@@ -366,7 +366,7 @@ Public Class frmGraficas
         cadenaXML += "</categories>"
     End Sub
 #End Region
-    ''Falta x mes !!!
+
 #Region "ESTABLECE OEE 1 EQUIPO 1 LINEA"
     Private Sub establece_fechas_oee(ByVal idEquipo As Integer, ByVal idLinea As Integer, ByVal fechaInicio As DateTime, ByVal fechaFinal As DateTime)
         Dim fechaGraficos As String = ""
@@ -374,6 +374,8 @@ Public Class frmGraficas
         Dim vRetorno As DataTable = Nothing
         Dim vDT As DataTable = Nothing
         Dim banderaPromedio As Boolean
+        Dim vMesInicio As String = ""
+        Dim vYearInicio As String = ""
         cadenaXML += "<categories>"
         If rbtDia.Checked Then
             vDT = oGraficas.obtener_Oee(idEquipo, idLinea, fechaInicio, fechaFinal)
@@ -394,15 +396,31 @@ Public Class frmGraficas
                 End Try
                 banderaPromedio = True
             End If
-        Else ''modificar para meses
+        Else
             If rbtMeses.Checked Then
                 vDT = oGraficas.obtener_Oee(idEquipo, idLinea, fechaInicio, fechaFinal)
-                For Each VDR As DataRow In vDT.Rows
-                    fechaGraficos = VDR("Dia_Asignado")
-                    fechaGraficos = Mid(fechaGraficos, 4, 2)
-                    mes = getMeses(fechaGraficos)
-                    cadenaXML += "<category name='" & mes & "' />"
-                Next
+                If vDT.Rows.Count = 0 Then
+                    lblError.Visible = True
+                    lblError.Enabled = True
+                Else
+                    lblError.Visible = False
+                    lblError.Enabled = False
+                    vMesInicio = Month(DateTime.Parse(vDT.Rows(0).Item("Dia_Asignado"))).ToString
+                    vYearInicio = Year(DateTime.Parse(vDT.Rows(0).Item("Dia_Asignado"))).ToString
+                    For Each vDR As DataRow In vDT.Rows
+                        If (Month(DateTime.Parse(vDR("Dia_Asignado"))).ToString = vMesInicio And Year(DateTime.Parse(vDR("Dia_Asignado"))).ToString = vYearInicio) Then
+                            fechaGraficos = vDR("Dia_Asignado")
+                            fechaGraficos = Mid(fechaGraficos, 4, 2)
+                            mes = getMeses(fechaGraficos)
+                        Else
+                            banderaPromedio = False
+                            cadenaXML += "<category name='" & mes & "  " & vYearInicio & " ' />"
+                            vMesInicio = Month(DateTime.Parse(vDR("Dia_Asignado"))).ToString
+                            vYearInicio = Year(DateTime.Parse(vDR("Dia_Asignado"))).ToString
+                        End If
+                    Next
+                End If
+                cadenaXML += "<category name='" & mes & "   " & vYearInicio & "' />"
             End If
         End If
         If banderaPromedio = True Then
@@ -448,67 +466,69 @@ Public Class frmGraficas
                 Next
             End If
             banderaPromedio = True
-        Else
-            If rbtMeses.Checked Then
-                vDT = oGraficas.obtener_Oee(idEquipo, idLinea, fechaInicio, fechaFinal)
-                If vDT.Rows.Count = 0 Then
-                    lblError.Visible = True
-                    lblError.Enabled = True
-                Else
-                    lblError.Visible = False
-                    lblError.Enabled = False
-                    vMesInicio = Month(DateTime.Parse(vDT.Rows(0).Item("Dia_Asignado"))).ToString
-                    vYearInicio = Year(DateTime.Parse(vDT.Rows(0).Item("Dia_Asignado"))).ToString
-                    For Each vDR As DataRow In vDT.Rows
-                        If (Month(DateTime.Parse(vDR("Dia_Asignado"))).ToString = vMesInicio And Year(DateTime.Parse(vDR("Dia_Asignado"))).ToString = vYearInicio) Then
-                            If vDR("TIPO_REGISTRO") = "P" Then
-                                oee = vDR(("oee")) * 100
-                                promedio = promedio + oee
-                                contador = contador + 1
-                            ElseIf vDR("TIPO_REGISTRO") = "D" Then
-                                oee = 0
-                                promedio = promedio + oee
-                            ElseIf vDR("TIPO_REGISTRO") = "Z" Then
-                                oee = 0
-                                promedio = promedio + oee
-                            End If
+        End If
+
+        ''meses
+        If rbtMeses.Checked Then
+            vDT = oGraficas.obtener_Oee(idEquipo, idLinea, fechaInicio, fechaFinal)
+            If vDT.Rows.Count = 0 Then
+                lblError.Visible = True
+                lblError.Enabled = True
+                cadenaXML += " <set value='" & 0 & "'/>"
+            Else
+                lblError.Visible = False
+                lblError.Enabled = False
+                vMesInicio = Month(DateTime.Parse(vDT.Rows(0).Item("Dia_Asignado"))).ToString
+                vYearInicio = Year(DateTime.Parse(vDT.Rows(0).Item("Dia_Asignado"))).ToString
+                For Each vDR As DataRow In vDT.Rows
+                    If (Month(DateTime.Parse(vDR("Dia_Asignado"))).ToString = vMesInicio And Year(DateTime.Parse(vDR("Dia_Asignado"))).ToString = vYearInicio) Then
+                        If vDR("TIPO_REGISTRO") = "P" Then
+                            oee = vDR(("oee")) * 100
+                            promedio = promedio + oee
+                            contador = contador + 1
                         Else
-                            banderaPromedio = True
-                            If contador > 0 Then
-                                promedio = promedio / contador
-                            Else
-                                promedio = 0
-                            End If
-                            cadenaXML += " <set value='" & promedio.ToString & "'/>"
-                            promedio = 0
                             oee = 0
                             contador = 0
-                            vMesInicio = Month(DateTime.Parse(vDR("Dia_Asignado"))).ToString
-                            vYearInicio = Year(DateTime.Parse(vDR("Dia_Asignado"))).ToString
-                            If vDR("TIPO_REGISTRO") = "P" Then
-                                oee = vDR(("oee")) * 100
-                                promedio = promedio + oee
-                                contador = contador + 1
-                            ElseIf vDR("TIPO_REGISTRO") = "D" Then
-                                oee = 0
-                                promedio = promedio + oee
-                            ElseIf vDR("TIPO_REGISTRO") = "Z" Then
-                                oee = 0
-                                promedio = promedio + oee
-                            End If
+                            promedio = promedio + oee
                         End If
-                    Next
-                    If contador > 0 Then
-                        promedio = promedio / contador
                     Else
+                        If contador > 0 Then
+                            promedio = promedio / contador
+                        Else
+                            promedio = 0
+                        End If
+                        cadenaXML += " <set value='" & promedio.ToString & "'/>"
                         promedio = 0
-                    End If
-                    cadenaXML += " <set value='" & promedio.ToString & "'/>"
-                End If
-            End If
+                        oee = 0
+                        contador = 0
+                        vMesInicio = Month(DateTime.Parse(vDR("Dia_Asignado"))).ToString
+                        vYearInicio = Year(DateTime.Parse(vDR("Dia_Asignado"))).ToString
+                        If vDR("TIPO_REGISTRO") = "P" Then
+                            oee = vDR(("oee")) * 100
+                            promedio = promedio + oee
+                            contador = contador + 1
+                        Else
+                            oee = 0
+                            contador = 0
+                            promedio = promedio + oee
+                        End If
+                        'If contador > 0 Then
+                        '    promedio = promedio / contador
+                        'Else
+                        '    promedio = 0
+                        'End If
+                        'cadenaXML += " <set value='" & promedio.ToString & "'/>"
 
-        End If
-        If contador > 0 Then
+                    End If ''comparacion de mes/fecha
+
+                Next
+
+            End If ''fin de si hay datos
+            banderaPromedio = False
+        End If ''fin si escogio x meses
+
+
+        If rbtDia.Checked And contador > 0 Then
             promedio = promedio / contador
         Else
             promedio = 0
