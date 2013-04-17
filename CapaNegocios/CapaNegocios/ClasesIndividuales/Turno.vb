@@ -1,10 +1,9 @@
 ﻿Imports CapaDatos
-Imports System.Transactions
 Public Class Turno
     Implements IIndividual
     Dim cadena_conexion As New CapaDatos.conexiones
     Dim oBD As New CapaDatos.CapaDatos(cadena_conexion.CadenaSicaip)
-#Region "Metodos IIndividual"
+#Region "IIndividual"
     Public Sub Cargar() Implements IIndividual.Cargar
 
     End Sub
@@ -29,6 +28,12 @@ Public Class Turno
     Public Sub Registrar() Implements IIndividual.Registrar
 
     End Sub
+#End Region
+#Region "Atributos"
+
+#End Region
+#Region "Propiedades"
+
 #End Region
 
 #Region "Metodos Formulario de Produccion"

@@ -1,11 +1,9 @@
 ﻿Imports CapaDatos
-Imports System.Transactions
 Public Class Modelo
     Implements IIndividual
     Dim cadena_conexion As New CapaDatos.conexiones
     Dim oBD As New CapaDatos.CapaDatos(cadena_conexion.CadenaSicaip)
-#Region "Metodos IIndividual"
-
+#Region "IIndividual"
     Public Sub Cargar() Implements IIndividual.Cargar
 
     End Sub
@@ -13,7 +11,7 @@ Public Class Modelo
     Public Sub Eliminar() Implements IIndividual.Eliminar
 
     End Sub
-    Dim vId
+    Dim vId As Long
     Public Property Id As Long Implements IIndividual.Id
         Get
             Return vId
@@ -30,6 +28,11 @@ Public Class Modelo
     Public Sub Registrar() Implements IIndividual.Registrar
 
     End Sub
+#End Region
+#Region "Atributos"
+
+#End Region
+#Region "Propiedades"
 
 #End Region
 

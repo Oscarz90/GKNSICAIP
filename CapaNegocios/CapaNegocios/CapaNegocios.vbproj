@@ -65,14 +65,15 @@
     <Import Include="System.Data" />
     <Import Include="System.Diagnostics" />
     <Import Include="System.Linq" />
+    <Import Include="System.Transactions" />
     <Import Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ClasesIndividuales\EquipoLinea.vb" />
-    <Compile Include="ClasesIndividuales\Laboratorio.vb" />
     <Compile Include="ClasesIndividuales\Linea.vb" />
     <Compile Include="ClasesIndividuales\Modelo.vb" />
     <Compile Include="ClasesIndividuales\Produccion.vb" />
+    <Compile Include="ClasesIndividuales\Productividad.vb" />
     <Compile Include="ClasesIndividuales\Turno.vb" />
     <Compile Include="IIndividual.vb" />
     <Compile Include="My Project\AssemblyInfo.vb" />
