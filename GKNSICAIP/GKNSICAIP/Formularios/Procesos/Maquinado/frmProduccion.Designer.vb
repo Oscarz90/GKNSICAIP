@@ -36,7 +36,7 @@ Partial Class frmProduccion
         Me.ColumnHeader7 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.ColumnHeader8 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.ColumnHeader9 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
-        Me.ComboBox2 = New System.Windows.Forms.ComboBox()
+        Me.cbxModeloRechazo = New System.Windows.Forms.ComboBox()
         Me.Label17 = New System.Windows.Forms.Label()
         Me.Label19 = New System.Windows.Forms.Label()
         Me.TextBox2 = New System.Windows.Forms.TextBox()
@@ -236,7 +236,7 @@ Partial Class frmProduccion
         'grpDesechos
         '
         Me.grpDesechos.Controls.Add(Me.ListView2)
-        Me.grpDesechos.Controls.Add(Me.ComboBox2)
+        Me.grpDesechos.Controls.Add(Me.cbxModeloRechazo)
         Me.grpDesechos.Controls.Add(Me.Label17)
         Me.grpDesechos.Controls.Add(Me.Label19)
         Me.grpDesechos.Controls.Add(Me.TextBox2)
@@ -309,16 +309,16 @@ Partial Class frmProduccion
         Me.ColumnHeader9.Text = "colIdIndicador1"
         Me.ColumnHeader9.Width = 0
         '
-        'ComboBox2
+        'cbxModeloRechazo
         '
-        Me.ComboBox2.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
-        Me.ComboBox2.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.ComboBox2.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.ComboBox2.FormattingEnabled = True
-        Me.ComboBox2.Location = New System.Drawing.Point(124, 42)
-        Me.ComboBox2.Name = "ComboBox2"
-        Me.ComboBox2.Size = New System.Drawing.Size(217, 26)
-        Me.ComboBox2.TabIndex = 323
+        Me.cbxModeloRechazo.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
+        Me.cbxModeloRechazo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cbxModeloRechazo.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.cbxModeloRechazo.FormattingEnabled = True
+        Me.cbxModeloRechazo.Location = New System.Drawing.Point(124, 42)
+        Me.cbxModeloRechazo.Name = "cbxModeloRechazo"
+        Me.cbxModeloRechazo.Size = New System.Drawing.Size(217, 26)
+        Me.cbxModeloRechazo.TabIndex = 323
         '
         'Label17
         '
@@ -927,7 +927,7 @@ Partial Class frmProduccion
         Me.tabPageParos.Location = New System.Drawing.Point(4, 22)
         Me.tabPageParos.Name = "tabPageParos"
         Me.tabPageParos.Padding = New System.Windows.Forms.Padding(3)
-        Me.tabPageParos.Size = New System.Drawing.Size(1232, 420)
+        Me.tabPageParos.Size = New System.Drawing.Size(1222, 420)
         Me.tabPageParos.TabIndex = 1
         Me.tabPageParos.Text = "Paros"
         Me.tabPageParos.UseVisualStyleBackColor = True
@@ -1261,7 +1261,7 @@ Partial Class frmProduccion
         Me.tabPageRechazos.Controls.Add(Me.GroupBox1)
         Me.tabPageRechazos.Location = New System.Drawing.Point(4, 22)
         Me.tabPageRechazos.Name = "tabPageRechazos"
-        Me.tabPageRechazos.Size = New System.Drawing.Size(1232, 420)
+        Me.tabPageRechazos.Size = New System.Drawing.Size(1222, 420)
         Me.tabPageRechazos.TabIndex = 2
         Me.tabPageRechazos.Text = "Rechazos"
         Me.tabPageRechazos.UseVisualStyleBackColor = True
@@ -1482,7 +1482,7 @@ Partial Class frmProduccion
         Me.TabPage1.Location = New System.Drawing.Point(4, 22)
         Me.TabPage1.Name = "TabPage1"
         Me.TabPage1.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabPage1.Size = New System.Drawing.Size(1232, 420)
+        Me.TabPage1.Size = New System.Drawing.Size(1222, 420)
         Me.TabPage1.TabIndex = 3
         Me.TabPage1.Text = "TabPage1"
         Me.TabPage1.UseVisualStyleBackColor = True
@@ -1494,7 +1494,7 @@ Partial Class frmProduccion
         Me.TabPage2.Location = New System.Drawing.Point(4, 22)
         Me.TabPage2.Name = "TabPage2"
         Me.TabPage2.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabPage2.Size = New System.Drawing.Size(1232, 420)
+        Me.TabPage2.Size = New System.Drawing.Size(1222, 420)
         Me.TabPage2.TabIndex = 4
         Me.TabPage2.Text = "TabPage2"
         Me.TabPage2.UseVisualStyleBackColor = True
@@ -1774,7 +1774,7 @@ Partial Class frmProduccion
         '
         'PictureBox1
         '
-        Me.PictureBox1.Location = New System.Drawing.Point(963, 85)
+        Me.PictureBox1.Location = New System.Drawing.Point(976, 70)
         Me.PictureBox1.Name = "PictureBox1"
         Me.PictureBox1.Size = New System.Drawing.Size(266, 172)
         Me.PictureBox1.TabIndex = 105
@@ -1920,7 +1920,7 @@ Partial Class frmProduccion
     Friend WithEvents ColumnHeader7 As System.Windows.Forms.ColumnHeader
     Friend WithEvents ColumnHeader8 As System.Windows.Forms.ColumnHeader
     Friend WithEvents ColumnHeader9 As System.Windows.Forms.ColumnHeader
-    Friend WithEvents ComboBox2 As System.Windows.Forms.ComboBox
+    Friend WithEvents cbxModeloRechazo As System.Windows.Forms.ComboBox
     Friend WithEvents Label17 As System.Windows.Forms.Label
     Friend WithEvents Label19 As System.Windows.Forms.Label
     Friend WithEvents TextBox2 As System.Windows.Forms.TextBox

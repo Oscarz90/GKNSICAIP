@@ -15,6 +15,7 @@ Public Class frmProduccion
         vnombre_equipo = NomEquipo
         vnombre_empleado = Empleado
         vcodigo_empleado = CodEmpleado
+        lblNombreEquipo.Text = vnombre_equipo
     End Sub
     Private Sub frmProduccion_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         llena_cbx_Turnos()

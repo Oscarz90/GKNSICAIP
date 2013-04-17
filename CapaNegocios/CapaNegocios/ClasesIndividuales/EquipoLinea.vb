@@ -10,6 +10,24 @@
 #End Region
 
 #Region "Propiedades"
+
+    Public Property cve_equipo_linea As String
+        Get
+            Return vcve_equipo_linea
+        End Get
+        Set(ByVal value As String)
+            vcve_equipo_linea = value
+        End Set
+    End Property
+    Public Property cve_linea As String
+        Get
+            Return vcve_linea
+        End Get
+        Set(ByVal value As String)
+            vcve_linea = value
+        End Set
+    End Property
+
     Public Property cve_equipo As Long
         Get
             Return vcve_equipo
