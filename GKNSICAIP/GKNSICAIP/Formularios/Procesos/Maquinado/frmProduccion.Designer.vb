@@ -39,11 +39,21 @@ Partial Class frmProduccion
         Me.cbxModeloRechazo = New System.Windows.Forms.ComboBox()
         Me.Label17 = New System.Windows.Forms.Label()
         Me.Label19 = New System.Windows.Forms.Label()
-        Me.TextBox2 = New System.Windows.Forms.TextBox()
+        Me.txtModeloDescripcionRechazo = New System.Windows.Forms.TextBox()
         Me.Label46 = New System.Windows.Forms.Label()
         Me.Label6 = New System.Windows.Forms.Label()
         Me.txtDesechos = New System.Windows.Forms.TextBox()
         Me.grpProductividad = New System.Windows.Forms.GroupBox()
+        Me.DataGridView1 = New System.Windows.Forms.DataGridView()
+        Me.colcve_produccion = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.colcve_linea = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.colcve_modelo = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.colnp_gkn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.coldescripcion = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.colpzas_ok = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.coltom = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.colCapacidad = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.colAdeudo = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Label54 = New System.Windows.Forms.Label()
         Me.txtPzasPorHora = New System.Windows.Forms.TextBox()
         Me.Label53 = New System.Windows.Forms.Label()
@@ -72,16 +82,6 @@ Partial Class frmProduccion
         Me.Label37 = New System.Windows.Forms.Label()
         Me.txtMinutos = New System.Windows.Forms.TextBox()
         Me.Label29 = New System.Windows.Forms.Label()
-        Me.lstModelos = New System.Windows.Forms.ListView()
-        Me.colModelo_Productividad = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
-        Me.colPzasProducidas = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
-        Me.colDesechos = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
-        Me.colTiempoOperacio = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
-        Me.colCapacidad = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
-        Me.colAdeudo = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
-        Me.IdModelo = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
-        Me.IdLinea = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
-        Me.IdIndicador1 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.cbxModeloProductividad = New System.Windows.Forms.ComboBox()
         Me.Label28 = New System.Windows.Forms.Label()
         Me.lblOEE = New System.Windows.Forms.Label()
@@ -95,8 +95,8 @@ Partial Class frmProduccion
         Me.txtPiezasProducidas = New System.Windows.Forms.TextBox()
         Me.Label9 = New System.Windows.Forms.Label()
         Me.Label10 = New System.Windows.Forms.Label()
-        Me.cmdAgregarModelo = New System.Windows.Forms.Button()
-        Me.cmdQuitarModelo = New System.Windows.Forms.Button()
+        Me.btnAgregarModelo = New System.Windows.Forms.Button()
+        Me.btnQuitarModelo = New System.Windows.Forms.Button()
         Me.tabPageParos = New System.Windows.Forms.TabPage()
         Me.grpCosto = New System.Windows.Forms.GroupBox()
         Me.lblMinReal = New System.Windows.Forms.Label()
@@ -196,6 +196,7 @@ Partial Class frmProduccion
         Me.tabPageProductividad.SuspendLayout()
         Me.grpDesechos.SuspendLayout()
         Me.grpProductividad.SuspendLayout()
+        CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.tabPageParos.SuspendLayout()
         Me.grpCosto.SuspendLayout()
         Me.grpParos.SuspendLayout()
@@ -239,7 +240,7 @@ Partial Class frmProduccion
         Me.grpDesechos.Controls.Add(Me.cbxModeloRechazo)
         Me.grpDesechos.Controls.Add(Me.Label17)
         Me.grpDesechos.Controls.Add(Me.Label19)
-        Me.grpDesechos.Controls.Add(Me.TextBox2)
+        Me.grpDesechos.Controls.Add(Me.txtModeloDescripcionRechazo)
         Me.grpDesechos.Controls.Add(Me.Label46)
         Me.grpDesechos.Controls.Add(Me.Label6)
         Me.grpDesechos.Controls.Add(Me.txtDesechos)
@@ -340,13 +341,13 @@ Partial Class frmProduccion
         Me.Label19.TabIndex = 322
         Me.Label19.Text = "Modelo:"
         '
-        'TextBox2
+        'txtModeloDescripcionRechazo
         '
-        Me.TextBox2.Location = New System.Drawing.Point(124, 85)
-        Me.TextBox2.Name = "TextBox2"
-        Me.TextBox2.ReadOnly = True
-        Me.TextBox2.Size = New System.Drawing.Size(217, 20)
-        Me.TextBox2.TabIndex = 324
+        Me.txtModeloDescripcionRechazo.Location = New System.Drawing.Point(124, 85)
+        Me.txtModeloDescripcionRechazo.Name = "txtModeloDescripcionRechazo"
+        Me.txtModeloDescripcionRechazo.ReadOnly = True
+        Me.txtModeloDescripcionRechazo.Size = New System.Drawing.Size(217, 20)
+        Me.txtModeloDescripcionRechazo.TabIndex = 324
         '
         'Label46
         '
@@ -380,6 +381,7 @@ Partial Class frmProduccion
         '
         'grpProductividad
         '
+        Me.grpProductividad.Controls.Add(Me.DataGridView1)
         Me.grpProductividad.Controls.Add(Me.Label54)
         Me.grpProductividad.Controls.Add(Me.txtPzasPorHora)
         Me.grpProductividad.Controls.Add(Me.Label53)
@@ -408,7 +410,6 @@ Partial Class frmProduccion
         Me.grpProductividad.Controls.Add(Me.Label37)
         Me.grpProductividad.Controls.Add(Me.txtMinutos)
         Me.grpProductividad.Controls.Add(Me.Label29)
-        Me.grpProductividad.Controls.Add(Me.lstModelos)
         Me.grpProductividad.Controls.Add(Me.cbxModeloProductividad)
         Me.grpProductividad.Controls.Add(Me.Label28)
         Me.grpProductividad.Controls.Add(Me.lblOEE)
@@ -422,8 +423,8 @@ Partial Class frmProduccion
         Me.grpProductividad.Controls.Add(Me.txtPiezasProducidas)
         Me.grpProductividad.Controls.Add(Me.Label9)
         Me.grpProductividad.Controls.Add(Me.Label10)
-        Me.grpProductividad.Controls.Add(Me.cmdAgregarModelo)
-        Me.grpProductividad.Controls.Add(Me.cmdQuitarModelo)
+        Me.grpProductividad.Controls.Add(Me.btnAgregarModelo)
+        Me.grpProductividad.Controls.Add(Me.btnQuitarModelo)
         Me.grpProductividad.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.grpProductividad.Location = New System.Drawing.Point(3, 3)
         Me.grpProductividad.Name = "grpProductividad"
@@ -432,11 +433,77 @@ Partial Class frmProduccion
         Me.grpProductividad.TabStop = False
         Me.grpProductividad.Text = "1.-PRODUCTIVIDAD"
         '
+        'DataGridView1
+        '
+        Me.DataGridView1.AllowUserToAddRows = False
+        Me.DataGridView1.AllowUserToDeleteRows = False
+        Me.DataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.DataGridView1.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.colcve_produccion, Me.colcve_linea, Me.colcve_modelo, Me.colnp_gkn, Me.coldescripcion, Me.colpzas_ok, Me.coltom, Me.colCapacidad, Me.colAdeudo})
+        Me.DataGridView1.Location = New System.Drawing.Point(3, 277)
+        Me.DataGridView1.Name = "DataGridView1"
+        Me.DataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
+        Me.DataGridView1.Size = New System.Drawing.Size(741, 130)
+        Me.DataGridView1.TabIndex = 322
+        '
+        'colcve_produccion
+        '
+        Me.colcve_produccion.HeaderText = "cve_produccion"
+        Me.colcve_produccion.Name = "colcve_produccion"
+        Me.colcve_produccion.ReadOnly = True
+        '
+        'colcve_linea
+        '
+        Me.colcve_linea.HeaderText = "cve_linea"
+        Me.colcve_linea.Name = "colcve_linea"
+        Me.colcve_linea.ReadOnly = True
+        '
+        'colcve_modelo
+        '
+        Me.colcve_modelo.HeaderText = "cve_modelo"
+        Me.colcve_modelo.Name = "colcve_modelo"
+        Me.colcve_modelo.ReadOnly = True
+        '
+        'colnp_gkn
+        '
+        Me.colnp_gkn.HeaderText = "No. Parte GKN"
+        Me.colnp_gkn.Name = "colnp_gkn"
+        Me.colnp_gkn.ReadOnly = True
+        '
+        'coldescripcion
+        '
+        Me.coldescripcion.HeaderText = "Modelo"
+        Me.coldescripcion.Name = "coldescripcion"
+        Me.coldescripcion.ReadOnly = True
+        '
+        'colpzas_ok
+        '
+        Me.colpzas_ok.HeaderText = "Piezas Ok"
+        Me.colpzas_ok.Name = "colpzas_ok"
+        Me.colpzas_ok.ReadOnly = True
+        '
+        'coltom
+        '
+        Me.coltom.HeaderText = "Tiempo Operacion"
+        Me.coltom.Name = "coltom"
+        Me.coltom.ReadOnly = True
+        '
+        'colCapacidad
+        '
+        Me.colCapacidad.HeaderText = "Capacidad"
+        Me.colCapacidad.Name = "colCapacidad"
+        Me.colCapacidad.ReadOnly = True
+        '
+        'colAdeudo
+        '
+        Me.colAdeudo.HeaderText = "Adeudo"
+        Me.colAdeudo.Name = "colAdeudo"
+        Me.colAdeudo.ReadOnly = True
+        '
         'Label54
         '
         Me.Label54.AutoSize = True
         Me.Label54.Font = New System.Drawing.Font("Arial", 11.0!)
-        Me.Label54.Location = New System.Drawing.Point(530, 183)
+        Me.Label54.Location = New System.Drawing.Point(535, 172)
         Me.Label54.Name = "Label54"
         Me.Label54.Size = New System.Drawing.Size(63, 17)
         Me.Label54.TabIndex = 321
@@ -445,7 +512,7 @@ Partial Class frmProduccion
         'txtPzasPorHora
         '
         Me.txtPzasPorHora.BackColor = System.Drawing.SystemColors.Control
-        Me.txtPzasPorHora.Location = New System.Drawing.Point(468, 179)
+        Me.txtPzasPorHora.Location = New System.Drawing.Point(473, 168)
         Me.txtPzasPorHora.Name = "txtPzasPorHora"
         Me.txtPzasPorHora.ReadOnly = True
         Me.txtPzasPorHora.Size = New System.Drawing.Size(61, 26)
@@ -457,7 +524,7 @@ Partial Class frmProduccion
         '
         Me.Label53.AutoSize = True
         Me.Label53.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label53.Location = New System.Drawing.Point(3, 213)
+        Me.Label53.Location = New System.Drawing.Point(8, 202)
         Me.Label53.Name = "Label53"
         Me.Label53.Size = New System.Drawing.Size(96, 18)
         Me.Label53.TabIndex = 319
@@ -465,7 +532,7 @@ Partial Class frmProduccion
         '
         'txtModeloDescripcion
         '
-        Me.txtModeloDescripcion.Location = New System.Drawing.Point(105, 210)
+        Me.txtModeloDescripcion.Location = New System.Drawing.Point(110, 199)
         Me.txtModeloDescripcion.Name = "txtModeloDescripcion"
         Me.txtModeloDescripcion.ReadOnly = True
         Me.txtModeloDescripcion.Size = New System.Drawing.Size(217, 26)
@@ -474,7 +541,7 @@ Partial Class frmProduccion
         'Label52
         '
         Me.Label52.AutoSize = True
-        Me.Label52.Location = New System.Drawing.Point(353, 184)
+        Me.Label52.Location = New System.Drawing.Point(358, 173)
         Me.Label52.Name = "Label52"
         Me.Label52.Size = New System.Drawing.Size(109, 18)
         Me.Label52.TabIndex = 316
@@ -521,7 +588,7 @@ Partial Class frmProduccion
         '
         Me.Label44.AutoSize = True
         Me.Label44.Font = New System.Drawing.Font("Arial", 11.0!)
-        Me.Label44.Location = New System.Drawing.Point(530, 214)
+        Me.Label44.Location = New System.Drawing.Point(535, 203)
         Me.Label44.Name = "Label44"
         Me.Label44.Size = New System.Drawing.Size(63, 17)
         Me.Label44.TabIndex = 308
@@ -531,7 +598,7 @@ Partial Class frmProduccion
         '
         Me.Label42.AutoSize = True
         Me.Label42.Font = New System.Drawing.Font("Arial", 11.0!)
-        Me.Label42.Location = New System.Drawing.Point(262, 249)
+        Me.Label42.Location = New System.Drawing.Point(267, 238)
         Me.Label42.Name = "Label42"
         Me.Label42.Size = New System.Drawing.Size(60, 17)
         Me.Label42.TabIndex = 307
@@ -540,7 +607,7 @@ Partial Class frmProduccion
         'Label1
         '
         Me.Label1.AutoSize = True
-        Me.Label1.Location = New System.Drawing.Point(680, 250)
+        Me.Label1.Location = New System.Drawing.Point(685, 239)
         Me.Label1.Name = "Label1"
         Me.Label1.Size = New System.Drawing.Size(50, 18)
         Me.Label1.TabIndex = 152
@@ -689,7 +756,7 @@ Partial Class frmProduccion
         'txtMinutos
         '
         Me.txtMinutos.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
-        Me.txtMinutos.Location = New System.Drawing.Point(195, 245)
+        Me.txtMinutos.Location = New System.Drawing.Point(200, 234)
         Me.txtMinutos.Name = "txtMinutos"
         Me.txtMinutos.Size = New System.Drawing.Size(61, 26)
         Me.txtMinutos.TabIndex = 156
@@ -699,70 +766,11 @@ Partial Class frmProduccion
         '
         Me.Label29.AutoSize = True
         Me.Label29.Font = New System.Drawing.Font("Arial", 11.0!)
-        Me.Label29.Location = New System.Drawing.Point(58, 249)
+        Me.Label29.Location = New System.Drawing.Point(63, 238)
         Me.Label29.Name = "Label29"
         Me.Label29.Size = New System.Drawing.Size(132, 17)
         Me.Label29.TabIndex = 155
         Me.Label29.Text = "Tiempo Operación:"
-        '
-        'lstModelos
-        '
-        Me.lstModelos.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.colModelo_Productividad, Me.colPzasProducidas, Me.colDesechos, Me.colTiempoOperacio, Me.colCapacidad, Me.colAdeudo, Me.IdModelo, Me.IdLinea, Me.IdIndicador1})
-        Me.lstModelos.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lstModelos.FullRowSelect = True
-        Me.lstModelos.GridLines = True
-        Me.lstModelos.Location = New System.Drawing.Point(10, 283)
-        Me.lstModelos.Margin = New System.Windows.Forms.Padding(4)
-        Me.lstModelos.Name = "lstModelos"
-        Me.lstModelos.Size = New System.Drawing.Size(729, 119)
-        Me.lstModelos.TabIndex = 147
-        Me.lstModelos.UseCompatibleStateImageBehavior = False
-        Me.lstModelos.View = System.Windows.Forms.View.Details
-        '
-        'colModelo_Productividad
-        '
-        Me.colModelo_Productividad.Text = "Modelo"
-        Me.colModelo_Productividad.Width = 170
-        '
-        'colPzasProducidas
-        '
-        Me.colPzasProducidas.Text = "Piezas OK"
-        Me.colPzasProducidas.Width = 96
-        '
-        'colDesechos
-        '
-        Me.colDesechos.Text = "Desechos"
-        Me.colDesechos.Width = 96
-        '
-        'colTiempoOperacio
-        '
-        Me.colTiempoOperacio.Text = "Tiempo Operación"
-        Me.colTiempoOperacio.Width = 150
-        '
-        'colCapacidad
-        '
-        Me.colCapacidad.Text = "Capacidad"
-        Me.colCapacidad.Width = 130
-        '
-        'colAdeudo
-        '
-        Me.colAdeudo.Text = "Adeudo"
-        Me.colAdeudo.Width = 82
-        '
-        'IdModelo
-        '
-        Me.IdModelo.Text = "Id_modelo"
-        Me.IdModelo.Width = 0
-        '
-        'IdLinea
-        '
-        Me.IdLinea.Text = "colIdLinea"
-        Me.IdLinea.Width = 0
-        '
-        'IdIndicador1
-        '
-        Me.IdIndicador1.Text = "colIdIndicador1"
-        Me.IdIndicador1.Width = 0
         '
         'cbxModeloProductividad
         '
@@ -770,7 +778,7 @@ Partial Class frmProduccion
         Me.cbxModeloProductividad.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cbxModeloProductividad.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cbxModeloProductividad.FormattingEnabled = True
-        Me.cbxModeloProductividad.Location = New System.Drawing.Point(105, 179)
+        Me.cbxModeloProductividad.Location = New System.Drawing.Point(110, 168)
         Me.cbxModeloProductividad.Name = "cbxModeloProductividad"
         Me.cbxModeloProductividad.Size = New System.Drawing.Size(217, 26)
         Me.cbxModeloProductividad.TabIndex = 154
@@ -779,7 +787,7 @@ Partial Class frmProduccion
         '
         Me.Label28.AutoSize = True
         Me.Label28.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label28.Location = New System.Drawing.Point(35, 182)
+        Me.Label28.Location = New System.Drawing.Point(40, 171)
         Me.Label28.Name = "Label28"
         Me.Label28.Size = New System.Drawing.Size(64, 18)
         Me.Label28.TabIndex = 153
@@ -839,7 +847,7 @@ Partial Class frmProduccion
         '
         Me.Label4.AutoSize = True
         Me.Label4.Font = New System.Drawing.Font("Arial", 11.0!)
-        Me.Label4.Location = New System.Drawing.Point(378, 214)
+        Me.Label4.Location = New System.Drawing.Point(383, 203)
         Me.Label4.Name = "Label4"
         Me.Label4.Size = New System.Drawing.Size(83, 17)
         Me.Label4.TabIndex = 4
@@ -848,7 +856,7 @@ Partial Class frmProduccion
         'Label23
         '
         Me.Label23.AutoSize = True
-        Me.Label23.Location = New System.Drawing.Point(599, 250)
+        Me.Label23.Location = New System.Drawing.Point(604, 239)
         Me.Label23.Name = "Label23"
         Me.Label23.Size = New System.Drawing.Size(65, 18)
         Me.Label23.TabIndex = 151
@@ -867,7 +875,7 @@ Partial Class frmProduccion
         'txtPiezasProducidas
         '
         Me.txtPiezasProducidas.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
-        Me.txtPiezasProducidas.Location = New System.Drawing.Point(468, 210)
+        Me.txtPiezasProducidas.Location = New System.Drawing.Point(473, 199)
         Me.txtPiezasProducidas.Name = "txtPiezasProducidas"
         Me.txtPiezasProducidas.Size = New System.Drawing.Size(61, 26)
         Me.txtPiezasProducidas.TabIndex = 7
@@ -894,31 +902,31 @@ Partial Class frmProduccion
         Me.Label10.TabIndex = 9
         Me.Label10.Text = "Desempeño:"
         '
-        'cmdAgregarModelo
+        'btnAgregarModelo
         '
-        Me.cmdAgregarModelo.BackColor = System.Drawing.Color.White
-        Me.cmdAgregarModelo.BackgroundImage = CType(resources.GetObject("cmdAgregarModelo.BackgroundImage"), System.Drawing.Image)
-        Me.cmdAgregarModelo.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center
-        Me.cmdAgregarModelo.Enabled = False
-        Me.cmdAgregarModelo.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.cmdAgregarModelo.Location = New System.Drawing.Point(601, 188)
-        Me.cmdAgregarModelo.Name = "cmdAgregarModelo"
-        Me.cmdAgregarModelo.Size = New System.Drawing.Size(63, 59)
-        Me.cmdAgregarModelo.TabIndex = 149
-        Me.cmdAgregarModelo.UseVisualStyleBackColor = False
+        Me.btnAgregarModelo.BackColor = System.Drawing.Color.White
+        Me.btnAgregarModelo.BackgroundImage = CType(resources.GetObject("btnAgregarModelo.BackgroundImage"), System.Drawing.Image)
+        Me.btnAgregarModelo.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center
+        Me.btnAgregarModelo.Enabled = False
+        Me.btnAgregarModelo.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnAgregarModelo.Location = New System.Drawing.Point(606, 177)
+        Me.btnAgregarModelo.Name = "btnAgregarModelo"
+        Me.btnAgregarModelo.Size = New System.Drawing.Size(63, 59)
+        Me.btnAgregarModelo.TabIndex = 149
+        Me.btnAgregarModelo.UseVisualStyleBackColor = False
         '
-        'cmdQuitarModelo
+        'btnQuitarModelo
         '
-        Me.cmdQuitarModelo.BackColor = System.Drawing.Color.White
-        Me.cmdQuitarModelo.BackgroundImage = CType(resources.GetObject("cmdQuitarModelo.BackgroundImage"), System.Drawing.Image)
-        Me.cmdQuitarModelo.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center
-        Me.cmdQuitarModelo.Enabled = False
-        Me.cmdQuitarModelo.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.cmdQuitarModelo.Location = New System.Drawing.Point(675, 188)
-        Me.cmdQuitarModelo.Name = "cmdQuitarModelo"
-        Me.cmdQuitarModelo.Size = New System.Drawing.Size(64, 59)
-        Me.cmdQuitarModelo.TabIndex = 150
-        Me.cmdQuitarModelo.UseVisualStyleBackColor = False
+        Me.btnQuitarModelo.BackColor = System.Drawing.Color.White
+        Me.btnQuitarModelo.BackgroundImage = CType(resources.GetObject("btnQuitarModelo.BackgroundImage"), System.Drawing.Image)
+        Me.btnQuitarModelo.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center
+        Me.btnQuitarModelo.Enabled = False
+        Me.btnQuitarModelo.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnQuitarModelo.Location = New System.Drawing.Point(680, 177)
+        Me.btnQuitarModelo.Name = "btnQuitarModelo"
+        Me.btnQuitarModelo.Size = New System.Drawing.Size(64, 59)
+        Me.btnQuitarModelo.TabIndex = 150
+        Me.btnQuitarModelo.UseVisualStyleBackColor = False
         '
         'tabPageParos
         '
@@ -1048,13 +1056,12 @@ Partial Class frmProduccion
         Me.grpParos.Controls.Add(Me.cbxMaquina)
         Me.grpParos.Controls.Add(Me.Label24)
         Me.grpParos.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.grpParos.Location = New System.Drawing.Point(6, 6)
+        Me.grpParos.Location = New System.Drawing.Point(26, 24)
         Me.grpParos.Name = "grpParos"
-        Me.grpParos.Size = New System.Drawing.Size(880, 408)
+        Me.grpParos.Size = New System.Drawing.Size(816, 390)
         Me.grpParos.TabIndex = 15
         Me.grpParos.TabStop = False
         Me.grpParos.Text = "PAROS"
-        Me.grpParos.Visible = False
         '
         'txtParosDescripcion
         '
@@ -1102,7 +1109,7 @@ Partial Class frmProduccion
         Me.lstParos.Location = New System.Drawing.Point(6, 186)
         Me.lstParos.Margin = New System.Windows.Forms.Padding(4)
         Me.lstParos.Name = "lstParos"
-        Me.lstParos.Size = New System.Drawing.Size(861, 215)
+        Me.lstParos.Size = New System.Drawing.Size(781, 186)
         Me.lstParos.TabIndex = 117
         Me.lstParos.UseCompatibleStateImageBehavior = False
         Me.lstParos.View = System.Windows.Forms.View.Details
@@ -1155,7 +1162,7 @@ Partial Class frmProduccion
         'Label15
         '
         Me.Label15.AutoSize = True
-        Me.Label15.Location = New System.Drawing.Point(812, 140)
+        Me.Label15.Location = New System.Drawing.Point(697, 143)
         Me.Label15.Name = "Label15"
         Me.Label15.Size = New System.Drawing.Size(50, 18)
         Me.Label15.TabIndex = 139
@@ -1164,7 +1171,7 @@ Partial Class frmProduccion
         'Label13
         '
         Me.Label13.AutoSize = True
-        Me.Label13.Location = New System.Drawing.Point(732, 140)
+        Me.Label13.Location = New System.Drawing.Point(617, 143)
         Me.Label13.Name = "Label13"
         Me.Label13.Size = New System.Drawing.Size(65, 18)
         Me.Label13.TabIndex = 138
@@ -1177,7 +1184,7 @@ Partial Class frmProduccion
         Me.cmdQuitarParo.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center
         Me.cmdQuitarParo.Enabled = False
         Me.cmdQuitarParo.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.cmdQuitarParo.Location = New System.Drawing.Point(803, 78)
+        Me.cmdQuitarParo.Location = New System.Drawing.Point(688, 81)
         Me.cmdQuitarParo.Name = "cmdQuitarParo"
         Me.cmdQuitarParo.Size = New System.Drawing.Size(64, 59)
         Me.cmdQuitarParo.TabIndex = 119
@@ -1190,7 +1197,7 @@ Partial Class frmProduccion
         Me.cmdAgregarParo.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center
         Me.cmdAgregarParo.Enabled = False
         Me.cmdAgregarParo.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.cmdAgregarParo.Location = New System.Drawing.Point(731, 78)
+        Me.cmdAgregarParo.Location = New System.Drawing.Point(616, 81)
         Me.cmdAgregarParo.Name = "cmdAgregarParo"
         Me.cmdAgregarParo.Size = New System.Drawing.Size(66, 59)
         Me.cmdAgregarParo.TabIndex = 118
@@ -1213,7 +1220,7 @@ Partial Class frmProduccion
         Me.txtDetallesParo.Multiline = True
         Me.txtDetallesParo.Name = "txtDetallesParo"
         Me.txtDetallesParo.ScrollBars = System.Windows.Forms.ScrollBars.Vertical
-        Me.txtDetallesParo.Size = New System.Drawing.Size(300, 75)
+        Me.txtDetallesParo.Size = New System.Drawing.Size(152, 75)
         Me.txtDetallesParo.TabIndex = 5
         '
         'cbxTipoParo
@@ -1888,6 +1895,7 @@ Partial Class frmProduccion
         Me.grpDesechos.PerformLayout()
         Me.grpProductividad.ResumeLayout(False)
         Me.grpProductividad.PerformLayout()
+        CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.tabPageParos.ResumeLayout(False)
         Me.grpCosto.ResumeLayout(False)
         Me.grpCosto.PerformLayout()
@@ -1923,7 +1931,7 @@ Partial Class frmProduccion
     Friend WithEvents cbxModeloRechazo As System.Windows.Forms.ComboBox
     Friend WithEvents Label17 As System.Windows.Forms.Label
     Friend WithEvents Label19 As System.Windows.Forms.Label
-    Friend WithEvents TextBox2 As System.Windows.Forms.TextBox
+    Friend WithEvents txtModeloDescripcionRechazo As System.Windows.Forms.TextBox
     Friend WithEvents Label46 As System.Windows.Forms.Label
     Friend WithEvents Label6 As System.Windows.Forms.Label
     Friend WithEvents txtDesechos As System.Windows.Forms.TextBox
@@ -1956,16 +1964,6 @@ Partial Class frmProduccion
     Friend WithEvents Label37 As System.Windows.Forms.Label
     Friend WithEvents txtMinutos As System.Windows.Forms.TextBox
     Friend WithEvents Label29 As System.Windows.Forms.Label
-    Friend WithEvents lstModelos As System.Windows.Forms.ListView
-    Friend WithEvents colModelo_Productividad As System.Windows.Forms.ColumnHeader
-    Friend WithEvents colPzasProducidas As System.Windows.Forms.ColumnHeader
-    Friend WithEvents colDesechos As System.Windows.Forms.ColumnHeader
-    Friend WithEvents colTiempoOperacio As System.Windows.Forms.ColumnHeader
-    Friend WithEvents colCapacidad As System.Windows.Forms.ColumnHeader
-    Friend WithEvents colAdeudo As System.Windows.Forms.ColumnHeader
-    Friend WithEvents IdModelo As System.Windows.Forms.ColumnHeader
-    Friend WithEvents IdLinea As System.Windows.Forms.ColumnHeader
-    Friend WithEvents IdIndicador1 As System.Windows.Forms.ColumnHeader
     Friend WithEvents cbxModeloProductividad As System.Windows.Forms.ComboBox
     Friend WithEvents Label28 As System.Windows.Forms.Label
     Friend WithEvents lblOEE As System.Windows.Forms.Label
@@ -1979,8 +1977,8 @@ Partial Class frmProduccion
     Friend WithEvents txtPiezasProducidas As System.Windows.Forms.TextBox
     Friend WithEvents Label9 As System.Windows.Forms.Label
     Friend WithEvents Label10 As System.Windows.Forms.Label
-    Friend WithEvents cmdAgregarModelo As System.Windows.Forms.Button
-    Friend WithEvents cmdQuitarModelo As System.Windows.Forms.Button
+    Friend WithEvents btnAgregarModelo As System.Windows.Forms.Button
+    Friend WithEvents btnQuitarModelo As System.Windows.Forms.Button
     Friend WithEvents tabPageParos As System.Windows.Forms.TabPage
     Friend WithEvents grpCosto As System.Windows.Forms.GroupBox
     Friend WithEvents lblMinReal As System.Windows.Forms.Label
@@ -2076,4 +2074,14 @@ Partial Class frmProduccion
     Friend WithEvents lblNombreEquipo As System.Windows.Forms.Label
     Friend WithEvents Label58 As System.Windows.Forms.Label
     Friend WithEvents cbxLinea As System.Windows.Forms.ComboBox
+    Friend WithEvents DataGridView1 As System.Windows.Forms.DataGridView
+    Friend WithEvents colcve_produccion As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents colcve_linea As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents colcve_modelo As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents colnp_gkn As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents coldescripcion As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents colpzas_ok As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents coltom As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents colCapacidad As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents colAdeudo As System.Windows.Forms.DataGridViewTextBoxColumn
 End Class

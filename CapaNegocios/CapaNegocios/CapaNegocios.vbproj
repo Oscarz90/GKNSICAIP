@@ -71,6 +71,7 @@
     <Compile Include="ClasesIndividuales\EquipoLinea.vb" />
     <Compile Include="ClasesIndividuales\Laboratorio.vb" />
     <Compile Include="ClasesIndividuales\Linea.vb" />
+    <Compile Include="ClasesIndividuales\Modelo.vb" />
     <Compile Include="ClasesIndividuales\Produccion.vb" />
     <Compile Include="ClasesIndividuales\Turno.vb" />
     <Compile Include="IIndividual.vb" />
