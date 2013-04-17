@@ -69,12 +69,35 @@
     <Import Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ClasesIndividuales\Cadena_Valor.vb" />
+    <Compile Include="ClasesIndividuales\Calidad.vb" />
+    <Compile Include="ClasesIndividuales\CDM.vb" />
+    <Compile Include="ClasesIndividuales\Cinco_S.vb" />
+    <Compile Include="ClasesIndividuales\Clasificacion_Modelo.vb" />
+    <Compile Include="ClasesIndividuales\Componente.vb" />
+    <Compile Include="ClasesIndividuales\Costo.vb" />
+    <Compile Include="ClasesIndividuales\Detalle.vb" />
+    <Compile Include="ClasesIndividuales\Detalle_CDM_Total.vb" />
+    <Compile Include="ClasesIndividuales\Equipo.vb" />
     <Compile Include="ClasesIndividuales\EquipoLinea.vb" />
+    <Compile Include="ClasesIndividuales\ImagenCorporativa.vb" />
+    <Compile Include="ClasesIndividuales\Lider.vb" />
     <Compile Include="ClasesIndividuales\Linea.vb" />
+    <Compile Include="ClasesIndividuales\Maquina.vb" />
     <Compile Include="ClasesIndividuales\Modelo.vb" />
+    <Compile Include="ClasesIndividuales\Nivel_Usuario.vb" />
+    <Compile Include="ClasesIndividuales\Objetivo.vb" />
+    <Compile Include="ClasesIndividuales\Paro.vb" />
     <Compile Include="ClasesIndividuales\Produccion.vb" />
     <Compile Include="ClasesIndividuales\Productividad.vb" />
+    <Compile Include="ClasesIndividuales\Rechazo.vb" />
+    <Compile Include="ClasesIndividuales\Registro_Paro.vb" />
+    <Compile Include="ClasesIndividuales\Registro_Paro_CDM.vb" />
+    <Compile Include="ClasesIndividuales\Registro_Turno.vb" />
+    <Compile Include="ClasesIndividuales\TC.vb" />
+    <Compile Include="ClasesIndividuales\Tipo_Rechazo.vb" />
     <Compile Include="ClasesIndividuales\Turno.vb" />
+    <Compile Include="ClasesIndividuales\Usuario.vb" />
     <Compile Include="IIndividual.vb" />
     <Compile Include="My Project\AssemblyInfo.vb" />
     <Compile Include="My Project\Application.Designer.vb">
