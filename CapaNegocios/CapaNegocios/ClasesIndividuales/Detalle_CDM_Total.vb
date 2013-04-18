@@ -30,9 +30,78 @@ Public Class Detalle_CDM_Total
     End Sub
 #End Region
 #Region "Atributos"
-
+    Private vcve_detalle_CDM As Long
+    Private vcve_registro_turno As Long
+    Private vcve_CDM As Long
+    Private vmejora As Double
+    Private vcosto As Double
+    Private vfecha_inicial As String
+    Private vfecha_final As String
 #End Region
 #Region "Propiedades"
+
+    Public Property cve_detalle_CDM() As Long
+        Get
+            Return vcve_detalle_CDM
+        End Get
+        Set(ByVal value As Long)
+            vcve_detalle_CDM = value
+        End Set
+    End Property
+    Public Property cve_registro_turno() As Long
+        Get
+            Return vcve_registro_turno
+        End Get
+        Set(ByVal value As Long)
+            vcve_registro_turno = value
+        End Set
+    End Property
+    Public Property cve_CDM() As Long
+        Get
+            Return vcve_CDM
+        End Get
+        Set(ByVal value As Long)
+            vcve_CDM = value
+        End Set
+    End Property
+    Public Property mejora() As Double
+        Get
+            Return vmejora
+        End Get
+        Set(ByVal value As Double)
+            vmejora = value
+        End Set
+    End Property
+    Public Property costo() As Double
+        Get
+            Return vcosto
+        End Get
+        Set(ByVal value As Double)
+            vcosto = value
+        End Set
+    End Property
+    Public Property fecha_inicial() As String
+        Get
+            Return vfecha_inicial
+        End Get
+        Set(ByVal value As String)
+            vfecha_inicial = value
+        End Set
+    End Property
+    Public Property fecha_final() As String
+        Get
+            Return vfecha_final
+        End Get
+        Set(ByVal value As String)
+            vfecha_final = value
+        End Set
+    End Property
+
+
+
+
+
+
 
 #End Region
 End Class

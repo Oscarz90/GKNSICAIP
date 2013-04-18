@@ -30,12 +30,61 @@ Public Class Modelo
     End Sub
 #End Region
 #Region "Atributos"
+    Private vcve_modelo As Long
+    Private vcve_componente As Long
+    Private vcve_clasificacion_modelo As Long
+    Private vnp_gkn As String
+    Private vdescripcion As String
 
 #End Region
 #Region "Propiedades"
 
-#End Region
+    Public Property cve_modelo() As Long
+        Get
+            Return vcve_modelo
+        End Get
+        Set(ByVal value As Long)
+            vcve_modelo = value
+        End Set
+    End Property
+    Public Property cve_componente() As Long
+        Get
+            Return vcve_componente
+        End Get
+        Set(ByVal value As Long)
+            vcve_componente = value
+        End Set
+    End Property
+    Public Property cve_clasificacion_modelo() As Long
+        Get
+            Return vcve_clasificacion_modelo
+        End Get
+        Set(ByVal value As Long)
+            vcve_clasificacion_modelo = value
+        End Set
+    End Property
+    Public Property np_gkn() As String
+        Get
+            Return vnp_gkn
+        End Get
+        Set(ByVal value As String)
+            vnp_gkn = value
+        End Set
+    End Property
+    Public Property descripcion() As String
+        Get
+            Return vdescripcion
+        End Get
+        Set(ByVal value As String)
+            vdescripcion = value
+        End Set
+    End Property
 
+
+
+
+
+#End Region
 #Region "Metodos Formulario de Produccion"
     Public Function llena_combo_Modelos_Linea(ByVal mcve_linea As String) As DataTable
         Dim dtModelos As New DataTable
