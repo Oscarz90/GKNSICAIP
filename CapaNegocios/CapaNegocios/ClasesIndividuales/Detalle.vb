@@ -16,7 +16,7 @@ Public Class Detalle
 
     Public Sub Eliminar() Implements IIndividual.Eliminar
         Try
-            oBD.EjecutarQuery("Delete FROM lider where Cve_Detalle= " & vCve_Detalle)
+            oBD.EjecutarQuery("Delete FROM detalle where Cve_Detalle= " & vCve_Detalle)
         Catch ex As Exception
 
         End Try

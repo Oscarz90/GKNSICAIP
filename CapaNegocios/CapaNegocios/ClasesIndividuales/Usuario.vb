@@ -46,7 +46,7 @@ Public Class Usuario
                 Dim cmd As New SqlClient.SqlCommand
                 cmd.CommandType = CommandType.StoredProcedure
                 cmd.CommandText = "REGISTRAR_Usuario"
-                cmd.Parameters.Add("@cve_usuario", SqlDbType.Int).Value = Me.vCve_usuario
+                cmd.Parameters.Add("@cve_usuario", SqlDbType.BigInt).Value = Me.vCve_usuario
                 cmd.Parameters.Add("@nombre", SqlDbType.VarChar).Value = Me.vNombre
                 cmd.Parameters.Add("@pass", SqlDbType.VarChar).Value = Me.vPass
                 cmd.Parameters.Add("@cve_nivel_usuario", SqlDbType.Int).Value = Me.vCve_nivel_usuario
@@ -63,7 +63,7 @@ Public Class Usuario
 
 #Region "Atributos"
 
-    Dim vCve_usuario As Long
+    Private vCve_usuario As Long
     Private vNombre As String
     Private vPass As String
     Private vCve_nivel_usuario As Long

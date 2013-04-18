@@ -33,7 +33,7 @@ Public Class Objetivo
         Dim vRetorno As Long
         vDR = oBD.ObtenerRenglon("Select cve_objetivo from objetivo where cve_equipo=" & vCadena, "")
         If vDR IsNot Nothing Then
-            vRetorno = vDR("cve_lider")
+            vRetorno = vDR("cve_objetivo")
         Else
             vRetorno = 0
         End If
