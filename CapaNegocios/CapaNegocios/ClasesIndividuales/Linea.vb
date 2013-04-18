@@ -30,9 +30,46 @@ Public Class Linea
     End Sub
 #End Region
 #Region "Atributos"
-
+    Private vcve_linea As Long
+    Private vcve_componente As Long
+    Private vlinea As String
+    Private vtpcdm As Long
 #End Region
 #Region "Propiedades"
+    Public Property cve_linea() As Long
+        Get
+            Return vcve_linea
+        End Get
+        Set(ByVal value As Long)
+            vcve_linea = value
+        End Set
+    End Property
+    Public Property cve_componente() As Long
+        Get
+            Return vcve_componente
+        End Get
+        Set(ByVal value As Long)
+            vcve_componente = value
+        End Set
+    End Property
+    Public Property linea() As String
+        Get
+            Return vlinea
+        End Get
+        Set(ByVal value As String)
+            vlinea = value
+        End Set
+    End Property
+    Public Property tpcdm() As Long
+        Get
+            Return vtpcdm
+        End Get
+        Set(ByVal value As Long)
+            vtpcdm = value
+        End Set
+    End Property
+
+
 
 #End Region
 

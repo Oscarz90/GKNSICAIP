@@ -30,29 +30,27 @@ Public Class EquipoLinea
     End Sub
 #End Region
 #Region "Atributos"
-    Private vcve_equipo_linea As Integer
-    Private vcve_equipo As Integer
-    Private vcve_linea As Integer
+    Private vcve_equipo_linea As Long
+    Private vcve_equipo As Long
+    Private vcve_linea As Long
 #End Region
 #Region "Propiedades"
-
-    Public Property cve_equipo_linea As String
+    Public Property cve_equipo_linea As Long
         Get
             Return vcve_equipo_linea
         End Get
-        Set(ByVal value As String)
+        Set(ByVal value As Long)
             vcve_equipo_linea = value
         End Set
     End Property
-    Public Property cve_linea As String
+    Public Property cve_linea As Long
         Get
             Return vcve_linea
         End Get
-        Set(ByVal value As String)
+        Set(ByVal value As Long)
             vcve_linea = value
         End Set
     End Property
-
     Public Property cve_equipo As Long
         Get
             Return vcve_equipo

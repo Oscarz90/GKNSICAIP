@@ -30,9 +30,45 @@ Public Class Maquina
     End Sub
 #End Region
 #Region "Atributos"
-
+    Private vcve_maquina As Long
+    Private vcve_linea As Long
+    Private vmaquina As String
+    Private vclave_maquina As String
 #End Region
 #Region "Propiedades"
+    Public Property cve_maquina() As Long
+        Get
+            Return vcve_maquina
+        End Get
+        Set(ByVal value As Long)
+            vcve_maquina = value
+        End Set
+    End Property
+    Public Property cve_linea() As Long
+        Get
+            Return vcve_linea
+        End Get
+        Set(ByVal value As Long)
+            vcve_linea = value
+        End Set
+    End Property
+    Public Property clave_maquina() As String
+        Get
+            Return vclave_maquina
+        End Get
+        Set(ByVal value As String)
+            vclave_maquina = value
+        End Set
+    End Property
+    Public Property maquina() As String
+        Get
+            Return vmaquina
+        End Get
+        Set(ByVal value As String)
+            vmaquina = value
+        End Set
+    End Property
+
 
 #End Region
 End Class
