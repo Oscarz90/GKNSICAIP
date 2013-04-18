@@ -1,5 +1,5 @@
 ﻿Imports CapaDatos
-Public Class Linea
+Public Class Modelo
     Implements IIndividual
     Dim cadena_conexion As New CapaDatos.conexiones
     Dim oBD As New CapaDatos.CapaDatos(cadena_conexion.CadenaSicaip)
@@ -37,15 +37,18 @@ Public Class Linea
 #End Region
 
 #Region "Metodos Formulario de Produccion"
-    Public Function llena_combo_lineas() As DataTable
-        Dim dtTurnos As New DataTable
+    Public Function llena_combo_Modelos_Linea(ByVal mcve_linea As String) As DataTable
+        Dim dtModelos As New DataTable
         Try
-            'dtTurnos = oBD.ObtenerTabla("select l.cve_linea,l.linea from linea l join equipo_linea el on l.cve_linea=el.cve_linea where el.cve_equipo=" & vcve_equipo)
+            dtModelos = oBD.ObtenerTabla("select m.cve_modelo,m.np_gkn from linea l " &
+                                         "join TC tc on l.cve_linea=tc.cve_linea " &
+                                         "join modelo m on tc.cve_modelo=m.cve_modelo " &
+                                         "where l.cve_linea=" & mcve_linea)
         Catch ex As Exception
-            MsgBox("ERROR_AL_OBTENER_Lineas_CLineas")
-            dtTurnos = Nothing
+            MsgBox("ERROR_AL_OBTENER_MODELOS_DE_LINEA_CModelo")
+            dtModelos = Nothing
         End Try
-        Return dtTurnos
+        Return dtModelos
     End Function
 #End Region
 End Class

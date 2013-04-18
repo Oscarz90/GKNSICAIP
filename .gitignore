@@ -100,3 +100,5 @@ UpgradeLog*.XML
 /CapaDatos/CapaDatos/CapaDatos/conexiones.vb
 /GKNSICAIP/GKNSICAIP/My Project/Application.myapp
 /GKNSICAIP/GKNSICAIP/My Project/Application.Designer.vb
+/CapaNegocios/CapaNegocios/CapaNegocios.vbproj
+/CapaDatos/CapaDatos/CapaDatos.vbproj
