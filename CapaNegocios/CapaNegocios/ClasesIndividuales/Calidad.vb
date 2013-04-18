@@ -86,9 +86,6 @@ Public Class Calidad
             vnrfti = value
         End Set
     End Property
-
-
-
 #End Region
 
 End Class
