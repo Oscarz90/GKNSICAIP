@@ -41,7 +41,7 @@ Public Class Tipo_Rechazo
             Try
                 Dim cmd As New SqlClient.SqlCommand
                 cmd.CommandType = CommandType.StoredProcedure
-                cmd.CommandText = "REGISTRAR_TipoRechazo"
+                cmd.CommandText = "REGISTRAR_Tipo_Rechazo"
                 cmd.Parameters.Add("@cve_tipo_rechazo", SqlDbType.Int).Value = Me.vcve_tipo_rechazo
                 cmd.Parameters.Add("@tipo", SqlDbType.VarChar).Value = Me.vTipo
 
