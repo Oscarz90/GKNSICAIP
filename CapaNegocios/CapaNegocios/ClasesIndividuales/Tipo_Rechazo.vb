@@ -26,7 +26,7 @@ Public Class Tipo_Rechazo
     Public Function Obtener_Id(ByVal vCadena As String) As Long Implements IIndividual.Obtener_Id
         Dim vDR As DataRow
         Dim vRetorno As Long
-        vDR = oBD.ObtenerRenglon("select cve_tipo_rechazo from tipo_rechazo where tipo=" & vCadena, "tipo_rechazo")
+        vDR = oBD.ObtenerRenglon("select cve_tipo_rechazo from tipo_rechazo where tipo = " & vCadena, "tipo_rechazo")
         If vDR IsNot Nothing Then
             vRetorno = vDR("cve_tipo_rechazo")
         Else
@@ -41,7 +41,7 @@ Public Class Tipo_Rechazo
             Try
                 Dim cmd As New SqlClient.SqlCommand
                 cmd.CommandType = CommandType.StoredProcedure
-                cmd.CommandText = "REGISTRAR_TipoRechazo"
+                cmd.CommandText = "REGISTRAR_Tipo_Rechazo"
                 cmd.Parameters.Add("@cve_tipo_rechazo", SqlDbType.Int).Value = Me.vcve_tipo_rechazo
                 cmd.Parameters.Add("@tipo", SqlDbType.VarChar).Value = Me.vTipo
 

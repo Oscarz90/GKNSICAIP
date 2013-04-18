@@ -30,10 +30,71 @@ Public Class Cinco_S
     End Sub
 #End Region
 #Region "Atributos"
-
+    Private vcve_cinco_S As Long
+    Private vcve_registro_turno As Long
+    Private vcod_empleado As String
+    Private vmantto_autto As Double
+    Private vadmon_visual As Double
+    Private vcincoS As Double
+    Private vpromedio As Double
 #End Region
 #Region "Propiedades"
-
+    Public Property cve_cinco_S() As Long
+        Get
+            Return vcve_cinco_S
+        End Get
+        Set(ByVal value As Long)
+            vcve_cinco_S = value
+        End Set
+    End Property
+    Public Property cve_registro_turno() As Long
+        Get
+            Return vcve_registro_turno
+        End Get
+        Set(ByVal value As Long)
+            vcve_registro_turno = value
+        End Set
+    End Property
+    Public Property cod_empleado() As String
+        Get
+            Return vcod_empleado
+        End Get
+        Set(ByVal value As String)
+            vcod_empleado = value
+        End Set
+    End Property
+    Public Property mantto_autto() As Double
+        Get
+            Return vmantto_autto
+        End Get
+        Set(ByVal value As Double)
+            vmantto_autto = value
+        End Set
+    End Property
+    Public Property admon_visual() As Double
+        Get
+            Return vadmon_visual
+        End Get
+        Set(ByVal value As Double)
+            vadmon_visual = value
+        End Set
+    End Property
+    Public Property cincoS() As Double
+        Get
+            Return vcincoS
+        End Get
+        Set(ByVal value As Double)
+            vcincoS = value
+        End Set
+    End Property
+    Public Property promedio() As Double
+        Get
+            Return vpromedio
+        End Get
+        Set(ByVal value As Double)
+            vpromedio = value
+        End Set
+    End Property
 #End Region
 
 End Class

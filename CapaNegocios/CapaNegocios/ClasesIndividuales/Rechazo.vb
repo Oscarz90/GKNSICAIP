@@ -30,9 +30,121 @@ Public Class Rechazo
     End Sub
 #End Region
 #Region "Atributos"
-
+    Private vcve_rechazo As Long
+    Private vcve_registro_turno As Long
+    Private vcod_empleado_registro As String
+    Private vfecha_registro As String
+    Private vcve_modelo As Long
+    Private vcve_tipo_rechazo As Long
+    Private vcantidad As Long
+    Private vmotivo As String
+    Private vcod_empleado_elimino As String
+    Private vfecha_eliminacion As String
+    Private vestatus As String
 #End Region
 #Region "Propiedades"
+
+    Public Property cve_rechazo() As Long
+        Get
+            Return vcve_rechazo
+        End Get
+        Set(ByVal value As Long)
+            vcve_rechazo = value
+        End Set
+    End Property
+    Public Property cve_registro_turno() As Long
+        Get
+            Return vcve_registro_turno
+        End Get
+        Set(ByVal value As Long)
+            vcve_registro_turno = value
+        End Set
+    End Property
+    Public Property cod_empleado_registro() As String
+        Get
+            Return vcod_empleado_registro
+        End Get
+        Set(ByVal value As String)
+            vcod_empleado_registro = value
+        End Set
+    End Property
+    Public Property fecha_registro() As String
+        Get
+            Return vfecha_registro
+        End Get
+        Set(ByVal value As String)
+            vfecha_registro = value
+        End Set
+    End Property
+    Public Property cve_modelo() As Long
+        Get
+            Return vcve_modelo
+        End Get
+        Set(ByVal value As Long)
+            vcve_modelo = value
+        End Set
+    End Property
+    Public Property cve_tipo_rechazo() As Long
+        Get
+            Return vcve_tipo_rechazo
+        End Get
+        Set(ByVal value As Long)
+            vcve_tipo_rechazo = value
+        End Set
+    End Property
+    Public Property cantidad() As Long
+        Get
+            Return vcantidad
+        End Get
+        Set(ByVal value As Long)
+            vcantidad = value
+        End Set
+    End Property
+    Public Property motivo() As String
+        Get
+            Return vmotivo
+        End Get
+        Set(ByVal value As String)
+            vmotivo = value
+        End Set
+    End Property
+    Public Property cod_empleado_elimino() As String
+        Get
+            Return vcod_empleado_elimino
+        End Get
+        Set(ByVal value As String)
+            vcod_empleado_elimino = value
+        End Set
+    End Property
+    Public Property fecha_eliminacion() As String
+        Get
+            Return vfecha_eliminacion
+        End Get
+        Set(ByVal value As String)
+            vfecha_eliminacion = value
+        End Set
+    End Property
+
+    Public Property estatus() As String
+        Get
+            Return vestatus
+        End Get
+        Set(ByVal value As String)
+            vestatus = value
+        End Set
+    End Property
+
+
+
+
+
+
+
+
+
+
+
+
 
 #End Region
 End Class

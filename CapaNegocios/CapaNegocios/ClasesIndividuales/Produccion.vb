@@ -67,33 +67,33 @@ Public Class Produccion
     End Function
 #End Region
 #Region "Atributos"
-    Private vcve_produccion As Integer
-    Private vcve_registro_turno As Integer
+    Private vcve_produccion As Long
+    Private vcve_registro_turno As Long
     Private vcod_empleado_registro As String
     Private vfecha_registro As String
-    Private vcve_modelo As Integer
-    Private vpzas_ok As Integer
-    Private vtom As Integer
-    Private vadeudo As Integer
+    Private vcve_modelo As Long
+    Private vpzas_ok As Long
+    Private vtom As Long
+    Private vadeudo As Long
     Private vcod_empleado_eliminacion As String
-    Private vfecha_eliminacion
-    Private vstatus As String
+    Private vfecha_eliminacion As String
+    Private vestatus As String
 #End Region
 #Region "Propiedades"
 
-    Public Property cve_produccion As Integer
+    Public Property cve_produccion As Long
         Get
             Return vcve_produccion
         End Get
-        Set(ByVal value As Integer)
+        Set(ByVal value As Long)
             vcve_produccion = value
         End Set
     End Property
-    Public Property cve_registro_turno As Integer
+    Public Property cve_registro_turno As Long
         Get
             Return vcve_registro_turno
         End Get
-        Set(ByVal value As Integer)
+        Set(ByVal value As Long)
             vcve_registro_turno = value
         End Set
     End Property
@@ -113,38 +113,38 @@ Public Class Produccion
             vfecha_registro = value
         End Set
     End Property
-    Public Property cve_modelo As Integer
+    Public Property cve_modelo As Long
         Get
             Return vcve_modelo
         End Get
-        Set(ByVal value As Integer)
+        Set(ByVal value As Long)
             vcve_modelo = value
         End Set
     End Property
 
-    Public Property pzas_ok As Integer
+    Public Property pzas_ok As Long
         Get
             Return vpzas_ok
         End Get
-        Set(ByVal value As Integer)
+        Set(ByVal value As Long)
             vpzas_ok = value
         End Set
     End Property
 
-    Public Property tom As Integer
+    Public Property tom As Long
         Get
             Return vtom
         End Get
-        Set(ByVal value As Integer)
+        Set(ByVal value As Long)
             vtom = value
         End Set
     End Property
 
-    Public Property adeudo As Integer
+    Public Property adeudo As Long
         Get
             Return vadeudo
         End Get
-        Set(ByVal value As Integer)
+        Set(ByVal value As Long)
             vadeudo = value
         End Set
     End Property
@@ -158,7 +158,24 @@ Public Class Produccion
         End Set
     End Property
 
-    Property fecha_eliminacion
+    Public Property fecha_eliminacion() As String
+        Get
+            Return vfecha_eliminacion
+        End Get
+        Set(ByVal value As String)
+            vfecha_eliminacion = value
+        End Set
+    End Property
+
+    Public Property estatus() As String
+        Get
+            Return vestatus
+        End Get
+        Set(ByVal value As String)
+            vestatus = value
+        End Set
+    End Property
+
 
 
 
