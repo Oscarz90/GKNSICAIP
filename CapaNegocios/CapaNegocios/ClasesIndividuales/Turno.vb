@@ -30,9 +30,67 @@ Public Class Turno
     End Sub
 #End Region
 #Region "Atributos"
-
+    Private vcve_turno As Long
+    Private vminutos As Long
+    Private vcomedor As Long
+    Private vturno As String
+    Private vinicio As String
+    Private vfin As String
 #End Region
 #Region "Propiedades"
+    Public Property cve_turno() As Long
+        Get
+            Return vcve_turno
+        End Get
+        Set(ByVal value As Long)
+            vcve_turno = value
+        End Set
+    End Property
+
+    Public Property minutos() As Long
+        Get
+            Return vminutos
+        End Get
+        Set(ByVal value As Long)
+            vminutos = value
+        End Set
+    End Property
+
+    Public Property comedor() As Long
+        Get
+            Return vcomedor
+        End Get
+        Set(ByVal value As Long)
+            vcomedor = value
+        End Set
+    End Property
+
+    Public Property turno() As String
+        Get
+            Return vturno
+        End Get
+        Set(ByVal value As String)
+            vturno = value
+        End Set
+    End Property
+
+    Public Property inicio() As String
+        Get
+            Return vinicio
+        End Get
+        Set(ByVal value As String)
+            vinicio = value
+        End Set
+    End Property
+
+    Public Property NewProperty() As String
+        Get
+            Return vfin
+        End Get
+        Set(ByVal value As String)
+            vfin = value
+        End Set
+    End Property
 
 #End Region
 
