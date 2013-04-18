@@ -26,7 +26,7 @@ Public Class Tipo_Rechazo
     Public Function Obtener_Id(ByVal vCadena As String) As Long Implements IIndividual.Obtener_Id
         Dim vDR As DataRow
         Dim vRetorno As Long
-        vDR = oBD.ObtenerRenglon("select cve_tipo_rechazo from tipo_rechazo where tipo=" & vCadena, "tipo_rechazo")
+        vDR = oBD.ObtenerRenglon("select cve_tipo_rechazo from tipo_rechazo where tipo = " & vCadena, "tipo_rechazo")
         If vDR IsNot Nothing Then
             vRetorno = vDR("cve_tipo_rechazo")
         Else
