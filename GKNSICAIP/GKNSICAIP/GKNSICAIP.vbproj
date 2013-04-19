@@ -80,10 +80,10 @@
     <Import Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Formularios\Graficas\Graficas.Designer.vb">
-      <DependentUpon>Graficas.vb</DependentUpon>
+    <Compile Include="Formularios\Graficas\frmGraficas.Designer.vb">
+      <DependentUpon>frmGraficas.vb</DependentUpon>
     </Compile>
-    <Compile Include="Formularios\Graficas\Graficas.vb">
+    <Compile Include="Formularios\Graficas\frmGraficas.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Formularios\Procesos\Maquinado\frmProduccion.Designer.vb">
@@ -115,8 +115,8 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Formularios\Graficas\Graficas.resx">
-      <DependentUpon>Graficas.vb</DependentUpon>
+    <EmbeddedResource Include="Formularios\Graficas\frmGraficas.resx">
+      <DependentUpon>frmGraficas.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Formularios\Procesos\Maquinado\frmProduccion.resx">
       <DependentUpon>frmProduccion.vb</DependentUpon>
@@ -167,6 +167,9 @@
       <Isolated>False</Isolated>
       <EmbedInteropTypes>True</EmbedInteropTypes>
     </COMReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\TLATOANI IMAGOTIPO REV0a.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

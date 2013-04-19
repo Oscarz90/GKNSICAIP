@@ -66,5 +66,12 @@ Namespace My.Resources
                 Return CType(obj,System.Drawing.Bitmap)
             End Get
         End Property
+        
+        Friend ReadOnly Property TLATOANI_IMAGOTIPO_REV0a() As System.Drawing.Bitmap
+            Get
+                Dim obj As Object = ResourceManager.GetObject("TLATOANI IMAGOTIPO REV0a", resourceCulture)
+                Return CType(obj,System.Drawing.Bitmap)
+            End Get
+        End Property
     End Module
 End Namespace
