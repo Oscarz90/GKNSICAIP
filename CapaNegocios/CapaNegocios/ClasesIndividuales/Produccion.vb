@@ -23,44 +23,42 @@ Public Class Produccion
         End Set
     End Property
 
-    Private vNombre As String
-    Public Property Nombre() As String
-        Get
-            Return vNombre
-        End Get
-        Set(ByVal value As String)
-            vNombre = value
-        End Set
-    End Property
-
     Public Function Obtener_Id(ByVal vCadena As String) As Long Implements IIndividual.Obtener_Id
         Return 1
     End Function
 
     Public Sub Registrar() Implements IIndividual.Registrar
-        Dim oBD As New CapaDatos.CapaDatos("Data Source= Oscar-PC\SQLExpress; initial Catalog=GKNSICAIP; User Id= sa; Password= sistemas")
+        'Dim oBD As New CapaDatos.CapaDatos("Data Source= Oscar-PC\SQLExpress; initial Catalog=GKNSICAIP; Integrated Security = True")
         Using scope As New TransactionScope
             Try
                 Dim vComando As New SqlClient.SqlCommand
                 vComando.CommandType = CommandType.StoredProcedure
-                vComando.CommandText = "registra_prueba"
-                vComando.Parameters.Add("@Laboratorio_Id", SqlDbType.Int).Value = Me.vId
-                vComando.Parameters.Add("@Nombre", SqlDbType.VarChar).Value = Me.vNombre
-                Dim obj As DataTable = oBD.EjecutaCommando(vComando)
-                Me.vId = obj.Rows(0)(0)
+                vComando.CommandText = "registra_produccion"
+                vComando.Parameters.Add("@cve_registro_turno", SqlDbType.BigInt).Value = Me.vcve_registro_turno
+                vComando.Parameters.Add("@codempleado", SqlDbType.VarChar).Value = Me.vcod_empleado_registro
+                vComando.Parameters.Add("@fecha_registro", SqlDbType.DateTime).Value = Convert.ToDateTime(Me.vfecha_registro)
+                vComando.Parameters.Add("@cve_modelo", SqlDbType.BigInt).Value = Me.vcve_modelo
+                vComando.Parameters.Add("@pzas_ok", SqlDbType.Int).Value = Me.pzas_ok
+                vComando.Parameters.Add("@tiempo_operacion", SqlDbType.Int).Value = Me.vtom
+                vComando.Parameters.Add("@estatus", SqlDbType.VarChar).Value = Me.vestatus
+                'Dim obj As DataTable = oBD.EjecutaCommando(vComando)
+                oBD.EjecutaProcedimientos(vComando)
+                'Me.vId = obj.Rows(0)(0)
                 scope.Complete()
-            Catch ex As Exception
-                Throw New Exception(ex.Message)
+            Catch 'ex As Exception
+                MsgBox("Error al insertar produccion. CProduccion_ERROR", vbCritical + vbOKOnly, "Error")
+                'Throw New Exception(ex.Message)
             End Try
         End Using
     End Sub
+
     Public Function obtener_datos() As DataTable
         'Dim dt As DataTable = oBD.ObtenerTabla("Select cve_turno,turno from laboratorio")
         Dim dt As DataTable
         Try
             dt = oBD.ObtenerTabla("Select cve_turno,turno from turno")
         Catch ex As Exception
-            MsgBox("ERROR_01")
+            MsgBox("Error al obtener datos. ERROR_CProduccion", vbCritical + vbOKOnly, "Error")
             dt = Nothing
         End Try
         Return dt
@@ -80,7 +78,6 @@ Public Class Produccion
     Private vestatus As String
 #End Region
 #Region "Propiedades"
-
     Public Property cve_produccion As Long
         Get
             Return vcve_produccion
@@ -121,7 +118,6 @@ Public Class Produccion
             vcve_modelo = value
         End Set
     End Property
-
     Public Property pzas_ok As Long
         Get
             Return vpzas_ok
@@ -130,7 +126,6 @@ Public Class Produccion
             vpzas_ok = value
         End Set
     End Property
-
     Public Property tom As Long
         Get
             Return vtom
@@ -139,7 +134,6 @@ Public Class Produccion
             vtom = value
         End Set
     End Property
-
     Public Property adeudo As Long
         Get
             Return vadeudo
@@ -148,7 +142,6 @@ Public Class Produccion
             vadeudo = value
         End Set
     End Property
-
     Public Property cod_empleado_eliminacion As String
         Get
             Return vcod_empleado_eliminacion
@@ -157,7 +150,6 @@ Public Class Produccion
             vcod_empleado_eliminacion = value
         End Set
     End Property
-
     Public Property fecha_eliminacion() As String
         Get
             Return vfecha_eliminacion
@@ -166,7 +158,6 @@ Public Class Produccion
             vfecha_eliminacion = value
         End Set
     End Property
-
     Public Property estatus() As String
         Get
             Return vestatus
@@ -175,10 +166,26 @@ Public Class Produccion
             vestatus = value
         End Set
     End Property
-
-
-
-
 #End Region
-
+#Region "Metodos formulario de produccion"
+    Public Function llena_productividad_gridview() As DataTable
+        Dim obj As DataTable
+        Using scope As New TransactionScope
+            Try
+                Dim vComando As New SqlClient.SqlCommand
+                vComando.CommandType = CommandType.StoredProcedure
+                vComando.CommandText = "obtener_registros_produccion"
+                vComando.Parameters.Add("@cve_registro_turno", SqlDbType.BigInt).Value = Me.vcve_registro_turno
+                obj = oBD.EjecutaCommando(vComando)
+                Me.vId = obj.Rows(0)(0)
+                scope.Complete()
+            Catch 'ex As Exception
+                MsgBox("Error al obtener detalle de Productivdad. CProduccion_ERROR", vbCritical + vbOKOnly, "Error")
+                Return Nothing
+                'Throw New Exception(ex.Message)
+            End Try
+            Return obj
+        End Using
+    End Function
+#End Region
 End Class

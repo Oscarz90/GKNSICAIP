@@ -45,6 +45,7 @@ Public Class frmProduccion
         llena_cbx_Turnos()
         llena_cbx_Lineas()
         llena_cbx_Modelos()
+        llena_productividad_gridview()
     End Sub
 
 #End Region
@@ -57,7 +58,6 @@ Public Class frmProduccion
         cbxTurno.DataSource = oTurnos.llena_combo_turnos
         cbxTurno.SelectedIndex = -1
     End Sub
-
     Private Sub llena_cbx_Lineas()
         Dim oEquipoLinea As New CapaNegocios.EquipoLinea
         oEquipoLinea.cve_equipo = vcve_equipo
@@ -67,7 +67,6 @@ Public Class frmProduccion
         cbxLinea.SelectedIndex = -1
         flgBanderacbxLineas = True
     End Sub
-
     Private Sub llena_cbx_Modelos()
         flgBanderacbxModelos = False
         If cbxLinea.SelectedIndex <> -1 And flgBanderacbxLineas Then
@@ -84,7 +83,13 @@ Public Class frmProduccion
         End If
     End Sub
 #End Region
-
+#Region "llenado de gridsviews"
+    Private Sub llena_productividad_gridview()
+        Dim oProduccion As New Produccion
+        oProduccion.cve_registro_turno = 1
+        grdDetalleProductividad.DataSource = oProduccion.llena_productividad_gridview()
+    End Sub
+#End Region
 #Region "Eventos de ComboBox"
     Private Sub cbxLinea_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cbxLinea.SelectedIndexChanged
         llena_cbx_Modelos()
@@ -101,12 +106,6 @@ Public Class frmProduccion
         valida_sea_numero(sender)
         valida_botones_productividad()
         deshabilitar_btn_Quitar_modelo()
-    End Sub
-#End Region
-
-#Region "eventos botones"
-    Private Sub btnAgregarModelo_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnAgregarModelo.Click
-
     End Sub
 #End Region
 
@@ -145,4 +144,26 @@ Public Class frmProduccion
     End Sub
 #End Region
 
+#Region "Limpia formularios"
+    Private Sub limpia_productividad()
+        cbxModeloProductividad.SelectedIndex = -1
+        txtPiezasProducidas.Text = "0"
+        txtMinutos.Text = ""
+    End Sub
+#End Region
+
+#Region "Funciones para modulo Productividad"
+    Private Sub btnAgregarModelo_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnAgregarModelo.Click
+        Dim oProduccion As New Produccion
+        oProduccion.cve_registro_turno = 1
+        oProduccion.cod_empleado_registro = "118737"
+        oProduccion.fecha_registro = Now.ToString("dd-MM-yyyy HH:mm")
+        oProduccion.cve_modelo = cbxModeloProductividad.SelectedValue
+        oProduccion.pzas_ok = Long.Parse(txtPiezasProducidas.Text)
+        oProduccion.tom = Long.Parse(txtMinutos.Text)
+        oProduccion.estatus = "1"
+        oProduccion.Registrar()
+        limpia_productividad()
+    End Sub
+#End Region
 End Class

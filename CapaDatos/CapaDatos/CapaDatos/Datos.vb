@@ -57,6 +57,7 @@ Public Class CapaDatos
     ''' <param name="Nombre">Nombre de Tabla</param>
     ''' <returns></returns>
     ''' <remarks></remarks>
+    ''' 
     Public Function ObtenerRenglon(ByVal vConsulta_SQL As String, ByVal Nombre As String) As DataRow
         Dim oSQL_Adt As New SqlClient.SqlDataAdapter
         Dim vDT_Temp As DataTable
@@ -76,6 +77,12 @@ Public Class CapaDatos
         End Try
     End Function
 
-
+    Public Sub EjecutaProcedimientos(ByVal oSQL_Comando As System.Data.Common.DbCommand)
+        Try
+            Dim vDS As DataSet = oBD.ExecuteDataSet(oSQL_Comando)
+        Catch ex As Exception
+            Throw New Exception("Error al crear una tabla " & Err.Description)
+        End Try
+    End Sub
 #End Region
 End Class
