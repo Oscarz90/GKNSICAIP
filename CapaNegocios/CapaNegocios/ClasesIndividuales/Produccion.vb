@@ -8,7 +8,6 @@ Public Class Produccion
     Public Sub Cargar() Implements IIndividual.Cargar
 
     End Sub
-
     Public Sub Eliminar() Implements IIndividual.Eliminar
 
     End Sub
@@ -187,5 +186,25 @@ Public Class Produccion
             Return obj
         End Using
     End Function
+    Public Sub elimina_fila_productividad_gridview()
+        'Dim oBD As New CapaDatos.CapaDatos("Data Source= Oscar-PC\SQLExpress; initial Catalog=GKNSICAIP; Integrated Security = True")
+        Using scope As New TransactionScope
+            Try
+                Dim vComando As New SqlClient.SqlCommand
+                vComando.CommandType = CommandType.StoredProcedure
+                vComando.CommandText = "remueve_produccion"
+                vComando.Parameters.Add("@cve_registro_turno", SqlDbType.BigInt).Value = Me.vcve_registro_turno
+                vComando.Parameters.Add("@cve_produccion", SqlDbType.BigInt).Value = Me.vcve_produccion
+                vComando.Parameters.Add("@estatus", SqlDbType.VarChar).Value = Me.estatus
+                'Dim obj As DataTable = oBD.EjecutaCommando(vComando)
+                oBD.EjecutaProcedimientos(vComando)
+                'Me.vId = obj.Rows(0)(0)
+                scope.Complete()
+            Catch 'ex As Exception
+                MsgBox("Error al eliminar produccion. CProduccion_ERROR", vbCritical + vbOKOnly, "Error")
+                'Throw New Exception(ex.Message)
+            End Try
+        End Using
+    End Sub
 #End Region
 End Class

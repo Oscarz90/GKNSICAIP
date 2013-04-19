@@ -49,7 +49,6 @@ Public Class frmProduccion
     End Sub
 
 #End Region
-
 #Region "LLenado de comboBoxs"
     Private Sub llena_cbx_Turnos()
         Dim oTurnos As New CapaNegocios.Turno
@@ -85,6 +84,10 @@ Public Class frmProduccion
 #End Region
 #Region "llenado de gridsviews"
     Private Sub llena_productividad_gridview()
+        'grdDetalleProductividad.DataSource = Nothing
+        grdDetalleProductividad.Rows.Clear()
+        'grdDetalleProductividad.Columns.Clear()
+        grdDetalleProductividad.Refresh()
         Dim oProduccion As New Produccion
         oProduccion.cve_registro_turno = 1
         grdDetalleProductividad.DataSource = oProduccion.llena_productividad_gridview()
@@ -95,7 +98,6 @@ Public Class frmProduccion
         llena_cbx_Modelos()
     End Sub
 #End Region
-
 #Region "Eventos de TextBox"
     Private Sub txtMinutos_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles txtMinutos.TextChanged
         valida_sea_numero(sender)
@@ -108,13 +110,21 @@ Public Class frmProduccion
         deshabilitar_btn_Quitar_modelo()
     End Sub
 #End Region
-
+#Region "Eventos Botones"
+    Private Sub btnAgregarModelo_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnAgregarModelo.Click
+        add_modelo_producido()
+    End Sub
+    Private Sub btnQuitarModelo_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnQuitarModelo.Click
+        remove_modelo_producido()
+        llena_productividad_gridview()
+        deshabilitar_btn_Quitar_modelo()
+    End Sub
+#End Region
 #Region "eventos listviews"
     Private Sub lstProductividad_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs)
         habilita_btn_Quitar_modelo()
     End Sub
 #End Region
-
 #Region "validaciones"
     Private Sub valida_botones_productividad()
         If cbxModeloProductividad.SelectedIndex <> -1 And txtMinutos.Text <> "" And txtPiezasProducidas.Text <> "" And txtPiezasProducidas.Text <> "0" And txtMinutos.Text <> "0" Then
@@ -143,7 +153,6 @@ Public Class frmProduccion
         btnQuitarModelo.Enabled = True
     End Sub
 #End Region
-
 #Region "Limpia formularios"
     Private Sub limpia_productividad()
         cbxModeloProductividad.SelectedIndex = -1
@@ -151,9 +160,12 @@ Public Class frmProduccion
         txtMinutos.Text = ""
     End Sub
 #End Region
-
 #Region "Funciones para modulo Productividad"
-    Private Sub btnAgregarModelo_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnAgregarModelo.Click
+    Private Sub grdDetalleProductividad_CellClick(ByVal sender As System.Object, ByVal e As System.Windows.Forms.DataGridViewCellEventArgs) Handles grdDetalleProductividad.CellClick
+        'Dim cve_produccion As Long = grdDetalleProductividad.Item("colcve_produccion", grdDetalleProductividad.CurrentRow.Index).Value
+        habilita_btn_Quitar_modelo()
+    End Sub
+    Private Sub add_modelo_producido()
         Dim oProduccion As New Produccion
         oProduccion.cve_registro_turno = 1
         oProduccion.cod_empleado_registro = "118737"
@@ -164,6 +176,14 @@ Public Class frmProduccion
         oProduccion.estatus = "1"
         oProduccion.Registrar()
         limpia_productividad()
+    End Sub
+    Private Sub remove_modelo_producido()
+        MsgBox(grdDetalleProductividad.Item("colcve_produccion", grdDetalleProductividad.CurrentRow.Index).Value)
+        Dim oProduccion As New Produccion
+        oProduccion.cve_registro_turno = 1
+        oProduccion.cve_produccion = grdDetalleProductividad.Item("colcve_produccion", grdDetalleProductividad.CurrentRow.Index).Value
+        oProduccion.estatus = "0"
+        oProduccion.elimina_fila_productividad_gridview()
     End Sub
 #End Region
 End Class
