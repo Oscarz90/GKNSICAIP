@@ -44,6 +44,7 @@ Public Class frmProduccion
         llena_cbx_Turnos()
         llena_cbx_Lineas()
         llena_cbx_Modelos()
+        llena_cbx_tipo_rechazos()
         llena_productividad_gridview()
         llena_desecho_gridview()
     End Sub
@@ -94,6 +95,14 @@ Public Class frmProduccion
             flgBanderacbxModelos = True
         End If
     End Sub
+    'Rechazos
+    Private Sub llena_cbx_tipo_rechazos()
+        Dim oTipoRechazo As New Tipo_Rechazo
+        cbxTipoRechazo.ValueMember = "cve_tipo_rechazo"
+        cbxTipoRechazo.DisplayMember = "tipo"
+        cbxTipoRechazo.DataSource = oTipoRechazo.llena_combo_tipo_rechazo
+        cbxModeloRechazo.SelectedIndex = -1
+    End Sub
 #End Region
 #Region "Llenado Labels - Textbox"
     'General
@@ -128,6 +137,7 @@ Public Class frmProduccion
     'Productividad
     Private Sub cbxModeloProductividad_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cbxModeloProductividad.SelectedIndexChanged
         If cbxModeloProductividad.SelectedIndex <> -1 Then
+            valida_botones_productividad()
             obten_descripcion_modelo(txtModeloDescripcionProductividad, cbxModeloProductividad)
             deshabilitar_btn_quitar_modelo()
         End If
@@ -135,6 +145,7 @@ Public Class frmProduccion
     'Desechos
     Private Sub cbxModeloDesecho_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cbxModeloDesecho.SelectedIndexChanged
         If cbxModeloDesecho.SelectedIndex <> -1 Then
+            valida_botones_desecho()
             obten_descripcion_modelo(txtModeloDesecho, cbxModeloDesecho)
             deshabilitar_btn_quitar_desecho()
         End If
@@ -142,7 +153,14 @@ Public Class frmProduccion
     'Rechazos
     Private Sub cbxModeloRechazo_SelectedIndexChanged_1(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cbxModeloRechazo.SelectedIndexChanged
         If cbxModeloRechazo.SelectedIndex <> -1 Then
+            valida_botones_rechazos()
             obten_descripcion_modelo(txtModeloRechazo, cbxModeloRechazo)
+            deshabilitar_btn_quitar_rechazo()
+        End If
+    End Sub
+    Private Sub cbxTipoRechazo_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cbxTipoRechazo.SelectedIndexChanged
+        If cbxTipoRechazo.SelectedIndex <> -1 Then
+            valida_botones_rechazos()
             deshabilitar_btn_quitar_rechazo()
         End If
     End Sub
@@ -164,6 +182,12 @@ Public Class frmProduccion
         valida_sea_numero(sender)
         valida_botones_desecho()
         deshabilitar_btn_quitar_desecho()
+    End Sub
+    'Rechazos
+    Private Sub txtRechazosCantidad_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles txtRechazosCantidad.TextChanged
+        valida_sea_numero(sender)
+        valida_botones_rechazos()
+        deshabilitar_btn_quitar_rechazo()
     End Sub
 #End Region
 #Region "Eventos Botones"
@@ -318,8 +342,4 @@ Public Class frmProduccion
         oDesecho.elimina_fila_desecho_gridview()
     End Sub
 #End Region
-
-
-    
-
 End Class

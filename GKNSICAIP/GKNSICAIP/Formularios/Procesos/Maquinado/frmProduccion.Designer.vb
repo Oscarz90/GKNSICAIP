@@ -137,13 +137,6 @@ Partial Class frmProduccion
         Me.Label2 = New System.Windows.Forms.Label()
         Me.cbxTipoRechazo = New System.Windows.Forms.ComboBox()
         Me.Label3 = New System.Windows.Forms.Label()
-        Me.ListView1 = New System.Windows.Forms.ListView()
-        Me.colModelo = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
-        Me.colDescripcionModelo = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
-        Me.colTipoRechazo = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
-        Me.colCantidad = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
-        Me.colMotivo = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
-        Me.colIdRechazo = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.cbxModeloRechazo = New System.Windows.Forms.ComboBox()
         Me.Label5 = New System.Windows.Forms.Label()
         Me.Label7 = New System.Windows.Forms.Label()
@@ -191,6 +184,13 @@ Partial Class frmProduccion
         Me.lblNombreEquipo = New System.Windows.Forms.Label()
         Me.Label58 = New System.Windows.Forms.Label()
         Me.cbxLinea = New System.Windows.Forms.ComboBox()
+        Me.grdDetalleRechazo = New System.Windows.Forms.DataGridView()
+        Me.colcve_rechazo = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.col_np_gkn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.col_descripcion = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.colcantidad = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.coltipo_rechazo = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.colmotivo = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.TabContenido.SuspendLayout()
         Me.tabPageProductividad.SuspendLayout()
         Me.grpDesechos.SuspendLayout()
@@ -207,6 +207,7 @@ Partial Class frmProduccion
         Me.grpSeguridad.SuspendLayout()
         CType(Me.banner_formulario, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.grdDetalleRechazo, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'TabContenido
@@ -262,11 +263,11 @@ Partial Class frmProduccion
         Me.grdDetalleDesecho.AllowUserToDeleteRows = False
         Me.grdDetalleDesecho.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.grdDetalleDesecho.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.colcve_desecho, Me.colnp_gkn, Me.colmodelodescripcion, Me.coldesechocantidad})
-        Me.grdDetalleDesecho.Location = New System.Drawing.Point(6, 274)
+        Me.grdDetalleDesecho.Location = New System.Drawing.Point(6, 237)
         Me.grdDetalleDesecho.Name = "grdDetalleDesecho"
         Me.grdDetalleDesecho.ReadOnly = True
         Me.grdDetalleDesecho.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
-        Me.grdDetalleDesecho.Size = New System.Drawing.Size(436, 128)
+        Me.grdDetalleDesecho.Size = New System.Drawing.Size(436, 165)
         Me.grdDetalleDesecho.TabIndex = 327
         '
         'colcve_desecho
@@ -300,7 +301,7 @@ Partial Class frmProduccion
         'Label59
         '
         Me.Label59.AutoSize = True
-        Me.Label59.Location = New System.Drawing.Point(364, 234)
+        Me.Label59.Location = New System.Drawing.Point(372, 178)
         Me.Label59.Name = "Label59"
         Me.Label59.Size = New System.Drawing.Size(50, 18)
         Me.Label59.TabIndex = 326
@@ -312,7 +313,7 @@ Partial Class frmProduccion
         Me.cbxModeloDesecho.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cbxModeloDesecho.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cbxModeloDesecho.FormattingEnabled = True
-        Me.cbxModeloDesecho.Location = New System.Drawing.Point(160, 45)
+        Me.cbxModeloDesecho.Location = New System.Drawing.Point(116, 25)
         Me.cbxModeloDesecho.Name = "cbxModeloDesecho"
         Me.cbxModeloDesecho.Size = New System.Drawing.Size(217, 26)
         Me.cbxModeloDesecho.TabIndex = 323
@@ -320,7 +321,7 @@ Partial Class frmProduccion
         'Label60
         '
         Me.Label60.AutoSize = True
-        Me.Label60.Location = New System.Drawing.Point(283, 234)
+        Me.Label60.Location = New System.Drawing.Point(291, 178)
         Me.Label60.Name = "Label60"
         Me.Label60.Size = New System.Drawing.Size(65, 18)
         Me.Label60.TabIndex = 325
@@ -330,7 +331,7 @@ Partial Class frmProduccion
         '
         Me.Label17.AutoSize = True
         Me.Label17.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label17.Location = New System.Drawing.Point(58, 91)
+        Me.Label17.Location = New System.Drawing.Point(14, 71)
         Me.Label17.Name = "Label17"
         Me.Label17.Size = New System.Drawing.Size(96, 18)
         Me.Label17.TabIndex = 325
@@ -343,7 +344,7 @@ Partial Class frmProduccion
         Me.btnAgregarDesecho.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center
         Me.btnAgregarDesecho.Enabled = False
         Me.btnAgregarDesecho.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnAgregarDesecho.Location = New System.Drawing.Point(285, 172)
+        Me.btnAgregarDesecho.Location = New System.Drawing.Point(293, 116)
         Me.btnAgregarDesecho.Name = "btnAgregarDesecho"
         Me.btnAgregarDesecho.Size = New System.Drawing.Size(63, 59)
         Me.btnAgregarDesecho.TabIndex = 323
@@ -353,7 +354,7 @@ Partial Class frmProduccion
         '
         Me.Label19.AutoSize = True
         Me.Label19.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label19.Location = New System.Drawing.Point(90, 48)
+        Me.Label19.Location = New System.Drawing.Point(46, 28)
         Me.Label19.Name = "Label19"
         Me.Label19.Size = New System.Drawing.Size(64, 18)
         Me.Label19.TabIndex = 322
@@ -366,7 +367,7 @@ Partial Class frmProduccion
         Me.btnQuitarDesecho.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center
         Me.btnQuitarDesecho.Enabled = False
         Me.btnQuitarDesecho.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnQuitarDesecho.Location = New System.Drawing.Point(359, 172)
+        Me.btnQuitarDesecho.Location = New System.Drawing.Point(367, 116)
         Me.btnQuitarDesecho.Name = "btnQuitarDesecho"
         Me.btnQuitarDesecho.Size = New System.Drawing.Size(64, 59)
         Me.btnQuitarDesecho.TabIndex = 324
@@ -374,7 +375,7 @@ Partial Class frmProduccion
         '
         'txtModeloDesecho
         '
-        Me.txtModeloDesecho.Location = New System.Drawing.Point(160, 88)
+        Me.txtModeloDesecho.Location = New System.Drawing.Point(116, 68)
         Me.txtModeloDesecho.Name = "txtModeloDesecho"
         Me.txtModeloDesecho.ReadOnly = True
         Me.txtModeloDesecho.Size = New System.Drawing.Size(217, 26)
@@ -384,7 +385,7 @@ Partial Class frmProduccion
         '
         Me.Label46.AutoSize = True
         Me.Label46.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label46.Location = New System.Drawing.Point(227, 135)
+        Me.Label46.Location = New System.Drawing.Point(183, 115)
         Me.Label46.Name = "Label46"
         Me.Label46.Size = New System.Drawing.Size(68, 18)
         Me.Label46.TabIndex = 309
@@ -394,7 +395,7 @@ Partial Class frmProduccion
         '
         Me.Label6.AutoSize = True
         Me.Label6.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label6.Location = New System.Drawing.Point(70, 136)
+        Me.Label6.Location = New System.Drawing.Point(26, 116)
         Me.Label6.Name = "Label6"
         Me.Label6.Size = New System.Drawing.Size(83, 18)
         Me.Label6.TabIndex = 8
@@ -403,7 +404,7 @@ Partial Class frmProduccion
         'txtDesechosCantidad
         '
         Me.txtDesechosCantidad.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
-        Me.txtDesechosCantidad.Location = New System.Drawing.Point(160, 132)
+        Me.txtDesechosCantidad.Location = New System.Drawing.Point(116, 112)
         Me.txtDesechosCantidad.Name = "txtDesechosCantidad"
         Me.txtDesechosCantidad.Size = New System.Drawing.Size(61, 26)
         Me.txtDesechosCantidad.TabIndex = 9
@@ -1327,11 +1328,11 @@ Partial Class frmProduccion
         '
         'grpRechazos
         '
+        Me.grpRechazos.Controls.Add(Me.grdDetalleRechazo)
         Me.grpRechazos.Controls.Add(Me.txtModeloRechazo)
         Me.grpRechazos.Controls.Add(Me.Label2)
         Me.grpRechazos.Controls.Add(Me.cbxTipoRechazo)
         Me.grpRechazos.Controls.Add(Me.Label3)
-        Me.grpRechazos.Controls.Add(Me.ListView1)
         Me.grpRechazos.Controls.Add(Me.cbxModeloRechazo)
         Me.grpRechazos.Controls.Add(Me.Label5)
         Me.grpRechazos.Controls.Add(Me.Label7)
@@ -1374,7 +1375,7 @@ Partial Class frmProduccion
         Me.cbxTipoRechazo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cbxTipoRechazo.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cbxTipoRechazo.FormattingEnabled = True
-        Me.cbxTipoRechazo.Location = New System.Drawing.Point(109, 131)
+        Me.cbxTipoRechazo.Location = New System.Drawing.Point(417, 61)
         Me.cbxTipoRechazo.Name = "cbxTipoRechazo"
         Me.cbxTipoRechazo.Size = New System.Drawing.Size(198, 26)
         Me.cbxTipoRechazo.TabIndex = 334
@@ -1383,54 +1384,11 @@ Partial Class frmProduccion
         '
         Me.Label3.AutoSize = True
         Me.Label3.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label3.Location = New System.Drawing.Point(61, 134)
+        Me.Label3.Location = New System.Drawing.Point(369, 64)
         Me.Label3.Name = "Label3"
         Me.Label3.Size = New System.Drawing.Size(38, 18)
         Me.Label3.TabIndex = 333
         Me.Label3.Text = "Tipo"
-        '
-        'ListView1
-        '
-        Me.ListView1.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.colModelo, Me.colDescripcionModelo, Me.colTipoRechazo, Me.colCantidad, Me.colMotivo, Me.colIdRechazo})
-        Me.ListView1.Font = New System.Drawing.Font("Arial", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.ListView1.FullRowSelect = True
-        Me.ListView1.GridLines = True
-        Me.ListView1.Location = New System.Drawing.Point(7, 271)
-        Me.ListView1.Margin = New System.Windows.Forms.Padding(4)
-        Me.ListView1.Name = "ListView1"
-        Me.ListView1.Size = New System.Drawing.Size(617, 136)
-        Me.ListView1.TabIndex = 332
-        Me.ListView1.UseCompatibleStateImageBehavior = False
-        Me.ListView1.View = System.Windows.Forms.View.Details
-        '
-        'colModelo
-        '
-        Me.colModelo.Text = "Modelo"
-        Me.colModelo.Width = 140
-        '
-        'colDescripcionModelo
-        '
-        Me.colDescripcionModelo.Text = "Descripcion"
-        Me.colDescripcionModelo.Width = 135
-        '
-        'colTipoRechazo
-        '
-        Me.colTipoRechazo.Text = "Tipo"
-        Me.colTipoRechazo.Width = 190
-        '
-        'colCantidad
-        '
-        Me.colCantidad.Text = "Cantidad"
-        Me.colCantidad.Width = 50
-        '
-        'colMotivo
-        '
-        Me.colMotivo.Text = "Motivo"
-        Me.colMotivo.Width = 258
-        '
-        'colIdRechazo
-        '
-        Me.colIdRechazo.Width = 0
         '
         'cbxModeloRechazo
         '
@@ -1446,7 +1404,7 @@ Partial Class frmProduccion
         '
         Me.Label5.AutoSize = True
         Me.Label5.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label5.Location = New System.Drawing.Point(7, 165)
+        Me.Label5.Location = New System.Drawing.Point(7, 110)
         Me.Label5.Name = "Label5"
         Me.Label5.Size = New System.Drawing.Size(58, 18)
         Me.Label5.TabIndex = 330
@@ -1456,7 +1414,7 @@ Partial Class frmProduccion
         '
         Me.Label7.AutoSize = True
         Me.Label7.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label7.Location = New System.Drawing.Point(508, 109)
+        Me.Label7.Location = New System.Drawing.Point(557, 193)
         Me.Label7.Name = "Label7"
         Me.Label7.Size = New System.Drawing.Size(50, 18)
         Me.Label7.TabIndex = 329
@@ -1466,7 +1424,7 @@ Partial Class frmProduccion
         '
         Me.Label11.AutoSize = True
         Me.Label11.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label11.Location = New System.Drawing.Point(423, 109)
+        Me.Label11.Location = New System.Drawing.Point(472, 193)
         Me.Label11.Name = "Label11"
         Me.Label11.Size = New System.Drawing.Size(65, 18)
         Me.Label11.TabIndex = 328
@@ -1479,7 +1437,7 @@ Partial Class frmProduccion
         Me.btnAgregarRechazo.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center
         Me.btnAgregarRechazo.Enabled = False
         Me.btnAgregarRechazo.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnAgregarRechazo.Location = New System.Drawing.Point(425, 47)
+        Me.btnAgregarRechazo.Location = New System.Drawing.Point(474, 131)
         Me.btnAgregarRechazo.Name = "btnAgregarRechazo"
         Me.btnAgregarRechazo.Size = New System.Drawing.Size(63, 59)
         Me.btnAgregarRechazo.TabIndex = 326
@@ -1492,7 +1450,7 @@ Partial Class frmProduccion
         Me.btnQuitarRechazo.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center
         Me.btnQuitarRechazo.Enabled = False
         Me.btnQuitarRechazo.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnQuitarRechazo.Location = New System.Drawing.Point(502, 47)
+        Me.btnQuitarRechazo.Location = New System.Drawing.Point(551, 131)
         Me.btnQuitarRechazo.Name = "btnQuitarRechazo"
         Me.btnQuitarRechazo.Size = New System.Drawing.Size(64, 59)
         Me.btnQuitarRechazo.TabIndex = 327
@@ -1512,7 +1470,7 @@ Partial Class frmProduccion
         '
         Me.Label16.AutoSize = True
         Me.Label16.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label16.Location = New System.Drawing.Point(27, 98)
+        Me.Label16.Location = New System.Drawing.Point(335, 28)
         Me.Label16.Name = "Label16"
         Me.Label16.Size = New System.Drawing.Size(72, 18)
         Me.Label16.TabIndex = 324
@@ -1521,18 +1479,18 @@ Partial Class frmProduccion
         'txtRechazoMotivo
         '
         Me.txtRechazoMotivo.Font = New System.Drawing.Font("Arial", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtRechazoMotivo.Location = New System.Drawing.Point(6, 186)
+        Me.txtRechazoMotivo.Location = New System.Drawing.Point(6, 131)
         Me.txtRechazoMotivo.Multiline = True
         Me.txtRechazoMotivo.Name = "txtRechazoMotivo"
         Me.txtRechazoMotivo.ScrollBars = System.Windows.Forms.ScrollBars.Vertical
-        Me.txtRechazoMotivo.Size = New System.Drawing.Size(618, 78)
+        Me.txtRechazoMotivo.Size = New System.Drawing.Size(301, 78)
         Me.txtRechazoMotivo.TabIndex = 323
         '
         'txtRechazosCantidad
         '
         Me.txtRechazosCantidad.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
         Me.txtRechazosCantidad.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtRechazosCantidad.Location = New System.Drawing.Point(109, 95)
+        Me.txtRechazosCantidad.Location = New System.Drawing.Point(417, 25)
         Me.txtRechazosCantidad.Name = "txtRechazosCantidad"
         Me.txtRechazosCantidad.Size = New System.Drawing.Size(198, 26)
         Me.txtRechazosCantidad.TabIndex = 322
@@ -1920,6 +1878,51 @@ Partial Class frmProduccion
         Me.cbxLinea.Size = New System.Drawing.Size(234, 26)
         Me.cbxLinea.TabIndex = 309
         '
+        'grdDetalleRechazo
+        '
+        Me.grdDetalleRechazo.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.grdDetalleRechazo.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.colcve_rechazo, Me.col_np_gkn, Me.col_descripcion, Me.colcantidad, Me.coltipo_rechazo, Me.colmotivo})
+        Me.grdDetalleRechazo.Location = New System.Drawing.Point(6, 234)
+        Me.grdDetalleRechazo.Name = "grdDetalleRechazo"
+        Me.grdDetalleRechazo.Size = New System.Drawing.Size(609, 174)
+        Me.grdDetalleRechazo.TabIndex = 337
+        '
+        'colcve_rechazo
+        '
+        Me.colcve_rechazo.HeaderText = "cve_rechazo"
+        Me.colcve_rechazo.Name = "colcve_rechazo"
+        Me.colcve_rechazo.ReadOnly = True
+        '
+        'col_np_gkn
+        '
+        Me.col_np_gkn.HeaderText = "No. Parte GKN"
+        Me.col_np_gkn.Name = "col_np_gkn"
+        Me.col_np_gkn.ReadOnly = True
+        '
+        'col_descripcion
+        '
+        Me.col_descripcion.HeaderText = "Modelo"
+        Me.col_descripcion.Name = "col_descripcion"
+        Me.col_descripcion.ReadOnly = True
+        '
+        'colcantidad
+        '
+        Me.colcantidad.HeaderText = "Cantidad"
+        Me.colcantidad.Name = "colcantidad"
+        Me.colcantidad.ReadOnly = True
+        '
+        'coltipo_rechazo
+        '
+        Me.coltipo_rechazo.HeaderText = "Rechazo"
+        Me.coltipo_rechazo.Name = "coltipo_rechazo"
+        Me.coltipo_rechazo.ReadOnly = True
+        '
+        'colmotivo
+        '
+        Me.colmotivo.HeaderText = "motivo"
+        Me.colmotivo.Name = "colmotivo"
+        Me.colmotivo.ReadOnly = True
+        '
         'frmProduccion
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -1966,6 +1969,7 @@ Partial Class frmProduccion
         Me.grpSeguridad.PerformLayout()
         CType(Me.banner_formulario, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.grdDetalleRechazo, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -2065,13 +2069,6 @@ Partial Class frmProduccion
     Friend WithEvents Label2 As System.Windows.Forms.Label
     Friend WithEvents cbxTipoRechazo As System.Windows.Forms.ComboBox
     Friend WithEvents Label3 As System.Windows.Forms.Label
-    Friend WithEvents ListView1 As System.Windows.Forms.ListView
-    Friend WithEvents colModelo As System.Windows.Forms.ColumnHeader
-    Friend WithEvents colDescripcionModelo As System.Windows.Forms.ColumnHeader
-    Friend WithEvents colTipoRechazo As System.Windows.Forms.ColumnHeader
-    Friend WithEvents colCantidad As System.Windows.Forms.ColumnHeader
-    Friend WithEvents colMotivo As System.Windows.Forms.ColumnHeader
-    Friend WithEvents colIdRechazo As System.Windows.Forms.ColumnHeader
     Friend WithEvents cbxModeloRechazo As System.Windows.Forms.ComboBox
     Friend WithEvents Label5 As System.Windows.Forms.Label
     Friend WithEvents Label7 As System.Windows.Forms.Label
@@ -2138,4 +2135,11 @@ Partial Class frmProduccion
     Friend WithEvents colnp_gkn As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents colmodelodescripcion As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents coldesechocantidad As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents grdDetalleRechazo As System.Windows.Forms.DataGridView
+    Friend WithEvents colcve_rechazo As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents col_np_gkn As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents col_descripcion As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents colcantidad As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents coltipo_rechazo As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents colmotivo As System.Windows.Forms.DataGridViewTextBoxColumn
 End Class

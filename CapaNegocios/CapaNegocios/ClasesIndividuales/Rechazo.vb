@@ -43,7 +43,6 @@ Public Class Rechazo
     Private vestatus As String
 #End Region
 #Region "Propiedades"
-
     Public Property cve_rechazo() As Long
         Get
             Return vcve_rechazo
@@ -124,7 +123,6 @@ Public Class Rechazo
             vfecha_eliminacion = value
         End Set
     End Property
-
     Public Property estatus() As String
         Get
             Return vestatus
@@ -133,18 +131,23 @@ Public Class Rechazo
             vestatus = value
         End Set
     End Property
-
-
-
-
-
-
-
-
-
-
-
-
-
+#End Region
+#Region "Metodos formulario de produccion"
+    Public Function llena_rechazo_gridview() As DataTable
+        Dim obj As DataTable
+        Dim queryLlenagridview As String = "select d.cve_desecho,m.np_gkn,m.descripcion,d.cantidad from desecho d " &
+            "join modelo m on d.cve_modelo=m.cve_modelo " &
+            "where d.cve_registro_turno=" & vcve_registro_turno & " and d.estatus='1'"
+        Using scope As New TransactionScope
+            Try
+                obj = oBD.ObtenerTabla(queryLlenagridview)
+                scope.Complete()
+            Catch
+                MsgBox("Error al obtener detalle de Desechos. CDesecho_ERROR", vbCritical + vbOKOnly, "Error")
+                Return Nothing
+            End Try
+            Return obj
+        End Using
+    End Function
 #End Region
 End Class
