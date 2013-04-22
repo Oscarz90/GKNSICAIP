@@ -44,6 +44,7 @@ Public Class frmProduccion
         llena_cbx_Lineas()
         llena_cbx_Modelos()
         llena_productividad_gridview()
+        llena_desecho_gridview()
     End Sub
 
 #End Region
@@ -71,22 +72,22 @@ Public Class frmProduccion
             cbxModeloProductividad.ValueMember = "cve_modelo"
             cbxModeloProductividad.DisplayMember = "np_gkn"
             cbxModeloProductividad.DataSource = oModelo.llena_combo_Modelos_Linea(cbxLinea.SelectedValue)
-            cbxModeloRechazo.ValueMember = "cve_modelo"
-            cbxModeloRechazo.DisplayMember = "np_gkn"
-            cbxModeloRechazo.DataSource = oModelo.llena_combo_Modelos_Linea(cbxLinea.SelectedValue)
+            cbxModeloDesecho.ValueMember = "cve_modelo"
+            cbxModeloDesecho.DisplayMember = "np_gkn"
+            cbxModeloDesecho.DataSource = oModelo.llena_combo_Modelos_Linea(cbxLinea.SelectedValue)
             cbxModeloProductividad.SelectedIndex = -1
-            cbxModeloRechazo.SelectedIndex = -1
+            cbxModeloDesecho.SelectedIndex = -1
             flgBanderacbxModelos = True
         End If
     End Sub
 #End Region
 #Region "Llenado Labels - Textbox"
-    Private Sub obten_descripcion_modelo(ByRef txtmodelodesc As TextBox)
+    Private Sub obten_descripcion_modelo(ByRef txtmodelodesc As TextBox, ByRef cbxmodelodesc As ComboBox)
         If flgBanderacbxModelos Then
             Dim oModelo As New Modelo
-            oModelo.cve_modelo = cbxModeloProductividad.SelectedValue
+            oModelo.cve_modelo = cbxmodelodesc.SelectedValue
             oModelo.obtener_descripcion_modelo()
-            txtModeloDescripcionProductividad.Text = oModelo.descripcion
+            txtmodelodesc.Text = oModelo.descripcion
         End If
     End Sub
 #End Region
@@ -97,7 +98,9 @@ Public Class frmProduccion
         grdDetalleProductividad.DataSource = oProduccion.llena_productividad_gridview()
     End Sub
     Private Sub llena_desecho_gridview()
-
+        Dim oDesecho As New Desecho
+        oDesecho.cve_registro_turno = 1
+        grdDetalleDesecho.DataSource = oDesecho.llena_desecho_gridview()
     End Sub
 #End Region
 #Region "Eventos ComboBox"
@@ -106,12 +109,16 @@ Public Class frmProduccion
     End Sub
     Private Sub cbxModeloProductividad_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cbxModeloProductividad.SelectedIndexChanged
         If cbxModeloProductividad.SelectedIndex <> -1 Then
-            obten_descripcion_modelo(txtModeloDescripcionProductividad)
+            obten_descripcion_modelo(txtModeloDescripcionProductividad, cbxModeloProductividad)
             deshabilitar_btn_Quitar_modelo()
         End If
     End Sub
-    Private Sub cbxModeloRechazo_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cbxModeloRechazo.SelectedIndexChanged
-        obten_descripcion_modelo(txtModeloRechazo)
+    Private Sub cbxModeloRechazo_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cbxModeloDesecho.SelectedIndexChanged
+        If cbxModeloDesecho.SelectedIndex <> -1 Then
+            obten_descripcion_modelo(txtModeloDesecho, cbxModeloDesecho)
+            deshabilitar_btn_quitar_desecho()
+        End If
+
     End Sub
 #End Region
 #Region "Eventos TextBox"
@@ -125,6 +132,11 @@ Public Class frmProduccion
         valida_botones_productividad()
         deshabilitar_btn_Quitar_modelo()
     End Sub
+    Private Sub txtDesechosCantidad_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles txtDesechosCantidad.TextChanged
+        valida_sea_numero(sender)
+        valida_botones_desecho()
+        deshabilitar_btn_quitar_desecho()
+    End Sub
 #End Region
 #Region "Eventos Botones"
     Private Sub btnAgregarModelo_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnAgregarModelo.Click
@@ -136,6 +148,16 @@ Public Class frmProduccion
         remove_modelo_producido()
         llena_productividad_gridview()
         deshabilitar_btn_Quitar_modelo()
+    End Sub
+    Private Sub btnAgregarDesecho_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnAgregarDesecho.Click
+        add_desecho()
+        limpia_desechos()
+        llena_desecho_gridview()
+    End Sub
+    Private Sub btnQuitarDesecho_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnQuitarDesecho.Click
+        remove_desecho()
+        llena_desecho_gridview()
+        deshabilitar_btn_quitar_desecho()
     End Sub
 #End Region
 #Region "Eventos Gridviews"
@@ -158,26 +180,25 @@ Public Class frmProduccion
         End If
     End Sub
     Private Sub valida_botones_desecho()
-        If cbxModeloRechazo.SelectedIndex <> -1 And txtDesechosCantidad.Text <> "" And txtDesechosCantidad.Text <> "0" Then
+        If cbxModeloDesecho.SelectedIndex <> -1 And txtDesechosCantidad.Text <> "" And txtDesechosCantidad.Text <> "0" Then
             If cbxTurno.SelectedIndex <> -1 Then
                 btnAgregarDesecho.Enabled = True
             End If
         Else
-            btnAgregarModelo.Enabled = False
+            btnAgregarDesecho.Enabled = False
         End If
-
     End Sub
     Private Sub valida_sea_numero(ByRef cajaDeTexto As TextBox)
         If cajaDeTexto.Text <> "" And Not IsNumeric(cajaDeTexto.Text) Then
             cajaDeTexto.Text = "0"
         End If
     End Sub
-    Private Sub deshabilitar_btn_Quitar_modelo()
-        btnQuitarModelo.Enabled = False
-    End Sub
     Private Sub habilita_btn_Quitar_modelo()
         limpia_productividad()
         btnQuitarModelo.Enabled = True
+    End Sub
+    Private Sub deshabilitar_btn_quitar_modelo()
+        btnQuitarModelo.Enabled = False
     End Sub
     Private Sub habilita_btn_Quitar_desecho()
         limpia_desechos()
@@ -192,10 +213,12 @@ Public Class frmProduccion
         cbxModeloProductividad.SelectedIndex = -1
         txtPiezasOkProducidas.Text = "0"
         txtTiempoOperacion.Text = ""
+        txtModeloDescripcionProductividad.Text = ""
     End Sub
     Private Sub limpia_desechos()
-        cbxModeloRechazo.SelectedIndex = -1
+        cbxModeloDesecho.SelectedIndex = -1
         txtDesechosCantidad.Text = ""
+        txtModeloDesecho.Text = ""
     End Sub
 #End Region
 #Region "Funciones para modulo Productividad"
@@ -211,12 +234,27 @@ Public Class frmProduccion
         oProduccion.Registrar()
     End Sub
     Private Sub remove_modelo_producido()
-        MsgBox(grdDetalleProductividad.Item("colcve_produccion", grdDetalleProductividad.CurrentRow.Index).Value)
         Dim oProduccion As New Produccion
         oProduccion.cve_registro_turno = 1
         oProduccion.cve_produccion = grdDetalleProductividad.Item("colcve_produccion", grdDetalleProductividad.CurrentRow.Index).Value
         oProduccion.estatus = "0"
         oProduccion.elimina_fila_productividad_gridview()
     End Sub
+    Private Sub add_desecho()
+        Dim oDesecho As New Desecho
+        oDesecho.cve_registro_turno = 1
+        oDesecho.cod_empleado = "118737"
+        oDesecho.cve_modelo = cbxModeloDesecho.SelectedValue
+        oDesecho.cantidad = Long.Parse(txtDesechosCantidad.Text)
+        oDesecho.estatus = "1"
+        oDesecho.Registrar()
+    End Sub
+    Private Sub remove_desecho()
+        Dim oDesecho As New Desecho
+        oDesecho.cve_desecho = grdDetalleDesecho.Item("colcve_desecho", grdDetalleDesecho.CurrentRow.Index).Value
+        oDesecho.elimina_fila_desecho_gridview()
+    End Sub
 #End Region
+
+
 End Class

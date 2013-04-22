@@ -176,7 +176,7 @@ Public Class Produccion
                 vComando.CommandText = "obtener_registros_produccion"
                 vComando.Parameters.Add("@cve_registro_turno", SqlDbType.BigInt).Value = Me.vcve_registro_turno
                 obj = oBD.EjecutaCommando(vComando)
-                Me.vId = obj.Rows(0)(0)
+                'Me.vId = obj.Rows(0)(0)
                 scope.Complete()
             Catch 'ex As Exception
                 MsgBox("Error al obtener detalle de Productivdad. CProduccion_ERROR", vbCritical + vbOKOnly, "Error")
