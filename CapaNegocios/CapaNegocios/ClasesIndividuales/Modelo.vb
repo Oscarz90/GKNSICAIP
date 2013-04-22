@@ -99,5 +99,24 @@ Public Class Modelo
         End Try
         Return dtModelos
     End Function
+    Public Sub obtener_descripcion_modelo()
+        Dim rDatos As DataRow = Nothing
+        Try
+            rDatos = oBD.ObtenerRenglon("Select descripcion from modelo where cve_modelo=" & Me.vcve_modelo, "modelos")
+            If rDatos IsNot Nothing Then
+                If rDatos("descripcion") IsNot DBNull.Value Then
+                    Me.vdescripcion = rDatos("descripcion")
+                    'Me.vidCalendario = rDatos("idCalendario")
+                    'Me.vNombreActividad = rDatos("NombreActividad")
+                    'Me.vTipoActividad = rDatos("TipoActividad")
+                    'Me.vdescripcion = rDatos("Descripcion")
+                    'Me.FechaInicio = rDatos("FechaInicio")
+                    'Me.FechaFin = rDatos("FechaFin")
+                End If
+            End If
+        Catch ex As Exception
+            Throw New Exception(ex.Message)
+        End Try
+    End Sub
 #End Region
 End Class

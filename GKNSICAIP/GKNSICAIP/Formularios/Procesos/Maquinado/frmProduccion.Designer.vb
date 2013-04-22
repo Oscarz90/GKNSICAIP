@@ -26,16 +26,6 @@ Partial Class frmProduccion
         Me.TabContenido = New System.Windows.Forms.TabControl()
         Me.tabPageProductividad = New System.Windows.Forms.TabPage()
         Me.grpDesechos = New System.Windows.Forms.GroupBox()
-        Me.ListView2 = New System.Windows.Forms.ListView()
-        Me.ColumnHeader1 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
-        Me.ColumnHeader2 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
-        Me.ColumnHeader3 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
-        Me.ColumnHeader4 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
-        Me.ColumnHeader5 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
-        Me.ColumnHeader6 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
-        Me.ColumnHeader7 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
-        Me.ColumnHeader8 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
-        Me.ColumnHeader9 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.cbxModeloRechazo = New System.Windows.Forms.ComboBox()
         Me.Label17 = New System.Windows.Forms.Label()
         Me.Label19 = New System.Windows.Forms.Label()
@@ -44,7 +34,16 @@ Partial Class frmProduccion
         Me.Label6 = New System.Windows.Forms.Label()
         Me.txtDesechos = New System.Windows.Forms.TextBox()
         Me.grpProductividad = New System.Windows.Forms.GroupBox()
-        Me.DataGridView1 = New System.Windows.Forms.DataGridView()
+        Me.grdDetalleProductividad = New System.Windows.Forms.DataGridView()
+        Me.colcve_produccion = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.colcve_linea = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.colcve_modelo = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.np_gkn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.coldescripcion = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.colpzas_ok = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.coltom = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.colCapacidad = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.colAdeudo = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Label54 = New System.Windows.Forms.Label()
         Me.txtPzasPorHora = New System.Windows.Forms.TextBox()
         Me.Label53 = New System.Windows.Forms.Label()
@@ -183,20 +182,11 @@ Partial Class frmProduccion
         Me.lblNombreEquipo = New System.Windows.Forms.Label()
         Me.Label58 = New System.Windows.Forms.Label()
         Me.cbxLinea = New System.Windows.Forms.ComboBox()
-        Me.colcve_produccion = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.colcve_linea = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.colcve_modelo = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.colnp_gkn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.coldescripcion = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.colpzas_ok = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.coltom = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.colCapacidad = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.colAdeudo = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.TabContenido.SuspendLayout()
         Me.tabPageProductividad.SuspendLayout()
         Me.grpDesechos.SuspendLayout()
         Me.grpProductividad.SuspendLayout()
-        CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.grdDetalleProductividad, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.tabPageParos.SuspendLayout()
         Me.grpCosto.SuspendLayout()
         Me.grpParos.SuspendLayout()
@@ -236,7 +226,6 @@ Partial Class frmProduccion
         '
         'grpDesechos
         '
-        Me.grpDesechos.Controls.Add(Me.ListView2)
         Me.grpDesechos.Controls.Add(Me.cbxModeloRechazo)
         Me.grpDesechos.Controls.Add(Me.Label17)
         Me.grpDesechos.Controls.Add(Me.Label19)
@@ -250,65 +239,6 @@ Partial Class frmProduccion
         Me.grpDesechos.TabIndex = 326
         Me.grpDesechos.TabStop = False
         Me.grpDesechos.Text = "GroupBox2"
-        '
-        'ListView2
-        '
-        Me.ListView2.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.ColumnHeader1, Me.ColumnHeader2, Me.ColumnHeader3, Me.ColumnHeader4, Me.ColumnHeader5, Me.ColumnHeader6, Me.ColumnHeader7, Me.ColumnHeader8, Me.ColumnHeader9})
-        Me.ListView2.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.ListView2.FullRowSelect = True
-        Me.ListView2.GridLines = True
-        Me.ListView2.Location = New System.Drawing.Point(7, 282)
-        Me.ListView2.Margin = New System.Windows.Forms.Padding(4)
-        Me.ListView2.Name = "ListView2"
-        Me.ListView2.Size = New System.Drawing.Size(453, 119)
-        Me.ListView2.TabIndex = 322
-        Me.ListView2.UseCompatibleStateImageBehavior = False
-        Me.ListView2.View = System.Windows.Forms.View.Details
-        '
-        'ColumnHeader1
-        '
-        Me.ColumnHeader1.Text = "Modelo"
-        Me.ColumnHeader1.Width = 170
-        '
-        'ColumnHeader2
-        '
-        Me.ColumnHeader2.Text = "Piezas OK"
-        Me.ColumnHeader2.Width = 96
-        '
-        'ColumnHeader3
-        '
-        Me.ColumnHeader3.Text = "Desechos"
-        Me.ColumnHeader3.Width = 96
-        '
-        'ColumnHeader4
-        '
-        Me.ColumnHeader4.Text = "Tiempo Operación"
-        Me.ColumnHeader4.Width = 150
-        '
-        'ColumnHeader5
-        '
-        Me.ColumnHeader5.Text = "Capacidad"
-        Me.ColumnHeader5.Width = 130
-        '
-        'ColumnHeader6
-        '
-        Me.ColumnHeader6.Text = "Adeudo"
-        Me.ColumnHeader6.Width = 82
-        '
-        'ColumnHeader7
-        '
-        Me.ColumnHeader7.Text = "Id_modelo"
-        Me.ColumnHeader7.Width = 0
-        '
-        'ColumnHeader8
-        '
-        Me.ColumnHeader8.Text = "colIdLinea"
-        Me.ColumnHeader8.Width = 0
-        '
-        'ColumnHeader9
-        '
-        Me.ColumnHeader9.Text = "colIdIndicador1"
-        Me.ColumnHeader9.Width = 0
         '
         'cbxModeloRechazo
         '
@@ -381,7 +311,7 @@ Partial Class frmProduccion
         '
         'grpProductividad
         '
-        Me.grpProductividad.Controls.Add(Me.DataGridView1)
+        Me.grpProductividad.Controls.Add(Me.grdDetalleProductividad)
         Me.grpProductividad.Controls.Add(Me.Label54)
         Me.grpProductividad.Controls.Add(Me.txtPzasPorHora)
         Me.grpProductividad.Controls.Add(Me.Label53)
@@ -433,17 +363,92 @@ Partial Class frmProduccion
         Me.grpProductividad.TabStop = False
         Me.grpProductividad.Text = "1.-PRODUCTIVIDAD"
         '
-        'DataGridView1
+        'grdDetalleProductividad
         '
-        Me.DataGridView1.AllowUserToAddRows = False
-        Me.DataGridView1.AllowUserToDeleteRows = False
-        Me.DataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.DataGridView1.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.colcve_produccion, Me.colcve_linea, Me.colcve_modelo, Me.colnp_gkn, Me.coldescripcion, Me.colpzas_ok, Me.coltom, Me.colCapacidad, Me.colAdeudo})
-        Me.DataGridView1.Location = New System.Drawing.Point(3, 277)
-        Me.DataGridView1.Name = "DataGridView1"
-        Me.DataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
-        Me.DataGridView1.Size = New System.Drawing.Size(741, 130)
-        Me.DataGridView1.TabIndex = 322
+        Me.grdDetalleProductividad.AllowUserToAddRows = False
+        Me.grdDetalleProductividad.AllowUserToDeleteRows = False
+        Me.grdDetalleProductividad.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.grdDetalleProductividad.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.colcve_produccion, Me.colcve_linea, Me.colcve_modelo, Me.np_gkn, Me.coldescripcion, Me.colpzas_ok, Me.coltom, Me.colCapacidad, Me.colAdeudo})
+        Me.grdDetalleProductividad.Location = New System.Drawing.Point(3, 277)
+        Me.grdDetalleProductividad.Name = "grdDetalleProductividad"
+        Me.grdDetalleProductividad.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
+        Me.grdDetalleProductividad.Size = New System.Drawing.Size(741, 130)
+        Me.grdDetalleProductividad.TabIndex = 322
+        '
+        'colcve_produccion
+        '
+        Me.colcve_produccion.DataPropertyName = "cve_produccion"
+        Me.colcve_produccion.HeaderText = "cve_produccion"
+        Me.colcve_produccion.Name = "colcve_produccion"
+        Me.colcve_produccion.ReadOnly = True
+        '
+        'colcve_linea
+        '
+        Me.colcve_linea.DataPropertyName = "cve_linea"
+        Me.colcve_linea.HeaderText = "cve_linea"
+        Me.colcve_linea.Name = "colcve_linea"
+        Me.colcve_linea.ReadOnly = True
+        '
+        'colcve_modelo
+        '
+        Me.colcve_modelo.DataPropertyName = "cve_modelo"
+        Me.colcve_modelo.HeaderText = "cve_modelo"
+        Me.colcve_modelo.Name = "colcve_modelo"
+        Me.colcve_modelo.ReadOnly = True
+        '
+        'np_gkn
+        '
+        Me.np_gkn.DataPropertyName = "np_gkn"
+        Me.np_gkn.HeaderText = "No. Parte GKN"
+        Me.np_gkn.Name = "np_gkn"
+        Me.np_gkn.ReadOnly = True
+        Me.np_gkn.Resizable = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.np_gkn.Width = 140
+        '
+        'coldescripcion
+        '
+        Me.coldescripcion.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells
+        Me.coldescripcion.DataPropertyName = "descripcion"
+        Me.coldescripcion.HeaderText = "Modelo"
+        Me.coldescripcion.Name = "coldescripcion"
+        Me.coldescripcion.ReadOnly = True
+        Me.coldescripcion.Resizable = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.coldescripcion.Width = 85
+        '
+        'colpzas_ok
+        '
+        Me.colpzas_ok.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells
+        Me.colpzas_ok.DataPropertyName = "pzas_ok"
+        Me.colpzas_ok.HeaderText = "Piezas Ok"
+        Me.colpzas_ok.Name = "colpzas_ok"
+        Me.colpzas_ok.ReadOnly = True
+        Me.colpzas_ok.Width = 97
+        '
+        'coltom
+        '
+        Me.coltom.DataPropertyName = "tom"
+        Me.coltom.HeaderText = "Tiempo Operacion"
+        Me.coltom.Name = "coltom"
+        Me.coltom.ReadOnly = True
+        Me.coltom.Width = 160
+        '
+        'colCapacidad
+        '
+        Me.colCapacidad.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells
+        Me.colCapacidad.DataPropertyName = "capacidad"
+        Me.colCapacidad.HeaderText = "Capacidad"
+        Me.colCapacidad.Name = "colCapacidad"
+        Me.colCapacidad.ReadOnly = True
+        Me.colCapacidad.Width = 111
+        '
+        'colAdeudo
+        '
+        Me.colAdeudo.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells
+        Me.colAdeudo.DataPropertyName = "adeudo"
+        Me.colAdeudo.HeaderText = "Adeudo"
+        Me.colAdeudo.Name = "colAdeudo"
+        Me.colAdeudo.ReadOnly = True
+        Me.colAdeudo.Width = 88
         '
         'Label54
         '
@@ -1813,60 +1818,6 @@ Partial Class frmProduccion
         Me.cbxLinea.Size = New System.Drawing.Size(234, 26)
         Me.cbxLinea.TabIndex = 309
         '
-        'colcve_produccion
-        '
-        Me.colcve_produccion.HeaderText = "cve_produccion"
-        Me.colcve_produccion.Name = "colcve_produccion"
-        Me.colcve_produccion.ReadOnly = True
-        '
-        'colcve_linea
-        '
-        Me.colcve_linea.HeaderText = "cve_linea"
-        Me.colcve_linea.Name = "colcve_linea"
-        Me.colcve_linea.ReadOnly = True
-        '
-        'colcve_modelo
-        '
-        Me.colcve_modelo.HeaderText = "cve_modelo"
-        Me.colcve_modelo.Name = "colcve_modelo"
-        Me.colcve_modelo.ReadOnly = True
-        '
-        'colnp_gkn
-        '
-        Me.colnp_gkn.HeaderText = "No. Parte GKN"
-        Me.colnp_gkn.Name = "colnp_gkn"
-        Me.colnp_gkn.ReadOnly = True
-        '
-        'coldescripcion
-        '
-        Me.coldescripcion.HeaderText = "Modelo"
-        Me.coldescripcion.Name = "coldescripcion"
-        Me.coldescripcion.ReadOnly = True
-        '
-        'colpzas_ok
-        '
-        Me.colpzas_ok.HeaderText = "Piezas Ok"
-        Me.colpzas_ok.Name = "colpzas_ok"
-        Me.colpzas_ok.ReadOnly = True
-        '
-        'coltom
-        '
-        Me.coltom.HeaderText = "Tiempo Operacion"
-        Me.coltom.Name = "coltom"
-        Me.coltom.ReadOnly = True
-        '
-        'colCapacidad
-        '
-        Me.colCapacidad.HeaderText = "Capacidad"
-        Me.colCapacidad.Name = "colCapacidad"
-        Me.colCapacidad.ReadOnly = True
-        '
-        'colAdeudo
-        '
-        Me.colAdeudo.HeaderText = "Adeudo"
-        Me.colAdeudo.Name = "colAdeudo"
-        Me.colAdeudo.ReadOnly = True
-        '
         'frmProduccion
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -1885,6 +1836,7 @@ Partial Class frmProduccion
         Me.Controls.Add(Me.titulo_banner_formulario)
         Me.Controls.Add(Me.banner_formulario)
         Me.Controls.Add(Me.TabContenido)
+        Me.MaximizeBox = False
         Me.MaximumSize = New System.Drawing.Size(1280, 768)
         Me.MinimumSize = New System.Drawing.Size(1270, 736)
         Me.Name = "frmProduccion"
@@ -1895,7 +1847,7 @@ Partial Class frmProduccion
         Me.grpDesechos.PerformLayout()
         Me.grpProductividad.ResumeLayout(False)
         Me.grpProductividad.PerformLayout()
-        CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.grdDetalleProductividad, System.ComponentModel.ISupportInitialize).EndInit()
         Me.tabPageParos.ResumeLayout(False)
         Me.grpCosto.ResumeLayout(False)
         Me.grpCosto.PerformLayout()
@@ -1918,16 +1870,6 @@ Partial Class frmProduccion
     Friend WithEvents TabContenido As System.Windows.Forms.TabControl
     Friend WithEvents tabPageProductividad As System.Windows.Forms.TabPage
     Friend WithEvents grpDesechos As System.Windows.Forms.GroupBox
-    Friend WithEvents ListView2 As System.Windows.Forms.ListView
-    Friend WithEvents ColumnHeader1 As System.Windows.Forms.ColumnHeader
-    Friend WithEvents ColumnHeader2 As System.Windows.Forms.ColumnHeader
-    Friend WithEvents ColumnHeader3 As System.Windows.Forms.ColumnHeader
-    Friend WithEvents ColumnHeader4 As System.Windows.Forms.ColumnHeader
-    Friend WithEvents ColumnHeader5 As System.Windows.Forms.ColumnHeader
-    Friend WithEvents ColumnHeader6 As System.Windows.Forms.ColumnHeader
-    Friend WithEvents ColumnHeader7 As System.Windows.Forms.ColumnHeader
-    Friend WithEvents ColumnHeader8 As System.Windows.Forms.ColumnHeader
-    Friend WithEvents ColumnHeader9 As System.Windows.Forms.ColumnHeader
     Friend WithEvents cbxModeloRechazo As System.Windows.Forms.ComboBox
     Friend WithEvents Label17 As System.Windows.Forms.Label
     Friend WithEvents Label19 As System.Windows.Forms.Label
@@ -2074,11 +2016,11 @@ Partial Class frmProduccion
     Friend WithEvents lblNombreEquipo As System.Windows.Forms.Label
     Friend WithEvents Label58 As System.Windows.Forms.Label
     Friend WithEvents cbxLinea As System.Windows.Forms.ComboBox
-    Friend WithEvents DataGridView1 As System.Windows.Forms.DataGridView
+    Friend WithEvents grdDetalleProductividad As System.Windows.Forms.DataGridView
     Friend WithEvents colcve_produccion As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents colcve_linea As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents colcve_modelo As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents colnp_gkn As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents np_gkn As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents coldescripcion As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents colpzas_ok As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents coltom As System.Windows.Forms.DataGridViewTextBoxColumn
