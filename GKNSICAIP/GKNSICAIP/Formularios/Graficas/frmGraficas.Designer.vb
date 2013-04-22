@@ -56,7 +56,6 @@ Partial Class frmGraficas
         Me.cbxArea = New System.Windows.Forms.ComboBox()
         Me.lblInstrucciones1 = New System.Windows.Forms.Label()
         Me.lblInstrucciones2 = New System.Windows.Forms.Label()
-        Me.swfGrafica = New AxShockwaveFlashObjects.AxShockwaveFlash()
         Me.ofdBuscar = New System.Windows.Forms.OpenFileDialog()
         Me.banner_formulario = New System.Windows.Forms.PictureBox()
         Me.titulo_banner_formulario = New System.Windows.Forms.Label()
@@ -64,7 +63,6 @@ Partial Class frmGraficas
         Me.grp3.SuspendLayout()
         Me.grp2.SuspendLayout()
         Me.grp1.SuspendLayout()
-        CType(Me.swfGrafica, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.banner_formulario, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
@@ -468,15 +466,6 @@ Partial Class frmGraficas
         Me.lblInstrucciones2.TabIndex = 22
         Me.lblInstrucciones2.Text = "valor, Área, Línea y Equipo"
         '
-        'swfGrafica
-        '
-        Me.swfGrafica.Enabled = True
-        Me.swfGrafica.Location = New System.Drawing.Point(8, 262)
-        Me.swfGrafica.Name = "swfGrafica"
-        Me.swfGrafica.OcxState = CType(resources.GetObject("swfGrafica.OcxState"), System.Windows.Forms.AxHost.State)
-        Me.swfGrafica.Size = New System.Drawing.Size(1235, 451)
-        Me.swfGrafica.TabIndex = 94
-        '
         'ofdBuscar
         '
         Me.ofdBuscar.FileName = "OpenFileDialog1"
@@ -504,7 +493,7 @@ Partial Class frmGraficas
         Me.titulo_banner_formulario.TabIndex = 106
         Me.titulo_banner_formulario.Text = "Gráficos de Resultados."
         '
-        'Graficas
+        'frmGraficas
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
@@ -512,7 +501,6 @@ Partial Class frmGraficas
         Me.ClientSize = New System.Drawing.Size(1254, 722)
         Me.Controls.Add(Me.titulo_banner_formulario)
         Me.Controls.Add(Me.banner_formulario)
-        Me.Controls.Add(Me.swfGrafica)
         Me.Controls.Add(Me.Exportar)
         Me.Controls.Add(Me.Label1)
         Me.Controls.Add(Me.Label12)
@@ -523,7 +511,7 @@ Partial Class frmGraficas
         Me.Controls.Add(Me.cmdGraficar)
         Me.Controls.Add(Me.grp2)
         Me.Controls.Add(Me.grp1)
-        Me.Name = "Graficas"
+        Me.Name = "frmGraficas"
         Me.Text = "Graficas"
         Me.groupTipo.ResumeLayout(False)
         Me.groupTipo.PerformLayout()
@@ -533,7 +521,6 @@ Partial Class frmGraficas
         Me.grp2.PerformLayout()
         Me.grp1.ResumeLayout(False)
         Me.grp1.PerformLayout()
-        CType(Me.swfGrafica, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.banner_formulario, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
@@ -572,7 +559,6 @@ Partial Class frmGraficas
     Friend WithEvents cbxArea As System.Windows.Forms.ComboBox
     Friend WithEvents lblInstrucciones1 As System.Windows.Forms.Label
     Friend WithEvents lblInstrucciones2 As System.Windows.Forms.Label
-    Friend WithEvents swfGrafica As AxShockwaveFlashObjects.AxShockwaveFlash
     Friend WithEvents ofdBuscar As System.Windows.Forms.OpenFileDialog
     Friend WithEvents banner_formulario As System.Windows.Forms.PictureBox
     Friend WithEvents titulo_banner_formulario As System.Windows.Forms.Label
