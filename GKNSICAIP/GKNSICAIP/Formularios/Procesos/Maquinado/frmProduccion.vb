@@ -41,12 +41,15 @@ Public Class frmProduccion
     End Sub
     'Load
     Private Sub frmProduccion_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
+        'Combobox
         llena_cbx_Turnos()
         llena_cbx_Lineas()
         llena_cbx_Modelos()
         llena_cbx_tipo_rechazos()
+        'Grids
         llena_productividad_gridview()
         llena_desecho_gridview()
+        llena_rechazo_gridview()
     End Sub
 
 #End Region
@@ -101,7 +104,7 @@ Public Class frmProduccion
         cbxTipoRechazo.ValueMember = "cve_tipo_rechazo"
         cbxTipoRechazo.DisplayMember = "tipo"
         cbxTipoRechazo.DataSource = oTipoRechazo.llena_combo_tipo_rechazo
-        cbxModeloRechazo.SelectedIndex = -1
+        cbxTipoRechazo.SelectedIndex = -1
     End Sub
 #End Region
 #Region "Llenado Labels - Textbox"
@@ -127,6 +130,12 @@ Public Class frmProduccion
         Dim oDesecho As New Desecho
         oDesecho.cve_registro_turno = 1
         grdDetalleDesecho.DataSource = oDesecho.llena_desecho_gridview()
+    End Sub
+    'Rechazos
+    Private Sub llena_rechazo_gridview()
+        Dim oRechazo As New Rechazo
+        oRechazo.cve_registro_turno = 1
+        grdDetalleRechazo.DataSource = oRechazo.llena_rechazo_gridview()
     End Sub
 #End Region
 #Region "Eventos ComboBox"
@@ -323,6 +332,8 @@ Public Class frmProduccion
         Dim oProduccion As New Produccion
         oProduccion.cve_registro_turno = 1
         oProduccion.cve_produccion = grdDetalleProductividad.Item("colcve_produccion", grdDetalleProductividad.CurrentRow.Index).Value
+        oProduccion.cod_empleado_eliminacion = "118737"
+        oProduccion.fecha_eliminacion = Now.ToString("dd-MM-yyyy HH:mm")
         oProduccion.estatus = "0"
         oProduccion.elimina_fila_productividad_gridview()
     End Sub
@@ -330,7 +341,8 @@ Public Class frmProduccion
     Private Sub add_desecho()
         Dim oDesecho As New Desecho
         oDesecho.cve_registro_turno = 1
-        oDesecho.cod_empleado = "118737"
+        oDesecho.cod_empleado_registro = "118737"
+        oDesecho.fecha_registro = Now.ToString("dd-MM-yyyy HH:mm")
         oDesecho.cve_modelo = cbxModeloDesecho.SelectedValue
         oDesecho.cantidad = Long.Parse(txtDesechosCantidad.Text)
         oDesecho.estatus = "1"
@@ -338,6 +350,8 @@ Public Class frmProduccion
     End Sub
     Private Sub remove_desecho()
         Dim oDesecho As New Desecho
+        oDesecho.cod_empleado_eliminacion = "118737"
+        oDesecho.fecha_eliminacion = Now.ToString("dd-MM-yyyy HH:mm")
         oDesecho.cve_desecho = grdDetalleDesecho.Item("colcve_desecho", grdDetalleDesecho.CurrentRow.Index).Value
         oDesecho.elimina_fila_desecho_gridview()
     End Sub

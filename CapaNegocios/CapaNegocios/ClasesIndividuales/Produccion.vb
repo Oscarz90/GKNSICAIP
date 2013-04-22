@@ -195,14 +195,13 @@ Public Class Produccion
                 vComando.CommandText = "remueve_produccion"
                 vComando.Parameters.Add("@cve_registro_turno", SqlDbType.BigInt).Value = Me.vcve_registro_turno
                 vComando.Parameters.Add("@cve_produccion", SqlDbType.BigInt).Value = Me.vcve_produccion
+                vComando.Parameters.Add("@cod_empleado", SqlDbType.VarChar).Value = Me.vcod_empleado_eliminacion
+                vComando.Parameters.Add("@fecha_eliminacion", SqlDbType.DateTime).Value = Convert.ToDateTime(Me.vfecha_eliminacion)
                 vComando.Parameters.Add("@estatus", SqlDbType.VarChar).Value = Me.estatus
-                'Dim obj As DataTable = oBD.EjecutaCommando(vComando)
                 oBD.EjecutaProcedimientos(vComando)
-                'Me.vId = obj.Rows(0)(0)
                 scope.Complete()
-            Catch 'ex As Exception
+            Catch
                 MsgBox("Error al eliminar produccion. CProduccion_ERROR", vbCritical + vbOKOnly, "Error")
-                'Throw New Exception(ex.Message)
             End Try
         End Using
     End Sub

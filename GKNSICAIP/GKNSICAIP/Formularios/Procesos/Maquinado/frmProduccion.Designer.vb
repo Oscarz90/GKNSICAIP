@@ -133,6 +133,13 @@ Partial Class frmProduccion
         Me.Label24 = New System.Windows.Forms.Label()
         Me.tabPageRechazos = New System.Windows.Forms.TabPage()
         Me.grpRechazos = New System.Windows.Forms.GroupBox()
+        Me.grdDetalleRechazo = New System.Windows.Forms.DataGridView()
+        Me.colcve_rechazo = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.col_np_gkn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.col_descripcion = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.colcantidad = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.coltipo_rechazo = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.colmotivo = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.txtModeloRechazo = New System.Windows.Forms.TextBox()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.cbxTipoRechazo = New System.Windows.Forms.ComboBox()
@@ -184,13 +191,6 @@ Partial Class frmProduccion
         Me.lblNombreEquipo = New System.Windows.Forms.Label()
         Me.Label58 = New System.Windows.Forms.Label()
         Me.cbxLinea = New System.Windows.Forms.ComboBox()
-        Me.grdDetalleRechazo = New System.Windows.Forms.DataGridView()
-        Me.colcve_rechazo = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.col_np_gkn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.col_descripcion = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.colcantidad = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.coltipo_rechazo = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.colmotivo = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.TabContenido.SuspendLayout()
         Me.tabPageProductividad.SuspendLayout()
         Me.grpDesechos.SuspendLayout()
@@ -202,12 +202,12 @@ Partial Class frmProduccion
         Me.grpParos.SuspendLayout()
         Me.tabPageRechazos.SuspendLayout()
         Me.grpRechazos.SuspendLayout()
+        CType(Me.grdDetalleRechazo, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.TabPage2.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
         Me.grpSeguridad.SuspendLayout()
         CType(Me.banner_formulario, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.grdDetalleRechazo, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'TabContenido
@@ -1343,18 +1343,69 @@ Partial Class frmProduccion
         Me.grpRechazos.Controls.Add(Me.Label16)
         Me.grpRechazos.Controls.Add(Me.txtRechazoMotivo)
         Me.grpRechazos.Controls.Add(Me.txtRechazosCantidad)
-        Me.grpRechazos.Font = New System.Drawing.Font("Arial Narrow", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.grpRechazos.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.grpRechazos.Location = New System.Drawing.Point(3, 3)
         Me.grpRechazos.Name = "grpRechazos"
-        Me.grpRechazos.Size = New System.Drawing.Size(1223, 414)
+        Me.grpRechazos.Size = New System.Drawing.Size(631, 414)
         Me.grpRechazos.TabIndex = 0
         Me.grpRechazos.TabStop = False
         Me.grpRechazos.Text = "RECHAZOS"
         '
+        'grdDetalleRechazo
+        '
+        Me.grdDetalleRechazo.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.grdDetalleRechazo.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.colcve_rechazo, Me.col_np_gkn, Me.col_descripcion, Me.colcantidad, Me.coltipo_rechazo, Me.colmotivo})
+        Me.grdDetalleRechazo.Location = New System.Drawing.Point(10, 234)
+        Me.grdDetalleRechazo.Name = "grdDetalleRechazo"
+        Me.grdDetalleRechazo.Size = New System.Drawing.Size(609, 174)
+        Me.grdDetalleRechazo.TabIndex = 337
+        '
+        'colcve_rechazo
+        '
+        Me.colcve_rechazo.DataPropertyName = "cve_rechazo"
+        Me.colcve_rechazo.HeaderText = "cve_rechazo"
+        Me.colcve_rechazo.Name = "colcve_rechazo"
+        Me.colcve_rechazo.ReadOnly = True
+        '
+        'col_np_gkn
+        '
+        Me.col_np_gkn.DataPropertyName = "np_gkn"
+        Me.col_np_gkn.HeaderText = "No. Parte GKN"
+        Me.col_np_gkn.Name = "col_np_gkn"
+        Me.col_np_gkn.ReadOnly = True
+        '
+        'col_descripcion
+        '
+        Me.col_descripcion.DataPropertyName = "descripcion"
+        Me.col_descripcion.HeaderText = "Modelo"
+        Me.col_descripcion.Name = "col_descripcion"
+        Me.col_descripcion.ReadOnly = True
+        '
+        'colcantidad
+        '
+        Me.colcantidad.DataPropertyName = "cantidad"
+        Me.colcantidad.HeaderText = "Cantidad"
+        Me.colcantidad.Name = "colcantidad"
+        Me.colcantidad.ReadOnly = True
+        '
+        'coltipo_rechazo
+        '
+        Me.coltipo_rechazo.DataPropertyName = "tipo"
+        Me.coltipo_rechazo.HeaderText = "Rechazo"
+        Me.coltipo_rechazo.Name = "coltipo_rechazo"
+        Me.coltipo_rechazo.ReadOnly = True
+        '
+        'colmotivo
+        '
+        Me.colmotivo.DataPropertyName = "motivo"
+        Me.colmotivo.HeaderText = "motivo"
+        Me.colmotivo.Name = "colmotivo"
+        Me.colmotivo.ReadOnly = True
+        '
         'txtModeloRechazo
         '
         Me.txtModeloRechazo.Font = New System.Drawing.Font("Arial Narrow", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtModeloRechazo.Location = New System.Drawing.Point(109, 63)
+        Me.txtModeloRechazo.Location = New System.Drawing.Point(113, 64)
         Me.txtModeloRechazo.Name = "txtModeloRechazo"
         Me.txtModeloRechazo.ReadOnly = True
         Me.txtModeloRechazo.Size = New System.Drawing.Size(198, 26)
@@ -1364,7 +1415,7 @@ Partial Class frmProduccion
         '
         Me.Label2.AutoSize = True
         Me.Label2.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label2.Location = New System.Drawing.Point(7, 67)
+        Me.Label2.Location = New System.Drawing.Point(11, 68)
         Me.Label2.Name = "Label2"
         Me.Label2.Size = New System.Drawing.Size(92, 18)
         Me.Label2.TabIndex = 335
@@ -1375,7 +1426,7 @@ Partial Class frmProduccion
         Me.cbxTipoRechazo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cbxTipoRechazo.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cbxTipoRechazo.FormattingEnabled = True
-        Me.cbxTipoRechazo.Location = New System.Drawing.Point(417, 61)
+        Me.cbxTipoRechazo.Location = New System.Drawing.Point(421, 65)
         Me.cbxTipoRechazo.Name = "cbxTipoRechazo"
         Me.cbxTipoRechazo.Size = New System.Drawing.Size(198, 26)
         Me.cbxTipoRechazo.TabIndex = 334
@@ -1384,7 +1435,7 @@ Partial Class frmProduccion
         '
         Me.Label3.AutoSize = True
         Me.Label3.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label3.Location = New System.Drawing.Point(369, 64)
+        Me.Label3.Location = New System.Drawing.Point(373, 68)
         Me.Label3.Name = "Label3"
         Me.Label3.Size = New System.Drawing.Size(38, 18)
         Me.Label3.TabIndex = 333
@@ -1395,7 +1446,7 @@ Partial Class frmProduccion
         Me.cbxModeloRechazo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cbxModeloRechazo.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cbxModeloRechazo.FormattingEnabled = True
-        Me.cbxModeloRechazo.Location = New System.Drawing.Point(109, 25)
+        Me.cbxModeloRechazo.Location = New System.Drawing.Point(113, 25)
         Me.cbxModeloRechazo.Name = "cbxModeloRechazo"
         Me.cbxModeloRechazo.Size = New System.Drawing.Size(198, 26)
         Me.cbxModeloRechazo.TabIndex = 331
@@ -1404,7 +1455,7 @@ Partial Class frmProduccion
         '
         Me.Label5.AutoSize = True
         Me.Label5.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label5.Location = New System.Drawing.Point(7, 110)
+        Me.Label5.Location = New System.Drawing.Point(11, 110)
         Me.Label5.Name = "Label5"
         Me.Label5.Size = New System.Drawing.Size(58, 18)
         Me.Label5.TabIndex = 330
@@ -1414,7 +1465,7 @@ Partial Class frmProduccion
         '
         Me.Label7.AutoSize = True
         Me.Label7.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label7.Location = New System.Drawing.Point(557, 193)
+        Me.Label7.Location = New System.Drawing.Point(561, 193)
         Me.Label7.Name = "Label7"
         Me.Label7.Size = New System.Drawing.Size(50, 18)
         Me.Label7.TabIndex = 329
@@ -1424,7 +1475,7 @@ Partial Class frmProduccion
         '
         Me.Label11.AutoSize = True
         Me.Label11.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label11.Location = New System.Drawing.Point(472, 193)
+        Me.Label11.Location = New System.Drawing.Point(476, 193)
         Me.Label11.Name = "Label11"
         Me.Label11.Size = New System.Drawing.Size(65, 18)
         Me.Label11.TabIndex = 328
@@ -1437,7 +1488,7 @@ Partial Class frmProduccion
         Me.btnAgregarRechazo.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center
         Me.btnAgregarRechazo.Enabled = False
         Me.btnAgregarRechazo.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnAgregarRechazo.Location = New System.Drawing.Point(474, 131)
+        Me.btnAgregarRechazo.Location = New System.Drawing.Point(478, 131)
         Me.btnAgregarRechazo.Name = "btnAgregarRechazo"
         Me.btnAgregarRechazo.Size = New System.Drawing.Size(63, 59)
         Me.btnAgregarRechazo.TabIndex = 326
@@ -1450,7 +1501,7 @@ Partial Class frmProduccion
         Me.btnQuitarRechazo.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center
         Me.btnQuitarRechazo.Enabled = False
         Me.btnQuitarRechazo.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnQuitarRechazo.Location = New System.Drawing.Point(551, 131)
+        Me.btnQuitarRechazo.Location = New System.Drawing.Point(555, 131)
         Me.btnQuitarRechazo.Name = "btnQuitarRechazo"
         Me.btnQuitarRechazo.Size = New System.Drawing.Size(64, 59)
         Me.btnQuitarRechazo.TabIndex = 327
@@ -1460,7 +1511,7 @@ Partial Class frmProduccion
         '
         Me.Label12.AutoSize = True
         Me.Label12.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label12.Location = New System.Drawing.Point(39, 28)
+        Me.Label12.Location = New System.Drawing.Point(43, 28)
         Me.Label12.Name = "Label12"
         Me.Label12.Size = New System.Drawing.Size(60, 18)
         Me.Label12.TabIndex = 325
@@ -1470,7 +1521,7 @@ Partial Class frmProduccion
         '
         Me.Label16.AutoSize = True
         Me.Label16.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label16.Location = New System.Drawing.Point(335, 28)
+        Me.Label16.Location = New System.Drawing.Point(339, 28)
         Me.Label16.Name = "Label16"
         Me.Label16.Size = New System.Drawing.Size(72, 18)
         Me.Label16.TabIndex = 324
@@ -1479,7 +1530,7 @@ Partial Class frmProduccion
         'txtRechazoMotivo
         '
         Me.txtRechazoMotivo.Font = New System.Drawing.Font("Arial", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtRechazoMotivo.Location = New System.Drawing.Point(6, 131)
+        Me.txtRechazoMotivo.Location = New System.Drawing.Point(10, 131)
         Me.txtRechazoMotivo.Multiline = True
         Me.txtRechazoMotivo.Name = "txtRechazoMotivo"
         Me.txtRechazoMotivo.ScrollBars = System.Windows.Forms.ScrollBars.Vertical
@@ -1490,7 +1541,7 @@ Partial Class frmProduccion
         '
         Me.txtRechazosCantidad.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
         Me.txtRechazosCantidad.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtRechazosCantidad.Location = New System.Drawing.Point(417, 25)
+        Me.txtRechazosCantidad.Location = New System.Drawing.Point(421, 25)
         Me.txtRechazosCantidad.Name = "txtRechazosCantidad"
         Me.txtRechazosCantidad.Size = New System.Drawing.Size(198, 26)
         Me.txtRechazosCantidad.TabIndex = 322
@@ -1878,51 +1929,6 @@ Partial Class frmProduccion
         Me.cbxLinea.Size = New System.Drawing.Size(234, 26)
         Me.cbxLinea.TabIndex = 309
         '
-        'grdDetalleRechazo
-        '
-        Me.grdDetalleRechazo.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.grdDetalleRechazo.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.colcve_rechazo, Me.col_np_gkn, Me.col_descripcion, Me.colcantidad, Me.coltipo_rechazo, Me.colmotivo})
-        Me.grdDetalleRechazo.Location = New System.Drawing.Point(6, 234)
-        Me.grdDetalleRechazo.Name = "grdDetalleRechazo"
-        Me.grdDetalleRechazo.Size = New System.Drawing.Size(609, 174)
-        Me.grdDetalleRechazo.TabIndex = 337
-        '
-        'colcve_rechazo
-        '
-        Me.colcve_rechazo.HeaderText = "cve_rechazo"
-        Me.colcve_rechazo.Name = "colcve_rechazo"
-        Me.colcve_rechazo.ReadOnly = True
-        '
-        'col_np_gkn
-        '
-        Me.col_np_gkn.HeaderText = "No. Parte GKN"
-        Me.col_np_gkn.Name = "col_np_gkn"
-        Me.col_np_gkn.ReadOnly = True
-        '
-        'col_descripcion
-        '
-        Me.col_descripcion.HeaderText = "Modelo"
-        Me.col_descripcion.Name = "col_descripcion"
-        Me.col_descripcion.ReadOnly = True
-        '
-        'colcantidad
-        '
-        Me.colcantidad.HeaderText = "Cantidad"
-        Me.colcantidad.Name = "colcantidad"
-        Me.colcantidad.ReadOnly = True
-        '
-        'coltipo_rechazo
-        '
-        Me.coltipo_rechazo.HeaderText = "Rechazo"
-        Me.coltipo_rechazo.Name = "coltipo_rechazo"
-        Me.coltipo_rechazo.ReadOnly = True
-        '
-        'colmotivo
-        '
-        Me.colmotivo.HeaderText = "motivo"
-        Me.colmotivo.Name = "colmotivo"
-        Me.colmotivo.ReadOnly = True
-        '
         'frmProduccion
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -1962,6 +1968,7 @@ Partial Class frmProduccion
         Me.tabPageRechazos.ResumeLayout(False)
         Me.grpRechazos.ResumeLayout(False)
         Me.grpRechazos.PerformLayout()
+        CType(Me.grdDetalleRechazo, System.ComponentModel.ISupportInitialize).EndInit()
         Me.TabPage2.ResumeLayout(False)
         Me.GroupBox2.ResumeLayout(False)
         Me.GroupBox2.PerformLayout()
@@ -1969,7 +1976,6 @@ Partial Class frmProduccion
         Me.grpSeguridad.PerformLayout()
         CType(Me.banner_formulario, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.grdDetalleRechazo, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 

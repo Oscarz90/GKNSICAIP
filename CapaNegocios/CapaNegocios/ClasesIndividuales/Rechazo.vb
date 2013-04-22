@@ -135,15 +135,16 @@ Public Class Rechazo
 #Region "Metodos formulario de produccion"
     Public Function llena_rechazo_gridview() As DataTable
         Dim obj As DataTable
-        Dim queryLlenagridview As String = "select d.cve_desecho,m.np_gkn,m.descripcion,d.cantidad from desecho d " &
-            "join modelo m on d.cve_modelo=m.cve_modelo " &
-            "where d.cve_registro_turno=" & vcve_registro_turno & " and d.estatus='1'"
+        Dim queryLlenagridview As String = "select r.cve_rechazo,m.np_gkn,m.descripcion,r.cantidad,tr.tipo,r.motivo from rechazo r " &
+            "join tipo_rechazo tr on r.cve_tipo_rechazo=tr.cve_tipo_rechazo " &
+            "join modelo m on r.cve_modelo=m.cve_modelo " &
+            "where r.cve_registro_turno=" & vcve_registro_turno & " and r.estatus='1'"
         Using scope As New TransactionScope
             Try
                 obj = oBD.ObtenerTabla(queryLlenagridview)
                 scope.Complete()
             Catch
-                MsgBox("Error al obtener detalle de Desechos. CDesecho_ERROR", vbCritical + vbOKOnly, "Error")
+                MsgBox("Error al obtener detalle de Rechazos. CDesecho_ERROR", vbCritical + vbOKOnly, "Error")
                 Return Nothing
             End Try
             Return obj

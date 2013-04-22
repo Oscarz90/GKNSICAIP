@@ -1,7 +1,6 @@
 ﻿Imports CapaDatos
 Public Class Desecho
     Implements IIndividual
-
     Dim cadena_conexion As New CapaDatos.conexiones
     Dim oBD As New CapaDatos.CapaDatos(cadena_conexion.CadenaSicaip)
 #Region "Metodos IIndividual"
@@ -24,11 +23,12 @@ Public Class Desecho
         Return 1
     End Function
     Public Sub Registrar() Implements IIndividual.Registrar
-        Dim queryInsert As String = "insert into desecho(cve_registro_turno,cve_modelo,cod_empleado,cantidad,estatus) " &
-                              "values(" & vcve_registro_turno & "," & vcve_modelo & ",'" & vcod_empleado & "'," & vcantidad & "," & vestatus & ")"
+        Dim queryInsert As String = "insert into desecho(cve_registro_turno,cod_empleado_registro,fecha_registro,cve_modelo,cantidad,estatus) " &
+                              "values(" & vcve_registro_turno & ",'" & vcod_empleado_registro & "','" & vfecha_registro & "'," & vcve_modelo & "," & vcantidad & ",'" & vestatus & "')"
+        MsgBox(queryInsert)
         Try
             oBD.EjecutarQuery(queryInsert)
-        Catch 
+        Catch
             MsgBox("Error al insertar desecho. CDesecho_ERROR", vbCritical + vbOKOnly, "Error")
         End Try
     End Sub
@@ -36,9 +36,12 @@ Public Class Desecho
 #Region "Atributos"
     Private vcve_desecho As Long
     Private vcve_registro_turno As Long
+    Private vcod_empleado_registro As String
+    Private vfecha_registro As String
     Private vcve_modelo As Long
-    Private vcod_empleado As String
     Private vcantidad As Long
+    Private vcod_empleado_eliminacion As String
+    Private vfecha_eliminacion As String
     Private vestatus As String
 #End Region
 #Region "Propiedades"
@@ -58,20 +61,28 @@ Public Class Desecho
             vcve_registro_turno = value
         End Set
     End Property
+    Public Property cod_empleado_registro() As String
+        Get
+            Return vcod_empleado_registro
+        End Get
+        Set(ByVal value As String)
+            vcod_empleado_registro = value
+        End Set
+    End Property
+    Public Property fecha_registro() As String
+        Get
+            Return vfecha_registro
+        End Get
+        Set(ByVal value As String)
+            vfecha_registro = value
+        End Set
+    End Property
     Public Property cve_modelo() As Long
         Get
             Return vcve_modelo
         End Get
         Set(ByVal value As Long)
             vcve_modelo = value
-        End Set
-    End Property
-    Public Property cod_empleado() As String
-        Get
-            Return vcod_empleado
-        End Get
-        Set(ByVal value As String)
-            vcod_empleado = value
         End Set
     End Property
     Public Property cantidad() As Long
@@ -82,6 +93,22 @@ Public Class Desecho
             vcantidad = value
         End Set
     End Property
+    Public Property cod_empleado_eliminacion() As String
+        Get
+            Return vcod_empleado_eliminacion
+        End Get
+        Set(ByVal value As String)
+            vcod_empleado_eliminacion = value
+        End Set
+    End Property
+    Public Property fecha_eliminacion() As String
+        Get
+            Return vfecha_eliminacion
+        End Get
+        Set(ByVal value As String)
+            vfecha_eliminacion = value
+        End Set
+    End Property
     Public Property estatus() As String
         Get
             Return vestatus
@@ -90,7 +117,6 @@ Public Class Desecho
             vestatus = value
         End Set
     End Property
-
 #End Region
 #Region "Metodos formulario de produccion"
     Public Function llena_desecho_gridview() As DataTable
@@ -111,7 +137,9 @@ Public Class Desecho
     End Function
     Public Sub elimina_fila_desecho_gridview()
         Try
-            oBD.EjecutarQuery("update desecho set estatus='0' where cve_desecho=" & vcve_desecho)
+            MsgBox("update desecho set cod_empleado_eliminacion='" & vcod_empleado_eliminacion & "',fecha_eliminacion='" & vfecha_eliminacion & "',estatus='0' where cve_desecho=" & vcve_desecho)
+            oBD.EjecutarQuery("update desecho set cod_empleado_eliminacion='" & vcod_empleado_eliminacion & "',fecha_eliminacion='" & vfecha_eliminacion & "',estatus='0' where cve_desecho=" & vcve_desecho)
+
         Catch ex As Exception
             MsgBox("Error al eliminar desecho. CDesecho_ERROR", vbCritical + vbOKOnly, "Error")
         End Try
