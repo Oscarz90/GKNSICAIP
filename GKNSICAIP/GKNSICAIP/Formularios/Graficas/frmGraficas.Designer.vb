@@ -59,11 +59,13 @@ Partial Class frmGraficas
         Me.ofdBuscar = New System.Windows.Forms.OpenFileDialog()
         Me.banner_formulario = New System.Windows.Forms.PictureBox()
         Me.titulo_banner_formulario = New System.Windows.Forms.Label()
+        Me.AxShockwaveFlash1 = New AxShockwaveFlashObjects.AxShockwaveFlash()
         Me.groupTipo.SuspendLayout()
         Me.grp3.SuspendLayout()
         Me.grp2.SuspendLayout()
         Me.grp1.SuspendLayout()
         CType(Me.banner_formulario, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.AxShockwaveFlash1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'Exportar
@@ -493,12 +495,22 @@ Partial Class frmGraficas
         Me.titulo_banner_formulario.TabIndex = 106
         Me.titulo_banner_formulario.Text = "Gráficos de Resultados."
         '
+        'AxShockwaveFlash1
+        '
+        Me.AxShockwaveFlash1.Enabled = True
+        Me.AxShockwaveFlash1.Location = New System.Drawing.Point(70, 338)
+        Me.AxShockwaveFlash1.Name = "AxShockwaveFlash1"
+        Me.AxShockwaveFlash1.OcxState = CType(resources.GetObject("AxShockwaveFlash1.OcxState"), System.Windows.Forms.AxHost.State)
+        Me.AxShockwaveFlash1.Size = New System.Drawing.Size(192, 192)
+        Me.AxShockwaveFlash1.TabIndex = 107
+        '
         'frmGraficas
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.White
         Me.ClientSize = New System.Drawing.Size(1254, 722)
+        Me.Controls.Add(Me.AxShockwaveFlash1)
         Me.Controls.Add(Me.titulo_banner_formulario)
         Me.Controls.Add(Me.banner_formulario)
         Me.Controls.Add(Me.Exportar)
@@ -522,6 +534,7 @@ Partial Class frmGraficas
         Me.grp1.ResumeLayout(False)
         Me.grp1.PerformLayout()
         CType(Me.banner_formulario, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.AxShockwaveFlash1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -562,4 +575,5 @@ Partial Class frmGraficas
     Friend WithEvents ofdBuscar As System.Windows.Forms.OpenFileDialog
     Friend WithEvents banner_formulario As System.Windows.Forms.PictureBox
     Friend WithEvents titulo_banner_formulario As System.Windows.Forms.Label
+    Friend WithEvents AxShockwaveFlash1 As AxShockwaveFlashObjects.AxShockwaveFlash
 End Class
