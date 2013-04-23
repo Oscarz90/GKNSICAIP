@@ -79,4 +79,16 @@ Public Class Tipo_Rechazo
         End Set
     End Property
 #End Region
+#Region "Metodos formulario de produccion"
+    Public Function llena_combo_tipo_rechazo() As DataTable
+        Dim dtTipoRechazo As New DataTable
+        Try
+            dtTipoRechazo = oBD.ObtenerTabla("select cve_tipo_rechazo,tipo from tipo_rechazo")
+        Catch ex As Exception
+            MsgBox("Error al obtener Tipo de Rechazos. CTipo_Rechazo_ERROR", vbCritical + vbOKOnly, "Error")
+            dtTipoRechazo = Nothing
+        End Try
+        Return dtTipoRechazo
+    End Function
+#End Region
 End Class

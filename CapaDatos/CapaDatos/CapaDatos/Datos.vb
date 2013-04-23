@@ -81,7 +81,7 @@ Public Class CapaDatos
         Try
             Dim vDS As DataSet = oBD.ExecuteDataSet(oSQL_Comando)
         Catch ex As Exception
-            Throw New Exception("Error al crear una tabla " & Err.Description)
+            Throw New Exception("Error al ejecutar Operacion " & Err.Description)
         End Try
     End Sub
 #End Region

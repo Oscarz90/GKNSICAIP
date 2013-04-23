@@ -106,12 +106,6 @@ Public Class Modelo
             If rDatos IsNot Nothing Then
                 If rDatos("descripcion") IsNot DBNull.Value Then
                     Me.vdescripcion = rDatos("descripcion")
-                    'Me.vidCalendario = rDatos("idCalendario")
-                    'Me.vNombreActividad = rDatos("NombreActividad")
-                    'Me.vTipoActividad = rDatos("TipoActividad")
-                    'Me.vdescripcion = rDatos("Descripcion")
-                    'Me.FechaInicio = rDatos("FechaInicio")
-                    'Me.FechaFin = rDatos("FechaFin")
                 End If
             End If
         Catch ex As Exception

@@ -1,13 +1,12 @@
 ﻿Imports CapaDatos
-Public Class Rechazo
+Public Class Desecho
     Implements IIndividual
     Dim cadena_conexion As New CapaDatos.conexiones
     Dim oBD As New CapaDatos.CapaDatos(cadena_conexion.CadenaSicaip)
-#Region "IIndividual"
+#Region "Metodos IIndividual"
     Public Sub Cargar() Implements IIndividual.Cargar
 
     End Sub
-
     Public Sub Eliminar() Implements IIndividual.Eliminar
 
     End Sub
@@ -20,35 +19,38 @@ Public Class Rechazo
             vId = value
         End Set
     End Property
-
     Public Function Obtener_Id(ByVal vCadena As String) As Long Implements IIndividual.Obtener_Id
         Return 1
     End Function
-
     Public Sub Registrar() Implements IIndividual.Registrar
-
+        Dim queryInsert As String = "insert into desecho(cve_registro_turno,cod_empleado_registro,fecha_registro,cve_modelo,cantidad,estatus) " &
+                              "values(" & vcve_registro_turno & ",'" & vcod_empleado_registro & "','" & vfecha_registro & "'," & vcve_modelo & "," & vcantidad & ",'" & vestatus & "')"
+        MsgBox(queryInsert)
+        Try
+            oBD.EjecutarQuery(queryInsert)
+        Catch
+            MsgBox("Error al insertar desecho. CDesecho_ERROR", vbCritical + vbOKOnly, "Error")
+        End Try
     End Sub
 #End Region
 #Region "Atributos"
-    Private vcve_rechazo As Long
+    Private vcve_desecho As Long
     Private vcve_registro_turno As Long
     Private vcod_empleado_registro As String
     Private vfecha_registro As String
     Private vcve_modelo As Long
-    Private vcve_tipo_rechazo As Long
     Private vcantidad As Long
-    Private vmotivo As String
-    Private vcod_empleado_elimino As String
+    Private vcod_empleado_eliminacion As String
     Private vfecha_eliminacion As String
     Private vestatus As String
 #End Region
 #Region "Propiedades"
-    Public Property cve_rechazo() As Long
+    Public Property cve_desecho() As Long
         Get
-            Return vcve_rechazo
+            Return vcve_desecho
         End Get
         Set(ByVal value As Long)
-            vcve_rechazo = value
+            vcve_desecho = value
         End Set
     End Property
     Public Property cve_registro_turno() As Long
@@ -83,14 +85,6 @@ Public Class Rechazo
             vcve_modelo = value
         End Set
     End Property
-    Public Property cve_tipo_rechazo() As Long
-        Get
-            Return vcve_tipo_rechazo
-        End Get
-        Set(ByVal value As Long)
-            vcve_tipo_rechazo = value
-        End Set
-    End Property
     Public Property cantidad() As Long
         Get
             Return vcantidad
@@ -99,20 +93,12 @@ Public Class Rechazo
             vcantidad = value
         End Set
     End Property
-    Public Property motivo() As String
+    Public Property cod_empleado_eliminacion() As String
         Get
-            Return vmotivo
+            Return vcod_empleado_eliminacion
         End Get
         Set(ByVal value As String)
-            vmotivo = value
-        End Set
-    End Property
-    Public Property cod_empleado_elimino() As String
-        Get
-            Return vcod_empleado_elimino
-        End Get
-        Set(ByVal value As String)
-            vcod_empleado_elimino = value
+            vcod_empleado_eliminacion = value
         End Set
     End Property
     Public Property fecha_eliminacion() As String
@@ -133,22 +119,30 @@ Public Class Rechazo
     End Property
 #End Region
 #Region "Metodos formulario de produccion"
-    Public Function llena_rechazo_gridview() As DataTable
+    Public Function llena_desecho_gridview() As DataTable
         Dim obj As DataTable
-        Dim queryLlenagridview As String = "select r.cve_rechazo,m.np_gkn,m.descripcion,r.cantidad,tr.tipo,r.motivo from rechazo r " &
-            "join tipo_rechazo tr on r.cve_tipo_rechazo=tr.cve_tipo_rechazo " &
-            "join modelo m on r.cve_modelo=m.cve_modelo " &
-            "where r.cve_registro_turno=" & vcve_registro_turno & " and r.estatus='1'"
+        Dim queryLlenagridview As String = "select d.cve_desecho,m.np_gkn,m.descripcion,d.cantidad from desecho d " &
+            "join modelo m on d.cve_modelo=m.cve_modelo " &
+            "where d.cve_registro_turno=" & vcve_registro_turno & " and d.estatus='1'"
         Using scope As New TransactionScope
             Try
                 obj = oBD.ObtenerTabla(queryLlenagridview)
                 scope.Complete()
             Catch
-                MsgBox("Error al obtener detalle de Rechazos. CDesecho_ERROR", vbCritical + vbOKOnly, "Error")
+                MsgBox("Error al obtener detalle de Desechos. CDesecho_ERROR", vbCritical + vbOKOnly, "Error")
                 Return Nothing
             End Try
             Return obj
         End Using
     End Function
+    Public Sub elimina_fila_desecho_gridview()
+        Try
+            MsgBox("update desecho set cod_empleado_eliminacion='" & vcod_empleado_eliminacion & "',fecha_eliminacion='" & vfecha_eliminacion & "',estatus='0' where cve_desecho=" & vcve_desecho)
+            oBD.EjecutarQuery("update desecho set cod_empleado_eliminacion='" & vcod_empleado_eliminacion & "',fecha_eliminacion='" & vfecha_eliminacion & "',estatus='0' where cve_desecho=" & vcve_desecho)
+
+        Catch ex As Exception
+            MsgBox("Error al eliminar desecho. CDesecho_ERROR", vbCritical + vbOKOnly, "Error")
+        End Try
+    End Sub
 #End Region
 End Class
