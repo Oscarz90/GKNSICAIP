@@ -27,10 +27,6 @@ Partial Class frmProduccion
         Me.tabPageProductividad = New System.Windows.Forms.TabPage()
         Me.grpDesechos = New System.Windows.Forms.GroupBox()
         Me.grdDetalleDesecho = New System.Windows.Forms.DataGridView()
-        Me.colcve_desecho = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.colnp_gkn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.colmodelodescripcion = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.coldesechocantidad = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Label59 = New System.Windows.Forms.Label()
         Me.cbxModeloDesecho = New System.Windows.Forms.ComboBox()
         Me.Label60 = New System.Windows.Forms.Label()
@@ -191,6 +187,12 @@ Partial Class frmProduccion
         Me.lblNombreEquipo = New System.Windows.Forms.Label()
         Me.Label58 = New System.Windows.Forms.Label()
         Me.cbxLinea = New System.Windows.Forms.ComboBox()
+        Me.colcve_desecho = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.col__cve_linea = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.col_cve_modelo = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.colnp_gkn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.colmodelodescripcion = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.coldesechocantidad = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.TabContenido.SuspendLayout()
         Me.tabPageProductividad.SuspendLayout()
         Me.grpDesechos.SuspendLayout()
@@ -262,41 +264,13 @@ Partial Class frmProduccion
         Me.grdDetalleDesecho.AllowUserToAddRows = False
         Me.grdDetalleDesecho.AllowUserToDeleteRows = False
         Me.grdDetalleDesecho.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.grdDetalleDesecho.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.colcve_desecho, Me.colnp_gkn, Me.colmodelodescripcion, Me.coldesechocantidad})
+        Me.grdDetalleDesecho.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.colcve_desecho, Me.col__cve_linea, Me.col_cve_modelo, Me.colnp_gkn, Me.colmodelodescripcion, Me.coldesechocantidad})
         Me.grdDetalleDesecho.Location = New System.Drawing.Point(6, 237)
         Me.grdDetalleDesecho.Name = "grdDetalleDesecho"
         Me.grdDetalleDesecho.ReadOnly = True
         Me.grdDetalleDesecho.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
         Me.grdDetalleDesecho.Size = New System.Drawing.Size(436, 165)
         Me.grdDetalleDesecho.TabIndex = 327
-        '
-        'colcve_desecho
-        '
-        Me.colcve_desecho.DataPropertyName = "cve_desecho"
-        Me.colcve_desecho.HeaderText = "cve_desecho"
-        Me.colcve_desecho.Name = "colcve_desecho"
-        Me.colcve_desecho.ReadOnly = True
-        '
-        'colnp_gkn
-        '
-        Me.colnp_gkn.DataPropertyName = "np_gkn"
-        Me.colnp_gkn.HeaderText = "No.Parte GKN"
-        Me.colnp_gkn.Name = "colnp_gkn"
-        Me.colnp_gkn.ReadOnly = True
-        '
-        'colmodelodescripcion
-        '
-        Me.colmodelodescripcion.DataPropertyName = "descripcion"
-        Me.colmodelodescripcion.HeaderText = "Modelo"
-        Me.colmodelodescripcion.Name = "colmodelodescripcion"
-        Me.colmodelodescripcion.ReadOnly = True
-        '
-        'coldesechocantidad
-        '
-        Me.coldesechocantidad.DataPropertyName = "cantidad"
-        Me.coldesechocantidad.HeaderText = "Cantidad"
-        Me.coldesechocantidad.Name = "coldesechocantidad"
-        Me.coldesechocantidad.ReadOnly = True
         '
         'Label59
         '
@@ -1932,6 +1906,48 @@ Partial Class frmProduccion
         Me.cbxLinea.Size = New System.Drawing.Size(234, 26)
         Me.cbxLinea.TabIndex = 309
         '
+        'colcve_desecho
+        '
+        Me.colcve_desecho.DataPropertyName = "cve_desecho"
+        Me.colcve_desecho.HeaderText = "cve_desecho"
+        Me.colcve_desecho.Name = "colcve_desecho"
+        Me.colcve_desecho.ReadOnly = True
+        '
+        'col__cve_linea
+        '
+        Me.col__cve_linea.DataPropertyName = "cve_linea"
+        Me.col__cve_linea.HeaderText = "cve_linea"
+        Me.col__cve_linea.Name = "col__cve_linea"
+        Me.col__cve_linea.ReadOnly = True
+        '
+        'col_cve_modelo
+        '
+        Me.col_cve_modelo.DataPropertyName = "cve_modelo"
+        Me.col_cve_modelo.HeaderText = "cve_modelo"
+        Me.col_cve_modelo.Name = "col_cve_modelo"
+        Me.col_cve_modelo.ReadOnly = True
+        '
+        'colnp_gkn
+        '
+        Me.colnp_gkn.DataPropertyName = "np_gkn"
+        Me.colnp_gkn.HeaderText = "No.Parte GKN"
+        Me.colnp_gkn.Name = "colnp_gkn"
+        Me.colnp_gkn.ReadOnly = True
+        '
+        'colmodelodescripcion
+        '
+        Me.colmodelodescripcion.DataPropertyName = "descripcion"
+        Me.colmodelodescripcion.HeaderText = "Modelo"
+        Me.colmodelodescripcion.Name = "colmodelodescripcion"
+        Me.colmodelodescripcion.ReadOnly = True
+        '
+        'coldesechocantidad
+        '
+        Me.coldesechocantidad.DataPropertyName = "cantidad"
+        Me.coldesechocantidad.HeaderText = "Cantidad"
+        Me.coldesechocantidad.Name = "coldesechocantidad"
+        Me.coldesechocantidad.ReadOnly = True
+        '
         'frmProduccion
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -2140,10 +2156,6 @@ Partial Class frmProduccion
     Friend WithEvents Label60 As System.Windows.Forms.Label
     Friend WithEvents btnAgregarDesecho As System.Windows.Forms.Button
     Friend WithEvents btnQuitarDesecho As System.Windows.Forms.Button
-    Friend WithEvents colcve_desecho As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents colnp_gkn As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents colmodelodescripcion As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents coldesechocantidad As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents grdDetalleRechazo As System.Windows.Forms.DataGridView
     Friend WithEvents colcve_rechazo As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents col_np_gkn As System.Windows.Forms.DataGridViewTextBoxColumn
@@ -2151,4 +2163,10 @@ Partial Class frmProduccion
     Friend WithEvents colcantidad As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents coltipo_rechazo As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents colmotivo As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents colcve_desecho As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents col__cve_linea As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents col_cve_modelo As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents colnp_gkn As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents colmodelodescripcion As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents coldesechocantidad As System.Windows.Forms.DataGridViewTextBoxColumn
 End Class

@@ -15,6 +15,12 @@ Public Class frmProduccion
     Private flgBanderacbxTurnos As Boolean = False
 #End Region
 #Region "Calculo de OEE"
+    Private Sub calcula_Productividad()
+        calcula_Disponibilidad()
+        calcula_Desempeno()
+        calcula_Calidad()
+        calcula_OEE()
+    End Sub
     Private Sub calcula_Disponibilidad()
         If lblTiempoTurno.Text <> "0" And lblTiempoCarga.Text = lblParosNoPlaneados.Text Then
             lblDisponibilidad.Text = "0.00"
@@ -29,45 +35,43 @@ Public Class frmProduccion
         Else
             lblDisponibilidad.Text = "0.00"
         End If
-
-
-
-
     End Sub
     Private Sub calcula_Desempeno()
-        'Dim pzasOK As Double
-        'Dim desechos As Double
-        'Dim TC As Double
-        'Dim desempeno As Double = 0
-        'Dim contador As Integer = Convert.ToDouble(lblTiempoOperacion.Text)
-        'Try
-        '    For i As Integer = 0 To lstModelos.Items.Count - 1 Step 1
-        '        pzasOK = 0
-        '        desechos = 0
-        '        TC = 0
-        '        TC = Convert.ToDouble(bDat.Realiza_Consulta_en_BD_SICAIP(bDat.get_Tiempo_Ciclo_para_produccion(lstModelos.Items(i).SubItems(7).Text, lstModelos.Items(i).SubItems(6).Text)))
-        '        pzasOK = Convert.ToDouble(lstModelos.Items(i).SubItems(1).Text)
-        '        desechos = Convert.ToDouble(lstModelos.Items(i).SubItems(2).Text)
-        '        desempeno = desempeno + ((pzasOK + desechos) * TC)
-        '        ''contador = contador + 1
-        '    Next i
-        '    desempeno = (desempeno / contador) * 100
-        '    If contador <> 0 Then
-        '        If desempeno <= 100 And desempeno >= 0 Then
-        '            lblDesempeno.Text = Format(desempeno, "##0.00")
-        '        ElseIf desempeno < 0 Then
-        '            lblDesempeno.Text = "0.00"
-        '        Else
-        '            lblDesempeno.Text = "100.00"
-        '        End If
-        '    Else
-        '        lblDesempeno.Text = "0.00"
-        '    End If
-
-        'Catch ex As Exception
-        '    MsgBox("Error al calcular el desempeño. Clave del Error: FPR_014", vbCritical + vbOKOnly, "Error")
-        '    bDat.Mata_Conexion_SICAIP()
-        'End Try
+        Dim produccion_d As Double
+        Dim desechos_d As Double
+        Dim tiempo_operacion As Double = Convert.ToDouble(lblTiempoOperacion.Text)
+        Dim desempeno As Double
+        Dim oTC As New TC
+        For Each row As DataGridViewRow In grdDetalleProductividad.Rows
+            oTC.cve_linea = Val(row.Cells(1).Value)
+            oTC.cve_modelo = Val(row.Cells(2).Value)
+            MsgBox("produccion")
+            MsgBox(oTC.obtener_tiempo_ciclo())
+            MsgBox(Val(row.Cells(5).Value))
+            produccion_d += (oTC.obtener_tiempo_ciclo() * Val(row.Cells(5).Value))
+        Next
+        MsgBox(produccion_d)
+        For Each row As DataGridViewRow In grdDetalleDesecho.Rows
+            oTC.cve_linea = Val(row.Cells(1).Value)
+            oTC.cve_modelo = Val(row.Cells(2).Value)
+            MsgBox("desechos")
+            MsgBox(oTC.obtener_tiempo_ciclo())
+            MsgBox(Val(row.Cells(5).Value))
+            desechos_d += (oTC.obtener_tiempo_ciclo() * Val(row.Cells(5).Value))
+        Next
+        MsgBox(desechos_d)
+        desempeno = ((produccion_d + desechos_d) / tiempo_operacion) * 100
+        If tiempo_operacion <> 0 Then
+            If desempeno <= 100 And desempeno >= 0 Then
+                lblDesempeno.Text = Format(desempeno, "##0.00")
+            ElseIf desempeno < 0 Then
+                lblDesempeno.Text = "0.00"
+            Else
+                lblDesempeno.Text = "100.00"
+            End If
+        Else
+            lblDesempeno.Text = "0.00"
+        End If
     End Sub
     Private Sub calcula_Calidad()
         Dim varvalida As Double = (get_suma_desechos() + get_suma_piezas_producidas())
@@ -85,6 +89,9 @@ Public Class frmProduccion
         Else
             lblCalidad.Text = "0.00"
         End If
+    End Sub
+    Private Sub calcula_OEE()
+        lblOEE.Text = Format((Convert.ToDouble(lblCalidad.Text) / 100) * (Convert.ToDouble(lblDisponibilidad.Text) / 100) * (Convert.ToDouble(lblDesempeno.Text) / 100) * 100, "##0.00")
     End Sub
 #End Region
 #Region "Inicializando formulario"
@@ -114,6 +121,7 @@ Public Class frmProduccion
         llena_productividad_gridview()
         llena_desecho_gridview()
         actualiza_tabla_turno_minutos()
+        calcula_Productividad()
     End Sub
 #End Region
 #Region "LLenado ComboBoxs"
@@ -194,7 +202,6 @@ Public Class frmProduccion
         Dim oDesecho As New Desecho
         oDesecho.cve_registro_turno = 1
         grdDetalleDesecho.DataSource = oDesecho.llena_desecho_gridview()
-        get_suma_desechos()
     End Sub
     'Rechazos
     Private Sub llena_rechazo_gridview()
@@ -207,6 +214,7 @@ Public Class frmProduccion
     'General
     Private Sub cbxTurno_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cbxTurno.SelectedIndexChanged
         actualiza_tabla_turno_minutos()
+        calcula_Productividad()
     End Sub
     Private Sub cbxLinea_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cbxLinea.SelectedIndexChanged
         llena_cbx_Modelos()
@@ -273,6 +281,7 @@ Public Class frmProduccion
         add_modelo_producido()
         limpia_productividad()
         llena_productividad_gridview()
+        calcula_Productividad()
     End Sub
     Private Sub btnQuitarModelo_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnQuitarModelo.Click
         remove_modelo_producido()
@@ -455,7 +464,7 @@ Public Class frmProduccion
     Private Function get_suma_desechos() As Double
         Dim Total As Double
         For Each row As DataGridViewRow In grdDetalleDesecho.Rows
-            Total += Val(row.Cells(3).Value)
+            Total += Val(row.Cells(5).Value)
         Next
         Return Total
     End Function
@@ -468,7 +477,7 @@ Public Class frmProduccion
             lblTiempoTurno.Text = oTurno.minutos
             lblParosComedor.Text = oTurno.comedor
             lblParosPlaneados.Text = get_suma_paros_planeados()
-            lblTiempoCarga.Text = oTurno.minutos - (get_suma_paros_planeados() - oTurno.comedor)
+            lblTiempoCarga.Text = oTurno.minutos - (get_suma_paros_planeados() + oTurno.comedor)
             lblParosNoPlaneados.Text = get_suma_paros_no_planeados()
             lblTiempoOperacion.Text = Convert.ToDouble(lblTiempoCarga.Text) - get_suma_paros_no_planeados()
         End If
