@@ -7,11 +7,9 @@ Public Class Graficas
     ''Public vIdEquipo As Integer = 4
 
 #End Region
-
 #Region "Propiedades"
 
 #End Region
-
 #Region "OBTENER EQUIPO, LINEA(S), AREA, CADENA DE VALOR NIVEL USUARIO"
     ''' <summary>
     ''' Obtener Id del equipo desde formulario de captura producción
@@ -118,7 +116,6 @@ Public Class Graficas
     End Function
 
 #End Region
-
 #Region "OBTENER EQUIPO, LINEAS, AREA, CADENA DE VALOR DIRECTOR"
 
     Public Function Obtener_Nombre_Equipo_Director(ByVal vIdArea As String) As Integer
@@ -136,4 +133,37 @@ Public Class Graficas
     End Function
 
 #End Region
+
+    Public Function ejecutarVista(ByVal indicador As Integer, ByVal cadenaWHERE As String) As DataTable
+        Dim vRetorno As DataTable = Nothing
+        Dim vDT As DataTable = Nothing
+        Try
+            vDT = oBD.ObtenerTabla("SELECT DIA_ASIGNADO FROM VISTA_SELECCION_INDICADOR" & indicador & " " & cadenaWHERE)
+            If vDT IsNot Nothing Then
+                vRetorno = vDT
+            Else
+                vRetorno = Nothing
+            End If
+        Catch ex As Exception
+
+        End Try
+        Return vRetorno
+    End Function
+
+    Public Function ejecutarVistaOEE(ByVal cadenaWHERE As String) As DataTable
+        Dim vRetorno As DataTable = Nothing
+        Dim vDT As DataTable = Nothing
+        Try
+            vDT = oBD.ObtenerTabla("select OEE from VISTA_SELECCION_INDICADOR1 " & cadenaWHERE)
+            If vDT IsNot Nothing Then
+                vRetorno = vDT
+            Else
+                vRetorno = Nothing
+            End If
+        Catch ex As Exception
+
+        End Try
+        Return vRetorno
+    End Function
+
 End Class
