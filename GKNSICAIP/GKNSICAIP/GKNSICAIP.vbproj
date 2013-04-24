@@ -68,12 +68,17 @@
     <ApplicationManifest>My Project\app.manifest</ApplicationManifest>
   </PropertyGroup>
   <ItemGroup>
+<<<<<<< HEAD
     <Reference Include="AxInterop.ShockwaveFlashObjects">
       <HintPath>DLL\AxInterop.ShockwaveFlashObjects.dll</HintPath>
     </Reference>
     <Reference Include="Interop.ShockwaveFlashObjects">
       <HintPath>DLL\Interop.ShockwaveFlashObjects.dll</HintPath>
       <EmbedInteropTypes>False</EmbedInteropTypes>
+=======
+    <Reference Include="CapaNegocios">
+      <HintPath>..\..\CapaNegocios\CapaNegocios\bin\Release\CapaNegocios.dll</HintPath>
+>>>>>>> 3dc73d3506dd862aa64bedaea4e4a33a60876a02
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
