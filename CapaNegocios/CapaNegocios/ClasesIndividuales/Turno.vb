@@ -5,7 +5,22 @@ Public Class Turno
     Dim oBD As New CapaDatos.CapaDatos(cadena_conexion.CadenaSicaip)
 #Region "IIndividual"
     Public Sub Cargar() Implements IIndividual.Cargar
-
+        Dim rDatos As DataRow = Nothing
+        Try
+            rDatos = oBD.ObtenerRenglon("SELECT * FROM turno WHERE cve_turno=" & vcve_turno, "turno")
+            If rDatos IsNot Nothing Then
+                If rDatos("cve_turno") IsNot DBNull.Value Then
+                    Me.vcve_turno = rDatos("cve_turno")
+                    Me.vminutos = rDatos("minutos")
+                    Me.vcomedor = rDatos("comedor")
+                    Me.vturno = rDatos("turno")
+                    Me.vinicio = rDatos("inicio")
+                    Me.vfin = rDatos("fin")
+                End If
+            End If
+        Catch ex As Exception
+            Throw New Exception(ex.Message)
+        End Try
     End Sub
 
     Public Sub Eliminar() Implements IIndividual.Eliminar

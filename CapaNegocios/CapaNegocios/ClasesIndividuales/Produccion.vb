@@ -27,7 +27,6 @@ Public Class Produccion
     End Function
 
     Public Sub Registrar() Implements IIndividual.Registrar
-        'Dim oBD As New CapaDatos.CapaDatos("Data Source= Oscar-PC\SQLExpress; initial Catalog=GKNSICAIP; Integrated Security = True")
         Using scope As New TransactionScope
             Try
                 Dim vComando As New SqlClient.SqlCommand
@@ -37,9 +36,8 @@ Public Class Produccion
                 vComando.Parameters.Add("@codempleado", SqlDbType.VarChar).Value = Me.vcod_empleado_registro
                 vComando.Parameters.Add("@fecha_registro", SqlDbType.DateTime).Value = Convert.ToDateTime(Me.vfecha_registro)
                 vComando.Parameters.Add("@cve_modelo", SqlDbType.BigInt).Value = Me.vcve_modelo
-                vComando.Parameters.Add("@pzas_ok", SqlDbType.Int).Value = Me.pzas_ok
+                vComando.Parameters.Add("@pzas_ok", SqlDbType.Int).Value = Me.vpzas_ok
                 vComando.Parameters.Add("@tiempo_operacion", SqlDbType.Int).Value = Me.vtom
-                vComando.Parameters.Add("@estatus", SqlDbType.VarChar).Value = Me.vestatus
                 'Dim obj As DataTable = oBD.EjecutaCommando(vComando)
                 oBD.EjecutaProcedimientos(vComando)
                 'Me.vId = obj.Rows(0)(0)
@@ -197,7 +195,6 @@ Public Class Produccion
                 vComando.Parameters.Add("@cve_produccion", SqlDbType.BigInt).Value = Me.vcve_produccion
                 vComando.Parameters.Add("@cod_empleado", SqlDbType.VarChar).Value = Me.vcod_empleado_eliminacion
                 vComando.Parameters.Add("@fecha_eliminacion", SqlDbType.DateTime).Value = Convert.ToDateTime(Me.vfecha_eliminacion)
-                vComando.Parameters.Add("@estatus", SqlDbType.VarChar).Value = Me.estatus
                 oBD.EjecutaProcedimientos(vComando)
                 scope.Complete()
             Catch

@@ -1353,10 +1353,13 @@ Partial Class frmProduccion
         '
         'grdDetalleRechazo
         '
+        Me.grdDetalleRechazo.AllowUserToAddRows = False
+        Me.grdDetalleRechazo.AllowUserToDeleteRows = False
         Me.grdDetalleRechazo.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.grdDetalleRechazo.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.colcve_rechazo, Me.col_np_gkn, Me.col_descripcion, Me.colcantidad, Me.coltipo_rechazo, Me.colmotivo})
         Me.grdDetalleRechazo.Location = New System.Drawing.Point(10, 234)
         Me.grdDetalleRechazo.Name = "grdDetalleRechazo"
+        Me.grdDetalleRechazo.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
         Me.grdDetalleRechazo.Size = New System.Drawing.Size(609, 174)
         Me.grdDetalleRechazo.TabIndex = 337
         '

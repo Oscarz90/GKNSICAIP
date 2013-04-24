@@ -5,14 +5,19 @@ Public Class frmProduccion
     Private vnombre_equipo As String
     Private vnombre_empleado As String
     Private vcodigo_empleado As String
+    'Private disponibilidad As Double = 0
+    'Private desempeno As Double = 0
+    'Private calidad As Double = 0
+    'Private oee As Double = disponibilidad * desempeno * calidad
     'Banderas
     Private flgBanderacbxLineas As Boolean = False
     Private flgBanderacbxModelos As Boolean = False
+    Private flgBanderacbxTurnos As Boolean = False
 #End Region
 #Region "Calculo de OEE"
     Private Sub calcula_Disponibilidad()
         If lblTiempoTurno.Text <> "0" And lblTiempoCarga.Text = lblParosNoPlaneados.Text Then
-            lblDisponibilidad.Text = "0"
+            lblDisponibilidad.Text = "0.00"
         ElseIf lblTiempoCarga.Text <> "0" And lblTiempoOperacion.Text <> "0" Then
             If ((Convert.ToDouble(lblTiempoOperacion.Text) / Convert.ToDouble(lblTiempoCarga.Text)) * 100) <= 100 Then
                 lblDisponibilidad.Text = Format((Convert.ToDouble(lblTiempoOperacion.Text) / Convert.ToDouble(lblTiempoCarga.Text)) * 100, "##0.00")
@@ -22,14 +27,22 @@ Public Class frmProduccion
                 lblDisponibilidad.Text = "0.00"
             End If
         Else
-            lblDisponibilidad.Text = 0
+            lblDisponibilidad.Text = "0.00"
         End If
+
+
+
+
     End Sub
     Private Sub calcula_Desempeno()
 
     End Sub
 #End Region
 #Region "Inicializando formulario"
+    'Load
+    Private Sub frmProduccion_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
+        inicializa_formulario()
+    End Sub
     'Establece variables globales
     Public Sub set_Datos_Equipo(ByVal idEq As Integer, ByVal NomEquipo As String, ByVal Empleado As String, ByVal CodEmpleado As String)
         vcve_equipo = idEq
@@ -39,19 +52,20 @@ Public Class frmProduccion
         lblNombreEquipo.Text = vnombre_equipo
 
     End Sub
-    'Load
-    Private Sub frmProduccion_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
-        'Combobox
+    'Llena toda la info del formulario
+    Private Sub inicializa_formulario()
+        'General
         llena_cbx_Turnos()
         llena_cbx_Lineas()
         llena_cbx_Modelos()
+        'Rechazos
         llena_cbx_tipo_rechazos()
-        'Grids
+        llena_rechazo_gridview()
+        'Productividad
         llena_productividad_gridview()
         llena_desecho_gridview()
-        llena_rechazo_gridview()
+        actualiza_tabla_turno_minutos()
     End Sub
-
 #End Region
 #Region "LLenado ComboBoxs"
     'Turnos
@@ -61,6 +75,7 @@ Public Class frmProduccion
         cbxTurno.DisplayMember = "turno"
         cbxTurno.DataSource = oTurnos.llena_combo_turnos
         cbxTurno.SelectedIndex = -1
+        flgBanderacbxTurnos = True
     End Sub
     'Lineas
     Private Sub llena_cbx_Lineas()
@@ -140,6 +155,9 @@ Public Class frmProduccion
 #End Region
 #Region "Eventos ComboBox"
     'General
+    Private Sub cbxTurno_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cbxTurno.SelectedIndexChanged
+        actualiza_tabla_turno_minutos()
+    End Sub
     Private Sub cbxLinea_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cbxLinea.SelectedIndexChanged
         llena_cbx_Modelos()
     End Sub
@@ -222,6 +240,19 @@ Public Class frmProduccion
         llena_desecho_gridview()
         deshabilitar_btn_quitar_desecho()
     End Sub
+    'Rechazos
+    Private Sub btnAgregarRechazo_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnAgregarRechazo.Click
+        add_rechazo()
+        limpia_rechazos()
+        llena_rechazo_gridview()
+        llena_productividad_gridview()
+    End Sub
+    Private Sub btnQuitarRechazo_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnQuitarRechazo.Click
+        remove_rechazo()
+        llena_rechazo_gridview()
+        deshabilitar_btn_quitar_rechazo()
+        llena_productividad_gridview()
+    End Sub
 #End Region
 #Region "Eventos Gridviews"
     'Productividad
@@ -232,6 +263,10 @@ Public Class frmProduccion
     'Desechos
     Private Sub grdDetalleDesecho_CellClick(ByVal sender As System.Object, ByVal e As System.Windows.Forms.DataGridViewCellEventArgs) Handles grdDetalleDesecho.CellClick
         habilita_btn_Quitar_desecho()
+    End Sub
+    'Rechazos
+    Private Sub grdDetalleRechazo_CellClick(ByVal sender As System.Object, ByVal e As System.Windows.Forms.DataGridViewCellEventArgs) Handles grdDetalleRechazo.CellClick
+        habilita_btn_Quitar_rechazo()
     End Sub
 #End Region
 #Region "Validaciones"
@@ -259,13 +294,13 @@ Public Class frmProduccion
         btnQuitarModelo.Enabled = False
     End Sub
     'Rechazo
-    Private Sub valida_botones_desecho()
-        If cbxModeloDesecho.SelectedIndex <> -1 And txtDesechosCantidad.Text <> "" And txtDesechosCantidad.Text <> "0" Then
+    Private Sub valida_botones_rechazos()
+        If cbxModeloRechazo.SelectedIndex <> -1 And txtRechazosCantidad.Text <> "" And txtRechazosCantidad.Text <> "0" And cbxTipoRechazo.SelectedIndex <> -1 Then
             If cbxTurno.SelectedIndex <> -1 Then
-                btnAgregarDesecho.Enabled = True
+                btnAgregarRechazo.Enabled = True
             End If
         Else
-            btnAgregarDesecho.Enabled = False
+            btnAgregarRechazo.Enabled = False
         End If
     End Sub
     Private Sub habilita_btn_Quitar_rechazo()
@@ -276,13 +311,13 @@ Public Class frmProduccion
         btnQuitarRechazo.Enabled = False
     End Sub
     'Desecho
-    Private Sub valida_botones_rechazos()
-        If cbxModeloRechazo.SelectedIndex <> -1 And txtRechazosCantidad.Text <> "" And txtRechazosCantidad.Text <> "0" And cbxTipoRechazo.SelectedIndex <> -1 Then
+    Private Sub valida_botones_desecho()
+        If cbxModeloDesecho.SelectedIndex <> -1 And txtDesechosCantidad.Text <> "" And txtDesechosCantidad.Text <> "0" Then
             If cbxTurno.SelectedIndex <> -1 Then
-                btnAgregarRechazo.Enabled = True
+                btnAgregarDesecho.Enabled = True
             End If
         Else
-            btnAgregarRechazo.Enabled = False
+            btnAgregarDesecho.Enabled = False
         End If
     End Sub
     Private Sub habilita_btn_Quitar_desecho()
@@ -311,6 +346,7 @@ Public Class frmProduccion
     Private Sub limpia_rechazos()
         cbxModeloRechazo.SelectedIndex = -1
         cbxTipoRechazo.SelectedIndex = -1
+        txtModeloRechazo.Text = ""
         txtRechazosCantidad.Text = ""
         txtRechazoMotivo.Text = ""
     End Sub
@@ -325,7 +361,6 @@ Public Class frmProduccion
         oProduccion.cve_modelo = cbxModeloProductividad.SelectedValue
         oProduccion.pzas_ok = Long.Parse(txtPiezasOkProducidas.Text)
         oProduccion.tom = Long.Parse(txtTiempoOperacion.Text)
-        oProduccion.estatus = "1"
         oProduccion.Registrar()
     End Sub
     Private Sub remove_modelo_producido()
@@ -334,7 +369,6 @@ Public Class frmProduccion
         oProduccion.cve_produccion = grdDetalleProductividad.Item("colcve_produccion", grdDetalleProductividad.CurrentRow.Index).Value
         oProduccion.cod_empleado_eliminacion = "118737"
         oProduccion.fecha_eliminacion = Now.ToString("dd-MM-yyyy HH:mm")
-        oProduccion.estatus = "0"
         oProduccion.elimina_fila_productividad_gridview()
     End Sub
     'Desechos
@@ -342,7 +376,7 @@ Public Class frmProduccion
         Dim oDesecho As New Desecho
         oDesecho.cve_registro_turno = 1
         oDesecho.cod_empleado_registro = "118737"
-        oDesecho.fecha_registro = Now.ToString("dd-MM-yyyy HH:mm")
+        oDesecho.fecha_registro = Now.ToString("MM-dd-yyyy HH:mm")
         oDesecho.cve_modelo = cbxModeloDesecho.SelectedValue
         oDesecho.cantidad = Long.Parse(txtDesechosCantidad.Text)
         oDesecho.estatus = "1"
@@ -351,9 +385,56 @@ Public Class frmProduccion
     Private Sub remove_desecho()
         Dim oDesecho As New Desecho
         oDesecho.cod_empleado_eliminacion = "118737"
-        oDesecho.fecha_eliminacion = Now.ToString("dd-MM-yyyy HH:mm")
+        oDesecho.fecha_eliminacion = Now.ToString("MM-dd-yyyy HH:mm")
         oDesecho.cve_desecho = grdDetalleDesecho.Item("colcve_desecho", grdDetalleDesecho.CurrentRow.Index).Value
         oDesecho.elimina_fila_desecho_gridview()
     End Sub
+    'Tabla Turno Minutos
+    Private Sub actualiza_tabla_turno_minutos()
+        If cbxTurno.SelectedIndex <> -1 And flgBanderacbxTurnos Then
+            Dim oTurno As New Turno
+            oTurno.cve_turno = cbxTurno.SelectedValue
+            oTurno.Cargar()
+            lblTiempoTurno.Text = oTurno.minutos
+            lblParosComedor.Text = oTurno.comedor
+            lblParosPlaneados.Text = get_suma_paros_planeados()
+            lblTiempoCarga.Text = oTurno.minutos - (get_suma_paros_planeados() - oTurno.comedor)
+            lblParosNoPlaneados.Text = get_suma_paros_no_planeados()
+            lblTiempoOperacion.Text = Convert.ToDouble(lblTiempoCarga.Text) - get_suma_paros_no_planeados()
+        End If
+    End Sub
 #End Region
+#Region "Funciones para modulo de Paros"
+    'Suma Paros planeados y no planeados
+    Private Function get_suma_paros_planeados() As Integer
+        Return 0
+    End Function
+    Private Function get_suma_paros_no_planeados() As Integer
+        Return 0
+    End Function
+#End Region
+#Region "Funciones para modulo Rechazos"
+    'Rechazo
+    Private Sub add_rechazo()
+        Dim oRechazo As New Rechazo
+        oRechazo.cve_registro_turno = 1
+        oRechazo.cod_empleado_registro = "118737"
+        oRechazo.fecha_registro = Now.ToString("dd-MM-yyyy HH:mm")
+        oRechazo.cve_modelo = cbxModeloRechazo.SelectedValue
+        oRechazo.cve_tipo_rechazo = cbxTipoRechazo.SelectedValue
+        oRechazo.cantidad = Long.Parse(txtRechazosCantidad.Text)
+        oRechazo.motivo = txtRechazoMotivo.Text
+        oRechazo.Registrar()
+    End Sub
+    Private Sub remove_rechazo()
+        Dim oRechazo As New Rechazo
+        oRechazo.cve_registro_turno = 1
+        oRechazo.cve_rechazo = grdDetalleRechazo.Item("colcve_rechazo", grdDetalleRechazo.CurrentRow.Index).Value
+        oRechazo.cod_empleado_elimino = "118737"
+        oRechazo.fecha_eliminacion = Now.ToString("dd-MM-yyyy HH:mm")
+        oRechazo.elimina_fila_rechazo_gridview()
+    End Sub
+#End Region
+
+    
 End Class

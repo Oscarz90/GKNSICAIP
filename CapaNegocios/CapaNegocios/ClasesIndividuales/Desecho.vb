@@ -25,7 +25,6 @@ Public Class Desecho
     Public Sub Registrar() Implements IIndividual.Registrar
         Dim queryInsert As String = "insert into desecho(cve_registro_turno,cod_empleado_registro,fecha_registro,cve_modelo,cantidad,estatus) " &
                               "values(" & vcve_registro_turno & ",'" & vcod_empleado_registro & "','" & vfecha_registro & "'," & vcve_modelo & "," & vcantidad & ",'" & vestatus & "')"
-        MsgBox(queryInsert)
         Try
             oBD.EjecutarQuery(queryInsert)
         Catch
@@ -137,9 +136,7 @@ Public Class Desecho
     End Function
     Public Sub elimina_fila_desecho_gridview()
         Try
-            MsgBox("update desecho set cod_empleado_eliminacion='" & vcod_empleado_eliminacion & "',fecha_eliminacion='" & vfecha_eliminacion & "',estatus='0' where cve_desecho=" & vcve_desecho)
             oBD.EjecutarQuery("update desecho set cod_empleado_eliminacion='" & vcod_empleado_eliminacion & "',fecha_eliminacion='" & vfecha_eliminacion & "',estatus='0' where cve_desecho=" & vcve_desecho)
-
         Catch ex As Exception
             MsgBox("Error al eliminar desecho. CDesecho_ERROR", vbCritical + vbOKOnly, "Error")
         End Try
