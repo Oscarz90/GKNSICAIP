@@ -40,7 +40,6 @@ Public Class Login
 
 #End Region
 
-
     Public Function Obtener_Cve_Empleado(ByVal vCodigo_Barras As String) As String
         Dim vRetorno As String = ""
         vRetorno = Mid(vCodigo_Barras, 6, 6)
