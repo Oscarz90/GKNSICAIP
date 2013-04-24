@@ -6,16 +6,15 @@ Public Class Paro
 #Region "IIndividual"
     Public Sub Cargar() Implements IIndividual.Cargar
         Dim vDR As DataRow
-        vDR = oBD.ObtenerRenglon("select * from paro where cve_paro = " & vCve_Paro, "paro")
+        vDR = oBD.ObtenerRenglon("select * from paro where paro = " & vCve_Paro, "paro")
         If vDR IsNot Nothing Then
             vCve_Paro = vDR("cve_paro")
-            vCod_Paro = vDR("Cod_paro")
+            vCod_Paro = vDR("cod_paro")
             vParo = vDR("paro")
-            vAfecta_CDM = vDR("Afecta_CDM")
-            vCve_Detalle = vDR("Cve_Detalle")
+            vAfecta_CDM = vDR("afecta_CDM")
+            vCve_Detalle = vDR("cve_detalle")
         End If
     End Sub
-
     Public Sub Eliminar() Implements IIndividual.Eliminar
         Try
             oBD.EjecutarQuery("Delete FROM paro where cve_paro= " & vCve_Paro)
@@ -23,7 +22,6 @@ Public Class Paro
 
         End Try
     End Sub
-
     Public Function Obtener_Id(ByVal vCadena As String) As Long Implements IIndividual.Obtener_Id
         Dim vDR As DataRow
         Dim vRetorno As Long
@@ -35,7 +33,6 @@ Public Class Paro
         End If
         Return vRetorno
     End Function
-
     Public Sub Registrar() Implements IIndividual.Registrar
         Using scope As New TransactionScope
             Try
@@ -64,8 +61,7 @@ Public Class Paro
     Private vCve_Detalle As Long
 #End Region
 #Region "Propiedades"
-
-    Public Property Cve_Paro As Long Implements IIndividual.Id
+    Public Property cve_Paro As Long Implements IIndividual.Id
         Get
             Return vCve_Paro
         End Get
@@ -73,8 +69,7 @@ Public Class Paro
             vCve_Paro = value
         End Set
     End Property
-
-    Public Property Cod_Paro() As String
+    Public Property cod_paro() As String
         Get
             Return vCod_Paro
         End Get
@@ -82,8 +77,7 @@ Public Class Paro
             vCod_Paro = value
         End Set
     End Property
-
-    Public Property Paro() As String
+    Public Property paro() As String
         Get
             Return vParo
         End Get
@@ -91,8 +85,7 @@ Public Class Paro
             vParo = value
         End Set
     End Property
-
-    Public Property Afecta_CDM() As Integer
+    Public Property afecta_CDM() As Integer
         Get
             Return vAfecta_CDM
         End Get
@@ -100,9 +93,7 @@ Public Class Paro
             vAfecta_CDM = value
         End Set
     End Property
-
-
-    Public Property Cve_Detalle() As Long
+    Public Property cve_Detalle() As Long
         Get
             Return vCve_Detalle
         End Get
@@ -110,8 +101,5 @@ Public Class Paro
             vCve_Detalle = value
         End Set
     End Property
-
-
-
 #End Region
 End Class

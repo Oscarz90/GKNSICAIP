@@ -13,6 +13,8 @@ Public Class frmProduccion
     Private flgBanderacbxLineas As Boolean = False
     Private flgBanderacbxModelos As Boolean = False
     Private flgBanderacbxTurnos As Boolean = False
+    Private flgBanderacbxMaquinas As Boolean = False
+    Private flgBanderacbxParos As Boolean = False
 #End Region
 #Region "Calculo de OEE"
     Private Sub calcula_Productividad()
@@ -45,21 +47,13 @@ Public Class frmProduccion
         For Each row As DataGridViewRow In grdDetalleProductividad.Rows
             oTC.cve_linea = Val(row.Cells(1).Value)
             oTC.cve_modelo = Val(row.Cells(2).Value)
-            MsgBox("produccion")
-            MsgBox(oTC.obtener_tiempo_ciclo())
-            MsgBox(Val(row.Cells(5).Value))
             produccion_d += (oTC.obtener_tiempo_ciclo() * Val(row.Cells(5).Value))
         Next
-        MsgBox(produccion_d)
         For Each row As DataGridViewRow In grdDetalleDesecho.Rows
             oTC.cve_linea = Val(row.Cells(1).Value)
             oTC.cve_modelo = Val(row.Cells(2).Value)
-            MsgBox("desechos")
-            MsgBox(oTC.obtener_tiempo_ciclo())
-            MsgBox(Val(row.Cells(5).Value))
             desechos_d += (oTC.obtener_tiempo_ciclo() * Val(row.Cells(5).Value))
         Next
-        MsgBox(desechos_d)
         desempeno = ((produccion_d + desechos_d) / tiempo_operacion) * 100
         If tiempo_operacion <> 0 Then
             If desempeno <= 100 And desempeno >= 0 Then
@@ -141,7 +135,7 @@ Public Class frmProduccion
         cbxLinea.ValueMember = "cve_linea"
         cbxLinea.DisplayMember = "linea"
         cbxLinea.DataSource = oEquipoLinea.llena_combo_lineas
-        cbxLinea.SelectedIndex = -1
+        'cbxLinea.SelectedIndex = -1
         flgBanderacbxLineas = True
     End Sub
     'Modelos (por Linea)
@@ -171,13 +165,15 @@ Public Class frmProduccion
         End If
     End Sub
     'Rechazos
-    Private Sub llena_cbx_tipo_rechazos()
+    Private Sub llena_cbx_Tipo_Rechazos()
         Dim oTipoRechazo As New Tipo_Rechazo
         cbxTipoRechazo.ValueMember = "cve_tipo_rechazo"
         cbxTipoRechazo.DisplayMember = "tipo"
         cbxTipoRechazo.DataSource = oTipoRechazo.llena_combo_tipo_rechazo
         cbxTipoRechazo.SelectedIndex = -1
     End Sub
+    'Paros
+    'Private Sub llena_cbx_()
 #End Region
 #Region "Llenado Labels - Textbox"
     'General
@@ -187,6 +183,23 @@ Public Class frmProduccion
             oModelo.cve_modelo = cbxmodelodesc.SelectedValue
             oModelo.obtener_descripcion_modelo()
             txtmodelodesc.Text = oModelo.descripcion
+        End If
+    End Sub
+    'Paros
+    Private Sub obten_descripcion_maquina(ByRef txtmaquinadesc As TextBox, ByRef cbxmaquinadesc As ComboBox)
+        If flgBanderacbxMaquinas Then
+            Dim oMaquina As New Maquina
+            oMaquina.cve_maquina = cbxmaquinadesc.SelectedValue
+            oMaquina.Cargar()
+            txtmaquinadesc.Text = oMaquina.maquina
+        End If
+    End Sub
+    Private Sub obten_descripcion_paro(ByRef txtparodesc As TextBox, ByRef cbxtipoparosdesc As ComboBox)
+        If flgBanderacbxParos Then
+            Dim oParo As New Paro
+            oParo.cve_Paro = cbxtipoparosdesc.SelectedValue
+            oParo.Cargar()
+            txtparodesc.Text = oParo.paro
         End If
     End Sub
 #End Region
@@ -214,7 +227,6 @@ Public Class frmProduccion
     'General
     Private Sub cbxTurno_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cbxTurno.SelectedIndexChanged
         actualiza_tabla_turno_minutos()
-        calcula_Productividad()
     End Sub
     Private Sub cbxLinea_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cbxLinea.SelectedIndexChanged
         llena_cbx_Modelos()
@@ -248,6 +260,19 @@ Public Class frmProduccion
             valida_botones_rechazos()
             deshabilitar_btn_quitar_rechazo()
         End If
+    End Sub
+    'Paros
+    Private Sub cbxMaquina_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cbxMaquina.SelectedIndexChanged
+        If cbxMaquina.SelectedIndex <> -1 Then
+            valida_botones_paro()
+            obten_descripcion_maquina(txtMaquinaDescripcion, cbxMaquina)
+            deshabilitar_btn_quitar_paro()
+        End If
+    End Sub
+    Private Sub cbxTipoParo_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cbxTipoParo.SelectedIndexChanged
+        valida_botones_paro()
+        obten_descripcion_paro(txtParosDescripcion, cbxTipoParo)
+        deshabilitar_btn_quitar_paro()
     End Sub
 #End Region
 #Region "Eventos TextBox"
@@ -386,6 +411,23 @@ Public Class frmProduccion
     Private Sub deshabilitar_btn_quitar_desecho()
         btnQuitarDesecho.Enabled = False
     End Sub
+    'Paro
+    Private Sub valida_botones_paro()
+        If cbxMaquina.SelectedIndex <> -1 And cbxTipoParo.SelectedIndex <> -1 And txtMinutosParo.Text <> "" And txtMinutosParo.Text <> "0" Then
+            If cbxTurno.SelectedIndex <> -1 Then
+                btnAgregarParo.Enabled = True
+            End If
+        Else
+            btnAgregarParo.Enabled = False
+        End If
+    End Sub
+    Private Sub habilita_btn_Quitar_paro()
+        limpia_paros()
+        btnQuitarParo.Enabled = True
+    End Sub
+    Private Sub deshabilitar_btn_quitar_paro()
+        btnQuitarParo.Enabled = False
+    End Sub
 #End Region
 #Region "Limpia formularios"
     'Productividad
@@ -409,6 +451,27 @@ Public Class frmProduccion
         txtRechazosCantidad.Text = ""
         txtRechazoMotivo.Text = ""
     End Sub
+    'Paros
+    Private Sub limpia_paros()
+        txtMinutosParo.Text = ""
+        txtDetallesParo.Text = ""
+        cbxMaquina.SelectedIndex = -1
+        cbxTipoParo.SelectedIndex = -1
+    End Sub
+#End Region
+#Region "Funciones Generales"
+    Private Function valida_hora_de_captura(ByVal hora_actual As DateTime) As Boolean
+        Dim fecha_inicio As DateTime
+        Dim fecha_final As DateTime
+        'fecha_inicio = ini_aux
+        'fecha_final = fin_aux
+        If hora_actual >= fecha_inicio And hora_actual <= fecha_final Then
+            Return True
+        Else
+            'bandera_guardado = True
+            Return False
+        End If
+    End Function
 #End Region
 #Region "Funciones para modulo Productividad"
     'Productividad
@@ -442,6 +505,21 @@ Public Class frmProduccion
         oRegistro_turno.cve_registro_turno = 1
         oRegistro_turno.Cargar()
         Return oRegistro_turno.adeudo
+    End Function
+    Private Function get_minutos_disponibles() As Boolean
+        Dim mindisponibles As Integer = Convert.ToDouble(lblTiempoOperacion.Text)
+        Dim Total As Double
+
+
+        For Each row As DataGridViewRow In grdDetalleProductividad.Rows
+            Total += Val(row.Cells(6).Value)
+        Next
+        Return Total
+        If (mindisponibles - Total) > 0 Then
+            Return True
+        Else
+            Return False
+        End If
     End Function
     'Desechos
     Private Sub add_desecho()
