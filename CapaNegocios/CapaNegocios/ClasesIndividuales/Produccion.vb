@@ -69,7 +69,6 @@ Public Class Produccion
     Private vcve_modelo As Long
     Private vpzas_ok As Long
     Private vtom As Long
-    Private vadeudo As Long
     Private vcod_empleado_eliminacion As String
     Private vfecha_eliminacion As String
     Private vestatus As String
@@ -129,14 +128,6 @@ Public Class Produccion
         End Get
         Set(ByVal value As Long)
             vtom = value
-        End Set
-    End Property
-    Public Property adeudo As Long
-        Get
-            Return vadeudo
-        End Get
-        Set(ByVal value As Long)
-            vadeudo = value
         End Set
     End Property
     Public Property cod_empleado_eliminacion As String

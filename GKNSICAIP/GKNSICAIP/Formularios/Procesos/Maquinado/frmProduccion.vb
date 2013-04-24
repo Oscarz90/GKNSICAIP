@@ -35,7 +35,56 @@ Public Class frmProduccion
 
     End Sub
     Private Sub calcula_Desempeno()
+        'Dim pzasOK As Double
+        'Dim desechos As Double
+        'Dim TC As Double
+        'Dim desempeno As Double = 0
+        'Dim contador As Integer = Convert.ToDouble(lblTiempoOperacion.Text)
+        'Try
+        '    For i As Integer = 0 To lstModelos.Items.Count - 1 Step 1
+        '        pzasOK = 0
+        '        desechos = 0
+        '        TC = 0
+        '        TC = Convert.ToDouble(bDat.Realiza_Consulta_en_BD_SICAIP(bDat.get_Tiempo_Ciclo_para_produccion(lstModelos.Items(i).SubItems(7).Text, lstModelos.Items(i).SubItems(6).Text)))
+        '        pzasOK = Convert.ToDouble(lstModelos.Items(i).SubItems(1).Text)
+        '        desechos = Convert.ToDouble(lstModelos.Items(i).SubItems(2).Text)
+        '        desempeno = desempeno + ((pzasOK + desechos) * TC)
+        '        ''contador = contador + 1
+        '    Next i
+        '    desempeno = (desempeno / contador) * 100
+        '    If contador <> 0 Then
+        '        If desempeno <= 100 And desempeno >= 0 Then
+        '            lblDesempeno.Text = Format(desempeno, "##0.00")
+        '        ElseIf desempeno < 0 Then
+        '            lblDesempeno.Text = "0.00"
+        '        Else
+        '            lblDesempeno.Text = "100.00"
+        '        End If
+        '    Else
+        '        lblDesempeno.Text = "0.00"
+        '    End If
 
+        'Catch ex As Exception
+        '    MsgBox("Error al calcular el desempeño. Clave del Error: FPR_014", vbCritical + vbOKOnly, "Error")
+        '    bDat.Mata_Conexion_SICAIP()
+        'End Try
+    End Sub
+    Private Sub calcula_Calidad()
+        Dim varvalida As Double = (get_suma_desechos() + get_suma_piezas_producidas())
+        If lblTiempoTurno.Text <> "0" And get_suma_piezas_producidas() = 0 Then
+            lblCalidad.Text = "0.00"
+        ElseIf varvalida <> 0 And get_suma_piezas_producidas() <> 0 Then
+            Dim resultado As Double = (((get_suma_piezas_producidas() - (get_suma_rechazos() + get_suma_adeudos())) / varvalida) * 100)
+            If resultado <= 100 And resultado >= 0 Then
+                lblCalidad.Text = Format(resultado, "##0.00")
+            ElseIf resultado < 0 Then
+                lblCalidad.Text = "0.00"
+            Else
+                lblCalidad.Text = "100.00"
+            End If
+        Else
+            lblCalidad.Text = "0.00"
+        End If
     End Sub
 #End Region
 #Region "Inicializando formulario"
@@ -145,6 +194,7 @@ Public Class frmProduccion
         Dim oDesecho As New Desecho
         oDesecho.cve_registro_turno = 1
         grdDetalleDesecho.DataSource = oDesecho.llena_desecho_gridview()
+        get_suma_desechos()
     End Sub
     'Rechazos
     Private Sub llena_rechazo_gridview()
@@ -371,6 +421,19 @@ Public Class frmProduccion
         oProduccion.fecha_eliminacion = Now.ToString("dd-MM-yyyy HH:mm")
         oProduccion.elimina_fila_productividad_gridview()
     End Sub
+    Private Function get_suma_piezas_producidas() As Double
+        Dim Total As Double
+        For Each row As DataGridViewRow In grdDetalleProductividad.Rows
+            Total += Val(row.Cells(5).Value)
+        Next
+        Return Total
+    End Function
+    Private Function get_suma_adeudos() As Double
+        Dim oRegistro_turno As New Registro_Turno
+        oRegistro_turno.cve_registro_turno = 1
+        oRegistro_turno.Cargar()
+        Return oRegistro_turno.adeudo
+    End Function
     'Desechos
     Private Sub add_desecho()
         Dim oDesecho As New Desecho
@@ -389,6 +452,13 @@ Public Class frmProduccion
         oDesecho.cve_desecho = grdDetalleDesecho.Item("colcve_desecho", grdDetalleDesecho.CurrentRow.Index).Value
         oDesecho.elimina_fila_desecho_gridview()
     End Sub
+    Private Function get_suma_desechos() As Double
+        Dim Total As Double
+        For Each row As DataGridViewRow In grdDetalleDesecho.Rows
+            Total += Val(row.Cells(3).Value)
+        Next
+        Return Total
+    End Function
     'Tabla Turno Minutos
     Private Sub actualiza_tabla_turno_minutos()
         If cbxTurno.SelectedIndex <> -1 And flgBanderacbxTurnos Then
@@ -434,7 +504,12 @@ Public Class frmProduccion
         oRechazo.fecha_eliminacion = Now.ToString("dd-MM-yyyy HH:mm")
         oRechazo.elimina_fila_rechazo_gridview()
     End Sub
+    Private Function get_suma_rechazos() As Double
+        Dim Total As Double
+        For Each row As DataGridViewRow In grdDetalleRechazo.Rows
+            Total += Val(row.Cells(3).Value)
+        Next
+        Return Total
+    End Function
 #End Region
-
-    
 End Class

@@ -69,4 +69,23 @@ Public Class TC
         End Set
     End Property
 #End Region
+#Region "Metodos formulario de produccion"
+    Public Function obtener_tiempo_ciclo() As Double
+        Dim Tiempo_ciclo As Double = 0
+        Dim rDatos As DataRow = Nothing
+        Try
+            rDatos = oBD.ObtenerRenglon("select cast(60 as float)/t.piezas_por_hora as tiempo_ciclo from TC t where cve_linea=" & vcve_linea & " and cve_modelo=" & vcve_modelo, "TC")
+            If rDatos IsNot Nothing Then
+                If rDatos("tiempo_ciclo") IsNot DBNull.Value Then
+                    Tiempo_ciclo = rDatos("tiempo_ciclo")
+                End If
+            End If
+            Return Tiempo_ciclo
+        Catch 'ex As Exception
+            MsgBox("Error al obtener Tiempo Ciclo. CTC_ERROR", vbCritical + vbOKOnly, "Error")
+            Return Tiempo_ciclo
+        End Try
+    End Function
+    
+#End Region
 End Class
