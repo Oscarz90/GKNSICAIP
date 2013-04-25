@@ -1,8 +1,9 @@
 ﻿Imports CapaNegocios
 Public Class frmGraficas    
-    Dim oGraficas As Graficas
 #Region "VARIABLES GLOBALES"
-    Private vIdEquipo As Integer = 4
+    Dim oGraficas As Graficas
+    'Private vIdEquipo As Integer = 4
+    Private vIdEquipo As Integer = 76
     Dim colores(12) As String
     Dim rutaGrafica As String
     Dim cadenaXML As String
@@ -10,14 +11,13 @@ Public Class frmGraficas
     Dim banderaCheck As Integer
     Dim banderaRadio As Integer
     Dim banderaDate As Integer
-    Dim sQuery As String=""
+    Dim sQuery As String = ""
     Dim cadenaWHERE As String = ""
     Dim group As String = ""
-    Dim contorno_anchor As String = "000000"
+    Dim contorno_anchor As String = "000000" 'negro
     Dim radio_anchor As String = "5"
 #End Region
 #Region "LLENADO DE COMBOBOXS USUARIO/LET"
-
     Private Sub llena_cbx_Equipos()
         oGraficas = New Graficas
         cbxEquipo.ValueMember = "cve_equipo"
@@ -25,7 +25,6 @@ Public Class frmGraficas
         cbxEquipo.DataSource = oGraficas.Obtener_Nombre_Equipo_Usuarios(vIdEquipo)
         cbxEquipo.SelectedIndex = 0
     End Sub
-
     Private Sub llena_cbx_Lineas()
         oGraficas = New Graficas
         cbxLinea.ValueMember = "cve_linea"
@@ -33,7 +32,6 @@ Public Class frmGraficas
         cbxLinea.DataSource = oGraficas.Obtener_Lineas_Equipo_Usuarios(vIdEquipo)
         cbxLinea.SelectedIndex = 0
     End Sub
-
     Private Sub llena_cbx_Areas()
         oGraficas = New Graficas
         cbxArea.ValueMember = "cve_componente"
@@ -41,7 +39,6 @@ Public Class frmGraficas
         cbxArea.DataSource = oGraficas.Obtener_Area_Usuarios(vIdEquipo)
         cbxArea.SelectedIndex = 0
     End Sub
-
     Private Sub llena_cbx_CadenaValor()
         oGraficas = New Graficas
         cbxUN.ValueMember = "cve_cadena_valor"
@@ -49,7 +46,6 @@ Public Class frmGraficas
         cbxUN.DataSource = oGraficas.Obtener_CadenaValor_Usuarios(vIdEquipo)
         cbxUN.SelectedIndex = 0
     End Sub
-
 #End Region
 #Region "LLENADO DE COMBOBOXS LG"
 
@@ -97,9 +93,9 @@ Public Class frmGraficas
 #End Region
 #Region "COLORES"
     Private Sub llena_colores()
-        colores(0) = "0C1089" 'VerdeClaro
-        colores(1) = "F4FA58" 'AmarilloClaro
-        colores(2) = "5858FA" 'AzulClaro
+        colores(0) = "0C1089" 'Azul Oscuro
+        colores(1) = "9D080D" 'Rojo
+        colores(2) = "C9198D" 'Rosa oscuro
         colores(3) = "58D3F7" 'AzulPastelClaro
         colores(4) = "FAAC58" 'NaranjaClaro
         colores(5) = "FFFF00" 'AmarilloOscuro
@@ -121,24 +117,20 @@ Public Class frmGraficas
         Else
             banderacbx = 0
         End If
-
         ''MOSTRAR EL AVISO PARA SELECCIONAR FECHAS
         Advertencia()
-
         ''DEBE HABER AL MENOS UN CONCEPTO DE INDICADOR SELECCIONADO
         If (rbtOEE.Checked Or rbtSeg.Checked Or rbtNRFTi.Checked Or rbtGente.Checked Or rbt5s.Checked Or rbtCosto.Checked) Then
             banderaCheck = 1
         Else
             banderaCheck = 0
         End If
-
         ''DEBE HABER AL MENOS UN TIPO DE GRAFICO SELECCIONADO
         If (rbtLineas.Checked Or rbtBarras.Checked Or rbtStock.Checked) Then
             banderaRadio = 1
         Else
             banderaRadio = 0
         End If
-
         ''SI SE HAN SELECCIONADO LOS COMBOBOXS, RADIO BUTTONS, CALENDARIOS HABILITAR BOTON GRAFICAR
         If banderacbx = 1 And banderaCheck = 1 And banderaRadio = 1 And banderaDate = 1 Then
             cmdGraficar.Enabled = True
@@ -146,7 +138,6 @@ Public Class frmGraficas
             cmdGraficar.Enabled = False
             cmdImprimir.Enabled = False
         End If
-
     End Sub
 
     Private Sub Advertencia()
@@ -190,33 +181,18 @@ Public Class frmGraficas
 #Region "ESTABLECE CONDICION WHERE USUARIOS"
     Private Sub Condicion_WHERE()
         cadenaWHERE = "where "
-        '' If cbxUN.SelectedIndex = 0 Then
         cadenaWHERE = cadenaWHERE & "cadena ='" & cbxUN.Text & "' and "
-        ''End If
-
-        'If cbxArea.SelectedIndex = 0 Then
         cadenaWHERE = cadenaWHERE & "componente ='" & cbxArea.Text & "' and "
-        'End If
-
-        'If cbxLinea.SelectedIndex = 0 Then
         cadenaWHERE = cadenaWHERE & "Linea ='" & cbxLinea.Text & "' and "
-        'End If
-
-        'If cbxEquipo.SelectedIndex = 0 Then
         cadenaWHERE = cadenaWHERE & "Equipo ='" & Replace(cbxEquipo.Text, "'", "''") & "' and "
-        ''End If
-
-        ''If rbtDia.Checked Then
         cadenaWHERE = cadenaWHERE & "dia_asignado between '" & dtpDesde.Value.Year.ToString & "-" & dtpDesde.Value.Month.ToString & "-" & dtpDesde.Value.Day.ToString & "' and '" & dtpHasta.Value.Year.ToString & "-" & dtpHasta.Value.Month.ToString & "-" & dtpHasta.Value.Day.ToString & "'"
+        ''cadenaWHERE = cadenaWHERE & "TIPO_REGISTRO=P"
         group = "dia_asignado"
-        'End If
         ''---------------------------------------------  C H E C A R ----------------------------------------------------------
         ''--------------------------------------------------------------------------------------------------------------------------
         If rbtMeses.Checked Then
             Dim desde As String = "01/" & dtpDesde.Value.Month.ToString & "/" & dtpDesde.Value.Year.ToString
-
             Dim hasta As String = DateTime.DaysInMonth(dtpHasta.Value.Year, dtpHasta.Value.Month) & "/" & dtpHasta.Value.Month.ToString & "/" & dtpDesde.Value.Year.ToString
-
             cadenaWHERE = cadenaWHERE & "fecha between '" & desde & "' and '" & hasta & "'"
             group = "datepart(year,fecha),datepart(month,fecha)"
         End If
@@ -226,68 +202,58 @@ Public Class frmGraficas
             group = "datepart(year,fecha)"
         End If
 
-        cadenaWHERE = cadenaWHERE & " group by cadena, componente, linea, equipo, oee," & group & " order by " & group
+        cadenaWHERE = cadenaWHERE & " group by cadena, componente, linea, equipo, oee, TIPO_REGISTRO, " & group & " order by " & group
     End Sub
 
 #End Region
 #Region "FECHAS PARA LOS GRÁFICOS EJE X "
     Private Sub establece_fechas(ByVal indicador As Integer)
-        Dim fechaG As String = ""
+        Dim fechaGraficos As String = ""
         Dim vDT As DataTable
         cadenaXML += "<categories>"
 
         If rbtDia.Checked Then
             vDT = oGraficas.ejecutarVista(indicador, cadenaWHERE)
-            'While lee.Read()
-            '    fechaG = lee.Item(0).ToString
-            '    fechaG = Mid(fechaG, 1, 5)
-            '    cadenaXML += "<category name='" & fechaG & "' />"
-            'End While
             For Each vDR As DataRow In vDT.Rows
-                fechaG = vDR("Dia_Asignado")
-                fechaG = Mid(fechaG, 1, 5)
-                cadenaXML += "<category name='" & fechaG & "' />"
+                fechaGraficos = vDR("Dia_Asignado")
+                fechaGraficos = Mid(fechaGraficos, 1, 5)
+                cadenaXML += "<category name='" & fechaGraficos & "' />"
             Next
         Else
 
         End If
-        cadenaXML += "<category name='PROMEDIO' />"
+        cadenaXML += "<category name ='PROMEDIO OEE' />"
         cadenaXML += "</categories>"
     End Sub
 
 #End Region
-#Region "ESTABLECE TOTAL DE OEE"
+#Region "ESTABLECE TOTAL DE OEE EJE Y"
     Private Sub establece_OEE(ByVal color As String)
         Dim promedio As Single = 0
         Dim contador As Integer = 0
         Dim vDT As DataTable
-        'Dim fechaG As String = ""
+        Dim TipoRegistroD As String = "D"
         cadenaXML += "<dataset seriesName='OEE' color='" & color & "' anchorBorderColor='" & contorno_anchor & "' anchorBgColor='" & color & "' anchorRadius='" & radio_anchor & "'>"
-        'sQuery = "select total from indicador1view " & cadenaWHERE
         Dim oee As Single = 0
-
-        'While lee.Read()
-        '    oee = CSng(lee.Item(0)) * 100
-        '    promedio = promedio + oee
-        '    contador = contador + 1
-        '    ''cadena_xml += " <set value='" & oee.ToString & "' value=oee.ToString />"
-        '    ''<set name='Jan' value='462' color='AFD8F8' />
-        '    cadena_xml += " <set value='" & oee.ToString & "'/>"
-        'End While
-
         If rbtDia.Checked Then
             vDT = oGraficas.ejecutarVistaOEE(cadenaWHERE)
             For Each vDR As DataRow In vDT.Rows
-                oee = vDR(("oee")) * 100
-                promedio = promedio + oee
-                contador = contador + 1
-                cadenaXML += " <set value='" & oee.ToString & "'/>"
+                If vDR("TIPO_REGISTRO") = "P" Then
+                    oee = vDR(("oee")) * 100
+                    promedio = promedio + oee
+                    contador = contador + 1
+                    cadenaXML += " <set value='" & oee.ToString & "'/>"
+                ElseIf vDR("TIPO_REGISTRO") = "D" Then
+                    oee = vDR(("oee")) * 100
+                    promedio = promedio + oee
+                    cadenaXML += " <set value='" & oee.ToString & "' />"
+                End If
             Next
         Else
 
         End If
         promedio = promedio / contador
-        cadenaXML += " <set value='" & promedio.ToString & "'/>"
+        cadenaXML += " <set value='" & promedio.ToString & "' color='" & colores(1) & "'/>"
         cadenaXML += " </dataset>"
     End Sub
 
@@ -364,38 +330,38 @@ Public Class frmGraficas
             tipoGrafico = "FCF_StackedColumn2D.swf"
         End If
 
-        rutaGrafica = "file://" & Application.StartupPath & "/FusionChartsFree/Charts/" & tipoGrafico & "?chartWidth=1240&chartHeight=380"
+        rutaGrafica = "file://" & Application.StartupPath & "/FusionChartsFree/Charts/" & tipoGrafico & "?chartWidth=1240&chartHeight=400"
         cadenaXML = rutaGrafica + "&dataXML=<graph YAxisMinValue='0' YAxisMaxValue='100' numberSuffix='%25' caption='REPORTE DE RESULTADOS' subcaption='SICAIP' YAxisName= '" & ejeY & "' xAxisName='F E C H A (s)' labeldisplay='rotate' decimalPrecision='2' rotateNames='1' formatNumberScale='0' thousandSeparator=',' bgcolor='ffffff' bgalpha='000000' showColumnShadow='1' showAlternateHGridColor='1' AlternateHGridColor='ff5904' divLineColor='ff5904' divLineAlpha='20' alternateHGridAlpha='5' canvasBorderColor='666666' baseFontColor='666666'>"
 
-
         Condicion_WHERE()
-
         If rbtOEE.Checked Then
-            establece_fechas(1) '---Este Id esta bien. 1--> OEE
-            establece_OEE(colores(0))
+            If cbxTodasLineas.Checked Then
+                establece_fechas(1)
+                'establece_OEE_Acumulado(colores(0)) ''FALTA sacar el acumulado checar promedio= 0/0
+            Else
+                establece_fechas(1) '---Este Id esta bien. 1--> OEE
+                establece_OEE(colores(0))
+            End If
         ElseIf rbtNRFTi.Checked Then
             establece_fechas(2)
-            establece_OEE(colores(1))
+            establece_OEE(colores(3))
         ElseIf rbtCosto.Checked Then
             establece_fechas(3)
             establece_OEE(colores(2))
-        ElseIf rbtGente.Checked Then
+        ElseIf rbtSeg.Checked Then
             establece_fechas(4)
             establece_OEE(colores(3))
-        ElseIf rbt5s.Checked Then
+        ElseIf rbtGente.Checked Then
             establece_fechas(5)
             establece_OEE(colores(4))
-        ElseIf rbtSeg.Checked Then
+        ElseIf rbt5s.Checked Then
             establece_fechas(6)
             establece_OEE(colores(5))
         End If
-        cadenaXML += "<trendlines> <line startValue='32.50' color='FF0000' displayValue='OBJETIVO' showOnTop='1'/> </trendlines>"
-
+        cadenaXML += "<trendlines> <line startValue='85.00' color='FF0000' displayValue='OBJETIVO' showOnTop='1'/> </trendlines>"
         cadenaXML += " </graph>"
-
-        swfGrafica.Movie = 1       'hace que el control actualice o se refresque
-
-        swfGrafica.Movie = cadenaXML   'carga la pelicula flash
+        swfGrafica.Movie = 1 'hace que el control actualice o se refresque
+        swfGrafica.Movie = cadenaXML 'carga la pelicula flash
         cmdImprimir.Enabled = True
 
     End Sub
@@ -403,7 +369,6 @@ Public Class frmGraficas
         Me.Close()
     End Sub
 #End Region
-
 
     Private Sub rbtDia_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles rbtDia.CheckedChanged
         Habilita_Graficar()
@@ -415,5 +380,17 @@ Public Class frmGraficas
 
     Private Sub rbtLineas_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles rbtLineas.CheckedChanged
         Habilita_Graficar()
+    End Sub
+
+    Private Sub cmdImprimir_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmdImprimir.Click
+
+    End Sub
+
+    Private Sub cbxTodasLineas_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cbxTodasLineas.CheckedChanged
+        If cbxTodasLineas.Checked Then
+            cbxLinea.Enabled = False
+        Else
+            cbxLinea.Enabled = True
+        End If
     End Sub
 End Class

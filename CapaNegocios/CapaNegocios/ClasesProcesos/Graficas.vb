@@ -154,7 +154,8 @@ Public Class Graficas
         Dim vRetorno As DataTable = Nothing
         Dim vDT As DataTable = Nothing
         Try
-            vDT = oBD.ObtenerTabla("select OEE from VISTA_SELECCION_INDICADOR1 " & cadenaWHERE)
+            'vDT = oBD.ObtenerTabla("select OEE from VISTA_SELECCION_INDICADOR1 " & cadenaWHERE)
+            vDT = oBD.ObtenerTabla("select OEE, TIPO_REGISTRO from VISTA_SELECCION_INDICADOR1 " & cadenaWHERE)
             If vDT IsNot Nothing Then
                 vRetorno = vDT
             Else
