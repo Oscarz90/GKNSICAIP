@@ -50,6 +50,11 @@ Partial Class frmGraficas
         Me.lblHasta = New System.Windows.Forms.Label()
         Me.dtpHasta = New System.Windows.Forms.DateTimePicker()
         Me.grp1 = New System.Windows.Forms.GroupBox()
+        Me.cbxTodasLineas = New System.Windows.Forms.CheckBox()
+        Me.Label5 = New System.Windows.Forms.Label()
+        Me.Label4 = New System.Windows.Forms.Label()
+        Me.Label3 = New System.Windows.Forms.Label()
+        Me.Label2 = New System.Windows.Forms.Label()
         Me.cbxLinea = New System.Windows.Forms.ComboBox()
         Me.cbxEquipo = New System.Windows.Forms.ComboBox()
         Me.cbxUN = New System.Windows.Forms.ComboBox()
@@ -60,11 +65,6 @@ Partial Class frmGraficas
         Me.banner_formulario = New System.Windows.Forms.PictureBox()
         Me.titulo_banner_formulario = New System.Windows.Forms.Label()
         Me.swfGrafica = New AxShockwaveFlashObjects.AxShockwaveFlash()
-        Me.Label2 = New System.Windows.Forms.Label()
-        Me.Label3 = New System.Windows.Forms.Label()
-        Me.Label4 = New System.Windows.Forms.Label()
-        Me.Label5 = New System.Windows.Forms.Label()
-        Me.cbxTodasLineas = New System.Windows.Forms.CheckBox()
         Me.groupTipo.SuspendLayout()
         Me.grp3.SuspendLayout()
         Me.grp2.SuspendLayout()
@@ -415,6 +415,57 @@ Partial Class frmGraficas
         Me.grp1.TabStop = False
         Me.grp1.Text = "Selección de equipo(s)"
         '
+        'cbxTodasLineas
+        '
+        Me.cbxTodasLineas.AutoSize = True
+        Me.cbxTodasLineas.Font = New System.Drawing.Font("Arial", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.cbxTodasLineas.Location = New System.Drawing.Point(243, 101)
+        Me.cbxTodasLineas.Name = "cbxTodasLineas"
+        Me.cbxTodasLineas.Size = New System.Drawing.Size(72, 20)
+        Me.cbxTodasLineas.TabIndex = 80
+        Me.cbxTodasLineas.Text = "TODAS"
+        Me.cbxTodasLineas.UseVisualStyleBackColor = True
+        '
+        'Label5
+        '
+        Me.Label5.AutoSize = True
+        Me.Label5.Font = New System.Drawing.Font("Arial", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label5.Location = New System.Drawing.Point(1, 129)
+        Me.Label5.Name = "Label5"
+        Me.Label5.Size = New System.Drawing.Size(46, 14)
+        Me.Label5.TabIndex = 79
+        Me.Label5.Text = "EQUIPO"
+        '
+        'Label4
+        '
+        Me.Label4.AutoSize = True
+        Me.Label4.Font = New System.Drawing.Font("Arial", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label4.Location = New System.Drawing.Point(1, 102)
+        Me.Label4.Name = "Label4"
+        Me.Label4.Size = New System.Drawing.Size(38, 14)
+        Me.Label4.TabIndex = 78
+        Me.Label4.Text = "LÍNEA"
+        '
+        'Label3
+        '
+        Me.Label3.AutoSize = True
+        Me.Label3.Font = New System.Drawing.Font("Arial", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label3.Location = New System.Drawing.Point(1, 76)
+        Me.Label3.Name = "Label3"
+        Me.Label3.Size = New System.Drawing.Size(36, 14)
+        Me.Label3.TabIndex = 77
+        Me.Label3.Text = "ÁREA"
+        '
+        'Label2
+        '
+        Me.Label2.AutoSize = True
+        Me.Label2.Font = New System.Drawing.Font("Arial", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label2.Location = New System.Drawing.Point(1, 50)
+        Me.Label2.Name = "Label2"
+        Me.Label2.Size = New System.Drawing.Size(70, 14)
+        Me.Label2.TabIndex = 76
+        Me.Label2.Text = "CAD VALOR"
+        '
         'cbxLinea
         '
         Me.cbxLinea.Font = New System.Drawing.Font("Arial", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
@@ -513,57 +564,6 @@ Partial Class frmGraficas
         Me.swfGrafica.OcxState = CType(resources.GetObject("swfGrafica.OcxState"), System.Windows.Forms.AxHost.State)
         Me.swfGrafica.Size = New System.Drawing.Size(1226, 415)
         Me.swfGrafica.TabIndex = 107
-        '
-        'Label2
-        '
-        Me.Label2.AutoSize = True
-        Me.Label2.Font = New System.Drawing.Font("Arial", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label2.Location = New System.Drawing.Point(1, 50)
-        Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(70, 14)
-        Me.Label2.TabIndex = 76
-        Me.Label2.Text = "CAD VALOR"
-        '
-        'Label3
-        '
-        Me.Label3.AutoSize = True
-        Me.Label3.Font = New System.Drawing.Font("Arial", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label3.Location = New System.Drawing.Point(1, 76)
-        Me.Label3.Name = "Label3"
-        Me.Label3.Size = New System.Drawing.Size(36, 14)
-        Me.Label3.TabIndex = 77
-        Me.Label3.Text = "ÁREA"
-        '
-        'Label4
-        '
-        Me.Label4.AutoSize = True
-        Me.Label4.Font = New System.Drawing.Font("Arial", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label4.Location = New System.Drawing.Point(1, 102)
-        Me.Label4.Name = "Label4"
-        Me.Label4.Size = New System.Drawing.Size(38, 14)
-        Me.Label4.TabIndex = 78
-        Me.Label4.Text = "LÍNEA"
-        '
-        'Label5
-        '
-        Me.Label5.AutoSize = True
-        Me.Label5.Font = New System.Drawing.Font("Arial", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label5.Location = New System.Drawing.Point(1, 129)
-        Me.Label5.Name = "Label5"
-        Me.Label5.Size = New System.Drawing.Size(46, 14)
-        Me.Label5.TabIndex = 79
-        Me.Label5.Text = "EQUIPO"
-        '
-        'cbxTodasLineas
-        '
-        Me.cbxTodasLineas.AutoSize = True
-        Me.cbxTodasLineas.Font = New System.Drawing.Font("Arial", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.cbxTodasLineas.Location = New System.Drawing.Point(243, 101)
-        Me.cbxTodasLineas.Name = "cbxTodasLineas"
-        Me.cbxTodasLineas.Size = New System.Drawing.Size(72, 20)
-        Me.cbxTodasLineas.TabIndex = 80
-        Me.cbxTodasLineas.Text = "TODAS"
-        Me.cbxTodasLineas.UseVisualStyleBackColor = True
         '
         'frmGraficas
         '

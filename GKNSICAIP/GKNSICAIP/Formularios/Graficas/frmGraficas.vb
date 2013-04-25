@@ -91,6 +91,7 @@ Public Class frmGraficas
 #Region "LLENADO DE COMBOBOXS DIRECTOR"
 
 #End Region
+
 #Region "COLORES"
     Private Sub llena_colores()
         colores(0) = "0C1089" 'Azul Oscuro
@@ -179,14 +180,17 @@ Public Class frmGraficas
     End Sub
 #End Region
 #Region "ESTABLECE CONDICION WHERE USUARIOS"
-    Private Sub Condicion_WHERE()
+    Private Sub Condicion_WHERE(ByVal vTodas As Boolean)
         cadenaWHERE = "where "
         cadenaWHERE = cadenaWHERE & "cadena ='" & cbxUN.Text & "' and "
         cadenaWHERE = cadenaWHERE & "componente ='" & cbxArea.Text & "' and "
-        cadenaWHERE = cadenaWHERE & "Linea ='" & cbxLinea.Text & "' and "
+        If vTodas = False Then
+            cadenaWHERE = cadenaWHERE & "Linea ='" & cbxLinea.Text & "' and "
+        End If        
         cadenaWHERE = cadenaWHERE & "Equipo ='" & Replace(cbxEquipo.Text, "'", "''") & "' and "
-        cadenaWHERE = cadenaWHERE & "dia_asignado between '" & dtpDesde.Value.Year.ToString & "-" & dtpDesde.Value.Month.ToString & "-" & dtpDesde.Value.Day.ToString & "' and '" & dtpHasta.Value.Year.ToString & "-" & dtpHasta.Value.Month.ToString & "-" & dtpHasta.Value.Day.ToString & "'"
-        ''cadenaWHERE = cadenaWHERE & "TIPO_REGISTRO=P"
+        cadenaWHERE = cadenaWHERE & "dia_asignado between '" & dtpDesde.Value.Year.ToString & "-" & dtpDesde.Value.Month.ToString & "-" &
+            dtpDesde.Value.Day.ToString & "' and '" & dtpHasta.Value.Year.ToString & "-" &
+            dtpHasta.Value.Month.ToString & "-" & dtpHasta.Value.Day.ToString & "'"
         group = "dia_asignado"
         ''---------------------------------------------  C H E C A R ----------------------------------------------------------
         ''--------------------------------------------------------------------------------------------------------------------------
@@ -229,32 +233,43 @@ Public Class frmGraficas
 #End Region
 #Region "ESTABLECE TOTAL DE OEE EJE Y"
     Private Sub establece_OEE(ByVal color As String)
-        Dim promedio As Single = 0
+        Dim promedio As Double = 0
         Dim contador As Integer = 0
         Dim vDT As DataTable
-        Dim TipoRegistroD As String = "D"
         cadenaXML += "<dataset seriesName='OEE' color='" & color & "' anchorBorderColor='" & contorno_anchor & "' anchorBgColor='" & color & "' anchorRadius='" & radio_anchor & "'>"
-        Dim oee As Single = 0
+        Dim oee As Double = 0
+        Dim vFecha_Actual As DateTime
         If rbtDia.Checked Then
             vDT = oGraficas.ejecutarVistaOEE(cadenaWHERE)
+            vFecha_Actual = vDT.Rows(0).Item("DIA_ASIGNADO").ToString
             For Each vDR As DataRow In vDT.Rows
                 If vDR("TIPO_REGISTRO") = "P" Then
                     oee = vDR(("oee")) * 100
                     promedio = promedio + oee
                     contador = contador + 1
-                    cadenaXML += " <set value='" & oee.ToString & "'/>"
+                    If vFecha_Actual = vDR("DIA_ASIGNADO") Then
+
+                    Else
+                        cadenaXML += " <set value='" & oee.ToString & "'/>"
+                    End If
+
                 ElseIf vDR("TIPO_REGISTRO") = "D" Then
-                    oee = vDR(("oee")) * 100
-                    promedio = promedio + oee
+                    oee = 0
+                    'promedio = promedio + oee
                     cadenaXML += " <set value='" & oee.ToString & "' />"
                 End If
             Next
         Else
 
         End If
-        promedio = promedio / contador
+        If contador > 0 Then
+            promedio = promedio / contador           
+        Else
+            promedio = 0
+        End If
         cadenaXML += " <set value='" & promedio.ToString & "' color='" & colores(1) & "'/>"
         cadenaXML += " </dataset>"
+        
     End Sub
 
 #End Region
@@ -315,7 +330,56 @@ Public Class frmGraficas
         Habilita_Graficar()
     End Sub
 #End Region
-#Region "EVENTOS BOTONES"
+#Region "EVENTOS RADIO BUTTONS DIA/MES/AÑO"
+    Private Sub rbtDia_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles rbtDia.CheckedChanged
+        Habilita_Graficar()
+    End Sub
+
+    Private Sub rbtMeses_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles rbtMeses.CheckedChanged
+        Habilita_Graficar()
+    End Sub
+
+    Private Sub rbtAnos_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles rbtAnos.CheckedChanged
+        Habilita_Graficar()
+    End Sub
+#End Region
+#Region "EVENTOS RADIO BUTTONS TIPOS DE GRAFICOS"
+    Private Sub rbtLineas_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles rbtLineas.CheckedChanged
+        Habilita_Graficar()
+    End Sub
+    Private Sub rbtBarras_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles rbtBarras.CheckedChanged
+        Habilita_Graficar()
+    End Sub
+    Private Sub rbtStock_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles rbtStock.CheckedChanged
+        Habilita_Graficar()
+    End Sub
+#End Region
+#Region "EVENTOS RADIO BUTTONS TIPO INDICADOR"
+    Private Sub rbtOEE_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles rbtOEE.CheckedChanged
+        Habilita_Graficar()
+    End Sub
+    Private Sub rbtNRFTi_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles rbtNRFTi.CheckedChanged
+        Habilita_Graficar()
+    End Sub
+
+    Private Sub rbtCosto_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles rbtCosto.CheckedChanged
+        Habilita_Graficar()
+    End Sub
+
+    Private Sub rbtSeg_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles rbtSeg.CheckedChanged
+        Habilita_Graficar()
+    End Sub
+
+    Private Sub rbtGente_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles rbtGente.CheckedChanged
+        Habilita_Graficar()
+    End Sub
+
+    Private Sub rbt5s_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles rbt5s.CheckedChanged
+        Habilita_Graficar()
+    End Sub
+
+#End Region
+#Region "EVENTOS BOTONES GRAFICAR/EXPORTAR/SALIR"
     Private Sub cmdGraficar_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmdGraficar.Click
         swfGrafica.Visible = True
         Dim tipoGrafico As String = ""
@@ -333,11 +397,11 @@ Public Class frmGraficas
         rutaGrafica = "file://" & Application.StartupPath & "/FusionChartsFree/Charts/" & tipoGrafico & "?chartWidth=1240&chartHeight=400"
         cadenaXML = rutaGrafica + "&dataXML=<graph YAxisMinValue='0' YAxisMaxValue='100' numberSuffix='%25' caption='REPORTE DE RESULTADOS' subcaption='SICAIP' YAxisName= '" & ejeY & "' xAxisName='F E C H A (s)' labeldisplay='rotate' decimalPrecision='2' rotateNames='1' formatNumberScale='0' thousandSeparator=',' bgcolor='ffffff' bgalpha='000000' showColumnShadow='1' showAlternateHGridColor='1' AlternateHGridColor='ff5904' divLineColor='ff5904' divLineAlpha='20' alternateHGridAlpha='5' canvasBorderColor='666666' baseFontColor='666666'>"
 
-        Condicion_WHERE()
+        Condicion_WHERE(cbxTodasLineas.Checked)
         If rbtOEE.Checked Then
             If cbxTodasLineas.Checked Then
                 establece_fechas(1)
-                'establece_OEE_Acumulado(colores(0)) ''FALTA sacar el acumulado checar promedio= 0/0
+                establece_OEE(colores(0)) ''FALTA sacar el acumulado 
             Else
                 establece_fechas(1) '---Este Id esta bien. 1--> OEE
                 establece_OEE(colores(0))
@@ -365,27 +429,16 @@ Public Class frmGraficas
         cmdImprimir.Enabled = True
 
     End Sub
-    Private Sub frmSalir_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles frmSalir.Click
-        Me.Close()
-    End Sub
-#End Region
-
-    Private Sub rbtDia_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles rbtDia.CheckedChanged
-        Habilita_Graficar()
-    End Sub
-
-    Private Sub rbtOEE_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles rbtOEE.CheckedChanged
-        Habilita_Graficar()
-    End Sub
-
-    Private Sub rbtLineas_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles rbtLineas.CheckedChanged
-        Habilita_Graficar()
-    End Sub
 
     Private Sub cmdImprimir_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmdImprimir.Click
 
     End Sub
 
+    Private Sub frmSalir_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles frmSalir.Click
+        Me.Close()
+    End Sub
+#End Region
+#Region "EVENTO CHECKBOX TODAS LAS LINEAS"
     Private Sub cbxTodasLineas_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cbxTodasLineas.CheckedChanged
         If cbxTodasLineas.Checked Then
             cbxLinea.Enabled = False
@@ -393,4 +446,6 @@ Public Class frmGraficas
             cbxLinea.Enabled = True
         End If
     End Sub
+#End Region
+
 End Class
