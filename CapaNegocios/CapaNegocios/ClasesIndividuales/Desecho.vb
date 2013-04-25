@@ -120,8 +120,9 @@ Public Class Desecho
 #Region "Metodos formulario de produccion"
     Public Function llena_desecho_gridview() As DataTable
         Dim obj As DataTable
-        Dim queryLlenagridview As String = "select d.cve_desecho,m.np_gkn,m.descripcion,d.cantidad from desecho d " &
+        Dim queryLlenagridview As String = "select d.cve_desecho,rt.cve_linea,m.cve_modelo,m.np_gkn,m.descripcion,d.cantidad from desecho d " &
             "join modelo m on d.cve_modelo=m.cve_modelo " &
+            "join registro_turno rt on rt.cve_registro_turno=d.cve_registro_turno " &
             "where d.cve_registro_turno=" & vcve_registro_turno & " and d.estatus='1'"
         Using scope As New TransactionScope
             Try

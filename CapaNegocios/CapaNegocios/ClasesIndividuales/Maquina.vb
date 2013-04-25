@@ -5,7 +5,20 @@ Public Class Maquina
     Dim oBD As New CapaDatos.CapaDatos(cadena_conexion.CadenaSicaip)
 #Region "IIndividual"
     Public Sub Cargar() Implements IIndividual.Cargar
-
+        Dim rDatos As DataRow = Nothing
+        Try
+            rDatos = oBD.ObtenerRenglon("SELECT * FROM maquina WHERE cve_maquina=" & vcve_maquina, "turno")
+            If rDatos IsNot Nothing Then
+                If rDatos("cve_maquina") IsNot DBNull.Value Then
+                    Me.vcve_maquina = rDatos("cve_maquina")
+                    Me.vcve_linea = rDatos("cve_linea")
+                    Me.vclave_maquina = rDatos("clave_maquina")
+                    Me.vmaquina = rDatos("maquina")
+                End If
+            End If
+        Catch ex As Exception
+            Throw New Exception(ex.Message)
+        End Try
     End Sub
 
     Public Sub Eliminar() Implements IIndividual.Eliminar

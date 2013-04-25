@@ -5,7 +5,16 @@ Public Class Registro_Turno
     Dim oBD As New CapaDatos.CapaDatos(cadena_conexion.CadenaSicaip)
 #Region "IIndividual"
     Public Sub Cargar() Implements IIndividual.Cargar
-
+        Dim vDR As DataRow
+        vDR = oBD.ObtenerRenglon("select * from registro_turno where cve_registro_turno = " & vcve_registro_turno, "registro_turno")
+        If vDR IsNot Nothing Then
+            vcve_registro_turno = vDR("cve_registro_turno")
+            vcve_equipo = vDR("cve_equipo")
+            vcve_linea = vDR("cve_linea")
+            vcve_turno = vDR("cve_turno")
+            vdia_asignado = vDR("dia_asignado")
+            vadeudo = vDR("adeudo")
+        End If
     End Sub
 
     Public Sub Eliminar() Implements IIndividual.Eliminar
@@ -35,6 +44,7 @@ Public Class Registro_Turno
     Private vcve_linea As Long
     Private vcve_turno As Long
     Private vdia_asignado As String
+    Private vadeudo As Long
 #End Region
 #Region "Propiedades"
     Public Property cve_registro_turno() As Long
@@ -75,6 +85,14 @@ Public Class Registro_Turno
         End Get
         Set(ByVal value As String)
             vdia_asignado = value
+        End Set
+    End Property
+    Public Property adeudo() As Long
+        Get
+            Return vadeudo
+        End Get
+        Set(ByVal value As Long)
+            vadeudo = value
         End Set
     End Property
 #End Region
