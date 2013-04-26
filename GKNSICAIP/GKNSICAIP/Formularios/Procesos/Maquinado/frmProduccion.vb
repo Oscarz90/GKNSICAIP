@@ -1,20 +1,22 @@
 ﻿Imports CapaNegocios
 Public Class frmProduccion
 #Region "Atributos"
-    Private vcve_equipo As Integer = 4
+    'Globales
+    Private vcve_equipo As Integer
     Private vnombre_equipo As String
     Private vnombre_empleado As String
     Private vcodigo_empleado As String
-    'Private disponibilidad As Double = 0
-    'Private desempeno As Double = 0
-    'Private calidad As Double = 0
-    'Private oee As Double = disponibilidad * desempeno * calidad
+    'Temporal de desarrollo
+    Private vcve_registro_turno As Integer = 1
     'Banderas
     Private flgBanderacbxLineas As Boolean = False
     Private flgBanderacbxModelos As Boolean = False
     Private flgBanderacbxTurnos As Boolean = False
     Private flgBanderacbxMaquinas As Boolean = False
     Private flgBanderacbxParos As Boolean = False
+    'CDM
+    Private contenedor_CDM As CDM_Class
+    Private obtenedor_CDM As frmCDM
 #End Region
 #Region "Calculo de OEE"
     Private Sub calcula_Productividad()
@@ -97,13 +99,15 @@ Public Class frmProduccion
     Public Sub set_Datos_Equipo(ByVal idEq As Integer, ByVal NomEquipo As String, ByVal Empleado As String, ByVal CodEmpleado As String)
         vcve_equipo = idEq
         vnombre_equipo = NomEquipo
-        vnombre_empleado = Empleado
         vcodigo_empleado = CodEmpleado
-        lblNombreEquipo.Text = vnombre_equipo
-
+        vnombre_empleado = Empleado
+        lblNombreEquipo.Text = NomEquipo
+        lblCodigoEmpleado.Text = CodEmpleado
+        lblNombreEmpleado.Text = Empleado
     End Sub
     'Llena toda la info del formulario
     Private Sub inicializa_formulario()
+        set_Datos_Equipo(4, "Tlatoanis", "Oscar Mtz S", "118737")
         'General
         llena_cbx_Turnos()
         llena_cbx_Lineas()
@@ -116,6 +120,13 @@ Public Class frmProduccion
         llena_desecho_gridview()
         actualiza_tabla_turno_minutos()
         calcula_Productividad()
+        'Paros
+        llena_cbx_Maquinas()
+        llena_cbx_Paros()
+        llena_paro_gridview()
+        contenedor_CDM = New CDM_Class
+        contenedor_CDM.set_not_used()
+        obtenedor_CDM = New frmCDM(contenedor_CDM)
     End Sub
 #End Region
 #Region "LLenado ComboBoxs"
@@ -125,7 +136,7 @@ Public Class frmProduccion
         cbxTurno.ValueMember = "cve_turno"
         cbxTurno.DisplayMember = "turno"
         cbxTurno.DataSource = oTurnos.llena_combo_turnos
-        cbxTurno.SelectedIndex = -1
+        'cbxTurno.SelectedIndex = -1
         flgBanderacbxTurnos = True
     End Sub
     'Lineas
@@ -143,20 +154,21 @@ Public Class frmProduccion
         flgBanderacbxModelos = False
         If cbxLinea.SelectedIndex <> -1 And flgBanderacbxLineas Then
             Dim oModelo As New CapaNegocios.Modelo
+            oModelo.cve_linea = cbxLinea.SelectedValue
             cbxModeloProductividad.ValueMember = "cve_modelo"
             cbxModeloProductividad.DisplayMember = "np_gkn"
-            cbxModeloProductividad.DataSource = oModelo.llena_combo_Modelos_Linea(cbxLinea.SelectedValue)
+            cbxModeloProductividad.DataSource = oModelo.llena_combo_Modelos_Linea()
             cbxModeloProductividad.SelectedIndex = -1
 
             cbxModeloDesecho.ValueMember = "cve_modelo"
             cbxModeloDesecho.DisplayMember = "np_gkn"
-            cbxModeloDesecho.DataSource = oModelo.llena_combo_Modelos_Linea(cbxLinea.SelectedValue)
+            cbxModeloDesecho.DataSource = oModelo.llena_combo_Modelos_Linea()
             cbxModeloDesecho.SelectedIndex = -1
 
 
             cbxModeloRechazo.ValueMember = "cve_modelo"
             cbxModeloRechazo.DisplayMember = "np_gkn"
-            cbxModeloRechazo.DataSource = oModelo.llena_combo_Modelos_Linea(cbxLinea.SelectedValue)
+            cbxModeloRechazo.DataSource = oModelo.llena_combo_Modelos_Linea()
             cbxModeloRechazo.SelectedIndex = -1
 
 
@@ -169,16 +181,35 @@ Public Class frmProduccion
         Dim oTipoRechazo As New Tipo_Rechazo
         cbxTipoRechazo.ValueMember = "cve_tipo_rechazo"
         cbxTipoRechazo.DisplayMember = "tipo"
-        cbxTipoRechazo.DataSource = oTipoRechazo.llena_combo_tipo_rechazo
+        cbxTipoRechazo.DataSource = oTipoRechazo.llena_combo_tipo_rechazo()
         cbxTipoRechazo.SelectedIndex = -1
     End Sub
     'Paros
-    'Private Sub llena_cbx_()
+    Private Sub llena_cbx_Maquinas()
+        If cbxLinea.SelectedIndex <> -1 And flgBanderacbxLineas Then
+            Dim oMaquina As New Maquina
+            oMaquina.cve_linea = cbxLinea.SelectedValue
+            cbxMaquina.ValueMember = "cve_maquina"
+            cbxMaquina.DisplayMember = "clave_maquina"
+            cbxMaquina.DataSource = oMaquina.llena_combo_maquina()
+            cbxMaquina.SelectedIndex = -1
+            flgBanderacbxMaquinas = True
+        End If
+    End Sub
+    Private Sub llena_cbx_Paros()
+        Dim oParo As New Paro
+        cbxTipoParo.ValueMember = "cve_paro"
+        cbxTipoParo.DisplayMember = "cod_paro"
+        cbxTipoParo.DataSource = oParo.llena_combo_paros()
+        cbxTipoParo.SelectedIndex = -1
+        flgBanderacbxParos = True
+    End Sub
 #End Region
 #Region "Llenado Labels - Textbox"
     'General
     Private Sub obten_descripcion_modelo(ByRef txtmodelodesc As TextBox, ByRef cbxmodelodesc As ComboBox)
-        If flgBanderacbxModelos Then
+        txtmodelodesc.Text = ""
+        If flgBanderacbxModelos And cbxmodelodesc.SelectedIndex <> -1 Then
             Dim oModelo As New Modelo
             oModelo.cve_modelo = cbxmodelodesc.SelectedValue
             oModelo.obtener_descripcion_modelo()
@@ -187,7 +218,8 @@ Public Class frmProduccion
     End Sub
     'Paros
     Private Sub obten_descripcion_maquina(ByRef txtmaquinadesc As TextBox, ByRef cbxmaquinadesc As ComboBox)
-        If flgBanderacbxMaquinas Then
+        txtmaquinadesc.Text = ""
+        If flgBanderacbxMaquinas And cbxmaquinadesc.SelectedIndex <> -1 Then
             Dim oMaquina As New Maquina
             oMaquina.cve_maquina = cbxmaquinadesc.SelectedValue
             oMaquina.Cargar()
@@ -195,10 +227,11 @@ Public Class frmProduccion
         End If
     End Sub
     Private Sub obten_descripcion_paro(ByRef txtparodesc As TextBox, ByRef cbxtipoparosdesc As ComboBox)
-        If flgBanderacbxParos Then
+        txtparodesc.Text = ""
+        If flgBanderacbxParos And cbxtipoparosdesc.SelectedIndex <> -1 Then
             Dim oParo As New Paro
             oParo.cve_Paro = cbxtipoparosdesc.SelectedValue
-            oParo.Cargar()
+            oParo.obten_descripcion_paro()
             txtparodesc.Text = oParo.paro
         End If
     End Sub
@@ -222,6 +255,12 @@ Public Class frmProduccion
         oRechazo.cve_registro_turno = 1
         grdDetalleRechazo.DataSource = oRechazo.llena_rechazo_gridview()
     End Sub
+    'Paros
+    Private Sub llena_paro_gridview()
+        Dim oRegistro_Paro As New Registro_Paro
+        oRegistro_Paro.Cve_registro_turno = get_registro_del_turno()
+        grdDetalleParo.DataSource = oRegistro_Paro.llena_paro_gridview()
+    End Sub
 #End Region
 #Region "Eventos ComboBox"
     'General
@@ -230,9 +269,11 @@ Public Class frmProduccion
     End Sub
     Private Sub cbxLinea_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cbxLinea.SelectedIndexChanged
         llena_cbx_Modelos()
+        llena_cbx_Maquinas()
     End Sub
     'Productividad
     Private Sub cbxModeloProductividad_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cbxModeloProductividad.SelectedIndexChanged
+        txtModeloDescripcionProductividad.Text = ""
         If cbxModeloProductividad.SelectedIndex <> -1 Then
             valida_botones_productividad()
             obten_descripcion_modelo(txtModeloDescripcionProductividad, cbxModeloProductividad)
@@ -241,6 +282,7 @@ Public Class frmProduccion
     End Sub
     'Desechos
     Private Sub cbxModeloDesecho_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cbxModeloDesecho.SelectedIndexChanged
+        txtModeloDesecho.Text = ""
         If cbxModeloDesecho.SelectedIndex <> -1 Then
             valida_botones_desecho()
             obten_descripcion_modelo(txtModeloDesecho, cbxModeloDesecho)
@@ -263,16 +305,24 @@ Public Class frmProduccion
     End Sub
     'Paros
     Private Sub cbxMaquina_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cbxMaquina.SelectedIndexChanged
-        If cbxMaquina.SelectedIndex <> -1 Then
-            valida_botones_paro()
-            obten_descripcion_maquina(txtMaquinaDescripcion, cbxMaquina)
-            deshabilitar_btn_quitar_paro()
-        End If
+        valida_botones_paro()
+        obten_descripcion_maquina(txtMaquinaDescripcion, cbxMaquina)
+        deshabilitar_btn_quitar_paro()
     End Sub
     Private Sub cbxTipoParo_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cbxTipoParo.SelectedIndexChanged
-        valida_botones_paro()
-        obten_descripcion_paro(txtParosDescripcion, cbxTipoParo)
-        deshabilitar_btn_quitar_paro()
+        If cbxTipoParo.Text = "H.1" Or cbxTipoParo.Text = "H.2" Or cbxTipoParo.Text = "H.3" Then
+            If cbxMaquina.SelectedIndex <> -1 Then
+                txtMinutosParo.Enabled = False
+                txtDetallesParo.Enabled = False
+                activa_captura_CDM()
+            Else
+                cbxTipoParo.SelectedIndex = -1
+            End If
+        Else
+            valida_botones_paro()
+            obten_descripcion_paro(txtParosDescripcion, cbxTipoParo)
+            deshabilitar_btn_quitar_paro()
+        End If
     End Sub
 #End Region
 #Region "Eventos TextBox"
@@ -298,6 +348,12 @@ Public Class frmProduccion
         valida_sea_numero(sender)
         valida_botones_rechazos()
         deshabilitar_btn_quitar_rechazo()
+    End Sub
+    'Paros
+    Private Sub txtMinutosParo_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles txtMinutosParo.TextChanged
+        valida_sea_numero(sender)
+        valida_botones_paro()
+        deshabilitar_btn_quitar_paro()
     End Sub
 #End Region
 #Region "Eventos Botones"
@@ -336,6 +392,13 @@ Public Class frmProduccion
         llena_rechazo_gridview()
         deshabilitar_btn_quitar_rechazo()
         llena_productividad_gridview()
+    End Sub
+    'Paros
+    Private Sub btnAgregarParo_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnAgregarParo.Click
+        add_paro()
+        limpia_paros()
+        llena_paro_gridview()
+        calcula_Productividad()
     End Sub
 #End Region
 #Region "Eventos Gridviews"
@@ -435,13 +498,11 @@ Public Class frmProduccion
         cbxModeloProductividad.SelectedIndex = -1
         txtPiezasOkProducidas.Text = "0"
         txtTiempoOperacion.Text = ""
-        txtModeloDescripcionProductividad.Text = ""
     End Sub
     'Desechos
     Private Sub limpia_desechos()
         cbxModeloDesecho.SelectedIndex = -1
         txtDesechosCantidad.Text = ""
-        txtModeloDesecho.Text = ""
     End Sub
     'Rechazos
     Private Sub limpia_rechazos()
@@ -460,6 +521,9 @@ Public Class frmProduccion
     End Sub
 #End Region
 #Region "Funciones Generales"
+    Private Function get_registro_del_turno() As Long
+        Return vcve_registro_turno
+    End Function
     Private Function valida_hora_de_captura(ByVal hora_actual As DateTime) As Boolean
         Dim fecha_inicio As DateTime
         Dim fecha_final As DateTime
@@ -477,8 +541,8 @@ Public Class frmProduccion
     'Productividad
     Private Sub add_modelo_producido()
         Dim oProduccion As New Produccion
-        oProduccion.cve_registro_turno = 1
-        oProduccion.cod_empleado_registro = "118737"
+        oProduccion.cve_registro_turno = get_registro_del_turno()
+        oProduccion.cod_empleado_registro = vcodigo_empleado
         oProduccion.fecha_registro = Now.ToString("dd-MM-yyyy HH:mm")
         oProduccion.cve_modelo = cbxModeloProductividad.SelectedValue
         oProduccion.pzas_ok = Long.Parse(txtPiezasOkProducidas.Text)
@@ -487,9 +551,9 @@ Public Class frmProduccion
     End Sub
     Private Sub remove_modelo_producido()
         Dim oProduccion As New Produccion
-        oProduccion.cve_registro_turno = 1
+        oProduccion.cve_registro_turno = get_registro_del_turno()
         oProduccion.cve_produccion = grdDetalleProductividad.Item("colcve_produccion", grdDetalleProductividad.CurrentRow.Index).Value
-        oProduccion.cod_empleado_eliminacion = "118737"
+        oProduccion.cod_empleado_eliminacion = vcodigo_empleado
         oProduccion.fecha_eliminacion = Now.ToString("dd-MM-yyyy HH:mm")
         oProduccion.elimina_fila_productividad_gridview()
     End Sub
@@ -502,30 +566,35 @@ Public Class frmProduccion
     End Function
     Private Function get_suma_adeudos() As Double
         Dim oRegistro_turno As New Registro_Turno
-        oRegistro_turno.cve_registro_turno = 1
+        oRegistro_turno.cve_registro_turno = get_registro_del_turno()
         oRegistro_turno.Cargar()
         Return oRegistro_turno.adeudo
     End Function
-    Private Function get_minutos_disponibles() As Boolean
+    Private Function get_minutos_disponibles() As Double
         Dim mindisponibles As Integer = Convert.ToDouble(lblTiempoOperacion.Text)
         Dim Total As Double
-
-
         For Each row As DataGridViewRow In grdDetalleProductividad.Rows
             Total += Val(row.Cells(6).Value)
         Next
-        Return Total
-        If (mindisponibles - Total) > 0 Then
+        MsgBox(mindisponibles - Total)
+        Return mindisponibles - Total
+    End Function
+    Private Function se_puede_añadir_produccion_o_paro(ByVal min As Integer) As Boolean
+        If get_Minutos_disponibles() = 0 Then
+            Return False
+        ElseIf min <= get_Minutos_disponibles() Then
             Return True
         Else
             Return False
         End If
     End Function
+
+
     'Desechos
     Private Sub add_desecho()
         Dim oDesecho As New Desecho
-        oDesecho.cve_registro_turno = 1
-        oDesecho.cod_empleado_registro = "118737"
+        oDesecho.cve_registro_turno = get_registro_del_turno()
+        oDesecho.cod_empleado_registro = vcodigo_empleado
         oDesecho.fecha_registro = Now.ToString("MM-dd-yyyy HH:mm")
         oDesecho.cve_modelo = cbxModeloDesecho.SelectedValue
         oDesecho.cantidad = Long.Parse(txtDesechosCantidad.Text)
@@ -534,7 +603,7 @@ Public Class frmProduccion
     End Sub
     Private Sub remove_desecho()
         Dim oDesecho As New Desecho
-        oDesecho.cod_empleado_eliminacion = "118737"
+        oDesecho.cod_empleado_eliminacion = vcodigo_empleado
         oDesecho.fecha_eliminacion = Now.ToString("MM-dd-yyyy HH:mm")
         oDesecho.cve_desecho = grdDetalleDesecho.Item("colcve_desecho", grdDetalleDesecho.CurrentRow.Index).Value
         oDesecho.elimina_fila_desecho_gridview()
@@ -569,13 +638,26 @@ Public Class frmProduccion
     Private Function get_suma_paros_no_planeados() As Integer
         Return 0
     End Function
+    'Paros
+    Private Sub add_paro()
+        Dim oParo As New Registro_Paro
+        oParo.Cve_registro_turno = get_registro_del_turno()
+        oParo.Cod_empleado_registro = vcodigo_empleado
+        oParo.Fecha_registro = Now.ToString("MM-dd-yyyy HH:mm")
+        oParo.Cve_paro = cbxTipoParo.SelectedValue
+        oParo.Cve_maquina = cbxMaquina.SelectedValue
+        oParo.Minutos = Long.Parse(txtMinutosParo.Text)
+        oParo.Detalles = txtDetallesParo.Text
+        oParo.Estatus = "1"
+        oParo.Registrar()
+    End Sub
 #End Region
 #Region "Funciones para modulo Rechazos"
     'Rechazo
     Private Sub add_rechazo()
         Dim oRechazo As New Rechazo
-        oRechazo.cve_registro_turno = 1
-        oRechazo.cod_empleado_registro = "118737"
+        oRechazo.cve_registro_turno = get_registro_del_turno()
+        oRechazo.cod_empleado_registro = vcodigo_empleado
         oRechazo.fecha_registro = Now.ToString("dd-MM-yyyy HH:mm")
         oRechazo.cve_modelo = cbxModeloRechazo.SelectedValue
         oRechazo.cve_tipo_rechazo = cbxTipoRechazo.SelectedValue
@@ -598,5 +680,31 @@ Public Class frmProduccion
         Next
         Return Total
     End Function
+#End Region
+#Region "Funciones para modulo de CDM"
+    Private Sub activa_captura_CDM()
+        obtenedor_CDM.inicializa_valores(cbxLinea.SelectedValue, cbxTurno.SelectedValue, get_minutos_disponibles(), cbxTipoParo.Text)
+        obtenedor_CDM.ShowDialog()
+        obtenedor_CDM.Dispose()
+        If contenedor_CDM.get_if_it_was_used() Then
+            'add_Paro_CDM()
+
+            actualiza_tabla_turno_minutos()
+            calcula_Productividad()
+            'insert_Productividad_en_BD()
+            'get_Costo_Produccion_Detalle()
+            'insert_Costo_en_BD()
+        End If
+        'borra objeto de CDM
+        contenedor_CDM = Nothing
+        'crea el nuevo objeto de CDM
+        contenedor_CDM = New CDM_Class
+        obtenedor_CDM = New frmCDM(contenedor_CDM)
+
+        txtMinutosParo.Enabled = True
+        txtDetallesParo.Enabled = True
+        cbxTipoParo.SelectedIndex = -1
+        cbxMaquina.SelectedIndex = -1
+    End Sub
 #End Region
 End Class

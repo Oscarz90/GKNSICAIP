@@ -6,13 +6,13 @@ Public Class Paro
 #Region "IIndividual"
     Public Sub Cargar() Implements IIndividual.Cargar
         Dim vDR As DataRow
-        vDR = oBD.ObtenerRenglon("select * from paro where paro = " & vCve_Paro, "paro")
+        vDR = oBD.ObtenerRenglon("select * from paro where cve_paro =" & vCve_Paro, "paro")
         If vDR IsNot Nothing Then
             vCve_Paro = vDR("cve_paro")
             vCod_Paro = vDR("cod_paro")
             vParo = vDR("paro")
             vAfecta_CDM = vDR("afecta_CDM")
-            vCve_Detalle = vDR("cve_detalle")
+            'vCve_Detalle = vDR("cve_detalle")
         End If
     End Sub
     Public Sub Eliminar() Implements IIndividual.Eliminar
@@ -101,5 +101,26 @@ Public Class Paro
             vCve_Detalle = value
         End Set
     End Property
+#End Region
+#Region "Metodos formulario de produccion"
+    Public Function llena_combo_paros() As DataTable
+        Dim dtParo As New DataTable
+        Try
+            dtParo = oBD.ObtenerTabla("select p.cve_paro,p.cod_paro from paro p")
+        Catch ex As Exception
+            MsgBox("Error al obtener Paros. CParo_ERROR", vbCritical + vbOKOnly, "Error")
+            dtParo = Nothing
+        End Try
+        Return dtParo
+    End Function
+    Public Sub obten_descripcion_paro()
+        Dim vDR As DataRow
+        vDR = oBD.ObtenerRenglon("select * from paro where cve_paro =" & vCve_Paro, "paro")
+        If vDR IsNot Nothing Then
+            vCve_Paro = vDR("cve_paro")
+            vCod_Paro = vDR("cod_paro")
+            vParo = vDR("paro")
+        End If
+    End Sub
 #End Region
 End Class

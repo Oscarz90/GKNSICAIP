@@ -34,6 +34,8 @@ Public Class Componente
     Private vcve_cadena_valor As Long
     Private vcomponente As String
     Private vprecio As Double
+    'Auxiliar
+    Private vcve_linea As Long
 #End Region
 #Region "Propiedades"
     Public Property cve_componente() As Long
@@ -68,5 +70,24 @@ Public Class Componente
             vprecio = value
         End Set
     End Property
+    Public Property cve_linea() As Long
+        Get
+            Return vcve_linea
+        End Get
+        Set(ByVal value As Long)
+            vcve_linea = value
+        End Set
+    End Property
+
 #End Region
+#Region "Metodos Formulario de CDM Cambio de Modelo"
+    Public Sub obtiene_precio_componente_linea()
+        Dim vDR As DataRow
+        vDR = oBD.ObtenerRenglon("select c.precio from linea l join componente c on l.cve_componente=c.cve_componente where l.cve_linea=" & vcve_linea, "paro")
+        If vDR IsNot Nothing Then
+            vprecio = vDR("precio")
+        End If
+    End Sub
+#End Region
+
 End Class

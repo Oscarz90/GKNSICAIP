@@ -79,4 +79,21 @@ Public Class CDM
         End Set
     End Property
 #End Region
+#Region "Metodos Formulario de CDM Cambio de Modelo"
+    Public Sub obtiene_tiempo_de_cdm()
+        Dim rDatos As DataRow = Nothing
+        Try
+            rDatos = oBD.ObtenerRenglon("exec get_CDM_tiempo " & vcve_linea & "," & vcve_modelo_inicial & "," & vcve_modelo_final, "CDM")
+            If rDatos IsNot Nothing Then
+                If rDatos("cve_CDM") IsNot DBNull.Value Then
+                    Me.vcve_CDM = rDatos("cve_CDM")
+                    Me.tiempo = rDatos("tiempo")
+                End If
+            End If
+        Catch 'ex As Exception
+            'Throw New Exception(ex.Message)
+            MsgBox("Error al Obtener tiempo de cambio de modelo. CCDM_ERROR", vbCritical + vbOKOnly, "Error")
+        End Try
+    End Sub
+#End Region
 End Class

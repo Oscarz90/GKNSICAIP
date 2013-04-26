@@ -44,29 +44,13 @@ Public Class Registro_Paro
     End Function
 
     Public Sub Registrar() Implements IIndividual.Registrar
-        Using scope As New TransactionScope
-            Try
-                Dim cmd As New SqlClient.SqlCommand
-                cmd.CommandType = CommandType.StoredProcedure
-                cmd.CommandText = "REGISTRAR_Registro_paro"
-                cmd.Parameters.Add("@cve_registro_paro", SqlDbType.BigInt).Value = Me.vCve_registro_paro
-                cmd.Parameters.Add("@cve_registro_turno", SqlDbType.BigInt).Value = Me.vCve_registro_turno
-                cmd.Parameters.Add("@cod_empleado_registro", SqlDbType.VarChar).Value = Me.vCod_empleado_registro
-                cmd.Parameters.Add("@fecha_registro", SqlDbType.DateTime).Value = Me.vFecha_registro
-                cmd.Parameters.Add("@cve_paro", SqlDbType.BigInt).Value = Me.vCve_paro
-                cmd.Parameters.Add("@cve_maquina", SqlDbType.BigInt).Value = Me.vCve_maquina
-                cmd.Parameters.Add("@minutos", SqlDbType.Int).Value = Me.vMinutos
-                cmd.Parameters.Add("@detalles", SqlDbType.VarChar).Value = Me.vDetalles
-                cmd.Parameters.Add("@cod_empleado_eliminacion", SqlDbType.VarChar).Value = Me.vCod_empleado_eliminacion
-                cmd.Parameters.Add("@fecha_eliminacion", SqlDbType.DateTime).Value = Me.vFecha_eliminacion
-                cmd.Parameters.Add("@estatus", SqlDbType.VarChar).Value = Me.vEstatus
-
-                Dim obj As DataTable = oBD.EjecutaCommando(cmd)
-                Me.vCve_registro_paro = obj.Rows(0)(0)
-                scope.Complete()
-            Catch ex As Exception
-            End Try
-        End Using
+        Dim queryInsert As String = "insert into registro_paro(cve_registro_turno,cod_empleado_registro,fecha_registro,cve_paro,cve_maquina,minutos,detalles,estatus) " &
+                              "values(" & vCve_registro_turno & ",'" & vCod_empleado_registro & "','" & vFecha_registro & "'," & vCve_paro & "," & vCve_maquina & "," & vMinutos & ",'" & vDetalles & "','" & vEstatus & "')"
+        Try
+            oBD.EjecutarQuery(queryInsert)
+        Catch
+            MsgBox("Error al insertar Paro. CRegistro_Paro_ERROR", vbCritical + vbOKOnly, "Error")
+        End Try
     End Sub
 #End Region
 
@@ -74,13 +58,13 @@ Public Class Registro_Paro
     Private vCve_registro_paro As Long
     Private vCve_registro_turno As Long
     Private vCod_empleado_registro As String
-    Private vFecha_registro As DateTime
+    Private vFecha_registro As String
     Private vCve_paro As Long
     Private vCve_maquina As Long
     Private vMinutos As Long
     Private vDetalles As String
     Private vCod_empleado_eliminacion As String
-    Private vFecha_eliminacion As DateTime
+    Private vFecha_eliminacion As String
     Private vEstatus As String
 
 #End Region
@@ -114,11 +98,11 @@ Public Class Registro_Paro
         End Set
     End Property
 
-    Public Property Fecha_registro() As DateTime
+    Public Property Fecha_registro() As String
         Get
             Return vFecha_registro
         End Get
-        Set(ByVal value As DateTime)
+        Set(ByVal value As String)
             vFecha_registro = value
         End Set
     End Property
@@ -192,5 +176,25 @@ Public Class Registro_Paro
     End Property
 
 #End Region
-
+#Region "Metodos formulario de produccion"
+    Public Function llena_paro_gridview() As DataTable
+        Dim obj As DataTable
+        Dim queryLlenagridview As String = "select rp.cve_registro_paro,rt.cve_linea,rp.cve_maquina,rp.cve_paro,p.cod_paro,rp.minutos,mq.clave_maquina,mq.maquina,rp.detalles " &
+            "from registro_paro rp " &
+            "join maquina mq on rp.cve_maquina=mq.cve_maquina " &
+            "join registro_turno rt on rp.cve_registro_turno=rt.cve_registro_turno " &
+            "join paro p on rp.cve_paro=p.cve_paro " &
+            "where rp.cve_registro_turno=" & vCve_registro_turno & " and rp.estatus='1'"
+        Using scope As New TransactionScope
+            Try
+                obj = oBD.ObtenerTabla(queryLlenagridview)
+                scope.Complete()
+            Catch
+                MsgBox("Error al obtener detalle de Paro. CRegistro_Paro_ERROR", vbCritical + vbOKOnly, "Error")
+                Return Nothing
+            End Try
+            Return obj
+        End Using
+    End Function
+#End Region
 End Class
