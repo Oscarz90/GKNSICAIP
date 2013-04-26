@@ -231,10 +231,49 @@ Public Class frmGraficas
     End Sub
 
 #End Region
-#Region "ESTABLECE TOTAL DE OEE EJE Y"
+#Region "ESTABLECE OEE 1 EQUIPO 1 LINEA"
     Private Sub establece_OEE(ByVal color As String)
         Dim promedio As Double = 0
         Dim contador As Integer = 0
+        Dim vDT As DataTable
+        cadenaXML += "<dataset seriesName='OEE' color='" & color & "' anchorBorderColor='" & contorno_anchor & "' anchorBgColor='" & color & "' anchorRadius='" & radio_anchor & "'>"
+        Dim oee As Double = 0
+        If rbtDia.Checked Then
+            vDT = oGraficas.ejecutarVistaOEE(cadenaWHERE)
+            For Each vDR As DataRow In vDT.Rows
+                If vDR("TIPO_REGISTRO") = "P" Then
+                    oee = vDR(("oee")) * 100
+                    promedio = promedio + oee
+                    contador = contador + 1
+                    cadenaXML += " <set value='" & oee.ToString & "'/>"
+                ElseIf vDR("TIPO_REGISTRO") = "D" Then
+                    oee = 0
+                    promedio = promedio + oee
+                    cadenaXML += " <set value='" & oee.ToString & "' />"
+                End If
+            Next
+        Else
+
+        End If
+        If contador > 0 Then
+            promedio = promedio / contador
+        Else
+            promedio = 0
+        End If
+        cadenaXML += " <set value='" & promedio.ToString & "' color='" & colores(1) & "'/>"
+        cadenaXML += " </dataset>"
+
+    End Sub
+
+#End Region
+
+#Region "ESTABLECE OEE 1 EQUIPO LINEAS ACUMULADAS"
+    Private Sub establece_OEE_Acumulado(ByVal color As String)
+        Dim promDia As Double = 0
+        Dim promAcumulado As Double = 0
+        Dim promFinal As Double = 0
+        Dim contador As Integer = 0
+        Dim vContador_Dias As Integer = 0
         Dim vDT As DataTable
         cadenaXML += "<dataset seriesName='OEE' color='" & color & "' anchorBorderColor='" & contorno_anchor & "' anchorBgColor='" & color & "' anchorRadius='" & radio_anchor & "'>"
         Dim oee As Double = 0
@@ -243,35 +282,36 @@ Public Class frmGraficas
             vDT = oGraficas.ejecutarVistaOEE(cadenaWHERE)
             vFecha_Actual = vDT.Rows(0).Item("DIA_ASIGNADO").ToString
             For Each vDR As DataRow In vDT.Rows
-                If vDR("TIPO_REGISTRO") = "P" Then
+                If vDR("TIPO_REGISTRO") = "P" And vFecha_Actual = vDR("DIA_ASIGNADO") Then
                     oee = vDR(("oee")) * 100
-                    promedio = promedio + oee
-                    contador = contador + 1
-                    If vFecha_Actual = vDR("DIA_ASIGNADO") Then
-
-                    Else
-                        cadenaXML += " <set value='" & oee.ToString & "'/>"
+                    promDia = promDia + oee
+                    contador = contador + 1                    
+                    'ElseIf vDR("TIPO_REGISTRO") = "D" Then
+                ElseIf vDR("TIPO_REGISTRO") = "P" And vFecha_Actual <> vDR("DIA_ASIGNADO") Then
+                    vContador_Dias = vContador_Dias + 1
+                    promDia = promDia / contador
+                    promAcumulado = promAcumulado + promDia
+                    cadenaXML += " <set value='" & promDia.ToString & "'/>"
+                    vFecha_Actual = vDR("DIA_ASIGNADO")
+                    promDia = 0
+                    contador = 0
+                    If vDR("TIPO_REGISTRO") <> "D" Then
+                        oee = vDR(("oee")) * 100
+                        promDia = promDia + oee
+                        contador = contador + 1
+                        promDia = promDia / contador
                     End If
-
-                ElseIf vDR("TIPO_REGISTRO") = "D" Then
-                    oee = 0
-                    'promedio = promedio + oee
-                    cadenaXML += " <set value='" & oee.ToString & "' />"
                 End If
             Next
-        Else
-
+            vContador_Dias = vContador_Dias + 1            
+            promDia = promDia / contador
+            promAcumulado = promAcumulado + promDia
+            cadenaXML += " <set value='" & promDia.ToString & "'/>"            
         End If
-        If contador > 0 Then
-            promedio = promedio / contador           
-        Else
-            promedio = 0
-        End If
-        cadenaXML += " <set value='" & promedio.ToString & "' color='" & colores(1) & "'/>"
+        promFinal = promAcumulado / vContador_Dias
+        cadenaXML += " <set value='" & promFinal.ToString & "' color='" & colores(1) & "'/>"
         cadenaXML += " </dataset>"
-        
     End Sub
-
 #End Region
 
 #Region "INICIALIZACION DEL FORMULARIO"
@@ -401,7 +441,7 @@ Public Class frmGraficas
         If rbtOEE.Checked Then
             If cbxTodasLineas.Checked Then
                 establece_fechas(1)
-                establece_OEE(colores(0)) ''FALTA sacar el acumulado 
+                establece_OEE_Acumulado(colores(0)) ''FALTA sacar el acumulado 
             Else
                 establece_fechas(1) '---Este Id esta bien. 1--> OEE
                 establece_OEE(colores(0))
