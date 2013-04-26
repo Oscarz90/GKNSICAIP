@@ -50,6 +50,11 @@ Partial Class frmGraficas
         Me.lblHasta = New System.Windows.Forms.Label()
         Me.dtpHasta = New System.Windows.Forms.DateTimePicker()
         Me.grp1 = New System.Windows.Forms.GroupBox()
+        Me.cbxTodasLineas = New System.Windows.Forms.CheckBox()
+        Me.Label5 = New System.Windows.Forms.Label()
+        Me.Label4 = New System.Windows.Forms.Label()
+        Me.Label3 = New System.Windows.Forms.Label()
+        Me.Label2 = New System.Windows.Forms.Label()
         Me.cbxLinea = New System.Windows.Forms.ComboBox()
         Me.cbxEquipo = New System.Windows.Forms.ComboBox()
         Me.cbxUN = New System.Windows.Forms.ComboBox()
@@ -73,7 +78,7 @@ Partial Class frmGraficas
         Me.Exportar.AutoSize = True
         Me.Exportar.BackColor = System.Drawing.Color.White
         Me.Exportar.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Exportar.Location = New System.Drawing.Point(1018, 227)
+        Me.Exportar.Location = New System.Drawing.Point(1059, 227)
         Me.Exportar.Name = "Exportar"
         Me.Exportar.Size = New System.Drawing.Size(98, 19)
         Me.Exportar.TabIndex = 93
@@ -84,7 +89,7 @@ Partial Class frmGraficas
         Me.Label1.AutoSize = True
         Me.Label1.BackColor = System.Drawing.Color.White
         Me.Label1.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label1.Location = New System.Drawing.Point(878, 227)
+        Me.Label1.Location = New System.Drawing.Point(919, 227)
         Me.Label1.Name = "Label1"
         Me.Label1.Size = New System.Drawing.Size(93, 19)
         Me.Label1.TabIndex = 92
@@ -109,7 +114,7 @@ Partial Class frmGraficas
         Me.groupTipo.Controls.Add(Me.rbtBarras)
         Me.groupTipo.Controls.Add(Me.rbtLineas)
         Me.groupTipo.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.groupTipo.Location = New System.Drawing.Point(854, 64)
+        Me.groupTipo.Location = New System.Drawing.Point(895, 64)
         Me.groupTipo.Name = "groupTipo"
         Me.groupTipo.Size = New System.Drawing.Size(270, 61)
         Me.groupTipo.TabIndex = 88
@@ -174,7 +179,7 @@ Partial Class frmGraficas
         Me.grp3.Controls.Add(Me.rbtNRFTi)
         Me.grp3.Controls.Add(Me.rbtGente)
         Me.grp3.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.grp3.Location = New System.Drawing.Point(678, 66)
+        Me.grp3.Location = New System.Drawing.Point(719, 66)
         Me.grp3.Name = "grp3"
         Me.grp3.Size = New System.Drawing.Size(170, 180)
         Me.grp3.TabIndex = 90
@@ -261,7 +266,7 @@ Partial Class frmGraficas
         Me.cmdImprimir.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cmdImprimir.ForeColor = System.Drawing.SystemColors.ControlText
         Me.cmdImprimir.Image = CType(resources.GetObject("cmdImprimir.Image"), System.Drawing.Image)
-        Me.cmdImprimir.Location = New System.Drawing.Point(994, 127)
+        Me.cmdImprimir.Location = New System.Drawing.Point(1035, 127)
         Me.cmdImprimir.Name = "cmdImprimir"
         Me.cmdImprimir.Size = New System.Drawing.Size(130, 98)
         Me.cmdImprimir.TabIndex = 84
@@ -274,7 +279,7 @@ Partial Class frmGraficas
         Me.cmdGraficar.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cmdGraficar.ForeColor = System.Drawing.SystemColors.ControlText
         Me.cmdGraficar.Image = CType(resources.GetObject("cmdGraficar.Image"), System.Drawing.Image)
-        Me.cmdGraficar.Location = New System.Drawing.Point(854, 127)
+        Me.cmdGraficar.Location = New System.Drawing.Point(895, 127)
         Me.cmdGraficar.Name = "cmdGraficar"
         Me.cmdGraficar.Size = New System.Drawing.Size(130, 97)
         Me.cmdGraficar.TabIndex = 83
@@ -292,7 +297,7 @@ Partial Class frmGraficas
         Me.grp2.Controls.Add(Me.lblHasta)
         Me.grp2.Controls.Add(Me.dtpHasta)
         Me.grp2.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.grp2.Location = New System.Drawing.Point(305, 76)
+        Me.grp2.Location = New System.Drawing.Point(346, 76)
         Me.grp2.Name = "grp2"
         Me.grp2.Size = New System.Drawing.Size(367, 161)
         Me.grp2.TabIndex = 86
@@ -391,6 +396,11 @@ Partial Class frmGraficas
         'grp1
         '
         Me.grp1.BackColor = System.Drawing.Color.White
+        Me.grp1.Controls.Add(Me.cbxTodasLineas)
+        Me.grp1.Controls.Add(Me.Label5)
+        Me.grp1.Controls.Add(Me.Label4)
+        Me.grp1.Controls.Add(Me.Label3)
+        Me.grp1.Controls.Add(Me.Label2)
         Me.grp1.Controls.Add(Me.cbxLinea)
         Me.grp1.Controls.Add(Me.cbxEquipo)
         Me.grp1.Controls.Add(Me.cbxUN)
@@ -398,20 +408,71 @@ Partial Class frmGraficas
         Me.grp1.Controls.Add(Me.lblInstrucciones1)
         Me.grp1.Controls.Add(Me.lblInstrucciones2)
         Me.grp1.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.grp1.Location = New System.Drawing.Point(8, 75)
+        Me.grp1.Location = New System.Drawing.Point(12, 75)
         Me.grp1.Name = "grp1"
-        Me.grp1.Size = New System.Drawing.Size(289, 162)
+        Me.grp1.Size = New System.Drawing.Size(326, 162)
         Me.grp1.TabIndex = 87
         Me.grp1.TabStop = False
         Me.grp1.Text = "Selección de equipo(s)"
+        '
+        'cbxTodasLineas
+        '
+        Me.cbxTodasLineas.AutoSize = True
+        Me.cbxTodasLineas.Font = New System.Drawing.Font("Arial", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.cbxTodasLineas.Location = New System.Drawing.Point(243, 101)
+        Me.cbxTodasLineas.Name = "cbxTodasLineas"
+        Me.cbxTodasLineas.Size = New System.Drawing.Size(72, 20)
+        Me.cbxTodasLineas.TabIndex = 80
+        Me.cbxTodasLineas.Text = "TODAS"
+        Me.cbxTodasLineas.UseVisualStyleBackColor = True
+        '
+        'Label5
+        '
+        Me.Label5.AutoSize = True
+        Me.Label5.Font = New System.Drawing.Font("Arial", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label5.Location = New System.Drawing.Point(1, 129)
+        Me.Label5.Name = "Label5"
+        Me.Label5.Size = New System.Drawing.Size(46, 14)
+        Me.Label5.TabIndex = 79
+        Me.Label5.Text = "EQUIPO"
+        '
+        'Label4
+        '
+        Me.Label4.AutoSize = True
+        Me.Label4.Font = New System.Drawing.Font("Arial", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label4.Location = New System.Drawing.Point(1, 102)
+        Me.Label4.Name = "Label4"
+        Me.Label4.Size = New System.Drawing.Size(38, 14)
+        Me.Label4.TabIndex = 78
+        Me.Label4.Text = "LÍNEA"
+        '
+        'Label3
+        '
+        Me.Label3.AutoSize = True
+        Me.Label3.Font = New System.Drawing.Font("Arial", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label3.Location = New System.Drawing.Point(1, 76)
+        Me.Label3.Name = "Label3"
+        Me.Label3.Size = New System.Drawing.Size(36, 14)
+        Me.Label3.TabIndex = 77
+        Me.Label3.Text = "ÁREA"
+        '
+        'Label2
+        '
+        Me.Label2.AutoSize = True
+        Me.Label2.Font = New System.Drawing.Font("Arial", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label2.Location = New System.Drawing.Point(1, 50)
+        Me.Label2.Name = "Label2"
+        Me.Label2.Size = New System.Drawing.Size(70, 14)
+        Me.Label2.TabIndex = 76
+        Me.Label2.Text = "CAD VALOR"
         '
         'cbxLinea
         '
         Me.cbxLinea.Font = New System.Drawing.Font("Arial", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cbxLinea.FormattingEnabled = True
-        Me.cbxLinea.Location = New System.Drawing.Point(20, 97)
+        Me.cbxLinea.Location = New System.Drawing.Point(72, 97)
         Me.cbxLinea.Name = "cbxLinea"
-        Me.cbxLinea.Size = New System.Drawing.Size(243, 24)
+        Me.cbxLinea.Size = New System.Drawing.Size(146, 24)
         Me.cbxLinea.TabIndex = 75
         Me.cbxLinea.Text = "Línea"
         '
@@ -420,7 +481,7 @@ Partial Class frmGraficas
         Me.cbxEquipo.Font = New System.Drawing.Font("Arial", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cbxEquipo.ForeColor = System.Drawing.SystemColors.WindowText
         Me.cbxEquipo.FormattingEnabled = True
-        Me.cbxEquipo.Location = New System.Drawing.Point(20, 123)
+        Me.cbxEquipo.Location = New System.Drawing.Point(72, 123)
         Me.cbxEquipo.Name = "cbxEquipo"
         Me.cbxEquipo.Size = New System.Drawing.Size(243, 24)
         Me.cbxEquipo.TabIndex = 1
@@ -430,7 +491,7 @@ Partial Class frmGraficas
         '
         Me.cbxUN.Font = New System.Drawing.Font("Arial", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cbxUN.FormattingEnabled = True
-        Me.cbxUN.Location = New System.Drawing.Point(20, 45)
+        Me.cbxUN.Location = New System.Drawing.Point(72, 45)
         Me.cbxUN.Name = "cbxUN"
         Me.cbxUN.Size = New System.Drawing.Size(243, 24)
         Me.cbxUN.TabIndex = 2
@@ -440,7 +501,7 @@ Partial Class frmGraficas
         '
         Me.cbxArea.Font = New System.Drawing.Font("Arial", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cbxArea.FormattingEnabled = True
-        Me.cbxArea.Location = New System.Drawing.Point(20, 71)
+        Me.cbxArea.Location = New System.Drawing.Point(72, 71)
         Me.cbxArea.Name = "cbxArea"
         Me.cbxArea.Size = New System.Drawing.Size(243, 24)
         Me.cbxArea.TabIndex = 3
@@ -576,4 +637,9 @@ Partial Class frmGraficas
     Friend WithEvents banner_formulario As System.Windows.Forms.PictureBox
     Friend WithEvents titulo_banner_formulario As System.Windows.Forms.Label
     Friend WithEvents swfGrafica As AxShockwaveFlashObjects.AxShockwaveFlash
+    Friend WithEvents Label5 As System.Windows.Forms.Label
+    Friend WithEvents Label4 As System.Windows.Forms.Label
+    Friend WithEvents Label3 As System.Windows.Forms.Label
+    Friend WithEvents Label2 As System.Windows.Forms.Label
+    Friend WithEvents cbxTodasLineas As System.Windows.Forms.CheckBox
 End Class

@@ -138,7 +138,7 @@ Public Class Graficas
         Dim vRetorno As DataTable = Nothing
         Dim vDT As DataTable = Nothing
         Try
-            vDT = oBD.ObtenerTabla("SELECT DIA_ASIGNADO FROM VISTA_SELECCION_INDICADOR" & indicador & " " & cadenaWHERE)
+            vDT = oBD.ObtenerTabla("SELECT DISTINCT DIA_ASIGNADO FROM VISTA_SELECCION_INDICADOR" & indicador & " " & cadenaWHERE)
             If vDT IsNot Nothing Then
                 vRetorno = vDT
             Else
@@ -154,7 +154,7 @@ Public Class Graficas
         Dim vRetorno As DataTable = Nothing
         Dim vDT As DataTable = Nothing
         Try
-            vDT = oBD.ObtenerTabla("select OEE from VISTA_SELECCION_INDICADOR1 " & cadenaWHERE)
+            vDT = oBD.ObtenerTabla("select OEE, TIPO_REGISTRO, DIA_ASIGNADO from VISTA_SELECCION_INDICADOR1 " & cadenaWHERE)
             If vDT IsNot Nothing Then
                 vRetorno = vDT
             Else
