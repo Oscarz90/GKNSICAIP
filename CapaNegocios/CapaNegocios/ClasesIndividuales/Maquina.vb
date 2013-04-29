@@ -81,7 +81,17 @@ Public Class Maquina
             vmaquina = value
         End Set
     End Property
-
-
+#End Region
+#Region "Metodos formulario de produccion"
+    Public Function llena_combo_maquina() As DataTable
+        Dim dtMaquina As New DataTable
+        Try
+            dtMaquina = oBD.ObtenerTabla("	select m.cve_maquina,m.clave_maquina from maquina m where m.cve_linea=" & vcve_linea)
+        Catch ex As Exception
+            MsgBox("Error al obtener Maquinas. CMaquina_ERROR", vbCritical + vbOKOnly, "Error")
+            dtMaquina = Nothing
+        End Try
+        Return dtMaquina
+    End Function
 #End Region
 End Class

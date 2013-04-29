@@ -51,6 +51,8 @@ Public Class Turno
     Private vturno As String
     Private vinicio As String
     Private vfin As String
+    'auxiliar
+    Private vfecha_registro As String
 #End Region
 #Region "Propiedades"
     Public Property cve_turno() As Long
@@ -98,12 +100,21 @@ Public Class Turno
         End Set
     End Property
 
-    Public Property NewProperty() As String
+    Public Property fin() As String
         Get
             Return vfin
         End Get
         Set(ByVal value As String)
             vfin = value
+        End Set
+    End Property
+
+    Public Property fecha_registro() As String
+        Get
+            Return vfecha_registro
+        End Get
+        Set(ByVal value As String)
+            vfecha_registro = value
         End Set
     End Property
 
@@ -121,4 +132,20 @@ Public Class Turno
         Return dtTurnos
     End Function
 #End Region
+    Public Sub fecha_inicio_fin()
+        Dim rDatos As DataRow = Nothing
+        Try
+            rDatos = oBD.ObtenerRenglon("select * from fecha_inicio_fin (" & vcve_turno & ",'" & vfecha_registro & "');", "turno")
+            If rDatos IsNot Nothing Then
+                If rDatos("inicio") IsNot DBNull.Value Then
+                    Me.vinicio = rDatos("inicio")
+                    Me.vfin = rDatos("fin")
+                End If
+            End If
+        Catch ex As Exception
+            Throw New Exception(ex.Message)
+        End Try
+    End Sub
+
+
 End Class

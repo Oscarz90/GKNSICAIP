@@ -109,7 +109,7 @@ Partial Class frmProduccion
         Me.Label18 = New System.Windows.Forms.Label()
         Me.Label31 = New System.Windows.Forms.Label()
         Me.grpParos = New System.Windows.Forms.GroupBox()
-        Me.DataGridView1 = New System.Windows.Forms.DataGridView()
+        Me.grdDetalleParo = New System.Windows.Forms.DataGridView()
         Me.colcve_registro_paro = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.colcve_lineab = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.colcve_maquina = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -202,7 +202,7 @@ Partial Class frmProduccion
         Me.tabPageParos.SuspendLayout()
         Me.grpCosto.SuspendLayout()
         Me.grpParos.SuspendLayout()
-        CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.grdDetalleParo, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.tabPageRechazos.SuspendLayout()
         Me.grpRechazos.SuspendLayout()
         CType(Me.grdDetalleRechazo, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -225,6 +225,7 @@ Partial Class frmProduccion
         Me.TabContenido.SelectedIndex = 0
         Me.TabContenido.Size = New System.Drawing.Size(1230, 446)
         Me.TabContenido.TabIndex = 1
+        Me.TabContenido.Tag = ""
         '
         'tabPageProductividad
         '
@@ -1110,7 +1111,7 @@ Partial Class frmProduccion
         '
         'grpParos
         '
-        Me.grpParos.Controls.Add(Me.DataGridView1)
+        Me.grpParos.Controls.Add(Me.grdDetalleParo)
         Me.grpParos.Controls.Add(Me.txtParosDescripcion)
         Me.grpParos.Controls.Add(Me.txtMaquinaDescripcion)
         Me.grpParos.Controls.Add(Me.txtMinutosParo)
@@ -1133,17 +1134,17 @@ Partial Class frmProduccion
         Me.grpParos.TabStop = False
         Me.grpParos.Text = "PAROS"
         '
-        'DataGridView1
+        'grdDetalleParo
         '
-        Me.DataGridView1.AllowUserToAddRows = False
-        Me.DataGridView1.AllowUserToDeleteRows = False
-        Me.DataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.DataGridView1.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.colcve_registro_paro, Me.colcve_lineab, Me.colcve_maquina, Me.colcve_paro, Me.colcod_paro, Me.colminutos, Me.colclave_maquina, Me.colmaquina, Me.coldetalles})
-        Me.DataGridView1.Location = New System.Drawing.Point(6, 171)
-        Me.DataGridView1.Name = "DataGridView1"
-        Me.DataGridView1.ReadOnly = True
-        Me.DataGridView1.Size = New System.Drawing.Size(824, 231)
-        Me.DataGridView1.TabIndex = 324
+        Me.grdDetalleParo.AllowUserToAddRows = False
+        Me.grdDetalleParo.AllowUserToDeleteRows = False
+        Me.grdDetalleParo.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.grdDetalleParo.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.colcve_registro_paro, Me.colcve_lineab, Me.colcve_maquina, Me.colcve_paro, Me.colcod_paro, Me.colminutos, Me.colclave_maquina, Me.colmaquina, Me.coldetalles})
+        Me.grdDetalleParo.Location = New System.Drawing.Point(6, 171)
+        Me.grdDetalleParo.Name = "grdDetalleParo"
+        Me.grdDetalleParo.ReadOnly = True
+        Me.grdDetalleParo.Size = New System.Drawing.Size(824, 231)
+        Me.grdDetalleParo.TabIndex = 324
         '
         'colcve_registro_paro
         '
@@ -1589,7 +1590,7 @@ Partial Class frmProduccion
         Me.TabPage1.Padding = New System.Windows.Forms.Padding(3)
         Me.TabPage1.Size = New System.Drawing.Size(1222, 420)
         Me.TabPage1.TabIndex = 3
-        Me.TabPage1.Text = "TabPage1"
+        Me.TabPage1.Text = "Seguridad"
         Me.TabPage1.UseVisualStyleBackColor = True
         '
         'TabPage2
@@ -1601,7 +1602,7 @@ Partial Class frmProduccion
         Me.TabPage2.Padding = New System.Windows.Forms.Padding(3)
         Me.TabPage2.Size = New System.Drawing.Size(1222, 420)
         Me.TabPage2.TabIndex = 4
-        Me.TabPage2.Text = "TabPage2"
+        Me.TabPage2.Text = "Gente"
         Me.TabPage2.UseVisualStyleBackColor = True
         '
         'GroupBox2
@@ -1743,7 +1744,7 @@ Partial Class frmProduccion
         Me.grpSeguridad.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.grpSeguridad.Location = New System.Drawing.Point(6, 6)
         Me.grpSeguridad.Name = "grpSeguridad"
-        Me.grpSeguridad.Size = New System.Drawing.Size(604, 408)
+        Me.grpSeguridad.Size = New System.Drawing.Size(555, 408)
         Me.grpSeguridad.TabIndex = 7
         Me.grpSeguridad.TabStop = False
         Me.grpSeguridad.Text = "SEGURIDAD"
@@ -2001,7 +2002,7 @@ Partial Class frmProduccion
         Me.grpCosto.PerformLayout()
         Me.grpParos.ResumeLayout(False)
         Me.grpParos.PerformLayout()
-        CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.grdDetalleParo, System.ComponentModel.ISupportInitialize).EndInit()
         Me.tabPageRechazos.ResumeLayout(False)
         Me.grpRechazos.ResumeLayout(False)
         Me.grpRechazos.PerformLayout()
@@ -2177,7 +2178,7 @@ Partial Class frmProduccion
     Friend WithEvents colnp_gkn As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents colmodelodescripcion As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents coldesechocantidad As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents DataGridView1 As System.Windows.Forms.DataGridView
+    Friend WithEvents grdDetalleParo As System.Windows.Forms.DataGridView
     Friend WithEvents colcve_registro_paro As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents colcve_lineab As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents colcve_maquina As System.Windows.Forms.DataGridViewTextBoxColumn
