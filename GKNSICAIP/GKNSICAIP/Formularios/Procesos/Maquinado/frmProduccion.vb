@@ -687,7 +687,7 @@ Public Class frmProduccion
         obtenedor_CDM.ShowDialog()
         obtenedor_CDM.Dispose()
         If contenedor_CDM.get_if_it_was_used() Then
-            'add_Paro_CDM()
+            add_Paro_CDM()
 
             actualiza_tabla_turno_minutos()
             calcula_Productividad()
@@ -705,6 +705,23 @@ Public Class frmProduccion
         txtDetallesParo.Enabled = True
         cbxTipoParo.SelectedIndex = -1
         cbxMaquina.SelectedIndex = -1
+    End Sub
+    Private Sub add_Paro_CDM()
+        'Dim cod_reg_paro As Integer
+        'Try
+        'cod_reg_paro = bDat.Realiza_Consulta_en_BD_SICAIP(bDat.captura_Paros_CDM(Now.ToString("yyyy-MM-dd HH:mm:ss"), contenedor_CDM.minutosTotales, idEquipo, cbxMaquina.SelectedValue, cbxTipoParo.SelectedValue, contenedor_CDM.comentarios(8, 0), cbxTurnos.SelectedValue, cbxLinea.SelectedValue, contenedor_CDM.mejora, contenedor_CDM.costo, contenedor_CDM.fecha_inicio, contenedor_CDM.fecha_final, contenedor_CDM.CDM))
+
+        'Dim i As Integer
+        'For i = 0 To contenedor_CDM.paros_detalle.GetUpperBound(0)
+        'If contenedor_CDM.paros_detalle(i, 0) <> Nothing Then
+        'bDat.Realiza_Accion_en_BD_SICAIP(bDat.captura_Paros_detalles_CDM(Now.ToString("yyyy-MM-dd HH:mm:ss"), contenedor_CDM.paros_detalle(i, 1), idEquipo, cbxMaquina.SelectedValue, contenedor_CDM.comentarios(i, 0), cbxTurnos.SelectedValue, cbxLinea.SelectedValue, contenedor_CDM.mejora, contenedor_CDM.fecha_inicio, contenedor_CDM.fecha_final, cod_reg_paro, contenedor_CDM.paros_detalle(i, 0), contenedor_CDM.CDM))
+        'End If
+        'Next
+        'Catch ex As Exception
+        '   MsgBox("Error al insertar CDM Clave del Error: FPR_013", vbCritical + vbOKOnly, "Error")
+        '  bDat.Mata_Conexion_SICAIP()
+        'End Try
+        'Llena_lst_Paros_listview()
     End Sub
 #End Region
 End Class

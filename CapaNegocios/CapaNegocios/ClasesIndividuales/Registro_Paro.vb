@@ -22,7 +22,6 @@ Public Class Registro_Paro
             vEstatus = vDR("estatus")
         End If
     End Sub
-
     Public Sub Eliminar() Implements IIndividual.Eliminar
         Try
             oBD.EjecutarQuery("delete from registro_paro where cve_registro_paro = " & vCve_registro_paro)
@@ -30,7 +29,6 @@ Public Class Registro_Paro
 
         End Try
     End Sub
-
     Public Function Obtener_Id(ByVal vCadena As String) As Long Implements IIndividual.Obtener_Id
         Dim vDR As DataRow
         Dim vRetorno As Long
@@ -42,7 +40,6 @@ Public Class Registro_Paro
         End If
         Return vRetorno
     End Function
-
     Public Sub Registrar() Implements IIndividual.Registrar
         Dim queryInsert As String = "insert into registro_paro(cve_registro_turno,cod_empleado_registro,fecha_registro,cve_paro,cve_maquina,minutos,detalles,estatus) " &
                               "values(" & vCve_registro_turno & ",'" & vCod_empleado_registro & "','" & vFecha_registro & "'," & vCve_paro & "," & vCve_maquina & "," & vMinutos & ",'" & vDetalles & "','" & vEstatus & "')"
