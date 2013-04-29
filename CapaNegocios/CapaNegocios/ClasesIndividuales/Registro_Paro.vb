@@ -63,6 +63,7 @@ Public Class Registro_Paro
     Private vCod_empleado_eliminacion As String
     Private vFecha_eliminacion As String
     Private vEstatus As String
+    'Atributos auxiliares
 
 #End Region
 
@@ -193,5 +194,32 @@ Public Class Registro_Paro
             Return obj
         End Using
     End Function
+    Public Sub captura_CDM(ByRef oDetalle_CDM_total As Detalle_CDM_Total)
+        Using scope As New TransactionScope
+            Try
+                Dim vComando As New SqlClient.SqlCommand
+                vComando.CommandType = CommandType.StoredProcedure
+                vComando.CommandText = "captura_Paros_CDM"
+                vComando.Parameters.Add("@cve_registro_turno", SqlDbType.Int).Value = Me.vCve_registro_turno
+                vComando.Parameters.Add("@cod_empleado", SqlDbType.VarChar).Value = Me.vCod_empleado_registro
+                vComando.Parameters.Add("@fecha_registro", SqlDbType.DateTime).Value = Convert.ToDateTime(Me.vFecha_registro)
+                vComando.Parameters.Add("@cve_paro", SqlDbType.Int).Value = Me.vCve_paro
+                vComando.Parameters.Add("@cve_maquina", SqlDbType.Int).Value = Me.vCve_maquina
+                vComando.Parameters.Add("@minutos", SqlDbType.Int).Value = Me.vMinutos
+                vComando.Parameters.Add("@detalles", SqlDbType.VarChar).Value = Me.vDetalles
+                vComando.Parameters.Add("@cve_CDM", SqlDbType.Int).Value = oDetalle_CDM_total.cve_CDM
+                vComando.Parameters.Add("@mejora", SqlDbType.Float).Value = oDetalle_CDM_total.mejora
+                vComando.Parameters.Add("@costo", SqlDbType.Float).Value = oDetalle_CDM_total.costo
+                vComando.Parameters.Add("@fecha_inicial", SqlDbType.DateTime).Value = Convert.ToDateTime(oDetalle_CDM_total.fecha_inicial)
+                vComando.Parameters.Add("@fecha_final", SqlDbType.DateTime).Value = Convert.ToDateTime(oDetalle_CDM_total.fecha_final)
+                Dim obj As DataTable = oBD.EjecutaCommando(vComando)
+                Me.vCve_registro_paro = obj.Rows(0)(0)
+                scope.Complete()
+            Catch
+                MsgBox("Error al insertar CDM. CRegistro_Paro_ERROR", vbCritical + vbOKOnly, "Error")
+            End Try
+        End Using
+
+    End Sub
 #End Region
 End Class
