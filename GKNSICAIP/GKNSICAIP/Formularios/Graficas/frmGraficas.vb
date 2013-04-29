@@ -195,8 +195,8 @@ Public Class frmGraficas
         ''---------------------------------------------  C H E C A R ----------------------------------------------------------
         ''--------------------------------------------------------------------------------------------------------------------------
         If rbtMeses.Checked Then
-            Dim desde As String = "01/" & dtpDesde.Value.Month.ToString & "/" & dtpDesde.Value.Year.ToString
-            Dim hasta As String = DateTime.DaysInMonth(dtpHasta.Value.Year, dtpHasta.Value.Month) & "/" & dtpHasta.Value.Month.ToString & "/" & dtpDesde.Value.Year.ToString
+            Dim desde As String = "01-" & dtpDesde.Value.Month.ToString & "-" & dtpDesde.Value.Year.ToString
+            Dim hasta As String = DateTime.DaysInMonth(dtpHasta.Value.Year, dtpHasta.Value.Month) & "-" & dtpHasta.Value.Month.ToString & "-" & dtpDesde.Value.Year.ToString
             cadenaWHERE = cadenaWHERE & "fecha between '" & desde & "' and '" & hasta & "'"
             group = "datepart(year,fecha),datepart(month,fecha)"
         End If
@@ -264,9 +264,7 @@ Public Class frmGraficas
         cadenaXML += " </dataset>"
 
     End Sub
-
 #End Region
-
 #Region "ESTABLECE OEE 1 EQUIPO LINEAS ACUMULADAS"
     Private Sub establece_OEE_Acumulado(ByVal color As String)
         Dim promDia As Double = 0
@@ -312,6 +310,45 @@ Public Class frmGraficas
         cadenaXML += " <set value='" & promFinal.ToString & "' color='" & colores(1) & "'/>"
         cadenaXML += " </dataset>"
     End Sub
+#End Region
+
+#Region "ESTABLECE 5S 1 EQUIPO 1 LINEA"
+    Private Sub establece_5S(ByVal color As String)
+        Dim promedio As Double = 0
+        Dim contador As Integer = 0
+        Dim vDT As DataTable
+        cadenaXML += "<dataset seriesName='OEE' color='" & color & "' anchorBorderColor='" & contorno_anchor & "' anchorBgColor='" & color & "' anchorRadius='" & radio_anchor & "'>"
+        Dim oee As Double = 0
+        If rbtDia.Checked Then
+            vDT = oGraficas.ejecutarVistaOEE(cadenaWHERE)
+            For Each vDR As DataRow In vDT.Rows
+                If vDR("TIPO_REGISTRO") = "P" Then
+                    oee = vDR(("oee")) * 100
+                    promedio = promedio + oee
+                    contador = contador + 1
+                    cadenaXML += " <set value='" & oee.ToString & "'/>"
+                ElseIf vDR("TIPO_REGISTRO") = "D" Then
+                    oee = 0
+                    promedio = promedio + oee
+                    cadenaXML += " <set value='" & oee.ToString & "' />"
+                End If
+            Next
+        Else
+
+        End If
+        If contador > 0 Then
+            promedio = promedio / contador
+        Else
+            promedio = 0
+        End If
+        cadenaXML += " <set value='" & promedio.ToString & "' color='" & colores(1) & "'/>"
+        cadenaXML += " </dataset>"
+
+    End Sub
+#End Region
+
+#Region "ESTABLECE 5S 1 EQUIPO LINEAS ACUMULADAS"
+
 #End Region
 
 #Region "INICIALIZACION DEL FORMULARIO"
@@ -416,6 +453,9 @@ Public Class frmGraficas
 
     Private Sub rbt5s_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles rbt5s.CheckedChanged
         Habilita_Graficar()
+        If rbt5s.Checked Then
+            rbtDia.Enabled = False
+        End If
     End Sub
 
 #End Region

@@ -226,7 +226,7 @@ Partial Class frmGraficas
         '
         Me.rbt5s.AutoSize = True
         Me.rbt5s.Font = New System.Drawing.Font("Arial", 10.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.rbt5s.Location = New System.Drawing.Point(37, 147)
+        Me.rbt5s.Location = New System.Drawing.Point(37, 125)
         Me.rbt5s.Name = "rbt5s"
         Me.rbt5s.Size = New System.Drawing.Size(45, 20)
         Me.rbt5s.TabIndex = 29
@@ -250,7 +250,7 @@ Partial Class frmGraficas
         '
         Me.rbtGente.AutoSize = True
         Me.rbtGente.Font = New System.Drawing.Font("Arial", 10.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.rbtGente.Location = New System.Drawing.Point(37, 123)
+        Me.rbtGente.Location = New System.Drawing.Point(37, 151)
         Me.rbtGente.Name = "rbtGente"
         Me.rbtGente.Size = New System.Drawing.Size(69, 20)
         Me.rbtGente.TabIndex = 28
