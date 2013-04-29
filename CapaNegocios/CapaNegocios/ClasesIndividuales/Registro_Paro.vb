@@ -64,7 +64,7 @@ Public Class Registro_Paro
     Private vFecha_eliminacion As String
     Private vEstatus As String
     'Atributos auxiliares
-
+    Private vcod_paro As String
 #End Region
 
 #Region "Propiedades"
@@ -173,6 +173,16 @@ Public Class Registro_Paro
         End Set
     End Property
 
+    Public Property cod_paro() As String
+        Get
+            Return vcod_paro
+        End Get
+        Set(ByVal value As String)
+            vcod_paro = value
+        End Set
+    End Property
+
+
 #End Region
 #Region "Metodos formulario de produccion"
     Public Function llena_paro_gridview() As DataTable
@@ -219,7 +229,28 @@ Public Class Registro_Paro
                 MsgBox("Error al insertar CDM. CRegistro_Paro_ERROR", vbCritical + vbOKOnly, "Error")
             End Try
         End Using
-
+    End Sub
+    Public Sub captura_detalle_CDM()
+        Using scope As New TransactionScope
+            Try
+                Dim vComando As New SqlClient.SqlCommand
+                vComando.CommandType = CommandType.StoredProcedure
+                vComando.CommandText = "captura_Paros_detalles_CDM"
+                vComando.Parameters.Add("@cve_registro_paro", SqlDbType.BigInt).Value = Me.vCve_registro_paro
+                vComando.Parameters.Add("@cve_registro_turno", SqlDbType.BigInt).Value = Me.vCve_registro_turno
+                vComando.Parameters.Add("@cod_empleado", SqlDbType.VarChar).Value = Me.vCod_empleado_registro
+                vComando.Parameters.Add("@fecha_registro", SqlDbType.DateTime).Value = Convert.ToDateTime(Me.vFecha_registro)
+                vComando.Parameters.Add("@cod_paro", SqlDbType.VarChar).Value = Me.vcod_paro
+                vComando.Parameters.Add("@cve_maquina", SqlDbType.BigInt).Value = Me.vCve_maquina
+                vComando.Parameters.Add("@minutos", SqlDbType.Int).Value = Me.vMinutos
+                vComando.Parameters.Add("@detalles", SqlDbType.VarChar).Value = Me.vDetalles
+                Dim obj As DataTable = oBD.EjecutaCommando(vComando)
+                Me.vCve_registro_paro = obj.Rows(0)(0)
+                scope.Complete()
+            Catch
+                MsgBox("Error al insertar detalle CDM. CRegistro_Paro_ERROR", vbCritical + vbOKOnly, "Error")
+            End Try
+        End Using
     End Sub
 #End Region
 End Class

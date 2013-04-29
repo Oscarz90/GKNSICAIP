@@ -707,6 +707,51 @@ Public Class frmProduccion
         cbxMaquina.SelectedIndex = -1
     End Sub
     Private Sub add_Paro_CDM()
+        Dim cve_registro_paro As Long
+        Dim oRegistro_Paro As New Registro_Paro
+        Dim oDetalle_CDM_total As Detalle_CDM_Total
+        oDetalle_CDM_total = New Detalle_CDM_Total
+        'Registro_Paro
+        oRegistro_Paro.Cve_registro_turno = get_registro_del_turno()
+        oRegistro_Paro.Cod_empleado_registro = vcodigo_empleado
+        oRegistro_Paro.Fecha_registro = Now.ToString("dd-MM-yyyy HH:mm")
+        oRegistro_Paro.Cve_paro = cbxTipoParo.SelectedValue
+        oRegistro_Paro.Cve_maquina = cbxMaquina.SelectedValue
+        oRegistro_Paro.Minutos = contenedor_CDM.minutosTotales
+        oRegistro_Paro.Detalles = contenedor_CDM.comentarios(8, 0)
+        'Detalle_CDM_Total
+        oDetalle_CDM_total.cve_CDM = contenedor_CDM.CDM
+        oDetalle_CDM_total.mejora = contenedor_CDM.mejora
+        oDetalle_CDM_total.costo = contenedor_CDM.costo
+        oDetalle_CDM_total.fecha_inicial = contenedor_CDM.fecha_inicio
+        oDetalle_CDM_total.fecha_final = contenedor_CDM.fecha_final
+        oRegistro_Paro.captura_CDM(oDetalle_CDM_total)
+        cve_registro_paro = oRegistro_Paro.Cve_registro_paro
+        'id insertado
+        'oRegistro_Paro.Cve_registro_paro
+        oRegistro_Paro = Nothing
+
+        Dim i As Integer
+        For i = 0 To contenedor_CDM.paros_detalle.GetUpperBound(0)
+            If contenedor_CDM.paros_detalle(i, 0) <> Nothing Then
+                oRegistro_Paro = New Registro_Paro
+                oRegistro_Paro.Cve_registro_paro = cve_registro_paro
+                oRegistro_Paro.Cve_registro_turno = get_registro_del_turno()
+                oRegistro_Paro.Cod_empleado_registro = vcodigo_empleado
+                oRegistro_Paro.Fecha_registro = Now.ToString("dd-MM-yyyy HH:mm")
+                oRegistro_Paro.cod_paro
+
+
+
+                'bDat.Realiza_Accion_en_BD_SICAIP(bDat.captura_Paros_detalles_CDM(Now.ToString("yyyy-MM-dd HH:mm:ss"), contenedor_CDM.paros_detalle(i, 1), idEquipo, cbxMaquina.SelectedValue, contenedor_CDM.comentarios(i, 0), cbxTurnos.SelectedValue, cbxLinea.SelectedValue, contenedor_CDM.mejora, contenedor_CDM.fecha_inicio, contenedor_CDM.fecha_final, cod_reg_paro, contenedor_CDM.paros_detalle(i, 0), contenedor_CDM.CDM))
+
+            End If
+        Next
+
+
+
+
+        'aaaaaaaaaaaa
         'Dim cod_reg_paro As Integer
         'Try
         'cod_reg_paro = bDat.Realiza_Consulta_en_BD_SICAIP(bDat.captura_Paros_CDM(Now.ToString("yyyy-MM-dd HH:mm:ss"), contenedor_CDM.minutosTotales, idEquipo, cbxMaquina.SelectedValue, cbxTipoParo.SelectedValue, contenedor_CDM.comentarios(8, 0), cbxTurnos.SelectedValue, cbxLinea.SelectedValue, contenedor_CDM.mejora, contenedor_CDM.costo, contenedor_CDM.fecha_inicio, contenedor_CDM.fecha_final, contenedor_CDM.CDM))

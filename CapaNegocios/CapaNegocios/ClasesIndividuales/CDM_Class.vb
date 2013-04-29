@@ -5,7 +5,6 @@
     Public minutosTotales As Integer
     Public paros_detalle(7, 1) As String
     Public comentarios(8, 0) As String
-    'Public modelo_afectado As Integer
     Public mejora As Double = 0
     Public costo As Double = 0
     Private Property usado As Boolean
