@@ -2,8 +2,8 @@
 Public Class frmGraficas    
 #Region "VARIABLES GLOBALES"
     Dim oGraficas As Graficas
-    Private vIdEquipo As Integer = 4
-    'Private vIdEquipo As Integer = 76
+    'Private vIdEquipo As Integer = 4
+    Private vIdEquipo As Integer = 76
     Dim colores(12) As String
     Dim rutaGrafica As String
     Dim cadenaXML As String
@@ -249,7 +249,8 @@ Public Class frmGraficas
             Dim desde As String = dtpDesde.Value.Year.ToString & "-" & dtpDesde.Value.Month.ToString & "-" & "01"
             Dim hasta As String = dtpDesde.Value.Year.ToString & "-" & dtpHasta.Value.Month.ToString & "-" & DateTime.DaysInMonth(dtpHasta.Value.Year, dtpHasta.Value.Month)
             cadenaWHERE = cadenaWHERE & "dia_asignado between '" & desde & "' and '" & hasta & "'"
-            cadenaGroup = "datepart(year,dia_asignado), datepart(month,dia_asignado)"
+            ''cadenaGroup = "datepart(year,dia_asignado), datepart(month,dia_asignado)"
+            cadenaGroup = "dia_asignado"
         End If
 
         If rbtOEE.Checked Then
@@ -261,7 +262,7 @@ Public Class frmGraficas
         ElseIf rbtSeg.Checked Then
 
         ElseIf rbt5s.Checked Then
-            cadenaWHERE = cadenaWHERE & " group by cadena, componente, linea, equipo, PROMEDIO, " & cadenaGroup & ", dia_asignado order by " & cadenaGroup
+            cadenaWHERE = cadenaWHERE & " group by cadena, componente, linea, equipo, PROMEDIO, " & cadenaGroup & " order by " & cadenaGroup
         ElseIf rbtGente.Checked Then
 
         End If
@@ -396,14 +397,12 @@ Public Class frmGraficas
         cadenaXML += " </dataset>"
     End Sub
 #End Region
-
 #Region "ESTABLECE 5S 1 EQUIPO 1 LINEA"
     Private Sub establece_5S(ByVal cadena As String, ByVal color As String)
         Dim promedio5S As Double = 0
         Dim contador As Integer = 0
         Dim vDT As DataTable
         cadenaXML += "<dataset seriesName='5s' color='" & color & "' anchorBorderColor='" & contorno_anchor & "' anchorBgColor='" & color & "' anchorRadius='" & radio_anchor & "'>"
-
         If rbtMeses.Checked Then
             vDT = oGraficas.ejecutarVista(cadena, cadenaWHERE)
             For Each vDR As DataRow In vDT.Rows
@@ -417,51 +416,43 @@ Public Class frmGraficas
         cadenaXML += " </dataset>"
     End Sub
 #End Region
-
 #Region "ESTABLECE 5S 1 EQUIPO LINEAS ACUMULADAS"
     Private Sub establece5S_Acumulado(ByVal cadena As String, ByVal color As String)
-        Dim promDia As Double = 0
-        Dim promAcumulado As Double = 0
-        Dim promFinal As Double = 0
+        Dim vResultado5s As Double = 0
+        Dim vFecha_Actual As DateTime
+        Dim promMes As Double = 0
+        Dim promAnual As Double = 0
         Dim contador As Integer = 0
-        Dim vContador_Dias As Integer = 0
         Dim vDT As DataTable
         cadenaXML += "<dataset seriesName='5S' color='" & color & "' anchorBorderColor='" & contorno_anchor & "' anchorBgColor='" & color & "' anchorRadius='" & radio_anchor & "'>"
-        Dim oee As Double = 0
-        Dim vFecha_Actual As DateTime
+
         If rbtMeses.Checked Then
             vDT = oGraficas.ejecutarVista(cadena, cadenaWHERE)
             vFecha_Actual = vDT.Rows(0).Item("DIA_ASIGNADO").ToString
             For Each vDR As DataRow In vDT.Rows
-                If vDR("TIPO_REGISTRO") = "P" And vFecha_Actual = vDR("DIA_ASIGNADO") Then
-                    oee = vDR(("oee")) * 100
-                    promDia = promDia + oee
+                If vFecha_Actual = vDR("DIA_ASIGNADO") Then
+                    vResultado5s = vDR("PROMEDIO")
+                    promMes = promMes + vResultado5s
                     contador = contador + 1
-                    'ElseIf vDR("TIPO_REGISTRO") = "D" Then
-                ElseIf vDR("TIPO_REGISTRO") = "P" And vFecha_Actual <> vDR("DIA_ASIGNADO") Then
-                    vContador_Dias = vContador_Dias + 1
-                    promDia = promDia / contador
-                    promAcumulado = promAcumulado + promDia
-                    cadenaXML += " <set value='" & promDia.ToString & "'/>"
+                ElseIf vFecha_Actual <> vDR("DIA_ASIGNADO") Then
+                    promAnual = promMes / contador
+                    cadenaXML += " <set value='" & promAnual.ToString & "'/>"
                     vFecha_Actual = vDR("DIA_ASIGNADO")
-                    promDia = 0
+                    promAnual = 0
                     contador = 0
-                    If vDR("TIPO_REGISTRO") <> "D" Then
-                        oee = vDR(("oee")) * 100
-                        promDia = promDia + oee
-                        contador = contador + 1
-                        promDia = promDia / contador
-                    End If
+                    promMes = 0
                 End If
+                'vResultado5s = vDR("PROMEDIO")
+                'promMes = promMes + vResultado5s
+                'contador = contador + 1
             Next
-            vContador_Dias = vContador_Dias + 1
-            promDia = promDia / contador
-            promAcumulado = promAcumulado + promDia
-            cadenaXML += " <set value='" & promDia.ToString & "'/>"
+            promAnual = promMes / contador
+            cadenaXML += " <set value='" & promAnual.ToString & "'/>"
+            cadenaXML += " </dataset>"
         End If
-        promFinal = promAcumulado / vContador_Dias
-        cadenaXML += " <set value='" & promFinal.ToString & "' color='" & colores(1) & "'/>"
-        cadenaXML += " </dataset>"
+        'promAnual = promMes / contador
+        'cadenaXML += " <set value='" & promAnual.ToString & "' color='" & colores(1) & "'/>"
+        'cadenaXML += " </dataset>"
     End Sub
 #End Region
 
@@ -558,10 +549,16 @@ Public Class frmGraficas
     Private Sub rbtOEE_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles rbtOEE.CheckedChanged
         Habilita_Graficar()
         rbtStock.Enabled = False
-
+        rbtDia.Enabled = True
+        rbtMeses.Enabled = True
+        rbtAnos.Enabled = True
     End Sub
     Private Sub rbtNRFTi_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles rbtNRFTi.CheckedChanged
         Habilita_Graficar()
+
+        rbtDia.Enabled = True
+        rbtMeses.Enabled = True
+        rbtAnos.Enabled = True
     End Sub
 
     Private Sub rbtCosto_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles rbtCosto.CheckedChanged
@@ -632,7 +629,7 @@ Public Class frmGraficas
         End If
 
         rutaGrafica = "file://" & Application.StartupPath & "/FusionChartsFree/Charts/" & tipoGrafico & "?chartWidth=1240&chartHeight=400"
-        cadenaXML = rutaGrafica + "&dataXML=<graph YAxisMinValue='0' YAxisMaxValue='" & maxEjeY & "' numberSuffix='%25' caption='REPORTE DE RESULTADOS' subcaption='" & subcaption & "' YAxisName= '" & ejeY & "' xAxisName='F E C H A (s)' labeldisplay='rotate' decimalPrecision='2' rotateNames='1' formatNumberScale='0' thousandSeparator=',' bgcolor='ffffff' bgalpha='000000' showColumnShadow='1' showAlternateHGridColor='1' AlternateHGridColor='ff5904' divLineColor='ff5904' divLineAlpha='20' alternateHGridAlpha='5' canvasBorderColor='666666' baseFontColor='666666'>"
+        cadenaXML = rutaGrafica + "&dataXML=<graph YAxisMinValue='0' YAxisMaxValue='" & maxEjeY & "' numberSuffix='" & numberSuffix & "' caption='REPORTE DE RESULTADOS' subcaption='" & subcaption & "' YAxisName= '" & ejeY & "' xAxisName='F E C H A (s)' labeldisplay='rotate' decimalPrecision='2' rotateNames='1' formatNumberScale='0' thousandSeparator=',' bgcolor='ffffff' bgalpha='000000' showColumnShadow='1' showAlternateHGridColor='1' AlternateHGridColor='ff5904' divLineColor='ff5904' divLineAlpha='20' alternateHGridAlpha='5' canvasBorderColor='666666' baseFontColor='666666'>"
 
         Condicion_WHERE(cbxTodasLineas.Checked)
         If rbtOEE.Checked Then
@@ -660,11 +657,13 @@ Public Class frmGraficas
             'establece_fechas(5)
             'establece_OEE(colores(4))
         ElseIf rbt5s.Checked Then
-            cadenaSELECT = "SELECT PROMEDIO, DIA_ASIGNADO FROM VISTA_SELECCION_INDICADOR5"
             If cbxTodasLineas.Checked Then
-                ''establece_fechas(5)
-                ''establece_OEE_Acumulado(colores(0))
+                cadenaSELECT = "SELECT DISTINCT DIA_ASIGNADO FROM VISTA_SELECCION_INDICADOR5"
+                establece_fechas(cadenaSELECT)
+                cadenaSELECT = "SELECT PROMEDIO, DIA_ASIGNADO FROM VISTA_SELECCION_INDICADOR5"
+                establece5S_Acumulado(cadenaSELECT, colores(0))
             Else
+                cadenaSELECT = "SELECT PROMEDIO, DIA_ASIGNADO FROM VISTA_SELECCION_INDICADOR5"
                 establece_fechas_5s(cadenaSELECT)
                 establece_5S(cadenaSELECT, colores(12))
                 cadenaXML += "<trendlines> <line startValue='3' color='FF0000' displayValue='OBJETIVO' showOnTop='1'/> </trendlines>"
