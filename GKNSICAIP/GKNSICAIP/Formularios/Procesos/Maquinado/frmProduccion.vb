@@ -539,10 +539,6 @@ Public Class frmProduccion
             Return False
         End If
     End Function
-    Private Sub llena_formulario()
-        'actualiza_tabla_turno_minutos()
-        'calcula_Productividad()
-    End Sub
 #End Region
 #Region "Funciones para modulo Productividad"
     'Productividad

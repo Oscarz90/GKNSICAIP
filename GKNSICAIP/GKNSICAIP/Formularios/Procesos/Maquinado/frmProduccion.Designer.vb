@@ -1992,6 +1992,7 @@ Partial Class frmProduccion
         Me.Controls.Add(Me.titulo_banner_formulario)
         Me.Controls.Add(Me.banner_formulario)
         Me.Controls.Add(Me.TabContenido)
+        Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.MaximizeBox = False
         Me.MaximumSize = New System.Drawing.Size(1280, 768)
         Me.MinimumSize = New System.Drawing.Size(1270, 736)
