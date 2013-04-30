@@ -134,14 +134,11 @@ Public Class Modelo
                 vComando.CommandText = "get_lista_modelos_salida"
                 vComando.Parameters.Add("@cve_linea", SqlDbType.BigInt).Value = Me.vcve_linea
                 vComando.Parameters.Add("@cve_modelo", SqlDbType.VarChar).Value = Me.vcve_modelo
-                Dim obj As DataTable = oBD.EjecutaCommando(vComando)
-                'oBD.EjecutaProcedimientos(vComando)
-                'Me.vId = obj.Rows(0)(0)
+                Dim obj As DataTable = oBD.EjecutaCommando(vComando)            
                 scope.Complete()
                 Return obj
-            Catch 'ex As Exception
+            Catch
                 MsgBox("Error al obtener modelos de salida. CModelo_ERROR", vbCritical + vbOKOnly, "Error")
-                'Throw New Exception(ex.Message)
                 Return Nothing
             End Try
         End Using

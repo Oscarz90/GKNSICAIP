@@ -3,8 +3,7 @@ Public Class frmCDM
 #Region "Atributos"
     Private vdia_asignado As Date
 #End Region
-    'Private bDat As New ClaseBD
-    'Private oDataTable As New DataTables
+#Region "Otros atributos"
     Private contenedor As CDM_Class
     Private bandera_modelo As Boolean = False
     Private bandera_modelo_salida As Boolean = False
@@ -23,6 +22,7 @@ Public Class frmCDM
     Private mejora As Double = 0
     Private bandera_horas_inicio_fin As Boolean = False
     Private bandera_agrega_coment As Boolean = True
+#End Region
 #Region "Inicializando formulario"
     Public Sub New(ByRef obje As CDM_Class)
         InitializeComponent()
@@ -61,13 +61,10 @@ Public Class frmCDM
         paro_descr.Text = paro_desc
         minutosdisponibles = min_disp
         linea = line
-        inicializa_Horas_inicio_fin(turno)
-        'inicializa_Horas_inicio_fin(bDat.Realiza_Consulta_en_BD_SICAIP(bDat.get_hora_inicio_final(turno, 1)), bDat.Realiza_Consulta_en_BD_SICAIP(bDat.get_hora_inicio_final(turno, 2)))
+        inicializa_Horas_inicio_fin(turno)        
     End Sub
     '    Public Sub inicializa_Horas_inicio_fin(ByVal inicio As DateTime, ByVal final As DateTime)
     Public Sub inicializa_Horas_inicio_fin(ByVal turno As Integer)
-        'Dim ini As DateTime = Now.ToString("yyyy-MM-dd") & " " & Format(inicio, "HH:mm:ss")
-        'Dim fin As DateTime = Now.ToString("yyyy-MM-dd") & " " & Format(final, "HH:mm:ss")
         Dim oTurno As New Turno
         oTurno.cve_turno = turno
         oTurno.fecha_registro = Now.ToString("MM-dd-yyyy")
@@ -75,19 +72,7 @@ Public Class frmCDM
         Dim ini As DateTime = oTurno.inicio
         Dim fin As DateTime = oTurno.fin
         Dim actual As DateTime
-        actual = Now.ToString("yyyy-MM-dd HH:mm:ss")
-        '1
-        'Dim i, f As Integer
-        'i = CInt(Format(inicio, "HH"))
-        'f = CInt(Format(final, "HH"))
-        'If (i > f) Then
-        'fin = fin.AddHours(2)
-        'If actual >= ini Then
-        'fin = fin.AddDays(1)
-        'ElseIf actual <= fin Then
-        'ini = ini.AddDays(-1)
-        'End If
-        'End If
+        actual = Now.ToString("yyyy-MM-dd HH:mm:ss")    
         dtpInicio.MinDate = ini
         dtpInicio.MaxDate = fin
         dtpInicio.Value = ini
@@ -127,9 +112,8 @@ Public Class frmCDM
 #Region "Validaciones"
     Private Function se_puede_añadir_paro(ByVal min As Integer) As Boolean
         If Convert.ToInt16(txtMinutosTotales.Text) = 0 Then
-
             Return False
-        ElseIf Convert.ToInt32(txtMinutosTotales.Text) <= min Then
+        ElseIf Convert.ToInt16(txtMinutosTotales.Text) <= min Then
             Return True
         Else
             Return False
@@ -179,7 +163,7 @@ Public Class frmCDM
             If id_CDM = 0 Then
                 id_CDM = Nothing
             End If
-            contenedor.set_Values(id_CDM, dtpInicio.Value.ToString("yyyy-MM-dd HH:mm:ss"), dtpFinal.Value.ToString("yyyy-MM-dd HH:mm:ss"), Convert.ToInt32(txtMinutosTotales.Text) - minutosDetParos, paro_detalle, paro_comentarios, mejora, costo)
+            contenedor.set_Values(id_CDM, dtpInicio.Value.ToString("dd-MM-yyyy HH:mm"), dtpFinal.Value.ToString("dd-MM-yyyy HH:mm"), Convert.ToInt32(txtMinutosTotales.Text) - minutosDetParos, paro_detalle, paro_comentarios, mejora, costo)
             salir()
         Else
             MsgBox("Los minutos disponibles son insuficientes o esta tratando de insertar un paro con 0 minutos.", vbCritical + vbOKOnly, "Error")
@@ -214,7 +198,7 @@ Public Class frmCDM
             Dim oModelo As New Modelo
             oModelo.cve_modelo = cbxModeloinicial.SelectedValue
             oModelo.Cargar()
-            MsgBox(oModelo.descripcion)
+            'MsgBox(oModelo.descripcion)
             txtModeloinicial.Text = oModelo.descripcion
             llena_lista_modelos_salida(cbxModeloinicial.SelectedValue)
             If bandera_modelo_salida And cbxModelofinal.SelectedIndex <> -1 Then
@@ -250,35 +234,24 @@ Public Class frmCDM
             Dim oModelo As New Modelo
             oModelo.cve_modelo = cbxModelofinal.SelectedValue
             oModelo.Cargar()
-            txtModelofinal.Text = oModelo.descripcion
-            'txtModelofinal.Text = bDat.Realiza_Consulta_en_BD_SICAIP(bDat.get_descripcion_modelos(cbxModelofinal.SelectedValue))
-            'sustituye
-
-
-
+            txtModelofinal.Text = oModelo.descripcion        
             If cbxModelofinal.SelectedIndex <> -1 Then
 
                 Dim oCDM As New CDM
                 oCDM.cve_linea = linea
                 oCDM.cve_modelo_inicial = cbxModeloinicial.SelectedValue
                 oCDM.cve_modelo_final = cbxModelofinal.SelectedValue
+                MsgBox(cbxModeloinicial.SelectedValue)
+                MsgBox(cbxModelofinal.SelectedValue)
+
                 oCDM.obtiene_tiempo_de_cdm()
+
                 id_CDM = oCDM.cve_CDM
+                MsgBox(id_CDM)
                 tiempo_CDM = oCDM.tiempo
-                'Dim lector As OleDb.OleDbDataReader
-                'Try
-                'bDat.Realizar_Conexion_SICAIP()
-                'lector = bDat.Realiza_Consulta_Tabla_en_BD_SICAIP(bDat.get_CDM_tiempo(linea, cbxModeloinicial.SelectedValue, cbxModelofinal.SelectedValue))
-                'While lector.Read
-                'id_CDM = lector.Item(0).ToString()
-                'tiempo_CDM = lector.Item(1).ToString()
-                'End While
-                'bDat.Mata_Conexion_SICAIP()
+                MsgBox(tiempo_CDM)
                 calcula_costo()
-                calcula_mejora()
-                'Catch ex As Exception
-                '                bDat.Mata_Conexion_SICAIP()
-                '               End Try
+                calcula_mejora()                
             End If
         End If
         If bandera_modelo And cbxModeloinicial.SelectedIndex <> -1 And bandera_modelo_salida And cbxModelofinal.SelectedIndex <> -1 Then
@@ -558,17 +531,13 @@ Public Class frmCDM
         costo = 0
         If bandera_modelo And bandera_modelo_salida And cbxModeloinicial.SelectedIndex <> -1 And cbxModelofinal.SelectedIndex <> -1 And txtMinutosTotales.Text <> "" And txtMinutosTotales.Text <> "0" Then
             If Convert.ToDouble(txtMinutosTotales.Text) > tiempo_CDM Then
-                'Try
-                'costocomponente = bDat.Realiza_Consulta_en_BD_SICAIP(bDat.get_costo_por_componente(linea))
+                MsgBox("ya entre")
                 Dim oComponente As New Componente
                 oComponente.cve_linea = linea
                 oComponente.obtiene_precio_componente_linea()
                 costocomponente = oComponente.precio
                 costo = (Convert.ToDouble(txtMinutosTotales.Text) - tiempo_CDM) * costocomponente
                 lblcosto.Text = costo
-                'Catch ex As Exception
-                'bDat.Mata_Conexion_SICAIP()
-                'End Try
             Else
                 costo = 0
                 lblcosto.Text = costo
@@ -598,15 +567,4 @@ Public Class frmCDM
             End If
         End If
     End Sub
-
-
-
-
-
-
-
-
-
-
-
 End Class

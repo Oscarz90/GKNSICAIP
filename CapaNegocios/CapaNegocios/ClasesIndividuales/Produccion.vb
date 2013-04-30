@@ -176,7 +176,6 @@ Public Class Produccion
         End Using
     End Function
     Public Sub elimina_fila_productividad_gridview()
-        'Dim oBD As New CapaDatos.CapaDatos("Data Source= Oscar-PC\SQLExpress; initial Catalog=GKNSICAIP; Integrated Security = True")
         Using scope As New TransactionScope
             Try
                 Dim vComando As New SqlClient.SqlCommand
