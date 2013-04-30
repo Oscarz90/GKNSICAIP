@@ -134,11 +134,11 @@ Public Class Graficas
 
 #End Region
 
-    Public Function ejecutarVista(ByVal indicador As Integer, ByVal cadenaWHERE As String) As DataTable
+    Public Function ejecutarVista(ByVal cadena As String, ByVal cadenaWHERE As String) As DataTable
         Dim vRetorno As DataTable = Nothing
         Dim vDT As DataTable = Nothing
         Try
-            vDT = oBD.ObtenerTabla("SELECT DISTINCT DIA_ASIGNADO FROM VISTA_SELECCION_INDICADOR" & indicador & " " & cadenaWHERE)
+            vDT = oBD.ObtenerTabla("" & cadena & " " & cadenaWHERE)
             If vDT IsNot Nothing Then
                 vRetorno = vDT
             Else
@@ -150,21 +150,21 @@ Public Class Graficas
         Return vRetorno
     End Function
 
-    Public Function ejecutarVistaOEE(ByVal cadenaWHERE As String) As DataTable
-        Dim vRetorno As DataTable = Nothing
-        Dim vDT As DataTable = Nothing
-        Try
-            vDT = oBD.ObtenerTabla("select OEE, TIPO_REGISTRO, DIA_ASIGNADO from VISTA_SELECCION_INDICADOR1 " & cadenaWHERE)
-            If vDT IsNot Nothing Then
-                vRetorno = vDT
-            Else
-                vRetorno = Nothing
-            End If
-        Catch ex As Exception
+    'Public Function ejecutarVista5s(ByVal cadenaWHERE As String) As DataTable
+    '    Dim vRetorno As DataTable = Nothing
+    '    Dim vDT As DataTable = Nothing
+    '    Try
+    '        vDT = oBD.ObtenerTabla("select PROMEDIO, DIA_ASIGNADO from VISTA_SELECCION_INDICADOR5 " & cadenaWHERE)
+    '        If vDT IsNot Nothing Then
+    '            vRetorno = vDT
+    '        Else
+    '            vRetorno = Nothing
+    '        End If
+    '    Catch ex As Exception
 
-        End Try
-        Return vRetorno
-    End Function
+    '    End Try
+    '    Return vRetorno
+    'End Function
 
 
 End Class
