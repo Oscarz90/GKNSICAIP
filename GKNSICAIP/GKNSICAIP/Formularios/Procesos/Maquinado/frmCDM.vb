@@ -163,7 +163,7 @@ Public Class frmCDM
             If id_CDM = 0 Then
                 id_CDM = Nothing
             End If
-            contenedor.set_Values(id_CDM, dtpInicio.Value.ToString("yyyy-MM-dd HH:mm:ss"), dtpFinal.Value.ToString("yyyy-MM-dd HH:mm:ss"), Convert.ToInt32(txtMinutosTotales.Text) - minutosDetParos, paro_detalle, paro_comentarios, mejora, costo)
+            contenedor.set_Values(id_CDM, dtpInicio.Value.ToString("dd-MM-yyyy HH:mm"), dtpFinal.Value.ToString("dd-MM-yyyy HH:mm"), Convert.ToInt32(txtMinutosTotales.Text) - minutosDetParos, paro_detalle, paro_comentarios, mejora, costo)
             salir()
         Else
             MsgBox("Los minutos disponibles son insuficientes o esta tratando de insertar un paro con 0 minutos.", vbCritical + vbOKOnly, "Error")
@@ -198,7 +198,7 @@ Public Class frmCDM
             Dim oModelo As New Modelo
             oModelo.cve_modelo = cbxModeloinicial.SelectedValue
             oModelo.Cargar()
-            MsgBox(oModelo.descripcion)
+            'MsgBox(oModelo.descripcion)
             txtModeloinicial.Text = oModelo.descripcion
             llena_lista_modelos_salida(cbxModeloinicial.SelectedValue)
             If bandera_modelo_salida And cbxModelofinal.SelectedIndex <> -1 Then
@@ -241,9 +241,15 @@ Public Class frmCDM
                 oCDM.cve_linea = linea
                 oCDM.cve_modelo_inicial = cbxModeloinicial.SelectedValue
                 oCDM.cve_modelo_final = cbxModelofinal.SelectedValue
+                MsgBox(cbxModeloinicial.SelectedValue)
+                MsgBox(cbxModelofinal.SelectedValue)
+
                 oCDM.obtiene_tiempo_de_cdm()
+
                 id_CDM = oCDM.cve_CDM
-                tiempo_CDM = oCDM.tiempo                
+                MsgBox(id_CDM)
+                tiempo_CDM = oCDM.tiempo
+                MsgBox(tiempo_CDM)
                 calcula_costo()
                 calcula_mejora()                
             End If
@@ -524,7 +530,8 @@ Public Class frmCDM
         Dim costocomponente As Double
         costo = 0
         If bandera_modelo And bandera_modelo_salida And cbxModeloinicial.SelectedIndex <> -1 And cbxModelofinal.SelectedIndex <> -1 And txtMinutosTotales.Text <> "" And txtMinutosTotales.Text <> "0" Then
-            If Convert.ToDouble(txtMinutosTotales.Text) > tiempo_CDM Then                
+            If Convert.ToDouble(txtMinutosTotales.Text) > tiempo_CDM Then
+                MsgBox("ya entre")
                 Dim oComponente As New Componente
                 oComponente.cve_linea = linea
                 oComponente.obtiene_precio_componente_linea()

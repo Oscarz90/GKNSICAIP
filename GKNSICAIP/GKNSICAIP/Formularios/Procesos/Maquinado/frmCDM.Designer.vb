@@ -418,7 +418,6 @@ Partial Class frmCDM
         Me.Label12.Size = New System.Drawing.Size(45, 13)
         Me.Label12.TabIndex = 192
         Me.Label12.Text = "Label12"
-        Me.Label12.Visible = False
         '
         'cmdParoL
         '
@@ -576,7 +575,6 @@ Partial Class frmCDM
         Me.lblcosto.Size = New System.Drawing.Size(41, 16)
         Me.lblcosto.TabIndex = 204
         Me.lblcosto.Text = "costo"
-        Me.lblcosto.Visible = False
         '
         'lblmejora
         '
@@ -587,7 +585,6 @@ Partial Class frmCDM
         Me.lblmejora.Size = New System.Drawing.Size(53, 16)
         Me.lblmejora.TabIndex = 205
         Me.lblmejora.Text = "mejora"
-        Me.lblmejora.Visible = False
         '
         'cmdCDM
         '

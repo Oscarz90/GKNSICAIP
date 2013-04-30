@@ -35,8 +35,8 @@ Public Class Detalle_CDM_Total
     Private vcve_CDM As Long
     Private vmejora As Double
     Private vcosto As Double
-    Private vfecha_inicial As String
-    Private vfecha_final As String
+    Private vfecha_inicial As DateTime
+    Private vfecha_final As DateTime
 #End Region
 #Region "Propiedades"
 
@@ -80,19 +80,19 @@ Public Class Detalle_CDM_Total
             vcosto = value
         End Set
     End Property
-    Public Property fecha_inicial() As String
+    Public Property fecha_inicial() As DateTime
         Get
             Return vfecha_inicial
         End Get
-        Set(ByVal value As String)
+        Set(ByVal value As DateTime)
             vfecha_inicial = value
         End Set
     End Property
-    Public Property fecha_final() As String
+    Public Property fecha_final() As DateTime
         Get
             Return vfecha_final
         End Get
-        Set(ByVal value As String)
+        Set(ByVal value As DateTime)
             vfecha_final = value
         End Set
     End Property
