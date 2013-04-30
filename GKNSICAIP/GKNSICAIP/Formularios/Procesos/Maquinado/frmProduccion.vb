@@ -279,6 +279,7 @@ Public Class frmProduccion
         If cbxModeloProductividad.SelectedIndex <> -1 Then
             valida_botones_productividad()
             obten_descripcion_modelo(txtModeloDescripcionProductividad, cbxModeloProductividad)
+            piezas_por_hora_modelo()
             deshabilitar_btn_quitar_modelo()
         End If
     End Sub
@@ -591,6 +592,17 @@ Public Class frmProduccion
             Return False
         End If
     End Function
+    Private Sub piezas_por_hora_modelo()
+        txtPzasPorHora.Text = "0"        
+        Dim PzasporHora As Double = 0
+        If cbxModeloProductividad.SelectedIndex <> -1 And cbxLinea.SelectedIndex <> -1 And flgBanderacbxModelos And flgBanderacbxLineas Then
+            Dim oTC As New TC
+            oTC.cve_linea = cbxLinea.SelectedValue
+            oTC.cve_modelo = cbxModeloProductividad.SelectedValue
+            oTC.obtener_piezas_por_hora()
+            txtPzasPorHora.Text = oTC.piezas_por_hora
+        End If
+    End Sub
     'Desechos
     Private Sub add_desecho()
         Dim oDesecho As New Desecho
