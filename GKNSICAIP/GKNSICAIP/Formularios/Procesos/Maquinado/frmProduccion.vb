@@ -112,21 +112,23 @@ Public Class frmProduccion
         llena_cbx_Turnos()
         llena_cbx_Lineas()
         llena_cbx_Modelos()
-        'Rechazos
-        llena_cbx_tipo_rechazos()
-        llena_rechazo_gridview()
         'Productividad
         llena_productividad_gridview()
         llena_desecho_gridview()
-        actualiza_tabla_turno_minutos()
-        calcula_Productividad()
+        'Rechazos
+        llena_cbx_tipo_rechazos()
+        llena_rechazo_gridview()
         'Paros
         llena_cbx_Maquinas()
         llena_cbx_Paros()
         llena_paro_gridview()
+        'CDM
         contenedor_CDM = New CDM_Class
         contenedor_CDM.set_not_used()
         obtenedor_CDM = New frmCDM(contenedor_CDM)
+        'Productividad
+        actualiza_tabla_turno_minutos()
+        calcula_Productividad()
     End Sub
 #End Region
 #Region "LLenado ComboBoxs"
@@ -398,6 +400,7 @@ Public Class frmProduccion
         add_paro()
         limpia_paros()
         llena_paro_gridview()
+        actualiza_tabla_turno_minutos()
         calcula_Productividad()
     End Sub
 #End Region
@@ -536,6 +539,10 @@ Public Class frmProduccion
             Return False
         End If
     End Function
+    Private Sub llena_formulario()
+        'actualiza_tabla_turno_minutos()
+        'calcula_Productividad()
+    End Sub
 #End Region
 #Region "Funciones para modulo Productividad"
     'Productividad
@@ -588,8 +595,6 @@ Public Class frmProduccion
             Return False
         End If
     End Function
-
-
     'Desechos
     Private Sub add_desecho()
         Dim oDesecho As New Desecho
@@ -632,18 +637,31 @@ Public Class frmProduccion
 #End Region
 #Region "Funciones para modulo de Paros"
     'Suma Paros planeados y no planeados
-    Private Function get_suma_paros_planeados() As Integer
-        Return 0
+    Private Function get_suma_paros_planeados() As Double
+        Dim Total As Double
+        For Each row As DataGridViewRow In grdDetalleParo.Rows
+            If Convert.ToString(row.Cells(4).Value) = "Z" Then
+                MsgBox("entre")
+                Total += Convert.ToDouble(Val(row.Cells(6).Value))
+            End If
+        Next
+        Return Total
     End Function
-    Private Function get_suma_paros_no_planeados() As Integer
-        Return 0
+    Private Function get_suma_paros_no_planeados() As Double
+        Dim Total As Double
+        For Each row As DataGridViewRow In grdDetalleParo.Rows
+            If Convert.ToString(row.Cells(4).Value).ToString <> "Z" Then
+                Total += Convert.ToDouble(Val(row.Cells(6).Value))
+            End If
+        Next
+        Return Total
     End Function
     'Paros
     Private Sub add_paro()
         Dim oParo As New Registro_Paro
         oParo.Cve_registro_turno = get_registro_del_turno()
         oParo.Cod_empleado_registro = vcodigo_empleado
-        oParo.Fecha_registro = Now.ToString("MM-dd-yyyy HH:mm")
+        oParo.Fecha_registro = Convert.ToDateTime(Now.ToString("dd-MM-yyyy HH:mm"))
         oParo.Cve_paro = cbxTipoParo.SelectedValue
         oParo.Cve_maquina = cbxMaquina.SelectedValue
         oParo.Minutos = Long.Parse(txtMinutosParo.Text)
@@ -699,11 +717,9 @@ Public Class frmProduccion
         'crea el nuevo objeto de CDM
         contenedor_CDM = New CDM_Class
         obtenedor_CDM = New frmCDM(contenedor_CDM)
-
         txtMinutosParo.Enabled = True
         txtDetallesParo.Enabled = True
-        cbxTipoParo.SelectedIndex = -1
-        cbxMaquina.SelectedIndex = -1
+        limpia_paros()
     End Sub
     Private Sub add_Paro_CDM()
         Dim cve_registro_paro As Long
@@ -726,9 +742,7 @@ Public Class frmProduccion
         oDetalle_CDM_total.fecha_inicial = Convert.ToDateTime(contenedor_CDM.fecha_inicio)
         oDetalle_CDM_total.fecha_final = Convert.ToDateTime(contenedor_CDM.fecha_final)
         oRegistro_Paro.captura_CDM(oDetalle_CDM_total)
-        cve_registro_paro = oRegistro_Paro.Cve_registro_paro
-        'id insertado
-        'oRegistro_Paro.Cve_registro_paro
+        cve_registro_paro = oRegistro_Paro.Cve_registro_paro    
         oRegistro_Paro = Nothing
 
         Dim i As Integer
@@ -744,30 +758,9 @@ Public Class frmProduccion
                 oRegistro_Paro.Minutos = contenedor_CDM.paros_detalle(i, 1)
                 oRegistro_Paro.Detalles = contenedor_CDM.comentarios(i, 0)
                 oRegistro_Paro.captura_detalle_CDM()
-                'bDat.Realiza_Accion_en_BD_SICAIP(bDat.captura_Paros_detalles_CDM(Now.ToString("yyyy-MM-dd HH:mm:ss"), contenedor_CDM.paros_detalle(i, 1), idEquipo, cbxMaquina.SelectedValue, contenedor_CDM.comentarios(i, 0), cbxTurnos.SelectedValue, cbxLinea.SelectedValue, contenedor_CDM.mejora, contenedor_CDM.fecha_inicio, contenedor_CDM.fecha_final, cod_reg_paro, contenedor_CDM.paros_detalle(i, 0), contenedor_CDM.CDM))
                 oRegistro_Paro = Nothing
             End If
         Next
-
-
-
-
-        'aaaaaaaaaaaa
-        'Dim cod_reg_paro As Integer
-        'Try
-        'cod_reg_paro = bDat.Realiza_Consulta_en_BD_SICAIP(bDat.captura_Paros_CDM(Now.ToString("yyyy-MM-dd HH:mm:ss"), contenedor_CDM.minutosTotales, idEquipo, cbxMaquina.SelectedValue, cbxTipoParo.SelectedValue, contenedor_CDM.comentarios(8, 0), cbxTurnos.SelectedValue, cbxLinea.SelectedValue, contenedor_CDM.mejora, contenedor_CDM.costo, contenedor_CDM.fecha_inicio, contenedor_CDM.fecha_final, contenedor_CDM.CDM))
-
-        'Dim i As Integer
-        'For i = 0 To contenedor_CDM.paros_detalle.GetUpperBound(0)
-        'If contenedor_CDM.paros_detalle(i, 0) <> Nothing Then
-        'bDat.Realiza_Accion_en_BD_SICAIP(bDat.captura_Paros_detalles_CDM(Now.ToString("yyyy-MM-dd HH:mm:ss"), contenedor_CDM.paros_detalle(i, 1), idEquipo, cbxMaquina.SelectedValue, contenedor_CDM.comentarios(i, 0), cbxTurnos.SelectedValue, cbxLinea.SelectedValue, contenedor_CDM.mejora, contenedor_CDM.fecha_inicio, contenedor_CDM.fecha_final, cod_reg_paro, contenedor_CDM.paros_detalle(i, 0), contenedor_CDM.CDM))
-        'End If
-        'Next
-        'Catch ex As Exception
-        '   MsgBox("Error al insertar CDM Clave del Error: FPR_013", vbCritical + vbOKOnly, "Error")
-        '  bDat.Mata_Conexion_SICAIP()
-        'End Try
-        'Llena_lst_Paros_listview()
     End Sub
 #End Region
 End Class

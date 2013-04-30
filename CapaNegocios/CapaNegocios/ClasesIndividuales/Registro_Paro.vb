@@ -42,7 +42,7 @@ Public Class Registro_Paro
     End Function
     Public Sub Registrar() Implements IIndividual.Registrar
         Dim queryInsert As String = "insert into registro_paro(cve_registro_turno,cod_empleado_registro,fecha_registro,cve_paro,cve_maquina,minutos,detalles,estatus) " &
-                              "values(" & vCve_registro_turno & ",'" & vCod_empleado_registro & "','" & vFecha_registro & "'," & vCve_paro & "," & vCve_maquina & "," & vMinutos & ",'" & vDetalles & "','" & vEstatus & "')"
+                              "values(" & vCve_registro_turno & ",'" & vCod_empleado_registro & "','" & vFecha_registro.ToString("MM-dd-yyyy HH:mm") & "'," & vCve_paro & "," & vCve_maquina & "," & vMinutos & ",'" & vDetalles & "','" & vEstatus & "')"
         Try
             oBD.EjecutarQuery(queryInsert)
         Catch
@@ -187,7 +187,7 @@ Public Class Registro_Paro
 #Region "Metodos formulario de produccion"
     Public Function llena_paro_gridview() As DataTable
         Dim obj As DataTable
-        Dim queryLlenagridview As String = "select rp.cve_registro_paro,rt.cve_linea,rp.cve_maquina,rp.cve_paro,p.cod_paro,rp.minutos,mq.clave_maquina,mq.maquina,rp.detalles " &
+        Dim queryLlenagridview As String = "select rp.cve_registro_paro,rt.cve_linea,rp.cve_maquina,rp.cve_paro,p.cod_paro,p.paro,rp.minutos,mq.clave_maquina,mq.maquina,rp.detalles " &
             "from registro_paro rp " &
             "join maquina mq on rp.cve_maquina=mq.cve_maquina " &
             "join registro_turno rt on rp.cve_registro_turno=rt.cve_registro_turno " &
