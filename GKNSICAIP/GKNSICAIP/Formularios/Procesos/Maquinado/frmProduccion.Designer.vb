@@ -110,15 +110,6 @@ Partial Class frmProduccion
         Me.Label31 = New System.Windows.Forms.Label()
         Me.grpParos = New System.Windows.Forms.GroupBox()
         Me.grdDetalleParo = New System.Windows.Forms.DataGridView()
-        Me.colcve_registro_paro = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.colcve_lineab = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.colcve_maquina = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.colcve_paro = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.colcod_paro = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.colminutos = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.colclave_maquina = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.colmaquina = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.coldetalles = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.txtParosDescripcion = New System.Windows.Forms.TextBox()
         Me.txtMaquinaDescripcion = New System.Windows.Forms.TextBox()
         Me.txtMinutosParo = New System.Windows.Forms.TextBox()
@@ -193,6 +184,16 @@ Partial Class frmProduccion
         Me.lblNombreEquipo = New System.Windows.Forms.Label()
         Me.Label58 = New System.Windows.Forms.Label()
         Me.cbxLinea = New System.Windows.Forms.ComboBox()
+        Me.colcve_registro_paro = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.colcve_lineab = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.colcve_maquina = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.colcve_paro = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.colcod_paro = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.paro = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.colminutos = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.colclave_maquina = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.colmaquina = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.coldetalles = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.TabContenido.SuspendLayout()
         Me.tabPageProductividad.SuspendLayout()
         Me.grpDesechos.SuspendLayout()
@@ -1139,75 +1140,12 @@ Partial Class frmProduccion
         Me.grdDetalleParo.AllowUserToAddRows = False
         Me.grdDetalleParo.AllowUserToDeleteRows = False
         Me.grdDetalleParo.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.grdDetalleParo.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.colcve_registro_paro, Me.colcve_lineab, Me.colcve_maquina, Me.colcve_paro, Me.colcod_paro, Me.colminutos, Me.colclave_maquina, Me.colmaquina, Me.coldetalles})
+        Me.grdDetalleParo.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.colcve_registro_paro, Me.colcve_lineab, Me.colcve_maquina, Me.colcve_paro, Me.colcod_paro, Me.paro, Me.colminutos, Me.colclave_maquina, Me.colmaquina, Me.coldetalles})
         Me.grdDetalleParo.Location = New System.Drawing.Point(6, 171)
         Me.grdDetalleParo.Name = "grdDetalleParo"
         Me.grdDetalleParo.ReadOnly = True
         Me.grdDetalleParo.Size = New System.Drawing.Size(824, 231)
         Me.grdDetalleParo.TabIndex = 324
-        '
-        'colcve_registro_paro
-        '
-        Me.colcve_registro_paro.DataPropertyName = "cve_registro_paro"
-        Me.colcve_registro_paro.HeaderText = "cve_registro_paro"
-        Me.colcve_registro_paro.Name = "colcve_registro_paro"
-        Me.colcve_registro_paro.ReadOnly = True
-        '
-        'colcve_lineab
-        '
-        Me.colcve_lineab.DataPropertyName = "cve_linea"
-        Me.colcve_lineab.HeaderText = "cve_linea"
-        Me.colcve_lineab.Name = "colcve_lineab"
-        Me.colcve_lineab.ReadOnly = True
-        '
-        'colcve_maquina
-        '
-        Me.colcve_maquina.DataPropertyName = "cve_maquina"
-        Me.colcve_maquina.HeaderText = "cve_maquina"
-        Me.colcve_maquina.Name = "colcve_maquina"
-        Me.colcve_maquina.ReadOnly = True
-        '
-        'colcve_paro
-        '
-        Me.colcve_paro.DataPropertyName = "cve_paro"
-        Me.colcve_paro.HeaderText = "cve_paro"
-        Me.colcve_paro.Name = "colcve_paro"
-        Me.colcve_paro.ReadOnly = True
-        '
-        'colcod_paro
-        '
-        Me.colcod_paro.DataPropertyName = "cod_paro"
-        Me.colcod_paro.HeaderText = "Paro"
-        Me.colcod_paro.Name = "colcod_paro"
-        Me.colcod_paro.ReadOnly = True
-        '
-        'colminutos
-        '
-        Me.colminutos.DataPropertyName = "minutos"
-        Me.colminutos.HeaderText = "Minutos"
-        Me.colminutos.Name = "colminutos"
-        Me.colminutos.ReadOnly = True
-        '
-        'colclave_maquina
-        '
-        Me.colclave_maquina.DataPropertyName = "clave_maquina"
-        Me.colclave_maquina.HeaderText = "Clave Maquina"
-        Me.colclave_maquina.Name = "colclave_maquina"
-        Me.colclave_maquina.ReadOnly = True
-        '
-        'colmaquina
-        '
-        Me.colmaquina.DataPropertyName = "maquina"
-        Me.colmaquina.HeaderText = "Maquina"
-        Me.colmaquina.Name = "colmaquina"
-        Me.colmaquina.ReadOnly = True
-        '
-        'coldetalles
-        '
-        Me.coldetalles.DataPropertyName = "detalles"
-        Me.coldetalles.HeaderText = "Detalles"
-        Me.coldetalles.Name = "coldetalles"
-        Me.coldetalles.ReadOnly = True
         '
         'txtParosDescripcion
         '
@@ -1966,6 +1904,76 @@ Partial Class frmProduccion
         Me.cbxLinea.Size = New System.Drawing.Size(234, 26)
         Me.cbxLinea.TabIndex = 309
         '
+        'colcve_registro_paro
+        '
+        Me.colcve_registro_paro.DataPropertyName = "cve_registro_paro"
+        Me.colcve_registro_paro.HeaderText = "cve_registro_paro"
+        Me.colcve_registro_paro.Name = "colcve_registro_paro"
+        Me.colcve_registro_paro.ReadOnly = True
+        '
+        'colcve_lineab
+        '
+        Me.colcve_lineab.DataPropertyName = "cve_linea"
+        Me.colcve_lineab.HeaderText = "cve_linea"
+        Me.colcve_lineab.Name = "colcve_lineab"
+        Me.colcve_lineab.ReadOnly = True
+        '
+        'colcve_maquina
+        '
+        Me.colcve_maquina.DataPropertyName = "cve_maquina"
+        Me.colcve_maquina.HeaderText = "cve_maquina"
+        Me.colcve_maquina.Name = "colcve_maquina"
+        Me.colcve_maquina.ReadOnly = True
+        '
+        'colcve_paro
+        '
+        Me.colcve_paro.DataPropertyName = "cve_paro"
+        Me.colcve_paro.HeaderText = "cve_paro"
+        Me.colcve_paro.Name = "colcve_paro"
+        Me.colcve_paro.ReadOnly = True
+        '
+        'colcod_paro
+        '
+        Me.colcod_paro.DataPropertyName = "cod_paro"
+        Me.colcod_paro.HeaderText = "Paro"
+        Me.colcod_paro.Name = "colcod_paro"
+        Me.colcod_paro.ReadOnly = True
+        '
+        'paro
+        '
+        Me.paro.DataPropertyName = "paro"
+        Me.paro.HeaderText = "Descripcion"
+        Me.paro.Name = "paro"
+        Me.paro.ReadOnly = True
+        '
+        'colminutos
+        '
+        Me.colminutos.DataPropertyName = "minutos"
+        Me.colminutos.HeaderText = "Minutos"
+        Me.colminutos.Name = "colminutos"
+        Me.colminutos.ReadOnly = True
+        '
+        'colclave_maquina
+        '
+        Me.colclave_maquina.DataPropertyName = "clave_maquina"
+        Me.colclave_maquina.HeaderText = "Clave Maquina"
+        Me.colclave_maquina.Name = "colclave_maquina"
+        Me.colclave_maquina.ReadOnly = True
+        '
+        'colmaquina
+        '
+        Me.colmaquina.DataPropertyName = "maquina"
+        Me.colmaquina.HeaderText = "Maquina"
+        Me.colmaquina.Name = "colmaquina"
+        Me.colmaquina.ReadOnly = True
+        '
+        'coldetalles
+        '
+        Me.coldetalles.DataPropertyName = "detalles"
+        Me.coldetalles.HeaderText = "Detalles"
+        Me.coldetalles.Name = "coldetalles"
+        Me.coldetalles.ReadOnly = True
+        '
         'frmProduccion
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -1984,6 +1992,7 @@ Partial Class frmProduccion
         Me.Controls.Add(Me.titulo_banner_formulario)
         Me.Controls.Add(Me.banner_formulario)
         Me.Controls.Add(Me.TabContenido)
+        Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.MaximizeBox = False
         Me.MaximumSize = New System.Drawing.Size(1280, 768)
         Me.MinimumSize = New System.Drawing.Size(1270, 736)
@@ -2184,6 +2193,7 @@ Partial Class frmProduccion
     Friend WithEvents colcve_maquina As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents colcve_paro As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents colcod_paro As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents paro As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents colminutos As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents colclave_maquina As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents colmaquina As System.Windows.Forms.DataGridViewTextBoxColumn
