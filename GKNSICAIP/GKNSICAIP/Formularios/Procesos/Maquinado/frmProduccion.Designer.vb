@@ -110,6 +110,16 @@ Partial Class frmProduccion
         Me.Label31 = New System.Windows.Forms.Label()
         Me.grpParos = New System.Windows.Forms.GroupBox()
         Me.grdDetalleParo = New System.Windows.Forms.DataGridView()
+        Me.colcve_registro_paro = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.colcve_lineab = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.colcve_maquina = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.colcve_paro = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.colcod_paro = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.paro = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.colminutos = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.colclave_maquina = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.colmaquina = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.coldetalles = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.txtParosDescripcion = New System.Windows.Forms.TextBox()
         Me.txtMaquinaDescripcion = New System.Windows.Forms.TextBox()
         Me.txtMinutosParo = New System.Windows.Forms.TextBox()
@@ -148,19 +158,6 @@ Partial Class frmProduccion
         Me.txtRechazoMotivo = New System.Windows.Forms.TextBox()
         Me.txtRechazosCantidad = New System.Windows.Forms.TextBox()
         Me.TabPage1 = New System.Windows.Forms.TabPage()
-        Me.TabPage2 = New System.Windows.Forms.TabPage()
-        Me.GroupBox2 = New System.Windows.Forms.GroupBox()
-        Me.ListView4 = New System.Windows.Forms.ListView()
-        Me.ColumnHeader12 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
-        Me.ColumnHeader13 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
-        Me.Label33 = New System.Windows.Forms.Label()
-        Me.Label45 = New System.Windows.Forms.Label()
-        Me.Button5 = New System.Windows.Forms.Button()
-        Me.Button6 = New System.Windows.Forms.Button()
-        Me.TextBox4 = New System.Windows.Forms.TextBox()
-        Me.ComboBox4 = New System.Windows.Forms.ComboBox()
-        Me.Label50 = New System.Windows.Forms.Label()
-        Me.Label55 = New System.Windows.Forms.Label()
         Me.grpSeguridad = New System.Windows.Forms.GroupBox()
         Me.ListView3 = New System.Windows.Forms.ListView()
         Me.ColumnHeader10 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
@@ -173,6 +170,18 @@ Partial Class frmProduccion
         Me.ComboBox3 = New System.Windows.Forms.ComboBox()
         Me.Label20 = New System.Windows.Forms.Label()
         Me.Label27 = New System.Windows.Forms.Label()
+        Me.TabPage2 = New System.Windows.Forms.TabPage()
+        Me.grpGente = New System.Windows.Forms.GroupBox()
+        Me.Label61 = New System.Windows.Forms.Label()
+        Me.txtDetallesGente = New System.Windows.Forms.TextBox()
+        Me.Label33 = New System.Windows.Forms.Label()
+        Me.Label45 = New System.Windows.Forms.Label()
+        Me.btnAgregarGente = New System.Windows.Forms.Button()
+        Me.btnQuitarGente = New System.Windows.Forms.Button()
+        Me.txtGenteCantidad = New System.Windows.Forms.TextBox()
+        Me.cbxTipoDetalleGente = New System.Windows.Forms.ComboBox()
+        Me.Label50 = New System.Windows.Forms.Label()
+        Me.Label55 = New System.Windows.Forms.Label()
         Me.titulo_banner_formulario = New System.Windows.Forms.Label()
         Me.banner_formulario = New System.Windows.Forms.PictureBox()
         Me.PictureBox1 = New System.Windows.Forms.PictureBox()
@@ -184,16 +193,6 @@ Partial Class frmProduccion
         Me.lblNombreEquipo = New System.Windows.Forms.Label()
         Me.Label58 = New System.Windows.Forms.Label()
         Me.cbxLinea = New System.Windows.Forms.ComboBox()
-        Me.colcve_registro_paro = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.colcve_lineab = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.colcve_maquina = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.colcve_paro = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.colcod_paro = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.paro = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.colminutos = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.colclave_maquina = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.colmaquina = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.coldetalles = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.TabContenido.SuspendLayout()
         Me.tabPageProductividad.SuspendLayout()
         Me.grpDesechos.SuspendLayout()
@@ -207,9 +206,10 @@ Partial Class frmProduccion
         Me.tabPageRechazos.SuspendLayout()
         Me.grpRechazos.SuspendLayout()
         CType(Me.grdDetalleRechazo, System.ComponentModel.ISupportInitialize).BeginInit()
-        Me.TabPage2.SuspendLayout()
-        Me.GroupBox2.SuspendLayout()
+        Me.TabPage1.SuspendLayout()
         Me.grpSeguridad.SuspendLayout()
+        Me.TabPage2.SuspendLayout()
+        Me.grpGente.SuspendLayout()
         CType(Me.banner_formulario, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
@@ -482,7 +482,7 @@ Partial Class frmProduccion
         Me.grpProductividad.Size = New System.Drawing.Size(750, 413)
         Me.grpProductividad.TabIndex = 1
         Me.grpProductividad.TabStop = False
-        Me.grpProductividad.Text = "1.-Productividad"
+        Me.grpProductividad.Text = "Productividad"
         '
         'grdDetalleProductividad
         '
@@ -1133,7 +1133,7 @@ Partial Class frmProduccion
         Me.grpParos.Size = New System.Drawing.Size(836, 408)
         Me.grpParos.TabIndex = 15
         Me.grpParos.TabStop = False
-        Me.grpParos.Text = "PAROS"
+        Me.grpParos.Text = "Paros"
         '
         'grdDetalleParo
         '
@@ -1144,8 +1144,79 @@ Partial Class frmProduccion
         Me.grdDetalleParo.Location = New System.Drawing.Point(6, 171)
         Me.grdDetalleParo.Name = "grdDetalleParo"
         Me.grdDetalleParo.ReadOnly = True
+        Me.grdDetalleParo.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
         Me.grdDetalleParo.Size = New System.Drawing.Size(824, 231)
         Me.grdDetalleParo.TabIndex = 324
+        '
+        'colcve_registro_paro
+        '
+        Me.colcve_registro_paro.DataPropertyName = "cve_registro_paro"
+        Me.colcve_registro_paro.HeaderText = "cve_registro_paro"
+        Me.colcve_registro_paro.Name = "colcve_registro_paro"
+        Me.colcve_registro_paro.ReadOnly = True
+        '
+        'colcve_lineab
+        '
+        Me.colcve_lineab.DataPropertyName = "cve_linea"
+        Me.colcve_lineab.HeaderText = "cve_linea"
+        Me.colcve_lineab.Name = "colcve_lineab"
+        Me.colcve_lineab.ReadOnly = True
+        '
+        'colcve_maquina
+        '
+        Me.colcve_maquina.DataPropertyName = "cve_maquina"
+        Me.colcve_maquina.HeaderText = "cve_maquina"
+        Me.colcve_maquina.Name = "colcve_maquina"
+        Me.colcve_maquina.ReadOnly = True
+        '
+        'colcve_paro
+        '
+        Me.colcve_paro.DataPropertyName = "cve_paro"
+        Me.colcve_paro.HeaderText = "cve_paro"
+        Me.colcve_paro.Name = "colcve_paro"
+        Me.colcve_paro.ReadOnly = True
+        '
+        'colcod_paro
+        '
+        Me.colcod_paro.DataPropertyName = "cod_paro"
+        Me.colcod_paro.HeaderText = "Paro"
+        Me.colcod_paro.Name = "colcod_paro"
+        Me.colcod_paro.ReadOnly = True
+        '
+        'paro
+        '
+        Me.paro.DataPropertyName = "paro"
+        Me.paro.HeaderText = "Descripcion"
+        Me.paro.Name = "paro"
+        Me.paro.ReadOnly = True
+        '
+        'colminutos
+        '
+        Me.colminutos.DataPropertyName = "minutos"
+        Me.colminutos.HeaderText = "Minutos"
+        Me.colminutos.Name = "colminutos"
+        Me.colminutos.ReadOnly = True
+        '
+        'colclave_maquina
+        '
+        Me.colclave_maquina.DataPropertyName = "clave_maquina"
+        Me.colclave_maquina.HeaderText = "Clave Maquina"
+        Me.colclave_maquina.Name = "colclave_maquina"
+        Me.colclave_maquina.ReadOnly = True
+        '
+        'colmaquina
+        '
+        Me.colmaquina.DataPropertyName = "maquina"
+        Me.colmaquina.HeaderText = "Maquina"
+        Me.colmaquina.Name = "colmaquina"
+        Me.colmaquina.ReadOnly = True
+        '
+        'coldetalles
+        '
+        Me.coldetalles.DataPropertyName = "detalles"
+        Me.coldetalles.HeaderText = "Detalles"
+        Me.coldetalles.Name = "coldetalles"
+        Me.coldetalles.ReadOnly = True
         '
         'txtParosDescripcion
         '
@@ -1321,7 +1392,7 @@ Partial Class frmProduccion
         Me.grpRechazos.Size = New System.Drawing.Size(631, 414)
         Me.grpRechazos.TabIndex = 0
         Me.grpRechazos.TabStop = False
-        Me.grpRechazos.Text = "RECHAZOS"
+        Me.grpRechazos.Text = "Rechazos"
         '
         'grdDetalleRechazo
         '
@@ -1523,6 +1594,7 @@ Partial Class frmProduccion
         '
         'TabPage1
         '
+        Me.TabPage1.Controls.Add(Me.grpSeguridad)
         Me.TabPage1.Location = New System.Drawing.Point(4, 22)
         Me.TabPage1.Name = "TabPage1"
         Me.TabPage1.Padding = New System.Windows.Forms.Padding(3)
@@ -1530,143 +1602,6 @@ Partial Class frmProduccion
         Me.TabPage1.TabIndex = 3
         Me.TabPage1.Text = "Seguridad"
         Me.TabPage1.UseVisualStyleBackColor = True
-        '
-        'TabPage2
-        '
-        Me.TabPage2.Controls.Add(Me.GroupBox2)
-        Me.TabPage2.Controls.Add(Me.grpSeguridad)
-        Me.TabPage2.Location = New System.Drawing.Point(4, 22)
-        Me.TabPage2.Name = "TabPage2"
-        Me.TabPage2.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabPage2.Size = New System.Drawing.Size(1222, 420)
-        Me.TabPage2.TabIndex = 4
-        Me.TabPage2.Text = "Gente"
-        Me.TabPage2.UseVisualStyleBackColor = True
-        '
-        'GroupBox2
-        '
-        Me.GroupBox2.Controls.Add(Me.ListView4)
-        Me.GroupBox2.Controls.Add(Me.Label33)
-        Me.GroupBox2.Controls.Add(Me.Label45)
-        Me.GroupBox2.Controls.Add(Me.Button5)
-        Me.GroupBox2.Controls.Add(Me.Button6)
-        Me.GroupBox2.Controls.Add(Me.TextBox4)
-        Me.GroupBox2.Controls.Add(Me.ComboBox4)
-        Me.GroupBox2.Controls.Add(Me.Label50)
-        Me.GroupBox2.Controls.Add(Me.Label55)
-        Me.GroupBox2.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.GroupBox2.Location = New System.Drawing.Point(616, 6)
-        Me.GroupBox2.Name = "GroupBox2"
-        Me.GroupBox2.Size = New System.Drawing.Size(610, 408)
-        Me.GroupBox2.TabIndex = 335
-        Me.GroupBox2.TabStop = False
-        Me.GroupBox2.Text = "SEGURIDAD"
-        Me.GroupBox2.Visible = False
-        '
-        'ListView4
-        '
-        Me.ListView4.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.ColumnHeader12, Me.ColumnHeader13})
-        Me.ListView4.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.ListView4.FullRowSelect = True
-        Me.ListView4.GridLines = True
-        Me.ListView4.Location = New System.Drawing.Point(11, 202)
-        Me.ListView4.Margin = New System.Windows.Forms.Padding(4)
-        Me.ListView4.Name = "ListView4"
-        Me.ListView4.Size = New System.Drawing.Size(518, 177)
-        Me.ListView4.TabIndex = 334
-        Me.ListView4.UseCompatibleStateImageBehavior = False
-        Me.ListView4.View = System.Windows.Forms.View.Details
-        '
-        'ColumnHeader12
-        '
-        Me.ColumnHeader12.Text = "Tipo paro"
-        Me.ColumnHeader12.Width = 130
-        '
-        'ColumnHeader13
-        '
-        Me.ColumnHeader13.Text = "Minutos"
-        Me.ColumnHeader13.Width = 90
-        '
-        'Label33
-        '
-        Me.Label33.AutoSize = True
-        Me.Label33.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label33.Location = New System.Drawing.Point(484, 136)
-        Me.Label33.Name = "Label33"
-        Me.Label33.Size = New System.Drawing.Size(50, 18)
-        Me.Label33.TabIndex = 333
-        Me.Label33.Text = "Quitar"
-        '
-        'Label45
-        '
-        Me.Label45.AutoSize = True
-        Me.Label45.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label45.Location = New System.Drawing.Point(399, 136)
-        Me.Label45.Name = "Label45"
-        Me.Label45.Size = New System.Drawing.Size(65, 18)
-        Me.Label45.TabIndex = 332
-        Me.Label45.Text = "Agregar"
-        '
-        'Button5
-        '
-        Me.Button5.BackColor = System.Drawing.Color.White
-        Me.Button5.BackgroundImage = CType(resources.GetObject("Button5.BackgroundImage"), System.Drawing.Image)
-        Me.Button5.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center
-        Me.Button5.Enabled = False
-        Me.Button5.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Button5.Location = New System.Drawing.Point(401, 74)
-        Me.Button5.Name = "Button5"
-        Me.Button5.Size = New System.Drawing.Size(63, 59)
-        Me.Button5.TabIndex = 330
-        Me.Button5.UseVisualStyleBackColor = False
-        '
-        'Button6
-        '
-        Me.Button6.BackColor = System.Drawing.Color.White
-        Me.Button6.BackgroundImage = CType(resources.GetObject("Button6.BackgroundImage"), System.Drawing.Image)
-        Me.Button6.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center
-        Me.Button6.Enabled = False
-        Me.Button6.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Button6.Location = New System.Drawing.Point(478, 74)
-        Me.Button6.Name = "Button6"
-        Me.Button6.Size = New System.Drawing.Size(64, 59)
-        Me.Button6.TabIndex = 331
-        Me.Button6.UseVisualStyleBackColor = False
-        '
-        'TextBox4
-        '
-        Me.TextBox4.Location = New System.Drawing.Point(186, 114)
-        Me.TextBox4.Name = "TextBox4"
-        Me.TextBox4.Size = New System.Drawing.Size(181, 26)
-        Me.TextBox4.TabIndex = 153
-        '
-        'ComboBox4
-        '
-        Me.ComboBox4.FormattingEnabled = True
-        Me.ComboBox4.Location = New System.Drawing.Point(186, 60)
-        Me.ComboBox4.Name = "ComboBox4"
-        Me.ComboBox4.Size = New System.Drawing.Size(181, 26)
-        Me.ComboBox4.TabIndex = 152
-        '
-        'Label50
-        '
-        Me.Label50.AutoSize = True
-        Me.Label50.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label50.Location = New System.Drawing.Point(104, 117)
-        Me.Label50.Name = "Label50"
-        Me.Label50.Size = New System.Drawing.Size(76, 18)
-        Me.Label50.TabIndex = 151
-        Me.Label50.Text = "Cantidad:"
-        '
-        'Label55
-        '
-        Me.Label55.AutoSize = True
-        Me.Label55.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label55.Location = New System.Drawing.Point(8, 63)
-        Me.Label55.Name = "Label55"
-        Me.Label55.Size = New System.Drawing.Size(172, 18)
-        Me.Label55.TabIndex = 8
-        Me.Label55.Text = "Condiciones inseguras:"
         '
         'grpSeguridad
         '
@@ -1680,10 +1615,10 @@ Partial Class frmProduccion
         Me.grpSeguridad.Controls.Add(Me.Label20)
         Me.grpSeguridad.Controls.Add(Me.Label27)
         Me.grpSeguridad.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.grpSeguridad.Location = New System.Drawing.Point(6, 6)
+        Me.grpSeguridad.Location = New System.Drawing.Point(6, 3)
         Me.grpSeguridad.Name = "grpSeguridad"
-        Me.grpSeguridad.Size = New System.Drawing.Size(555, 408)
-        Me.grpSeguridad.TabIndex = 7
+        Me.grpSeguridad.Size = New System.Drawing.Size(547, 417)
+        Me.grpSeguridad.TabIndex = 8
         Me.grpSeguridad.TabStop = False
         Me.grpSeguridad.Text = "SEGURIDAD"
         Me.grpSeguridad.Visible = False
@@ -1792,6 +1727,139 @@ Partial Class frmProduccion
         Me.Label27.Size = New System.Drawing.Size(172, 18)
         Me.Label27.TabIndex = 8
         Me.Label27.Text = "Condiciones inseguras:"
+        '
+        'TabPage2
+        '
+        Me.TabPage2.Controls.Add(Me.grpGente)
+        Me.TabPage2.Location = New System.Drawing.Point(4, 22)
+        Me.TabPage2.Name = "TabPage2"
+        Me.TabPage2.Padding = New System.Windows.Forms.Padding(3)
+        Me.TabPage2.Size = New System.Drawing.Size(1222, 420)
+        Me.TabPage2.TabIndex = 4
+        Me.TabPage2.Text = "Gente"
+        Me.TabPage2.UseVisualStyleBackColor = True
+        '
+        'grpGente
+        '
+        Me.grpGente.Controls.Add(Me.Label61)
+        Me.grpGente.Controls.Add(Me.txtDetallesGente)
+        Me.grpGente.Controls.Add(Me.Label33)
+        Me.grpGente.Controls.Add(Me.Label45)
+        Me.grpGente.Controls.Add(Me.btnAgregarGente)
+        Me.grpGente.Controls.Add(Me.btnQuitarGente)
+        Me.grpGente.Controls.Add(Me.txtGenteCantidad)
+        Me.grpGente.Controls.Add(Me.cbxTipoDetalleGente)
+        Me.grpGente.Controls.Add(Me.Label50)
+        Me.grpGente.Controls.Add(Me.Label55)
+        Me.grpGente.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.grpGente.Location = New System.Drawing.Point(6, 6)
+        Me.grpGente.Name = "grpGente"
+        Me.grpGente.Size = New System.Drawing.Size(1210, 408)
+        Me.grpGente.TabIndex = 335
+        Me.grpGente.TabStop = False
+        Me.grpGente.Text = "Gente"
+        '
+        'Label61
+        '
+        Me.Label61.AutoSize = True
+        Me.Label61.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label61.Location = New System.Drawing.Point(19, 113)
+        Me.Label61.Name = "Label61"
+        Me.Label61.Size = New System.Drawing.Size(69, 18)
+        Me.Label61.TabIndex = 336
+        Me.Label61.Text = "Detalles:"
+        '
+        'txtDetallesGente
+        '
+        Me.txtDetallesGente.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
+        Me.txtDetallesGente.Location = New System.Drawing.Point(102, 113)
+        Me.txtDetallesGente.Multiline = True
+        Me.txtDetallesGente.Name = "txtDetallesGente"
+        Me.txtDetallesGente.ScrollBars = System.Windows.Forms.ScrollBars.Vertical
+        Me.txtDetallesGente.Size = New System.Drawing.Size(211, 75)
+        Me.txtDetallesGente.TabIndex = 335
+        '
+        'Label33
+        '
+        Me.Label33.AutoSize = True
+        Me.Label33.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label33.Location = New System.Drawing.Point(478, 175)
+        Me.Label33.Name = "Label33"
+        Me.Label33.Size = New System.Drawing.Size(50, 18)
+        Me.Label33.TabIndex = 333
+        Me.Label33.Text = "Quitar"
+        '
+        'Label45
+        '
+        Me.Label45.AutoSize = True
+        Me.Label45.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label45.Location = New System.Drawing.Point(393, 175)
+        Me.Label45.Name = "Label45"
+        Me.Label45.Size = New System.Drawing.Size(65, 18)
+        Me.Label45.TabIndex = 332
+        Me.Label45.Text = "Agregar"
+        '
+        'btnAgregarGente
+        '
+        Me.btnAgregarGente.BackColor = System.Drawing.Color.White
+        Me.btnAgregarGente.BackgroundImage = CType(resources.GetObject("btnAgregarGente.BackgroundImage"), System.Drawing.Image)
+        Me.btnAgregarGente.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center
+        Me.btnAgregarGente.Enabled = False
+        Me.btnAgregarGente.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnAgregarGente.Location = New System.Drawing.Point(395, 113)
+        Me.btnAgregarGente.Name = "btnAgregarGente"
+        Me.btnAgregarGente.Size = New System.Drawing.Size(63, 59)
+        Me.btnAgregarGente.TabIndex = 330
+        Me.btnAgregarGente.UseVisualStyleBackColor = False
+        '
+        'btnQuitarGente
+        '
+        Me.btnQuitarGente.BackColor = System.Drawing.Color.White
+        Me.btnQuitarGente.BackgroundImage = CType(resources.GetObject("btnQuitarGente.BackgroundImage"), System.Drawing.Image)
+        Me.btnQuitarGente.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center
+        Me.btnQuitarGente.Enabled = False
+        Me.btnQuitarGente.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnQuitarGente.Location = New System.Drawing.Point(472, 113)
+        Me.btnQuitarGente.Name = "btnQuitarGente"
+        Me.btnQuitarGente.Size = New System.Drawing.Size(64, 59)
+        Me.btnQuitarGente.TabIndex = 331
+        Me.btnQuitarGente.UseVisualStyleBackColor = False
+        '
+        'txtGenteCantidad
+        '
+        Me.txtGenteCantidad.Location = New System.Drawing.Point(102, 71)
+        Me.txtGenteCantidad.Name = "txtGenteCantidad"
+        Me.txtGenteCantidad.Size = New System.Drawing.Size(181, 26)
+        Me.txtGenteCantidad.TabIndex = 153
+        '
+        'cbxTipoDetalleGente
+        '
+        Me.cbxTipoDetalleGente.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cbxTipoDetalleGente.FormattingEnabled = True
+        Me.cbxTipoDetalleGente.Location = New System.Drawing.Point(102, 29)
+        Me.cbxTipoDetalleGente.Name = "cbxTipoDetalleGente"
+        Me.cbxTipoDetalleGente.Size = New System.Drawing.Size(181, 26)
+        Me.cbxTipoDetalleGente.TabIndex = 152
+        '
+        'Label50
+        '
+        Me.Label50.AutoSize = True
+        Me.Label50.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label50.Location = New System.Drawing.Point(20, 74)
+        Me.Label50.Name = "Label50"
+        Me.Label50.Size = New System.Drawing.Size(76, 18)
+        Me.Label50.TabIndex = 151
+        Me.Label50.Text = "Cantidad:"
+        '
+        'Label55
+        '
+        Me.Label55.AutoSize = True
+        Me.Label55.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label55.Location = New System.Drawing.Point(54, 32)
+        Me.Label55.Name = "Label55"
+        Me.Label55.Size = New System.Drawing.Size(42, 18)
+        Me.Label55.TabIndex = 8
+        Me.Label55.Text = "Tipo:"
         '
         'titulo_banner_formulario
         '
@@ -1904,76 +1972,6 @@ Partial Class frmProduccion
         Me.cbxLinea.Size = New System.Drawing.Size(234, 26)
         Me.cbxLinea.TabIndex = 309
         '
-        'colcve_registro_paro
-        '
-        Me.colcve_registro_paro.DataPropertyName = "cve_registro_paro"
-        Me.colcve_registro_paro.HeaderText = "cve_registro_paro"
-        Me.colcve_registro_paro.Name = "colcve_registro_paro"
-        Me.colcve_registro_paro.ReadOnly = True
-        '
-        'colcve_lineab
-        '
-        Me.colcve_lineab.DataPropertyName = "cve_linea"
-        Me.colcve_lineab.HeaderText = "cve_linea"
-        Me.colcve_lineab.Name = "colcve_lineab"
-        Me.colcve_lineab.ReadOnly = True
-        '
-        'colcve_maquina
-        '
-        Me.colcve_maquina.DataPropertyName = "cve_maquina"
-        Me.colcve_maquina.HeaderText = "cve_maquina"
-        Me.colcve_maquina.Name = "colcve_maquina"
-        Me.colcve_maquina.ReadOnly = True
-        '
-        'colcve_paro
-        '
-        Me.colcve_paro.DataPropertyName = "cve_paro"
-        Me.colcve_paro.HeaderText = "cve_paro"
-        Me.colcve_paro.Name = "colcve_paro"
-        Me.colcve_paro.ReadOnly = True
-        '
-        'colcod_paro
-        '
-        Me.colcod_paro.DataPropertyName = "cod_paro"
-        Me.colcod_paro.HeaderText = "Paro"
-        Me.colcod_paro.Name = "colcod_paro"
-        Me.colcod_paro.ReadOnly = True
-        '
-        'paro
-        '
-        Me.paro.DataPropertyName = "paro"
-        Me.paro.HeaderText = "Descripcion"
-        Me.paro.Name = "paro"
-        Me.paro.ReadOnly = True
-        '
-        'colminutos
-        '
-        Me.colminutos.DataPropertyName = "minutos"
-        Me.colminutos.HeaderText = "Minutos"
-        Me.colminutos.Name = "colminutos"
-        Me.colminutos.ReadOnly = True
-        '
-        'colclave_maquina
-        '
-        Me.colclave_maquina.DataPropertyName = "clave_maquina"
-        Me.colclave_maquina.HeaderText = "Clave Maquina"
-        Me.colclave_maquina.Name = "colclave_maquina"
-        Me.colclave_maquina.ReadOnly = True
-        '
-        'colmaquina
-        '
-        Me.colmaquina.DataPropertyName = "maquina"
-        Me.colmaquina.HeaderText = "Maquina"
-        Me.colmaquina.Name = "colmaquina"
-        Me.colmaquina.ReadOnly = True
-        '
-        'coldetalles
-        '
-        Me.coldetalles.DataPropertyName = "detalles"
-        Me.coldetalles.HeaderText = "Detalles"
-        Me.coldetalles.Name = "coldetalles"
-        Me.coldetalles.ReadOnly = True
-        '
         'frmProduccion
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -2016,11 +2014,12 @@ Partial Class frmProduccion
         Me.grpRechazos.ResumeLayout(False)
         Me.grpRechazos.PerformLayout()
         CType(Me.grdDetalleRechazo, System.ComponentModel.ISupportInitialize).EndInit()
-        Me.TabPage2.ResumeLayout(False)
-        Me.GroupBox2.ResumeLayout(False)
-        Me.GroupBox2.PerformLayout()
+        Me.TabPage1.ResumeLayout(False)
         Me.grpSeguridad.ResumeLayout(False)
         Me.grpSeguridad.PerformLayout()
+        Me.TabPage2.ResumeLayout(False)
+        Me.grpGente.ResumeLayout(False)
+        Me.grpGente.PerformLayout()
         CType(Me.banner_formulario, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
@@ -2124,30 +2123,15 @@ Partial Class frmProduccion
     Friend WithEvents txtRechazosCantidad As System.Windows.Forms.TextBox
     Friend WithEvents TabPage1 As System.Windows.Forms.TabPage
     Friend WithEvents TabPage2 As System.Windows.Forms.TabPage
-    Friend WithEvents GroupBox2 As System.Windows.Forms.GroupBox
-    Friend WithEvents ListView4 As System.Windows.Forms.ListView
-    Friend WithEvents ColumnHeader12 As System.Windows.Forms.ColumnHeader
-    Friend WithEvents ColumnHeader13 As System.Windows.Forms.ColumnHeader
+    Friend WithEvents grpGente As System.Windows.Forms.GroupBox
     Friend WithEvents Label33 As System.Windows.Forms.Label
     Friend WithEvents Label45 As System.Windows.Forms.Label
-    Friend WithEvents Button5 As System.Windows.Forms.Button
-    Friend WithEvents Button6 As System.Windows.Forms.Button
-    Friend WithEvents TextBox4 As System.Windows.Forms.TextBox
-    Friend WithEvents ComboBox4 As System.Windows.Forms.ComboBox
+    Friend WithEvents btnAgregarGente As System.Windows.Forms.Button
+    Friend WithEvents btnQuitarGente As System.Windows.Forms.Button
+    Friend WithEvents txtGenteCantidad As System.Windows.Forms.TextBox
+    Friend WithEvents cbxTipoDetalleGente As System.Windows.Forms.ComboBox
     Friend WithEvents Label50 As System.Windows.Forms.Label
     Friend WithEvents Label55 As System.Windows.Forms.Label
-    Friend WithEvents grpSeguridad As System.Windows.Forms.GroupBox
-    Friend WithEvents ListView3 As System.Windows.Forms.ListView
-    Friend WithEvents ColumnHeader10 As System.Windows.Forms.ColumnHeader
-    Friend WithEvents ColumnHeader11 As System.Windows.Forms.ColumnHeader
-    Friend WithEvents Label22 As System.Windows.Forms.Label
-    Friend WithEvents Label30 As System.Windows.Forms.Label
-    Friend WithEvents Button3 As System.Windows.Forms.Button
-    Friend WithEvents Button4 As System.Windows.Forms.Button
-    Friend WithEvents TextBox3 As System.Windows.Forms.TextBox
-    Friend WithEvents ComboBox3 As System.Windows.Forms.ComboBox
-    Friend WithEvents Label20 As System.Windows.Forms.Label
-    Friend WithEvents Label27 As System.Windows.Forms.Label
     Friend WithEvents titulo_banner_formulario As System.Windows.Forms.Label
     Friend WithEvents banner_formulario As System.Windows.Forms.PictureBox
     Friend WithEvents PictureBox1 As System.Windows.Forms.PictureBox
@@ -2198,4 +2182,18 @@ Partial Class frmProduccion
     Friend WithEvents colclave_maquina As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents colmaquina As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents coldetalles As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents grpSeguridad As System.Windows.Forms.GroupBox
+    Friend WithEvents ListView3 As System.Windows.Forms.ListView
+    Friend WithEvents ColumnHeader10 As System.Windows.Forms.ColumnHeader
+    Friend WithEvents ColumnHeader11 As System.Windows.Forms.ColumnHeader
+    Friend WithEvents Label22 As System.Windows.Forms.Label
+    Friend WithEvents Label30 As System.Windows.Forms.Label
+    Friend WithEvents Button3 As System.Windows.Forms.Button
+    Friend WithEvents Button4 As System.Windows.Forms.Button
+    Friend WithEvents TextBox3 As System.Windows.Forms.TextBox
+    Friend WithEvents ComboBox3 As System.Windows.Forms.ComboBox
+    Friend WithEvents Label20 As System.Windows.Forms.Label
+    Friend WithEvents Label27 As System.Windows.Forms.Label
+    Friend WithEvents Label61 As System.Windows.Forms.Label
+    Friend WithEvents txtDetallesGente As System.Windows.Forms.TextBox
 End Class

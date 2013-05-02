@@ -88,6 +88,7 @@ Public Class frmCDM
 #End Region
 #Region "LLenado ComboBoxs"
     Private Sub llena_lista_modelos_entrada()
+        bandera_modelo = False
         Dim oModelo As New Modelo
         oModelo.cve_linea = linea
         cbxModeloinicial.ValueMember = "cve_modelo"
@@ -97,7 +98,9 @@ Public Class frmCDM
         bandera_modelo = True
     End Sub
     Private Sub llena_lista_modelos_salida(ByVal idModelo As String)
+
         If cbxModeloinicial.SelectedIndex <> -1 Then
+            bandera_modelo_salida = False
             Dim oModelo As New Modelo
             oModelo.cve_linea = linea
             oModelo.cve_modelo = idModelo
@@ -125,7 +128,7 @@ Public Class frmCDM
         End If
     End Sub
     Private Sub valida_boton_guardar()
-        If cbxModeloinicial.SelectedIndex <> -1 And cbxModelofinal.SelectedIndex <> -1 And txtMinutosTotales.Text <> "" And tiempo_CDM <> Nothing Then
+        If cbxModeloinicial.SelectedIndex <> -1 And cbxModelofinal.SelectedIndex <> -1 And txtMinutosTotales.Text <> "" Then 'tiempo_CDM <> Nothing Then
             calcula_min_paros()
             If Convert.ToInt16(txtMinutosTotales.Text) <= minutosdisponibles Then
                 GroupBox1.Enabled = True
@@ -198,7 +201,7 @@ Public Class frmCDM
             Dim oModelo As New Modelo
             oModelo.cve_modelo = cbxModeloinicial.SelectedValue
             oModelo.Cargar()
-            'MsgBox(oModelo.descripcion)
+
             txtModeloinicial.Text = oModelo.descripcion
             llena_lista_modelos_salida(cbxModeloinicial.SelectedValue)
             If bandera_modelo_salida And cbxModelofinal.SelectedIndex <> -1 Then
@@ -223,6 +226,7 @@ Public Class frmCDM
             dtpInicio.Enabled = False
             dtpFinal.Enabled = False
             GroupBox1.Enabled = False
+
         End If
         valida_boton_guardar()
     End Sub
@@ -236,23 +240,18 @@ Public Class frmCDM
             oModelo.Cargar()
             txtModelofinal.Text = oModelo.descripcion        
             If cbxModelofinal.SelectedIndex <> -1 Then
-
                 Dim oCDM As New CDM
                 oCDM.cve_linea = linea
                 oCDM.cve_modelo_inicial = cbxModeloinicial.SelectedValue
                 oCDM.cve_modelo_final = cbxModelofinal.SelectedValue
-                MsgBox(cbxModeloinicial.SelectedValue)
-                MsgBox(cbxModelofinal.SelectedValue)
-
                 oCDM.obtiene_tiempo_de_cdm()
-
                 id_CDM = oCDM.cve_CDM
-                MsgBox(id_CDM)
                 tiempo_CDM = oCDM.tiempo
-                MsgBox(tiempo_CDM)
                 calcula_costo()
-                calcula_mejora()                
+                calcula_mejora()
+                valida_boton_guardar()
             End If
+
         End If
         If bandera_modelo And cbxModeloinicial.SelectedIndex <> -1 And bandera_modelo_salida And cbxModelofinal.SelectedIndex <> -1 Then
             dtpInicio.Enabled = True
@@ -457,7 +456,7 @@ Public Class frmCDM
     End Sub
     Private Sub dtpFinal_ValueChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles dtpFinal.ValueChanged
         If bandera_horas_inicio_fin Then
-            If dtpInicio.Value > dtpFinal.Value Or txtMinutosTotales.Text = "0" Then
+            If dtpInicio.Value > dtpFinal.Value Then 'Or txtMinutosTotales.Text = "0" Then
                 txtMinutosTotales.Text = "0"
             Else
                 calcula_minutos_totales()
@@ -531,7 +530,6 @@ Public Class frmCDM
         costo = 0
         If bandera_modelo And bandera_modelo_salida And cbxModeloinicial.SelectedIndex <> -1 And cbxModelofinal.SelectedIndex <> -1 And txtMinutosTotales.Text <> "" And txtMinutosTotales.Text <> "0" Then
             If Convert.ToDouble(txtMinutosTotales.Text) > tiempo_CDM Then
-                MsgBox("ya entre")
                 Dim oComponente As New Componente
                 oComponente.cve_linea = linea
                 oComponente.obtiene_precio_componente_linea()

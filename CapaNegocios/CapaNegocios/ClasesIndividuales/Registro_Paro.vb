@@ -259,5 +259,24 @@ Public Class Registro_Paro
             End Try
         End Using
     End Sub
+    Public Sub remove_paro_detalle()
+        Using scope As New TransactionScope
+            Try
+                Dim vComando As New SqlClient.SqlCommand
+                vComando.CommandType = CommandType.StoredProcedure
+                vComando.CommandText = "delete_registro_paro"
+                vComando.Parameters.Add("@cve_registro_paro", SqlDbType.BigInt).Value = Me.vCve_registro_paro
+                vComando.Parameters.Add("@cod_empleado_eliminacion", SqlDbType.VarChar).Value = Me.vCod_empleado_eliminacion
+                vComando.Parameters.Add("@fecha_eliminacion", SqlDbType.DateTime).Value = Me.vFecha_eliminacion
+                oBD.EjecutaProcedimientos(vComando)
+                scope.Complete()
+                MsgBox("eliminado")
+            Catch
+                MsgBox("Error al eliminar paro. CRegistro_Paro_ERROR", vbCritical + vbOKOnly, "Error")
+            End Try
+        End Using
+    End Sub
+
+
 #End Region
 End Class
