@@ -86,6 +86,20 @@ Public Class TC
             Return Tiempo_ciclo
         End Try
     End Function
+
+    '
+    Public Sub obtener_piezas_por_hora()
+        Dim vDR As DataRow
+        Try
+            vDR = oBD.ObtenerRenglon("select t.piezas_por_hora from TC t where t.cve_linea=" & vcve_linea & " and t.cve_modelo=" & vcve_modelo, "paro")
+            If vDR IsNot Nothing Then
+                vpiezas_por_hora = vDR("piezas_por_hora")
+            End If
+        Catch
+            MsgBox("Error al obtener piezas por hora!. CTC_ERROR", vbCritical + vbOKOnly, "Error")
+        End Try
+        
+    End Sub
     
 #End Region
 End Class
