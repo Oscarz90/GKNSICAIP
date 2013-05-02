@@ -294,7 +294,7 @@ Public Class frmGraficas
 
             End If
         End If
-        cadenaXML += "<category name ='PROMEDIO OEE' />"
+        cadenaXML += "<category name ='PROMEDIO' />"
         cadenaXML += "</categories>"
     End Sub
     Private Sub establece_fechas_5s(ByVal cadena As String)
@@ -456,6 +456,49 @@ Public Class frmGraficas
     End Sub
 #End Region
 
+#Region "ESTABLECE NRFTI 1 EQUIPO 1 LINEA"
+    Private Sub establece_NRFTi(ByVal cadena As String, ByVal color As String)
+        Dim sumaPzasOK As Double = 0
+        Dim sumaPzasDes As Double = 0
+        Dim promNrfti As Double = 0  ''Promedio NRFTi se vuelve a calcular NRFTi = (PZAS.DES/(PZAS.DES + PZAS. OK))*1,000,000
+        'Dim contador As Integer = 0
+        Dim vDT As DataTable
+        cadenaXML += "<dataset seriesName='NRFTi' color='" & color & "' anchorBorderColor='" & contorno_anchor & "' anchorBgColor='" & color & "' anchorRadius='" & radio_anchor & "'>"
+        Dim nrfti As Double = 0
+        Dim pzasOK As Double = 0
+        Dim pzasDes As Double = 0
+
+        If rbtDia.Checked Then
+            vDT = oGraficas.ejecutarVista(cadena, cadenaWHERE)
+            For Each vDR As DataRow In vDT.Rows
+                If vDR("NRFTI") <> 0 Then
+                    nrfti = vDR(("NRFTI"))
+                    pzasOK = vDR(("PZAS_OK"))
+                    pzasDes = vDR(("PZAS_DESECHO"))
+                    sumaPzasOK = sumaPzasOK + pzasOK
+                    sumaPzasDes = sumaPzasDes + pzasDes
+                    promNrfti = (sumaPzasDes / (sumaPzasDes + sumaPzasOK)) * 1000000
+                    cadenaXML += " <set value='" & nrfti.ToString & "'/>"
+                ElseIf vDR("NRFTI") = 0 Then
+                    nrfti = 0
+                    cadenaXML += " <set value='" & nrfti.ToString & "' />"
+                End If
+            Next
+        Else
+
+        End If
+        promNrfti = Math.Round(promNrfti)
+        promNrfti = Math.Truncate(promNrfti)
+        cadenaXML += " <set value='" & promNrfti.ToString & "' color='" & colores(1) & "'/>"
+        cadenaXML += " </dataset>"
+
+    End Sub
+#End Region
+
+#Region "ESTABLECE NRFTI 1 EQUIPO LINEAS ACUMULADAS"
+
+#End Region
+
 #Region "INICIALIZACION DEL FORMULARIO"
     Private Sub Graficas_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         'oGraficas.Obtener_IdEquipo(vIdEquipo)
@@ -551,14 +594,11 @@ Public Class frmGraficas
         rbtStock.Enabled = False
         rbtDia.Enabled = True
         rbtMeses.Enabled = True
-        rbtAnos.Enabled = True
     End Sub
     Private Sub rbtNRFTi_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles rbtNRFTi.CheckedChanged
         Habilita_Graficar()
-
         rbtDia.Enabled = True
         rbtMeses.Enabled = True
-        rbtAnos.Enabled = True
     End Sub
 
     Private Sub rbtCosto_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles rbtCosto.CheckedChanged
@@ -576,6 +616,7 @@ Public Class frmGraficas
     Private Sub rbt5s_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles rbt5s.CheckedChanged
         Habilita_Graficar()
         If rbt5s.Checked Then
+            rbtStock.Enabled = False
             rbtDia.Enabled = False
             rbtMeses.Checked = True
         End If
@@ -597,7 +638,7 @@ Public Class frmGraficas
             numberSuffix = "%25"
             subcaption = "OEE"
         ElseIf rbtNRFTi.Checked Then
-            maxEjeY = 12000 ''Dependiendo del maximo valor de los objetivos
+            maxEjeY = 32000
             numberSuffix = ""
             subcaption = "NRFTi"
         ElseIf rbtCosto.Checked Then
@@ -632,6 +673,7 @@ Public Class frmGraficas
         cadenaXML = rutaGrafica + "&dataXML=<graph YAxisMinValue='0' YAxisMaxValue='" & maxEjeY & "' numberSuffix='" & numberSuffix & "' caption='REPORTE DE RESULTADOS' subcaption='" & subcaption & "' YAxisName= '" & ejeY & "' xAxisName='F E C H A (s)' labeldisplay='rotate' decimalPrecision='2' rotateNames='1' formatNumberScale='0' thousandSeparator=',' bgcolor='ffffff' bgalpha='000000' showColumnShadow='1' showAlternateHGridColor='1' AlternateHGridColor='ff5904' divLineColor='ff5904' divLineAlpha='20' alternateHGridAlpha='5' canvasBorderColor='666666' baseFontColor='666666'>"
 
         Condicion_WHERE(cbxTodasLineas.Checked)
+        '' O E E -- P R O D U C C I O N --
         If rbtOEE.Checked Then
             If cbxTodasLineas.Checked Then
                 cadenaSELECT = "SELECT DISTINCT DIA_ASIGNADO FROM VISTA_SELECCION_INDICADOR1"
@@ -644,9 +686,19 @@ Public Class frmGraficas
                 establece_OEE(cadenaSELECT, colores(0))
             End If
             cadenaXML += "<trendlines> <line startValue='85.0' color='FF0000' displayValue='OBJETIVO' showOnTop='1'/> </trendlines>"
+            ''N R F T I -- C A L I D A D --
         ElseIf rbtNRFTi.Checked Then
-            'establece_fechas(2)
-            'establece_OEE(colores(3))
+            If cbxTodasLineas.Checked Then
+                cadenaSELECT = "SELECT DISTINCT DIA_ASIGNADO FROM VISTA_SELECCION_INDICADOR2"
+                establece_fechas(cadenaSELECT) ''establece_fechas(1)
+                cadenaSELECT = "SELECT NRFTI, DIA_ASIGNADO FROM VISTA_SELECCION_INDICADOR2"
+                establece_OEE_Acumulado(cadenaSELECT, colores(0))
+            Else
+                cadenaSELECT = "SELECT DIA_ASIGNADO, PZAS_OK, PZAS_DESECHO, NRFTI FROM VISTA_SELECCION_INDICADOR2"
+                establece_fechas(cadenaSELECT)
+                establece_NRFTi(cadenaSELECT, colores(6))
+            End If
+            cadenaXML += "<trendlines> <line startValue='12000' color='FF0000' displayValue='OBJETIVO' showOnTop='1'/> </trendlines>"
         ElseIf rbtCosto.Checked Then
             'establece_fechas(3)
             'establece_OEE(colores(2))
@@ -656,6 +708,8 @@ Public Class frmGraficas
         ElseIf rbtGente.Checked Then
             'establece_fechas(5)
             'establece_OEE(colores(4))
+
+            '' 5 S
         ElseIf rbt5s.Checked Then
             If cbxTodasLineas.Checked Then
                 cadenaSELECT = "SELECT DISTINCT DIA_ASIGNADO FROM VISTA_SELECCION_INDICADOR5"

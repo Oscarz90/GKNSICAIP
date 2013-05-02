@@ -315,6 +315,7 @@ Partial Class frmGraficas
         Me.rbtAnos.TabStop = True
         Me.rbtAnos.Text = "Por años"
         Me.rbtAnos.UseVisualStyleBackColor = True
+        Me.rbtAnos.Visible = False
         '
         'rbtDia
         '
