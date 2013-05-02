@@ -308,9 +308,11 @@ Public Class frmProduccion
     End Sub
     'Paros
     Private Sub cbxMaquina_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cbxMaquina.SelectedIndexChanged
-        valida_botones_paro()
-        obten_descripcion_maquina(txtMaquinaDescripcion, cbxMaquina)
-        deshabilitar_btn_quitar_paro()
+        If cbxMaquina.SelectedIndex <> -1 Then
+            valida_botones_paro()
+            obten_descripcion_maquina(txtMaquinaDescripcion, cbxMaquina)
+            deshabilitar_btn_quitar_paro()
+        End If
     End Sub
     Private Sub cbxTipoParo_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cbxTipoParo.SelectedIndexChanged
         If cbxTipoParo.Text = "H.1" Or cbxTipoParo.Text = "H.2" Or cbxTipoParo.Text = "H.3" Then
@@ -331,32 +333,31 @@ Public Class frmProduccion
 #Region "Eventos TextBox"
     'Productividad
     Private Sub txtMinutos_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles txtTiempoOperacion.TextChanged
-        valida_sea_numero(sender)
         valida_botones_productividad()
         deshabilitar_btn_quitar_modelo()
     End Sub
     Private Sub txtPiezasProducidas_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles txtPiezasOkProducidas.TextChanged
-        valida_sea_numero(sender)
         valida_botones_productividad()
         deshabilitar_btn_quitar_modelo()
     End Sub
     'Desechos
     Private Sub txtDesechosCantidad_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles txtDesechosCantidad.TextChanged
-        valida_sea_numero(sender)
         valida_botones_desecho()
         deshabilitar_btn_quitar_desecho()
     End Sub
     'Rechazos
     Private Sub txtRechazosCantidad_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles txtRechazosCantidad.TextChanged
-        valida_sea_numero(sender)
         valida_botones_rechazos()
         deshabilitar_btn_quitar_rechazo()
     End Sub
     'Paros
     Private Sub txtMinutosParo_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles txtMinutosParo.TextChanged
-        valida_sea_numero(sender)
         valida_botones_paro()
         deshabilitar_btn_quitar_paro()
+    End Sub
+    'Gente
+    Private Sub txtGenteCantidad_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles txtGenteCantidad.TextChanged
+
     End Sub
 #End Region
 #Region "Eventos Botones"
@@ -404,6 +405,14 @@ Public Class frmProduccion
         actualiza_tabla_turno_minutos()
         calcula_Productividad()
     End Sub
+    Private Sub btnQuitarParo_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnQuitarParo.Click
+        remove_paro()
+        limpia_paros()
+        deshabilitar_btn_quitar_paro()
+        llena_paro_gridview()
+        actualiza_tabla_turno_minutos()
+        calcula_Productividad()
+    End Sub
 #End Region
 #Region "Eventos Gridviews"
     'Productividad
@@ -419,19 +428,29 @@ Public Class frmProduccion
     Private Sub grdDetalleRechazo_CellClick(ByVal sender As System.Object, ByVal e As System.Windows.Forms.DataGridViewCellEventArgs) Handles grdDetalleRechazo.CellClick
         habilita_btn_Quitar_rechazo()
     End Sub
+    'Paros
+    Private Sub grdDetalleParo_CellClick(ByVal sender As System.Object, ByVal e As System.Windows.Forms.DataGridViewCellEventArgs) Handles grdDetalleParo.CellClick
+        habilita_btn_Quitar_paro()
+    End Sub
 #End Region
 #Region "Validaciones"
     'Generales
-    Private Sub valida_sea_numero(ByRef cajaDeTexto As TextBox)
-        If cajaDeTexto.Text <> "" And Not IsNumeric(cajaDeTexto.Text) Then
-            cajaDeTexto.Text = "0"
+    Private Sub valida_sea_numero(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txtTiempoOperacion.KeyPress, txtPiezasOkProducidas.KeyPress, txtDesechosCantidad.KeyPress, txtMinutosParo.KeyPress, txtRechazosCantidad.KeyPress, txtGenteCantidad.KeyPress
+        If Char.IsNumber(e.KeyChar) Then
+            e.Handled = False
+        ElseIf Char.IsControl(e.KeyChar) Then
+            e.Handled = False
+        Else
+            e.Handled = True
         End If
     End Sub
     'Productividad
     Private Sub valida_botones_productividad()
-        If cbxModeloProductividad.SelectedIndex <> -1 And txtTiempoOperacion.Text <> "" And txtPiezasOkProducidas.Text <> "" And txtPiezasOkProducidas.Text <> "0" And txtTiempoOperacion.Text <> "0" Then
-            If cbxTurno.SelectedIndex <> -1 Then
+        If cbxTurno.SelectedIndex <> -1 And cbxModeloProductividad.SelectedIndex <> -1 And txtTiempoOperacion.Text <> "" And txtPiezasOkProducidas.Text <> "" Then
+            If Convert.ToInt64(txtTiempoOperacion.Text) <> 0 And Convert.ToInt64(txtPiezasOkProducidas.Text) <> 0 Then
                 btnAgregarModelo.Enabled = True
+            Else
+                btnAgregarModelo.Enabled = False
             End If
         Else
             btnAgregarModelo.Enabled = False
@@ -446,10 +465,13 @@ Public Class frmProduccion
     End Sub
     'Rechazo
     Private Sub valida_botones_rechazos()
-        If cbxModeloRechazo.SelectedIndex <> -1 And txtRechazosCantidad.Text <> "" And txtRechazosCantidad.Text <> "0" And cbxTipoRechazo.SelectedIndex <> -1 Then
-            If cbxTurno.SelectedIndex <> -1 Then
+        If cbxTurno.SelectedIndex <> -1 And cbxModeloRechazo.SelectedIndex <> -1 And cbxTipoRechazo.SelectedIndex <> -1 And txtRechazosCantidad.Text <> "" Then
+            If Convert.ToInt64(txtRechazosCantidad.Text) <> 0 Then
                 btnAgregarRechazo.Enabled = True
+            Else
+                btnAgregarRechazo.Enabled = False
             End If
+
         Else
             btnAgregarRechazo.Enabled = False
         End If
@@ -463,9 +485,11 @@ Public Class frmProduccion
     End Sub
     'Desecho
     Private Sub valida_botones_desecho()
-        If cbxModeloDesecho.SelectedIndex <> -1 And txtDesechosCantidad.Text <> "" And txtDesechosCantidad.Text <> "0" Then
-            If cbxTurno.SelectedIndex <> -1 Then
-                btnAgregarDesecho.Enabled = True
+        If cbxTurno.SelectedIndex <> -1 And cbxModeloDesecho.SelectedIndex <> -1 And txtDesechosCantidad.Text <> "" Then
+            If Convert.ToInt64(txtDesechosCantidad.Text) <> 0 Then
+                    btnAgregarDesecho.Enabled = True
+            Else
+                btnAgregarDesecho.Enabled = False
             End If
         Else
             btnAgregarDesecho.Enabled = False
@@ -480,9 +504,11 @@ Public Class frmProduccion
     End Sub
     'Paro
     Private Sub valida_botones_paro()
-        If cbxMaquina.SelectedIndex <> -1 And cbxTipoParo.SelectedIndex <> -1 And txtMinutosParo.Text <> "" And txtMinutosParo.Text <> "0" Then
-            If cbxTurno.SelectedIndex <> -1 Then
+        If cbxTurno.SelectedIndex <> -1 And cbxMaquina.SelectedIndex <> -1 And cbxTipoParo.SelectedIndex <> -1 And txtMinutosParo.Text <> "" Then
+            If Convert.ToInt64(txtMinutosParo.Text) <> 0 Then
                 btnAgregarParo.Enabled = True
+            Else
+                btnAgregarParo.Enabled = False
             End If
         Else
             btnAgregarParo.Enabled = False
@@ -494,6 +520,26 @@ Public Class frmProduccion
     End Sub
     Private Sub deshabilitar_btn_quitar_paro()
         btnQuitarParo.Enabled = False
+    End Sub
+    'Gente
+    Private Sub valida_botones_gente()
+        If cbxTurno.SelectedIndex <> -1 And cbxTipoDetalleGente.SelectedIndex <> -1 And txtGenteCantidad.Text <> "" Then
+            If Convert.ToInt64(txtGenteCantidad.Text) <> 0 Then
+                btnAgregarGente.Enabled = True
+            Else
+                btnAgregarGente.Enabled = False
+            End If
+            btnAgregarGente.Enabled = True
+        Else
+            btnAgregarGente.Enabled = False
+        End If
+    End Sub
+    Private Sub habilita_btn_Quitar_gente()
+        limpia_gente()
+        btnQuitarGente.Enabled = True
+    End Sub
+    Private Sub deshabilitar_btn_quitar_gente()
+        btnQuitarGente.Enabled = False
     End Sub
 #End Region
 #Region "Limpia formularios"
@@ -522,6 +568,12 @@ Public Class frmProduccion
         txtDetallesParo.Text = ""
         cbxMaquina.SelectedIndex = -1
         cbxTipoParo.SelectedIndex = -1
+    End Sub
+    'Gente
+    Private Sub limpia_gente()
+        cbxTipoDetalleGente.SelectedIndex = -1
+        txtGenteCantidad.Text = ""
+        txtDetallesGente.Text = ""
     End Sub
 #End Region
 #Region "Funciones Generales"
@@ -580,20 +632,19 @@ Public Class frmProduccion
         For Each row As DataGridViewRow In grdDetalleProductividad.Rows
             Total += Val(row.Cells(6).Value)
         Next
-        MsgBox(mindisponibles - Total)
         Return mindisponibles - Total
     End Function
     Private Function se_puede_añadir_produccion_o_paro(ByVal min As Integer) As Boolean
-        If get_Minutos_disponibles() = 0 Then
+        If get_minutos_disponibles() = 0 Then
             Return False
-        ElseIf min <= get_Minutos_disponibles() Then
+        ElseIf min <= get_minutos_disponibles() Then
             Return True
         Else
             Return False
         End If
     End Function
     Private Sub piezas_por_hora_modelo()
-        txtPzasPorHora.Text = "0"        
+        txtPzasPorHora.Text = "0"
         Dim PzasporHora As Double = 0
         If cbxModeloProductividad.SelectedIndex <> -1 And cbxLinea.SelectedIndex <> -1 And flgBanderacbxModelos And flgBanderacbxLineas Then
             Dim oTC As New TC
@@ -677,6 +728,13 @@ Public Class frmProduccion
         oParo.Estatus = "1"
         oParo.Registrar()
     End Sub
+    Private Sub remove_paro()
+        Dim oRegistro_Paro As New Registro_Paro
+        oRegistro_Paro.Cve_registro_paro = grdDetalleParo.Item("colcve_registro_paro", grdDetalleParo.CurrentRow.Index).Value
+        oRegistro_Paro.Cod_empleado_eliminacion = vcodigo_empleado
+        oRegistro_Paro.Fecha_eliminacion = Convert.ToDateTime(Now.ToString("dd-MM-yyyy HH:mm"))
+        oRegistro_Paro.remove_paro_detalle()
+    End Sub
 #End Region
 #Region "Funciones para modulo Rechazos"
     'Rechazo
@@ -693,7 +751,7 @@ Public Class frmProduccion
     End Sub
     Private Sub remove_rechazo()
         Dim oRechazo As New Rechazo
-        oRechazo.cve_registro_turno = 1
+        oRechazo.cve_registro_turno = get_registro_del_turno()
         oRechazo.cve_rechazo = grdDetalleRechazo.Item("colcve_rechazo", grdDetalleRechazo.CurrentRow.Index).Value
         oRechazo.cod_empleado_elimino = "118737"
         oRechazo.fecha_eliminacion = Now.ToString("dd-MM-yyyy HH:mm")
@@ -714,8 +772,10 @@ Public Class frmProduccion
         obtenedor_CDM.Dispose()
         If contenedor_CDM.get_if_it_was_used() Then
             add_Paro_CDM()
+            llena_paro_gridview()
             actualiza_tabla_turno_minutos()
             calcula_Productividad()
+
             'insert_Productividad_en_BD()
             'get_Costo_Produccion_Detalle()
             'insert_Costo_en_BD()
@@ -728,6 +788,7 @@ Public Class frmProduccion
         txtMinutosParo.Enabled = True
         txtDetallesParo.Enabled = True
         limpia_paros()
+
     End Sub
     Private Sub add_Paro_CDM()
         Dim cve_registro_paro As Long
@@ -750,7 +811,7 @@ Public Class frmProduccion
         oDetalle_CDM_total.fecha_inicial = Convert.ToDateTime(contenedor_CDM.fecha_inicio)
         oDetalle_CDM_total.fecha_final = Convert.ToDateTime(contenedor_CDM.fecha_final)
         oRegistro_Paro.captura_CDM(oDetalle_CDM_total)
-        cve_registro_paro = oRegistro_Paro.Cve_registro_paro    
+        cve_registro_paro = oRegistro_Paro.Cve_registro_paro
         oRegistro_Paro = Nothing
 
         Dim i As Integer
