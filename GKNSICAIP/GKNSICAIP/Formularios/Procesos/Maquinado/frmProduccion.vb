@@ -131,11 +131,12 @@ Public Class frmProduccion
         llena_gente_gridview()
         'Seguridad
         llena_cbx_cond_inseg()
+        llena_cbx_accidentes()
         llena_cond_inseg_gridview()
+        llena_accidentes_gridview()
         'Productividad
         actualiza_tabla_turno_minutos()
         calcula_Productividad()
-        MsgBox(grdDetalleCondInseg.Rows.Count)
     End Sub
 #End Region
 #Region "LLenado ComboBoxs"
@@ -232,10 +233,10 @@ Public Class frmProduccion
     'Seguridad- Accidentes
     Private Sub llena_cbx_accidentes()
         Dim oDetalleSeguridad As New Detalle_Seguridad
-        cbxTipoCondInseg.ValueMember = "cve_detalle_seguridad"
-        cbxTipoCondInseg.DisplayMember = "descripcion"
-        cbxTipoCondInseg.DataSource = oDetalleSeguridad.llena_combo_seguridad_accidentes()
-        cbxTipoCondInseg.SelectedIndex = -1
+        cbxTipoAccidente.ValueMember = "cve_detalle_seguridad"
+        cbxTipoAccidente.DisplayMember = "descripcion"
+        cbxTipoAccidente.DataSource = oDetalleSeguridad.llena_combo_seguridad_accidentes()
+        cbxTipoAccidente.SelectedIndex = -1
     End Sub
 #End Region
 #Region "Llenado Labels - Textbox"
@@ -305,6 +306,12 @@ Public Class frmProduccion
         Dim oSeguridad As New Seguridad
         oSeguridad.cve_registro_turno = get_registro_del_turno()
         grdDetalleCondInseg.DataSource = oSeguridad.llena_cond_inseg_gridview()
+    End Sub
+    'Seguridad - Accidentes
+    Private Sub llena_accidentes_gridview()
+        Dim oSeguridad As New Seguridad
+        oSeguridad.cve_registro_turno = get_registro_del_turno()
+        grdDetalleAccidente.DataSource = oSeguridad.llena_accidentes_gridview()
     End Sub
 #End Region
 #Region "Eventos ComboBox"
@@ -387,6 +394,12 @@ Public Class frmProduccion
         End If
     End Sub
     'Seguridad - Accidentes
+    Private Sub cbxTipoAccidente_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cbxTipoAccidente.SelectedIndexChanged
+        If cbxTipoAccidente.SelectedIndex <> -1 Then
+            valida_botones_accidentes()
+            deshabilitar_btn_quitar_accidentes()
+        End If
+    End Sub
 #End Region
 #Region "Eventos TextBox"
     'Productividad
@@ -422,6 +435,11 @@ Public Class frmProduccion
     Private Sub txtCondInsegCantidad_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles txtCondInsegCantidad.TextChanged
         valida_botones_cond_inseg()
         deshabilitar_btn_quitar_cond_inseg()
+    End Sub
+    'Seguridad - Accidentes
+    Private Sub txtAccidenteCantidad_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles txtAccidenteCantidad.TextChanged
+        valida_botones_accidentes()
+        deshabilitar_btn_quitar_accidentes()
     End Sub
 #End Region
 #Region "Eventos Botones"
@@ -501,6 +519,18 @@ Public Class frmProduccion
         deshabilitar_btn_quitar_cond_inseg()
         llena_cond_inseg_gridview()
     End Sub
+    'Seguridad Accidentes
+    Private Sub btnAgregarAccidente_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnAgregarAccidente.Click
+        add_accidentes()
+        limpia_accidentes()
+        llena_accidentes_gridview()
+    End Sub
+    Private Sub btnQuitarAccidente_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnQuitarAccidente.Click
+        remove_accidentes()
+        limpia_accidentes()
+        deshabilitar_btn_quitar_accidentes()
+        llena_accidentes_gridview()
+    End Sub
 
 #End Region
 #Region "Eventos Gridviews"
@@ -528,6 +558,10 @@ Public Class frmProduccion
     'Seguridad - Condiciones Inseguras
     Private Sub grdDetalleCondInseg_CellClick(ByVal sender As System.Object, ByVal e As System.Windows.Forms.DataGridViewCellEventArgs) Handles grdDetalleCondInseg.CellClick
         habilita_btn_Quitar_cond_inseg()
+    End Sub
+    'Seguridad - Accidentes
+    Private Sub grdDetalleAccidente_CellClick(ByVal sender As System.Object, ByVal e As System.Windows.Forms.DataGridViewCellEventArgs) Handles grdDetalleAccidente.CellClick
+        habilita_btn_Quitar_accidentes()
     End Sub
 #End Region
 #Region "Validaciones"
@@ -655,6 +689,25 @@ Public Class frmProduccion
     Private Sub deshabilitar_btn_quitar_cond_inseg()
         btnQuitarCondInseg.Enabled = False
     End Sub
+    'Seguridad Acccidentes
+    Private Sub valida_botones_accidentes()
+        If cbxTurno.SelectedIndex <> -1 And cbxTipoAccidente.SelectedIndex <> -1 And txtAccidenteCantidad.Text <> "" Then
+            If Convert.ToInt64(txtAccidenteCantidad.Text) <> 0 Then
+                btnAgregarAccidente.Enabled = True
+            Else
+                btnAgregarAccidente.Enabled = False
+            End If
+        Else
+            btnAgregarAccidente.Enabled = False
+        End If
+    End Sub
+    Private Sub habilita_btn_Quitar_accidentes()
+        limpia_accidentes()
+        btnQuitarAccidente.Enabled = True
+    End Sub
+    Private Sub deshabilitar_btn_quitar_accidentes()
+        btnQuitarAccidente.Enabled = False
+    End Sub
 #End Region
 #Region "Limpia formularios"
     'Productividad
@@ -695,6 +748,12 @@ Public Class frmProduccion
         cbxTipoCondInseg.SelectedIndex = -1
         txtCondInsegCantidad.Text = ""
         txtDetallesCondInseg.Text = ""
+    End Sub
+    'Seguridad Accidente
+    Private Sub limpia_accidentes()
+        cbxTipoAccidente.SelectedIndex = -1
+        txtAccidenteCantidad.Text = ""
+        txtDetallesAccidentes.Text = ""
     End Sub
 #End Region
 #Region "Funciones Generales"
@@ -832,7 +891,6 @@ Public Class frmProduccion
         Dim Total As Double
         For Each row As DataGridViewRow In grdDetalleParo.Rows
             If Convert.ToString(row.Cells(4).Value) = "Z" Then
-                MsgBox("entre")
                 Total += Convert.ToDouble(Val(row.Cells(6).Value))
             End If
         Next
@@ -1002,7 +1060,7 @@ Public Class frmProduccion
         oSeguridad.cantidad = Long.Parse(txtCondInsegCantidad.Text)
         oSeguridad.comentarios = txtDetallesCondInseg.Text
         oSeguridad.estatus = "1"
-        oSeguridad.registra_cond_inseg()
+        oSeguridad.Registrar()
     End Sub
     Private Sub remove_cond_inseg()
         If grdDetalleCondInseg.Rows.Count <> 0 Then
@@ -1015,5 +1073,29 @@ Public Class frmProduccion
             btnQuitarCondInseg.Enabled = False
         End If
     End Sub
+    Private Sub add_accidentes()
+        Dim oSeguridad As New Seguridad
+        oSeguridad.cve_registro_turno = get_registro_del_turno()
+        oSeguridad.cod_empleado_registro = vcodigo_empleado
+        oSeguridad.fecha_registro = Now.ToString("MM-dd-yyyy HH:mm")
+        oSeguridad.cve_detalle_seguridad = cbxTipoAccidente.SelectedValue
+        oSeguridad.cantidad = Long.Parse(txtAccidenteCantidad.Text)
+        oSeguridad.comentarios = txtDetallesAccidentes.Text
+        oSeguridad.estatus = "1"
+        oSeguridad.Registrar()
+    End Sub
+    Private Sub remove_accidentes()
+        If grdDetalleAccidente.Rows.Count <> 0 Then
+            Dim oSeguridad As New Seguridad
+            oSeguridad.cod_empleado_eliminacion = vcodigo_empleado
+            oSeguridad.fecha_eliminacion = Now.ToString("dd-MM-yyyy HH:mm")
+            oSeguridad.cve_seguridad = grdDetalleAccidente.Item("col_cve_seguridad", grdDetalleAccidente.CurrentRow.Index).Value
+            oSeguridad.Eliminar()
+        Else
+            btnQuitarAccidente.Enabled = False
+        End If
+    End Sub
 #End Region
+
+ 
 End Class

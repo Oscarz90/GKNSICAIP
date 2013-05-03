@@ -31,7 +31,13 @@ Public Class Seguridad
     End Function
 
     Public Sub Registrar() Implements IIndividual.Registrar
-       
+        Dim queryInsert As String = "insert into seguridad(cve_registro_turno,cod_empleado_registro,fecha_registro,cve_detalle_seguridad,cantidad,comentarios,estatus) " &
+                            "values(" & vcve_registro_turno & ",'" & vcod_empleado_registro & "','" & vfecha_registro.ToString("MM-dd-yyyy HH:mm") & "'," & vcve_detalle_seguridad & "," & vcantidad & ",'" & vcomentarios & "','1')"
+        Try
+            oBD.EjecutarQuery(queryInsert)
+        Catch
+            MsgBox("Error al insertar Seguridad. CSeguridad_ERROR", vbCritical + vbOKOnly, "Error")
+        End Try
     End Sub
 #End Region
 #Region "Atributos"
@@ -129,15 +135,6 @@ Public Class Seguridad
     End Property
 #End Region
 #Region "Metodos formulario de produccion"
-    Public Sub registra_cond_inseg()
-        Dim queryInsert As String = "insert into seguridad(cve_registro_turno,cod_empleado_registro,fecha_registro,cve_detalle_seguridad,cantidad,comentarios,estatus) " &
-                           "values(" & vcve_registro_turno & ",'" & vcod_empleado_registro & "','" & vfecha_registro.ToString("MM-dd-yyyy HH:mm") & "'," & vcve_detalle_seguridad & "," & vcantidad & ",'" & vcomentarios & "','1')"
-        Try
-            oBD.EjecutarQuery(queryInsert)
-        Catch
-            MsgBox("Error al insertar Seguridad. CSeguridad_ERROR", vbCritical + vbOKOnly, "Error")
-        End Try
-    End Sub
     Public Function llena_cond_inseg_gridview() As DataTable
         Dim obj As DataTable
         Dim queryLlenagridview As String = "select s.cve_seguridad,ds.descripcion,s.cantidad,s.comentarios from seguridad s " &
@@ -148,7 +145,23 @@ Public Class Seguridad
                 obj = oBD.ObtenerTabla(queryLlenagridview)
                 scope.Complete()
             Catch
-                MsgBox("Error al obtener detalle de seguridad. CSeguridad_ERROR", vbCritical + vbOKOnly, "Error")
+                MsgBox("Error al obtener detalle de seguridad-condiciones inseguras. CSeguridad_ERROR", vbCritical + vbOKOnly, "Error")
+                Return Nothing
+            End Try
+            Return obj
+        End Using
+    End Function
+    Public Function llena_accidentes_gridview() As DataTable
+        Dim obj As DataTable
+        Dim queryLlenagridview As String = "select s.cve_seguridad,ds.descripcion,s.cantidad,s.comentarios from seguridad s " &
+            "join detalle_seguridad ds on s.cve_detalle_seguridad=ds.cve_detalle_seguridad " &
+            "where ds.tipo=1 and s.cve_registro_turno=" & vcve_registro_turno & " and s.estatus='1'"
+        Using scope As New TransactionScope
+            Try
+                obj = oBD.ObtenerTabla(queryLlenagridview)
+                scope.Complete()
+            Catch
+                MsgBox("Error al obtener detalle de seguridad-Accidentes. CSeguridad_ERROR", vbCritical + vbOKOnly, "Error")
                 Return Nothing
             End Try
             Return obj

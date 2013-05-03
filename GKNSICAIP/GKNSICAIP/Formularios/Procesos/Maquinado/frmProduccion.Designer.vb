@@ -135,6 +135,15 @@ Partial Class frmProduccion
         Me.cbxMaquina = New System.Windows.Forms.ComboBox()
         Me.Label24 = New System.Windows.Forms.Label()
         Me.tabPageRechazos = New System.Windows.Forms.TabPage()
+        Me.grp5s = New System.Windows.Forms.GroupBox()
+        Me.txtPromedio = New System.Windows.Forms.TextBox()
+        Me.Label68 = New System.Windows.Forms.Label()
+        Me.txtManttoAutonomo = New System.Windows.Forms.TextBox()
+        Me.Label69 = New System.Windows.Forms.Label()
+        Me.txt5s = New System.Windows.Forms.TextBox()
+        Me.txtAdmonVisual = New System.Windows.Forms.TextBox()
+        Me.Label70 = New System.Windows.Forms.Label()
+        Me.Label71 = New System.Windows.Forms.Label()
         Me.grpRechazos = New System.Windows.Forms.GroupBox()
         Me.grdDetalleRechazo = New System.Windows.Forms.DataGridView()
         Me.colcve_rechazo = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -159,7 +168,11 @@ Partial Class frmProduccion
         Me.txtRechazosCantidad = New System.Windows.Forms.TextBox()
         Me.TabPage1 = New System.Windows.Forms.TabPage()
         Me.grpAccidentes = New System.Windows.Forms.GroupBox()
-        Me.DataGridView2 = New System.Windows.Forms.DataGridView()
+        Me.grdDetalleAccidente = New System.Windows.Forms.DataGridView()
+        Me.col_cve_seguridad = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.col_descripcion_ = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Cantidad = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.col_comentarios_ = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.btnQuitarAccidente = New System.Windows.Forms.Button()
         Me.btnAgregarAccidente = New System.Windows.Forms.Button()
         Me.Label63 = New System.Windows.Forms.Label()
@@ -225,11 +238,12 @@ Partial Class frmProduccion
         Me.grpParos.SuspendLayout()
         CType(Me.grdDetalleParo, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.tabPageRechazos.SuspendLayout()
+        Me.grp5s.SuspendLayout()
         Me.grpRechazos.SuspendLayout()
         CType(Me.grdDetalleRechazo, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.TabPage1.SuspendLayout()
         Me.grpAccidentes.SuspendLayout()
-        CType(Me.DataGridView2, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.grdDetalleAccidente, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.grpCondInseg.SuspendLayout()
         CType(Me.grdDetalleCondInseg, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.TabPage2.SuspendLayout()
@@ -448,12 +462,11 @@ Partial Class frmProduccion
         '
         'txtDesechosCantidad
         '
-        Me.txtDesechosCantidad.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
+        Me.txtDesechosCantidad.BackColor = System.Drawing.Color.FromArgb(CType(CType(243, Byte), Integer), CType(CType(251, Byte), Integer), CType(CType(120, Byte), Integer))
         Me.txtDesechosCantidad.Location = New System.Drawing.Point(116, 112)
         Me.txtDesechosCantidad.Name = "txtDesechosCantidad"
         Me.txtDesechosCantidad.Size = New System.Drawing.Size(61, 26)
         Me.txtDesechosCantidad.TabIndex = 9
-        Me.txtDesechosCantidad.Text = "0"
         Me.txtDesechosCantidad.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         '
         'grpProductividad
@@ -853,7 +866,7 @@ Partial Class frmProduccion
         '
         'txtTiempoOperacion
         '
-        Me.txtTiempoOperacion.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
+        Me.txtTiempoOperacion.BackColor = System.Drawing.Color.FromArgb(CType(CType(243, Byte), Integer), CType(CType(251, Byte), Integer), CType(CType(120, Byte), Integer))
         Me.txtTiempoOperacion.Location = New System.Drawing.Point(198, 236)
         Me.txtTiempoOperacion.Name = "txtTiempoOperacion"
         Me.txtTiempoOperacion.Size = New System.Drawing.Size(61, 26)
@@ -972,12 +985,11 @@ Partial Class frmProduccion
         '
         'txtPiezasOkProducidas
         '
-        Me.txtPiezasOkProducidas.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
+        Me.txtPiezasOkProducidas.BackColor = System.Drawing.Color.FromArgb(CType(CType(243, Byte), Integer), CType(CType(251, Byte), Integer), CType(CType(120, Byte), Integer))
         Me.txtPiezasOkProducidas.Location = New System.Drawing.Point(449, 201)
         Me.txtPiezasOkProducidas.Name = "txtPiezasOkProducidas"
         Me.txtPiezasOkProducidas.Size = New System.Drawing.Size(61, 26)
         Me.txtPiezasOkProducidas.TabIndex = 7
-        Me.txtPiezasOkProducidas.Text = "0"
         Me.txtPiezasOkProducidas.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         '
         'Label9
@@ -1264,7 +1276,7 @@ Partial Class frmProduccion
         '
         'txtMinutosParo
         '
-        Me.txtMinutosParo.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
+        Me.txtMinutosParo.BackColor = System.Drawing.Color.FromArgb(CType(CType(243, Byte), Integer), CType(CType(251, Byte), Integer), CType(CType(120, Byte), Integer))
         Me.txtMinutosParo.Location = New System.Drawing.Point(422, 21)
         Me.txtMinutosParo.Name = "txtMinutosParo"
         Me.txtMinutosParo.Size = New System.Drawing.Size(161, 26)
@@ -1337,7 +1349,7 @@ Partial Class frmProduccion
         '
         'txtDetallesParo
         '
-        Me.txtDetallesParo.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
+        Me.txtDetallesParo.BackColor = System.Drawing.Color.FromArgb(CType(CType(243, Byte), Integer), CType(CType(251, Byte), Integer), CType(CType(120, Byte), Integer))
         Me.txtDetallesParo.Location = New System.Drawing.Point(422, 78)
         Me.txtDetallesParo.Multiline = True
         Me.txtDetallesParo.Name = "txtDetallesParo"
@@ -1387,13 +1399,99 @@ Partial Class frmProduccion
         '
         'tabPageRechazos
         '
+        Me.tabPageRechazos.Controls.Add(Me.grp5s)
         Me.tabPageRechazos.Controls.Add(Me.grpRechazos)
         Me.tabPageRechazos.Location = New System.Drawing.Point(4, 27)
         Me.tabPageRechazos.Name = "tabPageRechazos"
         Me.tabPageRechazos.Size = New System.Drawing.Size(1222, 431)
         Me.tabPageRechazos.TabIndex = 2
-        Me.tabPageRechazos.Text = "Rechazos"
+        Me.tabPageRechazos.Text = "Rechazos / 5'S"
         Me.tabPageRechazos.UseVisualStyleBackColor = True
+        '
+        'grp5s
+        '
+        Me.grp5s.Controls.Add(Me.txtPromedio)
+        Me.grp5s.Controls.Add(Me.Label68)
+        Me.grp5s.Controls.Add(Me.txtManttoAutonomo)
+        Me.grp5s.Controls.Add(Me.Label69)
+        Me.grp5s.Controls.Add(Me.txt5s)
+        Me.grp5s.Controls.Add(Me.txtAdmonVisual)
+        Me.grp5s.Controls.Add(Me.Label70)
+        Me.grp5s.Controls.Add(Me.Label71)
+        Me.grp5s.Location = New System.Drawing.Point(640, 12)
+        Me.grp5s.Name = "grp5s"
+        Me.grp5s.Size = New System.Drawing.Size(511, 358)
+        Me.grp5s.TabIndex = 337
+        Me.grp5s.TabStop = False
+        Me.grp5s.Text = "5'S"
+        '
+        'txtPromedio
+        '
+        Me.txtPromedio.Location = New System.Drawing.Point(449, 43)
+        Me.txtPromedio.Name = "txtPromedio"
+        Me.txtPromedio.ReadOnly = True
+        Me.txtPromedio.Size = New System.Drawing.Size(100, 26)
+        Me.txtPromedio.TabIndex = 160
+        '
+        'Label68
+        '
+        Me.Label68.AutoSize = True
+        Me.Label68.Location = New System.Drawing.Point(362, 46)
+        Me.Label68.Name = "Label68"
+        Me.Label68.Size = New System.Drawing.Size(73, 18)
+        Me.Label68.TabIndex = 159
+        Me.Label68.Text = "Promedio:"
+        '
+        'txtManttoAutonomo
+        '
+        Me.txtManttoAutonomo.Location = New System.Drawing.Point(190, 137)
+        Me.txtManttoAutonomo.Name = "txtManttoAutonomo"
+        Me.txtManttoAutonomo.Size = New System.Drawing.Size(100, 26)
+        Me.txtManttoAutonomo.TabIndex = 157
+        '
+        'Label69
+        '
+        Me.Label69.AutoSize = True
+        Me.Label69.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label69.Location = New System.Drawing.Point(47, 140)
+        Me.Label69.Name = "Label69"
+        Me.Label69.Size = New System.Drawing.Size(137, 18)
+        Me.Label69.TabIndex = 158
+        Me.Label69.Text = "Mantto. Autónomo:"
+        '
+        'txt5s
+        '
+        Me.txt5s.Location = New System.Drawing.Point(190, 91)
+        Me.txt5s.Name = "txt5s"
+        Me.txt5s.Size = New System.Drawing.Size(100, 26)
+        Me.txt5s.TabIndex = 156
+        '
+        'txtAdmonVisual
+        '
+        Me.txtAdmonVisual.Location = New System.Drawing.Point(190, 45)
+        Me.txtAdmonVisual.Name = "txtAdmonVisual"
+        Me.txtAdmonVisual.Size = New System.Drawing.Size(100, 26)
+        Me.txtAdmonVisual.TabIndex = 154
+        '
+        'Label70
+        '
+        Me.Label70.AutoSize = True
+        Me.Label70.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label70.Location = New System.Drawing.Point(25, 51)
+        Me.Label70.Name = "Label70"
+        Me.Label70.Size = New System.Drawing.Size(159, 18)
+        Me.Label70.TabIndex = 155
+        Me.Label70.Text = "Administración visual:"
+        '
+        'Label71
+        '
+        Me.Label71.AutoSize = True
+        Me.Label71.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label71.Location = New System.Drawing.Point(151, 94)
+        Me.Label71.Name = "Label71"
+        Me.Label71.Size = New System.Drawing.Size(33, 18)
+        Me.Label71.TabIndex = 153
+        Me.Label71.Text = "5 s:"
         '
         'grpRechazos
         '
@@ -1611,7 +1709,7 @@ Partial Class frmProduccion
         '
         'txtRechazosCantidad
         '
-        Me.txtRechazosCantidad.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
+        Me.txtRechazosCantidad.BackColor = System.Drawing.Color.FromArgb(CType(CType(243, Byte), Integer), CType(CType(251, Byte), Integer), CType(CType(120, Byte), Integer))
         Me.txtRechazosCantidad.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtRechazosCantidad.Location = New System.Drawing.Point(421, 25)
         Me.txtRechazosCantidad.Name = "txtRechazosCantidad"
@@ -1632,7 +1730,7 @@ Partial Class frmProduccion
         '
         'grpAccidentes
         '
-        Me.grpAccidentes.Controls.Add(Me.DataGridView2)
+        Me.grpAccidentes.Controls.Add(Me.grdDetalleAccidente)
         Me.grpAccidentes.Controls.Add(Me.btnQuitarAccidente)
         Me.grpAccidentes.Controls.Add(Me.btnAgregarAccidente)
         Me.grpAccidentes.Controls.Add(Me.Label63)
@@ -1651,13 +1749,45 @@ Partial Class frmProduccion
         Me.grpAccidentes.TabStop = False
         Me.grpAccidentes.Text = "Accidentes"
         '
-        'DataGridView2
+        'grdDetalleAccidente
         '
-        Me.DataGridView2.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.DataGridView2.Location = New System.Drawing.Point(6, 242)
-        Me.DataGridView2.Name = "DataGridView2"
-        Me.DataGridView2.Size = New System.Drawing.Size(588, 171)
-        Me.DataGridView2.TabIndex = 348
+        Me.grdDetalleAccidente.AllowUserToAddRows = False
+        Me.grdDetalleAccidente.AllowUserToDeleteRows = False
+        Me.grdDetalleAccidente.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.grdDetalleAccidente.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.col_cve_seguridad, Me.col_descripcion_, Me.Cantidad, Me.col_comentarios_})
+        Me.grdDetalleAccidente.Location = New System.Drawing.Point(6, 242)
+        Me.grdDetalleAccidente.Name = "grdDetalleAccidente"
+        Me.grdDetalleAccidente.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
+        Me.grdDetalleAccidente.Size = New System.Drawing.Size(588, 171)
+        Me.grdDetalleAccidente.TabIndex = 348
+        '
+        'col_cve_seguridad
+        '
+        Me.col_cve_seguridad.DataPropertyName = "cve_seguridad"
+        Me.col_cve_seguridad.HeaderText = "cve_seguridad"
+        Me.col_cve_seguridad.Name = "col_cve_seguridad"
+        Me.col_cve_seguridad.ReadOnly = True
+        '
+        'col_descripcion_
+        '
+        Me.col_descripcion_.DataPropertyName = "descripcion"
+        Me.col_descripcion_.HeaderText = "Descripcion"
+        Me.col_descripcion_.Name = "col_descripcion_"
+        Me.col_descripcion_.ReadOnly = True
+        '
+        'Cantidad
+        '
+        Me.Cantidad.DataPropertyName = "cantidad"
+        Me.Cantidad.HeaderText = "Cantidad"
+        Me.Cantidad.Name = "Cantidad"
+        Me.Cantidad.ReadOnly = True
+        '
+        'col_comentarios_
+        '
+        Me.col_comentarios_.DataPropertyName = "comentarios"
+        Me.col_comentarios_.HeaderText = "Comentarios"
+        Me.col_comentarios_.Name = "col_comentarios_"
+        Me.col_comentarios_.ReadOnly = True
         '
         'btnQuitarAccidente
         '
@@ -1707,7 +1837,7 @@ Partial Class frmProduccion
         '
         'txtDetallesAccidentes
         '
-        Me.txtDetallesAccidentes.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
+        Me.txtDetallesAccidentes.BackColor = System.Drawing.Color.FromArgb(CType(CType(243, Byte), Integer), CType(CType(251, Byte), Integer), CType(CType(120, Byte), Integer))
         Me.txtDetallesAccidentes.Location = New System.Drawing.Point(93, 144)
         Me.txtDetallesAccidentes.Multiline = True
         Me.txtDetallesAccidentes.Name = "txtDetallesAccidentes"
@@ -1727,6 +1857,7 @@ Partial Class frmProduccion
         '
         'txtAccidenteCantidad
         '
+        Me.txtAccidenteCantidad.BackColor = System.Drawing.Color.FromArgb(CType(CType(243, Byte), Integer), CType(CType(251, Byte), Integer), CType(CType(120, Byte), Integer))
         Me.txtAccidenteCantidad.Location = New System.Drawing.Point(93, 93)
         Me.txtAccidenteCantidad.Name = "txtAccidenteCantidad"
         Me.txtAccidenteCantidad.Size = New System.Drawing.Size(181, 28)
@@ -1870,7 +2001,7 @@ Partial Class frmProduccion
         '
         'txtDetallesCondInseg
         '
-        Me.txtDetallesCondInseg.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
+        Me.txtDetallesCondInseg.BackColor = System.Drawing.Color.FromArgb(CType(CType(243, Byte), Integer), CType(CType(251, Byte), Integer), CType(CType(120, Byte), Integer))
         Me.txtDetallesCondInseg.Location = New System.Drawing.Point(96, 145)
         Me.txtDetallesCondInseg.Multiline = True
         Me.txtDetallesCondInseg.Name = "txtDetallesCondInseg"
@@ -1890,6 +2021,7 @@ Partial Class frmProduccion
         '
         'txtCondInsegCantidad
         '
+        Me.txtCondInsegCantidad.BackColor = System.Drawing.Color.FromArgb(CType(CType(243, Byte), Integer), CType(CType(251, Byte), Integer), CType(CType(120, Byte), Integer))
         Me.txtCondInsegCantidad.Location = New System.Drawing.Point(96, 94)
         Me.txtCondInsegCantidad.Name = "txtCondInsegCantidad"
         Me.txtCondInsegCantidad.Size = New System.Drawing.Size(181, 28)
@@ -1949,9 +2081,9 @@ Partial Class frmProduccion
         Me.grpGente.Controls.Add(Me.Label50)
         Me.grpGente.Controls.Add(Me.Label55)
         Me.grpGente.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.grpGente.Location = New System.Drawing.Point(6, 3)
+        Me.grpGente.Location = New System.Drawing.Point(6, 6)
         Me.grpGente.Name = "grpGente"
-        Me.grpGente.Size = New System.Drawing.Size(615, 411)
+        Me.grpGente.Size = New System.Drawing.Size(615, 408)
         Me.grpGente.TabIndex = 335
         Me.grpGente.TabStop = False
         Me.grpGente.Text = "Gente"
@@ -2043,7 +2175,7 @@ Partial Class frmProduccion
         '
         'txtDetallesGente
         '
-        Me.txtDetallesGente.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
+        Me.txtDetallesGente.BackColor = System.Drawing.Color.FromArgb(CType(CType(243, Byte), Integer), CType(CType(251, Byte), Integer), CType(CType(120, Byte), Integer))
         Me.txtDetallesGente.Location = New System.Drawing.Point(102, 147)
         Me.txtDetallesGente.Multiline = True
         Me.txtDetallesGente.Name = "txtDetallesGente"
@@ -2063,6 +2195,7 @@ Partial Class frmProduccion
         '
         'txtGenteCantidad
         '
+        Me.txtGenteCantidad.BackColor = System.Drawing.Color.FromArgb(CType(CType(243, Byte), Integer), CType(CType(251, Byte), Integer), CType(CType(120, Byte), Integer))
         Me.txtGenteCantidad.Location = New System.Drawing.Point(102, 96)
         Me.txtGenteCantidad.Name = "txtGenteCantidad"
         Me.txtGenteCantidad.Size = New System.Drawing.Size(181, 26)
@@ -2213,6 +2346,7 @@ Partial Class frmProduccion
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.White
+        Me.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None
         Me.ClientSize = New System.Drawing.Size(1254, 722)
         Me.Controls.Add(Me.Label58)
         Me.Controls.Add(Me.cbxLinea)
@@ -2226,6 +2360,7 @@ Partial Class frmProduccion
         Me.Controls.Add(Me.titulo_banner_formulario)
         Me.Controls.Add(Me.banner_formulario)
         Me.Controls.Add(Me.TabContenido)
+        Me.DoubleBuffered = True
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.MaximizeBox = False
         Me.MaximumSize = New System.Drawing.Size(1280, 768)
@@ -2247,13 +2382,15 @@ Partial Class frmProduccion
         Me.grpParos.PerformLayout()
         CType(Me.grdDetalleParo, System.ComponentModel.ISupportInitialize).EndInit()
         Me.tabPageRechazos.ResumeLayout(False)
+        Me.grp5s.ResumeLayout(False)
+        Me.grp5s.PerformLayout()
         Me.grpRechazos.ResumeLayout(False)
         Me.grpRechazos.PerformLayout()
         CType(Me.grdDetalleRechazo, System.ComponentModel.ISupportInitialize).EndInit()
         Me.TabPage1.ResumeLayout(False)
         Me.grpAccidentes.ResumeLayout(False)
         Me.grpAccidentes.PerformLayout()
-        CType(Me.DataGridView2, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.grdDetalleAccidente, System.ComponentModel.ISupportInitialize).EndInit()
         Me.grpCondInseg.ResumeLayout(False)
         Me.grpCondInseg.PerformLayout()
         CType(Me.grdDetalleCondInseg, System.ComponentModel.ISupportInitialize).EndInit()
@@ -2452,10 +2589,23 @@ Partial Class frmProduccion
     Friend WithEvents cbxTipoCondInseg As System.Windows.Forms.ComboBox
     Friend WithEvents Label30 As System.Windows.Forms.Label
     Friend WithEvents Label62 As System.Windows.Forms.Label
-    Friend WithEvents DataGridView2 As System.Windows.Forms.DataGridView
+    Friend WithEvents grdDetalleAccidente As System.Windows.Forms.DataGridView
     Friend WithEvents grdDetalleCondInseg As System.Windows.Forms.DataGridView
     Friend WithEvents colcve_seguridad As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents coldescripciondetalle As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents colcantidaddetalle As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents colcomentarios As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents col_cve_seguridad As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents col_descripcion_ As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents Cantidad As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents col_comentarios_ As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents grp5s As System.Windows.Forms.GroupBox
+    Friend WithEvents txtPromedio As System.Windows.Forms.TextBox
+    Friend WithEvents Label68 As System.Windows.Forms.Label
+    Friend WithEvents txtManttoAutonomo As System.Windows.Forms.TextBox
+    Friend WithEvents Label69 As System.Windows.Forms.Label
+    Friend WithEvents txt5s As System.Windows.Forms.TextBox
+    Friend WithEvents txtAdmonVisual As System.Windows.Forms.TextBox
+    Friend WithEvents Label70 As System.Windows.Forms.Label
+    Friend WithEvents Label71 As System.Windows.Forms.Label
 End Class
