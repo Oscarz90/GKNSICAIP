@@ -455,7 +455,6 @@ Public Class frmGraficas
         'cadenaXML += " </dataset>"
     End Sub
 #End Region
-
 #Region "ESTABLECE NRFTI 1 EQUIPO 1 LINEA"
     Private Sub establece_NRFTi(ByVal cadena As String, ByVal color As String)
         Dim sumaPzasOK As Double = 0
@@ -496,7 +495,58 @@ Public Class frmGraficas
 #End Region
 
 #Region "ESTABLECE NRFTI 1 EQUIPO LINEAS ACUMULADAS"
+    Private Sub establece_NRFTi_Acumulado(ByVal cadena As String, ByVal color As String)
+        Dim sumaPzasOK As Double = 0
+        Dim sumaPzasDes As Double = 0
+        Dim promNrfti As Double = 0
+        Dim sumaPzasOKFinal As Double = 0 ''*
+        Dim sumaPzasDesFinal As Double = 0  ''*
+        Dim promNrftiFinal As Double = 0  ''*
+        Dim vDT As DataTable
+        cadenaXML += "<dataset seriesName='NRFTi' color='" & color & "' anchorBorderColor='" & contorno_anchor & "' anchorBgColor='" & color & "' anchorRadius='" & radio_anchor & "'>"
+        Dim nrfti As Double = 0
+        Dim pzasOK As Double = 0
+        Dim pzasDes As Double = 0
+        Dim vFecha_Actual As DateTime
+        If rbtDia.Checked Then
+            vDT = oGraficas.ejecutarVista(cadena, cadenaWHERE)
+            vFecha_Actual = vDT.Rows(0).Item("DIA_ASIGNADO").ToString
+            For Each vDR As DataRow In vDT.Rows
+                If vFecha_Actual = vDR("DIA_ASIGNADO") Then
+                    pzasOK = vDR(("PZAS_OK"))
+                    pzasDes = vDR(("PZAS_DESECHO"))
+                    sumaPzasOK = sumaPzasOK + pzasOK
+                    sumaPzasDes = sumaPzasDes + pzasDes
+                    promNrfti = (sumaPzasDes / (sumaPzasDes + sumaPzasOK)) * 1000000
+                    ''PROMEDIO FINAL NRFTI BARRA ROJA
+                    sumaPzasOKFinal = sumaPzasOKFinal + pzasOK
+                    sumaPzasDesFinal = sumaPzasDesFinal + pzasDes
+                    promNrftiFinal = (sumaPzasDesFinal / (sumaPzasDesFinal + sumaPzasOKFinal)) * 1000000
+                ElseIf vFecha_Actual <> vDR("DIA_ASIGNADO") Then
+                    cadenaXML += " <set value='" & promNrfti.ToString & "'/>"
+                    pzasOK = vDR(("PZAS_OK"))
+                    pzasDes = vDR(("PZAS_DESECHO"))
+                    sumaPzasOK = 0
+                    sumaPzasDes = 0
+                    promNrfti = 0
+                    sumaPzasOK = sumaPzasOK + pzasOK
+                    sumaPzasDes = sumaPzasDes + pzasDes
+                    promNrfti = (sumaPzasDes / (sumaPzasDes + sumaPzasOK)) * 1000000
+                    ''PROMEDIO FINAL NRFTI BARRA ROJA
+                    sumaPzasOKFinal = sumaPzasOKFinal + pzasOK
+                    sumaPzasDesFinal = sumaPzasDesFinal + pzasDes
+                    promNrftiFinal = (sumaPzasDesFinal / (sumaPzasDesFinal + sumaPzasOKFinal)) * 1000000
+                    vFecha_Actual = vDR("DIA_ASIGNADO")
+                    pzasOK = 0
+                    pzasDes = 0
+                End If
 
+            Next
+            cadenaXML += " <set value='" & promNrfti.ToString & "'/>"
+        End If
+        cadenaXML += " <set value='" & promNrftiFinal.ToString & "' color='" & colores(1) & "'/>"
+        cadenaXML += " </dataset>"
+    End Sub
 #End Region
 
 #Region "INICIALIZACION DEL FORMULARIO"
@@ -691,8 +741,8 @@ Public Class frmGraficas
             If cbxTodasLineas.Checked Then
                 cadenaSELECT = "SELECT DISTINCT DIA_ASIGNADO FROM VISTA_SELECCION_INDICADOR2"
                 establece_fechas(cadenaSELECT) ''establece_fechas(1)
-                cadenaSELECT = "SELECT NRFTI, DIA_ASIGNADO FROM VISTA_SELECCION_INDICADOR2"
-                establece_OEE_Acumulado(cadenaSELECT, colores(0))
+                cadenaSELECT = "SELECT DIA_ASIGNADO, PZAS_OK, PZAS_DESECHO, NRFTI FROM VISTA_SELECCION_INDICADOR2"
+                establece_NRFTi_Acumulado(cadenaSELECT, colores(6))
             Else
                 cadenaSELECT = "SELECT DIA_ASIGNADO, PZAS_OK, PZAS_DESECHO, NRFTI FROM VISTA_SELECCION_INDICADOR2"
                 establece_fechas(cadenaSELECT)
