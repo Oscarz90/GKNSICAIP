@@ -126,6 +126,9 @@ Public Class frmProduccion
         contenedor_CDM = New CDM_Class
         contenedor_CDM.set_not_used()
         obtenedor_CDM = New frmCDM(contenedor_CDM)
+        'Gente
+        llena_cbx_Detalle_Gente()
+        llena_gente_gridview()
         'Productividad
         actualiza_tabla_turno_minutos()
         calcula_Productividad()
@@ -206,6 +209,14 @@ Public Class frmProduccion
         cbxTipoParo.SelectedIndex = -1
         flgBanderacbxParos = True
     End Sub
+    'Gente
+    Private Sub llena_cbx_Detalle_Gente()
+        Dim oDetalle_Gente As New Detalle_Gente
+        cbxTipoDetalleGente.ValueMember = "cve_detalle_gente"
+        cbxTipoDetalleGente.DisplayMember = "descripcion"
+        cbxTipoDetalleGente.DataSource = oDetalle_Gente.llena_combo_detalle_gente
+        cbxTipoDetalleGente.SelectedIndex = -1
+    End Sub
 #End Region
 #Region "Llenado Labels - Textbox"
     'General
@@ -262,6 +273,12 @@ Public Class frmProduccion
         Dim oRegistro_Paro As New Registro_Paro
         oRegistro_Paro.Cve_registro_turno = get_registro_del_turno()
         grdDetalleParo.DataSource = oRegistro_Paro.llena_paro_gridview()
+    End Sub
+    'Gente
+    Private Sub llena_gente_gridview()
+        Dim oGente As New Gente
+        oGente.cve_registro_turno = get_registro_del_turno()
+        grdDetalleGente.DataSource = oGente.llena_gente_gridview()
     End Sub
 #End Region
 #Region "Eventos ComboBox"
@@ -329,6 +346,13 @@ Public Class frmProduccion
             deshabilitar_btn_quitar_paro()
         End If
     End Sub
+    'Gente
+    Private Sub cbxTipoDetalleGente_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cbxTipoDetalleGente.SelectedIndexChanged
+        If cbxTipoDetalleGente.SelectedIndex <> -1 Then
+            valida_botones_gente()
+            deshabilitar_btn_quitar_gente()
+        End If
+    End Sub
 #End Region
 #Region "Eventos TextBox"
     'Productividad
@@ -357,7 +381,8 @@ Public Class frmProduccion
     End Sub
     'Gente
     Private Sub txtGenteCantidad_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles txtGenteCantidad.TextChanged
-
+        valida_botones_gente()
+        deshabilitar_btn_quitar_gente()
     End Sub
 #End Region
 #Region "Eventos Botones"
@@ -413,6 +438,18 @@ Public Class frmProduccion
         actualiza_tabla_turno_minutos()
         calcula_Productividad()
     End Sub
+    'Gente
+    Private Sub btnAgregarGente_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnAgregarGente.Click
+        add_gente()
+        limpia_gente()
+        llena_gente_gridview()
+    End Sub
+    Private Sub btnQuitarGente_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnQuitarGente.Click
+        remove_gente()
+        limpia_gente()
+        deshabilitar_btn_quitar_gente()
+        llena_gente_gridview()
+    End Sub
 #End Region
 #Region "Eventos Gridviews"
     'Productividad
@@ -431,6 +468,10 @@ Public Class frmProduccion
     'Paros
     Private Sub grdDetalleParo_CellClick(ByVal sender As System.Object, ByVal e As System.Windows.Forms.DataGridViewCellEventArgs) Handles grdDetalleParo.CellClick
         habilita_btn_Quitar_paro()
+    End Sub
+    'Gente
+    Private Sub grdDetalleGente_CellClick(ByVal sender As System.Object, ByVal e As System.Windows.Forms.DataGridViewCellEventArgs) Handles grdDetalleGente.CellClick
+        habilita_btn_Quitar_gente()
     End Sub
 #End Region
 #Region "Validaciones"
@@ -546,7 +587,8 @@ Public Class frmProduccion
     'Productividad
     Private Sub limpia_productividad()
         cbxModeloProductividad.SelectedIndex = -1
-        txtPiezasOkProducidas.Text = "0"
+        txtPzasPorHora.Text = ""
+        txtPiezasOkProducidas.Text = ""
         txtTiempoOperacion.Text = ""
     End Sub
     'Desechos
@@ -611,7 +653,7 @@ Public Class frmProduccion
         oProduccion.cve_produccion = grdDetalleProductividad.Item("colcve_produccion", grdDetalleProductividad.CurrentRow.Index).Value
         oProduccion.cod_empleado_eliminacion = vcodigo_empleado
         oProduccion.fecha_eliminacion = Now.ToString("dd-MM-yyyy HH:mm")
-        oProduccion.elimina_fila_productividad_gridview()
+        oProduccion.Eliminar()
     End Sub
     Private Function get_suma_piezas_producidas() As Double
         Dim Total As Double
@@ -670,7 +712,7 @@ Public Class frmProduccion
         oDesecho.cod_empleado_eliminacion = vcodigo_empleado
         oDesecho.fecha_eliminacion = Now.ToString("MM-dd-yyyy HH:mm")
         oDesecho.cve_desecho = grdDetalleDesecho.Item("colcve_desecho", grdDetalleDesecho.CurrentRow.Index).Value
-        oDesecho.elimina_fila_desecho_gridview()
+        oDesecho.Eliminar()
     End Sub
     Private Function get_suma_desechos() As Double
         Dim Total As Double
@@ -733,7 +775,7 @@ Public Class frmProduccion
         oRegistro_Paro.Cve_registro_paro = grdDetalleParo.Item("colcve_registro_paro", grdDetalleParo.CurrentRow.Index).Value
         oRegistro_Paro.Cod_empleado_eliminacion = vcodigo_empleado
         oRegistro_Paro.Fecha_eliminacion = Convert.ToDateTime(Now.ToString("dd-MM-yyyy HH:mm"))
-        oRegistro_Paro.remove_paro_detalle()
+        oRegistro_Paro.Eliminar()
     End Sub
 #End Region
 #Region "Funciones para modulo Rechazos"
@@ -755,7 +797,7 @@ Public Class frmProduccion
         oRechazo.cve_rechazo = grdDetalleRechazo.Item("colcve_rechazo", grdDetalleRechazo.CurrentRow.Index).Value
         oRechazo.cod_empleado_elimino = "118737"
         oRechazo.fecha_eliminacion = Now.ToString("dd-MM-yyyy HH:mm")
-        oRechazo.elimina_fila_rechazo_gridview()
+        oRechazo.Eliminar()
     End Sub
     Private Function get_suma_rechazos() As Double
         Dim Total As Double
@@ -775,14 +817,8 @@ Public Class frmProduccion
             llena_paro_gridview()
             actualiza_tabla_turno_minutos()
             calcula_Productividad()
-
-            'insert_Productividad_en_BD()
-            'get_Costo_Produccion_Detalle()
-            'insert_Costo_en_BD()
         End If
-        'borra objeto de CDM
         contenedor_CDM = Nothing
-        'crea el nuevo objeto de CDM
         contenedor_CDM = New CDM_Class
         obtenedor_CDM = New frmCDM(contenedor_CDM)
         txtMinutosParo.Enabled = True
@@ -832,4 +868,27 @@ Public Class frmProduccion
         Next
     End Sub
 #End Region
+#Region "Funciones para modulo de Gente"
+    Private Sub add_gente()
+        Dim oGente As New Gente
+        oGente.cve_registro_turno = get_registro_del_turno()
+        oGente.cod_empleado_registro = vcodigo_empleado
+        oGente.fecha_registro = Now.ToString("MM-dd-yyyy HH:mm")
+        oGente.cve_detalle_gente = cbxTipoDetalleGente.SelectedValue
+        oGente.cantidad = Long.Parse(txtGenteCantidad.Text)
+        oGente.comentarios = txtDetallesGente.Text
+        oGente.estatus = "1"
+        oGente.Registrar()
+    End Sub
+    Private Sub remove_gente()
+        Dim oGente As New Gente
+        oGente.cod_empleado_eliminacion = vcodigo_empleado
+        oGente.fecha_eliminacion = Now.ToString("dd-MM-yyyy HH:mm")
+        oGente.cve_gente = grdDetalleGente.Item("colcve_gente", grdDetalleGente.CurrentRow.Index).Value
+        oGente.Eliminar()
+    End Sub
+#End Region
+
+
+
 End Class

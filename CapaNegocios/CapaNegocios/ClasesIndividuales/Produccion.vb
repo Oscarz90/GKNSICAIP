@@ -9,7 +9,21 @@ Public Class Produccion
 
     End Sub
     Public Sub Eliminar() Implements IIndividual.Eliminar
-
+        Using scope As New TransactionScope
+            Try
+                Dim vComando As New SqlClient.SqlCommand
+                vComando.CommandType = CommandType.StoredProcedure
+                vComando.CommandText = "remueve_produccion"
+                vComando.Parameters.Add("@cve_registro_turno", SqlDbType.BigInt).Value = Me.vcve_registro_turno
+                vComando.Parameters.Add("@cve_produccion", SqlDbType.BigInt).Value = Me.vcve_produccion
+                vComando.Parameters.Add("@cod_empleado", SqlDbType.VarChar).Value = Me.vcod_empleado_eliminacion
+                vComando.Parameters.Add("@fecha_eliminacion", SqlDbType.DateTime).Value = Convert.ToDateTime(Me.vfecha_eliminacion)
+                oBD.EjecutaProcedimientos(vComando)
+                scope.Complete()
+            Catch
+                MsgBox("Error al eliminar produccion. CProduccion_ERROR", vbCritical + vbOKOnly, "Error")
+            End Try
+        End Using
     End Sub
 
     Dim vId As Long
@@ -175,22 +189,5 @@ Public Class Produccion
             Return obj
         End Using
     End Function
-    Public Sub elimina_fila_productividad_gridview()
-        Using scope As New TransactionScope
-            Try
-                Dim vComando As New SqlClient.SqlCommand
-                vComando.CommandType = CommandType.StoredProcedure
-                vComando.CommandText = "remueve_produccion"
-                vComando.Parameters.Add("@cve_registro_turno", SqlDbType.BigInt).Value = Me.vcve_registro_turno
-                vComando.Parameters.Add("@cve_produccion", SqlDbType.BigInt).Value = Me.vcve_produccion
-                vComando.Parameters.Add("@cod_empleado", SqlDbType.VarChar).Value = Me.vcod_empleado_eliminacion
-                vComando.Parameters.Add("@fecha_eliminacion", SqlDbType.DateTime).Value = Convert.ToDateTime(Me.vfecha_eliminacion)
-                oBD.EjecutaProcedimientos(vComando)
-                scope.Complete()
-            Catch
-                MsgBox("Error al eliminar produccion. CProduccion_ERROR", vbCritical + vbOKOnly, "Error")
-            End Try
-        End Using
-    End Sub
 #End Region
 End Class

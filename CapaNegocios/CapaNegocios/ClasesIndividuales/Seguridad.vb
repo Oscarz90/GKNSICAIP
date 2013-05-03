@@ -127,5 +127,4 @@ Public Class Seguridad
 #Region "Metodos formulario de produccion"
 
 #End Region
-    
 End Class

@@ -9,7 +9,11 @@ Public Class Gente
     End Sub
 
     Public Sub Eliminar() Implements IIndividual.Eliminar
-
+        Try
+            oBD.EjecutarQuery("update gente set cod_empleado_eliminacion='" & vcod_empleado_eliminacion & "',fecha_eliminacion='" & vfecha_eliminacion.ToString("MM-dd-yyyy HH:mm") & "',estatus='0' where cve_gente=" & vcve_gente)
+        Catch ex As Exception
+            MsgBox("Error al eliminar desecho. CDesecho_ERROR", vbCritical + vbOKOnly, "Error")
+        End Try
     End Sub
 
     Public Property Id As Long Implements IIndividual.Id
@@ -26,7 +30,13 @@ Public Class Gente
     End Function
 
     Public Sub Registrar() Implements IIndividual.Registrar
-
+        Dim queryInsert As String = "insert into gente(cve_registro_turno,cod_empleado_registro,fecha_registro,cve_detalle_gente,cantidad,comentarios,estatus) " &
+                              "values(" & vcve_registro_turno & ",'" & vcod_empleado_registro & "','" & vfecha_registro.ToString("MM-dd-yyyy HH:mm") & "'," & vcve_detalle_gente & "," & vcantidad & ",'" & vcomentarios & "','1')"
+        Try
+            oBD.EjecutarQuery(queryInsert)
+        Catch
+            MsgBox("Error al insertar gente. CGente_ERROR", vbCritical + vbOKOnly, "Error")
+        End Try
     End Sub
 #End Region
 #Region "Atributos"
@@ -124,6 +134,21 @@ Public Class Gente
     End Property
 #End Region
 #Region "Metodos formulario de produccion"
-
+    Public Function llena_gente_gridview() As DataTable
+        Dim obj As DataTable
+        Dim queryLlenagridview As String = "select g.cve_gente,dg.descripcion,g.cantidad,g.comentarios " &
+            "from gente g join detalle_gente dg on g.cve_detalle_gente=dg.cve_detalle_gente " &
+            "where g.cve_registro_turno=" & vcve_registro_turno & " and g.estatus='1'"
+        Using scope As New TransactionScope
+            Try
+                obj = oBD.ObtenerTabla(queryLlenagridview)
+                scope.Complete()
+            Catch
+                MsgBox("Error al obtener detalle de gente. CGente_ERROR", vbCritical + vbOKOnly, "Error")
+                Return Nothing
+            End Try
+            Return obj
+        End Using
+    End Function
 #End Region
 End Class

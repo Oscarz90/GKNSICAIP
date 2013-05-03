@@ -23,11 +23,21 @@ Public Class Registro_Paro
         End If
     End Sub
     Public Sub Eliminar() Implements IIndividual.Eliminar
-        Try
-            oBD.EjecutarQuery("delete from registro_paro where cve_registro_paro = " & vCve_registro_paro)
-        Catch ex As Exception
-
-        End Try
+        Using scope As New TransactionScope
+            Try
+                Dim vComando As New SqlClient.SqlCommand
+                vComando.CommandType = CommandType.StoredProcedure
+                vComando.CommandText = "delete_registro_paro"
+                vComando.Parameters.Add("@cve_registro_paro", SqlDbType.BigInt).Value = Me.vCve_registro_paro
+                vComando.Parameters.Add("@cod_empleado_eliminacion", SqlDbType.VarChar).Value = Me.vCod_empleado_eliminacion
+                vComando.Parameters.Add("@fecha_eliminacion", SqlDbType.DateTime).Value = Me.vFecha_eliminacion
+                oBD.EjecutaProcedimientos(vComando)
+                scope.Complete()
+                MsgBox("eliminado")
+            Catch
+                MsgBox("Error al eliminar paro. CRegistro_Paro_ERROR", vbCritical + vbOKOnly, "Error")
+            End Try
+        End Using
     End Sub
     Public Function Obtener_Id(ByVal vCadena As String) As Long Implements IIndividual.Obtener_Id
         Dim vDR As DataRow
@@ -50,7 +60,6 @@ Public Class Registro_Paro
         End Try
     End Sub
 #End Region
-
 #Region "Atributos"
     Private vCve_registro_paro As Long
     Private vCve_registro_turno As Long
@@ -66,7 +75,6 @@ Public Class Registro_Paro
     'Atributos auxiliares
     Private vcod_paro As String
 #End Region
-
 #Region "Propiedades"
 
     Public Property Cve_registro_paro As Long Implements IIndividual.Id
@@ -217,7 +225,7 @@ Public Class Registro_Paro
                 vComando.Parameters.Add("@cve_maquina", SqlDbType.Int).Value = Me.vCve_maquina
                 vComando.Parameters.Add("@minutos", SqlDbType.Int).Value = Me.vMinutos
                 If Me.vDetalles = Nothing Then
-                    Me.vDetalles = "N/C"
+                    Me.vDetalles = ""
                 End If
                 vComando.Parameters.Add("@detalles", SqlDbType.VarChar).Value = Me.vDetalles
                 vComando.Parameters.Add("@cve_CDM", SqlDbType.Int).Value = oDDetalle_CDM_total.cve_CDM
@@ -249,7 +257,7 @@ Public Class Registro_Paro
                 vComando.Parameters.Add("@cve_maquina", SqlDbType.BigInt).Value = Me.vCve_maquina
                 vComando.Parameters.Add("@minutos", SqlDbType.Int).Value = Me.vMinutos
                 If Me.vDetalles = Nothing Then
-                    Me.vDetalles = "N/C"
+                    Me.vDetalles = ""
                 End If
                 vComando.Parameters.Add("@detalles", SqlDbType.VarChar).Value = Me.vDetalles
                 oBD.EjecutaProcedimientos(vComando)
@@ -259,24 +267,5 @@ Public Class Registro_Paro
             End Try
         End Using
     End Sub
-    Public Sub remove_paro_detalle()
-        Using scope As New TransactionScope
-            Try
-                Dim vComando As New SqlClient.SqlCommand
-                vComando.CommandType = CommandType.StoredProcedure
-                vComando.CommandText = "delete_registro_paro"
-                vComando.Parameters.Add("@cve_registro_paro", SqlDbType.BigInt).Value = Me.vCve_registro_paro
-                vComando.Parameters.Add("@cod_empleado_eliminacion", SqlDbType.VarChar).Value = Me.vCod_empleado_eliminacion
-                vComando.Parameters.Add("@fecha_eliminacion", SqlDbType.DateTime).Value = Me.vFecha_eliminacion
-                oBD.EjecutaProcedimientos(vComando)
-                scope.Complete()
-                MsgBox("eliminado")
-            Catch
-                MsgBox("Error al eliminar paro. CRegistro_Paro_ERROR", vbCritical + vbOKOnly, "Error")
-            End Try
-        End Using
-    End Sub
-
-
 #End Region
 End Class

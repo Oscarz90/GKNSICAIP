@@ -126,7 +126,7 @@ Public Class Turno
         Try
             dtTurnos = oBD.ObtenerTabla("Select cve_turno,turno from turno")
         Catch ex As Exception
-            MsgBox("ERROR_AL_OBTENER_TURNOS_CTurno")
+            MsgBox("Error al obtener turnos. CTurno_ERROR", vbCritical + vbOKOnly, "Error")
             dtTurnos = Nothing
         End Try
         Return dtTurnos
