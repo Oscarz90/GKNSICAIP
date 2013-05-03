@@ -130,10 +130,12 @@ Public Class frmProduccion
         llena_cbx_Detalle_Gente()
         llena_gente_gridview()
         'Seguridad
+        llena_cbx_cond_inseg()
         llena_cond_inseg_gridview()
         'Productividad
         actualiza_tabla_turno_minutos()
         calcula_Productividad()
+        MsgBox(grdDetalleCondInseg.Rows.Count)
     End Sub
 #End Region
 #Region "LLenado ComboBoxs"
@@ -220,7 +222,21 @@ Public Class frmProduccion
         cbxTipoDetalleGente.SelectedIndex = -1
     End Sub
     'Seguridad - Condiciones Inseguras
-
+    Private Sub llena_cbx_cond_inseg()
+        Dim oDetalleSeguridad As New Detalle_Seguridad
+        cbxTipoCondInseg.ValueMember = "cve_detalle_seguridad"
+        cbxTipoCondInseg.DisplayMember = "descripcion"
+        cbxTipoCondInseg.DataSource = oDetalleSeguridad.llena_combo_seguridad_cond_inseg()
+        cbxTipoCondInseg.SelectedIndex = -1
+    End Sub
+    'Seguridad- Accidentes
+    Private Sub llena_cbx_accidentes()
+        Dim oDetalleSeguridad As New Detalle_Seguridad
+        cbxTipoCondInseg.ValueMember = "cve_detalle_seguridad"
+        cbxTipoCondInseg.DisplayMember = "descripcion"
+        cbxTipoCondInseg.DataSource = oDetalleSeguridad.llena_combo_seguridad_accidentes()
+        cbxTipoCondInseg.SelectedIndex = -1
+    End Sub
 #End Region
 #Region "Llenado Labels - Textbox"
     'General
@@ -287,7 +303,7 @@ Public Class frmProduccion
     'Seguridad - Condiciones Inseguras
     Private Sub llena_cond_inseg_gridview()
         Dim oSeguridad As New Seguridad
-        oSeguridad.cve_seguridad = get_registro_del_turno()
+        oSeguridad.cve_registro_turno = get_registro_del_turno()
         grdDetalleCondInseg.DataSource = oSeguridad.llena_cond_inseg_gridview()
     End Sub
 #End Region
@@ -367,7 +383,7 @@ Public Class frmProduccion
     Private Sub cbxTipoCondInseg_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cbxTipoCondInseg.SelectedIndexChanged
         If cbxTipoCondInseg.SelectedIndex <> -1 Then
             valida_botones_cond_inseg()
-            deshabilitar_btn_cond_inseg()
+            deshabilitar_btn_quitar_cond_inseg()
         End If
     End Sub
     'Seguridad - Accidentes
@@ -401,6 +417,11 @@ Public Class frmProduccion
     Private Sub txtGenteCantidad_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles txtGenteCantidad.TextChanged
         valida_botones_gente()
         deshabilitar_btn_quitar_gente()
+    End Sub
+    'Seguridad - Condiciones Inseguras
+    Private Sub txtCondInsegCantidad_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles txtCondInsegCantidad.TextChanged
+        valida_botones_cond_inseg()
+        deshabilitar_btn_quitar_cond_inseg()
     End Sub
 #End Region
 #Region "Eventos Botones"
@@ -472,12 +493,13 @@ Public Class frmProduccion
     Private Sub btnAgregarCondInseg_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnAgregarCondInseg.Click
         add_cond_inseg()
         limpia_cond_inseg()
+        llena_cond_inseg_gridview()
     End Sub
     Private Sub btnQuitarCondInseg_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnQuitarCondInseg.Click
         remove_cond_inseg()
         limpia_cond_inseg()
-        deshabilitar_btn_cond_inseg()
-
+        deshabilitar_btn_quitar_cond_inseg()
+        llena_cond_inseg_gridview()
     End Sub
 
 #End Region
@@ -502,6 +524,10 @@ Public Class frmProduccion
     'Gente
     Private Sub grdDetalleGente_CellClick(ByVal sender As System.Object, ByVal e As System.Windows.Forms.DataGridViewCellEventArgs) Handles grdDetalleGente.CellClick
         habilita_btn_Quitar_gente()
+    End Sub
+    'Seguridad - Condiciones Inseguras
+    Private Sub grdDetalleCondInseg_CellClick(ByVal sender As System.Object, ByVal e As System.Windows.Forms.DataGridViewCellEventArgs) Handles grdDetalleCondInseg.CellClick
+        habilita_btn_Quitar_cond_inseg()
     End Sub
 #End Region
 #Region "Validaciones"
@@ -623,10 +649,10 @@ Public Class frmProduccion
         End If
     End Sub
     Private Sub habilita_btn_Quitar_cond_inseg()
-        limpia_gente()
+        limpia_cond_inseg()
         btnQuitarCondInseg.Enabled = True
     End Sub
-    Private Sub deshabilitar_btn_cond_inseg()
+    Private Sub deshabilitar_btn_quitar_cond_inseg()
         btnQuitarCondInseg.Enabled = False
     End Sub
 #End Region
@@ -701,12 +727,18 @@ Public Class frmProduccion
         oProduccion.Registrar()
     End Sub
     Private Sub remove_modelo_producido()
-        Dim oProduccion As New Produccion
-        oProduccion.cve_registro_turno = get_registro_del_turno()
-        oProduccion.cve_produccion = grdDetalleProductividad.Item("colcve_produccion", grdDetalleProductividad.CurrentRow.Index).Value
-        oProduccion.cod_empleado_eliminacion = vcodigo_empleado
-        oProduccion.fecha_eliminacion = Now.ToString("dd-MM-yyyy HH:mm")
-        oProduccion.Eliminar()
+        If grdDetalleProductividad.Rows.Count <> 0 Then
+            Dim oProduccion As New Produccion
+            oProduccion.cve_registro_turno = get_registro_del_turno()
+            oProduccion.cve_produccion = grdDetalleProductividad.Item("colcve_produccion", grdDetalleProductividad.CurrentRow.Index).Value
+            oProduccion.cod_empleado_eliminacion = vcodigo_empleado
+            oProduccion.fecha_eliminacion = Now.ToString("dd-MM-yyyy HH:mm")
+            oProduccion.Eliminar()
+        Else
+            btnQuitarModelo.Enabled = False
+        End If
+
+        
     End Sub
     Private Function get_suma_piezas_producidas() As Double
         Dim Total As Double
@@ -761,11 +793,16 @@ Public Class frmProduccion
         oDesecho.Registrar()
     End Sub
     Private Sub remove_desecho()
-        Dim oDesecho As New Desecho
-        oDesecho.cod_empleado_eliminacion = vcodigo_empleado
-        oDesecho.fecha_eliminacion = Now.ToString("MM-dd-yyyy HH:mm")
-        oDesecho.cve_desecho = grdDetalleDesecho.Item("colcve_desecho", grdDetalleDesecho.CurrentRow.Index).Value
-        oDesecho.Eliminar()
+        If grdDetalleDesecho.Rows.Count <> 0 Then
+            Dim oDesecho As New Desecho
+            oDesecho.cod_empleado_eliminacion = vcodigo_empleado
+            oDesecho.fecha_eliminacion = Now.ToString("MM-dd-yyyy HH:mm")
+            oDesecho.cve_desecho = grdDetalleDesecho.Item("colcve_desecho", grdDetalleDesecho.CurrentRow.Index).Value
+            oDesecho.Eliminar()
+        Else
+            btnQuitarDesecho.Enabled = False
+        End If
+        
     End Sub
     Private Function get_suma_desechos() As Double
         Dim Total As Double
@@ -824,11 +861,15 @@ Public Class frmProduccion
         oParo.Registrar()
     End Sub
     Private Sub remove_paro()
-        Dim oRegistro_Paro As New Registro_Paro
-        oRegistro_Paro.Cve_registro_paro = grdDetalleParo.Item("colcve_registro_paro", grdDetalleParo.CurrentRow.Index).Value
-        oRegistro_Paro.Cod_empleado_eliminacion = vcodigo_empleado
-        oRegistro_Paro.Fecha_eliminacion = Convert.ToDateTime(Now.ToString("dd-MM-yyyy HH:mm"))
-        oRegistro_Paro.Eliminar()
+        If grdDetalleParo.Rows.Count <> 0 Then
+            Dim oRegistro_Paro As New Registro_Paro
+            oRegistro_Paro.Cve_registro_paro = grdDetalleParo.Item("colcve_registro_paro", grdDetalleParo.CurrentRow.Index).Value
+            oRegistro_Paro.Cod_empleado_eliminacion = vcodigo_empleado
+            oRegistro_Paro.Fecha_eliminacion = Convert.ToDateTime(Now.ToString("dd-MM-yyyy HH:mm"))
+            oRegistro_Paro.Eliminar()
+        Else
+            btnQuitarParo.Enabled = False
+        End If
     End Sub
 #End Region
 #Region "Funciones para modulo Rechazos"
@@ -845,12 +886,17 @@ Public Class frmProduccion
         oRechazo.Registrar()
     End Sub
     Private Sub remove_rechazo()
-        Dim oRechazo As New Rechazo
-        oRechazo.cve_registro_turno = get_registro_del_turno()
-        oRechazo.cve_rechazo = grdDetalleRechazo.Item("colcve_rechazo", grdDetalleRechazo.CurrentRow.Index).Value
-        oRechazo.cod_empleado_elimino = "118737"
-        oRechazo.fecha_eliminacion = Now.ToString("dd-MM-yyyy HH:mm")
-        oRechazo.Eliminar()
+        If grdDetalleRechazo.Rows.Count <> 0 Then
+            Dim oRechazo As New Rechazo
+            oRechazo.cve_registro_turno = get_registro_del_turno()
+            oRechazo.cve_rechazo = grdDetalleRechazo.Item("colcve_rechazo", grdDetalleRechazo.CurrentRow.Index).Value
+            oRechazo.cod_empleado_elimino = "118737"
+            oRechazo.fecha_eliminacion = Now.ToString("dd-MM-yyyy HH:mm")
+            oRechazo.Eliminar()
+        Else
+            btnQuitarRechazo.Enabled = False
+        End If
+        
     End Sub
     Private Function get_suma_rechazos() As Double
         Dim Total As Double
@@ -934,11 +980,16 @@ Public Class frmProduccion
         oGente.Registrar()
     End Sub
     Private Sub remove_gente()
-        Dim oGente As New Gente
-        oGente.cod_empleado_eliminacion = vcodigo_empleado
-        oGente.fecha_eliminacion = Now.ToString("dd-MM-yyyy HH:mm")
-        oGente.cve_gente = grdDetalleGente.Item("colcve_gente", grdDetalleGente.CurrentRow.Index).Value
-        oGente.Eliminar()
+        If grdDetalleGente.Rows.Count <> 0 Then
+            Dim oGente As New Gente
+            oGente.cod_empleado_eliminacion = vcodigo_empleado
+            oGente.fecha_eliminacion = Now.ToString("dd-MM-yyyy HH:mm")
+            oGente.cve_gente = grdDetalleGente.Item("colcve_gente", grdDetalleGente.CurrentRow.Index).Value
+            oGente.Eliminar()
+        Else
+            btnQuitarGente.Enabled = False
+        End If
+        
     End Sub
 #End Region
 #Region "Funciones para modulo Seguridad"
@@ -954,17 +1005,15 @@ Public Class frmProduccion
         oSeguridad.registra_cond_inseg()
     End Sub
     Private Sub remove_cond_inseg()
-        Dim oSeguridad As New Seguridad
-        oSeguridad.cod_empleado_eliminacion = vcodigo_empleado
-        oSeguridad.fecha_eliminacion = Now.ToString("dd-MM-yyyy HH:mm")
-        oSeguridad.cve_seguridad = grdDetalleGente.Item("colcve_gente", grdDetalleGente.CurrentRow.Index).Value
-        oSeguridad.Eliminar()
+        If grdDetalleCondInseg.Rows.Count <> 0 Then
+            Dim oSeguridad As New Seguridad
+            oSeguridad.cod_empleado_eliminacion = vcodigo_empleado
+            oSeguridad.fecha_eliminacion = Now.ToString("dd-MM-yyyy HH:mm")
+            oSeguridad.cve_seguridad = grdDetalleCondInseg.Item("colcve_seguridad", grdDetalleCondInseg.CurrentRow.Index).Value
+            oSeguridad.Eliminar()
+        Else
+            btnQuitarCondInseg.Enabled = False
+        End If
     End Sub
 #End Region
-
-
-
-
-
-
 End Class

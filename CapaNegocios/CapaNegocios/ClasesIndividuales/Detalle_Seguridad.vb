@@ -1,6 +1,8 @@
 ﻿Imports CapaDatos
 Public Class Detalle_Seguridad
     Implements IIndividual
+    Dim cadena_conexion As New CapaDatos.conexiones
+    Dim oBD As New CapaDatos.CapaDatos(cadena_conexion.CadenaSicaip)
 #Region "Iindividual"
     Public Sub Cargar() Implements IIndividual.Cargar
 
@@ -15,7 +17,7 @@ Public Class Detalle_Seguridad
             Return vcve_detalle_seguridad
         End Get
         Set(ByVal value As Long)
-            vcve_detalle_seguridad=Long
+            vcve_detalle_seguridad = value
         End Set
     End Property
 
@@ -64,6 +66,25 @@ Public Class Detalle_Seguridad
 
 #End Region
 #Region "Metodos formulario de produccion"
-
+    Public Function llena_combo_seguridad_cond_inseg() As DataTable
+        Dim dtDetalle As New DataTable
+        Try
+            dtDetalle = oBD.ObtenerTabla("Select cve_detalle_seguridad,descripcion from detalle_seguridad where tipo=0")
+        Catch ex As Exception
+            MsgBox("Error al obtener Detalle Seguridad Condiciones Inseguras. CDetalle_Seguridad_ERROR", vbCritical + vbOKOnly, "Error")
+            dtDetalle = Nothing
+        End Try
+        Return dtDetalle
+    End Function
+    Public Function llena_combo_seguridad_accidentes() As DataTable
+        Dim dtDetalle As New DataTable
+        Try
+            dtDetalle = oBD.ObtenerTabla("Select cve_detalle_seguridad,descripcion from detalle_seguridad where tipo=1")
+        Catch ex As Exception
+            MsgBox("Error al obtener Detalle Seguridad Condiciones Inseguras. CDetalle_Seguridad_ERROR", vbCritical + vbOKOnly, "Error")
+            dtDetalle = Nothing
+        End Try
+        Return dtDetalle
+    End Function
 #End Region
 End Class

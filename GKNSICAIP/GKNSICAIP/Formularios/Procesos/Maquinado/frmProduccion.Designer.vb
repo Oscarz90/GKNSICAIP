@@ -172,6 +172,10 @@ Partial Class frmProduccion
         Me.Label67 = New System.Windows.Forms.Label()
         Me.grpCondInseg = New System.Windows.Forms.GroupBox()
         Me.grdDetalleCondInseg = New System.Windows.Forms.DataGridView()
+        Me.colcve_seguridad = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.coldescripciondetalle = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.colcantidaddetalle = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.colcomentarios = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.btnQuitarCondInseg = New System.Windows.Forms.Button()
         Me.btnAgregarCondInseg = New System.Windows.Forms.Button()
         Me.Label20 = New System.Windows.Forms.Label()
@@ -210,10 +214,6 @@ Partial Class frmProduccion
         Me.lblNombreEquipo = New System.Windows.Forms.Label()
         Me.Label58 = New System.Windows.Forms.Label()
         Me.cbxLinea = New System.Windows.Forms.ComboBox()
-        Me.colcve_seguridad = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.coldescripciondetalle = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.colcantidaddetalle = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.colcomentarios = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.TabContenido.SuspendLayout()
         Me.tabPageProductividad.SuspendLayout()
         Me.grpDesechos.SuspendLayout()
@@ -1784,12 +1784,43 @@ Partial Class frmProduccion
         '
         'grdDetalleCondInseg
         '
+        Me.grdDetalleCondInseg.AllowUserToAddRows = False
+        Me.grdDetalleCondInseg.AllowUserToDeleteRows = False
         Me.grdDetalleCondInseg.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.grdDetalleCondInseg.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.colcve_seguridad, Me.coldescripciondetalle, Me.colcantidaddetalle, Me.colcomentarios})
         Me.grdDetalleCondInseg.Location = New System.Drawing.Point(6, 242)
         Me.grdDetalleCondInseg.Name = "grdDetalleCondInseg"
+        Me.grdDetalleCondInseg.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
         Me.grdDetalleCondInseg.Size = New System.Drawing.Size(588, 171)
         Me.grdDetalleCondInseg.TabIndex = 347
+        '
+        'colcve_seguridad
+        '
+        Me.colcve_seguridad.DataPropertyName = "cve_seguridad"
+        Me.colcve_seguridad.HeaderText = "cve_seguridad"
+        Me.colcve_seguridad.Name = "colcve_seguridad"
+        Me.colcve_seguridad.ReadOnly = True
+        '
+        'coldescripciondetalle
+        '
+        Me.coldescripciondetalle.DataPropertyName = "descripcion"
+        Me.coldescripciondetalle.HeaderText = "Descripcion"
+        Me.coldescripciondetalle.Name = "coldescripciondetalle"
+        Me.coldescripciondetalle.ReadOnly = True
+        '
+        'colcantidaddetalle
+        '
+        Me.colcantidaddetalle.DataPropertyName = "cantidad"
+        Me.colcantidaddetalle.HeaderText = "Cantidad"
+        Me.colcantidaddetalle.Name = "colcantidaddetalle"
+        Me.colcantidaddetalle.ReadOnly = True
+        '
+        'colcomentarios
+        '
+        Me.colcomentarios.DataPropertyName = "comentarios"
+        Me.colcomentarios.HeaderText = "Comentarios"
+        Me.colcomentarios.Name = "colcomentarios"
+        Me.colcomentarios.ReadOnly = True
         '
         'btnQuitarCondInseg
         '
@@ -2176,34 +2207,6 @@ Partial Class frmProduccion
         Me.cbxLinea.Name = "cbxLinea"
         Me.cbxLinea.Size = New System.Drawing.Size(234, 26)
         Me.cbxLinea.TabIndex = 309
-        '
-        'colcve_seguridad
-        '
-        Me.colcve_seguridad.DataPropertyName = "cve_seguridad"
-        Me.colcve_seguridad.HeaderText = "cve_seguridad"
-        Me.colcve_seguridad.Name = "colcve_seguridad"
-        Me.colcve_seguridad.ReadOnly = True
-        '
-        'coldescripciondetalle
-        '
-        Me.coldescripciondetalle.DataPropertyName = "descripcion"
-        Me.coldescripciondetalle.HeaderText = "Descripcion"
-        Me.coldescripciondetalle.Name = "coldescripciondetalle"
-        Me.coldescripciondetalle.ReadOnly = True
-        '
-        'colcantidaddetalle
-        '
-        Me.colcantidaddetalle.DataPropertyName = "cantidad"
-        Me.colcantidaddetalle.HeaderText = "Cantidad"
-        Me.colcantidaddetalle.Name = "colcantidaddetalle"
-        Me.colcantidaddetalle.ReadOnly = True
-        '
-        'colcomentarios
-        '
-        Me.colcomentarios.DataPropertyName = "comentarios"
-        Me.colcomentarios.HeaderText = "Comentarios"
-        Me.colcomentarios.Name = "colcomentarios"
-        Me.colcomentarios.ReadOnly = True
         '
         'frmProduccion
         '
