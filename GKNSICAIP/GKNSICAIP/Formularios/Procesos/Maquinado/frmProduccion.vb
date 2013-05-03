@@ -476,7 +476,7 @@ Public Class frmProduccion
 #End Region
 #Region "Validaciones"
     'Generales
-    Private Sub valida_sea_numero(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txtTiempoOperacion.KeyPress, txtPiezasOkProducidas.KeyPress, txtDesechosCantidad.KeyPress, txtMinutosParo.KeyPress, txtRechazosCantidad.KeyPress, txtGenteCantidad.KeyPress
+    Private Sub valida_sea_numero(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txtTiempoOperacion.KeyPress, txtPiezasOkProducidas.KeyPress, txtDesechosCantidad.KeyPress, txtMinutosParo.KeyPress, txtRechazosCantidad.KeyPress, txtGenteCantidad.KeyPress, txtCondInsegCantidad.KeyPress, txtAccidenteCantidad.KeyPress
         If Char.IsNumber(e.KeyChar) Then
             e.Handled = False
         ElseIf Char.IsControl(e.KeyChar) Then
@@ -580,6 +580,26 @@ Public Class frmProduccion
         btnQuitarGente.Enabled = True
     End Sub
     Private Sub deshabilitar_btn_quitar_gente()
+        btnQuitarGente.Enabled = False
+    End Sub
+    'Seguridad
+    Private Sub valida_botones_cond_inseg()
+        If cbxTurno.SelectedIndex <> -1 And cbxTipoCondInseg.SelectedIndex <> -1 And txtCondInsegCantidad.Text <> "" Then
+            If Convert.ToInt64(txtCondInsegCantidad.Text) <> 0 Then
+                btnAgregarCondInseg.Enabled = True
+            Else
+                btnAgregarCondInseg.Enabled = False
+            End If
+            btnAgregarCondInseg.Enabled = True
+        Else
+            btnAgregarCondInseg.Enabled = False
+        End If
+    End Sub
+    Private Sub habilita_btn_Quitar_cond_inseg()
+        limpia_gente()
+        btnQuitarGente.Enabled = True
+    End Sub
+    Private Sub deshabilitar_btn_cond_inseg()
         btnQuitarGente.Enabled = False
     End Sub
 #End Region

@@ -188,8 +188,8 @@ Partial Class frmProduccion
         Me.cbxLinea = New System.Windows.Forms.ComboBox()
         Me.grpCondInseg = New System.Windows.Forms.GroupBox()
         Me.grpAccidentes = New System.Windows.Forms.GroupBox()
-        Me.Button1 = New System.Windows.Forms.Button()
-        Me.Button2 = New System.Windows.Forms.Button()
+        Me.btnQuitarCondInseg = New System.Windows.Forms.Button()
+        Me.btnAgregarCondInseg = New System.Windows.Forms.Button()
         Me.Label20 = New System.Windows.Forms.Label()
         Me.Label22 = New System.Windows.Forms.Label()
         Me.txtDetallesCondInseg = New System.Windows.Forms.TextBox()
@@ -198,8 +198,8 @@ Partial Class frmProduccion
         Me.cbxTipoCondInseg = New System.Windows.Forms.ComboBox()
         Me.Label30 = New System.Windows.Forms.Label()
         Me.Label62 = New System.Windows.Forms.Label()
-        Me.Button3 = New System.Windows.Forms.Button()
-        Me.Button4 = New System.Windows.Forms.Button()
+        Me.btnQuitarAccidente = New System.Windows.Forms.Button()
+        Me.btnAgregarAccidente = New System.Windows.Forms.Button()
         Me.Label63 = New System.Windows.Forms.Label()
         Me.Label64 = New System.Windows.Forms.Label()
         Me.txtDetallesAccidentes = New System.Windows.Forms.TextBox()
@@ -1908,8 +1908,8 @@ Partial Class frmProduccion
         '
         'grpCondInseg
         '
-        Me.grpCondInseg.Controls.Add(Me.Button1)
-        Me.grpCondInseg.Controls.Add(Me.Button2)
+        Me.grpCondInseg.Controls.Add(Me.btnQuitarCondInseg)
+        Me.grpCondInseg.Controls.Add(Me.btnAgregarCondInseg)
         Me.grpCondInseg.Controls.Add(Me.Label20)
         Me.grpCondInseg.Controls.Add(Me.Label22)
         Me.grpCondInseg.Controls.Add(Me.txtDetallesCondInseg)
@@ -1928,8 +1928,8 @@ Partial Class frmProduccion
         '
         'grpAccidentes
         '
-        Me.grpAccidentes.Controls.Add(Me.Button3)
-        Me.grpAccidentes.Controls.Add(Me.Button4)
+        Me.grpAccidentes.Controls.Add(Me.btnQuitarAccidente)
+        Me.grpAccidentes.Controls.Add(Me.btnAgregarAccidente)
         Me.grpAccidentes.Controls.Add(Me.Label63)
         Me.grpAccidentes.Controls.Add(Me.Label64)
         Me.grpAccidentes.Controls.Add(Me.txtDetallesAccidentes)
@@ -1946,31 +1946,31 @@ Partial Class frmProduccion
         Me.grpAccidentes.TabStop = False
         Me.grpAccidentes.Text = "Accidentes"
         '
-        'Button1
+        'btnQuitarCondInseg
         '
-        Me.Button1.BackColor = System.Drawing.Color.White
-        Me.Button1.BackgroundImage = CType(resources.GetObject("Button1.BackgroundImage"), System.Drawing.Image)
-        Me.Button1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center
-        Me.Button1.Enabled = False
-        Me.Button1.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Button1.Location = New System.Drawing.Point(524, 23)
-        Me.Button1.Name = "Button1"
-        Me.Button1.Size = New System.Drawing.Size(64, 59)
-        Me.Button1.TabIndex = 342
-        Me.Button1.UseVisualStyleBackColor = False
+        Me.btnQuitarCondInseg.BackColor = System.Drawing.Color.White
+        Me.btnQuitarCondInseg.BackgroundImage = CType(resources.GetObject("btnQuitarCondInseg.BackgroundImage"), System.Drawing.Image)
+        Me.btnQuitarCondInseg.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center
+        Me.btnQuitarCondInseg.Enabled = False
+        Me.btnQuitarCondInseg.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnQuitarCondInseg.Location = New System.Drawing.Point(524, 23)
+        Me.btnQuitarCondInseg.Name = "btnQuitarCondInseg"
+        Me.btnQuitarCondInseg.Size = New System.Drawing.Size(64, 59)
+        Me.btnQuitarCondInseg.TabIndex = 342
+        Me.btnQuitarCondInseg.UseVisualStyleBackColor = False
         '
-        'Button2
+        'btnAgregarCondInseg
         '
-        Me.Button2.BackColor = System.Drawing.Color.White
-        Me.Button2.BackgroundImage = CType(resources.GetObject("Button2.BackgroundImage"), System.Drawing.Image)
-        Me.Button2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center
-        Me.Button2.Enabled = False
-        Me.Button2.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Button2.Location = New System.Drawing.Point(447, 23)
-        Me.Button2.Name = "Button2"
-        Me.Button2.Size = New System.Drawing.Size(63, 59)
-        Me.Button2.TabIndex = 341
-        Me.Button2.UseVisualStyleBackColor = False
+        Me.btnAgregarCondInseg.BackColor = System.Drawing.Color.White
+        Me.btnAgregarCondInseg.BackgroundImage = CType(resources.GetObject("btnAgregarCondInseg.BackgroundImage"), System.Drawing.Image)
+        Me.btnAgregarCondInseg.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center
+        Me.btnAgregarCondInseg.Enabled = False
+        Me.btnAgregarCondInseg.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnAgregarCondInseg.Location = New System.Drawing.Point(447, 23)
+        Me.btnAgregarCondInseg.Name = "btnAgregarCondInseg"
+        Me.btnAgregarCondInseg.Size = New System.Drawing.Size(63, 59)
+        Me.btnAgregarCondInseg.TabIndex = 341
+        Me.btnAgregarCondInseg.UseVisualStyleBackColor = False
         '
         'Label20
         '
@@ -2048,31 +2048,31 @@ Partial Class frmProduccion
         Me.Label62.TabIndex = 337
         Me.Label62.Text = "Tipo:"
         '
-        'Button3
+        'btnQuitarAccidente
         '
-        Me.Button3.BackColor = System.Drawing.Color.White
-        Me.Button3.BackgroundImage = CType(resources.GetObject("Button3.BackgroundImage"), System.Drawing.Image)
-        Me.Button3.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center
-        Me.Button3.Enabled = False
-        Me.Button3.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Button3.Location = New System.Drawing.Point(521, 22)
-        Me.Button3.Name = "Button3"
-        Me.Button3.Size = New System.Drawing.Size(64, 59)
-        Me.Button3.TabIndex = 342
-        Me.Button3.UseVisualStyleBackColor = False
+        Me.btnQuitarAccidente.BackColor = System.Drawing.Color.White
+        Me.btnQuitarAccidente.BackgroundImage = CType(resources.GetObject("btnQuitarAccidente.BackgroundImage"), System.Drawing.Image)
+        Me.btnQuitarAccidente.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center
+        Me.btnQuitarAccidente.Enabled = False
+        Me.btnQuitarAccidente.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnQuitarAccidente.Location = New System.Drawing.Point(521, 22)
+        Me.btnQuitarAccidente.Name = "btnQuitarAccidente"
+        Me.btnQuitarAccidente.Size = New System.Drawing.Size(64, 59)
+        Me.btnQuitarAccidente.TabIndex = 342
+        Me.btnQuitarAccidente.UseVisualStyleBackColor = False
         '
-        'Button4
+        'btnAgregarAccidente
         '
-        Me.Button4.BackColor = System.Drawing.Color.White
-        Me.Button4.BackgroundImage = CType(resources.GetObject("Button4.BackgroundImage"), System.Drawing.Image)
-        Me.Button4.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center
-        Me.Button4.Enabled = False
-        Me.Button4.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Button4.Location = New System.Drawing.Point(444, 22)
-        Me.Button4.Name = "Button4"
-        Me.Button4.Size = New System.Drawing.Size(63, 59)
-        Me.Button4.TabIndex = 341
-        Me.Button4.UseVisualStyleBackColor = False
+        Me.btnAgregarAccidente.BackColor = System.Drawing.Color.White
+        Me.btnAgregarAccidente.BackgroundImage = CType(resources.GetObject("btnAgregarAccidente.BackgroundImage"), System.Drawing.Image)
+        Me.btnAgregarAccidente.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center
+        Me.btnAgregarAccidente.Enabled = False
+        Me.btnAgregarAccidente.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnAgregarAccidente.Location = New System.Drawing.Point(444, 22)
+        Me.btnAgregarAccidente.Name = "btnAgregarAccidente"
+        Me.btnAgregarAccidente.Size = New System.Drawing.Size(63, 59)
+        Me.btnAgregarAccidente.TabIndex = 341
+        Me.btnAgregarAccidente.UseVisualStyleBackColor = False
         '
         'Label63
         '
@@ -2372,8 +2372,8 @@ Partial Class frmProduccion
     Friend WithEvents comentarios As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents grpAccidentes As System.Windows.Forms.GroupBox
     Friend WithEvents grpCondInseg As System.Windows.Forms.GroupBox
-    Friend WithEvents Button3 As System.Windows.Forms.Button
-    Friend WithEvents Button4 As System.Windows.Forms.Button
+    Friend WithEvents btnQuitarAccidente As System.Windows.Forms.Button
+    Friend WithEvents btnAgregarAccidente As System.Windows.Forms.Button
     Friend WithEvents Label63 As System.Windows.Forms.Label
     Friend WithEvents Label64 As System.Windows.Forms.Label
     Friend WithEvents txtDetallesAccidentes As System.Windows.Forms.TextBox
@@ -2382,8 +2382,8 @@ Partial Class frmProduccion
     Friend WithEvents cbxTipoAccidente As System.Windows.Forms.ComboBox
     Friend WithEvents Label66 As System.Windows.Forms.Label
     Friend WithEvents Label67 As System.Windows.Forms.Label
-    Friend WithEvents Button1 As System.Windows.Forms.Button
-    Friend WithEvents Button2 As System.Windows.Forms.Button
+    Friend WithEvents btnQuitarCondInseg As System.Windows.Forms.Button
+    Friend WithEvents btnAgregarCondInseg As System.Windows.Forms.Button
     Friend WithEvents Label20 As System.Windows.Forms.Label
     Friend WithEvents Label22 As System.Windows.Forms.Label
     Friend WithEvents txtDetallesCondInseg As System.Windows.Forms.TextBox
