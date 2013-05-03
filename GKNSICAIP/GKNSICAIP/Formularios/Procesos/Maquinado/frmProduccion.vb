@@ -129,6 +129,8 @@ Public Class frmProduccion
         'Gente
         llena_cbx_Detalle_Gente()
         llena_gente_gridview()
+        'Seguridad
+        llena_cond_inseg_gridview()
         'Productividad
         actualiza_tabla_turno_minutos()
         calcula_Productividad()
@@ -214,9 +216,11 @@ Public Class frmProduccion
         Dim oDetalle_Gente As New Detalle_Gente
         cbxTipoDetalleGente.ValueMember = "cve_detalle_gente"
         cbxTipoDetalleGente.DisplayMember = "descripcion"
-        cbxTipoDetalleGente.DataSource = oDetalle_Gente.llena_combo_detalle_gente
+        cbxTipoDetalleGente.DataSource = oDetalle_Gente.llena_combo_detalle_gente()
         cbxTipoDetalleGente.SelectedIndex = -1
     End Sub
+    'Seguridad - Condiciones Inseguras
+
 #End Region
 #Region "Llenado Labels - Textbox"
     'General
@@ -279,6 +283,12 @@ Public Class frmProduccion
         Dim oGente As New Gente
         oGente.cve_registro_turno = get_registro_del_turno()
         grdDetalleGente.DataSource = oGente.llena_gente_gridview()
+    End Sub
+    'Seguridad - Condiciones Inseguras
+    Private Sub llena_cond_inseg_gridview()
+        Dim oSeguridad As New Seguridad
+        oSeguridad.cve_seguridad = get_registro_del_turno()
+        grdDetalleCondInseg.DataSource = oSeguridad.llena_cond_inseg_gridview()
     End Sub
 #End Region
 #Region "Eventos ComboBox"
@@ -353,6 +363,14 @@ Public Class frmProduccion
             deshabilitar_btn_quitar_gente()
         End If
     End Sub
+    'Seguridad - Condiciones Inseguras
+    Private Sub cbxTipoCondInseg_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cbxTipoCondInseg.SelectedIndexChanged
+        If cbxTipoCondInseg.SelectedIndex <> -1 Then
+            valida_botones_cond_inseg()
+            deshabilitar_btn_cond_inseg()
+        End If
+    End Sub
+    'Seguridad - Accidentes
 #End Region
 #Region "Eventos TextBox"
     'Productividad
@@ -450,6 +468,18 @@ Public Class frmProduccion
         deshabilitar_btn_quitar_gente()
         llena_gente_gridview()
     End Sub
+    'Seguridad Condiciones Inseguras
+    Private Sub btnAgregarCondInseg_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnAgregarCondInseg.Click
+        add_cond_inseg()
+        limpia_cond_inseg()
+    End Sub
+    Private Sub btnQuitarCondInseg_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnQuitarCondInseg.Click
+        remove_cond_inseg()
+        limpia_cond_inseg()
+        deshabilitar_btn_cond_inseg()
+
+    End Sub
+
 #End Region
 #Region "Eventos Gridviews"
     'Productividad
@@ -512,7 +542,6 @@ Public Class frmProduccion
             Else
                 btnAgregarRechazo.Enabled = False
             End If
-
         Else
             btnAgregarRechazo.Enabled = False
         End If
@@ -570,7 +599,6 @@ Public Class frmProduccion
             Else
                 btnAgregarGente.Enabled = False
             End If
-            btnAgregarGente.Enabled = True
         Else
             btnAgregarGente.Enabled = False
         End If
@@ -582,7 +610,7 @@ Public Class frmProduccion
     Private Sub deshabilitar_btn_quitar_gente()
         btnQuitarGente.Enabled = False
     End Sub
-    'Seguridad
+    'Seguridad Condiciones Inseguras
     Private Sub valida_botones_cond_inseg()
         If cbxTurno.SelectedIndex <> -1 And cbxTipoCondInseg.SelectedIndex <> -1 And txtCondInsegCantidad.Text <> "" Then
             If Convert.ToInt64(txtCondInsegCantidad.Text) <> 0 Then
@@ -590,17 +618,16 @@ Public Class frmProduccion
             Else
                 btnAgregarCondInseg.Enabled = False
             End If
-            btnAgregarCondInseg.Enabled = True
         Else
             btnAgregarCondInseg.Enabled = False
         End If
     End Sub
     Private Sub habilita_btn_Quitar_cond_inseg()
         limpia_gente()
-        btnQuitarGente.Enabled = True
+        btnQuitarCondInseg.Enabled = True
     End Sub
     Private Sub deshabilitar_btn_cond_inseg()
-        btnQuitarGente.Enabled = False
+        btnQuitarCondInseg.Enabled = False
     End Sub
 #End Region
 #Region "Limpia formularios"
@@ -636,6 +663,12 @@ Public Class frmProduccion
         cbxTipoDetalleGente.SelectedIndex = -1
         txtGenteCantidad.Text = ""
         txtDetallesGente.Text = ""
+    End Sub
+    'Seguridad Condiciones Inseguras
+    Private Sub limpia_cond_inseg()
+        cbxTipoCondInseg.SelectedIndex = -1
+        txtCondInsegCantidad.Text = ""
+        txtDetallesCondInseg.Text = ""
     End Sub
 #End Region
 #Region "Funciones Generales"
@@ -908,6 +941,29 @@ Public Class frmProduccion
         oGente.Eliminar()
     End Sub
 #End Region
+#Region "Funciones para modulo Seguridad"
+    Private Sub add_cond_inseg()
+        Dim oSeguridad As New Seguridad
+        oSeguridad.cve_registro_turno = get_registro_del_turno()
+        oSeguridad.cod_empleado_registro = vcodigo_empleado
+        oSeguridad.fecha_registro = Now.ToString("MM-dd-yyyy HH:mm")
+        oSeguridad.cve_detalle_seguridad = cbxTipoCondInseg.SelectedValue
+        oSeguridad.cantidad = Long.Parse(txtCondInsegCantidad.Text)
+        oSeguridad.comentarios = txtDetallesCondInseg.Text
+        oSeguridad.estatus = "1"
+        oSeguridad.registra_cond_inseg()
+    End Sub
+    Private Sub remove_cond_inseg()
+        Dim oSeguridad As New Seguridad
+        oSeguridad.cod_empleado_eliminacion = vcodigo_empleado
+        oSeguridad.fecha_eliminacion = Now.ToString("dd-MM-yyyy HH:mm")
+        oSeguridad.cve_seguridad = grdDetalleGente.Item("colcve_gente", grdDetalleGente.CurrentRow.Index).Value
+        oSeguridad.Eliminar()
+    End Sub
+#End Region
+
+
+
 
 
 

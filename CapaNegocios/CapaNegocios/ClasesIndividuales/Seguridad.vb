@@ -9,7 +9,11 @@ Public Class Seguridad
     End Sub
 
     Public Sub Eliminar() Implements IIndividual.Eliminar
-
+        Try
+            oBD.EjecutarQuery("update seguridad set cod_empleado_eliminacion='" & vcod_empleado_eliminacion & "',fecha_eliminacion='" & vfecha_eliminacion.ToString("MM-dd-yyyy HH:mm") & "',estatus='0' where cve_seguridad=" & vcve_seguridad)
+        Catch ex As Exception
+            MsgBox("Error al eliminar seguridad. CSeguridad_ERROR", vbCritical + vbOKOnly, "Error")
+        End Try
     End Sub
 
     Public Property Id As Long Implements IIndividual.Id
@@ -27,7 +31,7 @@ Public Class Seguridad
     End Function
 
     Public Sub Registrar() Implements IIndividual.Registrar
-
+       
     End Sub
 #End Region
 #Region "Atributos"
@@ -125,6 +129,30 @@ Public Class Seguridad
     End Property
 #End Region
 #Region "Metodos formulario de produccion"
-
+    Public Sub registra_cond_inseg()
+        Dim queryInsert As String = "insert into seguridad(cve_registro_turno,cod_empleado_registro,fecha_registro,cve_detalle_seguridad,cantidad,comentarios,estatus) " &
+                           "values(" & vcve_registro_turno & ",'" & vcod_empleado_registro & "','" & vfecha_registro.ToString("MM-dd-yyyy HH:mm") & "'," & vcve_detalle_seguridad & "," & vcantidad & ",'" & vcomentarios & "','1')"
+        Try
+            oBD.EjecutarQuery(queryInsert)
+        Catch
+            MsgBox("Error al insertar Seguridad. CSeguridad_ERROR", vbCritical + vbOKOnly, "Error")
+        End Try
+    End Sub
+    Public Function llena_cond_inseg_gridview() As DataTable
+        Dim obj As DataTable
+        Dim queryLlenagridview As String = "select s.cve_seguridad,ds.descripcion,s.cantidad,s.comentarios from seguridad s " &
+            "join detalle_seguridad ds on s.cve_detalle_seguridad=ds.cve_detalle_seguridad " &
+            "where ds.tipo=0 and s.cve_registro_turno=" & vcve_registro_turno & " and s.estatus='1'"
+        Using scope As New TransactionScope
+            Try
+                obj = oBD.ObtenerTabla(queryLlenagridview)
+                scope.Complete()
+            Catch
+                MsgBox("Error al obtener detalle de seguridad. CSeguridad_ERROR", vbCritical + vbOKOnly, "Error")
+                Return Nothing
+            End Try
+            Return obj
+        End Using
+    End Function
 #End Region
 End Class

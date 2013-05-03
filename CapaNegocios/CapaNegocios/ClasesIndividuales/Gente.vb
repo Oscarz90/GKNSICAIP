@@ -12,7 +12,7 @@ Public Class Gente
         Try
             oBD.EjecutarQuery("update gente set cod_empleado_eliminacion='" & vcod_empleado_eliminacion & "',fecha_eliminacion='" & vfecha_eliminacion.ToString("MM-dd-yyyy HH:mm") & "',estatus='0' where cve_gente=" & vcve_gente)
         Catch ex As Exception
-            MsgBox("Error al eliminar desecho. CDesecho_ERROR", vbCritical + vbOKOnly, "Error")
+            MsgBox("Error al eliminar desecho. CGente_ERROR", vbCritical + vbOKOnly, "Error")
         End Try
     End Sub
 
