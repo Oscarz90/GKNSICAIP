@@ -227,6 +227,19 @@ Partial Class frmProduccion
         Me.lblNombreEquipo = New System.Windows.Forms.Label()
         Me.Label58 = New System.Windows.Forms.Label()
         Me.cbxLinea = New System.Windows.Forms.ComboBox()
+        Me.Turnos_Lineas = New System.Windows.Forms.TabPage()
+        Me.grdLineasNoRegistradas = New System.Windows.Forms.DataGridView()
+        Me.grdLineasRegistradas = New System.Windows.Forms.DataGridView()
+        Me.cbxTurnosLineas = New System.Windows.Forms.ComboBox()
+        Me.Label72 = New System.Windows.Forms.Label()
+        Me.Button1 = New System.Windows.Forms.Button()
+        Me.Button2 = New System.Windows.Forms.Button()
+        Me.Label73 = New System.Windows.Forms.Label()
+        Me.Label74 = New System.Windows.Forms.Label()
+        Me.Label75 = New System.Windows.Forms.Label()
+        Me.Label76 = New System.Windows.Forms.Label()
+        Me.col_cve_linea = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.collinea = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.TabContenido.SuspendLayout()
         Me.tabPageProductividad.SuspendLayout()
         Me.grpDesechos.SuspendLayout()
@@ -251,6 +264,9 @@ Partial Class frmProduccion
         CType(Me.grdDetalleGente, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.banner_formulario, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.Turnos_Lineas.SuspendLayout()
+        CType(Me.grdLineasNoRegistradas, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.grdLineasRegistradas, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'TabContenido
@@ -260,6 +276,7 @@ Partial Class frmProduccion
         Me.TabContenido.Controls.Add(Me.tabPageRechazos)
         Me.TabContenido.Controls.Add(Me.TabPage1)
         Me.TabContenido.Controls.Add(Me.TabPage2)
+        Me.TabContenido.Controls.Add(Me.Turnos_Lineas)
         Me.TabContenido.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.TabContenido.Location = New System.Drawing.Point(12, 248)
         Me.TabContenido.Name = "TabContenido"
@@ -1427,7 +1444,7 @@ Partial Class frmProduccion
         '
         'txtPromedio
         '
-        Me.txtPromedio.Location = New System.Drawing.Point(449, 43)
+        Me.txtPromedio.Location = New System.Drawing.Point(190, 184)
         Me.txtPromedio.Name = "txtPromedio"
         Me.txtPromedio.ReadOnly = True
         Me.txtPromedio.Size = New System.Drawing.Size(100, 26)
@@ -1436,7 +1453,7 @@ Partial Class frmProduccion
         'Label68
         '
         Me.Label68.AutoSize = True
-        Me.Label68.Location = New System.Drawing.Point(362, 46)
+        Me.Label68.Location = New System.Drawing.Point(103, 187)
         Me.Label68.Name = "Label68"
         Me.Label68.Size = New System.Drawing.Size(73, 18)
         Me.Label68.TabIndex = 159
@@ -2325,7 +2342,7 @@ Partial Class frmProduccion
         '
         Me.Label58.AutoSize = True
         Me.Label58.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label58.Location = New System.Drawing.Point(9, 192)
+        Me.Label58.Location = New System.Drawing.Point(8, 184)
         Me.Label58.Name = "Label58"
         Me.Label58.Size = New System.Drawing.Size(51, 18)
         Me.Label58.TabIndex = 310
@@ -2336,10 +2353,142 @@ Partial Class frmProduccion
         Me.cbxLinea.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cbxLinea.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cbxLinea.FormattingEnabled = True
-        Me.cbxLinea.Location = New System.Drawing.Point(66, 189)
+        Me.cbxLinea.Location = New System.Drawing.Point(65, 181)
         Me.cbxLinea.Name = "cbxLinea"
         Me.cbxLinea.Size = New System.Drawing.Size(234, 26)
         Me.cbxLinea.TabIndex = 309
+        '
+        'Turnos_Lineas
+        '
+        Me.Turnos_Lineas.Controls.Add(Me.cbxTurnosLineas)
+        Me.Turnos_Lineas.Controls.Add(Me.Label76)
+        Me.Turnos_Lineas.Controls.Add(Me.Label75)
+        Me.Turnos_Lineas.Controls.Add(Me.Label74)
+        Me.Turnos_Lineas.Controls.Add(Me.Label73)
+        Me.Turnos_Lineas.Controls.Add(Me.Button2)
+        Me.Turnos_Lineas.Controls.Add(Me.Button1)
+        Me.Turnos_Lineas.Controls.Add(Me.Label72)
+        Me.Turnos_Lineas.Controls.Add(Me.grdLineasRegistradas)
+        Me.Turnos_Lineas.Controls.Add(Me.grdLineasNoRegistradas)
+        Me.Turnos_Lineas.Location = New System.Drawing.Point(4, 27)
+        Me.Turnos_Lineas.Name = "Turnos_Lineas"
+        Me.Turnos_Lineas.Padding = New System.Windows.Forms.Padding(3)
+        Me.Turnos_Lineas.Size = New System.Drawing.Size(1222, 431)
+        Me.Turnos_Lineas.TabIndex = 5
+        Me.Turnos_Lineas.Text = "Turnos/lineas"
+        Me.Turnos_Lineas.UseVisualStyleBackColor = True
+        '
+        'grdLineasNoRegistradas
+        '
+        Me.grdLineasNoRegistradas.AllowUserToAddRows = False
+        Me.grdLineasNoRegistradas.AllowUserToDeleteRows = False
+        Me.grdLineasNoRegistradas.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.grdLineasNoRegistradas.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.col_cve_linea, Me.collinea})
+        Me.grdLineasNoRegistradas.Location = New System.Drawing.Point(17, 62)
+        Me.grdLineasNoRegistradas.Name = "grdLineasNoRegistradas"
+        Me.grdLineasNoRegistradas.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
+        Me.grdLineasNoRegistradas.Size = New System.Drawing.Size(447, 334)
+        Me.grdLineasNoRegistradas.TabIndex = 0
+        '
+        'grdLineasRegistradas
+        '
+        Me.grdLineasRegistradas.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.grdLineasRegistradas.Location = New System.Drawing.Point(757, 62)
+        Me.grdLineasRegistradas.Name = "grdLineasRegistradas"
+        Me.grdLineasRegistradas.Size = New System.Drawing.Size(447, 334)
+        Me.grdLineasRegistradas.TabIndex = 1
+        '
+        'cbxTurnosLineas
+        '
+        Me.cbxTurnosLineas.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cbxTurnosLineas.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.cbxTurnosLineas.FormattingEnabled = True
+        Me.cbxTurnosLineas.Location = New System.Drawing.Point(497, 114)
+        Me.cbxTurnosLineas.Name = "cbxTurnosLineas"
+        Me.cbxTurnosLineas.Size = New System.Drawing.Size(234, 26)
+        Me.cbxTurnosLineas.TabIndex = 311
+        '
+        'Label72
+        '
+        Me.Label72.AutoSize = True
+        Me.Label72.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label72.Location = New System.Drawing.Point(494, 93)
+        Me.Label72.Name = "Label72"
+        Me.Label72.Size = New System.Drawing.Size(50, 18)
+        Me.Label72.TabIndex = 312
+        Me.Label72.Text = "Turno:"
+        '
+        'Button1
+        '
+        Me.Button1.Location = New System.Drawing.Point(518, 183)
+        Me.Button1.Name = "Button1"
+        Me.Button1.Size = New System.Drawing.Size(189, 40)
+        Me.Button1.TabIndex = 313
+        Me.Button1.Text = ">>"
+        Me.Button1.UseVisualStyleBackColor = True
+        '
+        'Button2
+        '
+        Me.Button2.Location = New System.Drawing.Point(518, 311)
+        Me.Button2.Name = "Button2"
+        Me.Button2.Size = New System.Drawing.Size(189, 40)
+        Me.Button2.TabIndex = 314
+        Me.Button2.Text = ">"
+        Me.Button2.UseVisualStyleBackColor = True
+        '
+        'Label73
+        '
+        Me.Label73.AutoSize = True
+        Me.Label73.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label73.Location = New System.Drawing.Point(558, 226)
+        Me.Label73.Name = "Label73"
+        Me.Label73.Size = New System.Drawing.Size(118, 18)
+        Me.Label73.TabIndex = 315
+        Me.Label73.Text = "Registrar Todas"
+        '
+        'Label74
+        '
+        Me.Label74.AutoSize = True
+        Me.Label74.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label74.Location = New System.Drawing.Point(584, 354)
+        Me.Label74.Name = "Label74"
+        Me.Label74.Size = New System.Drawing.Size(72, 18)
+        Me.Label74.TabIndex = 316
+        Me.Label74.Text = "Registrar"
+        '
+        'Label75
+        '
+        Me.Label75.AutoSize = True
+        Me.Label75.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label75.Location = New System.Drawing.Point(14, 41)
+        Me.Label75.Name = "Label75"
+        Me.Label75.Size = New System.Drawing.Size(142, 18)
+        Me.Label75.TabIndex = 317
+        Me.Label75.Text = "Lineas Disponibles"
+        '
+        'Label76
+        '
+        Me.Label76.AutoSize = True
+        Me.Label76.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label76.Location = New System.Drawing.Point(754, 41)
+        Me.Label76.Name = "Label76"
+        Me.Label76.Size = New System.Drawing.Size(106, 18)
+        Me.Label76.TabIndex = 318
+        Me.Label76.Text = "Lineas - Turno"
+        '
+        'col_cve_linea
+        '
+        Me.col_cve_linea.DataPropertyName = "cve_linea"
+        Me.col_cve_linea.HeaderText = "cve_linea"
+        Me.col_cve_linea.Name = "col_cve_linea"
+        Me.col_cve_linea.ReadOnly = True
+        '
+        'collinea
+        '
+        Me.collinea.DataPropertyName = "linea"
+        Me.collinea.HeaderText = "linea"
+        Me.collinea.Name = "collinea"
+        Me.collinea.ReadOnly = True
         '
         'frmProduccion
         '
@@ -2400,6 +2549,10 @@ Partial Class frmProduccion
         CType(Me.grdDetalleGente, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.banner_formulario, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.Turnos_Lineas.ResumeLayout(False)
+        Me.Turnos_Lineas.PerformLayout()
+        CType(Me.grdLineasNoRegistradas, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.grdLineasRegistradas, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -2608,4 +2761,17 @@ Partial Class frmProduccion
     Friend WithEvents txtAdmonVisual As System.Windows.Forms.TextBox
     Friend WithEvents Label70 As System.Windows.Forms.Label
     Friend WithEvents Label71 As System.Windows.Forms.Label
+    Friend WithEvents Turnos_Lineas As System.Windows.Forms.TabPage
+    Friend WithEvents Label76 As System.Windows.Forms.Label
+    Friend WithEvents Label75 As System.Windows.Forms.Label
+    Friend WithEvents Label74 As System.Windows.Forms.Label
+    Friend WithEvents Label73 As System.Windows.Forms.Label
+    Friend WithEvents Button2 As System.Windows.Forms.Button
+    Friend WithEvents Button1 As System.Windows.Forms.Button
+    Friend WithEvents Label72 As System.Windows.Forms.Label
+    Friend WithEvents grdLineasRegistradas As System.Windows.Forms.DataGridView
+    Friend WithEvents grdLineasNoRegistradas As System.Windows.Forms.DataGridView
+    Friend WithEvents cbxTurnosLineas As System.Windows.Forms.ComboBox
+    Friend WithEvents col_cve_linea As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents collinea As System.Windows.Forms.DataGridViewTextBoxColumn
 End Class

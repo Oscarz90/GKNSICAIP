@@ -67,12 +67,13 @@ Public Class frmCDM
     Public Sub inicializa_Horas_inicio_fin(ByVal turno As Integer)
         Dim oTurno As New Turno
         oTurno.cve_turno = turno
-        oTurno.fecha_registro = Now.ToString("MM-dd-yyyy")
+        oTurno.fecha_registro = Convert.ToDateTime(Now.ToString("dd-MM-yyyy HH:mm"))
         oTurno.fecha_inicio_fin()
+        ' If oTurno.bandera_registro = 1 Then
         Dim ini As DateTime = oTurno.inicio
         Dim fin As DateTime = oTurno.fin
-        Dim actual As DateTime
-        actual = Now.ToString("yyyy-MM-dd HH:mm:ss")    
+        'Dim actual As DateTime
+        'actual = Now.ToString("yyyy-MM-dd HH:mm:ss")    
         dtpInicio.MinDate = ini
         dtpInicio.MaxDate = fin
         dtpInicio.Value = ini
@@ -84,6 +85,11 @@ Public Class frmCDM
         dtpFinal.CustomFormat = "HH:mm:ss dd/MM"
         dtpFinal.Format = DateTimePickerFormat.Custom
         bandera_horas_inicio_fin = True
+        '  Else
+        '   bandera_horas_inicio_fin = False
+
+        '  End If
+
     End Sub
 #End Region
 #Region "LLenado ComboBoxs"

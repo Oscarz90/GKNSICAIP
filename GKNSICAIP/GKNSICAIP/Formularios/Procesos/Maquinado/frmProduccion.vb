@@ -107,7 +107,9 @@ Public Class frmProduccion
     End Sub
     'Llena toda la info del formulario
     Private Sub inicializa_formulario()
-        set_Datos_Equipo(4, "Tlatoanis", "Oscar Mtz S", "118737")
+        set_Datos_Equipo(7, "Tlatoanis", "Oscar Mtz S", "118737")
+
+        llena_lineas_No_gridview()
         'General
         llena_cbx_Turnos()
         llena_cbx_Lineas()
@@ -147,6 +149,13 @@ Public Class frmProduccion
         cbxTurno.DisplayMember = "turno"
         cbxTurno.DataSource = oTurnos.llena_combo_turnos
         'cbxTurno.SelectedIndex = -1
+
+        'turnos de Linea Registro
+        cbxTurnosLineas.DisplayMember = "cve_turno"
+        cbxTurnosLineas.DisplayMember = "turno"
+        cbxTurnosLineas.DataSource = oTurnos.llena_combo_turnos
+        cbxTurnosLineas.SelectedIndex = -1
+
         flgBanderacbxTurnos = True
     End Sub
     'Lineas
@@ -312,6 +321,12 @@ Public Class frmProduccion
         Dim oSeguridad As New Seguridad
         oSeguridad.cve_registro_turno = get_registro_del_turno()
         grdDetalleAccidente.DataSource = oSeguridad.llena_accidentes_gridview()
+    End Sub
+    'Linea Turno
+    Private Sub llena_lineas_No_gridview()
+        Dim oEquipoLinea As New CapaNegocios.EquipoLinea
+        oEquipoLinea.cve_equipo = vcve_equipo
+        grdLineasNoRegistradas.DataSource = oEquipoLinea.llena_combo_lineas
     End Sub
 #End Region
 #Region "Eventos ComboBox"
@@ -617,7 +632,7 @@ Public Class frmProduccion
     Private Sub valida_botones_desecho()
         If cbxTurno.SelectedIndex <> -1 And cbxModeloDesecho.SelectedIndex <> -1 And txtDesechosCantidad.Text <> "" Then
             If Convert.ToInt64(txtDesechosCantidad.Text) <> 0 Then
-                    btnAgregarDesecho.Enabled = True
+                btnAgregarDesecho.Enabled = True
             Else
                 btnAgregarDesecho.Enabled = False
             End If
@@ -735,6 +750,7 @@ Public Class frmProduccion
         txtMinutosParo.Text = ""
         txtDetallesParo.Text = ""
         cbxMaquina.SelectedIndex = -1
+        txtMaquinaDescripcion.Text = ""
         cbxTipoParo.SelectedIndex = -1
     End Sub
     'Gente
@@ -797,7 +813,7 @@ Public Class frmProduccion
             btnQuitarModelo.Enabled = False
         End If
 
-        
+
     End Sub
     Private Function get_suma_piezas_producidas() As Double
         Dim Total As Double
@@ -861,7 +877,7 @@ Public Class frmProduccion
         Else
             btnQuitarDesecho.Enabled = False
         End If
-        
+
     End Sub
     Private Function get_suma_desechos() As Double
         Dim Total As Double
@@ -954,7 +970,7 @@ Public Class frmProduccion
         Else
             btnQuitarRechazo.Enabled = False
         End If
-        
+
     End Sub
     Private Function get_suma_rechazos() As Double
         Dim Total As Double
@@ -1047,7 +1063,7 @@ Public Class frmProduccion
         Else
             btnQuitarGente.Enabled = False
         End If
-        
+
     End Sub
 #End Region
 #Region "Funciones para modulo Seguridad"
@@ -1097,5 +1113,4 @@ Public Class frmProduccion
     End Sub
 #End Region
 
- 
 End Class
