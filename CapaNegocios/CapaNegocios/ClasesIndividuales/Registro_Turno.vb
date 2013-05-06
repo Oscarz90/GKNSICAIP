@@ -35,7 +35,13 @@ Public Class Registro_Turno
     End Function
 
     Public Sub Registrar() Implements IIndividual.Registrar
-
+        Dim queryInsert As String = "insert into registro_turno(cve_equipo,cve_linea,cve_turno,dia_asignado,adeudo) " &
+                              "values(" & vcve_equipo & "," & vcve_linea & "," & vcve_turno & ",'" & vdia_asignado.ToString("dd-MM-yyyy") & "',0)"
+        Try
+            oBD.EjecutarQuery(queryInsert)
+        Catch
+            MsgBox("Error al Registrar_Linea_turno. CREgistro_Turno_ERROR", vbCritical + vbOKOnly, "Error")
+        End Try
     End Sub
 #End Region
 #Region "Atributos"
@@ -43,8 +49,10 @@ Public Class Registro_Turno
     Private vcve_equipo As Long
     Private vcve_linea As Long
     Private vcve_turno As Long
-    Private vdia_asignado As String
+    Private vdia_asignado As DateTime
     Private vadeudo As Long
+    'auxiliares
+    Private vbandera_registro_turno As Long
 #End Region
 #Region "Propiedades"
     Public Property cve_registro_turno() As Long
@@ -79,11 +87,11 @@ Public Class Registro_Turno
             vcve_turno = value
         End Set
     End Property
-    Public Property dia_asignado() As String
+    Public Property dia_asignado() As DateTime
         Get
             Return vdia_asignado
         End Get
-        Set(ByVal value As String)
+        Set(ByVal value As DateTime)
             vdia_asignado = value
         End Set
     End Property
@@ -95,5 +103,51 @@ Public Class Registro_Turno
             vadeudo = value
         End Set
     End Property
+    Public Property bandera_registro_turno() As Long
+        Get
+            Return vbandera_registro_turno
+        End Get
+        Set(ByVal value As Long)
+            vbandera_registro_turno = value
+        End Set
+    End Property
+
+#End Region
+#Region "Metodos formulario de produccion"
+    Public Sub verifica_registro_turno()
+        Using scope As New TransactionScope
+
+            Try
+                Dim cmd As New SqlClient.SqlCommand
+                cmd.CommandType = CommandType.StoredProcedure
+                cmd.CommandText = "verifica_registro_turno"
+                cmd.Parameters.Add("@cve_equipo", SqlDbType.BigInt).Value = Me.vcve_equipo
+                cmd.Parameters.Add("@cve_linea", SqlDbType.BigInt).Value = Me.vcve_linea
+                cmd.Parameters.Add("@fecha", SqlDbType.DateTime).Value = Me.vdia_asignado.ToString("dd-MM-yyyy")
+                Dim obj As DataTable = oBD.EjecutaCommando(cmd)
+                Me.vbandera_registro_turno = obj.Rows(0)(0)
+                Me.vcve_registro_turno = obj.Rows(0)(1)
+                Me.vcve_turno = obj.Rows(0)(2)
+                scope.Complete()
+            Catch
+                MsgBox("Error al validar verifica_registro_turno. CRegistro_Turno_ERROR1", vbCritical + vbOKOnly, "Error")
+            End Try
+        End Using
+    End Sub
+    Public Function llena_lineas_registradas_hoy() As DataTable
+        Dim dtEquipoLinea As New DataTable
+        Try
+            dtEquipoLinea = oBD.ObtenerTabla(" select rt.cve_registro_turno,l.linea,t.turno,rt.dia_asignado from registro_turno rt " &
+                                             "join linea l on rt.cve_linea=l.cve_linea " &
+                                             "join turno t on rt.cve_turno=t.cve_turno " &
+                                             "where day(rt.dia_asignado)=day('" & vdia_asignado.ToString("MM-dd-yyyy") & "') And " &
+                                             "month(rt.dia_asignado)=month('" & vdia_asignado.ToString("MM-dd-yyyy") & "') And " &
+                                             "year(rt.dia_asignado)=year('" & vdia_asignado.ToString("MM-dd-yyyy") & "')")
+        Catch ex As Exception
+            MsgBox("Error al obtener Lineas Registradas. CRegistro_Turno_ERROR", vbCritical + vbOKOnly, "Error")
+            dtEquipoLinea = Nothing
+        End Try
+        Return dtEquipoLinea
+    End Function
 #End Region
 End Class

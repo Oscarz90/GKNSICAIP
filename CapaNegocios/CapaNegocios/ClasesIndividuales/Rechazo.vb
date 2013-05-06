@@ -7,9 +7,22 @@ Public Class Rechazo
     Public Sub Cargar() Implements IIndividual.Cargar
 
     End Sub
-
     Public Sub Eliminar() Implements IIndividual.Eliminar
-
+        Using scope As New TransactionScope
+            Try
+                Dim vComando As New SqlClient.SqlCommand
+                vComando.CommandType = CommandType.StoredProcedure
+                vComando.CommandText = "remueve_rechazo"
+                vComando.Parameters.Add("@cve_registro_turno", SqlDbType.BigInt).Value = Me.vcve_registro_turno
+                vComando.Parameters.Add("@cve_rechazo", SqlDbType.BigInt).Value = Me.vcve_rechazo
+                vComando.Parameters.Add("@cod_empleado", SqlDbType.VarChar).Value = Me.vcod_empleado_elimino
+                vComando.Parameters.Add("@fecha_eliminacion", SqlDbType.DateTime).Value = Convert.ToDateTime(Me.vfecha_eliminacion)
+                oBD.EjecutaProcedimientos(vComando)
+                scope.Complete()
+            Catch
+                MsgBox("Error al eliminar rechazo. CRechazo_ERROR", vbCritical + vbOKOnly, "Error")
+            End Try
+        End Using
     End Sub
     Dim vId As Long
     Public Property Id As Long Implements IIndividual.Id
@@ -20,11 +33,9 @@ Public Class Rechazo
             vId = value
         End Set
     End Property
-
     Public Function Obtener_Id(ByVal vCadena As String) As Long Implements IIndividual.Obtener_Id
         Return 1
     End Function
-
     Public Sub Registrar() Implements IIndividual.Registrar
         Using scope As New TransactionScope
             Try
@@ -38,9 +49,7 @@ Public Class Rechazo
                 vComando.Parameters.Add("@cve_tipo_rechazo", SqlDbType.Int).Value = Me.vcve_tipo_rechazo
                 vComando.Parameters.Add("@cantidad", SqlDbType.Int).Value = Me.vcantidad
                 vComando.Parameters.Add("@motivo", SqlDbType.VarChar).Value = Me.vmotivo
-                'Dim obj As DataTable = oBD.EjecutaCommando(vComando)
                 oBD.EjecutaProcedimientos(vComando)
-                'Me.vId = obj.Rows(0)(0)
                 scope.Complete()
             Catch 'ex As Exception
                 MsgBox("Error al insertar rechazo. CRechazo_ERROR", vbCritical + vbOKOnly, "Error")
@@ -170,23 +179,5 @@ Public Class Rechazo
             Return obj
         End Using
     End Function
-    Public Sub elimina_fila_rechazo_gridview()
-        'Dim oBD As New CapaDatos.CapaDatos("Data Source= Oscar-PC\SQLExpress; initial Catalog=GKNSICAIP; Integrated Security = True")
-        Using scope As New TransactionScope
-            Try
-                Dim vComando As New SqlClient.SqlCommand
-                vComando.CommandType = CommandType.StoredProcedure
-                vComando.CommandText = "remueve_rechazo"
-                vComando.Parameters.Add("@cve_registro_turno", SqlDbType.BigInt).Value = Me.vcve_registro_turno
-                vComando.Parameters.Add("@cve_rechazo", SqlDbType.BigInt).Value = Me.vcve_rechazo
-                vComando.Parameters.Add("@cod_empleado", SqlDbType.VarChar).Value = Me.vcod_empleado_elimino
-                vComando.Parameters.Add("@fecha_eliminacion", SqlDbType.DateTime).Value = Convert.ToDateTime(Me.vfecha_eliminacion)
-                oBD.EjecutaProcedimientos(vComando)
-                scope.Complete()
-            Catch
-                MsgBox("Error al eliminar rechazo. CRechazo_ERROR", vbCritical + vbOKOnly, "Error")
-            End Try
-        End Using
-    End Sub
 #End Region
 End Class

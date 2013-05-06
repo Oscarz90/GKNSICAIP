@@ -49,10 +49,11 @@ Public Class Turno
     Private vminutos As Long
     Private vcomedor As Long
     Private vturno As String
-    Private vinicio As String
-    Private vfin As String
+    Private vinicio As DateTime
+    Private vfin As DateTime
     'auxiliar
-    Private vfecha_registro As String
+    Private vfecha_registro As DateTime
+    Private vbandera_registro As Integer
 #End Region
 #Region "Propiedades"
     Public Property cve_turno() As Long
@@ -91,30 +92,39 @@ Public Class Turno
         End Set
     End Property
 
-    Public Property inicio() As String
+    Public Property inicio() As DateTime
         Get
             Return vinicio
         End Get
-        Set(ByVal value As String)
+        Set(ByVal value As DateTime)
             vinicio = value
         End Set
     End Property
 
-    Public Property fin() As String
+    Public Property fin() As DateTime
         Get
             Return vfin
         End Get
-        Set(ByVal value As String)
+        Set(ByVal value As DateTime)
             vfin = value
         End Set
     End Property
 
-    Public Property fecha_registro() As String
+    Public Property fecha_registro() As DateTime
         Get
             Return vfecha_registro
         End Get
-        Set(ByVal value As String)
+        Set(ByVal value As DateTime)
             vfecha_registro = value
+        End Set
+    End Property
+
+    Public Property bandera_registro() As Integer
+        Get
+            Return vbandera_registro
+        End Get
+        Set(ByVal value As Integer)
+            vbandera_registro = value
         End Set
     End Property
 
@@ -126,7 +136,7 @@ Public Class Turno
         Try
             dtTurnos = oBD.ObtenerTabla("Select cve_turno,turno from turno")
         Catch ex As Exception
-            MsgBox("ERROR_AL_OBTENER_TURNOS_CTurno")
+            MsgBox("Error al obtener turnos. CTurno_ERROR", vbCritical + vbOKOnly, "Error")
             dtTurnos = Nothing
         End Try
         Return dtTurnos
@@ -135,7 +145,7 @@ Public Class Turno
     Public Sub fecha_inicio_fin()
         Dim rDatos As DataRow = Nothing
         Try
-            rDatos = oBD.ObtenerRenglon("select * from fecha_inicio_fin (" & vcve_turno & ",'" & vfecha_registro & "');", "turno")
+            rDatos = oBD.ObtenerRenglon("select * from fecha_inicio_fin (" & vcve_turno & ",'" & vfecha_registro.ToString("MM-dd-yyyy HH:mm") & "');", "turno")
             If rDatos IsNot Nothing Then
                 If rDatos("inicio") IsNot DBNull.Value Then
                     Me.vinicio = rDatos("inicio")
@@ -143,9 +153,27 @@ Public Class Turno
                 End If
             End If
         Catch ex As Exception
-            Throw New Exception(ex.Message)
+            MsgBox("Error al obtener inicio_fin. CTurno_ERROR", vbCritical + vbOKOnly, "Error")
         End Try
     End Sub
-
+    Public Sub valida_inicio_fin()
+        Using scope As New TransactionScope
+            Try
+                Dim cmd As New SqlClient.SqlCommand
+                cmd.CommandType = CommandType.StoredProcedure
+                cmd.CommandText = "valida_inicio_fin"
+                cmd.Parameters.Add("@turno", SqlDbType.BigInt).Value = Me.vcve_turno
+                cmd.Parameters.Add("@fecha", SqlDbType.VarChar).Value = Me.vfecha_registro.ToString("dd-MM-yyyy HH:mm")
+                Dim obj As DataTable = oBD.EjecutaCommando(cmd)
+                'Me.vinicio = obj.Rows(0)(0)
+                Me.vbandera_registro = obj.Rows(0)(0)
+                Me.vinicio = obj.Rows(0)(1)
+                Me.vfin = obj.Rows(0)(2)
+                scope.Complete()
+            Catch ex As Exception
+                MsgBox("Error al validar inicio_fin. CTurno_ERROR", vbCritical + vbOKOnly, "Error")
+            End Try
+        End Using
+    End Sub
 
 End Class

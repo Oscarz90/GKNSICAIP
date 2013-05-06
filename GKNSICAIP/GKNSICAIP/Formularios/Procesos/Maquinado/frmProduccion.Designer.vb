@@ -135,6 +135,15 @@ Partial Class frmProduccion
         Me.cbxMaquina = New System.Windows.Forms.ComboBox()
         Me.Label24 = New System.Windows.Forms.Label()
         Me.tabPageRechazos = New System.Windows.Forms.TabPage()
+        Me.grp5s = New System.Windows.Forms.GroupBox()
+        Me.txtPromedio = New System.Windows.Forms.TextBox()
+        Me.Label68 = New System.Windows.Forms.Label()
+        Me.txtManttoAutonomo = New System.Windows.Forms.TextBox()
+        Me.Label69 = New System.Windows.Forms.Label()
+        Me.txt5s = New System.Windows.Forms.TextBox()
+        Me.txtAdmonVisual = New System.Windows.Forms.TextBox()
+        Me.Label70 = New System.Windows.Forms.Label()
+        Me.Label71 = New System.Windows.Forms.Label()
         Me.grpRechazos = New System.Windows.Forms.GroupBox()
         Me.grdDetalleRechazo = New System.Windows.Forms.DataGridView()
         Me.colcve_rechazo = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -158,30 +167,68 @@ Partial Class frmProduccion
         Me.txtRechazoMotivo = New System.Windows.Forms.TextBox()
         Me.txtRechazosCantidad = New System.Windows.Forms.TextBox()
         Me.TabPage1 = New System.Windows.Forms.TabPage()
-        Me.grpSeguridad = New System.Windows.Forms.GroupBox()
-        Me.ListView3 = New System.Windows.Forms.ListView()
-        Me.ColumnHeader10 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
-        Me.ColumnHeader11 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
-        Me.Label22 = New System.Windows.Forms.Label()
-        Me.Label30 = New System.Windows.Forms.Label()
-        Me.Button3 = New System.Windows.Forms.Button()
-        Me.Button4 = New System.Windows.Forms.Button()
-        Me.TextBox3 = New System.Windows.Forms.TextBox()
-        Me.ComboBox3 = New System.Windows.Forms.ComboBox()
+        Me.grpAccidentes = New System.Windows.Forms.GroupBox()
+        Me.grdDetalleAccidente = New System.Windows.Forms.DataGridView()
+        Me.col_cve_seguridad = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.col_descripcion_ = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Cantidad = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.col_comentarios_ = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.btnQuitarAccidente = New System.Windows.Forms.Button()
+        Me.btnAgregarAccidente = New System.Windows.Forms.Button()
+        Me.Label63 = New System.Windows.Forms.Label()
+        Me.Label64 = New System.Windows.Forms.Label()
+        Me.txtDetallesAccidentes = New System.Windows.Forms.TextBox()
+        Me.Label65 = New System.Windows.Forms.Label()
+        Me.txtAccidenteCantidad = New System.Windows.Forms.TextBox()
+        Me.cbxTipoAccidente = New System.Windows.Forms.ComboBox()
+        Me.Label66 = New System.Windows.Forms.Label()
+        Me.Label67 = New System.Windows.Forms.Label()
+        Me.grpCondInseg = New System.Windows.Forms.GroupBox()
+        Me.grdDetalleCondInseg = New System.Windows.Forms.DataGridView()
+        Me.colcve_seguridad = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.coldescripciondetalle = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.colcantidaddetalle = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.colcomentarios = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.btnQuitarCondInseg = New System.Windows.Forms.Button()
+        Me.btnAgregarCondInseg = New System.Windows.Forms.Button()
         Me.Label20 = New System.Windows.Forms.Label()
+        Me.Label22 = New System.Windows.Forms.Label()
+        Me.txtDetallesCondInseg = New System.Windows.Forms.TextBox()
         Me.Label27 = New System.Windows.Forms.Label()
+        Me.txtCondInsegCantidad = New System.Windows.Forms.TextBox()
+        Me.cbxTipoCondInseg = New System.Windows.Forms.ComboBox()
+        Me.Label30 = New System.Windows.Forms.Label()
+        Me.Label62 = New System.Windows.Forms.Label()
         Me.TabPage2 = New System.Windows.Forms.TabPage()
         Me.grpGente = New System.Windows.Forms.GroupBox()
-        Me.Label61 = New System.Windows.Forms.Label()
-        Me.txtDetallesGente = New System.Windows.Forms.TextBox()
-        Me.Label33 = New System.Windows.Forms.Label()
-        Me.Label45 = New System.Windows.Forms.Label()
-        Me.btnAgregarGente = New System.Windows.Forms.Button()
+        Me.grdDetalleGente = New System.Windows.Forms.DataGridView()
+        Me.colcve_gente = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.colgdescripcion = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.colgcantidad = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.comentarios = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.btnQuitarGente = New System.Windows.Forms.Button()
+        Me.btnAgregarGente = New System.Windows.Forms.Button()
+        Me.Label61 = New System.Windows.Forms.Label()
+        Me.Label33 = New System.Windows.Forms.Label()
+        Me.txtDetallesGente = New System.Windows.Forms.TextBox()
+        Me.Label45 = New System.Windows.Forms.Label()
         Me.txtGenteCantidad = New System.Windows.Forms.TextBox()
         Me.cbxTipoDetalleGente = New System.Windows.Forms.ComboBox()
         Me.Label50 = New System.Windows.Forms.Label()
         Me.Label55 = New System.Windows.Forms.Label()
+        Me.Turnos_Lineas = New System.Windows.Forms.TabPage()
+        Me.cbxTurnosLineas = New System.Windows.Forms.ComboBox()
+        Me.Label76 = New System.Windows.Forms.Label()
+        Me.Label75 = New System.Windows.Forms.Label()
+        Me.Label74 = New System.Windows.Forms.Label()
+        Me.Label73 = New System.Windows.Forms.Label()
+        Me.btnLineaUnica = New System.Windows.Forms.Button()
+        Me.btnLineasTodas = New System.Windows.Forms.Button()
+        Me.Label72 = New System.Windows.Forms.Label()
+        Me.grdLineasRegistradas = New System.Windows.Forms.DataGridView()
+        Me.grdLineasNoRegistradas = New System.Windows.Forms.DataGridView()
+        Me.col_cve_linea = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.collinea = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.titulo_banner_formulario = New System.Windows.Forms.Label()
         Me.banner_formulario = New System.Windows.Forms.PictureBox()
         Me.PictureBox1 = New System.Windows.Forms.PictureBox()
@@ -193,6 +240,10 @@ Partial Class frmProduccion
         Me.lblNombreEquipo = New System.Windows.Forms.Label()
         Me.Label58 = New System.Windows.Forms.Label()
         Me.cbxLinea = New System.Windows.Forms.ComboBox()
+        Me.col_cve_registro_turno = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.col_linea = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.col_turno = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.col_dia_asignado = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.TabContenido.SuspendLayout()
         Me.tabPageProductividad.SuspendLayout()
         Me.grpDesechos.SuspendLayout()
@@ -204,12 +255,20 @@ Partial Class frmProduccion
         Me.grpParos.SuspendLayout()
         CType(Me.grdDetalleParo, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.tabPageRechazos.SuspendLayout()
+        Me.grp5s.SuspendLayout()
         Me.grpRechazos.SuspendLayout()
         CType(Me.grdDetalleRechazo, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.TabPage1.SuspendLayout()
-        Me.grpSeguridad.SuspendLayout()
+        Me.grpAccidentes.SuspendLayout()
+        CType(Me.grdDetalleAccidente, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.grpCondInseg.SuspendLayout()
+        CType(Me.grdDetalleCondInseg, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.TabPage2.SuspendLayout()
         Me.grpGente.SuspendLayout()
+        CType(Me.grdDetalleGente, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.Turnos_Lineas.SuspendLayout()
+        CType(Me.grdLineasRegistradas, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.grdLineasNoRegistradas, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.banner_formulario, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
@@ -221,10 +280,12 @@ Partial Class frmProduccion
         Me.TabContenido.Controls.Add(Me.tabPageRechazos)
         Me.TabContenido.Controls.Add(Me.TabPage1)
         Me.TabContenido.Controls.Add(Me.TabPage2)
-        Me.TabContenido.Location = New System.Drawing.Point(12, 264)
+        Me.TabContenido.Controls.Add(Me.Turnos_Lineas)
+        Me.TabContenido.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.TabContenido.Location = New System.Drawing.Point(12, 248)
         Me.TabContenido.Name = "TabContenido"
         Me.TabContenido.SelectedIndex = 0
-        Me.TabContenido.Size = New System.Drawing.Size(1230, 446)
+        Me.TabContenido.Size = New System.Drawing.Size(1230, 462)
         Me.TabContenido.TabIndex = 1
         Me.TabContenido.Tag = ""
         '
@@ -232,10 +293,10 @@ Partial Class frmProduccion
         '
         Me.tabPageProductividad.Controls.Add(Me.grpDesechos)
         Me.tabPageProductividad.Controls.Add(Me.grpProductividad)
-        Me.tabPageProductividad.Location = New System.Drawing.Point(4, 22)
+        Me.tabPageProductividad.Location = New System.Drawing.Point(4, 27)
         Me.tabPageProductividad.Name = "tabPageProductividad"
         Me.tabPageProductividad.Padding = New System.Windows.Forms.Padding(3)
-        Me.tabPageProductividad.Size = New System.Drawing.Size(1222, 420)
+        Me.tabPageProductividad.Size = New System.Drawing.Size(1222, 431)
         Me.tabPageProductividad.TabIndex = 0
         Me.tabPageProductividad.Text = "Productividad"
         Me.tabPageProductividad.UseVisualStyleBackColor = True
@@ -422,12 +483,11 @@ Partial Class frmProduccion
         '
         'txtDesechosCantidad
         '
-        Me.txtDesechosCantidad.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
+        Me.txtDesechosCantidad.BackColor = System.Drawing.Color.FromArgb(CType(CType(243, Byte), Integer), CType(CType(251, Byte), Integer), CType(CType(120, Byte), Integer))
         Me.txtDesechosCantidad.Location = New System.Drawing.Point(116, 112)
         Me.txtDesechosCantidad.Name = "txtDesechosCantidad"
         Me.txtDesechosCantidad.Size = New System.Drawing.Size(61, 26)
         Me.txtDesechosCantidad.TabIndex = 9
-        Me.txtDesechosCantidad.Text = "0"
         Me.txtDesechosCantidad.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         '
         'grpProductividad
@@ -827,7 +887,7 @@ Partial Class frmProduccion
         '
         'txtTiempoOperacion
         '
-        Me.txtTiempoOperacion.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
+        Me.txtTiempoOperacion.BackColor = System.Drawing.Color.FromArgb(CType(CType(243, Byte), Integer), CType(CType(251, Byte), Integer), CType(CType(120, Byte), Integer))
         Me.txtTiempoOperacion.Location = New System.Drawing.Point(198, 236)
         Me.txtTiempoOperacion.Name = "txtTiempoOperacion"
         Me.txtTiempoOperacion.Size = New System.Drawing.Size(61, 26)
@@ -946,12 +1006,11 @@ Partial Class frmProduccion
         '
         'txtPiezasOkProducidas
         '
-        Me.txtPiezasOkProducidas.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
+        Me.txtPiezasOkProducidas.BackColor = System.Drawing.Color.FromArgb(CType(CType(243, Byte), Integer), CType(CType(251, Byte), Integer), CType(CType(120, Byte), Integer))
         Me.txtPiezasOkProducidas.Location = New System.Drawing.Point(449, 201)
         Me.txtPiezasOkProducidas.Name = "txtPiezasOkProducidas"
         Me.txtPiezasOkProducidas.Size = New System.Drawing.Size(61, 26)
         Me.txtPiezasOkProducidas.TabIndex = 7
-        Me.txtPiezasOkProducidas.Text = "0"
         Me.txtPiezasOkProducidas.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         '
         'Label9
@@ -1004,10 +1063,10 @@ Partial Class frmProduccion
         '
         Me.tabPageParos.Controls.Add(Me.grpCosto)
         Me.tabPageParos.Controls.Add(Me.grpParos)
-        Me.tabPageParos.Location = New System.Drawing.Point(4, 22)
+        Me.tabPageParos.Location = New System.Drawing.Point(4, 27)
         Me.tabPageParos.Name = "tabPageParos"
         Me.tabPageParos.Padding = New System.Windows.Forms.Padding(3)
-        Me.tabPageParos.Size = New System.Drawing.Size(1222, 420)
+        Me.tabPageParos.Size = New System.Drawing.Size(1222, 431)
         Me.tabPageParos.TabIndex = 1
         Me.tabPageParos.Text = "Paros"
         Me.tabPageParos.UseVisualStyleBackColor = True
@@ -1230,16 +1289,16 @@ Partial Class frmProduccion
         'txtMaquinaDescripcion
         '
         Me.txtMaquinaDescripcion.Font = New System.Drawing.Font("Arial", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtMaquinaDescripcion.Location = New System.Drawing.Point(6, 56)
+        Me.txtMaquinaDescripcion.Location = New System.Drawing.Point(22, 55)
         Me.txtMaquinaDescripcion.Name = "txtMaquinaDescripcion"
         Me.txtMaquinaDescripcion.ReadOnly = True
-        Me.txtMaquinaDescripcion.Size = New System.Drawing.Size(294, 25)
+        Me.txtMaquinaDescripcion.Size = New System.Drawing.Size(299, 25)
         Me.txtMaquinaDescripcion.TabIndex = 322
         '
         'txtMinutosParo
         '
-        Me.txtMinutosParo.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
-        Me.txtMinutosParo.Location = New System.Drawing.Point(410, 21)
+        Me.txtMinutosParo.BackColor = System.Drawing.Color.FromArgb(CType(CType(243, Byte), Integer), CType(CType(251, Byte), Integer), CType(CType(120, Byte), Integer))
+        Me.txtMinutosParo.Location = New System.Drawing.Point(422, 21)
         Me.txtMinutosParo.Name = "txtMinutosParo"
         Me.txtMinutosParo.Size = New System.Drawing.Size(161, 26)
         Me.txtMinutosParo.TabIndex = 141
@@ -1249,7 +1308,7 @@ Partial Class frmProduccion
         '
         Me.Label25.AutoSize = True
         Me.Label25.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label25.Location = New System.Drawing.Point(327, 24)
+        Me.Label25.Location = New System.Drawing.Point(339, 24)
         Me.Label25.Name = "Label25"
         Me.Label25.Size = New System.Drawing.Size(66, 18)
         Me.Label25.TabIndex = 140
@@ -1303,7 +1362,7 @@ Partial Class frmProduccion
         '
         Me.Label32.AutoSize = True
         Me.Label32.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label32.Location = New System.Drawing.Point(327, 78)
+        Me.Label32.Location = New System.Drawing.Point(339, 78)
         Me.Label32.Name = "Label32"
         Me.Label32.Size = New System.Drawing.Size(69, 18)
         Me.Label32.TabIndex = 15
@@ -1311,8 +1370,8 @@ Partial Class frmProduccion
         '
         'txtDetallesParo
         '
-        Me.txtDetallesParo.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
-        Me.txtDetallesParo.Location = New System.Drawing.Point(410, 78)
+        Me.txtDetallesParo.BackColor = System.Drawing.Color.FromArgb(CType(CType(243, Byte), Integer), CType(CType(251, Byte), Integer), CType(CType(120, Byte), Integer))
+        Me.txtDetallesParo.Location = New System.Drawing.Point(422, 78)
         Me.txtDetallesParo.Multiline = True
         Me.txtDetallesParo.Name = "txtDetallesParo"
         Me.txtDetallesParo.ScrollBars = System.Windows.Forms.ScrollBars.Vertical
@@ -1344,7 +1403,7 @@ Partial Class frmProduccion
         Me.cbxMaquina.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cbxMaquina.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cbxMaquina.FormattingEnabled = True
-        Me.cbxMaquina.Location = New System.Drawing.Point(78, 21)
+        Me.cbxMaquina.Location = New System.Drawing.Point(99, 21)
         Me.cbxMaquina.Name = "cbxMaquina"
         Me.cbxMaquina.Size = New System.Drawing.Size(222, 26)
         Me.cbxMaquina.TabIndex = 7
@@ -1352,22 +1411,108 @@ Partial Class frmProduccion
         'Label24
         '
         Me.Label24.AutoSize = True
-        Me.Label24.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label24.Location = New System.Drawing.Point(8, 23)
+        Me.Label24.Font = New System.Drawing.Font("Calibri", 12.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label24.Location = New System.Drawing.Point(16, 23)
         Me.Label24.Name = "Label24"
-        Me.Label24.Size = New System.Drawing.Size(72, 18)
+        Me.Label24.Size = New System.Drawing.Size(77, 21)
         Me.Label24.TabIndex = 6
         Me.Label24.Text = "Maquina:"
         '
         'tabPageRechazos
         '
+        Me.tabPageRechazos.Controls.Add(Me.grp5s)
         Me.tabPageRechazos.Controls.Add(Me.grpRechazos)
-        Me.tabPageRechazos.Location = New System.Drawing.Point(4, 22)
+        Me.tabPageRechazos.Location = New System.Drawing.Point(4, 27)
         Me.tabPageRechazos.Name = "tabPageRechazos"
-        Me.tabPageRechazos.Size = New System.Drawing.Size(1222, 420)
+        Me.tabPageRechazos.Size = New System.Drawing.Size(1222, 431)
         Me.tabPageRechazos.TabIndex = 2
-        Me.tabPageRechazos.Text = "Rechazos"
+        Me.tabPageRechazos.Text = "Rechazos / 5'S"
         Me.tabPageRechazos.UseVisualStyleBackColor = True
+        '
+        'grp5s
+        '
+        Me.grp5s.Controls.Add(Me.txtPromedio)
+        Me.grp5s.Controls.Add(Me.Label68)
+        Me.grp5s.Controls.Add(Me.txtManttoAutonomo)
+        Me.grp5s.Controls.Add(Me.Label69)
+        Me.grp5s.Controls.Add(Me.txt5s)
+        Me.grp5s.Controls.Add(Me.txtAdmonVisual)
+        Me.grp5s.Controls.Add(Me.Label70)
+        Me.grp5s.Controls.Add(Me.Label71)
+        Me.grp5s.Location = New System.Drawing.Point(640, 12)
+        Me.grp5s.Name = "grp5s"
+        Me.grp5s.Size = New System.Drawing.Size(511, 358)
+        Me.grp5s.TabIndex = 337
+        Me.grp5s.TabStop = False
+        Me.grp5s.Text = "5'S"
+        '
+        'txtPromedio
+        '
+        Me.txtPromedio.Location = New System.Drawing.Point(190, 184)
+        Me.txtPromedio.Name = "txtPromedio"
+        Me.txtPromedio.ReadOnly = True
+        Me.txtPromedio.Size = New System.Drawing.Size(100, 26)
+        Me.txtPromedio.TabIndex = 160
+        '
+        'Label68
+        '
+        Me.Label68.AutoSize = True
+        Me.Label68.Location = New System.Drawing.Point(103, 187)
+        Me.Label68.Name = "Label68"
+        Me.Label68.Size = New System.Drawing.Size(73, 18)
+        Me.Label68.TabIndex = 159
+        Me.Label68.Text = "Promedio:"
+        '
+        'txtManttoAutonomo
+        '
+        Me.txtManttoAutonomo.Location = New System.Drawing.Point(190, 137)
+        Me.txtManttoAutonomo.Name = "txtManttoAutonomo"
+        Me.txtManttoAutonomo.Size = New System.Drawing.Size(100, 26)
+        Me.txtManttoAutonomo.TabIndex = 157
+        '
+        'Label69
+        '
+        Me.Label69.AutoSize = True
+        Me.Label69.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label69.Location = New System.Drawing.Point(47, 140)
+        Me.Label69.Name = "Label69"
+        Me.Label69.Size = New System.Drawing.Size(137, 18)
+        Me.Label69.TabIndex = 158
+        Me.Label69.Text = "Mantto. Autónomo:"
+        '
+        'txt5s
+        '
+        Me.txt5s.Location = New System.Drawing.Point(190, 91)
+        Me.txt5s.Name = "txt5s"
+        Me.txt5s.Size = New System.Drawing.Size(100, 26)
+        Me.txt5s.TabIndex = 156
+        '
+        'txtAdmonVisual
+        '
+        Me.txtAdmonVisual.Location = New System.Drawing.Point(190, 45)
+        Me.txtAdmonVisual.Name = "txtAdmonVisual"
+        Me.txtAdmonVisual.Size = New System.Drawing.Size(100, 26)
+        Me.txtAdmonVisual.TabIndex = 154
+        '
+        'Label70
+        '
+        Me.Label70.AutoSize = True
+        Me.Label70.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label70.Location = New System.Drawing.Point(25, 51)
+        Me.Label70.Name = "Label70"
+        Me.Label70.Size = New System.Drawing.Size(159, 18)
+        Me.Label70.TabIndex = 155
+        Me.Label70.Text = "Administración visual:"
+        '
+        'Label71
+        '
+        Me.Label71.AutoSize = True
+        Me.Label71.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label71.Location = New System.Drawing.Point(151, 94)
+        Me.Label71.Name = "Label71"
+        Me.Label71.Size = New System.Drawing.Size(33, 18)
+        Me.Label71.TabIndex = 153
+        Me.Label71.Text = "5 s:"
         '
         'grpRechazos
         '
@@ -1585,7 +1730,7 @@ Partial Class frmProduccion
         '
         'txtRechazosCantidad
         '
-        Me.txtRechazosCantidad.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
+        Me.txtRechazosCantidad.BackColor = System.Drawing.Color.FromArgb(CType(CType(243, Byte), Integer), CType(CType(251, Byte), Integer), CType(CType(120, Byte), Integer))
         Me.txtRechazosCantidad.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtRechazosCantidad.Location = New System.Drawing.Point(421, 25)
         Me.txtRechazosCantidad.Name = "txtRechazosCantidad"
@@ -1594,159 +1739,364 @@ Partial Class frmProduccion
         '
         'TabPage1
         '
-        Me.TabPage1.Controls.Add(Me.grpSeguridad)
-        Me.TabPage1.Location = New System.Drawing.Point(4, 22)
+        Me.TabPage1.Controls.Add(Me.grpAccidentes)
+        Me.TabPage1.Controls.Add(Me.grpCondInseg)
+        Me.TabPage1.Location = New System.Drawing.Point(4, 27)
         Me.TabPage1.Name = "TabPage1"
         Me.TabPage1.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabPage1.Size = New System.Drawing.Size(1222, 420)
+        Me.TabPage1.Size = New System.Drawing.Size(1222, 431)
         Me.TabPage1.TabIndex = 3
         Me.TabPage1.Text = "Seguridad"
         Me.TabPage1.UseVisualStyleBackColor = True
         '
-        'grpSeguridad
+        'grpAccidentes
         '
-        Me.grpSeguridad.Controls.Add(Me.ListView3)
-        Me.grpSeguridad.Controls.Add(Me.Label22)
-        Me.grpSeguridad.Controls.Add(Me.Label30)
-        Me.grpSeguridad.Controls.Add(Me.Button3)
-        Me.grpSeguridad.Controls.Add(Me.Button4)
-        Me.grpSeguridad.Controls.Add(Me.TextBox3)
-        Me.grpSeguridad.Controls.Add(Me.ComboBox3)
-        Me.grpSeguridad.Controls.Add(Me.Label20)
-        Me.grpSeguridad.Controls.Add(Me.Label27)
-        Me.grpSeguridad.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.grpSeguridad.Location = New System.Drawing.Point(6, 3)
-        Me.grpSeguridad.Name = "grpSeguridad"
-        Me.grpSeguridad.Size = New System.Drawing.Size(547, 417)
-        Me.grpSeguridad.TabIndex = 8
-        Me.grpSeguridad.TabStop = False
-        Me.grpSeguridad.Text = "SEGURIDAD"
-        Me.grpSeguridad.Visible = False
+        Me.grpAccidentes.Controls.Add(Me.grdDetalleAccidente)
+        Me.grpAccidentes.Controls.Add(Me.btnQuitarAccidente)
+        Me.grpAccidentes.Controls.Add(Me.btnAgregarAccidente)
+        Me.grpAccidentes.Controls.Add(Me.Label63)
+        Me.grpAccidentes.Controls.Add(Me.Label64)
+        Me.grpAccidentes.Controls.Add(Me.txtDetallesAccidentes)
+        Me.grpAccidentes.Controls.Add(Me.Label65)
+        Me.grpAccidentes.Controls.Add(Me.txtAccidenteCantidad)
+        Me.grpAccidentes.Controls.Add(Me.cbxTipoAccidente)
+        Me.grpAccidentes.Controls.Add(Me.Label66)
+        Me.grpAccidentes.Controls.Add(Me.Label67)
+        Me.grpAccidentes.Font = New System.Drawing.Font("Calibri", 12.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.grpAccidentes.Location = New System.Drawing.Point(612, 6)
+        Me.grpAccidentes.Name = "grpAccidentes"
+        Me.grpAccidentes.Size = New System.Drawing.Size(600, 419)
+        Me.grpAccidentes.TabIndex = 1
+        Me.grpAccidentes.TabStop = False
+        Me.grpAccidentes.Text = "Accidentes"
         '
-        'ListView3
+        'grdDetalleAccidente
         '
-        Me.ListView3.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.ColumnHeader10, Me.ColumnHeader11})
-        Me.ListView3.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.ListView3.FullRowSelect = True
-        Me.ListView3.GridLines = True
-        Me.ListView3.Location = New System.Drawing.Point(11, 202)
-        Me.ListView3.Margin = New System.Windows.Forms.Padding(4)
-        Me.ListView3.Name = "ListView3"
-        Me.ListView3.Size = New System.Drawing.Size(518, 177)
-        Me.ListView3.TabIndex = 334
-        Me.ListView3.UseCompatibleStateImageBehavior = False
-        Me.ListView3.View = System.Windows.Forms.View.Details
+        Me.grdDetalleAccidente.AllowUserToAddRows = False
+        Me.grdDetalleAccidente.AllowUserToDeleteRows = False
+        Me.grdDetalleAccidente.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.grdDetalleAccidente.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.col_cve_seguridad, Me.col_descripcion_, Me.Cantidad, Me.col_comentarios_})
+        Me.grdDetalleAccidente.Location = New System.Drawing.Point(6, 242)
+        Me.grdDetalleAccidente.Name = "grdDetalleAccidente"
+        Me.grdDetalleAccidente.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
+        Me.grdDetalleAccidente.Size = New System.Drawing.Size(588, 171)
+        Me.grdDetalleAccidente.TabIndex = 348
         '
-        'ColumnHeader10
+        'col_cve_seguridad
         '
-        Me.ColumnHeader10.Text = "Tipo paro"
-        Me.ColumnHeader10.Width = 130
+        Me.col_cve_seguridad.DataPropertyName = "cve_seguridad"
+        Me.col_cve_seguridad.HeaderText = "cve_seguridad"
+        Me.col_cve_seguridad.Name = "col_cve_seguridad"
+        Me.col_cve_seguridad.ReadOnly = True
         '
-        'ColumnHeader11
+        'col_descripcion_
         '
-        Me.ColumnHeader11.Text = "Minutos"
-        Me.ColumnHeader11.Width = 90
+        Me.col_descripcion_.DataPropertyName = "descripcion"
+        Me.col_descripcion_.HeaderText = "Descripcion"
+        Me.col_descripcion_.Name = "col_descripcion_"
+        Me.col_descripcion_.ReadOnly = True
         '
-        'Label22
+        'Cantidad
         '
-        Me.Label22.AutoSize = True
-        Me.Label22.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label22.Location = New System.Drawing.Point(484, 136)
-        Me.Label22.Name = "Label22"
-        Me.Label22.Size = New System.Drawing.Size(50, 18)
-        Me.Label22.TabIndex = 333
-        Me.Label22.Text = "Quitar"
+        Me.Cantidad.DataPropertyName = "cantidad"
+        Me.Cantidad.HeaderText = "Cantidad"
+        Me.Cantidad.Name = "Cantidad"
+        Me.Cantidad.ReadOnly = True
         '
-        'Label30
+        'col_comentarios_
         '
-        Me.Label30.AutoSize = True
-        Me.Label30.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label30.Location = New System.Drawing.Point(399, 136)
-        Me.Label30.Name = "Label30"
-        Me.Label30.Size = New System.Drawing.Size(65, 18)
-        Me.Label30.TabIndex = 332
-        Me.Label30.Text = "Agregar"
+        Me.col_comentarios_.DataPropertyName = "comentarios"
+        Me.col_comentarios_.HeaderText = "Comentarios"
+        Me.col_comentarios_.Name = "col_comentarios_"
+        Me.col_comentarios_.ReadOnly = True
         '
-        'Button3
+        'btnQuitarAccidente
         '
-        Me.Button3.BackColor = System.Drawing.Color.White
-        Me.Button3.BackgroundImage = CType(resources.GetObject("Button3.BackgroundImage"), System.Drawing.Image)
-        Me.Button3.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center
-        Me.Button3.Enabled = False
-        Me.Button3.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Button3.Location = New System.Drawing.Point(401, 74)
-        Me.Button3.Name = "Button3"
-        Me.Button3.Size = New System.Drawing.Size(63, 59)
-        Me.Button3.TabIndex = 330
-        Me.Button3.UseVisualStyleBackColor = False
+        Me.btnQuitarAccidente.BackColor = System.Drawing.Color.White
+        Me.btnQuitarAccidente.BackgroundImage = CType(resources.GetObject("btnQuitarAccidente.BackgroundImage"), System.Drawing.Image)
+        Me.btnQuitarAccidente.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center
+        Me.btnQuitarAccidente.Enabled = False
+        Me.btnQuitarAccidente.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnQuitarAccidente.Location = New System.Drawing.Point(521, 22)
+        Me.btnQuitarAccidente.Name = "btnQuitarAccidente"
+        Me.btnQuitarAccidente.Size = New System.Drawing.Size(64, 59)
+        Me.btnQuitarAccidente.TabIndex = 342
+        Me.btnQuitarAccidente.UseVisualStyleBackColor = False
         '
-        'Button4
+        'btnAgregarAccidente
         '
-        Me.Button4.BackColor = System.Drawing.Color.White
-        Me.Button4.BackgroundImage = CType(resources.GetObject("Button4.BackgroundImage"), System.Drawing.Image)
-        Me.Button4.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center
-        Me.Button4.Enabled = False
-        Me.Button4.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Button4.Location = New System.Drawing.Point(478, 74)
-        Me.Button4.Name = "Button4"
-        Me.Button4.Size = New System.Drawing.Size(64, 59)
-        Me.Button4.TabIndex = 331
-        Me.Button4.UseVisualStyleBackColor = False
+        Me.btnAgregarAccidente.BackColor = System.Drawing.Color.White
+        Me.btnAgregarAccidente.BackgroundImage = CType(resources.GetObject("btnAgregarAccidente.BackgroundImage"), System.Drawing.Image)
+        Me.btnAgregarAccidente.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center
+        Me.btnAgregarAccidente.Enabled = False
+        Me.btnAgregarAccidente.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnAgregarAccidente.Location = New System.Drawing.Point(444, 22)
+        Me.btnAgregarAccidente.Name = "btnAgregarAccidente"
+        Me.btnAgregarAccidente.Size = New System.Drawing.Size(63, 59)
+        Me.btnAgregarAccidente.TabIndex = 341
+        Me.btnAgregarAccidente.UseVisualStyleBackColor = False
         '
-        'TextBox3
+        'Label63
         '
-        Me.TextBox3.Location = New System.Drawing.Point(186, 114)
-        Me.TextBox3.Name = "TextBox3"
-        Me.TextBox3.Size = New System.Drawing.Size(181, 26)
-        Me.TextBox3.TabIndex = 153
+        Me.Label63.AutoSize = True
+        Me.Label63.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label63.Location = New System.Drawing.Point(10, 147)
+        Me.Label63.Name = "Label63"
+        Me.Label63.Size = New System.Drawing.Size(69, 18)
+        Me.Label63.TabIndex = 346
+        Me.Label63.Text = "Detalles:"
         '
-        'ComboBox3
+        'Label64
         '
-        Me.ComboBox3.FormattingEnabled = True
-        Me.ComboBox3.Location = New System.Drawing.Point(186, 60)
-        Me.ComboBox3.Name = "ComboBox3"
-        Me.ComboBox3.Size = New System.Drawing.Size(181, 26)
-        Me.ComboBox3.TabIndex = 152
+        Me.Label64.AutoSize = True
+        Me.Label64.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label64.Location = New System.Drawing.Point(527, 84)
+        Me.Label64.Name = "Label64"
+        Me.Label64.Size = New System.Drawing.Size(50, 18)
+        Me.Label64.TabIndex = 344
+        Me.Label64.Text = "Quitar"
+        '
+        'txtDetallesAccidentes
+        '
+        Me.txtDetallesAccidentes.BackColor = System.Drawing.Color.FromArgb(CType(CType(243, Byte), Integer), CType(CType(251, Byte), Integer), CType(CType(120, Byte), Integer))
+        Me.txtDetallesAccidentes.Location = New System.Drawing.Point(93, 144)
+        Me.txtDetallesAccidentes.Multiline = True
+        Me.txtDetallesAccidentes.Name = "txtDetallesAccidentes"
+        Me.txtDetallesAccidentes.ScrollBars = System.Windows.Forms.ScrollBars.Vertical
+        Me.txtDetallesAccidentes.Size = New System.Drawing.Size(348, 75)
+        Me.txtDetallesAccidentes.TabIndex = 345
+        '
+        'Label65
+        '
+        Me.Label65.AutoSize = True
+        Me.Label65.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label65.Location = New System.Drawing.Point(442, 84)
+        Me.Label65.Name = "Label65"
+        Me.Label65.Size = New System.Drawing.Size(65, 18)
+        Me.Label65.TabIndex = 343
+        Me.Label65.Text = "Agregar"
+        '
+        'txtAccidenteCantidad
+        '
+        Me.txtAccidenteCantidad.BackColor = System.Drawing.Color.FromArgb(CType(CType(243, Byte), Integer), CType(CType(251, Byte), Integer), CType(CType(120, Byte), Integer))
+        Me.txtAccidenteCantidad.Location = New System.Drawing.Point(93, 93)
+        Me.txtAccidenteCantidad.Name = "txtAccidenteCantidad"
+        Me.txtAccidenteCantidad.Size = New System.Drawing.Size(181, 28)
+        Me.txtAccidenteCantidad.TabIndex = 340
+        '
+        'cbxTipoAccidente
+        '
+        Me.cbxTipoAccidente.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cbxTipoAccidente.FormattingEnabled = True
+        Me.cbxTipoAccidente.Location = New System.Drawing.Point(93, 44)
+        Me.cbxTipoAccidente.Name = "cbxTipoAccidente"
+        Me.cbxTipoAccidente.Size = New System.Drawing.Size(181, 29)
+        Me.cbxTipoAccidente.TabIndex = 339
+        '
+        'Label66
+        '
+        Me.Label66.AutoSize = True
+        Me.Label66.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label66.Location = New System.Drawing.Point(11, 96)
+        Me.Label66.Name = "Label66"
+        Me.Label66.Size = New System.Drawing.Size(76, 18)
+        Me.Label66.TabIndex = 338
+        Me.Label66.Text = "Cantidad:"
+        '
+        'Label67
+        '
+        Me.Label67.AutoSize = True
+        Me.Label67.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label67.Location = New System.Drawing.Point(45, 47)
+        Me.Label67.Name = "Label67"
+        Me.Label67.Size = New System.Drawing.Size(42, 18)
+        Me.Label67.TabIndex = 337
+        Me.Label67.Text = "Tipo:"
+        '
+        'grpCondInseg
+        '
+        Me.grpCondInseg.Controls.Add(Me.grdDetalleCondInseg)
+        Me.grpCondInseg.Controls.Add(Me.btnQuitarCondInseg)
+        Me.grpCondInseg.Controls.Add(Me.btnAgregarCondInseg)
+        Me.grpCondInseg.Controls.Add(Me.Label20)
+        Me.grpCondInseg.Controls.Add(Me.Label22)
+        Me.grpCondInseg.Controls.Add(Me.txtDetallesCondInseg)
+        Me.grpCondInseg.Controls.Add(Me.Label27)
+        Me.grpCondInseg.Controls.Add(Me.txtCondInsegCantidad)
+        Me.grpCondInseg.Controls.Add(Me.cbxTipoCondInseg)
+        Me.grpCondInseg.Controls.Add(Me.Label30)
+        Me.grpCondInseg.Controls.Add(Me.Label62)
+        Me.grpCondInseg.Font = New System.Drawing.Font("Calibri", 12.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.grpCondInseg.Location = New System.Drawing.Point(6, 6)
+        Me.grpCondInseg.Name = "grpCondInseg"
+        Me.grpCondInseg.Size = New System.Drawing.Size(600, 419)
+        Me.grpCondInseg.TabIndex = 0
+        Me.grpCondInseg.TabStop = False
+        Me.grpCondInseg.Text = "Condiciones Inseguras"
+        '
+        'grdDetalleCondInseg
+        '
+        Me.grdDetalleCondInseg.AllowUserToAddRows = False
+        Me.grdDetalleCondInseg.AllowUserToDeleteRows = False
+        Me.grdDetalleCondInseg.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.grdDetalleCondInseg.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.colcve_seguridad, Me.coldescripciondetalle, Me.colcantidaddetalle, Me.colcomentarios})
+        Me.grdDetalleCondInseg.Location = New System.Drawing.Point(6, 242)
+        Me.grdDetalleCondInseg.Name = "grdDetalleCondInseg"
+        Me.grdDetalleCondInseg.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
+        Me.grdDetalleCondInseg.Size = New System.Drawing.Size(588, 171)
+        Me.grdDetalleCondInseg.TabIndex = 347
+        '
+        'colcve_seguridad
+        '
+        Me.colcve_seguridad.DataPropertyName = "cve_seguridad"
+        Me.colcve_seguridad.HeaderText = "cve_seguridad"
+        Me.colcve_seguridad.Name = "colcve_seguridad"
+        Me.colcve_seguridad.ReadOnly = True
+        '
+        'coldescripciondetalle
+        '
+        Me.coldescripciondetalle.DataPropertyName = "descripcion"
+        Me.coldescripciondetalle.HeaderText = "Descripcion"
+        Me.coldescripciondetalle.Name = "coldescripciondetalle"
+        Me.coldescripciondetalle.ReadOnly = True
+        '
+        'colcantidaddetalle
+        '
+        Me.colcantidaddetalle.DataPropertyName = "cantidad"
+        Me.colcantidaddetalle.HeaderText = "Cantidad"
+        Me.colcantidaddetalle.Name = "colcantidaddetalle"
+        Me.colcantidaddetalle.ReadOnly = True
+        '
+        'colcomentarios
+        '
+        Me.colcomentarios.DataPropertyName = "comentarios"
+        Me.colcomentarios.HeaderText = "Comentarios"
+        Me.colcomentarios.Name = "colcomentarios"
+        Me.colcomentarios.ReadOnly = True
+        '
+        'btnQuitarCondInseg
+        '
+        Me.btnQuitarCondInseg.BackColor = System.Drawing.Color.White
+        Me.btnQuitarCondInseg.BackgroundImage = CType(resources.GetObject("btnQuitarCondInseg.BackgroundImage"), System.Drawing.Image)
+        Me.btnQuitarCondInseg.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center
+        Me.btnQuitarCondInseg.Enabled = False
+        Me.btnQuitarCondInseg.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnQuitarCondInseg.Location = New System.Drawing.Point(524, 23)
+        Me.btnQuitarCondInseg.Name = "btnQuitarCondInseg"
+        Me.btnQuitarCondInseg.Size = New System.Drawing.Size(64, 59)
+        Me.btnQuitarCondInseg.TabIndex = 342
+        Me.btnQuitarCondInseg.UseVisualStyleBackColor = False
+        '
+        'btnAgregarCondInseg
+        '
+        Me.btnAgregarCondInseg.BackColor = System.Drawing.Color.White
+        Me.btnAgregarCondInseg.BackgroundImage = CType(resources.GetObject("btnAgregarCondInseg.BackgroundImage"), System.Drawing.Image)
+        Me.btnAgregarCondInseg.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center
+        Me.btnAgregarCondInseg.Enabled = False
+        Me.btnAgregarCondInseg.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnAgregarCondInseg.Location = New System.Drawing.Point(447, 23)
+        Me.btnAgregarCondInseg.Name = "btnAgregarCondInseg"
+        Me.btnAgregarCondInseg.Size = New System.Drawing.Size(63, 59)
+        Me.btnAgregarCondInseg.TabIndex = 341
+        Me.btnAgregarCondInseg.UseVisualStyleBackColor = False
         '
         'Label20
         '
         Me.Label20.AutoSize = True
         Me.Label20.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label20.Location = New System.Drawing.Point(104, 117)
+        Me.Label20.Location = New System.Drawing.Point(13, 148)
         Me.Label20.Name = "Label20"
-        Me.Label20.Size = New System.Drawing.Size(76, 18)
-        Me.Label20.TabIndex = 151
-        Me.Label20.Text = "Cantidad:"
+        Me.Label20.Size = New System.Drawing.Size(69, 18)
+        Me.Label20.TabIndex = 346
+        Me.Label20.Text = "Detalles:"
+        '
+        'Label22
+        '
+        Me.Label22.AutoSize = True
+        Me.Label22.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label22.Location = New System.Drawing.Point(530, 85)
+        Me.Label22.Name = "Label22"
+        Me.Label22.Size = New System.Drawing.Size(50, 18)
+        Me.Label22.TabIndex = 344
+        Me.Label22.Text = "Quitar"
+        '
+        'txtDetallesCondInseg
+        '
+        Me.txtDetallesCondInseg.BackColor = System.Drawing.Color.FromArgb(CType(CType(243, Byte), Integer), CType(CType(251, Byte), Integer), CType(CType(120, Byte), Integer))
+        Me.txtDetallesCondInseg.Location = New System.Drawing.Point(96, 145)
+        Me.txtDetallesCondInseg.Multiline = True
+        Me.txtDetallesCondInseg.Name = "txtDetallesCondInseg"
+        Me.txtDetallesCondInseg.ScrollBars = System.Windows.Forms.ScrollBars.Vertical
+        Me.txtDetallesCondInseg.Size = New System.Drawing.Size(348, 75)
+        Me.txtDetallesCondInseg.TabIndex = 345
         '
         'Label27
         '
         Me.Label27.AutoSize = True
         Me.Label27.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label27.Location = New System.Drawing.Point(8, 63)
+        Me.Label27.Location = New System.Drawing.Point(445, 85)
         Me.Label27.Name = "Label27"
-        Me.Label27.Size = New System.Drawing.Size(172, 18)
-        Me.Label27.TabIndex = 8
-        Me.Label27.Text = "Condiciones inseguras:"
+        Me.Label27.Size = New System.Drawing.Size(65, 18)
+        Me.Label27.TabIndex = 343
+        Me.Label27.Text = "Agregar"
+        '
+        'txtCondInsegCantidad
+        '
+        Me.txtCondInsegCantidad.BackColor = System.Drawing.Color.FromArgb(CType(CType(243, Byte), Integer), CType(CType(251, Byte), Integer), CType(CType(120, Byte), Integer))
+        Me.txtCondInsegCantidad.Location = New System.Drawing.Point(96, 94)
+        Me.txtCondInsegCantidad.Name = "txtCondInsegCantidad"
+        Me.txtCondInsegCantidad.Size = New System.Drawing.Size(181, 28)
+        Me.txtCondInsegCantidad.TabIndex = 340
+        '
+        'cbxTipoCondInseg
+        '
+        Me.cbxTipoCondInseg.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cbxTipoCondInseg.FormattingEnabled = True
+        Me.cbxTipoCondInseg.Location = New System.Drawing.Point(96, 45)
+        Me.cbxTipoCondInseg.Name = "cbxTipoCondInseg"
+        Me.cbxTipoCondInseg.Size = New System.Drawing.Size(181, 29)
+        Me.cbxTipoCondInseg.TabIndex = 339
+        '
+        'Label30
+        '
+        Me.Label30.AutoSize = True
+        Me.Label30.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label30.Location = New System.Drawing.Point(14, 97)
+        Me.Label30.Name = "Label30"
+        Me.Label30.Size = New System.Drawing.Size(76, 18)
+        Me.Label30.TabIndex = 338
+        Me.Label30.Text = "Cantidad:"
+        '
+        'Label62
+        '
+        Me.Label62.AutoSize = True
+        Me.Label62.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label62.Location = New System.Drawing.Point(48, 48)
+        Me.Label62.Name = "Label62"
+        Me.Label62.Size = New System.Drawing.Size(42, 18)
+        Me.Label62.TabIndex = 337
+        Me.Label62.Text = "Tipo:"
         '
         'TabPage2
         '
         Me.TabPage2.Controls.Add(Me.grpGente)
-        Me.TabPage2.Location = New System.Drawing.Point(4, 22)
+        Me.TabPage2.Location = New System.Drawing.Point(4, 27)
         Me.TabPage2.Name = "TabPage2"
         Me.TabPage2.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabPage2.Size = New System.Drawing.Size(1222, 420)
+        Me.TabPage2.Size = New System.Drawing.Size(1222, 431)
         Me.TabPage2.TabIndex = 4
         Me.TabPage2.Text = "Gente"
         Me.TabPage2.UseVisualStyleBackColor = True
         '
         'grpGente
         '
-        Me.grpGente.Controls.Add(Me.Label61)
-        Me.grpGente.Controls.Add(Me.txtDetallesGente)
-        Me.grpGente.Controls.Add(Me.Label33)
-        Me.grpGente.Controls.Add(Me.Label45)
-        Me.grpGente.Controls.Add(Me.btnAgregarGente)
+        Me.grpGente.Controls.Add(Me.grdDetalleGente)
         Me.grpGente.Controls.Add(Me.btnQuitarGente)
+        Me.grpGente.Controls.Add(Me.btnAgregarGente)
+        Me.grpGente.Controls.Add(Me.Label61)
+        Me.grpGente.Controls.Add(Me.Label33)
+        Me.grpGente.Controls.Add(Me.txtDetallesGente)
+        Me.grpGente.Controls.Add(Me.Label45)
         Me.grpGente.Controls.Add(Me.txtGenteCantidad)
         Me.grpGente.Controls.Add(Me.cbxTipoDetalleGente)
         Me.grpGente.Controls.Add(Me.Label50)
@@ -1754,63 +2104,49 @@ Partial Class frmProduccion
         Me.grpGente.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.grpGente.Location = New System.Drawing.Point(6, 6)
         Me.grpGente.Name = "grpGente"
-        Me.grpGente.Size = New System.Drawing.Size(1210, 408)
+        Me.grpGente.Size = New System.Drawing.Size(615, 408)
         Me.grpGente.TabIndex = 335
         Me.grpGente.TabStop = False
         Me.grpGente.Text = "Gente"
         '
-        'Label61
+        'grdDetalleGente
         '
-        Me.Label61.AutoSize = True
-        Me.Label61.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label61.Location = New System.Drawing.Point(19, 113)
-        Me.Label61.Name = "Label61"
-        Me.Label61.Size = New System.Drawing.Size(69, 18)
-        Me.Label61.TabIndex = 336
-        Me.Label61.Text = "Detalles:"
+        Me.grdDetalleGente.AllowUserToAddRows = False
+        Me.grdDetalleGente.AllowUserToDeleteRows = False
+        Me.grdDetalleGente.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.grdDetalleGente.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.colcve_gente, Me.colgdescripcion, Me.colgcantidad, Me.comentarios})
+        Me.grdDetalleGente.Location = New System.Drawing.Point(14, 242)
+        Me.grdDetalleGente.Name = "grdDetalleGente"
+        Me.grdDetalleGente.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
+        Me.grdDetalleGente.Size = New System.Drawing.Size(580, 150)
+        Me.grdDetalleGente.TabIndex = 337
         '
-        'txtDetallesGente
+        'colcve_gente
         '
-        Me.txtDetallesGente.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
-        Me.txtDetallesGente.Location = New System.Drawing.Point(102, 113)
-        Me.txtDetallesGente.Multiline = True
-        Me.txtDetallesGente.Name = "txtDetallesGente"
-        Me.txtDetallesGente.ScrollBars = System.Windows.Forms.ScrollBars.Vertical
-        Me.txtDetallesGente.Size = New System.Drawing.Size(211, 75)
-        Me.txtDetallesGente.TabIndex = 335
+        Me.colcve_gente.DataPropertyName = "cve_gente"
+        Me.colcve_gente.HeaderText = "cve_gente"
+        Me.colcve_gente.Name = "colcve_gente"
         '
-        'Label33
+        'colgdescripcion
         '
-        Me.Label33.AutoSize = True
-        Me.Label33.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label33.Location = New System.Drawing.Point(478, 175)
-        Me.Label33.Name = "Label33"
-        Me.Label33.Size = New System.Drawing.Size(50, 18)
-        Me.Label33.TabIndex = 333
-        Me.Label33.Text = "Quitar"
+        Me.colgdescripcion.DataPropertyName = "descripcion"
+        Me.colgdescripcion.HeaderText = "descripcion"
+        Me.colgdescripcion.Name = "colgdescripcion"
+        Me.colgdescripcion.ReadOnly = True
         '
-        'Label45
+        'colgcantidad
         '
-        Me.Label45.AutoSize = True
-        Me.Label45.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label45.Location = New System.Drawing.Point(393, 175)
-        Me.Label45.Name = "Label45"
-        Me.Label45.Size = New System.Drawing.Size(65, 18)
-        Me.Label45.TabIndex = 332
-        Me.Label45.Text = "Agregar"
+        Me.colgcantidad.DataPropertyName = "cantidad"
+        Me.colgcantidad.HeaderText = "cantidad"
+        Me.colgcantidad.Name = "colgcantidad"
+        Me.colgcantidad.ReadOnly = True
         '
-        'btnAgregarGente
+        'comentarios
         '
-        Me.btnAgregarGente.BackColor = System.Drawing.Color.White
-        Me.btnAgregarGente.BackgroundImage = CType(resources.GetObject("btnAgregarGente.BackgroundImage"), System.Drawing.Image)
-        Me.btnAgregarGente.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center
-        Me.btnAgregarGente.Enabled = False
-        Me.btnAgregarGente.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnAgregarGente.Location = New System.Drawing.Point(395, 113)
-        Me.btnAgregarGente.Name = "btnAgregarGente"
-        Me.btnAgregarGente.Size = New System.Drawing.Size(63, 59)
-        Me.btnAgregarGente.TabIndex = 330
-        Me.btnAgregarGente.UseVisualStyleBackColor = False
+        Me.comentarios.DataPropertyName = "comentarios"
+        Me.comentarios.HeaderText = "comentarios"
+        Me.comentarios.Name = "comentarios"
+        Me.comentarios.ReadOnly = True
         '
         'btnQuitarGente
         '
@@ -1819,15 +2155,69 @@ Partial Class frmProduccion
         Me.btnQuitarGente.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center
         Me.btnQuitarGente.Enabled = False
         Me.btnQuitarGente.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnQuitarGente.Location = New System.Drawing.Point(472, 113)
+        Me.btnQuitarGente.Location = New System.Drawing.Point(530, 25)
         Me.btnQuitarGente.Name = "btnQuitarGente"
         Me.btnQuitarGente.Size = New System.Drawing.Size(64, 59)
         Me.btnQuitarGente.TabIndex = 331
         Me.btnQuitarGente.UseVisualStyleBackColor = False
         '
+        'btnAgregarGente
+        '
+        Me.btnAgregarGente.BackColor = System.Drawing.Color.White
+        Me.btnAgregarGente.BackgroundImage = CType(resources.GetObject("btnAgregarGente.BackgroundImage"), System.Drawing.Image)
+        Me.btnAgregarGente.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center
+        Me.btnAgregarGente.Enabled = False
+        Me.btnAgregarGente.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnAgregarGente.Location = New System.Drawing.Point(453, 25)
+        Me.btnAgregarGente.Name = "btnAgregarGente"
+        Me.btnAgregarGente.Size = New System.Drawing.Size(63, 59)
+        Me.btnAgregarGente.TabIndex = 330
+        Me.btnAgregarGente.UseVisualStyleBackColor = False
+        '
+        'Label61
+        '
+        Me.Label61.AutoSize = True
+        Me.Label61.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label61.Location = New System.Drawing.Point(19, 150)
+        Me.Label61.Name = "Label61"
+        Me.Label61.Size = New System.Drawing.Size(69, 18)
+        Me.Label61.TabIndex = 336
+        Me.Label61.Text = "Detalles:"
+        '
+        'Label33
+        '
+        Me.Label33.AutoSize = True
+        Me.Label33.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label33.Location = New System.Drawing.Point(536, 87)
+        Me.Label33.Name = "Label33"
+        Me.Label33.Size = New System.Drawing.Size(50, 18)
+        Me.Label33.TabIndex = 333
+        Me.Label33.Text = "Quitar"
+        '
+        'txtDetallesGente
+        '
+        Me.txtDetallesGente.BackColor = System.Drawing.Color.FromArgb(CType(CType(243, Byte), Integer), CType(CType(251, Byte), Integer), CType(CType(120, Byte), Integer))
+        Me.txtDetallesGente.Location = New System.Drawing.Point(102, 147)
+        Me.txtDetallesGente.Multiline = True
+        Me.txtDetallesGente.Name = "txtDetallesGente"
+        Me.txtDetallesGente.ScrollBars = System.Windows.Forms.ScrollBars.Vertical
+        Me.txtDetallesGente.Size = New System.Drawing.Size(348, 75)
+        Me.txtDetallesGente.TabIndex = 335
+        '
+        'Label45
+        '
+        Me.Label45.AutoSize = True
+        Me.Label45.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label45.Location = New System.Drawing.Point(451, 87)
+        Me.Label45.Name = "Label45"
+        Me.Label45.Size = New System.Drawing.Size(65, 18)
+        Me.Label45.TabIndex = 332
+        Me.Label45.Text = "Agregar"
+        '
         'txtGenteCantidad
         '
-        Me.txtGenteCantidad.Location = New System.Drawing.Point(102, 71)
+        Me.txtGenteCantidad.BackColor = System.Drawing.Color.FromArgb(CType(CType(243, Byte), Integer), CType(CType(251, Byte), Integer), CType(CType(120, Byte), Integer))
+        Me.txtGenteCantidad.Location = New System.Drawing.Point(102, 96)
         Me.txtGenteCantidad.Name = "txtGenteCantidad"
         Me.txtGenteCantidad.Size = New System.Drawing.Size(181, 26)
         Me.txtGenteCantidad.TabIndex = 153
@@ -1836,7 +2226,7 @@ Partial Class frmProduccion
         '
         Me.cbxTipoDetalleGente.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cbxTipoDetalleGente.FormattingEnabled = True
-        Me.cbxTipoDetalleGente.Location = New System.Drawing.Point(102, 29)
+        Me.cbxTipoDetalleGente.Location = New System.Drawing.Point(102, 47)
         Me.cbxTipoDetalleGente.Name = "cbxTipoDetalleGente"
         Me.cbxTipoDetalleGente.Size = New System.Drawing.Size(181, 26)
         Me.cbxTipoDetalleGente.TabIndex = 152
@@ -1845,7 +2235,7 @@ Partial Class frmProduccion
         '
         Me.Label50.AutoSize = True
         Me.Label50.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label50.Location = New System.Drawing.Point(20, 74)
+        Me.Label50.Location = New System.Drawing.Point(20, 99)
         Me.Label50.Name = "Label50"
         Me.Label50.Size = New System.Drawing.Size(76, 18)
         Me.Label50.TabIndex = 151
@@ -1855,11 +2245,147 @@ Partial Class frmProduccion
         '
         Me.Label55.AutoSize = True
         Me.Label55.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label55.Location = New System.Drawing.Point(54, 32)
+        Me.Label55.Location = New System.Drawing.Point(54, 50)
         Me.Label55.Name = "Label55"
         Me.Label55.Size = New System.Drawing.Size(42, 18)
         Me.Label55.TabIndex = 8
         Me.Label55.Text = "Tipo:"
+        '
+        'Turnos_Lineas
+        '
+        Me.Turnos_Lineas.Controls.Add(Me.cbxTurnosLineas)
+        Me.Turnos_Lineas.Controls.Add(Me.Label76)
+        Me.Turnos_Lineas.Controls.Add(Me.Label75)
+        Me.Turnos_Lineas.Controls.Add(Me.Label74)
+        Me.Turnos_Lineas.Controls.Add(Me.Label73)
+        Me.Turnos_Lineas.Controls.Add(Me.btnLineaUnica)
+        Me.Turnos_Lineas.Controls.Add(Me.btnLineasTodas)
+        Me.Turnos_Lineas.Controls.Add(Me.Label72)
+        Me.Turnos_Lineas.Controls.Add(Me.grdLineasRegistradas)
+        Me.Turnos_Lineas.Controls.Add(Me.grdLineasNoRegistradas)
+        Me.Turnos_Lineas.Location = New System.Drawing.Point(4, 27)
+        Me.Turnos_Lineas.Name = "Turnos_Lineas"
+        Me.Turnos_Lineas.Padding = New System.Windows.Forms.Padding(3)
+        Me.Turnos_Lineas.Size = New System.Drawing.Size(1222, 431)
+        Me.Turnos_Lineas.TabIndex = 5
+        Me.Turnos_Lineas.Text = "Turnos/lineas"
+        Me.Turnos_Lineas.UseVisualStyleBackColor = True
+        '
+        'cbxTurnosLineas
+        '
+        Me.cbxTurnosLineas.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cbxTurnosLineas.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.cbxTurnosLineas.FormattingEnabled = True
+        Me.cbxTurnosLineas.Location = New System.Drawing.Point(497, 114)
+        Me.cbxTurnosLineas.Name = "cbxTurnosLineas"
+        Me.cbxTurnosLineas.Size = New System.Drawing.Size(234, 26)
+        Me.cbxTurnosLineas.TabIndex = 311
+        '
+        'Label76
+        '
+        Me.Label76.AutoSize = True
+        Me.Label76.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label76.Location = New System.Drawing.Point(754, 41)
+        Me.Label76.Name = "Label76"
+        Me.Label76.Size = New System.Drawing.Size(106, 18)
+        Me.Label76.TabIndex = 318
+        Me.Label76.Text = "Lineas - Turno"
+        '
+        'Label75
+        '
+        Me.Label75.AutoSize = True
+        Me.Label75.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label75.Location = New System.Drawing.Point(14, 41)
+        Me.Label75.Name = "Label75"
+        Me.Label75.Size = New System.Drawing.Size(142, 18)
+        Me.Label75.TabIndex = 317
+        Me.Label75.Text = "Lineas Disponibles"
+        '
+        'Label74
+        '
+        Me.Label74.AutoSize = True
+        Me.Label74.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label74.Location = New System.Drawing.Point(584, 354)
+        Me.Label74.Name = "Label74"
+        Me.Label74.Size = New System.Drawing.Size(72, 18)
+        Me.Label74.TabIndex = 316
+        Me.Label74.Text = "Registrar"
+        '
+        'Label73
+        '
+        Me.Label73.AutoSize = True
+        Me.Label73.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label73.Location = New System.Drawing.Point(558, 226)
+        Me.Label73.Name = "Label73"
+        Me.Label73.Size = New System.Drawing.Size(118, 18)
+        Me.Label73.TabIndex = 315
+        Me.Label73.Text = "Registrar Todas"
+        '
+        'btnLineaUnica
+        '
+        Me.btnLineaUnica.Location = New System.Drawing.Point(518, 311)
+        Me.btnLineaUnica.Name = "btnLineaUnica"
+        Me.btnLineaUnica.Size = New System.Drawing.Size(189, 40)
+        Me.btnLineaUnica.TabIndex = 314
+        Me.btnLineaUnica.Text = ">"
+        Me.btnLineaUnica.UseVisualStyleBackColor = True
+        '
+        'btnLineasTodas
+        '
+        Me.btnLineasTodas.Location = New System.Drawing.Point(518, 183)
+        Me.btnLineasTodas.Name = "btnLineasTodas"
+        Me.btnLineasTodas.Size = New System.Drawing.Size(189, 40)
+        Me.btnLineasTodas.TabIndex = 313
+        Me.btnLineasTodas.Text = ">>"
+        Me.btnLineasTodas.UseVisualStyleBackColor = True
+        '
+        'Label72
+        '
+        Me.Label72.AutoSize = True
+        Me.Label72.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label72.Location = New System.Drawing.Point(494, 93)
+        Me.Label72.Name = "Label72"
+        Me.Label72.Size = New System.Drawing.Size(50, 18)
+        Me.Label72.TabIndex = 312
+        Me.Label72.Text = "Turno:"
+        '
+        'grdLineasRegistradas
+        '
+        Me.grdLineasRegistradas.AllowUserToAddRows = False
+        Me.grdLineasRegistradas.AllowUserToDeleteRows = False
+        Me.grdLineasRegistradas.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.grdLineasRegistradas.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.col_cve_registro_turno, Me.col_linea, Me.col_turno, Me.col_dia_asignado})
+        Me.grdLineasRegistradas.Location = New System.Drawing.Point(757, 62)
+        Me.grdLineasRegistradas.Name = "grdLineasRegistradas"
+        Me.grdLineasRegistradas.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
+        Me.grdLineasRegistradas.Size = New System.Drawing.Size(447, 334)
+        Me.grdLineasRegistradas.TabIndex = 1
+        '
+        'grdLineasNoRegistradas
+        '
+        Me.grdLineasNoRegistradas.AllowUserToAddRows = False
+        Me.grdLineasNoRegistradas.AllowUserToDeleteRows = False
+        Me.grdLineasNoRegistradas.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.grdLineasNoRegistradas.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.col_cve_linea, Me.collinea})
+        Me.grdLineasNoRegistradas.Location = New System.Drawing.Point(17, 62)
+        Me.grdLineasNoRegistradas.Name = "grdLineasNoRegistradas"
+        Me.grdLineasNoRegistradas.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
+        Me.grdLineasNoRegistradas.Size = New System.Drawing.Size(447, 334)
+        Me.grdLineasNoRegistradas.TabIndex = 0
+        '
+        'col_cve_linea
+        '
+        Me.col_cve_linea.DataPropertyName = "cve_linea"
+        Me.col_cve_linea.HeaderText = "cve_linea"
+        Me.col_cve_linea.Name = "col_cve_linea"
+        Me.col_cve_linea.ReadOnly = True
+        '
+        'collinea
+        '
+        Me.collinea.DataPropertyName = "linea"
+        Me.collinea.HeaderText = "linea"
+        Me.collinea.Name = "collinea"
+        Me.collinea.ReadOnly = True
         '
         'titulo_banner_formulario
         '
@@ -1895,6 +2421,7 @@ Partial Class frmProduccion
         'cbxTurno
         '
         Me.cbxTurno.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cbxTurno.Enabled = False
         Me.cbxTurno.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cbxTurno.FormattingEnabled = True
         Me.cbxTurno.Location = New System.Drawing.Point(65, 149)
@@ -1956,7 +2483,7 @@ Partial Class frmProduccion
         '
         Me.Label58.AutoSize = True
         Me.Label58.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label58.Location = New System.Drawing.Point(9, 192)
+        Me.Label58.Location = New System.Drawing.Point(8, 184)
         Me.Label58.Name = "Label58"
         Me.Label58.Size = New System.Drawing.Size(51, 18)
         Me.Label58.TabIndex = 310
@@ -1967,16 +2494,46 @@ Partial Class frmProduccion
         Me.cbxLinea.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cbxLinea.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cbxLinea.FormattingEnabled = True
-        Me.cbxLinea.Location = New System.Drawing.Point(66, 189)
+        Me.cbxLinea.Location = New System.Drawing.Point(65, 181)
         Me.cbxLinea.Name = "cbxLinea"
         Me.cbxLinea.Size = New System.Drawing.Size(234, 26)
         Me.cbxLinea.TabIndex = 309
+        '
+        'col_cve_registro_turno
+        '
+        Me.col_cve_registro_turno.DataPropertyName = "cve_registro_turno"
+        Me.col_cve_registro_turno.HeaderText = "cve_registro_turno"
+        Me.col_cve_registro_turno.Name = "col_cve_registro_turno"
+        Me.col_cve_registro_turno.ReadOnly = True
+        '
+        'col_linea
+        '
+        Me.col_linea.DataPropertyName = "linea"
+        Me.col_linea.HeaderText = "linea"
+        Me.col_linea.Name = "col_linea"
+        Me.col_linea.ReadOnly = True
+        '
+        'col_turno
+        '
+        Me.col_turno.DataPropertyName = "turno"
+        Me.col_turno.HeaderText = "Turno"
+        Me.col_turno.Name = "col_turno"
+        Me.col_turno.ReadOnly = True
+        '
+        'col_dia_asignado
+        '
+        Me.col_dia_asignado.DataPropertyName = "dia_asignado"
+        Me.col_dia_asignado.HeaderText = "Dia Registro"
+        Me.col_dia_asignado.Name = "col_dia_asignado"
+        Me.col_dia_asignado.ReadOnly = True
+        Me.col_dia_asignado.Width = 200
         '
         'frmProduccion
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.White
+        Me.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None
         Me.ClientSize = New System.Drawing.Size(1254, 722)
         Me.Controls.Add(Me.Label58)
         Me.Controls.Add(Me.cbxLinea)
@@ -1990,6 +2547,7 @@ Partial Class frmProduccion
         Me.Controls.Add(Me.titulo_banner_formulario)
         Me.Controls.Add(Me.banner_formulario)
         Me.Controls.Add(Me.TabContenido)
+        Me.DoubleBuffered = True
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.MaximizeBox = False
         Me.MaximumSize = New System.Drawing.Size(1280, 768)
@@ -2011,15 +2569,26 @@ Partial Class frmProduccion
         Me.grpParos.PerformLayout()
         CType(Me.grdDetalleParo, System.ComponentModel.ISupportInitialize).EndInit()
         Me.tabPageRechazos.ResumeLayout(False)
+        Me.grp5s.ResumeLayout(False)
+        Me.grp5s.PerformLayout()
         Me.grpRechazos.ResumeLayout(False)
         Me.grpRechazos.PerformLayout()
         CType(Me.grdDetalleRechazo, System.ComponentModel.ISupportInitialize).EndInit()
         Me.TabPage1.ResumeLayout(False)
-        Me.grpSeguridad.ResumeLayout(False)
-        Me.grpSeguridad.PerformLayout()
+        Me.grpAccidentes.ResumeLayout(False)
+        Me.grpAccidentes.PerformLayout()
+        CType(Me.grdDetalleAccidente, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.grpCondInseg.ResumeLayout(False)
+        Me.grpCondInseg.PerformLayout()
+        CType(Me.grdDetalleCondInseg, System.ComponentModel.ISupportInitialize).EndInit()
         Me.TabPage2.ResumeLayout(False)
         Me.grpGente.ResumeLayout(False)
         Me.grpGente.PerformLayout()
+        CType(Me.grdDetalleGente, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.Turnos_Lineas.ResumeLayout(False)
+        Me.Turnos_Lineas.PerformLayout()
+        CType(Me.grdLineasRegistradas, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.grdLineasNoRegistradas, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.banner_formulario, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
@@ -2182,18 +2751,69 @@ Partial Class frmProduccion
     Friend WithEvents colclave_maquina As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents colmaquina As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents coldetalles As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents grpSeguridad As System.Windows.Forms.GroupBox
-    Friend WithEvents ListView3 As System.Windows.Forms.ListView
-    Friend WithEvents ColumnHeader10 As System.Windows.Forms.ColumnHeader
-    Friend WithEvents ColumnHeader11 As System.Windows.Forms.ColumnHeader
-    Friend WithEvents Label22 As System.Windows.Forms.Label
-    Friend WithEvents Label30 As System.Windows.Forms.Label
-    Friend WithEvents Button3 As System.Windows.Forms.Button
-    Friend WithEvents Button4 As System.Windows.Forms.Button
-    Friend WithEvents TextBox3 As System.Windows.Forms.TextBox
-    Friend WithEvents ComboBox3 As System.Windows.Forms.ComboBox
-    Friend WithEvents Label20 As System.Windows.Forms.Label
-    Friend WithEvents Label27 As System.Windows.Forms.Label
     Friend WithEvents Label61 As System.Windows.Forms.Label
     Friend WithEvents txtDetallesGente As System.Windows.Forms.TextBox
+    Friend WithEvents grdDetalleGente As System.Windows.Forms.DataGridView
+    Friend WithEvents colcve_gente As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents colgdescripcion As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents colgcantidad As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents comentarios As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents grpAccidentes As System.Windows.Forms.GroupBox
+    Friend WithEvents grpCondInseg As System.Windows.Forms.GroupBox
+    Friend WithEvents btnQuitarAccidente As System.Windows.Forms.Button
+    Friend WithEvents btnAgregarAccidente As System.Windows.Forms.Button
+    Friend WithEvents Label63 As System.Windows.Forms.Label
+    Friend WithEvents Label64 As System.Windows.Forms.Label
+    Friend WithEvents txtDetallesAccidentes As System.Windows.Forms.TextBox
+    Friend WithEvents Label65 As System.Windows.Forms.Label
+    Friend WithEvents txtAccidenteCantidad As System.Windows.Forms.TextBox
+    Friend WithEvents cbxTipoAccidente As System.Windows.Forms.ComboBox
+    Friend WithEvents Label66 As System.Windows.Forms.Label
+    Friend WithEvents Label67 As System.Windows.Forms.Label
+    Friend WithEvents btnQuitarCondInseg As System.Windows.Forms.Button
+    Friend WithEvents btnAgregarCondInseg As System.Windows.Forms.Button
+    Friend WithEvents Label20 As System.Windows.Forms.Label
+    Friend WithEvents Label22 As System.Windows.Forms.Label
+    Friend WithEvents txtDetallesCondInseg As System.Windows.Forms.TextBox
+    Friend WithEvents Label27 As System.Windows.Forms.Label
+    Friend WithEvents txtCondInsegCantidad As System.Windows.Forms.TextBox
+    Friend WithEvents cbxTipoCondInseg As System.Windows.Forms.ComboBox
+    Friend WithEvents Label30 As System.Windows.Forms.Label
+    Friend WithEvents Label62 As System.Windows.Forms.Label
+    Friend WithEvents grdDetalleAccidente As System.Windows.Forms.DataGridView
+    Friend WithEvents grdDetalleCondInseg As System.Windows.Forms.DataGridView
+    Friend WithEvents colcve_seguridad As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents coldescripciondetalle As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents colcantidaddetalle As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents colcomentarios As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents col_cve_seguridad As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents col_descripcion_ As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents Cantidad As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents col_comentarios_ As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents grp5s As System.Windows.Forms.GroupBox
+    Friend WithEvents txtPromedio As System.Windows.Forms.TextBox
+    Friend WithEvents Label68 As System.Windows.Forms.Label
+    Friend WithEvents txtManttoAutonomo As System.Windows.Forms.TextBox
+    Friend WithEvents Label69 As System.Windows.Forms.Label
+    Friend WithEvents txt5s As System.Windows.Forms.TextBox
+    Friend WithEvents txtAdmonVisual As System.Windows.Forms.TextBox
+    Friend WithEvents Label70 As System.Windows.Forms.Label
+    Friend WithEvents Label71 As System.Windows.Forms.Label
+    Friend WithEvents Turnos_Lineas As System.Windows.Forms.TabPage
+    Friend WithEvents Label76 As System.Windows.Forms.Label
+    Friend WithEvents Label75 As System.Windows.Forms.Label
+    Friend WithEvents Label74 As System.Windows.Forms.Label
+    Friend WithEvents Label73 As System.Windows.Forms.Label
+    Friend WithEvents btnLineaUnica As System.Windows.Forms.Button
+    Friend WithEvents btnLineasTodas As System.Windows.Forms.Button
+    Friend WithEvents Label72 As System.Windows.Forms.Label
+    Friend WithEvents grdLineasRegistradas As System.Windows.Forms.DataGridView
+    Friend WithEvents grdLineasNoRegistradas As System.Windows.Forms.DataGridView
+    Friend WithEvents cbxTurnosLineas As System.Windows.Forms.ComboBox
+    Friend WithEvents col_cve_linea As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents collinea As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents col_cve_registro_turno As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents col_linea As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents col_turno As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents col_dia_asignado As System.Windows.Forms.DataGridViewTextBoxColumn
 End Class

@@ -8,7 +8,11 @@ Public Class Desecho
 
     End Sub
     Public Sub Eliminar() Implements IIndividual.Eliminar
-
+        Try
+            oBD.EjecutarQuery("update desecho set cod_empleado_eliminacion='" & vcod_empleado_eliminacion & "',fecha_eliminacion='" & vfecha_eliminacion & "',estatus='0' where cve_desecho=" & vcve_desecho)
+        Catch ex As Exception
+            MsgBox("Error al eliminar desecho. CDesecho_ERROR", vbCritical + vbOKOnly, "Error")
+        End Try
     End Sub
     Dim vId As Long
     Public Property Id As Long Implements IIndividual.Id
@@ -135,12 +139,6 @@ Public Class Desecho
             Return obj
         End Using
     End Function
-    Public Sub elimina_fila_desecho_gridview()
-        Try
-            oBD.EjecutarQuery("update desecho set cod_empleado_eliminacion='" & vcod_empleado_eliminacion & "',fecha_eliminacion='" & vfecha_eliminacion & "',estatus='0' where cve_desecho=" & vcve_desecho)
-        Catch ex As Exception
-            MsgBox("Error al eliminar desecho. CDesecho_ERROR", vbCritical + vbOKOnly, "Error")
-        End Try
-    End Sub
+
 #End Region
 End Class
