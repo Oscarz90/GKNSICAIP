@@ -7,9 +7,7 @@ Public Class frmGraficas
     Dim colores(12) As String
     Dim rutaGrafica As String
     Dim cadenaXML As String
-
     Dim cadenaSELECT As String = ""
-
     Dim banderacbx As Integer
     Dim banderaCheck As Integer
     Dim banderaRadio As Integer
@@ -176,58 +174,65 @@ Public Class frmGraficas
 
     Private Sub Advertencia()
         ''VALIDACION DE LAS FECHAS DESDE, HASTA DE LA SELECCION DE FECHA = DIA
-        If rbtDia.Checked Then
-            If dtpDesde.Value.Date.CompareTo(dtpHasta.Value.Date) > 0 Then
+        If rbtDia.Checked Or rbtMeses.Checked Then
+            If dtpHasta.Value < dtpDesde.Value Then
                 lblAviso.Visible = True
+                cmdGraficar.Enabled = False
                 banderaDate = 0
             Else
                 lblAviso.Visible = False
+                cmdGraficar.Enabled = True
                 banderaDate = 1
-            End If
-        Else ''VALIDACION DE LAS FECHAS DESDE, HASTA DE LA SELECCION DE FECHA = MESES
-            If rbtMeses.Checked Then
-                If dtpDesde.Value.Year.CompareTo(dtpHasta.Value.Year) >= 0 Then ''Si el año (desde) es mayor que el año (hasta)
-                    If dtpDesde.Value.Month.CompareTo(dtpHasta.Value.Month) >= 0 Then ''Si el mes (desde) es mayor que el mes (hasta)
-                        lblAviso.Visible = True
-                        banderaDate = 0
-                    Else
-                        lblAviso.Visible = False
-                        banderaDate = 1
-                    End If
-                Else
-                    lblAviso.Visible = False
-                    banderaDate = 1
-                End If
-            Else ''VALIDACION DE LAS FECHAS DESDE, HASTA DE LA SELECCION DE FECHA = AÑOS
-                If rbtAnos.Checked Then
-                    If dtpDesde.Value.Year.CompareTo(dtpHasta.Value.Year) >= 0 Then
-                        lblAviso.Visible = True
-                        banderaDate = 0
-                    Else
-                        lblAviso.Visible = False
-                        banderaDate = 1
-                    End If
-                End If
             End If
         End If
     End Sub
 #End Region
-#Region "EVALUAR INDICADOR"
-    'If rbtOEE.Checked Then
 
+    Private Sub HabilitarTipoGrafico()
+        ''HABILITAR LOS RADIO BUTTONS DE LOS TIPOS DE GRÁFICOS PARA OEE, NRFTI Y 5´S
+        If rbtDia.Checked And (rbtOEE.Checked Or rbtNRFTi.Checked) Then
+            rbtLineas.Enabled = True
+            rbtBarras.Enabled = True
+            rbtBarras.Checked = True
+            rbtStock.Enabled = False
+            rbtStock.Checked = False
+            dtpDesde.CustomFormat = "dd/MMMM/yyyy"
+            dtpHasta.CustomFormat = "dd/MMMM/yyyy"
+            Habilita_Graficar()
+        ElseIf rbtMeses.Checked And (rbtOEE.Checked Or rbtNRFTi.Checked Or rbt5s.Checked) Then
+            rbtLineas.Enabled = True
+            rbtBarras.Enabled = True
+            rbtBarras.Checked = True
+            rbtStock.Enabled = False
+            rbtStock.Checked = False
+            dtpDesde.CustomFormat = "MMMM/yyyy"
+            dtpHasta.CustomFormat = "MMMM/yyyy"
+            Habilita_Graficar()
+        End If
+    End Sub
 
-    '    ElseIf rbtNRFTi.Checked Then
+    Private Sub HabilitarTipoGraficoStock()
+        ''HABILITAR LOS RADIO BUTTONS DE LOS TIPOS DE GRÁFICOS PARA GENTE Y SEGURIDAD
+        If rbtDia.Checked And (rbtSeg.Checked Or rbtGente.Checked) Then
+            rbtLineas.Enabled = False
+            rbtBarras.Enabled = False
+            rbtStock.Enabled = True
+            rbtStock.Checked = True
+            dtpDesde.CustomFormat = "dd/MMMM/yyyy"
+            dtpHasta.CustomFormat = "dd/MMMM/yyyy"
+            Habilita_Graficar()
+        ElseIf rbtMeses.Checked And (rbtSeg.Checked Or rbtGente.Checked) Then
+           rbtLineas.Enabled = False
+            rbtBarras.Enabled = False
+            rbtStock.Enabled = True
+            rbtStock.Checked = True
+            dtpDesde.CustomFormat = "MMMM/yyyy"
+            dtpHasta.CustomFormat = "MMMM/yyyy"
+            Habilita_Graficar()
+        End If
 
-    '    ElseIf rbtCosto.Checked Then
+    End Sub
 
-    '    ElseIf rbtSeg.Checked Then
-
-    '    ElseIf rbt5s.Checked Then
-
-    '    ElseIf rbtGente.Checked Then
-
-    '    End If
-#End Region
 #Region "ESTABLECE CONDICION WHERE USUARIOS"
     Private Sub Condicion_WHERE(ByVal vTodas As Boolean)
         cadenaWHERE = "where "
@@ -493,7 +498,6 @@ Public Class frmGraficas
 
     End Sub
 #End Region
-
 #Region "ESTABLECE NRFTI 1 EQUIPO LINEAS ACUMULADAS"
     Private Sub establece_NRFTi_Acumulado(ByVal cadena As String, ByVal color As String)
         Dim sumaPzasOK As Double = 0
@@ -548,7 +552,6 @@ Public Class frmGraficas
         cadenaXML += " </dataset>"
     End Sub
 #End Region
-
 #Region "INICIALIZACION DEL FORMULARIO"
     Private Sub Graficas_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         'oGraficas.Obtener_IdEquipo(vIdEquipo)
@@ -569,7 +572,7 @@ Public Class frmGraficas
         cmdGraficar.Enabled = False
         rbtDia.Checked = True
         rbtOEE.Checked = True
-        rbtLineas.Checked = True
+        rbtBarras.Checked = True
         ''USO DE BANDERAS
         'banderacbx = 0
         'banderaArea = 0
@@ -640,35 +643,51 @@ Public Class frmGraficas
 #End Region
 #Region "EVENTOS RADIO BUTTONS TIPO INDICADOR"
     Private Sub rbtOEE_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles rbtOEE.CheckedChanged
-        Habilita_Graficar()
-        rbtStock.Enabled = False
         rbtDia.Enabled = True
-        rbtMeses.Enabled = True
+        rbtDia.Checked = True
+        rbtMeses.Enabled = False
+        rbtMeses.Checked = False
+        HabilitarTipoGrafico()
     End Sub
     Private Sub rbtNRFTi_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles rbtNRFTi.CheckedChanged
-        Habilita_Graficar()
         rbtDia.Enabled = True
-        rbtMeses.Enabled = True
+        rbtDia.Checked = True
+        rbtMeses.Enabled = False
+        rbtMeses.Checked = False
+        HabilitarTipoGrafico()
     End Sub
-
     Private Sub rbtCosto_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles rbtCosto.CheckedChanged
-        Habilita_Graficar()
+        'Habilita_Graficar()
+        'rbtLineas.Enabled = False
+        'rbtBarras.Enabled = False
+        'rbtStock.Enabled = False
     End Sub
 
     Private Sub rbtSeg_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles rbtSeg.CheckedChanged
-        Habilita_Graficar()
+        rbtDia.Enabled = True
+        rbtDia.Checked = True
+        rbtMeses.Enabled = False
+        rbtMeses.Checked = False
+        HabilitarTipoGraficoStock()
     End Sub
-
     Private Sub rbtGente_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles rbtGente.CheckedChanged
-        Habilita_Graficar()
+        rbtDia.Enabled = True
+        rbtDia.Checked = True
+        rbtMeses.Enabled = False
+        rbtMeses.Checked = False
+        HabilitarTipoGraficoStock()
     End Sub
-
     Private Sub rbt5s_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles rbt5s.CheckedChanged
-        Habilita_Graficar()
         If rbt5s.Checked Then
+            rbtLineas.Enabled = True
+            rbtBarras.Enabled = True
+            rbtBarras.Checked = True
             rbtStock.Enabled = False
+            rbtStock.Checked = False
             rbtDia.Enabled = False
+            rbtMeses.Enabled = True
             rbtMeses.Checked = True
+            HabilitarTipoGrafico()
         End If
     End Sub
 
@@ -696,7 +715,7 @@ Public Class frmGraficas
             numberSuffix = ""
             subcaption = "COSTO"
         ElseIf rbtSeg.Checked Then
-            maxEjeY = 100 ''checar ??
+            maxEjeY = 15
             numberSuffix = ""
             subcaption = "SEGURIDAD"
         ElseIf rbt5s.Checked Then
@@ -704,7 +723,7 @@ Public Class frmGraficas
             numberSuffix = ""
             subcaption = "5s"
         ElseIf rbtGente.Checked Then
-            maxEjeY = 100 'checar ??
+            maxEjeY = 15
             numberSuffix = ""
             subcaption = "GENTE"
         End If
@@ -765,7 +784,7 @@ Public Class frmGraficas
                 cadenaSELECT = "SELECT DISTINCT DIA_ASIGNADO FROM VISTA_SELECCION_INDICADOR5"
                 establece_fechas(cadenaSELECT)
                 cadenaSELECT = "SELECT PROMEDIO, DIA_ASIGNADO FROM VISTA_SELECCION_INDICADOR5"
-                establece5S_Acumulado(cadenaSELECT, colores(0))
+                establece5S_Acumulado(cadenaSELECT, colores(12))
             Else
                 cadenaSELECT = "SELECT PROMEDIO, DIA_ASIGNADO FROM VISTA_SELECCION_INDICADOR5"
                 establece_fechas_5s(cadenaSELECT)
@@ -798,5 +817,4 @@ Public Class frmGraficas
         End If
     End Sub
 #End Region
-
 End Class

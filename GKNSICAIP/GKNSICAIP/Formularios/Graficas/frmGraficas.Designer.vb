@@ -137,7 +137,7 @@ Partial Class frmGraficas
         '
         Me.rbtBarras.AutoSize = True
         Me.rbtBarras.Font = New System.Drawing.Font("Arial", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.rbtBarras.Location = New System.Drawing.Point(98, 25)
+        Me.rbtBarras.Location = New System.Drawing.Point(6, 25)
         Me.rbtBarras.Name = "rbtBarras"
         Me.rbtBarras.Size = New System.Drawing.Size(67, 20)
         Me.rbtBarras.TabIndex = 1
@@ -149,7 +149,7 @@ Partial Class frmGraficas
         '
         Me.rbtLineas.AutoSize = True
         Me.rbtLineas.Font = New System.Drawing.Font("Arial", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.rbtLineas.Location = New System.Drawing.Point(28, 25)
+        Me.rbtLineas.Location = New System.Drawing.Point(82, 25)
         Me.rbtLineas.Name = "rbtLineas"
         Me.rbtLineas.Size = New System.Drawing.Size(68, 20)
         Me.rbtLineas.TabIndex = 0
