@@ -92,29 +92,29 @@ Public Class Turno
         End Set
     End Property
 
-    Public Property inicio() As String
+    Public Property inicio() As DateTime
         Get
             Return vinicio
         End Get
-        Set(ByVal value As String)
+        Set(ByVal value As DateTime)
             vinicio = value
         End Set
     End Property
 
-    Public Property fin() As String
+    Public Property fin() As DateTime
         Get
             Return vfin
         End Get
-        Set(ByVal value As String)
+        Set(ByVal value As DateTime)
             vfin = value
         End Set
     End Property
 
-    Public Property fecha_registro() As String
+    Public Property fecha_registro() As DateTime
         Get
             Return vfecha_registro
         End Get
-        Set(ByVal value As String)
+        Set(ByVal value As DateTime)
             vfecha_registro = value
         End Set
     End Property

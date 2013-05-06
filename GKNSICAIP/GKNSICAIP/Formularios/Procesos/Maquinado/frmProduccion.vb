@@ -7,7 +7,8 @@ Public Class frmProduccion
     Private vnombre_empleado As String
     Private vcodigo_empleado As String
     'Temporal de desarrollo
-    Private vcve_registro_turno As Integer = 1
+    Private vcve_registro_turno As Long
+    Private vcve_turno As Long
     'Banderas
     Private flgBanderacbxLineas As Boolean = False
     Private flgBanderacbxModelos As Boolean = False
@@ -17,6 +18,73 @@ Public Class frmProduccion
     'CDM
     Private contenedor_CDM As CDM_Class
     Private obtenedor_CDM As frmCDM
+#End Region
+#Region "Propiedades"
+    Public Property cve_registro_turno() As Long
+        Get
+            Return vcve_registro_turno
+        End Get
+        Set(ByVal value As Long)
+            vcve_registro_turno = value
+        End Set
+    End Property
+
+#End Region
+#Region "Inicializando formulario"
+    'Load
+    Private Sub frmProduccion_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
+        inicializa_formulario()
+    End Sub
+    'Establece variables globales
+    Public Sub set_Datos_Equipo(ByVal idEq As Integer, ByVal NomEquipo As String, ByVal Empleado As String, ByVal CodEmpleado As String)
+        vcve_equipo = idEq
+        vnombre_equipo = NomEquipo
+        vcodigo_empleado = CodEmpleado
+        vnombre_empleado = Empleado
+        lblNombreEquipo.Text = NomEquipo
+        lblCodigoEmpleado.Text = CodEmpleado
+        lblNombreEmpleado.Text = Empleado
+    End Sub
+    'Llena toda la info del formulario
+    Private Sub inicializa_formulario()
+        set_Datos_Equipo(7, "Tlatoanis", "Oscar Mtz S", "118737")
+        llena_lineas_No_gridview()
+        llena_lineas_Si_gridview()
+        'General
+        llena_cbx_Turnos()
+        llena_cbx_Lineas()        
+        'CDM
+        contenedor_CDM = New CDM_Class
+        contenedor_CDM.set_not_used()
+        obtenedor_CDM = New frmCDM(contenedor_CDM)
+       
+        
+    End Sub
+    'Llena info del formulario
+    Private Sub llena_informacion_tabs_formulario()
+        llena_cbx_Modelos()
+        'Productividad
+        llena_productividad_gridview()
+        llena_desecho_gridview()
+        'Rechazos
+        llena_cbx_Tipo_Rechazos()
+        llena_rechazo_gridview()
+        'Paros
+        llena_cbx_Maquinas()
+        llena_cbx_Paros()
+        llena_paro_gridview()
+        'Gente
+        llena_cbx_Detalle_Gente()
+        llena_gente_gridview()
+        'Seguridad
+        llena_cbx_cond_inseg()
+        llena_cbx_accidentes()
+        llena_cond_inseg_gridview()
+        llena_accidentes_gridview()
+        'Productividad
+        actualiza_tabla_turno_minutos()
+        calcula_Productividad()
+    End Sub
 #End Region
 #Region "Calculo de OEE"
     Private Sub calcula_Productividad()
@@ -90,57 +158,6 @@ Public Class frmProduccion
         lblOEE.Text = Format((Convert.ToDouble(lblCalidad.Text) / 100) * (Convert.ToDouble(lblDisponibilidad.Text) / 100) * (Convert.ToDouble(lblDesempeno.Text) / 100) * 100, "##0.00")
     End Sub
 #End Region
-#Region "Inicializando formulario"
-    'Load
-    Private Sub frmProduccion_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
-        inicializa_formulario()
-    End Sub
-    'Establece variables globales
-    Public Sub set_Datos_Equipo(ByVal idEq As Integer, ByVal NomEquipo As String, ByVal Empleado As String, ByVal CodEmpleado As String)
-        vcve_equipo = idEq
-        vnombre_equipo = NomEquipo
-        vcodigo_empleado = CodEmpleado
-        vnombre_empleado = Empleado
-        lblNombreEquipo.Text = NomEquipo
-        lblCodigoEmpleado.Text = CodEmpleado
-        lblNombreEmpleado.Text = Empleado
-    End Sub
-    'Llena toda la info del formulario
-    Private Sub inicializa_formulario()
-        set_Datos_Equipo(7, "Tlatoanis", "Oscar Mtz S", "118737")
-
-        llena_lineas_No_gridview()
-        'General
-        llena_cbx_Turnos()
-        llena_cbx_Lineas()
-        llena_cbx_Modelos()
-        'Productividad
-        llena_productividad_gridview()
-        llena_desecho_gridview()
-        'Rechazos
-        llena_cbx_tipo_rechazos()
-        llena_rechazo_gridview()
-        'Paros
-        llena_cbx_Maquinas()
-        llena_cbx_Paros()
-        llena_paro_gridview()
-        'CDM
-        contenedor_CDM = New CDM_Class
-        contenedor_CDM.set_not_used()
-        obtenedor_CDM = New frmCDM(contenedor_CDM)
-        'Gente
-        llena_cbx_Detalle_Gente()
-        llena_gente_gridview()
-        'Seguridad
-        llena_cbx_cond_inseg()
-        llena_cbx_accidentes()
-        llena_cond_inseg_gridview()
-        llena_accidentes_gridview()
-        'Productividad
-        actualiza_tabla_turno_minutos()
-        calcula_Productividad()
-    End Sub
-#End Region
 #Region "LLenado ComboBoxs"
     'Turnos
     Private Sub llena_cbx_Turnos()
@@ -148,10 +165,10 @@ Public Class frmProduccion
         cbxTurno.ValueMember = "cve_turno"
         cbxTurno.DisplayMember = "turno"
         cbxTurno.DataSource = oTurnos.llena_combo_turnos
-        'cbxTurno.SelectedIndex = -1
+        cbxTurno.SelectedIndex = -1
 
         'turnos de Linea Registro
-        cbxTurnosLineas.DisplayMember = "cve_turno"
+        cbxTurnosLineas.ValueMember = "cve_turno"
         cbxTurnosLineas.DisplayMember = "turno"
         cbxTurnosLineas.DataSource = oTurnos.llena_combo_turnos
         cbxTurnosLineas.SelectedIndex = -1
@@ -165,7 +182,7 @@ Public Class frmProduccion
         cbxLinea.ValueMember = "cve_linea"
         cbxLinea.DisplayMember = "linea"
         cbxLinea.DataSource = oEquipoLinea.llena_combo_lineas
-        'cbxLinea.SelectedIndex = -1
+        cbxLinea.SelectedIndex = -1
         flgBanderacbxLineas = True
     End Sub
     'Modelos (por Linea)
@@ -283,19 +300,19 @@ Public Class frmProduccion
     'Productividad
     Private Sub llena_productividad_gridview()
         Dim oProduccion As New Produccion
-        oProduccion.cve_registro_turno = 1
+        oProduccion.cve_registro_turno = vcve_registro_turno
         grdDetalleProductividad.DataSource = oProduccion.llena_productividad_gridview()
     End Sub
     'Desechos
     Private Sub llena_desecho_gridview()
         Dim oDesecho As New Desecho
-        oDesecho.cve_registro_turno = 1
+        oDesecho.cve_registro_turno = vcve_registro_turno
         grdDetalleDesecho.DataSource = oDesecho.llena_desecho_gridview()
     End Sub
     'Rechazos
     Private Sub llena_rechazo_gridview()
         Dim oRechazo As New Rechazo
-        oRechazo.cve_registro_turno = 1
+        oRechazo.cve_registro_turno = vcve_registro_turno
         grdDetalleRechazo.DataSource = oRechazo.llena_rechazo_gridview()
     End Sub
     'Paros
@@ -326,17 +343,33 @@ Public Class frmProduccion
     Private Sub llena_lineas_No_gridview()
         Dim oEquipoLinea As New CapaNegocios.EquipoLinea
         oEquipoLinea.cve_equipo = vcve_equipo
-        grdLineasNoRegistradas.DataSource = oEquipoLinea.llena_combo_lineas
+        grdLineasNoRegistradas.DataSource = oEquipoLinea.llena_combo_lineas()
+    End Sub
+    Private Sub llena_lineas_Si_gridview()
+        Dim oRegistro_Turno As New Registro_Turno
+        oRegistro_Turno.dia_asignado = Convert.ToDateTime(Now.ToString("dd-MM-yyyy"))
+        grdLineasRegistradas.DataSource = oRegistro_Turno.llena_lineas_registradas_hoy()
     End Sub
 #End Region
 #Region "Eventos ComboBox"
     'General
     Private Sub cbxTurno_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cbxTurno.SelectedIndexChanged
-        actualiza_tabla_turno_minutos()
+        'actualiza_tabla_turno_minutos()
     End Sub
     Private Sub cbxLinea_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cbxLinea.SelectedIndexChanged
-        llena_cbx_Modelos()
-        llena_cbx_Maquinas()
+        If cbxLinea.SelectedIndex <> -1 And flgBanderacbxLineas Then
+            If verifica_registro_turno(cbxLinea.SelectedValue, Convert.ToDateTime(Now.ToString("dd-MM-yyyy"))) Then
+                MsgBox("No has registrado esta linea")
+                cbxLinea.SelectedIndex = -1
+            Else
+                MsgBox("Registrada")
+                cbxTurno.SelectedIndex = vcve_turno - 1
+                llena_cbx_Modelos()
+                llena_cbx_Maquinas()
+                llena_informacion_tabs_formulario()
+            End If
+        End If
+       
     End Sub
     'Productividad
     Private Sub cbxModeloProductividad_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cbxModeloProductividad.SelectedIndexChanged
@@ -373,6 +406,7 @@ Public Class frmProduccion
     End Sub
     'Paros
     Private Sub cbxMaquina_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cbxMaquina.SelectedIndexChanged
+        txtMaquinaDescripcion.Text = ""
         If cbxMaquina.SelectedIndex <> -1 Then
             valida_botones_paro()
             obten_descripcion_maquina(txtMaquinaDescripcion, cbxMaquina)
@@ -414,6 +448,10 @@ Public Class frmProduccion
             valida_botones_accidentes()
             deshabilitar_btn_quitar_accidentes()
         End If
+    End Sub
+    'Turno-Lineas
+    Private Sub cbxTurnosLineas_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cbxTurnosLineas.SelectedIndexChanged
+        valida_botones_Turno_linea()
     End Sub
 #End Region
 #Region "Eventos TextBox"
@@ -546,7 +584,14 @@ Public Class frmProduccion
         deshabilitar_btn_quitar_accidentes()
         llena_accidentes_gridview()
     End Sub
+    'Turnos Lineas
+    Private Sub btnLineasTodas_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnLineasTodas.Click
 
+    End Sub
+
+    Private Sub btnLinea_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnLineaUnica.Click
+        registra_linea()
+    End Sub
 #End Region
 #Region "Eventos Gridviews"
     'Productividad
@@ -723,6 +768,20 @@ Public Class frmProduccion
     Private Sub deshabilitar_btn_quitar_accidentes()
         btnQuitarAccidente.Enabled = False
     End Sub
+    'Turno - Lineas
+    Private Sub valida_botones_Turno_linea()
+        If cbxTurnosLineas.SelectedIndex <> -1 And grdLineasNoRegistradas.CurrentRow IsNot Nothing Then
+            btnLineasTodas.Enabled = True
+            btnLineaUnica.Enabled = True
+        Else
+            btnLineasTodas.Enabled = False
+            btnLineaUnica.Enabled = False
+        End If
+    End Sub
+    Private Sub deshabilita_btn_Turno_linea()
+        btnLineasTodas.Enabled = False
+        btnLineaUnica.Enabled = False
+    End Sub
 #End Region
 #Region "Limpia formularios"
     'Productividad
@@ -771,6 +830,10 @@ Public Class frmProduccion
         txtAccidenteCantidad.Text = ""
         txtDetallesAccidentes.Text = ""
     End Sub
+    'Turno - Linea
+    Private Sub limpia_turno_linea()
+        cbxTurnosLineas.SelectedIndex = -1
+    End Sub
 #End Region
 #Region "Funciones Generales"
     Private Function get_registro_del_turno() As Long
@@ -812,8 +875,6 @@ Public Class frmProduccion
         Else
             btnQuitarModelo.Enabled = False
         End If
-
-
     End Sub
     Private Function get_suma_piezas_producidas() As Double
         Dim Total As Double
@@ -1110,6 +1171,72 @@ Public Class frmProduccion
         Else
             btnQuitarAccidente.Enabled = False
         End If
+    End Sub
+#End Region
+#Region "Funciones para modulo Turnos-Lineas"
+    'Registra una Linea
+    Private Sub registra_linea()
+        Dim line_aux As Long = grdLineasNoRegistradas.Item("col_cve_linea", grdLineasNoRegistradas.CurrentRow.Index).Value
+        If valida_registro_linea() Then
+            If verifica_registro_turno(line_aux, obten_dia_asignado_registro_turno()) Then
+                MsgBox("ya solo registra")
+                Registra_Turno_Linea(line_aux)
+                limpia_turno_linea()
+                deshabilita_btn_Turno_linea()
+                llena_lineas_Si_gridview()
+            Else
+                limpia_turno_linea()
+                MsgBox("Esta Linea ya ha sido registrada.", vbCritical + vbOKOnly, "Error")
+
+            End If
+        End If
+    End Sub
+    '1 Verifica la hora de registro
+    Private Function valida_registro_linea() As Boolean
+        Dim oTurno As New Turno
+        oTurno.cve_turno = cbxTurnosLineas.SelectedValue
+        oTurno.fecha_registro = Convert.ToDateTime(Now.ToString("dd-MM-yyyy HH:mm"))
+        oTurno.valida_inicio_fin()
+        If oTurno.bandera_registro = 1 Then
+            Return True
+        Else
+            MsgBox("Error! No puedes registrar linea antes del inicio o despues final del turno", vbCritical + vbOKOnly, "Error")
+            limpia_turno_linea()
+            deshabilita_btn_Turno_linea()
+            Return False
+        End If
+    End Function
+    '2 Verifica si hay ya registro
+    Private Function verifica_registro_turno(ByVal line As Long, ByVal dateinicio As Date) As Boolean
+        Dim oRegistro_turno As New Registro_Turno
+        oRegistro_turno.cve_equipo = vcve_equipo
+        oRegistro_turno.cve_linea = line
+        oRegistro_turno.dia_asignado = dateinicio
+        oRegistro_turno.verifica_registro_turno()
+        If oRegistro_turno.bandera_registro_turno = 0 Then
+            Return True
+        Else
+            vcve_registro_turno = oRegistro_turno.cve_registro_turno
+            vcve_turno = oRegistro_turno.cve_turno
+            Return False
+        End If
+    End Function
+    '3Dia Asignado solo requiere el cbx de Turno
+    Private Function obten_dia_asignado_registro_turno() As Date
+        Dim oTurno As New Turno
+        oTurno.cve_turno = cbxTurnosLineas.SelectedValue
+        oTurno.fecha_registro = Convert.ToDateTime(Now.ToString("dd-MM-yyyy HH:mm"))
+        oTurno.valida_inicio_fin()
+        Return oTurno.inicio
+    End Function
+    '4 Registra 1 Linea Metodo
+    Private Sub Registra_Turno_Linea(ByVal line As Long)
+        Dim oRegistro_Turno As New Registro_Turno
+        oRegistro_Turno.cve_equipo = vcve_equipo
+        oRegistro_Turno.cve_linea = line
+        oRegistro_Turno.cve_turno = cbxTurnosLineas.SelectedValue
+        oRegistro_Turno.dia_asignado = obten_dia_asignado_registro_turno()
+        oRegistro_Turno.Registrar()
     End Sub
 #End Region
 
