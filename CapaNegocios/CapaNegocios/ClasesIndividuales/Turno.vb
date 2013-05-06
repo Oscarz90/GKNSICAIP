@@ -163,12 +163,14 @@ Public Class Turno
                 cmd.CommandType = CommandType.StoredProcedure
                 cmd.CommandText = "valida_inicio_fin"
                 cmd.Parameters.Add("@turno", SqlDbType.BigInt).Value = Me.vcve_turno
-                cmd.Parameters.Add("@fecha", SqlDbType.VarChar).Value = Me.vfecha_registro.ToString("dd-MM-yyyy HH:mm")
+                cmd.Parameters.Add("@fecha", SqlDbType.VarChar).Value = Me.vfecha_registro.ToString("MM-dd-yyyy HH:mm")
                 Dim obj As DataTable = oBD.EjecutaCommando(cmd)
                 'Me.vinicio = obj.Rows(0)(0)
                 Me.vbandera_registro = obj.Rows(0)(0)
                 Me.vinicio = obj.Rows(0)(1)
                 Me.vfin = obj.Rows(0)(2)
+                '  MsgBox(vinicio)
+                ' MsgBox(vfin)
                 scope.Complete()
             Catch ex As Exception
                 MsgBox("Error al validar inicio_fin. CTurno_ERROR", vbCritical + vbOKOnly, "Error")

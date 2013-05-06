@@ -347,7 +347,8 @@ Public Class frmProduccion
     End Sub
     Private Sub llena_lineas_Si_gridview()
         Dim oRegistro_Turno As New Registro_Turno
-        oRegistro_Turno.dia_asignado = Convert.ToDateTime(Now.ToString("dd-MM-yyyy"))
+        oRegistro_Turno.cve_equipo = vcve_equipo
+        oRegistro_Turno.dia_asignado = Convert.ToDateTime(Now.ToString("dd-MM-yyyy HH:mm:ss"))
         grdLineasRegistradas.DataSource = oRegistro_Turno.llena_lineas_registradas_hoy()
     End Sub
 #End Region
@@ -1177,9 +1178,10 @@ Public Class frmProduccion
     'Registra una Linea
     Private Sub registra_linea()
         Dim line_aux As Long = grdLineasNoRegistradas.Item("col_cve_linea", grdLineasNoRegistradas.CurrentRow.Index).Value
+        'MsgBox(Now.ToString("dd-MM-yyyy"))
         If valida_registro_linea() Then
             If verifica_registro_turno(line_aux, obten_dia_asignado_registro_turno()) Then
-                MsgBox("ya solo registra")
+                MsgBox("REgistro exitoso")
                 Registra_Turno_Linea(line_aux)
                 limpia_turno_linea()
                 deshabilita_btn_Turno_linea()
@@ -1227,6 +1229,7 @@ Public Class frmProduccion
         oTurno.cve_turno = cbxTurnosLineas.SelectedValue
         oTurno.fecha_registro = Convert.ToDateTime(Now.ToString("dd-MM-yyyy HH:mm"))
         oTurno.valida_inicio_fin()
+        ' MsgBox(oTurno.inicio)
         Return oTurno.inicio
     End Function
     '4 Registra 1 Linea Metodo
