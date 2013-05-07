@@ -19,33 +19,33 @@ Public Class frmGraficas
     Dim radio_anchor As String = "5"
 #End Region
 #Region "MESES"
-    Private Function meses(ByVal numero As Integer) As String
+    Private Function getMeses(ByVal numero As Integer) As String
         Dim mes As String = ""
         Select Case numero
             Case 1
-                mes = "Enero"
+                mes = "ENERO"
             Case 2
-                mes = "Febrero"
+                mes = "FEBRERO"
             Case 3
-                mes = "Marzo"
+                mes = "MARZO"
             Case 4
-                mes = "Abril"
+                mes = "ABRIL"
             Case 5
-                mes = "Mayo"
+                mes = "MAYO"
             Case 6
-                mes = "Junio"
+                mes = "JUNIO"
             Case 7
-                mes = "Julio"
+                mes = "JULIO"
             Case 8
-                mes = "Agosto"
+                mes = "AGOSTO"
             Case 9
-                mes = "Septiembre"
+                mes = "SEPTIEMBRE"
             Case 10
-                mes = "Octubre"
+                mes = "OCTUBRE"
             Case 11
-                mes = "Noviembre"
+                mes = "NOVIEMBRE"
             Case 12
-                mes = "Diciembre"
+                mes = "DICIEMBRE"
         End Select
         Return mes
     End Function
@@ -187,7 +187,7 @@ Public Class frmGraficas
         End If
     End Sub
 #End Region
-
+#Region "HABILITAR TIPO DE GRAFICOS"
     Private Sub HabilitarTipoGrafico()
         ''HABILITAR LOS RADIO BUTTONS DE LOS TIPOS DE GRÁFICOS PARA OEE, NRFTI Y 5´S
         If rbtDia.Checked And (rbtOEE.Checked Or rbtNRFTi.Checked) Then
@@ -210,7 +210,6 @@ Public Class frmGraficas
             Habilita_Graficar()
         End If
     End Sub
-
     Private Sub HabilitarTipoGraficoStock()
         ''HABILITAR LOS RADIO BUTTONS DE LOS TIPOS DE GRÁFICOS PARA GENTE Y SEGURIDAD
         If rbtDia.Checked And (rbtSeg.Checked Or rbtGente.Checked) Then
@@ -222,7 +221,7 @@ Public Class frmGraficas
             dtpHasta.CustomFormat = "dd/MMMM/yyyy"
             Habilita_Graficar()
         ElseIf rbtMeses.Checked And (rbtSeg.Checked Or rbtGente.Checked) Then
-           rbtLineas.Enabled = False
+            rbtLineas.Enabled = False
             rbtBarras.Enabled = False
             rbtStock.Enabled = True
             rbtStock.Checked = True
@@ -232,7 +231,7 @@ Public Class frmGraficas
         End If
 
     End Sub
-
+#End Region
 #Region "ESTABLECE CONDICION WHERE USUARIOS"
     Private Sub Condicion_WHERE(ByVal vTodas As Boolean)
         cadenaWHERE = "where "
@@ -275,7 +274,7 @@ Public Class frmGraficas
     End Sub
 
 #End Region
-#Region "FECHAS PARA LOS GRÁFICOS EJE X --OEE--5s-- "
+#Region "FECHAS PARA LOS GRÁFICOS EJE X --OEE--"
     Private Sub establece_fechas(ByVal cadena As String)
         Dim fechaGraficos As String = ""
         Dim vDT As DataTable
@@ -305,15 +304,16 @@ Public Class frmGraficas
     Private Sub establece_fechas_5s(ByVal cadena As String)
         Dim fechaGraficos As String = ""
         Dim vDT As DataTable
+        Dim mes As String = ""
         cadenaXML += "<categories>"
 
-        vDT = oGraficas.ejecutarVista(cadena, cadenaWHERE)
         If rbtMeses.Checked Then
             vDT = oGraficas.ejecutarVista(cadena, cadenaWHERE)
             For Each vDR As DataRow In vDT.Rows
                 fechaGraficos = vDR("Dia_Asignado")
-                fechaGraficos = Mid(fechaGraficos, 1, 5)
-                cadenaXML += "<category name='" & fechaGraficos & "' />"
+                fechaGraficos = Mid(fechaGraficos, 5, 1)
+                mes = getMeses(Convert.ToInt32(fechaGraficos))
+                cadenaXML += "<category name='" & mes & "' />"
             Next
 
         End If
@@ -782,7 +782,8 @@ Public Class frmGraficas
         ElseIf rbt5s.Checked Then
             If cbxTodasLineas.Checked Then
                 cadenaSELECT = "SELECT DISTINCT DIA_ASIGNADO FROM VISTA_SELECCION_INDICADOR5"
-                establece_fechas(cadenaSELECT)
+                'establece_fechas(cadenaSELECT) CON PROMEDIO
+                establece_fechas_5s(cadenaSELECT) 'SIN PROMEDIO
                 cadenaSELECT = "SELECT PROMEDIO, DIA_ASIGNADO FROM VISTA_SELECCION_INDICADOR5"
                 establece5S_Acumulado(cadenaSELECT, colores(12))
             Else
