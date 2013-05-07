@@ -187,7 +187,7 @@ Public Class frmGraficas
         End If
     End Sub
 #End Region
-
+#Region "HABILITAR TIPO DE GRAFICOS"
     Private Sub HabilitarTipoGrafico()
         ''HABILITAR LOS RADIO BUTTONS DE LOS TIPOS DE GRÁFICOS PARA OEE, NRFTI Y 5´S
         If rbtDia.Checked And (rbtOEE.Checked Or rbtNRFTi.Checked) Then
@@ -210,7 +210,6 @@ Public Class frmGraficas
             Habilita_Graficar()
         End If
     End Sub
-
     Private Sub HabilitarTipoGraficoStock()
         ''HABILITAR LOS RADIO BUTTONS DE LOS TIPOS DE GRÁFICOS PARA GENTE Y SEGURIDAD
         If rbtDia.Checked And (rbtSeg.Checked Or rbtGente.Checked) Then
@@ -222,7 +221,7 @@ Public Class frmGraficas
             dtpHasta.CustomFormat = "dd/MMMM/yyyy"
             Habilita_Graficar()
         ElseIf rbtMeses.Checked And (rbtSeg.Checked Or rbtGente.Checked) Then
-           rbtLineas.Enabled = False
+            rbtLineas.Enabled = False
             rbtBarras.Enabled = False
             rbtStock.Enabled = True
             rbtStock.Checked = True
@@ -232,7 +231,7 @@ Public Class frmGraficas
         End If
 
     End Sub
-
+#End Region
 #Region "ESTABLECE CONDICION WHERE USUARIOS"
     Private Sub Condicion_WHERE(ByVal vTodas As Boolean)
         cadenaWHERE = "where "
