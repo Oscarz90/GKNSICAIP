@@ -134,6 +134,26 @@ Public Class Registro_Turno
             End Try
         End Using
     End Sub
+    Public Sub verifica_registro_turno_produccion()
+        Using scope As New TransactionScope
+
+            Try
+                Dim cmd As New SqlClient.SqlCommand
+                cmd.CommandType = CommandType.StoredProcedure
+                cmd.CommandText = "verifica_registro_turno_produccion"
+                cmd.Parameters.Add("@cve_equipo", SqlDbType.BigInt).Value = Me.vcve_equipo
+                cmd.Parameters.Add("@cve_linea", SqlDbType.BigInt).Value = Me.vcve_linea
+                cmd.Parameters.Add("@fecha", SqlDbType.DateTime).Value = Me.vdia_asignado.ToString("dd-MM-yyyy HH:mm")
+                Dim obj As DataTable = oBD.EjecutaCommando(cmd)
+                Me.vbandera_registro_turno = obj.Rows(0)(0)
+                Me.vcve_registro_turno = obj.Rows(0)(1)
+                Me.vcve_turno = obj.Rows(0)(2)
+                scope.Complete()
+            Catch
+                MsgBox("Error al validar verifica_registro_turno_produccion. CRegistro_Turno_ERROR", vbCritical + vbOKOnly, "Error")
+            End Try
+        End Using
+    End Sub
     Public Function llena_lineas_registradas_hoy() As DataTable
 
         Dim obj As DataTable
@@ -153,5 +173,6 @@ Public Class Registro_Turno
             Return obj
         End Using
     End Function
+
 #End Region
 End Class

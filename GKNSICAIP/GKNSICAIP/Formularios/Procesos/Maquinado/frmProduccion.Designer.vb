@@ -226,6 +226,10 @@ Partial Class frmProduccion
         Me.btnLineasTodas = New System.Windows.Forms.Button()
         Me.Label72 = New System.Windows.Forms.Label()
         Me.grdLineasRegistradas = New System.Windows.Forms.DataGridView()
+        Me.col_cve_registro_turno = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.col_linea = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.col_turno = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.col_dia_asignado = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.grdLineasNoRegistradas = New System.Windows.Forms.DataGridView()
         Me.col_cve_linea = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.collinea = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -240,10 +244,12 @@ Partial Class frmProduccion
         Me.lblNombreEquipo = New System.Windows.Forms.Label()
         Me.Label58 = New System.Windows.Forms.Label()
         Me.cbxLinea = New System.Windows.Forms.ComboBox()
-        Me.col_cve_registro_turno = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.col_linea = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.col_turno = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.col_dia_asignado = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.grpCalidad = New System.Windows.Forms.GroupBox()
+        Me.Label77 = New System.Windows.Forms.Label()
+        Me.lblNRFTi = New System.Windows.Forms.Label()
+        Me.Label78 = New System.Windows.Forms.Label()
+        Me.lblFechaRegistro = New System.Windows.Forms.Label()
+        Me.lblFechaRegistrodescripcion = New System.Windows.Forms.Label()
         Me.TabContenido.SuspendLayout()
         Me.tabPageProductividad.SuspendLayout()
         Me.grpDesechos.SuspendLayout()
@@ -271,6 +277,7 @@ Partial Class frmProduccion
         CType(Me.grdLineasNoRegistradas, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.banner_formulario, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.grpCalidad.SuspendLayout()
         Me.SuspendLayout()
         '
         'TabContenido
@@ -1061,6 +1068,7 @@ Partial Class frmProduccion
         '
         'tabPageParos
         '
+        Me.tabPageParos.Controls.Add(Me.grpCalidad)
         Me.tabPageParos.Controls.Add(Me.grpCosto)
         Me.tabPageParos.Controls.Add(Me.grpParos)
         Me.tabPageParos.Location = New System.Drawing.Point(4, 27)
@@ -2361,6 +2369,35 @@ Partial Class frmProduccion
         Me.grdLineasRegistradas.Size = New System.Drawing.Size(447, 334)
         Me.grdLineasRegistradas.TabIndex = 1
         '
+        'col_cve_registro_turno
+        '
+        Me.col_cve_registro_turno.DataPropertyName = "cve_registro_turno"
+        Me.col_cve_registro_turno.HeaderText = "cve_registro_turno"
+        Me.col_cve_registro_turno.Name = "col_cve_registro_turno"
+        Me.col_cve_registro_turno.ReadOnly = True
+        '
+        'col_linea
+        '
+        Me.col_linea.DataPropertyName = "linea"
+        Me.col_linea.HeaderText = "linea"
+        Me.col_linea.Name = "col_linea"
+        Me.col_linea.ReadOnly = True
+        '
+        'col_turno
+        '
+        Me.col_turno.DataPropertyName = "turno"
+        Me.col_turno.HeaderText = "Turno"
+        Me.col_turno.Name = "col_turno"
+        Me.col_turno.ReadOnly = True
+        '
+        'col_dia_asignado
+        '
+        Me.col_dia_asignado.DataPropertyName = "dia_asignado"
+        Me.col_dia_asignado.HeaderText = "Dia Registro"
+        Me.col_dia_asignado.Name = "col_dia_asignado"
+        Me.col_dia_asignado.ReadOnly = True
+        Me.col_dia_asignado.Width = 200
+        '
         'grdLineasNoRegistradas
         '
         Me.grdLineasNoRegistradas.AllowUserToAddRows = False
@@ -2499,34 +2536,68 @@ Partial Class frmProduccion
         Me.cbxLinea.Size = New System.Drawing.Size(234, 26)
         Me.cbxLinea.TabIndex = 309
         '
-        'col_cve_registro_turno
+        'grpCalidad
         '
-        Me.col_cve_registro_turno.DataPropertyName = "cve_registro_turno"
-        Me.col_cve_registro_turno.HeaderText = "cve_registro_turno"
-        Me.col_cve_registro_turno.Name = "col_cve_registro_turno"
-        Me.col_cve_registro_turno.ReadOnly = True
+        Me.grpCalidad.Controls.Add(Me.Label77)
+        Me.grpCalidad.Controls.Add(Me.lblNRFTi)
+        Me.grpCalidad.Controls.Add(Me.Label78)
+        Me.grpCalidad.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.grpCalidad.Location = New System.Drawing.Point(848, 177)
+        Me.grpCalidad.Name = "grpCalidad"
+        Me.grpCalidad.Size = New System.Drawing.Size(368, 237)
+        Me.grpCalidad.TabIndex = 17
+        Me.grpCalidad.TabStop = False
+        Me.grpCalidad.Text = "3.-CALIDAD"
         '
-        'col_linea
+        'Label77
         '
-        Me.col_linea.DataPropertyName = "linea"
-        Me.col_linea.HeaderText = "linea"
-        Me.col_linea.Name = "col_linea"
-        Me.col_linea.ReadOnly = True
+        Me.Label77.AutoSize = True
+        Me.Label77.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label77.Location = New System.Drawing.Point(210, 53)
+        Me.Label77.Name = "Label77"
+        Me.Label77.Size = New System.Drawing.Size(59, 19)
+        Me.Label77.TabIndex = 14
+        Me.Label77.Text = "PPM'S"
         '
-        'col_turno
+        'lblNRFTi
         '
-        Me.col_turno.DataPropertyName = "turno"
-        Me.col_turno.HeaderText = "Turno"
-        Me.col_turno.Name = "col_turno"
-        Me.col_turno.ReadOnly = True
+        Me.lblNRFTi.AutoSize = True
+        Me.lblNRFTi.Font = New System.Drawing.Font("Arial", 15.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblNRFTi.Location = New System.Drawing.Point(94, 50)
+        Me.lblNRFTi.Name = "lblNRFTi"
+        Me.lblNRFTi.Size = New System.Drawing.Size(22, 24)
+        Me.lblNRFTi.TabIndex = 13
+        Me.lblNRFTi.Text = "0"
         '
-        'col_dia_asignado
+        'Label78
         '
-        Me.col_dia_asignado.DataPropertyName = "dia_asignado"
-        Me.col_dia_asignado.HeaderText = "Dia Registro"
-        Me.col_dia_asignado.Name = "col_dia_asignado"
-        Me.col_dia_asignado.ReadOnly = True
-        Me.col_dia_asignado.Width = 200
+        Me.Label78.AutoSize = True
+        Me.Label78.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label78.Location = New System.Drawing.Point(27, 53)
+        Me.Label78.Name = "Label78"
+        Me.Label78.Size = New System.Drawing.Size(57, 19)
+        Me.Label78.TabIndex = 12
+        Me.Label78.Text = "NRFTi"
+        '
+        'lblFechaRegistro
+        '
+        Me.lblFechaRegistro.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblFechaRegistro.Location = New System.Drawing.Point(440, 184)
+        Me.lblFechaRegistro.Name = "lblFechaRegistro"
+        Me.lblFechaRegistro.Size = New System.Drawing.Size(165, 19)
+        Me.lblFechaRegistro.TabIndex = 311
+        Me.lblFechaRegistro.Text = "NombreEquipo"
+        Me.lblFechaRegistro.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'lblFechaRegistrodescripcion
+        '
+        Me.lblFechaRegistrodescripcion.AutoSize = True
+        Me.lblFechaRegistrodescripcion.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblFechaRegistrodescripcion.Location = New System.Drawing.Point(325, 184)
+        Me.lblFechaRegistrodescripcion.Name = "lblFechaRegistrodescripcion"
+        Me.lblFechaRegistrodescripcion.Size = New System.Drawing.Size(119, 18)
+        Me.lblFechaRegistrodescripcion.TabIndex = 312
+        Me.lblFechaRegistrodescripcion.Text = "Fecha Registro:"
         '
         'frmProduccion
         '
@@ -2535,6 +2606,8 @@ Partial Class frmProduccion
         Me.BackColor = System.Drawing.Color.White
         Me.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None
         Me.ClientSize = New System.Drawing.Size(1254, 722)
+        Me.Controls.Add(Me.lblFechaRegistrodescripcion)
+        Me.Controls.Add(Me.lblFechaRegistro)
         Me.Controls.Add(Me.Label58)
         Me.Controls.Add(Me.cbxLinea)
         Me.Controls.Add(Me.lblNombreEquipo)
@@ -2591,6 +2664,8 @@ Partial Class frmProduccion
         CType(Me.grdLineasNoRegistradas, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.banner_formulario, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.grpCalidad.ResumeLayout(False)
+        Me.grpCalidad.PerformLayout()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -2816,4 +2891,10 @@ Partial Class frmProduccion
     Friend WithEvents col_linea As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents col_turno As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents col_dia_asignado As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents grpCalidad As System.Windows.Forms.GroupBox
+    Friend WithEvents Label77 As System.Windows.Forms.Label
+    Friend WithEvents lblNRFTi As System.Windows.Forms.Label
+    Friend WithEvents Label78 As System.Windows.Forms.Label
+    Friend WithEvents lblFechaRegistro As System.Windows.Forms.Label
+    Friend WithEvents lblFechaRegistrodescripcion As System.Windows.Forms.Label
 End Class
