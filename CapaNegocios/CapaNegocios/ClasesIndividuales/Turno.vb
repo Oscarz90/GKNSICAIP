@@ -54,6 +54,9 @@ Public Class Turno
     'auxiliar
     Private vfecha_registro As DateTime
     Private vbandera_registro As Integer
+    Private vcve_registro_turno As Long
+   
+
 #End Region
 #Region "Propiedades"
     Public Property cve_turno() As Long
@@ -128,6 +131,14 @@ Public Class Turno
         End Set
     End Property
 
+    Public Property cve_registro_turno() As Long
+        Get
+            Return vcve_registro_turno
+        End Get
+        Set(ByVal value As Long)
+            vcve_registro_turno = value
+        End Set
+    End Property
 #End Region
 
 #Region "Metodos Formulario de Produccion"
@@ -163,7 +174,7 @@ Public Class Turno
                 cmd.CommandType = CommandType.StoredProcedure
                 cmd.CommandText = "valida_inicio_fin"
                 cmd.Parameters.Add("@turno", SqlDbType.BigInt).Value = Me.vcve_turno
-                cmd.Parameters.Add("@fecha", SqlDbType.VarChar).Value = Me.vfecha_registro.ToString("dd-MM-yyyy HH:mm")
+                cmd.Parameters.Add("@fecha", SqlDbType.VarChar).Value = Me.vfecha_registro.ToString("MM-dd-yyyy HH:mm")
                 Dim obj As DataTable = oBD.EjecutaCommando(cmd)
                 'Me.vinicio = obj.Rows(0)(0)
                 Me.vbandera_registro = obj.Rows(0)(0)
@@ -172,6 +183,22 @@ Public Class Turno
                 scope.Complete()
             Catch ex As Exception
                 MsgBox("Error al validar inicio_fin. CTurno_ERROR", vbCritical + vbOKOnly, "Error")
+            End Try
+        End Using
+    End Sub
+    Public Sub valida_inicio_fin_produccion()
+        Using scope As New TransactionScope
+            Try
+                Dim cmd As New SqlClient.SqlCommand
+                cmd.CommandType = CommandType.StoredProcedure
+                cmd.CommandText = "valida_inicio_fin_produccion"
+                cmd.Parameters.Add("@cve_registro_turno", SqlDbType.BigInt).Value = Me.vcve_registro_turno  
+                Dim obj As DataTable = oBD.EjecutaCommando(cmd)
+                Me.vinicio = obj.Rows(0)(0)
+                Me.vfin = obj.Rows(0)(1)
+                scope.Complete()
+            Catch ex As Exception
+                MsgBox("Error al validar valida_inicio_fin_produccion. CTurno_ERROR", vbCritical + vbOKOnly, "Error")
             End Try
         End Using
     End Sub

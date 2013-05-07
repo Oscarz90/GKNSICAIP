@@ -26,13 +26,30 @@ Public Class Calidad
     End Function
 
     Public Sub Registrar() Implements IIndividual.Registrar
-
+        Using scope As New TransactionScope
+            Try
+                Dim vComando As New SqlClient.SqlCommand
+                vComando.CommandType = CommandType.StoredProcedure
+                vComando.CommandText = "Captura_Calidad_Produccion"
+                vComando.Parameters.Add("@cve_registro_turno", SqlDbType.BigInt).Value = Me.vcve_registro_turno
+                vComando.Parameters.Add("@cod_empleado", SqlDbType.VarChar).Value = Me.vcod_empleado
+                vComando.Parameters.Add("@fecha", SqlDbType.DateTime).Value = Me.vfecha
+                vComando.Parameters.Add("@pzas_ok", SqlDbType.BigInt).Value = Me.vpzas_ok
+                vComando.Parameters.Add("@pzas_desecho", SqlDbType.Int).Value = Me.vpzas_desecho
+                vComando.Parameters.Add("@nrfti", SqlDbType.Int).Value = Me.vnrfti
+                oBD.EjecutaProcedimientos(vComando)
+                scope.Complete()
+            Catch
+                MsgBox("Error al insertar calidad. CCalidad_ERROR", vbCritical + vbOKOnly, "Error")
+            End Try
+        End Using
     End Sub
 #End Region
 #Region "Atributos"
     Private vcve_calidad As Long
     Private vcve_registro_turno As Long
     Private vcod_empleado As String
+    Private vfecha As DateTime
     Private vpzas_ok As Long
     Private vpzas_desecho As Long
     Private vnrfti As Double
@@ -60,6 +77,14 @@ Public Class Calidad
         End Get
         Set(ByVal value As String)
             vcod_empleado = value
+        End Set
+    End Property
+    Public Property fecha() As DateTime
+        Get
+            Return vfecha
+        End Get
+        Set(ByVal value As DateTime)
+            vfecha = value
         End Set
     End Property
     Public Property pzas_ok() As Long
