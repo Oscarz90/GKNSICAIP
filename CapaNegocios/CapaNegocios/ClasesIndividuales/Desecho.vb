@@ -27,8 +27,8 @@ Public Class Desecho
         Return 1
     End Function
     Public Sub Registrar() Implements IIndividual.Registrar
-        Dim queryInsert As String = "insert into desecho(cve_registro_turno,cod_empleado_registro,fecha_registro,cve_modelo,cantidad,estatus) " &
-                              "values(" & vcve_registro_turno & ",'" & vcod_empleado_registro & "','" & vfecha_registro & "'," & vcve_modelo & "," & vcantidad & ",'" & vestatus & "')"
+        Dim queryInsert As String = "insert into desecho(cve_registro_turno,cod_empleado_registro,fecha_registro,cve_modelo,cantidad,comentarios,estatus) " &
+                              "values(" & vcve_registro_turno & ",'" & vcod_empleado_registro & "','" & vfecha_registro & "'," & vcve_modelo & "," & vcantidad & ",'" & vcomentarios & "','" & vestatus & "')"
         Try
             oBD.EjecutarQuery(queryInsert)
         Catch
@@ -43,6 +43,7 @@ Public Class Desecho
     Private vfecha_registro As String
     Private vcve_modelo As Long
     Private vcantidad As Long
+    Private vcomentarios As String
     Private vcod_empleado_eliminacion As String
     Private vfecha_eliminacion As String
     Private vestatus As String
@@ -96,6 +97,14 @@ Public Class Desecho
             vcantidad = value
         End Set
     End Property
+    Public Property comentarios() As String
+        Get
+            Return vcomentarios
+        End Get
+        Set(ByVal value As String)
+            vcomentarios = value
+        End Set
+    End Property
     Public Property cod_empleado_eliminacion() As String
         Get
             Return vcod_empleado_eliminacion
@@ -124,7 +133,7 @@ Public Class Desecho
 #Region "Metodos formulario de produccion"
     Public Function llena_desecho_gridview() As DataTable
         Dim obj As DataTable
-        Dim queryLlenagridview As String = "select d.cve_desecho,rt.cve_linea,m.cve_modelo,m.np_gkn,m.descripcion,d.cantidad from desecho d " &
+        Dim queryLlenagridview As String = "select d.cve_desecho,rt.cve_linea,m.cve_modelo,m.np_gkn,m.descripcion,d.cantidad,d.comentarios from desecho d " &
             "join modelo m on d.cve_modelo=m.cve_modelo " &
             "join registro_turno rt on rt.cve_registro_turno=d.cve_registro_turno " &
             "where d.cve_registro_turno=" & vcve_registro_turno & " and d.estatus='1'"

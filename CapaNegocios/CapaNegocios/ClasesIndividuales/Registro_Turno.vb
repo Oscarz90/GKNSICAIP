@@ -172,6 +172,57 @@ Public Class Registro_Turno
             Return obj
         End Using
     End Function
-
+    'Descansos
+    Public sub registra_dia_descanso()
+        Dim queryInsert As String = "insert into registro_turno " &
+            "select el.cve_equipo,l.cve_linea,(Select t.cve_turno from turno t where turno='Descanso'),'" & vdia_asignado.ToString("MM-dd-yyyy") & "',0 from linea l join equipo_linea el on l.cve_linea=el.cve_linea where el.cve_equipo=" & cve_equipo
+        Try
+            oBD.EjecutarQuery(queryInsert)
+        Catch
+            MsgBox("Error al Registrar_Descanso. CREgistro_Turno_ERROR", vbCritical + vbOKOnly, "Error")
+        End Try
+    End Sub
+    Public Sub borra_dia_descanso()
+        Dim queryInsert As String = "delete from registro_turno " &
+            "where cve_equipo=" & vcve_equipo & " and cve_turno=(select t.cve_turno from turno t where t.turno='Descanso') and " &
+            "day(dia_asignado)=day('" & vdia_asignado.ToString("MM-dd-yyyy") & "') and " &
+            "month(dia_asignado)=month('" & vdia_asignado.ToString("MM-dd-yyyy") & "') and " &
+            "year(dia_asignado)=year('" & vdia_asignado.ToString("MM-dd-yyyy") & "')"
+        Try
+            oBD.EjecutarQuery(queryInsert)
+        Catch
+            MsgBox("Error al Registrar_Descanso. CREgistro_Turno_ERROR", vbCritical + vbOKOnly, "Error")
+        End Try
+    End Sub
+    Public Sub valida_dia_descanso()
+        Dim vDR As DataRow
+        Dim query As String = "select count(*) as contador from registro_turno rt where " &
+            "rt.cve_equipo=" & vcve_equipo & " and " &
+            "day(rt.dia_asignado)=day('" & vdia_asignado.ToString("MM-dd-yyyy") & "') and " &
+            "month(rt.dia_asignado)=month('" & vdia_asignado.ToString("MM-dd-yyyy") & "') and " &
+            "year(rt.dia_asignado)=year('" & vdia_asignado.ToString("MM-dd-yyyy") & "') and " &
+            "rt.cve_linea in (select l.cve_linea from linea l join equipo_linea el on l.cve_linea=el.cve_linea where el.cve_equipo=" & vcve_equipo & ")"
+        vDR = oBD.ObtenerRenglon(query, "registro_turno")
+        If vDR IsNot Nothing Then
+            vbandera_registro_turno = vDR("contador")            
+        End If
+    End Sub
+    Public Function llena_Descanso_gridview() As DataTable
+        Dim dtDescanso As New DataTable
+        Dim query As String = "select rts.dia_asignado as dia_asignado,'Descanso Todas Lineas' as descripcion from (" &
+            "select rt.dia_asignado,count(rt.cve_linea) as contador_lineas from registro_turno rt " &
+            "where rt.cve_turno=(select t.cve_turno from turno t where t.turno='Descanso') and rt.cve_equipo=" & vcve_equipo & " and " &
+            "month(rt.dia_asignado)=month('" & vdia_asignado.ToString("MM-dd-yyyy") & "') and " &
+            "year(rt.dia_asignado)=year('" & vdia_asignado.ToString("MM-dd-yyyy") & "') " &
+            "group by rt.dia_asignado,day(rt.dia_asignado),month(rt.dia_asignado),year(rt.dia_asignado)) as rts " &
+            "where rts.contador_lineas=(select count(l.cve_linea) from linea l join equipo_linea el on l.cve_linea=el.cve_linea where el.cve_equipo=" & vcve_equipo & ")"
+        Try
+            dtDescanso = oBD.ObtenerTabla(query)
+        Catch ex As Exception
+            MsgBox("Error al obtener_Descansos. CRegistro_Turno_ERROR", vbCritical + vbOKOnly, "Error")
+            dtDescanso = Nothing
+        End Try
+        Return dtDescanso
+    End Function
 #End Region
 End Class

@@ -27,12 +27,6 @@ Partial Class frmProduccion
         Me.tabPageProductividad = New System.Windows.Forms.TabPage()
         Me.grpDesechos = New System.Windows.Forms.GroupBox()
         Me.grdDetalleDesecho = New System.Windows.Forms.DataGridView()
-        Me.colcve_desecho = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.col__cve_linea = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.col_cve_modelo = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.colnp_gkn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.colmodelodescripcion = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.coldesechocantidad = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Label59 = New System.Windows.Forms.Label()
         Me.cbxModeloDesecho = New System.Windows.Forms.ComboBox()
         Me.Label60 = New System.Windows.Forms.Label()
@@ -138,8 +132,11 @@ Partial Class frmProduccion
         Me.Label26 = New System.Windows.Forms.Label()
         Me.cbxMaquina = New System.Windows.Forms.ComboBox()
         Me.Label24 = New System.Windows.Forms.Label()
-        Me.tabPageRechazos = New System.Windows.Forms.TabPage()
+        Me.tabPageRechazos5s = New System.Windows.Forms.TabPage()
         Me.grp5s = New System.Windows.Forms.GroupBox()
+        Me.lblAlertaCincoS = New System.Windows.Forms.Label()
+        Me.txtprom = New System.Windows.Forms.TextBox()
+        Me.Label83 = New System.Windows.Forms.Label()
         Me.txtManto = New System.Windows.Forms.TextBox()
         Me.Label80 = New System.Windows.Forms.Label()
         Me.txtcinco_S = New System.Windows.Forms.TextBox()
@@ -178,7 +175,7 @@ Partial Class frmProduccion
         Me.Label16 = New System.Windows.Forms.Label()
         Me.txtRechazoMotivo = New System.Windows.Forms.TextBox()
         Me.txtRechazosCantidad = New System.Windows.Forms.TextBox()
-        Me.TabPage1 = New System.Windows.Forms.TabPage()
+        Me.tabPageCondInsegAccidentes = New System.Windows.Forms.TabPage()
         Me.grpAccidentes = New System.Windows.Forms.GroupBox()
         Me.grdDetalleAccidente = New System.Windows.Forms.DataGridView()
         Me.col_cve_seguridad = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -211,7 +208,7 @@ Partial Class frmProduccion
         Me.cbxTipoCondInseg = New System.Windows.Forms.ComboBox()
         Me.Label30 = New System.Windows.Forms.Label()
         Me.Label62 = New System.Windows.Forms.Label()
-        Me.TabPage2 = New System.Windows.Forms.TabPage()
+        Me.tabPageGente = New System.Windows.Forms.TabPage()
         Me.grpGente = New System.Windows.Forms.GroupBox()
         Me.grdDetalleGente = New System.Windows.Forms.DataGridView()
         Me.colcve_gente = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -228,7 +225,7 @@ Partial Class frmProduccion
         Me.cbxTipoDetalleGente = New System.Windows.Forms.ComboBox()
         Me.Label50 = New System.Windows.Forms.Label()
         Me.Label55 = New System.Windows.Forms.Label()
-        Me.Turnos_Lineas = New System.Windows.Forms.TabPage()
+        Me.tabPageTurnosLineas = New System.Windows.Forms.TabPage()
         Me.cbxTurnosLineas = New System.Windows.Forms.ComboBox()
         Me.Label76 = New System.Windows.Forms.Label()
         Me.Label75 = New System.Windows.Forms.Label()
@@ -245,6 +242,16 @@ Partial Class frmProduccion
         Me.grdLineasNoRegistradas = New System.Windows.Forms.DataGridView()
         Me.col_cve_linea = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.collinea = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.tabPageDescansos = New System.Windows.Forms.TabPage()
+        Me.btnQuitarDescanso = New System.Windows.Forms.Button()
+        Me.btnAgregarDescanso = New System.Windows.Forms.Button()
+        Me.Label85 = New System.Windows.Forms.Label()
+        Me.Label86 = New System.Windows.Forms.Label()
+        Me.grdDetalleDescansos = New System.Windows.Forms.DataGridView()
+        Me.col_fecha_descanso = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.col_Descanso = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Label84 = New System.Windows.Forms.Label()
+        Me.dtpDescanso = New System.Windows.Forms.DateTimePicker()
         Me.titulo_banner_formulario = New System.Windows.Forms.Label()
         Me.banner_formulario = New System.Windows.Forms.PictureBox()
         Me.imgEscudo = New System.Windows.Forms.PictureBox()
@@ -258,17 +265,15 @@ Partial Class frmProduccion
         Me.cbxLinea = New System.Windows.Forms.ComboBox()
         Me.lblFechaRegistro = New System.Windows.Forms.Label()
         Me.lblFechaRegistrodescripcion = New System.Windows.Forms.Label()
-        Me.txtprom = New System.Windows.Forms.TextBox()
-        Me.Label83 = New System.Windows.Forms.Label()
-        Me.lblAlertaCincoS = New System.Windows.Forms.Label()
-        Me.TabPage3 = New System.Windows.Forms.TabPage()
-        Me.dtpDescanso = New System.Windows.Forms.DateTimePicker()
-        Me.Label84 = New System.Windows.Forms.Label()
-        Me.DataGridView1 = New System.Windows.Forms.DataGridView()
-        Me.Button1 = New System.Windows.Forms.Button()
-        Me.Button2 = New System.Windows.Forms.Button()
-        Me.Label85 = New System.Windows.Forms.Label()
-        Me.Label86 = New System.Windows.Forms.Label()
+        Me.txtDetalleDesecho = New System.Windows.Forms.TextBox()
+        Me.Label87 = New System.Windows.Forms.Label()
+        Me.colcve_desecho = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.col__cve_linea = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.col_cve_modelo = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.colnp_gkn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.colmodelodescripcion = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.coldesechocantidad = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.col_comentarios_desecho = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.TabContenido.SuspendLayout()
         Me.tabPageProductividad.SuspendLayout()
         Me.grpDesechos.SuspendLayout()
@@ -280,36 +285,36 @@ Partial Class frmProduccion
         Me.grpCosto.SuspendLayout()
         Me.grpParos.SuspendLayout()
         CType(Me.grdDetalleParo, System.ComponentModel.ISupportInitialize).BeginInit()
-        Me.tabPageRechazos.SuspendLayout()
+        Me.tabPageRechazos5s.SuspendLayout()
         Me.grp5s.SuspendLayout()
         Me.grpRechazos.SuspendLayout()
         CType(Me.grdDetalleRechazo, System.ComponentModel.ISupportInitialize).BeginInit()
-        Me.TabPage1.SuspendLayout()
+        Me.tabPageCondInsegAccidentes.SuspendLayout()
         Me.grpAccidentes.SuspendLayout()
         CType(Me.grdDetalleAccidente, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.grpCondInseg.SuspendLayout()
         CType(Me.grdDetalleCondInseg, System.ComponentModel.ISupportInitialize).BeginInit()
-        Me.TabPage2.SuspendLayout()
+        Me.tabPageGente.SuspendLayout()
         Me.grpGente.SuspendLayout()
         CType(Me.grdDetalleGente, System.ComponentModel.ISupportInitialize).BeginInit()
-        Me.Turnos_Lineas.SuspendLayout()
+        Me.tabPageTurnosLineas.SuspendLayout()
         CType(Me.grdLineasRegistradas, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.grdLineasNoRegistradas, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.tabPageDescansos.SuspendLayout()
+        CType(Me.grdDetalleDescansos, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.banner_formulario, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.imgEscudo, System.ComponentModel.ISupportInitialize).BeginInit()
-        Me.TabPage3.SuspendLayout()
-        CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'TabContenido
         '
         Me.TabContenido.Controls.Add(Me.tabPageProductividad)
         Me.TabContenido.Controls.Add(Me.tabPageParos)
-        Me.TabContenido.Controls.Add(Me.tabPageRechazos)
-        Me.TabContenido.Controls.Add(Me.TabPage1)
-        Me.TabContenido.Controls.Add(Me.TabPage2)
-        Me.TabContenido.Controls.Add(Me.Turnos_Lineas)
-        Me.TabContenido.Controls.Add(Me.TabPage3)
+        Me.TabContenido.Controls.Add(Me.tabPageRechazos5s)
+        Me.TabContenido.Controls.Add(Me.tabPageCondInsegAccidentes)
+        Me.TabContenido.Controls.Add(Me.tabPageGente)
+        Me.TabContenido.Controls.Add(Me.tabPageTurnosLineas)
+        Me.TabContenido.Controls.Add(Me.tabPageDescansos)
         Me.TabContenido.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.TabContenido.Location = New System.Drawing.Point(12, 248)
         Me.TabContenido.Name = "TabContenido"
@@ -332,6 +337,8 @@ Partial Class frmProduccion
         '
         'grpDesechos
         '
+        Me.grpDesechos.Controls.Add(Me.Label87)
+        Me.grpDesechos.Controls.Add(Me.txtDetalleDesecho)
         Me.grpDesechos.Controls.Add(Me.grdDetalleDesecho)
         Me.grpDesechos.Controls.Add(Me.Label59)
         Me.grpDesechos.Controls.Add(Me.cbxModeloDesecho)
@@ -357,7 +364,7 @@ Partial Class frmProduccion
         Me.grdDetalleDesecho.AllowUserToAddRows = False
         Me.grdDetalleDesecho.AllowUserToDeleteRows = False
         Me.grdDetalleDesecho.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.grdDetalleDesecho.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.colcve_desecho, Me.col__cve_linea, Me.col_cve_modelo, Me.colnp_gkn, Me.colmodelodescripcion, Me.coldesechocantidad})
+        Me.grdDetalleDesecho.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.colcve_desecho, Me.col__cve_linea, Me.col_cve_modelo, Me.colnp_gkn, Me.colmodelodescripcion, Me.coldesechocantidad, Me.col_comentarios_desecho})
         Me.grdDetalleDesecho.Location = New System.Drawing.Point(6, 237)
         Me.grdDetalleDesecho.Name = "grdDetalleDesecho"
         Me.grdDetalleDesecho.ReadOnly = True
@@ -365,52 +372,10 @@ Partial Class frmProduccion
         Me.grdDetalleDesecho.Size = New System.Drawing.Size(436, 165)
         Me.grdDetalleDesecho.TabIndex = 327
         '
-        'colcve_desecho
-        '
-        Me.colcve_desecho.DataPropertyName = "cve_desecho"
-        Me.colcve_desecho.HeaderText = "cve_desecho"
-        Me.colcve_desecho.Name = "colcve_desecho"
-        Me.colcve_desecho.ReadOnly = True
-        '
-        'col__cve_linea
-        '
-        Me.col__cve_linea.DataPropertyName = "cve_linea"
-        Me.col__cve_linea.HeaderText = "cve_linea"
-        Me.col__cve_linea.Name = "col__cve_linea"
-        Me.col__cve_linea.ReadOnly = True
-        '
-        'col_cve_modelo
-        '
-        Me.col_cve_modelo.DataPropertyName = "cve_modelo"
-        Me.col_cve_modelo.HeaderText = "cve_modelo"
-        Me.col_cve_modelo.Name = "col_cve_modelo"
-        Me.col_cve_modelo.ReadOnly = True
-        '
-        'colnp_gkn
-        '
-        Me.colnp_gkn.DataPropertyName = "np_gkn"
-        Me.colnp_gkn.HeaderText = "No.Parte GKN"
-        Me.colnp_gkn.Name = "colnp_gkn"
-        Me.colnp_gkn.ReadOnly = True
-        '
-        'colmodelodescripcion
-        '
-        Me.colmodelodescripcion.DataPropertyName = "descripcion"
-        Me.colmodelodescripcion.HeaderText = "Modelo"
-        Me.colmodelodescripcion.Name = "colmodelodescripcion"
-        Me.colmodelodescripcion.ReadOnly = True
-        '
-        'coldesechocantidad
-        '
-        Me.coldesechocantidad.DataPropertyName = "cantidad"
-        Me.coldesechocantidad.HeaderText = "Cantidad"
-        Me.coldesechocantidad.Name = "coldesechocantidad"
-        Me.coldesechocantidad.ReadOnly = True
-        '
         'Label59
         '
         Me.Label59.AutoSize = True
-        Me.Label59.Location = New System.Drawing.Point(372, 178)
+        Me.Label59.Location = New System.Drawing.Point(374, 187)
         Me.Label59.Name = "Label59"
         Me.Label59.Size = New System.Drawing.Size(50, 18)
         Me.Label59.TabIndex = 326
@@ -430,7 +395,7 @@ Partial Class frmProduccion
         'Label60
         '
         Me.Label60.AutoSize = True
-        Me.Label60.Location = New System.Drawing.Point(291, 178)
+        Me.Label60.Location = New System.Drawing.Point(293, 187)
         Me.Label60.Name = "Label60"
         Me.Label60.Size = New System.Drawing.Size(65, 18)
         Me.Label60.TabIndex = 325
@@ -440,7 +405,7 @@ Partial Class frmProduccion
         '
         Me.Label17.AutoSize = True
         Me.Label17.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label17.Location = New System.Drawing.Point(14, 71)
+        Me.Label17.Location = New System.Drawing.Point(14, 60)
         Me.Label17.Name = "Label17"
         Me.Label17.Size = New System.Drawing.Size(96, 18)
         Me.Label17.TabIndex = 325
@@ -453,7 +418,7 @@ Partial Class frmProduccion
         Me.btnAgregarDesecho.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center
         Me.btnAgregarDesecho.Enabled = False
         Me.btnAgregarDesecho.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnAgregarDesecho.Location = New System.Drawing.Point(293, 116)
+        Me.btnAgregarDesecho.Location = New System.Drawing.Point(295, 125)
         Me.btnAgregarDesecho.Name = "btnAgregarDesecho"
         Me.btnAgregarDesecho.Size = New System.Drawing.Size(63, 59)
         Me.btnAgregarDesecho.TabIndex = 323
@@ -476,7 +441,7 @@ Partial Class frmProduccion
         Me.btnQuitarDesecho.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center
         Me.btnQuitarDesecho.Enabled = False
         Me.btnQuitarDesecho.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnQuitarDesecho.Location = New System.Drawing.Point(367, 116)
+        Me.btnQuitarDesecho.Location = New System.Drawing.Point(369, 125)
         Me.btnQuitarDesecho.Name = "btnQuitarDesecho"
         Me.btnQuitarDesecho.Size = New System.Drawing.Size(64, 59)
         Me.btnQuitarDesecho.TabIndex = 324
@@ -484,7 +449,7 @@ Partial Class frmProduccion
         '
         'txtModeloDesecho
         '
-        Me.txtModeloDesecho.Location = New System.Drawing.Point(116, 68)
+        Me.txtModeloDesecho.Location = New System.Drawing.Point(116, 57)
         Me.txtModeloDesecho.Name = "txtModeloDesecho"
         Me.txtModeloDesecho.ReadOnly = True
         Me.txtModeloDesecho.Size = New System.Drawing.Size(217, 26)
@@ -494,7 +459,7 @@ Partial Class frmProduccion
         '
         Me.Label46.AutoSize = True
         Me.Label46.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label46.Location = New System.Drawing.Point(183, 115)
+        Me.Label46.Location = New System.Drawing.Point(183, 92)
         Me.Label46.Name = "Label46"
         Me.Label46.Size = New System.Drawing.Size(68, 18)
         Me.Label46.TabIndex = 309
@@ -504,7 +469,7 @@ Partial Class frmProduccion
         '
         Me.Label6.AutoSize = True
         Me.Label6.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label6.Location = New System.Drawing.Point(26, 116)
+        Me.Label6.Location = New System.Drawing.Point(26, 93)
         Me.Label6.Name = "Label6"
         Me.Label6.Size = New System.Drawing.Size(83, 18)
         Me.Label6.TabIndex = 8
@@ -513,7 +478,7 @@ Partial Class frmProduccion
         'txtDesechosCantidad
         '
         Me.txtDesechosCantidad.BackColor = System.Drawing.Color.FromArgb(CType(CType(243, Byte), Integer), CType(CType(251, Byte), Integer), CType(CType(120, Byte), Integer))
-        Me.txtDesechosCantidad.Location = New System.Drawing.Point(116, 112)
+        Me.txtDesechosCantidad.Location = New System.Drawing.Point(116, 89)
         Me.txtDesechosCantidad.Name = "txtDesechosCantidad"
         Me.txtDesechosCantidad.Size = New System.Drawing.Size(61, 26)
         Me.txtDesechosCantidad.TabIndex = 9
@@ -1260,9 +1225,9 @@ Partial Class frmProduccion
         Me.grpParos.Controls.Add(Me.cbxMaquina)
         Me.grpParos.Controls.Add(Me.Label24)
         Me.grpParos.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.grpParos.Location = New System.Drawing.Point(6, 35)
+        Me.grpParos.Location = New System.Drawing.Point(6, 3)
         Me.grpParos.Name = "grpParos"
-        Me.grpParos.Size = New System.Drawing.Size(836, 379)
+        Me.grpParos.Size = New System.Drawing.Size(836, 411)
         Me.grpParos.TabIndex = 15
         Me.grpParos.TabStop = False
         Me.grpParos.Text = "Paros"
@@ -1491,16 +1456,16 @@ Partial Class frmProduccion
         Me.Label24.TabIndex = 6
         Me.Label24.Text = "Maquina:"
         '
-        'tabPageRechazos
+        'tabPageRechazos5s
         '
-        Me.tabPageRechazos.Controls.Add(Me.grp5s)
-        Me.tabPageRechazos.Controls.Add(Me.grpRechazos)
-        Me.tabPageRechazos.Location = New System.Drawing.Point(4, 27)
-        Me.tabPageRechazos.Name = "tabPageRechazos"
-        Me.tabPageRechazos.Size = New System.Drawing.Size(1222, 431)
-        Me.tabPageRechazos.TabIndex = 2
-        Me.tabPageRechazos.Text = "Rechazos / 5'S"
-        Me.tabPageRechazos.UseVisualStyleBackColor = True
+        Me.tabPageRechazos5s.Controls.Add(Me.grp5s)
+        Me.tabPageRechazos5s.Controls.Add(Me.grpRechazos)
+        Me.tabPageRechazos5s.Location = New System.Drawing.Point(4, 27)
+        Me.tabPageRechazos5s.Name = "tabPageRechazos5s"
+        Me.tabPageRechazos5s.Size = New System.Drawing.Size(1222, 431)
+        Me.tabPageRechazos5s.TabIndex = 2
+        Me.tabPageRechazos5s.Text = "Rechazos / 5'S"
+        Me.tabPageRechazos5s.UseVisualStyleBackColor = True
         '
         'grp5s
         '
@@ -1529,6 +1494,35 @@ Partial Class frmProduccion
         Me.grp5s.TabIndex = 337
         Me.grp5s.TabStop = False
         Me.grp5s.Text = "5'S"
+        '
+        'lblAlertaCincoS
+        '
+        Me.lblAlertaCincoS.AutoSize = True
+        Me.lblAlertaCincoS.Font = New System.Drawing.Font("Calibri", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblAlertaCincoS.ForeColor = System.Drawing.Color.Red
+        Me.lblAlertaCincoS.Location = New System.Drawing.Point(188, 217)
+        Me.lblAlertaCincoS.Name = "lblAlertaCincoS"
+        Me.lblAlertaCincoS.Size = New System.Drawing.Size(172, 19)
+        Me.lblAlertaCincoS.TabIndex = 339
+        Me.lblAlertaCincoS.Text = "No se ha Capturado 5'S."
+        Me.lblAlertaCincoS.Visible = False
+        '
+        'txtprom
+        '
+        Me.txtprom.Location = New System.Drawing.Point(260, 348)
+        Me.txtprom.Name = "txtprom"
+        Me.txtprom.ReadOnly = True
+        Me.txtprom.Size = New System.Drawing.Size(100, 26)
+        Me.txtprom.TabIndex = 338
+        '
+        'Label83
+        '
+        Me.Label83.AutoSize = True
+        Me.Label83.Location = New System.Drawing.Point(173, 351)
+        Me.Label83.Name = "Label83"
+        Me.Label83.Size = New System.Drawing.Size(73, 18)
+        Me.Label83.TabIndex = 337
+        Me.Label83.Text = "Promedio:"
         '
         'txtManto
         '
@@ -1898,17 +1892,17 @@ Partial Class frmProduccion
         Me.txtRechazosCantidad.Size = New System.Drawing.Size(198, 26)
         Me.txtRechazosCantidad.TabIndex = 322
         '
-        'TabPage1
+        'tabPageCondInsegAccidentes
         '
-        Me.TabPage1.Controls.Add(Me.grpAccidentes)
-        Me.TabPage1.Controls.Add(Me.grpCondInseg)
-        Me.TabPage1.Location = New System.Drawing.Point(4, 27)
-        Me.TabPage1.Name = "TabPage1"
-        Me.TabPage1.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabPage1.Size = New System.Drawing.Size(1222, 431)
-        Me.TabPage1.TabIndex = 3
-        Me.TabPage1.Text = "Seguridad"
-        Me.TabPage1.UseVisualStyleBackColor = True
+        Me.tabPageCondInsegAccidentes.Controls.Add(Me.grpAccidentes)
+        Me.tabPageCondInsegAccidentes.Controls.Add(Me.grpCondInseg)
+        Me.tabPageCondInsegAccidentes.Location = New System.Drawing.Point(4, 27)
+        Me.tabPageCondInsegAccidentes.Name = "tabPageCondInsegAccidentes"
+        Me.tabPageCondInsegAccidentes.Padding = New System.Windows.Forms.Padding(3)
+        Me.tabPageCondInsegAccidentes.Size = New System.Drawing.Size(1222, 431)
+        Me.tabPageCondInsegAccidentes.TabIndex = 3
+        Me.tabPageCondInsegAccidentes.Text = "Seguridad"
+        Me.tabPageCondInsegAccidentes.UseVisualStyleBackColor = True
         '
         'grpAccidentes
         '
@@ -2238,16 +2232,16 @@ Partial Class frmProduccion
         Me.Label62.TabIndex = 337
         Me.Label62.Text = "Tipo:"
         '
-        'TabPage2
+        'tabPageGente
         '
-        Me.TabPage2.Controls.Add(Me.grpGente)
-        Me.TabPage2.Location = New System.Drawing.Point(4, 27)
-        Me.TabPage2.Name = "TabPage2"
-        Me.TabPage2.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabPage2.Size = New System.Drawing.Size(1222, 431)
-        Me.TabPage2.TabIndex = 4
-        Me.TabPage2.Text = "Gente"
-        Me.TabPage2.UseVisualStyleBackColor = True
+        Me.tabPageGente.Controls.Add(Me.grpGente)
+        Me.tabPageGente.Location = New System.Drawing.Point(4, 27)
+        Me.tabPageGente.Name = "tabPageGente"
+        Me.tabPageGente.Padding = New System.Windows.Forms.Padding(3)
+        Me.tabPageGente.Size = New System.Drawing.Size(1222, 431)
+        Me.tabPageGente.TabIndex = 4
+        Me.tabPageGente.Text = "Gente"
+        Me.tabPageGente.UseVisualStyleBackColor = True
         '
         'grpGente
         '
@@ -2412,25 +2406,25 @@ Partial Class frmProduccion
         Me.Label55.TabIndex = 8
         Me.Label55.Text = "Tipo:"
         '
-        'Turnos_Lineas
+        'tabPageTurnosLineas
         '
-        Me.Turnos_Lineas.Controls.Add(Me.cbxTurnosLineas)
-        Me.Turnos_Lineas.Controls.Add(Me.Label76)
-        Me.Turnos_Lineas.Controls.Add(Me.Label75)
-        Me.Turnos_Lineas.Controls.Add(Me.Label74)
-        Me.Turnos_Lineas.Controls.Add(Me.Label73)
-        Me.Turnos_Lineas.Controls.Add(Me.btnLineaUnica)
-        Me.Turnos_Lineas.Controls.Add(Me.btnLineasTodas)
-        Me.Turnos_Lineas.Controls.Add(Me.Label72)
-        Me.Turnos_Lineas.Controls.Add(Me.grdLineasRegistradas)
-        Me.Turnos_Lineas.Controls.Add(Me.grdLineasNoRegistradas)
-        Me.Turnos_Lineas.Location = New System.Drawing.Point(4, 27)
-        Me.Turnos_Lineas.Name = "Turnos_Lineas"
-        Me.Turnos_Lineas.Padding = New System.Windows.Forms.Padding(3)
-        Me.Turnos_Lineas.Size = New System.Drawing.Size(1222, 431)
-        Me.Turnos_Lineas.TabIndex = 5
-        Me.Turnos_Lineas.Text = "Turnos/lineas"
-        Me.Turnos_Lineas.UseVisualStyleBackColor = True
+        Me.tabPageTurnosLineas.Controls.Add(Me.cbxTurnosLineas)
+        Me.tabPageTurnosLineas.Controls.Add(Me.Label76)
+        Me.tabPageTurnosLineas.Controls.Add(Me.Label75)
+        Me.tabPageTurnosLineas.Controls.Add(Me.Label74)
+        Me.tabPageTurnosLineas.Controls.Add(Me.Label73)
+        Me.tabPageTurnosLineas.Controls.Add(Me.btnLineaUnica)
+        Me.tabPageTurnosLineas.Controls.Add(Me.btnLineasTodas)
+        Me.tabPageTurnosLineas.Controls.Add(Me.Label72)
+        Me.tabPageTurnosLineas.Controls.Add(Me.grdLineasRegistradas)
+        Me.tabPageTurnosLineas.Controls.Add(Me.grdLineasNoRegistradas)
+        Me.tabPageTurnosLineas.Location = New System.Drawing.Point(4, 27)
+        Me.tabPageTurnosLineas.Name = "tabPageTurnosLineas"
+        Me.tabPageTurnosLineas.Padding = New System.Windows.Forms.Padding(3)
+        Me.tabPageTurnosLineas.Size = New System.Drawing.Size(1222, 431)
+        Me.tabPageTurnosLineas.TabIndex = 5
+        Me.tabPageTurnosLineas.Text = "Turnos/lineas"
+        Me.tabPageTurnosLineas.UseVisualStyleBackColor = True
         '
         'cbxTurnosLineas
         '
@@ -2577,6 +2571,112 @@ Partial Class frmProduccion
         Me.collinea.Name = "collinea"
         Me.collinea.ReadOnly = True
         '
+        'tabPageDescansos
+        '
+        Me.tabPageDescansos.Controls.Add(Me.btnQuitarDescanso)
+        Me.tabPageDescansos.Controls.Add(Me.btnAgregarDescanso)
+        Me.tabPageDescansos.Controls.Add(Me.Label85)
+        Me.tabPageDescansos.Controls.Add(Me.Label86)
+        Me.tabPageDescansos.Controls.Add(Me.grdDetalleDescansos)
+        Me.tabPageDescansos.Controls.Add(Me.Label84)
+        Me.tabPageDescansos.Controls.Add(Me.dtpDescanso)
+        Me.tabPageDescansos.Location = New System.Drawing.Point(4, 27)
+        Me.tabPageDescansos.Name = "tabPageDescansos"
+        Me.tabPageDescansos.Padding = New System.Windows.Forms.Padding(3)
+        Me.tabPageDescansos.Size = New System.Drawing.Size(1222, 431)
+        Me.tabPageDescansos.TabIndex = 6
+        Me.tabPageDescansos.Text = "Descansos"
+        Me.tabPageDescansos.UseVisualStyleBackColor = True
+        '
+        'btnQuitarDescanso
+        '
+        Me.btnQuitarDescanso.BackColor = System.Drawing.Color.White
+        Me.btnQuitarDescanso.BackgroundImage = CType(resources.GetObject("btnQuitarDescanso.BackgroundImage"), System.Drawing.Image)
+        Me.btnQuitarDescanso.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center
+        Me.btnQuitarDescanso.Enabled = False
+        Me.btnQuitarDescanso.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnQuitarDescanso.Location = New System.Drawing.Point(638, 46)
+        Me.btnQuitarDescanso.Name = "btnQuitarDescanso"
+        Me.btnQuitarDescanso.Size = New System.Drawing.Size(64, 59)
+        Me.btnQuitarDescanso.TabIndex = 335
+        Me.btnQuitarDescanso.UseVisualStyleBackColor = False
+        '
+        'btnAgregarDescanso
+        '
+        Me.btnAgregarDescanso.BackColor = System.Drawing.Color.White
+        Me.btnAgregarDescanso.BackgroundImage = CType(resources.GetObject("btnAgregarDescanso.BackgroundImage"), System.Drawing.Image)
+        Me.btnAgregarDescanso.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center
+        Me.btnAgregarDescanso.Enabled = False
+        Me.btnAgregarDescanso.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnAgregarDescanso.Location = New System.Drawing.Point(561, 46)
+        Me.btnAgregarDescanso.Name = "btnAgregarDescanso"
+        Me.btnAgregarDescanso.Size = New System.Drawing.Size(63, 59)
+        Me.btnAgregarDescanso.TabIndex = 334
+        Me.btnAgregarDescanso.UseVisualStyleBackColor = False
+        '
+        'Label85
+        '
+        Me.Label85.AutoSize = True
+        Me.Label85.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label85.Location = New System.Drawing.Point(644, 108)
+        Me.Label85.Name = "Label85"
+        Me.Label85.Size = New System.Drawing.Size(50, 18)
+        Me.Label85.TabIndex = 337
+        Me.Label85.Text = "Quitar"
+        '
+        'Label86
+        '
+        Me.Label86.AutoSize = True
+        Me.Label86.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label86.Location = New System.Drawing.Point(559, 108)
+        Me.Label86.Name = "Label86"
+        Me.Label86.Size = New System.Drawing.Size(65, 18)
+        Me.Label86.TabIndex = 336
+        Me.Label86.Text = "Agregar"
+        '
+        'grdDetalleDescansos
+        '
+        Me.grdDetalleDescansos.AllowUserToAddRows = False
+        Me.grdDetalleDescansos.AllowUserToDeleteRows = False
+        Me.grdDetalleDescansos.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.grdDetalleDescansos.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.col_fecha_descanso, Me.col_Descanso})
+        Me.grdDetalleDescansos.Location = New System.Drawing.Point(33, 168)
+        Me.grdDetalleDescansos.Name = "grdDetalleDescansos"
+        Me.grdDetalleDescansos.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
+        Me.grdDetalleDescansos.Size = New System.Drawing.Size(478, 257)
+        Me.grdDetalleDescansos.TabIndex = 314
+        '
+        'col_fecha_descanso
+        '
+        Me.col_fecha_descanso.DataPropertyName = "dia_asignado"
+        Me.col_fecha_descanso.HeaderText = "Fecha Descanso"
+        Me.col_fecha_descanso.Name = "col_fecha_descanso"
+        Me.col_fecha_descanso.ReadOnly = True
+        '
+        'col_Descanso
+        '
+        Me.col_Descanso.DataPropertyName = "descripcion"
+        Me.col_Descanso.HeaderText = "Descripcion"
+        Me.col_Descanso.Name = "col_Descanso"
+        Me.col_Descanso.ReadOnly = True
+        '
+        'Label84
+        '
+        Me.Label84.AutoSize = True
+        Me.Label84.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label84.Location = New System.Drawing.Point(30, 30)
+        Me.Label84.Name = "Label84"
+        Me.Label84.Size = New System.Drawing.Size(194, 18)
+        Me.Label84.TabIndex = 313
+        Me.Label84.Text = "Calendario del Mes Actual:"
+        '
+        'dtpDescanso
+        '
+        Me.dtpDescanso.Location = New System.Drawing.Point(33, 63)
+        Me.dtpDescanso.Name = "dtpDescanso"
+        Me.dtpDescanso.Size = New System.Drawing.Size(269, 26)
+        Me.dtpDescanso.TabIndex = 309
+        '
         'titulo_banner_formulario
         '
         Me.titulo_banner_formulario.AutoSize = True
@@ -2709,123 +2809,74 @@ Partial Class frmProduccion
         Me.lblFechaRegistrodescripcion.TabIndex = 312
         Me.lblFechaRegistrodescripcion.Text = "Fecha Registro:"
         '
-        'txtprom
+        'txtDetalleDesecho
         '
-        Me.txtprom.Location = New System.Drawing.Point(260, 348)
-        Me.txtprom.Name = "txtprom"
-        Me.txtprom.ReadOnly = True
-        Me.txtprom.Size = New System.Drawing.Size(100, 26)
-        Me.txtprom.TabIndex = 338
+        Me.txtDetalleDesecho.BackColor = System.Drawing.Color.FromArgb(CType(CType(243, Byte), Integer), CType(CType(251, Byte), Integer), CType(CType(120, Byte), Integer))
+        Me.txtDetalleDesecho.Location = New System.Drawing.Point(17, 156)
+        Me.txtDetalleDesecho.Multiline = True
+        Me.txtDetalleDesecho.Name = "txtDetalleDesecho"
+        Me.txtDetalleDesecho.ScrollBars = System.Windows.Forms.ScrollBars.Vertical
+        Me.txtDetalleDesecho.Size = New System.Drawing.Size(250, 75)
+        Me.txtDetalleDesecho.TabIndex = 328
         '
-        'Label83
+        'Label87
         '
-        Me.Label83.AutoSize = True
-        Me.Label83.Location = New System.Drawing.Point(173, 351)
-        Me.Label83.Name = "Label83"
-        Me.Label83.Size = New System.Drawing.Size(73, 18)
-        Me.Label83.TabIndex = 337
-        Me.Label83.Text = "Promedio:"
+        Me.Label87.AutoSize = True
+        Me.Label87.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label87.Location = New System.Drawing.Point(14, 135)
+        Me.Label87.Name = "Label87"
+        Me.Label87.Size = New System.Drawing.Size(69, 18)
+        Me.Label87.TabIndex = 329
+        Me.Label87.Text = "Detalles:"
         '
-        'lblAlertaCincoS
+        'colcve_desecho
         '
-        Me.lblAlertaCincoS.AutoSize = True
-        Me.lblAlertaCincoS.Font = New System.Drawing.Font("Calibri", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblAlertaCincoS.ForeColor = System.Drawing.Color.Red
-        Me.lblAlertaCincoS.Location = New System.Drawing.Point(188, 217)
-        Me.lblAlertaCincoS.Name = "lblAlertaCincoS"
-        Me.lblAlertaCincoS.Size = New System.Drawing.Size(172, 19)
-        Me.lblAlertaCincoS.TabIndex = 339
-        Me.lblAlertaCincoS.Text = "No se ha Capturado 5'S."
-        Me.lblAlertaCincoS.Visible = False
+        Me.colcve_desecho.DataPropertyName = "cve_desecho"
+        Me.colcve_desecho.HeaderText = "cve_desecho"
+        Me.colcve_desecho.Name = "colcve_desecho"
+        Me.colcve_desecho.ReadOnly = True
         '
-        'TabPage3
+        'col__cve_linea
         '
-        Me.TabPage3.Controls.Add(Me.Button1)
-        Me.TabPage3.Controls.Add(Me.Button2)
-        Me.TabPage3.Controls.Add(Me.Label85)
-        Me.TabPage3.Controls.Add(Me.Label86)
-        Me.TabPage3.Controls.Add(Me.DataGridView1)
-        Me.TabPage3.Controls.Add(Me.Label84)
-        Me.TabPage3.Controls.Add(Me.dtpDescanso)
-        Me.TabPage3.Location = New System.Drawing.Point(4, 27)
-        Me.TabPage3.Name = "TabPage3"
-        Me.TabPage3.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabPage3.Size = New System.Drawing.Size(1222, 431)
-        Me.TabPage3.TabIndex = 6
-        Me.TabPage3.Text = "Descansos"
-        Me.TabPage3.UseVisualStyleBackColor = True
+        Me.col__cve_linea.DataPropertyName = "cve_linea"
+        Me.col__cve_linea.HeaderText = "cve_linea"
+        Me.col__cve_linea.Name = "col__cve_linea"
+        Me.col__cve_linea.ReadOnly = True
         '
-        'dtpDescanso
+        'col_cve_modelo
         '
-        Me.dtpDescanso.Location = New System.Drawing.Point(49, 79)
-        Me.dtpDescanso.Name = "dtpDescanso"
-        Me.dtpDescanso.Size = New System.Drawing.Size(200, 26)
-        Me.dtpDescanso.TabIndex = 309
-        Me.dtpDescanso.Visible = False
+        Me.col_cve_modelo.DataPropertyName = "cve_modelo"
+        Me.col_cve_modelo.HeaderText = "cve_modelo"
+        Me.col_cve_modelo.Name = "col_cve_modelo"
+        Me.col_cve_modelo.ReadOnly = True
         '
-        'Label84
+        'colnp_gkn
         '
-        Me.Label84.AutoSize = True
-        Me.Label84.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label84.Location = New System.Drawing.Point(46, 46)
-        Me.Label84.Name = "Label84"
-        Me.Label84.Size = New System.Drawing.Size(194, 18)
-        Me.Label84.TabIndex = 313
-        Me.Label84.Text = "Calendario del Mes Actual:"
+        Me.colnp_gkn.DataPropertyName = "np_gkn"
+        Me.colnp_gkn.HeaderText = "No.Parte GKN"
+        Me.colnp_gkn.Name = "colnp_gkn"
+        Me.colnp_gkn.ReadOnly = True
         '
-        'DataGridView1
+        'colmodelodescripcion
         '
-        Me.DataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.DataGridView1.Location = New System.Drawing.Point(6, 168)
-        Me.DataGridView1.Name = "DataGridView1"
-        Me.DataGridView1.Size = New System.Drawing.Size(724, 257)
-        Me.DataGridView1.TabIndex = 314
+        Me.colmodelodescripcion.DataPropertyName = "descripcion"
+        Me.colmodelodescripcion.HeaderText = "Modelo"
+        Me.colmodelodescripcion.Name = "colmodelodescripcion"
+        Me.colmodelodescripcion.ReadOnly = True
         '
-        'Button1
+        'coldesechocantidad
         '
-        Me.Button1.BackColor = System.Drawing.Color.White
-        Me.Button1.BackgroundImage = CType(resources.GetObject("Button1.BackgroundImage"), System.Drawing.Image)
-        Me.Button1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center
-        Me.Button1.Enabled = False
-        Me.Button1.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Button1.Location = New System.Drawing.Point(638, 46)
-        Me.Button1.Name = "Button1"
-        Me.Button1.Size = New System.Drawing.Size(64, 59)
-        Me.Button1.TabIndex = 335
-        Me.Button1.UseVisualStyleBackColor = False
+        Me.coldesechocantidad.DataPropertyName = "cantidad"
+        Me.coldesechocantidad.HeaderText = "Cantidad"
+        Me.coldesechocantidad.Name = "coldesechocantidad"
+        Me.coldesechocantidad.ReadOnly = True
         '
-        'Button2
+        'col_comentarios_desecho
         '
-        Me.Button2.BackColor = System.Drawing.Color.White
-        Me.Button2.BackgroundImage = CType(resources.GetObject("Button2.BackgroundImage"), System.Drawing.Image)
-        Me.Button2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center
-        Me.Button2.Enabled = False
-        Me.Button2.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Button2.Location = New System.Drawing.Point(561, 46)
-        Me.Button2.Name = "Button2"
-        Me.Button2.Size = New System.Drawing.Size(63, 59)
-        Me.Button2.TabIndex = 334
-        Me.Button2.UseVisualStyleBackColor = False
-        '
-        'Label85
-        '
-        Me.Label85.AutoSize = True
-        Me.Label85.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label85.Location = New System.Drawing.Point(644, 108)
-        Me.Label85.Name = "Label85"
-        Me.Label85.Size = New System.Drawing.Size(50, 18)
-        Me.Label85.TabIndex = 337
-        Me.Label85.Text = "Quitar"
-        '
-        'Label86
-        '
-        Me.Label86.AutoSize = True
-        Me.Label86.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label86.Location = New System.Drawing.Point(559, 108)
-        Me.Label86.Name = "Label86"
-        Me.Label86.Size = New System.Drawing.Size(65, 18)
-        Me.Label86.TabIndex = 336
-        Me.Label86.Text = "Agregar"
+        Me.col_comentarios_desecho.DataPropertyName = "comentarios"
+        Me.col_comentarios_desecho.HeaderText = "Comentarios"
+        Me.col_comentarios_desecho.Name = "col_comentarios_desecho"
+        Me.col_comentarios_desecho.ReadOnly = True
         '
         'frmProduccion
         '
@@ -2871,32 +2922,32 @@ Partial Class frmProduccion
         Me.grpParos.ResumeLayout(False)
         Me.grpParos.PerformLayout()
         CType(Me.grdDetalleParo, System.ComponentModel.ISupportInitialize).EndInit()
-        Me.tabPageRechazos.ResumeLayout(False)
+        Me.tabPageRechazos5s.ResumeLayout(False)
         Me.grp5s.ResumeLayout(False)
         Me.grp5s.PerformLayout()
         Me.grpRechazos.ResumeLayout(False)
         Me.grpRechazos.PerformLayout()
         CType(Me.grdDetalleRechazo, System.ComponentModel.ISupportInitialize).EndInit()
-        Me.TabPage1.ResumeLayout(False)
+        Me.tabPageCondInsegAccidentes.ResumeLayout(False)
         Me.grpAccidentes.ResumeLayout(False)
         Me.grpAccidentes.PerformLayout()
         CType(Me.grdDetalleAccidente, System.ComponentModel.ISupportInitialize).EndInit()
         Me.grpCondInseg.ResumeLayout(False)
         Me.grpCondInseg.PerformLayout()
         CType(Me.grdDetalleCondInseg, System.ComponentModel.ISupportInitialize).EndInit()
-        Me.TabPage2.ResumeLayout(False)
+        Me.tabPageGente.ResumeLayout(False)
         Me.grpGente.ResumeLayout(False)
         Me.grpGente.PerformLayout()
         CType(Me.grdDetalleGente, System.ComponentModel.ISupportInitialize).EndInit()
-        Me.Turnos_Lineas.ResumeLayout(False)
-        Me.Turnos_Lineas.PerformLayout()
+        Me.tabPageTurnosLineas.ResumeLayout(False)
+        Me.tabPageTurnosLineas.PerformLayout()
         CType(Me.grdLineasRegistradas, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.grdLineasNoRegistradas, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.tabPageDescansos.ResumeLayout(False)
+        Me.tabPageDescansos.PerformLayout()
+        CType(Me.grdDetalleDescansos, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.banner_formulario, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.imgEscudo, System.ComponentModel.ISupportInitialize).EndInit()
-        Me.TabPage3.ResumeLayout(False)
-        Me.TabPage3.PerformLayout()
-        CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -2980,7 +3031,7 @@ Partial Class frmProduccion
     Friend WithEvents Label26 As System.Windows.Forms.Label
     Friend WithEvents cbxMaquina As System.Windows.Forms.ComboBox
     Friend WithEvents Label24 As System.Windows.Forms.Label
-    Friend WithEvents tabPageRechazos As System.Windows.Forms.TabPage
+    Friend WithEvents tabPageRechazos5s As System.Windows.Forms.TabPage
     Friend WithEvents grpRechazos As System.Windows.Forms.GroupBox
     Friend WithEvents txtModeloRechazo As System.Windows.Forms.TextBox
     Friend WithEvents Label2 As System.Windows.Forms.Label
@@ -2996,8 +3047,8 @@ Partial Class frmProduccion
     Friend WithEvents Label16 As System.Windows.Forms.Label
     Friend WithEvents txtRechazoMotivo As System.Windows.Forms.TextBox
     Friend WithEvents txtRechazosCantidad As System.Windows.Forms.TextBox
-    Friend WithEvents TabPage1 As System.Windows.Forms.TabPage
-    Friend WithEvents TabPage2 As System.Windows.Forms.TabPage
+    Friend WithEvents tabPageCondInsegAccidentes As System.Windows.Forms.TabPage
+    Friend WithEvents tabPageGente As System.Windows.Forms.TabPage
     Friend WithEvents grpGente As System.Windows.Forms.GroupBox
     Friend WithEvents Label33 As System.Windows.Forms.Label
     Friend WithEvents Label45 As System.Windows.Forms.Label
@@ -3040,12 +3091,6 @@ Partial Class frmProduccion
     Friend WithEvents colcantidad As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents coltipo_rechazo As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents colmotivo As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents colcve_desecho As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents col__cve_linea As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents col_cve_modelo As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents colnp_gkn As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents colmodelodescripcion As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents coldesechocantidad As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents grdDetalleParo As System.Windows.Forms.DataGridView
     Friend WithEvents colcve_registro_paro As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents colcve_lineab As System.Windows.Forms.DataGridViewTextBoxColumn
@@ -3105,7 +3150,7 @@ Partial Class frmProduccion
     Friend WithEvents txtAdmonVisual As System.Windows.Forms.TextBox
     Friend WithEvents Label70 As System.Windows.Forms.Label
     Friend WithEvents Label71 As System.Windows.Forms.Label
-    Friend WithEvents Turnos_Lineas As System.Windows.Forms.TabPage
+    Friend WithEvents tabPageTurnosLineas As System.Windows.Forms.TabPage
     Friend WithEvents Label76 As System.Windows.Forms.Label
     Friend WithEvents Label75 As System.Windows.Forms.Label
     Friend WithEvents Label74 As System.Windows.Forms.Label
@@ -3139,12 +3184,23 @@ Partial Class frmProduccion
     Friend WithEvents txtprom As System.Windows.Forms.TextBox
     Friend WithEvents Label83 As System.Windows.Forms.Label
     Friend WithEvents lblAlertaCincoS As System.Windows.Forms.Label
-    Friend WithEvents TabPage3 As System.Windows.Forms.TabPage
-    Friend WithEvents Button1 As System.Windows.Forms.Button
-    Friend WithEvents Button2 As System.Windows.Forms.Button
+    Friend WithEvents tabPageDescansos As System.Windows.Forms.TabPage
+    Friend WithEvents btnQuitarDescanso As System.Windows.Forms.Button
+    Friend WithEvents btnAgregarDescanso As System.Windows.Forms.Button
     Friend WithEvents Label85 As System.Windows.Forms.Label
     Friend WithEvents Label86 As System.Windows.Forms.Label
-    Friend WithEvents DataGridView1 As System.Windows.Forms.DataGridView
+    Friend WithEvents grdDetalleDescansos As System.Windows.Forms.DataGridView
     Friend WithEvents Label84 As System.Windows.Forms.Label
     Friend WithEvents dtpDescanso As System.Windows.Forms.DateTimePicker
+    Friend WithEvents col_fecha_descanso As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents col_Descanso As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents txtDetalleDesecho As System.Windows.Forms.TextBox
+    Friend WithEvents Label87 As System.Windows.Forms.Label
+    Friend WithEvents colcve_desecho As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents col__cve_linea As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents col_cve_modelo As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents colnp_gkn As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents colmodelodescripcion As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents coldesechocantidad As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents col_comentarios_desecho As System.Windows.Forms.DataGridViewTextBoxColumn
 End Class
