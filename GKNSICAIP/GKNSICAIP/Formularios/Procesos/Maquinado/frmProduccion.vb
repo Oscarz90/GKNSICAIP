@@ -94,6 +94,8 @@ Public Class frmProduccion
         calcula_NRFTI()
         '5S
         llena_cinco_S()
+        'Costo
+        verifica_costo()
     End Sub
 #End Region
 #Region "Calculo de OEE"
@@ -654,6 +656,8 @@ Public Class frmProduccion
                 actualiza_tabla_turno_minutos()
                 calcula_Productividad()
                 add_productividad()
+                verifica_costo()
+                add_costo()
             End If
         End If
     End Sub
@@ -666,6 +670,8 @@ Public Class frmProduccion
             actualiza_tabla_turno_minutos()
             calcula_Productividad()
             add_productividad()
+            verifica_costo()
+            add_costo()
         End If
     End Sub
     'Gente
@@ -718,7 +724,7 @@ Public Class frmProduccion
     End Sub
     'Turnos Lineas
     Private Sub btnLineasTodas_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnLineasTodas.Click
-
+        registra_todas_lineas()
     End Sub
     Private Sub btnLinea_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnLineaUnica.Click
         registra_linea()
@@ -1351,6 +1357,28 @@ Public Class frmProduccion
             btnQuitarParo.Enabled = False
         End If
     End Sub
+    'Costo
+    Private Sub verifica_costo()
+        Dim oCosto As New Costo
+        oCosto.cve_registro_turno = get_registro_del_turno()
+        oCosto.verifica_costo_produccion()
+        lblMinProgramados.Text = oCosto.min_programados
+        lblMinReal.Text = oCosto.min_reales
+        lblPrecio.Text = oCosto.precio
+        lblCosto.Text = oCosto.costo
+    End Sub
+    Private Sub add_costo()
+
+        Dim oCosto As New Costo
+        oCosto.cve_registro_turno = get_registro_del_turno()
+        oCosto.cod_empleado = vcodigo_empleado
+        oCosto.fecha = Convert.ToDateTime(Now.ToString("dd-MM-yyyy HH:mm"))
+        oCosto.min_programados = Convert.ToInt64(lblMinProgramados.Text)
+        oCosto.min_reales = Convert.ToInt64(lblMinReal.Text)
+        oCosto.precio = Convert.ToDouble(lblPrecio.Text)
+        oCosto.costo = Convert.ToDouble(lblCosto.Text)
+        oCosto.Registrar()
+    End Sub
 #End Region
 #Region "Funciones para modulo Rechazos"
     'Rechazo
@@ -1397,6 +1425,8 @@ Public Class frmProduccion
                 llena_paro_gridview()
                 actualiza_tabla_turno_minutos()
                 calcula_Productividad()
+                verifica_costo()
+                add_costo()
             End If
         End If
         contenedor_CDM = Nothing
@@ -1521,16 +1551,44 @@ Public Class frmProduccion
     End Sub
 #End Region
 #Region "Funciones para modulo Turnos-Lineas"
+    'Registra todas las Lineas
+    Private Sub registra_todas_lineas()
+        Dim line_aux As Long
+        If cbxTurnosLineas.Text <> "Descanso" Then
+            If MsgBox("¿Seguro que desea registrar el turno para las lineas restantes (las ya registradas se omitiran)?", vbQuestion + vbYesNo, "Confirmación") = vbYes Then
+                If valida_registro_linea() Then
+                    For Each row As DataGridViewRow In grdLineasNoRegistradas.Rows
+                        line_aux = Val(row.Cells(0).Value)
+                        If verifica_registro_turno(line_aux, obten_dia_asignado_registro_turno()) Then
+                            Registra_Turno_Linea(line_aux)
+                        End If
+
+                        line_aux = Nothing
+                    Next
+                    limpia_turno_linea()
+                    deshabilitar_btn_Turno_linea()
+                    llena_lineas_Si_gridview()
+                End If
+            End If
+        Else
+            MsgBox("Para Registrar todas lineas con descanso dirijase a la pestaña 'Descansos' ", vbCritical + vbOKOnly, "Error")
+            limpia_turno_linea()
+            deshabilitar_btn_Turno_linea()
+        End If
+
+    End Sub
     'Registra una Linea
     Private Sub registra_linea()
         Dim line_aux As Long = grdLineasNoRegistradas.Item("col_cve_linea", grdLineasNoRegistradas.CurrentRow.Index).Value
         If valida_registro_linea() Then
             If verifica_registro_turno(line_aux, obten_dia_asignado_registro_turno()) Then
-                MsgBox("Registro exitoso", vbOKOnly, "Aviso")
-                Registra_Turno_Linea(line_aux)
-                limpia_turno_linea()
-                deshabilitar_btn_Turno_linea()
-                llena_lineas_Si_gridview()
+                If MsgBox("¿Seguro que desea registrar linea?", vbQuestion + vbYesNo, "Confirmación") = vbYes Then
+                    MsgBox("Registro exitoso", vbOKOnly, "Aviso")
+                    Registra_Turno_Linea(line_aux)
+                    limpia_turno_linea()
+                    deshabilitar_btn_Turno_linea()
+                    llena_lineas_Si_gridview()
+                End If
             Else
                 limpia_turno_linea()
                 MsgBox("Esta Linea ya ha sido registrada.", vbCritical + vbOKOnly, "Error")
