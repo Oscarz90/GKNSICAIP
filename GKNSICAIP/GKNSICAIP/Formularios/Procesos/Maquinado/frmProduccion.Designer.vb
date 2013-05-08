@@ -29,13 +29,6 @@ Partial Class frmProduccion
         Me.Label87 = New System.Windows.Forms.Label()
         Me.txtDetalleDesecho = New System.Windows.Forms.TextBox()
         Me.grdDetalleDesecho = New System.Windows.Forms.DataGridView()
-        Me.colcve_desecho = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.col__cve_linea = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.col_cve_modelo = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.colnp_gkn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.colmodelodescripcion = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.coldesechocantidad = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.col_comentarios_desecho = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Label59 = New System.Windows.Forms.Label()
         Me.cbxModeloDesecho = New System.Windows.Forms.ComboBox()
         Me.Label60 = New System.Windows.Forms.Label()
@@ -49,15 +42,6 @@ Partial Class frmProduccion
         Me.txtDesechosCantidad = New System.Windows.Forms.TextBox()
         Me.grpProductividad = New System.Windows.Forms.GroupBox()
         Me.grdDetalleProductividad = New System.Windows.Forms.DataGridView()
-        Me.colcve_produccion = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.colcve_linea = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.colcve_modelo = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.np_gkn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.coldescripcion = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.colpzas_ok = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.coltom = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.colCapacidad = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.colAdeudo = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Label54 = New System.Windows.Forms.Label()
         Me.txtPzasPorHora = New System.Windows.Forms.TextBox()
         Me.Label53 = New System.Windows.Forms.Label()
@@ -82,7 +66,6 @@ Partial Class frmProduccion
         Me.Label39 = New System.Windows.Forms.Label()
         Me.lblParosPlaneados = New System.Windows.Forms.Label()
         Me.Label35 = New System.Windows.Forms.Label()
-        Me.Label34 = New System.Windows.Forms.Label()
         Me.Label37 = New System.Windows.Forms.Label()
         Me.txtTiempoOperacion = New System.Windows.Forms.TextBox()
         Me.Label29 = New System.Windows.Forms.Label()
@@ -117,16 +100,6 @@ Partial Class frmProduccion
         Me.Label31 = New System.Windows.Forms.Label()
         Me.grpParos = New System.Windows.Forms.GroupBox()
         Me.grdDetalleParo = New System.Windows.Forms.DataGridView()
-        Me.colcve_registro_paro = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.colcve_lineab = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.colcve_maquina = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.colcve_paro = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.colcod_paro = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.paro = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.colminutos = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.colclave_maquina = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.colmaquina = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.coldetalles = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.txtParosDescripcion = New System.Windows.Forms.TextBox()
         Me.txtMaquinaDescripcion = New System.Windows.Forms.TextBox()
         Me.txtMinutosParo = New System.Windows.Forms.TextBox()
@@ -164,12 +137,6 @@ Partial Class frmProduccion
         Me.Label71 = New System.Windows.Forms.Label()
         Me.grpRechazos = New System.Windows.Forms.GroupBox()
         Me.grdDetalleRechazo = New System.Windows.Forms.DataGridView()
-        Me.colcve_rechazo = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.col_np_gkn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.col_descripcion = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.colcantidad = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.coltipo_rechazo = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.colmotivo = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.txtModeloRechazo = New System.Windows.Forms.TextBox()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.cbxTipoRechazo = New System.Windows.Forms.ComboBox()
@@ -187,10 +154,6 @@ Partial Class frmProduccion
         Me.tabPageCondInsegAccidentes = New System.Windows.Forms.TabPage()
         Me.grpAccidentes = New System.Windows.Forms.GroupBox()
         Me.grdDetalleAccidente = New System.Windows.Forms.DataGridView()
-        Me.col_cve_seguridad = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.col_descripcion_ = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Cantidad = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.col_comentarios_ = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.btnQuitarAccidente = New System.Windows.Forms.Button()
         Me.btnAgregarAccidente = New System.Windows.Forms.Button()
         Me.Label63 = New System.Windows.Forms.Label()
@@ -203,10 +166,6 @@ Partial Class frmProduccion
         Me.Label67 = New System.Windows.Forms.Label()
         Me.grpCondInseg = New System.Windows.Forms.GroupBox()
         Me.grdDetalleCondInseg = New System.Windows.Forms.DataGridView()
-        Me.colcve_seguridad = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.coldescripciondetalle = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.colcantidaddetalle = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.colcomentarios = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.btnQuitarCondInseg = New System.Windows.Forms.Button()
         Me.btnAgregarCondInseg = New System.Windows.Forms.Button()
         Me.Label20 = New System.Windows.Forms.Label()
@@ -220,10 +179,6 @@ Partial Class frmProduccion
         Me.tabPageGente = New System.Windows.Forms.TabPage()
         Me.grpGente = New System.Windows.Forms.GroupBox()
         Me.grdDetalleGente = New System.Windows.Forms.DataGridView()
-        Me.colcve_gente = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.colgdescripcion = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.colgcantidad = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.comentarios = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.btnQuitarGente = New System.Windows.Forms.Button()
         Me.btnAgregarGente = New System.Windows.Forms.Button()
         Me.Label61 = New System.Windows.Forms.Label()
@@ -244,23 +199,26 @@ Partial Class frmProduccion
         Me.btnLineasTodas = New System.Windows.Forms.Button()
         Me.Label72 = New System.Windows.Forms.Label()
         Me.grdLineasRegistradas = New System.Windows.Forms.DataGridView()
-        Me.col_cve_registro_turno = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.col_linea = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.col_turno = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.col_dia_asignado = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.grdLineasNoRegistradas = New System.Windows.Forms.DataGridView()
-        Me.col_cve_linea = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.collinea = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.tabPageDescansos = New System.Windows.Forms.TabPage()
         Me.btnQuitarDescanso = New System.Windows.Forms.Button()
         Me.btnAgregarDescanso = New System.Windows.Forms.Button()
         Me.Label85 = New System.Windows.Forms.Label()
         Me.Label86 = New System.Windows.Forms.Label()
         Me.grdDetalleDescansos = New System.Windows.Forms.DataGridView()
-        Me.col_fecha_descanso = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.col_Descanso = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Label84 = New System.Windows.Forms.Label()
         Me.dtpDescanso = New System.Windows.Forms.DateTimePicker()
+        Me.TabPage1 = New System.Windows.Forms.TabPage()
+        Me.grpComentarios = New System.Windows.Forms.GroupBox()
+        Me.grdDetalleComentario = New System.Windows.Forms.DataGridView()
+        Me.col_cve_comentarios_generales = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.col_comentarios = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Label90 = New System.Windows.Forms.Label()
+        Me.txtDetallesComentario = New System.Windows.Forms.TextBox()
+        Me.btnQuitarComentario = New System.Windows.Forms.Button()
+        Me.btnAgregarComentario = New System.Windows.Forms.Button()
+        Me.Label88 = New System.Windows.Forms.Label()
+        Me.Label89 = New System.Windows.Forms.Label()
         Me.titulo_banner_formulario = New System.Windows.Forms.Label()
         Me.banner_formulario = New System.Windows.Forms.PictureBox()
         Me.imgEscudo = New System.Windows.Forms.PictureBox()
@@ -274,17 +232,58 @@ Partial Class frmProduccion
         Me.cbxLinea = New System.Windows.Forms.ComboBox()
         Me.lblFechaRegistro = New System.Windows.Forms.Label()
         Me.lblFechaRegistrodescripcion = New System.Windows.Forms.Label()
-        Me.TabPage1 = New System.Windows.Forms.TabPage()
-        Me.grpComentarios = New System.Windows.Forms.GroupBox()
-        Me.btnQuitarComentario = New System.Windows.Forms.Button()
-        Me.btnAgregarComentario = New System.Windows.Forms.Button()
-        Me.Label88 = New System.Windows.Forms.Label()
-        Me.Label89 = New System.Windows.Forms.Label()
-        Me.Label90 = New System.Windows.Forms.Label()
-        Me.txtDetallesComentario = New System.Windows.Forms.TextBox()
-        Me.grdDetalleComentario = New System.Windows.Forms.DataGridView()
-        Me.col_cve_comentarios_generales = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.col_comentarios = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.colcve_produccion = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.colcve_linea = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.colcve_modelo = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.np_gkn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.coldescripcion = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.colpzas_ok = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.coltom = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.colCapacidad = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.colAdeudo = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.colcve_desecho = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.col__cve_linea = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.col_cve_modelo = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.colnp_gkn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.colmodelodescripcion = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.coldesechocantidad = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.col_comentarios_desecho = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.colcve_registro_paro = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.colcve_lineab = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.colcve_maquina = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.colcve_paro = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.colcod_paro = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.paro = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.colminutos = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.colclave_maquina = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.colmaquina = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.coldetalles = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.colcve_rechazo = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.col_np_gkn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.col_descripcion = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.colcantidad = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.coltipo_rechazo = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.colmotivo = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.colcve_seguridad = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.coldescripciondetalle = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.colcantidaddetalle = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.colcomentarios = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.col_cve_seguridad = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.col_descripcion_ = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Cantidad = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.col_comentarios_ = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.colcve_gente = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.colgdescripcion = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.colgcantidad = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.comentarios = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.col_cve_linea = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.collinea = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.col_cve_registro_turno = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.col_linea = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.col_turno = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.col_dia_asignado = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.col_fecha_descanso = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.col_Descanso = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.tabPageComentarios.SuspendLayout()
         Me.tabPageProductividad.SuspendLayout()
         Me.grpDesechos.SuspendLayout()
@@ -313,11 +312,11 @@ Partial Class frmProduccion
         CType(Me.grdLineasNoRegistradas, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.tabPageDescansos.SuspendLayout()
         CType(Me.grdDetalleDescansos, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.banner_formulario, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.imgEscudo, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.TabPage1.SuspendLayout()
         Me.grpComentarios.SuspendLayout()
         CType(Me.grdDetalleComentario, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.banner_formulario, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.imgEscudo, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'tabPageComentarios
@@ -406,55 +405,6 @@ Partial Class frmProduccion
         Me.grdDetalleDesecho.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
         Me.grdDetalleDesecho.Size = New System.Drawing.Size(436, 165)
         Me.grdDetalleDesecho.TabIndex = 327
-        '
-        'colcve_desecho
-        '
-        Me.colcve_desecho.DataPropertyName = "cve_desecho"
-        Me.colcve_desecho.HeaderText = "cve_desecho"
-        Me.colcve_desecho.Name = "colcve_desecho"
-        Me.colcve_desecho.ReadOnly = True
-        '
-        'col__cve_linea
-        '
-        Me.col__cve_linea.DataPropertyName = "cve_linea"
-        Me.col__cve_linea.HeaderText = "cve_linea"
-        Me.col__cve_linea.Name = "col__cve_linea"
-        Me.col__cve_linea.ReadOnly = True
-        '
-        'col_cve_modelo
-        '
-        Me.col_cve_modelo.DataPropertyName = "cve_modelo"
-        Me.col_cve_modelo.HeaderText = "cve_modelo"
-        Me.col_cve_modelo.Name = "col_cve_modelo"
-        Me.col_cve_modelo.ReadOnly = True
-        '
-        'colnp_gkn
-        '
-        Me.colnp_gkn.DataPropertyName = "np_gkn"
-        Me.colnp_gkn.HeaderText = "No.Parte GKN"
-        Me.colnp_gkn.Name = "colnp_gkn"
-        Me.colnp_gkn.ReadOnly = True
-        '
-        'colmodelodescripcion
-        '
-        Me.colmodelodescripcion.DataPropertyName = "descripcion"
-        Me.colmodelodescripcion.HeaderText = "Modelo"
-        Me.colmodelodescripcion.Name = "colmodelodescripcion"
-        Me.colmodelodescripcion.ReadOnly = True
-        '
-        'coldesechocantidad
-        '
-        Me.coldesechocantidad.DataPropertyName = "cantidad"
-        Me.coldesechocantidad.HeaderText = "Cantidad"
-        Me.coldesechocantidad.Name = "coldesechocantidad"
-        Me.coldesechocantidad.ReadOnly = True
-        '
-        'col_comentarios_desecho
-        '
-        Me.col_comentarios_desecho.DataPropertyName = "comentarios"
-        Me.col_comentarios_desecho.HeaderText = "Comentarios"
-        Me.col_comentarios_desecho.Name = "col_comentarios_desecho"
-        Me.col_comentarios_desecho.ReadOnly = True
         '
         'Label59
         '
@@ -595,7 +545,6 @@ Partial Class frmProduccion
         Me.grpProductividad.Controls.Add(Me.Label39)
         Me.grpProductividad.Controls.Add(Me.lblParosPlaneados)
         Me.grpProductividad.Controls.Add(Me.Label35)
-        Me.grpProductividad.Controls.Add(Me.Label34)
         Me.grpProductividad.Controls.Add(Me.Label37)
         Me.grpProductividad.Controls.Add(Me.txtTiempoOperacion)
         Me.grpProductividad.Controls.Add(Me.Label29)
@@ -628,92 +577,17 @@ Partial Class frmProduccion
         Me.grdDetalleProductividad.AllowUserToDeleteRows = False
         Me.grdDetalleProductividad.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.grdDetalleProductividad.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.colcve_produccion, Me.colcve_linea, Me.colcve_modelo, Me.np_gkn, Me.coldescripcion, Me.colpzas_ok, Me.coltom, Me.colCapacidad, Me.colAdeudo})
-        Me.grdDetalleProductividad.Location = New System.Drawing.Point(3, 277)
+        Me.grdDetalleProductividad.Location = New System.Drawing.Point(3, 257)
         Me.grdDetalleProductividad.Name = "grdDetalleProductividad"
         Me.grdDetalleProductividad.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
-        Me.grdDetalleProductividad.Size = New System.Drawing.Size(741, 130)
+        Me.grdDetalleProductividad.Size = New System.Drawing.Size(741, 150)
         Me.grdDetalleProductividad.TabIndex = 322
-        '
-        'colcve_produccion
-        '
-        Me.colcve_produccion.DataPropertyName = "cve_produccion"
-        Me.colcve_produccion.HeaderText = "cve_produccion"
-        Me.colcve_produccion.Name = "colcve_produccion"
-        Me.colcve_produccion.ReadOnly = True
-        '
-        'colcve_linea
-        '
-        Me.colcve_linea.DataPropertyName = "cve_linea"
-        Me.colcve_linea.HeaderText = "cve_linea"
-        Me.colcve_linea.Name = "colcve_linea"
-        Me.colcve_linea.ReadOnly = True
-        '
-        'colcve_modelo
-        '
-        Me.colcve_modelo.DataPropertyName = "cve_modelo"
-        Me.colcve_modelo.HeaderText = "cve_modelo"
-        Me.colcve_modelo.Name = "colcve_modelo"
-        Me.colcve_modelo.ReadOnly = True
-        '
-        'np_gkn
-        '
-        Me.np_gkn.DataPropertyName = "np_gkn"
-        Me.np_gkn.HeaderText = "No. Parte GKN"
-        Me.np_gkn.Name = "np_gkn"
-        Me.np_gkn.ReadOnly = True
-        Me.np_gkn.Resizable = System.Windows.Forms.DataGridViewTriState.[False]
-        Me.np_gkn.Width = 140
-        '
-        'coldescripcion
-        '
-        Me.coldescripcion.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells
-        Me.coldescripcion.DataPropertyName = "descripcion"
-        Me.coldescripcion.HeaderText = "Modelo"
-        Me.coldescripcion.Name = "coldescripcion"
-        Me.coldescripcion.ReadOnly = True
-        Me.coldescripcion.Resizable = System.Windows.Forms.DataGridViewTriState.[False]
-        Me.coldescripcion.Width = 85
-        '
-        'colpzas_ok
-        '
-        Me.colpzas_ok.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells
-        Me.colpzas_ok.DataPropertyName = "pzas_ok"
-        Me.colpzas_ok.HeaderText = "Piezas Ok"
-        Me.colpzas_ok.Name = "colpzas_ok"
-        Me.colpzas_ok.ReadOnly = True
-        Me.colpzas_ok.Width = 97
-        '
-        'coltom
-        '
-        Me.coltom.DataPropertyName = "tom"
-        Me.coltom.HeaderText = "Tiempo Operacion"
-        Me.coltom.Name = "coltom"
-        Me.coltom.ReadOnly = True
-        Me.coltom.Width = 160
-        '
-        'colCapacidad
-        '
-        Me.colCapacidad.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells
-        Me.colCapacidad.DataPropertyName = "capacidad"
-        Me.colCapacidad.HeaderText = "Capacidad"
-        Me.colCapacidad.Name = "colCapacidad"
-        Me.colCapacidad.ReadOnly = True
-        Me.colCapacidad.Width = 111
-        '
-        'colAdeudo
-        '
-        Me.colAdeudo.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells
-        Me.colAdeudo.DataPropertyName = "adeudo"
-        Me.colAdeudo.HeaderText = "Adeudo"
-        Me.colAdeudo.Name = "colAdeudo"
-        Me.colAdeudo.ReadOnly = True
-        Me.colAdeudo.Width = 88
         '
         'Label54
         '
         Me.Label54.AutoSize = True
         Me.Label54.Font = New System.Drawing.Font("Arial", 11.0!)
-        Me.Label54.Location = New System.Drawing.Point(511, 174)
+        Me.Label54.Location = New System.Drawing.Point(510, 163)
         Me.Label54.Name = "Label54"
         Me.Label54.Size = New System.Drawing.Size(63, 17)
         Me.Label54.TabIndex = 321
@@ -722,7 +596,7 @@ Partial Class frmProduccion
         'txtPzasPorHora
         '
         Me.txtPzasPorHora.BackColor = System.Drawing.SystemColors.Control
-        Me.txtPzasPorHora.Location = New System.Drawing.Point(449, 170)
+        Me.txtPzasPorHora.Location = New System.Drawing.Point(448, 159)
         Me.txtPzasPorHora.Name = "txtPzasPorHora"
         Me.txtPzasPorHora.ReadOnly = True
         Me.txtPzasPorHora.Size = New System.Drawing.Size(61, 26)
@@ -734,7 +608,7 @@ Partial Class frmProduccion
         '
         Me.Label53.AutoSize = True
         Me.Label53.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label53.Location = New System.Drawing.Point(6, 204)
+        Me.Label53.Location = New System.Drawing.Point(5, 193)
         Me.Label53.Name = "Label53"
         Me.Label53.Size = New System.Drawing.Size(96, 18)
         Me.Label53.TabIndex = 319
@@ -742,7 +616,7 @@ Partial Class frmProduccion
         '
         'txtModeloDescripcionProductividad
         '
-        Me.txtModeloDescripcionProductividad.Location = New System.Drawing.Point(108, 201)
+        Me.txtModeloDescripcionProductividad.Location = New System.Drawing.Point(107, 190)
         Me.txtModeloDescripcionProductividad.Name = "txtModeloDescripcionProductividad"
         Me.txtModeloDescripcionProductividad.ReadOnly = True
         Me.txtModeloDescripcionProductividad.Size = New System.Drawing.Size(217, 26)
@@ -751,7 +625,7 @@ Partial Class frmProduccion
         'Label52
         '
         Me.Label52.AutoSize = True
-        Me.Label52.Location = New System.Drawing.Point(334, 175)
+        Me.Label52.Location = New System.Drawing.Point(333, 164)
         Me.Label52.Name = "Label52"
         Me.Label52.Size = New System.Drawing.Size(109, 18)
         Me.Label52.TabIndex = 316
@@ -761,7 +635,7 @@ Partial Class frmProduccion
         '
         Me.Label51.AutoSize = True
         Me.Label51.Font = New System.Drawing.Font("Arial", 15.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label51.Location = New System.Drawing.Point(641, 128)
+        Me.Label51.Location = New System.Drawing.Point(631, 117)
         Me.Label51.Name = "Label51"
         Me.Label51.Size = New System.Drawing.Size(29, 24)
         Me.Label51.TabIndex = 314
@@ -770,7 +644,7 @@ Partial Class frmProduccion
         'Label49
         '
         Me.Label49.AutoSize = True
-        Me.Label49.Location = New System.Drawing.Point(631, 102)
+        Me.Label49.Location = New System.Drawing.Point(632, 82)
         Me.Label49.Name = "Label49"
         Me.Label49.Size = New System.Drawing.Size(22, 18)
         Me.Label49.TabIndex = 312
@@ -779,7 +653,7 @@ Partial Class frmProduccion
         'Label48
         '
         Me.Label48.AutoSize = True
-        Me.Label48.Location = New System.Drawing.Point(631, 76)
+        Me.Label48.Location = New System.Drawing.Point(632, 56)
         Me.Label48.Name = "Label48"
         Me.Label48.Size = New System.Drawing.Size(22, 18)
         Me.Label48.TabIndex = 311
@@ -788,7 +662,7 @@ Partial Class frmProduccion
         'Label47
         '
         Me.Label47.AutoSize = True
-        Me.Label47.Location = New System.Drawing.Point(631, 51)
+        Me.Label47.Location = New System.Drawing.Point(632, 31)
         Me.Label47.Name = "Label47"
         Me.Label47.Size = New System.Drawing.Size(22, 18)
         Me.Label47.TabIndex = 310
@@ -798,7 +672,7 @@ Partial Class frmProduccion
         '
         Me.Label44.AutoSize = True
         Me.Label44.Font = New System.Drawing.Font("Arial", 11.0!)
-        Me.Label44.Location = New System.Drawing.Point(511, 205)
+        Me.Label44.Location = New System.Drawing.Point(510, 194)
         Me.Label44.Name = "Label44"
         Me.Label44.Size = New System.Drawing.Size(63, 17)
         Me.Label44.TabIndex = 308
@@ -808,7 +682,7 @@ Partial Class frmProduccion
         '
         Me.Label42.AutoSize = True
         Me.Label42.Font = New System.Drawing.Font("Arial", 11.0!)
-        Me.Label42.Location = New System.Drawing.Point(265, 240)
+        Me.Label42.Location = New System.Drawing.Point(264, 229)
         Me.Label42.Name = "Label42"
         Me.Label42.Size = New System.Drawing.Size(60, 17)
         Me.Label42.TabIndex = 307
@@ -827,7 +701,7 @@ Partial Class frmProduccion
         '
         Me.lblParosComedor.AutoSize = True
         Me.lblParosComedor.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblParosComedor.Location = New System.Drawing.Point(395, 77)
+        Me.lblParosComedor.Location = New System.Drawing.Point(396, 57)
         Me.lblParosComedor.Name = "lblParosComedor"
         Me.lblParosComedor.Size = New System.Drawing.Size(17, 18)
         Me.lblParosComedor.TabIndex = 170
@@ -837,7 +711,7 @@ Partial Class frmProduccion
         '
         Me.Label36.AutoSize = True
         Me.Label36.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label36.Location = New System.Drawing.Point(240, 76)
+        Me.Label36.Location = New System.Drawing.Point(241, 56)
         Me.Label36.Name = "Label36"
         Me.Label36.Size = New System.Drawing.Size(146, 18)
         Me.Label36.TabIndex = 169
@@ -847,7 +721,7 @@ Partial Class frmProduccion
         '
         Me.lblTiempoOperacion.AutoSize = True
         Me.lblTiempoOperacion.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblTiempoOperacion.Location = New System.Drawing.Point(192, 102)
+        Me.lblTiempoOperacion.Location = New System.Drawing.Point(193, 82)
         Me.lblTiempoOperacion.Name = "lblTiempoOperacion"
         Me.lblTiempoOperacion.Size = New System.Drawing.Size(17, 18)
         Me.lblTiempoOperacion.TabIndex = 168
@@ -857,7 +731,7 @@ Partial Class frmProduccion
         '
         Me.lblParosNoPlaneados.AutoSize = True
         Me.lblParosNoPlaneados.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblParosNoPlaneados.Location = New System.Drawing.Point(395, 102)
+        Me.lblParosNoPlaneados.Location = New System.Drawing.Point(396, 82)
         Me.lblParosNoPlaneados.Name = "lblParosNoPlaneados"
         Me.lblParosNoPlaneados.Size = New System.Drawing.Size(17, 18)
         Me.lblParosNoPlaneados.TabIndex = 166
@@ -867,7 +741,7 @@ Partial Class frmProduccion
         '
         Me.Label21.AutoSize = True
         Me.Label21.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label21.Location = New System.Drawing.Point(23, 102)
+        Me.Label21.Location = New System.Drawing.Point(24, 82)
         Me.Label21.Name = "Label21"
         Me.Label21.Size = New System.Drawing.Size(160, 18)
         Me.Label21.TabIndex = 167
@@ -877,7 +751,7 @@ Partial Class frmProduccion
         '
         Me.Label43.AutoSize = True
         Me.Label43.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label43.Location = New System.Drawing.Point(234, 102)
+        Me.Label43.Location = New System.Drawing.Point(235, 82)
         Me.Label43.Name = "Label43"
         Me.Label43.Size = New System.Drawing.Size(152, 18)
         Me.Label43.TabIndex = 165
@@ -887,7 +761,7 @@ Partial Class frmProduccion
         '
         Me.lblTiempoTurno.AutoSize = True
         Me.lblTiempoTurno.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblTiempoTurno.Location = New System.Drawing.Point(193, 51)
+        Me.lblTiempoTurno.Location = New System.Drawing.Point(194, 31)
         Me.lblTiempoTurno.Name = "lblTiempoTurno"
         Me.lblTiempoTurno.Size = New System.Drawing.Size(17, 18)
         Me.lblTiempoTurno.TabIndex = 164
@@ -897,7 +771,7 @@ Partial Class frmProduccion
         '
         Me.Label41.AutoSize = True
         Me.Label41.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label41.Location = New System.Drawing.Point(58, 51)
+        Me.Label41.Location = New System.Drawing.Point(59, 31)
         Me.Label41.Name = "Label41"
         Me.Label41.Size = New System.Drawing.Size(124, 18)
         Me.Label41.TabIndex = 163
@@ -907,7 +781,7 @@ Partial Class frmProduccion
         '
         Me.lblTiempoCarga.AutoSize = True
         Me.lblTiempoCarga.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblTiempoCarga.Location = New System.Drawing.Point(192, 76)
+        Me.lblTiempoCarga.Location = New System.Drawing.Point(193, 56)
         Me.lblTiempoCarga.Name = "lblTiempoCarga"
         Me.lblTiempoCarga.Size = New System.Drawing.Size(17, 18)
         Me.lblTiempoCarga.TabIndex = 162
@@ -917,7 +791,7 @@ Partial Class frmProduccion
         '
         Me.Label39.AutoSize = True
         Me.Label39.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label39.Location = New System.Drawing.Point(53, 76)
+        Me.Label39.Location = New System.Drawing.Point(54, 56)
         Me.Label39.Name = "Label39"
         Me.Label39.Size = New System.Drawing.Size(130, 18)
         Me.Label39.TabIndex = 161
@@ -927,7 +801,7 @@ Partial Class frmProduccion
         '
         Me.lblParosPlaneados.AutoSize = True
         Me.lblParosPlaneados.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblParosPlaneados.Location = New System.Drawing.Point(395, 51)
+        Me.lblParosPlaneados.Location = New System.Drawing.Point(396, 31)
         Me.lblParosPlaneados.Name = "lblParosPlaneados"
         Me.lblParosPlaneados.Size = New System.Drawing.Size(17, 18)
         Me.lblParosPlaneados.TabIndex = 160
@@ -937,27 +811,17 @@ Partial Class frmProduccion
         '
         Me.Label35.AutoSize = True
         Me.Label35.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label35.Location = New System.Drawing.Point(18, 135)
+        Me.Label35.Location = New System.Drawing.Point(23, 128)
         Me.Label35.Name = "Label35"
         Me.Label35.Size = New System.Drawing.Size(186, 19)
         Me.Label35.TabIndex = 158
         Me.Label35.Text = "Resultados por Modelo"
         '
-        'Label34
-        '
-        Me.Label34.AutoSize = True
-        Me.Label34.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label34.Location = New System.Drawing.Point(20, 23)
-        Me.Label34.Name = "Label34"
-        Me.Label34.Size = New System.Drawing.Size(177, 19)
-        Me.Label34.TabIndex = 157
-        Me.Label34.Text = "Resultados Generales"
-        '
         'Label37
         '
         Me.Label37.AutoSize = True
         Me.Label37.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label37.Location = New System.Drawing.Point(255, 51)
+        Me.Label37.Location = New System.Drawing.Point(256, 31)
         Me.Label37.Name = "Label37"
         Me.Label37.Size = New System.Drawing.Size(131, 18)
         Me.Label37.TabIndex = 159
@@ -966,7 +830,7 @@ Partial Class frmProduccion
         'txtTiempoOperacion
         '
         Me.txtTiempoOperacion.BackColor = System.Drawing.Color.FromArgb(CType(CType(243, Byte), Integer), CType(CType(251, Byte), Integer), CType(CType(120, Byte), Integer))
-        Me.txtTiempoOperacion.Location = New System.Drawing.Point(198, 236)
+        Me.txtTiempoOperacion.Location = New System.Drawing.Point(197, 225)
         Me.txtTiempoOperacion.Name = "txtTiempoOperacion"
         Me.txtTiempoOperacion.Size = New System.Drawing.Size(61, 26)
         Me.txtTiempoOperacion.TabIndex = 156
@@ -976,7 +840,7 @@ Partial Class frmProduccion
         '
         Me.Label29.AutoSize = True
         Me.Label29.Font = New System.Drawing.Font("Arial", 11.0!)
-        Me.Label29.Location = New System.Drawing.Point(61, 240)
+        Me.Label29.Location = New System.Drawing.Point(60, 229)
         Me.Label29.Name = "Label29"
         Me.Label29.Size = New System.Drawing.Size(132, 17)
         Me.Label29.TabIndex = 155
@@ -988,7 +852,7 @@ Partial Class frmProduccion
         Me.cbxModeloProductividad.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cbxModeloProductividad.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cbxModeloProductividad.FormattingEnabled = True
-        Me.cbxModeloProductividad.Location = New System.Drawing.Point(108, 170)
+        Me.cbxModeloProductividad.Location = New System.Drawing.Point(107, 159)
         Me.cbxModeloProductividad.Name = "cbxModeloProductividad"
         Me.cbxModeloProductividad.Size = New System.Drawing.Size(217, 26)
         Me.cbxModeloProductividad.TabIndex = 154
@@ -997,7 +861,7 @@ Partial Class frmProduccion
         '
         Me.Label28.AutoSize = True
         Me.Label28.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label28.Location = New System.Drawing.Point(38, 173)
+        Me.Label28.Location = New System.Drawing.Point(37, 162)
         Me.Label28.Name = "Label28"
         Me.Label28.Size = New System.Drawing.Size(64, 18)
         Me.Label28.TabIndex = 153
@@ -1007,7 +871,7 @@ Partial Class frmProduccion
         '
         Me.lblOEE.AutoSize = True
         Me.lblOEE.Font = New System.Drawing.Font("Arial", 15.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblOEE.Location = New System.Drawing.Point(565, 128)
+        Me.lblOEE.Location = New System.Drawing.Point(566, 117)
         Me.lblOEE.Name = "lblOEE"
         Me.lblOEE.Size = New System.Drawing.Size(22, 24)
         Me.lblOEE.TabIndex = 13
@@ -1017,7 +881,7 @@ Partial Class frmProduccion
         '
         Me.lblCalidad.AutoSize = True
         Me.lblCalidad.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblCalidad.Location = New System.Drawing.Point(566, 102)
+        Me.lblCalidad.Location = New System.Drawing.Point(567, 82)
         Me.lblCalidad.Name = "lblCalidad"
         Me.lblCalidad.Size = New System.Drawing.Size(17, 18)
         Me.lblCalidad.TabIndex = 12
@@ -1027,7 +891,7 @@ Partial Class frmProduccion
         '
         Me.Label14.AutoSize = True
         Me.Label14.Font = New System.Drawing.Font("Arial", 15.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label14.Location = New System.Drawing.Point(494, 128)
+        Me.Label14.Location = New System.Drawing.Point(495, 117)
         Me.Label14.Name = "Label14"
         Me.Label14.Size = New System.Drawing.Size(54, 24)
         Me.Label14.TabIndex = 12
@@ -1037,7 +901,7 @@ Partial Class frmProduccion
         '
         Me.lblDesempeno.AutoSize = True
         Me.lblDesempeno.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblDesempeno.Location = New System.Drawing.Point(566, 77)
+        Me.lblDesempeno.Location = New System.Drawing.Point(567, 57)
         Me.lblDesempeno.Name = "lblDesempeno"
         Me.lblDesempeno.Size = New System.Drawing.Size(17, 18)
         Me.lblDesempeno.TabIndex = 12
@@ -1047,7 +911,7 @@ Partial Class frmProduccion
         '
         Me.Label8.AutoSize = True
         Me.Label8.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label8.Location = New System.Drawing.Point(480, 102)
+        Me.Label8.Location = New System.Drawing.Point(481, 82)
         Me.Label8.Name = "Label8"
         Me.Label8.Size = New System.Drawing.Size(67, 18)
         Me.Label8.TabIndex = 11
@@ -1057,7 +921,7 @@ Partial Class frmProduccion
         '
         Me.Label4.AutoSize = True
         Me.Label4.Font = New System.Drawing.Font("Arial", 11.0!)
-        Me.Label4.Location = New System.Drawing.Point(359, 205)
+        Me.Label4.Location = New System.Drawing.Point(358, 194)
         Me.Label4.Name = "Label4"
         Me.Label4.Size = New System.Drawing.Size(83, 17)
         Me.Label4.TabIndex = 4
@@ -1076,7 +940,7 @@ Partial Class frmProduccion
         '
         Me.lblDisponibilidad.AutoSize = True
         Me.lblDisponibilidad.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblDisponibilidad.Location = New System.Drawing.Point(566, 51)
+        Me.lblDisponibilidad.Location = New System.Drawing.Point(567, 31)
         Me.lblDisponibilidad.Name = "lblDisponibilidad"
         Me.lblDisponibilidad.Size = New System.Drawing.Size(17, 18)
         Me.lblDisponibilidad.TabIndex = 11
@@ -1085,7 +949,7 @@ Partial Class frmProduccion
         'txtPiezasOkProducidas
         '
         Me.txtPiezasOkProducidas.BackColor = System.Drawing.Color.FromArgb(CType(CType(243, Byte), Integer), CType(CType(251, Byte), Integer), CType(CType(120, Byte), Integer))
-        Me.txtPiezasOkProducidas.Location = New System.Drawing.Point(449, 201)
+        Me.txtPiezasOkProducidas.Location = New System.Drawing.Point(448, 190)
         Me.txtPiezasOkProducidas.Name = "txtPiezasOkProducidas"
         Me.txtPiezasOkProducidas.Size = New System.Drawing.Size(61, 26)
         Me.txtPiezasOkProducidas.TabIndex = 7
@@ -1095,7 +959,7 @@ Partial Class frmProduccion
         '
         Me.Label9.AutoSize = True
         Me.Label9.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label9.Location = New System.Drawing.Point(434, 51)
+        Me.Label9.Location = New System.Drawing.Point(435, 31)
         Me.Label9.Name = "Label9"
         Me.Label9.Size = New System.Drawing.Size(113, 18)
         Me.Label9.TabIndex = 10
@@ -1105,7 +969,7 @@ Partial Class frmProduccion
         '
         Me.Label10.AutoSize = True
         Me.Label10.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label10.Location = New System.Drawing.Point(449, 77)
+        Me.Label10.Location = New System.Drawing.Point(450, 57)
         Me.Label10.Name = "Label10"
         Me.Label10.Size = New System.Drawing.Size(98, 18)
         Me.Label10.TabIndex = 9
@@ -1328,76 +1192,6 @@ Partial Class frmProduccion
         Me.grdDetalleParo.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
         Me.grdDetalleParo.Size = New System.Drawing.Size(824, 231)
         Me.grdDetalleParo.TabIndex = 324
-        '
-        'colcve_registro_paro
-        '
-        Me.colcve_registro_paro.DataPropertyName = "cve_registro_paro"
-        Me.colcve_registro_paro.HeaderText = "cve_registro_paro"
-        Me.colcve_registro_paro.Name = "colcve_registro_paro"
-        Me.colcve_registro_paro.ReadOnly = True
-        '
-        'colcve_lineab
-        '
-        Me.colcve_lineab.DataPropertyName = "cve_linea"
-        Me.colcve_lineab.HeaderText = "cve_linea"
-        Me.colcve_lineab.Name = "colcve_lineab"
-        Me.colcve_lineab.ReadOnly = True
-        '
-        'colcve_maquina
-        '
-        Me.colcve_maquina.DataPropertyName = "cve_maquina"
-        Me.colcve_maquina.HeaderText = "cve_maquina"
-        Me.colcve_maquina.Name = "colcve_maquina"
-        Me.colcve_maquina.ReadOnly = True
-        '
-        'colcve_paro
-        '
-        Me.colcve_paro.DataPropertyName = "cve_paro"
-        Me.colcve_paro.HeaderText = "cve_paro"
-        Me.colcve_paro.Name = "colcve_paro"
-        Me.colcve_paro.ReadOnly = True
-        '
-        'colcod_paro
-        '
-        Me.colcod_paro.DataPropertyName = "cod_paro"
-        Me.colcod_paro.HeaderText = "Paro"
-        Me.colcod_paro.Name = "colcod_paro"
-        Me.colcod_paro.ReadOnly = True
-        '
-        'paro
-        '
-        Me.paro.DataPropertyName = "paro"
-        Me.paro.HeaderText = "Descripcion"
-        Me.paro.Name = "paro"
-        Me.paro.ReadOnly = True
-        '
-        'colminutos
-        '
-        Me.colminutos.DataPropertyName = "minutos"
-        Me.colminutos.HeaderText = "Minutos"
-        Me.colminutos.Name = "colminutos"
-        Me.colminutos.ReadOnly = True
-        '
-        'colclave_maquina
-        '
-        Me.colclave_maquina.DataPropertyName = "clave_maquina"
-        Me.colclave_maquina.HeaderText = "Clave Maquina"
-        Me.colclave_maquina.Name = "colclave_maquina"
-        Me.colclave_maquina.ReadOnly = True
-        '
-        'colmaquina
-        '
-        Me.colmaquina.DataPropertyName = "maquina"
-        Me.colmaquina.HeaderText = "Maquina"
-        Me.colmaquina.Name = "colmaquina"
-        Me.colmaquina.ReadOnly = True
-        '
-        'coldetalles
-        '
-        Me.coldetalles.DataPropertyName = "detalles"
-        Me.coldetalles.HeaderText = "Detalles"
-        Me.coldetalles.Name = "coldetalles"
-        Me.coldetalles.ReadOnly = True
         '
         'txtParosDescripcion
         '
@@ -1790,48 +1584,6 @@ Partial Class frmProduccion
         Me.grdDetalleRechazo.Size = New System.Drawing.Size(609, 174)
         Me.grdDetalleRechazo.TabIndex = 337
         '
-        'colcve_rechazo
-        '
-        Me.colcve_rechazo.DataPropertyName = "cve_rechazo"
-        Me.colcve_rechazo.HeaderText = "cve_rechazo"
-        Me.colcve_rechazo.Name = "colcve_rechazo"
-        Me.colcve_rechazo.ReadOnly = True
-        '
-        'col_np_gkn
-        '
-        Me.col_np_gkn.DataPropertyName = "np_gkn"
-        Me.col_np_gkn.HeaderText = "No. Parte GKN"
-        Me.col_np_gkn.Name = "col_np_gkn"
-        Me.col_np_gkn.ReadOnly = True
-        '
-        'col_descripcion
-        '
-        Me.col_descripcion.DataPropertyName = "descripcion"
-        Me.col_descripcion.HeaderText = "Modelo"
-        Me.col_descripcion.Name = "col_descripcion"
-        Me.col_descripcion.ReadOnly = True
-        '
-        'colcantidad
-        '
-        Me.colcantidad.DataPropertyName = "cantidad"
-        Me.colcantidad.HeaderText = "Cantidad"
-        Me.colcantidad.Name = "colcantidad"
-        Me.colcantidad.ReadOnly = True
-        '
-        'coltipo_rechazo
-        '
-        Me.coltipo_rechazo.DataPropertyName = "tipo"
-        Me.coltipo_rechazo.HeaderText = "Rechazo"
-        Me.coltipo_rechazo.Name = "coltipo_rechazo"
-        Me.coltipo_rechazo.ReadOnly = True
-        '
-        'colmotivo
-        '
-        Me.colmotivo.DataPropertyName = "motivo"
-        Me.colmotivo.HeaderText = "motivo"
-        Me.colmotivo.Name = "colmotivo"
-        Me.colmotivo.ReadOnly = True
-        '
         'txtModeloRechazo
         '
         Me.txtModeloRechazo.Font = New System.Drawing.Font("Arial Narrow", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
@@ -2021,34 +1773,6 @@ Partial Class frmProduccion
         Me.grdDetalleAccidente.Size = New System.Drawing.Size(588, 171)
         Me.grdDetalleAccidente.TabIndex = 348
         '
-        'col_cve_seguridad
-        '
-        Me.col_cve_seguridad.DataPropertyName = "cve_seguridad"
-        Me.col_cve_seguridad.HeaderText = "cve_seguridad"
-        Me.col_cve_seguridad.Name = "col_cve_seguridad"
-        Me.col_cve_seguridad.ReadOnly = True
-        '
-        'col_descripcion_
-        '
-        Me.col_descripcion_.DataPropertyName = "descripcion"
-        Me.col_descripcion_.HeaderText = "Descripcion"
-        Me.col_descripcion_.Name = "col_descripcion_"
-        Me.col_descripcion_.ReadOnly = True
-        '
-        'Cantidad
-        '
-        Me.Cantidad.DataPropertyName = "cantidad"
-        Me.Cantidad.HeaderText = "Cantidad"
-        Me.Cantidad.Name = "Cantidad"
-        Me.Cantidad.ReadOnly = True
-        '
-        'col_comentarios_
-        '
-        Me.col_comentarios_.DataPropertyName = "comentarios"
-        Me.col_comentarios_.HeaderText = "Comentarios"
-        Me.col_comentarios_.Name = "col_comentarios_"
-        Me.col_comentarios_.ReadOnly = True
-        '
         'btnQuitarAccidente
         '
         Me.btnQuitarAccidente.BackColor = System.Drawing.Color.White
@@ -2184,34 +1908,6 @@ Partial Class frmProduccion
         Me.grdDetalleCondInseg.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
         Me.grdDetalleCondInseg.Size = New System.Drawing.Size(588, 171)
         Me.grdDetalleCondInseg.TabIndex = 347
-        '
-        'colcve_seguridad
-        '
-        Me.colcve_seguridad.DataPropertyName = "cve_seguridad"
-        Me.colcve_seguridad.HeaderText = "cve_seguridad"
-        Me.colcve_seguridad.Name = "colcve_seguridad"
-        Me.colcve_seguridad.ReadOnly = True
-        '
-        'coldescripciondetalle
-        '
-        Me.coldescripciondetalle.DataPropertyName = "descripcion"
-        Me.coldescripciondetalle.HeaderText = "Descripcion"
-        Me.coldescripciondetalle.Name = "coldescripciondetalle"
-        Me.coldescripciondetalle.ReadOnly = True
-        '
-        'colcantidaddetalle
-        '
-        Me.colcantidaddetalle.DataPropertyName = "cantidad"
-        Me.colcantidaddetalle.HeaderText = "Cantidad"
-        Me.colcantidaddetalle.Name = "colcantidaddetalle"
-        Me.colcantidaddetalle.ReadOnly = True
-        '
-        'colcomentarios
-        '
-        Me.colcomentarios.DataPropertyName = "comentarios"
-        Me.colcomentarios.HeaderText = "Comentarios"
-        Me.colcomentarios.Name = "colcomentarios"
-        Me.colcomentarios.ReadOnly = True
         '
         'btnQuitarCondInseg
         '
@@ -2360,33 +2056,6 @@ Partial Class frmProduccion
         Me.grdDetalleGente.Size = New System.Drawing.Size(580, 150)
         Me.grdDetalleGente.TabIndex = 337
         '
-        'colcve_gente
-        '
-        Me.colcve_gente.DataPropertyName = "cve_gente"
-        Me.colcve_gente.HeaderText = "cve_gente"
-        Me.colcve_gente.Name = "colcve_gente"
-        '
-        'colgdescripcion
-        '
-        Me.colgdescripcion.DataPropertyName = "descripcion"
-        Me.colgdescripcion.HeaderText = "descripcion"
-        Me.colgdescripcion.Name = "colgdescripcion"
-        Me.colgdescripcion.ReadOnly = True
-        '
-        'colgcantidad
-        '
-        Me.colgcantidad.DataPropertyName = "cantidad"
-        Me.colgcantidad.HeaderText = "cantidad"
-        Me.colgcantidad.Name = "colgcantidad"
-        Me.colgcantidad.ReadOnly = True
-        '
-        'comentarios
-        '
-        Me.comentarios.DataPropertyName = "comentarios"
-        Me.comentarios.HeaderText = "comentarios"
-        Me.comentarios.Name = "comentarios"
-        Me.comentarios.ReadOnly = True
-        '
         'btnQuitarGente
         '
         Me.btnQuitarGente.BackColor = System.Drawing.Color.White
@@ -2515,7 +2184,7 @@ Partial Class frmProduccion
         Me.cbxTurnosLineas.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cbxTurnosLineas.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cbxTurnosLineas.FormattingEnabled = True
-        Me.cbxTurnosLineas.Location = New System.Drawing.Point(497, 114)
+        Me.cbxTurnosLineas.Location = New System.Drawing.Point(458, 101)
         Me.cbxTurnosLineas.Name = "cbxTurnosLineas"
         Me.cbxTurnosLineas.Size = New System.Drawing.Size(234, 26)
         Me.cbxTurnosLineas.TabIndex = 311
@@ -2524,11 +2193,11 @@ Partial Class frmProduccion
         '
         Me.Label76.AutoSize = True
         Me.Label76.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label76.Location = New System.Drawing.Point(754, 41)
+        Me.Label76.Location = New System.Drawing.Point(734, 41)
         Me.Label76.Name = "Label76"
-        Me.Label76.Size = New System.Drawing.Size(106, 18)
+        Me.Label76.Size = New System.Drawing.Size(144, 18)
         Me.Label76.TabIndex = 318
-        Me.Label76.Text = "Lineas - Turno"
+        Me.Label76.Text = "Lineas Registradas"
         '
         'Label75
         '
@@ -2536,15 +2205,15 @@ Partial Class frmProduccion
         Me.Label75.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label75.Location = New System.Drawing.Point(14, 41)
         Me.Label75.Name = "Label75"
-        Me.Label75.Size = New System.Drawing.Size(142, 18)
+        Me.Label75.Size = New System.Drawing.Size(134, 18)
         Me.Label75.TabIndex = 317
-        Me.Label75.Text = "Lineas Disponibles"
+        Me.Label75.Text = "Lineas del Equipo"
         '
         'Label74
         '
         Me.Label74.AutoSize = True
         Me.Label74.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label74.Location = New System.Drawing.Point(584, 354)
+        Me.Label74.Location = New System.Drawing.Point(545, 341)
         Me.Label74.Name = "Label74"
         Me.Label74.Size = New System.Drawing.Size(72, 18)
         Me.Label74.TabIndex = 316
@@ -2554,7 +2223,7 @@ Partial Class frmProduccion
         '
         Me.Label73.AutoSize = True
         Me.Label73.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label73.Location = New System.Drawing.Point(558, 226)
+        Me.Label73.Location = New System.Drawing.Point(519, 213)
         Me.Label73.Name = "Label73"
         Me.Label73.Size = New System.Drawing.Size(118, 18)
         Me.Label73.TabIndex = 315
@@ -2562,7 +2231,7 @@ Partial Class frmProduccion
         '
         'btnLineaUnica
         '
-        Me.btnLineaUnica.Location = New System.Drawing.Point(518, 311)
+        Me.btnLineaUnica.Location = New System.Drawing.Point(479, 298)
         Me.btnLineaUnica.Name = "btnLineaUnica"
         Me.btnLineaUnica.Size = New System.Drawing.Size(189, 40)
         Me.btnLineaUnica.TabIndex = 314
@@ -2571,7 +2240,7 @@ Partial Class frmProduccion
         '
         'btnLineasTodas
         '
-        Me.btnLineasTodas.Location = New System.Drawing.Point(518, 183)
+        Me.btnLineasTodas.Location = New System.Drawing.Point(479, 170)
         Me.btnLineasTodas.Name = "btnLineasTodas"
         Me.btnLineasTodas.Size = New System.Drawing.Size(189, 40)
         Me.btnLineasTodas.TabIndex = 313
@@ -2582,7 +2251,7 @@ Partial Class frmProduccion
         '
         Me.Label72.AutoSize = True
         Me.Label72.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label72.Location = New System.Drawing.Point(494, 93)
+        Me.Label72.Location = New System.Drawing.Point(455, 80)
         Me.Label72.Name = "Label72"
         Me.Label72.Size = New System.Drawing.Size(50, 18)
         Me.Label72.TabIndex = 312
@@ -2594,40 +2263,11 @@ Partial Class frmProduccion
         Me.grdLineasRegistradas.AllowUserToDeleteRows = False
         Me.grdLineasRegistradas.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.grdLineasRegistradas.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.col_cve_registro_turno, Me.col_linea, Me.col_turno, Me.col_dia_asignado})
-        Me.grdLineasRegistradas.Location = New System.Drawing.Point(757, 62)
+        Me.grdLineasRegistradas.Location = New System.Drawing.Point(737, 62)
         Me.grdLineasRegistradas.Name = "grdLineasRegistradas"
         Me.grdLineasRegistradas.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
-        Me.grdLineasRegistradas.Size = New System.Drawing.Size(447, 334)
+        Me.grdLineasRegistradas.Size = New System.Drawing.Size(467, 334)
         Me.grdLineasRegistradas.TabIndex = 1
-        '
-        'col_cve_registro_turno
-        '
-        Me.col_cve_registro_turno.DataPropertyName = "cve_registro_turno"
-        Me.col_cve_registro_turno.HeaderText = "cve_registro_turno"
-        Me.col_cve_registro_turno.Name = "col_cve_registro_turno"
-        Me.col_cve_registro_turno.ReadOnly = True
-        '
-        'col_linea
-        '
-        Me.col_linea.DataPropertyName = "linea"
-        Me.col_linea.HeaderText = "linea"
-        Me.col_linea.Name = "col_linea"
-        Me.col_linea.ReadOnly = True
-        '
-        'col_turno
-        '
-        Me.col_turno.DataPropertyName = "turno"
-        Me.col_turno.HeaderText = "Turno"
-        Me.col_turno.Name = "col_turno"
-        Me.col_turno.ReadOnly = True
-        '
-        'col_dia_asignado
-        '
-        Me.col_dia_asignado.DataPropertyName = "dia_asignado"
-        Me.col_dia_asignado.HeaderText = "Dia Registro"
-        Me.col_dia_asignado.Name = "col_dia_asignado"
-        Me.col_dia_asignado.ReadOnly = True
-        Me.col_dia_asignado.Width = 200
         '
         'grdLineasNoRegistradas
         '
@@ -2638,22 +2278,8 @@ Partial Class frmProduccion
         Me.grdLineasNoRegistradas.Location = New System.Drawing.Point(17, 62)
         Me.grdLineasNoRegistradas.Name = "grdLineasNoRegistradas"
         Me.grdLineasNoRegistradas.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
-        Me.grdLineasNoRegistradas.Size = New System.Drawing.Size(447, 334)
+        Me.grdLineasNoRegistradas.Size = New System.Drawing.Size(396, 334)
         Me.grdLineasNoRegistradas.TabIndex = 0
-        '
-        'col_cve_linea
-        '
-        Me.col_cve_linea.DataPropertyName = "cve_linea"
-        Me.col_cve_linea.HeaderText = "cve_linea"
-        Me.col_cve_linea.Name = "col_cve_linea"
-        Me.col_cve_linea.ReadOnly = True
-        '
-        'collinea
-        '
-        Me.collinea.DataPropertyName = "linea"
-        Me.collinea.HeaderText = "linea"
-        Me.collinea.Name = "collinea"
-        Me.collinea.ReadOnly = True
         '
         'tabPageDescansos
         '
@@ -2730,20 +2356,6 @@ Partial Class frmProduccion
         Me.grdDetalleDescansos.Size = New System.Drawing.Size(478, 257)
         Me.grdDetalleDescansos.TabIndex = 314
         '
-        'col_fecha_descanso
-        '
-        Me.col_fecha_descanso.DataPropertyName = "dia_asignado"
-        Me.col_fecha_descanso.HeaderText = "Fecha Descanso"
-        Me.col_fecha_descanso.Name = "col_fecha_descanso"
-        Me.col_fecha_descanso.ReadOnly = True
-        '
-        'col_Descanso
-        '
-        Me.col_Descanso.DataPropertyName = "descripcion"
-        Me.col_Descanso.HeaderText = "Descripcion"
-        Me.col_Descanso.Name = "col_Descanso"
-        Me.col_Descanso.ReadOnly = True
-        '
         'Label84
         '
         Me.Label84.AutoSize = True
@@ -2760,6 +2372,125 @@ Partial Class frmProduccion
         Me.dtpDescanso.Name = "dtpDescanso"
         Me.dtpDescanso.Size = New System.Drawing.Size(269, 26)
         Me.dtpDescanso.TabIndex = 309
+        '
+        'TabPage1
+        '
+        Me.TabPage1.Controls.Add(Me.grpComentarios)
+        Me.TabPage1.Location = New System.Drawing.Point(4, 27)
+        Me.TabPage1.Name = "TabPage1"
+        Me.TabPage1.Padding = New System.Windows.Forms.Padding(3)
+        Me.TabPage1.Size = New System.Drawing.Size(1222, 431)
+        Me.TabPage1.TabIndex = 7
+        Me.TabPage1.Text = "Comentarios"
+        Me.TabPage1.UseVisualStyleBackColor = True
+        '
+        'grpComentarios
+        '
+        Me.grpComentarios.Controls.Add(Me.grdDetalleComentario)
+        Me.grpComentarios.Controls.Add(Me.Label90)
+        Me.grpComentarios.Controls.Add(Me.txtDetallesComentario)
+        Me.grpComentarios.Controls.Add(Me.btnQuitarComentario)
+        Me.grpComentarios.Controls.Add(Me.btnAgregarComentario)
+        Me.grpComentarios.Controls.Add(Me.Label88)
+        Me.grpComentarios.Controls.Add(Me.Label89)
+        Me.grpComentarios.Location = New System.Drawing.Point(6, 6)
+        Me.grpComentarios.Name = "grpComentarios"
+        Me.grpComentarios.Size = New System.Drawing.Size(633, 407)
+        Me.grpComentarios.TabIndex = 0
+        Me.grpComentarios.TabStop = False
+        Me.grpComentarios.Text = "Comentarios"
+        '
+        'grdDetalleComentario
+        '
+        Me.grdDetalleComentario.AllowUserToAddRows = False
+        Me.grdDetalleComentario.AllowUserToDeleteRows = False
+        Me.grdDetalleComentario.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.grdDetalleComentario.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.col_cve_comentarios_generales, Me.col_comentarios})
+        Me.grdDetalleComentario.Location = New System.Drawing.Point(11, 202)
+        Me.grdDetalleComentario.Name = "grdDetalleComentario"
+        Me.grdDetalleComentario.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
+        Me.grdDetalleComentario.Size = New System.Drawing.Size(606, 189)
+        Me.grdDetalleComentario.TabIndex = 344
+        '
+        'col_cve_comentarios_generales
+        '
+        Me.col_cve_comentarios_generales.DataPropertyName = "cve_comentarios_generales"
+        Me.col_cve_comentarios_generales.HeaderText = "cve_comentarios_generales"
+        Me.col_cve_comentarios_generales.Name = "col_cve_comentarios_generales"
+        Me.col_cve_comentarios_generales.ReadOnly = True
+        '
+        'col_comentarios
+        '
+        Me.col_comentarios.DataPropertyName = "comentarios"
+        Me.col_comentarios.HeaderText = "Comentario"
+        Me.col_comentarios.Name = "col_comentarios"
+        Me.col_comentarios.ReadOnly = True
+        '
+        'Label90
+        '
+        Me.Label90.AutoSize = True
+        Me.Label90.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label90.Location = New System.Drawing.Point(8, 41)
+        Me.Label90.Name = "Label90"
+        Me.Label90.Size = New System.Drawing.Size(69, 18)
+        Me.Label90.TabIndex = 343
+        Me.Label90.Text = "Detalles:"
+        '
+        'txtDetallesComentario
+        '
+        Me.txtDetallesComentario.BackColor = System.Drawing.Color.FromArgb(CType(CType(243, Byte), Integer), CType(CType(251, Byte), Integer), CType(CType(120, Byte), Integer))
+        Me.txtDetallesComentario.Location = New System.Drawing.Point(11, 62)
+        Me.txtDetallesComentario.Multiline = True
+        Me.txtDetallesComentario.Name = "txtDetallesComentario"
+        Me.txtDetallesComentario.ScrollBars = System.Windows.Forms.ScrollBars.Vertical
+        Me.txtDetallesComentario.Size = New System.Drawing.Size(437, 115)
+        Me.txtDetallesComentario.TabIndex = 342
+        '
+        'btnQuitarComentario
+        '
+        Me.btnQuitarComentario.BackColor = System.Drawing.Color.White
+        Me.btnQuitarComentario.BackgroundImage = CType(resources.GetObject("btnQuitarComentario.BackgroundImage"), System.Drawing.Image)
+        Me.btnQuitarComentario.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center
+        Me.btnQuitarComentario.Enabled = False
+        Me.btnQuitarComentario.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnQuitarComentario.Location = New System.Drawing.Point(553, 74)
+        Me.btnQuitarComentario.Name = "btnQuitarComentario"
+        Me.btnQuitarComentario.Size = New System.Drawing.Size(64, 59)
+        Me.btnQuitarComentario.TabIndex = 339
+        Me.btnQuitarComentario.UseVisualStyleBackColor = False
+        '
+        'btnAgregarComentario
+        '
+        Me.btnAgregarComentario.BackColor = System.Drawing.Color.White
+        Me.btnAgregarComentario.BackgroundImage = CType(resources.GetObject("btnAgregarComentario.BackgroundImage"), System.Drawing.Image)
+        Me.btnAgregarComentario.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center
+        Me.btnAgregarComentario.Enabled = False
+        Me.btnAgregarComentario.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnAgregarComentario.Location = New System.Drawing.Point(476, 74)
+        Me.btnAgregarComentario.Name = "btnAgregarComentario"
+        Me.btnAgregarComentario.Size = New System.Drawing.Size(63, 59)
+        Me.btnAgregarComentario.TabIndex = 338
+        Me.btnAgregarComentario.UseVisualStyleBackColor = False
+        '
+        'Label88
+        '
+        Me.Label88.AutoSize = True
+        Me.Label88.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label88.Location = New System.Drawing.Point(559, 136)
+        Me.Label88.Name = "Label88"
+        Me.Label88.Size = New System.Drawing.Size(50, 18)
+        Me.Label88.TabIndex = 341
+        Me.Label88.Text = "Quitar"
+        '
+        'Label89
+        '
+        Me.Label89.AutoSize = True
+        Me.Label89.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label89.Location = New System.Drawing.Point(474, 136)
+        Me.Label89.Name = "Label89"
+        Me.Label89.Size = New System.Drawing.Size(65, 18)
+        Me.Label89.TabIndex = 340
+        Me.Label89.Text = "Agregar"
         '
         'titulo_banner_formulario
         '
@@ -2893,124 +2624,404 @@ Partial Class frmProduccion
         Me.lblFechaRegistrodescripcion.TabIndex = 312
         Me.lblFechaRegistrodescripcion.Text = "Fecha Registro:"
         '
-        'TabPage1
+        'colcve_produccion
         '
-        Me.TabPage1.Controls.Add(Me.grpComentarios)
-        Me.TabPage1.Location = New System.Drawing.Point(4, 27)
-        Me.TabPage1.Name = "TabPage1"
-        Me.TabPage1.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabPage1.Size = New System.Drawing.Size(1222, 431)
-        Me.TabPage1.TabIndex = 7
-        Me.TabPage1.Text = "Comentarios"
-        Me.TabPage1.UseVisualStyleBackColor = True
+        Me.colcve_produccion.DataPropertyName = "cve_produccion"
+        Me.colcve_produccion.HeaderText = "cve_produccion"
+        Me.colcve_produccion.Name = "colcve_produccion"
+        Me.colcve_produccion.ReadOnly = True
+        Me.colcve_produccion.Visible = False
         '
-        'grpComentarios
+        'colcve_linea
         '
-        Me.grpComentarios.Controls.Add(Me.grdDetalleComentario)
-        Me.grpComentarios.Controls.Add(Me.Label90)
-        Me.grpComentarios.Controls.Add(Me.txtDetallesComentario)
-        Me.grpComentarios.Controls.Add(Me.btnQuitarComentario)
-        Me.grpComentarios.Controls.Add(Me.btnAgregarComentario)
-        Me.grpComentarios.Controls.Add(Me.Label88)
-        Me.grpComentarios.Controls.Add(Me.Label89)
-        Me.grpComentarios.Location = New System.Drawing.Point(6, 6)
-        Me.grpComentarios.Name = "grpComentarios"
-        Me.grpComentarios.Size = New System.Drawing.Size(633, 407)
-        Me.grpComentarios.TabIndex = 0
-        Me.grpComentarios.TabStop = False
-        Me.grpComentarios.Text = "Comentarios"
+        Me.colcve_linea.DataPropertyName = "cve_linea"
+        Me.colcve_linea.HeaderText = "cve_linea"
+        Me.colcve_linea.Name = "colcve_linea"
+        Me.colcve_linea.ReadOnly = True
+        Me.colcve_linea.Visible = False
         '
-        'btnQuitarComentario
+        'colcve_modelo
         '
-        Me.btnQuitarComentario.BackColor = System.Drawing.Color.White
-        Me.btnQuitarComentario.BackgroundImage = CType(resources.GetObject("btnQuitarComentario.BackgroundImage"), System.Drawing.Image)
-        Me.btnQuitarComentario.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center
-        Me.btnQuitarComentario.Enabled = False
-        Me.btnQuitarComentario.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnQuitarComentario.Location = New System.Drawing.Point(553, 74)
-        Me.btnQuitarComentario.Name = "btnQuitarComentario"
-        Me.btnQuitarComentario.Size = New System.Drawing.Size(64, 59)
-        Me.btnQuitarComentario.TabIndex = 339
-        Me.btnQuitarComentario.UseVisualStyleBackColor = False
+        Me.colcve_modelo.DataPropertyName = "cve_modelo"
+        Me.colcve_modelo.HeaderText = "cve_modelo"
+        Me.colcve_modelo.Name = "colcve_modelo"
+        Me.colcve_modelo.ReadOnly = True
+        Me.colcve_modelo.Visible = False
         '
-        'btnAgregarComentario
+        'np_gkn
         '
-        Me.btnAgregarComentario.BackColor = System.Drawing.Color.White
-        Me.btnAgregarComentario.BackgroundImage = CType(resources.GetObject("btnAgregarComentario.BackgroundImage"), System.Drawing.Image)
-        Me.btnAgregarComentario.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center
-        Me.btnAgregarComentario.Enabled = False
-        Me.btnAgregarComentario.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnAgregarComentario.Location = New System.Drawing.Point(476, 74)
-        Me.btnAgregarComentario.Name = "btnAgregarComentario"
-        Me.btnAgregarComentario.Size = New System.Drawing.Size(63, 59)
-        Me.btnAgregarComentario.TabIndex = 338
-        Me.btnAgregarComentario.UseVisualStyleBackColor = False
+        Me.np_gkn.DataPropertyName = "np_gkn"
+        Me.np_gkn.HeaderText = "No. Parte GKN"
+        Me.np_gkn.Name = "np_gkn"
+        Me.np_gkn.ReadOnly = True
+        Me.np_gkn.Resizable = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.np_gkn.Width = 140
         '
-        'Label88
+        'coldescripcion
         '
-        Me.Label88.AutoSize = True
-        Me.Label88.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label88.Location = New System.Drawing.Point(559, 136)
-        Me.Label88.Name = "Label88"
-        Me.Label88.Size = New System.Drawing.Size(50, 18)
-        Me.Label88.TabIndex = 341
-        Me.Label88.Text = "Quitar"
+        Me.coldescripcion.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells
+        Me.coldescripcion.DataPropertyName = "descripcion"
+        Me.coldescripcion.HeaderText = "Modelo"
+        Me.coldescripcion.Name = "coldescripcion"
+        Me.coldescripcion.ReadOnly = True
+        Me.coldescripcion.Resizable = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.coldescripcion.Width = 85
         '
-        'Label89
+        'colpzas_ok
         '
-        Me.Label89.AutoSize = True
-        Me.Label89.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label89.Location = New System.Drawing.Point(474, 136)
-        Me.Label89.Name = "Label89"
-        Me.Label89.Size = New System.Drawing.Size(65, 18)
-        Me.Label89.TabIndex = 340
-        Me.Label89.Text = "Agregar"
+        Me.colpzas_ok.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells
+        Me.colpzas_ok.DataPropertyName = "pzas_ok"
+        Me.colpzas_ok.HeaderText = "Piezas Ok"
+        Me.colpzas_ok.Name = "colpzas_ok"
+        Me.colpzas_ok.ReadOnly = True
+        Me.colpzas_ok.Width = 105
         '
-        'Label90
+        'coltom
         '
-        Me.Label90.AutoSize = True
-        Me.Label90.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label90.Location = New System.Drawing.Point(8, 41)
-        Me.Label90.Name = "Label90"
-        Me.Label90.Size = New System.Drawing.Size(69, 18)
-        Me.Label90.TabIndex = 343
-        Me.Label90.Text = "Detalles:"
+        Me.coltom.DataPropertyName = "tom"
+        Me.coltom.HeaderText = "Tiempo Operacion"
+        Me.coltom.Name = "coltom"
+        Me.coltom.ReadOnly = True
+        Me.coltom.Width = 160
         '
-        'txtDetallesComentario
+        'colCapacidad
         '
-        Me.txtDetallesComentario.BackColor = System.Drawing.Color.FromArgb(CType(CType(243, Byte), Integer), CType(CType(251, Byte), Integer), CType(CType(120, Byte), Integer))
-        Me.txtDetallesComentario.Location = New System.Drawing.Point(11, 62)
-        Me.txtDetallesComentario.Multiline = True
-        Me.txtDetallesComentario.Name = "txtDetallesComentario"
-        Me.txtDetallesComentario.ScrollBars = System.Windows.Forms.ScrollBars.Vertical
-        Me.txtDetallesComentario.Size = New System.Drawing.Size(437, 115)
-        Me.txtDetallesComentario.TabIndex = 342
+        Me.colCapacidad.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells
+        Me.colCapacidad.DataPropertyName = "capacidad"
+        Me.colCapacidad.HeaderText = "Capacidad"
+        Me.colCapacidad.Name = "colCapacidad"
+        Me.colCapacidad.ReadOnly = True
+        Me.colCapacidad.Width = 111
         '
-        'grdDetalleComentario
+        'colAdeudo
         '
-        Me.grdDetalleComentario.AllowUserToAddRows = False
-        Me.grdDetalleComentario.AllowUserToDeleteRows = False
-        Me.grdDetalleComentario.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.grdDetalleComentario.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.col_cve_comentarios_generales, Me.col_comentarios})
-        Me.grdDetalleComentario.Location = New System.Drawing.Point(11, 202)
-        Me.grdDetalleComentario.Name = "grdDetalleComentario"
-        Me.grdDetalleComentario.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
-        Me.grdDetalleComentario.Size = New System.Drawing.Size(606, 189)
-        Me.grdDetalleComentario.TabIndex = 344
+        Me.colAdeudo.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells
+        Me.colAdeudo.DataPropertyName = "adeudo"
+        Me.colAdeudo.HeaderText = "Adeudo"
+        Me.colAdeudo.Name = "colAdeudo"
+        Me.colAdeudo.ReadOnly = True
+        Me.colAdeudo.Width = 88
         '
-        'col_cve_comentarios_generales
+        'colcve_desecho
         '
-        Me.col_cve_comentarios_generales.DataPropertyName = "cve_comentarios_generales"
-        Me.col_cve_comentarios_generales.HeaderText = "cve_comentarios_generales"
-        Me.col_cve_comentarios_generales.Name = "col_cve_comentarios_generales"
-        Me.col_cve_comentarios_generales.ReadOnly = True
+        Me.colcve_desecho.DataPropertyName = "cve_desecho"
+        Me.colcve_desecho.HeaderText = "cve_desecho"
+        Me.colcve_desecho.Name = "colcve_desecho"
+        Me.colcve_desecho.ReadOnly = True
+        Me.colcve_desecho.Visible = False
         '
-        'col_comentarios
+        'col__cve_linea
         '
-        Me.col_comentarios.DataPropertyName = "comentarios"
-        Me.col_comentarios.HeaderText = "Comentario"
-        Me.col_comentarios.Name = "col_comentarios"
-        Me.col_comentarios.ReadOnly = True
+        Me.col__cve_linea.DataPropertyName = "cve_linea"
+        Me.col__cve_linea.HeaderText = "cve_linea"
+        Me.col__cve_linea.Name = "col__cve_linea"
+        Me.col__cve_linea.ReadOnly = True
+        Me.col__cve_linea.Visible = False
+        '
+        'col_cve_modelo
+        '
+        Me.col_cve_modelo.DataPropertyName = "cve_modelo"
+        Me.col_cve_modelo.HeaderText = "cve_modelo"
+        Me.col_cve_modelo.Name = "col_cve_modelo"
+        Me.col_cve_modelo.ReadOnly = True
+        Me.col_cve_modelo.Visible = False
+        '
+        'colnp_gkn
+        '
+        Me.colnp_gkn.DataPropertyName = "np_gkn"
+        Me.colnp_gkn.HeaderText = "No.Parte GKN"
+        Me.colnp_gkn.Name = "colnp_gkn"
+        Me.colnp_gkn.ReadOnly = True
+        Me.colnp_gkn.Width = 150
+        '
+        'colmodelodescripcion
+        '
+        Me.colmodelodescripcion.DataPropertyName = "descripcion"
+        Me.colmodelodescripcion.HeaderText = "Modelo"
+        Me.colmodelodescripcion.Name = "colmodelodescripcion"
+        Me.colmodelodescripcion.ReadOnly = True
+        '
+        'coldesechocantidad
+        '
+        Me.coldesechocantidad.DataPropertyName = "cantidad"
+        Me.coldesechocantidad.HeaderText = "Cantidad"
+        Me.coldesechocantidad.Name = "coldesechocantidad"
+        Me.coldesechocantidad.ReadOnly = True
+        '
+        'col_comentarios_desecho
+        '
+        Me.col_comentarios_desecho.DataPropertyName = "comentarios"
+        Me.col_comentarios_desecho.HeaderText = "Comentarios"
+        Me.col_comentarios_desecho.Name = "col_comentarios_desecho"
+        Me.col_comentarios_desecho.ReadOnly = True
+        '
+        'colcve_registro_paro
+        '
+        Me.colcve_registro_paro.DataPropertyName = "cve_registro_paro"
+        Me.colcve_registro_paro.HeaderText = "cve_registro_paro"
+        Me.colcve_registro_paro.Name = "colcve_registro_paro"
+        Me.colcve_registro_paro.ReadOnly = True
+        Me.colcve_registro_paro.Visible = False
+        '
+        'colcve_lineab
+        '
+        Me.colcve_lineab.DataPropertyName = "cve_linea"
+        Me.colcve_lineab.HeaderText = "cve_linea"
+        Me.colcve_lineab.Name = "colcve_lineab"
+        Me.colcve_lineab.ReadOnly = True
+        Me.colcve_lineab.Visible = False
+        '
+        'colcve_maquina
+        '
+        Me.colcve_maquina.DataPropertyName = "cve_maquina"
+        Me.colcve_maquina.HeaderText = "cve_maquina"
+        Me.colcve_maquina.Name = "colcve_maquina"
+        Me.colcve_maquina.ReadOnly = True
+        Me.colcve_maquina.Visible = False
+        '
+        'colcve_paro
+        '
+        Me.colcve_paro.DataPropertyName = "cve_paro"
+        Me.colcve_paro.HeaderText = "cve_paro"
+        Me.colcve_paro.Name = "colcve_paro"
+        Me.colcve_paro.ReadOnly = True
+        Me.colcve_paro.Visible = False
+        '
+        'colcod_paro
+        '
+        Me.colcod_paro.DataPropertyName = "cod_paro"
+        Me.colcod_paro.HeaderText = "Cod. Paro"
+        Me.colcod_paro.Name = "colcod_paro"
+        Me.colcod_paro.ReadOnly = True
+        '
+        'paro
+        '
+        Me.paro.DataPropertyName = "paro"
+        Me.paro.HeaderText = "Descripcion"
+        Me.paro.Name = "paro"
+        Me.paro.ReadOnly = True
+        '
+        'colminutos
+        '
+        Me.colminutos.DataPropertyName = "minutos"
+        Me.colminutos.HeaderText = "Minutos"
+        Me.colminutos.Name = "colminutos"
+        Me.colminutos.ReadOnly = True
+        '
+        'colclave_maquina
+        '
+        Me.colclave_maquina.DataPropertyName = "clave_maquina"
+        Me.colclave_maquina.HeaderText = "Clave Maquina"
+        Me.colclave_maquina.Name = "colclave_maquina"
+        Me.colclave_maquina.ReadOnly = True
+        '
+        'colmaquina
+        '
+        Me.colmaquina.DataPropertyName = "maquina"
+        Me.colmaquina.HeaderText = "Maquina"
+        Me.colmaquina.Name = "colmaquina"
+        Me.colmaquina.ReadOnly = True
+        '
+        'coldetalles
+        '
+        Me.coldetalles.DataPropertyName = "detalles"
+        Me.coldetalles.HeaderText = "Detalles"
+        Me.coldetalles.Name = "coldetalles"
+        Me.coldetalles.ReadOnly = True
+        '
+        'colcve_rechazo
+        '
+        Me.colcve_rechazo.DataPropertyName = "cve_rechazo"
+        Me.colcve_rechazo.HeaderText = "cve_rechazo"
+        Me.colcve_rechazo.Name = "colcve_rechazo"
+        Me.colcve_rechazo.ReadOnly = True
+        Me.colcve_rechazo.Visible = False
+        '
+        'col_np_gkn
+        '
+        Me.col_np_gkn.DataPropertyName = "np_gkn"
+        Me.col_np_gkn.HeaderText = "No. Parte GKN"
+        Me.col_np_gkn.Name = "col_np_gkn"
+        Me.col_np_gkn.ReadOnly = True
+        Me.col_np_gkn.Width = 150
+        '
+        'col_descripcion
+        '
+        Me.col_descripcion.DataPropertyName = "descripcion"
+        Me.col_descripcion.HeaderText = "Modelo"
+        Me.col_descripcion.Name = "col_descripcion"
+        Me.col_descripcion.ReadOnly = True
+        '
+        'colcantidad
+        '
+        Me.colcantidad.DataPropertyName = "cantidad"
+        Me.colcantidad.HeaderText = "Cantidad"
+        Me.colcantidad.Name = "colcantidad"
+        Me.colcantidad.ReadOnly = True
+        '
+        'coltipo_rechazo
+        '
+        Me.coltipo_rechazo.DataPropertyName = "tipo"
+        Me.coltipo_rechazo.HeaderText = "Rechazo"
+        Me.coltipo_rechazo.Name = "coltipo_rechazo"
+        Me.coltipo_rechazo.ReadOnly = True
+        '
+        'colmotivo
+        '
+        Me.colmotivo.DataPropertyName = "motivo"
+        Me.colmotivo.HeaderText = "motivo"
+        Me.colmotivo.Name = "colmotivo"
+        Me.colmotivo.ReadOnly = True
+        '
+        'colcve_seguridad
+        '
+        Me.colcve_seguridad.DataPropertyName = "cve_seguridad"
+        Me.colcve_seguridad.HeaderText = "cve_seguridad"
+        Me.colcve_seguridad.Name = "colcve_seguridad"
+        Me.colcve_seguridad.ReadOnly = True
+        Me.colcve_seguridad.Visible = False
+        '
+        'coldescripciondetalle
+        '
+        Me.coldescripciondetalle.DataPropertyName = "descripcion"
+        Me.coldescripciondetalle.HeaderText = "Descripcion"
+        Me.coldescripciondetalle.Name = "coldescripciondetalle"
+        Me.coldescripciondetalle.ReadOnly = True
+        '
+        'colcantidaddetalle
+        '
+        Me.colcantidaddetalle.DataPropertyName = "cantidad"
+        Me.colcantidaddetalle.HeaderText = "Cantidad"
+        Me.colcantidaddetalle.Name = "colcantidaddetalle"
+        Me.colcantidaddetalle.ReadOnly = True
+        '
+        'colcomentarios
+        '
+        Me.colcomentarios.DataPropertyName = "comentarios"
+        Me.colcomentarios.HeaderText = "Comentarios"
+        Me.colcomentarios.Name = "colcomentarios"
+        Me.colcomentarios.ReadOnly = True
+        '
+        'col_cve_seguridad
+        '
+        Me.col_cve_seguridad.DataPropertyName = "cve_seguridad"
+        Me.col_cve_seguridad.HeaderText = "cve_seguridad"
+        Me.col_cve_seguridad.Name = "col_cve_seguridad"
+        Me.col_cve_seguridad.ReadOnly = True
+        Me.col_cve_seguridad.Visible = False
+        '
+        'col_descripcion_
+        '
+        Me.col_descripcion_.DataPropertyName = "descripcion"
+        Me.col_descripcion_.HeaderText = "Descripcion"
+        Me.col_descripcion_.Name = "col_descripcion_"
+        Me.col_descripcion_.ReadOnly = True
+        '
+        'Cantidad
+        '
+        Me.Cantidad.DataPropertyName = "cantidad"
+        Me.Cantidad.HeaderText = "Cantidad"
+        Me.Cantidad.Name = "Cantidad"
+        Me.Cantidad.ReadOnly = True
+        '
+        'col_comentarios_
+        '
+        Me.col_comentarios_.DataPropertyName = "comentarios"
+        Me.col_comentarios_.HeaderText = "Comentarios"
+        Me.col_comentarios_.Name = "col_comentarios_"
+        Me.col_comentarios_.ReadOnly = True
+        '
+        'colcve_gente
+        '
+        Me.colcve_gente.DataPropertyName = "cve_gente"
+        Me.colcve_gente.HeaderText = "cve_gente"
+        Me.colcve_gente.Name = "colcve_gente"
+        Me.colcve_gente.Visible = False
+        '
+        'colgdescripcion
+        '
+        Me.colgdescripcion.DataPropertyName = "descripcion"
+        Me.colgdescripcion.HeaderText = "descripcion"
+        Me.colgdescripcion.Name = "colgdescripcion"
+        Me.colgdescripcion.ReadOnly = True
+        '
+        'colgcantidad
+        '
+        Me.colgcantidad.DataPropertyName = "cantidad"
+        Me.colgcantidad.HeaderText = "cantidad"
+        Me.colgcantidad.Name = "colgcantidad"
+        Me.colgcantidad.ReadOnly = True
+        '
+        'comentarios
+        '
+        Me.comentarios.DataPropertyName = "comentarios"
+        Me.comentarios.HeaderText = "comentarios"
+        Me.comentarios.Name = "comentarios"
+        Me.comentarios.ReadOnly = True
+        '
+        'col_cve_linea
+        '
+        Me.col_cve_linea.DataPropertyName = "cve_linea"
+        Me.col_cve_linea.HeaderText = "cve_linea"
+        Me.col_cve_linea.Name = "col_cve_linea"
+        Me.col_cve_linea.ReadOnly = True
+        Me.col_cve_linea.Visible = False
+        '
+        'collinea
+        '
+        Me.collinea.DataPropertyName = "linea"
+        Me.collinea.HeaderText = "linea"
+        Me.collinea.Name = "collinea"
+        Me.collinea.ReadOnly = True
+        Me.collinea.Width = 150
+        '
+        'col_cve_registro_turno
+        '
+        Me.col_cve_registro_turno.DataPropertyName = "cve_registro_turno"
+        Me.col_cve_registro_turno.HeaderText = "cve_registro_turno"
+        Me.col_cve_registro_turno.Name = "col_cve_registro_turno"
+        Me.col_cve_registro_turno.ReadOnly = True
+        Me.col_cve_registro_turno.Visible = False
+        '
+        'col_linea
+        '
+        Me.col_linea.DataPropertyName = "linea"
+        Me.col_linea.HeaderText = "linea"
+        Me.col_linea.Name = "col_linea"
+        Me.col_linea.ReadOnly = True
+        Me.col_linea.Width = 150
+        '
+        'col_turno
+        '
+        Me.col_turno.DataPropertyName = "turno"
+        Me.col_turno.HeaderText = "Turno"
+        Me.col_turno.Name = "col_turno"
+        Me.col_turno.ReadOnly = True
+        Me.col_turno.Width = 120
+        '
+        'col_dia_asignado
+        '
+        Me.col_dia_asignado.DataPropertyName = "dia_asignado"
+        Me.col_dia_asignado.HeaderText = "Dia Registro"
+        Me.col_dia_asignado.Name = "col_dia_asignado"
+        Me.col_dia_asignado.ReadOnly = True
+        Me.col_dia_asignado.Width = 150
+        '
+        'col_fecha_descanso
+        '
+        Me.col_fecha_descanso.DataPropertyName = "dia_asignado"
+        Me.col_fecha_descanso.HeaderText = "Fecha Descanso"
+        Me.col_fecha_descanso.Name = "col_fecha_descanso"
+        Me.col_fecha_descanso.ReadOnly = True
+        Me.col_fecha_descanso.Width = 150
+        '
+        'col_Descanso
+        '
+        Me.col_Descanso.DataPropertyName = "descripcion"
+        Me.col_Descanso.HeaderText = "Descripcion"
+        Me.col_Descanso.Name = "col_Descanso"
+        Me.col_Descanso.ReadOnly = True
+        Me.col_Descanso.Width = 150
         '
         'frmProduccion
         '
@@ -3080,12 +3091,12 @@ Partial Class frmProduccion
         Me.tabPageDescansos.ResumeLayout(False)
         Me.tabPageDescansos.PerformLayout()
         CType(Me.grdDetalleDescansos, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.banner_formulario, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.imgEscudo, System.ComponentModel.ISupportInitialize).EndInit()
         Me.TabPage1.ResumeLayout(False)
         Me.grpComentarios.ResumeLayout(False)
         Me.grpComentarios.PerformLayout()
         CType(Me.grdDetalleComentario, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.banner_formulario, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.imgEscudo, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -3125,7 +3136,6 @@ Partial Class frmProduccion
     Friend WithEvents Label39 As System.Windows.Forms.Label
     Friend WithEvents lblParosPlaneados As System.Windows.Forms.Label
     Friend WithEvents Label35 As System.Windows.Forms.Label
-    Friend WithEvents Label34 As System.Windows.Forms.Label
     Friend WithEvents Label37 As System.Windows.Forms.Label
     Friend WithEvents txtTiempoOperacion As System.Windows.Forms.TextBox
     Friend WithEvents Label29 As System.Windows.Forms.Label
@@ -3208,45 +3218,16 @@ Partial Class frmProduccion
     Friend WithEvents Label58 As System.Windows.Forms.Label
     Friend WithEvents cbxLinea As System.Windows.Forms.ComboBox
     Friend WithEvents grdDetalleProductividad As System.Windows.Forms.DataGridView
-    Friend WithEvents colcve_produccion As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents colcve_linea As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents colcve_modelo As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents np_gkn As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents coldescripcion As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents colpzas_ok As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents coltom As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents colCapacidad As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents colAdeudo As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents grdDetalleDesecho As System.Windows.Forms.DataGridView
     Friend WithEvents Label59 As System.Windows.Forms.Label
     Friend WithEvents Label60 As System.Windows.Forms.Label
     Friend WithEvents btnAgregarDesecho As System.Windows.Forms.Button
     Friend WithEvents btnQuitarDesecho As System.Windows.Forms.Button
     Friend WithEvents grdDetalleRechazo As System.Windows.Forms.DataGridView
-    Friend WithEvents colcve_rechazo As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents col_np_gkn As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents col_descripcion As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents colcantidad As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents coltipo_rechazo As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents colmotivo As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents grdDetalleParo As System.Windows.Forms.DataGridView
-    Friend WithEvents colcve_registro_paro As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents colcve_lineab As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents colcve_maquina As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents colcve_paro As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents colcod_paro As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents paro As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents colminutos As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents colclave_maquina As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents colmaquina As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents coldetalles As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents Label61 As System.Windows.Forms.Label
     Friend WithEvents txtDetallesGente As System.Windows.Forms.TextBox
     Friend WithEvents grdDetalleGente As System.Windows.Forms.DataGridView
-    Friend WithEvents colcve_gente As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents colgdescripcion As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents colgcantidad As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents comentarios As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents grpAccidentes As System.Windows.Forms.GroupBox
     Friend WithEvents grpCondInseg As System.Windows.Forms.GroupBox
     Friend WithEvents btnQuitarAccidente As System.Windows.Forms.Button
@@ -3271,14 +3252,6 @@ Partial Class frmProduccion
     Friend WithEvents Label62 As System.Windows.Forms.Label
     Friend WithEvents grdDetalleAccidente As System.Windows.Forms.DataGridView
     Friend WithEvents grdDetalleCondInseg As System.Windows.Forms.DataGridView
-    Friend WithEvents colcve_seguridad As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents coldescripciondetalle As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents colcantidaddetalle As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents colcomentarios As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents col_cve_seguridad As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents col_descripcion_ As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents Cantidad As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents col_comentarios_ As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents grp5s As System.Windows.Forms.GroupBox
     Friend WithEvents txtPromedio As System.Windows.Forms.TextBox
     Friend WithEvents Label68 As System.Windows.Forms.Label
@@ -3299,12 +3272,6 @@ Partial Class frmProduccion
     Friend WithEvents grdLineasRegistradas As System.Windows.Forms.DataGridView
     Friend WithEvents grdLineasNoRegistradas As System.Windows.Forms.DataGridView
     Friend WithEvents cbxTurnosLineas As System.Windows.Forms.ComboBox
-    Friend WithEvents col_cve_linea As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents collinea As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents col_cve_registro_turno As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents col_linea As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents col_turno As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents col_dia_asignado As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents grpCalidad As System.Windows.Forms.GroupBox
     Friend WithEvents Label77 As System.Windows.Forms.Label
     Friend WithEvents lblNRFTi As System.Windows.Forms.Label
@@ -3330,17 +3297,8 @@ Partial Class frmProduccion
     Friend WithEvents grdDetalleDescansos As System.Windows.Forms.DataGridView
     Friend WithEvents Label84 As System.Windows.Forms.Label
     Friend WithEvents dtpDescanso As System.Windows.Forms.DateTimePicker
-    Friend WithEvents col_fecha_descanso As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents col_Descanso As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents txtDetalleDesecho As System.Windows.Forms.TextBox
     Friend WithEvents Label87 As System.Windows.Forms.Label
-    Friend WithEvents colcve_desecho As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents col__cve_linea As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents col_cve_modelo As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents colnp_gkn As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents colmodelodescripcion As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents coldesechocantidad As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents col_comentarios_desecho As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents TabPage1 As System.Windows.Forms.TabPage
     Friend WithEvents grpComentarios As System.Windows.Forms.GroupBox
     Friend WithEvents grdDetalleComentario As System.Windows.Forms.DataGridView
@@ -3352,4 +3310,56 @@ Partial Class frmProduccion
     Friend WithEvents btnAgregarComentario As System.Windows.Forms.Button
     Friend WithEvents Label88 As System.Windows.Forms.Label
     Friend WithEvents Label89 As System.Windows.Forms.Label
+    Friend WithEvents colcve_desecho As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents col__cve_linea As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents col_cve_modelo As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents colnp_gkn As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents colmodelodescripcion As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents coldesechocantidad As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents col_comentarios_desecho As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents colcve_produccion As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents colcve_linea As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents colcve_modelo As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents np_gkn As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents coldescripcion As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents colpzas_ok As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents coltom As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents colCapacidad As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents colAdeudo As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents colcve_registro_paro As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents colcve_lineab As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents colcve_maquina As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents colcve_paro As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents colcod_paro As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents paro As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents colminutos As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents colclave_maquina As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents colmaquina As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents coldetalles As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents colcve_rechazo As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents col_np_gkn As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents col_descripcion As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents colcantidad As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents coltipo_rechazo As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents colmotivo As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents col_cve_seguridad As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents col_descripcion_ As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents Cantidad As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents col_comentarios_ As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents colcve_seguridad As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents coldescripciondetalle As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents colcantidaddetalle As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents colcomentarios As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents colcve_gente As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents colgdescripcion As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents colgcantidad As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents comentarios As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents col_cve_registro_turno As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents col_linea As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents col_turno As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents col_dia_asignado As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents col_cve_linea As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents collinea As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents col_fecha_descanso As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents col_Descanso As System.Windows.Forms.DataGridViewTextBoxColumn
 End Class

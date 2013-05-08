@@ -96,6 +96,8 @@ Public Class frmProduccion
         llena_cinco_S()
         'Costo
         verifica_costo()
+        'comentarios_generales
+        llena_comentarios_generales_gridview()
     End Sub
 #End Region
 #Region "Calculo de OEE"
@@ -402,6 +404,12 @@ Public Class frmProduccion
             lblAlertaCincoS.Visible = False
         End If
     End Sub
+    'Comentarios Generales
+    Private Sub llena_comentarios_generales_gridview()
+        Dim oComentariosGenerales As New Comentarios_Generales
+        oComentariosGenerales.cve_registro_turno = get_registro_del_turno()
+        grdDetalleComentario.DataSource = oComentariosGenerales.llena_comentarios_generales_gridview
+    End Sub
 #End Region
 #Region "Eventos ComboBox"
     'General
@@ -413,9 +421,8 @@ Public Class frmProduccion
             If verifica_registro_turno_produccion(cbxLinea.SelectedValue, Convert.ToDateTime(Now.ToString("dd-MM-yyyy HH:mm"))) Then
                 MsgBox("No has registrado esta linea")
                 establece_dia_descanso()
-                cbxLinea.SelectedIndex = -1
             Else
-                MsgBox("Registrada")
+                MsgBox("Linea Registrada")
                 cbxTurno.SelectedIndex = vcve_turno - 1
                 If cbxTurno.Text = "Descanso" Then
                     establece_dia_descanso()
@@ -574,6 +581,11 @@ Public Class frmProduccion
         valida_sea_numero(sender)
         valida_botones_cinco_s()
         calcula_promedio_cinco_S()
+    End Sub
+    'Comentarios generales
+    Private Sub txtDetallesComentario_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles txtDetallesComentario.TextChanged
+        valida_botones_comentarios_generales()
+        deshabilitar_btn_Quitar_comentario()
     End Sub
 #End Region
 #Region "Eventos Botones"
@@ -749,6 +761,22 @@ Public Class frmProduccion
         llena_lineas_Si_gridview()
         llena_Descanso_gridview()
     End Sub
+    'Comentarios Generales
+    Private Sub btnAgregarComentario_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnAgregarComentario.Click
+        If valida_hora_de_captura(Now.ToString("dd-MM-yyyy HH:mm:ss")) Then
+            add_comentario()
+            limpia_comentarios_generales()
+            llena_comentarios_generales_gridview()
+        End If
+    End Sub
+    Private Sub btnQuitarComentario_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnQuitarComentario.Click
+        If valida_hora_captura(Now.ToString("dd-MM-yyyy HH:mm:ss")) Then
+            remove_comentario()
+            limpia_comentarios_generales()
+            deshabilitar_btn_Quitar_comentario()
+            llena_comentarios_generales_gridview()
+        End If
+    End Sub
 #End Region
 #Region "Eventos Gridviews"
     'Productividad
@@ -784,6 +812,10 @@ Public Class frmProduccion
     Private Sub grdDetalleDescansos_CellClick(ByVal sender As System.Object, ByVal e As System.Windows.Forms.DataGridViewCellEventArgs) Handles grdDetalleDescansos.CellClick
         habilita_btn_quitar_descanso()
     End Sub
+    'Comentarios Generales
+    Private Sub grdDetalleComentario_CellClick(ByVal sender As System.Object, ByVal e As System.Windows.Forms.DataGridViewCellEventArgs) Handles grdDetalleComentario.CellClick
+        habilita_btn_Quitar_comentario()
+    End Sub
 #End Region
 #Region "Eventos DateTimePicker"
     Private Sub dtpDescanso_ValueChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles dtpDescanso.ValueChanged
@@ -800,7 +832,7 @@ Public Class frmProduccion
         If fecha_inicio <= hora_actual And hora_actual <= fecha_final And ini_aux <> Nothing And fin_aux <> Nothing Then
             Return True
         Else
-            MsgBox("Ha finalizado el turno ya no puedes capturar. Para elegir un nuevo turno y dia Da Click en Salir", vbExclamation + vbOKOnly, "Aviso!")
+            MsgBox("Ha finalizado el turno ya no puedes capturar o borrar. Para elegir un nuevo turno y dia Da Click en Salir", vbExclamation + vbOKOnly, "Aviso!")
             Return False
         End If
     End Function
@@ -913,6 +945,22 @@ Public Class frmProduccion
     Private Sub deshabilitar_btn_quitar_gente()
         btnQuitarGente.Enabled = False
     End Sub
+    'Comentarios Genrales
+    Private Sub valida_botones_comentarios_generales()
+        If cbxTurno.SelectedIndex <> -1 And txtDetallesComentario.Text <> "" Then
+            btnAgregarComentario.Enabled = True
+        Else
+            btnAgregarComentario.Enabled = False
+        End If
+    End Sub
+    Private Sub habilita_btn_Quitar_comentario()
+        limpia_comentarios_generales()
+        btnQuitarComentario.Enabled = True
+    End Sub
+    Private Sub deshabilitar_btn_Quitar_comentario()
+        btnQuitarComentario.Enabled = False
+    End Sub
+
     'Seguridad Condiciones Inseguras
     Private Sub valida_botones_cond_inseg()
         If cbxTurno.SelectedIndex <> -1 And cbxTipoCondInseg.SelectedIndex <> -1 And txtCondInsegCantidad.Text <> "" Then
@@ -996,6 +1044,8 @@ Public Class frmProduccion
 #Region "Limpia formularios"
     'Descanso Limpia todo
     Private Sub establece_dia_descanso()
+        cbxLinea.SelectedIndex = -1
+        cbxTurno.SelectedIndex = -1
         lblFechaRegistro.Visible = False
         lblFechaRegistrodescripcion.Visible = False
         grdDetalleProductividad.DataSource = Nothing
@@ -1005,7 +1055,7 @@ Public Class frmProduccion
         grdDetalleCondInseg.DataSource = Nothing
         grdDetalleAccidente.DataSource = Nothing
         grdDetalleGente.DataSource = Nothing
-
+        grdDetalleComentario.DataSource = Nothing
 
         grpProductividad.Enabled = False
         grpDesechos.Enabled = False
@@ -1017,6 +1067,7 @@ Public Class frmProduccion
         grpGente.Enabled = False
         grpCosto.Enabled = False
         grpCalidad.Enabled = False
+        grpComentarios.Enabled = False
 
 
         limpia_productividad()
@@ -1027,6 +1078,7 @@ Public Class frmProduccion
         limpia_cond_inseg()
         limpia_accidentes()
         limpia_turno_linea()
+        limpia_comentarios_generales()
     End Sub
     'Dia Laboral
     Private Sub establece_dia_laboral()
@@ -1041,6 +1093,7 @@ Public Class frmProduccion
         grpGente.Enabled = True
         grpCosto.Enabled = True
         grpCalidad.Enabled = True
+        grpComentarios.Enabled = True
 
         limpia_productividad()
         limpia_desechos()
@@ -1050,6 +1103,7 @@ Public Class frmProduccion
         limpia_cond_inseg()
         limpia_accidentes()
         limpia_turno_linea()
+        limpia_comentarios_generales()
     End Sub
     'Productividad
     Private Sub limpia_productividad()
@@ -1159,8 +1213,6 @@ Public Class frmProduccion
         oTurno.valida_inicio_fin_produccion()
         ini_aux = oTurno.inicio
         fin_aux = oTurno.fin
-        MsgBox(ini_aux)
-        MsgBox(fin_aux)
     End Sub
     'Obtiene y muestra la fecha a la cual pertenece la captura
     Private Sub establece_label_fecha_captura()
@@ -1725,7 +1777,29 @@ Public Class frmProduccion
         End If
     End Function
 #End Region
+#Region "Funciones para modulo Comentarios Generales"
+    Private Sub add_comentario()
+        Dim oComentariosGenerales As New Comentarios_Generales
+        oComentariosGenerales.cve_registro_turno = get_registro_del_turno()
+        oComentariosGenerales.cod_empleado_registro = vcodigo_empleado
+        oComentariosGenerales.fecha_registro = Convert.ToDateTime(Now.ToString("dd-MM-yyyy HH:mm"))
+        oComentariosGenerales.comentarios = txtDetallesComentario.Text
+        oComentariosGenerales.Registrar()
+    End Sub
+    Private Sub remove_comentario()
+        If grdDetalleComentario.Rows.Count <> 0 Then
+            Dim oComentariosGenerales As New Comentarios_Generales
+            oComentariosGenerales.cod_empleado_eliminacion = vcodigo_empleado
+            oComentariosGenerales.fecha_eliminacion = Convert.ToDateTime(Now.ToString("dd-MM-yyyy HH:mm"))
+            oComentariosGenerales.cve_comentarios_generales = grdDetalleComentario.Item("col_cve_comentarios_generales", grdDetalleComentario.CurrentRow.Index).Value
+            oComentariosGenerales.Eliminar()
+        Else
+            btnQuitarCondInseg.Enabled = False
+        End If
+    End Sub
 
-    
-    
+#End Region
+
+
+
 End Class
