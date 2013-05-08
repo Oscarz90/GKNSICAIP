@@ -33,9 +33,7 @@ Partial Class frmProduccion
         Me.cbxModeloDesecho = New System.Windows.Forms.ComboBox()
         Me.Label60 = New System.Windows.Forms.Label()
         Me.Label17 = New System.Windows.Forms.Label()
-        Me.btnAgregarDesecho = New System.Windows.Forms.Button()
         Me.Label19 = New System.Windows.Forms.Label()
-        Me.btnQuitarDesecho = New System.Windows.Forms.Button()
         Me.txtModeloDesecho = New System.Windows.Forms.TextBox()
         Me.Label46 = New System.Windows.Forms.Label()
         Me.Label6 = New System.Windows.Forms.Label()
@@ -82,8 +80,6 @@ Partial Class frmProduccion
         Me.txtPiezasOkProducidas = New System.Windows.Forms.TextBox()
         Me.Label9 = New System.Windows.Forms.Label()
         Me.Label10 = New System.Windows.Forms.Label()
-        Me.btnAgregarModelo = New System.Windows.Forms.Button()
-        Me.btnQuitarModelo = New System.Windows.Forms.Button()
         Me.tabPageParos = New System.Windows.Forms.TabPage()
         Me.grpCalidad = New System.Windows.Forms.GroupBox()
         Me.Label77 = New System.Windows.Forms.Label()
@@ -106,8 +102,6 @@ Partial Class frmProduccion
         Me.Label25 = New System.Windows.Forms.Label()
         Me.Label15 = New System.Windows.Forms.Label()
         Me.Label13 = New System.Windows.Forms.Label()
-        Me.btnQuitarParo = New System.Windows.Forms.Button()
-        Me.btnAgregarParo = New System.Windows.Forms.Button()
         Me.Label32 = New System.Windows.Forms.Label()
         Me.txtDetallesParo = New System.Windows.Forms.TextBox()
         Me.cbxTipoParo = New System.Windows.Forms.ComboBox()
@@ -126,7 +120,6 @@ Partial Class frmProduccion
         Me.Label81 = New System.Windows.Forms.Label()
         Me.Label82 = New System.Windows.Forms.Label()
         Me.Label79 = New System.Windows.Forms.Label()
-        Me.btnAgregarCincoS = New System.Windows.Forms.Button()
         Me.txtPromedio = New System.Windows.Forms.TextBox()
         Me.Label68 = New System.Windows.Forms.Label()
         Me.txtManttoAutonomo = New System.Windows.Forms.TextBox()
@@ -145,8 +138,6 @@ Partial Class frmProduccion
         Me.Label5 = New System.Windows.Forms.Label()
         Me.Label7 = New System.Windows.Forms.Label()
         Me.Label11 = New System.Windows.Forms.Label()
-        Me.btnAgregarRechazo = New System.Windows.Forms.Button()
-        Me.btnQuitarRechazo = New System.Windows.Forms.Button()
         Me.Label12 = New System.Windows.Forms.Label()
         Me.Label16 = New System.Windows.Forms.Label()
         Me.txtRechazoMotivo = New System.Windows.Forms.TextBox()
@@ -154,8 +145,6 @@ Partial Class frmProduccion
         Me.tabPageCondInsegAccidentes = New System.Windows.Forms.TabPage()
         Me.grpAccidentes = New System.Windows.Forms.GroupBox()
         Me.grdDetalleAccidente = New System.Windows.Forms.DataGridView()
-        Me.btnQuitarAccidente = New System.Windows.Forms.Button()
-        Me.btnAgregarAccidente = New System.Windows.Forms.Button()
         Me.Label63 = New System.Windows.Forms.Label()
         Me.Label64 = New System.Windows.Forms.Label()
         Me.txtDetallesAccidentes = New System.Windows.Forms.TextBox()
@@ -166,8 +155,6 @@ Partial Class frmProduccion
         Me.Label67 = New System.Windows.Forms.Label()
         Me.grpCondInseg = New System.Windows.Forms.GroupBox()
         Me.grdDetalleCondInseg = New System.Windows.Forms.DataGridView()
-        Me.btnQuitarCondInseg = New System.Windows.Forms.Button()
-        Me.btnAgregarCondInseg = New System.Windows.Forms.Button()
         Me.Label20 = New System.Windows.Forms.Label()
         Me.Label22 = New System.Windows.Forms.Label()
         Me.txtDetallesCondInseg = New System.Windows.Forms.TextBox()
@@ -179,8 +166,6 @@ Partial Class frmProduccion
         Me.tabPageGente = New System.Windows.Forms.TabPage()
         Me.grpGente = New System.Windows.Forms.GroupBox()
         Me.grdDetalleGente = New System.Windows.Forms.DataGridView()
-        Me.btnQuitarGente = New System.Windows.Forms.Button()
-        Me.btnAgregarGente = New System.Windows.Forms.Button()
         Me.Label61 = New System.Windows.Forms.Label()
         Me.Label33 = New System.Windows.Forms.Label()
         Me.txtDetallesGente = New System.Windows.Forms.TextBox()
@@ -195,14 +180,10 @@ Partial Class frmProduccion
         Me.Label75 = New System.Windows.Forms.Label()
         Me.Label74 = New System.Windows.Forms.Label()
         Me.Label73 = New System.Windows.Forms.Label()
-        Me.btnLineaUnica = New System.Windows.Forms.Button()
-        Me.btnLineasTodas = New System.Windows.Forms.Button()
         Me.Label72 = New System.Windows.Forms.Label()
         Me.grdLineasRegistradas = New System.Windows.Forms.DataGridView()
         Me.grdLineasNoRegistradas = New System.Windows.Forms.DataGridView()
         Me.tabPageDescansos = New System.Windows.Forms.TabPage()
-        Me.btnQuitarDescanso = New System.Windows.Forms.Button()
-        Me.btnAgregarDescanso = New System.Windows.Forms.Button()
         Me.Label85 = New System.Windows.Forms.Label()
         Me.Label86 = New System.Windows.Forms.Label()
         Me.grdDetalleDescansos = New System.Windows.Forms.DataGridView()
@@ -211,17 +192,11 @@ Partial Class frmProduccion
         Me.TabPage1 = New System.Windows.Forms.TabPage()
         Me.grpComentarios = New System.Windows.Forms.GroupBox()
         Me.grdDetalleComentario = New System.Windows.Forms.DataGridView()
-        Me.col_cve_comentarios_generales = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.col_comentarios = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Label90 = New System.Windows.Forms.Label()
         Me.txtDetallesComentario = New System.Windows.Forms.TextBox()
-        Me.btnQuitarComentario = New System.Windows.Forms.Button()
-        Me.btnAgregarComentario = New System.Windows.Forms.Button()
         Me.Label88 = New System.Windows.Forms.Label()
         Me.Label89 = New System.Windows.Forms.Label()
         Me.titulo_banner_formulario = New System.Windows.Forms.Label()
-        Me.banner_formulario = New System.Windows.Forms.PictureBox()
-        Me.imgEscudo = New System.Windows.Forms.PictureBox()
         Me.cbxTurno = New System.Windows.Forms.ComboBox()
         Me.Label56 = New System.Windows.Forms.Label()
         Me.Label57 = New System.Windows.Forms.Label()
@@ -278,12 +253,37 @@ Partial Class frmProduccion
         Me.comentarios = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.col_cve_linea = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.collinea = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.col_fecha_descanso = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.col_Descanso = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.col_cve_comentarios_generales = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.col_comentarios = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.col_cve_registro_turno = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.col_linea = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.col_turno = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.col_dia_asignado = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.col_fecha_descanso = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.col_Descanso = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.imgEscudo = New System.Windows.Forms.PictureBox()
+        Me.banner_formulario = New System.Windows.Forms.PictureBox()
+        Me.btnAgregarDesecho = New System.Windows.Forms.Button()
+        Me.btnQuitarDesecho = New System.Windows.Forms.Button()
+        Me.btnAgregarModelo = New System.Windows.Forms.Button()
+        Me.btnQuitarModelo = New System.Windows.Forms.Button()
+        Me.btnQuitarParo = New System.Windows.Forms.Button()
+        Me.btnAgregarParo = New System.Windows.Forms.Button()
+        Me.btnAgregarCincoS = New System.Windows.Forms.Button()
+        Me.btnAgregarRechazo = New System.Windows.Forms.Button()
+        Me.btnQuitarRechazo = New System.Windows.Forms.Button()
+        Me.btnQuitarAccidente = New System.Windows.Forms.Button()
+        Me.btnAgregarAccidente = New System.Windows.Forms.Button()
+        Me.btnQuitarCondInseg = New System.Windows.Forms.Button()
+        Me.btnAgregarCondInseg = New System.Windows.Forms.Button()
+        Me.btnQuitarGente = New System.Windows.Forms.Button()
+        Me.btnAgregarGente = New System.Windows.Forms.Button()
+        Me.btnLineaUnica = New System.Windows.Forms.Button()
+        Me.btnLineasTodas = New System.Windows.Forms.Button()
+        Me.btnQuitarDescanso = New System.Windows.Forms.Button()
+        Me.btnAgregarDescanso = New System.Windows.Forms.Button()
+        Me.btnQuitarComentario = New System.Windows.Forms.Button()
+        Me.btnAgregarComentario = New System.Windows.Forms.Button()
         Me.tabPageComentarios.SuspendLayout()
         Me.tabPageProductividad.SuspendLayout()
         Me.grpDesechos.SuspendLayout()
@@ -315,8 +315,8 @@ Partial Class frmProduccion
         Me.TabPage1.SuspendLayout()
         Me.grpComentarios.SuspendLayout()
         CType(Me.grdDetalleComentario, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.banner_formulario, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.imgEscudo, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.banner_formulario, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'tabPageComentarios
@@ -385,7 +385,7 @@ Partial Class frmProduccion
         '
         'txtDetalleDesecho
         '
-        Me.txtDetalleDesecho.BackColor = System.Drawing.Color.FromArgb(CType(CType(243, Byte), Integer), CType(CType(251, Byte), Integer), CType(CType(120, Byte), Integer))
+        Me.txtDetalleDesecho.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(128, Byte), Integer))
         Me.txtDetalleDesecho.Location = New System.Drawing.Point(17, 156)
         Me.txtDetalleDesecho.Multiline = True
         Me.txtDetalleDesecho.Name = "txtDetalleDesecho"
@@ -417,7 +417,7 @@ Partial Class frmProduccion
         '
         'cbxModeloDesecho
         '
-        Me.cbxModeloDesecho.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
+        Me.cbxModeloDesecho.BackColor = System.Drawing.Color.White
         Me.cbxModeloDesecho.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cbxModeloDesecho.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cbxModeloDesecho.FormattingEnabled = True
@@ -445,19 +445,6 @@ Partial Class frmProduccion
         Me.Label17.TabIndex = 325
         Me.Label17.Text = "Descripcion:"
         '
-        'btnAgregarDesecho
-        '
-        Me.btnAgregarDesecho.BackColor = System.Drawing.Color.White
-        Me.btnAgregarDesecho.BackgroundImage = CType(resources.GetObject("btnAgregarDesecho.BackgroundImage"), System.Drawing.Image)
-        Me.btnAgregarDesecho.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center
-        Me.btnAgregarDesecho.Enabled = False
-        Me.btnAgregarDesecho.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnAgregarDesecho.Location = New System.Drawing.Point(295, 125)
-        Me.btnAgregarDesecho.Name = "btnAgregarDesecho"
-        Me.btnAgregarDesecho.Size = New System.Drawing.Size(63, 59)
-        Me.btnAgregarDesecho.TabIndex = 323
-        Me.btnAgregarDesecho.UseVisualStyleBackColor = False
-        '
         'Label19
         '
         Me.Label19.AutoSize = True
@@ -467,19 +454,6 @@ Partial Class frmProduccion
         Me.Label19.Size = New System.Drawing.Size(64, 18)
         Me.Label19.TabIndex = 322
         Me.Label19.Text = "Modelo:"
-        '
-        'btnQuitarDesecho
-        '
-        Me.btnQuitarDesecho.BackColor = System.Drawing.Color.White
-        Me.btnQuitarDesecho.BackgroundImage = CType(resources.GetObject("btnQuitarDesecho.BackgroundImage"), System.Drawing.Image)
-        Me.btnQuitarDesecho.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center
-        Me.btnQuitarDesecho.Enabled = False
-        Me.btnQuitarDesecho.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnQuitarDesecho.Location = New System.Drawing.Point(369, 125)
-        Me.btnQuitarDesecho.Name = "btnQuitarDesecho"
-        Me.btnQuitarDesecho.Size = New System.Drawing.Size(64, 59)
-        Me.btnQuitarDesecho.TabIndex = 324
-        Me.btnQuitarDesecho.UseVisualStyleBackColor = False
         '
         'txtModeloDesecho
         '
@@ -511,7 +485,7 @@ Partial Class frmProduccion
         '
         'txtDesechosCantidad
         '
-        Me.txtDesechosCantidad.BackColor = System.Drawing.Color.FromArgb(CType(CType(243, Byte), Integer), CType(CType(251, Byte), Integer), CType(CType(120, Byte), Integer))
+        Me.txtDesechosCantidad.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(128, Byte), Integer))
         Me.txtDesechosCantidad.Location = New System.Drawing.Point(116, 89)
         Me.txtDesechosCantidad.Name = "txtDesechosCantidad"
         Me.txtDesechosCantidad.Size = New System.Drawing.Size(61, 26)
@@ -829,7 +803,7 @@ Partial Class frmProduccion
         '
         'txtTiempoOperacion
         '
-        Me.txtTiempoOperacion.BackColor = System.Drawing.Color.FromArgb(CType(CType(243, Byte), Integer), CType(CType(251, Byte), Integer), CType(CType(120, Byte), Integer))
+        Me.txtTiempoOperacion.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(128, Byte), Integer))
         Me.txtTiempoOperacion.Location = New System.Drawing.Point(197, 225)
         Me.txtTiempoOperacion.Name = "txtTiempoOperacion"
         Me.txtTiempoOperacion.Size = New System.Drawing.Size(61, 26)
@@ -848,7 +822,7 @@ Partial Class frmProduccion
         '
         'cbxModeloProductividad
         '
-        Me.cbxModeloProductividad.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
+        Me.cbxModeloProductividad.BackColor = System.Drawing.Color.White
         Me.cbxModeloProductividad.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cbxModeloProductividad.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cbxModeloProductividad.FormattingEnabled = True
@@ -948,7 +922,7 @@ Partial Class frmProduccion
         '
         'txtPiezasOkProducidas
         '
-        Me.txtPiezasOkProducidas.BackColor = System.Drawing.Color.FromArgb(CType(CType(243, Byte), Integer), CType(CType(251, Byte), Integer), CType(CType(120, Byte), Integer))
+        Me.txtPiezasOkProducidas.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(128, Byte), Integer))
         Me.txtPiezasOkProducidas.Location = New System.Drawing.Point(448, 190)
         Me.txtPiezasOkProducidas.Name = "txtPiezasOkProducidas"
         Me.txtPiezasOkProducidas.Size = New System.Drawing.Size(61, 26)
@@ -975,32 +949,6 @@ Partial Class frmProduccion
         Me.Label10.TabIndex = 9
         Me.Label10.Text = "Desempeño:"
         '
-        'btnAgregarModelo
-        '
-        Me.btnAgregarModelo.BackColor = System.Drawing.Color.White
-        Me.btnAgregarModelo.BackgroundImage = CType(resources.GetObject("btnAgregarModelo.BackgroundImage"), System.Drawing.Image)
-        Me.btnAgregarModelo.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center
-        Me.btnAgregarModelo.Enabled = False
-        Me.btnAgregarModelo.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnAgregarModelo.Location = New System.Drawing.Point(590, 170)
-        Me.btnAgregarModelo.Name = "btnAgregarModelo"
-        Me.btnAgregarModelo.Size = New System.Drawing.Size(63, 59)
-        Me.btnAgregarModelo.TabIndex = 149
-        Me.btnAgregarModelo.UseVisualStyleBackColor = False
-        '
-        'btnQuitarModelo
-        '
-        Me.btnQuitarModelo.BackColor = System.Drawing.Color.White
-        Me.btnQuitarModelo.BackgroundImage = CType(resources.GetObject("btnQuitarModelo.BackgroundImage"), System.Drawing.Image)
-        Me.btnQuitarModelo.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center
-        Me.btnQuitarModelo.Enabled = False
-        Me.btnQuitarModelo.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnQuitarModelo.Location = New System.Drawing.Point(664, 170)
-        Me.btnQuitarModelo.Name = "btnQuitarModelo"
-        Me.btnQuitarModelo.Size = New System.Drawing.Size(64, 59)
-        Me.btnQuitarModelo.TabIndex = 150
-        Me.btnQuitarModelo.UseVisualStyleBackColor = False
-        '
         'tabPageParos
         '
         Me.tabPageParos.Controls.Add(Me.grpCalidad)
@@ -1020,9 +968,9 @@ Partial Class frmProduccion
         Me.grpCalidad.Controls.Add(Me.lblNRFTi)
         Me.grpCalidad.Controls.Add(Me.Label78)
         Me.grpCalidad.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.grpCalidad.Location = New System.Drawing.Point(848, 177)
+        Me.grpCalidad.Location = New System.Drawing.Point(848, 238)
         Me.grpCalidad.Name = "grpCalidad"
-        Me.grpCalidad.Size = New System.Drawing.Size(368, 237)
+        Me.grpCalidad.Size = New System.Drawing.Size(368, 103)
         Me.grpCalidad.TabIndex = 17
         Me.grpCalidad.TabStop = False
         Me.grpCalidad.Text = "3.-CALIDAD"
@@ -1199,22 +1147,22 @@ Partial Class frmProduccion
         Me.txtParosDescripcion.Location = New System.Drawing.Point(6, 128)
         Me.txtParosDescripcion.Name = "txtParosDescripcion"
         Me.txtParosDescripcion.ReadOnly = True
-        Me.txtParosDescripcion.Size = New System.Drawing.Size(294, 25)
+        Me.txtParosDescripcion.Size = New System.Drawing.Size(355, 25)
         Me.txtParosDescripcion.TabIndex = 323
         '
         'txtMaquinaDescripcion
         '
         Me.txtMaquinaDescripcion.Font = New System.Drawing.Font("Arial", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtMaquinaDescripcion.Location = New System.Drawing.Point(22, 55)
+        Me.txtMaquinaDescripcion.Location = New System.Drawing.Point(6, 55)
         Me.txtMaquinaDescripcion.Name = "txtMaquinaDescripcion"
         Me.txtMaquinaDescripcion.ReadOnly = True
-        Me.txtMaquinaDescripcion.Size = New System.Drawing.Size(299, 25)
+        Me.txtMaquinaDescripcion.Size = New System.Drawing.Size(355, 25)
         Me.txtMaquinaDescripcion.TabIndex = 322
         '
         'txtMinutosParo
         '
-        Me.txtMinutosParo.BackColor = System.Drawing.Color.FromArgb(CType(CType(243, Byte), Integer), CType(CType(251, Byte), Integer), CType(CType(120, Byte), Integer))
-        Me.txtMinutosParo.Location = New System.Drawing.Point(422, 21)
+        Me.txtMinutosParo.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(128, Byte), Integer))
+        Me.txtMinutosParo.Location = New System.Drawing.Point(460, 21)
         Me.txtMinutosParo.Name = "txtMinutosParo"
         Me.txtMinutosParo.Size = New System.Drawing.Size(161, 26)
         Me.txtMinutosParo.TabIndex = 141
@@ -1224,7 +1172,7 @@ Partial Class frmProduccion
         '
         Me.Label25.AutoSize = True
         Me.Label25.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label25.Location = New System.Drawing.Point(339, 24)
+        Me.Label25.Location = New System.Drawing.Point(392, 24)
         Me.Label25.Name = "Label25"
         Me.Label25.Size = New System.Drawing.Size(66, 18)
         Me.Label25.TabIndex = 140
@@ -1233,7 +1181,7 @@ Partial Class frmProduccion
         'Label15
         '
         Me.Label15.AutoSize = True
-        Me.Label15.Location = New System.Drawing.Point(752, 104)
+        Me.Label15.Location = New System.Drawing.Point(775, 114)
         Me.Label15.Name = "Label15"
         Me.Label15.Size = New System.Drawing.Size(50, 18)
         Me.Label15.TabIndex = 139
@@ -1242,43 +1190,17 @@ Partial Class frmProduccion
         'Label13
         '
         Me.Label13.AutoSize = True
-        Me.Label13.Location = New System.Drawing.Point(672, 104)
+        Me.Label13.Location = New System.Drawing.Point(695, 114)
         Me.Label13.Name = "Label13"
         Me.Label13.Size = New System.Drawing.Size(65, 18)
         Me.Label13.TabIndex = 138
         Me.Label13.Text = "Agregar"
         '
-        'btnQuitarParo
-        '
-        Me.btnQuitarParo.BackColor = System.Drawing.Color.White
-        Me.btnQuitarParo.BackgroundImage = CType(resources.GetObject("btnQuitarParo.BackgroundImage"), System.Drawing.Image)
-        Me.btnQuitarParo.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center
-        Me.btnQuitarParo.Enabled = False
-        Me.btnQuitarParo.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnQuitarParo.Location = New System.Drawing.Point(743, 42)
-        Me.btnQuitarParo.Name = "btnQuitarParo"
-        Me.btnQuitarParo.Size = New System.Drawing.Size(64, 59)
-        Me.btnQuitarParo.TabIndex = 119
-        Me.btnQuitarParo.UseVisualStyleBackColor = False
-        '
-        'btnAgregarParo
-        '
-        Me.btnAgregarParo.BackColor = System.Drawing.Color.White
-        Me.btnAgregarParo.BackgroundImage = CType(resources.GetObject("btnAgregarParo.BackgroundImage"), System.Drawing.Image)
-        Me.btnAgregarParo.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center
-        Me.btnAgregarParo.Enabled = False
-        Me.btnAgregarParo.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnAgregarParo.Location = New System.Drawing.Point(671, 42)
-        Me.btnAgregarParo.Name = "btnAgregarParo"
-        Me.btnAgregarParo.Size = New System.Drawing.Size(66, 59)
-        Me.btnAgregarParo.TabIndex = 118
-        Me.btnAgregarParo.UseVisualStyleBackColor = False
-        '
         'Label32
         '
         Me.Label32.AutoSize = True
         Me.Label32.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label32.Location = New System.Drawing.Point(339, 78)
+        Me.Label32.Location = New System.Drawing.Point(389, 78)
         Me.Label32.Name = "Label32"
         Me.Label32.Size = New System.Drawing.Size(69, 18)
         Me.Label32.TabIndex = 15
@@ -1286,8 +1208,8 @@ Partial Class frmProduccion
         '
         'txtDetallesParo
         '
-        Me.txtDetallesParo.BackColor = System.Drawing.Color.FromArgb(CType(CType(243, Byte), Integer), CType(CType(251, Byte), Integer), CType(CType(120, Byte), Integer))
-        Me.txtDetallesParo.Location = New System.Drawing.Point(422, 78)
+        Me.txtDetallesParo.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(128, Byte), Integer))
+        Me.txtDetallesParo.Location = New System.Drawing.Point(460, 78)
         Me.txtDetallesParo.Multiline = True
         Me.txtDetallesParo.Name = "txtDetallesParo"
         Me.txtDetallesParo.ScrollBars = System.Windows.Forms.ScrollBars.Vertical
@@ -1298,17 +1220,17 @@ Partial Class frmProduccion
         '
         Me.cbxTipoParo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cbxTipoParo.FormattingEnabled = True
-        Me.cbxTipoParo.Location = New System.Drawing.Point(111, 95)
+        Me.cbxTipoParo.Location = New System.Drawing.Point(132, 96)
         Me.cbxTipoParo.MaxDropDownItems = 5
         Me.cbxTipoParo.Name = "cbxTipoParo"
-        Me.cbxTipoParo.Size = New System.Drawing.Size(189, 26)
+        Me.cbxTipoParo.Size = New System.Drawing.Size(145, 26)
         Me.cbxTipoParo.TabIndex = 15
         '
         'Label26
         '
         Me.Label26.AutoSize = True
         Me.Label26.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label26.Location = New System.Drawing.Point(3, 98)
+        Me.Label26.Location = New System.Drawing.Point(24, 99)
         Me.Label26.Name = "Label26"
         Me.Label26.Size = New System.Drawing.Size(102, 18)
         Me.Label26.TabIndex = 15
@@ -1319,16 +1241,16 @@ Partial Class frmProduccion
         Me.cbxMaquina.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cbxMaquina.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cbxMaquina.FormattingEnabled = True
-        Me.cbxMaquina.Location = New System.Drawing.Point(99, 21)
+        Me.cbxMaquina.Location = New System.Drawing.Point(132, 21)
         Me.cbxMaquina.Name = "cbxMaquina"
-        Me.cbxMaquina.Size = New System.Drawing.Size(222, 26)
+        Me.cbxMaquina.Size = New System.Drawing.Size(189, 26)
         Me.cbxMaquina.TabIndex = 7
         '
         'Label24
         '
         Me.Label24.AutoSize = True
         Me.Label24.Font = New System.Drawing.Font("Calibri", 12.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label24.Location = New System.Drawing.Point(16, 23)
+        Me.Label24.Location = New System.Drawing.Point(49, 23)
         Me.Label24.Name = "Label24"
         Me.Label24.Size = New System.Drawing.Size(77, 21)
         Me.Label24.TabIndex = 6
@@ -1466,19 +1388,6 @@ Partial Class frmProduccion
         Me.Label79.TabIndex = 330
         Me.Label79.Text = "Agregar"
         '
-        'btnAgregarCincoS
-        '
-        Me.btnAgregarCincoS.BackColor = System.Drawing.Color.White
-        Me.btnAgregarCincoS.BackgroundImage = CType(resources.GetObject("btnAgregarCincoS.BackgroundImage"), System.Drawing.Image)
-        Me.btnAgregarCincoS.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center
-        Me.btnAgregarCincoS.Enabled = False
-        Me.btnAgregarCincoS.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnAgregarCincoS.Location = New System.Drawing.Point(457, 34)
-        Me.btnAgregarCincoS.Name = "btnAgregarCincoS"
-        Me.btnAgregarCincoS.Size = New System.Drawing.Size(63, 59)
-        Me.btnAgregarCincoS.TabIndex = 329
-        Me.btnAgregarCincoS.UseVisualStyleBackColor = False
-        '
         'txtPromedio
         '
         Me.txtPromedio.Location = New System.Drawing.Point(260, 132)
@@ -1498,6 +1407,7 @@ Partial Class frmProduccion
         '
         'txtManttoAutonomo
         '
+        Me.txtManttoAutonomo.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(128, Byte), Integer))
         Me.txtManttoAutonomo.Location = New System.Drawing.Point(260, 36)
         Me.txtManttoAutonomo.Name = "txtManttoAutonomo"
         Me.txtManttoAutonomo.Size = New System.Drawing.Size(100, 26)
@@ -1515,6 +1425,7 @@ Partial Class frmProduccion
         '
         'txt5s
         '
+        Me.txt5s.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(128, Byte), Integer))
         Me.txt5s.Location = New System.Drawing.Point(260, 100)
         Me.txt5s.Name = "txt5s"
         Me.txt5s.Size = New System.Drawing.Size(100, 26)
@@ -1522,6 +1433,7 @@ Partial Class frmProduccion
         '
         'txtAdmonVisual
         '
+        Me.txtAdmonVisual.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(128, Byte), Integer))
         Me.txtAdmonVisual.Location = New System.Drawing.Point(260, 68)
         Me.txtAdmonVisual.Name = "txtAdmonVisual"
         Me.txtAdmonVisual.Size = New System.Drawing.Size(100, 26)
@@ -1663,32 +1575,6 @@ Partial Class frmProduccion
         Me.Label11.TabIndex = 328
         Me.Label11.Text = "Agregar"
         '
-        'btnAgregarRechazo
-        '
-        Me.btnAgregarRechazo.BackColor = System.Drawing.Color.White
-        Me.btnAgregarRechazo.BackgroundImage = CType(resources.GetObject("btnAgregarRechazo.BackgroundImage"), System.Drawing.Image)
-        Me.btnAgregarRechazo.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center
-        Me.btnAgregarRechazo.Enabled = False
-        Me.btnAgregarRechazo.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnAgregarRechazo.Location = New System.Drawing.Point(478, 131)
-        Me.btnAgregarRechazo.Name = "btnAgregarRechazo"
-        Me.btnAgregarRechazo.Size = New System.Drawing.Size(63, 59)
-        Me.btnAgregarRechazo.TabIndex = 326
-        Me.btnAgregarRechazo.UseVisualStyleBackColor = False
-        '
-        'btnQuitarRechazo
-        '
-        Me.btnQuitarRechazo.BackColor = System.Drawing.Color.White
-        Me.btnQuitarRechazo.BackgroundImage = CType(resources.GetObject("btnQuitarRechazo.BackgroundImage"), System.Drawing.Image)
-        Me.btnQuitarRechazo.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center
-        Me.btnQuitarRechazo.Enabled = False
-        Me.btnQuitarRechazo.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnQuitarRechazo.Location = New System.Drawing.Point(555, 131)
-        Me.btnQuitarRechazo.Name = "btnQuitarRechazo"
-        Me.btnQuitarRechazo.Size = New System.Drawing.Size(64, 59)
-        Me.btnQuitarRechazo.TabIndex = 327
-        Me.btnQuitarRechazo.UseVisualStyleBackColor = False
-        '
         'Label12
         '
         Me.Label12.AutoSize = True
@@ -1711,6 +1597,7 @@ Partial Class frmProduccion
         '
         'txtRechazoMotivo
         '
+        Me.txtRechazoMotivo.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(128, Byte), Integer))
         Me.txtRechazoMotivo.Font = New System.Drawing.Font("Arial", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtRechazoMotivo.Location = New System.Drawing.Point(10, 131)
         Me.txtRechazoMotivo.Multiline = True
@@ -1721,7 +1608,7 @@ Partial Class frmProduccion
         '
         'txtRechazosCantidad
         '
-        Me.txtRechazosCantidad.BackColor = System.Drawing.Color.FromArgb(CType(CType(243, Byte), Integer), CType(CType(251, Byte), Integer), CType(CType(120, Byte), Integer))
+        Me.txtRechazosCantidad.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(128, Byte), Integer))
         Me.txtRechazosCantidad.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtRechazosCantidad.Location = New System.Drawing.Point(421, 25)
         Me.txtRechazosCantidad.Name = "txtRechazosCantidad"
@@ -1773,32 +1660,6 @@ Partial Class frmProduccion
         Me.grdDetalleAccidente.Size = New System.Drawing.Size(588, 171)
         Me.grdDetalleAccidente.TabIndex = 348
         '
-        'btnQuitarAccidente
-        '
-        Me.btnQuitarAccidente.BackColor = System.Drawing.Color.White
-        Me.btnQuitarAccidente.BackgroundImage = CType(resources.GetObject("btnQuitarAccidente.BackgroundImage"), System.Drawing.Image)
-        Me.btnQuitarAccidente.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center
-        Me.btnQuitarAccidente.Enabled = False
-        Me.btnQuitarAccidente.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnQuitarAccidente.Location = New System.Drawing.Point(521, 22)
-        Me.btnQuitarAccidente.Name = "btnQuitarAccidente"
-        Me.btnQuitarAccidente.Size = New System.Drawing.Size(64, 59)
-        Me.btnQuitarAccidente.TabIndex = 342
-        Me.btnQuitarAccidente.UseVisualStyleBackColor = False
-        '
-        'btnAgregarAccidente
-        '
-        Me.btnAgregarAccidente.BackColor = System.Drawing.Color.White
-        Me.btnAgregarAccidente.BackgroundImage = CType(resources.GetObject("btnAgregarAccidente.BackgroundImage"), System.Drawing.Image)
-        Me.btnAgregarAccidente.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center
-        Me.btnAgregarAccidente.Enabled = False
-        Me.btnAgregarAccidente.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnAgregarAccidente.Location = New System.Drawing.Point(444, 22)
-        Me.btnAgregarAccidente.Name = "btnAgregarAccidente"
-        Me.btnAgregarAccidente.Size = New System.Drawing.Size(63, 59)
-        Me.btnAgregarAccidente.TabIndex = 341
-        Me.btnAgregarAccidente.UseVisualStyleBackColor = False
-        '
         'Label63
         '
         Me.Label63.AutoSize = True
@@ -1821,7 +1682,7 @@ Partial Class frmProduccion
         '
         'txtDetallesAccidentes
         '
-        Me.txtDetallesAccidentes.BackColor = System.Drawing.Color.FromArgb(CType(CType(243, Byte), Integer), CType(CType(251, Byte), Integer), CType(CType(120, Byte), Integer))
+        Me.txtDetallesAccidentes.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(128, Byte), Integer))
         Me.txtDetallesAccidentes.Location = New System.Drawing.Point(93, 144)
         Me.txtDetallesAccidentes.Multiline = True
         Me.txtDetallesAccidentes.Name = "txtDetallesAccidentes"
@@ -1841,7 +1702,7 @@ Partial Class frmProduccion
         '
         'txtAccidenteCantidad
         '
-        Me.txtAccidenteCantidad.BackColor = System.Drawing.Color.FromArgb(CType(CType(243, Byte), Integer), CType(CType(251, Byte), Integer), CType(CType(120, Byte), Integer))
+        Me.txtAccidenteCantidad.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(128, Byte), Integer))
         Me.txtAccidenteCantidad.Location = New System.Drawing.Point(93, 93)
         Me.txtAccidenteCantidad.Name = "txtAccidenteCantidad"
         Me.txtAccidenteCantidad.Size = New System.Drawing.Size(181, 28)
@@ -1909,32 +1770,6 @@ Partial Class frmProduccion
         Me.grdDetalleCondInseg.Size = New System.Drawing.Size(588, 171)
         Me.grdDetalleCondInseg.TabIndex = 347
         '
-        'btnQuitarCondInseg
-        '
-        Me.btnQuitarCondInseg.BackColor = System.Drawing.Color.White
-        Me.btnQuitarCondInseg.BackgroundImage = CType(resources.GetObject("btnQuitarCondInseg.BackgroundImage"), System.Drawing.Image)
-        Me.btnQuitarCondInseg.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center
-        Me.btnQuitarCondInseg.Enabled = False
-        Me.btnQuitarCondInseg.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnQuitarCondInseg.Location = New System.Drawing.Point(524, 23)
-        Me.btnQuitarCondInseg.Name = "btnQuitarCondInseg"
-        Me.btnQuitarCondInseg.Size = New System.Drawing.Size(64, 59)
-        Me.btnQuitarCondInseg.TabIndex = 342
-        Me.btnQuitarCondInseg.UseVisualStyleBackColor = False
-        '
-        'btnAgregarCondInseg
-        '
-        Me.btnAgregarCondInseg.BackColor = System.Drawing.Color.White
-        Me.btnAgregarCondInseg.BackgroundImage = CType(resources.GetObject("btnAgregarCondInseg.BackgroundImage"), System.Drawing.Image)
-        Me.btnAgregarCondInseg.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center
-        Me.btnAgregarCondInseg.Enabled = False
-        Me.btnAgregarCondInseg.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnAgregarCondInseg.Location = New System.Drawing.Point(447, 23)
-        Me.btnAgregarCondInseg.Name = "btnAgregarCondInseg"
-        Me.btnAgregarCondInseg.Size = New System.Drawing.Size(63, 59)
-        Me.btnAgregarCondInseg.TabIndex = 341
-        Me.btnAgregarCondInseg.UseVisualStyleBackColor = False
-        '
         'Label20
         '
         Me.Label20.AutoSize = True
@@ -1957,7 +1792,7 @@ Partial Class frmProduccion
         '
         'txtDetallesCondInseg
         '
-        Me.txtDetallesCondInseg.BackColor = System.Drawing.Color.FromArgb(CType(CType(243, Byte), Integer), CType(CType(251, Byte), Integer), CType(CType(120, Byte), Integer))
+        Me.txtDetallesCondInseg.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(128, Byte), Integer))
         Me.txtDetallesCondInseg.Location = New System.Drawing.Point(96, 145)
         Me.txtDetallesCondInseg.Multiline = True
         Me.txtDetallesCondInseg.Name = "txtDetallesCondInseg"
@@ -1977,7 +1812,7 @@ Partial Class frmProduccion
         '
         'txtCondInsegCantidad
         '
-        Me.txtCondInsegCantidad.BackColor = System.Drawing.Color.FromArgb(CType(CType(243, Byte), Integer), CType(CType(251, Byte), Integer), CType(CType(120, Byte), Integer))
+        Me.txtCondInsegCantidad.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(128, Byte), Integer))
         Me.txtCondInsegCantidad.Location = New System.Drawing.Point(96, 94)
         Me.txtCondInsegCantidad.Name = "txtCondInsegCantidad"
         Me.txtCondInsegCantidad.Size = New System.Drawing.Size(181, 28)
@@ -2056,32 +1891,6 @@ Partial Class frmProduccion
         Me.grdDetalleGente.Size = New System.Drawing.Size(580, 150)
         Me.grdDetalleGente.TabIndex = 337
         '
-        'btnQuitarGente
-        '
-        Me.btnQuitarGente.BackColor = System.Drawing.Color.White
-        Me.btnQuitarGente.BackgroundImage = CType(resources.GetObject("btnQuitarGente.BackgroundImage"), System.Drawing.Image)
-        Me.btnQuitarGente.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center
-        Me.btnQuitarGente.Enabled = False
-        Me.btnQuitarGente.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnQuitarGente.Location = New System.Drawing.Point(530, 25)
-        Me.btnQuitarGente.Name = "btnQuitarGente"
-        Me.btnQuitarGente.Size = New System.Drawing.Size(64, 59)
-        Me.btnQuitarGente.TabIndex = 331
-        Me.btnQuitarGente.UseVisualStyleBackColor = False
-        '
-        'btnAgregarGente
-        '
-        Me.btnAgregarGente.BackColor = System.Drawing.Color.White
-        Me.btnAgregarGente.BackgroundImage = CType(resources.GetObject("btnAgregarGente.BackgroundImage"), System.Drawing.Image)
-        Me.btnAgregarGente.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center
-        Me.btnAgregarGente.Enabled = False
-        Me.btnAgregarGente.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnAgregarGente.Location = New System.Drawing.Point(453, 25)
-        Me.btnAgregarGente.Name = "btnAgregarGente"
-        Me.btnAgregarGente.Size = New System.Drawing.Size(63, 59)
-        Me.btnAgregarGente.TabIndex = 330
-        Me.btnAgregarGente.UseVisualStyleBackColor = False
-        '
         'Label61
         '
         Me.Label61.AutoSize = True
@@ -2104,7 +1913,7 @@ Partial Class frmProduccion
         '
         'txtDetallesGente
         '
-        Me.txtDetallesGente.BackColor = System.Drawing.Color.FromArgb(CType(CType(243, Byte), Integer), CType(CType(251, Byte), Integer), CType(CType(120, Byte), Integer))
+        Me.txtDetallesGente.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(128, Byte), Integer))
         Me.txtDetallesGente.Location = New System.Drawing.Point(102, 147)
         Me.txtDetallesGente.Multiline = True
         Me.txtDetallesGente.Name = "txtDetallesGente"
@@ -2124,7 +1933,7 @@ Partial Class frmProduccion
         '
         'txtGenteCantidad
         '
-        Me.txtGenteCantidad.BackColor = System.Drawing.Color.FromArgb(CType(CType(243, Byte), Integer), CType(CType(251, Byte), Integer), CType(CType(120, Byte), Integer))
+        Me.txtGenteCantidad.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(128, Byte), Integer))
         Me.txtGenteCantidad.Location = New System.Drawing.Point(102, 96)
         Me.txtGenteCantidad.Name = "txtGenteCantidad"
         Me.txtGenteCantidad.Size = New System.Drawing.Size(181, 26)
@@ -2181,6 +1990,7 @@ Partial Class frmProduccion
         '
         'cbxTurnosLineas
         '
+        Me.cbxTurnosLineas.BackColor = System.Drawing.Color.White
         Me.cbxTurnosLineas.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cbxTurnosLineas.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cbxTurnosLineas.FormattingEnabled = True
@@ -2213,7 +2023,7 @@ Partial Class frmProduccion
         '
         Me.Label74.AutoSize = True
         Me.Label74.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label74.Location = New System.Drawing.Point(545, 341)
+        Me.Label74.Location = New System.Drawing.Point(535, 365)
         Me.Label74.Name = "Label74"
         Me.Label74.Size = New System.Drawing.Size(72, 18)
         Me.Label74.TabIndex = 316
@@ -2223,29 +2033,11 @@ Partial Class frmProduccion
         '
         Me.Label73.AutoSize = True
         Me.Label73.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label73.Location = New System.Drawing.Point(519, 213)
+        Me.Label73.Location = New System.Drawing.Point(476, 216)
         Me.Label73.Name = "Label73"
-        Me.Label73.Size = New System.Drawing.Size(118, 18)
+        Me.Label73.Size = New System.Drawing.Size(197, 18)
         Me.Label73.TabIndex = 315
-        Me.Label73.Text = "Registrar Todas"
-        '
-        'btnLineaUnica
-        '
-        Me.btnLineaUnica.Location = New System.Drawing.Point(479, 298)
-        Me.btnLineaUnica.Name = "btnLineaUnica"
-        Me.btnLineaUnica.Size = New System.Drawing.Size(189, 40)
-        Me.btnLineaUnica.TabIndex = 314
-        Me.btnLineaUnica.Text = ">"
-        Me.btnLineaUnica.UseVisualStyleBackColor = True
-        '
-        'btnLineasTodas
-        '
-        Me.btnLineasTodas.Location = New System.Drawing.Point(479, 170)
-        Me.btnLineasTodas.Name = "btnLineasTodas"
-        Me.btnLineasTodas.Size = New System.Drawing.Size(189, 40)
-        Me.btnLineasTodas.TabIndex = 313
-        Me.btnLineasTodas.Text = ">>"
-        Me.btnLineasTodas.UseVisualStyleBackColor = True
+        Me.Label73.Text = "Registrar Lineas Restantes"
         '
         'Label72
         '
@@ -2297,32 +2089,6 @@ Partial Class frmProduccion
         Me.tabPageDescansos.TabIndex = 6
         Me.tabPageDescansos.Text = "Descansos"
         Me.tabPageDescansos.UseVisualStyleBackColor = True
-        '
-        'btnQuitarDescanso
-        '
-        Me.btnQuitarDescanso.BackColor = System.Drawing.Color.White
-        Me.btnQuitarDescanso.BackgroundImage = CType(resources.GetObject("btnQuitarDescanso.BackgroundImage"), System.Drawing.Image)
-        Me.btnQuitarDescanso.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center
-        Me.btnQuitarDescanso.Enabled = False
-        Me.btnQuitarDescanso.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnQuitarDescanso.Location = New System.Drawing.Point(638, 46)
-        Me.btnQuitarDescanso.Name = "btnQuitarDescanso"
-        Me.btnQuitarDescanso.Size = New System.Drawing.Size(64, 59)
-        Me.btnQuitarDescanso.TabIndex = 335
-        Me.btnQuitarDescanso.UseVisualStyleBackColor = False
-        '
-        'btnAgregarDescanso
-        '
-        Me.btnAgregarDescanso.BackColor = System.Drawing.Color.White
-        Me.btnAgregarDescanso.BackgroundImage = CType(resources.GetObject("btnAgregarDescanso.BackgroundImage"), System.Drawing.Image)
-        Me.btnAgregarDescanso.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center
-        Me.btnAgregarDescanso.Enabled = False
-        Me.btnAgregarDescanso.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnAgregarDescanso.Location = New System.Drawing.Point(561, 46)
-        Me.btnAgregarDescanso.Name = "btnAgregarDescanso"
-        Me.btnAgregarDescanso.Size = New System.Drawing.Size(63, 59)
-        Me.btnAgregarDescanso.TabIndex = 334
-        Me.btnAgregarDescanso.UseVisualStyleBackColor = False
         '
         'Label85
         '
@@ -2412,20 +2178,6 @@ Partial Class frmProduccion
         Me.grdDetalleComentario.Size = New System.Drawing.Size(606, 189)
         Me.grdDetalleComentario.TabIndex = 344
         '
-        'col_cve_comentarios_generales
-        '
-        Me.col_cve_comentarios_generales.DataPropertyName = "cve_comentarios_generales"
-        Me.col_cve_comentarios_generales.HeaderText = "cve_comentarios_generales"
-        Me.col_cve_comentarios_generales.Name = "col_cve_comentarios_generales"
-        Me.col_cve_comentarios_generales.ReadOnly = True
-        '
-        'col_comentarios
-        '
-        Me.col_comentarios.DataPropertyName = "comentarios"
-        Me.col_comentarios.HeaderText = "Comentario"
-        Me.col_comentarios.Name = "col_comentarios"
-        Me.col_comentarios.ReadOnly = True
-        '
         'Label90
         '
         Me.Label90.AutoSize = True
@@ -2445,32 +2197,6 @@ Partial Class frmProduccion
         Me.txtDetallesComentario.ScrollBars = System.Windows.Forms.ScrollBars.Vertical
         Me.txtDetallesComentario.Size = New System.Drawing.Size(437, 115)
         Me.txtDetallesComentario.TabIndex = 342
-        '
-        'btnQuitarComentario
-        '
-        Me.btnQuitarComentario.BackColor = System.Drawing.Color.White
-        Me.btnQuitarComentario.BackgroundImage = CType(resources.GetObject("btnQuitarComentario.BackgroundImage"), System.Drawing.Image)
-        Me.btnQuitarComentario.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center
-        Me.btnQuitarComentario.Enabled = False
-        Me.btnQuitarComentario.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnQuitarComentario.Location = New System.Drawing.Point(553, 74)
-        Me.btnQuitarComentario.Name = "btnQuitarComentario"
-        Me.btnQuitarComentario.Size = New System.Drawing.Size(64, 59)
-        Me.btnQuitarComentario.TabIndex = 339
-        Me.btnQuitarComentario.UseVisualStyleBackColor = False
-        '
-        'btnAgregarComentario
-        '
-        Me.btnAgregarComentario.BackColor = System.Drawing.Color.White
-        Me.btnAgregarComentario.BackgroundImage = CType(resources.GetObject("btnAgregarComentario.BackgroundImage"), System.Drawing.Image)
-        Me.btnAgregarComentario.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center
-        Me.btnAgregarComentario.Enabled = False
-        Me.btnAgregarComentario.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnAgregarComentario.Location = New System.Drawing.Point(476, 74)
-        Me.btnAgregarComentario.Name = "btnAgregarComentario"
-        Me.btnAgregarComentario.Size = New System.Drawing.Size(63, 59)
-        Me.btnAgregarComentario.TabIndex = 338
-        Me.btnAgregarComentario.UseVisualStyleBackColor = False
         '
         'Label88
         '
@@ -2503,25 +2229,6 @@ Partial Class frmProduccion
         Me.titulo_banner_formulario.Size = New System.Drawing.Size(476, 32)
         Me.titulo_banner_formulario.TabIndex = 103
         Me.titulo_banner_formulario.Text = "Captura de Resultados de Producción"
-        '
-        'banner_formulario
-        '
-        Me.banner_formulario.BackColor = System.Drawing.Color.Transparent
-        Me.banner_formulario.BackgroundImage = Global.GKNSICAIP.My.Resources.Resources.banner_03
-        Me.banner_formulario.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
-        Me.banner_formulario.Location = New System.Drawing.Point(-6, -1)
-        Me.banner_formulario.Name = "banner_formulario"
-        Me.banner_formulario.Size = New System.Drawing.Size(1262, 44)
-        Me.banner_formulario.TabIndex = 104
-        Me.banner_formulario.TabStop = False
-        '
-        'imgEscudo
-        '
-        Me.imgEscudo.Location = New System.Drawing.Point(976, 70)
-        Me.imgEscudo.Name = "imgEscudo"
-        Me.imgEscudo.Size = New System.Drawing.Size(266, 172)
-        Me.imgEscudo.TabIndex = 105
-        Me.imgEscudo.TabStop = False
         '
         'cbxTurno
         '
@@ -2674,7 +2381,7 @@ Partial Class frmProduccion
         Me.colpzas_ok.HeaderText = "Piezas Ok"
         Me.colpzas_ok.Name = "colpzas_ok"
         Me.colpzas_ok.ReadOnly = True
-        Me.colpzas_ok.Width = 105
+        Me.colpzas_ok.Width = 97
         '
         'coltom
         '
@@ -2975,38 +2682,6 @@ Partial Class frmProduccion
         Me.collinea.ReadOnly = True
         Me.collinea.Width = 150
         '
-        'col_cve_registro_turno
-        '
-        Me.col_cve_registro_turno.DataPropertyName = "cve_registro_turno"
-        Me.col_cve_registro_turno.HeaderText = "cve_registro_turno"
-        Me.col_cve_registro_turno.Name = "col_cve_registro_turno"
-        Me.col_cve_registro_turno.ReadOnly = True
-        Me.col_cve_registro_turno.Visible = False
-        '
-        'col_linea
-        '
-        Me.col_linea.DataPropertyName = "linea"
-        Me.col_linea.HeaderText = "linea"
-        Me.col_linea.Name = "col_linea"
-        Me.col_linea.ReadOnly = True
-        Me.col_linea.Width = 150
-        '
-        'col_turno
-        '
-        Me.col_turno.DataPropertyName = "turno"
-        Me.col_turno.HeaderText = "Turno"
-        Me.col_turno.Name = "col_turno"
-        Me.col_turno.ReadOnly = True
-        Me.col_turno.Width = 120
-        '
-        'col_dia_asignado
-        '
-        Me.col_dia_asignado.DataPropertyName = "dia_asignado"
-        Me.col_dia_asignado.HeaderText = "Dia Registro"
-        Me.col_dia_asignado.Name = "col_dia_asignado"
-        Me.col_dia_asignado.ReadOnly = True
-        Me.col_dia_asignado.Width = 150
-        '
         'col_fecha_descanso
         '
         Me.col_fecha_descanso.DataPropertyName = "dia_asignado"
@@ -3022,6 +2697,339 @@ Partial Class frmProduccion
         Me.col_Descanso.Name = "col_Descanso"
         Me.col_Descanso.ReadOnly = True
         Me.col_Descanso.Width = 150
+        '
+        'col_cve_comentarios_generales
+        '
+        Me.col_cve_comentarios_generales.DataPropertyName = "cve_comentarios_generales"
+        Me.col_cve_comentarios_generales.HeaderText = "cve_comentarios_generales"
+        Me.col_cve_comentarios_generales.Name = "col_cve_comentarios_generales"
+        Me.col_cve_comentarios_generales.ReadOnly = True
+        Me.col_cve_comentarios_generales.Visible = False
+        '
+        'col_comentarios
+        '
+        Me.col_comentarios.DataPropertyName = "comentarios"
+        Me.col_comentarios.HeaderText = "Comentario"
+        Me.col_comentarios.Name = "col_comentarios"
+        Me.col_comentarios.ReadOnly = True
+        Me.col_comentarios.Width = 560
+        '
+        'col_cve_registro_turno
+        '
+        Me.col_cve_registro_turno.DataPropertyName = "cve_registro_turno"
+        Me.col_cve_registro_turno.HeaderText = "cve_registro_turno"
+        Me.col_cve_registro_turno.Name = "col_cve_registro_turno"
+        Me.col_cve_registro_turno.ReadOnly = True
+        Me.col_cve_registro_turno.Visible = False
+        '
+        'col_linea
+        '
+        Me.col_linea.DataPropertyName = "linea"
+        Me.col_linea.HeaderText = "linea"
+        Me.col_linea.Name = "col_linea"
+        Me.col_linea.ReadOnly = True
+        Me.col_linea.Width = 120
+        '
+        'col_turno
+        '
+        Me.col_turno.DataPropertyName = "turno"
+        Me.col_turno.HeaderText = "Turno"
+        Me.col_turno.Name = "col_turno"
+        Me.col_turno.ReadOnly = True
+        Me.col_turno.Width = 150
+        '
+        'col_dia_asignado
+        '
+        Me.col_dia_asignado.DataPropertyName = "dia_asignado"
+        Me.col_dia_asignado.HeaderText = "Dia Registro"
+        Me.col_dia_asignado.Name = "col_dia_asignado"
+        Me.col_dia_asignado.ReadOnly = True
+        Me.col_dia_asignado.Width = 150
+        '
+        'imgEscudo
+        '
+        Me.imgEscudo.Location = New System.Drawing.Point(976, 70)
+        Me.imgEscudo.Name = "imgEscudo"
+        Me.imgEscudo.Size = New System.Drawing.Size(266, 172)
+        Me.imgEscudo.TabIndex = 105
+        Me.imgEscudo.TabStop = False
+        '
+        'banner_formulario
+        '
+        Me.banner_formulario.BackColor = System.Drawing.Color.Transparent
+        Me.banner_formulario.BackgroundImage = Global.GKNSICAIP.My.Resources.Resources.banner_03
+        Me.banner_formulario.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
+        Me.banner_formulario.Location = New System.Drawing.Point(-6, -1)
+        Me.banner_formulario.Name = "banner_formulario"
+        Me.banner_formulario.Size = New System.Drawing.Size(1262, 44)
+        Me.banner_formulario.TabIndex = 104
+        Me.banner_formulario.TabStop = False
+        '
+        'btnAgregarDesecho
+        '
+        Me.btnAgregarDesecho.BackColor = System.Drawing.Color.White
+        Me.btnAgregarDesecho.BackgroundImage = CType(resources.GetObject("btnAgregarDesecho.BackgroundImage"), System.Drawing.Image)
+        Me.btnAgregarDesecho.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center
+        Me.btnAgregarDesecho.Enabled = False
+        Me.btnAgregarDesecho.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnAgregarDesecho.Location = New System.Drawing.Point(295, 125)
+        Me.btnAgregarDesecho.Name = "btnAgregarDesecho"
+        Me.btnAgregarDesecho.Size = New System.Drawing.Size(63, 59)
+        Me.btnAgregarDesecho.TabIndex = 323
+        Me.btnAgregarDesecho.UseVisualStyleBackColor = False
+        '
+        'btnQuitarDesecho
+        '
+        Me.btnQuitarDesecho.BackColor = System.Drawing.Color.White
+        Me.btnQuitarDesecho.BackgroundImage = CType(resources.GetObject("btnQuitarDesecho.BackgroundImage"), System.Drawing.Image)
+        Me.btnQuitarDesecho.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center
+        Me.btnQuitarDesecho.Enabled = False
+        Me.btnQuitarDesecho.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnQuitarDesecho.Location = New System.Drawing.Point(369, 125)
+        Me.btnQuitarDesecho.Name = "btnQuitarDesecho"
+        Me.btnQuitarDesecho.Size = New System.Drawing.Size(64, 59)
+        Me.btnQuitarDesecho.TabIndex = 324
+        Me.btnQuitarDesecho.UseVisualStyleBackColor = False
+        '
+        'btnAgregarModelo
+        '
+        Me.btnAgregarModelo.BackColor = System.Drawing.Color.White
+        Me.btnAgregarModelo.BackgroundImage = CType(resources.GetObject("btnAgregarModelo.BackgroundImage"), System.Drawing.Image)
+        Me.btnAgregarModelo.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center
+        Me.btnAgregarModelo.Enabled = False
+        Me.btnAgregarModelo.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnAgregarModelo.Location = New System.Drawing.Point(590, 170)
+        Me.btnAgregarModelo.Name = "btnAgregarModelo"
+        Me.btnAgregarModelo.Size = New System.Drawing.Size(63, 59)
+        Me.btnAgregarModelo.TabIndex = 149
+        Me.btnAgregarModelo.UseVisualStyleBackColor = False
+        '
+        'btnQuitarModelo
+        '
+        Me.btnQuitarModelo.BackColor = System.Drawing.Color.White
+        Me.btnQuitarModelo.BackgroundImage = CType(resources.GetObject("btnQuitarModelo.BackgroundImage"), System.Drawing.Image)
+        Me.btnQuitarModelo.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center
+        Me.btnQuitarModelo.Enabled = False
+        Me.btnQuitarModelo.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnQuitarModelo.Location = New System.Drawing.Point(664, 170)
+        Me.btnQuitarModelo.Name = "btnQuitarModelo"
+        Me.btnQuitarModelo.Size = New System.Drawing.Size(64, 59)
+        Me.btnQuitarModelo.TabIndex = 150
+        Me.btnQuitarModelo.UseVisualStyleBackColor = False
+        '
+        'btnQuitarParo
+        '
+        Me.btnQuitarParo.BackColor = System.Drawing.Color.White
+        Me.btnQuitarParo.BackgroundImage = CType(resources.GetObject("btnQuitarParo.BackgroundImage"), System.Drawing.Image)
+        Me.btnQuitarParo.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center
+        Me.btnQuitarParo.Enabled = False
+        Me.btnQuitarParo.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnQuitarParo.Location = New System.Drawing.Point(766, 52)
+        Me.btnQuitarParo.Name = "btnQuitarParo"
+        Me.btnQuitarParo.Size = New System.Drawing.Size(64, 59)
+        Me.btnQuitarParo.TabIndex = 119
+        Me.btnQuitarParo.UseVisualStyleBackColor = False
+        '
+        'btnAgregarParo
+        '
+        Me.btnAgregarParo.BackColor = System.Drawing.Color.White
+        Me.btnAgregarParo.BackgroundImage = CType(resources.GetObject("btnAgregarParo.BackgroundImage"), System.Drawing.Image)
+        Me.btnAgregarParo.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center
+        Me.btnAgregarParo.Enabled = False
+        Me.btnAgregarParo.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnAgregarParo.Location = New System.Drawing.Point(694, 52)
+        Me.btnAgregarParo.Name = "btnAgregarParo"
+        Me.btnAgregarParo.Size = New System.Drawing.Size(66, 59)
+        Me.btnAgregarParo.TabIndex = 118
+        Me.btnAgregarParo.UseVisualStyleBackColor = False
+        '
+        'btnAgregarCincoS
+        '
+        Me.btnAgregarCincoS.BackColor = System.Drawing.Color.White
+        Me.btnAgregarCincoS.BackgroundImage = CType(resources.GetObject("btnAgregarCincoS.BackgroundImage"), System.Drawing.Image)
+        Me.btnAgregarCincoS.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center
+        Me.btnAgregarCincoS.Enabled = False
+        Me.btnAgregarCincoS.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnAgregarCincoS.Location = New System.Drawing.Point(457, 34)
+        Me.btnAgregarCincoS.Name = "btnAgregarCincoS"
+        Me.btnAgregarCincoS.Size = New System.Drawing.Size(63, 59)
+        Me.btnAgregarCincoS.TabIndex = 329
+        Me.btnAgregarCincoS.UseVisualStyleBackColor = False
+        '
+        'btnAgregarRechazo
+        '
+        Me.btnAgregarRechazo.BackColor = System.Drawing.Color.White
+        Me.btnAgregarRechazo.BackgroundImage = CType(resources.GetObject("btnAgregarRechazo.BackgroundImage"), System.Drawing.Image)
+        Me.btnAgregarRechazo.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center
+        Me.btnAgregarRechazo.Enabled = False
+        Me.btnAgregarRechazo.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnAgregarRechazo.Location = New System.Drawing.Point(478, 131)
+        Me.btnAgregarRechazo.Name = "btnAgregarRechazo"
+        Me.btnAgregarRechazo.Size = New System.Drawing.Size(63, 59)
+        Me.btnAgregarRechazo.TabIndex = 326
+        Me.btnAgregarRechazo.UseVisualStyleBackColor = False
+        '
+        'btnQuitarRechazo
+        '
+        Me.btnQuitarRechazo.BackColor = System.Drawing.Color.White
+        Me.btnQuitarRechazo.BackgroundImage = CType(resources.GetObject("btnQuitarRechazo.BackgroundImage"), System.Drawing.Image)
+        Me.btnQuitarRechazo.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center
+        Me.btnQuitarRechazo.Enabled = False
+        Me.btnQuitarRechazo.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnQuitarRechazo.Location = New System.Drawing.Point(555, 131)
+        Me.btnQuitarRechazo.Name = "btnQuitarRechazo"
+        Me.btnQuitarRechazo.Size = New System.Drawing.Size(64, 59)
+        Me.btnQuitarRechazo.TabIndex = 327
+        Me.btnQuitarRechazo.UseVisualStyleBackColor = False
+        '
+        'btnQuitarAccidente
+        '
+        Me.btnQuitarAccidente.BackColor = System.Drawing.Color.White
+        Me.btnQuitarAccidente.BackgroundImage = CType(resources.GetObject("btnQuitarAccidente.BackgroundImage"), System.Drawing.Image)
+        Me.btnQuitarAccidente.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center
+        Me.btnQuitarAccidente.Enabled = False
+        Me.btnQuitarAccidente.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnQuitarAccidente.Location = New System.Drawing.Point(521, 22)
+        Me.btnQuitarAccidente.Name = "btnQuitarAccidente"
+        Me.btnQuitarAccidente.Size = New System.Drawing.Size(64, 59)
+        Me.btnQuitarAccidente.TabIndex = 342
+        Me.btnQuitarAccidente.UseVisualStyleBackColor = False
+        '
+        'btnAgregarAccidente
+        '
+        Me.btnAgregarAccidente.BackColor = System.Drawing.Color.White
+        Me.btnAgregarAccidente.BackgroundImage = CType(resources.GetObject("btnAgregarAccidente.BackgroundImage"), System.Drawing.Image)
+        Me.btnAgregarAccidente.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center
+        Me.btnAgregarAccidente.Enabled = False
+        Me.btnAgregarAccidente.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnAgregarAccidente.Location = New System.Drawing.Point(444, 22)
+        Me.btnAgregarAccidente.Name = "btnAgregarAccidente"
+        Me.btnAgregarAccidente.Size = New System.Drawing.Size(63, 59)
+        Me.btnAgregarAccidente.TabIndex = 341
+        Me.btnAgregarAccidente.UseVisualStyleBackColor = False
+        '
+        'btnQuitarCondInseg
+        '
+        Me.btnQuitarCondInseg.BackColor = System.Drawing.Color.White
+        Me.btnQuitarCondInseg.BackgroundImage = CType(resources.GetObject("btnQuitarCondInseg.BackgroundImage"), System.Drawing.Image)
+        Me.btnQuitarCondInseg.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center
+        Me.btnQuitarCondInseg.Enabled = False
+        Me.btnQuitarCondInseg.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnQuitarCondInseg.Location = New System.Drawing.Point(524, 23)
+        Me.btnQuitarCondInseg.Name = "btnQuitarCondInseg"
+        Me.btnQuitarCondInseg.Size = New System.Drawing.Size(64, 59)
+        Me.btnQuitarCondInseg.TabIndex = 342
+        Me.btnQuitarCondInseg.UseVisualStyleBackColor = False
+        '
+        'btnAgregarCondInseg
+        '
+        Me.btnAgregarCondInseg.BackColor = System.Drawing.Color.White
+        Me.btnAgregarCondInseg.BackgroundImage = CType(resources.GetObject("btnAgregarCondInseg.BackgroundImage"), System.Drawing.Image)
+        Me.btnAgregarCondInseg.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center
+        Me.btnAgregarCondInseg.Enabled = False
+        Me.btnAgregarCondInseg.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnAgregarCondInseg.Location = New System.Drawing.Point(447, 23)
+        Me.btnAgregarCondInseg.Name = "btnAgregarCondInseg"
+        Me.btnAgregarCondInseg.Size = New System.Drawing.Size(63, 59)
+        Me.btnAgregarCondInseg.TabIndex = 341
+        Me.btnAgregarCondInseg.UseVisualStyleBackColor = False
+        '
+        'btnQuitarGente
+        '
+        Me.btnQuitarGente.BackColor = System.Drawing.Color.White
+        Me.btnQuitarGente.BackgroundImage = CType(resources.GetObject("btnQuitarGente.BackgroundImage"), System.Drawing.Image)
+        Me.btnQuitarGente.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center
+        Me.btnQuitarGente.Enabled = False
+        Me.btnQuitarGente.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnQuitarGente.Location = New System.Drawing.Point(530, 25)
+        Me.btnQuitarGente.Name = "btnQuitarGente"
+        Me.btnQuitarGente.Size = New System.Drawing.Size(64, 59)
+        Me.btnQuitarGente.TabIndex = 331
+        Me.btnQuitarGente.UseVisualStyleBackColor = False
+        '
+        'btnAgregarGente
+        '
+        Me.btnAgregarGente.BackColor = System.Drawing.Color.White
+        Me.btnAgregarGente.BackgroundImage = CType(resources.GetObject("btnAgregarGente.BackgroundImage"), System.Drawing.Image)
+        Me.btnAgregarGente.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center
+        Me.btnAgregarGente.Enabled = False
+        Me.btnAgregarGente.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnAgregarGente.Location = New System.Drawing.Point(453, 25)
+        Me.btnAgregarGente.Name = "btnAgregarGente"
+        Me.btnAgregarGente.Size = New System.Drawing.Size(63, 59)
+        Me.btnAgregarGente.TabIndex = 330
+        Me.btnAgregarGente.UseVisualStyleBackColor = False
+        '
+        'btnLineaUnica
+        '
+        Me.btnLineaUnica.Image = Global.GKNSICAIP.My.Resources.Resources._next
+        Me.btnLineaUnica.Location = New System.Drawing.Point(526, 291)
+        Me.btnLineaUnica.Name = "btnLineaUnica"
+        Me.btnLineaUnica.Size = New System.Drawing.Size(92, 71)
+        Me.btnLineaUnica.TabIndex = 314
+        Me.btnLineaUnica.UseVisualStyleBackColor = True
+        '
+        'btnLineasTodas
+        '
+        Me.btnLineasTodas.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.btnLineasTodas.Image = Global.GKNSICAIP.My.Resources.Resources.next_next
+        Me.btnLineasTodas.Location = New System.Drawing.Point(526, 142)
+        Me.btnLineasTodas.Name = "btnLineasTodas"
+        Me.btnLineasTodas.Size = New System.Drawing.Size(92, 71)
+        Me.btnLineasTodas.TabIndex = 313
+        Me.btnLineasTodas.UseVisualStyleBackColor = True
+        '
+        'btnQuitarDescanso
+        '
+        Me.btnQuitarDescanso.BackColor = System.Drawing.Color.White
+        Me.btnQuitarDescanso.BackgroundImage = CType(resources.GetObject("btnQuitarDescanso.BackgroundImage"), System.Drawing.Image)
+        Me.btnQuitarDescanso.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center
+        Me.btnQuitarDescanso.Enabled = False
+        Me.btnQuitarDescanso.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnQuitarDescanso.Location = New System.Drawing.Point(638, 46)
+        Me.btnQuitarDescanso.Name = "btnQuitarDescanso"
+        Me.btnQuitarDescanso.Size = New System.Drawing.Size(64, 59)
+        Me.btnQuitarDescanso.TabIndex = 335
+        Me.btnQuitarDescanso.UseVisualStyleBackColor = False
+        '
+        'btnAgregarDescanso
+        '
+        Me.btnAgregarDescanso.BackColor = System.Drawing.Color.White
+        Me.btnAgregarDescanso.BackgroundImage = CType(resources.GetObject("btnAgregarDescanso.BackgroundImage"), System.Drawing.Image)
+        Me.btnAgregarDescanso.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center
+        Me.btnAgregarDescanso.Enabled = False
+        Me.btnAgregarDescanso.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnAgregarDescanso.Location = New System.Drawing.Point(561, 46)
+        Me.btnAgregarDescanso.Name = "btnAgregarDescanso"
+        Me.btnAgregarDescanso.Size = New System.Drawing.Size(63, 59)
+        Me.btnAgregarDescanso.TabIndex = 334
+        Me.btnAgregarDescanso.UseVisualStyleBackColor = False
+        '
+        'btnQuitarComentario
+        '
+        Me.btnQuitarComentario.BackColor = System.Drawing.Color.White
+        Me.btnQuitarComentario.BackgroundImage = CType(resources.GetObject("btnQuitarComentario.BackgroundImage"), System.Drawing.Image)
+        Me.btnQuitarComentario.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center
+        Me.btnQuitarComentario.Enabled = False
+        Me.btnQuitarComentario.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnQuitarComentario.Location = New System.Drawing.Point(553, 74)
+        Me.btnQuitarComentario.Name = "btnQuitarComentario"
+        Me.btnQuitarComentario.Size = New System.Drawing.Size(64, 59)
+        Me.btnQuitarComentario.TabIndex = 339
+        Me.btnQuitarComentario.UseVisualStyleBackColor = False
+        '
+        'btnAgregarComentario
+        '
+        Me.btnAgregarComentario.BackColor = System.Drawing.Color.White
+        Me.btnAgregarComentario.BackgroundImage = CType(resources.GetObject("btnAgregarComentario.BackgroundImage"), System.Drawing.Image)
+        Me.btnAgregarComentario.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center
+        Me.btnAgregarComentario.Enabled = False
+        Me.btnAgregarComentario.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnAgregarComentario.Location = New System.Drawing.Point(476, 74)
+        Me.btnAgregarComentario.Name = "btnAgregarComentario"
+        Me.btnAgregarComentario.Size = New System.Drawing.Size(63, 59)
+        Me.btnAgregarComentario.TabIndex = 338
+        Me.btnAgregarComentario.UseVisualStyleBackColor = False
         '
         'frmProduccion
         '
@@ -3095,8 +3103,8 @@ Partial Class frmProduccion
         Me.grpComentarios.ResumeLayout(False)
         Me.grpComentarios.PerformLayout()
         CType(Me.grdDetalleComentario, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.banner_formulario, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.imgEscudo, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.banner_formulario, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -3302,8 +3310,6 @@ Partial Class frmProduccion
     Friend WithEvents TabPage1 As System.Windows.Forms.TabPage
     Friend WithEvents grpComentarios As System.Windows.Forms.GroupBox
     Friend WithEvents grdDetalleComentario As System.Windows.Forms.DataGridView
-    Friend WithEvents col_cve_comentarios_generales As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents col_comentarios As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents Label90 As System.Windows.Forms.Label
     Friend WithEvents txtDetallesComentario As System.Windows.Forms.TextBox
     Friend WithEvents btnQuitarComentario As System.Windows.Forms.Button
@@ -3354,12 +3360,14 @@ Partial Class frmProduccion
     Friend WithEvents colgdescripcion As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents colgcantidad As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents comentarios As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents col_cve_registro_turno As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents col_linea As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents col_turno As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents col_dia_asignado As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents col_cve_linea As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents collinea As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents col_fecha_descanso As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents col_Descanso As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents col_cve_comentarios_generales As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents col_comentarios As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents col_cve_registro_turno As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents col_linea As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents col_turno As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents col_dia_asignado As System.Windows.Forms.DataGridViewTextBoxColumn
 End Class
