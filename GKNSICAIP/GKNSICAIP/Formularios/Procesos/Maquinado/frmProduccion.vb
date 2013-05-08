@@ -1114,6 +1114,10 @@ Public Class frmProduccion
         dtpDescanso.Checked = False
         dtpDescanso.Value = Date.Today
     End Sub
+    'Comentarios Generales
+    Private Sub limpia_comentarios_generales()
+        txtDetallesComentario.Text = ""
+    End Sub
 #End Region
 #Region "Funciones Generales"
     Private Sub define_calendario_descanso()

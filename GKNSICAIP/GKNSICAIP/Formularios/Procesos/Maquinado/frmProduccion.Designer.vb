@@ -23,10 +23,19 @@ Partial Class frmProduccion
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmProduccion))
-        Me.TabContenido = New System.Windows.Forms.TabControl()
+        Me.tabPageComentarios = New System.Windows.Forms.TabControl()
         Me.tabPageProductividad = New System.Windows.Forms.TabPage()
         Me.grpDesechos = New System.Windows.Forms.GroupBox()
+        Me.Label87 = New System.Windows.Forms.Label()
+        Me.txtDetalleDesecho = New System.Windows.Forms.TextBox()
         Me.grdDetalleDesecho = New System.Windows.Forms.DataGridView()
+        Me.colcve_desecho = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.col__cve_linea = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.col_cve_modelo = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.colnp_gkn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.colmodelodescripcion = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.coldesechocantidad = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.col_comentarios_desecho = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Label59 = New System.Windows.Forms.Label()
         Me.cbxModeloDesecho = New System.Windows.Forms.ComboBox()
         Me.Label60 = New System.Windows.Forms.Label()
@@ -265,16 +274,18 @@ Partial Class frmProduccion
         Me.cbxLinea = New System.Windows.Forms.ComboBox()
         Me.lblFechaRegistro = New System.Windows.Forms.Label()
         Me.lblFechaRegistrodescripcion = New System.Windows.Forms.Label()
-        Me.txtDetalleDesecho = New System.Windows.Forms.TextBox()
-        Me.Label87 = New System.Windows.Forms.Label()
-        Me.colcve_desecho = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.col__cve_linea = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.col_cve_modelo = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.colnp_gkn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.colmodelodescripcion = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.coldesechocantidad = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.col_comentarios_desecho = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.TabContenido.SuspendLayout()
+        Me.TabPage1 = New System.Windows.Forms.TabPage()
+        Me.grpComentarios = New System.Windows.Forms.GroupBox()
+        Me.btnQuitarComentario = New System.Windows.Forms.Button()
+        Me.btnAgregarComentario = New System.Windows.Forms.Button()
+        Me.Label88 = New System.Windows.Forms.Label()
+        Me.Label89 = New System.Windows.Forms.Label()
+        Me.Label90 = New System.Windows.Forms.Label()
+        Me.txtDetallesComentario = New System.Windows.Forms.TextBox()
+        Me.grdDetalleComentario = New System.Windows.Forms.DataGridView()
+        Me.col_cve_comentarios_generales = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.col_comentarios = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.tabPageComentarios.SuspendLayout()
         Me.tabPageProductividad.SuspendLayout()
         Me.grpDesechos.SuspendLayout()
         CType(Me.grdDetalleDesecho, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -304,24 +315,28 @@ Partial Class frmProduccion
         CType(Me.grdDetalleDescansos, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.banner_formulario, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.imgEscudo, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.TabPage1.SuspendLayout()
+        Me.grpComentarios.SuspendLayout()
+        CType(Me.grdDetalleComentario, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
-        'TabContenido
+        'tabPageComentarios
         '
-        Me.TabContenido.Controls.Add(Me.tabPageProductividad)
-        Me.TabContenido.Controls.Add(Me.tabPageParos)
-        Me.TabContenido.Controls.Add(Me.tabPageRechazos5s)
-        Me.TabContenido.Controls.Add(Me.tabPageCondInsegAccidentes)
-        Me.TabContenido.Controls.Add(Me.tabPageGente)
-        Me.TabContenido.Controls.Add(Me.tabPageTurnosLineas)
-        Me.TabContenido.Controls.Add(Me.tabPageDescansos)
-        Me.TabContenido.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TabContenido.Location = New System.Drawing.Point(12, 248)
-        Me.TabContenido.Name = "TabContenido"
-        Me.TabContenido.SelectedIndex = 0
-        Me.TabContenido.Size = New System.Drawing.Size(1230, 462)
-        Me.TabContenido.TabIndex = 1
-        Me.TabContenido.Tag = ""
+        Me.tabPageComentarios.Controls.Add(Me.tabPageProductividad)
+        Me.tabPageComentarios.Controls.Add(Me.tabPageParos)
+        Me.tabPageComentarios.Controls.Add(Me.tabPageRechazos5s)
+        Me.tabPageComentarios.Controls.Add(Me.tabPageCondInsegAccidentes)
+        Me.tabPageComentarios.Controls.Add(Me.tabPageGente)
+        Me.tabPageComentarios.Controls.Add(Me.tabPageTurnosLineas)
+        Me.tabPageComentarios.Controls.Add(Me.tabPageDescansos)
+        Me.tabPageComentarios.Controls.Add(Me.TabPage1)
+        Me.tabPageComentarios.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.tabPageComentarios.Location = New System.Drawing.Point(12, 248)
+        Me.tabPageComentarios.Name = "tabPageComentarios"
+        Me.tabPageComentarios.SelectedIndex = 0
+        Me.tabPageComentarios.Size = New System.Drawing.Size(1230, 462)
+        Me.tabPageComentarios.TabIndex = 1
+        Me.tabPageComentarios.Tag = ""
         '
         'tabPageProductividad
         '
@@ -359,6 +374,26 @@ Partial Class frmProduccion
         Me.grpDesechos.TabStop = False
         Me.grpDesechos.Text = "Desecho"
         '
+        'Label87
+        '
+        Me.Label87.AutoSize = True
+        Me.Label87.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label87.Location = New System.Drawing.Point(14, 135)
+        Me.Label87.Name = "Label87"
+        Me.Label87.Size = New System.Drawing.Size(69, 18)
+        Me.Label87.TabIndex = 329
+        Me.Label87.Text = "Detalles:"
+        '
+        'txtDetalleDesecho
+        '
+        Me.txtDetalleDesecho.BackColor = System.Drawing.Color.FromArgb(CType(CType(243, Byte), Integer), CType(CType(251, Byte), Integer), CType(CType(120, Byte), Integer))
+        Me.txtDetalleDesecho.Location = New System.Drawing.Point(17, 156)
+        Me.txtDetalleDesecho.Multiline = True
+        Me.txtDetalleDesecho.Name = "txtDetalleDesecho"
+        Me.txtDetalleDesecho.ScrollBars = System.Windows.Forms.ScrollBars.Vertical
+        Me.txtDetalleDesecho.Size = New System.Drawing.Size(250, 75)
+        Me.txtDetalleDesecho.TabIndex = 328
+        '
         'grdDetalleDesecho
         '
         Me.grdDetalleDesecho.AllowUserToAddRows = False
@@ -371,6 +406,55 @@ Partial Class frmProduccion
         Me.grdDetalleDesecho.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
         Me.grdDetalleDesecho.Size = New System.Drawing.Size(436, 165)
         Me.grdDetalleDesecho.TabIndex = 327
+        '
+        'colcve_desecho
+        '
+        Me.colcve_desecho.DataPropertyName = "cve_desecho"
+        Me.colcve_desecho.HeaderText = "cve_desecho"
+        Me.colcve_desecho.Name = "colcve_desecho"
+        Me.colcve_desecho.ReadOnly = True
+        '
+        'col__cve_linea
+        '
+        Me.col__cve_linea.DataPropertyName = "cve_linea"
+        Me.col__cve_linea.HeaderText = "cve_linea"
+        Me.col__cve_linea.Name = "col__cve_linea"
+        Me.col__cve_linea.ReadOnly = True
+        '
+        'col_cve_modelo
+        '
+        Me.col_cve_modelo.DataPropertyName = "cve_modelo"
+        Me.col_cve_modelo.HeaderText = "cve_modelo"
+        Me.col_cve_modelo.Name = "col_cve_modelo"
+        Me.col_cve_modelo.ReadOnly = True
+        '
+        'colnp_gkn
+        '
+        Me.colnp_gkn.DataPropertyName = "np_gkn"
+        Me.colnp_gkn.HeaderText = "No.Parte GKN"
+        Me.colnp_gkn.Name = "colnp_gkn"
+        Me.colnp_gkn.ReadOnly = True
+        '
+        'colmodelodescripcion
+        '
+        Me.colmodelodescripcion.DataPropertyName = "descripcion"
+        Me.colmodelodescripcion.HeaderText = "Modelo"
+        Me.colmodelodescripcion.Name = "colmodelodescripcion"
+        Me.colmodelodescripcion.ReadOnly = True
+        '
+        'coldesechocantidad
+        '
+        Me.coldesechocantidad.DataPropertyName = "cantidad"
+        Me.coldesechocantidad.HeaderText = "Cantidad"
+        Me.coldesechocantidad.Name = "coldesechocantidad"
+        Me.coldesechocantidad.ReadOnly = True
+        '
+        'col_comentarios_desecho
+        '
+        Me.col_comentarios_desecho.DataPropertyName = "comentarios"
+        Me.col_comentarios_desecho.HeaderText = "Comentarios"
+        Me.col_comentarios_desecho.Name = "col_comentarios_desecho"
+        Me.col_comentarios_desecho.ReadOnly = True
         '
         'Label59
         '
@@ -2809,74 +2893,124 @@ Partial Class frmProduccion
         Me.lblFechaRegistrodescripcion.TabIndex = 312
         Me.lblFechaRegistrodescripcion.Text = "Fecha Registro:"
         '
-        'txtDetalleDesecho
+        'TabPage1
         '
-        Me.txtDetalleDesecho.BackColor = System.Drawing.Color.FromArgb(CType(CType(243, Byte), Integer), CType(CType(251, Byte), Integer), CType(CType(120, Byte), Integer))
-        Me.txtDetalleDesecho.Location = New System.Drawing.Point(17, 156)
-        Me.txtDetalleDesecho.Multiline = True
-        Me.txtDetalleDesecho.Name = "txtDetalleDesecho"
-        Me.txtDetalleDesecho.ScrollBars = System.Windows.Forms.ScrollBars.Vertical
-        Me.txtDetalleDesecho.Size = New System.Drawing.Size(250, 75)
-        Me.txtDetalleDesecho.TabIndex = 328
+        Me.TabPage1.Controls.Add(Me.grpComentarios)
+        Me.TabPage1.Location = New System.Drawing.Point(4, 27)
+        Me.TabPage1.Name = "TabPage1"
+        Me.TabPage1.Padding = New System.Windows.Forms.Padding(3)
+        Me.TabPage1.Size = New System.Drawing.Size(1222, 431)
+        Me.TabPage1.TabIndex = 7
+        Me.TabPage1.Text = "Comentarios"
+        Me.TabPage1.UseVisualStyleBackColor = True
         '
-        'Label87
+        'grpComentarios
         '
-        Me.Label87.AutoSize = True
-        Me.Label87.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label87.Location = New System.Drawing.Point(14, 135)
-        Me.Label87.Name = "Label87"
-        Me.Label87.Size = New System.Drawing.Size(69, 18)
-        Me.Label87.TabIndex = 329
-        Me.Label87.Text = "Detalles:"
+        Me.grpComentarios.Controls.Add(Me.grdDetalleComentario)
+        Me.grpComentarios.Controls.Add(Me.Label90)
+        Me.grpComentarios.Controls.Add(Me.txtDetallesComentario)
+        Me.grpComentarios.Controls.Add(Me.btnQuitarComentario)
+        Me.grpComentarios.Controls.Add(Me.btnAgregarComentario)
+        Me.grpComentarios.Controls.Add(Me.Label88)
+        Me.grpComentarios.Controls.Add(Me.Label89)
+        Me.grpComentarios.Location = New System.Drawing.Point(6, 6)
+        Me.grpComentarios.Name = "grpComentarios"
+        Me.grpComentarios.Size = New System.Drawing.Size(633, 407)
+        Me.grpComentarios.TabIndex = 0
+        Me.grpComentarios.TabStop = False
+        Me.grpComentarios.Text = "Comentarios"
         '
-        'colcve_desecho
+        'btnQuitarComentario
         '
-        Me.colcve_desecho.DataPropertyName = "cve_desecho"
-        Me.colcve_desecho.HeaderText = "cve_desecho"
-        Me.colcve_desecho.Name = "colcve_desecho"
-        Me.colcve_desecho.ReadOnly = True
+        Me.btnQuitarComentario.BackColor = System.Drawing.Color.White
+        Me.btnQuitarComentario.BackgroundImage = CType(resources.GetObject("btnQuitarComentario.BackgroundImage"), System.Drawing.Image)
+        Me.btnQuitarComentario.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center
+        Me.btnQuitarComentario.Enabled = False
+        Me.btnQuitarComentario.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnQuitarComentario.Location = New System.Drawing.Point(553, 74)
+        Me.btnQuitarComentario.Name = "btnQuitarComentario"
+        Me.btnQuitarComentario.Size = New System.Drawing.Size(64, 59)
+        Me.btnQuitarComentario.TabIndex = 339
+        Me.btnQuitarComentario.UseVisualStyleBackColor = False
         '
-        'col__cve_linea
+        'btnAgregarComentario
         '
-        Me.col__cve_linea.DataPropertyName = "cve_linea"
-        Me.col__cve_linea.HeaderText = "cve_linea"
-        Me.col__cve_linea.Name = "col__cve_linea"
-        Me.col__cve_linea.ReadOnly = True
+        Me.btnAgregarComentario.BackColor = System.Drawing.Color.White
+        Me.btnAgregarComentario.BackgroundImage = CType(resources.GetObject("btnAgregarComentario.BackgroundImage"), System.Drawing.Image)
+        Me.btnAgregarComentario.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center
+        Me.btnAgregarComentario.Enabled = False
+        Me.btnAgregarComentario.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnAgregarComentario.Location = New System.Drawing.Point(476, 74)
+        Me.btnAgregarComentario.Name = "btnAgregarComentario"
+        Me.btnAgregarComentario.Size = New System.Drawing.Size(63, 59)
+        Me.btnAgregarComentario.TabIndex = 338
+        Me.btnAgregarComentario.UseVisualStyleBackColor = False
         '
-        'col_cve_modelo
+        'Label88
         '
-        Me.col_cve_modelo.DataPropertyName = "cve_modelo"
-        Me.col_cve_modelo.HeaderText = "cve_modelo"
-        Me.col_cve_modelo.Name = "col_cve_modelo"
-        Me.col_cve_modelo.ReadOnly = True
+        Me.Label88.AutoSize = True
+        Me.Label88.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label88.Location = New System.Drawing.Point(559, 136)
+        Me.Label88.Name = "Label88"
+        Me.Label88.Size = New System.Drawing.Size(50, 18)
+        Me.Label88.TabIndex = 341
+        Me.Label88.Text = "Quitar"
         '
-        'colnp_gkn
+        'Label89
         '
-        Me.colnp_gkn.DataPropertyName = "np_gkn"
-        Me.colnp_gkn.HeaderText = "No.Parte GKN"
-        Me.colnp_gkn.Name = "colnp_gkn"
-        Me.colnp_gkn.ReadOnly = True
+        Me.Label89.AutoSize = True
+        Me.Label89.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label89.Location = New System.Drawing.Point(474, 136)
+        Me.Label89.Name = "Label89"
+        Me.Label89.Size = New System.Drawing.Size(65, 18)
+        Me.Label89.TabIndex = 340
+        Me.Label89.Text = "Agregar"
         '
-        'colmodelodescripcion
+        'Label90
         '
-        Me.colmodelodescripcion.DataPropertyName = "descripcion"
-        Me.colmodelodescripcion.HeaderText = "Modelo"
-        Me.colmodelodescripcion.Name = "colmodelodescripcion"
-        Me.colmodelodescripcion.ReadOnly = True
+        Me.Label90.AutoSize = True
+        Me.Label90.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label90.Location = New System.Drawing.Point(8, 41)
+        Me.Label90.Name = "Label90"
+        Me.Label90.Size = New System.Drawing.Size(69, 18)
+        Me.Label90.TabIndex = 343
+        Me.Label90.Text = "Detalles:"
         '
-        'coldesechocantidad
+        'txtDetallesComentario
         '
-        Me.coldesechocantidad.DataPropertyName = "cantidad"
-        Me.coldesechocantidad.HeaderText = "Cantidad"
-        Me.coldesechocantidad.Name = "coldesechocantidad"
-        Me.coldesechocantidad.ReadOnly = True
+        Me.txtDetallesComentario.BackColor = System.Drawing.Color.FromArgb(CType(CType(243, Byte), Integer), CType(CType(251, Byte), Integer), CType(CType(120, Byte), Integer))
+        Me.txtDetallesComentario.Location = New System.Drawing.Point(11, 62)
+        Me.txtDetallesComentario.Multiline = True
+        Me.txtDetallesComentario.Name = "txtDetallesComentario"
+        Me.txtDetallesComentario.ScrollBars = System.Windows.Forms.ScrollBars.Vertical
+        Me.txtDetallesComentario.Size = New System.Drawing.Size(437, 115)
+        Me.txtDetallesComentario.TabIndex = 342
         '
-        'col_comentarios_desecho
+        'grdDetalleComentario
         '
-        Me.col_comentarios_desecho.DataPropertyName = "comentarios"
-        Me.col_comentarios_desecho.HeaderText = "Comentarios"
-        Me.col_comentarios_desecho.Name = "col_comentarios_desecho"
-        Me.col_comentarios_desecho.ReadOnly = True
+        Me.grdDetalleComentario.AllowUserToAddRows = False
+        Me.grdDetalleComentario.AllowUserToDeleteRows = False
+        Me.grdDetalleComentario.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.grdDetalleComentario.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.col_cve_comentarios_generales, Me.col_comentarios})
+        Me.grdDetalleComentario.Location = New System.Drawing.Point(11, 202)
+        Me.grdDetalleComentario.Name = "grdDetalleComentario"
+        Me.grdDetalleComentario.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
+        Me.grdDetalleComentario.Size = New System.Drawing.Size(606, 189)
+        Me.grdDetalleComentario.TabIndex = 344
+        '
+        'col_cve_comentarios_generales
+        '
+        Me.col_cve_comentarios_generales.DataPropertyName = "cve_comentarios_generales"
+        Me.col_cve_comentarios_generales.HeaderText = "cve_comentarios_generales"
+        Me.col_cve_comentarios_generales.Name = "col_cve_comentarios_generales"
+        Me.col_cve_comentarios_generales.ReadOnly = True
+        '
+        'col_comentarios
+        '
+        Me.col_comentarios.DataPropertyName = "comentarios"
+        Me.col_comentarios.HeaderText = "Comentario"
+        Me.col_comentarios.Name = "col_comentarios"
+        Me.col_comentarios.ReadOnly = True
         '
         'frmProduccion
         '
@@ -2898,7 +3032,7 @@ Partial Class frmProduccion
         Me.Controls.Add(Me.imgEscudo)
         Me.Controls.Add(Me.titulo_banner_formulario)
         Me.Controls.Add(Me.banner_formulario)
-        Me.Controls.Add(Me.TabContenido)
+        Me.Controls.Add(Me.tabPageComentarios)
         Me.DoubleBuffered = True
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.MaximizeBox = False
@@ -2906,7 +3040,7 @@ Partial Class frmProduccion
         Me.MinimumSize = New System.Drawing.Size(1270, 736)
         Me.Name = "frmProduccion"
         Me.Text = "frmProduccion"
-        Me.TabContenido.ResumeLayout(False)
+        Me.tabPageComentarios.ResumeLayout(False)
         Me.tabPageProductividad.ResumeLayout(False)
         Me.grpDesechos.ResumeLayout(False)
         Me.grpDesechos.PerformLayout()
@@ -2948,11 +3082,15 @@ Partial Class frmProduccion
         CType(Me.grdDetalleDescansos, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.banner_formulario, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.imgEscudo, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.TabPage1.ResumeLayout(False)
+        Me.grpComentarios.ResumeLayout(False)
+        Me.grpComentarios.PerformLayout()
+        CType(Me.grdDetalleComentario, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
     End Sub
-    Friend WithEvents TabContenido As System.Windows.Forms.TabControl
+    Friend WithEvents tabPageComentarios As System.Windows.Forms.TabControl
     Friend WithEvents tabPageProductividad As System.Windows.Forms.TabPage
     Friend WithEvents grpDesechos As System.Windows.Forms.GroupBox
     Friend WithEvents cbxModeloDesecho As System.Windows.Forms.ComboBox
@@ -3203,4 +3341,15 @@ Partial Class frmProduccion
     Friend WithEvents colmodelodescripcion As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents coldesechocantidad As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents col_comentarios_desecho As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents TabPage1 As System.Windows.Forms.TabPage
+    Friend WithEvents grpComentarios As System.Windows.Forms.GroupBox
+    Friend WithEvents grdDetalleComentario As System.Windows.Forms.DataGridView
+    Friend WithEvents col_cve_comentarios_generales As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents col_comentarios As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents Label90 As System.Windows.Forms.Label
+    Friend WithEvents txtDetallesComentario As System.Windows.Forms.TextBox
+    Friend WithEvents btnQuitarComentario As System.Windows.Forms.Button
+    Friend WithEvents btnAgregarComentario As System.Windows.Forms.Button
+    Friend WithEvents Label88 As System.Windows.Forms.Label
+    Friend WithEvents Label89 As System.Windows.Forms.Label
 End Class
