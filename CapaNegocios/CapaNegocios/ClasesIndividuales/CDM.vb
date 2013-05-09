@@ -90,8 +90,7 @@ Public Class CDM
                     Me.tiempo = rDatos("tiempo")
                 End If
             End If
-        Catch 'ex As Exception
-            'Throw New Exception(ex.Message)
+        Catch 
             MsgBox("Error al Obtener tiempo de cambio de modelo. CCDM_ERROR", vbCritical + vbOKOnly, "Error")
         End Try
     End Sub

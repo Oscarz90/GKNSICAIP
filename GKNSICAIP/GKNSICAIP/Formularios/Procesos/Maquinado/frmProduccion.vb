@@ -832,7 +832,7 @@ Public Class frmProduccion
         If fecha_inicio <= hora_actual And hora_actual <= fecha_final And ini_aux <> Nothing And fin_aux <> Nothing Then
             Return True
         Else
-            MsgBox("Ha finalizado el turno ya no puedes capturar o borrar. Para elegir un nuevo turno y dia Da Click en Salir", vbExclamation + vbOKOnly, "Aviso!")
+            MsgBox("Ha finalizado el turno ya no puedes capturar. Para elegir un nuevo turno y dia Da Click en la pestaña Turnos-Lineas", vbExclamation + vbOKOnly, "Aviso!")
             Return False
         End If
     End Function
@@ -1197,7 +1197,7 @@ Public Class frmProduccion
         If hora_actual >= fecha_inicio And hora_actual <= fecha_final Then
             Return True
         Else
-            MsgBox("Ha finalizado el turno ya no puedes capturar. Para elegir un nuevo turno y dia Da Click en Salir", vbExclamation + vbOKOnly, "Aviso!")
+            MsgBox("Ha finalizado el turno ya no puedes capturar. Para elegir un nuevo turno y dia Da Click en la pestaña Turnos-Lineas", vbExclamation + vbOKOnly, "Aviso!")
             cbxLinea.SelectedIndex = -1
             cbxTurno.SelectedIndex = -1
             establece_dia_descanso()
