@@ -1,60 +1,64 @@
 ﻿Imports CapaDatos
-Public Class Desecho
+Public Class Comentarios_Generales
     Implements IIndividual
     Dim cadena_conexion As New CapaDatos.conexiones
     Dim oBD As New CapaDatos.CapaDatos(cadena_conexion.CadenaSicaip)
-#Region "Metodos IIndividual"
+#Region "IIndividual"
+
+
     Public Sub Cargar() Implements IIndividual.Cargar
 
     End Sub
+
     Public Sub Eliminar() Implements IIndividual.Eliminar
         Try
-            oBD.EjecutarQuery("update desecho set cod_empleado_eliminacion='" & vcod_empleado_eliminacion & "',fecha_eliminacion='" & vfecha_eliminacion & "',estatus='0' where cve_desecho=" & vcve_desecho)
+            oBD.EjecutarQuery("update comentarios_generales set cod_empleado_eliminacion='" & vcod_empleado_eliminacion & "',fecha_eliminacion='" & vfecha_eliminacion.ToString("MM-dd-yyyy HH:mm") & "',estatus='0' where cve_comentarios_generales=" & vcve_comentarios_generales)
         Catch ex As Exception
-            MsgBox("Error al eliminar desecho. CDesecho_ERROR", vbCritical + vbOKOnly, "Error")
+            MsgBox("Error al eliminar comentario. CComentarios_Generales_ERROR", vbCritical + vbOKOnly, "Error")
         End Try
     End Sub
-    Dim vId As Long
+
     Public Property Id As Long Implements IIndividual.Id
         Get
-            Return vId
+            Return vcve_comentarios_generales
         End Get
         Set(ByVal value As Long)
-            vId = value
+            vcve_comentarios_generales = value
         End Set
     End Property
+
     Public Function Obtener_Id(ByVal vCadena As String) As Long Implements IIndividual.Obtener_Id
-        Return 1
+        Return vcve_comentarios_generales
     End Function
+
     Public Sub Registrar() Implements IIndividual.Registrar
-        Dim queryInsert As String = "insert into desecho(cve_registro_turno,cod_empleado_registro,fecha_registro,cve_modelo,cantidad,comentarios,estatus) " &
-                              "values(" & vcve_registro_turno & ",'" & vcod_empleado_registro & "','" & vfecha_registro & "'," & vcve_modelo & "," & vcantidad & ",'" & vcomentarios & "','" & vestatus & "')"
+        Dim queryInsert As String = "insert into comentarios_generales(cve_registro_turno,cod_empleado_registro,fecha_registro,comentarios,estatus) " &
+                            "values(" & vcve_registro_turno & ",'" & vcod_empleado_registro & "','" & vfecha_registro.ToString("MM-dd-yyyy HH:mm") & "','" & vcomentarios & "','1')"
         Try
             oBD.EjecutarQuery(queryInsert)
         Catch
-            MsgBox("Error al insertar desecho. CDesecho_ERROR", vbCritical + vbOKOnly, "Error")
+            MsgBox("Error al insertar comentario_General. CComentarios_Generales_ERROR", vbCritical + vbOKOnly, "Error")
         End Try
     End Sub
 #End Region
 #Region "Atributos"
-    Private vcve_desecho As Long
+
+    Private vcve_comentarios_generales As Long
     Private vcve_registro_turno As Long
     Private vcod_empleado_registro As String
-    Private vfecha_registro As String
-    Private vcve_modelo As Long
-    Private vcantidad As Long
+    Private vfecha_registro As DateTime
     Private vcomentarios As String
     Private vcod_empleado_eliminacion As String
-    Private vfecha_eliminacion As String
+    Private vfecha_eliminacion As DateTime
     Private vestatus As String
 #End Region
 #Region "Propiedades"
-    Public Property cve_desecho() As Long
+    Public Property cve_comentarios_generales() As Long
         Get
-            Return vcve_desecho
+            Return vcve_comentarios_generales
         End Get
         Set(ByVal value As Long)
-            vcve_desecho = value
+            vcve_comentarios_generales = value
         End Set
     End Property
     Public Property cve_registro_turno() As Long
@@ -73,28 +77,12 @@ Public Class Desecho
             vcod_empleado_registro = value
         End Set
     End Property
-    Public Property fecha_registro() As String
+    Public Property fecha_registro() As DateTime
         Get
             Return vfecha_registro
         End Get
-        Set(ByVal value As String)
+        Set(ByVal value As DateTime)
             vfecha_registro = value
-        End Set
-    End Property
-    Public Property cve_modelo() As Long
-        Get
-            Return vcve_modelo
-        End Get
-        Set(ByVal value As Long)
-            vcve_modelo = value
-        End Set
-    End Property
-    Public Property cantidad() As Long
-        Get
-            Return vcantidad
-        End Get
-        Set(ByVal value As Long)
-            vcantidad = value
         End Set
     End Property
     Public Property comentarios() As String
@@ -113,11 +101,11 @@ Public Class Desecho
             vcod_empleado_eliminacion = value
         End Set
     End Property
-    Public Property fecha_eliminacion() As String
+    Public Property fecha_eliminacion() As DateTime
         Get
             Return vfecha_eliminacion
         End Get
-        Set(ByVal value As String)
+        Set(ByVal value As DateTime)
             vfecha_eliminacion = value
         End Set
     End Property
@@ -131,23 +119,20 @@ Public Class Desecho
     End Property
 #End Region
 #Region "Metodos formulario de produccion"
-    Public Function llena_desecho_gridview() As DataTable
+    Public Function llena_comentarios_generales_gridview() As DataTable
         Dim obj As DataTable
-        Dim queryLlenagridview As String = "select d.cve_desecho,rt.cve_linea,m.cve_modelo,m.np_gkn,m.descripcion,d.cantidad,d.comentarios from desecho d " &
-            "join modelo m on d.cve_modelo=m.cve_modelo " &
-            "join registro_turno rt on rt.cve_registro_turno=d.cve_registro_turno " &
-            "where d.cve_registro_turno=" & vcve_registro_turno & " and d.estatus='1'"
+        Dim queryLlenagridview As String = "select cg.cve_comentarios_generales,cg.comentarios from comentarios_generales cg " &
+            "where cg.estatus='1' and cg.cve_registro_turno=" & vcve_registro_turno
         Using scope As New TransactionScope
             Try
                 obj = oBD.ObtenerTabla(queryLlenagridview)
                 scope.Complete()
             Catch
-                MsgBox("Error al obtener detalle de Desechos. CDesecho_ERROR", vbCritical + vbOKOnly, "Error")
+                MsgBox("Error al obtener detalle de comentarios_generales. CComentarios_Generales_ERROR", vbCritical + vbOKOnly, "Error")
                 Return Nothing
             End Try
             Return obj
         End Using
     End Function
-
 #End Region
 End Class

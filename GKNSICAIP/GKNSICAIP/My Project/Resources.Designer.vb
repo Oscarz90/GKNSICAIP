@@ -60,6 +60,13 @@ Namespace My.Resources
             End Set
         End Property
         
+        Friend ReadOnly Property _next() As System.Drawing.Bitmap
+            Get
+                Dim obj As Object = ResourceManager.GetObject("next", resourceCulture)
+                Return CType(obj,System.Drawing.Bitmap)
+            End Get
+        End Property
+        
         Friend ReadOnly Property banner_03() As System.Drawing.Bitmap
             Get
                 Dim obj As Object = ResourceManager.GetObject("banner_03", resourceCulture)
@@ -70,6 +77,13 @@ Namespace My.Resources
         Friend ReadOnly Property banner_gkn_driveline() As System.Drawing.Bitmap
             Get
                 Dim obj As Object = ResourceManager.GetObject("banner-gkn-driveline", resourceCulture)
+                Return CType(obj,System.Drawing.Bitmap)
+            End Get
+        End Property
+        
+        Friend ReadOnly Property next_next() As System.Drawing.Bitmap
+            Get
+                Dim obj As Object = ResourceManager.GetObject("next-next", resourceCulture)
                 Return CType(obj,System.Drawing.Bitmap)
             End Get
         End Property
