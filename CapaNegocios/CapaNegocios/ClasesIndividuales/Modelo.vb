@@ -51,6 +51,7 @@ Public Class Modelo
     Private vdescripcion As String
     'Auxiliares
     Private vcve_linea As Long
+    Private vcve_registro_turno As Long
 
 #End Region
 #Region "Propiedades"
@@ -95,15 +96,20 @@ Public Class Modelo
             vdescripcion = value
         End Set
     End Property
-
-
-
     Public Property cve_linea() As Long
         Get
             Return vcve_linea
         End Get
         Set(ByVal value As Long)
             vcve_linea = value
+        End Set
+    End Property
+    Public Property cve_registro_turno() As Long
+        Get
+            Return vcve_registro_turno
+        End Get
+        Set(ByVal value As Long)
+            vcve_registro_turno = value
         End Set
     End Property
 
@@ -122,6 +128,23 @@ Public Class Modelo
                                          "where l.cve_linea=" & vcve_linea)
         Catch ex As Exception
             MsgBox("ERROR_AL_OBTENER_MODELOS_DE_LINEA_CModelo")
+            dtModelos = Nothing
+        End Try
+        Return dtModelos
+    End Function
+    Public Function llena_combo_Modelos_Desecho_Linea() As DataTable
+        Dim dtModelos As New DataTable
+        Dim query As String = "select m.cve_modelo,m.np_gkn from registro_turno rt " &
+            "join linea l on rt.cve_linea=l.cve_linea " &
+            "join TC t on t.cve_linea=l.cve_linea " &
+            "join modelo m on t.cve_modelo=m.cve_modelo " &
+            "where rt.cve_registro_turno=" & vcve_registro_turno & " and " &
+            "m.cve_modelo in (select p.cve_modelo from produccion p " &
+            "where p.cve_registro_turno=" & vcve_registro_turno & " and p.estatus='1')"
+        Try
+            dtModelos = oBD.ObtenerTabla(query)
+        Catch ex As Exception
+            MsgBox("ERROR_AL_OBTENER_MODELOS_DESECHO_DE_LINEA_CModelo")
             dtModelos = Nothing
         End Try
         Return dtModelos

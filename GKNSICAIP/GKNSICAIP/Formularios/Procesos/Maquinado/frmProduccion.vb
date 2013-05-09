@@ -12,6 +12,7 @@ Public Class frmProduccion
     'Banderas
     Private flgBanderacbxLineas As Boolean = False
     Private flgBanderacbxModelos As Boolean = False
+    Private flgBanderacbxModelosDesecho As Boolean = False
     Private flgBanderacbxTurnos As Boolean = False
     Private flgBanderacbxMaquinas As Boolean = False
     Private flgBanderacbxParos As Boolean = False
@@ -226,12 +227,6 @@ Public Class frmProduccion
             cbxModeloProductividad.DataSource = oModelo.llena_combo_Modelos_Linea()
             cbxModeloProductividad.SelectedIndex = -1
 
-            cbxModeloDesecho.ValueMember = "cve_modelo"
-            cbxModeloDesecho.DisplayMember = "np_gkn"
-            cbxModeloDesecho.DataSource = oModelo.llena_combo_Modelos_Linea()
-            cbxModeloDesecho.SelectedIndex = -1
-
-
             cbxModeloRechazo.ValueMember = "cve_modelo"
             cbxModeloRechazo.DisplayMember = "np_gkn"
             cbxModeloRechazo.DataSource = oModelo.llena_combo_Modelos_Linea()
@@ -240,6 +235,18 @@ Public Class frmProduccion
 
 
             flgBanderacbxModelos = True
+        End If
+    End Sub
+    Private Sub llena_cbx_Modelos_Desecho()
+        flgBanderacbxModelosDesecho = False
+        If cbxLinea.SelectedIndex <> -1 And flgBanderacbxLineas Then
+            Dim oModelo As New CapaNegocios.Modelo
+            oModelo.cve_registro_turno = get_registro_del_turno()
+            cbxModeloDesecho.ValueMember = "cve_modelo"
+            cbxModeloDesecho.DisplayMember = "np_gkn"
+            cbxModeloDesecho.DataSource = oModelo.llena_combo_Modelos_Desecho_Linea()
+            cbxModeloDesecho.SelectedIndex = -1
+            flgBanderacbxModelosDesecho = True
         End If
     End Sub
     'Rechazos
@@ -431,6 +438,7 @@ Public Class frmProduccion
                     establece_dia_laboral()
                     establece_hora_inicio_fin_captura()
                     llena_cbx_Modelos()
+                    llena_cbx_Modelos_Desecho()
                     llena_cbx_Maquinas()
                     llena_informacion_tabs_formulario()
                     establece_label_fecha_captura()
@@ -600,6 +608,7 @@ Public Class frmProduccion
                 calcula_NRFTI()
                 add_productividad()
                 add_Nrfti()
+                llena_cbx_Modelos_Desecho()
             End If
         End If
     End Sub
@@ -612,6 +621,7 @@ Public Class frmProduccion
             calcula_NRFTI()
             add_productividad()
             add_Nrfti()
+            llena_cbx_Modelos_Desecho()
         End If
     End Sub
     'Desechos
