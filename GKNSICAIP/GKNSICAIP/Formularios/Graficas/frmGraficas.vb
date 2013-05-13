@@ -2,8 +2,8 @@
 Public Class frmGraficas    
 #Region "VARIABLES GLOBALES"
     Dim oGraficas As Graficas
-    Private vIdEquipo As Integer = 4
-    'Private vIdEquipo As Integer = 76
+    'Private vIdEquipo As Integer = 4
+    Private vIdEquipo As Integer = 76
     Dim colores(12) As String
     Dim rutaGrafica As String
     Dim cadenaXML As String
@@ -381,8 +381,7 @@ Public Class frmGraficas
                             oee = 0
                             promedio = promedio + oee
                         End If
-                        vMesInicio = Month(DateTime.Parse(vDR("Dia_Asignado"))).ToString
-                        vYearInicio = Year(DateTime.Parse(vDR("Dia_Asignado"))).ToString
+
                     Else
                         banderaPromedio = True
                         If contador > 0 Then
@@ -391,13 +390,20 @@ Public Class frmGraficas
                             promedio = 0
                         End If
                         cadenaXML += " <set value='" & promedio.ToString & "'/>"
-                        vMesInicio = Month(DateTime.Parse(vDR("Dia_Asignado"))).ToString
-                        vYearInicio = Year(DateTime.Parse(vDR("Dia_Asignado"))).ToString
                         promedio = 0
                         oee = 0
                         contador = 0
+                        vMesInicio = Month(DateTime.Parse(vDR("Dia_Asignado"))).ToString
+                        vYearInicio = Year(DateTime.Parse(vDR("Dia_Asignado"))).ToString
+                        If vDR("TIPO_REGISTRO") = "P" Then
+                            oee = vDR(("oee")) * 100
+                            promedio = promedio + oee
+                            contador = contador + 1
+                        ElseIf vDR("TIPO_REGISTRO") = "D" Then
+                            oee = 0
+                            promedio = promedio + oee
+                        End If
                     End If
-                    
                 Next
                 If contador > 0 Then
                     promedio = promedio / contador
@@ -428,11 +434,15 @@ Public Class frmGraficas
         Dim contador As Integer = 0
         Dim vContador_Dias As Integer = 0
         Dim vDT As DataTable
+        Dim vMesInicio As String = ""
+        Dim vYearInicio As String = ""
+        Dim mes As String = ""
+        Dim banderaPromedio As Boolean = False
+
         cadenaXML += "<dataset seriesName='OEE' color='" & color & "' anchorBorderColor='" & contorno_anchor & "' anchorBgColor='" & color & "' anchorRadius='" & radio_anchor & "'>"
         Dim oee As Double = 0
         Dim vFecha_Actual As DateTime
         If rbtDia.Checked Then
-            'vDT = oGraficas.ejecutarVistaOEE(cadenaWHERE)
             vDT = oGraficas.ejecutarVista(cadena, cadenaWHERE)
             vFecha_Actual = vDT.Rows(0).Item("DIA_ASIGNADO").ToString
             For Each vDR As DataRow In vDT.Rows
@@ -440,7 +450,6 @@ Public Class frmGraficas
                     oee = vDR(("oee")) * 100
                     promDia = promDia + oee
                     contador = contador + 1
-                    'ElseIf vDR("TIPO_REGISTRO") = "D" Then
                 ElseIf vDR("TIPO_REGISTRO") = "P" And vFecha_Actual <> vDR("DIA_ASIGNADO") Then
                     vContador_Dias = vContador_Dias + 1
                     promDia = promDia / contador
@@ -461,9 +470,74 @@ Public Class frmGraficas
             promDia = promDia / contador
             promAcumulado = promAcumulado + promDia
             cadenaXML += " <set value='" & promDia.ToString & "'/>"
+            banderaPromedio = True
+        Else
+            If rbtMeses.Checked Then
+                vDT = oGraficas.ejecutarVista(cadena, cadenaWHERE)
+                vFecha_Actual = vDT.Rows(0).Item("DIA_ASIGNADO").ToString
+                vMesInicio = Month(DateTime.Parse(vDT.Rows(0).Item("Dia_Asignado"))).ToString
+                vYearInicio = Year(DateTime.Parse(vDT.Rows(0).Item("Dia_Asignado"))).ToString
+                For Each vDR As DataRow In vDT.Rows
+                    If (Month(DateTime.Parse(vDR("Dia_Asignado"))).ToString = vMesInicio And Year(DateTime.Parse(vDR("Dia_Asignado"))).ToString = vYearInicio) Then
+                        If vDR("TIPO_REGISTRO") = "P" And vFecha_Actual = vDR("DIA_ASIGNADO") Then
+                            oee = vDR(("oee")) * 100
+                            promDia = promDia + oee
+                            contador = contador + 1
+                        ElseIf vDR("TIPO_REGISTRO") = "P" And vFecha_Actual <> vDR("DIA_ASIGNADO") Then
+                            vContador_Dias = vContador_Dias + 1
+                            promDia = promDia / contador
+                            promAcumulado = promAcumulado + promDia
+                            'cadenaXML += " <set value='" & promAcumulado.ToString & "'/>"
+                            vFecha_Actual = vDR("DIA_ASIGNADO")
+                            promDia = 0
+                            contador = 0
+                            If vDR("TIPO_REGISTRO") <> "D" Then
+                                oee = vDR(("oee")) * 100
+                                promDia = promDia + oee
+                                contador = contador + 1
+                                promDia = promDia / contador
+                            End If
+                        End If
+                    Else
+                        banderaPromedio = True
+                        cadenaXML += " <set value='" & promAcumulado.ToString & "'/>"
+                        vFecha_Actual = vDR("DIA_ASIGNADO")
+                        promDia = 0
+                        contador = 0
+                        vMesInicio = Month(DateTime.Parse(vDR("Dia_Asignado"))).ToString
+                        vYearInicio = Year(DateTime.Parse(vDR("Dia_Asignado"))).ToString
+                        If vDR("TIPO_REGISTRO") = "P" And vFecha_Actual = vDR("DIA_ASIGNADO") Then
+                            oee = vDR(("oee")) * 100
+                            promDia = promDia + oee
+                            contador = contador + 1
+                        ElseIf vDR("TIPO_REGISTRO") = "P" And vFecha_Actual <> vDR("DIA_ASIGNADO") Then
+                            vContador_Dias = vContador_Dias + 1
+                            promDia = promDia / contador
+                            promAcumulado = promAcumulado + promDia
+                            'cadenaXML += " <set value='" & promAcumulado.ToString & "'/>"
+                            vFecha_Actual = vDR("DIA_ASIGNADO")
+                            promDia = 0
+                            contador = 0
+                            If vDR("TIPO_REGISTRO") <> "D" Then
+                                oee = vDR(("oee")) * 100
+                                promDia = promDia + oee
+                                contador = contador + 1
+                                promDia = promDia / contador
+                            End If
+                        End If
+                    End If
+                Next
+                vContador_Dias = vContador_Dias + 1
+                promDia = promDia / contador
+                promAcumulado = promAcumulado + promDia
+                promFinal = promAcumulado / vContador_Dias
+                cadenaXML += " <set value='" & promFinal.ToString & "'/>"
+            End If
         End If
-        promFinal = promAcumulado / vContador_Dias
-        cadenaXML += " <set value='" & promFinal.ToString & "' color='" & colores(1) & "'/>"
+        If banderaPromedio = True Then
+            promFinal = promAcumulado / vContador_Dias
+            cadenaXML += " <set value='" & promFinal.ToString & "' color='" & colores(1) & "'/>"
+        End If
         cadenaXML += " </dataset>"
     End Sub
 #End Region
@@ -507,10 +581,13 @@ Public Class frmGraficas
                 ElseIf vFecha_Actual <> vDR("DIA_ASIGNADO") Then
                     promAnual = promMes / contador
                     cadenaXML += " <set value='" & promAnual.ToString & "'/>"
-                    vFecha_Actual = vDR("DIA_ASIGNADO")
                     promAnual = 0
                     contador = 0
                     promMes = 0
+                    vResultado5s = vDR("PROMEDIO")
+                    promMes = promMes + vResultado5s
+                    contador = contador + 1
+                    vFecha_Actual = vDR("DIA_ASIGNADO")
                 End If
                 'vResultado5s = vDR("PROMEDIO")
                 'promMes = promMes + vResultado5s
