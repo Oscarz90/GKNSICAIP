@@ -587,7 +587,7 @@ Public Class frmProduccion
     End Sub
 
     Private Sub txtManttoAutonomo_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles txtManttoAutonomo.TextChanged
-            valida_botones_cinco_s()
+        valida_botones_cinco_s()
         calcula_promedio_cinco_S()
     End Sub
     'Comentarios generales
@@ -766,7 +766,7 @@ Public Class frmProduccion
             limpia_descanso()
         Else
             limpia_descanso()
-            MsgBox("no vas a registrar wey!", vbExclamation, "Error")
+            MsgBox("¡Solo puedes registrar descansos con fecha a partir del dia de hoy!", vbExclamation, "Error")
         End If 
     End Sub
     Private Sub btnQuitarDescanso_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnQuitarDescanso.Click
@@ -781,7 +781,7 @@ Public Class frmProduccion
         Else
             limpia_descanso()
             deshabilitar_btn_quitar_descanso()
-            MsgBox("no vas a borrar wey!", vbExclamation, "Error")
+            MsgBox("¡Solo puedes borrar descansos con fecha a partir del dia de hoy!", vbExclamation, "Error")
         End If
     End Sub
     'Comentarios Generales
@@ -873,9 +873,8 @@ Public Class frmProduccion
     Private Function valida_cinco_s(ByRef txtbox As TextBox) As Boolean
         Dim a As Integer() = {1, 2, 3, 4}
         Dim flgvalidacincos As Boolean = True
+        If Convert.ToDouble(txtbox.Text) = Int(Convert.ToDouble(txtbox.Text)) Then
 
-        If Convert.ToDouble(txtbox.Text) = vbInteger Then
-            MsgBox("igual a entero")
             If Convert.ToDouble(txtbox.Text) > 5 Then
                 flgvalidacincos = False
             Else
@@ -1055,7 +1054,6 @@ Public Class frmProduccion
     End Sub
     '5s
     Private Sub valida_botones_cinco_s()
-        MsgBox("valida botones")
         If cbxTurno.SelectedValue <> -1 And txtAdmonVisual.Text <> "" And txtManttoAutonomo.Text <> "" And txt5s.Text <> "" Then
             If Convert.ToDouble(txtAdmonVisual.Text) <> 0 And Convert.ToDouble(txtManttoAutonomo.Text) <> 0 And Convert.ToDouble(txt5s.Text) <> 0 Then
                 If valida_cinco_s(txtAdmonVisual) And valida_cinco_s(txtManttoAutonomo) And valida_cinco_s(txt5s) Then
@@ -1767,8 +1765,10 @@ Public Class frmProduccion
 #Region "Funciones para modulo 5S"
     Private Sub calcula_promedio_cinco_S()
         If txtAdmonVisual.Text <> Nothing And txt5s.Text <> Nothing And txtManttoAutonomo.Text <> Nothing Then
-            'txtPromedio.Text = Format(((Convert.ToDouble(txtAdmonVisual.Text) + Convert.ToDouble(txtManttoAutonomo.Text) + Convert.ToDouble(txt5s.Text)) / 3), "##0.0000")
-            txtPromedio.Text = ((Convert.ToDouble(txtAdmonVisual.Text) + Convert.ToDouble(txtManttoAutonomo.Text) + Convert.ToDouble(txt5s.Text)) / 3)
+            txtPromedio.Text = Format(((Convert.ToDouble(txtAdmonVisual.Text) + Convert.ToDouble(txtManttoAutonomo.Text) + Convert.ToDouble(txt5s.Text)) / 3), "##0.0000")
+            'txtPromedio.Text = ((Convert.ToDouble(txtAdmonVisual.Text) + Convert.ToDouble(txtManttoAutonomo.Text) + Convert.ToDouble(txt5s.Text)) / 3)
+        Else
+            txtPromedio.Text = "0.0000"
         End If
     End Sub
     Private Sub add_cinco_s()
@@ -1848,37 +1848,40 @@ Public Class frmProduccion
 #End Region
 
     Private Sub valida_numero_cinco_s(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txtManttoAutonomo.KeyPress, txtAdmonVisual.KeyPress, txt5s.KeyPress
-        MsgBox("VALIDA numero cnico")
         Dim cajatexto As TextBox
         cajatexto = sender
-        Dim dig As Integer = Len(cajatexto.Text & e.KeyChar)
         Dim esDec As Boolean
-        Dim a, esDecimal, NumDecimales As Integer
-        For a = 0 To dig - 1
-            Dim car As String = CStr(cajatexto.Text & e.KeyChar)
-            If car.Substring(a, 1) = "." And esDec <> True Then
-                esDecimal = esDecimal + 1
-                esDec = True
-            ElseIf esDec Then
-                NumDecimales = NumDecimales + 1
-            End If
-            ' aqui se controla los digitos a partir del punto numdecimales = 4 si es de dos decimales
-        Next
-        If NumDecimales > 1 Then
-            e.Handled = True
-        Else
-            If Char.IsNumber(e.KeyChar) Then
-                e.Handled = False
-            ElseIf Char.IsControl(e.KeyChar) Then
-                e.Handled = False
-            ElseIf UCase(e.KeyChar) Like "[.]" Then
-                If InStr(sender.Text, ".") > 0 Then
-                    e.Handled = True
+        If Char.IsNumber(e.KeyChar) Then
+            'asfdasdf
+            ' e.Handled = False
+            Dim a, esDecimal, NumDecimales As Integer
+            Dim dig As Integer = Len(cajatexto.Text & e.KeyChar)
+            For a = 0 To dig - 1
+                Dim car As String = CStr(cajatexto.Text & e.KeyChar)
+                If car.Substring(a, 1) = "." And esDec <> True Then
+                    esDecimal = esDecimal + 1
+                    esDec = True
+                ElseIf esDec Then
+                    NumDecimales = NumDecimales + 1
                 End If
+                ' aqui se controla los digitos a partir del punto numdecimales = 4 si es de dos decimales
+            Next
+            If NumDecimales > 1 Then
+                e.Handled = True
             Else
+                e.Handled = False
+            End If
+            'asdfsdf
+        ElseIf Char.IsControl(e.KeyChar) Then
+            e.Handled = False
+        ElseIf UCase(e.KeyChar) Like "[.]" Then
+            If InStr(sender.Text, ".") > 0 Then
                 e.Handled = True
             End If
+        Else
+            e.Handled = True
         End If
+
 
     End Sub
 End Class
