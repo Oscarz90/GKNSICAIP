@@ -12,6 +12,7 @@ Public Class frmProduccion
     'Banderas
     Private flgBanderacbxLineas As Boolean = False
     Private flgBanderacbxModelos As Boolean = False
+    Private flgBanderacbxModelosDesecho As Boolean = False
     Private flgBanderacbxTurnos As Boolean = False
     Private flgBanderacbxMaquinas As Boolean = False
     Private flgBanderacbxParos As Boolean = False
@@ -50,7 +51,7 @@ Public Class frmProduccion
     End Sub
     'Llena toda la info del formulario
     Private Sub inicializa_formulario()
-        set_Datos_Equipo(7, "Tlatoanis", "Oscar Mtz S", "118737")
+        'set_Datos_Equipo(7, "Tlatoanis", "Oscar Mtz S", "118737")
         get_Imagen_Equipo()
         define_calendario_descanso()
         'Descansos
@@ -226,12 +227,6 @@ Public Class frmProduccion
             cbxModeloProductividad.DataSource = oModelo.llena_combo_Modelos_Linea()
             cbxModeloProductividad.SelectedIndex = -1
 
-            cbxModeloDesecho.ValueMember = "cve_modelo"
-            cbxModeloDesecho.DisplayMember = "np_gkn"
-            cbxModeloDesecho.DataSource = oModelo.llena_combo_Modelos_Linea()
-            cbxModeloDesecho.SelectedIndex = -1
-
-
             cbxModeloRechazo.ValueMember = "cve_modelo"
             cbxModeloRechazo.DisplayMember = "np_gkn"
             cbxModeloRechazo.DataSource = oModelo.llena_combo_Modelos_Linea()
@@ -240,6 +235,18 @@ Public Class frmProduccion
 
 
             flgBanderacbxModelos = True
+        End If
+    End Sub
+    Private Sub llena_cbx_Modelos_Desecho()
+        flgBanderacbxModelosDesecho = False
+        If cbxLinea.SelectedIndex <> -1 And flgBanderacbxLineas Then
+            Dim oModelo As New CapaNegocios.Modelo
+            oModelo.cve_registro_turno = get_registro_del_turno()
+            cbxModeloDesecho.ValueMember = "cve_modelo"
+            cbxModeloDesecho.DisplayMember = "np_gkn"
+            cbxModeloDesecho.DataSource = oModelo.llena_combo_Modelos_Desecho_Linea()
+            cbxModeloDesecho.SelectedIndex = -1
+            flgBanderacbxModelosDesecho = True
         End If
     End Sub
     'Rechazos
@@ -413,16 +420,13 @@ Public Class frmProduccion
 #End Region
 #Region "Eventos ComboBox"
     'General
-    Private Sub cbxTurno_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cbxTurno.SelectedIndexChanged
-        'actualiza_tabla_turno_minutos()
-    End Sub
     Private Sub cbxLinea_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cbxLinea.SelectedIndexChanged
         If cbxLinea.SelectedIndex <> -1 And flgBanderacbxLineas Then
             If verifica_registro_turno_produccion(cbxLinea.SelectedValue, Convert.ToDateTime(Now.ToString("dd-MM-yyyy HH:mm"))) Then
-                MsgBox("No has registrado esta linea")
+                MsgBox("No has registrado Turno para la Linea: " & cbxLinea.Text)
                 establece_dia_descanso()
             Else
-                MsgBox("Linea Registrada")
+                ' MsgBox("Linea con horario asignado")
                 cbxTurno.SelectedIndex = vcve_turno - 1
                 If cbxTurno.Text = "Descanso" Then
                     establece_dia_descanso()
@@ -431,6 +435,7 @@ Public Class frmProduccion
                     establece_dia_laboral()
                     establece_hora_inicio_fin_captura()
                     llena_cbx_Modelos()
+                    llena_cbx_Modelos_Desecho()
                     llena_cbx_Maquinas()
                     llena_informacion_tabs_formulario()
                     establece_label_fecha_captura()
@@ -567,18 +572,21 @@ Public Class frmProduccion
     End Sub
     '5s
     Private Sub txtAdmonVisual_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles txtAdmonVisual.TextChanged
-        valida_sea_numero(sender)
+
         valida_botones_cinco_s()
         calcula_promedio_cinco_S()
+        
+
     End Sub
     Private Sub txt5s_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles txt5s.TextChanged
-        valida_sea_numero(sender)
+
         valida_botones_cinco_s()
         calcula_promedio_cinco_S()
+      
+
     End Sub
 
     Private Sub txtManttoAutonomo_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles txtManttoAutonomo.TextChanged
-        valida_sea_numero(sender)
         valida_botones_cinco_s()
         calcula_promedio_cinco_S()
     End Sub
@@ -600,6 +608,7 @@ Public Class frmProduccion
                 calcula_NRFTI()
                 add_productividad()
                 add_Nrfti()
+                llena_cbx_Modelos_Desecho()
             End If
         End If
     End Sub
@@ -612,6 +621,7 @@ Public Class frmProduccion
             calcula_NRFTI()
             add_productividad()
             add_Nrfti()
+            llena_cbx_Modelos_Desecho()
         End If
     End Sub
     'Desechos
@@ -751,15 +761,28 @@ Public Class frmProduccion
     End Sub
     'Descanso
     Private Sub btnAgregarDescanso_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnAgregarDescanso.Click
-        registra_descanso()
-        limpia_descanso()
+        If dtpDescanso.Value >= Now.ToString("dd-MM-yyy") Then
+            registra_descanso()
+            limpia_descanso()
+        Else
+            limpia_descanso()
+            MsgBox("¡Solo puedes registrar descansos con fecha a partir del dia de hoy!", vbExclamation, "Error")
+        End If 
     End Sub
     Private Sub btnQuitarDescanso_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnQuitarDescanso.Click
-        remove_descanso()
-        limpia_descanso()
-        deshabilitar_btn_quitar_descanso()
-        llena_lineas_Si_gridview()
-        llena_Descanso_gridview()
+
+        Dim Fecha As Date = grdDetalleDescansos.Item("col_fecha_descanso", grdDetalleDescansos.CurrentRow.Index).Value
+        If Fecha >= Now.ToString("dd-MM-yyy") Then
+            remove_descanso()
+            limpia_descanso()
+            deshabilitar_btn_quitar_descanso()
+            llena_lineas_Si_gridview()
+            llena_Descanso_gridview()
+        Else
+            limpia_descanso()
+            deshabilitar_btn_quitar_descanso()
+            MsgBox("¡Solo puedes borrar descansos con fecha a partir del dia de hoy!", vbExclamation, "Error")
+        End If
     End Sub
     'Comentarios Generales
     Private Sub btnAgregarComentario_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnAgregarComentario.Click
@@ -811,6 +834,7 @@ Public Class frmProduccion
     'Descansos
     Private Sub grdDetalleDescansos_CellClick(ByVal sender As System.Object, ByVal e As System.Windows.Forms.DataGridViewCellEventArgs) Handles grdDetalleDescansos.CellClick
         habilita_btn_quitar_descanso()
+        limpia_descanso()
     End Sub
     'Comentarios Generales
     Private Sub grdDetalleComentario_CellClick(ByVal sender As System.Object, ByVal e As System.Windows.Forms.DataGridViewCellEventArgs) Handles grdDetalleComentario.CellClick
@@ -820,6 +844,7 @@ Public Class frmProduccion
 #Region "Eventos DateTimePicker"
     Private Sub dtpDescanso_ValueChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles dtpDescanso.ValueChanged
         valida_botones_Descansos()
+        deshabilitar_btn_quitar_descanso()
     End Sub
 #End Region
 #Region "Validaciones"
@@ -832,7 +857,7 @@ Public Class frmProduccion
         If fecha_inicio <= hora_actual And hora_actual <= fecha_final And ini_aux <> Nothing And fin_aux <> Nothing Then
             Return True
         Else
-            MsgBox("Ha finalizado el turno ya no puedes capturar o borrar. Para elegir un nuevo turno y dia Da Click en Salir", vbExclamation + vbOKOnly, "Aviso!")
+            MsgBox("Ha finalizado el turno ya no puedes capturar. Para elegir un nuevo turno y dia Da Click en la pestaña Turnos-Lineas", vbExclamation + vbOKOnly, "Aviso!")
             Return False
         End If
     End Function
@@ -845,11 +870,25 @@ Public Class frmProduccion
             e.Handled = True
         End If
     End Sub
-    Private Sub valida_sea_numero(ByRef txtbox As TextBox)
-        If txtbox.Text <> "" And Not IsNumeric(txtbox.Text) Then
-            txtbox.Text = "0"
+    Private Function valida_cinco_s(ByRef txtbox As TextBox) As Boolean
+        Dim a As Integer() = {1, 2, 3, 4}
+        Dim flgvalidacincos As Boolean = True
+        If Convert.ToDouble(txtbox.Text) = Int(Convert.ToDouble(txtbox.Text)) Then
+
+            If Convert.ToDouble(txtbox.Text) > 5 Then
+                flgvalidacincos = False
+            Else
+                For x = 0 To a.Length - 1
+                    If flgvalidacincos And a(x) = Convert.ToDouble(txtbox.Text) Then
+                        flgvalidacincos = False
+                    End If
+                Next
+            End If
+            Return flgvalidacincos
+        Else
+            Return flgvalidacincos
         End If
-    End Sub
+    End Function
     'Productividad
     Private Sub valida_botones_productividad()
         If cbxTurno.SelectedIndex <> -1 And cbxModeloProductividad.SelectedIndex <> -1 And txtTiempoOperacion.Text <> "" And txtPiezasOkProducidas.Text <> "" Then
@@ -1016,8 +1055,13 @@ Public Class frmProduccion
     '5s
     Private Sub valida_botones_cinco_s()
         If cbxTurno.SelectedValue <> -1 And txtAdmonVisual.Text <> "" And txtManttoAutonomo.Text <> "" And txt5s.Text <> "" Then
-            If Convert.ToInt64(txtAdmonVisual.Text) <> 0 And Convert.ToInt64(txtManttoAutonomo.Text) <> 0 And Convert.ToInt64(txt5s.Text) <> 0 Then
-                btnAgregarCincoS.Enabled = True
+            If Convert.ToDouble(txtAdmonVisual.Text) <> 0 And Convert.ToDouble(txtManttoAutonomo.Text) <> 0 And Convert.ToDouble(txt5s.Text) <> 0 Then
+                If valida_cinco_s(txtAdmonVisual) And valida_cinco_s(txtManttoAutonomo) And valida_cinco_s(txt5s) Then
+                    btnAgregarCincoS.Enabled = True
+                Else
+                    btnAgregarCincoS.Enabled = False
+                End If
+
             Else
                 btnAgregarCincoS.Enabled = False
             End If
@@ -1044,8 +1088,11 @@ Public Class frmProduccion
 #Region "Limpia formularios"
     'Descanso Limpia todo
     Private Sub establece_dia_descanso()
-        cbxLinea.SelectedIndex = -1
-        cbxTurno.SelectedIndex = -1
+        If cbxTurno.Text <> "Descanso" Then
+            cbxLinea.SelectedIndex = -1
+            cbxTurno.SelectedIndex = -1
+        End If
+        
         lblFechaRegistro.Visible = False
         lblFechaRegistrodescripcion.Visible = False
         grdDetalleProductividad.DataSource = Nothing
@@ -1066,7 +1113,6 @@ Public Class frmProduccion
         grpAccidentes.Enabled = False
         grpGente.Enabled = False
         grpCosto.Enabled = False
-        grpCalidad.Enabled = False
         grpComentarios.Enabled = False
 
 
@@ -1092,7 +1138,6 @@ Public Class frmProduccion
         grpAccidentes.Enabled = True
         grpGente.Enabled = True
         grpCosto.Enabled = True
-        grpCalidad.Enabled = True
         grpComentarios.Enabled = True
 
         limpia_productividad()
@@ -1197,7 +1242,7 @@ Public Class frmProduccion
         If hora_actual >= fecha_inicio And hora_actual <= fecha_final Then
             Return True
         Else
-            MsgBox("Ha finalizado el turno ya no puedes capturar. Para elegir un nuevo turno y dia Da Click en Salir", vbExclamation + vbOKOnly, "Aviso!")
+            MsgBox("Ha finalizado el turno ya no puedes capturar. Para elegir un nuevo turno y dia Da Click en la pestaña Turnos-Lineas", vbExclamation + vbOKOnly, "Aviso!")
             cbxLinea.SelectedIndex = -1
             cbxTurno.SelectedIndex = -1
             establece_dia_descanso()
@@ -1611,7 +1656,7 @@ Public Class frmProduccion
     Private Sub registra_todas_lineas()
         Dim line_aux As Long
         If cbxTurnosLineas.Text <> "Descanso" Then
-            If MsgBox("¿Seguro que desea registrar el turno para las lineas restantes (las ya registradas se omitiran)?", vbQuestion + vbYesNo, "Confirmación") = vbYes Then
+            If MsgBox("¿Estas seguro que el horario para las lineas (todas/restantes) es: " & cbxTurnosLineas.Text & "?. Una vez registrado el horario ya no lo podrás modificar.", vbQuestion + vbYesNo, "Confirmación") = vbYes Then
                 If valida_registro_linea() Then
                     For Each row As DataGridViewRow In grdLineasNoRegistradas.Rows
                         line_aux = Val(row.Cells(0).Value)
@@ -1636,9 +1681,10 @@ Public Class frmProduccion
     'Registra una Linea
     Private Sub registra_linea()
         Dim line_aux As Long = grdLineasNoRegistradas.Item("col_cve_linea", grdLineasNoRegistradas.CurrentRow.Index).Value
+        Dim nom_aux As String = grdLineasNoRegistradas.Item("collinea", grdLineasNoRegistradas.CurrentRow.Index).Value
         If valida_registro_linea() Then
-            If verifica_registro_turno(line_aux, obten_dia_asignado_registro_turno()) Then
-                If MsgBox("¿Seguro que desea registrar linea?", vbQuestion + vbYesNo, "Confirmación") = vbYes Then
+            If verifica_registro_turno(line_aux, obten_dia_asignado_registro_turno()) Then                
+                If MsgBox("¿Estas seguro que el horario para la linea: " & nom_aux & " es " & cbxTurnosLineas.Text & "?. Una vez registrado ya no lo podrás modificar.", vbQuestion + vbYesNo, "Confirmación") = vbYes Then
                     MsgBox("Registro exitoso", vbOKOnly, "Aviso")
                     Registra_Turno_Linea(line_aux)
                     limpia_turno_linea()
@@ -1647,7 +1693,7 @@ Public Class frmProduccion
                 End If
             Else
                 limpia_turno_linea()
-                MsgBox("Esta Linea ya ha sido registrada.", vbCritical + vbOKOnly, "Error")
+                MsgBox("Esta Linea ya ha sido registrada.", vbExclamation, "Error")
 
             End If
         End If
@@ -1719,7 +1765,10 @@ Public Class frmProduccion
 #Region "Funciones para modulo 5S"
     Private Sub calcula_promedio_cinco_S()
         If txtAdmonVisual.Text <> Nothing And txt5s.Text <> Nothing And txtManttoAutonomo.Text <> Nothing Then
-            txtPromedio.Text = Format(((Convert.ToInt64(txtAdmonVisual.Text) + Convert.ToInt64(txtManttoAutonomo.Text) + Convert.ToInt64(txt5s.Text)) / 3), "##0.0000")
+            txtPromedio.Text = Format(((Convert.ToDouble(txtAdmonVisual.Text) + Convert.ToDouble(txtManttoAutonomo.Text) + Convert.ToDouble(txt5s.Text)) / 3), "##0.0000")
+            'txtPromedio.Text = ((Convert.ToDouble(txtAdmonVisual.Text) + Convert.ToDouble(txtManttoAutonomo.Text) + Convert.ToDouble(txt5s.Text)) / 3)
+        Else
+            txtPromedio.Text = "0.0000"
         End If
     End Sub
     Private Sub add_cinco_s()
@@ -1752,14 +1801,12 @@ Public Class frmProduccion
     End Sub
     Private Sub remove_descanso()
         If grdDetalleDescansos.Rows.Count <> 0 Then
-            Dim oRegistro_Turno As New Registro_Turno
-            oRegistro_Turno.cve_equipo = vcve_equipo
-            oRegistro_Turno.dia_asignado = Convert.ToDateTime(grdDetalleDescansos.Item("col_fecha_descanso", grdDetalleDescansos.CurrentRow.Index).Value)
-            oRegistro_Turno.borra_dia_descanso()
-            'oGente.cod_empleado_eliminacion = vcodigo_empleado
-            'oGente.fecha_eliminacion = Now.ToString("dd-MM-yyyy HH:mm")
-            'oGente.cve_gente = grdDetalleGente.Item("colcve_gente", grdDetalleGente.CurrentRow.Index).Value
-            'oGente.Eliminar()
+            If MsgBox("¿Seguro que desea guardar dia descanso?", vbQuestion + vbYesNo, "Confirmación") = vbYes Then
+                Dim oRegistro_Turno As New Registro_Turno
+                oRegistro_Turno.cve_equipo = vcve_equipo
+                oRegistro_Turno.dia_asignado = Convert.ToDateTime(grdDetalleDescansos.Item("col_fecha_descanso", grdDetalleDescansos.CurrentRow.Index).Value)
+                oRegistro_Turno.borra_dia_descanso()
+            End If
         Else
             btnQuitarGente.Enabled = False
         End If
@@ -1800,6 +1847,41 @@ Public Class frmProduccion
 
 #End Region
 
+    Private Sub valida_numero_cinco_s(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txtManttoAutonomo.KeyPress, txtAdmonVisual.KeyPress, txt5s.KeyPress
+        Dim cajatexto As TextBox
+        cajatexto = sender
+        Dim esDec As Boolean
+        If Char.IsNumber(e.KeyChar) Then
+            'asfdasdf
+            ' e.Handled = False
+            Dim a, esDecimal, NumDecimales As Integer
+            Dim dig As Integer = Len(cajatexto.Text & e.KeyChar)
+            For a = 0 To dig - 1
+                Dim car As String = CStr(cajatexto.Text & e.KeyChar)
+                If car.Substring(a, 1) = "." And esDec <> True Then
+                    esDecimal = esDecimal + 1
+                    esDec = True
+                ElseIf esDec Then
+                    NumDecimales = NumDecimales + 1
+                End If
+                ' aqui se controla los digitos a partir del punto numdecimales = 4 si es de dos decimales
+            Next
+            If NumDecimales > 1 Then
+                e.Handled = True
+            Else
+                e.Handled = False
+            End If
+            'asdfsdf
+        ElseIf Char.IsControl(e.KeyChar) Then
+            e.Handled = False
+        ElseIf UCase(e.KeyChar) Like "[.]" Then
+            If InStr(sender.Text, ".") > 0 Then
+                e.Handled = True
+            End If
+        Else
+            e.Handled = True
+        End If
 
 
+    End Sub
 End Class

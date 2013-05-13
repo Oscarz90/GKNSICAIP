@@ -156,7 +156,7 @@ Public Class Turno
     Public Sub fecha_inicio_fin()
         Dim rDatos As DataRow = Nothing
         Try
-            rDatos = oBD.ObtenerRenglon("select * from fecha_inicio_fin (" & vcve_turno & ",'" & vfecha_registro.ToString("MM-dd-yyyy HH:mm") & "');", "turno")
+            rDatos = oBD.ObtenerRenglon("select * from fecha_inicio_fin (" & vcve_turno & ",'" & vfecha_registro.ToString("MM-dd-yyyy HH:mm:ss") & "');", "turno")
             If rDatos IsNot Nothing Then
                 If rDatos("inicio") IsNot DBNull.Value Then
                     Me.vinicio = rDatos("inicio")
