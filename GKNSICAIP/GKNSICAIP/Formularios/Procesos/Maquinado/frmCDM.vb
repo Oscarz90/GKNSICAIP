@@ -72,6 +72,7 @@ Public Class frmCDM
         If oTurno.bandera_registro = 1 Then
             oTurno.fecha_registro = Convert.ToDateTime(Now.ToString("dd-MM-yyyy HH:mm"))
             oTurno.fecha_inicio_fin()
+            'oTurno.valida_inicio_fin_produccion()
             Dim ini As DateTime = oTurno.inicio
             Dim fin As DateTime = oTurno.fin
             'Dim actual As DateTime

@@ -24,24 +24,35 @@ Partial Class frmProduccion
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmProduccion))
         Me.tabPageContenido = New System.Windows.Forms.TabControl()
+        Me.tabPageTurnosLineas = New System.Windows.Forms.TabPage()
+        Me.cbxTurnosLineas = New System.Windows.Forms.ComboBox()
+        Me.Label76 = New System.Windows.Forms.Label()
+        Me.Label75 = New System.Windows.Forms.Label()
+        Me.Label74 = New System.Windows.Forms.Label()
+        Me.Label73 = New System.Windows.Forms.Label()
+        Me.btnLineaUnica = New System.Windows.Forms.Button()
+        Me.btnLineasTodas = New System.Windows.Forms.Button()
+        Me.Label72 = New System.Windows.Forms.Label()
+        Me.grdLineasRegistradas = New System.Windows.Forms.DataGridView()
+        Me.col_cve_registro_turno = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.col_linea = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.col_turno = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.col_dia_asignado = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.grdLineasNoRegistradas = New System.Windows.Forms.DataGridView()
+        Me.col_cve_linea = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.collinea = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.tabPageProductividad = New System.Windows.Forms.TabPage()
-        Me.grpDesechos = New System.Windows.Forms.GroupBox()
-        Me.Label87 = New System.Windows.Forms.Label()
-        Me.txtDetalleDesecho = New System.Windows.Forms.TextBox()
-        Me.grdDetalleDesecho = New System.Windows.Forms.DataGridView()
-        Me.Label59 = New System.Windows.Forms.Label()
-        Me.cbxModeloDesecho = New System.Windows.Forms.ComboBox()
-        Me.Label60 = New System.Windows.Forms.Label()
-        Me.Label17 = New System.Windows.Forms.Label()
-        Me.btnAgregarDesecho = New System.Windows.Forms.Button()
-        Me.Label19 = New System.Windows.Forms.Label()
-        Me.btnQuitarDesecho = New System.Windows.Forms.Button()
-        Me.txtModeloDesecho = New System.Windows.Forms.TextBox()
-        Me.Label46 = New System.Windows.Forms.Label()
-        Me.Label6 = New System.Windows.Forms.Label()
-        Me.txtDesechosCantidad = New System.Windows.Forms.TextBox()
         Me.grpProductividad = New System.Windows.Forms.GroupBox()
         Me.grdDetalleProductividad = New System.Windows.Forms.DataGridView()
+        Me.colcve_produccion = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.colcve_linea = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.colcve_modelo = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.np_gkn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.coldescripcion = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.colpzas_ok = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.coltom = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.colCapacidad = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.colAdeudo = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Label54 = New System.Windows.Forms.Label()
         Me.txtPzasPorHora = New System.Windows.Forms.TextBox()
         Me.Label53 = New System.Windows.Forms.Label()
@@ -85,11 +96,11 @@ Partial Class frmProduccion
         Me.btnAgregarModelo = New System.Windows.Forms.Button()
         Me.btnQuitarModelo = New System.Windows.Forms.Button()
         Me.tabPageParos = New System.Windows.Forms.TabPage()
-        Me.grpCalidad = New System.Windows.Forms.GroupBox()
-        Me.Label77 = New System.Windows.Forms.Label()
-        Me.lblNRFTi = New System.Windows.Forms.Label()
-        Me.Label78 = New System.Windows.Forms.Label()
         Me.grpCosto = New System.Windows.Forms.GroupBox()
+        Me.GroupBox2 = New System.Windows.Forms.GroupBox()
+        Me.Label98 = New System.Windows.Forms.Label()
+        Me.Label99 = New System.Windows.Forms.Label()
+        Me.Label100 = New System.Windows.Forms.Label()
         Me.lblMinReal = New System.Windows.Forms.Label()
         Me.lblMinProgramados = New System.Windows.Forms.Label()
         Me.lblCosto = New System.Windows.Forms.Label()
@@ -100,6 +111,16 @@ Partial Class frmProduccion
         Me.Label31 = New System.Windows.Forms.Label()
         Me.grpParos = New System.Windows.Forms.GroupBox()
         Me.grdDetalleParo = New System.Windows.Forms.DataGridView()
+        Me.colcve_registro_paro = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.colcve_lineab = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.colcve_maquina = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.colcve_paro = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.colcod_paro = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.paro = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.colminutos = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.colclave_maquina = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.colmaquina = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.coldetalles = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.txtParosDescripcion = New System.Windows.Forms.TextBox()
         Me.txtMaquinaDescripcion = New System.Windows.Forms.TextBox()
         Me.txtMinutosParo = New System.Windows.Forms.TextBox()
@@ -115,6 +136,87 @@ Partial Class frmProduccion
         Me.cbxMaquina = New System.Windows.Forms.ComboBox()
         Me.Label24 = New System.Windows.Forms.Label()
         Me.tabPageRechazos5s = New System.Windows.Forms.TabPage()
+        Me.grpDesechos = New System.Windows.Forms.GroupBox()
+        Me.Label87 = New System.Windows.Forms.Label()
+        Me.Label77 = New System.Windows.Forms.Label()
+        Me.lblNRFTi = New System.Windows.Forms.Label()
+        Me.txtDetalleDesecho = New System.Windows.Forms.TextBox()
+        Me.grdDetalleDesecho = New System.Windows.Forms.DataGridView()
+        Me.colcve_desecho = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.col__cve_linea = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.col_cve_modelo = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.colnp_gkn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.colmodelodescripcion = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.coldesechocantidad = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.col_comentarios_desecho = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Label59 = New System.Windows.Forms.Label()
+        Me.cbxModeloDesecho = New System.Windows.Forms.ComboBox()
+        Me.Label78 = New System.Windows.Forms.Label()
+        Me.Label60 = New System.Windows.Forms.Label()
+        Me.Label17 = New System.Windows.Forms.Label()
+        Me.btnAgregarDesecho = New System.Windows.Forms.Button()
+        Me.Label19 = New System.Windows.Forms.Label()
+        Me.btnQuitarDesecho = New System.Windows.Forms.Button()
+        Me.txtModeloDesecho = New System.Windows.Forms.TextBox()
+        Me.Label46 = New System.Windows.Forms.Label()
+        Me.Label6 = New System.Windows.Forms.Label()
+        Me.txtDesechosCantidad = New System.Windows.Forms.TextBox()
+        Me.grpRechazos = New System.Windows.Forms.GroupBox()
+        Me.grdDetalleRechazo = New System.Windows.Forms.DataGridView()
+        Me.colcve_rechazo = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.col_np_gkn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.col_descripcion = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.colcantidad = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.coltipo_rechazo = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.colmotivo = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.txtModeloRechazo = New System.Windows.Forms.TextBox()
+        Me.Label2 = New System.Windows.Forms.Label()
+        Me.cbxTipoRechazo = New System.Windows.Forms.ComboBox()
+        Me.Label3 = New System.Windows.Forms.Label()
+        Me.cbxModeloRechazo = New System.Windows.Forms.ComboBox()
+        Me.Label5 = New System.Windows.Forms.Label()
+        Me.Label7 = New System.Windows.Forms.Label()
+        Me.Label11 = New System.Windows.Forms.Label()
+        Me.btnAgregarRechazo = New System.Windows.Forms.Button()
+        Me.btnQuitarRechazo = New System.Windows.Forms.Button()
+        Me.Label12 = New System.Windows.Forms.Label()
+        Me.Label16 = New System.Windows.Forms.Label()
+        Me.txtRechazoMotivo = New System.Windows.Forms.TextBox()
+        Me.txtRechazosCantidad = New System.Windows.Forms.TextBox()
+        Me.tabPageCondInsegAccidentes = New System.Windows.Forms.TabPage()
+        Me.grpAccidentes = New System.Windows.Forms.GroupBox()
+        Me.grdDetalleAccidente = New System.Windows.Forms.DataGridView()
+        Me.col_cve_seguridad = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.col_descripcion_ = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Cantidad = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.col_comentarios_ = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.btnQuitarAccidente = New System.Windows.Forms.Button()
+        Me.btnAgregarAccidente = New System.Windows.Forms.Button()
+        Me.Label63 = New System.Windows.Forms.Label()
+        Me.Label64 = New System.Windows.Forms.Label()
+        Me.txtDetallesAccidentes = New System.Windows.Forms.TextBox()
+        Me.Label65 = New System.Windows.Forms.Label()
+        Me.txtAccidenteCantidad = New System.Windows.Forms.TextBox()
+        Me.cbxTipoAccidente = New System.Windows.Forms.ComboBox()
+        Me.Label66 = New System.Windows.Forms.Label()
+        Me.Label67 = New System.Windows.Forms.Label()
+        Me.grpCondInseg = New System.Windows.Forms.GroupBox()
+        Me.grdDetalleCondInseg = New System.Windows.Forms.DataGridView()
+        Me.colcve_seguridad = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.coldescripciondetalle = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.colcantidaddetalle = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.colcomentarios = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.btnQuitarCondInseg = New System.Windows.Forms.Button()
+        Me.btnAgregarCondInseg = New System.Windows.Forms.Button()
+        Me.Label20 = New System.Windows.Forms.Label()
+        Me.Label22 = New System.Windows.Forms.Label()
+        Me.txtDetallesCondInseg = New System.Windows.Forms.TextBox()
+        Me.Label27 = New System.Windows.Forms.Label()
+        Me.txtCondInsegCantidad = New System.Windows.Forms.TextBox()
+        Me.cbxTipoCondInseg = New System.Windows.Forms.ComboBox()
+        Me.Label30 = New System.Windows.Forms.Label()
+        Me.Label62 = New System.Windows.Forms.Label()
+        Me.tabPageGente = New System.Windows.Forms.TabPage()
         Me.grp5s = New System.Windows.Forms.GroupBox()
         Me.lblAlertaCincoS = New System.Windows.Forms.Label()
         Me.txtprom = New System.Windows.Forms.TextBox()
@@ -135,50 +237,12 @@ Partial Class frmProduccion
         Me.txtAdmonVisual = New System.Windows.Forms.TextBox()
         Me.Label70 = New System.Windows.Forms.Label()
         Me.Label71 = New System.Windows.Forms.Label()
-        Me.grpRechazos = New System.Windows.Forms.GroupBox()
-        Me.grdDetalleRechazo = New System.Windows.Forms.DataGridView()
-        Me.txtModeloRechazo = New System.Windows.Forms.TextBox()
-        Me.Label2 = New System.Windows.Forms.Label()
-        Me.cbxTipoRechazo = New System.Windows.Forms.ComboBox()
-        Me.Label3 = New System.Windows.Forms.Label()
-        Me.cbxModeloRechazo = New System.Windows.Forms.ComboBox()
-        Me.Label5 = New System.Windows.Forms.Label()
-        Me.Label7 = New System.Windows.Forms.Label()
-        Me.Label11 = New System.Windows.Forms.Label()
-        Me.btnAgregarRechazo = New System.Windows.Forms.Button()
-        Me.btnQuitarRechazo = New System.Windows.Forms.Button()
-        Me.Label12 = New System.Windows.Forms.Label()
-        Me.Label16 = New System.Windows.Forms.Label()
-        Me.txtRechazoMotivo = New System.Windows.Forms.TextBox()
-        Me.txtRechazosCantidad = New System.Windows.Forms.TextBox()
-        Me.tabPageCondInsegAccidentes = New System.Windows.Forms.TabPage()
-        Me.grpAccidentes = New System.Windows.Forms.GroupBox()
-        Me.grdDetalleAccidente = New System.Windows.Forms.DataGridView()
-        Me.btnQuitarAccidente = New System.Windows.Forms.Button()
-        Me.btnAgregarAccidente = New System.Windows.Forms.Button()
-        Me.Label63 = New System.Windows.Forms.Label()
-        Me.Label64 = New System.Windows.Forms.Label()
-        Me.txtDetallesAccidentes = New System.Windows.Forms.TextBox()
-        Me.Label65 = New System.Windows.Forms.Label()
-        Me.txtAccidenteCantidad = New System.Windows.Forms.TextBox()
-        Me.cbxTipoAccidente = New System.Windows.Forms.ComboBox()
-        Me.Label66 = New System.Windows.Forms.Label()
-        Me.Label67 = New System.Windows.Forms.Label()
-        Me.grpCondInseg = New System.Windows.Forms.GroupBox()
-        Me.grdDetalleCondInseg = New System.Windows.Forms.DataGridView()
-        Me.btnQuitarCondInseg = New System.Windows.Forms.Button()
-        Me.btnAgregarCondInseg = New System.Windows.Forms.Button()
-        Me.Label20 = New System.Windows.Forms.Label()
-        Me.Label22 = New System.Windows.Forms.Label()
-        Me.txtDetallesCondInseg = New System.Windows.Forms.TextBox()
-        Me.Label27 = New System.Windows.Forms.Label()
-        Me.txtCondInsegCantidad = New System.Windows.Forms.TextBox()
-        Me.cbxTipoCondInseg = New System.Windows.Forms.ComboBox()
-        Me.Label30 = New System.Windows.Forms.Label()
-        Me.Label62 = New System.Windows.Forms.Label()
-        Me.tabPageGente = New System.Windows.Forms.TabPage()
         Me.grpGente = New System.Windows.Forms.GroupBox()
         Me.grdDetalleGente = New System.Windows.Forms.DataGridView()
+        Me.colcve_gente = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.colgdescripcion = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.colgcantidad = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.comentarios = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.btnQuitarGente = New System.Windows.Forms.Button()
         Me.btnAgregarGente = New System.Windows.Forms.Button()
         Me.Label61 = New System.Windows.Forms.Label()
@@ -189,25 +253,6 @@ Partial Class frmProduccion
         Me.cbxTipoDetalleGente = New System.Windows.Forms.ComboBox()
         Me.Label50 = New System.Windows.Forms.Label()
         Me.Label55 = New System.Windows.Forms.Label()
-        Me.tabPageTurnosLineas = New System.Windows.Forms.TabPage()
-        Me.cbxTurnosLineas = New System.Windows.Forms.ComboBox()
-        Me.Label76 = New System.Windows.Forms.Label()
-        Me.Label75 = New System.Windows.Forms.Label()
-        Me.Label74 = New System.Windows.Forms.Label()
-        Me.Label73 = New System.Windows.Forms.Label()
-        Me.btnLineaUnica = New System.Windows.Forms.Button()
-        Me.btnLineasTodas = New System.Windows.Forms.Button()
-        Me.Label72 = New System.Windows.Forms.Label()
-        Me.grdLineasRegistradas = New System.Windows.Forms.DataGridView()
-        Me.grdLineasNoRegistradas = New System.Windows.Forms.DataGridView()
-        Me.tabPageDescansos = New System.Windows.Forms.TabPage()
-        Me.btnQuitarDescanso = New System.Windows.Forms.Button()
-        Me.btnAgregarDescanso = New System.Windows.Forms.Button()
-        Me.Label85 = New System.Windows.Forms.Label()
-        Me.Label86 = New System.Windows.Forms.Label()
-        Me.grdDetalleDescansos = New System.Windows.Forms.DataGridView()
-        Me.Label84 = New System.Windows.Forms.Label()
-        Me.dtpDescanso = New System.Windows.Forms.DateTimePicker()
         Me.tabPageComentarios = New System.Windows.Forms.TabPage()
         Me.grpComentarios = New System.Windows.Forms.GroupBox()
         Me.grdDetalleComentario = New System.Windows.Forms.DataGridView()
@@ -219,6 +264,16 @@ Partial Class frmProduccion
         Me.btnAgregarComentario = New System.Windows.Forms.Button()
         Me.Label88 = New System.Windows.Forms.Label()
         Me.Label89 = New System.Windows.Forms.Label()
+        Me.tabPageDescansos = New System.Windows.Forms.TabPage()
+        Me.btnQuitarDescanso = New System.Windows.Forms.Button()
+        Me.btnAgregarDescanso = New System.Windows.Forms.Button()
+        Me.Label85 = New System.Windows.Forms.Label()
+        Me.Label86 = New System.Windows.Forms.Label()
+        Me.grdDetalleDescansos = New System.Windows.Forms.DataGridView()
+        Me.col_fecha_descanso = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.col_Descanso = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Label84 = New System.Windows.Forms.Label()
+        Me.dtpDescanso = New System.Windows.Forms.DateTimePicker()
         Me.titulo_banner_formulario = New System.Windows.Forms.Label()
         Me.cbxTurno = New System.Windows.Forms.ComboBox()
         Me.Label56 = New System.Windows.Forms.Label()
@@ -232,75 +287,21 @@ Partial Class frmProduccion
         Me.lblFechaRegistrodescripcion = New System.Windows.Forms.Label()
         Me.imgEscudo = New System.Windows.Forms.PictureBox()
         Me.banner_formulario = New System.Windows.Forms.PictureBox()
-        Me.colcve_produccion = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.colcve_linea = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.colcve_modelo = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.np_gkn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.coldescripcion = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.colpzas_ok = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.coltom = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.colCapacidad = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.colAdeudo = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.col_cve_linea = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.collinea = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.col_dia_asignado = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.col_turno = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.col_linea = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.col_cve_registro_turno = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.colcve_desecho = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.col__cve_linea = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.col_cve_modelo = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.colnp_gkn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.colmodelodescripcion = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.coldesechocantidad = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.col_comentarios_desecho = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.colcve_registro_paro = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.colcve_lineab = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.colcve_maquina = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.colcve_paro = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.colcod_paro = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.paro = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.colminutos = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.colclave_maquina = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.colmaquina = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.coldetalles = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.colcve_rechazo = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.col_np_gkn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.col_descripcion = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.colcantidad = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.coltipo_rechazo = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.colmotivo = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.colcve_seguridad = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.coldescripciondetalle = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.colcantidaddetalle = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.colcomentarios = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.col_cve_seguridad = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.col_descripcion_ = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Cantidad = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.col_comentarios_ = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.colcve_gente = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.colgdescripcion = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.colgcantidad = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.comentarios = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.col_fecha_descanso = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.col_Descanso = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.GroupBox2 = New System.Windows.Forms.GroupBox()
-        Me.Label98 = New System.Windows.Forms.Label()
-        Me.Label99 = New System.Windows.Forms.Label()
-        Me.Label100 = New System.Windows.Forms.Label()
         Me.tabPageContenido.SuspendLayout()
+        Me.tabPageTurnosLineas.SuspendLayout()
+        CType(Me.grdLineasRegistradas, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.grdLineasNoRegistradas, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.tabPageProductividad.SuspendLayout()
-        Me.grpDesechos.SuspendLayout()
-        CType(Me.grdDetalleDesecho, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.grpProductividad.SuspendLayout()
         CType(Me.grdDetalleProductividad, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.tabPageParos.SuspendLayout()
-        Me.grpCalidad.SuspendLayout()
         Me.grpCosto.SuspendLayout()
+        Me.GroupBox2.SuspendLayout()
         Me.grpParos.SuspendLayout()
         CType(Me.grdDetalleParo, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.tabPageRechazos5s.SuspendLayout()
-        Me.grp5s.SuspendLayout()
+        Me.grpDesechos.SuspendLayout()
+        CType(Me.grdDetalleDesecho, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.grpRechazos.SuspendLayout()
         CType(Me.grdDetalleRechazo, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.tabPageCondInsegAccidentes.SuspendLayout()
@@ -309,19 +310,16 @@ Partial Class frmProduccion
         Me.grpCondInseg.SuspendLayout()
         CType(Me.grdDetalleCondInseg, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.tabPageGente.SuspendLayout()
+        Me.grp5s.SuspendLayout()
         Me.grpGente.SuspendLayout()
         CType(Me.grdDetalleGente, System.ComponentModel.ISupportInitialize).BeginInit()
-        Me.tabPageTurnosLineas.SuspendLayout()
-        CType(Me.grdLineasRegistradas, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.grdLineasNoRegistradas, System.ComponentModel.ISupportInitialize).BeginInit()
-        Me.tabPageDescansos.SuspendLayout()
-        CType(Me.grdDetalleDescansos, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.tabPageComentarios.SuspendLayout()
         Me.grpComentarios.SuspendLayout()
         CType(Me.grdDetalleComentario, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.tabPageDescansos.SuspendLayout()
+        CType(Me.grdDetalleDescansos, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.imgEscudo, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.banner_formulario, System.ComponentModel.ISupportInitialize).BeginInit()
-        Me.GroupBox2.SuspendLayout()
         Me.SuspendLayout()
         '
         'tabPageContenido
@@ -342,9 +340,183 @@ Partial Class frmProduccion
         Me.tabPageContenido.TabIndex = 0
         Me.tabPageContenido.Tag = ""
         '
+        'tabPageTurnosLineas
+        '
+        Me.tabPageTurnosLineas.Controls.Add(Me.cbxTurnosLineas)
+        Me.tabPageTurnosLineas.Controls.Add(Me.Label76)
+        Me.tabPageTurnosLineas.Controls.Add(Me.Label75)
+        Me.tabPageTurnosLineas.Controls.Add(Me.Label74)
+        Me.tabPageTurnosLineas.Controls.Add(Me.Label73)
+        Me.tabPageTurnosLineas.Controls.Add(Me.btnLineaUnica)
+        Me.tabPageTurnosLineas.Controls.Add(Me.btnLineasTodas)
+        Me.tabPageTurnosLineas.Controls.Add(Me.Label72)
+        Me.tabPageTurnosLineas.Controls.Add(Me.grdLineasRegistradas)
+        Me.tabPageTurnosLineas.Controls.Add(Me.grdLineasNoRegistradas)
+        Me.tabPageTurnosLineas.Font = New System.Drawing.Font("Calibri", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.tabPageTurnosLineas.Location = New System.Drawing.Point(4, 28)
+        Me.tabPageTurnosLineas.Name = "tabPageTurnosLineas"
+        Me.tabPageTurnosLineas.Padding = New System.Windows.Forms.Padding(3)
+        Me.tabPageTurnosLineas.Size = New System.Drawing.Size(1222, 430)
+        Me.tabPageTurnosLineas.TabIndex = 5
+        Me.tabPageTurnosLineas.Text = "Turnos - Lineas"
+        Me.tabPageTurnosLineas.UseVisualStyleBackColor = True
+        '
+        'cbxTurnosLineas
+        '
+        Me.cbxTurnosLineas.BackColor = System.Drawing.Color.White
+        Me.cbxTurnosLineas.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cbxTurnosLineas.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.cbxTurnosLineas.FormattingEnabled = True
+        Me.cbxTurnosLineas.Location = New System.Drawing.Point(458, 101)
+        Me.cbxTurnosLineas.Name = "cbxTurnosLineas"
+        Me.cbxTurnosLineas.Size = New System.Drawing.Size(234, 26)
+        Me.cbxTurnosLineas.TabIndex = 102
+        '
+        'Label76
+        '
+        Me.Label76.AutoSize = True
+        Me.Label76.Font = New System.Drawing.Font("Calibri", 12.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label76.Location = New System.Drawing.Point(733, 38)
+        Me.Label76.Name = "Label76"
+        Me.Label76.Size = New System.Drawing.Size(223, 21)
+        Me.Label76.TabIndex = 0
+        Me.Label76.Text = "Horarios Registrados por Linea"
+        '
+        'Label75
+        '
+        Me.Label75.AutoSize = True
+        Me.Label75.Font = New System.Drawing.Font("Calibri", 12.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label75.Location = New System.Drawing.Point(13, 38)
+        Me.Label75.Name = "Label75"
+        Me.Label75.Size = New System.Drawing.Size(130, 21)
+        Me.Label75.TabIndex = 317
+        Me.Label75.Text = "Lineas del Equipo"
+        '
+        'Label74
+        '
+        Me.Label74.AutoSize = True
+        Me.Label74.Font = New System.Drawing.Font("Calibri", 12.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label74.Location = New System.Drawing.Point(482, 363)
+        Me.Label74.Name = "Label74"
+        Me.Label74.Size = New System.Drawing.Size(210, 21)
+        Me.Label74.TabIndex = 0
+        Me.Label74.Text = "Registrar solo para esta linea"
+        '
+        'Label73
+        '
+        Me.Label73.AutoSize = True
+        Me.Label73.Font = New System.Drawing.Font("Calibri", 12.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label73.Location = New System.Drawing.Point(454, 216)
+        Me.Label73.Name = "Label73"
+        Me.Label73.Size = New System.Drawing.Size(245, 21)
+        Me.Label73.TabIndex = 0
+        Me.Label73.Text = "Registrar Lineas Todas / Restantes"
+        '
+        'btnLineaUnica
+        '
+        Me.btnLineaUnica.Image = Global.GKNSICAIP.My.Resources.Resources._next
+        Me.btnLineaUnica.Location = New System.Drawing.Point(537, 289)
+        Me.btnLineaUnica.Name = "btnLineaUnica"
+        Me.btnLineaUnica.Size = New System.Drawing.Size(92, 71)
+        Me.btnLineaUnica.TabIndex = 104
+        Me.btnLineaUnica.UseVisualStyleBackColor = True
+        '
+        'btnLineasTodas
+        '
+        Me.btnLineasTodas.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.btnLineasTodas.Image = Global.GKNSICAIP.My.Resources.Resources.next_next
+        Me.btnLineasTodas.Location = New System.Drawing.Point(537, 142)
+        Me.btnLineasTodas.Name = "btnLineasTodas"
+        Me.btnLineasTodas.Size = New System.Drawing.Size(92, 71)
+        Me.btnLineasTodas.TabIndex = 103
+        Me.btnLineasTodas.UseVisualStyleBackColor = True
+        '
+        'Label72
+        '
+        Me.Label72.AutoSize = True
+        Me.Label72.Font = New System.Drawing.Font("Calibri", 12.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label72.Location = New System.Drawing.Point(454, 77)
+        Me.Label72.Name = "Label72"
+        Me.Label72.Size = New System.Drawing.Size(131, 21)
+        Me.Label72.TabIndex = 0
+        Me.Label72.Text = "Selecciona Turno:"
+        '
+        'grdLineasRegistradas
+        '
+        Me.grdLineasRegistradas.AllowUserToAddRows = False
+        Me.grdLineasRegistradas.AllowUserToDeleteRows = False
+        Me.grdLineasRegistradas.BackgroundColor = System.Drawing.SystemColors.Control
+        Me.grdLineasRegistradas.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.grdLineasRegistradas.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.col_cve_registro_turno, Me.col_linea, Me.col_turno, Me.col_dia_asignado})
+        Me.grdLineasRegistradas.Location = New System.Drawing.Point(737, 62)
+        Me.grdLineasRegistradas.Name = "grdLineasRegistradas"
+        Me.grdLineasRegistradas.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
+        Me.grdLineasRegistradas.Size = New System.Drawing.Size(467, 334)
+        Me.grdLineasRegistradas.TabIndex = 0
+        '
+        'col_cve_registro_turno
+        '
+        Me.col_cve_registro_turno.DataPropertyName = "cve_registro_turno"
+        Me.col_cve_registro_turno.HeaderText = "cve_registro_turno"
+        Me.col_cve_registro_turno.Name = "col_cve_registro_turno"
+        Me.col_cve_registro_turno.ReadOnly = True
+        Me.col_cve_registro_turno.Visible = False
+        '
+        'col_linea
+        '
+        Me.col_linea.DataPropertyName = "linea"
+        Me.col_linea.HeaderText = "linea"
+        Me.col_linea.Name = "col_linea"
+        Me.col_linea.ReadOnly = True
+        Me.col_linea.Width = 120
+        '
+        'col_turno
+        '
+        Me.col_turno.DataPropertyName = "turno"
+        Me.col_turno.HeaderText = "Turno"
+        Me.col_turno.Name = "col_turno"
+        Me.col_turno.ReadOnly = True
+        Me.col_turno.Width = 150
+        '
+        'col_dia_asignado
+        '
+        Me.col_dia_asignado.DataPropertyName = "dia_asignado"
+        Me.col_dia_asignado.HeaderText = "Dia Registro"
+        Me.col_dia_asignado.Name = "col_dia_asignado"
+        Me.col_dia_asignado.ReadOnly = True
+        Me.col_dia_asignado.Width = 150
+        '
+        'grdLineasNoRegistradas
+        '
+        Me.grdLineasNoRegistradas.AllowUserToAddRows = False
+        Me.grdLineasNoRegistradas.AllowUserToDeleteRows = False
+        Me.grdLineasNoRegistradas.BackgroundColor = System.Drawing.SystemColors.Control
+        Me.grdLineasNoRegistradas.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.grdLineasNoRegistradas.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.col_cve_linea, Me.collinea})
+        Me.grdLineasNoRegistradas.Location = New System.Drawing.Point(17, 62)
+        Me.grdLineasNoRegistradas.Name = "grdLineasNoRegistradas"
+        Me.grdLineasNoRegistradas.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
+        Me.grdLineasNoRegistradas.Size = New System.Drawing.Size(396, 334)
+        Me.grdLineasNoRegistradas.TabIndex = 0
+        '
+        'col_cve_linea
+        '
+        Me.col_cve_linea.DataPropertyName = "cve_linea"
+        Me.col_cve_linea.HeaderText = "cve_linea"
+        Me.col_cve_linea.Name = "col_cve_linea"
+        Me.col_cve_linea.ReadOnly = True
+        Me.col_cve_linea.Visible = False
+        '
+        'collinea
+        '
+        Me.collinea.DataPropertyName = "linea"
+        Me.collinea.HeaderText = "linea"
+        Me.collinea.Name = "collinea"
+        Me.collinea.ReadOnly = True
+        Me.collinea.Width = 350
+        '
         'tabPageProductividad
         '
-        Me.tabPageProductividad.Controls.Add(Me.grpDesechos)
         Me.tabPageProductividad.Controls.Add(Me.grpProductividad)
         Me.tabPageProductividad.Location = New System.Drawing.Point(4, 28)
         Me.tabPageProductividad.Name = "tabPageProductividad"
@@ -353,181 +525,6 @@ Partial Class frmProduccion
         Me.tabPageProductividad.TabIndex = 0
         Me.tabPageProductividad.Text = "Productividad"
         Me.tabPageProductividad.UseVisualStyleBackColor = True
-        '
-        'grpDesechos
-        '
-        Me.grpDesechos.Controls.Add(Me.Label87)
-        Me.grpDesechos.Controls.Add(Me.txtDetalleDesecho)
-        Me.grpDesechos.Controls.Add(Me.grdDetalleDesecho)
-        Me.grpDesechos.Controls.Add(Me.Label59)
-        Me.grpDesechos.Controls.Add(Me.cbxModeloDesecho)
-        Me.grpDesechos.Controls.Add(Me.Label60)
-        Me.grpDesechos.Controls.Add(Me.Label17)
-        Me.grpDesechos.Controls.Add(Me.btnAgregarDesecho)
-        Me.grpDesechos.Controls.Add(Me.Label19)
-        Me.grpDesechos.Controls.Add(Me.btnQuitarDesecho)
-        Me.grpDesechos.Controls.Add(Me.txtModeloDesecho)
-        Me.grpDesechos.Controls.Add(Me.Label46)
-        Me.grpDesechos.Controls.Add(Me.Label6)
-        Me.grpDesechos.Controls.Add(Me.txtDesechosCantidad)
-        Me.grpDesechos.Font = New System.Drawing.Font("Calibri", 12.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.grpDesechos.Location = New System.Drawing.Point(759, 3)
-        Me.grpDesechos.Name = "grpDesechos"
-        Me.grpDesechos.Size = New System.Drawing.Size(448, 413)
-        Me.grpDesechos.TabIndex = 0
-        Me.grpDesechos.TabStop = False
-        Me.grpDesechos.Text = "Desecho"
-        '
-        'Label87
-        '
-        Me.Label87.AutoSize = True
-        Me.Label87.Font = New System.Drawing.Font("Calibri", 12.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label87.Location = New System.Drawing.Point(36, 125)
-        Me.Label87.Name = "Label87"
-        Me.Label87.Size = New System.Drawing.Size(70, 21)
-        Me.Label87.TabIndex = 0
-        Me.Label87.Text = "Detalles:"
-        '
-        'txtDetalleDesecho
-        '
-        Me.txtDetalleDesecho.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(128, Byte), Integer))
-        Me.txtDetalleDesecho.Font = New System.Drawing.Font("Calibri", 12.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtDetalleDesecho.Location = New System.Drawing.Point(17, 147)
-        Me.txtDetalleDesecho.Multiline = True
-        Me.txtDetalleDesecho.Name = "txtDetalleDesecho"
-        Me.txtDetalleDesecho.ScrollBars = System.Windows.Forms.ScrollBars.Vertical
-        Me.txtDetalleDesecho.Size = New System.Drawing.Size(250, 84)
-        Me.txtDetalleDesecho.TabIndex = 208
-        '
-        'grdDetalleDesecho
-        '
-        Me.grdDetalleDesecho.AllowUserToAddRows = False
-        Me.grdDetalleDesecho.AllowUserToDeleteRows = False
-        Me.grdDetalleDesecho.BackgroundColor = System.Drawing.SystemColors.ControlLight
-        Me.grdDetalleDesecho.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.grdDetalleDesecho.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.colcve_desecho, Me.col__cve_linea, Me.col_cve_modelo, Me.colnp_gkn, Me.colmodelodescripcion, Me.coldesechocantidad, Me.col_comentarios_desecho})
-        Me.grdDetalleDesecho.Location = New System.Drawing.Point(6, 237)
-        Me.grdDetalleDesecho.Name = "grdDetalleDesecho"
-        Me.grdDetalleDesecho.ReadOnly = True
-        Me.grdDetalleDesecho.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
-        Me.grdDetalleDesecho.Size = New System.Drawing.Size(436, 165)
-        Me.grdDetalleDesecho.TabIndex = 0
-        '
-        'Label59
-        '
-        Me.Label59.AutoSize = True
-        Me.Label59.Font = New System.Drawing.Font("Calibri", 12.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label59.Location = New System.Drawing.Point(371, 209)
-        Me.Label59.Name = "Label59"
-        Me.Label59.Size = New System.Drawing.Size(54, 21)
-        Me.Label59.TabIndex = 0
-        Me.Label59.Text = "Quitar"
-        '
-        'cbxModeloDesecho
-        '
-        Me.cbxModeloDesecho.BackColor = System.Drawing.Color.White
-        Me.cbxModeloDesecho.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.cbxModeloDesecho.Font = New System.Drawing.Font("Calibri", 12.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.cbxModeloDesecho.FormattingEnabled = True
-        Me.cbxModeloDesecho.Location = New System.Drawing.Point(116, 25)
-        Me.cbxModeloDesecho.Name = "cbxModeloDesecho"
-        Me.cbxModeloDesecho.Size = New System.Drawing.Size(217, 29)
-        Me.cbxModeloDesecho.TabIndex = 206
-        '
-        'Label60
-        '
-        Me.Label60.AutoSize = True
-        Me.Label60.Font = New System.Drawing.Font("Calibri", 12.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label60.Location = New System.Drawing.Point(290, 209)
-        Me.Label60.Name = "Label60"
-        Me.Label60.Size = New System.Drawing.Size(64, 21)
-        Me.Label60.TabIndex = 0
-        Me.Label60.Text = "Agregar"
-        '
-        'Label17
-        '
-        Me.Label17.AutoSize = True
-        Me.Label17.Font = New System.Drawing.Font("Calibri", 12.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label17.Location = New System.Drawing.Point(14, 60)
-        Me.Label17.Name = "Label17"
-        Me.Label17.Size = New System.Drawing.Size(95, 21)
-        Me.Label17.TabIndex = 0
-        Me.Label17.Text = "Descripcion:"
-        '
-        'btnAgregarDesecho
-        '
-        Me.btnAgregarDesecho.BackColor = System.Drawing.Color.White
-        Me.btnAgregarDesecho.BackgroundImage = CType(resources.GetObject("btnAgregarDesecho.BackgroundImage"), System.Drawing.Image)
-        Me.btnAgregarDesecho.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center
-        Me.btnAgregarDesecho.Enabled = False
-        Me.btnAgregarDesecho.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnAgregarDesecho.Location = New System.Drawing.Point(292, 147)
-        Me.btnAgregarDesecho.Name = "btnAgregarDesecho"
-        Me.btnAgregarDesecho.Size = New System.Drawing.Size(63, 59)
-        Me.btnAgregarDesecho.TabIndex = 209
-        Me.btnAgregarDesecho.UseVisualStyleBackColor = False
-        '
-        'Label19
-        '
-        Me.Label19.AutoSize = True
-        Me.Label19.Font = New System.Drawing.Font("Calibri", 12.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label19.Location = New System.Drawing.Point(37, 25)
-        Me.Label19.Name = "Label19"
-        Me.Label19.Size = New System.Drawing.Size(69, 21)
-        Me.Label19.TabIndex = 0
-        Me.Label19.Text = "Modelo:"
-        '
-        'btnQuitarDesecho
-        '
-        Me.btnQuitarDesecho.BackColor = System.Drawing.Color.White
-        Me.btnQuitarDesecho.BackgroundImage = CType(resources.GetObject("btnQuitarDesecho.BackgroundImage"), System.Drawing.Image)
-        Me.btnQuitarDesecho.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center
-        Me.btnQuitarDesecho.Enabled = False
-        Me.btnQuitarDesecho.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnQuitarDesecho.Location = New System.Drawing.Point(366, 147)
-        Me.btnQuitarDesecho.Name = "btnQuitarDesecho"
-        Me.btnQuitarDesecho.Size = New System.Drawing.Size(64, 59)
-        Me.btnQuitarDesecho.TabIndex = 210
-        Me.btnQuitarDesecho.UseVisualStyleBackColor = False
-        '
-        'txtModeloDesecho
-        '
-        Me.txtModeloDesecho.Font = New System.Drawing.Font("Calibri", 12.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtModeloDesecho.Location = New System.Drawing.Point(116, 57)
-        Me.txtModeloDesecho.Name = "txtModeloDesecho"
-        Me.txtModeloDesecho.ReadOnly = True
-        Me.txtModeloDesecho.Size = New System.Drawing.Size(217, 28)
-        Me.txtModeloDesecho.TabIndex = 0
-        '
-        'Label46
-        '
-        Me.Label46.AutoSize = True
-        Me.Label46.Font = New System.Drawing.Font("Calibri", 12.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label46.Location = New System.Drawing.Point(183, 92)
-        Me.Label46.Name = "Label46"
-        Me.Label46.Size = New System.Drawing.Size(69, 21)
-        Me.Label46.TabIndex = 0
-        Me.Label46.Text = "cantidad"
-        '
-        'Label6
-        '
-        Me.Label6.AutoSize = True
-        Me.Label6.Font = New System.Drawing.Font("Calibri", 12.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label6.Location = New System.Drawing.Point(26, 93)
-        Me.Label6.Name = "Label6"
-        Me.Label6.Size = New System.Drawing.Size(80, 21)
-        Me.Label6.TabIndex = 0
-        Me.Label6.Text = "Desechos:"
-        '
-        'txtDesechosCantidad
-        '
-        Me.txtDesechosCantidad.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(128, Byte), Integer))
-        Me.txtDesechosCantidad.Font = New System.Drawing.Font("Calibri", 12.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtDesechosCantidad.Location = New System.Drawing.Point(116, 89)
-        Me.txtDesechosCantidad.Name = "txtDesechosCantidad"
-        Me.txtDesechosCantidad.Size = New System.Drawing.Size(61, 28)
-        Me.txtDesechosCantidad.TabIndex = 207
-        Me.txtDesechosCantidad.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         '
         'grpProductividad
         '
@@ -595,6 +592,86 @@ Partial Class frmProduccion
         Me.grdDetalleProductividad.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
         Me.grdDetalleProductividad.Size = New System.Drawing.Size(741, 150)
         Me.grdDetalleProductividad.TabIndex = 0
+        '
+        'colcve_produccion
+        '
+        Me.colcve_produccion.DataPropertyName = "cve_produccion"
+        Me.colcve_produccion.HeaderText = "cve_produccion"
+        Me.colcve_produccion.Name = "colcve_produccion"
+        Me.colcve_produccion.ReadOnly = True
+        Me.colcve_produccion.Visible = False
+        '
+        'colcve_linea
+        '
+        Me.colcve_linea.DataPropertyName = "cve_linea"
+        Me.colcve_linea.HeaderText = "cve_linea"
+        Me.colcve_linea.Name = "colcve_linea"
+        Me.colcve_linea.ReadOnly = True
+        Me.colcve_linea.Visible = False
+        '
+        'colcve_modelo
+        '
+        Me.colcve_modelo.DataPropertyName = "cve_modelo"
+        Me.colcve_modelo.HeaderText = "cve_modelo"
+        Me.colcve_modelo.Name = "colcve_modelo"
+        Me.colcve_modelo.ReadOnly = True
+        Me.colcve_modelo.Visible = False
+        '
+        'np_gkn
+        '
+        Me.np_gkn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells
+        Me.np_gkn.DataPropertyName = "np_gkn"
+        Me.np_gkn.HeaderText = "No. Parte GKN"
+        Me.np_gkn.Name = "np_gkn"
+        Me.np_gkn.ReadOnly = True
+        Me.np_gkn.Resizable = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.np_gkn.Width = 124
+        '
+        'coldescripcion
+        '
+        Me.coldescripcion.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells
+        Me.coldescripcion.DataPropertyName = "descripcion"
+        Me.coldescripcion.HeaderText = "Modelo"
+        Me.coldescripcion.Name = "coldescripcion"
+        Me.coldescripcion.ReadOnly = True
+        Me.coldescripcion.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.coldescripcion.Width = 89
+        '
+        'colpzas_ok
+        '
+        Me.colpzas_ok.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells
+        Me.colpzas_ok.DataPropertyName = "pzas_ok"
+        Me.colpzas_ok.HeaderText = "Piezas Ok"
+        Me.colpzas_ok.Name = "colpzas_ok"
+        Me.colpzas_ok.ReadOnly = True
+        Me.colpzas_ok.Width = 93
+        '
+        'coltom
+        '
+        Me.coltom.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells
+        Me.coltom.DataPropertyName = "tom"
+        Me.coltom.HeaderText = "Tiempo Operacion"
+        Me.coltom.Name = "coltom"
+        Me.coltom.ReadOnly = True
+        Me.coltom.Width = 148
+        '
+        'colCapacidad
+        '
+        Me.colCapacidad.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells
+        Me.colCapacidad.DataPropertyName = "capacidad"
+        Me.colCapacidad.HeaderText = "Capacidad"
+        Me.colCapacidad.Name = "colCapacidad"
+        Me.colCapacidad.ReadOnly = True
+        Me.colCapacidad.Width = 106
+        '
+        'colAdeudo
+        '
+        Me.colAdeudo.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells
+        Me.colAdeudo.DataPropertyName = "adeudo"
+        Me.colAdeudo.HeaderText = "Adeudo"
+        Me.colAdeudo.Name = "colAdeudo"
+        Me.colAdeudo.ReadOnly = True
+        Me.colAdeudo.Width = 89
         '
         'Label54
         '
@@ -1026,7 +1103,6 @@ Partial Class frmProduccion
         '
         'tabPageParos
         '
-        Me.tabPageParos.Controls.Add(Me.grpCalidad)
         Me.tabPageParos.Controls.Add(Me.grpCosto)
         Me.tabPageParos.Controls.Add(Me.grpParos)
         Me.tabPageParos.Location = New System.Drawing.Point(4, 28)
@@ -1036,49 +1112,6 @@ Partial Class frmProduccion
         Me.tabPageParos.TabIndex = 1
         Me.tabPageParos.Text = "Paros / Costo / NRFTi"
         Me.tabPageParos.UseVisualStyleBackColor = True
-        '
-        'grpCalidad
-        '
-        Me.grpCalidad.Controls.Add(Me.Label77)
-        Me.grpCalidad.Controls.Add(Me.lblNRFTi)
-        Me.grpCalidad.Controls.Add(Me.Label78)
-        Me.grpCalidad.Font = New System.Drawing.Font("Calibri", 12.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.grpCalidad.Location = New System.Drawing.Point(848, 238)
-        Me.grpCalidad.Name = "grpCalidad"
-        Me.grpCalidad.Size = New System.Drawing.Size(368, 103)
-        Me.grpCalidad.TabIndex = 0
-        Me.grpCalidad.TabStop = False
-        Me.grpCalidad.Text = "3.-CALIDAD"
-        '
-        'Label77
-        '
-        Me.Label77.AutoSize = True
-        Me.Label77.Font = New System.Drawing.Font("Calibri", 12.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label77.Location = New System.Drawing.Point(210, 53)
-        Me.Label77.Name = "Label77"
-        Me.Label77.Size = New System.Drawing.Size(55, 21)
-        Me.Label77.TabIndex = 0
-        Me.Label77.Text = "PPM'S"
-        '
-        'lblNRFTi
-        '
-        Me.lblNRFTi.AutoSize = True
-        Me.lblNRFTi.Font = New System.Drawing.Font("Calibri", 12.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblNRFTi.Location = New System.Drawing.Point(94, 50)
-        Me.lblNRFTi.Name = "lblNRFTi"
-        Me.lblNRFTi.Size = New System.Drawing.Size(19, 21)
-        Me.lblNRFTi.TabIndex = 13
-        Me.lblNRFTi.Text = "0"
-        '
-        'Label78
-        '
-        Me.Label78.AutoSize = True
-        Me.Label78.Font = New System.Drawing.Font("Calibri", 12.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label78.Location = New System.Drawing.Point(27, 53)
-        Me.Label78.Name = "Label78"
-        Me.Label78.Size = New System.Drawing.Size(51, 21)
-        Me.Label78.TabIndex = 0
-        Me.Label78.Text = "NRFTi"
         '
         'grpCosto
         '
@@ -1099,11 +1132,54 @@ Partial Class frmProduccion
         Me.grpCosto.TabStop = False
         Me.grpCosto.Text = "2.-COSTO"
         '
+        'GroupBox2
+        '
+        Me.GroupBox2.Controls.Add(Me.Label98)
+        Me.GroupBox2.Controls.Add(Me.Label99)
+        Me.GroupBox2.Controls.Add(Me.Label100)
+        Me.GroupBox2.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.GroupBox2.Location = New System.Drawing.Point(0, 232)
+        Me.GroupBox2.Name = "GroupBox2"
+        Me.GroupBox2.Size = New System.Drawing.Size(368, 103)
+        Me.GroupBox2.TabIndex = 0
+        Me.GroupBox2.TabStop = False
+        Me.GroupBox2.Text = "3.-CALIDAD"
+        '
+        'Label98
+        '
+        Me.Label98.AutoSize = True
+        Me.Label98.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label98.Location = New System.Drawing.Point(210, 53)
+        Me.Label98.Name = "Label98"
+        Me.Label98.Size = New System.Drawing.Size(59, 19)
+        Me.Label98.TabIndex = 0
+        Me.Label98.Text = "PPM'S"
+        '
+        'Label99
+        '
+        Me.Label99.AutoSize = True
+        Me.Label99.Font = New System.Drawing.Font("Arial", 15.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label99.Location = New System.Drawing.Point(94, 50)
+        Me.Label99.Name = "Label99"
+        Me.Label99.Size = New System.Drawing.Size(22, 24)
+        Me.Label99.TabIndex = 13
+        Me.Label99.Text = "0"
+        '
+        'Label100
+        '
+        Me.Label100.AutoSize = True
+        Me.Label100.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label100.Location = New System.Drawing.Point(27, 53)
+        Me.Label100.Name = "Label100"
+        Me.Label100.Size = New System.Drawing.Size(57, 19)
+        Me.Label100.TabIndex = 0
+        Me.Label100.Text = "NRFTi"
+        '
         'lblMinReal
         '
         Me.lblMinReal.AutoSize = True
         Me.lblMinReal.Font = New System.Drawing.Font("Calibri", 12.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblMinReal.Location = New System.Drawing.Point(186, 62)
+        Me.lblMinReal.Location = New System.Drawing.Point(250, 62)
         Me.lblMinReal.Name = "lblMinReal"
         Me.lblMinReal.Size = New System.Drawing.Size(19, 21)
         Me.lblMinReal.TabIndex = 0
@@ -1113,7 +1189,7 @@ Partial Class frmProduccion
         '
         Me.lblMinProgramados.AutoSize = True
         Me.lblMinProgramados.Font = New System.Drawing.Font("Calibri", 12.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblMinProgramados.Location = New System.Drawing.Point(186, 29)
+        Me.lblMinProgramados.Location = New System.Drawing.Point(250, 29)
         Me.lblMinProgramados.Name = "lblMinProgramados"
         Me.lblMinProgramados.Size = New System.Drawing.Size(19, 21)
         Me.lblMinProgramados.TabIndex = 0
@@ -1123,7 +1199,7 @@ Partial Class frmProduccion
         '
         Me.lblCosto.AutoSize = True
         Me.lblCosto.Font = New System.Drawing.Font("Calibri", 12.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblCosto.Location = New System.Drawing.Point(186, 120)
+        Me.lblCosto.Location = New System.Drawing.Point(250, 120)
         Me.lblCosto.Name = "lblCosto"
         Me.lblCosto.Size = New System.Drawing.Size(19, 21)
         Me.lblCosto.TabIndex = 0
@@ -1135,15 +1211,15 @@ Partial Class frmProduccion
         Me.Label40.Font = New System.Drawing.Font("Calibri", 12.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label40.Location = New System.Drawing.Point(19, 29)
         Me.Label40.Name = "Label40"
-        Me.Label40.Size = New System.Drawing.Size(140, 21)
+        Me.Label40.Size = New System.Drawing.Size(218, 21)
         Me.Label40.TabIndex = 0
-        Me.Label40.Text = "Min Programados:"
+        Me.Label40.Text = "Minutos Programados CDM:  "
         '
         'lblPrecio
         '
         Me.lblPrecio.AutoSize = True
         Me.lblPrecio.Font = New System.Drawing.Font("Calibri", 12.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblPrecio.Location = New System.Drawing.Point(186, 90)
+        Me.lblPrecio.Location = New System.Drawing.Point(250, 87)
         Me.lblPrecio.Name = "lblPrecio"
         Me.lblPrecio.Size = New System.Drawing.Size(19, 21)
         Me.lblPrecio.TabIndex = 0
@@ -1153,17 +1229,17 @@ Partial Class frmProduccion
         '
         Me.Label38.AutoSize = True
         Me.Label38.Font = New System.Drawing.Font("Calibri", 12.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label38.Location = New System.Drawing.Point(19, 62)
+        Me.Label38.Location = New System.Drawing.Point(64, 62)
         Me.Label38.Name = "Label38"
-        Me.Label38.Size = New System.Drawing.Size(78, 21)
+        Me.Label38.Size = New System.Drawing.Size(164, 21)
         Me.Label38.TabIndex = 0
-        Me.Label38.Text = "Min Real:"
+        Me.Label38.Text = "Minutos Reales CDM:"
         '
         'Label18
         '
         Me.Label18.AutoSize = True
         Me.Label18.Font = New System.Drawing.Font("Calibri", 12.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label18.Location = New System.Drawing.Point(19, 120)
+        Me.Label18.Location = New System.Drawing.Point(173, 120)
         Me.Label18.Name = "Label18"
         Me.Label18.Size = New System.Drawing.Size(55, 21)
         Me.Label18.TabIndex = 0
@@ -1173,7 +1249,7 @@ Partial Class frmProduccion
         '
         Me.Label31.AutoSize = True
         Me.Label31.Font = New System.Drawing.Font("Calibri", 12.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label31.Location = New System.Drawing.Point(19, 90)
+        Me.Label31.Location = New System.Drawing.Point(169, 93)
         Me.Label31.Name = "Label31"
         Me.Label31.Size = New System.Drawing.Size(59, 21)
         Me.Label31.TabIndex = 0
@@ -1217,6 +1293,91 @@ Partial Class frmProduccion
         Me.grdDetalleParo.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
         Me.grdDetalleParo.Size = New System.Drawing.Size(824, 231)
         Me.grdDetalleParo.TabIndex = 0
+        '
+        'colcve_registro_paro
+        '
+        Me.colcve_registro_paro.DataPropertyName = "cve_registro_paro"
+        Me.colcve_registro_paro.HeaderText = "cve_registro_paro"
+        Me.colcve_registro_paro.Name = "colcve_registro_paro"
+        Me.colcve_registro_paro.ReadOnly = True
+        Me.colcve_registro_paro.Visible = False
+        '
+        'colcve_lineab
+        '
+        Me.colcve_lineab.DataPropertyName = "cve_linea"
+        Me.colcve_lineab.HeaderText = "cve_linea"
+        Me.colcve_lineab.Name = "colcve_lineab"
+        Me.colcve_lineab.ReadOnly = True
+        Me.colcve_lineab.Visible = False
+        '
+        'colcve_maquina
+        '
+        Me.colcve_maquina.DataPropertyName = "cve_maquina"
+        Me.colcve_maquina.HeaderText = "cve_maquina"
+        Me.colcve_maquina.Name = "colcve_maquina"
+        Me.colcve_maquina.ReadOnly = True
+        Me.colcve_maquina.Visible = False
+        '
+        'colcve_paro
+        '
+        Me.colcve_paro.DataPropertyName = "cve_paro"
+        Me.colcve_paro.HeaderText = "cve_paro"
+        Me.colcve_paro.Name = "colcve_paro"
+        Me.colcve_paro.ReadOnly = True
+        Me.colcve_paro.Visible = False
+        '
+        'colcod_paro
+        '
+        Me.colcod_paro.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells
+        Me.colcod_paro.DataPropertyName = "cod_paro"
+        Me.colcod_paro.HeaderText = "Cod. Paro"
+        Me.colcod_paro.Name = "colcod_paro"
+        Me.colcod_paro.ReadOnly = True
+        Me.colcod_paro.Width = 102
+        '
+        'paro
+        '
+        Me.paro.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells
+        Me.paro.DataPropertyName = "paro"
+        Me.paro.HeaderText = "Descripcion"
+        Me.paro.Name = "paro"
+        Me.paro.ReadOnly = True
+        Me.paro.Width = 115
+        '
+        'colminutos
+        '
+        Me.colminutos.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells
+        Me.colminutos.DataPropertyName = "minutos"
+        Me.colminutos.HeaderText = "Minutos"
+        Me.colminutos.Name = "colminutos"
+        Me.colminutos.ReadOnly = True
+        Me.colminutos.Width = 94
+        '
+        'colclave_maquina
+        '
+        Me.colclave_maquina.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells
+        Me.colclave_maquina.DataPropertyName = "clave_maquina"
+        Me.colclave_maquina.HeaderText = "Clave Maquina"
+        Me.colclave_maquina.Name = "colclave_maquina"
+        Me.colclave_maquina.ReadOnly = True
+        Me.colclave_maquina.Width = 138
+        '
+        'colmaquina
+        '
+        Me.colmaquina.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells
+        Me.colmaquina.DataPropertyName = "maquina"
+        Me.colmaquina.HeaderText = "Maquina"
+        Me.colmaquina.Name = "colmaquina"
+        Me.colmaquina.ReadOnly = True
+        Me.colmaquina.Width = 97
+        '
+        'coldetalles
+        '
+        Me.coldetalles.DataPropertyName = "detalles"
+        Me.coldetalles.HeaderText = "Detalles"
+        Me.coldetalles.Name = "coldetalles"
+        Me.coldetalles.ReadOnly = True
+        Me.coldetalles.Width = 140
         '
         'txtParosDescripcion
         '
@@ -1366,14 +1527,888 @@ Partial Class frmProduccion
         '
         'tabPageRechazos5s
         '
-        Me.tabPageRechazos5s.Controls.Add(Me.grp5s)
+        Me.tabPageRechazos5s.Controls.Add(Me.grpDesechos)
         Me.tabPageRechazos5s.Controls.Add(Me.grpRechazos)
         Me.tabPageRechazos5s.Location = New System.Drawing.Point(4, 28)
         Me.tabPageRechazos5s.Name = "tabPageRechazos5s"
         Me.tabPageRechazos5s.Size = New System.Drawing.Size(1222, 430)
         Me.tabPageRechazos5s.TabIndex = 2
-        Me.tabPageRechazos5s.Text = "Rechazos / 5'S"
+        Me.tabPageRechazos5s.Text = "Calidad"
         Me.tabPageRechazos5s.UseVisualStyleBackColor = True
+        '
+        'grpDesechos
+        '
+        Me.grpDesechos.Controls.Add(Me.Label87)
+        Me.grpDesechos.Controls.Add(Me.Label77)
+        Me.grpDesechos.Controls.Add(Me.lblNRFTi)
+        Me.grpDesechos.Controls.Add(Me.txtDetalleDesecho)
+        Me.grpDesechos.Controls.Add(Me.grdDetalleDesecho)
+        Me.grpDesechos.Controls.Add(Me.Label59)
+        Me.grpDesechos.Controls.Add(Me.cbxModeloDesecho)
+        Me.grpDesechos.Controls.Add(Me.Label78)
+        Me.grpDesechos.Controls.Add(Me.Label60)
+        Me.grpDesechos.Controls.Add(Me.Label17)
+        Me.grpDesechos.Controls.Add(Me.btnAgregarDesecho)
+        Me.grpDesechos.Controls.Add(Me.Label19)
+        Me.grpDesechos.Controls.Add(Me.btnQuitarDesecho)
+        Me.grpDesechos.Controls.Add(Me.txtModeloDesecho)
+        Me.grpDesechos.Controls.Add(Me.Label46)
+        Me.grpDesechos.Controls.Add(Me.Label6)
+        Me.grpDesechos.Controls.Add(Me.txtDesechosCantidad)
+        Me.grpDesechos.Font = New System.Drawing.Font("Calibri", 12.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.grpDesechos.Location = New System.Drawing.Point(640, 3)
+        Me.grpDesechos.Name = "grpDesechos"
+        Me.grpDesechos.Size = New System.Drawing.Size(579, 414)
+        Me.grpDesechos.TabIndex = 0
+        Me.grpDesechos.TabStop = False
+        Me.grpDesechos.Text = "Desecho"
+        '
+        'Label87
+        '
+        Me.Label87.AutoSize = True
+        Me.Label87.Font = New System.Drawing.Font("Calibri", 12.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label87.Location = New System.Drawing.Point(32, 147)
+        Me.Label87.Name = "Label87"
+        Me.Label87.Size = New System.Drawing.Size(70, 21)
+        Me.Label87.TabIndex = 0
+        Me.Label87.Text = "Detalles:"
+        '
+        'Label77
+        '
+        Me.Label77.AutoSize = True
+        Me.Label77.Font = New System.Drawing.Font("Calibri", 12.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label77.Location = New System.Drawing.Point(235, 373)
+        Me.Label77.Name = "Label77"
+        Me.Label77.Size = New System.Drawing.Size(55, 21)
+        Me.Label77.TabIndex = 0
+        Me.Label77.Text = "PPM'S"
+        '
+        'lblNRFTi
+        '
+        Me.lblNRFTi.AutoSize = True
+        Me.lblNRFTi.Font = New System.Drawing.Font("Calibri", 12.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblNRFTi.Location = New System.Drawing.Point(119, 373)
+        Me.lblNRFTi.Name = "lblNRFTi"
+        Me.lblNRFTi.Size = New System.Drawing.Size(19, 21)
+        Me.lblNRFTi.TabIndex = 13
+        Me.lblNRFTi.Text = "0"
+        '
+        'txtDetalleDesecho
+        '
+        Me.txtDetalleDesecho.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(128, Byte), Integer))
+        Me.txtDetalleDesecho.Font = New System.Drawing.Font("Calibri", 12.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtDetalleDesecho.Location = New System.Drawing.Point(107, 144)
+        Me.txtDetalleDesecho.Multiline = True
+        Me.txtDetalleDesecho.Name = "txtDetalleDesecho"
+        Me.txtDetalleDesecho.ScrollBars = System.Windows.Forms.ScrollBars.Vertical
+        Me.txtDetalleDesecho.Size = New System.Drawing.Size(281, 65)
+        Me.txtDetalleDesecho.TabIndex = 208
+        '
+        'grdDetalleDesecho
+        '
+        Me.grdDetalleDesecho.AllowUserToAddRows = False
+        Me.grdDetalleDesecho.AllowUserToDeleteRows = False
+        Me.grdDetalleDesecho.BackgroundColor = System.Drawing.SystemColors.ControlLight
+        Me.grdDetalleDesecho.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.grdDetalleDesecho.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.colcve_desecho, Me.col__cve_linea, Me.col_cve_modelo, Me.colnp_gkn, Me.colmodelodescripcion, Me.coldesechocantidad, Me.col_comentarios_desecho})
+        Me.grdDetalleDesecho.Location = New System.Drawing.Point(6, 215)
+        Me.grdDetalleDesecho.Name = "grdDetalleDesecho"
+        Me.grdDetalleDesecho.ReadOnly = True
+        Me.grdDetalleDesecho.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
+        Me.grdDetalleDesecho.Size = New System.Drawing.Size(567, 144)
+        Me.grdDetalleDesecho.TabIndex = 0
+        '
+        'colcve_desecho
+        '
+        Me.colcve_desecho.DataPropertyName = "cve_desecho"
+        Me.colcve_desecho.HeaderText = "cve_desecho"
+        Me.colcve_desecho.Name = "colcve_desecho"
+        Me.colcve_desecho.ReadOnly = True
+        Me.colcve_desecho.Visible = False
+        '
+        'col__cve_linea
+        '
+        Me.col__cve_linea.DataPropertyName = "cve_linea"
+        Me.col__cve_linea.HeaderText = "cve_linea"
+        Me.col__cve_linea.Name = "col__cve_linea"
+        Me.col__cve_linea.ReadOnly = True
+        Me.col__cve_linea.Visible = False
+        '
+        'col_cve_modelo
+        '
+        Me.col_cve_modelo.DataPropertyName = "cve_modelo"
+        Me.col_cve_modelo.HeaderText = "cve_modelo"
+        Me.col_cve_modelo.Name = "col_cve_modelo"
+        Me.col_cve_modelo.ReadOnly = True
+        Me.col_cve_modelo.Visible = False
+        '
+        'colnp_gkn
+        '
+        Me.colnp_gkn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells
+        Me.colnp_gkn.DataPropertyName = "np_gkn"
+        Me.colnp_gkn.HeaderText = "No.Parte GKN"
+        Me.colnp_gkn.Name = "colnp_gkn"
+        Me.colnp_gkn.ReadOnly = True
+        Me.colnp_gkn.Width = 131
+        '
+        'colmodelodescripcion
+        '
+        Me.colmodelodescripcion.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells
+        Me.colmodelodescripcion.DataPropertyName = "descripcion"
+        Me.colmodelodescripcion.HeaderText = "Modelo"
+        Me.colmodelodescripcion.Name = "colmodelodescripcion"
+        Me.colmodelodescripcion.ReadOnly = True
+        Me.colmodelodescripcion.Width = 89
+        '
+        'coldesechocantidad
+        '
+        Me.coldesechocantidad.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells
+        Me.coldesechocantidad.DataPropertyName = "cantidad"
+        Me.coldesechocantidad.HeaderText = "Cantidad"
+        Me.coldesechocantidad.Name = "coldesechocantidad"
+        Me.coldesechocantidad.ReadOnly = True
+        Me.coldesechocantidad.Width = 96
+        '
+        'col_comentarios_desecho
+        '
+        Me.col_comentarios_desecho.DataPropertyName = "comentarios"
+        Me.col_comentarios_desecho.HeaderText = "Comentarios"
+        Me.col_comentarios_desecho.Name = "col_comentarios_desecho"
+        Me.col_comentarios_desecho.ReadOnly = True
+        Me.col_comentarios_desecho.Width = 140
+        '
+        'Label59
+        '
+        Me.Label59.AutoSize = True
+        Me.Label59.Font = New System.Drawing.Font("Calibri", 12.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label59.Location = New System.Drawing.Point(514, 84)
+        Me.Label59.Name = "Label59"
+        Me.Label59.Size = New System.Drawing.Size(54, 21)
+        Me.Label59.TabIndex = 0
+        Me.Label59.Text = "Quitar"
+        '
+        'cbxModeloDesecho
+        '
+        Me.cbxModeloDesecho.BackColor = System.Drawing.Color.White
+        Me.cbxModeloDesecho.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cbxModeloDesecho.Font = New System.Drawing.Font("Calibri", 12.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.cbxModeloDesecho.FormattingEnabled = True
+        Me.cbxModeloDesecho.Location = New System.Drawing.Point(107, 25)
+        Me.cbxModeloDesecho.Name = "cbxModeloDesecho"
+        Me.cbxModeloDesecho.Size = New System.Drawing.Size(217, 29)
+        Me.cbxModeloDesecho.TabIndex = 206
+        '
+        'Label78
+        '
+        Me.Label78.AutoSize = True
+        Me.Label78.Font = New System.Drawing.Font("Calibri", 12.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label78.Location = New System.Drawing.Point(13, 373)
+        Me.Label78.Name = "Label78"
+        Me.Label78.Size = New System.Drawing.Size(51, 21)
+        Me.Label78.TabIndex = 0
+        Me.Label78.Text = "NRFTi"
+        '
+        'Label60
+        '
+        Me.Label60.AutoSize = True
+        Me.Label60.Font = New System.Drawing.Font("Calibri", 12.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label60.Location = New System.Drawing.Point(433, 84)
+        Me.Label60.Name = "Label60"
+        Me.Label60.Size = New System.Drawing.Size(64, 21)
+        Me.Label60.TabIndex = 0
+        Me.Label60.Text = "Agregar"
+        '
+        'Label17
+        '
+        Me.Label17.AutoSize = True
+        Me.Label17.Font = New System.Drawing.Font("Calibri", 12.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label17.Location = New System.Drawing.Point(6, 68)
+        Me.Label17.Name = "Label17"
+        Me.Label17.Size = New System.Drawing.Size(95, 21)
+        Me.Label17.TabIndex = 0
+        Me.Label17.Text = "Descripcion:"
+        '
+        'btnAgregarDesecho
+        '
+        Me.btnAgregarDesecho.BackColor = System.Drawing.Color.White
+        Me.btnAgregarDesecho.BackgroundImage = CType(resources.GetObject("btnAgregarDesecho.BackgroundImage"), System.Drawing.Image)
+        Me.btnAgregarDesecho.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center
+        Me.btnAgregarDesecho.Enabled = False
+        Me.btnAgregarDesecho.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnAgregarDesecho.Location = New System.Drawing.Point(435, 22)
+        Me.btnAgregarDesecho.Name = "btnAgregarDesecho"
+        Me.btnAgregarDesecho.Size = New System.Drawing.Size(63, 59)
+        Me.btnAgregarDesecho.TabIndex = 209
+        Me.btnAgregarDesecho.UseVisualStyleBackColor = False
+        '
+        'Label19
+        '
+        Me.Label19.AutoSize = True
+        Me.Label19.Font = New System.Drawing.Font("Calibri", 12.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label19.Location = New System.Drawing.Point(32, 28)
+        Me.Label19.Name = "Label19"
+        Me.Label19.Size = New System.Drawing.Size(69, 21)
+        Me.Label19.TabIndex = 0
+        Me.Label19.Text = "Modelo:"
+        '
+        'btnQuitarDesecho
+        '
+        Me.btnQuitarDesecho.BackColor = System.Drawing.Color.White
+        Me.btnQuitarDesecho.BackgroundImage = CType(resources.GetObject("btnQuitarDesecho.BackgroundImage"), System.Drawing.Image)
+        Me.btnQuitarDesecho.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center
+        Me.btnQuitarDesecho.Enabled = False
+        Me.btnQuitarDesecho.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnQuitarDesecho.Location = New System.Drawing.Point(509, 22)
+        Me.btnQuitarDesecho.Name = "btnQuitarDesecho"
+        Me.btnQuitarDesecho.Size = New System.Drawing.Size(64, 59)
+        Me.btnQuitarDesecho.TabIndex = 210
+        Me.btnQuitarDesecho.UseVisualStyleBackColor = False
+        '
+        'txtModeloDesecho
+        '
+        Me.txtModeloDesecho.Font = New System.Drawing.Font("Calibri", 12.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtModeloDesecho.Location = New System.Drawing.Point(107, 65)
+        Me.txtModeloDesecho.Name = "txtModeloDesecho"
+        Me.txtModeloDesecho.ReadOnly = True
+        Me.txtModeloDesecho.Size = New System.Drawing.Size(217, 28)
+        Me.txtModeloDesecho.TabIndex = 0
+        '
+        'Label46
+        '
+        Me.Label46.AutoSize = True
+        Me.Label46.Font = New System.Drawing.Font("Calibri", 12.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label46.Location = New System.Drawing.Point(174, 106)
+        Me.Label46.Name = "Label46"
+        Me.Label46.Size = New System.Drawing.Size(69, 21)
+        Me.Label46.TabIndex = 0
+        Me.Label46.Text = "cantidad"
+        '
+        'Label6
+        '
+        Me.Label6.AutoSize = True
+        Me.Label6.Font = New System.Drawing.Font("Calibri", 12.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label6.Location = New System.Drawing.Point(21, 106)
+        Me.Label6.Name = "Label6"
+        Me.Label6.Size = New System.Drawing.Size(80, 21)
+        Me.Label6.TabIndex = 0
+        Me.Label6.Text = "Desechos:"
+        '
+        'txtDesechosCantidad
+        '
+        Me.txtDesechosCantidad.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(128, Byte), Integer))
+        Me.txtDesechosCantidad.Font = New System.Drawing.Font("Calibri", 12.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtDesechosCantidad.Location = New System.Drawing.Point(107, 103)
+        Me.txtDesechosCantidad.Name = "txtDesechosCantidad"
+        Me.txtDesechosCantidad.Size = New System.Drawing.Size(61, 28)
+        Me.txtDesechosCantidad.TabIndex = 207
+        Me.txtDesechosCantidad.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
+        '
+        'grpRechazos
+        '
+        Me.grpRechazos.Controls.Add(Me.grdDetalleRechazo)
+        Me.grpRechazos.Controls.Add(Me.txtModeloRechazo)
+        Me.grpRechazos.Controls.Add(Me.Label2)
+        Me.grpRechazos.Controls.Add(Me.cbxTipoRechazo)
+        Me.grpRechazos.Controls.Add(Me.Label3)
+        Me.grpRechazos.Controls.Add(Me.cbxModeloRechazo)
+        Me.grpRechazos.Controls.Add(Me.Label5)
+        Me.grpRechazos.Controls.Add(Me.Label7)
+        Me.grpRechazos.Controls.Add(Me.Label11)
+        Me.grpRechazos.Controls.Add(Me.btnAgregarRechazo)
+        Me.grpRechazos.Controls.Add(Me.btnQuitarRechazo)
+        Me.grpRechazos.Controls.Add(Me.Label12)
+        Me.grpRechazos.Controls.Add(Me.Label16)
+        Me.grpRechazos.Controls.Add(Me.txtRechazoMotivo)
+        Me.grpRechazos.Controls.Add(Me.txtRechazosCantidad)
+        Me.grpRechazos.Font = New System.Drawing.Font("Calibri", 12.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.grpRechazos.Location = New System.Drawing.Point(3, 3)
+        Me.grpRechazos.Name = "grpRechazos"
+        Me.grpRechazos.Size = New System.Drawing.Size(631, 414)
+        Me.grpRechazos.TabIndex = 0
+        Me.grpRechazos.TabStop = False
+        Me.grpRechazos.Text = "Rechazos"
+        '
+        'grdDetalleRechazo
+        '
+        Me.grdDetalleRechazo.AllowUserToAddRows = False
+        Me.grdDetalleRechazo.AllowUserToDeleteRows = False
+        Me.grdDetalleRechazo.BackgroundColor = System.Drawing.SystemColors.ControlLight
+        Me.grdDetalleRechazo.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.grdDetalleRechazo.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.colcve_rechazo, Me.col_np_gkn, Me.col_descripcion, Me.colcantidad, Me.coltipo_rechazo, Me.colmotivo})
+        Me.grdDetalleRechazo.Location = New System.Drawing.Point(10, 234)
+        Me.grdDetalleRechazo.Name = "grdDetalleRechazo"
+        Me.grdDetalleRechazo.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
+        Me.grdDetalleRechazo.Size = New System.Drawing.Size(609, 174)
+        Me.grdDetalleRechazo.TabIndex = 0
+        '
+        'colcve_rechazo
+        '
+        Me.colcve_rechazo.DataPropertyName = "cve_rechazo"
+        Me.colcve_rechazo.HeaderText = "cve_rechazo"
+        Me.colcve_rechazo.Name = "colcve_rechazo"
+        Me.colcve_rechazo.ReadOnly = True
+        Me.colcve_rechazo.Visible = False
+        '
+        'col_np_gkn
+        '
+        Me.col_np_gkn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells
+        Me.col_np_gkn.DataPropertyName = "np_gkn"
+        Me.col_np_gkn.HeaderText = "No. Parte GKN"
+        Me.col_np_gkn.Name = "col_np_gkn"
+        Me.col_np_gkn.ReadOnly = True
+        Me.col_np_gkn.Width = 135
+        '
+        'col_descripcion
+        '
+        Me.col_descripcion.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells
+        Me.col_descripcion.DataPropertyName = "descripcion"
+        Me.col_descripcion.HeaderText = "Modelo"
+        Me.col_descripcion.Name = "col_descripcion"
+        Me.col_descripcion.ReadOnly = True
+        Me.col_descripcion.Width = 89
+        '
+        'colcantidad
+        '
+        Me.colcantidad.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells
+        Me.colcantidad.DataPropertyName = "cantidad"
+        Me.colcantidad.HeaderText = "Cantidad"
+        Me.colcantidad.Name = "colcantidad"
+        Me.colcantidad.ReadOnly = True
+        Me.colcantidad.Width = 96
+        '
+        'coltipo_rechazo
+        '
+        Me.coltipo_rechazo.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells
+        Me.coltipo_rechazo.DataPropertyName = "tipo"
+        Me.coltipo_rechazo.HeaderText = "Rechazo"
+        Me.coltipo_rechazo.Name = "coltipo_rechazo"
+        Me.coltipo_rechazo.ReadOnly = True
+        Me.coltipo_rechazo.Width = 92
+        '
+        'colmotivo
+        '
+        Me.colmotivo.DataPropertyName = "motivo"
+        Me.colmotivo.HeaderText = "motivo"
+        Me.colmotivo.Name = "colmotivo"
+        Me.colmotivo.ReadOnly = True
+        Me.colmotivo.Width = 140
+        '
+        'txtModeloRechazo
+        '
+        Me.txtModeloRechazo.Font = New System.Drawing.Font("Calibri", 12.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtModeloRechazo.Location = New System.Drawing.Point(113, 64)
+        Me.txtModeloRechazo.Name = "txtModeloRechazo"
+        Me.txtModeloRechazo.ReadOnly = True
+        Me.txtModeloRechazo.Size = New System.Drawing.Size(198, 28)
+        Me.txtModeloRechazo.TabIndex = 0
+        '
+        'Label2
+        '
+        Me.Label2.AutoSize = True
+        Me.Label2.Font = New System.Drawing.Font("Calibri", 12.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label2.Location = New System.Drawing.Point(11, 68)
+        Me.Label2.Name = "Label2"
+        Me.Label2.Size = New System.Drawing.Size(90, 21)
+        Me.Label2.TabIndex = 0
+        Me.Label2.Text = "Descripcion"
+        '
+        'cbxTipoRechazo
+        '
+        Me.cbxTipoRechazo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cbxTipoRechazo.Font = New System.Drawing.Font("Calibri", 12.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.cbxTipoRechazo.FormattingEnabled = True
+        Me.cbxTipoRechazo.Location = New System.Drawing.Point(421, 65)
+        Me.cbxTipoRechazo.Name = "cbxTipoRechazo"
+        Me.cbxTipoRechazo.Size = New System.Drawing.Size(198, 29)
+        Me.cbxTipoRechazo.TabIndex = 403
+        '
+        'Label3
+        '
+        Me.Label3.AutoSize = True
+        Me.Label3.Font = New System.Drawing.Font("Calibri", 12.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label3.Location = New System.Drawing.Point(373, 68)
+        Me.Label3.Name = "Label3"
+        Me.Label3.Size = New System.Drawing.Size(40, 21)
+        Me.Label3.TabIndex = 0
+        Me.Label3.Text = "Tipo"
+        '
+        'cbxModeloRechazo
+        '
+        Me.cbxModeloRechazo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cbxModeloRechazo.Font = New System.Drawing.Font("Calibri", 12.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.cbxModeloRechazo.FormattingEnabled = True
+        Me.cbxModeloRechazo.Location = New System.Drawing.Point(113, 25)
+        Me.cbxModeloRechazo.Name = "cbxModeloRechazo"
+        Me.cbxModeloRechazo.Size = New System.Drawing.Size(198, 29)
+        Me.cbxModeloRechazo.TabIndex = 401
+        '
+        'Label5
+        '
+        Me.Label5.AutoSize = True
+        Me.Label5.Font = New System.Drawing.Font("Calibri", 12.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label5.Location = New System.Drawing.Point(11, 110)
+        Me.Label5.Name = "Label5"
+        Me.Label5.Size = New System.Drawing.Size(65, 21)
+        Me.Label5.TabIndex = 0
+        Me.Label5.Text = "Motivo:"
+        '
+        'Label7
+        '
+        Me.Label7.AutoSize = True
+        Me.Label7.Font = New System.Drawing.Font("Calibri", 12.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label7.Location = New System.Drawing.Point(533, 190)
+        Me.Label7.Name = "Label7"
+        Me.Label7.Size = New System.Drawing.Size(54, 21)
+        Me.Label7.TabIndex = 0
+        Me.Label7.Text = "Quitar"
+        '
+        'Label11
+        '
+        Me.Label11.AutoSize = True
+        Me.Label11.Font = New System.Drawing.Font("Calibri", 12.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label11.Location = New System.Drawing.Point(448, 190)
+        Me.Label11.Name = "Label11"
+        Me.Label11.Size = New System.Drawing.Size(64, 21)
+        Me.Label11.TabIndex = 0
+        Me.Label11.Text = "Agregar"
+        '
+        'btnAgregarRechazo
+        '
+        Me.btnAgregarRechazo.BackColor = System.Drawing.Color.White
+        Me.btnAgregarRechazo.BackgroundImage = CType(resources.GetObject("btnAgregarRechazo.BackgroundImage"), System.Drawing.Image)
+        Me.btnAgregarRechazo.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center
+        Me.btnAgregarRechazo.Enabled = False
+        Me.btnAgregarRechazo.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnAgregarRechazo.Location = New System.Drawing.Point(450, 128)
+        Me.btnAgregarRechazo.Name = "btnAgregarRechazo"
+        Me.btnAgregarRechazo.Size = New System.Drawing.Size(63, 59)
+        Me.btnAgregarRechazo.TabIndex = 405
+        Me.btnAgregarRechazo.UseVisualStyleBackColor = False
+        '
+        'btnQuitarRechazo
+        '
+        Me.btnQuitarRechazo.BackColor = System.Drawing.Color.White
+        Me.btnQuitarRechazo.BackgroundImage = CType(resources.GetObject("btnQuitarRechazo.BackgroundImage"), System.Drawing.Image)
+        Me.btnQuitarRechazo.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center
+        Me.btnQuitarRechazo.Enabled = False
+        Me.btnQuitarRechazo.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnQuitarRechazo.Location = New System.Drawing.Point(527, 128)
+        Me.btnQuitarRechazo.Name = "btnQuitarRechazo"
+        Me.btnQuitarRechazo.Size = New System.Drawing.Size(64, 59)
+        Me.btnQuitarRechazo.TabIndex = 406
+        Me.btnQuitarRechazo.UseVisualStyleBackColor = False
+        '
+        'Label12
+        '
+        Me.Label12.AutoSize = True
+        Me.Label12.Font = New System.Drawing.Font("Calibri", 12.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label12.Location = New System.Drawing.Point(43, 28)
+        Me.Label12.Name = "Label12"
+        Me.Label12.Size = New System.Drawing.Size(64, 21)
+        Me.Label12.TabIndex = 0
+        Me.Label12.Text = "Modelo"
+        '
+        'Label16
+        '
+        Me.Label16.AutoSize = True
+        Me.Label16.Font = New System.Drawing.Font("Calibri", 12.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label16.Location = New System.Drawing.Point(339, 28)
+        Me.Label16.Name = "Label16"
+        Me.Label16.Size = New System.Drawing.Size(71, 21)
+        Me.Label16.TabIndex = 0
+        Me.Label16.Text = "Cantidad"
+        '
+        'txtRechazoMotivo
+        '
+        Me.txtRechazoMotivo.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(128, Byte), Integer))
+        Me.txtRechazoMotivo.Font = New System.Drawing.Font("Calibri", 12.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtRechazoMotivo.Location = New System.Drawing.Point(10, 131)
+        Me.txtRechazoMotivo.Multiline = True
+        Me.txtRechazoMotivo.Name = "txtRechazoMotivo"
+        Me.txtRechazoMotivo.ScrollBars = System.Windows.Forms.ScrollBars.Vertical
+        Me.txtRechazoMotivo.Size = New System.Drawing.Size(301, 78)
+        Me.txtRechazoMotivo.TabIndex = 404
+        '
+        'txtRechazosCantidad
+        '
+        Me.txtRechazosCantidad.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(128, Byte), Integer))
+        Me.txtRechazosCantidad.Font = New System.Drawing.Font("Calibri", 12.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtRechazosCantidad.Location = New System.Drawing.Point(421, 25)
+        Me.txtRechazosCantidad.Name = "txtRechazosCantidad"
+        Me.txtRechazosCantidad.Size = New System.Drawing.Size(198, 28)
+        Me.txtRechazosCantidad.TabIndex = 402
+        '
+        'tabPageCondInsegAccidentes
+        '
+        Me.tabPageCondInsegAccidentes.Controls.Add(Me.grpAccidentes)
+        Me.tabPageCondInsegAccidentes.Controls.Add(Me.grpCondInseg)
+        Me.tabPageCondInsegAccidentes.Location = New System.Drawing.Point(4, 28)
+        Me.tabPageCondInsegAccidentes.Name = "tabPageCondInsegAccidentes"
+        Me.tabPageCondInsegAccidentes.Padding = New System.Windows.Forms.Padding(3)
+        Me.tabPageCondInsegAccidentes.Size = New System.Drawing.Size(1222, 430)
+        Me.tabPageCondInsegAccidentes.TabIndex = 3
+        Me.tabPageCondInsegAccidentes.Text = "Seguridad"
+        Me.tabPageCondInsegAccidentes.UseVisualStyleBackColor = True
+        '
+        'grpAccidentes
+        '
+        Me.grpAccidentes.Controls.Add(Me.grdDetalleAccidente)
+        Me.grpAccidentes.Controls.Add(Me.btnQuitarAccidente)
+        Me.grpAccidentes.Controls.Add(Me.btnAgregarAccidente)
+        Me.grpAccidentes.Controls.Add(Me.Label63)
+        Me.grpAccidentes.Controls.Add(Me.Label64)
+        Me.grpAccidentes.Controls.Add(Me.txtDetallesAccidentes)
+        Me.grpAccidentes.Controls.Add(Me.Label65)
+        Me.grpAccidentes.Controls.Add(Me.txtAccidenteCantidad)
+        Me.grpAccidentes.Controls.Add(Me.cbxTipoAccidente)
+        Me.grpAccidentes.Controls.Add(Me.Label66)
+        Me.grpAccidentes.Controls.Add(Me.Label67)
+        Me.grpAccidentes.Font = New System.Drawing.Font("Calibri", 12.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.grpAccidentes.Location = New System.Drawing.Point(612, 3)
+        Me.grpAccidentes.Name = "grpAccidentes"
+        Me.grpAccidentes.Size = New System.Drawing.Size(600, 422)
+        Me.grpAccidentes.TabIndex = 0
+        Me.grpAccidentes.TabStop = False
+        Me.grpAccidentes.Text = "Accidentes"
+        '
+        'grdDetalleAccidente
+        '
+        Me.grdDetalleAccidente.AllowUserToAddRows = False
+        Me.grdDetalleAccidente.AllowUserToDeleteRows = False
+        Me.grdDetalleAccidente.BackgroundColor = System.Drawing.SystemColors.ControlLight
+        Me.grdDetalleAccidente.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.grdDetalleAccidente.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.col_cve_seguridad, Me.col_descripcion_, Me.Cantidad, Me.col_comentarios_})
+        Me.grdDetalleAccidente.Location = New System.Drawing.Point(6, 242)
+        Me.grdDetalleAccidente.Name = "grdDetalleAccidente"
+        Me.grdDetalleAccidente.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
+        Me.grdDetalleAccidente.Size = New System.Drawing.Size(588, 171)
+        Me.grdDetalleAccidente.TabIndex = 0
+        '
+        'col_cve_seguridad
+        '
+        Me.col_cve_seguridad.DataPropertyName = "cve_seguridad"
+        Me.col_cve_seguridad.HeaderText = "cve_seguridad"
+        Me.col_cve_seguridad.Name = "col_cve_seguridad"
+        Me.col_cve_seguridad.ReadOnly = True
+        Me.col_cve_seguridad.Visible = False
+        '
+        'col_descripcion_
+        '
+        Me.col_descripcion_.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells
+        Me.col_descripcion_.DataPropertyName = "descripcion"
+        Me.col_descripcion_.HeaderText = "Descripcion"
+        Me.col_descripcion_.Name = "col_descripcion_"
+        Me.col_descripcion_.ReadOnly = True
+        Me.col_descripcion_.Width = 115
+        '
+        'Cantidad
+        '
+        Me.Cantidad.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells
+        Me.Cantidad.DataPropertyName = "cantidad"
+        Me.Cantidad.HeaderText = "Cantidad"
+        Me.Cantidad.Name = "Cantidad"
+        Me.Cantidad.ReadOnly = True
+        Me.Cantidad.Width = 96
+        '
+        'col_comentarios_
+        '
+        Me.col_comentarios_.DataPropertyName = "comentarios"
+        Me.col_comentarios_.HeaderText = "Comentarios"
+        Me.col_comentarios_.Name = "col_comentarios_"
+        Me.col_comentarios_.ReadOnly = True
+        Me.col_comentarios_.Width = 140
+        '
+        'btnQuitarAccidente
+        '
+        Me.btnQuitarAccidente.BackColor = System.Drawing.Color.White
+        Me.btnQuitarAccidente.BackgroundImage = CType(resources.GetObject("btnQuitarAccidente.BackgroundImage"), System.Drawing.Image)
+        Me.btnQuitarAccidente.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center
+        Me.btnQuitarAccidente.Enabled = False
+        Me.btnQuitarAccidente.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnQuitarAccidente.Location = New System.Drawing.Point(518, 45)
+        Me.btnQuitarAccidente.Name = "btnQuitarAccidente"
+        Me.btnQuitarAccidente.Size = New System.Drawing.Size(64, 59)
+        Me.btnQuitarAccidente.TabIndex = 515
+        Me.btnQuitarAccidente.UseVisualStyleBackColor = False
+        '
+        'btnAgregarAccidente
+        '
+        Me.btnAgregarAccidente.BackColor = System.Drawing.Color.White
+        Me.btnAgregarAccidente.BackgroundImage = CType(resources.GetObject("btnAgregarAccidente.BackgroundImage"), System.Drawing.Image)
+        Me.btnAgregarAccidente.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center
+        Me.btnAgregarAccidente.Enabled = False
+        Me.btnAgregarAccidente.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnAgregarAccidente.Location = New System.Drawing.Point(441, 45)
+        Me.btnAgregarAccidente.Name = "btnAgregarAccidente"
+        Me.btnAgregarAccidente.Size = New System.Drawing.Size(63, 59)
+        Me.btnAgregarAccidente.TabIndex = 514
+        Me.btnAgregarAccidente.UseVisualStyleBackColor = False
+        '
+        'Label63
+        '
+        Me.Label63.AutoSize = True
+        Me.Label63.Font = New System.Drawing.Font("Calibri", 12.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label63.Location = New System.Drawing.Point(20, 144)
+        Me.Label63.Name = "Label63"
+        Me.Label63.Size = New System.Drawing.Size(70, 21)
+        Me.Label63.TabIndex = 0
+        Me.Label63.Text = "Detalles:"
+        '
+        'Label64
+        '
+        Me.Label64.AutoSize = True
+        Me.Label64.Font = New System.Drawing.Font("Calibri", 12.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label64.Location = New System.Drawing.Point(524, 107)
+        Me.Label64.Name = "Label64"
+        Me.Label64.Size = New System.Drawing.Size(54, 21)
+        Me.Label64.TabIndex = 0
+        Me.Label64.Text = "Quitar"
+        '
+        'txtDetallesAccidentes
+        '
+        Me.txtDetallesAccidentes.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(128, Byte), Integer))
+        Me.txtDetallesAccidentes.Font = New System.Drawing.Font("Calibri", 12.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtDetallesAccidentes.Location = New System.Drawing.Point(93, 144)
+        Me.txtDetallesAccidentes.Multiline = True
+        Me.txtDetallesAccidentes.Name = "txtDetallesAccidentes"
+        Me.txtDetallesAccidentes.ScrollBars = System.Windows.Forms.ScrollBars.Vertical
+        Me.txtDetallesAccidentes.Size = New System.Drawing.Size(489, 75)
+        Me.txtDetallesAccidentes.TabIndex = 513
+        '
+        'Label65
+        '
+        Me.Label65.AutoSize = True
+        Me.Label65.Font = New System.Drawing.Font("Calibri", 12.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label65.Location = New System.Drawing.Point(439, 107)
+        Me.Label65.Name = "Label65"
+        Me.Label65.Size = New System.Drawing.Size(64, 21)
+        Me.Label65.TabIndex = 0
+        Me.Label65.Text = "Agregar"
+        '
+        'txtAccidenteCantidad
+        '
+        Me.txtAccidenteCantidad.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(128, Byte), Integer))
+        Me.txtAccidenteCantidad.Font = New System.Drawing.Font("Calibri", 12.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtAccidenteCantidad.Location = New System.Drawing.Point(93, 93)
+        Me.txtAccidenteCantidad.Name = "txtAccidenteCantidad"
+        Me.txtAccidenteCantidad.Size = New System.Drawing.Size(181, 28)
+        Me.txtAccidenteCantidad.TabIndex = 512
+        '
+        'cbxTipoAccidente
+        '
+        Me.cbxTipoAccidente.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cbxTipoAccidente.Font = New System.Drawing.Font("Calibri", 12.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.cbxTipoAccidente.FormattingEnabled = True
+        Me.cbxTipoAccidente.Location = New System.Drawing.Point(93, 44)
+        Me.cbxTipoAccidente.Name = "cbxTipoAccidente"
+        Me.cbxTipoAccidente.Size = New System.Drawing.Size(181, 29)
+        Me.cbxTipoAccidente.TabIndex = 511
+        '
+        'Label66
+        '
+        Me.Label66.AutoSize = True
+        Me.Label66.Font = New System.Drawing.Font("Calibri", 12.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label66.Location = New System.Drawing.Point(14, 96)
+        Me.Label66.Name = "Label66"
+        Me.Label66.Size = New System.Drawing.Size(76, 21)
+        Me.Label66.TabIndex = 0
+        Me.Label66.Text = "Cantidad:"
+        '
+        'Label67
+        '
+        Me.Label67.AutoSize = True
+        Me.Label67.Font = New System.Drawing.Font("Calibri", 12.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label67.Location = New System.Drawing.Point(45, 47)
+        Me.Label67.Name = "Label67"
+        Me.Label67.Size = New System.Drawing.Size(45, 21)
+        Me.Label67.TabIndex = 0
+        Me.Label67.Text = "Tipo:"
+        '
+        'grpCondInseg
+        '
+        Me.grpCondInseg.Controls.Add(Me.grdDetalleCondInseg)
+        Me.grpCondInseg.Controls.Add(Me.btnQuitarCondInseg)
+        Me.grpCondInseg.Controls.Add(Me.btnAgregarCondInseg)
+        Me.grpCondInseg.Controls.Add(Me.Label20)
+        Me.grpCondInseg.Controls.Add(Me.Label22)
+        Me.grpCondInseg.Controls.Add(Me.txtDetallesCondInseg)
+        Me.grpCondInseg.Controls.Add(Me.Label27)
+        Me.grpCondInseg.Controls.Add(Me.txtCondInsegCantidad)
+        Me.grpCondInseg.Controls.Add(Me.cbxTipoCondInseg)
+        Me.grpCondInseg.Controls.Add(Me.Label30)
+        Me.grpCondInseg.Controls.Add(Me.Label62)
+        Me.grpCondInseg.Font = New System.Drawing.Font("Calibri", 12.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.grpCondInseg.Location = New System.Drawing.Point(3, 3)
+        Me.grpCondInseg.Name = "grpCondInseg"
+        Me.grpCondInseg.Size = New System.Drawing.Size(603, 422)
+        Me.grpCondInseg.TabIndex = 0
+        Me.grpCondInseg.TabStop = False
+        Me.grpCondInseg.Text = "Condiciones Inseguras"
+        '
+        'grdDetalleCondInseg
+        '
+        Me.grdDetalleCondInseg.AllowUserToAddRows = False
+        Me.grdDetalleCondInseg.AllowUserToDeleteRows = False
+        Me.grdDetalleCondInseg.BackgroundColor = System.Drawing.SystemColors.ControlLight
+        Me.grdDetalleCondInseg.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.grdDetalleCondInseg.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.colcve_seguridad, Me.coldescripciondetalle, Me.colcantidaddetalle, Me.colcomentarios})
+        Me.grdDetalleCondInseg.Location = New System.Drawing.Point(6, 242)
+        Me.grdDetalleCondInseg.Name = "grdDetalleCondInseg"
+        Me.grdDetalleCondInseg.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
+        Me.grdDetalleCondInseg.Size = New System.Drawing.Size(591, 171)
+        Me.grdDetalleCondInseg.TabIndex = 0
+        '
+        'colcve_seguridad
+        '
+        Me.colcve_seguridad.DataPropertyName = "cve_seguridad"
+        Me.colcve_seguridad.HeaderText = "cve_seguridad"
+        Me.colcve_seguridad.Name = "colcve_seguridad"
+        Me.colcve_seguridad.ReadOnly = True
+        Me.colcve_seguridad.Visible = False
+        '
+        'coldescripciondetalle
+        '
+        Me.coldescripciondetalle.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells
+        Me.coldescripciondetalle.DataPropertyName = "descripcion"
+        Me.coldescripciondetalle.HeaderText = "Descripcion"
+        Me.coldescripciondetalle.Name = "coldescripciondetalle"
+        Me.coldescripciondetalle.ReadOnly = True
+        Me.coldescripciondetalle.Width = 115
+        '
+        'colcantidaddetalle
+        '
+        Me.colcantidaddetalle.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells
+        Me.colcantidaddetalle.DataPropertyName = "cantidad"
+        Me.colcantidaddetalle.HeaderText = "Cantidad"
+        Me.colcantidaddetalle.Name = "colcantidaddetalle"
+        Me.colcantidaddetalle.ReadOnly = True
+        Me.colcantidaddetalle.Width = 96
+        '
+        'colcomentarios
+        '
+        Me.colcomentarios.DataPropertyName = "comentarios"
+        Me.colcomentarios.HeaderText = "Comentarios"
+        Me.colcomentarios.Name = "colcomentarios"
+        Me.colcomentarios.ReadOnly = True
+        Me.colcomentarios.Width = 140
+        '
+        'btnQuitarCondInseg
+        '
+        Me.btnQuitarCondInseg.BackColor = System.Drawing.Color.White
+        Me.btnQuitarCondInseg.BackgroundImage = CType(resources.GetObject("btnQuitarCondInseg.BackgroundImage"), System.Drawing.Image)
+        Me.btnQuitarCondInseg.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center
+        Me.btnQuitarCondInseg.Enabled = False
+        Me.btnQuitarCondInseg.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnQuitarCondInseg.Location = New System.Drawing.Point(521, 44)
+        Me.btnQuitarCondInseg.Name = "btnQuitarCondInseg"
+        Me.btnQuitarCondInseg.Size = New System.Drawing.Size(64, 59)
+        Me.btnQuitarCondInseg.TabIndex = 505
+        Me.btnQuitarCondInseg.UseVisualStyleBackColor = False
+        '
+        'btnAgregarCondInseg
+        '
+        Me.btnAgregarCondInseg.BackColor = System.Drawing.Color.White
+        Me.btnAgregarCondInseg.BackgroundImage = CType(resources.GetObject("btnAgregarCondInseg.BackgroundImage"), System.Drawing.Image)
+        Me.btnAgregarCondInseg.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center
+        Me.btnAgregarCondInseg.Enabled = False
+        Me.btnAgregarCondInseg.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnAgregarCondInseg.Location = New System.Drawing.Point(444, 44)
+        Me.btnAgregarCondInseg.Name = "btnAgregarCondInseg"
+        Me.btnAgregarCondInseg.Size = New System.Drawing.Size(63, 59)
+        Me.btnAgregarCondInseg.TabIndex = 504
+        Me.btnAgregarCondInseg.UseVisualStyleBackColor = False
+        '
+        'Label20
+        '
+        Me.Label20.AutoSize = True
+        Me.Label20.Font = New System.Drawing.Font("Calibri", 12.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label20.Location = New System.Drawing.Point(20, 144)
+        Me.Label20.Name = "Label20"
+        Me.Label20.Size = New System.Drawing.Size(70, 21)
+        Me.Label20.TabIndex = 0
+        Me.Label20.Text = "Detalles:"
+        '
+        'Label22
+        '
+        Me.Label22.AutoSize = True
+        Me.Label22.Font = New System.Drawing.Font("Calibri", 12.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label22.Location = New System.Drawing.Point(527, 106)
+        Me.Label22.Name = "Label22"
+        Me.Label22.Size = New System.Drawing.Size(54, 21)
+        Me.Label22.TabIndex = 0
+        Me.Label22.Text = "Quitar"
+        '
+        'txtDetallesCondInseg
+        '
+        Me.txtDetallesCondInseg.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(128, Byte), Integer))
+        Me.txtDetallesCondInseg.Font = New System.Drawing.Font("Calibri", 12.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtDetallesCondInseg.Location = New System.Drawing.Point(96, 145)
+        Me.txtDetallesCondInseg.Multiline = True
+        Me.txtDetallesCondInseg.Name = "txtDetallesCondInseg"
+        Me.txtDetallesCondInseg.ScrollBars = System.Windows.Forms.ScrollBars.Vertical
+        Me.txtDetallesCondInseg.Size = New System.Drawing.Size(485, 75)
+        Me.txtDetallesCondInseg.TabIndex = 503
+        '
+        'Label27
+        '
+        Me.Label27.AutoSize = True
+        Me.Label27.Font = New System.Drawing.Font("Calibri", 12.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label27.Location = New System.Drawing.Point(442, 106)
+        Me.Label27.Name = "Label27"
+        Me.Label27.Size = New System.Drawing.Size(64, 21)
+        Me.Label27.TabIndex = 0
+        Me.Label27.Text = "Agregar"
+        '
+        'txtCondInsegCantidad
+        '
+        Me.txtCondInsegCantidad.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(128, Byte), Integer))
+        Me.txtCondInsegCantidad.Font = New System.Drawing.Font("Calibri", 12.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtCondInsegCantidad.Location = New System.Drawing.Point(96, 94)
+        Me.txtCondInsegCantidad.Name = "txtCondInsegCantidad"
+        Me.txtCondInsegCantidad.Size = New System.Drawing.Size(181, 28)
+        Me.txtCondInsegCantidad.TabIndex = 502
+        '
+        'cbxTipoCondInseg
+        '
+        Me.cbxTipoCondInseg.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cbxTipoCondInseg.Font = New System.Drawing.Font("Calibri", 12.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.cbxTipoCondInseg.FormattingEnabled = True
+        Me.cbxTipoCondInseg.Location = New System.Drawing.Point(96, 45)
+        Me.cbxTipoCondInseg.Name = "cbxTipoCondInseg"
+        Me.cbxTipoCondInseg.Size = New System.Drawing.Size(181, 29)
+        Me.cbxTipoCondInseg.TabIndex = 501
+        '
+        'Label30
+        '
+        Me.Label30.AutoSize = True
+        Me.Label30.Font = New System.Drawing.Font("Calibri", 12.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label30.Location = New System.Drawing.Point(14, 96)
+        Me.Label30.Name = "Label30"
+        Me.Label30.Size = New System.Drawing.Size(76, 21)
+        Me.Label30.TabIndex = 0
+        Me.Label30.Text = "Cantidad:"
+        '
+        'Label62
+        '
+        Me.Label62.AutoSize = True
+        Me.Label62.Font = New System.Drawing.Font("Calibri", 12.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label62.Location = New System.Drawing.Point(45, 48)
+        Me.Label62.Name = "Label62"
+        Me.Label62.Size = New System.Drawing.Size(45, 21)
+        Me.Label62.TabIndex = 0
+        Me.Label62.Text = "Tipo:"
+        '
+        'tabPageGente
+        '
+        Me.tabPageGente.Controls.Add(Me.grp5s)
+        Me.tabPageGente.Controls.Add(Me.grpGente)
+        Me.tabPageGente.Location = New System.Drawing.Point(4, 28)
+        Me.tabPageGente.Name = "tabPageGente"
+        Me.tabPageGente.Padding = New System.Windows.Forms.Padding(3)
+        Me.tabPageGente.Size = New System.Drawing.Size(1222, 430)
+        Me.tabPageGente.TabIndex = 4
+        Me.tabPageGente.Text = "Gente / 5'S"
+        Me.tabPageGente.UseVisualStyleBackColor = True
         '
         'grp5s
         '
@@ -1397,7 +2432,7 @@ Partial Class frmProduccion
         Me.grp5s.Controls.Add(Me.Label70)
         Me.grp5s.Controls.Add(Me.Label71)
         Me.grp5s.Font = New System.Drawing.Font("Calibri", 12.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.grp5s.Location = New System.Drawing.Point(640, 3)
+        Me.grp5s.Location = New System.Drawing.Point(627, 3)
         Me.grp5s.Name = "grp5s"
         Me.grp5s.Size = New System.Drawing.Size(579, 414)
         Me.grp5s.TabIndex = 0
@@ -1591,492 +2626,6 @@ Partial Class frmProduccion
         Me.Label71.TabIndex = 0
         Me.Label71.Text = "5 s:"
         '
-        'grpRechazos
-        '
-        Me.grpRechazos.Controls.Add(Me.grdDetalleRechazo)
-        Me.grpRechazos.Controls.Add(Me.txtModeloRechazo)
-        Me.grpRechazos.Controls.Add(Me.Label2)
-        Me.grpRechazos.Controls.Add(Me.cbxTipoRechazo)
-        Me.grpRechazos.Controls.Add(Me.Label3)
-        Me.grpRechazos.Controls.Add(Me.cbxModeloRechazo)
-        Me.grpRechazos.Controls.Add(Me.Label5)
-        Me.grpRechazos.Controls.Add(Me.Label7)
-        Me.grpRechazos.Controls.Add(Me.Label11)
-        Me.grpRechazos.Controls.Add(Me.btnAgregarRechazo)
-        Me.grpRechazos.Controls.Add(Me.btnQuitarRechazo)
-        Me.grpRechazos.Controls.Add(Me.Label12)
-        Me.grpRechazos.Controls.Add(Me.Label16)
-        Me.grpRechazos.Controls.Add(Me.txtRechazoMotivo)
-        Me.grpRechazos.Controls.Add(Me.txtRechazosCantidad)
-        Me.grpRechazos.Font = New System.Drawing.Font("Calibri", 12.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.grpRechazos.Location = New System.Drawing.Point(3, 3)
-        Me.grpRechazos.Name = "grpRechazos"
-        Me.grpRechazos.Size = New System.Drawing.Size(631, 414)
-        Me.grpRechazos.TabIndex = 0
-        Me.grpRechazos.TabStop = False
-        Me.grpRechazos.Text = "Rechazos"
-        '
-        'grdDetalleRechazo
-        '
-        Me.grdDetalleRechazo.AllowUserToAddRows = False
-        Me.grdDetalleRechazo.AllowUserToDeleteRows = False
-        Me.grdDetalleRechazo.BackgroundColor = System.Drawing.SystemColors.ControlLight
-        Me.grdDetalleRechazo.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.grdDetalleRechazo.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.colcve_rechazo, Me.col_np_gkn, Me.col_descripcion, Me.colcantidad, Me.coltipo_rechazo, Me.colmotivo})
-        Me.grdDetalleRechazo.Location = New System.Drawing.Point(10, 234)
-        Me.grdDetalleRechazo.Name = "grdDetalleRechazo"
-        Me.grdDetalleRechazo.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
-        Me.grdDetalleRechazo.Size = New System.Drawing.Size(609, 174)
-        Me.grdDetalleRechazo.TabIndex = 0
-        '
-        'txtModeloRechazo
-        '
-        Me.txtModeloRechazo.Font = New System.Drawing.Font("Calibri", 12.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtModeloRechazo.Location = New System.Drawing.Point(113, 64)
-        Me.txtModeloRechazo.Name = "txtModeloRechazo"
-        Me.txtModeloRechazo.ReadOnly = True
-        Me.txtModeloRechazo.Size = New System.Drawing.Size(198, 28)
-        Me.txtModeloRechazo.TabIndex = 0
-        '
-        'Label2
-        '
-        Me.Label2.AutoSize = True
-        Me.Label2.Font = New System.Drawing.Font("Calibri", 12.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label2.Location = New System.Drawing.Point(11, 68)
-        Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(90, 21)
-        Me.Label2.TabIndex = 0
-        Me.Label2.Text = "Descripcion"
-        '
-        'cbxTipoRechazo
-        '
-        Me.cbxTipoRechazo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.cbxTipoRechazo.Font = New System.Drawing.Font("Calibri", 12.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.cbxTipoRechazo.FormattingEnabled = True
-        Me.cbxTipoRechazo.Location = New System.Drawing.Point(421, 65)
-        Me.cbxTipoRechazo.Name = "cbxTipoRechazo"
-        Me.cbxTipoRechazo.Size = New System.Drawing.Size(198, 29)
-        Me.cbxTipoRechazo.TabIndex = 403
-        '
-        'Label3
-        '
-        Me.Label3.AutoSize = True
-        Me.Label3.Font = New System.Drawing.Font("Calibri", 12.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label3.Location = New System.Drawing.Point(373, 68)
-        Me.Label3.Name = "Label3"
-        Me.Label3.Size = New System.Drawing.Size(40, 21)
-        Me.Label3.TabIndex = 0
-        Me.Label3.Text = "Tipo"
-        '
-        'cbxModeloRechazo
-        '
-        Me.cbxModeloRechazo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.cbxModeloRechazo.Font = New System.Drawing.Font("Calibri", 12.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.cbxModeloRechazo.FormattingEnabled = True
-        Me.cbxModeloRechazo.Location = New System.Drawing.Point(113, 25)
-        Me.cbxModeloRechazo.Name = "cbxModeloRechazo"
-        Me.cbxModeloRechazo.Size = New System.Drawing.Size(198, 29)
-        Me.cbxModeloRechazo.TabIndex = 401
-        '
-        'Label5
-        '
-        Me.Label5.AutoSize = True
-        Me.Label5.Font = New System.Drawing.Font("Calibri", 12.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label5.Location = New System.Drawing.Point(11, 110)
-        Me.Label5.Name = "Label5"
-        Me.Label5.Size = New System.Drawing.Size(65, 21)
-        Me.Label5.TabIndex = 0
-        Me.Label5.Text = "Motivo:"
-        '
-        'Label7
-        '
-        Me.Label7.AutoSize = True
-        Me.Label7.Font = New System.Drawing.Font("Calibri", 12.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label7.Location = New System.Drawing.Point(561, 193)
-        Me.Label7.Name = "Label7"
-        Me.Label7.Size = New System.Drawing.Size(54, 21)
-        Me.Label7.TabIndex = 0
-        Me.Label7.Text = "Quitar"
-        '
-        'Label11
-        '
-        Me.Label11.AutoSize = True
-        Me.Label11.Font = New System.Drawing.Font("Calibri", 12.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label11.Location = New System.Drawing.Point(476, 193)
-        Me.Label11.Name = "Label11"
-        Me.Label11.Size = New System.Drawing.Size(64, 21)
-        Me.Label11.TabIndex = 0
-        Me.Label11.Text = "Agregar"
-        '
-        'btnAgregarRechazo
-        '
-        Me.btnAgregarRechazo.BackColor = System.Drawing.Color.White
-        Me.btnAgregarRechazo.BackgroundImage = CType(resources.GetObject("btnAgregarRechazo.BackgroundImage"), System.Drawing.Image)
-        Me.btnAgregarRechazo.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center
-        Me.btnAgregarRechazo.Enabled = False
-        Me.btnAgregarRechazo.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnAgregarRechazo.Location = New System.Drawing.Point(478, 131)
-        Me.btnAgregarRechazo.Name = "btnAgregarRechazo"
-        Me.btnAgregarRechazo.Size = New System.Drawing.Size(63, 59)
-        Me.btnAgregarRechazo.TabIndex = 405
-        Me.btnAgregarRechazo.UseVisualStyleBackColor = False
-        '
-        'btnQuitarRechazo
-        '
-        Me.btnQuitarRechazo.BackColor = System.Drawing.Color.White
-        Me.btnQuitarRechazo.BackgroundImage = CType(resources.GetObject("btnQuitarRechazo.BackgroundImage"), System.Drawing.Image)
-        Me.btnQuitarRechazo.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center
-        Me.btnQuitarRechazo.Enabled = False
-        Me.btnQuitarRechazo.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnQuitarRechazo.Location = New System.Drawing.Point(555, 131)
-        Me.btnQuitarRechazo.Name = "btnQuitarRechazo"
-        Me.btnQuitarRechazo.Size = New System.Drawing.Size(64, 59)
-        Me.btnQuitarRechazo.TabIndex = 406
-        Me.btnQuitarRechazo.UseVisualStyleBackColor = False
-        '
-        'Label12
-        '
-        Me.Label12.AutoSize = True
-        Me.Label12.Font = New System.Drawing.Font("Calibri", 12.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label12.Location = New System.Drawing.Point(43, 28)
-        Me.Label12.Name = "Label12"
-        Me.Label12.Size = New System.Drawing.Size(64, 21)
-        Me.Label12.TabIndex = 0
-        Me.Label12.Text = "Modelo"
-        '
-        'Label16
-        '
-        Me.Label16.AutoSize = True
-        Me.Label16.Font = New System.Drawing.Font("Calibri", 12.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label16.Location = New System.Drawing.Point(339, 28)
-        Me.Label16.Name = "Label16"
-        Me.Label16.Size = New System.Drawing.Size(71, 21)
-        Me.Label16.TabIndex = 0
-        Me.Label16.Text = "Cantidad"
-        '
-        'txtRechazoMotivo
-        '
-        Me.txtRechazoMotivo.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(128, Byte), Integer))
-        Me.txtRechazoMotivo.Font = New System.Drawing.Font("Calibri", 12.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtRechazoMotivo.Location = New System.Drawing.Point(10, 131)
-        Me.txtRechazoMotivo.Multiline = True
-        Me.txtRechazoMotivo.Name = "txtRechazoMotivo"
-        Me.txtRechazoMotivo.ScrollBars = System.Windows.Forms.ScrollBars.Vertical
-        Me.txtRechazoMotivo.Size = New System.Drawing.Size(301, 78)
-        Me.txtRechazoMotivo.TabIndex = 404
-        '
-        'txtRechazosCantidad
-        '
-        Me.txtRechazosCantidad.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(128, Byte), Integer))
-        Me.txtRechazosCantidad.Font = New System.Drawing.Font("Calibri", 12.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtRechazosCantidad.Location = New System.Drawing.Point(421, 25)
-        Me.txtRechazosCantidad.Name = "txtRechazosCantidad"
-        Me.txtRechazosCantidad.Size = New System.Drawing.Size(198, 28)
-        Me.txtRechazosCantidad.TabIndex = 402
-        '
-        'tabPageCondInsegAccidentes
-        '
-        Me.tabPageCondInsegAccidentes.Controls.Add(Me.grpAccidentes)
-        Me.tabPageCondInsegAccidentes.Controls.Add(Me.grpCondInseg)
-        Me.tabPageCondInsegAccidentes.Location = New System.Drawing.Point(4, 28)
-        Me.tabPageCondInsegAccidentes.Name = "tabPageCondInsegAccidentes"
-        Me.tabPageCondInsegAccidentes.Padding = New System.Windows.Forms.Padding(3)
-        Me.tabPageCondInsegAccidentes.Size = New System.Drawing.Size(1222, 430)
-        Me.tabPageCondInsegAccidentes.TabIndex = 3
-        Me.tabPageCondInsegAccidentes.Text = "Seguridad"
-        Me.tabPageCondInsegAccidentes.UseVisualStyleBackColor = True
-        '
-        'grpAccidentes
-        '
-        Me.grpAccidentes.Controls.Add(Me.grdDetalleAccidente)
-        Me.grpAccidentes.Controls.Add(Me.btnQuitarAccidente)
-        Me.grpAccidentes.Controls.Add(Me.btnAgregarAccidente)
-        Me.grpAccidentes.Controls.Add(Me.Label63)
-        Me.grpAccidentes.Controls.Add(Me.Label64)
-        Me.grpAccidentes.Controls.Add(Me.txtDetallesAccidentes)
-        Me.grpAccidentes.Controls.Add(Me.Label65)
-        Me.grpAccidentes.Controls.Add(Me.txtAccidenteCantidad)
-        Me.grpAccidentes.Controls.Add(Me.cbxTipoAccidente)
-        Me.grpAccidentes.Controls.Add(Me.Label66)
-        Me.grpAccidentes.Controls.Add(Me.Label67)
-        Me.grpAccidentes.Font = New System.Drawing.Font("Calibri", 12.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.grpAccidentes.Location = New System.Drawing.Point(612, 3)
-        Me.grpAccidentes.Name = "grpAccidentes"
-        Me.grpAccidentes.Size = New System.Drawing.Size(600, 422)
-        Me.grpAccidentes.TabIndex = 0
-        Me.grpAccidentes.TabStop = False
-        Me.grpAccidentes.Text = "Accidentes"
-        '
-        'grdDetalleAccidente
-        '
-        Me.grdDetalleAccidente.AllowUserToAddRows = False
-        Me.grdDetalleAccidente.AllowUserToDeleteRows = False
-        Me.grdDetalleAccidente.BackgroundColor = System.Drawing.SystemColors.ControlLight
-        Me.grdDetalleAccidente.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.grdDetalleAccidente.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.col_cve_seguridad, Me.col_descripcion_, Me.Cantidad, Me.col_comentarios_})
-        Me.grdDetalleAccidente.Location = New System.Drawing.Point(6, 242)
-        Me.grdDetalleAccidente.Name = "grdDetalleAccidente"
-        Me.grdDetalleAccidente.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
-        Me.grdDetalleAccidente.Size = New System.Drawing.Size(588, 171)
-        Me.grdDetalleAccidente.TabIndex = 0
-        '
-        'btnQuitarAccidente
-        '
-        Me.btnQuitarAccidente.BackColor = System.Drawing.Color.White
-        Me.btnQuitarAccidente.BackgroundImage = CType(resources.GetObject("btnQuitarAccidente.BackgroundImage"), System.Drawing.Image)
-        Me.btnQuitarAccidente.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center
-        Me.btnQuitarAccidente.Enabled = False
-        Me.btnQuitarAccidente.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnQuitarAccidente.Location = New System.Drawing.Point(518, 45)
-        Me.btnQuitarAccidente.Name = "btnQuitarAccidente"
-        Me.btnQuitarAccidente.Size = New System.Drawing.Size(64, 59)
-        Me.btnQuitarAccidente.TabIndex = 515
-        Me.btnQuitarAccidente.UseVisualStyleBackColor = False
-        '
-        'btnAgregarAccidente
-        '
-        Me.btnAgregarAccidente.BackColor = System.Drawing.Color.White
-        Me.btnAgregarAccidente.BackgroundImage = CType(resources.GetObject("btnAgregarAccidente.BackgroundImage"), System.Drawing.Image)
-        Me.btnAgregarAccidente.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center
-        Me.btnAgregarAccidente.Enabled = False
-        Me.btnAgregarAccidente.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnAgregarAccidente.Location = New System.Drawing.Point(441, 45)
-        Me.btnAgregarAccidente.Name = "btnAgregarAccidente"
-        Me.btnAgregarAccidente.Size = New System.Drawing.Size(63, 59)
-        Me.btnAgregarAccidente.TabIndex = 514
-        Me.btnAgregarAccidente.UseVisualStyleBackColor = False
-        '
-        'Label63
-        '
-        Me.Label63.AutoSize = True
-        Me.Label63.Font = New System.Drawing.Font("Calibri", 12.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label63.Location = New System.Drawing.Point(20, 144)
-        Me.Label63.Name = "Label63"
-        Me.Label63.Size = New System.Drawing.Size(70, 21)
-        Me.Label63.TabIndex = 0
-        Me.Label63.Text = "Detalles:"
-        '
-        'Label64
-        '
-        Me.Label64.AutoSize = True
-        Me.Label64.Font = New System.Drawing.Font("Calibri", 12.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label64.Location = New System.Drawing.Point(524, 107)
-        Me.Label64.Name = "Label64"
-        Me.Label64.Size = New System.Drawing.Size(54, 21)
-        Me.Label64.TabIndex = 0
-        Me.Label64.Text = "Quitar"
-        '
-        'txtDetallesAccidentes
-        '
-        Me.txtDetallesAccidentes.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(128, Byte), Integer))
-        Me.txtDetallesAccidentes.Font = New System.Drawing.Font("Calibri", 12.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtDetallesAccidentes.Location = New System.Drawing.Point(93, 144)
-        Me.txtDetallesAccidentes.Multiline = True
-        Me.txtDetallesAccidentes.Name = "txtDetallesAccidentes"
-        Me.txtDetallesAccidentes.ScrollBars = System.Windows.Forms.ScrollBars.Vertical
-        Me.txtDetallesAccidentes.Size = New System.Drawing.Size(489, 75)
-        Me.txtDetallesAccidentes.TabIndex = 513
-        '
-        'Label65
-        '
-        Me.Label65.AutoSize = True
-        Me.Label65.Font = New System.Drawing.Font("Calibri", 12.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label65.Location = New System.Drawing.Point(439, 107)
-        Me.Label65.Name = "Label65"
-        Me.Label65.Size = New System.Drawing.Size(64, 21)
-        Me.Label65.TabIndex = 0
-        Me.Label65.Text = "Agregar"
-        '
-        'txtAccidenteCantidad
-        '
-        Me.txtAccidenteCantidad.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(128, Byte), Integer))
-        Me.txtAccidenteCantidad.Font = New System.Drawing.Font("Calibri", 12.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtAccidenteCantidad.Location = New System.Drawing.Point(93, 93)
-        Me.txtAccidenteCantidad.Name = "txtAccidenteCantidad"
-        Me.txtAccidenteCantidad.Size = New System.Drawing.Size(181, 28)
-        Me.txtAccidenteCantidad.TabIndex = 512
-        '
-        'cbxTipoAccidente
-        '
-        Me.cbxTipoAccidente.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.cbxTipoAccidente.Font = New System.Drawing.Font("Calibri", 12.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.cbxTipoAccidente.FormattingEnabled = True
-        Me.cbxTipoAccidente.Location = New System.Drawing.Point(93, 44)
-        Me.cbxTipoAccidente.Name = "cbxTipoAccidente"
-        Me.cbxTipoAccidente.Size = New System.Drawing.Size(181, 29)
-        Me.cbxTipoAccidente.TabIndex = 511
-        '
-        'Label66
-        '
-        Me.Label66.AutoSize = True
-        Me.Label66.Font = New System.Drawing.Font("Calibri", 12.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label66.Location = New System.Drawing.Point(14, 96)
-        Me.Label66.Name = "Label66"
-        Me.Label66.Size = New System.Drawing.Size(76, 21)
-        Me.Label66.TabIndex = 0
-        Me.Label66.Text = "Cantidad:"
-        '
-        'Label67
-        '
-        Me.Label67.AutoSize = True
-        Me.Label67.Font = New System.Drawing.Font("Calibri", 12.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label67.Location = New System.Drawing.Point(45, 47)
-        Me.Label67.Name = "Label67"
-        Me.Label67.Size = New System.Drawing.Size(45, 21)
-        Me.Label67.TabIndex = 0
-        Me.Label67.Text = "Tipo:"
-        '
-        'grpCondInseg
-        '
-        Me.grpCondInseg.Controls.Add(Me.grdDetalleCondInseg)
-        Me.grpCondInseg.Controls.Add(Me.btnQuitarCondInseg)
-        Me.grpCondInseg.Controls.Add(Me.btnAgregarCondInseg)
-        Me.grpCondInseg.Controls.Add(Me.Label20)
-        Me.grpCondInseg.Controls.Add(Me.Label22)
-        Me.grpCondInseg.Controls.Add(Me.txtDetallesCondInseg)
-        Me.grpCondInseg.Controls.Add(Me.Label27)
-        Me.grpCondInseg.Controls.Add(Me.txtCondInsegCantidad)
-        Me.grpCondInseg.Controls.Add(Me.cbxTipoCondInseg)
-        Me.grpCondInseg.Controls.Add(Me.Label30)
-        Me.grpCondInseg.Controls.Add(Me.Label62)
-        Me.grpCondInseg.Font = New System.Drawing.Font("Calibri", 12.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.grpCondInseg.Location = New System.Drawing.Point(3, 3)
-        Me.grpCondInseg.Name = "grpCondInseg"
-        Me.grpCondInseg.Size = New System.Drawing.Size(603, 422)
-        Me.grpCondInseg.TabIndex = 0
-        Me.grpCondInseg.TabStop = False
-        Me.grpCondInseg.Text = "Condiciones Inseguras"
-        '
-        'grdDetalleCondInseg
-        '
-        Me.grdDetalleCondInseg.AllowUserToAddRows = False
-        Me.grdDetalleCondInseg.AllowUserToDeleteRows = False
-        Me.grdDetalleCondInseg.BackgroundColor = System.Drawing.SystemColors.ControlLight
-        Me.grdDetalleCondInseg.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.grdDetalleCondInseg.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.colcve_seguridad, Me.coldescripciondetalle, Me.colcantidaddetalle, Me.colcomentarios})
-        Me.grdDetalleCondInseg.Location = New System.Drawing.Point(6, 242)
-        Me.grdDetalleCondInseg.Name = "grdDetalleCondInseg"
-        Me.grdDetalleCondInseg.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
-        Me.grdDetalleCondInseg.Size = New System.Drawing.Size(591, 171)
-        Me.grdDetalleCondInseg.TabIndex = 0
-        '
-        'btnQuitarCondInseg
-        '
-        Me.btnQuitarCondInseg.BackColor = System.Drawing.Color.White
-        Me.btnQuitarCondInseg.BackgroundImage = CType(resources.GetObject("btnQuitarCondInseg.BackgroundImage"), System.Drawing.Image)
-        Me.btnQuitarCondInseg.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center
-        Me.btnQuitarCondInseg.Enabled = False
-        Me.btnQuitarCondInseg.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnQuitarCondInseg.Location = New System.Drawing.Point(521, 44)
-        Me.btnQuitarCondInseg.Name = "btnQuitarCondInseg"
-        Me.btnQuitarCondInseg.Size = New System.Drawing.Size(64, 59)
-        Me.btnQuitarCondInseg.TabIndex = 505
-        Me.btnQuitarCondInseg.UseVisualStyleBackColor = False
-        '
-        'btnAgregarCondInseg
-        '
-        Me.btnAgregarCondInseg.BackColor = System.Drawing.Color.White
-        Me.btnAgregarCondInseg.BackgroundImage = CType(resources.GetObject("btnAgregarCondInseg.BackgroundImage"), System.Drawing.Image)
-        Me.btnAgregarCondInseg.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center
-        Me.btnAgregarCondInseg.Enabled = False
-        Me.btnAgregarCondInseg.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnAgregarCondInseg.Location = New System.Drawing.Point(444, 44)
-        Me.btnAgregarCondInseg.Name = "btnAgregarCondInseg"
-        Me.btnAgregarCondInseg.Size = New System.Drawing.Size(63, 59)
-        Me.btnAgregarCondInseg.TabIndex = 504
-        Me.btnAgregarCondInseg.UseVisualStyleBackColor = False
-        '
-        'Label20
-        '
-        Me.Label20.AutoSize = True
-        Me.Label20.Font = New System.Drawing.Font("Calibri", 12.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label20.Location = New System.Drawing.Point(20, 144)
-        Me.Label20.Name = "Label20"
-        Me.Label20.Size = New System.Drawing.Size(70, 21)
-        Me.Label20.TabIndex = 0
-        Me.Label20.Text = "Detalles:"
-        '
-        'Label22
-        '
-        Me.Label22.AutoSize = True
-        Me.Label22.Font = New System.Drawing.Font("Calibri", 12.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label22.Location = New System.Drawing.Point(527, 106)
-        Me.Label22.Name = "Label22"
-        Me.Label22.Size = New System.Drawing.Size(54, 21)
-        Me.Label22.TabIndex = 0
-        Me.Label22.Text = "Quitar"
-        '
-        'txtDetallesCondInseg
-        '
-        Me.txtDetallesCondInseg.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(128, Byte), Integer))
-        Me.txtDetallesCondInseg.Font = New System.Drawing.Font("Calibri", 12.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtDetallesCondInseg.Location = New System.Drawing.Point(96, 145)
-        Me.txtDetallesCondInseg.Multiline = True
-        Me.txtDetallesCondInseg.Name = "txtDetallesCondInseg"
-        Me.txtDetallesCondInseg.ScrollBars = System.Windows.Forms.ScrollBars.Vertical
-        Me.txtDetallesCondInseg.Size = New System.Drawing.Size(485, 75)
-        Me.txtDetallesCondInseg.TabIndex = 503
-        '
-        'Label27
-        '
-        Me.Label27.AutoSize = True
-        Me.Label27.Font = New System.Drawing.Font("Calibri", 12.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label27.Location = New System.Drawing.Point(442, 106)
-        Me.Label27.Name = "Label27"
-        Me.Label27.Size = New System.Drawing.Size(64, 21)
-        Me.Label27.TabIndex = 0
-        Me.Label27.Text = "Agregar"
-        '
-        'txtCondInsegCantidad
-        '
-        Me.txtCondInsegCantidad.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(128, Byte), Integer))
-        Me.txtCondInsegCantidad.Font = New System.Drawing.Font("Calibri", 12.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtCondInsegCantidad.Location = New System.Drawing.Point(96, 94)
-        Me.txtCondInsegCantidad.Name = "txtCondInsegCantidad"
-        Me.txtCondInsegCantidad.Size = New System.Drawing.Size(181, 28)
-        Me.txtCondInsegCantidad.TabIndex = 502
-        '
-        'cbxTipoCondInseg
-        '
-        Me.cbxTipoCondInseg.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.cbxTipoCondInseg.Font = New System.Drawing.Font("Calibri", 12.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.cbxTipoCondInseg.FormattingEnabled = True
-        Me.cbxTipoCondInseg.Location = New System.Drawing.Point(96, 45)
-        Me.cbxTipoCondInseg.Name = "cbxTipoCondInseg"
-        Me.cbxTipoCondInseg.Size = New System.Drawing.Size(181, 29)
-        Me.cbxTipoCondInseg.TabIndex = 501
-        '
-        'Label30
-        '
-        Me.Label30.AutoSize = True
-        Me.Label30.Font = New System.Drawing.Font("Calibri", 12.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label30.Location = New System.Drawing.Point(14, 96)
-        Me.Label30.Name = "Label30"
-        Me.Label30.Size = New System.Drawing.Size(76, 21)
-        Me.Label30.TabIndex = 0
-        Me.Label30.Text = "Cantidad:"
-        '
-        'Label62
-        '
-        Me.Label62.AutoSize = True
-        Me.Label62.Font = New System.Drawing.Font("Calibri", 12.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label62.Location = New System.Drawing.Point(45, 48)
-        Me.Label62.Name = "Label62"
-        Me.Label62.Size = New System.Drawing.Size(45, 21)
-        Me.Label62.TabIndex = 0
-        Me.Label62.Text = "Tipo:"
-        '
-        'tabPageGente
-        '
-        Me.tabPageGente.Controls.Add(Me.grpGente)
-        Me.tabPageGente.Location = New System.Drawing.Point(4, 28)
-        Me.tabPageGente.Name = "tabPageGente"
-        Me.tabPageGente.Padding = New System.Windows.Forms.Padding(3)
-        Me.tabPageGente.Size = New System.Drawing.Size(1222, 430)
-        Me.tabPageGente.TabIndex = 4
-        Me.tabPageGente.Text = "Gente"
-        Me.tabPageGente.UseVisualStyleBackColor = True
-        '
         'grpGente
         '
         Me.grpGente.Controls.Add(Me.grdDetalleGente)
@@ -2110,6 +2659,39 @@ Partial Class frmProduccion
         Me.grdDetalleGente.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
         Me.grdDetalleGente.Size = New System.Drawing.Size(580, 150)
         Me.grdDetalleGente.TabIndex = 0
+        '
+        'colcve_gente
+        '
+        Me.colcve_gente.DataPropertyName = "cve_gente"
+        Me.colcve_gente.HeaderText = "cve_gente"
+        Me.colcve_gente.Name = "colcve_gente"
+        Me.colcve_gente.Visible = False
+        '
+        'colgdescripcion
+        '
+        Me.colgdescripcion.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells
+        Me.colgdescripcion.DataPropertyName = "descripcion"
+        Me.colgdescripcion.HeaderText = "descripcion"
+        Me.colgdescripcion.Name = "colgdescripcion"
+        Me.colgdescripcion.ReadOnly = True
+        Me.colgdescripcion.Width = 114
+        '
+        'colgcantidad
+        '
+        Me.colgcantidad.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells
+        Me.colgcantidad.DataPropertyName = "cantidad"
+        Me.colgcantidad.HeaderText = "cantidad"
+        Me.colgcantidad.Name = "colgcantidad"
+        Me.colgcantidad.ReadOnly = True
+        Me.colgcantidad.Width = 94
+        '
+        'comentarios
+        '
+        Me.comentarios.DataPropertyName = "comentarios"
+        Me.comentarios.HeaderText = "comentarios"
+        Me.comentarios.Name = "comentarios"
+        Me.comentarios.ReadOnly = True
+        Me.comentarios.Width = 140
         '
         'btnQuitarGente
         '
@@ -2217,227 +2799,6 @@ Partial Class frmProduccion
         Me.Label55.TabIndex = 0
         Me.Label55.Text = "Tipo:"
         '
-        'tabPageTurnosLineas
-        '
-        Me.tabPageTurnosLineas.Controls.Add(Me.cbxTurnosLineas)
-        Me.tabPageTurnosLineas.Controls.Add(Me.Label76)
-        Me.tabPageTurnosLineas.Controls.Add(Me.Label75)
-        Me.tabPageTurnosLineas.Controls.Add(Me.Label74)
-        Me.tabPageTurnosLineas.Controls.Add(Me.Label73)
-        Me.tabPageTurnosLineas.Controls.Add(Me.btnLineaUnica)
-        Me.tabPageTurnosLineas.Controls.Add(Me.btnLineasTodas)
-        Me.tabPageTurnosLineas.Controls.Add(Me.Label72)
-        Me.tabPageTurnosLineas.Controls.Add(Me.grdLineasRegistradas)
-        Me.tabPageTurnosLineas.Controls.Add(Me.grdLineasNoRegistradas)
-        Me.tabPageTurnosLineas.Font = New System.Drawing.Font("Calibri", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.tabPageTurnosLineas.Location = New System.Drawing.Point(4, 28)
-        Me.tabPageTurnosLineas.Name = "tabPageTurnosLineas"
-        Me.tabPageTurnosLineas.Padding = New System.Windows.Forms.Padding(3)
-        Me.tabPageTurnosLineas.Size = New System.Drawing.Size(1222, 430)
-        Me.tabPageTurnosLineas.TabIndex = 5
-        Me.tabPageTurnosLineas.Text = "Turnos/lineas"
-        Me.tabPageTurnosLineas.UseVisualStyleBackColor = True
-        '
-        'cbxTurnosLineas
-        '
-        Me.cbxTurnosLineas.BackColor = System.Drawing.Color.White
-        Me.cbxTurnosLineas.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.cbxTurnosLineas.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.cbxTurnosLineas.FormattingEnabled = True
-        Me.cbxTurnosLineas.Location = New System.Drawing.Point(458, 101)
-        Me.cbxTurnosLineas.Name = "cbxTurnosLineas"
-        Me.cbxTurnosLineas.Size = New System.Drawing.Size(234, 26)
-        Me.cbxTurnosLineas.TabIndex = 102
-        '
-        'Label76
-        '
-        Me.Label76.AutoSize = True
-        Me.Label76.Font = New System.Drawing.Font("Calibri", 12.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label76.Location = New System.Drawing.Point(733, 38)
-        Me.Label76.Name = "Label76"
-        Me.Label76.Size = New System.Drawing.Size(137, 21)
-        Me.Label76.TabIndex = 0
-        Me.Label76.Text = "Lineas Registradas"
-        '
-        'Label75
-        '
-        Me.Label75.AutoSize = True
-        Me.Label75.Font = New System.Drawing.Font("Calibri", 12.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label75.Location = New System.Drawing.Point(13, 38)
-        Me.Label75.Name = "Label75"
-        Me.Label75.Size = New System.Drawing.Size(130, 21)
-        Me.Label75.TabIndex = 317
-        Me.Label75.Text = "Lineas del Equipo"
-        '
-        'Label74
-        '
-        Me.Label74.AutoSize = True
-        Me.Label74.Font = New System.Drawing.Font("Calibri", 12.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label74.Location = New System.Drawing.Point(545, 363)
-        Me.Label74.Name = "Label74"
-        Me.Label74.Size = New System.Drawing.Size(72, 21)
-        Me.Label74.TabIndex = 0
-        Me.Label74.Text = "Registrar"
-        '
-        'Label73
-        '
-        Me.Label73.AutoSize = True
-        Me.Label73.Font = New System.Drawing.Font("Calibri", 12.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label73.Location = New System.Drawing.Point(488, 216)
-        Me.Label73.Name = "Label73"
-        Me.Label73.Size = New System.Drawing.Size(191, 21)
-        Me.Label73.TabIndex = 0
-        Me.Label73.Text = "Registrar Lineas Restantes"
-        '
-        'btnLineaUnica
-        '
-        Me.btnLineaUnica.Image = Global.GKNSICAIP.My.Resources.Resources._next
-        Me.btnLineaUnica.Location = New System.Drawing.Point(537, 289)
-        Me.btnLineaUnica.Name = "btnLineaUnica"
-        Me.btnLineaUnica.Size = New System.Drawing.Size(92, 71)
-        Me.btnLineaUnica.TabIndex = 104
-        Me.btnLineaUnica.UseVisualStyleBackColor = True
-        '
-        'btnLineasTodas
-        '
-        Me.btnLineasTodas.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.btnLineasTodas.Image = Global.GKNSICAIP.My.Resources.Resources.next_next
-        Me.btnLineasTodas.Location = New System.Drawing.Point(537, 142)
-        Me.btnLineasTodas.Name = "btnLineasTodas"
-        Me.btnLineasTodas.Size = New System.Drawing.Size(92, 71)
-        Me.btnLineasTodas.TabIndex = 103
-        Me.btnLineasTodas.UseVisualStyleBackColor = True
-        '
-        'Label72
-        '
-        Me.Label72.AutoSize = True
-        Me.Label72.Font = New System.Drawing.Font("Calibri", 12.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label72.Location = New System.Drawing.Point(454, 77)
-        Me.Label72.Name = "Label72"
-        Me.Label72.Size = New System.Drawing.Size(55, 21)
-        Me.Label72.TabIndex = 0
-        Me.Label72.Text = "Turno:"
-        '
-        'grdLineasRegistradas
-        '
-        Me.grdLineasRegistradas.AllowUserToAddRows = False
-        Me.grdLineasRegistradas.AllowUserToDeleteRows = False
-        Me.grdLineasRegistradas.BackgroundColor = System.Drawing.SystemColors.Control
-        Me.grdLineasRegistradas.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.grdLineasRegistradas.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.col_cve_registro_turno, Me.col_linea, Me.col_turno, Me.col_dia_asignado})
-        Me.grdLineasRegistradas.Location = New System.Drawing.Point(737, 62)
-        Me.grdLineasRegistradas.Name = "grdLineasRegistradas"
-        Me.grdLineasRegistradas.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
-        Me.grdLineasRegistradas.Size = New System.Drawing.Size(467, 334)
-        Me.grdLineasRegistradas.TabIndex = 0
-        '
-        'grdLineasNoRegistradas
-        '
-        Me.grdLineasNoRegistradas.AllowUserToAddRows = False
-        Me.grdLineasNoRegistradas.AllowUserToDeleteRows = False
-        Me.grdLineasNoRegistradas.BackgroundColor = System.Drawing.SystemColors.Control
-        Me.grdLineasNoRegistradas.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.grdLineasNoRegistradas.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.col_cve_linea, Me.collinea})
-        Me.grdLineasNoRegistradas.Location = New System.Drawing.Point(17, 62)
-        Me.grdLineasNoRegistradas.Name = "grdLineasNoRegistradas"
-        Me.grdLineasNoRegistradas.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
-        Me.grdLineasNoRegistradas.Size = New System.Drawing.Size(396, 334)
-        Me.grdLineasNoRegistradas.TabIndex = 0
-        '
-        'tabPageDescansos
-        '
-        Me.tabPageDescansos.Controls.Add(Me.btnQuitarDescanso)
-        Me.tabPageDescansos.Controls.Add(Me.btnAgregarDescanso)
-        Me.tabPageDescansos.Controls.Add(Me.Label85)
-        Me.tabPageDescansos.Controls.Add(Me.Label86)
-        Me.tabPageDescansos.Controls.Add(Me.grdDetalleDescansos)
-        Me.tabPageDescansos.Controls.Add(Me.Label84)
-        Me.tabPageDescansos.Controls.Add(Me.dtpDescanso)
-        Me.tabPageDescansos.Location = New System.Drawing.Point(4, 28)
-        Me.tabPageDescansos.Name = "tabPageDescansos"
-        Me.tabPageDescansos.Padding = New System.Windows.Forms.Padding(3)
-        Me.tabPageDescansos.Size = New System.Drawing.Size(1222, 430)
-        Me.tabPageDescansos.TabIndex = 6
-        Me.tabPageDescansos.Text = "Descansos"
-        Me.tabPageDescansos.UseVisualStyleBackColor = True
-        '
-        'btnQuitarDescanso
-        '
-        Me.btnQuitarDescanso.BackColor = System.Drawing.Color.White
-        Me.btnQuitarDescanso.BackgroundImage = CType(resources.GetObject("btnQuitarDescanso.BackgroundImage"), System.Drawing.Image)
-        Me.btnQuitarDescanso.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center
-        Me.btnQuitarDescanso.Enabled = False
-        Me.btnQuitarDescanso.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnQuitarDescanso.Location = New System.Drawing.Point(431, 33)
-        Me.btnQuitarDescanso.Name = "btnQuitarDescanso"
-        Me.btnQuitarDescanso.Size = New System.Drawing.Size(64, 59)
-        Me.btnQuitarDescanso.TabIndex = 803
-        Me.btnQuitarDescanso.UseVisualStyleBackColor = False
-        '
-        'btnAgregarDescanso
-        '
-        Me.btnAgregarDescanso.BackColor = System.Drawing.Color.White
-        Me.btnAgregarDescanso.BackgroundImage = CType(resources.GetObject("btnAgregarDescanso.BackgroundImage"), System.Drawing.Image)
-        Me.btnAgregarDescanso.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center
-        Me.btnAgregarDescanso.Enabled = False
-        Me.btnAgregarDescanso.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnAgregarDescanso.Location = New System.Drawing.Point(354, 33)
-        Me.btnAgregarDescanso.Name = "btnAgregarDescanso"
-        Me.btnAgregarDescanso.Size = New System.Drawing.Size(63, 59)
-        Me.btnAgregarDescanso.TabIndex = 802
-        Me.btnAgregarDescanso.UseVisualStyleBackColor = False
-        '
-        'Label85
-        '
-        Me.Label85.AutoSize = True
-        Me.Label85.Font = New System.Drawing.Font("Calibri", 12.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label85.Location = New System.Drawing.Point(437, 95)
-        Me.Label85.Name = "Label85"
-        Me.Label85.Size = New System.Drawing.Size(54, 21)
-        Me.Label85.TabIndex = 0
-        Me.Label85.Text = "Quitar"
-        '
-        'Label86
-        '
-        Me.Label86.AutoSize = True
-        Me.Label86.Font = New System.Drawing.Font("Calibri", 12.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label86.Location = New System.Drawing.Point(352, 95)
-        Me.Label86.Name = "Label86"
-        Me.Label86.Size = New System.Drawing.Size(64, 21)
-        Me.Label86.TabIndex = 0
-        Me.Label86.Text = "Agregar"
-        '
-        'grdDetalleDescansos
-        '
-        Me.grdDetalleDescansos.AllowUserToAddRows = False
-        Me.grdDetalleDescansos.AllowUserToDeleteRows = False
-        Me.grdDetalleDescansos.BackgroundColor = System.Drawing.SystemColors.ControlLight
-        Me.grdDetalleDescansos.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.grdDetalleDescansos.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.col_fecha_descanso, Me.col_Descanso})
-        Me.grdDetalleDescansos.Location = New System.Drawing.Point(17, 154)
-        Me.grdDetalleDescansos.Name = "grdDetalleDescansos"
-        Me.grdDetalleDescansos.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
-        Me.grdDetalleDescansos.Size = New System.Drawing.Size(478, 257)
-        Me.grdDetalleDescansos.TabIndex = 0
-        '
-        'Label84
-        '
-        Me.Label84.AutoSize = True
-        Me.Label84.Font = New System.Drawing.Font("Calibri", 12.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label84.Location = New System.Drawing.Point(13, 33)
-        Me.Label84.Name = "Label84"
-        Me.Label84.Size = New System.Drawing.Size(196, 21)
-        Me.Label84.TabIndex = 0
-        Me.Label84.Text = "Calendario del Mes Actual:"
-        '
-        'dtpDescanso
-        '
-        Me.dtpDescanso.Font = New System.Drawing.Font("Calibri", 12.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.dtpDescanso.Location = New System.Drawing.Point(17, 57)
-        Me.dtpDescanso.Name = "dtpDescanso"
-        Me.dtpDescanso.Size = New System.Drawing.Size(304, 28)
-        Me.dtpDescanso.TabIndex = 801
-        '
         'tabPageComentarios
         '
         Me.tabPageComentarios.Controls.Add(Me.grpComentarios)
@@ -2446,7 +2807,7 @@ Partial Class frmProduccion
         Me.tabPageComentarios.Padding = New System.Windows.Forms.Padding(3)
         Me.tabPageComentarios.Size = New System.Drawing.Size(1222, 430)
         Me.tabPageComentarios.TabIndex = 7
-        Me.tabPageComentarios.Text = "Comentarios"
+        Me.tabPageComentarios.Text = "Comentarios Generales"
         Me.tabPageComentarios.UseVisualStyleBackColor = True
         '
         'grpComentarios
@@ -2562,6 +2923,116 @@ Partial Class frmProduccion
         Me.Label89.TabIndex = 0
         Me.Label89.Text = "Agregar"
         '
+        'tabPageDescansos
+        '
+        Me.tabPageDescansos.Controls.Add(Me.btnQuitarDescanso)
+        Me.tabPageDescansos.Controls.Add(Me.btnAgregarDescanso)
+        Me.tabPageDescansos.Controls.Add(Me.Label85)
+        Me.tabPageDescansos.Controls.Add(Me.Label86)
+        Me.tabPageDescansos.Controls.Add(Me.grdDetalleDescansos)
+        Me.tabPageDescansos.Controls.Add(Me.Label84)
+        Me.tabPageDescansos.Controls.Add(Me.dtpDescanso)
+        Me.tabPageDescansos.Location = New System.Drawing.Point(4, 28)
+        Me.tabPageDescansos.Name = "tabPageDescansos"
+        Me.tabPageDescansos.Padding = New System.Windows.Forms.Padding(3)
+        Me.tabPageDescansos.Size = New System.Drawing.Size(1222, 430)
+        Me.tabPageDescansos.TabIndex = 6
+        Me.tabPageDescansos.Text = "Descansos"
+        Me.tabPageDescansos.UseVisualStyleBackColor = True
+        '
+        'btnQuitarDescanso
+        '
+        Me.btnQuitarDescanso.BackColor = System.Drawing.Color.White
+        Me.btnQuitarDescanso.BackgroundImage = CType(resources.GetObject("btnQuitarDescanso.BackgroundImage"), System.Drawing.Image)
+        Me.btnQuitarDescanso.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center
+        Me.btnQuitarDescanso.Enabled = False
+        Me.btnQuitarDescanso.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnQuitarDescanso.Location = New System.Drawing.Point(431, 33)
+        Me.btnQuitarDescanso.Name = "btnQuitarDescanso"
+        Me.btnQuitarDescanso.Size = New System.Drawing.Size(64, 59)
+        Me.btnQuitarDescanso.TabIndex = 803
+        Me.btnQuitarDescanso.UseVisualStyleBackColor = False
+        '
+        'btnAgregarDescanso
+        '
+        Me.btnAgregarDescanso.BackColor = System.Drawing.Color.White
+        Me.btnAgregarDescanso.BackgroundImage = CType(resources.GetObject("btnAgregarDescanso.BackgroundImage"), System.Drawing.Image)
+        Me.btnAgregarDescanso.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center
+        Me.btnAgregarDescanso.Enabled = False
+        Me.btnAgregarDescanso.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnAgregarDescanso.Location = New System.Drawing.Point(354, 33)
+        Me.btnAgregarDescanso.Name = "btnAgregarDescanso"
+        Me.btnAgregarDescanso.Size = New System.Drawing.Size(63, 59)
+        Me.btnAgregarDescanso.TabIndex = 802
+        Me.btnAgregarDescanso.UseVisualStyleBackColor = False
+        '
+        'Label85
+        '
+        Me.Label85.AutoSize = True
+        Me.Label85.Font = New System.Drawing.Font("Calibri", 12.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label85.Location = New System.Drawing.Point(437, 95)
+        Me.Label85.Name = "Label85"
+        Me.Label85.Size = New System.Drawing.Size(54, 21)
+        Me.Label85.TabIndex = 0
+        Me.Label85.Text = "Quitar"
+        '
+        'Label86
+        '
+        Me.Label86.AutoSize = True
+        Me.Label86.Font = New System.Drawing.Font("Calibri", 12.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label86.Location = New System.Drawing.Point(352, 95)
+        Me.Label86.Name = "Label86"
+        Me.Label86.Size = New System.Drawing.Size(64, 21)
+        Me.Label86.TabIndex = 0
+        Me.Label86.Text = "Agregar"
+        '
+        'grdDetalleDescansos
+        '
+        Me.grdDetalleDescansos.AllowUserToAddRows = False
+        Me.grdDetalleDescansos.AllowUserToDeleteRows = False
+        Me.grdDetalleDescansos.BackgroundColor = System.Drawing.SystemColors.ControlLight
+        Me.grdDetalleDescansos.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.grdDetalleDescansos.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.col_fecha_descanso, Me.col_Descanso})
+        Me.grdDetalleDescansos.Location = New System.Drawing.Point(17, 154)
+        Me.grdDetalleDescansos.Name = "grdDetalleDescansos"
+        Me.grdDetalleDescansos.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
+        Me.grdDetalleDescansos.Size = New System.Drawing.Size(478, 257)
+        Me.grdDetalleDescansos.TabIndex = 0
+        '
+        'col_fecha_descanso
+        '
+        Me.col_fecha_descanso.DataPropertyName = "dia_asignado"
+        Me.col_fecha_descanso.HeaderText = "Fecha Descanso"
+        Me.col_fecha_descanso.Name = "col_fecha_descanso"
+        Me.col_fecha_descanso.ReadOnly = True
+        Me.col_fecha_descanso.Width = 217
+        '
+        'col_Descanso
+        '
+        Me.col_Descanso.DataPropertyName = "descripcion"
+        Me.col_Descanso.HeaderText = "Descripcion"
+        Me.col_Descanso.Name = "col_Descanso"
+        Me.col_Descanso.ReadOnly = True
+        Me.col_Descanso.Width = 218
+        '
+        'Label84
+        '
+        Me.Label84.AutoSize = True
+        Me.Label84.Font = New System.Drawing.Font("Calibri", 12.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label84.Location = New System.Drawing.Point(13, 33)
+        Me.Label84.Name = "Label84"
+        Me.Label84.Size = New System.Drawing.Size(196, 21)
+        Me.Label84.TabIndex = 0
+        Me.Label84.Text = "Calendario del Mes Actual:"
+        '
+        'dtpDescanso
+        '
+        Me.dtpDescanso.Font = New System.Drawing.Font("Calibri", 12.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.dtpDescanso.Location = New System.Drawing.Point(17, 57)
+        Me.dtpDescanso.Name = "dtpDescanso"
+        Me.dtpDescanso.Size = New System.Drawing.Size(304, 28)
+        Me.dtpDescanso.TabIndex = 801
+        '
         'titulo_banner_formulario
         '
         Me.titulo_banner_formulario.AutoSize = True
@@ -2576,7 +3047,7 @@ Partial Class frmProduccion
         '
         'cbxTurno
         '
-        Me.cbxTurno.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cbxTurno.DropDownStyle = System.Windows.Forms.ComboBoxStyle.Simple
         Me.cbxTurno.Enabled = False
         Me.cbxTurno.Font = New System.Drawing.Font("Calibri", 12.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cbxTurno.FormattingEnabled = True
@@ -2589,11 +3060,11 @@ Partial Class frmProduccion
         '
         Me.Label56.AutoSize = True
         Me.Label56.Font = New System.Drawing.Font("Calibri", 12.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label56.Location = New System.Drawing.Point(49, 153)
+        Me.Label56.Location = New System.Drawing.Point(36, 153)
         Me.Label56.Name = "Label56"
-        Me.Label56.Size = New System.Drawing.Size(55, 21)
+        Me.Label56.Size = New System.Drawing.Size(68, 21)
         Me.Label56.TabIndex = 0
-        Me.Label56.Text = "Turno:"
+        Me.Label56.Text = "Horario:"
         '
         'Label57
         '
@@ -2658,9 +3129,9 @@ Partial Class frmProduccion
         'lblFechaRegistro
         '
         Me.lblFechaRegistro.Font = New System.Drawing.Font("Calibri", 12.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblFechaRegistro.Location = New System.Drawing.Point(549, 188)
+        Me.lblFechaRegistro.Location = New System.Drawing.Point(825, 70)
         Me.lblFechaRegistro.Name = "lblFechaRegistro"
-        Me.lblFechaRegistro.Size = New System.Drawing.Size(141, 19)
+        Me.lblFechaRegistro.Size = New System.Drawing.Size(121, 19)
         Me.lblFechaRegistro.TabIndex = 0
         Me.lblFechaRegistro.Text = "FechaRegistro"
         Me.lblFechaRegistro.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
@@ -2669,11 +3140,11 @@ Partial Class frmProduccion
         '
         Me.lblFechaRegistrodescripcion.AutoSize = True
         Me.lblFechaRegistrodescripcion.Font = New System.Drawing.Font("Calibri", 12.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblFechaRegistrodescripcion.Location = New System.Drawing.Point(427, 187)
+        Me.lblFechaRegistrodescripcion.Location = New System.Drawing.Point(703, 69)
         Me.lblFechaRegistrodescripcion.Name = "lblFechaRegistrodescripcion"
-        Me.lblFechaRegistrodescripcion.Size = New System.Drawing.Size(116, 21)
+        Me.lblFechaRegistrodescripcion.Size = New System.Drawing.Size(122, 21)
         Me.lblFechaRegistrodescripcion.TabIndex = 0
-        Me.lblFechaRegistrodescripcion.Text = "Fecha Registro:"
+        Me.lblFechaRegistrodescripcion.Text = "Registro del día:"
         '
         'imgEscudo
         '
@@ -2693,490 +3164,6 @@ Partial Class frmProduccion
         Me.banner_formulario.Size = New System.Drawing.Size(1262, 44)
         Me.banner_formulario.TabIndex = 104
         Me.banner_formulario.TabStop = False
-        '
-        'colcve_produccion
-        '
-        Me.colcve_produccion.DataPropertyName = "cve_produccion"
-        Me.colcve_produccion.HeaderText = "cve_produccion"
-        Me.colcve_produccion.Name = "colcve_produccion"
-        Me.colcve_produccion.ReadOnly = True
-        Me.colcve_produccion.Visible = False
-        '
-        'colcve_linea
-        '
-        Me.colcve_linea.DataPropertyName = "cve_linea"
-        Me.colcve_linea.HeaderText = "cve_linea"
-        Me.colcve_linea.Name = "colcve_linea"
-        Me.colcve_linea.ReadOnly = True
-        Me.colcve_linea.Visible = False
-        '
-        'colcve_modelo
-        '
-        Me.colcve_modelo.DataPropertyName = "cve_modelo"
-        Me.colcve_modelo.HeaderText = "cve_modelo"
-        Me.colcve_modelo.Name = "colcve_modelo"
-        Me.colcve_modelo.ReadOnly = True
-        Me.colcve_modelo.Visible = False
-        '
-        'np_gkn
-        '
-        Me.np_gkn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells
-        Me.np_gkn.DataPropertyName = "np_gkn"
-        Me.np_gkn.HeaderText = "No. Parte GKN"
-        Me.np_gkn.Name = "np_gkn"
-        Me.np_gkn.ReadOnly = True
-        Me.np_gkn.Resizable = System.Windows.Forms.DataGridViewTriState.[False]
-        Me.np_gkn.Width = 124
-        '
-        'coldescripcion
-        '
-        Me.coldescripcion.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells
-        Me.coldescripcion.DataPropertyName = "descripcion"
-        Me.coldescripcion.HeaderText = "Modelo"
-        Me.coldescripcion.Name = "coldescripcion"
-        Me.coldescripcion.ReadOnly = True
-        Me.coldescripcion.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.coldescripcion.Width = 89
-        '
-        'colpzas_ok
-        '
-        Me.colpzas_ok.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells
-        Me.colpzas_ok.DataPropertyName = "pzas_ok"
-        Me.colpzas_ok.HeaderText = "Piezas Ok"
-        Me.colpzas_ok.Name = "colpzas_ok"
-        Me.colpzas_ok.ReadOnly = True
-        Me.colpzas_ok.Width = 93
-        '
-        'coltom
-        '
-        Me.coltom.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells
-        Me.coltom.DataPropertyName = "tom"
-        Me.coltom.HeaderText = "Tiempo Operacion"
-        Me.coltom.Name = "coltom"
-        Me.coltom.ReadOnly = True
-        Me.coltom.Width = 148
-        '
-        'colCapacidad
-        '
-        Me.colCapacidad.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells
-        Me.colCapacidad.DataPropertyName = "capacidad"
-        Me.colCapacidad.HeaderText = "Capacidad"
-        Me.colCapacidad.Name = "colCapacidad"
-        Me.colCapacidad.ReadOnly = True
-        Me.colCapacidad.Width = 106
-        '
-        'colAdeudo
-        '
-        Me.colAdeudo.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells
-        Me.colAdeudo.DataPropertyName = "adeudo"
-        Me.colAdeudo.HeaderText = "Adeudo"
-        Me.colAdeudo.Name = "colAdeudo"
-        Me.colAdeudo.ReadOnly = True
-        Me.colAdeudo.Width = 89
-        '
-        'col_cve_linea
-        '
-        Me.col_cve_linea.DataPropertyName = "cve_linea"
-        Me.col_cve_linea.HeaderText = "cve_linea"
-        Me.col_cve_linea.Name = "col_cve_linea"
-        Me.col_cve_linea.ReadOnly = True
-        Me.col_cve_linea.Visible = False
-        '
-        'collinea
-        '
-        Me.collinea.DataPropertyName = "linea"
-        Me.collinea.HeaderText = "linea"
-        Me.collinea.Name = "collinea"
-        Me.collinea.ReadOnly = True
-        Me.collinea.Width = 350
-        '
-        'col_dia_asignado
-        '
-        Me.col_dia_asignado.DataPropertyName = "dia_asignado"
-        Me.col_dia_asignado.HeaderText = "Dia Registro"
-        Me.col_dia_asignado.Name = "col_dia_asignado"
-        Me.col_dia_asignado.ReadOnly = True
-        Me.col_dia_asignado.Width = 150
-        '
-        'col_turno
-        '
-        Me.col_turno.DataPropertyName = "turno"
-        Me.col_turno.HeaderText = "Turno"
-        Me.col_turno.Name = "col_turno"
-        Me.col_turno.ReadOnly = True
-        Me.col_turno.Width = 150
-        '
-        'col_linea
-        '
-        Me.col_linea.DataPropertyName = "linea"
-        Me.col_linea.HeaderText = "linea"
-        Me.col_linea.Name = "col_linea"
-        Me.col_linea.ReadOnly = True
-        Me.col_linea.Width = 120
-        '
-        'col_cve_registro_turno
-        '
-        Me.col_cve_registro_turno.DataPropertyName = "cve_registro_turno"
-        Me.col_cve_registro_turno.HeaderText = "cve_registro_turno"
-        Me.col_cve_registro_turno.Name = "col_cve_registro_turno"
-        Me.col_cve_registro_turno.ReadOnly = True
-        Me.col_cve_registro_turno.Visible = False
-        '
-        'colcve_desecho
-        '
-        Me.colcve_desecho.DataPropertyName = "cve_desecho"
-        Me.colcve_desecho.HeaderText = "cve_desecho"
-        Me.colcve_desecho.Name = "colcve_desecho"
-        Me.colcve_desecho.ReadOnly = True
-        Me.colcve_desecho.Visible = False
-        '
-        'col__cve_linea
-        '
-        Me.col__cve_linea.DataPropertyName = "cve_linea"
-        Me.col__cve_linea.HeaderText = "cve_linea"
-        Me.col__cve_linea.Name = "col__cve_linea"
-        Me.col__cve_linea.ReadOnly = True
-        Me.col__cve_linea.Visible = False
-        '
-        'col_cve_modelo
-        '
-        Me.col_cve_modelo.DataPropertyName = "cve_modelo"
-        Me.col_cve_modelo.HeaderText = "cve_modelo"
-        Me.col_cve_modelo.Name = "col_cve_modelo"
-        Me.col_cve_modelo.ReadOnly = True
-        Me.col_cve_modelo.Visible = False
-        '
-        'colnp_gkn
-        '
-        Me.colnp_gkn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells
-        Me.colnp_gkn.DataPropertyName = "np_gkn"
-        Me.colnp_gkn.HeaderText = "No.Parte GKN"
-        Me.colnp_gkn.Name = "colnp_gkn"
-        Me.colnp_gkn.ReadOnly = True
-        Me.colnp_gkn.Width = 131
-        '
-        'colmodelodescripcion
-        '
-        Me.colmodelodescripcion.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells
-        Me.colmodelodescripcion.DataPropertyName = "descripcion"
-        Me.colmodelodescripcion.HeaderText = "Modelo"
-        Me.colmodelodescripcion.Name = "colmodelodescripcion"
-        Me.colmodelodescripcion.ReadOnly = True
-        Me.colmodelodescripcion.Width = 89
-        '
-        'coldesechocantidad
-        '
-        Me.coldesechocantidad.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells
-        Me.coldesechocantidad.DataPropertyName = "cantidad"
-        Me.coldesechocantidad.HeaderText = "Cantidad"
-        Me.coldesechocantidad.Name = "coldesechocantidad"
-        Me.coldesechocantidad.ReadOnly = True
-        Me.coldesechocantidad.Width = 96
-        '
-        'col_comentarios_desecho
-        '
-        Me.col_comentarios_desecho.DataPropertyName = "comentarios"
-        Me.col_comentarios_desecho.HeaderText = "Comentarios"
-        Me.col_comentarios_desecho.Name = "col_comentarios_desecho"
-        Me.col_comentarios_desecho.ReadOnly = True
-        Me.col_comentarios_desecho.Width = 140
-        '
-        'colcve_registro_paro
-        '
-        Me.colcve_registro_paro.DataPropertyName = "cve_registro_paro"
-        Me.colcve_registro_paro.HeaderText = "cve_registro_paro"
-        Me.colcve_registro_paro.Name = "colcve_registro_paro"
-        Me.colcve_registro_paro.ReadOnly = True
-        Me.colcve_registro_paro.Visible = False
-        '
-        'colcve_lineab
-        '
-        Me.colcve_lineab.DataPropertyName = "cve_linea"
-        Me.colcve_lineab.HeaderText = "cve_linea"
-        Me.colcve_lineab.Name = "colcve_lineab"
-        Me.colcve_lineab.ReadOnly = True
-        Me.colcve_lineab.Visible = False
-        '
-        'colcve_maquina
-        '
-        Me.colcve_maquina.DataPropertyName = "cve_maquina"
-        Me.colcve_maquina.HeaderText = "cve_maquina"
-        Me.colcve_maquina.Name = "colcve_maquina"
-        Me.colcve_maquina.ReadOnly = True
-        Me.colcve_maquina.Visible = False
-        '
-        'colcve_paro
-        '
-        Me.colcve_paro.DataPropertyName = "cve_paro"
-        Me.colcve_paro.HeaderText = "cve_paro"
-        Me.colcve_paro.Name = "colcve_paro"
-        Me.colcve_paro.ReadOnly = True
-        Me.colcve_paro.Visible = False
-        '
-        'colcod_paro
-        '
-        Me.colcod_paro.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells
-        Me.colcod_paro.DataPropertyName = "cod_paro"
-        Me.colcod_paro.HeaderText = "Cod. Paro"
-        Me.colcod_paro.Name = "colcod_paro"
-        Me.colcod_paro.ReadOnly = True
-        Me.colcod_paro.Width = 102
-        '
-        'paro
-        '
-        Me.paro.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells
-        Me.paro.DataPropertyName = "paro"
-        Me.paro.HeaderText = "Descripcion"
-        Me.paro.Name = "paro"
-        Me.paro.ReadOnly = True
-        Me.paro.Width = 115
-        '
-        'colminutos
-        '
-        Me.colminutos.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells
-        Me.colminutos.DataPropertyName = "minutos"
-        Me.colminutos.HeaderText = "Minutos"
-        Me.colminutos.Name = "colminutos"
-        Me.colminutos.ReadOnly = True
-        Me.colminutos.Width = 94
-        '
-        'colclave_maquina
-        '
-        Me.colclave_maquina.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells
-        Me.colclave_maquina.DataPropertyName = "clave_maquina"
-        Me.colclave_maquina.HeaderText = "Clave Maquina"
-        Me.colclave_maquina.Name = "colclave_maquina"
-        Me.colclave_maquina.ReadOnly = True
-        Me.colclave_maquina.Width = 138
-        '
-        'colmaquina
-        '
-        Me.colmaquina.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells
-        Me.colmaquina.DataPropertyName = "maquina"
-        Me.colmaquina.HeaderText = "Maquina"
-        Me.colmaquina.Name = "colmaquina"
-        Me.colmaquina.ReadOnly = True
-        Me.colmaquina.Width = 97
-        '
-        'coldetalles
-        '
-        Me.coldetalles.DataPropertyName = "detalles"
-        Me.coldetalles.HeaderText = "Detalles"
-        Me.coldetalles.Name = "coldetalles"
-        Me.coldetalles.ReadOnly = True
-        Me.coldetalles.Width = 140
-        '
-        'colcve_rechazo
-        '
-        Me.colcve_rechazo.DataPropertyName = "cve_rechazo"
-        Me.colcve_rechazo.HeaderText = "cve_rechazo"
-        Me.colcve_rechazo.Name = "colcve_rechazo"
-        Me.colcve_rechazo.ReadOnly = True
-        Me.colcve_rechazo.Visible = False
-        '
-        'col_np_gkn
-        '
-        Me.col_np_gkn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells
-        Me.col_np_gkn.DataPropertyName = "np_gkn"
-        Me.col_np_gkn.HeaderText = "No. Parte GKN"
-        Me.col_np_gkn.Name = "col_np_gkn"
-        Me.col_np_gkn.ReadOnly = True
-        Me.col_np_gkn.Width = 135
-        '
-        'col_descripcion
-        '
-        Me.col_descripcion.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells
-        Me.col_descripcion.DataPropertyName = "descripcion"
-        Me.col_descripcion.HeaderText = "Modelo"
-        Me.col_descripcion.Name = "col_descripcion"
-        Me.col_descripcion.ReadOnly = True
-        Me.col_descripcion.Width = 89
-        '
-        'colcantidad
-        '
-        Me.colcantidad.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells
-        Me.colcantidad.DataPropertyName = "cantidad"
-        Me.colcantidad.HeaderText = "Cantidad"
-        Me.colcantidad.Name = "colcantidad"
-        Me.colcantidad.ReadOnly = True
-        Me.colcantidad.Width = 96
-        '
-        'coltipo_rechazo
-        '
-        Me.coltipo_rechazo.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells
-        Me.coltipo_rechazo.DataPropertyName = "tipo"
-        Me.coltipo_rechazo.HeaderText = "Rechazo"
-        Me.coltipo_rechazo.Name = "coltipo_rechazo"
-        Me.coltipo_rechazo.ReadOnly = True
-        Me.coltipo_rechazo.Width = 92
-        '
-        'colmotivo
-        '
-        Me.colmotivo.DataPropertyName = "motivo"
-        Me.colmotivo.HeaderText = "motivo"
-        Me.colmotivo.Name = "colmotivo"
-        Me.colmotivo.ReadOnly = True
-        Me.colmotivo.Width = 140
-        '
-        'colcve_seguridad
-        '
-        Me.colcve_seguridad.DataPropertyName = "cve_seguridad"
-        Me.colcve_seguridad.HeaderText = "cve_seguridad"
-        Me.colcve_seguridad.Name = "colcve_seguridad"
-        Me.colcve_seguridad.ReadOnly = True
-        Me.colcve_seguridad.Visible = False
-        '
-        'coldescripciondetalle
-        '
-        Me.coldescripciondetalle.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells
-        Me.coldescripciondetalle.DataPropertyName = "descripcion"
-        Me.coldescripciondetalle.HeaderText = "Descripcion"
-        Me.coldescripciondetalle.Name = "coldescripciondetalle"
-        Me.coldescripciondetalle.ReadOnly = True
-        Me.coldescripciondetalle.Width = 115
-        '
-        'colcantidaddetalle
-        '
-        Me.colcantidaddetalle.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells
-        Me.colcantidaddetalle.DataPropertyName = "cantidad"
-        Me.colcantidaddetalle.HeaderText = "Cantidad"
-        Me.colcantidaddetalle.Name = "colcantidaddetalle"
-        Me.colcantidaddetalle.ReadOnly = True
-        Me.colcantidaddetalle.Width = 96
-        '
-        'colcomentarios
-        '
-        Me.colcomentarios.DataPropertyName = "comentarios"
-        Me.colcomentarios.HeaderText = "Comentarios"
-        Me.colcomentarios.Name = "colcomentarios"
-        Me.colcomentarios.ReadOnly = True
-        Me.colcomentarios.Width = 140
-        '
-        'col_cve_seguridad
-        '
-        Me.col_cve_seguridad.DataPropertyName = "cve_seguridad"
-        Me.col_cve_seguridad.HeaderText = "cve_seguridad"
-        Me.col_cve_seguridad.Name = "col_cve_seguridad"
-        Me.col_cve_seguridad.ReadOnly = True
-        Me.col_cve_seguridad.Visible = False
-        '
-        'col_descripcion_
-        '
-        Me.col_descripcion_.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells
-        Me.col_descripcion_.DataPropertyName = "descripcion"
-        Me.col_descripcion_.HeaderText = "Descripcion"
-        Me.col_descripcion_.Name = "col_descripcion_"
-        Me.col_descripcion_.ReadOnly = True
-        Me.col_descripcion_.Width = 115
-        '
-        'Cantidad
-        '
-        Me.Cantidad.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells
-        Me.Cantidad.DataPropertyName = "cantidad"
-        Me.Cantidad.HeaderText = "Cantidad"
-        Me.Cantidad.Name = "Cantidad"
-        Me.Cantidad.ReadOnly = True
-        Me.Cantidad.Width = 96
-        '
-        'col_comentarios_
-        '
-        Me.col_comentarios_.DataPropertyName = "comentarios"
-        Me.col_comentarios_.HeaderText = "Comentarios"
-        Me.col_comentarios_.Name = "col_comentarios_"
-        Me.col_comentarios_.ReadOnly = True
-        Me.col_comentarios_.Width = 140
-        '
-        'colcve_gente
-        '
-        Me.colcve_gente.DataPropertyName = "cve_gente"
-        Me.colcve_gente.HeaderText = "cve_gente"
-        Me.colcve_gente.Name = "colcve_gente"
-        Me.colcve_gente.Visible = False
-        '
-        'colgdescripcion
-        '
-        Me.colgdescripcion.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells
-        Me.colgdescripcion.DataPropertyName = "descripcion"
-        Me.colgdescripcion.HeaderText = "descripcion"
-        Me.colgdescripcion.Name = "colgdescripcion"
-        Me.colgdescripcion.ReadOnly = True
-        Me.colgdescripcion.Width = 114
-        '
-        'colgcantidad
-        '
-        Me.colgcantidad.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells
-        Me.colgcantidad.DataPropertyName = "cantidad"
-        Me.colgcantidad.HeaderText = "cantidad"
-        Me.colgcantidad.Name = "colgcantidad"
-        Me.colgcantidad.ReadOnly = True
-        Me.colgcantidad.Width = 94
-        '
-        'comentarios
-        '
-        Me.comentarios.DataPropertyName = "comentarios"
-        Me.comentarios.HeaderText = "comentarios"
-        Me.comentarios.Name = "comentarios"
-        Me.comentarios.ReadOnly = True
-        Me.comentarios.Width = 140
-        '
-        'col_fecha_descanso
-        '
-        Me.col_fecha_descanso.DataPropertyName = "dia_asignado"
-        Me.col_fecha_descanso.HeaderText = "Fecha Descanso"
-        Me.col_fecha_descanso.Name = "col_fecha_descanso"
-        Me.col_fecha_descanso.ReadOnly = True
-        Me.col_fecha_descanso.Width = 217
-        '
-        'col_Descanso
-        '
-        Me.col_Descanso.DataPropertyName = "descripcion"
-        Me.col_Descanso.HeaderText = "Descripcion"
-        Me.col_Descanso.Name = "col_Descanso"
-        Me.col_Descanso.ReadOnly = True
-        Me.col_Descanso.Width = 218
-        '
-        'GroupBox2
-        '
-        Me.GroupBox2.Controls.Add(Me.Label98)
-        Me.GroupBox2.Controls.Add(Me.Label99)
-        Me.GroupBox2.Controls.Add(Me.Label100)
-        Me.GroupBox2.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.GroupBox2.Location = New System.Drawing.Point(0, 232)
-        Me.GroupBox2.Name = "GroupBox2"
-        Me.GroupBox2.Size = New System.Drawing.Size(368, 103)
-        Me.GroupBox2.TabIndex = 0
-        Me.GroupBox2.TabStop = False
-        Me.GroupBox2.Text = "3.-CALIDAD"
-        '
-        'Label98
-        '
-        Me.Label98.AutoSize = True
-        Me.Label98.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label98.Location = New System.Drawing.Point(210, 53)
-        Me.Label98.Name = "Label98"
-        Me.Label98.Size = New System.Drawing.Size(59, 19)
-        Me.Label98.TabIndex = 0
-        Me.Label98.Text = "PPM'S"
-        '
-        'Label99
-        '
-        Me.Label99.AutoSize = True
-        Me.Label99.Font = New System.Drawing.Font("Arial", 15.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label99.Location = New System.Drawing.Point(94, 50)
-        Me.Label99.Name = "Label99"
-        Me.Label99.Size = New System.Drawing.Size(22, 24)
-        Me.Label99.TabIndex = 13
-        Me.Label99.Text = "0"
-        '
-        'Label100
-        '
-        Me.Label100.AutoSize = True
-        Me.Label100.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label100.Location = New System.Drawing.Point(27, 53)
-        Me.Label100.Name = "Label100"
-        Me.Label100.Size = New System.Drawing.Size(57, 19)
-        Me.Label100.TabIndex = 0
-        Me.Label100.Text = "NRFTi"
         '
         'frmProduccion
         '
@@ -3207,24 +3194,26 @@ Partial Class frmProduccion
         Me.Name = "frmProduccion"
         Me.Text = "frmProduccion"
         Me.tabPageContenido.ResumeLayout(False)
+        Me.tabPageTurnosLineas.ResumeLayout(False)
+        Me.tabPageTurnosLineas.PerformLayout()
+        CType(Me.grdLineasRegistradas, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.grdLineasNoRegistradas, System.ComponentModel.ISupportInitialize).EndInit()
         Me.tabPageProductividad.ResumeLayout(False)
-        Me.grpDesechos.ResumeLayout(False)
-        Me.grpDesechos.PerformLayout()
-        CType(Me.grdDetalleDesecho, System.ComponentModel.ISupportInitialize).EndInit()
         Me.grpProductividad.ResumeLayout(False)
         Me.grpProductividad.PerformLayout()
         CType(Me.grdDetalleProductividad, System.ComponentModel.ISupportInitialize).EndInit()
         Me.tabPageParos.ResumeLayout(False)
-        Me.grpCalidad.ResumeLayout(False)
-        Me.grpCalidad.PerformLayout()
         Me.grpCosto.ResumeLayout(False)
         Me.grpCosto.PerformLayout()
+        Me.GroupBox2.ResumeLayout(False)
+        Me.GroupBox2.PerformLayout()
         Me.grpParos.ResumeLayout(False)
         Me.grpParos.PerformLayout()
         CType(Me.grdDetalleParo, System.ComponentModel.ISupportInitialize).EndInit()
         Me.tabPageRechazos5s.ResumeLayout(False)
-        Me.grp5s.ResumeLayout(False)
-        Me.grp5s.PerformLayout()
+        Me.grpDesechos.ResumeLayout(False)
+        Me.grpDesechos.PerformLayout()
+        CType(Me.grdDetalleDesecho, System.ComponentModel.ISupportInitialize).EndInit()
         Me.grpRechazos.ResumeLayout(False)
         Me.grpRechazos.PerformLayout()
         CType(Me.grdDetalleRechazo, System.ComponentModel.ISupportInitialize).EndInit()
@@ -3236,24 +3225,20 @@ Partial Class frmProduccion
         Me.grpCondInseg.PerformLayout()
         CType(Me.grdDetalleCondInseg, System.ComponentModel.ISupportInitialize).EndInit()
         Me.tabPageGente.ResumeLayout(False)
+        Me.grp5s.ResumeLayout(False)
+        Me.grp5s.PerformLayout()
         Me.grpGente.ResumeLayout(False)
         Me.grpGente.PerformLayout()
         CType(Me.grdDetalleGente, System.ComponentModel.ISupportInitialize).EndInit()
-        Me.tabPageTurnosLineas.ResumeLayout(False)
-        Me.tabPageTurnosLineas.PerformLayout()
-        CType(Me.grdLineasRegistradas, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.grdLineasNoRegistradas, System.ComponentModel.ISupportInitialize).EndInit()
-        Me.tabPageDescansos.ResumeLayout(False)
-        Me.tabPageDescansos.PerformLayout()
-        CType(Me.grdDetalleDescansos, System.ComponentModel.ISupportInitialize).EndInit()
         Me.tabPageComentarios.ResumeLayout(False)
         Me.grpComentarios.ResumeLayout(False)
         Me.grpComentarios.PerformLayout()
         CType(Me.grdDetalleComentario, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.tabPageDescansos.ResumeLayout(False)
+        Me.tabPageDescansos.PerformLayout()
+        CType(Me.grdDetalleDescansos, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.imgEscudo, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.banner_formulario, System.ComponentModel.ISupportInitialize).EndInit()
-        Me.GroupBox2.ResumeLayout(False)
-        Me.GroupBox2.PerformLayout()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -3429,7 +3414,6 @@ Partial Class frmProduccion
     Friend WithEvents grdLineasRegistradas As System.Windows.Forms.DataGridView
     Friend WithEvents grdLineasNoRegistradas As System.Windows.Forms.DataGridView
     Friend WithEvents cbxTurnosLineas As System.Windows.Forms.ComboBox
-    Friend WithEvents grpCalidad As System.Windows.Forms.GroupBox
     Friend WithEvents Label77 As System.Windows.Forms.Label
     Friend WithEvents lblNRFTi As System.Windows.Forms.Label
     Friend WithEvents Label78 As System.Windows.Forms.Label
