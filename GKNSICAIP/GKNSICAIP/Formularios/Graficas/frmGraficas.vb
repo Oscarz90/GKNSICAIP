@@ -609,12 +609,14 @@ Public Class frmGraficas
         Dim promNrfti As Double = 0  ''Promedio NRFTi se vuelve a calcular NRFTi = (PZAS.DES/(PZAS.DES + PZAS. OK))*1,000,000
         'Dim contador As Integer = 0
         Dim vDT As DataTable
+
         cadenaXML += "<dataset seriesName='NRFTi' color='" & color & "' anchorBorderColor='" & contorno_anchor & "' anchorBgColor='" & color & "' anchorRadius='" & radio_anchor & "'>"
         Dim nrfti As Double = 0
         Dim pzasOK As Double = 0
         Dim pzasDes As Double = 0
         Dim vMesInicio As String = ""
         Dim vYearInicio As String = ""
+        Dim banderaPromedio As Boolean
 
         If rbtDia.Checked Then
             vDT = oGraficas.ejecutarVista(cadena, cadenaWHERE)
@@ -631,6 +633,7 @@ Public Class frmGraficas
                     nrfti = 0
                     cadenaXML += " <set value='" & nrfti.ToString & "' />"
                 End If
+                banderaPromedio = True
             Next
         Else
             If rbtMeses.Checked Then
@@ -639,46 +642,38 @@ Public Class frmGraficas
                 vYearInicio = Year(DateTime.Parse(vDT.Rows(0).Item("Dia_Asignado"))).ToString
                 For Each vDR As DataRow In vDT.Rows
                     If (Month(DateTime.Parse(vDR("Dia_Asignado"))).ToString = vMesInicio And Year(DateTime.Parse(vDR("Dia_Asignado"))).ToString = vYearInicio) Then
-                        If vDR("NRFTI") <> 0 Then
-                            nrfti = vDR(("NRFTI"))
-                            pzasOK = vDR(("PZAS_OK"))
-                            pzasDes = vDR(("PZAS_DESECHO"))
-                            sumaPzasOK = sumaPzasOK + pzasOK
-                            sumaPzasDes = sumaPzasDes + pzasDes
-                            promNrfti = (sumaPzasDes / (sumaPzasDes + sumaPzasOK)) * 1000000
-                            'cadenaXML += " <set value='" & nrfti.ToString & "'/>"
-                        ElseIf vDR("NRFTI") = 0 Then
-                            nrfti = 0
-                            'cadenaXML += " <set value='" & nrfti.ToString & "' />"
-                        End If
-                    Else
-                        'banderaPromedio = False
-                        cadenaXML += " <set value='" & nrfti.ToString & "' />"
-                        vMesInicio = Month(DateTime.Parse(vDR("Dia_Asignado"))).ToString
-                        vYearInicio = Year(DateTime.Parse(vDR("Dia_Asignado"))).ToString
-                    End If
-
-
-                    If vDR("NRFTI") <> 0 Then
-                        nrfti = vDR(("NRFTI"))
                         pzasOK = vDR(("PZAS_OK"))
                         pzasDes = vDR(("PZAS_DESECHO"))
                         sumaPzasOK = sumaPzasOK + pzasOK
                         sumaPzasDes = sumaPzasDes + pzasDes
                         promNrfti = (sumaPzasDes / (sumaPzasDes + sumaPzasOK)) * 1000000
-                        cadenaXML += " <set value='" & nrfti.ToString & "'/>"
-                    ElseIf vDR("NRFTI") = 0 Then
-                        nrfti = 0
-                        cadenaXML += " <set value='" & nrfti.ToString & "' />"
-                    End If
-                Next
+                    Else
+                        banderaPromedio = True
+                        'promNrfti = (sumaPzasDes / (sumaPzasDes + sumaPzasOK)) * 1000000
+                        cadenaXML += " <set value='" & promNrfti.ToString & "' />"
+                        pzasOK = 0
+                        pzasDes = 0
+                        sumaPzasOK = 0
+                        sumaPzasDes = 0
+                        vMesInicio = Month(DateTime.Parse(vDR("Dia_Asignado"))).ToString
+                        vYearInicio = Year(DateTime.Parse(vDR("Dia_Asignado"))).ToString
+                        pzasOK = vDR(("PZAS_OK"))
+                        pzasDes = vDR(("PZAS_DESECHO"))
+                        sumaPzasOK = sumaPzasOK + pzasOK
+                        sumaPzasDes = sumaPzasDes + pzasDes
 
-            End If
+                    End If
+
+                Next
+                cadenaXML += " <set value='" & promNrfti.ToString & "' />"
+            End If ''dia/mes
 
         End If
         promNrfti = Math.Round(promNrfti)
         promNrfti = Math.Truncate(promNrfti)
-        cadenaXML += " <set value='" & promNrfti.ToString & "' color='" & colores(1) & "'/>"
+        If banderaPromedio = True Then
+            cadenaXML += " <set value='" & promNrfti.ToString & "' color='" & colores(1) & "'/>"
+        End If
         cadenaXML += " </dataset>"
 
     End Sub
@@ -697,6 +692,10 @@ Public Class frmGraficas
         Dim pzasOK As Double = 0
         Dim pzasDes As Double = 0
         Dim vFecha_Actual As DateTime
+        Dim vMesInicio As String = ""
+        Dim vYearInicio As String = ""
+        Dim banderaPromedio As Boolean
+
         If rbtDia.Checked Then
             vDT = oGraficas.ejecutarVista(cadena, cadenaWHERE)
             vFecha_Actual = vDT.Rows(0).Item("DIA_ASIGNADO").ToString
@@ -729,14 +728,75 @@ Public Class frmGraficas
                     pzasOK = 0
                     pzasDes = 0
                 End If
-
             Next
             cadenaXML += " <set value='" & promNrfti.ToString & "'/>"
+        Else
+            If rbtMeses.Checked Then
+                vDT = oGraficas.ejecutarVista(cadena, cadenaWHERE)
+                vFecha_Actual = vDT.Rows(0).Item("DIA_ASIGNADO").ToString
+                vMesInicio = Month(DateTime.Parse(vDT.Rows(0).Item("Dia_Asignado"))).ToString
+                vYearInicio = Year(DateTime.Parse(vDT.Rows(0).Item("Dia_Asignado"))).ToString
+                For Each vDR As DataRow In vDT.Rows
+                    If (Month(DateTime.Parse(vDR("Dia_Asignado"))).ToString = vMesInicio And Year(DateTime.Parse(vDR("Dia_Asignado"))).ToString = vYearInicio) Then
+                        If vFecha_Actual = vDR("DIA_ASIGNADO") Then
+                            pzasOK = vDR(("PZAS_OK"))
+                            pzasDes = vDR(("PZAS_DESECHO"))
+                            sumaPzasOK = sumaPzasOK + pzasOK
+                            sumaPzasDes = sumaPzasDes + pzasDes
+                            promNrfti = (sumaPzasDes / (sumaPzasDes + sumaPzasOK)) * 1000000
+                            ''PROMEDIO FINAL NRFTI BARRA ROJA
+                            sumaPzasOKFinal = sumaPzasOKFinal + pzasOK
+                            sumaPzasDesFinal = sumaPzasDesFinal + pzasDes
+                            promNrftiFinal = (sumaPzasDesFinal / (sumaPzasDesFinal + sumaPzasOKFinal)) * 1000000
+
+                        ElseIf vFecha_Actual <> vDR("DIA_ASIGNADO") Then
+                            banderaPromedio = True
+                            cadenaXML += " <set value='" & promNrftiFinal.ToString & "'/>"
+                            pzasOK = vDR(("PZAS_OK"))
+                            pzasDes = vDR(("PZAS_DESECHO"))
+                            sumaPzasOK = 0
+                            sumaPzasDes = 0
+                            promNrfti = 0
+                            sumaPzasOKFinal = 0
+                            sumaPzasDesFinal = 0
+                            'promNrftiFinal = 0
+                            vMesInicio = Month(DateTime.Parse(vDR("Dia_Asignado"))).ToString
+                            vYearInicio = Year(DateTime.Parse(vDR("Dia_Asignado"))).ToString
+                            sumaPzasOK = sumaPzasOK + pzasOK
+                            sumaPzasDes = sumaPzasDes + pzasDes
+                            promNrfti = (sumaPzasDes / (sumaPzasDes + sumaPzasOK)) * 1000000
+                            ''PROMEDIO FINAL NRFTI BARRA ROJA
+                            sumaPzasOKFinal = sumaPzasOKFinal + pzasOK
+                            sumaPzasDesFinal = sumaPzasDesFinal + pzasDes
+                            promNrftiFinal = (sumaPzasDesFinal / (sumaPzasDesFinal + sumaPzasOKFinal)) * 1000000
+                            vFecha_Actual = vDR("DIA_ASIGNADO")
+                            pzasOK = 0
+                            pzasDes = 0
+
+                        End If
+
+                    Else
+
+                    End If
+
+                Next
+                cadenaXML += " <set value='" & promNrftiFinal.ToString & "' />"
+            End If
+
         End If
-        cadenaXML += " <set value='" & promNrftiFinal.ToString & "' color='" & colores(1) & "'/>"
+        'cadenaXML += " <set value='" & promNrftiFinal.ToString & "' color='" & colores(1) & "'/>"
+        'cadenaXML += " </dataset>"
+
+        promNrftiFinal = Math.Round(promNrfti)
+        promNrftiFinal = Math.Truncate(promNrfti)
+        If banderaPromedio = True Then
+            cadenaXML += " <set value='" & promNrftiFinal.ToString & "' color='" & colores(1) & "'/>"
+        End If
         cadenaXML += " </dataset>"
+
     End Sub
 #End Region
+
 #Region "INICIALIZACION DEL FORMULARIO"
     Private Sub Graficas_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         'oGraficas.Obtener_IdEquipo(vIdEquipo)

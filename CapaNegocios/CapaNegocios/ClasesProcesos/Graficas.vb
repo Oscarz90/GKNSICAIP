@@ -1,4 +1,5 @@
-﻿Imports CapaDatos
+﻿Imports System.Security.Principal
+Imports CapaDatos
 Public Class Graficas
     Dim cadena_conexion As New CapaDatos.conexiones
     Dim oBD As New CapaDatos.CapaDatos(cadena_conexion.CadenaSicaip)
@@ -149,22 +150,5 @@ Public Class Graficas
         End Try
         Return vRetorno
     End Function
-
-    'Public Function ejecutarVista5s(ByVal cadenaWHERE As String) As DataTable
-    '    Dim vRetorno As DataTable = Nothing
-    '    Dim vDT As DataTable = Nothing
-    '    Try
-    '        vDT = oBD.ObtenerTabla("select PROMEDIO, DIA_ASIGNADO from VISTA_SELECCION_INDICADOR5 " & cadenaWHERE)
-    '        If vDT IsNot Nothing Then
-    '            vRetorno = vDT
-    '        Else
-    '            vRetorno = Nothing
-    '        End If
-    '    Catch ex As Exception
-
-    '    End Try
-    '    Return vRetorno
-    'End Function
-
 
 End Class
