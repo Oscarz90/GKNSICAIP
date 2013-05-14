@@ -174,9 +174,9 @@ Public Class frmProduccion
     End Sub
     Private Sub calcula_NRFTI()
         Dim varvalida As Double = (get_suma_desechos() + get_suma_piezas_producidas())
-        If lblTiempoTurno.Text <> "0" And get_suma_piezas_producidas() = 0 Then
-            lblNRFTi.Text = "0.00"
-        ElseIf varvalida <> 0 And get_suma_desechos() <> 0 Then
+        'If lblTiempoTurno.Text <> "0" And get_suma_piezas_producidas() = 0 Then
+        ' lblNRFTi.Text = "0.00"
+        If varvalida <> 0 And get_suma_desechos() <> 0 Then
 
             Dim resultado As Double = (get_suma_desechos() / (varvalida)) * 1000000
             If resultado < 0 Then
@@ -600,7 +600,7 @@ Public Class frmProduccion
     'Productividad
     Private Sub btnAgregarModelo_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnAgregarModelo.Click
         If valida_hora_de_captura(Now.ToString("dd-MM-yyyy HH:mm:ss")) Then
-            If se_puede_añadir_produccion_o_paro(Convert.ToInt64(txtTiempoOperacion.Text)) Then
+            If se_puede_añadir_produccion(Convert.ToInt64(txtTiempoOperacion.Text)) Then
                 add_modelo_producido()
                 limpia_productividad()
                 llena_productividad_gridview()
@@ -892,13 +892,13 @@ Public Class frmProduccion
     'Productividad
     Private Sub valida_botones_productividad()
         If cbxTurno.SelectedIndex <> -1 And cbxModeloProductividad.SelectedIndex <> -1 And txtTiempoOperacion.Text <> "" And txtPiezasOkProducidas.Text <> "" Then
-            If Convert.ToInt64(txtTiempoOperacion.Text) <> 0 And Convert.ToInt64(txtPiezasOkProducidas.Text) <> 0 Then
-                btnAgregarModelo.Enabled = True
-            Else
-                btnAgregarModelo.Enabled = False
-            End If
+            ' If Convert.ToInt64(txtTiempoOperacion.Text) <> 0 And Convert.ToInt64(txtPiezasOkProducidas.Text) <> 0 Then
+            btnAgregarModelo.Enabled = True
+            'Else
+            '  btnAgregarModelo.Enabled = False
+            ' End If
         Else
-            btnAgregarModelo.Enabled = False
+        btnAgregarModelo.Enabled = False
         End If
     End Sub
     Private Sub habilita_btn_Quitar_modelo()
@@ -1220,8 +1220,10 @@ Public Class frmProduccion
 #End Region
 #Region "Funciones Generales"
     Private Sub define_calendario_descanso()
+        Dim diafinal As Date = DateSerial(Year(Now.ToString("yyyy-MM-dd")), Month(Now.ToString("yyyy-MM-dd")) + 1, 0)
+        diafinal = diafinal.AddDays(5)
         dtpDescanso.MinDate = DateSerial(Year(Now.ToString("yyyy-MM-dd")), Month(Now.ToString("yyyy-MM-dd")), 1)
-        dtpDescanso.MaxDate = DateSerial(Year(Now.ToString("yyyy-MM-dd")), Month(Now.ToString("yyyy-MM-dd")) + 1, 0)
+        dtpDescanso.MaxDate = diafinal
     End Sub
     Private Sub get_Imagen_Equipo()
         Dim oEquipo As New Equipo
@@ -1350,6 +1352,17 @@ Public Class frmProduccion
         If get_minutos_disponibles() = 0 Then
             MsgBox("Los minutos disponibles son insuficientes .", vbCritical + vbOKOnly, "Error")
             Return False
+        ElseIf min <= get_minutos_disponibles() Then
+            Return True
+        Else
+            MsgBox("Los minutos disponibles son insuficientes .", vbCritical + vbOKOnly, "Error")
+            Return False
+        End If
+    End Function
+    Private Function se_puede_añadir_produccion(ByVal min As Integer) As Boolean
+        If get_minutos_disponibles() = 0 Then
+            'MsgBox("Los minutos disponibles son insuficientes .", vbCritical + vbOKOnly, "Error")
+            Return True
         ElseIf min <= get_minutos_disponibles() Then
             Return True
         Else
@@ -1585,7 +1598,7 @@ Public Class frmProduccion
         Dim oGente As New Gente
         oGente.cve_registro_turno = get_registro_del_turno()
         oGente.cod_empleado_registro = vcodigo_empleado
-        oGente.fecha_registro = Now.ToString("MM-dd-yyyy HH:mm")
+        oGente.fecha_registro = Convert.ToDateTime(Now.ToString("dd-MM-yyyy HH:mm"))
         oGente.cve_detalle_gente = cbxTipoDetalleGente.SelectedValue
         oGente.cantidad = Long.Parse(txtGenteCantidad.Text)
         oGente.comentarios = txtDetallesGente.Text
