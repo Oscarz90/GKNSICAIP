@@ -33,7 +33,6 @@ Public Class Registro_Paro
                 vComando.Parameters.Add("@fecha_eliminacion", SqlDbType.DateTime).Value = Me.vFecha_eliminacion
                 oBD.EjecutaProcedimientos(vComando)
                 scope.Complete()
-                MsgBox("eliminado")
             Catch
                 MsgBox("Error al eliminar paro. CRegistro_Paro_ERROR", vbCritical + vbOKOnly, "Error")
             End Try
