@@ -2,8 +2,8 @@
 Public Class frmGraficas    
 #Region "VARIABLES GLOBALES"
     Dim oGraficas As Graficas
-    'Private vIdEquipo As Integer = 4
-    Private vIdEquipo As Integer = 76
+    'Private vIdEquipo As Integer = 4, 76
+    Private vIdEquipo As Integer
     Dim colores(12) As String
     Dim rutaGrafica As String
     Dim cadenaXML As String
@@ -18,6 +18,15 @@ Public Class frmGraficas
     Dim contorno_anchor As String = "000000" 'negro
     Dim radio_anchor As String = "5"
 #End Region
+
+#Region "PASAR ID EQUIPO"
+
+    Public Sub Set_IdEquipo(ByVal idEq As Integer)
+        vIdEquipo = idEq
+    End Sub
+
+#End Region
+
 #Region "MESES"
     Private Function getMeses(ByVal numero As String) As String
         Dim mes As String = ""

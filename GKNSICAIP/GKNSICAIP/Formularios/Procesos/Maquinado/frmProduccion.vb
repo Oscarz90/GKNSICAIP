@@ -1859,6 +1859,13 @@ Public Class frmProduccion
     End Sub
 
 #End Region
+#Region "Funciones para módulo GRÁFICAS "
+    Private Sub AbrirGraficos()
+        frmGraficas.Set_IdEquipo(vcve_equipo)
+        frmGraficas.ShowDialog()
+        frmGraficas.Dispose()
+    End Sub
+#End Region
 
     Private Sub valida_numero_cinco_s(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txtManttoAutonomo.KeyPress, txtAdmonVisual.KeyPress, txt5s.KeyPress
         Dim cajatexto As TextBox
@@ -1896,5 +1903,9 @@ Public Class frmProduccion
         End If
 
 
+    End Sub
+
+    Private Sub cmdGraficar_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmdGraficar.Click
+        AbrirGraficos()
     End Sub
 End Class
