@@ -397,9 +397,6 @@
         28g64PFU4QAMgAHFXbccDiqsQy3E47VJvH96oYwBjAAqShEM/9k=
 </value>
   </data>
-  <metadata name="ofdBuscar.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>17, 17</value>
-  </metadata>
   <data name="swfGrafica.OcxState" mimetype="application/x-microsoft.net.object.binary.base64">
     <value>
         AAEAAAD/////AQAAAAAAAAAMAgAAAFdTeXN0ZW0uV2luZG93cy5Gb3JtcywgVmVyc2lvbj00LjAuMC4w
@@ -413,4 +410,7 @@
         CAAMAAAAZgBhAGwAcwBlAAAACAAEAAAAMAAAAAs=
 </value>
   </data>
+  <metadata name="fbdBuscar.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>17, 17</value>
+  </metadata>
 </root>

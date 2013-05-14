@@ -797,6 +797,23 @@ Public Class frmGraficas
     End Sub
 #End Region
 
+#Region "GUARDAR GRAFICO EN EXCEL"
+
+    Function capturaPantalla(ByVal locX As Integer, ByVal locY As Integer, ByVal width As Integer, ByVal height As Integer) As Bitmap
+        Dim NewImage As New Bitmap(width, height)
+        Using g As Graphics = Graphics.FromImage(NewImage)
+            g.CopyFromScreen(locX, locY, 0, 0, NewImage.Size)
+        End Using
+        Return NewImage
+    End Function
+
+    Private Sub guardarGrafica()
+        Dim screenPos As Point = Me.PointToScreen(New Point(0, 0))
+        Dim bit As Bitmap = capturaPantalla(screenPos.X + swfGrafica.Location.X, screenPos.Y + swfGrafica.Location.Y, swfGrafica.Width, swfGrafica.Height)
+        bit.Save(Application.StartupPath & "\Graficador\grafica.jpeg", Imaging.ImageFormat.Jpeg)
+    End Sub
+#End Region
+
 #Region "INICIALIZACION DEL FORMULARIO"
     Private Sub Graficas_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         'oGraficas.Obtener_IdEquipo(vIdEquipo)
@@ -1047,7 +1064,38 @@ Public Class frmGraficas
     End Sub
 
     Private Sub cmdImprimir_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmdImprimir.Click
+        guardarGrafica()
+        Dim ruta As String
+        ruta = ""
+        fbdBuscar.ShowNewFolderButton = True
+        fbdBuscar.SelectedPath = ""
+        fbdBuscar.ShowDialog()
+        ruta = fbdBuscar.SelectedPath
+        If ruta <> "" Then
+            ruta = ruta & "\"
+            Dim arch As ArchivoGraficas
+            arch = New ArchivoGraficas
+            Dim cadena_Conceptos As String = ""
 
+            arch.Abre_Graficas()
+            arch.Inserta_datos_grafica("C11", cbxUN.Text)
+            arch.Inserta_datos_grafica("C12", cbxArea.Text)
+            arch.Inserta_datos_grafica("C13", cbxLinea.Text)
+            arch.Inserta_datos_grafica("C14", cbxEquipo.Text)
+            'arch.Inserta_datos_grafica("F13", cbxEquipo.Text) 'CONCEPTO
+
+            If rbtDia.Checked Then
+                arch.Inserta_datos_grafica("F11", dtpDesde.Value.Day.ToString & "/" & dtpDesde.Value.Month.ToString & "/" & dtpDesde.Value.Year.ToString & " a " & dtpHasta.Value.Day.ToString & "/" & dtpHasta.Value.Month.ToString & "/" & dtpHasta.Value.Year.ToString)
+            End If
+            If rbtMeses.Checked Then
+                arch.Inserta_datos_grafica("F11", dtpDesde.Value.Month.ToString & "/" & dtpDesde.Value.Year.ToString & " a " & dtpHasta.Value.Month.ToString & "/" & dtpHasta.Value.Year.ToString)
+            End If
+            
+            arch.Exporta_Graficas_PDF(ruta)
+            arch.Cierra_Graficas()
+            MsgBox("El PDF fue guardado exitosamente en " & ruta, vbInformation)
+        Else
+        End If
     End Sub
 
     Private Sub frmSalir_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles frmSalir.Click

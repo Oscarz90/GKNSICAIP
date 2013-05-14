@@ -61,10 +61,10 @@ Partial Class frmGraficas
         Me.cbxArea = New System.Windows.Forms.ComboBox()
         Me.lblInstrucciones1 = New System.Windows.Forms.Label()
         Me.lblInstrucciones2 = New System.Windows.Forms.Label()
-        Me.ofdBuscar = New System.Windows.Forms.OpenFileDialog()
         Me.banner_formulario = New System.Windows.Forms.PictureBox()
         Me.titulo_banner_formulario = New System.Windows.Forms.Label()
         Me.swfGrafica = New AxShockwaveFlashObjects.AxShockwaveFlash()
+        Me.fbdBuscar = New System.Windows.Forms.FolderBrowserDialog()
         Me.groupTipo.SuspendLayout()
         Me.grp3.SuspendLayout()
         Me.grp2.SuspendLayout()
@@ -530,10 +530,6 @@ Partial Class frmGraficas
         Me.lblInstrucciones2.TabIndex = 22
         Me.lblInstrucciones2.Text = "valor, Área, Línea y Equipo"
         '
-        'ofdBuscar
-        '
-        Me.ofdBuscar.FileName = "OpenFileDialog1"
-        '
         'banner_formulario
         '
         Me.banner_formulario.BackColor = System.Drawing.Color.Transparent
@@ -634,7 +630,6 @@ Partial Class frmGraficas
     Friend WithEvents cbxArea As System.Windows.Forms.ComboBox
     Friend WithEvents lblInstrucciones1 As System.Windows.Forms.Label
     Friend WithEvents lblInstrucciones2 As System.Windows.Forms.Label
-    Friend WithEvents ofdBuscar As System.Windows.Forms.OpenFileDialog
     Friend WithEvents banner_formulario As System.Windows.Forms.PictureBox
     Friend WithEvents titulo_banner_formulario As System.Windows.Forms.Label
     Friend WithEvents swfGrafica As AxShockwaveFlashObjects.AxShockwaveFlash
@@ -643,4 +638,5 @@ Partial Class frmGraficas
     Friend WithEvents Label3 As System.Windows.Forms.Label
     Friend WithEvents Label2 As System.Windows.Forms.Label
     Friend WithEvents cbxTodasLineas As System.Windows.Forms.CheckBox
+    Friend WithEvents fbdBuscar As System.Windows.Forms.FolderBrowserDialog
 End Class

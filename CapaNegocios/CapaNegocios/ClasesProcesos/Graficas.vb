@@ -1,5 +1,4 @@
-﻿Imports System.Security.Principal
-Imports CapaDatos
+﻿Imports CapaDatos
 Public Class Graficas
     Dim cadena_conexion As New CapaDatos.conexiones
     Dim oBD As New CapaDatos.CapaDatos(cadena_conexion.CadenaSicaip)
