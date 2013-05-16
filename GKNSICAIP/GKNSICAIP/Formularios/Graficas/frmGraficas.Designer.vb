@@ -490,6 +490,7 @@ Partial Class frmGraficas
         '
         'cbxUN
         '
+        Me.cbxUN.Enabled = False
         Me.cbxUN.Font = New System.Drawing.Font("Arial", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cbxUN.FormattingEnabled = True
         Me.cbxUN.Location = New System.Drawing.Point(72, 45)
@@ -500,6 +501,7 @@ Partial Class frmGraficas
         '
         'cbxArea
         '
+        Me.cbxArea.Enabled = False
         Me.cbxArea.Font = New System.Drawing.Font("Arial", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cbxArea.FormattingEnabled = True
         Me.cbxArea.Location = New System.Drawing.Point(72, 71)
