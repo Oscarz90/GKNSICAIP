@@ -2544,7 +2544,6 @@ Partial Class frmProduccion
         Me.btnAgregarCincoS.BackColor = System.Drawing.Color.White
         Me.btnAgregarCincoS.BackgroundImage = CType(resources.GetObject("btnAgregarCincoS.BackgroundImage"), System.Drawing.Image)
         Me.btnAgregarCincoS.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center
-        Me.btnAgregarCincoS.Enabled = False
         Me.btnAgregarCincoS.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnAgregarCincoS.Location = New System.Drawing.Point(397, 52)
         Me.btnAgregarCincoS.Name = "btnAgregarCincoS"
