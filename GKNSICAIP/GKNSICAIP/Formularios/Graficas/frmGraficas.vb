@@ -792,13 +792,27 @@ Public Class frmGraficas
     End Sub
 #End Region
 
-    ''*** PENDIENTE
-
 #Region "ESTABLECE GENTE 1 EQUIPO 1 LINEA"
-    Private Sub establece_Gente(ByVal cadena As String, ByVal color As String)
-        '' cadena= un, area, linea, equipo
-        ''vDT = oGraficas.ejecutarVista(cadena, cadenaWHERE)
+    Private Sub establece_fechas_gente() ''MANDAR FECHAS
+        Dim fechaGraficos As String = ""
+        Dim vDT As DataTable
+        cadenaXML += "<categories>"
+
+        If rbtDia.Checked Then
+            'vDT = oGraficas.ejecutarVista(cadena, cadenaWHERE)
+            For Each vDR As DataRow In vDT.Rows
+                fechaGraficos = vDR("Dia_Asignado")
+                fechaGraficos = Mid(fechaGraficos, 1, 5)
+                cadenaXML += "<category name='" & fechaGraficos & "' />"
+            Next
+
+        End If
     End Sub
+
+    Private Sub establece_gente() ''mandar FALTAS, RETARDOS, INCIDENCIAS
+
+    End Sub
+
 #End Region
 
 #Region "ESTABLECE SEGURIDAD 1 EQUIPO 1 LINEA"
@@ -1044,8 +1058,13 @@ Public Class frmGraficas
             'establece_fechas(4)
             'establece_OEE(colores(3))
         ElseIf rbtGente.Checked Then
-            'establece_fechas(5)
-            'establece_OEE(colores(4))
+            If cbxTodasLineas.Checked Then
+
+            Else
+                'cadenaSELECT = "SELECT DIA_ASIGNADO, FALTAS, RETARDOS, INCIDENCIAS FROM VISTA_SELECCION_INDICADOR6"
+                establece_fechas_gente()
+                establece_gente()
+            End If
 
             '' 5 S
         ElseIf rbt5s.Checked Then
