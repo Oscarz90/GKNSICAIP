@@ -573,21 +573,21 @@ Public Class frmProduccion
     '5s
     Private Sub txtAdmonVisual_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles txtAdmonVisual.TextChanged
 
-        valida_botones_cinco_s()
+        'valida_botones_cinco_s()
         calcula_promedio_cinco_S()
         
 
     End Sub
     Private Sub txt5s_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles txt5s.TextChanged
 
-        valida_botones_cinco_s()
+        'valida_botones_cinco_s()
         calcula_promedio_cinco_S()
       
 
     End Sub
 
     Private Sub txtManttoAutonomo_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles txtManttoAutonomo.TextChanged
-        valida_botones_cinco_s()
+        'valida_botones_cinco_s()
         calcula_promedio_cinco_S()
     End Sub
     'Comentarios generales
@@ -753,10 +753,14 @@ Public Class frmProduccion
     End Sub
     '5s
     Private Sub btnAgregarCincoS_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnAgregarCincoS.Click
-        If valida_hora_captura(Now.ToString("dd-MM-yyyy HH:mm:ss")) Then
-            add_cinco_s()
-            limpia_cinco_s()
-            llena_cinco_S()
+        If valida_insercion_cinco_s() Then
+            If valida_hora_captura(Now.ToString("dd-MM-yyyy HH:mm:ss")) Then
+                add_cinco_s()
+                limpia_cinco_s()
+                llena_cinco_S()
+            End If
+        Else
+            MsgBox("Datos No validos para registrar.Revisa tu Formato de evaluacion de 5's Mannto., Auto, Admon. Visual, los resultados no pueden ser enteros ni mayor a 5.", vbExclamation + vbOKOnly, "Aviso!")
         End If
     End Sub
     'Descanso
@@ -799,6 +803,11 @@ Public Class frmProduccion
             deshabilitar_btn_Quitar_comentario()
             llena_comentarios_generales_gridview()
         End If
+    End Sub
+    'Graficas
+
+    Private Sub cmdGraficar_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmdGraficar.Click
+        AbrirGraficos()
     End Sub
 #End Region
 #Region "Eventos Gridviews"
@@ -970,6 +979,7 @@ Public Class frmProduccion
         If cbxTurno.SelectedIndex <> -1 And cbxTipoDetalleGente.SelectedIndex <> -1 And txtGenteCantidad.Text <> "" Then
             If Convert.ToInt64(txtGenteCantidad.Text) <> 0 Then
                 btnAgregarGente.Enabled = True
+                btnAgregarGente.BackColor = Color.Blue
             Else
                 btnAgregarGente.Enabled = False
             End If
@@ -1069,6 +1079,22 @@ Public Class frmProduccion
             btnAgregarCincoS.Enabled = False
         End If
     End Sub
+    Private Function valida_insercion_cinco_s() As Boolean
+        If cbxTurno.SelectedValue <> -1 And txtAdmonVisual.Text <> "" And txtManttoAutonomo.Text <> "" And txt5s.Text <> "" Then
+            If Convert.ToDouble(txtAdmonVisual.Text) <> 0 And Convert.ToDouble(txtManttoAutonomo.Text) <> 0 And Convert.ToDouble(txt5s.Text) <> 0 Then
+                If valida_cinco_s(txtAdmonVisual) And valida_cinco_s(txtManttoAutonomo) And valida_cinco_s(txt5s) Then
+                    Return True
+                Else
+                    Return False
+                End If
+
+            Else
+                Return False
+            End If
+        Else
+            Return False
+        End If
+    End Function
     'Descansos
     Private Sub valida_botones_Descansos()
         If dtpDescanso.Checked Then
@@ -1795,6 +1821,43 @@ Public Class frmProduccion
         oCinco_S.promedio = Convert.ToDouble(txtPromedio.Text)
         oCinco_S.Registrar()
     End Sub
+    Private Sub valida_numero_cinco_s(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txtManttoAutonomo.KeyPress, txtAdmonVisual.KeyPress, txt5s.KeyPress
+        Dim cajatexto As TextBox
+        cajatexto = sender
+        Dim esDec As Boolean
+        If Char.IsNumber(e.KeyChar) Then
+            'asfdasdf
+            ' e.Handled = False
+            Dim a, esDecimal, NumDecimales As Integer
+            Dim dig As Integer = Len(cajatexto.Text & e.KeyChar)
+            For a = 0 To dig - 1
+                Dim car As String = CStr(cajatexto.Text & e.KeyChar)
+                If car.Substring(a, 1) = "." And esDec <> True Then
+                    esDecimal = esDecimal + 1
+                    esDec = True
+                ElseIf esDec Then
+                    NumDecimales = NumDecimales + 1
+                End If
+                ' aqui se controla los digitos a partir del punto numdecimales = 4 si es de dos decimales
+            Next
+            If NumDecimales > 1 Then
+                e.Handled = True
+            Else
+                e.Handled = False
+            End If
+            'asdfsdf
+        ElseIf Char.IsControl(e.KeyChar) Then
+            e.Handled = False
+        ElseIf UCase(e.KeyChar) Like "[.]" Then
+            If InStr(sender.Text, ".") > 0 Then
+                e.Handled = True
+            End If
+        Else
+            e.Handled = True
+        End If
+
+
+    End Sub
 #End Region
 #Region "Funciones para modulo Descanso"
     Private Sub registra_descanso()
@@ -1867,45 +1930,6 @@ Public Class frmProduccion
     End Sub
 #End Region
 
-    Private Sub valida_numero_cinco_s(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txtManttoAutonomo.KeyPress, txtAdmonVisual.KeyPress, txt5s.KeyPress
-        Dim cajatexto As TextBox
-        cajatexto = sender
-        Dim esDec As Boolean
-        If Char.IsNumber(e.KeyChar) Then
-            'asfdasdf
-            ' e.Handled = False
-            Dim a, esDecimal, NumDecimales As Integer
-            Dim dig As Integer = Len(cajatexto.Text & e.KeyChar)
-            For a = 0 To dig - 1
-                Dim car As String = CStr(cajatexto.Text & e.KeyChar)
-                If car.Substring(a, 1) = "." And esDec <> True Then
-                    esDecimal = esDecimal + 1
-                    esDec = True
-                ElseIf esDec Then
-                    NumDecimales = NumDecimales + 1
-                End If
-                ' aqui se controla los digitos a partir del punto numdecimales = 4 si es de dos decimales
-            Next
-            If NumDecimales > 1 Then
-                e.Handled = True
-            Else
-                e.Handled = False
-            End If
-            'asdfsdf
-        ElseIf Char.IsControl(e.KeyChar) Then
-            e.Handled = False
-        ElseIf UCase(e.KeyChar) Like "[.]" Then
-            If InStr(sender.Text, ".") > 0 Then
-                e.Handled = True
-            End If
-        Else
-            e.Handled = True
-        End If
+    
 
-
-    End Sub
-
-    Private Sub cmdGraficar_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmdGraficar.Click
-        AbrirGraficos()
-    End Sub
 End Class
