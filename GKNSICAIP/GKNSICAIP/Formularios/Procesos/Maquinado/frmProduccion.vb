@@ -51,7 +51,6 @@ Public Class frmProduccion
     End Sub
     'Llena toda la info del formulario
     Private Sub inicializa_formulario()
-        'set_Datos_Equipo(7, "Tlatoanis", "Oscar Mtz S", "118737")
         get_Imagen_Equipo()
         define_calendario_descanso()
         'Descansos
@@ -903,150 +902,186 @@ Public Class frmProduccion
         If cbxTurno.SelectedIndex <> -1 And cbxModeloProductividad.SelectedIndex <> -1 And txtTiempoOperacion.Text <> "" And txtPiezasOkProducidas.Text <> "" Then
             ' If Convert.ToInt64(txtTiempoOperacion.Text) <> 0 And Convert.ToInt64(txtPiezasOkProducidas.Text) <> 0 Then
             btnAgregarModelo.Enabled = True
+            btnAgregarModelo.BackColor = Color.FromArgb(107, 198, 223)
             'Else
             '  btnAgregarModelo.Enabled = False
             ' End If
         Else
-        btnAgregarModelo.Enabled = False
+            btnAgregarModelo.Enabled = False
+            btnAgregarModelo.BackColor = Color.Transparent
         End If
     End Sub
     Private Sub habilita_btn_Quitar_modelo()
         limpia_productividad()
         btnQuitarModelo.Enabled = True
+        btnQuitarModelo.BackColor = Color.FromArgb(107, 198, 223)
     End Sub
     Private Sub deshabilitar_btn_quitar_modelo()
         btnQuitarModelo.Enabled = False
+        btnQuitarModelo.BackColor = Color.Transparent
     End Sub
     'Rechazo
     Private Sub valida_botones_rechazos()
         If cbxTurno.SelectedIndex <> -1 And cbxModeloRechazo.SelectedIndex <> -1 And cbxTipoRechazo.SelectedIndex <> -1 And txtRechazosCantidad.Text <> "" Then
             If Convert.ToInt64(txtRechazosCantidad.Text) <> 0 Then
                 btnAgregarRechazo.Enabled = True
+                btnAgregarRechazo.BackColor = Color.FromArgb(107, 198, 223)
             Else
                 btnAgregarRechazo.Enabled = False
+                btnAgregarRechazo.BackColor = Color.Transparent
             End If
         Else
             btnAgregarRechazo.Enabled = False
+            btnAgregarRechazo.BackColor = Color.Transparent
         End If
     End Sub
     Private Sub habilita_btn_Quitar_rechazo()
         limpia_rechazos()
         btnQuitarRechazo.Enabled = True
+        btnQuitarRechazo.BackColor = Color.FromArgb(107, 198, 223)
     End Sub
     Private Sub deshabilitar_btn_quitar_rechazo()
         btnQuitarRechazo.Enabled = False
+        btnQuitarRechazo.BackColor = Color.Transparent
     End Sub
     'Desecho
     Private Sub valida_botones_desecho()
         If cbxTurno.SelectedIndex <> -1 And cbxModeloDesecho.SelectedIndex <> -1 And txtDesechosCantidad.Text <> "" Then
             If Convert.ToInt64(txtDesechosCantidad.Text) <> 0 Then
                 btnAgregarDesecho.Enabled = True
+                btnAgregarDesecho.BackColor = Color.FromArgb(107, 198, 223)
             Else
                 btnAgregarDesecho.Enabled = False
+                btnAgregarDesecho.BackColor = Color.Transparent
             End If
         Else
             btnAgregarDesecho.Enabled = False
+            btnAgregarDesecho.BackColor = Color.Transparent
         End If
     End Sub
     Private Sub habilita_btn_Quitar_desecho()
         limpia_desechos()
         btnQuitarDesecho.Enabled = True
+        btnQuitarDesecho.BackColor = Color.FromArgb(107, 198, 223)
     End Sub
     Private Sub deshabilitar_btn_quitar_desecho()
         btnQuitarDesecho.Enabled = False
+        btnQuitarDesecho.BackColor = Color.Transparent
     End Sub
     'Paro
     Private Sub valida_botones_paro()
         If cbxTurno.SelectedIndex <> -1 And cbxMaquina.SelectedIndex <> -1 And cbxTipoParo.SelectedIndex <> -1 And txtMinutosParo.Text <> "" Then
             If Convert.ToInt64(txtMinutosParo.Text) <> 0 Then
                 btnAgregarParo.Enabled = True
+                btnAgregarParo.BackColor = Color.FromArgb(107, 198, 223)
             Else
                 btnAgregarParo.Enabled = False
+                btnAgregarParo.BackColor = Color.Transparent
             End If
         Else
             btnAgregarParo.Enabled = False
+            btnAgregarParo.BackColor = Color.Transparent
         End If
     End Sub
     Private Sub habilita_btn_Quitar_paro()
         limpia_paros()
         btnQuitarParo.Enabled = True
+        btnQuitarParo.BackColor = Color.FromArgb(107, 198, 223)
     End Sub
     Private Sub deshabilitar_btn_quitar_paro()
         btnQuitarParo.Enabled = False
+        btnQuitarParo.BackColor = Color.Transparent
     End Sub
     'Gente
     Private Sub valida_botones_gente()
         If cbxTurno.SelectedIndex <> -1 And cbxTipoDetalleGente.SelectedIndex <> -1 And txtGenteCantidad.Text <> "" Then
             If Convert.ToInt64(txtGenteCantidad.Text) <> 0 Then
                 btnAgregarGente.Enabled = True
-                btnAgregarGente.BackColor = Color.Blue
+                btnAgregarGente.BackColor = Color.FromArgb(107, 198, 223)
             Else
                 btnAgregarGente.Enabled = False
+                btnAgregarGente.BackColor = Color.Transparent
             End If
         Else
             btnAgregarGente.Enabled = False
+            btnAgregarGente.BackColor = Color.Transparent
         End If
     End Sub
     Private Sub habilita_btn_Quitar_gente()
         limpia_gente()
         btnQuitarGente.Enabled = True
+        btnQuitarGente.BackColor = Color.FromArgb(107, 198, 223)
     End Sub
     Private Sub deshabilitar_btn_quitar_gente()
         btnQuitarGente.Enabled = False
+        btnQuitarGente.BackColor = Color.Transparent
     End Sub
     'Comentarios Genrales
     Private Sub valida_botones_comentarios_generales()
         If cbxTurno.SelectedIndex <> -1 And txtDetallesComentario.Text <> "" Then
             btnAgregarComentario.Enabled = True
+            btnAgregarComentario.BackColor = Color.FromArgb(107, 198, 223)
         Else
             btnAgregarComentario.Enabled = False
+            btnAgregarComentario.BackColor = Color.Transparent
         End If
     End Sub
     Private Sub habilita_btn_Quitar_comentario()
         limpia_comentarios_generales()
         btnQuitarComentario.Enabled = True
+        btnQuitarComentario.BackColor = Color.FromArgb(107, 198, 223)
     End Sub
     Private Sub deshabilitar_btn_Quitar_comentario()
         btnQuitarComentario.Enabled = False
+        btnQuitarComentario.BackColor = Color.Transparent
     End Sub
-
     'Seguridad Condiciones Inseguras
     Private Sub valida_botones_cond_inseg()
         If cbxTurno.SelectedIndex <> -1 And cbxTipoCondInseg.SelectedIndex <> -1 And txtCondInsegCantidad.Text <> "" Then
             If Convert.ToInt64(txtCondInsegCantidad.Text) <> 0 Then
                 btnAgregarCondInseg.Enabled = True
+                btnAgregarCondInseg.BackColor = Color.FromArgb(107, 198, 223)
             Else
                 btnAgregarCondInseg.Enabled = False
+                btnAgregarCondInseg.BackColor = Color.Transparent
             End If
         Else
             btnAgregarCondInseg.Enabled = False
+            btnAgregarCondInseg.BackColor = Color.Transparent
         End If
     End Sub
     Private Sub habilita_btn_Quitar_cond_inseg()
         limpia_cond_inseg()
         btnQuitarCondInseg.Enabled = True
+        btnQuitarCondInseg.BackColor = Color.FromArgb(107, 198, 223)
     End Sub
     Private Sub deshabilitar_btn_quitar_cond_inseg()
         btnQuitarCondInseg.Enabled = False
+        btnQuitarCondInseg.BackColor = Color.Transparent
     End Sub
     'Seguridad Acccidentes
     Private Sub valida_botones_accidentes()
         If cbxTurno.SelectedIndex <> -1 And cbxTipoAccidente.SelectedIndex <> -1 And txtAccidenteCantidad.Text <> "" Then
             If Convert.ToInt64(txtAccidenteCantidad.Text) <> 0 Then
                 btnAgregarAccidente.Enabled = True
+                btnAgregarAccidente.BackColor = Color.FromArgb(107, 198, 223)
             Else
                 btnAgregarAccidente.Enabled = False
+                btnAgregarAccidente.BackColor = Color.Transparent
             End If
         Else
             btnAgregarAccidente.Enabled = False
+            btnAgregarAccidente.BackColor = Color.Transparent
         End If
     End Sub
     Private Sub habilita_btn_Quitar_accidentes()
         limpia_accidentes()
         btnQuitarAccidente.Enabled = True
+        btnQuitarAccidente.BackColor = Color.FromArgb(107, 198, 223)
     End Sub
     Private Sub deshabilitar_btn_quitar_accidentes()
         btnQuitarAccidente.Enabled = False
+        btnQuitarAccidente.BackColor = Color.Transparent
     End Sub
     'Turno - Lineas
     Private Sub valida_botones_Turno_linea()
@@ -1099,16 +1134,20 @@ Public Class frmProduccion
     Private Sub valida_botones_Descansos()
         If dtpDescanso.Checked Then
             btnAgregarDescanso.Enabled = True
+            btnAgregarDescanso.BackColor = Color.FromArgb(107, 198, 223)
         Else
             btnAgregarDescanso.Enabled = False
+            btnAgregarDescanso.BackColor = Color.Transparent
         End If
     End Sub
     Private Sub habilita_btn_quitar_descanso()
         limpia_descanso()
         btnQuitarDescanso.Enabled = True
+        btnQuitarDescanso.BackColor = Color.FromArgb(107, 198, 223)
     End Sub
     Private Sub deshabilitar_btn_quitar_descanso()
         btnQuitarDescanso.Enabled = False
+        btnQuitarDescanso.BackColor = Color.Transparent
     End Sub
 #End Region
 #Region "Limpia formularios"
