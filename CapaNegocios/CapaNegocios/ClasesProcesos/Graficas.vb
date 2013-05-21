@@ -2,13 +2,41 @@
 Public Class Graficas
     Dim cadena_conexion As New CapaDatos.conexiones
     Dim oBD As New CapaDatos.CapaDatos(cadena_conexion.CadenaSicaip)
+    Dim oBD_Kronos As New CapaDatos.CapaDatos(cadena_conexion.CadenaKronos)
 
 #Region "Atributos"
-    ''Public vIdEquipo As Integer = 4
+    Private vIdEquipo As Long
+    Private vFechaInicio As DateTime
+    Private vFechaFinal As DateTime
 
 #End Region
 #Region "Propiedades"
+    Public Property IdEquipo As Long
+        Get
+            Return vIdEquipo
+        End Get
+        Set(ByVal value As Long)
+            vIdEquipo = value
+        End Set
+    End Property
 
+    Public Property FechaInicio() As DateTime
+        Get
+            Return vFechaInicio
+        End Get
+        Set(ByVal value As DateTime)
+            vFechaInicio = value
+        End Set
+    End Property
+
+    Public Property FechaFinal() As DateTime
+        Get
+            Return vFechaFinal
+        End Get
+        Set(ByVal value As DateTime)
+            vFechaFinal = value
+        End Set
+    End Property
 #End Region
 #Region "OBTENER EQUIPO, LINEA(S), AREA, CADENA DE VALOR NIVEL USUARIO"
     ''' <summary>
@@ -148,6 +176,46 @@ Public Class Graficas
 
         End Try
         Return vRetorno
+    End Function
+
+    Public Function obtener_Seguridad(ByVal videquipo As Integer, ByVal vfechainicio As DateTime, ByVal vfechafinal As DateTime) As DataTable
+        Dim obj As DataTable
+        Using scope As New TransactionScope
+            Try
+                Dim cmd As New SqlClient.SqlCommand
+                cmd.CommandType = CommandType.StoredProcedure
+                cmd.CommandText = "obtiene_seguridad"
+                cmd.Parameters.Add("@cve_equipo", SqlDbType.BigInt).Value = videquipo
+                cmd.Parameters.Add("@fecha_inicial", SqlDbType.DateTime).Value = vfechainicio
+                cmd.Parameters.Add("@fecha_final", SqlDbType.DateTime).Value = vfechafinal
+                obj = oBD.EjecutaCommando(cmd)
+                scope.Complete()
+            Catch ex As Exception
+                MsgBox("Error al obtener detalle de Productivdad. CProduccion_ERROR", vbCritical + vbOKOnly, "Error")
+                Return Nothing
+            End Try
+            Return obj
+        End Using
+    End Function
+
+    Public Function obtener_Gente(ByVal videquipo As Integer, ByVal vfechainicio As DateTime, ByVal vfechafinal As DateTime) As DataTable
+        Dim obj As DataTable
+        Using scope As New TransactionScope
+            Try
+                Dim cmd As New SqlClient.SqlCommand
+                cmd.CommandType = CommandType.StoredProcedure
+                cmd.CommandText = "obtiene_gente"
+                cmd.Parameters.Add("@cve_equipo", SqlDbType.BigInt).Value = videquipo
+                cmd.Parameters.Add("@fecha_inicial", SqlDbType.DateTime).Value = vfechainicio
+                cmd.Parameters.Add("@fecha_final", SqlDbType.DateTime).Value = vfechafinal
+                obj = oBD.EjecutaCommando(cmd)
+                scope.Complete()
+            Catch ex As Exception
+                MsgBox("Error al obtener detalle de Productivdad. CProduccion_ERROR", vbCritical + vbOKOnly, "Error")
+                Return Nothing
+            End Try
+            Return obj
+        End Using
     End Function
 
 End Class

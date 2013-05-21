@@ -140,10 +140,10 @@ Public Class frmGraficas
         colores(4) = "FAAC58" 'NaranjaClaro
         colores(5) = "FFFF00" 'AmarilloOscuro
         colores(6) = "0101DF" 'AzulOscuro
-        colores(7) = "01A9DB" 'AzulPastelOscuro
+        colores(7) = "8A0808" 'AzulPastelOscuro gente **
         colores(8) = "FF8000" 'NaranjaOscuro
-        colores(9) = "81DAF5" 'Azul
-        colores(10) = "FAAC58" 'NaranjaClaro
+        colores(9) = "FFBF00" 'Azul=81DAF5  amarillo FFBF00 gente**
+        colores(10) = "045FB4" 'NaranjaClaro=FAAC58 azul gente = 045FB4 **
         colores(11) = "0B0B61" 'AzulOscuro
         colores(12) = "006400" 'F3F781=AmarilloClaro verde =006400  5s**
     End Sub
@@ -264,19 +264,19 @@ Public Class frmGraficas
             cadenaGroup = "dia_asignado"
         End If
 
-        If rbtOEE.Checked Then
-            cadenaWHERE = cadenaWHERE & " group by cadena, componente, linea, equipo, oee, tipo_registro, " & cadenaGroup & " order by " & cadenaGroup
-        ElseIf rbtNRFTi.Checked Then
+        'If rbtOEE.Checked Then
+        '    cadenaWHERE = cadenaWHERE & " group by cadena, componente, linea, equipo, oee, tipo_registro, " & cadenaGroup & " order by " & cadenaGroup
+        'ElseIf rbtNRFTi.Checked Then
 
-        ElseIf rbtCosto.Checked Then
+        'ElseIf rbtCosto.Checked Then
 
-        ElseIf rbtSeg.Checked Then
+        'ElseIf rbtSeg.Checked Then
 
-        ElseIf rbt5s.Checked Then
-            cadenaWHERE = cadenaWHERE & " group by cadena, componente, linea, equipo, PROMEDIO, " & cadenaGroup & " order by " & cadenaGroup
-        ElseIf rbtGente.Checked Then
+        'ElseIf rbt5s.Checked Then
+        '    cadenaWHERE = cadenaWHERE & " group by cadena, componente, linea, equipo, PROMEDIO, " & cadenaGroup & " order by " & cadenaGroup
+        'ElseIf rbtGente.Checked Then
 
-        End If
+        'End If
 
     End Sub
 
@@ -791,28 +791,103 @@ Public Class frmGraficas
 
     End Sub
 #End Region
-
-#Region "ESTABLECE GENTE 1 EQUIPO 1 LINEA"
-    Private Sub establece_fechas_gente() ''MANDAR FECHAS
+#Region "ESTABLECE GENTE 1 EQUIPO N LINEAS"
+    Private Sub establece_fechas_gente(ByVal idEquipo As Integer, ByVal fechaInicio As DateTime, ByVal fechaFinal As DateTime)
         Dim fechaGraficos As String = ""
         Dim vDT As DataTable
         cadenaXML += "<categories>"
 
         If rbtDia.Checked Then
-            'vDT = oGraficas.ejecutarVista(cadena, cadenaWHERE)
-            For Each vDR As DataRow In vDT.Rows
-                fechaGraficos = vDR("Dia_Asignado")
+            vDT = oGraficas.obtener_Gente(idEquipo, fechaInicio, fechaFinal)
+            For Each VDR As DataRow In vDT.Rows
+                fechaGraficos = VDR("Dia_Asignado")
                 fechaGraficos = Mid(fechaGraficos, 1, 5)
                 cadenaXML += "<category name='" & fechaGraficos & "' />"
             Next
-
+            cadenaXML += "</categories>"
         End If
     End Sub
-
-    Private Sub establece_gente() ''mandar FALTAS, RETARDOS, INCIDENCIAS
-
+    Private Sub establece_gente(ByVal idEquipo As Integer, ByVal fechaInicio As DateTime, ByVal fechaFinal As DateTime)
+        Dim vTotalMes As Integer
+        Dim vFaltas As Integer
+        Dim vRetardos As Integer
+        Dim VDT As DataTable
+        cadenaXML += "<dataset seriesName='INCIDENCIAS' color='045FB4' anchorBorderColor='" & contorno_anchor & "' anchorBgColor='045FB4' anchorRadius='" & radio_anchor & "'>"
+        If rbtDia.Checked Then
+            VDT = oGraficas.obtener_Gente(idEquipo, fechaInicio, fechaFinal)
+            For Each VDR As DataRow In VDT.Rows
+                vTotalMes = VDR("total")
+                cadenaXML += "<set value='" & vTotalMes & "' />"
+            Next
+            cadenaXML += " </dataset>"
+            cadenaXML += "<dataset seriesName='FALTAS' color='9D080D' anchorBorderColor='" & contorno_anchor & "' anchorBgColor='9D080D' anchorRadius='" & radio_anchor & "'>"
+            VDT = oGraficas.obtener_Gente(idEquipo, fechaInicio, fechaFinal)
+            For Each VDR As DataRow In VDT.Rows
+                vFaltas = VDR("faltas")
+                cadenaXML += "<set value='" & vFaltas & "' />"
+            Next
+            cadenaXML += " </dataset>"
+            cadenaXML += "<dataset seriesName='RETARDOS' color='FFBF00' anchorBorderColor='" & contorno_anchor & "' anchorBgColor='FFBF00' anchorRadius='" & radio_anchor & "'>"
+            VDT = oGraficas.obtener_Gente(idEquipo, fechaInicio, fechaFinal)
+            For Each VDR As DataRow In VDT.Rows
+                vRetardos = VDR("retardos")
+                cadenaXML += "<set value='" & vRetardos & "' />"
+            Next
+            cadenaXML += " </dataset>"
+        End If
     End Sub
+#End Region
 
+#Region "ESTABLECE GENTE 1 EQUIPO 1 LINEA"
+
+#End Region
+
+#Region "ESTABLECE SEGURIDAD 1 EQUIPO N LINEAS"
+    Private Sub establece_fechas_seguridad(ByVal idEquipo As Integer, ByVal fechaInicio As DateTime, ByVal fechaFinal As DateTime)
+        Dim fechaGraficos As String = ""
+        Dim vDT As DataTable
+        cadenaXML += "<categories>"
+
+        If rbtDia.Checked Then
+            vDT = oGraficas.obtener_Seguridad(idEquipo, fechaInicio, fechaFinal)
+            For Each VDR As DataRow In vDT.Rows
+                fechaGraficos = VDR("Dia_Asignado")
+                fechaGraficos = Mid(fechaGraficos, 1, 5)
+                cadenaXML += "<category name='" & fechaGraficos & "' />"
+            Next
+            cadenaXML += "</categories>"
+        End If
+    End Sub
+    Private Sub establece_seguridad(ByVal idEquipo As Integer, ByVal fechaInicio As DateTime, ByVal fechaFinal As DateTime)
+        Dim vTotalMes As Integer
+        Dim vResueltas As Integer
+        Dim vNuevas As Integer
+        Dim VDT As DataTable
+        cadenaXML += "<dataset seriesName='TOTAL DEL MES' color='FFBF00' anchorBorderColor='" & contorno_anchor & "' anchorBgColor='FFBF00' anchorRadius='" & radio_anchor & "'>"
+        If rbtDia.Checked Then
+            VDT = oGraficas.obtener_Seguridad(idEquipo, fechaInicio, fechaFinal)
+            For Each VDR As DataRow In VDT.Rows
+                vTotalMes = VDR("total")
+                cadenaXML += "<set value='" & vTotalMes & "' />"
+            Next
+            cadenaXML += " </dataset>"
+            cadenaXML += "<dataset seriesName='CI.RESUELTAS' color='006400' anchorBorderColor='" & contorno_anchor & "' anchorBgColor='006400' anchorRadius='" & radio_anchor & "'>"
+            VDT = oGraficas.obtener_Seguridad(idEquipo, fechaInicio, fechaFinal)
+            For Each VDR As DataRow In VDT.Rows
+                vResueltas = VDR("resueltas")
+                cadenaXML += "<set value='" & vResueltas & "' />"
+            Next
+            cadenaXML += " </dataset>"
+            cadenaXML += "<dataset seriesName='CI.NUEVAS' color='9D080D' anchorBorderColor='" & contorno_anchor & "' anchorBgColor='9D080D' anchorRadius='" & radio_anchor & "'>"
+
+            VDT = oGraficas.obtener_Seguridad(idEquipo, fechaInicio, fechaFinal)
+            For Each VDR As DataRow In VDT.Rows
+                vNuevas = VDR("nuevas")
+                cadenaXML += "<set value='" & vNuevas & "' />"
+            Next
+            cadenaXML += " </dataset>"
+        End If
+    End Sub
 #End Region
 
 #Region "ESTABLECE SEGURIDAD 1 EQUIPO 1 LINEA"
@@ -1054,16 +1129,20 @@ Public Class frmGraficas
         ElseIf rbtCosto.Checked Then
             'establece_fechas(3)
             'establece_OEE(colores(2))
+
         ElseIf rbtSeg.Checked Then
-            'establece_fechas(4)
-            'establece_OEE(colores(3))
+            If cbxTodasLineas.Checked Then
+
+            Else
+                establece_fechas_seguridad(vIdEquipo, dtpDesde.Value.ToString("dd-MM-yyyy"), dtpHasta.Value.ToString("dd-MM-yyyy"))
+                establece_seguridad(vIdEquipo, dtpDesde.Value.ToString("dd-MM-yyyy"), dtpHasta.Value.ToString("dd-MM-yyyy"))
+            End If
         ElseIf rbtGente.Checked Then
             If cbxTodasLineas.Checked Then
 
             Else
-                'cadenaSELECT = "SELECT DIA_ASIGNADO, FALTAS, RETARDOS, INCIDENCIAS FROM VISTA_SELECCION_INDICADOR6"
-                establece_fechas_gente()
-                establece_gente()
+                establece_fechas_gente(vIdEquipo, dtpDesde.Value.ToString("dd-MM-yyyy"), dtpHasta.Value.ToString("dd-MM-yyyy"))
+                establece_gente(vIdEquipo, dtpDesde.Value.ToString("dd-MM-yyyy"), dtpHasta.Value.ToString("dd-MM-yyyy"))
             End If
 
             '' 5 S
