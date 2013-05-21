@@ -145,17 +145,21 @@ Public Class frmCDM
             If Convert.ToInt16(txtMinutosTotales.Text) <= minutosdisponibles Then
                 GroupBox1.Enabled = True
                 cmdGuardar.Enabled = True
+                cmdGuardar.BackColor = Color.FromArgb(107, 198, 223)
             Else
                 cmdGuardar.Enabled = False
+                cmdGuardar.BackColor = Color.Transparent
                 GroupBox1.Enabled = False
             End If
         Else
             cmdGuardar.Enabled = False
+            cmdGuardar.BackColor = Color.Transparent
             GroupBox1.Enabled = False
         End If
         If txtMinutosTotales.Text <> "" Then
             If minutosDetParos > Convert.ToDouble(txtMinutosTotales.Text) Then
                 cmdGuardar.Enabled = False
+                cmdGuardar.BackColor = Color.Transparent
             End If
         End If
     End Sub
