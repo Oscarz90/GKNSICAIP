@@ -184,7 +184,7 @@ Partial Class frmGraficas
         Me.grp3.Size = New System.Drawing.Size(170, 180)
         Me.grp3.TabIndex = 90
         Me.grp3.TabStop = False
-        Me.grp3.Text = "Concepto"
+        Me.grp3.Text = "Indicador"
         '
         'rbtCosto
         '
