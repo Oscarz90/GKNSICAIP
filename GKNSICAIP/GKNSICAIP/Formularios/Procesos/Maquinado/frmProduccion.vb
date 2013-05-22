@@ -1844,9 +1844,10 @@ Public Class frmProduccion
     Private Sub calcula_promedio_cinco_S()
         If txtAdmonVisual.Text <> Nothing And txt5s.Text <> Nothing And txtManttoAutonomo.Text <> Nothing Then
             txtPromedio.Text = Format(((Convert.ToDouble(txtAdmonVisual.Text) + Convert.ToDouble(txtManttoAutonomo.Text) + Convert.ToDouble(txt5s.Text)) / 3), "##0.0000")
+            prom.Text = Format(((Convert.ToDouble(txtAdmonVisual.Text) + Convert.ToDouble(txtManttoAutonomo.Text) + Convert.ToDouble(txt5s.Text)) / 3), "##0.0")
             'txtPromedio.Text = ((Convert.ToDouble(txtAdmonVisual.Text) + Convert.ToDouble(txtManttoAutonomo.Text) + Convert.ToDouble(txt5s.Text)) / 3)
         Else
-            txtPromedio.Text = "0.0000"
+            txtPromedio.Text = "0.0"
         End If
     End Sub
     Private Sub add_cinco_s()
