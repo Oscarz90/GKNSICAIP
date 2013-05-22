@@ -161,7 +161,7 @@ Public Class Graficas
     End Function
 
 #End Region
-
+#Region "EJECUTAR VISTAS"
     Public Function ejecutarVista(ByVal cadena As String, ByVal cadenaWHERE As String) As DataTable
         Dim vRetorno As DataTable = Nothing
         Dim vDT As DataTable = Nothing
@@ -177,7 +177,9 @@ Public Class Graficas
         End Try
         Return vRetorno
     End Function
+#End Region
 
+#Region "OBTENER SEGURIDAD"
     Public Function obtener_Seguridad_acumulado(ByVal videquipo As Integer, ByVal vfechainicio As DateTime, ByVal vfechafinal As DateTime) As DataTable
         Dim obj As DataTable
         Using scope As New TransactionScope
@@ -197,7 +199,6 @@ Public Class Graficas
             Return obj
         End Using
     End Function
-
     Public Function obtener_Seguridad(ByVal videquipo As Integer, ByVal vidlinea As Integer, ByVal vfechainicio As DateTime, ByVal vfechafinal As DateTime) As DataTable
         Dim obj As DataTable
         Using scope As New TransactionScope
@@ -218,7 +219,48 @@ Public Class Graficas
             Return obj
         End Using
     End Function
+    Public Function obtener_Seguridad_por_mes_acumulado(ByVal videquipo As Integer, ByVal vfechainicio As DateTime, ByVal vfechafinal As DateTime) As DataTable
+        Dim obj As DataTable
+        Using scope As New TransactionScope
+            Try
+                Dim cmd As New SqlClient.SqlCommand
+                cmd.CommandType = CommandType.StoredProcedure
+                cmd.CommandText = "obtiene_seguridad_por_mes"
+                cmd.Parameters.Add("@cve_equipo", SqlDbType.BigInt).Value = videquipo
+                cmd.Parameters.Add("@fecha_inicial", SqlDbType.DateTime).Value = vfechainicio
+                cmd.Parameters.Add("@fecha_final", SqlDbType.DateTime).Value = vfechafinal
+                obj = oBD.EjecutaCommando(cmd)
+                scope.Complete()
+            Catch ex As Exception
+                MsgBox("Error al obtener detalle de Productivdad. CProduccion_ERROR", vbCritical + vbOKOnly, "Error")
+                Return Nothing
+            End Try
+            Return obj
+        End Using
+    End Function
+    Public Function obtener_Seguridad_por_mes_por_linea(ByVal videquipo As Integer, ByVal Vidlinea As Integer, ByVal vfechainicio As DateTime, ByVal vfechafinal As DateTime) As DataTable
+        Dim obj As DataTable
+        Using scope As New TransactionScope
+            Try
+                Dim cmd As New SqlClient.SqlCommand
+                cmd.CommandType = CommandType.StoredProcedure
+                cmd.CommandText = "obtiene_seguridad_por_mes_por_linea"
+                cmd.Parameters.Add("@cve_equipo", SqlDbType.BigInt).Value = videquipo
+                cmd.Parameters.Add("@cve_linea", SqlDbType.BigInt).Value = Vidlinea
+                cmd.Parameters.Add("@fecha_inicial", SqlDbType.DateTime).Value = vfechainicio
+                cmd.Parameters.Add("@fecha_final", SqlDbType.DateTime).Value = vfechafinal
+                obj = oBD.EjecutaCommando(cmd)
+                scope.Complete()
+            Catch ex As Exception
+                MsgBox("Error al obtener detalle de Productivdad. CProduccion_ERROR", vbCritical + vbOKOnly, "Error")
+                Return Nothing
+            End Try
+            Return obj
+        End Using
+    End Function
+#End Region
 
+#Region "OBTENER GENTE 1LINEA/NLINEAS/X MESES"
     Public Function obtener_Gente_acumulado(ByVal videquipo As Integer, ByVal vfechainicio As DateTime, ByVal vfechafinal As DateTime) As DataTable
         Dim obj As DataTable
         Using scope As New TransactionScope
@@ -238,7 +280,6 @@ Public Class Graficas
             Return obj
         End Using
     End Function
-
     Public Function obtener_Gente(ByVal videquipo As Integer, ByVal vidlinea As Integer, ByVal vfechainicio As DateTime, ByVal vfechafinal As DateTime) As DataTable
         Dim obj As DataTable
         Using scope As New TransactionScope
@@ -259,7 +300,6 @@ Public Class Graficas
             Return obj
         End Using
     End Function
-
     Public Function obtener_Gente_por_meses_acumulado(ByVal videquipo As Integer, ByVal vfechainicio As DateTime, ByVal vfechafinal As DateTime) As DataTable
         Dim obj As DataTable
         Using scope As New TransactionScope
@@ -279,5 +319,26 @@ Public Class Graficas
             Return obj
         End Using
     End Function
+    Public Function obtener_Gente_por_meses_por_linea(ByVal videquipo As Integer, ByVal vidlinea As Integer, ByVal vfechainicio As DateTime, ByVal vfechafinal As DateTime) As DataTable
+        Dim obj As DataTable
+        Using scope As New TransactionScope
+            Try
+                Dim cmd As New SqlClient.SqlCommand
+                cmd.CommandType = CommandType.StoredProcedure
+                cmd.CommandText = "obtiene_gente_por_mes_por_linea"
+                cmd.Parameters.Add("@cve_equipo", SqlDbType.BigInt).Value = videquipo
+                cmd.Parameters.Add("@cve_linea", SqlDbType.BigInt).Value = vidlinea
+                cmd.Parameters.Add("@fecha_inicial", SqlDbType.DateTime).Value = vfechainicio
+                cmd.Parameters.Add("@fecha_final", SqlDbType.DateTime).Value = vfechafinal
+                obj = oBD.EjecutaCommando(cmd)
+                scope.Complete()
+            Catch ex As Exception
+                MsgBox("Error al obtener detalle de Productivdad. CProduccion_ERROR", vbCritical + vbOKOnly, "Error")
+                Return Nothing
+            End Try
+            Return obj
+        End Using
+    End Function
+#End Region
 
 End Class

@@ -818,13 +818,12 @@ Public Class frmGraficas
                 vDT = oGraficas.obtener_Gente_por_meses_acumulado(idEquipo, fechaInicio, fechaFinal)
                 For Each VDR As DataRow In vDT.Rows
                     fechaGraficos = VDR("Dia_Asignado")
-                    fechaGraficos = Mid(fechaGraficos, 1, 5)
-                    cadenaXML += "<category name='" & fechaGraficos & "' />"
+                    fechaGraficos = Mid(fechaGraficos, 4, 2)
+                    mes = getMeses(fechaGraficos)
+                    cadenaXML += "<category name='" & mes & "' />"
                 Next
-
             End If
         End If
-
         cadenaXML += "</categories>"
     End Sub
     Private Sub establece_gente_acumulado(ByVal idEquipo As Integer, ByVal fechaInicio As DateTime, ByVal fechaFinal As DateTime)
@@ -885,6 +884,7 @@ Public Class frmGraficas
 #Region "ESTABLECE GENTE 1 EQUIPO 1 LINEA"
     Private Sub establece_fechas_gente(ByVal idEquipo As Integer, ByVal idLinea As Integer, ByVal fechaInicio As DateTime, ByVal fechaFinal As DateTime)
         Dim fechaGraficos As String = ""
+        Dim mes As String = ""
         Dim vDT As DataTable
         cadenaXML += "<categories>"
 
@@ -896,16 +896,27 @@ Public Class frmGraficas
                 cadenaXML += "<category name='" & fechaGraficos & "' />"
             Next
             cadenaXML += "</categories>"
+        Else
+            If rbtMeses.Checked Then
+                vDT = oGraficas.obtener_Gente_por_meses_por_linea(idEquipo, idLinea, fechaInicio, fechaFinal)
+                For Each VDR As DataRow In vDT.Rows
+                    fechaGraficos = VDR("Dia_Asignado")
+                    fechaGraficos = Mid(fechaGraficos, 4, 2)
+                    mes = getMeses(fechaGraficos)
+                    cadenaXML += "<category name='" & mes & "' />"
+                Next
+            End If
         End If
+        cadenaXML += "</categories>"
     End Sub
-
     Private Sub establece_gente(ByVal idEquipo As Integer, ByVal idLinea As Integer, ByVal fechaInicio As DateTime, ByVal fechaFinal As DateTime)
         Dim vTotalMes As Integer
         Dim vFaltas As Integer
         Dim vRetardos As Integer
         Dim VDT As DataTable
-        cadenaXML += "<dataset seriesName='INCIDENCIAS' color='045FB4' anchorBorderColor='" & contorno_anchor & "' anchorBgColor='045FB4' anchorRadius='" & radio_anchor & "'>"
+
         If rbtDia.Checked Then
+            cadenaXML += "<dataset seriesName='INCIDENCIAS' color='045FB4' anchorBorderColor='" & contorno_anchor & "' anchorBgColor='045FB4' anchorRadius='" & radio_anchor & "'>"
             VDT = oGraficas.obtener_Gente(idEquipo, idLinea, fechaInicio, fechaFinal)
             For Each VDR As DataRow In VDT.Rows
                 vTotalMes = VDR("total")
@@ -925,33 +936,29 @@ Public Class frmGraficas
                 vRetardos = VDR("retardos")
                 cadenaXML += "<set value='" & vRetardos & "' />"
             Next
-            ''cadenaXML += " </dataset>"
-
         Else
             If rbtMeses.Checked Then
                 cadenaXML += "<dataset seriesName='INCIDENCIAS' color='045FB4' anchorBorderColor='" & contorno_anchor & "' anchorBgColor='045FB4' anchorRadius='" & radio_anchor & "'>"
-                VDT = oGraficas.obtener_Gente_por_meses_acumulado(idEquipo, fechaInicio, fechaFinal)
+                VDT = oGraficas.obtener_Gente_por_meses_por_linea(idEquipo, idLinea, fechaInicio, fechaFinal)
                 For Each VDR As DataRow In VDT.Rows
                     vTotalMes = VDR("total")
                     cadenaXML += "<set value='" & vTotalMes & "' />"
                 Next
                 cadenaXML += " </dataset>"
                 cadenaXML += "<dataset seriesName='FALTAS' color='9D080D' anchorBorderColor='" & contorno_anchor & "' anchorBgColor='9D080D' anchorRadius='" & radio_anchor & "'>"
-                VDT = oGraficas.obtener_Gente_por_meses_acumulado(idEquipo, fechaInicio, fechaFinal)
+                VDT = oGraficas.obtener_Gente_por_meses_por_linea(idEquipo, idLinea, fechaInicio, fechaFinal)
                 For Each VDR As DataRow In VDT.Rows
                     vFaltas = VDR("faltas")
                     cadenaXML += "<set value='" & vFaltas & "' />"
                 Next
                 cadenaXML += " </dataset>"
                 cadenaXML += "<dataset seriesName='RETARDOS' color='FFBF00' anchorBorderColor='" & contorno_anchor & "' anchorBgColor='FFBF00' anchorRadius='" & radio_anchor & "'>"
-                VDT = oGraficas.obtener_Gente_por_meses_acumulado(idEquipo, fechaInicio, fechaFinal)
+                VDT = oGraficas.obtener_Gente_por_meses_por_linea(idEquipo, idLinea, fechaInicio, fechaFinal)
                 For Each VDR As DataRow In VDT.Rows
                     vRetardos = VDR("retardos")
                     cadenaXML += "<set value='" & vRetardos & "' />"
                 Next
-
             End If
-
         End If
         cadenaXML += " </dataset>"
     End Sub
@@ -961,6 +968,7 @@ Public Class frmGraficas
 #Region "ESTABLECE SEGURIDAD 1 EQUIPO N LINEAS"
     Private Sub establece_fechas_seguridad_acumulado(ByVal idEquipo As Integer, ByVal fechaInicio As DateTime, ByVal fechaFinal As DateTime)
         Dim fechaGraficos As String = ""
+        Dim mes As String = ""
         Dim vDT As DataTable
         cadenaXML += "<categories>"
 
@@ -972,15 +980,26 @@ Public Class frmGraficas
                 cadenaXML += "<category name='" & fechaGraficos & "' />"
             Next
             cadenaXML += "</categories>"
+
+            If rbtMeses.Checked Then
+                vDT = oGraficas.obtener_Gente_por_meses_acumulado(idEquipo, fechaInicio, fechaFinal)
+                For Each VDR As DataRow In vDT.Rows
+                    fechaGraficos = VDR("Dia_Asignado")
+                    fechaGraficos = Mid(fechaGraficos, 4, 2)
+                    mes = getMeses(fechaGraficos)
+                    cadenaXML += "<category name='" & mes & "' />"
+                Next
+            End If
         End If
+        cadenaXML += "</categories>"
     End Sub
     Private Sub establece_seguridad_acumulado(ByVal idEquipo As Integer, ByVal fechaInicio As DateTime, ByVal fechaFinal As DateTime)
         Dim vTotalMes As Integer
         Dim vResueltas As Integer
         Dim vNuevas As Integer
         Dim VDT As DataTable
-        cadenaXML += "<dataset seriesName='TOTAL DEL MES' color='FFBF00' anchorBorderColor='" & contorno_anchor & "' anchorBgColor='FFBF00' anchorRadius='" & radio_anchor & "'>"
         If rbtDia.Checked Then
+            cadenaXML += "<dataset seriesName='TOTAL DEL MES' color='FFBF00' anchorBorderColor='" & contorno_anchor & "' anchorBgColor='FFBF00' anchorRadius='" & radio_anchor & "'>"
             VDT = oGraficas.obtener_Seguridad_acumulado(idEquipo, fechaInicio, fechaFinal)
             For Each VDR As DataRow In VDT.Rows
                 vTotalMes = VDR("total")
@@ -1001,13 +1020,40 @@ Public Class frmGraficas
                 vNuevas = VDR("nuevas")
                 cadenaXML += "<set value='" & vNuevas & "' />"
             Next
-            cadenaXML += " </dataset>"
+        Else
+            If rbtMeses.Checked Then
+                cadenaXML += "<dataset seriesName='TOTAL DEL MES' color='FFBF00' anchorBorderColor='" & contorno_anchor & "' anchorBgColor='FFBF00' anchorRadius='" & radio_anchor & "'>"
+                VDT = oGraficas.obtener_Seguridad_por_mes_acumulado(idEquipo, fechaInicio, fechaFinal)
+                For Each VDR As DataRow In VDT.Rows
+                    vTotalMes = VDR("total")
+                    cadenaXML += "<set value='" & vTotalMes & "' />"
+                Next
+                cadenaXML += " </dataset>"
+                cadenaXML += "<dataset seriesName='CI.RESUELTAS' color='006400' anchorBorderColor='" & contorno_anchor & "' anchorBgColor='006400' anchorRadius='" & radio_anchor & "'>"
+                VDT = oGraficas.obtener_Seguridad_por_mes_acumulado(idEquipo, fechaInicio, fechaFinal)
+                For Each VDR As DataRow In VDT.Rows
+                    vResueltas = VDR("resueltas")
+                    cadenaXML += "<set value='" & vResueltas & "' />"
+                Next
+                cadenaXML += " </dataset>"
+                cadenaXML += "<dataset seriesName='CI.NUEVAS' color='9D080D' anchorBorderColor='" & contorno_anchor & "' anchorBgColor='9D080D' anchorRadius='" & radio_anchor & "'>"
+
+                VDT = oGraficas.obtener_Seguridad_por_mes_acumulado(idEquipo, fechaInicio, fechaFinal)
+                For Each VDR As DataRow In VDT.Rows
+                    vNuevas = VDR("nuevas")
+                    cadenaXML += "<set value='" & vNuevas & "' />"
+                Next
+
+            End If
         End If
+        cadenaXML += " </dataset>"
     End Sub
 #End Region
-#Region "ESTABLECE SEGURIDAD 1 EQUIPO 1 LINEA" ''falta idlinea
+
+#Region "ESTABLECE SEGURIDAD 1 EQUIPO 1 LINEA"
     Private Sub establece_fechas_seguridad(ByVal idEquipo As Integer, ByVal idLinea As Integer, ByVal fechaInicio As DateTime, ByVal fechaFinal As DateTime)
         Dim fechaGraficos As String = ""
+        Dim mes As String = ""
         Dim vDT As DataTable
         cadenaXML += "<categories>"
 
@@ -1018,16 +1064,27 @@ Public Class frmGraficas
                 fechaGraficos = Mid(fechaGraficos, 1, 5)
                 cadenaXML += "<category name='" & fechaGraficos & "' />"
             Next
-            cadenaXML += "</categories>"
+        Else
+            If rbtMeses.Checked Then
+                vDT = oGraficas.obtener_Seguridad_por_mes_por_linea(idEquipo, idLinea, fechaInicio, fechaFinal)
+                For Each VDR As DataRow In vDT.Rows
+                    fechaGraficos = VDR("Dia_Asignado")
+                    fechaGraficos = Mid(fechaGraficos, 4, 2)
+                    mes = getMeses(fechaGraficos)
+                    cadenaXML += "<category name='" & mes & "' />"
+                Next
+            End If
         End If
+        cadenaXML += " </dataset>"
     End Sub
     Private Sub establece_seguridad(ByVal idEquipo As Integer, ByVal idLinea As Integer, ByVal fechaInicio As DateTime, ByVal fechaFinal As DateTime)
         Dim vTotalMes As Integer
         Dim vResueltas As Integer
         Dim vNuevas As Integer
         Dim VDT As DataTable
-        cadenaXML += "<dataset seriesName='TOTAL DEL MES' color='FFBF00' anchorBorderColor='" & contorno_anchor & "' anchorBgColor='FFBF00' anchorRadius='" & radio_anchor & "'>"
+
         If rbtDia.Checked Then
+            cadenaXML += "<dataset seriesName='TOTAL DEL MES' color='FFBF00' anchorBorderColor='" & contorno_anchor & "' anchorBgColor='FFBF00' anchorRadius='" & radio_anchor & "'>"
             VDT = oGraficas.obtener_Seguridad(idEquipo, idLinea, fechaInicio, fechaFinal)
             For Each VDR As DataRow In VDT.Rows
                 vTotalMes = VDR("total")
@@ -1048,8 +1105,35 @@ Public Class frmGraficas
                 vNuevas = VDR("nuevas")
                 cadenaXML += "<set value='" & vNuevas & "' />"
             Next
-            cadenaXML += " </dataset>"
+
+        Else
+            If rbtMeses.Checked Then
+                cadenaXML += "<dataset seriesName='TOTAL DEL MES' color='FFBF00' anchorBorderColor='" & contorno_anchor & "' anchorBgColor='FFBF00' anchorRadius='" & radio_anchor & "'>"
+                VDT = oGraficas.obtener_Seguridad_por_mes_por_linea(idEquipo, idLinea, fechaInicio, fechaFinal)
+                For Each VDR As DataRow In VDT.Rows
+                    vTotalMes = VDR("total")
+                    cadenaXML += "<set value='" & vTotalMes & "' />"
+                Next
+                cadenaXML += " </dataset>"
+                cadenaXML += "<dataset seriesName='CI.RESUELTAS' color='006400' anchorBorderColor='" & contorno_anchor & "' anchorBgColor='006400' anchorRadius='" & radio_anchor & "'>"
+                VDT = oGraficas.obtener_Seguridad_por_mes_por_linea(idEquipo, idLinea, fechaInicio, fechaFinal)
+                For Each VDR As DataRow In VDT.Rows
+                    vResueltas = VDR("resueltas")
+                    cadenaXML += "<set value='" & vResueltas & "' />"
+                Next
+                cadenaXML += " </dataset>"
+                cadenaXML += "<dataset seriesName='CI.NUEVAS' color='9D080D' anchorBorderColor='" & contorno_anchor & "' anchorBgColor='9D080D' anchorRadius='" & radio_anchor & "'>"
+
+                VDT = oGraficas.obtener_Seguridad_por_mes_por_linea(idEquipo, idLinea, fechaInicio, fechaFinal)
+                For Each VDR As DataRow In VDT.Rows
+                    vNuevas = VDR("nuevas")
+                    cadenaXML += "<set value='" & vNuevas & "' />"
+                Next
+
+            End If
+
         End If
+        cadenaXML += " </dataset>"
     End Sub
 #End Region
 #Region "GUARDAR GRAFICO EN EXCEL"
