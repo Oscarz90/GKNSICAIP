@@ -26,13 +26,33 @@ Public Class Productividad
     End Function
 
     Public Sub Registrar() Implements IIndividual.Registrar
-
+        Using scope As New TransactionScope
+            Try
+                Dim vComando As New SqlClient.SqlCommand
+                vComando.CommandType = CommandType.StoredProcedure
+                vComando.CommandText = "Captura_productividad_Produccion"
+                vComando.Parameters.Add("@cve_registro_turno", SqlDbType.BigInt).Value = Me.vcve_registro_turno
+                vComando.Parameters.Add("@cod_empleado", SqlDbType.VarChar).Value = Me.vcod_empleado
+                vComando.Parameters.Add("@fecha", SqlDbType.DateTime).Value = Me.vfecha
+                vComando.Parameters.Add("@disponibilidad", SqlDbType.Float).Value = Me.vdisponibilidad
+                vComando.Parameters.Add("@desempeno", SqlDbType.Float).Value = Me.vdesempeno
+                vComando.Parameters.Add("@calidad", SqlDbType.Float).Value = Me.vcalidad
+                vComando.Parameters.Add("@oee", SqlDbType.Float).Value = Me.voee
+                vComando.Parameters.Add("@tipo_registro", SqlDbType.VarChar).Value = Me.vtipo_registro
+                oBD.EjecutaProcedimientos(vComando)
+                scope.Complete()
+            Catch 'ex As Exception
+                MsgBox("Error al insertar productividad. CProductividad_ERROR", vbCritical + vbOKOnly, "Error")
+                'Throw New Exception(ex.Message)
+            End Try
+        End Using
     End Sub
 #End Region
 #Region "Atributos"
     Private vcve_productividad As Long
     Private vcve_registro_turno As Long
     Private vcod_empleado As String
+    Private vfecha As DateTime
     Private vdisponibilidad As Double
     Private vdesempeno As Double
     Private vcalidad As Double
@@ -62,6 +82,14 @@ Public Class Productividad
         End Get
         Set(ByVal value As String)
             vcod_empleado = value
+        End Set
+    End Property
+    Public Property fecha() As DateTime
+        Get
+            Return vfecha
+        End Get
+        Set(ByVal value As DateTime)
+            vfecha = value
         End Set
     End Property
     Public Property disponibilidad() As Double

@@ -5,7 +5,7 @@ Public Class ImagenCorporativa
     Dim oBD As New CapaDatos.CapaDatos(cadena_conexion.CadenaSicaip)
 #Region "IIndividual"
     Public Sub Cargar() Implements IIndividual.Cargar
-
+       
     End Sub
 
     Public Sub Eliminar() Implements IIndividual.Eliminar

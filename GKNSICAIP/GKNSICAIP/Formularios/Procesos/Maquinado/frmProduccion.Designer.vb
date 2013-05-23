@@ -99,6 +99,10 @@ Partial Class frmProduccion
         Me.btnAgregarModelo = New System.Windows.Forms.Button()
         Me.btnQuitarModelo = New System.Windows.Forms.Button()
         Me.tabPageParos = New System.Windows.Forms.TabPage()
+        Me.grpCalidad = New System.Windows.Forms.GroupBox()
+        Me.Label77 = New System.Windows.Forms.Label()
+        Me.lblNRFTi = New System.Windows.Forms.Label()
+        Me.Label78 = New System.Windows.Forms.Label()
         Me.grpCosto = New System.Windows.Forms.GroupBox()
         Me.lblMinReal = New System.Windows.Forms.Label()
         Me.lblMinProgramados = New System.Windows.Forms.Label()
@@ -136,6 +140,14 @@ Partial Class frmProduccion
         Me.Label24 = New System.Windows.Forms.Label()
         Me.tabPageRechazos = New System.Windows.Forms.TabPage()
         Me.grp5s = New System.Windows.Forms.GroupBox()
+        Me.txtManto = New System.Windows.Forms.TextBox()
+        Me.Label80 = New System.Windows.Forms.Label()
+        Me.txtcinco_S = New System.Windows.Forms.TextBox()
+        Me.txtAdmon = New System.Windows.Forms.TextBox()
+        Me.Label81 = New System.Windows.Forms.Label()
+        Me.Label82 = New System.Windows.Forms.Label()
+        Me.Label79 = New System.Windows.Forms.Label()
+        Me.btnAgregarCincoS = New System.Windows.Forms.Button()
         Me.txtPromedio = New System.Windows.Forms.TextBox()
         Me.Label68 = New System.Windows.Forms.Label()
         Me.txtManttoAutonomo = New System.Windows.Forms.TextBox()
@@ -235,7 +247,7 @@ Partial Class frmProduccion
         Me.collinea = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.titulo_banner_formulario = New System.Windows.Forms.Label()
         Me.banner_formulario = New System.Windows.Forms.PictureBox()
-        Me.PictureBox1 = New System.Windows.Forms.PictureBox()
+        Me.imgEscudo = New System.Windows.Forms.PictureBox()
         Me.cbxTurno = New System.Windows.Forms.ComboBox()
         Me.Label56 = New System.Windows.Forms.Label()
         Me.Label57 = New System.Windows.Forms.Label()
@@ -244,12 +256,19 @@ Partial Class frmProduccion
         Me.lblNombreEquipo = New System.Windows.Forms.Label()
         Me.Label58 = New System.Windows.Forms.Label()
         Me.cbxLinea = New System.Windows.Forms.ComboBox()
-        Me.grpCalidad = New System.Windows.Forms.GroupBox()
-        Me.Label77 = New System.Windows.Forms.Label()
-        Me.lblNRFTi = New System.Windows.Forms.Label()
-        Me.Label78 = New System.Windows.Forms.Label()
         Me.lblFechaRegistro = New System.Windows.Forms.Label()
         Me.lblFechaRegistrodescripcion = New System.Windows.Forms.Label()
+        Me.txtprom = New System.Windows.Forms.TextBox()
+        Me.Label83 = New System.Windows.Forms.Label()
+        Me.lblAlertaCincoS = New System.Windows.Forms.Label()
+        Me.TabPage3 = New System.Windows.Forms.TabPage()
+        Me.dtpDescanso = New System.Windows.Forms.DateTimePicker()
+        Me.Label84 = New System.Windows.Forms.Label()
+        Me.DataGridView1 = New System.Windows.Forms.DataGridView()
+        Me.Button1 = New System.Windows.Forms.Button()
+        Me.Button2 = New System.Windows.Forms.Button()
+        Me.Label85 = New System.Windows.Forms.Label()
+        Me.Label86 = New System.Windows.Forms.Label()
         Me.TabContenido.SuspendLayout()
         Me.tabPageProductividad.SuspendLayout()
         Me.grpDesechos.SuspendLayout()
@@ -257,6 +276,7 @@ Partial Class frmProduccion
         Me.grpProductividad.SuspendLayout()
         CType(Me.grdDetalleProductividad, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.tabPageParos.SuspendLayout()
+        Me.grpCalidad.SuspendLayout()
         Me.grpCosto.SuspendLayout()
         Me.grpParos.SuspendLayout()
         CType(Me.grdDetalleParo, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -276,8 +296,9 @@ Partial Class frmProduccion
         CType(Me.grdLineasRegistradas, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.grdLineasNoRegistradas, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.banner_formulario, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
-        Me.grpCalidad.SuspendLayout()
+        CType(Me.imgEscudo, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.TabPage3.SuspendLayout()
+        CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'TabContenido
@@ -288,6 +309,7 @@ Partial Class frmProduccion
         Me.TabContenido.Controls.Add(Me.TabPage1)
         Me.TabContenido.Controls.Add(Me.TabPage2)
         Me.TabContenido.Controls.Add(Me.Turnos_Lineas)
+        Me.TabContenido.Controls.Add(Me.TabPage3)
         Me.TabContenido.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.TabContenido.Location = New System.Drawing.Point(12, 248)
         Me.TabContenido.Name = "TabContenido"
@@ -1076,8 +1098,51 @@ Partial Class frmProduccion
         Me.tabPageParos.Padding = New System.Windows.Forms.Padding(3)
         Me.tabPageParos.Size = New System.Drawing.Size(1222, 431)
         Me.tabPageParos.TabIndex = 1
-        Me.tabPageParos.Text = "Paros"
+        Me.tabPageParos.Text = "Paros / Costo / NRFTi"
         Me.tabPageParos.UseVisualStyleBackColor = True
+        '
+        'grpCalidad
+        '
+        Me.grpCalidad.Controls.Add(Me.Label77)
+        Me.grpCalidad.Controls.Add(Me.lblNRFTi)
+        Me.grpCalidad.Controls.Add(Me.Label78)
+        Me.grpCalidad.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.grpCalidad.Location = New System.Drawing.Point(848, 177)
+        Me.grpCalidad.Name = "grpCalidad"
+        Me.grpCalidad.Size = New System.Drawing.Size(368, 237)
+        Me.grpCalidad.TabIndex = 17
+        Me.grpCalidad.TabStop = False
+        Me.grpCalidad.Text = "3.-CALIDAD"
+        '
+        'Label77
+        '
+        Me.Label77.AutoSize = True
+        Me.Label77.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label77.Location = New System.Drawing.Point(210, 53)
+        Me.Label77.Name = "Label77"
+        Me.Label77.Size = New System.Drawing.Size(59, 19)
+        Me.Label77.TabIndex = 14
+        Me.Label77.Text = "PPM'S"
+        '
+        'lblNRFTi
+        '
+        Me.lblNRFTi.AutoSize = True
+        Me.lblNRFTi.Font = New System.Drawing.Font("Arial", 15.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblNRFTi.Location = New System.Drawing.Point(94, 50)
+        Me.lblNRFTi.Name = "lblNRFTi"
+        Me.lblNRFTi.Size = New System.Drawing.Size(22, 24)
+        Me.lblNRFTi.TabIndex = 13
+        Me.lblNRFTi.Text = "0"
+        '
+        'Label78
+        '
+        Me.Label78.AutoSize = True
+        Me.Label78.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label78.Location = New System.Drawing.Point(27, 53)
+        Me.Label78.Name = "Label78"
+        Me.Label78.Size = New System.Drawing.Size(57, 19)
+        Me.Label78.TabIndex = 12
+        Me.Label78.Text = "NRFTi"
         '
         'grpCosto
         '
@@ -1195,9 +1260,9 @@ Partial Class frmProduccion
         Me.grpParos.Controls.Add(Me.cbxMaquina)
         Me.grpParos.Controls.Add(Me.Label24)
         Me.grpParos.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.grpParos.Location = New System.Drawing.Point(6, 6)
+        Me.grpParos.Location = New System.Drawing.Point(6, 35)
         Me.grpParos.Name = "grpParos"
-        Me.grpParos.Size = New System.Drawing.Size(836, 408)
+        Me.grpParos.Size = New System.Drawing.Size(836, 379)
         Me.grpParos.TabIndex = 15
         Me.grpParos.TabStop = False
         Me.grpParos.Text = "Paros"
@@ -1439,6 +1504,17 @@ Partial Class frmProduccion
         '
         'grp5s
         '
+        Me.grp5s.Controls.Add(Me.lblAlertaCincoS)
+        Me.grp5s.Controls.Add(Me.txtprom)
+        Me.grp5s.Controls.Add(Me.Label83)
+        Me.grp5s.Controls.Add(Me.txtManto)
+        Me.grp5s.Controls.Add(Me.Label80)
+        Me.grp5s.Controls.Add(Me.txtcinco_S)
+        Me.grp5s.Controls.Add(Me.txtAdmon)
+        Me.grp5s.Controls.Add(Me.Label81)
+        Me.grp5s.Controls.Add(Me.Label82)
+        Me.grp5s.Controls.Add(Me.Label79)
+        Me.grp5s.Controls.Add(Me.btnAgregarCincoS)
         Me.grp5s.Controls.Add(Me.txtPromedio)
         Me.grp5s.Controls.Add(Me.Label68)
         Me.grp5s.Controls.Add(Me.txtManttoAutonomo)
@@ -1447,16 +1523,93 @@ Partial Class frmProduccion
         Me.grp5s.Controls.Add(Me.txtAdmonVisual)
         Me.grp5s.Controls.Add(Me.Label70)
         Me.grp5s.Controls.Add(Me.Label71)
-        Me.grp5s.Location = New System.Drawing.Point(640, 12)
+        Me.grp5s.Location = New System.Drawing.Point(640, 3)
         Me.grp5s.Name = "grp5s"
-        Me.grp5s.Size = New System.Drawing.Size(511, 358)
+        Me.grp5s.Size = New System.Drawing.Size(579, 414)
         Me.grp5s.TabIndex = 337
         Me.grp5s.TabStop = False
         Me.grp5s.Text = "5'S"
         '
+        'txtManto
+        '
+        Me.txtManto.Location = New System.Drawing.Point(260, 252)
+        Me.txtManto.Name = "txtManto"
+        Me.txtManto.ReadOnly = True
+        Me.txtManto.Size = New System.Drawing.Size(100, 26)
+        Me.txtManto.TabIndex = 335
+        '
+        'Label80
+        '
+        Me.Label80.AutoSize = True
+        Me.Label80.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label80.Location = New System.Drawing.Point(117, 255)
+        Me.Label80.Name = "Label80"
+        Me.Label80.Size = New System.Drawing.Size(137, 18)
+        Me.Label80.TabIndex = 336
+        Me.Label80.Text = "Mantto. Autónomo:"
+        '
+        'txtcinco_S
+        '
+        Me.txtcinco_S.Location = New System.Drawing.Point(260, 316)
+        Me.txtcinco_S.Name = "txtcinco_S"
+        Me.txtcinco_S.ReadOnly = True
+        Me.txtcinco_S.Size = New System.Drawing.Size(100, 26)
+        Me.txtcinco_S.TabIndex = 334
+        '
+        'txtAdmon
+        '
+        Me.txtAdmon.Location = New System.Drawing.Point(260, 284)
+        Me.txtAdmon.Name = "txtAdmon"
+        Me.txtAdmon.ReadOnly = True
+        Me.txtAdmon.Size = New System.Drawing.Size(100, 26)
+        Me.txtAdmon.TabIndex = 332
+        '
+        'Label81
+        '
+        Me.Label81.AutoSize = True
+        Me.Label81.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label81.Location = New System.Drawing.Point(95, 290)
+        Me.Label81.Name = "Label81"
+        Me.Label81.Size = New System.Drawing.Size(159, 18)
+        Me.Label81.TabIndex = 333
+        Me.Label81.Text = "Administración visual:"
+        '
+        'Label82
+        '
+        Me.Label82.AutoSize = True
+        Me.Label82.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label82.Location = New System.Drawing.Point(221, 319)
+        Me.Label82.Name = "Label82"
+        Me.Label82.Size = New System.Drawing.Size(33, 18)
+        Me.Label82.TabIndex = 331
+        Me.Label82.Text = "5 s:"
+        '
+        'Label79
+        '
+        Me.Label79.AutoSize = True
+        Me.Label79.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label79.Location = New System.Drawing.Point(455, 96)
+        Me.Label79.Name = "Label79"
+        Me.Label79.Size = New System.Drawing.Size(65, 18)
+        Me.Label79.TabIndex = 330
+        Me.Label79.Text = "Agregar"
+        '
+        'btnAgregarCincoS
+        '
+        Me.btnAgregarCincoS.BackColor = System.Drawing.Color.White
+        Me.btnAgregarCincoS.BackgroundImage = CType(resources.GetObject("btnAgregarCincoS.BackgroundImage"), System.Drawing.Image)
+        Me.btnAgregarCincoS.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center
+        Me.btnAgregarCincoS.Enabled = False
+        Me.btnAgregarCincoS.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnAgregarCincoS.Location = New System.Drawing.Point(457, 34)
+        Me.btnAgregarCincoS.Name = "btnAgregarCincoS"
+        Me.btnAgregarCincoS.Size = New System.Drawing.Size(63, 59)
+        Me.btnAgregarCincoS.TabIndex = 329
+        Me.btnAgregarCincoS.UseVisualStyleBackColor = False
+        '
         'txtPromedio
         '
-        Me.txtPromedio.Location = New System.Drawing.Point(190, 184)
+        Me.txtPromedio.Location = New System.Drawing.Point(260, 132)
         Me.txtPromedio.Name = "txtPromedio"
         Me.txtPromedio.ReadOnly = True
         Me.txtPromedio.Size = New System.Drawing.Size(100, 26)
@@ -1465,7 +1618,7 @@ Partial Class frmProduccion
         'Label68
         '
         Me.Label68.AutoSize = True
-        Me.Label68.Location = New System.Drawing.Point(103, 187)
+        Me.Label68.Location = New System.Drawing.Point(173, 135)
         Me.Label68.Name = "Label68"
         Me.Label68.Size = New System.Drawing.Size(73, 18)
         Me.Label68.TabIndex = 159
@@ -1473,7 +1626,7 @@ Partial Class frmProduccion
         '
         'txtManttoAutonomo
         '
-        Me.txtManttoAutonomo.Location = New System.Drawing.Point(190, 137)
+        Me.txtManttoAutonomo.Location = New System.Drawing.Point(260, 36)
         Me.txtManttoAutonomo.Name = "txtManttoAutonomo"
         Me.txtManttoAutonomo.Size = New System.Drawing.Size(100, 26)
         Me.txtManttoAutonomo.TabIndex = 157
@@ -1482,7 +1635,7 @@ Partial Class frmProduccion
         '
         Me.Label69.AutoSize = True
         Me.Label69.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label69.Location = New System.Drawing.Point(47, 140)
+        Me.Label69.Location = New System.Drawing.Point(117, 39)
         Me.Label69.Name = "Label69"
         Me.Label69.Size = New System.Drawing.Size(137, 18)
         Me.Label69.TabIndex = 158
@@ -1490,14 +1643,14 @@ Partial Class frmProduccion
         '
         'txt5s
         '
-        Me.txt5s.Location = New System.Drawing.Point(190, 91)
+        Me.txt5s.Location = New System.Drawing.Point(260, 100)
         Me.txt5s.Name = "txt5s"
         Me.txt5s.Size = New System.Drawing.Size(100, 26)
         Me.txt5s.TabIndex = 156
         '
         'txtAdmonVisual
         '
-        Me.txtAdmonVisual.Location = New System.Drawing.Point(190, 45)
+        Me.txtAdmonVisual.Location = New System.Drawing.Point(260, 68)
         Me.txtAdmonVisual.Name = "txtAdmonVisual"
         Me.txtAdmonVisual.Size = New System.Drawing.Size(100, 26)
         Me.txtAdmonVisual.TabIndex = 154
@@ -1506,7 +1659,7 @@ Partial Class frmProduccion
         '
         Me.Label70.AutoSize = True
         Me.Label70.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label70.Location = New System.Drawing.Point(25, 51)
+        Me.Label70.Location = New System.Drawing.Point(95, 74)
         Me.Label70.Name = "Label70"
         Me.Label70.Size = New System.Drawing.Size(159, 18)
         Me.Label70.TabIndex = 155
@@ -1516,7 +1669,7 @@ Partial Class frmProduccion
         '
         Me.Label71.AutoSize = True
         Me.Label71.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label71.Location = New System.Drawing.Point(151, 94)
+        Me.Label71.Location = New System.Drawing.Point(221, 103)
         Me.Label71.Name = "Label71"
         Me.Label71.Size = New System.Drawing.Size(33, 18)
         Me.Label71.TabIndex = 153
@@ -2447,13 +2600,13 @@ Partial Class frmProduccion
         Me.banner_formulario.TabIndex = 104
         Me.banner_formulario.TabStop = False
         '
-        'PictureBox1
+        'imgEscudo
         '
-        Me.PictureBox1.Location = New System.Drawing.Point(976, 70)
-        Me.PictureBox1.Name = "PictureBox1"
-        Me.PictureBox1.Size = New System.Drawing.Size(266, 172)
-        Me.PictureBox1.TabIndex = 105
-        Me.PictureBox1.TabStop = False
+        Me.imgEscudo.Location = New System.Drawing.Point(976, 70)
+        Me.imgEscudo.Name = "imgEscudo"
+        Me.imgEscudo.Size = New System.Drawing.Size(266, 172)
+        Me.imgEscudo.TabIndex = 105
+        Me.imgEscudo.TabStop = False
         '
         'cbxTurno
         '
@@ -2531,53 +2684,10 @@ Partial Class frmProduccion
         Me.cbxLinea.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cbxLinea.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cbxLinea.FormattingEnabled = True
-        Me.cbxLinea.Location = New System.Drawing.Point(65, 181)
+        Me.cbxLinea.Location = New System.Drawing.Point(65, 184)
         Me.cbxLinea.Name = "cbxLinea"
         Me.cbxLinea.Size = New System.Drawing.Size(234, 26)
         Me.cbxLinea.TabIndex = 309
-        '
-        'grpCalidad
-        '
-        Me.grpCalidad.Controls.Add(Me.Label77)
-        Me.grpCalidad.Controls.Add(Me.lblNRFTi)
-        Me.grpCalidad.Controls.Add(Me.Label78)
-        Me.grpCalidad.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.grpCalidad.Location = New System.Drawing.Point(848, 177)
-        Me.grpCalidad.Name = "grpCalidad"
-        Me.grpCalidad.Size = New System.Drawing.Size(368, 237)
-        Me.grpCalidad.TabIndex = 17
-        Me.grpCalidad.TabStop = False
-        Me.grpCalidad.Text = "3.-CALIDAD"
-        '
-        'Label77
-        '
-        Me.Label77.AutoSize = True
-        Me.Label77.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label77.Location = New System.Drawing.Point(210, 53)
-        Me.Label77.Name = "Label77"
-        Me.Label77.Size = New System.Drawing.Size(59, 19)
-        Me.Label77.TabIndex = 14
-        Me.Label77.Text = "PPM'S"
-        '
-        'lblNRFTi
-        '
-        Me.lblNRFTi.AutoSize = True
-        Me.lblNRFTi.Font = New System.Drawing.Font("Arial", 15.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblNRFTi.Location = New System.Drawing.Point(94, 50)
-        Me.lblNRFTi.Name = "lblNRFTi"
-        Me.lblNRFTi.Size = New System.Drawing.Size(22, 24)
-        Me.lblNRFTi.TabIndex = 13
-        Me.lblNRFTi.Text = "0"
-        '
-        'Label78
-        '
-        Me.Label78.AutoSize = True
-        Me.Label78.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label78.Location = New System.Drawing.Point(27, 53)
-        Me.Label78.Name = "Label78"
-        Me.Label78.Size = New System.Drawing.Size(57, 19)
-        Me.Label78.TabIndex = 12
-        Me.Label78.Text = "NRFTi"
         '
         'lblFechaRegistro
         '
@@ -2599,6 +2709,124 @@ Partial Class frmProduccion
         Me.lblFechaRegistrodescripcion.TabIndex = 312
         Me.lblFechaRegistrodescripcion.Text = "Fecha Registro:"
         '
+        'txtprom
+        '
+        Me.txtprom.Location = New System.Drawing.Point(260, 348)
+        Me.txtprom.Name = "txtprom"
+        Me.txtprom.ReadOnly = True
+        Me.txtprom.Size = New System.Drawing.Size(100, 26)
+        Me.txtprom.TabIndex = 338
+        '
+        'Label83
+        '
+        Me.Label83.AutoSize = True
+        Me.Label83.Location = New System.Drawing.Point(173, 351)
+        Me.Label83.Name = "Label83"
+        Me.Label83.Size = New System.Drawing.Size(73, 18)
+        Me.Label83.TabIndex = 337
+        Me.Label83.Text = "Promedio:"
+        '
+        'lblAlertaCincoS
+        '
+        Me.lblAlertaCincoS.AutoSize = True
+        Me.lblAlertaCincoS.Font = New System.Drawing.Font("Calibri", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblAlertaCincoS.ForeColor = System.Drawing.Color.Red
+        Me.lblAlertaCincoS.Location = New System.Drawing.Point(188, 217)
+        Me.lblAlertaCincoS.Name = "lblAlertaCincoS"
+        Me.lblAlertaCincoS.Size = New System.Drawing.Size(172, 19)
+        Me.lblAlertaCincoS.TabIndex = 339
+        Me.lblAlertaCincoS.Text = "No se ha Capturado 5'S."
+        Me.lblAlertaCincoS.Visible = False
+        '
+        'TabPage3
+        '
+        Me.TabPage3.Controls.Add(Me.Button1)
+        Me.TabPage3.Controls.Add(Me.Button2)
+        Me.TabPage3.Controls.Add(Me.Label85)
+        Me.TabPage3.Controls.Add(Me.Label86)
+        Me.TabPage3.Controls.Add(Me.DataGridView1)
+        Me.TabPage3.Controls.Add(Me.Label84)
+        Me.TabPage3.Controls.Add(Me.dtpDescanso)
+        Me.TabPage3.Location = New System.Drawing.Point(4, 27)
+        Me.TabPage3.Name = "TabPage3"
+        Me.TabPage3.Padding = New System.Windows.Forms.Padding(3)
+        Me.TabPage3.Size = New System.Drawing.Size(1222, 431)
+        Me.TabPage3.TabIndex = 6
+        Me.TabPage3.Text = "Descansos"
+        Me.TabPage3.UseVisualStyleBackColor = True
+        '
+        'dtpDescanso
+        '
+        Me.dtpDescanso.Location = New System.Drawing.Point(49, 79)
+        Me.dtpDescanso.Name = "dtpDescanso"
+        Me.dtpDescanso.Size = New System.Drawing.Size(200, 26)
+        Me.dtpDescanso.TabIndex = 309
+        Me.dtpDescanso.Visible = False
+        '
+        'Label84
+        '
+        Me.Label84.AutoSize = True
+        Me.Label84.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label84.Location = New System.Drawing.Point(46, 46)
+        Me.Label84.Name = "Label84"
+        Me.Label84.Size = New System.Drawing.Size(194, 18)
+        Me.Label84.TabIndex = 313
+        Me.Label84.Text = "Calendario del Mes Actual:"
+        '
+        'DataGridView1
+        '
+        Me.DataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.DataGridView1.Location = New System.Drawing.Point(6, 168)
+        Me.DataGridView1.Name = "DataGridView1"
+        Me.DataGridView1.Size = New System.Drawing.Size(724, 257)
+        Me.DataGridView1.TabIndex = 314
+        '
+        'Button1
+        '
+        Me.Button1.BackColor = System.Drawing.Color.White
+        Me.Button1.BackgroundImage = CType(resources.GetObject("Button1.BackgroundImage"), System.Drawing.Image)
+        Me.Button1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center
+        Me.Button1.Enabled = False
+        Me.Button1.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Button1.Location = New System.Drawing.Point(638, 46)
+        Me.Button1.Name = "Button1"
+        Me.Button1.Size = New System.Drawing.Size(64, 59)
+        Me.Button1.TabIndex = 335
+        Me.Button1.UseVisualStyleBackColor = False
+        '
+        'Button2
+        '
+        Me.Button2.BackColor = System.Drawing.Color.White
+        Me.Button2.BackgroundImage = CType(resources.GetObject("Button2.BackgroundImage"), System.Drawing.Image)
+        Me.Button2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center
+        Me.Button2.Enabled = False
+        Me.Button2.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Button2.Location = New System.Drawing.Point(561, 46)
+        Me.Button2.Name = "Button2"
+        Me.Button2.Size = New System.Drawing.Size(63, 59)
+        Me.Button2.TabIndex = 334
+        Me.Button2.UseVisualStyleBackColor = False
+        '
+        'Label85
+        '
+        Me.Label85.AutoSize = True
+        Me.Label85.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label85.Location = New System.Drawing.Point(644, 108)
+        Me.Label85.Name = "Label85"
+        Me.Label85.Size = New System.Drawing.Size(50, 18)
+        Me.Label85.TabIndex = 337
+        Me.Label85.Text = "Quitar"
+        '
+        'Label86
+        '
+        Me.Label86.AutoSize = True
+        Me.Label86.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label86.Location = New System.Drawing.Point(559, 108)
+        Me.Label86.Name = "Label86"
+        Me.Label86.Size = New System.Drawing.Size(65, 18)
+        Me.Label86.TabIndex = 336
+        Me.Label86.Text = "Agregar"
+        '
         'frmProduccion
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -2616,7 +2844,7 @@ Partial Class frmProduccion
         Me.Controls.Add(Me.lblNombreEmpleado)
         Me.Controls.Add(Me.cbxTurno)
         Me.Controls.Add(Me.Label56)
-        Me.Controls.Add(Me.PictureBox1)
+        Me.Controls.Add(Me.imgEscudo)
         Me.Controls.Add(Me.titulo_banner_formulario)
         Me.Controls.Add(Me.banner_formulario)
         Me.Controls.Add(Me.TabContenido)
@@ -2636,6 +2864,8 @@ Partial Class frmProduccion
         Me.grpProductividad.PerformLayout()
         CType(Me.grdDetalleProductividad, System.ComponentModel.ISupportInitialize).EndInit()
         Me.tabPageParos.ResumeLayout(False)
+        Me.grpCalidad.ResumeLayout(False)
+        Me.grpCalidad.PerformLayout()
         Me.grpCosto.ResumeLayout(False)
         Me.grpCosto.PerformLayout()
         Me.grpParos.ResumeLayout(False)
@@ -2663,9 +2893,10 @@ Partial Class frmProduccion
         CType(Me.grdLineasRegistradas, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.grdLineasNoRegistradas, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.banner_formulario, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).EndInit()
-        Me.grpCalidad.ResumeLayout(False)
-        Me.grpCalidad.PerformLayout()
+        CType(Me.imgEscudo, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.TabPage3.ResumeLayout(False)
+        Me.TabPage3.PerformLayout()
+        CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -2778,7 +3009,7 @@ Partial Class frmProduccion
     Friend WithEvents Label55 As System.Windows.Forms.Label
     Friend WithEvents titulo_banner_formulario As System.Windows.Forms.Label
     Friend WithEvents banner_formulario As System.Windows.Forms.PictureBox
-    Friend WithEvents PictureBox1 As System.Windows.Forms.PictureBox
+    Friend WithEvents imgEscudo As System.Windows.Forms.PictureBox
     Friend WithEvents cbxTurno As System.Windows.Forms.ComboBox
     Friend WithEvents Label56 As System.Windows.Forms.Label
     Friend WithEvents Label57 As System.Windows.Forms.Label
@@ -2897,4 +3128,23 @@ Partial Class frmProduccion
     Friend WithEvents Label78 As System.Windows.Forms.Label
     Friend WithEvents lblFechaRegistro As System.Windows.Forms.Label
     Friend WithEvents lblFechaRegistrodescripcion As System.Windows.Forms.Label
+    Friend WithEvents txtManto As System.Windows.Forms.TextBox
+    Friend WithEvents Label80 As System.Windows.Forms.Label
+    Friend WithEvents txtcinco_S As System.Windows.Forms.TextBox
+    Friend WithEvents txtAdmon As System.Windows.Forms.TextBox
+    Friend WithEvents Label81 As System.Windows.Forms.Label
+    Friend WithEvents Label82 As System.Windows.Forms.Label
+    Friend WithEvents Label79 As System.Windows.Forms.Label
+    Friend WithEvents btnAgregarCincoS As System.Windows.Forms.Button
+    Friend WithEvents txtprom As System.Windows.Forms.TextBox
+    Friend WithEvents Label83 As System.Windows.Forms.Label
+    Friend WithEvents lblAlertaCincoS As System.Windows.Forms.Label
+    Friend WithEvents TabPage3 As System.Windows.Forms.TabPage
+    Friend WithEvents Button1 As System.Windows.Forms.Button
+    Friend WithEvents Button2 As System.Windows.Forms.Button
+    Friend WithEvents Label85 As System.Windows.Forms.Label
+    Friend WithEvents Label86 As System.Windows.Forms.Label
+    Friend WithEvents DataGridView1 As System.Windows.Forms.DataGridView
+    Friend WithEvents Label84 As System.Windows.Forms.Label
+    Friend WithEvents dtpDescanso As System.Windows.Forms.DateTimePicker
 End Class

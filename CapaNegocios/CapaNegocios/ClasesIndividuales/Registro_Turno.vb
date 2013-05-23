@@ -155,7 +155,6 @@ Public Class Registro_Turno
         End Using
     End Sub
     Public Function llena_lineas_registradas_hoy() As DataTable
-
         Dim obj As DataTable
         Using scope As New TransactionScope
             Try
