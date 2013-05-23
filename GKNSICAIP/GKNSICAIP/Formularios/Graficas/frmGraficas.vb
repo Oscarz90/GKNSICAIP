@@ -895,7 +895,6 @@ Public Class frmGraficas
                 fechaGraficos = Mid(fechaGraficos, 1, 5)
                 cadenaXML += "<category name='" & fechaGraficos & "' />"
             Next
-            cadenaXML += "</categories>"
         Else
             If rbtMeses.Checked Then
                 vDT = oGraficas.obtener_Gente_por_meses_por_linea(idEquipo, idLinea, fechaInicio, fechaFinal)
@@ -979,10 +978,10 @@ Public Class frmGraficas
                 fechaGraficos = Mid(fechaGraficos, 1, 5)
                 cadenaXML += "<category name='" & fechaGraficos & "' />"
             Next
-            cadenaXML += "</categories>"
-
+        Else
+            ''corregir
             If rbtMeses.Checked Then
-                vDT = oGraficas.obtener_Gente_por_meses_acumulado(idEquipo, fechaInicio, fechaFinal)
+                vDT = oGraficas.obtener_Seguridad_por_mes_acumulado(idEquipo, fechaInicio, fechaFinal)
                 For Each VDR As DataRow In vDT.Rows
                     fechaGraficos = VDR("Dia_Asignado")
                     fechaGraficos = Mid(fechaGraficos, 4, 2)
@@ -1021,6 +1020,7 @@ Public Class frmGraficas
                 cadenaXML += "<set value='" & vNuevas & "' />"
             Next
         Else
+            ''corregir
             If rbtMeses.Checked Then
                 cadenaXML += "<dataset seriesName='TOTAL DEL MES' color='FFBF00' anchorBorderColor='" & contorno_anchor & "' anchorBgColor='FFBF00' anchorRadius='" & radio_anchor & "'>"
                 VDT = oGraficas.obtener_Seguridad_por_mes_acumulado(idEquipo, fechaInicio, fechaFinal)
@@ -1065,6 +1065,7 @@ Public Class frmGraficas
                 cadenaXML += "<category name='" & fechaGraficos & "' />"
             Next
         Else
+            ''corregir
             If rbtMeses.Checked Then
                 vDT = oGraficas.obtener_Seguridad_por_mes_por_linea(idEquipo, idLinea, fechaInicio, fechaFinal)
                 For Each VDR As DataRow In vDT.Rows
@@ -1075,7 +1076,7 @@ Public Class frmGraficas
                 Next
             End If
         End If
-        cadenaXML += " </dataset>"
+        cadenaXML += "</categories>"
     End Sub
     Private Sub establece_seguridad(ByVal idEquipo As Integer, ByVal idLinea As Integer, ByVal fechaInicio As DateTime, ByVal fechaFinal As DateTime)
         Dim vTotalMes As Integer
@@ -1107,6 +1108,7 @@ Public Class frmGraficas
             Next
 
         Else
+            ''corregir
             If rbtMeses.Checked Then
                 cadenaXML += "<dataset seriesName='TOTAL DEL MES' color='FFBF00' anchorBorderColor='" & contorno_anchor & "' anchorBgColor='FFBF00' anchorRadius='" & radio_anchor & "'>"
                 VDT = oGraficas.obtener_Seguridad_por_mes_por_linea(idEquipo, idLinea, fechaInicio, fechaFinal)
@@ -1136,6 +1138,7 @@ Public Class frmGraficas
         cadenaXML += " </dataset>"
     End Sub
 #End Region
+
 #Region "GUARDAR GRAFICO EN EXCEL"
 
     Function capturaPantalla(ByVal locX As Integer, ByVal locY As Integer, ByVal width As Integer, ByVal height As Integer) As Bitmap

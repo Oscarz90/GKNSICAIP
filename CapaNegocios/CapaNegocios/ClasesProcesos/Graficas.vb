@@ -186,7 +186,7 @@ Public Class Graficas
             Try
                 Dim cmd As New SqlClient.SqlCommand
                 cmd.CommandType = CommandType.StoredProcedure
-                cmd.CommandText = "obtiene_seguridad"
+                cmd.CommandText = "obtiene_seguridad"  ''-----------------
                 cmd.Parameters.Add("@cve_equipo", SqlDbType.BigInt).Value = videquipo
                 cmd.Parameters.Add("@fecha_inicial", SqlDbType.DateTime).Value = vfechainicio
                 cmd.Parameters.Add("@fecha_final", SqlDbType.DateTime).Value = vfechafinal
