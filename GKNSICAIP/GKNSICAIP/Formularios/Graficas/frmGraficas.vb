@@ -2,7 +2,6 @@
 Public Class frmGraficas    
 #Region "VARIABLES GLOBALES"
     Dim oGraficas As Graficas
-    'Private vIdEquipo As Integer = 4, 76
     Private vIdLinea As Integer
     Private vIdEquipo As Integer
     Dim colores(12) As String
@@ -24,12 +23,6 @@ Public Class frmGraficas
     Public Sub Set_IdEquipo(ByVal idEq As Integer)
         vIdEquipo = idEq
     End Sub
-
-    'Public Function Set_IdLinea(ByVal idLinea As Integer) As Integer
-    '    vIdLinea = cbxLinea.SelectedValue
-    '    Return vIdLinea
-    'End Function
-
 #End Region
 #Region "MESES"
     Private Function getMeses(ByVal numero As String) As String
@@ -139,19 +132,19 @@ Public Class frmGraficas
 #End Region
 #Region "COLORES"
     Private Sub llena_colores()
-        colores(0) = "FFA500" 'Azul Oscuro = 0C1089  amarillo fuerte=FFA500 oee**
-        colores(1) = "9D080D" 'Rojo **
-        colores(2) = "C9198D" 'Rosa oscuro
+        colores(0) = "FFA500" '---------------AMARILLO FUERTE -->OEE
+        colores(1) = "9D080D" '---------------ROJO   -->NUEVAS(SEGURIDAD), FALTAS(GENTE)
+        colores(2) = "585858" '---------------GRIS -->COSTO
         colores(3) = "58D3F7" 'AzulPastelClaro
         colores(4) = "FAAC58" 'NaranjaClaro
         colores(5) = "FFFF00" 'AmarilloOscuro
-        colores(6) = "0101DF" 'AzulOscuro
+        colores(6) = "0101DF" '---------------AZUL OSCURO -->NRFTI
         colores(7) = "8A0808" 'AzulPastelOscuro gente **
         colores(8) = "FF8000" 'NaranjaOscuro
-        colores(9) = "FFBF00" 'Azul=81DAF5  amarillo FFBF00 gente**
-        colores(10) = "045FB4" 'NaranjaClaro=FAAC58 azul gente = 045FB4 **
+        colores(9) = "FFBF00" '----------------AMARILLO -->TOTAL(SEGURIDAD), RETARDOS
+        colores(10) = "045FB4" '---------------AZUL --GENTE
         colores(11) = "0B0B61" 'AzulOscuro
-        colores(12) = "006400" 'F3F781=AmarilloClaro verde =006400  5s**
+        colores(12) = "006400" '---------------VERDE -->5S, SEGURIDAD(RESUELTAS)
     End Sub
 #End Region
 #Region "VALIDAR HABILITAR BOTON GRAFICAR"
@@ -270,19 +263,19 @@ Public Class frmGraficas
             cadenaGroup = "dia_asignado"
         End If
 
-        'If rbtOEE.Checked Then
-        '    cadenaWHERE = cadenaWHERE & " group by cadena, componente, linea, equipo, oee, tipo_registro, " & cadenaGroup & " order by " & cadenaGroup
-        'ElseIf rbtNRFTi.Checked Then
+        If rbtOEE.Checked Then
+            cadenaWHERE = cadenaWHERE & " group by cadena, componente, linea, equipo, oee, tipo_registro, " & cadenaGroup & " order by " & cadenaGroup
+        ElseIf rbtNRFTi.Checked Then
 
-        'ElseIf rbtCosto.Checked Then
+        ElseIf rbtCosto.Checked Then
 
-        'ElseIf rbtSeg.Checked Then
+        ElseIf rbtSeg.Checked Then
 
-        'ElseIf rbt5s.Checked Then
-        '    cadenaWHERE = cadenaWHERE & " group by cadena, componente, linea, equipo, PROMEDIO, " & cadenaGroup & " order by " & cadenaGroup
-        'ElseIf rbtGente.Checked Then
+        ElseIf rbt5s.Checked Then
+            cadenaWHERE = cadenaWHERE & " group by cadena, componente, linea, equipo, PROMEDIO, " & cadenaGroup & " order by " & cadenaGroup
+        ElseIf rbtGente.Checked Then
 
-        'End If
+        End If
 
     End Sub
 
@@ -296,7 +289,6 @@ Public Class frmGraficas
         Dim vDT As DataTable
         Dim banderaPromedio As Boolean
         cadenaXML += "<categories>"
-
         If rbtDia.Checked Then
             vDT = oGraficas.ejecutarVista(cadena, cadenaWHERE)
             For Each vDR As DataRow In vDT.Rows
@@ -978,7 +970,6 @@ Public Class frmGraficas
                 cadenaXML += "<category name='" & fechaGraficos & "' />"
             Next
         Else
-            ''corregir
             If rbtMeses.Checked Then
                 vDT = oGraficas.obtener_Seguridad_por_mes_acumulado(idEquipo, fechaInicio, fechaFinal)
                 For Each VDR As DataRow In vDT.Rows
@@ -1019,7 +1010,6 @@ Public Class frmGraficas
                 cadenaXML += "<set value='" & vNuevas & "' />"
             Next
         Else
-            ''corregir
             If rbtMeses.Checked Then
                 cadenaXML += "<dataset seriesName='TOTAL DEL MES' color='FFBF00' anchorBorderColor='" & contorno_anchor & "' anchorBgColor='FFBF00' anchorRadius='" & radio_anchor & "'>"
                 VDT = oGraficas.obtener_Seguridad_por_mes_acumulado(idEquipo, fechaInicio, fechaFinal)
@@ -1063,7 +1053,6 @@ Public Class frmGraficas
                 cadenaXML += "<category name='" & fechaGraficos & "' />"
             Next
         Else
-            ''corregir
             If rbtMeses.Checked Then
                 vDT = oGraficas.obtener_Seguridad_por_mes_por_linea(idEquipo, idLinea, fechaInicio, fechaFinal)
                 For Each VDR As DataRow In vDT.Rows
@@ -1136,15 +1125,12 @@ Public Class frmGraficas
         cadenaXML += " </dataset>"
     End Sub
 #End Region
-
 #Region "ESTABLECE COSTO 1 EQUIPO 1 LINEA"
 
 #End Region
-
 #Region "ESTABLECE COSTO 1 EQUIPO N LINEAS"
 
 #End Region
-
 #Region "GUARDAR GRAFICO EN EXCEL"
 
     Function capturaPantalla(ByVal locX As Integer, ByVal locY As Integer, ByVal width As Integer, ByVal height As Integer) As Bitmap
@@ -1305,6 +1291,7 @@ Public Class frmGraficas
     Private Sub cmdGraficar_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmdGraficar.Click
         swfGrafica.Visible = True
         Dim tipoGrafico As String = ""
+        Dim decimales As String = ""
         Dim ejeY As String = "R E S U L T A D O S "
         ''VALORES QUE CAMBIARAN DEPENDIENDO DEL INDICADOR SELECCIONADO
         '' 1. OEE           2. CALIDAD   3. COSTO    4. SEGURIDAD     5. 5'S       6. GENTE
@@ -1315,26 +1302,32 @@ Public Class frmGraficas
             maxEjeY = 100
             numberSuffix = "%25"
             subcaption = "OEE"
+            decimales = "1"
         ElseIf rbtNRFTi.Checked Then
             maxEjeY = 32000
             numberSuffix = ""
             subcaption = "NRFTi"
+            decimales = "0"
         ElseIf rbtCosto.Checked Then
             maxEjeY = 100
-            numberSuffix = ""
+            numberSuffix = "$"
             subcaption = "COSTO"
+            decimales = "1"
         ElseIf rbtSeg.Checked Then
             maxEjeY = 15
             numberSuffix = ""
             subcaption = "SEGURIDAD"
+            decimales = "0"
         ElseIf rbt5s.Checked Then
             maxEjeY = 5
             numberSuffix = ""
             subcaption = "5s"
+            decimales = "1"
         ElseIf rbtGente.Checked Then
             maxEjeY = 15
             numberSuffix = ""
             subcaption = "GENTE"
+            decimales = "0"
         End If
         ''SELECCION DEL TIPO DE GRAFICA LINEA/BARRA/STOCK
         If rbtLineas.Checked Then
@@ -1348,7 +1341,7 @@ Public Class frmGraficas
         End If
 
         rutaGrafica = "file://" & Application.StartupPath & "/FusionChartsFree/Charts/" & tipoGrafico & "?chartWidth=1240&chartHeight=400"
-        cadenaXML = rutaGrafica + "&dataXML=<graph YAxisMinValue='0' YAxisMaxValue='" & maxEjeY & "' numberSuffix='" & numberSuffix & "' caption='REPORTE DE RESULTADOS' subcaption='" & subcaption & "' YAxisName= '" & ejeY & "' xAxisName='F E C H A (s)' labeldisplay='rotate' decimalPrecision='2' rotateNames='1' formatNumberScale='0' thousandSeparator=',' bgcolor='ffffff' bgalpha='000000' showColumnShadow='1' showAlternateHGridColor='1' AlternateHGridColor='ff5904' divLineColor='ff5904' divLineAlpha='20' alternateHGridAlpha='5' canvasBorderColor='666666' baseFontColor='666666'>"
+        cadenaXML = rutaGrafica + "&dataXML=<graph YAxisMinValue='0' YAxisMaxValue='" & maxEjeY & "' numberSuffix='" & numberSuffix & "' caption='REPORTE DE RESULTADOS' subcaption='" & subcaption & "' YAxisName= '" & ejeY & "' xAxisName='F E C H A (s)' labeldisplay='rotate' decimalPrecision='" & decimales & "' rotateNames='1' formatNumberScale='0' thousandSeparator=',' bgcolor='ffffff' bgalpha='000000' showColumnShadow='1' showAlternateHGridColor='1' AlternateHGridColor='ff5904' divLineColor='ff5904' divLineAlpha='20' alternateHGridAlpha='5' canvasBorderColor='666666' baseFontColor='666666'>"
 
         Condicion_WHERE(cbxTodasLineas.Checked)
         '' O E E -- P R O D U C C I O N --
@@ -1445,7 +1438,20 @@ Public Class frmGraficas
             arch.Inserta_datos_grafica("C12", cbxArea.Text)
             arch.Inserta_datos_grafica("C13", cbxLinea.Text)
             arch.Inserta_datos_grafica("C14", cbxEquipo.Text)
-            'arch.Inserta_datos_grafica("F13", cbxEquipo.Text) 'CONCEPTO
+            If rbtOEE.Checked Then
+                arch.Inserta_datos_grafica("F13", rbtOEE.Text)
+            ElseIf rbtNRFTi.Checked Then
+                arch.Inserta_datos_grafica("F13", rbtNRFTi.Text)
+            ElseIf rbtCosto.Checked Then
+                arch.Inserta_datos_grafica("F13", rbtCosto.Text)
+            ElseIf rbtSeg.Checked Then
+                arch.Inserta_datos_grafica("F13", rbtSeg.Text)
+            ElseIf rbtGente.Checked Then
+                arch.Inserta_datos_grafica("F13", rbtGente.Text)
+            ElseIf rbt5s.Checked Then
+                arch.Inserta_datos_grafica("F13", rbt5s.Text)
+            End If
+
 
             If rbtDia.Checked Then
                 arch.Inserta_datos_grafica("F11", dtpDesde.Value.Day.ToString & "/" & dtpDesde.Value.Month.ToString & "/" & dtpDesde.Value.Year.ToString & " a " & dtpHasta.Value.Day.ToString & "/" & dtpHasta.Value.Month.ToString & "/" & dtpHasta.Value.Year.ToString)
