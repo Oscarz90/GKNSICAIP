@@ -173,15 +173,13 @@ Public Class frmProduccion
     End Sub
     Private Sub calcula_NRFTI()
         Dim varvalida As Double = (get_suma_desechos() + get_suma_piezas_producidas())
-        'If lblTiempoTurno.Text <> "0" And get_suma_piezas_producidas() = 0 Then
-        ' lblNRFTi.Text = "0.00"
         If varvalida <> 0 And get_suma_desechos() <> 0 Then
 
             Dim resultado As Double = (get_suma_desechos() / (varvalida)) * 1000000
             If resultado < 0 Then
                 lblNRFTi.Text = "0.00"
             Else
-                lblNRFTi.Text = Decimal.Round(resultado)
+                lblNRFTi.Text = Format(Decimal.Round(resultado), "##,##0.00")
             End If
         Else
             lblNRFTi.Text = "0.00"
@@ -1842,11 +1840,15 @@ Public Class frmProduccion
 #End Region
 #Region "Funciones para modulo 5S"
     Private Sub calcula_promedio_cinco_S()
+        Dim num As Double = 0
+        Dim multi As Double = Math.Pow(10D, 1.0)
+        Dim resultado As Double = 0
         If txtAdmonVisual.Text <> Nothing And txt5s.Text <> Nothing And txtManttoAutonomo.Text <> Nothing Then
-            txtPromedio.Text = Format(((Convert.ToDouble(txtAdmonVisual.Text) + Convert.ToDouble(txtManttoAutonomo.Text) + Convert.ToDouble(txt5s.Text)) / 3), "##0.0000")
-            'txtPromedio.Text = ((Convert.ToDouble(txtAdmonVisual.Text) + Convert.ToDouble(txtManttoAutonomo.Text) + Convert.ToDouble(txt5s.Text)) / 3)
+            num = ((Convert.ToDouble(txtAdmonVisual.Text) + Convert.ToDouble(txtManttoAutonomo.Text) + Convert.ToDouble(txt5s.Text)) / 3)
+            resultado = (Int(((num * multi)))) / multi
+            txtPromedio.Text = resultado
         Else
-            txtPromedio.Text = "0.0000"
+            txtPromedio.Text = "0.0"
         End If
     End Sub
     Private Sub add_cinco_s()

@@ -289,6 +289,7 @@ Partial Class frmProduccion
         Me.banner_formulario = New System.Windows.Forms.PictureBox()
         Me.cmdGraficar = New System.Windows.Forms.Button()
         Me.Label34 = New System.Windows.Forms.Label()
+        Me.prom = New System.Windows.Forms.Label()
         Me.tabPageContenido.SuspendLayout()
         Me.tabPageTurnosLineas.SuspendLayout()
         CType(Me.grdLineasRegistradas, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -627,7 +628,7 @@ Partial Class frmProduccion
         Me.np_gkn.Name = "np_gkn"
         Me.np_gkn.ReadOnly = True
         Me.np_gkn.Resizable = System.Windows.Forms.DataGridViewTriState.[False]
-        Me.np_gkn.Width = 124
+        Me.np_gkn.Width = 123
         '
         'coldescripcion
         '
@@ -2414,6 +2415,7 @@ Partial Class frmProduccion
         '
         'grp5s
         '
+        Me.grp5s.Controls.Add(Me.prom)
         Me.grp5s.Controls.Add(Me.lblAlertaCincoS)
         Me.grp5s.Controls.Add(Me.txtprom)
         Me.grp5s.Controls.Add(Me.Label83)
@@ -3042,7 +3044,7 @@ Partial Class frmProduccion
         Me.titulo_banner_formulario.ForeColor = System.Drawing.Color.SteelBlue
         Me.titulo_banner_formulario.Location = New System.Drawing.Point(4, 27)
         Me.titulo_banner_formulario.Name = "titulo_banner_formulario"
-        Me.titulo_banner_formulario.Size = New System.Drawing.Size(476, 32)
+        Me.titulo_banner_formulario.Size = New System.Drawing.Size(474, 32)
         Me.titulo_banner_formulario.TabIndex = 0
         Me.titulo_banner_formulario.Text = "Captura de Resultados de Producción"
         '
@@ -3188,6 +3190,16 @@ Partial Class frmProduccion
         Me.Label34.Size = New System.Drawing.Size(89, 21)
         Me.Label34.TabIndex = 318
         Me.Label34.Text = "Ir a gráficas"
+        '
+        'prom
+        '
+        Me.prom.AutoSize = True
+        Me.prom.Font = New System.Drawing.Font("Calibri", 12.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.prom.Location = New System.Drawing.Point(256, 175)
+        Me.prom.Name = "prom"
+        Me.prom.Size = New System.Drawing.Size(83, 21)
+        Me.prom.TabIndex = 415
+        Me.prom.Text = "Promedio:"
         '
         'frmProduccion
         '
@@ -3535,4 +3547,5 @@ Partial Class frmProduccion
     Friend WithEvents colcomentarios As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents cmdGraficar As System.Windows.Forms.Button
     Friend WithEvents Label34 As System.Windows.Forms.Label
+    Friend WithEvents prom As System.Windows.Forms.Label
 End Class
