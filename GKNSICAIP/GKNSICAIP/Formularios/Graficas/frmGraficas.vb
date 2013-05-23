@@ -963,7 +963,6 @@ Public Class frmGraficas
     End Sub
 
 #End Region
-
 #Region "ESTABLECE SEGURIDAD 1 EQUIPO N LINEAS"
     Private Sub establece_fechas_seguridad_acumulado(ByVal idEquipo As Integer, ByVal fechaInicio As DateTime, ByVal fechaFinal As DateTime)
         Dim fechaGraficos As String = ""
@@ -1049,7 +1048,6 @@ Public Class frmGraficas
         cadenaXML += " </dataset>"
     End Sub
 #End Region
-
 #Region "ESTABLECE SEGURIDAD 1 EQUIPO 1 LINEA"
     Private Sub establece_fechas_seguridad(ByVal idEquipo As Integer, ByVal idLinea As Integer, ByVal fechaInicio As DateTime, ByVal fechaFinal As DateTime)
         Dim fechaGraficos As String = ""
@@ -1137,6 +1135,14 @@ Public Class frmGraficas
         End If
         cadenaXML += " </dataset>"
     End Sub
+#End Region
+
+#Region "ESTABLECE COSTO 1 EQUIPO 1 LINEA"
+
+#End Region
+
+#Region "ESTABLECE COSTO 1 EQUIPO N LINEAS"
+
 #End Region
 
 #Region "GUARDAR GRAFICO EN EXCEL"
@@ -1314,7 +1320,7 @@ Public Class frmGraficas
             numberSuffix = ""
             subcaption = "NRFTi"
         ElseIf rbtCosto.Checked Then
-            maxEjeY = 100 ''checar ??
+            maxEjeY = 100
             numberSuffix = ""
             subcaption = "COSTO"
         ElseIf rbtSeg.Checked Then
@@ -1372,8 +1378,11 @@ Public Class frmGraficas
             End If
             cadenaXML += "<trendlines> <line startValue='12000' color='FF0000' displayValue='OBJETIVO' showOnTop='1'/> </trendlines>"
         ElseIf rbtCosto.Checked Then
-            'establece_fechas(3)
-            'establece_OEE(colores(2))
+            If cbxTodasLineas.Checked Then
+
+            Else
+
+            End If
 
         ElseIf rbtSeg.Checked Then
             If cbxTodasLineas.Checked Then
