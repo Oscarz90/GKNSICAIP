@@ -1126,7 +1126,73 @@ Public Class frmGraficas
     End Sub
 #End Region
 #Region "ESTABLECE COSTO 1 EQUIPO 1 LINEA"
+    Private Sub establece_Costo(ByVal cadena As String, ByVal color As String)
+        Dim promedio As Double = 0
+        Dim contador As Integer = 0
+        Dim fechaGraficos As String = ""
+        Dim vMesInicio As String = ""
+        Dim vYearInicio As String = ""
+        Dim mes As String = ""
+        Dim vDT As DataTable
+        Dim banderaPromedio As Boolean
 
+        cadenaXML += "<dataset seriesName='Costo' color='" & color & "' anchorBorderColor='" & contorno_anchor & "' anchorBgColor='" & color & "' anchorRadius='" & radio_anchor & "'>"
+        Dim costo As Double = 0
+        If rbtDia.Checked Then
+            vDT = oGraficas.ejecutarVista(cadena, cadenaWHERE)
+            For Each vDR As DataRow In vDT.Rows
+                costo = vDR("costo")
+                If costo = 0 Then
+                    cadenaXML += " <set value='" & costo.ToString & "'/>"
+                Else
+                    promedio = promedio + costo
+                    contador = contador + 1
+                    cadenaXML += " <set value='" & costo.ToString & "'/>"
+                End If
+            Next
+            banderaPromedio = True
+        Else
+            If rbtMeses.Checked Then
+                vDT = oGraficas.ejecutarVista(cadena, cadenaWHERE)
+                vMesInicio = Month(DateTime.Parse(vDT.Rows(0).Item("Dia_Asignado"))).ToString
+                vYearInicio = Year(DateTime.Parse(vDT.Rows(0).Item("Dia_Asignado"))).ToString
+                For Each vDR As DataRow In vDT.Rows
+                    If (Month(DateTime.Parse(vDR("Dia_Asignado"))).ToString = vMesInicio And Year(DateTime.Parse(vDR("Dia_Asignado"))).ToString = vYearInicio) Then
+                        costo = vDR("costo")
+                        If costo = 0 Then
+                            cadenaXML += " <set value='" & costo.ToString & "'/>"
+                        Else
+                            promedio = promedio + costo
+                            contador = contador + 1
+                            cadenaXML += " <set value='" & costo.ToString & "'/>"
+                        End If
+                    Else
+                        banderaPromedio = True
+                        promedio = promedio / contador
+                        cadenaXML += " <set value='" & promedio.ToString & "'/>"
+                        promedio = 0
+                        costo = 0
+                        contador = 0
+                        vMesInicio = Month(DateTime.Parse(vDR("Dia_Asignado"))).ToString
+                        vYearInicio = Year(DateTime.Parse(vDR("Dia_Asignado"))).ToString
+                        costo = vDR("costo")
+                        promedio = promedio + costo
+                        contador = contador + 1
+                        cadenaXML += " <set value='" & costo.ToString & "'/>"
+                        
+                    End If
+                Next
+                promedio = promedio / contador
+                cadenaXML += " <set value='" & promedio.ToString & "'/>"
+            End If
+        End If
+        promedio = promedio / contador
+
+        If banderaPromedio = True Then
+            cadenaXML += " <set value='" & promedio.ToString & "' color='" & colores(1) & "'/>"
+        End If
+        cadenaXML += " </dataset>"
+    End Sub
 #End Region
 #Region "ESTABLECE COSTO 1 EQUIPO N LINEAS"
 
@@ -1372,9 +1438,14 @@ Public Class frmGraficas
             cadenaXML += "<trendlines> <line startValue='12000' color='FF0000' displayValue='OBJETIVO' showOnTop='1'/> </trendlines>"
         ElseIf rbtCosto.Checked Then
             If cbxTodasLineas.Checked Then
-
+                cadenaSELECT = "SELECT DISTINCT DIA_ASIGNADO FROM VISTA_SELECCION_INDICADOR1"
+                establece_fechas(cadenaSELECT) ''establece_fechas(1)
+                cadenaSELECT = "SELECT OEE, TIPO_REGISTRO, DIA_ASIGNADO FROM VISTA_SELECCION_INDICADOR1"
+                'establece_Costo_Acumulado(cadenaSELECT, colores(0))
             Else
-
+                cadenaSELECT = "SELECT DIA_ASIGNADO, COSTO FROM VISTA_SELECCION_INDICADOR3"
+                establece_fechas(cadenaSELECT)
+                establece_Costo(cadenaSELECT, colores(2))
             End If
 
         ElseIf rbtSeg.Checked Then
