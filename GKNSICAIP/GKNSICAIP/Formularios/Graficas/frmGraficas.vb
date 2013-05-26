@@ -17,6 +17,9 @@ Public Class frmGraficas
     Dim cadenaGroup As String = ""
     Dim contorno_anchor As String = "000000" 'negro
     Dim radio_anchor As String = "5"
+
+    Dim vFecha_Now_Control As DateTime
+
 #End Region
 #Region "PASAR ID EQUIPO"
 
@@ -305,7 +308,7 @@ Public Class frmGraficas
                 For Each vDR As DataRow In vDT.Rows
                     If (Month(DateTime.Parse(vDR("Dia_Asignado"))).ToString = vMesInicio And Year(DateTime.Parse(vDR("Dia_Asignado"))).ToString = vYearInicio) Then
                         fechaGraficos = vDR("Dia_Asignado")
-                        fechaGraficos = Mid(fechaGraficos, 4, 2) ''05=MAYO
+                        fechaGraficos = Mid(fechaGraficos, 4, 2)
                         mes = getMeses(fechaGraficos)
                     Else
                         banderaPromedio = False
@@ -1159,12 +1162,10 @@ Public Class frmGraficas
                 For Each vDR As DataRow In vDT.Rows
                     If (Month(DateTime.Parse(vDR("Dia_Asignado"))).ToString = vMesInicio And Year(DateTime.Parse(vDR("Dia_Asignado"))).ToString = vYearInicio) Then
                         costo = vDR("costo")
-                        If costo = 0 Then
-                            cadenaXML += " <set value='" & costo.ToString & "'/>"
-                        Else
+                        If costo <> 0 Then
                             promedio = promedio + costo
                             contador = contador + 1
-                            cadenaXML += " <set value='" & costo.ToString & "'/>"
+                        Else
                         End If
                     Else
                         banderaPromedio = True
@@ -1176,10 +1177,11 @@ Public Class frmGraficas
                         vMesInicio = Month(DateTime.Parse(vDR("Dia_Asignado"))).ToString
                         vYearInicio = Year(DateTime.Parse(vDR("Dia_Asignado"))).ToString
                         costo = vDR("costo")
-                        promedio = promedio + costo
-                        contador = contador + 1
-                        cadenaXML += " <set value='" & costo.ToString & "'/>"
-                        
+                        If costo <> 0 Then
+                            promedio = promedio + costo
+                            contador = contador + 1
+                        Else
+                        End If
                     End If
                 Next
                 promedio = promedio / contador
@@ -1187,7 +1189,6 @@ Public Class frmGraficas
             End If
         End If
         promedio = promedio / contador
-
         If banderaPromedio = True Then
             cadenaXML += " <set value='" & promedio.ToString & "' color='" & colores(1) & "'/>"
         End If
@@ -1195,7 +1196,99 @@ Public Class frmGraficas
     End Sub
 #End Region
 #Region "ESTABLECE COSTO 1 EQUIPO N LINEAS"
+    Private Sub establece_Costo_Acumulado(ByVal cadena As String, ByVal color As String)
+        Dim promDia As Double = 0
+        Dim promAcumulado As Double = 0
+        Dim promFinal As Double = 0
+        Dim contador As Integer = 0
+        Dim vContador_Dias As Integer = 0
+        Dim vDT As DataTable
+        Dim vMesInicio As String = ""
+        Dim vYearInicio As String = ""
+        Dim mes As String = ""
+        Dim banderaPromedio As Boolean = False
 
+        cadenaXML += "<dataset seriesName='COSTO' color='" & color & "' anchorBorderColor='" & contorno_anchor & "' anchorBgColor='" & color & "' anchorRadius='" & radio_anchor & "'>"
+        Dim costo As Double = 0
+        Dim vFecha_Actual As DateTime
+        If rbtDia.Checked Then
+            vDT = oGraficas.ejecutarVista(cadena, cadenaWHERE)
+            vFecha_Actual = vDT.Rows(0).Item("DIA_ASIGNADO").ToString
+            For Each vDR As DataRow In vDT.Rows
+                If vDR("costo") <> 0 And vFecha_Actual = vDR("DIA_ASIGNADO") Then
+                    costo = vDR("costo")
+                    promDia = promDia + costo
+                    contador = contador + 1
+                Else
+                    vContador_Dias = vContador_Dias + 1
+                    promDia = promDia / contador
+                    promAcumulado = promAcumulado + promDia
+                    cadenaXML += " <set value='" & promDia.ToString & "'/>"
+                    vFecha_Actual = vDR("DIA_ASIGNADO")
+                    promDia = 0
+                    contador = 0
+
+                End If
+            Next
+            banderaPromedio = True
+        Else
+            If rbtMeses.Checked Then
+                vDT = oGraficas.ejecutarVista(cadena, cadenaWHERE)
+                vFecha_Actual = vDT.Rows(0).Item("DIA_ASIGNADO").ToString
+                vMesInicio = Month(DateTime.Parse(vDT.Rows(0).Item("Dia_Asignado"))).ToString
+                vYearInicio = Year(DateTime.Parse(vDT.Rows(0).Item("Dia_Asignado"))).ToString
+                For Each vDR As DataRow In vDT.Rows
+                    If (Month(DateTime.Parse(vDR("Dia_Asignado"))).ToString = vMesInicio And Year(DateTime.Parse(vDR("Dia_Asignado"))).ToString = vYearInicio) Then
+                        If vDR("costo") <> 0 And vFecha_Actual = vDR("DIA_ASIGNADO") Then
+                            costo = vDR("costo")
+                            promDia = promDia + costo
+                            contador = contador + 1
+                        Else
+                            vContador_Dias = vContador_Dias + 1
+                            promDia = promDia / contador
+                            promAcumulado = promAcumulado + promDia
+                            cadenaXML += " <set value='" & promDia.ToString & "'/>"
+                            vFecha_Actual = vDR("DIA_ASIGNADO")
+                            promDia = 0
+                            contador = 0
+
+                        End If
+                    Else
+                        banderaPromedio = True
+                        cadenaXML += " <set value='" & promAcumulado.ToString & "'/>"
+                        vFecha_Actual = vDR("DIA_ASIGNADO")
+                        promDia = 0
+                        contador = 0
+                        vMesInicio = Month(DateTime.Parse(vDR("Dia_Asignado"))).ToString
+                        vYearInicio = Year(DateTime.Parse(vDR("Dia_Asignado"))).ToString
+                        If vDR("costo") <> 0 And vFecha_Actual = vDR("DIA_ASIGNADO") Then
+                            costo = vDR("costo")
+                            promDia = promDia + costo
+                            contador = contador + 1
+                        Else
+                            vContador_Dias = vContador_Dias + 1
+                            promDia = promDia / contador
+                            promAcumulado = promAcumulado + promDia
+                            cadenaXML += " <set value='" & promDia.ToString & "'/>"
+                            vFecha_Actual = vDR("DIA_ASIGNADO")
+                            promDia = 0
+                            contador = 0
+                        End If
+                    End If
+                Next
+                vContador_Dias = vContador_Dias + 1
+                promDia = promDia / contador
+                promAcumulado = promAcumulado + promDia
+                promFinal = promAcumulado / vContador_Dias
+                cadenaXML += " <set value='" & promFinal.ToString & "'/>"
+            End If
+        End If
+        If banderaPromedio = True Then
+            promFinal = promAcumulado / vContador_Dias
+            cadenaXML += " <set value='" & promFinal.ToString & "' color='" & colores(1) & "'/>"
+        End If
+        cadenaXML += " </dataset>"
+    End Sub
 #End Region
 #Region "GUARDAR GRAFICO EN EXCEL"
 
@@ -1225,7 +1318,7 @@ Public Class frmGraficas
         cbxUN.Enabled = False
         cbxArea.Enabled = False
         cbxLinea.Enabled = True
-        cbxEquipo.Enabled = True
+        cbxEquipo.Enabled = False
         ''INICIALIZACION DE LAS FECHAS DE LOS CALENDARIOS
         dtpDesde.Value = DateSerial(Now.Year, Now.Month, 1) 'MUESTRA EL PRIMER DIA DEL MES
         dtpHasta.Value = Today 'MUESTRA LA FECHA ACTUAL
@@ -1262,6 +1355,41 @@ Public Class frmGraficas
 #End Region
 #Region "EVENTOS DE CALENDARIO"
     Private Sub dtpDesde_ValueChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles dtpDesde.ValueChanged
+        Try
+        If rbtDia.Checked Then
+            Dim vDia As Integer = dtpDesde.Value.Day
+            Dim vMes As Integer = dtpDesde.Value.Month
+            Dim vYear As Integer = dtpDesde.Value.Year
+            Dim vCadena_Fecha_Max As DateTime = Date.Now
+            Dim vUltimo_Dia_Mes As Date = Date.Now
+            vCadena_Fecha_Max = vDia & "/" & vMes & "/" & vYear
+            If vCadena_Fecha_Max.Year < vFecha_Now_Control.Year Then
+                    If vMes = 12 Then
+                        vYear = vYear + 1
+                        vMes = 1
+                        vUltimo_Dia_Mes = vDia & "/" & vMes & "/" & vYear
+                        vUltimo_Dia_Mes = vUltimo_Dia_Mes.AddDays(-vUltimo_Dia_Mes.Day + 1).AddMonths(1).AddDays(-1)
+                        vCadena_Fecha_Max = vUltimo_Dia_Mes.Day & "/" & vMes & "/" & vYear
+                    End If
+                ElseIf vCadena_Fecha_Max > vFecha_Now_Control Then
+                    If vMes = 12 Then
+                        vYear = vYear + 1
+                        vMes = 1
+                    End If                   
+                    vUltimo_Dia_Mes = vDia & "/" & vMes & "/" & vYear
+                    vUltimo_Dia_Mes = vUltimo_Dia_Mes.AddDays(-vUltimo_Dia_Mes.Day + 1).AddMonths(1).AddDays(-1)
+                    vCadena_Fecha_Max = vUltimo_Dia_Mes.Day & "/" & vMes & "/" & vYear
+                Else
+                    vUltimo_Dia_Mes = vDia & "/" & vMes + 1 & "/" & vYear
+                    vUltimo_Dia_Mes = vUltimo_Dia_Mes.AddDays(-vUltimo_Dia_Mes.Day + 1).AddMonths(1).AddDays(-1)
+                    vCadena_Fecha_Max = vUltimo_Dia_Mes.Day & "/" & vMes + 1 & "/" & vYear
+            End If
+            dtpHasta.MaxDate = vCadena_Fecha_Max
+        End If
+        Catch ex As Exception
+
+        End Try
+
         Habilita_Graficar()
     End Sub
 
@@ -1362,36 +1490,36 @@ Public Class frmGraficas
         ''VALORES QUE CAMBIARAN DEPENDIENDO DEL INDICADOR SELECCIONADO
         '' 1. OEE           2. CALIDAD   3. COSTO    4. SEGURIDAD     5. 5'S       6. GENTE
         Dim maxEjeY As Integer = 0
-        Dim numberSuffix As String = ""
+        Dim numberPreffix As String = ""
         Dim subcaption As String = ""
         If rbtOEE.Checked Then
             maxEjeY = 100
-            numberSuffix = "%25"
+            numberPreffix = "%25"
             subcaption = "OEE"
             decimales = "1"
         ElseIf rbtNRFTi.Checked Then
             maxEjeY = 32000
-            numberSuffix = ""
+            numberPreffix = ""
             subcaption = "NRFTi"
             decimales = "0"
         ElseIf rbtCosto.Checked Then
             maxEjeY = 100
-            numberSuffix = "$"
+            numberPreffix = "$"
             subcaption = "COSTO"
             decimales = "1"
         ElseIf rbtSeg.Checked Then
             maxEjeY = 15
-            numberSuffix = ""
+            numberPreffix = ""
             subcaption = "SEGURIDAD"
             decimales = "0"
         ElseIf rbt5s.Checked Then
             maxEjeY = 5
-            numberSuffix = ""
+            numberPreffix = ""
             subcaption = "5s"
             decimales = "1"
         ElseIf rbtGente.Checked Then
             maxEjeY = 15
-            numberSuffix = ""
+            numberPreffix = ""
             subcaption = "GENTE"
             decimales = "0"
         End If
@@ -1405,9 +1533,9 @@ Public Class frmGraficas
         If rbtStock.Checked Then
             tipoGrafico = "FCF_StackedColumn2D.swf"
         End If
-
+        'numberSuffix
         rutaGrafica = "file://" & Application.StartupPath & "/FusionChartsFree/Charts/" & tipoGrafico & "?chartWidth=1240&chartHeight=400"
-        cadenaXML = rutaGrafica + "&dataXML=<graph YAxisMinValue='0' YAxisMaxValue='" & maxEjeY & "' numberSuffix='" & numberSuffix & "' caption='REPORTE DE RESULTADOS' subcaption='" & subcaption & "' YAxisName= '" & ejeY & "' xAxisName='F E C H A (s)' labeldisplay='rotate' decimalPrecision='" & decimales & "' rotateNames='1' formatNumberScale='0' thousandSeparator=',' bgcolor='ffffff' bgalpha='000000' showColumnShadow='1' showAlternateHGridColor='1' AlternateHGridColor='ff5904' divLineColor='ff5904' divLineAlpha='20' alternateHGridAlpha='5' canvasBorderColor='666666' baseFontColor='666666'>"
+        cadenaXML = rutaGrafica + "&dataXML=<graph YAxisMinValue='0' YAxisMaxValue='" & maxEjeY & "' numberPrefix='" & numberPreffix & "' caption='REPORTE DE RESULTADOS' subcaption='" & subcaption & "' YAxisName= '" & ejeY & "' xAxisName='F E C H A (s)' labeldisplay='rotate' decimalPrecision='" & decimales & "' rotateNames='1' formatNumberScale='0' thousandSeparator=',' bgcolor='ffffff' bgalpha='000000' showColumnShadow='1' showAlternateHGridColor='1' AlternateHGridColor='ff5904' divLineColor='ff5904' divLineAlpha='20' alternateHGridAlpha='5' canvasBorderColor='666666' baseFontColor='666666'>"
 
         Condicion_WHERE(cbxTodasLineas.Checked)
         '' O E E -- P R O D U C C I O N --
@@ -1436,18 +1564,20 @@ Public Class frmGraficas
                 establece_NRFTi(cadenaSELECT, colores(6))
             End If
             cadenaXML += "<trendlines> <line startValue='12000' color='FF0000' displayValue='OBJETIVO' showOnTop='1'/> </trendlines>"
+            '' C O S T O
         ElseIf rbtCosto.Checked Then
             If cbxTodasLineas.Checked Then
-                cadenaSELECT = "SELECT DISTINCT DIA_ASIGNADO FROM VISTA_SELECCION_INDICADOR1"
-                establece_fechas(cadenaSELECT) ''establece_fechas(1)
-                cadenaSELECT = "SELECT OEE, TIPO_REGISTRO, DIA_ASIGNADO FROM VISTA_SELECCION_INDICADOR1"
-                'establece_Costo_Acumulado(cadenaSELECT, colores(0))
+                cadenaSELECT = "SELECT DISTINCT DIA_ASIGNADO FROM VISTA_SELECCION_INDICADOR3"
+                establece_fechas(cadenaSELECT)
+                cadenaSELECT = "SELECT DIA_ASIGNADO, COSTO FROM VISTA_SELECCION_INDICADOR3"
+                establece_Costo_Acumulado(cadenaSELECT, colores(2))
             Else
                 cadenaSELECT = "SELECT DIA_ASIGNADO, COSTO FROM VISTA_SELECCION_INDICADOR3"
                 establece_fechas(cadenaSELECT)
                 establece_Costo(cadenaSELECT, colores(2))
             End If
-
+            cadenaXML += "<trendlines> <line startValue='110' color='FF0000' displayValue='OBJETIVO' showOnTop='1'/> </trendlines>"
+            '' S E G U R I D A D
         ElseIf rbtSeg.Checked Then
             If cbxTodasLineas.Checked Then
                 establece_fechas_seguridad_acumulado(vIdEquipo, dtpDesde.Value.ToString("dd-MM-yyyy"), dtpHasta.Value.ToString("dd-MM-yyyy"))
@@ -1550,4 +1680,8 @@ Public Class frmGraficas
         End If
     End Sub
 #End Region
+
+    Private Sub dtpDesde_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles dtpDesde.KeyDown
+        vFecha_Now_Control = dtpDesde.Value
+    End Sub
 End Class

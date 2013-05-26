@@ -189,6 +189,7 @@ Partial Class frmGraficas
         'rbtCosto
         '
         Me.rbtCosto.AutoSize = True
+        Me.rbtCosto.Enabled = False
         Me.rbtCosto.Font = New System.Drawing.Font("Arial", 10.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.rbtCosto.Location = New System.Drawing.Point(37, 75)
         Me.rbtCosto.Name = "rbtCosto"
@@ -479,6 +480,7 @@ Partial Class frmGraficas
         '
         'cbxEquipo
         '
+        Me.cbxEquipo.Enabled = False
         Me.cbxEquipo.Font = New System.Drawing.Font("Arial", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cbxEquipo.ForeColor = System.Drawing.SystemColors.WindowText
         Me.cbxEquipo.FormattingEnabled = True
