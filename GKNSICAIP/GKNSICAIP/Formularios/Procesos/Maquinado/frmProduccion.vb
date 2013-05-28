@@ -1761,7 +1761,7 @@ Public Class frmProduccion
         If valida_registro_linea() Then
             If verifica_registro_turno(line_aux, obten_dia_asignado_registro_turno()) Then                
                 If MsgBox("¿Estas seguro que el horario para la linea: " & nom_aux & " es " & cbxTurnosLineas.Text & "?. Una vez registrado ya no lo podrás modificar.", vbQuestion + vbYesNo, "Confirmación") = vbYes Then
-                    MsgBox("Registro exitoso", vbOKOnly, "Aviso")
+                    'MsgBox("Registro exitoso", vbOKOnly, "Aviso")
                     Registra_Turno_Linea(line_aux)
                     limpia_turno_linea()
                     deshabilitar_btn_Turno_linea()
