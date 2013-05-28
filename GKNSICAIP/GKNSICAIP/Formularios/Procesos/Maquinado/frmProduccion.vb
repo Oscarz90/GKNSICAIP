@@ -1280,6 +1280,7 @@ Public Class frmProduccion
     Private Sub limpia_comentarios_generales()
         txtDetallesComentario.Text = ""
     End Sub
+
 #End Region
 #Region "Funciones Generales"
     Private Sub define_calendario_descanso()
