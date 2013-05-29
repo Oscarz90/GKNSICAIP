@@ -65,6 +65,7 @@ Partial Class frmGraficas
         Me.titulo_banner_formulario = New System.Windows.Forms.Label()
         Me.swfGrafica = New AxShockwaveFlashObjects.AxShockwaveFlash()
         Me.fbdBuscar = New System.Windows.Forms.FolderBrowserDialog()
+        Me.lblError = New System.Windows.Forms.Label()
         Me.groupTipo.SuspendLayout()
         Me.grp3.SuspendLayout()
         Me.grp2.SuspendLayout()
@@ -189,7 +190,6 @@ Partial Class frmGraficas
         'rbtCosto
         '
         Me.rbtCosto.AutoSize = True
-        Me.rbtCosto.Enabled = False
         Me.rbtCosto.Font = New System.Drawing.Font("Arial", 10.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.rbtCosto.Location = New System.Drawing.Point(37, 75)
         Me.rbtCosto.Name = "rbtCosto"
@@ -566,12 +566,25 @@ Partial Class frmGraficas
         Me.swfGrafica.Size = New System.Drawing.Size(1226, 415)
         Me.swfGrafica.TabIndex = 107
         '
+        'lblError
+        '
+        Me.lblError.AutoSize = True
+        Me.lblError.Font = New System.Drawing.Font("Microsoft Sans Serif", 16.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblError.ForeColor = System.Drawing.Color.Red
+        Me.lblError.Location = New System.Drawing.Point(457, 249)
+        Me.lblError.Name = "lblError"
+        Me.lblError.Size = New System.Drawing.Size(344, 26)
+        Me.lblError.TabIndex = 108
+        Me.lblError.Text = "NO HAY DATOS A MOSTRAR."
+        Me.lblError.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
         'frmGraficas
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.White
         Me.ClientSize = New System.Drawing.Size(1254, 722)
+        Me.Controls.Add(Me.lblError)
         Me.Controls.Add(Me.swfGrafica)
         Me.Controls.Add(Me.titulo_banner_formulario)
         Me.Controls.Add(Me.banner_formulario)
@@ -643,4 +656,5 @@ Partial Class frmGraficas
     Friend WithEvents Label2 As System.Windows.Forms.Label
     Friend WithEvents cbxTodasLineas As System.Windows.Forms.CheckBox
     Friend WithEvents fbdBuscar As System.Windows.Forms.FolderBrowserDialog
+    Friend WithEvents lblError As System.Windows.Forms.Label
 End Class
