@@ -187,7 +187,7 @@ Public Class Graficas
             Try
                 Dim cmd As New SqlClient.SqlCommand
                 cmd.CommandType = CommandType.StoredProcedure
-                cmd.CommandText = "obtiene_oee"  ''-----------------
+                cmd.CommandText = "obtiene_oee"
                 cmd.Parameters.Add("@cve_equipo", SqlDbType.BigInt).Value = videquipo
                 cmd.Parameters.Add("@fecha_inicial", SqlDbType.DateTime).Value = vfechainicio
                 cmd.Parameters.Add("@fecha_final", SqlDbType.DateTime).Value = vfechafinal
@@ -224,6 +224,50 @@ Public Class Graficas
     ''PENDIENTE DE HACER LOS PROCEDIMIENTOS X MESES Y SUS RESPECTIVOS METODOS!!!
 
 #End Region
+
+#Region "OBTENER NRFTI"
+    Public Function obtener_Nrfti_acumulado(ByVal videquipo As Integer, ByVal vfechainicio As DateTime, ByVal vfechafinal As DateTime) As DataTable
+        Dim obj As DataTable
+        Using scope As New TransactionScope
+            Try
+                Dim cmd As New SqlClient.SqlCommand
+                cmd.CommandType = CommandType.StoredProcedure
+                cmd.CommandText = "obtiene_nrfti"
+                cmd.Parameters.Add("@cve_equipo", SqlDbType.BigInt).Value = videquipo
+                cmd.Parameters.Add("@fecha_inicial", SqlDbType.DateTime).Value = vfechainicio
+                cmd.Parameters.Add("@fecha_final", SqlDbType.DateTime).Value = vfechafinal
+                obj = oBD.EjecutaCommando(cmd)
+                scope.Complete()
+            Catch ex As Exception
+                MsgBox("Error al obtener valores de Oee Productivdad. CProduccion_ERROR", vbCritical + vbOKOnly, "Error")
+                Return Nothing
+            End Try
+            Return obj
+        End Using
+    End Function
+    Public Function obtener_Nrfti(ByVal videquipo As Integer, ByVal vidlinea As Integer, ByVal vfechainicio As DateTime, ByVal vfechafinal As DateTime) As DataTable
+        Dim obj As DataTable
+        Using scope As New TransactionScope
+            Try
+                Dim cmd As New SqlClient.SqlCommand
+                cmd.CommandType = CommandType.StoredProcedure
+                cmd.CommandText = "obtiene_nrfti_por_linea"
+                cmd.Parameters.Add("@cve_equipo", SqlDbType.BigInt).Value = videquipo
+                cmd.Parameters.Add("@cve_linea", SqlDbType.BigInt).Value = vidlinea
+                cmd.Parameters.Add("@fecha_inicial", SqlDbType.DateTime).Value = vfechainicio
+                cmd.Parameters.Add("@fecha_final", SqlDbType.DateTime).Value = vfechafinal
+                obj = oBD.EjecutaCommando(cmd)
+                scope.Complete()
+            Catch ex As Exception
+                MsgBox("Error al obtener valores de Oee Productivdad. CProduccion_ERROR", vbCritical + vbOKOnly, "Error")
+                Return Nothing
+            End Try
+            Return obj
+        End Using
+    End Function
+#End Region
+
+
 
 #Region "OBTENER SEGURIDAD"
     Public Function obtener_Seguridad_acumulado(ByVal videquipo As Integer, ByVal vfechainicio As DateTime, ByVal vfechafinal As DateTime) As DataTable
