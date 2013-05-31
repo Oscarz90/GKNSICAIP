@@ -293,12 +293,20 @@ Public Class frmGraficas
         cadenaXML += "<categories>"
         If rbtDia.Checked Then
             vDT = oGraficas.ejecutarVista(cadena, cadenaWHERE)
-            For Each vDR As DataRow In vDT.Rows
-                fechaGraficos = vDR("Dia_Asignado")
-                fechaGraficos = Mid(fechaGraficos, 1, 5)
-                cadenaXML += "<category name='" & fechaGraficos & "' />"
-            Next
-            banderaPromedio = True
+            If vDT.Rows.Count = 0 Then
+                lblError.Visible = True ''Mensaje de error
+                lblError.Enabled = True
+            Else
+                lblError.Visible = False
+                lblError.Enabled = False
+                For Each vDR As DataRow In vDT.Rows
+                    fechaGraficos = vDR("Dia_Asignado")
+                    fechaGraficos = Mid(fechaGraficos, 1, 5)
+                    cadenaXML += "<category name='" & fechaGraficos & "' />"
+                Next
+                banderaPromedio = True
+            End If
+           
         Else
             If rbtMeses.Checked Then
                 vDT = oGraficas.ejecutarVista(cadena, cadenaWHERE)
@@ -334,13 +342,26 @@ Public Class frmGraficas
 
         If rbtMeses.Checked Then
             vDT = oGraficas.ejecutarVista(cadena, cadenaWHERE)
-            For Each vDR As DataRow In vDT.Rows
-                fechaGraficos = vDR("Dia_Asignado")
-                fechaGraficos = Mid(fechaGraficos, 4, 2)
-                mes = getMeses(fechaGraficos)
-                cadenaXML += "<category name='" & mes & "' />"
-            Next
-
+            If vDT.Rows.Count = 0 Then
+                lblError.Visible = True ''Mensaje de error
+                lblError.Enabled = True
+            Else
+                lblError.Visible = False
+                lblError.Enabled = False
+                If vDT.Rows.Count = 0 Then
+                    lblError.Visible = True ''Mensaje de error
+                    lblError.Enabled = True
+                Else
+                    lblError.Visible = False
+                    lblError.Enabled = False
+                    For Each vDR As DataRow In vDT.Rows
+                        fechaGraficos = vDR("Dia_Asignado")
+                        fechaGraficos = Mid(fechaGraficos, 4, 2)
+                        mes = getMeses(fechaGraficos)
+                        cadenaXML += "<category name='" & mes & "' />"
+                    Next
+                End If
+            End If
         End If
         cadenaXML += "</categories>"
     End Sub
@@ -357,29 +378,32 @@ Public Class frmGraficas
         If rbtDia.Checked Then
             vDT = oGraficas.obtener_Oee(idEquipo, idLinea, fechaInicio, fechaFinal)
             If vDT.Rows.Count = 0 Then
-                lblError.Visible = True ''Mensaje de error
+                lblError.Visible = True
                 lblError.Enabled = True
             Else
                 lblError.Visible = False
                 lblError.Enabled = False
-                For Each VDR As DataRow In vDT.Rows
-                    fechaGraficos = VDR("Dia_Asignado")
-                    fechaGraficos = Mid(fechaGraficos, 1, 5)
-                    cadenaXML += "<category name='" & fechaGraficos & "' />"
-                Next
+                Try
+                    For Each VDR As DataRow In vDT.Rows
+                        fechaGraficos = VDR("Dia_Asignado")
+                        fechaGraficos = Mid(fechaGraficos, 1, 5)
+                        cadenaXML += "<category name='" & fechaGraficos & "' />"
+                    Next
+                Catch ex As Exception
+                    MsgBox(ex.Message)
+                End Try
                 banderaPromedio = True
             End If
-        Else
-            ''PENDIENTE SACAR OEE X MESES
-            'If rbtMeses.Checked Then
-            '    vDT = oGraficas.obtener_Gente_por_meses_por_linea(idEquipo, idLinea, fechaInicio, fechaFinal)
-            '    For Each VDR As DataRow In vDT.Rows
-            '        fechaGraficos = VDR("Dia_Asignado")
-            '        fechaGraficos = Mid(fechaGraficos, 4, 2)
-            '        mes = getMeses(fechaGraficos)
-            '        cadenaXML += "<category name='" & mes & "' />"
-            '    Next
-            'End If
+        Else ''modificar para meses
+            If rbtMeses.Checked Then
+                vDT = oGraficas.obtener_Oee(idEquipo, idLinea, fechaInicio, fechaFinal)
+                For Each VDR As DataRow In vDT.Rows
+                    fechaGraficos = VDR("Dia_Asignado")
+                    fechaGraficos = Mid(fechaGraficos, 4, 2)
+                    mes = getMeses(fechaGraficos)
+                    cadenaXML += "<category name='" & mes & "' />"
+                Next
+            End If
         End If
         If banderaPromedio = True Then
             cadenaXML += "<category name ='PROMEDIO' />"
@@ -400,8 +424,12 @@ Public Class frmGraficas
         If rbtDia.Checked Then
             vDT = oGraficas.obtener_Oee(idEquipo, idLinea, fechaInicio, fechaFinal)
             If vDT.Rows.Count = 0 Then
-                MsgBox("NO HAY INFORMACIÓN DISPONIBLE PARA GRAFICAR.", vbExclamation + vbOKOnly, "Advertencia")
+                lblError.Visible = True
+                lblError.Enabled = True
+                cadenaXML += " <set value='" & 0 & "'/>"
             Else
+                lblError.Visible = False
+                lblError.Enabled = False
                 For Each vDR As DataRow In vDT.Rows
                     If vDR("TIPO_REGISTRO") = "P" Then
                         oee = vDR(("oee")) * 100
@@ -424,8 +452,11 @@ Public Class frmGraficas
             If rbtMeses.Checked Then
                 vDT = oGraficas.obtener_Oee(idEquipo, idLinea, fechaInicio, fechaFinal)
                 If vDT.Rows.Count = 0 Then
-                    MsgBox("NO HAY INFORMACIÓN DISPONIBLE PARA GRAFICAR.", vbExclamation + vbOKOnly, "Advertencia")
+                    lblError.Visible = True
+                    lblError.Enabled = True
                 Else
+                    lblError.Visible = False
+                    lblError.Enabled = False
                     vMesInicio = Month(DateTime.Parse(vDT.Rows(0).Item("Dia_Asignado"))).ToString
                     vYearInicio = Year(DateTime.Parse(vDT.Rows(0).Item("Dia_Asignado"))).ToString
                     For Each vDR As DataRow In vDT.Rows
@@ -502,15 +533,16 @@ Public Class frmGraficas
         If rbtDia.Checked Then
             vDT = oGraficas.obtener_Oee_acumulado(idEquipo, fechaInicio, fechaFinal)
             If vDT.Rows.Count = 0 Then
-                lblError.Visible = True ''Mensaje de error
+                lblError.Visible = True
                 lblError.Enabled = True
+                cadenaXML += " <set value='" & 0 & "'/>"
             Else
                 lblError.Visible = False
                 lblError.Enabled = False
                 vFecha_Actual = vDT.Rows(0).Item("DIA_ASIGNADO").ToString
                 For Each VDR As DataRow In vDT.Rows
                     If vFecha_Actual = VDR("DIA_ASIGNADO") Then
-                        
+
                     ElseIf vFecha_Actual <> VDR("DIA_ASIGNADO") Then
                         fechaGraficos = VDR("DIA_ASIGNADO")
                         fechaGraficos = Mid(vFecha_Actual, 1, 5)
@@ -559,8 +591,12 @@ Public Class frmGraficas
         If rbtDia.Checked Then
             vDT = oGraficas.obtener_Oee_acumulado(idEquipo, fechaInicio, fechaFinal)
             If vDT.Rows.Count = 0 Then
-                MsgBox("NO HAY INFORMACIÓN DISPONIBLE PARA GRAFICAR.", vbExclamation + vbOKOnly, "Advertencia")
+                lblError.Visible = True
+                lblError.Enabled = True
+                cadenaXML += " <set value='" & 0 & "'/>"
             Else
+                lblError.Visible = False
+                lblError.Enabled = False
                 vFecha_Actual = vDT.Rows(0).Item("DIA_ASIGNADO").ToString
                 For Each vDR As DataRow In vDT.Rows
                     If vDR("TIPO_REGISTRO") = "P" And vFecha_Actual = vDR("DIA_ASIGNADO") Then
@@ -683,7 +719,7 @@ Public Class frmGraficas
         cadenaXML += " </dataset>"
     End Sub
 #End Region
-    ''FALTA X MES 
+    ''FALTA X MES y promedio de nrfti acumulado
 #Region "ESTABLECE NRFTI 1 EQUIPO 1 LINEA"
     Private Sub establece_fechas_nrfti(ByVal idEquipo As Integer, ByVal idLinea As Integer, ByVal fechaInicio As DateTime, ByVal fechaFinal As DateTime)
         Dim fechaGraficos As String = ""
@@ -742,7 +778,9 @@ Public Class frmGraficas
         If rbtDia.Checked Then
             vDT = oGraficas.obtener_Nrfti(idEquipo, idLinea, fechaInicio, fechaFinal)
             If vDT.Rows.Count = 0 Then
-                MsgBox("NO HAY INFORMACIÓN DISPONIBLE PARA GRAFICAR.", vbExclamation + vbOKOnly, "Advertencia")
+                lblError.Visible = True
+                lblError.Enabled = True
+                cadenaXML += " <set value='" & 0 & "'/>"
             Else
                 lblError.Visible = False
                 lblError.Enabled = False
@@ -884,8 +922,12 @@ Public Class frmGraficas
         If rbtDia.Checked Then
             vDT = oGraficas.obtener_Nrfti_acumulado(idEquipo, fechaInicio, fechaFinal)
             If vDT.Rows.Count = 0 Then
-                MsgBox("NO HAY INFORMACIÓN DISPONIBLE PARA GRAFICAR.", vbExclamation + vbOKOnly, "Advertencia")
+                lblError.Visible = True
+                lblError.Enabled = True
+                cadenaXML += " <set value='" & 0 & "'/>"
             Else
+                lblError.Visible = False
+                lblError.Enabled = False
                 vFecha_Actual = vDT.Rows(0).Item("DIA_ASIGNADO").ToString
                 For Each vDR As DataRow In vDT.Rows
                     If vFecha_Actual = vDR("DIA_ASIGNADO") Then
@@ -986,7 +1028,6 @@ Public Class frmGraficas
 
     End Sub
 #End Region
-
     ''HACER DESDE CERO
 #Region "ESTABLECE COSTO 1 EQUIPO 1 LINEA"
     Private Sub establece_Costo(ByVal cadena As String, ByVal color As String)
@@ -1003,17 +1044,21 @@ Public Class frmGraficas
         Dim costo As Double = 0
         If rbtDia.Checked Then
             vDT = oGraficas.ejecutarVista(cadena, cadenaWHERE)
-            For Each vDR As DataRow In vDT.Rows
-                costo = vDR("costo")
-                If costo = 0 Then
-                    cadenaXML += " <set value='" & costo.ToString & "'/>"
-                Else
-                    promedio = promedio + costo
-                    contador = contador + 1
-                    cadenaXML += " <set value='" & costo.ToString & "'/>"
-                End If
-            Next
-            banderaPromedio = True
+            If vDT.Rows.Count = 0 Then
+                MsgBox("NO HAY INFORMACIÓN DISPONIBLE PARA GRAFICAR.", vbExclamation + vbOKOnly, "Advertencia")
+            Else
+                For Each vDR As DataRow In vDT.Rows
+                    costo = vDR("costo")
+                    If costo = 0 Then
+                        cadenaXML += " <set value='" & costo.ToString & "'/>"
+                    Else
+                        promedio = promedio + costo
+                        contador = contador + 1
+                        cadenaXML += " <set value='" & costo.ToString & "'/>"
+                    End If
+                Next
+                banderaPromedio = True
+            End If
         Else
             If rbtMeses.Checked Then
                 vDT = oGraficas.ejecutarVista(cadena, cadenaWHERE)
@@ -1150,7 +1195,7 @@ Public Class frmGraficas
         cadenaXML += " </dataset>"
     End Sub
 #End Region
-    ''YA ESTAN
+    ''YA ESTAN validar si no mandan datos
 #Region "ESTABLECE 5S 1 EQUIPO 1 LINEA"
     Private Sub establece_5S(ByVal cadena As String, ByVal color As String)
         Dim promedio5S As Double = 0
@@ -1159,10 +1204,18 @@ Public Class frmGraficas
         cadenaXML += "<dataset seriesName='5s' color='" & color & "' anchorBorderColor='" & contorno_anchor & "' anchorBgColor='" & color & "' anchorRadius='" & radio_anchor & "'>"
         If rbtMeses.Checked Then
             vDT = oGraficas.ejecutarVista(cadena, cadenaWHERE)
-            For Each vDR As DataRow In vDT.Rows
-                promedio5S = vDR("PROMEDIO")
+            If vDT.Rows.Count = 0 Then
+                lblError.Enabled = True
+                lblError.Visible = True
                 cadenaXML += " <set value='" & promedio5S.ToString & "'/>"
-            Next
+            Else
+                lblError.Enabled = False
+                lblError.Visible = False
+                For Each vDR As DataRow In vDT.Rows
+                    promedio5S = vDR("PROMEDIO")
+                    cadenaXML += " <set value='" & promedio5S.ToString & "'/>"
+                Next
+            End If
         Else
 
         End If
@@ -1179,30 +1232,35 @@ Public Class frmGraficas
         Dim contador As Integer = 0
         Dim vDT As DataTable
         cadenaXML += "<dataset seriesName='5S' color='" & color & "' anchorBorderColor='" & contorno_anchor & "' anchorBgColor='" & color & "' anchorRadius='" & radio_anchor & "'>"
-
         If rbtMeses.Checked Then
             vDT = oGraficas.ejecutarVista(cadena, cadenaWHERE)
-            vFecha_Actual = vDT.Rows(0).Item("DIA_ASIGNADO").ToString
-            For Each vDR As DataRow In vDT.Rows
-                If vFecha_Actual = vDR("DIA_ASIGNADO") Then
-                    vResultado5s = vDR("PROMEDIO")
-                    promMes = promMes + vResultado5s
-                    contador = contador + 1
-                ElseIf vFecha_Actual <> vDR("DIA_ASIGNADO") Then
-                    promAnual = promMes / contador
-                    cadenaXML += " <set value='" & promAnual.ToString & "'/>"
-                    promAnual = 0
-                    contador = 0
-                    promMes = 0
-                    vResultado5s = vDR("PROMEDIO")
-                    promMes = promMes + vResultado5s
-                    contador = contador + 1
-                    vFecha_Actual = vDR("DIA_ASIGNADO")
-                End If
-                'vResultado5s = vDR("PROMEDIO")
-                'promMes = promMes + vResultado5s
-                'contador = contador + 1
-            Next
+            If vDT.Rows.Count = 0 Then
+                lblError.Enabled = True
+                lblError.Visible = True
+                cadenaXML += " <set value='" & 0 & "'/>"
+            Else
+                vFecha_Actual = vDT.Rows(0).Item("DIA_ASIGNADO").ToString
+                For Each vDR As DataRow In vDT.Rows
+                    If vFecha_Actual = vDR("DIA_ASIGNADO") Then
+                        vResultado5s = vDR("PROMEDIO")
+                        promMes = promMes + vResultado5s
+                        contador = contador + 1
+                    ElseIf vFecha_Actual <> vDR("DIA_ASIGNADO") Then
+                        promAnual = promMes / contador
+                        cadenaXML += " <set value='" & promAnual.ToString & "'/>"
+                        promAnual = 0
+                        contador = 0
+                        promMes = 0
+                        vResultado5s = vDR("PROMEDIO")
+                        promMes = promMes + vResultado5s
+                        contador = contador + 1
+                        vFecha_Actual = vDR("DIA_ASIGNADO")
+                    End If
+                    'vResultado5s = vDR("PROMEDIO")
+                    'promMes = promMes + vResultado5s
+                    'contador = contador + 1
+                Next
+            End If
             promAnual = promMes / contador
             cadenaXML += " <set value='" & promAnual.ToString & "'/>"
             cadenaXML += " </dataset>"
@@ -1223,20 +1281,33 @@ Public Class frmGraficas
 
         If rbtDia.Checked Then
             vDT = oGraficas.obtener_Gente_acumulado(idEquipo, fechaInicio, fechaFinal)
-            For Each VDR As DataRow In vDT.Rows
-                fechaGraficos = VDR("Dia_Asignado")
-                fechaGraficos = Mid(fechaGraficos, 1, 5)
-                cadenaXML += "<category name='" & fechaGraficos & "' />"
-            Next
+            If vDT.Rows.Count = 0 Then
+                lblError.Visible = True
+                lblError.Enabled = True
+            Else
+                lblError.Visible = False
+                lblError.Enabled = False
+                For Each VDR As DataRow In vDT.Rows
+                    fechaGraficos = VDR("Dia_Asignado")
+                    fechaGraficos = Mid(fechaGraficos, 1, 5)
+                    cadenaXML += "<category name='" & fechaGraficos & "' />"
+                Next
+            End If
         Else
             If rbtMeses.Checked Then
                 vDT = oGraficas.obtener_Gente_por_meses_acumulado(idEquipo, fechaInicio, fechaFinal)
-                For Each VDR As DataRow In vDT.Rows
-                    fechaGraficos = VDR("Dia_Asignado")
-                    fechaGraficos = Mid(fechaGraficos, 4, 2)
-                    mes = getMeses(fechaGraficos)
-                    cadenaXML += "<category name='" & mes & "' />"
-                Next
+                If vDT.Rows.Count = 0 Then
+                    lblError.Visible = True
+                    lblError.Enabled = True
+                Else
+                    For Each VDR As DataRow In vDT.Rows
+                        fechaGraficos = VDR("Dia_Asignado")
+                        fechaGraficos = Mid(fechaGraficos, 4, 2)
+                        mes = getMeses(fechaGraficos)
+                        cadenaXML += "<category name='" & mes & "' />"
+                    Next
+                End If
+               
             End If
         End If
         cadenaXML += "</categories>"
@@ -1250,47 +1321,100 @@ Public Class frmGraficas
         If rbtDia.Checked Then
             cadenaXML += "<dataset seriesName='INCIDENCIAS' color='045FB4' anchorBorderColor='" & contorno_anchor & "' anchorBgColor='045FB4' anchorRadius='" & radio_anchor & "'>"
             VDT = oGraficas.obtener_Gente_acumulado(idEquipo, fechaInicio, fechaFinal)
-            For Each VDR As DataRow In VDT.Rows
-                vTotalMes = VDR("total")
-                cadenaXML += "<set value='" & vTotalMes & "' />"
-            Next
+            If VDT.Rows.Count = 0 Then
+                lblError.Visible = True
+                lblError.Enabled = True
+                cadenaXML += "<set value='" & 0 & "' />"
+            Else
+                lblError.Visible = False
+                lblError.Enabled = False
+                For Each VDR As DataRow In VDT.Rows
+                    vTotalMes = VDR("total")
+                    cadenaXML += "<set value='" & vTotalMes & "' />"
+                Next
+            End If
             cadenaXML += " </dataset>"
+
             cadenaXML += "<dataset seriesName='FALTAS' color='9D080D' anchorBorderColor='" & contorno_anchor & "' anchorBgColor='9D080D' anchorRadius='" & radio_anchor & "'>"
             VDT = oGraficas.obtener_Gente_acumulado(idEquipo, fechaInicio, fechaFinal)
-            For Each VDR As DataRow In VDT.Rows
-                vFaltas = VDR("faltas")
-                cadenaXML += "<set value='" & vFaltas & "' />"
-            Next
+            If VDT.Rows.Count = 0 Then
+                lblError.Visible = True
+                lblError.Enabled = True
+                cadenaXML += "<set value='" & 0 & "' />"
+            Else
+                lblError.Visible = False
+                lblError.Enabled = False
+                For Each VDR As DataRow In VDT.Rows
+                    vFaltas = VDR("faltas")
+                    cadenaXML += "<set value='" & vFaltas & "' />"
+                Next
+            End If
             cadenaXML += " </dataset>"
+
             cadenaXML += "<dataset seriesName='RETARDOS' color='FFBF00' anchorBorderColor='" & contorno_anchor & "' anchorBgColor='FFBF00' anchorRadius='" & radio_anchor & "'>"
             VDT = oGraficas.obtener_Gente_acumulado(idEquipo, fechaInicio, fechaFinal)
-            For Each VDR As DataRow In VDT.Rows
-                vRetardos = VDR("retardos")
-                cadenaXML += "<set value='" & vRetardos & "' />"
-            Next
+            If VDT.Rows.Count = 0 Then
+                lblError.Visible = True
+                lblError.Enabled = True
+                cadenaXML += "<set value='" & 0 & "' />"
+            Else
+                lblError.Visible = False
+                lblError.Enabled = False
+                For Each VDR As DataRow In VDT.Rows
+                    vRetardos = VDR("retardos")
+                    cadenaXML += "<set value='" & vRetardos & "' />"
+                Next
+            End If
 
         Else
             If rbtMeses.Checked Then
                 cadenaXML += "<dataset seriesName='INCIDENCIAS' color='045FB4' anchorBorderColor='" & contorno_anchor & "' anchorBgColor='045FB4' anchorRadius='" & radio_anchor & "'>"
                 VDT = oGraficas.obtener_Gente_por_meses_acumulado(idEquipo, fechaInicio, fechaFinal)
-                For Each VDR As DataRow In VDT.Rows
-                    vTotalMes = VDR("total")
-                    cadenaXML += "<set value='" & vTotalMes & "' />"
-                Next
+                If VDT.Rows.Count = 0 Then
+                    lblError.Visible = True
+                    lblError.Enabled = True
+                    cadenaXML += "<set value='" & 0 & "' />"
+                Else
+                    lblError.Visible = False
+                    lblError.Enabled = False
+                    For Each VDR As DataRow In VDT.Rows
+                        vTotalMes = VDR("total")
+                        cadenaXML += "<set value='" & vTotalMes & "' />"
+                    Next
+                End If
                 cadenaXML += " </dataset>"
+
                 cadenaXML += "<dataset seriesName='FALTAS' color='9D080D' anchorBorderColor='" & contorno_anchor & "' anchorBgColor='9D080D' anchorRadius='" & radio_anchor & "'>"
                 VDT = oGraficas.obtener_Gente_por_meses_acumulado(idEquipo, fechaInicio, fechaFinal)
-                For Each VDR As DataRow In VDT.Rows
-                    vFaltas = VDR("faltas")
-                    cadenaXML += "<set value='" & vFaltas & "' />"
-                Next
+                If VDT.Rows.Count = 0 Then
+                    lblError.Visible = True
+                    lblError.Enabled = True
+                    cadenaXML += "<set value='" & 0 & "' />"
+                Else
+                    lblError.Visible = False
+                    lblError.Enabled = False
+                    For Each VDR As DataRow In VDT.Rows
+                        vFaltas = VDR("faltas")
+                        cadenaXML += "<set value='" & vFaltas & "' />"
+                    Next
+                End If
                 cadenaXML += " </dataset>"
+
                 cadenaXML += "<dataset seriesName='RETARDOS' color='FFBF00' anchorBorderColor='" & contorno_anchor & "' anchorBgColor='FFBF00' anchorRadius='" & radio_anchor & "'>"
                 VDT = oGraficas.obtener_Gente_por_meses_acumulado(idEquipo, fechaInicio, fechaFinal)
-                For Each VDR As DataRow In VDT.Rows
-                    vRetardos = VDR("retardos")
-                    cadenaXML += "<set value='" & vRetardos & "' />"
-                Next
+                If VDT.Rows.Count = 0 Then
+                    lblError.Visible = True
+                    lblError.Enabled = True
+                    cadenaXML += "<set value='" & 0 & "' />"
+                Else
+                    lblError.Visible = False
+                    lblError.Enabled = False
+                    For Each VDR As DataRow In VDT.Rows
+                        vRetardos = VDR("retardos")
+                        cadenaXML += "<set value='" & vRetardos & "' />"
+                    Next
+                End If
+                
             End If
         End If
         cadenaXML += " </dataset>"
@@ -1305,20 +1429,36 @@ Public Class frmGraficas
 
         If rbtDia.Checked Then
             vDT = oGraficas.obtener_Gente(idEquipo, idLinea, fechaInicio, fechaFinal)
-            For Each VDR As DataRow In vDT.Rows
-                fechaGraficos = VDR("Dia_Asignado")
-                fechaGraficos = Mid(fechaGraficos, 1, 5)
-                cadenaXML += "<category name='" & fechaGraficos & "' />"
-            Next
+            If vDT.Rows.Count = 0 Then
+                lblError.Visible = True
+                lblError.Enabled = True
+            Else
+                lblError.Visible = False
+                lblError.Enabled = False
+                For Each VDR As DataRow In vDT.Rows
+                    fechaGraficos = VDR("Dia_Asignado")
+                    fechaGraficos = Mid(fechaGraficos, 1, 5)
+                    cadenaXML += "<category name='" & fechaGraficos & "' />"
+                Next
+            End If
+           
         Else
             If rbtMeses.Checked Then
                 vDT = oGraficas.obtener_Gente_por_meses_por_linea(idEquipo, idLinea, fechaInicio, fechaFinal)
-                For Each VDR As DataRow In vDT.Rows
-                    fechaGraficos = VDR("Dia_Asignado")
-                    fechaGraficos = Mid(fechaGraficos, 4, 2)
-                    mes = getMeses(fechaGraficos)
-                    cadenaXML += "<category name='" & mes & "' />"
-                Next
+                If vDT.Rows.Count = 0 Then
+                    lblError.Visible = True
+                    lblError.Enabled = True
+                Else
+                    lblError.Visible = False
+                    lblError.Enabled = False
+                    For Each VDR As DataRow In vDT.Rows
+                        fechaGraficos = VDR("Dia_Asignado")
+                        fechaGraficos = Mid(fechaGraficos, 4, 2)
+                        mes = getMeses(fechaGraficos)
+                        cadenaXML += "<category name='" & mes & "' />"
+                    Next
+                End If
+                
             End If
         End If
         cadenaXML += "</categories>"
@@ -1332,46 +1472,100 @@ Public Class frmGraficas
         If rbtDia.Checked Then
             cadenaXML += "<dataset seriesName='INCIDENCIAS' color='045FB4' anchorBorderColor='" & contorno_anchor & "' anchorBgColor='045FB4' anchorRadius='" & radio_anchor & "'>"
             VDT = oGraficas.obtener_Gente(idEquipo, idLinea, fechaInicio, fechaFinal)
-            For Each VDR As DataRow In VDT.Rows
-                vTotalMes = VDR("total")
-                cadenaXML += "<set value='" & vTotalMes & "' />"
-            Next
-            cadenaXML += " </dataset>"
-            cadenaXML += "<dataset seriesName='FALTAS' color='9D080D' anchorBorderColor='" & contorno_anchor & "' anchorBgColor='9D080D' anchorRadius='" & radio_anchor & "'>"
-            VDT = oGraficas.obtener_Gente(idEquipo, idLinea, fechaInicio, fechaFinal)
-            For Each VDR As DataRow In VDT.Rows
-                vFaltas = VDR("faltas")
-                cadenaXML += "<set value='" & vFaltas & "' />"
-            Next
-            cadenaXML += " </dataset>"
-            cadenaXML += "<dataset seriesName='RETARDOS' color='FFBF00' anchorBorderColor='" & contorno_anchor & "' anchorBgColor='FFBF00' anchorRadius='" & radio_anchor & "'>"
-            VDT = oGraficas.obtener_Gente(idEquipo, idLinea, fechaInicio, fechaFinal)
-            For Each VDR As DataRow In VDT.Rows
-                vRetardos = VDR("retardos")
-                cadenaXML += "<set value='" & vRetardos & "' />"
-            Next
-        Else
-            If rbtMeses.Checked Then
-                cadenaXML += "<dataset seriesName='INCIDENCIAS' color='045FB4' anchorBorderColor='" & contorno_anchor & "' anchorBgColor='045FB4' anchorRadius='" & radio_anchor & "'>"
-                VDT = oGraficas.obtener_Gente_por_meses_por_linea(idEquipo, idLinea, fechaInicio, fechaFinal)
+            If VDT.Rows.Count = 0 Then
+                lblError.Visible = True
+                lblError.Enabled = True
+                cadenaXML += "<set value='" & 0 & "' />"
+            Else
+                lblError.Visible = False
+                lblError.Enabled = False
                 For Each VDR As DataRow In VDT.Rows
                     vTotalMes = VDR("total")
                     cadenaXML += "<set value='" & vTotalMes & "' />"
                 Next
-                cadenaXML += " </dataset>"
-                cadenaXML += "<dataset seriesName='FALTAS' color='9D080D' anchorBorderColor='" & contorno_anchor & "' anchorBgColor='9D080D' anchorRadius='" & radio_anchor & "'>"
-                VDT = oGraficas.obtener_Gente_por_meses_por_linea(idEquipo, idLinea, fechaInicio, fechaFinal)
+            End If
+            cadenaXML += " </dataset>"
+
+            cadenaXML += "<dataset seriesName='FALTAS' color='9D080D' anchorBorderColor='" & contorno_anchor & "' anchorBgColor='9D080D' anchorRadius='" & radio_anchor & "'>"
+            VDT = oGraficas.obtener_Gente(idEquipo, idLinea, fechaInicio, fechaFinal)
+            If VDT.Rows.Count = 0 Then
+                lblError.Visible = True
+                lblError.Enabled = True
+                cadenaXML += "<set value='" & 0 & "' />"
+            Else
+                lblError.Visible = False
+                lblError.Enabled = False
                 For Each VDR As DataRow In VDT.Rows
                     vFaltas = VDR("faltas")
                     cadenaXML += "<set value='" & vFaltas & "' />"
                 Next
-                cadenaXML += " </dataset>"
-                cadenaXML += "<dataset seriesName='RETARDOS' color='FFBF00' anchorBorderColor='" & contorno_anchor & "' anchorBgColor='FFBF00' anchorRadius='" & radio_anchor & "'>"
-                VDT = oGraficas.obtener_Gente_por_meses_por_linea(idEquipo, idLinea, fechaInicio, fechaFinal)
+            End If
+            cadenaXML += " </dataset>"
+
+            cadenaXML += "<dataset seriesName='RETARDOS' color='FFBF00' anchorBorderColor='" & contorno_anchor & "' anchorBgColor='FFBF00' anchorRadius='" & radio_anchor & "'>"
+            VDT = oGraficas.obtener_Gente(idEquipo, idLinea, fechaInicio, fechaFinal)
+            If VDT.Rows.Count = 0 Then
+                lblError.Visible = True
+                lblError.Enabled = True
+                cadenaXML += "<set value='" & 0 & "' />"
+            Else
+                lblError.Visible = False
+                lblError.Enabled = False
                 For Each VDR As DataRow In VDT.Rows
                     vRetardos = VDR("retardos")
                     cadenaXML += "<set value='" & vRetardos & "' />"
                 Next
+            End If
+            
+        Else
+            If rbtMeses.Checked Then
+                cadenaXML += "<dataset seriesName='INCIDENCIAS' color='045FB4' anchorBorderColor='" & contorno_anchor & "' anchorBgColor='045FB4' anchorRadius='" & radio_anchor & "'>"
+                VDT = oGraficas.obtener_Gente_por_meses_por_linea(idEquipo, idLinea, fechaInicio, fechaFinal)
+                If VDT.Rows.Count = 0 Then
+                    lblError.Visible = True
+                    lblError.Enabled = True
+                    cadenaXML += "<set value='" & 0 & "' />"
+                Else
+                    lblError.Visible = False
+                    lblError.Enabled = False
+                    For Each VDR As DataRow In VDT.Rows
+                        vTotalMes = VDR("total")
+                        cadenaXML += "<set value='" & vTotalMes & "' />"
+                    Next
+                End If
+                cadenaXML += " </dataset>"
+
+                cadenaXML += "<dataset seriesName='FALTAS' color='9D080D' anchorBorderColor='" & contorno_anchor & "' anchorBgColor='9D080D' anchorRadius='" & radio_anchor & "'>"
+                VDT = oGraficas.obtener_Gente_por_meses_por_linea(idEquipo, idLinea, fechaInicio, fechaFinal)
+                If VDT.Rows.Count = 0 Then
+                    lblError.Visible = True
+                    lblError.Enabled = True
+                    cadenaXML += "<set value='" & 0 & "' />"
+                Else
+                    lblError.Visible = False
+                    lblError.Enabled = False
+                    For Each VDR As DataRow In VDT.Rows
+                        vFaltas = VDR("faltas")
+                        cadenaXML += "<set value='" & vFaltas & "' />"
+                    Next
+                End If
+                cadenaXML += " </dataset>"
+
+                cadenaXML += "<dataset seriesName='RETARDOS' color='FFBF00' anchorBorderColor='" & contorno_anchor & "' anchorBgColor='FFBF00' anchorRadius='" & radio_anchor & "'>"
+                VDT = oGraficas.obtener_Gente_por_meses_por_linea(idEquipo, idLinea, fechaInicio, fechaFinal)
+                If VDT.Rows.Count = 0 Then
+                    lblError.Visible = True
+                    lblError.Enabled = True
+                    cadenaXML += "<set value='" & 0 & "' />"
+                Else
+                    lblError.Visible = False
+                    lblError.Enabled = False
+                    For Each VDR As DataRow In VDT.Rows
+                        vRetardos = VDR("retardos")
+                        cadenaXML += "<set value='" & vRetardos & "' />"
+                    Next
+                End If
+                
             End If
         End If
         cadenaXML += " </dataset>"
@@ -1588,6 +1782,7 @@ Public Class frmGraficas
         rbtBarras.Checked = True
         lblError.Visible = False
         lblError.Enabled = False
+        rbtCosto.Enabled = False
         ''USO DE BANDERAS
         'banderacbx = 0
         'banderaArea = 0
@@ -1616,40 +1811,41 @@ Public Class frmGraficas
 #End Region
 #Region "EVENTOS DE CALENDARIO"
     Private Sub dtpDesde_ValueChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles dtpDesde.ValueChanged
-        'Try
-        '    If rbtDia.Checked Then
-        '        Dim vDia As Integer = dtpDesde.Value.Day
-        '        Dim vMes As Integer = dtpDesde.Value.Month
-        '        Dim vYear As Integer = dtpDesde.Value.Year
-        '        Dim vCadena_Fecha_Max As DateTime = Date.Now
-        '        Dim vUltimo_Dia_Mes As Date = Date.Now
-        '        vCadena_Fecha_Max = vDia & "/" & vMes & "/" & vYear
-        '        If vCadena_Fecha_Max.Year < vFecha_Now_Control.Year Then
-        '            If vMes = 12 Then
-        '                vYear = vYear + 1
-        '                vMes = 1
-        '                vUltimo_Dia_Mes = vDia & "/" & vMes & "/" & vYear
-        '                vUltimo_Dia_Mes = vUltimo_Dia_Mes.AddDays(-vUltimo_Dia_Mes.Day + 1).AddMonths(1).AddDays(-1)
-        '                vCadena_Fecha_Max = vUltimo_Dia_Mes.Day & "/" & vMes & "/" & vYear
-        '            End If
-        '        ElseIf vCadena_Fecha_Max > vFecha_Now_Control Then
-        '            If vMes = 12 Then
-        '                vYear = vYear + 1
-        '                vMes = 1
-        '            End If
-        '            vUltimo_Dia_Mes = vDia & "/" & vMes & "/" & vYear
-        '            vUltimo_Dia_Mes = vUltimo_Dia_Mes.AddDays(-vUltimo_Dia_Mes.Day + 1).AddMonths(1).AddDays(-1)
-        '            vCadena_Fecha_Max = vUltimo_Dia_Mes.Day & "/" & vMes & "/" & vYear
-        '        Else
-        '            vUltimo_Dia_Mes = vDia & "/" & vMes + 1 & "/" & vYear
-        '            vUltimo_Dia_Mes = vUltimo_Dia_Mes.AddDays(-vUltimo_Dia_Mes.Day + 1).AddMonths(1).AddDays(-1)
-        '            vCadena_Fecha_Max = vUltimo_Dia_Mes.Day & "/" & vMes + 1 & "/" & vYear
-        '        End If
-        '        dtpHasta.MaxDate = vCadena_Fecha_Max
-        '    End If
-        'Catch ex As Exception
+        Try
+            If rbtDia.Checked Then
+                Dim vDia As Integer = dtpDesde.Value.Day
+                Dim vMes As Integer = dtpDesde.Value.Month
+                Dim vYear As Integer = dtpDesde.Value.Year
+                Dim vCadena_Fecha_Max As DateTime = Date.Now
+                Dim vUltimo_Dia_Mes As Date = Date.Now
+                vCadena_Fecha_Max = vDia & "/" & vMes & "/" & vYear
+                vCadena_Fecha_Max = vCadena_Fecha_Max.AddDays(30)
+                'If vCadena_Fecha_Max.Year < vFecha_Now_Control.Year Then
+                '    If vMes = 12 Then
+                '        vYear = vYear + 1
+                '        vMes = 1
+                '        vUltimo_Dia_Mes = vDia & "/" & vMes & "/" & vYear
+                '        vUltimo_Dia_Mes = vUltimo_Dia_Mes.AddDays(-vUltimo_Dia_Mes.Day + 1).AddMonths(1).AddDays(-1)
+                '        vCadena_Fecha_Max = vUltimo_Dia_Mes.Day & "/" & vMes & "/" & vYear
+                '    End If
+                'ElseIf vCadena_Fecha_Max > vFecha_Now_Control Then
+                '    If vMes = 12 Then
+                '        vYear = vYear + 1
+                '        vMes = 1
+                '    End If
+                '    vUltimo_Dia_Mes = vDia & "/" & vMes & "/" & vYear
+                '    vUltimo_Dia_Mes = vUltimo_Dia_Mes.AddDays(-vUltimo_Dia_Mes.Day + 1).AddMonths(1).AddDays(-1)
+                '    vCadena_Fecha_Max = vUltimo_Dia_Mes.Day & "/" & vMes + 1 & "/" & vYear
+                'Else
+                '    vUltimo_Dia_Mes = vDia & "/" & vMes + 1 & "/" & vYear
+                '    vUltimo_Dia_Mes = vUltimo_Dia_Mes.AddDays(-vUltimo_Dia_Mes.Day + 1).AddMonths(1).AddDays(-1)
+                '    vCadena_Fecha_Max = vUltimo_Dia_Mes.Day & "/" & vMes + 1 & "/" & vYear
+                'End If
+                dtpHasta.MaxDate = vCadena_Fecha_Max
+            End If
+        Catch ex As Exception
 
-        'End Try
+        End Try
 
         Habilita_Graficar()
     End Sub
@@ -1669,6 +1865,7 @@ Public Class frmGraficas
     Private Sub rbtMeses_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles rbtMeses.CheckedChanged
         dtpDesde.CustomFormat = "MMMM/yyyy"
         dtpHasta.CustomFormat = "MMMM/yyyy"
+        dtpHasta.MaxDate = "12/9998"
         Advertencia()
         Habilita_Graficar()
     End Sub
