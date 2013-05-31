@@ -172,10 +172,10 @@ Public Class frmProduccion
         lblOEE.Text = Format((Convert.ToDouble(lblCalidad.Text) / 100) * (Convert.ToDouble(lblDisponibilidad.Text) / 100) * (Convert.ToDouble(lblDesempeno.Text) / 100) * 100, "##0.00")
     End Sub
     Private Sub calcula_NRFTI()
-        Dim varvalida As Double = (get_suma_desechos() + get_suma_piezas_producidas())
-        If varvalida <> 0 And get_suma_desechos() <> 0 Then
+        Dim varvalida As Double = (get_suma_desechos() + get_suma_piezas_producidas() + get_suma_rechazos())
+        If varvalida <> 0 And (get_suma_desechos() + get_suma_rechazos()) <> 0 Then
 
-            Dim resultado As Double = (get_suma_desechos() / (varvalida)) * 1000000
+            Dim resultado As Double = ((get_suma_desechos() + get_suma_rechazos()) / (varvalida)) * 1000000
             If resultado < 0 Then
                 lblNRFTi.Text = "0.00"
             Else
@@ -652,7 +652,9 @@ Public Class frmProduccion
             llena_rechazo_gridview()
             llena_productividad_gridview()
             calcula_Productividad()
+            calcula_NRFTI()
             add_productividad()
+            add_Nrfti()
         End If
     End Sub
     Private Sub btnQuitarRechazo_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnQuitarRechazo.Click
@@ -661,8 +663,10 @@ Public Class frmProduccion
             deshabilitar_btn_quitar_rechazo()
             llena_rechazo_gridview()
             llena_productividad_gridview()
+            calcula_NRFTI()
             calcula_Productividad()
             add_productividad()
+            add_Nrfti()
         End If
     End Sub
     'Paros
