@@ -209,11 +209,13 @@ Public Class Registro_Turno
     End Sub
     Public Function llena_Descanso_gridview() As DataTable
         Dim dtDescanso As New DataTable
+        Dim dateauxiliar As DateTime = vdia_asignado.AddDays(5)
         Dim query As String = "select rts.dia_asignado as dia_asignado,'Descanso Todas Lineas' as descripcion from (" &
             "select rt.dia_asignado,count(rt.cve_linea) as contador_lineas from registro_turno rt " &
             "where rt.cve_turno=(select t.cve_turno from turno t where t.turno='Descanso') and rt.cve_equipo=" & vcve_equipo & " and " &
             "month(rt.dia_asignado)=month('" & vdia_asignado.ToString("MM-dd-yyyy") & "') and " &
-            "year(rt.dia_asignado)=year('" & vdia_asignado.ToString("MM-dd-yyyy") & "') " &
+            "year(rt.dia_asignado)=year('" & vdia_asignado.ToString("MM-dd-yyyy") & "') or " &
+            "rt.dia_asignado<='" & dateauxiliar.ToString("MM-dd-yyyy") & "'" &
             "group by rt.dia_asignado,day(rt.dia_asignado),month(rt.dia_asignado),year(rt.dia_asignado)) as rts " &
             "where rts.contador_lineas=(select count(l.cve_linea) from linea l join equipo_linea el on l.cve_linea=el.cve_linea where el.cve_equipo=" & vcve_equipo & ")"
         Try

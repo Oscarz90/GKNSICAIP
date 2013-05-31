@@ -769,6 +769,7 @@ Public Class frmProduccion
         If dtpDescanso.Value >= Now.ToString("dd-MM-yyy") Then
             registra_descanso()
             limpia_descanso()
+            llena_Descanso_gridview()
         Else
             limpia_descanso()
             MsgBox("¡Solo puedes registrar descansos con fecha a partir del dia de hoy!", vbExclamation, "Error")
