@@ -30,11 +30,11 @@ Public Class frmLogin
                     vIdEquipo = oLogin.Obtener_Id_Equipo(oLogin.Equipo_Empleado)
                     ''VALIDAR LAS LINEAS PILOTO QUE SOLO PARTICIPARAN
                     vTipoTlatoani = Nothing
-                    If oLogin.Valida_Equipo_Piloto(oLogin.Equipo_Empleado) = 1 Then
-                        vTipoTlatoani = oLogin.Obtener_Tipo_Tlatoani(oLogin.Equipo_Empleado)
-                    Else
-                        MsgBox("EL SISTEMA ESTA DISPONIBLE SOLO PARA LINEAS PILOTO!!!")
-                    End If
+                    'If oLogin.Valida_Equipo_Piloto(oLogin.Equipo_Empleado) = 1 Then
+                    vTipoTlatoani = oLogin.Obtener_Tipo_Tlatoani(oLogin.Equipo_Empleado)
+                    'Else
+                    '    MsgBox("EL SISTEMA ESTA DISPONIBLE SOLO PARA LINEAS PILOTO!!!")
+                    'End If
 
                     'aqui seleccionar el form que se debe abrir
                     Select Case vTipoTlatoani
