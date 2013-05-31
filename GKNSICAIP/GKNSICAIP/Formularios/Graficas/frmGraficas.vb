@@ -468,7 +468,7 @@ Public Class frmGraficas
             banderaPromedio = True
         End If
 
-        ''meses
+        ''--------------------meses
         If rbtMeses.Checked Then
             vDT = oGraficas.obtener_Oee(idEquipo, idLinea, fechaInicio, fechaFinal)
             If vDT.Rows.Count = 0 Then
@@ -491,7 +491,7 @@ Public Class frmGraficas
                             contador = 0
                             promedio = promedio + oee
                         End If
-                    Else
+                    ElseIf (Month(DateTime.Parse(vDR("Dia_Asignado"))).ToString <> vMesInicio And Year(DateTime.Parse(vDR("Dia_Asignado"))).ToString = vYearInicio) Then
                         If contador > 0 Then
                             promedio = promedio / contador
                         Else
@@ -512,21 +512,14 @@ Public Class frmGraficas
                             contador = 0
                             promedio = promedio + oee
                         End If
-                        'If contador > 0 Then
-                        '    promedio = promedio / contador
-                        'Else
-                        '    promedio = 0
-                        'End If
-                        'cadenaXML += " <set value='" & promedio.ToString & "'/>"
 
                     End If ''comparacion de mes/fecha
-
                 Next
-
+                
             End If ''fin de si hay datos
             banderaPromedio = False
         End If ''fin si escogio x meses
-
+        ''-------------------------------------------
 
         If rbtDia.Checked And contador > 0 Then
             promedio = promedio / contador
@@ -579,13 +572,29 @@ Public Class frmGraficas
 
         Else
             If rbtMeses.Checked Then
-                vDT = oGraficas.obtener_Gente_por_meses_acumulado(idEquipo, fechaInicio, fechaFinal)
-                For Each VDR As DataRow In vDT.Rows
-                    fechaGraficos = VDR("Dia_Asignado")
-                    fechaGraficos = Mid(fechaGraficos, 4, 2)
-                    mes = getMeses(fechaGraficos)
-                    cadenaXML += "<category name='" & mes & "' />"
-                Next
+                vDT = oGraficas.obtener_Oee_acumulado(idEquipo, fechaInicio, fechaFinal)
+                If vDT.Rows.Count = 0 Then
+                    lblError.Visible = True
+                    lblError.Enabled = True
+                Else
+                    lblError.Visible = False
+                    lblError.Enabled = False
+                    vMesInicio = Month(DateTime.Parse(vDT.Rows(0).Item("Dia_Asignado"))).ToString
+                    vYearInicio = Year(DateTime.Parse(vDT.Rows(0).Item("Dia_Asignado"))).ToString
+                    For Each vDR As DataRow In vDT.Rows
+                        If (Month(DateTime.Parse(vDR("Dia_Asignado"))).ToString = vMesInicio And Year(DateTime.Parse(vDR("Dia_Asignado"))).ToString = vYearInicio) Then
+                            fechaGraficos = vDR("Dia_Asignado")
+                            fechaGraficos = Mid(fechaGraficos, 4, 2)
+                            mes = getMeses(fechaGraficos)
+                        Else
+                            banderaPromedio = False
+                            cadenaXML += "<category name='" & mes & "  " & vYearInicio & " ' />"
+                            vMesInicio = Month(DateTime.Parse(vDR("Dia_Asignado"))).ToString
+                            vYearInicio = Year(DateTime.Parse(vDR("Dia_Asignado"))).ToString
+                        End If
+                    Next
+                End If
+                cadenaXML += "<category name='" & mes & "   " & vYearInicio & "' />"
             End If
         End If
         If banderaPromedio = True Then
@@ -671,8 +680,8 @@ Public Class frmGraficas
             banderaPromedio = True
         Else
             If rbtMeses.Checked Then
-                ''vDT = oGraficas.ejecutarVista(cadena, cadenaWHERE)
-                'vFecha_Actual = vDT.Rows(0).Item("DIA_ASIGNADO").ToString
+                vDT = oGraficas.obtener_Oee_acumulado(idEquipo, fechaInicio, fechaFinal)
+                vFecha_Actual = vDT.Rows(0).Item("DIA_ASIGNADO").ToString
                 vMesInicio = Month(DateTime.Parse(vDT.Rows(0).Item("Dia_Asignado"))).ToString
                 vYearInicio = Year(DateTime.Parse(vDT.Rows(0).Item("Dia_Asignado"))).ToString
                 For Each vDR As DataRow In vDT.Rows
@@ -747,6 +756,8 @@ Public Class frmGraficas
         Dim vRetorno As DataTable = Nothing
         Dim vDT As DataTable = Nothing
         Dim banderaPromedio As Boolean
+        Dim vMesInicio As String = ""
+        Dim vYearInicio As String = ""
         cadenaXML += "<categories>"
         If rbtDia.Checked Then
             vDT = oGraficas.obtener_Nrfti(idEquipo, idLinea, fechaInicio, fechaFinal)
@@ -764,16 +775,32 @@ Public Class frmGraficas
                 banderaPromedio = True
             End If
         Else
-            ''PENDIENTE SACAR nrfti X MESES
-            'If rbtMeses.Checked Then
-            '    vDT = oGraficas.obtener_Gente_por_meses_por_linea(idEquipo, idLinea, fechaInicio, fechaFinal)
-            '    For Each VDR As DataRow In vDT.Rows
-            '        fechaGraficos = VDR("Dia_Asignado")
-            '        fechaGraficos = Mid(fechaGraficos, 4, 2)
-            '        mes = getMeses(fechaGraficos)
-            '        cadenaXML += "<category name='" & mes & "' />"
-            '    Next
-            'End If
+
+            If rbtMeses.Checked Then
+                vDT = oGraficas.obtener_Nrfti(idEquipo, idLinea, fechaInicio, fechaFinal)
+                If vDT.Rows.Count = 0 Then
+                    lblError.Visible = True
+                    lblError.Enabled = True
+                Else
+                    lblError.Visible = False
+                    lblError.Enabled = False
+                    vMesInicio = Month(DateTime.Parse(vDT.Rows(0).Item("Dia_Asignado"))).ToString
+                    vYearInicio = Year(DateTime.Parse(vDT.Rows(0).Item("Dia_Asignado"))).ToString
+                    For Each vDR As DataRow In vDT.Rows
+                        If (Month(DateTime.Parse(vDR("Dia_Asignado"))).ToString = vMesInicio And Year(DateTime.Parse(vDR("Dia_Asignado"))).ToString = vYearInicio) Then
+                            fechaGraficos = vDR("Dia_Asignado")
+                            fechaGraficos = Mid(fechaGraficos, 4, 2)
+                            mes = getMeses(fechaGraficos)
+                        Else
+                            banderaPromedio = False
+                            cadenaXML += "<category name='" & mes & "  " & vYearInicio & " ' />"
+                            vMesInicio = Month(DateTime.Parse(vDR("Dia_Asignado"))).ToString
+                            vYearInicio = Year(DateTime.Parse(vDR("Dia_Asignado"))).ToString
+                        End If
+                    Next
+                End If
+                cadenaXML += "<category name='" & mes & "   " & vYearInicio & "' />"
+            End If
         End If
         If banderaPromedio = True Then
             cadenaXML += "<category name ='PROMEDIO' />"
@@ -832,9 +859,9 @@ Public Class frmGraficas
         Else
             ''falta x meses
             If rbtMeses.Checked Then
-                'vDT = oGraficas.ejecutarVista(cadena, cadenaWHERE)
-                'vMesInicio = Month(DateTime.Parse(vDT.Rows(0).Item("Dia_Asignado"))).ToString
-                'vYearInicio = Year(DateTime.Parse(vDT.Rows(0).Item("Dia_Asignado"))).ToString
+                vDT = oGraficas.obtener_Nrfti(idEquipo, idLinea, fechaInicio, fechaFinal)
+                vMesInicio = Month(DateTime.Parse(vDT.Rows(0).Item("Dia_Asignado"))).ToString
+                vYearInicio = Year(DateTime.Parse(vDT.Rows(0).Item("Dia_Asignado"))).ToString
                 For Each vDR As DataRow In vDT.Rows
                     If (Month(DateTime.Parse(vDR("Dia_Asignado"))).ToString = vMesInicio And Year(DateTime.Parse(vDR("Dia_Asignado"))).ToString = vYearInicio) Then
                         pzasOK = vDR(("PZAS_OK"))
@@ -911,8 +938,29 @@ Public Class frmGraficas
             End If
         Else
             If rbtMeses.Checked Then
-                ''-hacer
-
+                vDT = oGraficas.obtener_Nrfti_acumulado(idEquipo, fechaInicio, fechaFinal)
+                If vDT.Rows.Count = 0 Then
+                    lblError.Visible = True
+                    lblError.Enabled = True
+                Else
+                    lblError.Visible = False
+                    lblError.Enabled = False
+                    vMesInicio = Month(DateTime.Parse(vDT.Rows(0).Item("Dia_Asignado"))).ToString
+                    vYearInicio = Year(DateTime.Parse(vDT.Rows(0).Item("Dia_Asignado"))).ToString
+                    For Each vDR As DataRow In vDT.Rows
+                        If (Month(DateTime.Parse(vDR("Dia_Asignado"))).ToString = vMesInicio And Year(DateTime.Parse(vDR("Dia_Asignado"))).ToString = vYearInicio) Then
+                            fechaGraficos = vDR("Dia_Asignado")
+                            fechaGraficos = Mid(fechaGraficos, 4, 2)
+                            mes = getMeses(fechaGraficos)
+                        Else
+                            banderaPromedio = False
+                            cadenaXML += "<category name='" & mes & "  " & vYearInicio & " ' />"
+                            vMesInicio = Month(DateTime.Parse(vDR("Dia_Asignado"))).ToString
+                            vYearInicio = Year(DateTime.Parse(vDR("Dia_Asignado"))).ToString
+                        End If
+                    Next
+                End If
+                cadenaXML += "<category name='" & mes & "   " & vYearInicio & "' />"
             End If
         End If
 
@@ -997,7 +1045,7 @@ Public Class frmGraficas
             End If
         Else
             If rbtMeses.Checked Then
-                'vDT = oGraficas.ejecutarVista(cadena, cadenaWHERE)
+                vDT = oGraficas.obtener_Nrfti_acumulado(idEquipo, fechaInicio, fechaFinal)
                 vFecha_Actual = vDT.Rows(0).Item("DIA_ASIGNADO").ToString
                 vMesInicio = Month(DateTime.Parse(vDT.Rows(0).Item("Dia_Asignado"))).ToString
                 vYearInicio = Year(DateTime.Parse(vDT.Rows(0).Item("Dia_Asignado"))).ToString
