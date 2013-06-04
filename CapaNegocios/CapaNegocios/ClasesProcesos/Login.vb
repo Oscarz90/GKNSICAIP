@@ -90,10 +90,10 @@ Public Class Login
     ''' <returns>Id del Equipo</returns>
     ''' <remarks></remarks>
     Public Function Obtener_Id_Equipo(ByVal vNombre_Equipo As String) As Integer
-        Dim vRetorno As Integer = 0
+        Dim vRetorno As Integer = 0  ''Replace(equipo_empleado, "'", "''")
         Dim vDR As DataRow
         Try
-            vDR = oBD_SICAIP.ObtenerRenglon("select cve_equipo from equipo where equipo = '" & vNombre_Equipo & "'", "Login")
+            vDR = oBD_SICAIP.ObtenerRenglon("select cve_equipo from equipo where equipo = '" & Replace(vNombre_Equipo, "'", "''") & "'", "Login")
             If vDR IsNot Nothing Then
                 vRetorno = vDR("cve_equipo")
             End If
@@ -140,7 +140,7 @@ Public Class Login
                 Dim cmd As New SqlClient.SqlCommand
                 cmd.CommandType = CommandType.StoredProcedure
                 cmd.CommandText = "get_Tipo_Tlatoani"
-                cmd.Parameters.Add("@nombre_equipo", SqlDbType.VarChar).Value = Replace(vNombre_Equipo, "'", "''")
+                cmd.Parameters.Add("@nombre_equipo", SqlDbType.VarChar).Value = vNombre_Equipo
                 Dim obj As DataTable = oBD_SICAIP.EjecutaCommando(cmd)
                 vRetorno = obj.Rows(0)(0)
                 scope.Complete()

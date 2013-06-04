@@ -26,8 +26,8 @@ Public Class frmLogin
                 vCodEmpleado = oLogin.Obtener_Cve_Empleado(txtCode.Text)
                 If oLogin.Empleado_Valido(vCodEmpleado) = True Then
                     txtCode.Text = ""
-                    oLogin.Cargar_Empleado(vCodEmpleado)
-                    vIdEquipo = oLogin.Obtener_Id_Equipo(oLogin.Equipo_Empleado)
+                    oLogin.Cargar_Empleado(vCodEmpleado) ''NOMBRE Y EQUIPO CON EL CODIGO DEL EMPLEADO
+                    vIdEquipo = oLogin.Obtener_Id_Equipo(oLogin.Equipo_Empleado) ''-------------
                     ''VALIDAR LAS LINEAS PILOTO QUE SOLO PARTICIPARAN
                     vTipoTlatoani = Nothing
                     'If oLogin.Valida_Equipo_Piloto(oLogin.Equipo_Empleado) = 1 Then
@@ -118,7 +118,7 @@ Public Class frmLogin
                             MsgBox("Aún no está disponible el formulario de captura para EMBOLADO")
                         Case Else
                             ''MsgBox("Error")
-                            MsgBox("EL SISTEMA ESTA DISPONIBLE SOLO PARA LINEAS PILOTO!!! ", vbCritical + vbOKOnly, "Error")
+                            MsgBox("EL EMPLEADO NO ES VALIDO ", vbCritical + vbOKOnly, "Error")
                     End Select
                 Else
                     MsgBox("EL EMPLEADO NO ES VALIDO", vbExclamation + vbOKOnly + vbDefaultButton1, "Error")
@@ -127,7 +127,8 @@ Public Class frmLogin
                     ''Mandar focus al botón aceptar---------------------------------------------------------------------------------------                    
                 End If
             Catch
-                MsgBox("EL SISTEMA ESTA DISPONIBLE SOLO PARA LINEAS PILOTO!!! ", vbCritical + vbOKOnly, "Error")
+                'MsgBox("EL SISTEMA ESTA DISPONIBLE SOLO PARA LINEAS PILOTO!!! ", vbCritical + vbOKOnly, "Error")
+                MsgBox("EL EMPLEADO NO ES VALIDO ", vbCritical + vbOKOnly, "Error")
             End Try
         End If
     End Sub
