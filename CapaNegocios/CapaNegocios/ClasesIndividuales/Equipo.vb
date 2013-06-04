@@ -10,7 +10,11 @@ Public Class Equipo
         If vDR IsNot Nothing Then
             vCve_Equipo = vDR("cve_equipo")
             vCve_Equipo_Kronos = vDR("Cve_Equipo_Kronos")
-            vCve_Lider = vDR("cve_Lider")
+            If Not IsDBNull(vDR("cve_lider")) Then
+                vCve_Lider = vDR("cve_Lider")
+            Else
+                vCve_Lider = 0
+            End If
             vCve_Detalle = vDR("cve_detalle")
             vEquipo = vDR("equipo")
             vLET = vDR("LET")
