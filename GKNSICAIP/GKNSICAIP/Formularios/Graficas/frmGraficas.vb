@@ -270,7 +270,7 @@ Public Class frmGraficas
         ElseIf rbtNRFTi.Checked Then
 
         ElseIf rbtCosto.Checked Then
-
+            cadenaWHERE = cadenaWHERE & " group by cadena, componente, linea, equipo, costo, " & cadenaGroup & " order by " & cadenaGroup
         ElseIf rbtSeg.Checked Then
 
         ElseIf rbt5s.Checked Then
@@ -1253,7 +1253,9 @@ Public Class frmGraficas
                 lblError.Enabled = False
                 vFecha_Actual = vDT.Rows(0).Item("DIA_ASIGNADO").ToString
                 For Each vDR As DataRow In vDT.Rows
-                    If vDR("costo") <> 0 And vFecha_Actual = vDR("DIA_ASIGNADO") Then
+                    If vDR("costo") = 0 And vFecha_Actual = vDR("DIA_ASIGNADO") Then
+                       
+                    ElseIf vDR("costo") <> 0 And vFecha_Actual = vDR("DIA_ASIGNADO") Then
                         costo = vDR("costo")
                         promDia = promDia + costo
                         contador = contador + 1

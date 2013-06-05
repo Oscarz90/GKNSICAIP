@@ -8,17 +8,47 @@ Public Class Equipo
         Dim vDR As DataRow
         vDR = oBD.ObtenerRenglon("select * from equipo where cve_equipo = " & vCve_Equipo, "equipo")
         If vDR IsNot Nothing Then
-            vCve_Equipo = vDR("cve_equipo")
-            vCve_Equipo_Kronos = vDR("Cve_Equipo_Kronos")
+            'vCve_Equipo = vDR("cve_equipo")
+            'vCve_Equipo_Kronos = vDR("Cve_Equipo_Kronos")
+            If Not IsDBNull(vDR("cve_equipo")) Then
+                vCve_Equipo = vDR("cve_equipo")
+            Else
+                vCve_Equipo = 0
+            End If
+            If Not IsDBNull(vDR("cve_equipo_kronos")) Then
+                vCve_Equipo_Kronos = vDR("cve_equipo_kronos")
+            Else
+                vCve_Equipo_Kronos = ""
+            End If
             If Not IsDBNull(vDR("cve_lider")) Then
                 vCve_Lider = vDR("cve_Lider")
             Else
                 vCve_Lider = 0
             End If
-            vCve_Detalle = vDR("cve_detalle")
-            vEquipo = vDR("equipo")
-            vLET = vDR("LET")
-            vRuta_Imagen = vDR("rutaImagen")
+            If Not IsDBNull(vDR("cve_detalle")) Then
+                vCve_Detalle = vDR("cve_detalle")
+            Else
+                vCve_Detalle = 0
+            End If
+            If Not IsDBNull(vDR("equipo")) Then
+                vEquipo = vDR("equipo")
+            Else
+                vEquipo = ""
+            End If
+            If Not IsDBNull(vDR("LET")) Then
+                vLET = vDR("LET")
+            Else
+                vLET = ""
+            End If
+            If Not IsDBNull(vDR("rutaImagen")) Then
+                vRuta_Imagen = vDR("rutaImagen")
+            Else
+                vRuta_Imagen = ""
+            End If
+            'vCve_Detalle = vDR("cve_detalle")
+            'vEquipo = vDR("equipo")
+            'vLET = vDR("LET")
+            'vRuta_Imagen = vDR("rutaImagen")
         End If
     End Sub
 
