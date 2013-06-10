@@ -19,6 +19,7 @@ Public Class frmGraficas
     Dim contorno_anchor As String = "000000" 'negro
     Dim radio_anchor As String = "5"
 
+
     Dim vFecha_Now_Control As DateTime
 
 #End Region
