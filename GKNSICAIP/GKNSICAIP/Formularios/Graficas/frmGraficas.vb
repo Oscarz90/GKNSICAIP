@@ -1,4 +1,5 @@
 ﻿Imports CapaNegocios
+Imports System.Security.Principal
 Public Class frmGraficas    
 #Region "VARIABLES GLOBALES"
     Dim oGraficas As Graficas
@@ -877,6 +878,9 @@ Public Class frmGraficas
                     sumaPzasOK = sumaPzasOK + pzasOK
                     sumaPzasDes = sumaPzasDes + pzasDes
                     promNrfti = (sumaPzasDes / (sumaPzasDes + sumaPzasOK)) * 1000000
+                    If promNrfti = 0 Then
+                        MsgBox("div x cero")
+                    End If
                     banderaPromedio = True
                 Next
             End If
@@ -1254,9 +1258,7 @@ Public Class frmGraficas
                 lblError.Enabled = False
                 vFecha_Actual = vDT.Rows(0).Item("DIA_ASIGNADO").ToString
                 For Each vDR As DataRow In vDT.Rows
-                    If vDR("costo") = 0 And vFecha_Actual = vDR("DIA_ASIGNADO") Then
-                       
-                    ElseIf vDR("costo") <> 0 And vFecha_Actual = vDR("DIA_ASIGNADO") Then
+                    If vFecha_Actual = vDR("DIA_ASIGNADO") And vDR("costo") <> 0 Then
                         costo = vDR("costo")
                         promDia = promDia + costo
                         contador = contador + 1
@@ -1900,7 +1902,12 @@ Public Class frmGraficas
     Private Sub guardarGrafica()
         Dim screenPos As Point = Me.PointToScreen(New Point(0, 0))
         Dim bit As Bitmap = capturaPantalla(screenPos.X + swfGrafica.Location.X, screenPos.Y + swfGrafica.Location.Y, swfGrafica.Width, swfGrafica.Height)
-        bit.Save(Application.StartupPath & "\Graficador\grafica.jpeg", Imaging.ImageFormat.Jpeg)
+        Dim bit2 As New Bitmap(bit)
+        Try
+            bit2.Save(Application.StartupPath & "\Graficador\grafica.jpeg", Imaging.ImageFormat.Jpeg) ''--
+        Catch ex As Exception
+            'MsgBox(ex.Message)
+        End Try
     End Sub
 #End Region
 #Region "INICIALIZACION DEL FORMULARIO"

@@ -8,8 +8,6 @@ Public Class Equipo
         Dim vDR As DataRow
         vDR = oBD.ObtenerRenglon("select * from equipo where cve_equipo = " & vCve_Equipo, "equipo")
         If vDR IsNot Nothing Then
-            'vCve_Equipo = vDR("cve_equipo")
-            'vCve_Equipo_Kronos = vDR("Cve_Equipo_Kronos")
             If Not IsDBNull(vDR("cve_equipo")) Then
                 vCve_Equipo = vDR("cve_equipo")
             Else
@@ -45,10 +43,6 @@ Public Class Equipo
             Else
                 vRuta_Imagen = ""
             End If
-            'vCve_Detalle = vDR("cve_detalle")
-            'vEquipo = vDR("equipo")
-            'vLET = vDR("LET")
-            'vRuta_Imagen = vDR("rutaImagen")
         End If
     End Sub
 
