@@ -90,7 +90,7 @@ Public Class Login
     ''' <returns>Id del Equipo</returns>
     ''' <remarks></remarks>
     Public Function Obtener_Id_Equipo(ByVal vNombre_Equipo As String) As Integer
-        Dim vRetorno As Integer = 0  ''Replace(equipo_empleado, "'", "''")
+        Dim vRetorno As Integer = 0
         Dim vDR As DataRow
         Try
             vDR = oBD_SICAIP.ObtenerRenglon("select cve_equipo from equipo where equipo = '" & Replace(vNombre_Equipo, "'", "''") & "'", "Login")
