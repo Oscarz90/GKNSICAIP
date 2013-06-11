@@ -11,7 +11,8 @@ Public Class ArchivoGraficas
 
     Public Sub Abre_Graficas()
         Exl = New Excel.Application
-        Exl.Workbooks.Open(Application.StartupPath & "\Graficador\PDFGrafica.xlsm")
+        'Exl.Workbooks.Open(Application.StartupPath & "\Graficador\PDFGrafica.xlsm")
+        Exl.Workbooks.Open("C:\Graficador\PDFGrafica.xlsm")
         Exl.Visible = False
     End Sub
     Public Sub Cierra_Graficas()
@@ -22,7 +23,8 @@ Public Class ArchivoGraficas
     End Sub
     Public Sub Exporta_Graficas_PDF(ByVal ruta As String)
         Try
-            Exl.Run("convierte_2", Application.StartupPath & "\Graficador", ruta)
+            'Exl.Run("convierte_2", Application.StartupPath & "\Graficador", ruta)
+            Exl.Run("convierte_2", "C:\Graficador", ruta)
         Catch
         End Try
     End Sub
