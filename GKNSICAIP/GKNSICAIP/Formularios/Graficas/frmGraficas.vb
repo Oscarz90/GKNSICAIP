@@ -1,8 +1,14 @@
 ﻿Imports CapaNegocios
+Imports CapaNegocios.Configuracion
 Imports System.Security.Principal
+''para probar
+Imports System.IO
+
 Public Class frmGraficas    
 #Region "VARIABLES GLOBALES"
     Dim oGraficas As Graficas
+    Dim oFile As Manejo_Archivos
+    Dim usuario As String = ""
     Private vIdLinea As Integer
     Private vIdEquipo As Integer
     Dim colores(12) As String
@@ -18,8 +24,6 @@ Public Class frmGraficas
     Dim cadenaGroup As String = ""
     Dim contorno_anchor As String = "000000" 'negro
     Dim radio_anchor As String = "5"
-
-
     Dim vFecha_Now_Control As DateTime
 
 #End Region
@@ -1920,8 +1924,34 @@ Public Class frmGraficas
         cadenaXML += " </dataset>"
     End Sub
 #End Region
-
 #Region "GUARDAR GRAFICO EN EXCEL"
+
+    ''Método para copiar la carpeta graficador que contiene la img.jpg y el macro graficador.xmls
+    Private Sub copiarCarpeta()
+        oFile = New Manejo_Archivos
+        Dim existeDir, existeFile1, existeFile2 As Boolean
+        usuario = Mid(WindowsIdentity.GetCurrent.Name, 11).ToUpper
+        ''Dim rutaDirectorio As String = "C:\Users\'" & usuario & "'\Documents\Graficador"
+        Dim rutaDirectorio As String = "C:\Users\Patricia\Documents\Graficador"
+        existeDir = oFile.Existe_Directorio(rutaDirectorio)
+        existeFile1 = oFile.Existe_Archivo("C:\Users\Patricia\Documents\Graficador\PDFGrafica.xlsm")
+        existeFile2 = oFile.Existe_Archivo("C:\Users\Patricia\Documents\Graficador\grafica.jpeg")
+        If existeDir Then
+            If existeFile1 And existeFile2 Then
+                'MsgBox("existe el directorio!!!!!!!yeah")
+                guardarGrafica()
+            Else
+                oFile.CopiarArchivo(Application.StartupPath & "\Graficador\grafica.jpeg", "C:\Users\Patricia\Documents\Graficador\grafica.jpeg")
+                oFile.CopiarArchivo(Application.StartupPath & "\Graficador\PDFGrafica.xlsm", "C:\Users\Patricia\Documents\Graficador\PDFGrafica.xlsm")
+            End If
+        Else
+            'MsgBox("no esta el directorio!! Buuh")
+            Directory.CreateDirectory("C:\Users\Patricia\Documents\Graficador") ''si funciona crea la carpeta
+            oFile.CopiarArchivo(Application.StartupPath & "\Graficador\grafica.jpeg", "C:\Users\Patricia\Documents\Graficador\grafica.jpeg")
+            oFile.CopiarArchivo(Application.StartupPath & "\Graficador\PDFGrafica.xlsm", "C:\Users\Patricia\Documents\Graficador\PDFGrafica.xlsm")
+            guardarGrafica()
+        End If
+    End Sub
 
     Function capturaPantalla(ByVal locX As Integer, ByVal locY As Integer, ByVal width As Integer, ByVal height As Integer) As Bitmap
         Dim NewImage As New Bitmap(width, height)
@@ -1938,11 +1968,11 @@ Public Class frmGraficas
         Dim bit2 As New Bitmap(bit)
         Try
             'bit2.Save(Application.StartupPath & "\Graficador\grafica.jpeg", Imaging.ImageFormat.Jpeg)
-            bit2.Save("C:\Graficador\grafica.jpeg", Imaging.ImageFormat.Jpeg)
+            bit2.Save("C:\Users\Patricia\Documents\Graficador\grafica.jpeg", Imaging.ImageFormat.Jpeg)
             bit.Dispose()
             bit2.Dispose()
         Catch ex As Exception
-            'MsgBox(ex.Message)
+            MsgBox(ex.Message)
         End Try
 
     End Sub
@@ -2262,7 +2292,7 @@ Public Class frmGraficas
     End Sub
 
     Private Sub cmdImprimir_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmdImprimir.Click
-        guardarGrafica()
+        copiarCarpeta()
         Dim ruta As String
         ruta = ""
         fbdBuscar.ShowNewFolderButton = True
