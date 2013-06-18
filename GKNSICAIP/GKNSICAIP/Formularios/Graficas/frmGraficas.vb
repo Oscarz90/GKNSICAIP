@@ -1,9 +1,7 @@
 ﻿Imports CapaNegocios
 Imports CapaNegocios.Configuracion
 Imports System.Security.Principal
-''para probar
 Imports System.IO
-
 Public Class frmGraficas    
 #Region "VARIABLES GLOBALES"
     Dim oGraficas As Graficas
