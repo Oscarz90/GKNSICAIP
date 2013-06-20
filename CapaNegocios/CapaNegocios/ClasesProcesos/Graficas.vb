@@ -251,7 +251,7 @@ Public Class Graficas
             Try
                 Dim cmd As New SqlClient.SqlCommand
                 cmd.CommandType = CommandType.StoredProcedure
-                cmd.CommandText = "obtiene_nrfti_por_linea"
+                cmd.CommandText = "obtiene_nrft_interno_por_linea"
                 cmd.Parameters.Add("@cve_equipo", SqlDbType.BigInt).Value = videquipo
                 cmd.Parameters.Add("@cve_linea", SqlDbType.BigInt).Value = vidlinea
                 cmd.Parameters.Add("@fecha_inicial", SqlDbType.DateTime).Value = vfechainicio

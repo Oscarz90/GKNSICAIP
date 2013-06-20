@@ -817,7 +817,7 @@ Public Class frmGraficas
                             fechaGraficos = Mid(fechaGraficos, 4, 2)
                             mes = getMeses(fechaGraficos)
                         Else
-                            banderaPromedio = False
+                            banderaPromedio = True
                             cadenaXML += "<category name='" & mes & "  " & vYearInicio & " ' />"
                             vMesInicio = Month(DateTime.Parse(vDR("Dia_Asignado"))).ToString
                             vYearInicio = Year(DateTime.Parse(vDR("Dia_Asignado"))).ToString
@@ -826,23 +826,33 @@ Public Class frmGraficas
                 End If
                 cadenaXML += "<category name='" & mes & "   " & vYearInicio & "' />"
             End If
+            ''fin por meses
         End If
         If banderaPromedio = True Then
-            cadenaXML += "<category name ='PROMEDIO' />"
+            cadenaXML += "<category name ='ACUMULADO' />"
         End If
         cadenaXML += "</categories>"
     End Sub
     Private Sub establece_NRFTi(ByVal idEquipo, ByVal idLinea, ByVal fechaInicio, ByVal fechaFinal)
         Dim sumaPzasOK As Double = 0
         Dim sumaPzasDes As Double = 0
-        Dim promNrfti As Double = 0  ''Promedio NRFTi se vuelve a calcular NRFTi = (PZAS.DES/(PZAS.DES + PZAS. OK))*1,000,000
-        'Dim contador As Integer = 0
+        Dim sumaRechazos As Double = 0
+        Dim ppms As Double = 0 ''calcular el nrft por día
+        Dim totalPzasOk As Double = 0
+        Dim totalPzasDes As Double = 0
+        Dim totalRechazos As Double = 0
+        Dim NrftiAcumulado As Double = 0 ''nrft acumulado de un rango entre fechas
+        Dim numerador As Double = 0
+        Dim denominador As Double = 0
+        Dim numeradorAcum As Double = 0
+        Dim denominadorAcum As Double = 0
+        ''NRFTI=((DESECHOS+RECHAZOS)/(DESDECHOS+RECHAZOS+PZAS.OK))*1,000,000
         Dim vDT As DataTable
-
         cadenaXML += "<dataset seriesName='NRFTi' color='" & colores(6) & "' anchorBorderColor='" & contorno_anchor & "' anchorBgColor='" & colores(6) & "' anchorRadius='" & radio_anchor & "'>"
         Dim nrfti As Double = 0
         Dim pzasOK As Double = 0
         Dim pzasDes As Double = 0
+        Dim rechazos As Double = 0
         Dim vMesInicio As String = ""
         Dim vYearInicio As String = ""
         Dim banderaPromedio As Boolean
@@ -861,28 +871,48 @@ Public Class frmGraficas
                         nrfti = vDR(("NRFTI"))
                         pzasOK = vDR(("PZAS_OK"))
                         pzasDes = vDR(("PZAS_DESECHO"))
-                        sumaPzasOK = sumaPzasOK + pzasOK
-                        sumaPzasDes = sumaPzasDes + pzasDes
-                        cadenaXML += " <set value='" & nrfti.ToString & "'/>"
+                        rechazos = vDR(("rechazos"))
+                        numerador = pzasDes + rechazos
+                        denominador = pzasDes + rechazos + pzasOK
+                        If numerador <> 0 And denominador <> 0 Then
+                            ppms = (numerador / denominador) * 1000000
+                        Else
+                            ppms = 0
+                        End If
+                        cadenaXML += " <set value='" & ppms.ToString & "'/>"
+                        ''Sacar el total para graficar el acumulado al final
+                        totalPzasOk = totalPzasOk + pzasOK
+                        totalPzasDes = totalPzasDes + pzasDes
+                        totalRechazos = totalRechazos + rechazos
                     ElseIf vDR("NRFTI") = 0 Then
-                        nrfti = 0
+                        nrfti = vDR(("NRFTI"))
                         pzasOK = vDR(("PZAS_OK"))
                         pzasDes = vDR(("PZAS_DESECHO"))
-                        sumaPzasOK = sumaPzasOK + pzasOK
-                        sumaPzasDes = sumaPzasDes + pzasDes
-                        cadenaXML += " <set value='" & nrfti.ToString & "' />"
+                        rechazos = vDR(("rechazos"))
+                        numerador = pzasDes + rechazos
+                        denominador = pzasDes + rechazos + pzasOK
+                        If numerador <> 0 And denominador <> 0 Then
+                            ppms = (numerador / denominador) * 1000000
+                        Else
+                            ppms = 0
+                        End If
+                        cadenaXML += " <set value='" & ppms.ToString & "' />"
+                        ''Sacar el total para graficar el acumulado al final
+                        totalPzasOk = totalPzasOk + pzasOK
+                        totalPzasDes = totalPzasDes + pzasDes
+                        totalRechazos = totalRechazos + rechazos
                     End If
-                    nrfti = vDR(("NRFTI"))
-                    pzasOK = vDR(("PZAS_OK"))
-                    pzasDes = vDR(("PZAS_DESECHO"))
-                    sumaPzasOK = sumaPzasOK + pzasOK
-                    sumaPzasDes = sumaPzasDes + pzasDes
-                    promNrfti = (sumaPzasDes / (sumaPzasDes + sumaPzasOK)) * 1000000
-                    banderaPromedio = False
+                    numeradorAcum = totalPzasDes + totalRechazos
+                    denominadorAcum = totalPzasDes + totalRechazos + totalPzasOk
+                    If numeradorAcum <> 0 And denominadorAcum <> 0 Then
+                        NrftiAcumulado = (numeradorAcum / denominadorAcum) * 1000000
+                    Else
+                        NrftiAcumulado = 0
+                    End If
+                    banderaPromedio = True
                 Next
             End If
         Else
-
             If rbtMeses.Checked Then
                 vDT = oGraficas.obtener_Nrfti(idEquipo, idLinea, fechaInicio, fechaFinal)
                 If vDT.Rows.Count = 0 Then
@@ -896,39 +926,75 @@ Public Class frmGraficas
                     vYearInicio = Year(DateTime.Parse(vDT.Rows(0).Item("Dia_Asignado"))).ToString
                     For Each vDR As DataRow In vDT.Rows
                         If (Month(DateTime.Parse(vDR("Dia_Asignado"))).ToString = vMesInicio And Year(DateTime.Parse(vDR("Dia_Asignado"))).ToString = vYearInicio) Then
+                            nrfti = vDR(("NRFTI"))
                             pzasOK = vDR(("PZAS_OK"))
                             pzasDes = vDR(("PZAS_DESECHO"))
+                            rechazos = vDR(("rechazos"))
                             sumaPzasOK = sumaPzasOK + pzasOK
                             sumaPzasDes = sumaPzasDes + pzasDes
-                            promNrfti = (sumaPzasDes / (sumaPzasDes + sumaPzasOK)) * 1000000
+                            sumaRechazos = sumaRechazos + rechazos
+                            numerador = sumaPzasDes + sumaRechazos
+                            denominador = sumaPzasDes + sumaRechazos + sumaPzasOK
+                            If numerador <> 0 And denominador <> 0 Then
+                                ppms = (numerador / denominador) * 1000000
+                            Else
+                                ppms = 0
+                            End If
+                            ''Sacar el total para graficar el acumulado al final
+                            totalPzasOk = totalPzasOk + pzasOK
+                            totalPzasDes = totalPzasDes + pzasDes
+                            totalRechazos = totalRechazos + rechazos
                         Else
-                            banderaPromedio = False
-                            'promNrfti = (sumaPzasDes / (sumaPzasDes + sumaPzasOK)) * 1000000
-                            cadenaXML += " <set value='" & promNrfti.ToString & "' />"
+                            ''NRFTI=((DESECHOS+RECHAZOS)/(DESDECHOS+RECHAZOS+PZAS.OK))*1,000,000
+                            cadenaXML += " <set value='" & ppms.ToString & "' />" ''nrfti x mes
                             pzasOK = 0
                             pzasDes = 0
+                            rechazos = 0
                             sumaPzasOK = 0
                             sumaPzasDes = 0
+                            sumaRechazos = 0
+                            
                             vMesInicio = Month(DateTime.Parse(vDR("Dia_Asignado"))).ToString
                             vYearInicio = Year(DateTime.Parse(vDR("Dia_Asignado"))).ToString
                             pzasOK = vDR(("PZAS_OK"))
                             pzasDes = vDR(("PZAS_DESECHO"))
+                            rechazos = vDR(("rechazos"))
                             sumaPzasOK = sumaPzasOK + pzasOK
                             sumaPzasDes = sumaPzasDes + pzasDes
-
+                            sumaRechazos = sumaRechazos + rechazos
+                            numerador = sumaPzasDes + sumaRechazos
+                            denominador = sumaPzasDes + sumaRechazos + sumaPzasOK
+                            If numerador <> 0 And denominador <> 0 Then
+                                ppms = (numerador / denominador) * 1000000
+                            Else
+                                ppms = 0
+                            End If
+                            ''Sacar el total para graficar el acumulado al final
+                            totalPzasOk = totalPzasOk + pzasOK
+                            totalPzasDes = totalPzasDes + pzasDes
+                            totalRechazos = totalRechazos + rechazos
                         End If
 
-                    Next
-                    cadenaXML += " <set value='" & promNrfti.ToString & "' />"
-                End If
-              
-            End If ''dia/mes
+                        numeradorAcum = totalPzasDes + totalRechazos
+                        denominadorAcum = totalPzasDes + totalRechazos + totalPzasOk
+                        If numeradorAcum <> 0 And denominadorAcum <> 0 Then
+                            NrftiAcumulado = (numeradorAcum / denominadorAcum) * 1000000
+                        Else
+                            NrftiAcumulado = 0
+                        End If
+                        banderaPromedio = True
 
-        End If
-        promNrfti = Math.Round(promNrfti)
-        promNrfti = Math.Truncate(promNrfti)
+                    Next
+                    cadenaXML += " <set value='" & ppms.ToString & "' />"
+                End If
+
+            End If
+
+        End If ''dia/mes
+        NrftiAcumulado = Math.Round(NrftiAcumulado)
+        NrftiAcumulado = Math.Truncate(NrftiAcumulado)
         If banderaPromedio = True Then
-            cadenaXML += " <set value='" & promNrfti.ToString & "' color='" & colores(1) & "'/>"
+            cadenaXML += " <set value='" & NrftiAcumulado.ToString & "' color='" & colores(1) & "'/>"
         End If
         cadenaXML += " </dataset>"
 
