@@ -53,6 +53,17 @@ Public Class Clasificacion_Modelo
         End Using
     End Sub
 
+    Public Function Obtener_Modelos() As DataTable
+        Dim vRetorno As DataTable
+        vRetorno = oBD.ObtenerTabla("select * from clasificacion_modelo")        
+        If vRetorno IsNot Nothing Then
+
+        Else
+            vRetorno = Nothing
+        End If
+        Return vRetorno
+    End Function
+
 #End Region
 
 #Region "Atributos"

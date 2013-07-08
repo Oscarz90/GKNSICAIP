@@ -3,6 +3,8 @@ Public Class Modelo
     Implements IIndividual
     Dim cadena_conexion As New CapaDatos.conexiones
     Dim oBD As New CapaDatos.CapaDatos(cadena_conexion.CadenaSicaip)
+    Dim oComponente As Componente
+    Dim oClasificacion_Modelo As Clasificacion_Modelo
 #Region "IIndividual"
     Public Sub Cargar() Implements IIndividual.Cargar
         Dim rDatos As DataRow = Nothing
@@ -40,7 +42,45 @@ Public Class Modelo
     End Function
 
     Public Sub Registrar() Implements IIndividual.Registrar
+        'Validacion
+        'If ValidacionesName.ValidacionesGenerales.ValidaNombre("DEPARTAMENTO", "Nombre", Me.m_Nombre, "Departamento_Id", Me.m_Departamento_Id) Then
+        '    Throw New CustomException(Errores.Mismo_Nombre)
+        '    Exit Sub
+        'End If
 
+        'If Me.m_Departamento_Id = 0 Then
+        '    'Nuevo Registro
+        '    Me.CargaDatosNvoRegistro()
+        'End If
+        'Me.CargaDatosNvoModificacion()
+        'vEmpleado_Registro = "07044800"
+        'vEmpleado_Modifico = "07044800"
+        'vFecha_Registro = "30/05/2013"
+        'vFecha_Modifico = "30/05/2013"
+        Using scope As New TransactionScope()
+            Try
+                Dim cmd As New SqlClient.SqlCommand
+                cmd.CommandType = CommandType.StoredProcedure
+                cmd.CommandText = "REGISTRAR_MODELO"
+
+                With cmd.Parameters
+                    .Add("cve_modelo", SqlDbType.BigInt).Value = Me.vcve_modelo
+                    .Add("Descripcion", SqlDbType.VarChar).Value = Me.descripcion
+                    .Add("cve_componente", SqlDbType.BigInt).Value = Me.vcve_componente
+                    .Add("cve_clasificacion_modelo", SqlDbType.Int).Value = Me.vcve_clasificacion_modelo
+                    .Add("np_gkn", SqlDbType.VarChar).Value = Me.vnp_gkn
+                End With
+
+                Dim obj As DataTable = oBD.EjecutaCommando(cmd)
+                Me.vcve_modelo = obj.Rows(0)(0) 'ID
+                'Me.RegistraDatos("DEPARTAMENTO", "Departamento_Id", Me.m_Departamento_Id)
+                'Dim oBitacora As Bitacora = Bitacora.ObtenInstancia
+                'oBitacora.RegistrarEnBitacora("DEPARTAMENTO.REGISTRAR", "Se registró el departamento: " & Me.m_Nombre)
+                scope.Complete()
+            Catch ex As Exception
+                Throw New Exception(ex.Message)
+            End Try
+        End Using
     End Sub
 #End Region
 #Region "Atributos"
@@ -113,7 +153,31 @@ Public Class Modelo
         End Set
     End Property
 
+    Public ReadOnly Property Nombre_Componente() As String
+        Get
+            If cve_componente <> 0 Then
+                oComponente = New Componente
+                oComponente.cve_componente = cve_componente
+                oComponente.Cargar()
+                Return oComponente.componente
+            Else
+                Return ""
+            End If
+        End Get
+    End Property
 
+    Public ReadOnly Property Nombre_Clasificacion_Modelo() As String
+        Get
+            If vcve_clasificacion_modelo <> 0 Then
+                oClasificacion_Modelo = New Clasificacion_Modelo
+                oClasificacion_Modelo.Cve_clasificacion_modelo = vcve_clasificacion_modelo
+                oClasificacion_Modelo.Cargar()
+                Return oClasificacion_Modelo.Descripcion
+            Else
+                Return ""
+            End If
+        End Get
+    End Property
 
 
 
