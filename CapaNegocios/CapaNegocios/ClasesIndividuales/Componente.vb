@@ -110,7 +110,7 @@ Public Class Componente
 
     Public Function Obtener_Componentes(ByVal vFiltro As String) As DataTable
         Dim vDT As DataTable
-        vDT = oBD.ObtenerTabla("select * from componente where componente='" & vFiltro & "'")
+        vDT = oBD.ObtenerTabla("select * from componente where componente LIKE '%" & vFiltro & "%'")
         If vDT IsNot Nothing Then
 
         Else
