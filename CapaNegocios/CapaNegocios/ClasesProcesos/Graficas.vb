@@ -267,7 +267,93 @@ Public Class Graficas
     End Function
 #End Region
 
+#Region "MANDAR OBJETIVOS"
 
+    Public Function obtener_Objetivo_Productividad(ByVal vIdEquipo As Integer) As Double
+        Dim vRetorno As Double = 0
+        Dim vDR As DataRow
+        Try
+            vDR = oBD.ObtenerRenglon("select cve_equipo, productividad from objetivo where estatus=1 and cve_equipo = " & vIdEquipo, "objetivo")
+            If vDR IsNot Nothing Then
+                vRetorno = vDR("productividad")
+            End If
+        Catch ex As Exception
+
+        End Try
+        Return vRetorno
+    End Function
+
+    Public Function obtener_Objetivo_Calidad(ByVal vIdEquipo As Integer) As Double
+        Dim vRetorno As Double = 0
+        Dim vDR As DataRow
+        Try
+            vDR = oBD.ObtenerRenglon("select cve_equipo, calidad from objetivo where estatus=1 and cve_equipo = " & vIdEquipo, "objetivo")
+            If vDR IsNot Nothing Then
+                vRetorno = vDR("calidad")
+            End If
+        Catch ex As Exception
+
+        End Try
+        Return vRetorno
+    End Function
+
+    Public Function obtener_Objetivo_Costo(ByVal vIdEquipo As Integer) As Double
+        Dim vRetorno As Double = 0
+        Dim vDR As DataRow
+        Try
+            vDR = oBD.ObtenerRenglon("select cve_equipo, costo from objetivo where estatus=1 and cve_equipo = " & vIdEquipo, "objetivo")
+            If vDR IsNot Nothing Then
+                vRetorno = vDR("costo")
+            End If
+        Catch ex As Exception
+
+        End Try
+        Return vRetorno
+    End Function
+
+    Public Function obtener_Objetivo_Seguridad(ByVal vIdEquipo As Integer) As Integer
+        Dim vRetorno As Integer = 0
+        Dim vDR As DataRow
+        Try
+            vDR = oBD.ObtenerRenglon("select cve_equipo, seguridad from objetivo where estatus=1 and cve_equipo = " & vIdEquipo, "objetivo")
+            If vDR IsNot Nothing Then
+                vRetorno = vDR("seguridad")
+            End If
+        Catch ex As Exception
+
+        End Try
+        Return vRetorno
+    End Function
+
+    Public Function obtener_Objetivo_Gente(ByVal vIdEquipo As Integer) As Integer
+        Dim vRetorno As Integer = 0
+        Dim vDR As DataRow
+        Try
+            vDR = oBD.ObtenerRenglon("select cve_equipo, gente from objetivo where estatus=1 and cve_equipo = " & vIdEquipo, "objetivo")
+            If vDR IsNot Nothing Then
+                vRetorno = vDR("gente")
+            End If
+        Catch ex As Exception
+
+        End Try
+        Return vRetorno
+    End Function
+
+    Public Function obtener_Objetivo_CincoS(ByVal vIdEquipo As Integer) As Double
+        Dim vRetorno As Double = 0
+        Dim vDR As DataRow
+        Try
+            vDR = oBD.ObtenerRenglon("select cve_equipo, cincoS from objetivo where estatus=1 and cve_equipo = " & vIdEquipo, "objetivo")
+            If vDR IsNot Nothing Then
+                vRetorno = vDR("cincoS")
+            End If
+        Catch ex As Exception
+
+        End Try
+        Return vRetorno
+    End Function
+
+#End Region
 
 #Region "OBTENER SEGURIDAD"
     Public Function obtener_Seguridad_acumulado(ByVal videquipo As Integer, ByVal vfechainicio As DateTime, ByVal vfechafinal As DateTime) As DataTable

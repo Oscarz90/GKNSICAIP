@@ -833,9 +833,9 @@ Public Class frmGraficas
                     End If
                     promAcumulado = promAcumulado + promDia
                     If promAcumulado <> 0 And vContador_Dias <> 0 Then
-                        promAcumulado = promAcumulado / vContador_Dias
+                        promFinal = promAcumulado / vContador_Dias
                     Else
-                        promAcumulado = 0
+                        promFinal = 0
                     End If
                     cadenaXML += " <set value='" & promFinal.ToString & "'/>"
                 End If
@@ -2085,6 +2085,37 @@ Public Class frmGraficas
     End Sub
 #End Region
 
+#Region "OBTENER OBJETIVO"
+    Public Function obtener_Objetivo(ByVal idEquipo As Integer, ByVal indicador As Integer) As Double
+        oGraficas = New Graficas
+        Dim indicadorSeleccionado As Integer = indicador
+        Dim obj As Double = 0
+        Dim objGS As Integer = 0
+        Select Case indicadorSeleccionado
+            Case 1
+                obj = oGraficas.obtener_Objetivo_Productividad(idEquipo)
+                Return obj * 100
+            Case 2
+                obj = oGraficas.obtener_Objetivo_Calidad(idEquipo)
+                Return obj
+            Case 3
+                obj = oGraficas.obtener_Objetivo_Costo(idEquipo)
+                Return obj
+            Case 4
+                objGS = oGraficas.obtener_Objetivo_Seguridad(idEquipo)
+                Return objGS
+            Case 5
+                objGS = oGraficas.obtener_Objetivo_Gente(idEquipo)
+                Return objGS
+            Case 6
+                obj = oGraficas.obtener_Objetivo_CincoS(idEquipo)
+                Return obj
+            Case Else
+                Return "error!"
+        End Select
+    End Function
+#End Region
+
 #Region "GUARDAR GRAFICO EN EXCEL"
 
     ''Método para copiar la carpeta graficador que contiene la img.jpg y el macro graficador.xmls
@@ -2321,6 +2352,9 @@ Public Class frmGraficas
 #Region "EVENTOS BOTONES GRAFICAR/EXPORTAR/SALIR"
     Private Sub cmdGraficar_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmdGraficar.Click
         swfGrafica.Visible = True
+        Dim Indicador As Integer = 0
+        Dim valorObj As Double = 0
+        Dim valorObjGS As Integer = 0
         Dim tipoGrafico As String = ""
         Dim decimales As String = ""
         Dim ejeY As String = "R E S U L T A D O S "
@@ -2377,6 +2411,7 @@ Public Class frmGraficas
         Condicion_WHERE(cbxTodasLineas.Checked)
         '' O E E -- P R O D U C C I O N --
         If rbtOEE.Checked Then
+            Indicador = 1
             If cbxTodasLineas.Checked Then
                 establece_fechas_oee_acumulado(vIdEquipo, dtpDesde.Value.ToString("dd-MM-yyyy"), dtpHasta.Value.ToString("dd-MM-yyyy"))
                 establece_OEE_Acumulado(vIdEquipo, dtpDesde.Value.ToString("dd-MM-yyyy"), dtpHasta.Value.ToString("dd-MM-yyyy"))
@@ -2384,9 +2419,11 @@ Public Class frmGraficas
                 establece_fechas_oee(vIdEquipo, cbxLinea.SelectedValue, dtpDesde.Value.ToString("dd-MM-yyyy"), dtpHasta.Value.ToString("dd-MM-yyyy"))
                 establece_OEE(vIdEquipo, cbxLinea.SelectedValue, dtpDesde.Value.ToString("dd-MM-yyyy"), dtpHasta.Value.ToString("dd-MM-yyyy"))
             End If
-            ''cadenaXML += "<trendlines> <line startValue='85.0' color='FF0000' displayValue='OBJETIVO' showOnTop='1'/> </trendlines>"
+            valorObj = obtener_Objetivo(vIdEquipo, Indicador)
+            cadenaXML += "<trendlines> <line startValue='" & valorObj & "' color='FF0000' displayValue='" & valorObj & "' showOnTop='1'/> </trendlines>"
             ''N R F T I -- C A L I D A D --
         ElseIf rbtNRFTi.Checked Then
+            Indicador = 2
             If cbxTodasLineas.Checked Then
                 establece_fechas_nrfti_acumulado(vIdEquipo, dtpDesde.Value.ToString("dd-MM-yyyy"), dtpHasta.Value.ToString("dd-MM-yyyy"))
                 establece_NRFTi_Acumulado(vIdEquipo, dtpDesde.Value.ToString("dd-MM-yyyy"), dtpHasta.Value.ToString("dd-MM-yyyy"))
@@ -2394,9 +2431,11 @@ Public Class frmGraficas
                 establece_fechas_nrfti(vIdEquipo, cbxLinea.SelectedValue, dtpDesde.Value.ToString("dd-MM-yyyy"), dtpHasta.Value.ToString("dd-MM-yyyy"))
                 establece_NRFTi(vIdEquipo, cbxLinea.SelectedValue, dtpDesde.Value.ToString("dd-MM-yyyy"), dtpHasta.Value.ToString("dd-MM-yyyy"))
             End If
-            ''cadenaXML += "<trendlines> <line startValue='12000' color='FF0000' displayValue='OBJETIVO' showOnTop='1'/> </trendlines>"
+            valorObj = obtener_Objetivo(vIdEquipo, Indicador)
+            cadenaXML += "<trendlines> <line startValue='" & valorObj & "' color='FF0000' displayValue='" & valorObj & "' showOnTop='1'/> </trendlines>"
             '' C O S T O
         ElseIf rbtCosto.Checked Then
+            'Indicador = 3
             If cbxTodasLineas.Checked Then
                 cadenaSELECT = "SELECT DISTINCT DIA_ASIGNADO FROM VISTA_SELECCION_INDICADOR3"
                 establece_fechas(cadenaSELECT)
@@ -2407,9 +2446,11 @@ Public Class frmGraficas
                 establece_fechas(cadenaSELECT)
                 establece_Costo(cadenaSELECT, colores(2))
             End If
-            'cadenaXML += "<trendlines> <line startValue='110' color='FF0000' displayValue='OBJETIVO' showOnTop='1'/> </trendlines>"
+            'valorObj = obtener_Objetivo(vIdEquipo, Indicador)
+            'cadenaXML += "<trendlines> <line startValue='" & valorObj & "' color='FF0000' displayValue='OBJETIVO' showOnTop='1'/> </trendlines>"
             '' S E G U R I D A D
         ElseIf rbtSeg.Checked Then
+            Indicador = 4
             If cbxTodasLineas.Checked Then
                 establece_fechas_seguridad_acumulado(vIdEquipo, dtpDesde.Value.ToString("dd-MM-yyyy"), dtpHasta.Value.ToString("dd-MM-yyyy"))
                 establece_seguridad_acumulado(vIdEquipo, dtpDesde.Value.ToString("dd-MM-yyyy"), dtpHasta.Value.ToString("dd-MM-yyyy"))
@@ -2417,9 +2458,11 @@ Public Class frmGraficas
                 establece_fechas_seguridad(vIdEquipo, cbxLinea.SelectedValue, dtpDesde.Value.ToString("dd-MM-yyyy"), dtpHasta.Value.ToString("dd-MM-yyyy"))
                 establece_seguridad(vIdEquipo, cbxLinea.SelectedValue, dtpDesde.Value.ToString("dd-MM-yyyy"), dtpHasta.Value.ToString("dd-MM-yyyy"))
             End If
-
+            valorObjGS = obtener_Objetivo(vIdEquipo, Indicador)
+            cadenaXML += "<trendlines> <line startValue='" & valorObjGS & "' color='FF0000' displayValue='" & valorObjGS & "' showOnTop='1'/> </trendlines>"
             ''G E N T E
         ElseIf rbtGente.Checked Then
+            Indicador = 5
             If cbxTodasLineas.Checked Then
                 establece_fechas_gente_acumulado(vIdEquipo, dtpDesde.Value.ToString("dd-MM-yyyy"), dtpHasta.Value.ToString("dd-MM-yyyy"))
                 establece_gente_acumulado(vIdEquipo, dtpDesde.Value.ToString("dd-MM-yyyy"), dtpHasta.Value.ToString("dd-MM-yyyy"))
@@ -2427,9 +2470,11 @@ Public Class frmGraficas
                 establece_fechas_gente(vIdEquipo, cbxLinea.SelectedValue, dtpDesde.Value.ToString("dd-MM-yyyy"), dtpHasta.Value.ToString("dd-MM-yyyy"))
                 establece_gente(vIdEquipo, cbxLinea.SelectedValue, dtpDesde.Value.ToString("dd-MM-yyyy"), dtpHasta.Value.ToString("dd-MM-yyyy"))
             End If
-
+            valorObjGS = obtener_Objetivo(vIdEquipo, Indicador)
+            cadenaXML += "<trendlines> <line startValue='" & valorObjGS & "' color='FF0000' displayValue='" & valorObjGS & "' showOnTop='1'/> </trendlines>"
             '' 5 S
         ElseIf rbt5s.Checked Then
+            Indicador = 6
             If cbxTodasLineas.Checked Then
                 cadenaSELECT = "SELECT DISTINCT DIA_ASIGNADO FROM VISTA_SELECCION_INDICADOR5"
                 'establece_fechas(cadenaSELECT) CON PROMEDIO
@@ -2440,10 +2485,10 @@ Public Class frmGraficas
                 cadenaSELECT = "SELECT PROMEDIO, DIA_ASIGNADO FROM VISTA_SELECCION_INDICADOR5"
                 establece_fechas_5s(cadenaSELECT)
                 establece_5S(cadenaSELECT, colores(12))
-                ''cadenaXML += "<trendlines> <line startValue='3' color='FF0000' displayValue='OBJETIVO' showOnTop='1'/> </trendlines>"
             End If
+            valorObj = obtener_Objetivo(vIdEquipo, Indicador)
+            cadenaXML += "<trendlines> <line startValue='" & valorObj & "' color='FF0000' displayValue='" & valorObj & "' showOnTop='1'/> </trendlines>"
         End If
-        'cadenaXML += "<trendlines> <line startValue='1.5' color='FF0000' displayValue='OBJETIVO' showOnTop='1'/> </trendlines>"
         cadenaXML += " </graph>"
         swfGrafica.Movie = 1 'hace que el control actualice o se refresque
         swfGrafica.Movie = cadenaXML 'carga la pelicula flash
