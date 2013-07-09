@@ -374,7 +374,7 @@ Public Class frmGraficas
         cadenaXML += "</categories>"
     End Sub
 #End Region
-    ''ACTUALIZACION DE OEE ACUMULADO POR OSCAR!!
+
 #Region "ESTABLECE OEE 1 EQUIPO 1 LINEA"
     Private Sub establece_fechas_oee(ByVal idEquipo As Integer, ByVal idLinea As Integer, ByVal fechaInicio As DateTime, ByVal fechaFinal As DateTime)
         Dim fechaGraficos As String = ""
@@ -386,7 +386,7 @@ Public Class frmGraficas
         Dim vYearInicio As String = ""
         cadenaXML += "<categories>"
         If rbtDia.Checked Then
-            vDT = oGraficas.obtener_Oee(idEquipo, idLinea, fechaInicio, fechaFinal)
+            vDT = oGraficas.obtener_Oee_Dia_Linea(idEquipo, idLinea, fechaInicio, fechaFinal)
             If vDT.Rows.Count = 0 Then
                 lblError.Visible = True
                 lblError.Enabled = True
@@ -434,7 +434,7 @@ Public Class frmGraficas
             End If
         End If
         If banderaPromedio = True Then
-            cadenaXML += "<category name ='PROMEDIO' />"
+            cadenaXML += "<category name ='ACUMULADO OEE' />"
         End If
         cadenaXML += "</categories>"
     End Sub
@@ -454,7 +454,7 @@ Public Class frmGraficas
         Dim oee As Double = 0
         cadenaXML += "<dataset seriesName='OEE' color='" & colores(0) & "' anchorBorderColor='" & contorno_anchor & "' anchorBgColor='FFA500' anchorRadius='" & radio_anchor & "'>"
         If rbtDia.Checked Then
-            vDT = oGraficas.obtener_Oee(idEquipo, idLinea, fechaInicio, fechaFinal)
+            vDT = oGraficas.obtener_Oee_Dia_Linea(idEquipo, idLinea, fechaInicio, fechaFinal)
             If vDT.Rows.Count = 0 Then
                 lblError.Visible = True
                 lblError.Enabled = True
@@ -463,28 +463,11 @@ Public Class frmGraficas
                 lblError.Visible = False
                 lblError.Enabled = False
                 For Each vDR As DataRow In vDT.Rows
-                    If IsDBNull(vDR("oee")) Then
-                        oee = 0
-                    Else
-                        oee = vDR("oee")
-                    End If
-                    If vDR("TIPO_REGISTRO") = "P" Then
-                        oee = oee * 100
-                        promMes = promMes + oee
-                        contadorMes = contadorMes + 1
-                        cadenaXML += " <set value='" & oee.ToString & "'/>"
-                    ElseIf vDR("TIPO_REGISTRO") = "D" Then
-                        oee = 0
-                        'promedio = promedio + oee
-                        cadenaXML += " <set value='" & oee.ToString & "' />"
-                    ElseIf vDR("TIPO_REGISTRO") = "Z" Then
-                        oee = 0
-                        'promedio = promedio + oee
-                        cadenaXML += " <set value='" & oee.ToString & "' />"
-                    End If
+                    oee = vDR("oee")
+                    cadenaXML += "<set value='" & oee & "' />"
                 Next
             End If
-            banderaPromedio = True
+            banderaPromedio = False
         Else
             ''--------------------meses
             If rbtMeses.Checked Then
@@ -575,39 +558,26 @@ Public Class frmGraficas
         Dim vYearInicio As String = ""
         Dim vDT As DataTable
         Dim banderaPromedio As Boolean
-        Dim vFecha_Actual As DateTime
         cadenaXML += "<categories>"
 
         If rbtDia.Checked Then
-            vDT = oGraficas.obtener_Oee_acumulado(idEquipo, fechaInicio, fechaFinal)
+            vDT = oGraficas.obtener_Oee_Dia(idEquipo, fechaInicio, fechaFinal)
             If vDT.Rows.Count = 0 Then
                 lblError.Visible = True
                 lblError.Enabled = True
-                cadenaXML += " <set value='" & 0 & "'/>"
             Else
                 lblError.Visible = False
                 lblError.Enabled = False
-                vFecha_Actual = vDT.Rows(0).Item("DIA_ASIGNADO").ToString
                 For Each VDR As DataRow In vDT.Rows
-                    If vFecha_Actual = VDR("DIA_ASIGNADO") Then
-
-                    ElseIf vFecha_Actual <> VDR("DIA_ASIGNADO") Then
-                        fechaGraficos = VDR("DIA_ASIGNADO")
-                        fechaGraficos = Mid(vFecha_Actual, 1, 5)
-                        cadenaXML += "<category name='" & fechaGraficos & "' />"
-                    End If
                     fechaGraficos = VDR("DIA_ASIGNADO")
                     fechaGraficos = Mid(fechaGraficos, 1, 5)
-                    vFecha_Actual = VDR("DIA_ASIGNADO")
+                    cadenaXML += "<category name='" & fechaGraficos & "' />"
                 Next
-                fechaGraficos = Mid(fechaGraficos, 1, 5)
-                cadenaXML += "<category name='" & fechaGraficos & "' />"
                 banderaPromedio = False
             End If
-
         Else
             If rbtMeses.Checked Then
-                vDT = oGraficas.obtener_Oee_acumulado(idEquipo, fechaInicio, fechaFinal)
+                vDT = oGraficas.obtener_Oee_Dia(idEquipo, fechaInicio, fechaFinal)
                 If vDT.Rows.Count = 0 Then
                     lblError.Visible = True
                     lblError.Enabled = True
@@ -634,7 +604,7 @@ Public Class frmGraficas
             End If
         End If
         If banderaPromedio = True Then
-            cadenaXML += "<category name ='PROMEDIO' />"
+            cadenaXML += "<category name ='ACUMULADO OEE' />"
         End If
         cadenaXML += "</categories>"
     End Sub
@@ -654,7 +624,7 @@ Public Class frmGraficas
 
         Dim vFecha_Actual As DateTime
         If rbtDia.Checked Then
-            vDT = oGraficas.obtener_Oee_acumulado(idEquipo, fechaInicio, fechaFinal)
+            vDT = oGraficas.obtener_Oee_Dia(idEquipo, fechaInicio, fechaFinal)
             If vDT.Rows.Count = 0 Then
                 lblError.Visible = True
                 lblError.Enabled = True
@@ -662,87 +632,15 @@ Public Class frmGraficas
             Else
                 lblError.Visible = False
                 lblError.Enabled = False
-                vFecha_Actual = vDT.Rows(0).Item("DIA_ASIGNADO").ToString
                 For Each vDR As DataRow In vDT.Rows
-                    If IsDBNull(vDR("oee")) Then
-                        oee = 0
-                    Else
-                        oee = vDR("oee")
-                    End If
-                    If vDR("TIPO_REGISTRO") = "P" And vFecha_Actual = vDR("DIA_ASIGNADO") Then
-                        oee = oee * 100
-                        promDia = promDia + oee
-                        contador = contador + 1
-                    ElseIf vDR("TIPO_REGISTRO") = "P" And vFecha_Actual <> vDR("DIA_ASIGNADO") Then
-                        If promDia <> 0 And contador <> 0 Then
-                            promDia = promDia / contador
-                        Else
-                            promDia = 0
-                        End If
-                        vContador_Dias = vContador_Dias + 1
-                        promAcumulado = promAcumulado + promDia
-                        cadenaXML += " <set value='" & promDia.ToString & "'/>"
-                        vFecha_Actual = vDR("DIA_ASIGNADO")
-                        promDia = 0
-                        contador = 0
-                        oee = oee * 100
-                        promDia = promDia + oee
-                        contador = contador + 1
-                    ElseIf vDR("TIPO_REGISTRO") = "D" And vFecha_Actual = vDR("DIA_ASIGNADO") Then
-                        oee = 0
-                        promDia = promDia + oee
-                    ElseIf vDR("TIPO_REGISTRO") = "D" And vFecha_Actual <> vDR("DIA_ASIGNADO") Then
-                        If promDia <> 0 And contador <> 0 Then
-                            promDia = promDia / contador
-                        Else
-                            promDia = 0
-                        End If
-                        promAcumulado = promAcumulado + promDia
-                        cadenaXML += " <set value='" & promDia.ToString & "'/>"
-                        vFecha_Actual = vDR("DIA_ASIGNADO")
-                        promDia = 0
-                        contador = 0
-                        oee = oee * 100
-                        promDia = promDia + oee
-                        contador = contador + 1
-                    ElseIf vDR("TIPO_REGISTRO") = "Z" And vFecha_Actual = vDR("DIA_ASIGNADO") Then
-                        oee = 0
-                        promDia = promDia + oee
-                    ElseIf vDR("TIPO_REGISTRO") = "Z" And vFecha_Actual <> vDR("DIA_ASIGNADO") Then
-                        If promDia <> 0 And contador <> 0 Then
-                            promDia = promDia / contador
-                        Else
-                            promDia = 0
-                        End If
-                        promAcumulado = promAcumulado + promDia
-                        cadenaXML += " <set value='" & promDia.ToString & "'/>"
-                        vFecha_Actual = vDR("DIA_ASIGNADO")
-                        promDia = 0
-                        contador = 0
-                        oee = oee * 100
-                        promDia = promDia + oee
-                        contador = contador + 1
-                    End If
+                    oee = vDR("oee")
+                    cadenaXML += "<set value='" & oee & "' />"
                 Next
-                If promDia <> 0 And contador <> 0 Then
-                    promDia = promDia / contador
-                Else
-                    promDia = 0
-                End If
-                vContador_Dias = vContador_Dias + 1
-                promAcumulado = promAcumulado + promDia
-                promFinal = promAcumulado
-                cadenaXML += " <set value='" & promDia.ToString & "'/>"
-                'If promFinal <> 0 And vContador_Dias <> 0 Then
-                '    promFinal = promFinal / vContador_Dias
-                'Else
-                '    promFinal = 0
-                'End If
             End If
             banderaPromedio = False
         Else ''Dejar como estaba en la parte de meses lineas acumuladas
             If rbtMeses.Checked Then
-                vDT = oGraficas.obtener_Oee_acumulado(idEquipo, fechaInicio, fechaFinal)
+                vDT = oGraficas.obtener_Oee_Dia(idEquipo, fechaInicio, fechaFinal)
                 If vDT.Rows.Count = 0 Then
                     lblError.Visible = True
                     lblError.Enabled = True
@@ -833,9 +731,9 @@ Public Class frmGraficas
                     End If
                     promAcumulado = promAcumulado + promDia
                     If promAcumulado <> 0 And vContador_Dias <> 0 Then
-                        promAcumulado = promAcumulado / vContador_Dias
+                        promFinal = promAcumulado / vContador_Dias
                     Else
-                        promAcumulado = 0
+                        promFinal = 0
                     End If
                     cadenaXML += " <set value='" & promFinal.ToString & "'/>"
                 End If
@@ -2085,6 +1983,37 @@ Public Class frmGraficas
     End Sub
 #End Region
 
+#Region "OBTENER OBJETIVO"
+    Public Function obtener_Objetivo(ByVal idEquipo As Integer, ByVal indicador As Integer) As Double
+        oGraficas = New Graficas
+        Dim indicadorSeleccionado As Integer = indicador
+        Dim obj As Double = 0
+        Dim objGS As Integer = 0
+        Select Case indicadorSeleccionado
+            Case 1
+                obj = oGraficas.obtener_Objetivo_Productividad(idEquipo)
+                Return obj * 100
+            Case 2
+                obj = oGraficas.obtener_Objetivo_Calidad(idEquipo)
+                Return obj
+            Case 3
+                obj = oGraficas.obtener_Objetivo_Costo(idEquipo)
+                Return obj
+            Case 4
+                objGS = oGraficas.obtener_Objetivo_Seguridad(idEquipo)
+                Return objGS
+            Case 5
+                objGS = oGraficas.obtener_Objetivo_Gente(idEquipo)
+                Return objGS
+            Case 6
+                obj = oGraficas.obtener_Objetivo_CincoS(idEquipo)
+                Return obj
+            Case Else
+                Return "error!"
+        End Select
+    End Function
+#End Region
+
 #Region "GUARDAR GRAFICO EN EXCEL"
 
     ''Método para copiar la carpeta graficador que contiene la img.jpg y el macro graficador.xmls
@@ -2321,6 +2250,9 @@ Public Class frmGraficas
 #Region "EVENTOS BOTONES GRAFICAR/EXPORTAR/SALIR"
     Private Sub cmdGraficar_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmdGraficar.Click
         swfGrafica.Visible = True
+        Dim Indicador As Integer = 0
+        Dim valorObj As Double = 0
+        Dim valorObjGS As Integer = 0
         Dim tipoGrafico As String = ""
         Dim decimales As String = ""
         Dim ejeY As String = "R E S U L T A D O S "
@@ -2377,6 +2309,7 @@ Public Class frmGraficas
         Condicion_WHERE(cbxTodasLineas.Checked)
         '' O E E -- P R O D U C C I O N --
         If rbtOEE.Checked Then
+            Indicador = 1
             If cbxTodasLineas.Checked Then
                 establece_fechas_oee_acumulado(vIdEquipo, dtpDesde.Value.ToString("dd-MM-yyyy"), dtpHasta.Value.ToString("dd-MM-yyyy"))
                 establece_OEE_Acumulado(vIdEquipo, dtpDesde.Value.ToString("dd-MM-yyyy"), dtpHasta.Value.ToString("dd-MM-yyyy"))
@@ -2384,9 +2317,11 @@ Public Class frmGraficas
                 establece_fechas_oee(vIdEquipo, cbxLinea.SelectedValue, dtpDesde.Value.ToString("dd-MM-yyyy"), dtpHasta.Value.ToString("dd-MM-yyyy"))
                 establece_OEE(vIdEquipo, cbxLinea.SelectedValue, dtpDesde.Value.ToString("dd-MM-yyyy"), dtpHasta.Value.ToString("dd-MM-yyyy"))
             End If
-            ''cadenaXML += "<trendlines> <line startValue='85.0' color='FF0000' displayValue='OBJETIVO' showOnTop='1'/> </trendlines>"
+            valorObj = obtener_Objetivo(vIdEquipo, Indicador)
+            cadenaXML += "<trendlines> <line startValue='" & valorObj & "' color='FF0000' displayValue='" & valorObj & "' showOnTop='1'/> </trendlines>"
             ''N R F T I -- C A L I D A D --
         ElseIf rbtNRFTi.Checked Then
+            Indicador = 2
             If cbxTodasLineas.Checked Then
                 establece_fechas_nrfti_acumulado(vIdEquipo, dtpDesde.Value.ToString("dd-MM-yyyy"), dtpHasta.Value.ToString("dd-MM-yyyy"))
                 establece_NRFTi_Acumulado(vIdEquipo, dtpDesde.Value.ToString("dd-MM-yyyy"), dtpHasta.Value.ToString("dd-MM-yyyy"))
@@ -2394,9 +2329,11 @@ Public Class frmGraficas
                 establece_fechas_nrfti(vIdEquipo, cbxLinea.SelectedValue, dtpDesde.Value.ToString("dd-MM-yyyy"), dtpHasta.Value.ToString("dd-MM-yyyy"))
                 establece_NRFTi(vIdEquipo, cbxLinea.SelectedValue, dtpDesde.Value.ToString("dd-MM-yyyy"), dtpHasta.Value.ToString("dd-MM-yyyy"))
             End If
-            ''cadenaXML += "<trendlines> <line startValue='12000' color='FF0000' displayValue='OBJETIVO' showOnTop='1'/> </trendlines>"
+            valorObj = obtener_Objetivo(vIdEquipo, Indicador)
+            cadenaXML += "<trendlines> <line startValue='" & valorObj & "' color='FF0000' displayValue='" & valorObj & "' showOnTop='1'/> </trendlines>"
             '' C O S T O
         ElseIf rbtCosto.Checked Then
+            'Indicador = 3
             If cbxTodasLineas.Checked Then
                 cadenaSELECT = "SELECT DISTINCT DIA_ASIGNADO FROM VISTA_SELECCION_INDICADOR3"
                 establece_fechas(cadenaSELECT)
@@ -2407,9 +2344,11 @@ Public Class frmGraficas
                 establece_fechas(cadenaSELECT)
                 establece_Costo(cadenaSELECT, colores(2))
             End If
-            'cadenaXML += "<trendlines> <line startValue='110' color='FF0000' displayValue='OBJETIVO' showOnTop='1'/> </trendlines>"
+            'valorObj = obtener_Objetivo(vIdEquipo, Indicador)
+            'cadenaXML += "<trendlines> <line startValue='" & valorObj & "' color='FF0000' displayValue='OBJETIVO' showOnTop='1'/> </trendlines>"
             '' S E G U R I D A D
         ElseIf rbtSeg.Checked Then
+            Indicador = 4
             If cbxTodasLineas.Checked Then
                 establece_fechas_seguridad_acumulado(vIdEquipo, dtpDesde.Value.ToString("dd-MM-yyyy"), dtpHasta.Value.ToString("dd-MM-yyyy"))
                 establece_seguridad_acumulado(vIdEquipo, dtpDesde.Value.ToString("dd-MM-yyyy"), dtpHasta.Value.ToString("dd-MM-yyyy"))
@@ -2417,9 +2356,11 @@ Public Class frmGraficas
                 establece_fechas_seguridad(vIdEquipo, cbxLinea.SelectedValue, dtpDesde.Value.ToString("dd-MM-yyyy"), dtpHasta.Value.ToString("dd-MM-yyyy"))
                 establece_seguridad(vIdEquipo, cbxLinea.SelectedValue, dtpDesde.Value.ToString("dd-MM-yyyy"), dtpHasta.Value.ToString("dd-MM-yyyy"))
             End If
-
+            valorObjGS = obtener_Objetivo(vIdEquipo, Indicador)
+            cadenaXML += "<trendlines> <line startValue='" & valorObjGS & "' color='FF0000' displayValue='" & valorObjGS & "' showOnTop='1'/> </trendlines>"
             ''G E N T E
         ElseIf rbtGente.Checked Then
+            Indicador = 5
             If cbxTodasLineas.Checked Then
                 establece_fechas_gente_acumulado(vIdEquipo, dtpDesde.Value.ToString("dd-MM-yyyy"), dtpHasta.Value.ToString("dd-MM-yyyy"))
                 establece_gente_acumulado(vIdEquipo, dtpDesde.Value.ToString("dd-MM-yyyy"), dtpHasta.Value.ToString("dd-MM-yyyy"))
@@ -2427,9 +2368,11 @@ Public Class frmGraficas
                 establece_fechas_gente(vIdEquipo, cbxLinea.SelectedValue, dtpDesde.Value.ToString("dd-MM-yyyy"), dtpHasta.Value.ToString("dd-MM-yyyy"))
                 establece_gente(vIdEquipo, cbxLinea.SelectedValue, dtpDesde.Value.ToString("dd-MM-yyyy"), dtpHasta.Value.ToString("dd-MM-yyyy"))
             End If
-
+            valorObjGS = obtener_Objetivo(vIdEquipo, Indicador)
+            cadenaXML += "<trendlines> <line startValue='" & valorObjGS & "' color='FF0000' displayValue='" & valorObjGS & "' showOnTop='1'/> </trendlines>"
             '' 5 S
         ElseIf rbt5s.Checked Then
+            Indicador = 6
             If cbxTodasLineas.Checked Then
                 cadenaSELECT = "SELECT DISTINCT DIA_ASIGNADO FROM VISTA_SELECCION_INDICADOR5"
                 'establece_fechas(cadenaSELECT) CON PROMEDIO
@@ -2440,10 +2383,10 @@ Public Class frmGraficas
                 cadenaSELECT = "SELECT PROMEDIO, DIA_ASIGNADO FROM VISTA_SELECCION_INDICADOR5"
                 establece_fechas_5s(cadenaSELECT)
                 establece_5S(cadenaSELECT, colores(12))
-                ''cadenaXML += "<trendlines> <line startValue='3' color='FF0000' displayValue='OBJETIVO' showOnTop='1'/> </trendlines>"
             End If
+            valorObj = obtener_Objetivo(vIdEquipo, Indicador)
+            cadenaXML += "<trendlines> <line startValue='" & valorObj & "' color='FF0000' displayValue='" & valorObj & "' showOnTop='1'/> </trendlines>"
         End If
-        'cadenaXML += "<trendlines> <line startValue='1.5' color='FF0000' displayValue='OBJETIVO' showOnTop='1'/> </trendlines>"
         cadenaXML += " </graph>"
         swfGrafica.Movie = 1 'hace que el control actualice o se refresque
         swfGrafica.Movie = cadenaXML 'carga la pelicula flash

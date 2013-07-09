@@ -181,13 +181,16 @@ Public Class Graficas
 #End Region
 
 #Region "OBTENER OEE"
-    Public Function obtener_Oee_acumulado(ByVal videquipo As Integer, ByVal vfechainicio As DateTime, ByVal vfechafinal As DateTime) As DataTable
+
+    ''OEE POR DIA ACUMULADO (TODAS LAS LINEAS)
+    Public Function obtener_Oee_Dia(ByVal videquipo As Integer, ByVal vfechainicio As DateTime, ByVal vfechafinal As DateTime) As DataTable
         Dim obj As DataTable
         Using scope As New TransactionScope
             Try
                 Dim cmd As New SqlClient.SqlCommand
                 cmd.CommandType = CommandType.StoredProcedure
-                cmd.CommandText = "obtiene_oee"
+                'cmd.CommandText = "obtiene_oee" --procedimiento anterior
+                cmd.CommandText = "obtiene_oee_dia"
                 cmd.Parameters.Add("@cve_equipo", SqlDbType.BigInt).Value = videquipo
                 cmd.Parameters.Add("@fecha_inicial", SqlDbType.DateTime).Value = vfechainicio
                 cmd.Parameters.Add("@fecha_final", SqlDbType.DateTime).Value = vfechafinal
@@ -200,6 +203,31 @@ Public Class Graficas
             Return obj
         End Using
     End Function
+
+    ''OEE POR DIA Y POR LINEA
+    Public Function obtener_Oee_Dia_Linea(ByVal videquipo As Integer, ByVal vidlinea As Integer, ByVal vfechainicio As DateTime, ByVal vfechafinal As DateTime) As DataTable
+        Dim obj As DataTable
+        Using scope As New TransactionScope
+            Try
+                Dim cmd As New SqlClient.SqlCommand
+                cmd.CommandType = CommandType.StoredProcedure
+                'cmd.CommandText = "obtiene_oee" 
+                cmd.CommandText = "obtiene_oee_dia_linea"
+                cmd.Parameters.Add("@cve_equipo", SqlDbType.BigInt).Value = videquipo
+                cmd.Parameters.Add("@cve_linea", SqlDbType.BigInt).Value = vidlinea
+                cmd.Parameters.Add("@fecha_inicial", SqlDbType.DateTime).Value = vfechainicio
+                cmd.Parameters.Add("@fecha_final", SqlDbType.DateTime).Value = vfechafinal
+                obj = oBD.EjecutaCommando(cmd)
+                scope.Complete()
+            Catch ex As Exception
+                MsgBox("Error al obtener valores de Oee Productivdad. CProduccion_ERROR", vbCritical + vbOKOnly, "Error")
+                Return Nothing
+            End Try
+            Return obj
+        End Using
+    End Function
+
+    ''OEE POR MES ACUMULADO (TODAS LAS LINEAS)
     Public Function obtener_Oee(ByVal videquipo As Integer, ByVal vidlinea As Integer, ByVal vfechainicio As DateTime, ByVal vfechafinal As DateTime) As DataTable
         Dim obj As DataTable
         Using scope As New TransactionScope
@@ -220,8 +248,6 @@ Public Class Graficas
             Return obj
         End Using
     End Function
-
-    ''PENDIENTE DE HACER LOS PROCEDIMIENTOS X MESES Y SUS RESPECTIVOS METODOS!!!
 
 #End Region
 
@@ -267,7 +293,93 @@ Public Class Graficas
     End Function
 #End Region
 
+#Region "MANDAR OBJETIVOS"
 
+    Public Function obtener_Objetivo_Productividad(ByVal vIdEquipo As Integer) As Double
+        Dim vRetorno As Double = 0
+        Dim vDR As DataRow
+        Try
+            vDR = oBD.ObtenerRenglon("select cve_equipo, productividad from objetivo where estatus=1 and cve_equipo = " & vIdEquipo, "objetivo")
+            If vDR IsNot Nothing Then
+                vRetorno = vDR("productividad")
+            End If
+        Catch ex As Exception
+
+        End Try
+        Return vRetorno
+    End Function
+
+    Public Function obtener_Objetivo_Calidad(ByVal vIdEquipo As Integer) As Double
+        Dim vRetorno As Double = 0
+        Dim vDR As DataRow
+        Try
+            vDR = oBD.ObtenerRenglon("select cve_equipo, calidad from objetivo where estatus=1 and cve_equipo = " & vIdEquipo, "objetivo")
+            If vDR IsNot Nothing Then
+                vRetorno = vDR("calidad")
+            End If
+        Catch ex As Exception
+
+        End Try
+        Return vRetorno
+    End Function
+
+    Public Function obtener_Objetivo_Costo(ByVal vIdEquipo As Integer) As Double
+        Dim vRetorno As Double = 0
+        Dim vDR As DataRow
+        Try
+            vDR = oBD.ObtenerRenglon("select cve_equipo, costo from objetivo where estatus=1 and cve_equipo = " & vIdEquipo, "objetivo")
+            If vDR IsNot Nothing Then
+                vRetorno = vDR("costo")
+            End If
+        Catch ex As Exception
+
+        End Try
+        Return vRetorno
+    End Function
+
+    Public Function obtener_Objetivo_Seguridad(ByVal vIdEquipo As Integer) As Integer
+        Dim vRetorno As Integer = 0
+        Dim vDR As DataRow
+        Try
+            vDR = oBD.ObtenerRenglon("select cve_equipo, seguridad from objetivo where estatus=1 and cve_equipo = " & vIdEquipo, "objetivo")
+            If vDR IsNot Nothing Then
+                vRetorno = vDR("seguridad")
+            End If
+        Catch ex As Exception
+
+        End Try
+        Return vRetorno
+    End Function
+
+    Public Function obtener_Objetivo_Gente(ByVal vIdEquipo As Integer) As Integer
+        Dim vRetorno As Integer = 0
+        Dim vDR As DataRow
+        Try
+            vDR = oBD.ObtenerRenglon("select cve_equipo, gente from objetivo where estatus=1 and cve_equipo = " & vIdEquipo, "objetivo")
+            If vDR IsNot Nothing Then
+                vRetorno = vDR("gente")
+            End If
+        Catch ex As Exception
+
+        End Try
+        Return vRetorno
+    End Function
+
+    Public Function obtener_Objetivo_CincoS(ByVal vIdEquipo As Integer) As Double
+        Dim vRetorno As Double = 0
+        Dim vDR As DataRow
+        Try
+            vDR = oBD.ObtenerRenglon("select cve_equipo, cincoS from objetivo where estatus=1 and cve_equipo = " & vIdEquipo, "objetivo")
+            If vDR IsNot Nothing Then
+                vRetorno = vDR("cincoS")
+            End If
+        Catch ex As Exception
+
+        End Try
+        Return vRetorno
+    End Function
+
+#End Region
 
 #Region "OBTENER SEGURIDAD"
     Public Function obtener_Seguridad_acumulado(ByVal videquipo As Integer, ByVal vfechainicio As DateTime, ByVal vfechafinal As DateTime) As DataTable
