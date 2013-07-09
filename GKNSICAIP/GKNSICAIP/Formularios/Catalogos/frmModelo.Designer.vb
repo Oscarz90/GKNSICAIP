@@ -91,6 +91,7 @@ Partial Class frmModelo
         '
         Me.txtComponente.Location = New System.Drawing.Point(108, 89)
         Me.txtComponente.Name = "txtComponente"
+        Me.txtComponente.ReadOnly = True
         Me.txtComponente.Size = New System.Drawing.Size(192, 20)
         Me.txtComponente.TabIndex = 7
         '
