@@ -1847,11 +1847,12 @@ Public Class frmProduccion
 #Region "Funciones para modulo 5S"
     Private Sub calcula_promedio_cinco_S()
         Dim num As Double = 0
+        Dim suma As Double = 0
         Dim multi As Double = Math.Pow(10D, 1.0)
         Dim resultado As Double = 0
         If txtAdmonVisual.Text <> Nothing And txt5s.Text <> Nothing And txtManttoAutonomo.Text <> Nothing Then
             num = ((Convert.ToDouble(txtAdmonVisual.Text) + Convert.ToDouble(txtManttoAutonomo.Text) + Convert.ToDouble(txt5s.Text)) / 3)
-            resultado = (Int(((num * multi)))) / multi
+            resultado = (Int(((num * multi)))) / multi 'Soluciono el problema de solo tomar 1 decimal sin redonder y truncar
             txtPromedio.Text = resultado
         Else
             txtPromedio.Text = "0.0"
