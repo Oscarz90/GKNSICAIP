@@ -5,7 +5,22 @@ Public Class Componente
     Dim oBD As New CapaDatos.CapaDatos(cadena_conexion.CadenaSicaip)
 #Region "IIndividual"
     Public Sub Cargar() Implements IIndividual.Cargar
-
+        Dim vDR As DataRow
+        vDR = oBD.ObtenerRenglon("select * from Componente where cve_componente=" & vcve_componente, "Componente")
+        If vDR IsNot Nothing Then
+            If Not IsDBNull(vDR("cve_componente")) Then
+                Me.vcve_componente = vDR("cve_componente")
+            End If
+            If Not IsDBNull(vDR("cve_cadena_Valor")) Then
+                Me.vcve_cadena_valor = vDR("cve_cadena_Valor")
+            End If
+            If Not IsDBNull(vDR("componente")) Then
+                Me.vcomponente = vDR("componente")
+            End If
+            If Not IsDBNull(vDR("precio")) Then
+                Me.vprecio = vDR("precio")
+            End If
+        End If
     End Sub
 
     Public Sub Eliminar() Implements IIndividual.Eliminar
@@ -80,6 +95,31 @@ Public Class Componente
     End Property
 
 #End Region
+
+#Region "Metodos Generales"
+    Public Function Obtener_Componentes() As DataTable
+        Dim vDT As DataTable
+        vDT = oBD.ObtenerTabla("select * from componente")
+        If vDT IsNot Nothing Then
+
+        Else
+            vDT = Nothing
+        End If
+        Return vDT
+    End Function
+
+    Public Function Obtener_Componentes(ByVal vFiltro As String) As DataTable
+        Dim vDT As DataTable
+        vDT = oBD.ObtenerTabla("select * from componente where componente LIKE '%" & vFiltro & "%'")
+        If vDT IsNot Nothing Then
+
+        Else
+            vDT = Nothing
+        End If
+        Return vDT
+    End Function
+#End Region
+
 #Region "Metodos Formulario de CDM Cambio de Modelo"
     Public Sub obtiene_precio_componente_linea()
         Dim vDR As DataRow
