@@ -379,10 +379,8 @@ Public Class frmGraficas
     Private Sub establece_fechas_oee(ByVal idEquipo As Integer, ByVal idLinea As Integer, ByVal fechaInicio As DateTime, ByVal fechaFinal As DateTime)
         Dim fechaGraficos As String = ""
         Dim mes As String = ""
-        Dim vRetorno As DataTable = Nothing
         Dim vDT As DataTable = Nothing
-        Dim banderaPromedio As Boolean
-        Dim vMesInicio As String = ""
+        Dim banderaAcumulado As Boolean
         Dim vYearInicio As String = ""
         cadenaXML += "<categories>"
         If rbtDia.Checked Then
@@ -402,55 +400,42 @@ Public Class frmGraficas
                 Catch ex As Exception
                     MsgBox(ex.Message)
                 End Try
-                banderaPromedio = True
+                banderaAcumulado = True
             End If
         Else
             If rbtMeses.Checked Then
-                vDT = oGraficas.obtener_Oee(idEquipo, idLinea, fechaInicio, fechaFinal)
+                vDT = oGraficas.obtener_Oee_Mes_Linea(idEquipo, idLinea, fechaInicio, fechaFinal)
                 If vDT.Rows.Count = 0 Then
                     lblError.Visible = True
                     lblError.Enabled = True
                 Else
                     lblError.Visible = False
                     lblError.Enabled = False
-                    vMesInicio = Month(DateTime.Parse(vDT.Rows(0).Item("Dia_Asignado"))).ToString
-                    vYearInicio = Year(DateTime.Parse(vDT.Rows(0).Item("Dia_Asignado"))).ToString
-                    For Each vDR As DataRow In vDT.Rows
-                        'If (Month(DateTime.Parse(vDR("Dia_Asignado"))).ToString = vMesInicio And Year(DateTime.Parse(vDR("Dia_Asignado"))).ToString = vYearInicio) Then
-                        If (Month(DateTime.Parse(vDR("Dia_Asignado"))).ToString = vMesInicio And Year(DateTime.Parse(vDR("Dia_Asignado"))).ToString = vYearInicio) Then
+                    Try
+                        For Each vDR As DataRow In vDT.Rows
                             fechaGraficos = vDR("Dia_Asignado")
                             fechaGraficos = Mid(fechaGraficos, 4, 2)
                             mes = getMeses(fechaGraficos)
-                        Else
-                            'banderaPromedio = False
                             cadenaXML += "<category name='" & mes & "  " & vYearInicio & " ' />"
-                            vMesInicio = Month(DateTime.Parse(vDR("Dia_Asignado"))).ToString
-                            vYearInicio = Year(DateTime.Parse(vDR("Dia_Asignado"))).ToString
-                        End If
-                    Next
+                        Next
+                    Catch ex As Exception
+                        MsgBox(ex.Message)
+                    End Try
+                    banderaAcumulado = True
                 End If
-                banderaPromedio = True
                 cadenaXML += "<category name='" & mes & "   " & vYearInicio & "' />"
             End If
         End If
-        If banderaPromedio = True Then
+        If banderaAcumulado = True Then
             cadenaXML += "<category name ='ACUMULADO OEE' />"
         End If
         cadenaXML += "</categories>"
     End Sub
     Private Sub establece_OEE(ByVal idEquipo As Integer, ByVal idLinea As Integer, ByVal fechaInicio As DateTime, ByVal fechaFinal As DateTime)
-        Dim promedio As Double = 0
-        Dim contador As Integer = 0
-        ''Promedio por mes
-        Dim promMes As Double = 0
-        Dim contadorMes As Integer = 0
-        Dim oeeMes As Double = 0
         Dim fechaGraficos As String = ""
-        Dim vMesInicio As String = ""
-        Dim vYearInicio As String = ""
         Dim mes As String = ""
         Dim vDT As DataTable
-        Dim banderaPromedio As Boolean
+        Dim banderaAcumulado As Boolean
         Dim oee As Double = 0
         cadenaXML += "<dataset seriesName='OEE' color='" & colores(0) & "' anchorBorderColor='" & contorno_anchor & "' anchorBgColor='FFA500' anchorRadius='" & radio_anchor & "'>"
         If rbtDia.Checked Then
@@ -467,85 +452,29 @@ Public Class frmGraficas
                     cadenaXML += "<set value='" & oee & "' />"
                 Next
             End If
-            banderaPromedio = False
+            banderaAcumulado = True
         Else
-            ''--------------------meses
             If rbtMeses.Checked Then
-                vDT = oGraficas.obtener_Oee(idEquipo, idLinea, fechaInicio, fechaFinal)
+                vDT = oGraficas.obtener_Oee_Mes_Linea(idEquipo, idLinea, fechaInicio, fechaFinal)
                 If vDT.Rows.Count = 0 Then
                     lblError.Visible = True
                     lblError.Enabled = True
-                    'MsgBox("sin filaas")
                     cadenaXML += " <set value='" & 0 & "'/>"
                 Else
                     lblError.Visible = False
                     lblError.Enabled = False
-                    vMesInicio = Month(DateTime.Parse(vDT.Rows(0).Item("Dia_Asignado"))).ToString
-                    vYearInicio = Year(DateTime.Parse(vDT.Rows(0).Item("Dia_Asignado"))).ToString
                     For Each vDR As DataRow In vDT.Rows
-                        If (Month(DateTime.Parse(vDR("Dia_Asignado"))).ToString = vMesInicio And Year(DateTime.Parse(vDR("Dia_Asignado"))).ToString = vYearInicio) Then
-                            If IsDBNull(vDR("oee")) Then
-                                oee = 0
-                            Else
-                                oee = vDR("oee")
-                            End If
-                            If vDR("TIPO_REGISTRO") = "P" Then
-                                oee = oee * 100
-                                promedio = promedio + oee
-                                contador = contador + 1
-                            Else
-                                oee = 0
-                            End If
-                        ElseIf (Month(DateTime.Parse(vDR("Dia_Asignado"))).ToString <> vMesInicio And Year(DateTime.Parse(vDR("Dia_Asignado"))).ToString = vYearInicio) Then
-                            If promedio <> 0 And contador <> 0 Then
-                                promedio = promedio / contador
-                            Else
-                                promedio = 0
-                            End If
-                            cadenaXML += " <set value='" & promedio.ToString & "'/>" ''valor de oee x mes
-                            promMes = promMes + promedio
-                            contadorMes = contadorMes + 1 ''cuenta los meses
-                            promedio = 0
-                            oee = 0
-                            contador = 0
-                            vMesInicio = Month(DateTime.Parse(vDR("Dia_Asignado"))).ToString
-                            vYearInicio = Year(DateTime.Parse(vDR("Dia_Asignado"))).ToString
-                            If IsDBNull(vDR("oee")) Then
-                                oee = 0
-                            Else
-                                oee = vDR("oee")
-                            End If
-                            If vDR("TIPO_REGISTRO") = "P" Then
-                                oee = oee * 100
-                                promedio = promedio + oee
-                                contador = contador + 1
-                            Else
-                                oee = 0
-                            End If
-
-                        End If ''comparacion de mes/fecha
+                        oee = vDR("oee")
+                        cadenaXML += "<set value='" & oee & "' />"
                     Next
-                    If promedio <> 0 And contador <> 0 Then
-                        promedio = promedio / contador
-                    Else
-                        promedio = 0
-                    End If
-                    cadenaXML += " <set value='" & promedio.ToString & "'/>" ''valor de oee x mes
-                    promMes = promMes + promedio
-                    contadorMes = contadorMes + 1 ''cuenta los meses
-                End If ''fin de si hay datos
-                banderaPromedio = True
-            End If ''fin si escogio x meses
-            ''-------------------------------------------
+                End If
+                banderaAcumulado = True
+            End If
+
         End If
 
-        If promMes <> 0 And contadorMes <> 0 Then
-            promMes = promMes / contadorMes
-        Else
-            promMes = 0
-        End If
-        If banderaPromedio = True Then
-            cadenaXML += " <set value='" & promMes.ToString & "' color='" & colores(1) & "'/>"
+        If banderaAcumulado = True Then
+            cadenaXML += " <set value='" & 0 & "' color='" & colores(1) & "'/>"
         End If
         cadenaXML += " </dataset>"
     End Sub
@@ -554,12 +483,10 @@ Public Class frmGraficas
     Private Sub establece_fechas_oee_acumulado(ByVal idEquipo As Integer, ByVal fechaInicio As DateTime, ByVal fechaFinal As DateTime)
         Dim fechaGraficos As String = ""
         Dim mes As String = ""
-        Dim vMesInicio As String = ""
         Dim vYearInicio As String = ""
         Dim vDT As DataTable
         Dim banderaPromedio As Boolean
         cadenaXML += "<categories>"
-
         If rbtDia.Checked Then
             vDT = oGraficas.obtener_Oee_Dia(idEquipo, fechaInicio, fechaFinal)
             If vDT.Rows.Count = 0 Then
@@ -573,32 +500,29 @@ Public Class frmGraficas
                     fechaGraficos = Mid(fechaGraficos, 1, 5)
                     cadenaXML += "<category name='" & fechaGraficos & "' />"
                 Next
-                banderaPromedio = False
+                banderaPromedio = True
             End If
         Else
             If rbtMeses.Checked Then
-                vDT = oGraficas.obtener_Oee_Dia(idEquipo, fechaInicio, fechaFinal)
+                vDT = oGraficas.obtener_Oee_Mes(idEquipo, fechaInicio, fechaFinal)
                 If vDT.Rows.Count = 0 Then
                     lblError.Visible = True
                     lblError.Enabled = True
                 Else
                     lblError.Visible = False
                     lblError.Enabled = False
-                    vMesInicio = Month(DateTime.Parse(vDT.Rows(0).Item("Dia_Asignado"))).ToString
                     vYearInicio = Year(DateTime.Parse(vDT.Rows(0).Item("Dia_Asignado"))).ToString
-                    For Each vDR As DataRow In vDT.Rows
-                        If (Month(DateTime.Parse(vDR("Dia_Asignado"))).ToString = vMesInicio And Year(DateTime.Parse(vDR("Dia_Asignado"))).ToString = vYearInicio) Then
+                    Try
+                        For Each vDR As DataRow In vDT.Rows
                             fechaGraficos = vDR("Dia_Asignado")
                             fechaGraficos = Mid(fechaGraficos, 4, 2)
                             mes = getMeses(fechaGraficos)
-                        Else
-                            banderaPromedio = False
                             cadenaXML += "<category name='" & mes & "  " & vYearInicio & " ' />"
-                            vMesInicio = Month(DateTime.Parse(vDR("Dia_Asignado"))).ToString
-                            vYearInicio = Year(DateTime.Parse(vDR("Dia_Asignado"))).ToString
-                        End If
-                    Next
-                    banderaPromedio = False
+                        Next
+                    Catch ex As Exception
+
+                    End Try
+                    banderaPromedio = True
                 End If
                 cadenaXML += "<category name='" & mes & "   " & vYearInicio & "' />"
             End If
@@ -609,6 +533,7 @@ Public Class frmGraficas
         cadenaXML += "</categories>"
     End Sub
     Private Sub establece_OEE_Acumulado(ByVal idEquipo As Integer, ByVal fechaInicio As DateTime, ByVal fechaFinal As DateTime)
+        Dim fechaGraficos As String = ""
         Dim promDia As Double = 0
         Dim promAcumulado As Double = 0
         Dim promFinal As Double = 0
@@ -637,10 +562,10 @@ Public Class frmGraficas
                     cadenaXML += "<set value='" & oee & "' />"
                 Next
             End If
-            banderaPromedio = False
-        Else ''Dejar como estaba en la parte de meses lineas acumuladas
+            banderaPromedio = True
+        Else
             If rbtMeses.Checked Then
-                vDT = oGraficas.obtener_Oee_Dia(idEquipo, fechaInicio, fechaFinal)
+                vDT = oGraficas.obtener_Oee_Mes(idEquipo, fechaInicio, fechaFinal)
                 If vDT.Rows.Count = 0 Then
                     lblError.Visible = True
                     lblError.Enabled = True
@@ -652,101 +577,16 @@ Public Class frmGraficas
                     vMesInicio = Month(DateTime.Parse(vDT.Rows(0).Item("Dia_Asignado"))).ToString
                     vYearInicio = Year(DateTime.Parse(vDT.Rows(0).Item("Dia_Asignado"))).ToString
                     For Each vDR As DataRow In vDT.Rows
-                        If (Month(DateTime.Parse(vDR("Dia_Asignado"))).ToString = vMesInicio And Year(DateTime.Parse(vDR("Dia_Asignado"))).ToString = vYearInicio) Then
-                            If IsDBNull(vDR("oee")) Then
-                                oee = 0
-                            Else
-                                oee = vDR("oee")
-                            End If
-                            If vDR("TIPO_REGISTRO") = "P" And vFecha_Actual = vDR("DIA_ASIGNADO") Then
-                                oee = oee * 100
-                                promDia = promDia + oee
-                                contador = contador + 1
-                            ElseIf vDR("TIPO_REGISTRO") = "P" And vFecha_Actual <> vDR("DIA_ASIGNADO") Then
-                                vContador_Dias = vContador_Dias + 1
-                                If promDia <> 0 And contador <> 0 Then
-                                    promDia = promDia / contador
-                                Else
-                                    promDia = 0
-                                End If
-
-                                promAcumulado = promAcumulado + promDia
-                                'cadenaXML += " <set value='" & promAcumulado.ToString & "'/>"
-                                vFecha_Actual = vDR("DIA_ASIGNADO")
-                                promDia = 0
-                                contador = 0
-                                If vDR("TIPO_REGISTRO") <> "D" Then
-                                    oee = oee * 100
-                                    promDia = promDia + oee
-                                    contador = contador + 1
-                                    If promDia <> 0 And contador <> 0 Then
-                                        promDia = promDia / contador
-                                    Else
-                                        promDia = 0
-                                    End If
-                                End If
-                            End If
-                        Else
-                            banderaPromedio = False
-                            cadenaXML += " <set value='" & promAcumulado.ToString & "'/>"
-                            vFecha_Actual = vDR("DIA_ASIGNADO")
-                            promDia = 0
-                            contador = 0
-                            vMesInicio = Month(DateTime.Parse(vDR("Dia_Asignado"))).ToString
-                            vYearInicio = Year(DateTime.Parse(vDR("Dia_Asignado"))).ToString
-                            If vDR("TIPO_REGISTRO") = "P" And vFecha_Actual = vDR("DIA_ASIGNADO") Then
-                                oee = oee * 100
-                                promDia = promDia + oee
-                                contador = contador + 1
-                            ElseIf vDR("TIPO_REGISTRO") = "P" And vFecha_Actual <> vDR("DIA_ASIGNADO") Then
-                                vContador_Dias = vContador_Dias + 1
-                                If promDia <> 0 And contador <> 0 Then
-                                    promDia = promDia / contador
-                                Else
-                                    promDia = 0
-                                End If
-                                promAcumulado = promAcumulado + promDia
-                                'cadenaXML += " <set value='" & promAcumulado.ToString & "'/>"
-                                vFecha_Actual = vDR("DIA_ASIGNADO")
-                                promDia = 0
-                                contador = 0
-                                If vDR("TIPO_REGISTRO") <> "D" Then
-                                    oee = oee * 100
-                                    promDia = promDia + oee
-                                    contador = contador + 1
-                                    If promDia <> 0 And contador <> 0 Then
-                                        promDia = promDia / contador
-                                    Else
-                                        promDia = 0
-                                    End If
-                                End If
-                            End If
-                        End If
+                        fechaGraficos = vDR("Dia_Asignado")
+                        fechaGraficos = Mid(fechaGraficos, 4, 2)
+                        mes = getMeses(fechaGraficos)
+                        cadenaXML += "<category name='" & mes & "  " & vYearInicio & " ' />"
                     Next
-                    vContador_Dias = vContador_Dias + 1
-                    If promDia <> 0 And contador <> 0 Then
-                        promDia = promDia / contador
-                    Else
-                        promDia = 0
-                    End If
-                    promAcumulado = promAcumulado + promDia
-                    If promAcumulado <> 0 And vContador_Dias <> 0 Then
-                        promFinal = promAcumulado / vContador_Dias
-                    Else
-                        promFinal = 0
-                    End If
-                    cadenaXML += " <set value='" & promFinal.ToString & "'/>"
                 End If
-
             End If
         End If
         If banderaPromedio = True Then
-            'If promFinal <> 0 And vContador_Dias <> 0 Then
-            'promFinal = promAcumulado / vContador_Dias
-            'Else
-            '    promFinal = 0
-            'End If
-            cadenaXML += " <set value='" & promFinal.ToString & "' color='" & colores(1) & "'/>"
+            cadenaXML += " <set value='" & 0 & "' color='" & colores(1) & "'/>"
         End If
         cadenaXML += " </dataset>"
     End Sub

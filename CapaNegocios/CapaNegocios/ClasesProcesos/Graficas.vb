@@ -228,13 +228,36 @@ Public Class Graficas
     End Function
 
     ''OEE POR MES ACUMULADO (TODAS LAS LINEAS)
-    Public Function obtener_Oee(ByVal videquipo As Integer, ByVal vidlinea As Integer, ByVal vfechainicio As DateTime, ByVal vfechafinal As DateTime) As DataTable
+    Public Function obtener_Oee_Mes(ByVal videquipo As Integer, ByVal vfechainicio As DateTime, ByVal vfechafinal As DateTime) As DataTable
         Dim obj As DataTable
         Using scope As New TransactionScope
             Try
                 Dim cmd As New SqlClient.SqlCommand
                 cmd.CommandType = CommandType.StoredProcedure
-                cmd.CommandText = "obtiene_oee_por_linea"
+                'cmd.CommandText = "obtiene_oee_por_linea" procedimiento anterior
+                cmd.CommandText = "obtiene_oee_mes"
+                cmd.Parameters.Add("@cve_equipo", SqlDbType.BigInt).Value = videquipo
+                cmd.Parameters.Add("@fecha_inicial", SqlDbType.DateTime).Value = vfechainicio
+                cmd.Parameters.Add("@fecha_final", SqlDbType.DateTime).Value = vfechafinal
+                obj = oBD.EjecutaCommando(cmd)
+                scope.Complete()
+            Catch ex As Exception
+                MsgBox("Error al obtener valores de Oee Productivdad. CProduccion_ERROR", vbCritical + vbOKOnly, "Error")
+                Return Nothing
+            End Try
+            Return obj
+        End Using
+    End Function
+
+    ''OEE POR MES ACUMULADO Y POR LINEA
+    Public Function obtener_Oee_Mes_Linea(ByVal videquipo As Integer, ByVal vidlinea As Integer, ByVal vfechainicio As DateTime, ByVal vfechafinal As DateTime) As DataTable
+        Dim obj As DataTable
+        Using scope As New TransactionScope
+            Try
+                Dim cmd As New SqlClient.SqlCommand
+                cmd.CommandType = CommandType.StoredProcedure
+                'cmd.CommandText = "obtiene_oee_por_linea" 'obtiene_oee_mes_linea
+                cmd.CommandText = "obtiene_oee_mes_linea"
                 cmd.Parameters.Add("@cve_equipo", SqlDbType.BigInt).Value = videquipo
                 cmd.Parameters.Add("@cve_linea", SqlDbType.BigInt).Value = vidlinea
                 cmd.Parameters.Add("@fecha_inicial", SqlDbType.DateTime).Value = vfechainicio
