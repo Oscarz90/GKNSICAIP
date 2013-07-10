@@ -3,9 +3,26 @@ Public Class Linea
     Implements IIndividual
     Dim cadena_conexion As New CapaDatos.conexiones
     Dim oBD As New CapaDatos.CapaDatos(cadena_conexion.CadenaSicaip)
+    Dim oComponente As Componente
+
 #Region "IIndividual"
     Public Sub Cargar() Implements IIndividual.Cargar
-
+        Dim vDR As DataRow
+        vDR = oBD.ObtenerRenglon("select * from Linea where cve_Linea=" & vcve_linea, "Linea")
+        If vDR IsNot Nothing Then
+            If Not IsDBNull(vDR("cve_Linea")) Then
+                Me.vcve_linea = vDR("cve_Linea")
+            End If
+            If Not IsDBNull(vDR("cve_componente")) Then
+                Me.vcve_componente = vDR("cve_componente")
+            End If
+            If Not IsDBNull(vDR("linea")) Then
+                Me.vlinea = vDR("linea")
+            End If
+            If Not IsDBNull(vDR("tpcdm")) Then
+                Me.vtpcdm = vDR("tpcdm")
+            End If
+        End If
     End Sub
 
     Public Sub Eliminar() Implements IIndividual.Eliminar
@@ -26,7 +43,24 @@ Public Class Linea
     End Function
 
     Public Sub Registrar() Implements IIndividual.Registrar
-
+        Using scope As New TransactionScope()
+            Try
+                Dim cmd As New SqlClient.SqlCommand
+                cmd.CommandType = CommandType.StoredProcedure
+                cmd.CommandText = "REGISTRAR_LINEA"
+                With cmd.Parameters
+                    .Add("cve_linea", SqlDbType.BigInt).Value = Me.vcve_linea
+                    .Add("cve_componente", SqlDbType.BigInt).Value = Me.vcve_componente
+                    .Add("linea", SqlDbType.VarChar).Value = Me.vlinea
+                    .Add("tpcdm", SqlDbType.Int).Value = Me.vtpcdm                   
+                End With
+                Dim obj As DataTable = oBD.EjecutaCommando(cmd)
+                Me.vcve_linea = obj.Rows(0)(0) 'ID               
+                scope.Complete()
+            Catch ex As Exception
+                Throw New Exception(ex.Message)
+            End Try
+        End Using
     End Sub
 #End Region
 #Region "Atributos"
@@ -69,8 +103,43 @@ Public Class Linea
         End Set
     End Property
 
+    Public ReadOnly Property Nombre_Componente() As String
+        Get
+            If cve_componente <> 0 Then
+                oComponente = New Componente
+                oComponente.cve_componente = cve_componente
+                oComponente.Cargar()
+                Return oComponente.componente
+            Else
+                Return ""
+            End If
+        End Get
+    End Property
 
+#End Region
 
+#Region "Metodos Generales"
+    Public Function Obtener_Lineas() As DataTable
+        Dim vDT As DataTable
+        vDT = oBD.ObtenerTabla("select * from Linea")
+        If vDT IsNot Nothing Then
+
+        Else
+            vDT = Nothing
+        End If
+        Return vDT
+    End Function
+
+    Public Function Obtener_Lineas(ByVal vFiltro As String) As DataTable
+        Dim vDT As DataTable
+        vDT = oBD.ObtenerTabla("select * from Linea where linea LIKE '%" & vFiltro & "%'")
+        If vDT IsNot Nothing Then
+
+        Else
+            vDT = Nothing
+        End If
+        Return vDT
+    End Function
 #End Region
 
 #Region "Metodos Formulario de Produccion"

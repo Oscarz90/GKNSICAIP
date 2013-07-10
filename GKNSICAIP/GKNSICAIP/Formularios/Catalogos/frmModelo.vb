@@ -1,6 +1,7 @@
 ﻿Imports CapaNegocios
 Public Class frmModelo
     Public vId_Publico As Long = 0
+    Public vId_Retorno As Long = 0
     Dim oModelo As Modelo
     Dim oClasificacion_Modelo As Clasificacion_Modelo
 
@@ -12,7 +13,7 @@ Public Class frmModelo
 
         ''La Siguiente Linea solo es para hacer pruebas sobre un modelo de Prueba(El cual se agrego y se modifico de forma Exitosa)
         ''Borrar si requiere hacer registro nuevo
-        vId_Publico = 936
+        'vId_Publico = 936
 
 
         If Convert.ToInt64(vId_Publico) <> 0 Then
@@ -61,6 +62,7 @@ Public Class frmModelo
             oModelo.cve_clasificacion_modelo = cbxClasificacion.SelectedValue
             Try
                 oModelo.Registrar()
+                vId_Retorno = oModelo.cve_modelo
                 MsgBox("Se registro correctamente")
             Catch ex As Exception
 

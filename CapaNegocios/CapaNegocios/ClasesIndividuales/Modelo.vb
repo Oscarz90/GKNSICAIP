@@ -182,6 +182,32 @@ Public Class Modelo
 
 
 #End Region
+
+#Region "Metodos Generales"
+    Public Function Obtener_Modelos() As DataTable
+        Dim vDT As DataTable
+        vDT = oBD.ObtenerTabla("select * from Modelo")
+        If vDT IsNot Nothing Then
+
+        Else
+            vDT = Nothing
+        End If
+        Return vDT
+    End Function
+
+    Public Function Obtener_Modelos(ByVal vFiltro As String) As DataTable
+        Dim vDT As DataTable
+        vDT = oBD.ObtenerTabla("select * from Modelo where descripcion LIKE '%" & vFiltro & "%'")
+        If vDT IsNot Nothing Then
+
+        Else
+            vDT = Nothing
+        End If
+        Return vDT
+    End Function
+#End Region
+
+
 #Region "Metodos Formulario de Produccion"
     Public Function llena_combo_Modelos_Linea() As DataTable
         Dim dtModelos As New DataTable

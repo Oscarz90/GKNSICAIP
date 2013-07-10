@@ -3,6 +3,9 @@ Public Class TC
     Implements IIndividual
     Dim cadena_conexion As New CapaDatos.conexiones
     Dim oBD As New CapaDatos.CapaDatos(cadena_conexion.CadenaSicaip)
+    Dim oLinea As Linea
+    Dim oModelo As Modelo
+
 #Region "IIndividual"
     Public Sub Cargar() Implements IIndividual.Cargar
 
@@ -34,6 +37,7 @@ Public Class TC
     Private vpiezas_por_hora As Long
     Private vcve_linea As Long
     Private vcve_modelo As Long
+    Private vEstatus As String
 #End Region
 #Region "Propiedades"
     Public Property cve_TC() As Long
@@ -68,7 +72,76 @@ Public Class TC
             vcve_modelo = value
         End Set
     End Property
+
+
+
+    Public Property Estatus() As String
+        Get
+            Return vEstatus
+        End Get
+        Set(ByVal value As String)
+            vEstatus = value
+        End Set
+    End Property
+
+
+    Private vFecha As DateTime
+    Public Property Fecha() As DateTime
+        Get
+            Return vFecha
+        End Get
+        Set(ByVal value As DateTime)
+            vFecha = value
+        End Set
+    End Property
+
+
+    Private vCodigo_Empleado As String
+    Public Property Codigo_Empleado() As String
+        Get
+            Return vCodigo_Empleado
+        End Get
+        Set(ByVal value As String)
+            vCodigo_Empleado = value
+        End Set
+    End Property
+
+
+
+
+    Public ReadOnly Property Nombre_Linea() As String
+        Get
+            If cve_linea <> 0 Then
+                oLinea = New Linea
+                oLinea.cve_linea = cve_linea
+                oLinea.Cargar()
+                Return oLinea.linea
+            Else
+                Return ""
+            End If
+        End Get
+    End Property
+
+    Public ReadOnly Property Nombre_Modelo() As String
+        Get
+            If cve_modelo <> 0 Then
+                oModelo = New Modelo
+                oModelo.cve_modelo = cve_modelo
+                oModelo.Cargar()
+                Return oModelo.descripcion
+            Else
+                Return ""
+            End If
+        End Get
+    End Property
+
 #End Region
+
+    Sub New()
+        vFecha = Date.Now
+    End Sub
+
+
 #Region "Metodos formulario de produccion"
     Public Function obtener_tiempo_ciclo() As Double
         Dim Tiempo_ciclo As Double = 0
