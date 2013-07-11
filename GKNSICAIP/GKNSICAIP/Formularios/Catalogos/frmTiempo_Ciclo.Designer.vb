@@ -46,7 +46,7 @@ Partial Class frmTiempo_Ciclo
         '
         'nudPiezas_Hora
         '
-        Me.nudPiezas_Hora.Location = New System.Drawing.Point(104, 50)
+        Me.nudPiezas_Hora.Location = New System.Drawing.Point(104, 32)
         Me.nudPiezas_Hora.Maximum = New Decimal(New Integer() {100000, 0, 0, 0})
         Me.nudPiezas_Hora.Name = "nudPiezas_Hora"
         Me.nudPiezas_Hora.Size = New System.Drawing.Size(120, 20)
@@ -55,7 +55,7 @@ Partial Class frmTiempo_Ciclo
         'Label1
         '
         Me.Label1.AutoSize = True
-        Me.Label1.Location = New System.Drawing.Point(12, 52)
+        Me.Label1.Location = New System.Drawing.Point(12, 34)
         Me.Label1.Name = "Label1"
         Me.Label1.Size = New System.Drawing.Size(86, 13)
         Me.Label1.TabIndex = 1
@@ -63,7 +63,7 @@ Partial Class frmTiempo_Ciclo
         '
         'txtLinea
         '
-        Me.txtLinea.Location = New System.Drawing.Point(104, 102)
+        Me.txtLinea.Location = New System.Drawing.Point(104, 84)
         Me.txtLinea.Name = "txtLinea"
         Me.txtLinea.ReadOnly = True
         Me.txtLinea.Size = New System.Drawing.Size(214, 20)
@@ -72,7 +72,7 @@ Partial Class frmTiempo_Ciclo
         'Label2
         '
         Me.Label2.AutoSize = True
-        Me.Label2.Location = New System.Drawing.Point(12, 105)
+        Me.Label2.Location = New System.Drawing.Point(12, 87)
         Me.Label2.Name = "Label2"
         Me.Label2.Size = New System.Drawing.Size(36, 13)
         Me.Label2.TabIndex = 3
@@ -80,7 +80,7 @@ Partial Class frmTiempo_Ciclo
         '
         'btnImportar_Linea
         '
-        Me.btnImportar_Linea.Location = New System.Drawing.Point(324, 100)
+        Me.btnImportar_Linea.Location = New System.Drawing.Point(324, 82)
         Me.btnImportar_Linea.Name = "btnImportar_Linea"
         Me.btnImportar_Linea.Size = New System.Drawing.Size(75, 23)
         Me.btnImportar_Linea.TabIndex = 4
@@ -90,7 +90,7 @@ Partial Class frmTiempo_Ciclo
         'Label3
         '
         Me.Label3.AutoSize = True
-        Me.Label3.Location = New System.Drawing.Point(12, 79)
+        Me.Label3.Location = New System.Drawing.Point(12, 61)
         Me.Label3.Name = "Label3"
         Me.Label3.Size = New System.Drawing.Size(45, 13)
         Me.Label3.TabIndex = 5
@@ -98,7 +98,7 @@ Partial Class frmTiempo_Ciclo
         '
         'txtModelo
         '
-        Me.txtModelo.Location = New System.Drawing.Point(104, 76)
+        Me.txtModelo.Location = New System.Drawing.Point(104, 58)
         Me.txtModelo.Name = "txtModelo"
         Me.txtModelo.ReadOnly = True
         Me.txtModelo.Size = New System.Drawing.Size(214, 20)
@@ -106,7 +106,7 @@ Partial Class frmTiempo_Ciclo
         '
         'btnImportar_Modelo
         '
-        Me.btnImportar_Modelo.Location = New System.Drawing.Point(324, 74)
+        Me.btnImportar_Modelo.Location = New System.Drawing.Point(324, 56)
         Me.btnImportar_Modelo.Name = "btnImportar_Modelo"
         Me.btnImportar_Modelo.Size = New System.Drawing.Size(75, 23)
         Me.btnImportar_Modelo.TabIndex = 7
@@ -116,7 +116,7 @@ Partial Class frmTiempo_Ciclo
         'Label4
         '
         Me.Label4.AutoSize = True
-        Me.Label4.Location = New System.Drawing.Point(12, 167)
+        Me.Label4.Location = New System.Drawing.Point(12, 223)
         Me.Label4.Name = "Label4"
         Me.Label4.Size = New System.Drawing.Size(54, 13)
         Me.Label4.TabIndex = 8
@@ -125,7 +125,7 @@ Partial Class frmTiempo_Ciclo
         'Label5
         '
         Me.Label5.AutoSize = True
-        Me.Label5.Location = New System.Drawing.Point(12, 196)
+        Me.Label5.Location = New System.Drawing.Point(12, 252)
         Me.Label5.Name = "Label5"
         Me.Label5.Size = New System.Drawing.Size(40, 13)
         Me.Label5.TabIndex = 9
@@ -134,7 +134,7 @@ Partial Class frmTiempo_Ciclo
         'Label6
         '
         Me.Label6.AutoSize = True
-        Me.Label6.Location = New System.Drawing.Point(12, 219)
+        Me.Label6.Location = New System.Drawing.Point(12, 275)
         Me.Label6.Name = "Label6"
         Me.Label6.Size = New System.Drawing.Size(45, 13)
         Me.Label6.TabIndex = 10
@@ -143,14 +143,14 @@ Partial Class frmTiempo_Ciclo
         'dtpFecha
         '
         Me.dtpFecha.Enabled = False
-        Me.dtpFecha.Location = New System.Drawing.Point(104, 190)
+        Me.dtpFecha.Location = New System.Drawing.Point(104, 246)
         Me.dtpFecha.Name = "dtpFecha"
         Me.dtpFecha.Size = New System.Drawing.Size(295, 20)
         Me.dtpFecha.TabIndex = 11
         '
         'txtEstatus
         '
-        Me.txtEstatus.Location = New System.Drawing.Point(104, 216)
+        Me.txtEstatus.Location = New System.Drawing.Point(104, 272)
         Me.txtEstatus.Name = "txtEstatus"
         Me.txtEstatus.ReadOnly = True
         Me.txtEstatus.Size = New System.Drawing.Size(120, 20)
@@ -158,7 +158,7 @@ Partial Class frmTiempo_Ciclo
         '
         'txtEmpleado
         '
-        Me.txtEmpleado.Location = New System.Drawing.Point(104, 164)
+        Me.txtEmpleado.Location = New System.Drawing.Point(104, 220)
         Me.txtEmpleado.Name = "txtEmpleado"
         Me.txtEmpleado.ReadOnly = True
         Me.txtEmpleado.Size = New System.Drawing.Size(295, 20)
@@ -166,7 +166,7 @@ Partial Class frmTiempo_Ciclo
         '
         'btnRegistrar
         '
-        Me.btnRegistrar.Location = New System.Drawing.Point(261, 258)
+        Me.btnRegistrar.Location = New System.Drawing.Point(248, 314)
         Me.btnRegistrar.Name = "btnRegistrar"
         Me.btnRegistrar.Size = New System.Drawing.Size(75, 23)
         Me.btnRegistrar.TabIndex = 14
@@ -175,7 +175,7 @@ Partial Class frmTiempo_Ciclo
         '
         'btnModificar
         '
-        Me.btnModificar.Location = New System.Drawing.Point(261, 258)
+        Me.btnModificar.Location = New System.Drawing.Point(248, 314)
         Me.btnModificar.Name = "btnModificar"
         Me.btnModificar.Size = New System.Drawing.Size(75, 23)
         Me.btnModificar.TabIndex = 15
@@ -184,7 +184,7 @@ Partial Class frmTiempo_Ciclo
         '
         'btnSalir
         '
-        Me.btnSalir.Location = New System.Drawing.Point(342, 258)
+        Me.btnSalir.Location = New System.Drawing.Point(329, 314)
         Me.btnSalir.Name = "btnSalir"
         Me.btnSalir.Size = New System.Drawing.Size(75, 23)
         Me.btnSalir.TabIndex = 17
@@ -193,9 +193,9 @@ Partial Class frmTiempo_Ciclo
         '
         'btnValidar
         '
-        Me.btnValidar.Location = New System.Drawing.Point(324, 129)
+        Me.btnValidar.Location = New System.Drawing.Point(15, 134)
         Me.btnValidar.Name = "btnValidar"
-        Me.btnValidar.Size = New System.Drawing.Size(75, 23)
+        Me.btnValidar.Size = New System.Drawing.Size(384, 23)
         Me.btnValidar.TabIndex = 18
         Me.btnValidar.Text = "Validar"
         Me.btnValidar.UseVisualStyleBackColor = True
@@ -204,7 +204,7 @@ Partial Class frmTiempo_Ciclo
         '
         Me.lbValidar.AutoSize = True
         Me.lbValidar.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lbValidar.Location = New System.Drawing.Point(12, 134)
+        Me.lbValidar.Location = New System.Drawing.Point(69, 116)
         Me.lbValidar.Name = "lbValidar"
         Me.lbValidar.Size = New System.Drawing.Size(277, 15)
         Me.lbValidar.TabIndex = 19
@@ -214,7 +214,7 @@ Partial Class frmTiempo_Ciclo
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(429, 293)
+        Me.ClientSize = New System.Drawing.Size(416, 367)
         Me.Controls.Add(Me.lbValidar)
         Me.Controls.Add(Me.btnValidar)
         Me.Controls.Add(Me.btnSalir)
@@ -234,6 +234,7 @@ Partial Class frmTiempo_Ciclo
         Me.Controls.Add(Me.txtLinea)
         Me.Controls.Add(Me.Label1)
         Me.Controls.Add(Me.nudPiezas_Hora)
+        Me.MaximizeBox = False
         Me.Name = "frmTiempo_Ciclo"
         Me.Text = "Tiempo Ciclo"
         CType(Me.nudPiezas_Hora, System.ComponentModel.ISupportInitialize).EndInit()

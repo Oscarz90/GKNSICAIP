@@ -142,6 +142,10 @@ Public Class TC
     End Sub
 
 
+#Region "Metodos Generales"
+
+#End Region
+
 #Region "Metodos formulario de produccion"
     Public Function obtener_tiempo_ciclo() As Double
         Dim Tiempo_ciclo As Double = 0
@@ -171,8 +175,8 @@ Public Class TC
         Catch
             MsgBox("Error al obtener piezas por hora!. CTC_ERROR", vbCritical + vbOKOnly, "Error")
         End Try
-        
+
     End Sub
-    
+
 #End Region
 End Class

@@ -205,6 +205,62 @@ Public Class Modelo
         End If
         Return vDT
     End Function
+
+    Public Function Modelo_Asignado_En_Linea(ByVal vId_Modelo As Long) As Boolean
+        Dim vRetorno As Boolean = False
+        Dim vDT As DataTable
+        vDT = oBD.ObtenerTabla("SELECT Li.linea " & _
+                                 "FROM linea Li JOIN componente Co ON Li.cve_componente= Co.cve_componente " & _
+                                 "JOIN modelo Mo on Mo.cve_componente= Co.cve_componente " & _
+                                 "WHERE cve_modelo=" & vId_Modelo)
+        If vDT IsNot Nothing Then
+            If vDT.Rows.Count > 0 Then
+                vRetorno = True
+            Else
+                vRetorno = False
+            End If
+        Else
+            vRetorno = False
+        End If
+        Return vRetorno
+    End Function
+
+    Public Function Modelo_Asignado_En_TiempoCiclo(ByVal vId_Modelo As Long) As Boolean
+        Dim vRetorno As Boolean = False
+        Dim vDT As DataTable
+        vDT = oBD.ObtenerTabla("SELECT TiemCiclo.cve_TC " & _
+                                 "FROM modelo Mo join TC TiemCiclo ON Mo.cve_modelo=TiemCiclo.cve_modelo " & _
+                                 "WHERE TiemCiclo.cve_modelo=" & vId_Modelo)
+        If vDT IsNot Nothing Then
+            If vDT.Rows.Count > 0 Then
+                vRetorno = True
+            Else
+                vRetorno = False
+            End If
+        Else
+            vRetorno = False
+        End If
+        Return vRetorno
+    End Function
+
+    Public Function Modelo_Y_Linea_Asignado_En_TiempoCiclo(ByVal vId_Modelo As Long, ByVal vId_Linea As Long) As Boolean
+        Dim vRetorno As Boolean = False
+        Dim vDT As DataTable
+        vDT = oBD.ObtenerTabla("SELECT TiemCiclo.cve_TC " & _
+                                 "FROM modelo Mo join TC TiemCiclo ON Mo.cve_modelo=TiemCiclo.cve_modelo " & _
+                                 "WHERE TiemCiclo.cve_modelo=" & vId_Modelo & " AND TiemCiclo.cve_linea=" & vId_Linea)
+        If vDT IsNot Nothing Then
+            If vDT.Rows.Count > 0 Then
+                vRetorno = True
+            Else
+                vRetorno = False
+            End If
+        Else
+            vRetorno = False
+        End If
+        Return vRetorno
+    End Function
+
 #End Region
 
 
