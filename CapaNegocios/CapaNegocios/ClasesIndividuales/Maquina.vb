@@ -3,6 +3,8 @@ Public Class Maquina
     Implements IIndividual
     Dim cadena_conexion As New CapaDatos.conexiones
     Dim oBD As New CapaDatos.CapaDatos(cadena_conexion.CadenaSicaip)
+    Dim oLinea As Linea
+
 #Region "IIndividual"
     Public Sub Cargar() Implements IIndividual.Cargar
         Dim rDatos As DataRow = Nothing
@@ -39,7 +41,29 @@ Public Class Maquina
     End Function
 
     Public Sub Registrar() Implements IIndividual.Registrar
+        Using scope As New TransactionScope()
+            Try
+                Dim cmd As New SqlClient.SqlCommand
+                cmd.CommandType = CommandType.StoredProcedure
+                cmd.CommandText = "REGISTRAR_MAQUINA"
 
+                With cmd.Parameters
+                    .Add("cve_maquina", SqlDbType.BigInt).Value = Me.vcve_maquina
+                    .Add("cve_linea", SqlDbType.BigInt).Value = Me.vcve_linea
+                    .Add("clave_maquina", SqlDbType.VarChar).Value = Me.vclave_maquina
+                    .Add("maquina", SqlDbType.VarChar).Value = Me.vmaquina
+                End With
+
+                Dim obj As DataTable = oBD.EjecutaCommando(cmd)
+                Me.vcve_maquina = obj.Rows(0)(0) 'ID
+                'Me.RegistraDatos("DEPARTAMENTO", "Departamento_Id", Me.m_Departamento_Id)
+                'Dim oBitacora As Bitacora = Bitacora.ObtenInstancia
+                'oBitacora.RegistrarEnBitacora("DEPARTAMENTO.REGISTRAR", "Se registró el departamento: " & Me.m_Nombre)
+                scope.Complete()
+            Catch ex As Exception
+                Throw New Exception(ex.Message)
+            End Try
+        End Using
     End Sub
 #End Region
 #Region "Atributos"
@@ -81,6 +105,20 @@ Public Class Maquina
             vmaquina = value
         End Set
     End Property
+
+    Public ReadOnly Property Nombre_Linea() As String
+        Get
+            If vcve_linea <> 0 Then
+                oLinea = New Linea
+                oLinea.cve_linea = vcve_linea
+                oLinea.Cargar()
+                Return oLinea.linea
+            Else
+                Return ""
+            End If
+        End Get
+    End Property
+
 #End Region
 #Region "Metodos formulario de produccion"
     Public Function llena_combo_maquina() As DataTable
