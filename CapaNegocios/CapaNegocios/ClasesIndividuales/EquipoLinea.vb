@@ -3,6 +3,8 @@ Public Class EquipoLinea
     Implements IIndividual
     Dim cadena_conexion As New CapaDatos.conexiones
     Dim oBD As New CapaDatos.CapaDatos(cadena_conexion.CadenaSicaip)
+    Dim oLinea As Linea
+
 #Region "IIndividual"
     Public Sub Cargar() Implements IIndividual.Cargar
 
@@ -59,7 +61,48 @@ Public Class EquipoLinea
             vcve_equipo = value
         End Set
     End Property
+
+    Public ReadOnly Property Nombre_Linea() As String
+        Get
+            If cve_linea <> 0 Then
+                oLinea = New Linea
+                oLinea.cve_linea = cve_linea
+                oLinea.Cargar()
+                Return oLinea.linea
+            Else
+                Return ""
+            End If
+        End Get
+    End Property
 #End Region
+
+#Region "Metodos Generales"
+    Public Function ObtenerElementosNoAsignados(ByVal vIdLinea As Long) As DataTable
+        Dim vDT As DataTable
+        vDT = oBD.ObtenerTabla("SELECT DISTINCT E.Equipo as Equipo, E.cve_equipo  from Equipo_Linea EL join Equipo E on EL.cve_Equipo=E.cve_Equipo Where EL.cve_linea <>" & vIdLinea)
+        If vDT IsNot Nothing Then
+
+        Else
+            vDT = Nothing
+        End If
+        Return vDT
+    End Function
+
+    Public Function ObtenerElementosAsignados(ByVal vIdLinea As Long) As DataTable
+        Dim vDT As DataTable
+        vDT = oBD.ObtenerTabla("select E.Equipo as Equipo, E.cve_equipo from Equipo_Linea EL join Equipo E on EL.cve_Equipo=E.cve_Equipo Where EL.cve_linea =" & vIdLinea)
+        If vDT IsNot Nothing Then
+
+        Else
+            vDT = Nothing
+        End If
+        Return vDT
+    End Function
+
+#End Region
+
+
+
 
 #Region "Metodos Formulario de Produccion"
     Public Function llena_combo_lineas() As DataTable

@@ -108,4 +108,8 @@ Public Class frmTiempo_Ciclo
         oTiempo_Ciclo.cve_linea = vfrmImportador_Linea.vRetorno_CVE_Linea
         txtLinea.Text = oTiempo_Ciclo.Nombre_Linea
     End Sub
+
+    Private Sub btnValidar_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnValidar.Click
+
+    End Sub
 End Class
