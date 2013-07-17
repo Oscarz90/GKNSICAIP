@@ -271,7 +271,7 @@ Public Class Graficas
             Return obj
         End Using
     End Function
-
+    
 #End Region
 
 #Region "OBTENER NRFTI"

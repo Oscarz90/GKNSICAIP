@@ -392,10 +392,18 @@ Public Class frmGraficas
                 lblError.Visible = False
                 lblError.Enabled = False
                 Try
+                    Dim vTotal As Integer = 1
+                    Dim vContador As Integer = 1
+                    vTotal = vDT.Rows.Count
                     For Each VDR As DataRow In vDT.Rows
-                        fechaGraficos = VDR("Dia_Asignado")
-                        fechaGraficos = Mid(fechaGraficos, 1, 5)
-                        cadenaXML += "<category name='" & fechaGraficos & "' />"
+                        If vTotal <> vContador Then
+                            fechaGraficos = VDR("Dia_Asignado")
+                            fechaGraficos = Mid(fechaGraficos, 1, 5)
+                            cadenaXML += "<category name='" & fechaGraficos & "' />"
+                        Else
+                            'MsgBox("Este no se grafica" & VDR("OEE"))
+                        End If
+                        vContador = vContador + 1
                     Next
                 Catch ex As Exception
                     MsgBox(ex.Message)
@@ -412,18 +420,26 @@ Public Class frmGraficas
                     lblError.Visible = False
                     lblError.Enabled = False
                     Try
+                        Dim vTotal As Integer = 1
+                        Dim vContador As Integer = 1
+                        vTotal = vDT.Rows.Count
+
                         For Each vDR As DataRow In vDT.Rows
-                            fechaGraficos = vDR("Dia_Asignado")
-                            fechaGraficos = Mid(fechaGraficos, 4, 2)
-                            mes = getMeses(fechaGraficos)
-                            cadenaXML += "<category name='" & mes & "  " & vYearInicio & " ' />"
+                            If vTotal <> vContador Then
+                                fechaGraficos = vDR("Dia_Asignado")
+                                fechaGraficos = Mid(fechaGraficos, 4, 2)
+                                mes = getMeses(fechaGraficos)
+                                cadenaXML += "<category name='" & mes & "  " & vYearInicio & " ' />"
+                            Else
+
+                            End If
+                            vContador = vContador + 1
                         Next
                     Catch ex As Exception
                         MsgBox(ex.Message)
                     End Try
                     banderaAcumulado = True
                 End If
-                cadenaXML += "<category name='" & mes & "   " & vYearInicio & "' />"
             End If
         End If
         If banderaAcumulado = True Then
@@ -435,6 +451,8 @@ Public Class frmGraficas
         Dim fechaGraficos As String = ""
         Dim mes As String = ""
         Dim vDT As DataTable
+        Dim oeeAcumuladoFinal As Double = 0
+        Dim vOEE_Acumulado_Final As Double = 0
         Dim banderaAcumulado As Boolean
         Dim oee As Double = 0
         cadenaXML += "<dataset seriesName='OEE' color='" & colores(0) & "' anchorBorderColor='" & contorno_anchor & "' anchorBgColor='FFA500' anchorRadius='" & radio_anchor & "'>"
@@ -447,9 +465,17 @@ Public Class frmGraficas
             Else
                 lblError.Visible = False
                 lblError.Enabled = False
+                Dim vTotal As Integer = 1
+                Dim vContador As Integer = 1
+                vTotal = vDT.Rows.Count
                 For Each vDR As DataRow In vDT.Rows
-                    oee = vDR("oee")
-                    cadenaXML += "<set value='" & oee & "' />"
+                    If vTotal <> vContador Then
+                        oee = vDR("oee")
+                        cadenaXML += "<set value='" & oee & "' />"
+                    Else
+                        vOEE_Acumulado_Final = vDR("oee")
+                    End If
+                    vContador = vContador + 1
                 Next
             End If
             banderaAcumulado = True
@@ -463,9 +489,19 @@ Public Class frmGraficas
                 Else
                     lblError.Visible = False
                     lblError.Enabled = False
+
+                    Dim vTotal As Integer = 1
+                    Dim vContador As Integer = 1
+                    vTotal = vDT.Rows.Count
+
                     For Each vDR As DataRow In vDT.Rows
-                        oee = vDR("oee")
-                        cadenaXML += "<set value='" & oee & "' />"
+                        If vTotal <> vContador Then
+                            oee = vDR("oee")
+                            cadenaXML += "<set value='" & oee & "' />"
+                        Else
+                            vOEE_Acumulado_Final = vDR("oee")
+                        End If
+                        vContador = vContador + 1
                     Next
                 End If
                 banderaAcumulado = True
@@ -474,7 +510,7 @@ Public Class frmGraficas
         End If
 
         If banderaAcumulado = True Then
-            cadenaXML += " <set value='" & 0 & "' color='" & colores(1) & "'/>"
+            cadenaXML += " <set value='" & vOEE_Acumulado_Final & "' color='" & colores(1) & "'/>"
         End If
         cadenaXML += " </dataset>"
     End Sub
@@ -485,7 +521,7 @@ Public Class frmGraficas
         Dim mes As String = ""
         Dim vYearInicio As String = ""
         Dim vDT As DataTable
-        Dim banderaPromedio As Boolean
+        Dim banderaAcumulado As Boolean
         cadenaXML += "<categories>"
         If rbtDia.Checked Then
             vDT = oGraficas.obtener_Oee_Dia(idEquipo, fechaInicio, fechaFinal)
@@ -495,12 +531,20 @@ Public Class frmGraficas
             Else
                 lblError.Visible = False
                 lblError.Enabled = False
+                Dim vTotal As Integer = 1
+                Dim vContador As Integer = 1
+                vTotal = vDT.Rows.Count
                 For Each VDR As DataRow In vDT.Rows
-                    fechaGraficos = VDR("DIA_ASIGNADO")
-                    fechaGraficos = Mid(fechaGraficos, 1, 5)
-                    cadenaXML += "<category name='" & fechaGraficos & "' />"
+                    If vTotal <> vContador Then
+                        fechaGraficos = VDR("DIA_ASIGNADO")
+                        fechaGraficos = Mid(fechaGraficos, 1, 5)
+                        cadenaXML += "<category name='" & fechaGraficos & "' />"
+                    Else
+                        'MsgBox("Este no se grafica" & VDR("OEE"))
+                    End If
+                    vContador = vContador + 1
                 Next
-                banderaPromedio = True
+                banderaAcumulado = True
             End If
         Else
             If rbtMeses.Checked Then
@@ -513,41 +557,43 @@ Public Class frmGraficas
                     lblError.Enabled = False
                     vYearInicio = Year(DateTime.Parse(vDT.Rows(0).Item("Dia_Asignado"))).ToString
                     Try
+                        Dim vTotal As Integer = 1
+                        Dim vContador As Integer = 1
+                        vTotal = vDT.Rows.Count
+
                         For Each vDR As DataRow In vDT.Rows
-                            fechaGraficos = vDR("Dia_Asignado")
-                            fechaGraficos = Mid(fechaGraficos, 4, 2)
-                            mes = getMeses(fechaGraficos)
-                            cadenaXML += "<category name='" & mes & "  " & vYearInicio & " ' />"
+                            If vTotal <> vContador Then
+                                fechaGraficos = vDR("Dia_Asignado")
+                                fechaGraficos = Mid(fechaGraficos, 4, 2)
+                                mes = getMeses(fechaGraficos)
+                                cadenaXML += "<category name='" & mes & "  " & vYearInicio & " ' />"
+                            Else
+
+                            End If
+                            vContador = vContador + 1
                         Next
                     Catch ex As Exception
-
+                        MsgBox(ex.Message)
                     End Try
-                    banderaPromedio = True
+                    banderaAcumulado = True
                 End If
-                cadenaXML += "<category name='" & mes & "   " & vYearInicio & "' />"
             End If
         End If
-        If banderaPromedio = True Then
+        If banderaAcumulado = True Then
             cadenaXML += "<category name ='ACUMULADO OEE' />"
         End If
         cadenaXML += "</categories>"
     End Sub
     Private Sub establece_OEE_Acumulado(ByVal idEquipo As Integer, ByVal fechaInicio As DateTime, ByVal fechaFinal As DateTime)
         Dim fechaGraficos As String = ""
-        Dim promDia As Double = 0
-        Dim promAcumulado As Double = 0
-        Dim promFinal As Double = 0
-        Dim contador As Integer = 0
-        Dim vContador_Dias As Integer = 0
         Dim vDT As DataTable
-        Dim vMesInicio As String = ""
         Dim vYearInicio As String = ""
         Dim mes As String = ""
-        Dim banderaPromedio As Boolean = False
+        Dim banderaAcumulado As Boolean = False
         Dim oee As Double = 0
+        Dim vOEE_Acumulado_Final As Double = 0
         cadenaXML += "<dataset seriesName='OEE' color='" & colores(0) & "' anchorBorderColor='" & contorno_anchor & "' anchorBgColor='" & colores(0) & "' anchorRadius='" & radio_anchor & "'>"
 
-        Dim vFecha_Actual As DateTime
         If rbtDia.Checked Then
             vDT = oGraficas.obtener_Oee_Dia(idEquipo, fechaInicio, fechaFinal)
             If vDT.Rows.Count = 0 Then
@@ -557,12 +603,20 @@ Public Class frmGraficas
             Else
                 lblError.Visible = False
                 lblError.Enabled = False
+                Dim vTotal As Integer = 1
+                Dim vContador As Integer = 1
+                vTotal = vDT.Rows.Count
                 For Each vDR As DataRow In vDT.Rows
-                    oee = vDR("oee")
-                    cadenaXML += "<set value='" & oee & "' />"
+                    If vTotal <> vContador Then
+                        oee = vDR("oee")
+                        cadenaXML += "<set value='" & oee & "' />"
+                    Else
+                        vOEE_Acumulado_Final = vDR("oee")
+                    End If
+                    vContador = vContador + 1
                 Next
             End If
-            banderaPromedio = True
+            banderaAcumulado = True
         Else
             If rbtMeses.Checked Then
                 vDT = oGraficas.obtener_Oee_Mes(idEquipo, fechaInicio, fechaFinal)
@@ -573,20 +627,26 @@ Public Class frmGraficas
                 Else
                     lblError.Visible = False
                     lblError.Enabled = False
-                    vFecha_Actual = vDT.Rows(0).Item("DIA_ASIGNADO").ToString
-                    vMesInicio = Month(DateTime.Parse(vDT.Rows(0).Item("Dia_Asignado"))).ToString
-                    vYearInicio = Year(DateTime.Parse(vDT.Rows(0).Item("Dia_Asignado"))).ToString
+
+                    Dim vTotal As Integer = 1
+                    Dim vContador As Integer = 1
+                    vTotal = vDT.Rows.Count
+
                     For Each vDR As DataRow In vDT.Rows
-                        fechaGraficos = vDR("Dia_Asignado")
-                        fechaGraficos = Mid(fechaGraficos, 4, 2)
-                        mes = getMeses(fechaGraficos)
-                        cadenaXML += "<category name='" & mes & "  " & vYearInicio & " ' />"
+                        If vTotal <> vContador Then
+                            oee = vDR("oee")
+                            cadenaXML += "<set value='" & oee & "' />"
+                        Else
+                            vOEE_Acumulado_Final = vDR("oee")
+                        End If
+                        vContador = vContador + 1
                     Next
                 End If
+                banderaAcumulado = True
             End If
         End If
-        If banderaPromedio = True Then
-            cadenaXML += " <set value='" & 0 & "' color='" & colores(1) & "'/>"
+        If banderaAcumulado = True Then
+            cadenaXML += " <set value='" & vOEE_Acumulado_Final & "' color='" & colores(1) & "'/>"
         End If
         cadenaXML += " </dataset>"
     End Sub
@@ -2144,7 +2204,7 @@ Public Class frmGraficas
         End If
 
         rutaGrafica = "file://" & Application.StartupPath & "/FusionChartsFree/Charts/" & tipoGrafico & "?chartWidth=1240&chartHeight=400"
-        cadenaXML = rutaGrafica + "&dataXML=<graph YAxisMinValue='0' YAxisMaxValue='" & maxEjeY & "' numberPrefix='" & numberSuffix & "' caption='REPORTE DE RESULTADOS' subcaption='" & subcaption & "' YAxisName= '" & ejeY & "' xAxisName='F E C H A (s)' labeldisplay='rotate' decimalPrecision='" & decimales & "' rotateNames='1' formatNumberScale='0' thousandSeparator=',' bgcolor='ffffff' bgalpha='000000' showColumnShadow='1' showAlternateHGridColor='1' AlternateHGridColor='ff5904' divLineColor='ff5904' divLineAlpha='20' alternateHGridAlpha='5' canvasBorderColor='666666' baseFontColor='666666'>"
+        cadenaXML = rutaGrafica + "&dataXML=<graph YAxisMinValue='0' YAxisMaxValue='" & maxEjeY & "' numberSuffix='" & numberSuffix & "' caption='REPORTE DE RESULTADOS' subcaption='" & subcaption & "' YAxisName= '" & ejeY & "' xAxisName='F E C H A (s)' labeldisplay='rotate' decimalPrecision='" & decimales & "' rotateNames='1' formatNumberScale='0' thousandSeparator=',' bgcolor='ffffff' bgalpha='000000' showColumnShadow='1' showAlternateHGridColor='1' AlternateHGridColor='ff5904' divLineColor='ff5904' divLineAlpha='20' alternateHGridAlpha='5' canvasBorderColor='666666' baseFontColor='666666'>"
 
         Condicion_WHERE(cbxTodasLineas.Checked)
         '' O E E -- P R O D U C C I O N --
