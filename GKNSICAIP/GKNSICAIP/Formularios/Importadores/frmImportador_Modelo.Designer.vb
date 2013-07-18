@@ -27,11 +27,6 @@ Partial Class frmImportador_Modelo
         Me.txtParametro = New System.Windows.Forms.TextBox()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.dgvDatos = New System.Windows.Forms.DataGridView()
-        Me.rbtFiltro_Nombre = New System.Windows.Forms.RadioButton()
-        Me.btnFiltrar = New System.Windows.Forms.Button()
-        Me.rbtTodos = New System.Windows.Forms.RadioButton()
-        Me.Label2 = New System.Windows.Forms.Label()
-        Me.btnNuevo = New System.Windows.Forms.Button()
         Me.cve_Modelo = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.cve_componente = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.cve_clasificacion_modelo = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -41,13 +36,23 @@ Partial Class frmImportador_Modelo
         Me.cve_registro = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Nombre_Componente = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Nombre_Clasificacion = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.rbtFiltro_Nombre = New System.Windows.Forms.RadioButton()
+        Me.btnFiltrar = New System.Windows.Forms.Button()
+        Me.rbtTodos = New System.Windows.Forms.RadioButton()
+        Me.Label2 = New System.Windows.Forms.Label()
+        Me.btnNuevo = New System.Windows.Forms.Button()
+        Me.Panel1 = New System.Windows.Forms.Panel()
+        Me.banner_formulario = New System.Windows.Forms.PictureBox()
+        Me.titulo_banner_formulario = New System.Windows.Forms.Label()
         CType(Me.dgvDatos, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.Panel1.SuspendLayout()
+        CType(Me.banner_formulario, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'btnImportar
         '
         Me.btnImportar.Enabled = False
-        Me.btnImportar.Location = New System.Drawing.Point(309, 54)
+        Me.btnImportar.Location = New System.Drawing.Point(309, 62)
         Me.btnImportar.Name = "btnImportar"
         Me.btnImportar.Size = New System.Drawing.Size(75, 23)
         Me.btnImportar.TabIndex = 0
@@ -56,7 +61,7 @@ Partial Class frmImportador_Modelo
         '
         'btnCancelar
         '
-        Me.btnCancelar.Location = New System.Drawing.Point(309, 83)
+        Me.btnCancelar.Location = New System.Drawing.Point(309, 91)
         Me.btnCancelar.Name = "btnCancelar"
         Me.btnCancelar.Size = New System.Drawing.Size(75, 23)
         Me.btnCancelar.TabIndex = 1
@@ -65,7 +70,7 @@ Partial Class frmImportador_Modelo
         '
         'txtParametro
         '
-        Me.txtParametro.Location = New System.Drawing.Point(50, 333)
+        Me.txtParametro.Location = New System.Drawing.Point(50, 391)
         Me.txtParametro.Name = "txtParametro"
         Me.txtParametro.Size = New System.Drawing.Size(334, 20)
         Me.txtParametro.TabIndex = 2
@@ -73,7 +78,7 @@ Partial Class frmImportador_Modelo
         'Label1
         '
         Me.Label1.AutoSize = True
-        Me.Label1.Location = New System.Drawing.Point(12, 336)
+        Me.Label1.Location = New System.Drawing.Point(12, 394)
         Me.Label1.Name = "Label1"
         Me.Label1.Size = New System.Drawing.Size(32, 13)
         Me.Label1.TabIndex = 3
@@ -85,62 +90,11 @@ Partial Class frmImportador_Modelo
         Me.dgvDatos.AllowUserToDeleteRows = False
         Me.dgvDatos.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.dgvDatos.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.cve_Modelo, Me.cve_componente, Me.cve_clasificacion_modelo, Me.np_gkn, Me.descripcion, Me.cve_linea, Me.cve_registro, Me.Nombre_Componente, Me.Nombre_Clasificacion})
-        Me.dgvDatos.Location = New System.Drawing.Point(12, 12)
+        Me.dgvDatos.Location = New System.Drawing.Point(12, 62)
         Me.dgvDatos.Name = "dgvDatos"
         Me.dgvDatos.ReadOnly = True
         Me.dgvDatos.Size = New System.Drawing.Size(291, 315)
         Me.dgvDatos.TabIndex = 4
-        '
-        'rbtFiltro_Nombre
-        '
-        Me.rbtFiltro_Nombre.AutoSize = True
-        Me.rbtFiltro_Nombre.Location = New System.Drawing.Point(121, 362)
-        Me.rbtFiltro_Nombre.Name = "rbtFiltro_Nombre"
-        Me.rbtFiltro_Nombre.Size = New System.Drawing.Size(108, 17)
-        Me.rbtFiltro_Nombre.TabIndex = 5
-        Me.rbtFiltro_Nombre.Text = "Filtrar por Nombre"
-        Me.rbtFiltro_Nombre.UseVisualStyleBackColor = True
-        '
-        'btnFiltrar
-        '
-        Me.btnFiltrar.Location = New System.Drawing.Point(309, 359)
-        Me.btnFiltrar.Name = "btnFiltrar"
-        Me.btnFiltrar.Size = New System.Drawing.Size(75, 23)
-        Me.btnFiltrar.TabIndex = 6
-        Me.btnFiltrar.Text = "Filtrar"
-        Me.btnFiltrar.UseVisualStyleBackColor = True
-        Me.btnFiltrar.Visible = False
-        '
-        'rbtTodos
-        '
-        Me.rbtTodos.AutoSize = True
-        Me.rbtTodos.Checked = True
-        Me.rbtTodos.Location = New System.Drawing.Point(50, 362)
-        Me.rbtTodos.Name = "rbtTodos"
-        Me.rbtTodos.Size = New System.Drawing.Size(65, 17)
-        Me.rbtTodos.TabIndex = 7
-        Me.rbtTodos.TabStop = True
-        Me.rbtTodos.Text = "Sin Filtro"
-        Me.rbtTodos.UseVisualStyleBackColor = True
-        '
-        'Label2
-        '
-        Me.Label2.AutoSize = True
-        Me.Label2.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label2.Location = New System.Drawing.Point(309, 146)
-        Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(90, 18)
-        Me.Label2.TabIndex = 8
-        Me.Label2.Text = "Si no Existe:"
-        '
-        'btnNuevo
-        '
-        Me.btnNuevo.Location = New System.Drawing.Point(309, 167)
-        Me.btnNuevo.Name = "btnNuevo"
-        Me.btnNuevo.Size = New System.Drawing.Size(75, 23)
-        Me.btnNuevo.TabIndex = 9
-        Me.btnNuevo.Text = "Nuevo"
-        Me.btnNuevo.UseVisualStyleBackColor = True
         '
         'cve_Modelo
         '
@@ -214,28 +168,115 @@ Partial Class frmImportador_Modelo
         Me.Nombre_Clasificacion.ReadOnly = True
         Me.Nombre_Clasificacion.Visible = False
         '
+        'rbtFiltro_Nombre
+        '
+        Me.rbtFiltro_Nombre.AutoSize = True
+        Me.rbtFiltro_Nombre.Location = New System.Drawing.Point(121, 420)
+        Me.rbtFiltro_Nombre.Name = "rbtFiltro_Nombre"
+        Me.rbtFiltro_Nombre.Size = New System.Drawing.Size(108, 17)
+        Me.rbtFiltro_Nombre.TabIndex = 5
+        Me.rbtFiltro_Nombre.Text = "Filtrar por Nombre"
+        Me.rbtFiltro_Nombre.UseVisualStyleBackColor = True
+        '
+        'btnFiltrar
+        '
+        Me.btnFiltrar.Location = New System.Drawing.Point(309, 417)
+        Me.btnFiltrar.Name = "btnFiltrar"
+        Me.btnFiltrar.Size = New System.Drawing.Size(75, 23)
+        Me.btnFiltrar.TabIndex = 6
+        Me.btnFiltrar.Text = "Filtrar"
+        Me.btnFiltrar.UseVisualStyleBackColor = True
+        Me.btnFiltrar.Visible = False
+        '
+        'rbtTodos
+        '
+        Me.rbtTodos.AutoSize = True
+        Me.rbtTodos.Checked = True
+        Me.rbtTodos.Location = New System.Drawing.Point(50, 420)
+        Me.rbtTodos.Name = "rbtTodos"
+        Me.rbtTodos.Size = New System.Drawing.Size(65, 17)
+        Me.rbtTodos.TabIndex = 7
+        Me.rbtTodos.TabStop = True
+        Me.rbtTodos.Text = "Sin Filtro"
+        Me.rbtTodos.UseVisualStyleBackColor = True
+        '
+        'Label2
+        '
+        Me.Label2.AutoSize = True
+        Me.Label2.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label2.Location = New System.Drawing.Point(309, 154)
+        Me.Label2.Name = "Label2"
+        Me.Label2.Size = New System.Drawing.Size(90, 18)
+        Me.Label2.TabIndex = 8
+        Me.Label2.Text = "Si no Existe:"
+        '
+        'btnNuevo
+        '
+        Me.btnNuevo.Location = New System.Drawing.Point(309, 175)
+        Me.btnNuevo.Name = "btnNuevo"
+        Me.btnNuevo.Size = New System.Drawing.Size(75, 23)
+        Me.btnNuevo.TabIndex = 9
+        Me.btnNuevo.Text = "Nuevo"
+        Me.btnNuevo.UseVisualStyleBackColor = True
+        '
+        'Panel1
+        '
+        Me.Panel1.BackColor = System.Drawing.Color.White
+        Me.Panel1.Controls.Add(Me.titulo_banner_formulario)
+        Me.Panel1.Controls.Add(Me.rbtTodos)
+        Me.Panel1.Controls.Add(Me.btnNuevo)
+        Me.Panel1.Controls.Add(Me.btnFiltrar)
+        Me.Panel1.Controls.Add(Me.banner_formulario)
+        Me.Panel1.Controls.Add(Me.rbtFiltro_Nombre)
+        Me.Panel1.Controls.Add(Me.Label2)
+        Me.Panel1.Controls.Add(Me.Label1)
+        Me.Panel1.Controls.Add(Me.dgvDatos)
+        Me.Panel1.Controls.Add(Me.txtParametro)
+        Me.Panel1.Controls.Add(Me.btnImportar)
+        Me.Panel1.Controls.Add(Me.btnCancelar)
+        Me.Panel1.Location = New System.Drawing.Point(0, 0)
+        Me.Panel1.Name = "Panel1"
+        Me.Panel1.Size = New System.Drawing.Size(399, 454)
+        Me.Panel1.TabIndex = 10
+        '
+        'banner_formulario
+        '
+        Me.banner_formulario.BackColor = System.Drawing.Color.Transparent
+        Me.banner_formulario.BackgroundImage = Global.GKNSICAIP.My.Resources.Resources.banner_03
+        Me.banner_formulario.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
+        Me.banner_formulario.Location = New System.Drawing.Point(0, 0)
+        Me.banner_formulario.Name = "banner_formulario"
+        Me.banner_formulario.Size = New System.Drawing.Size(396, 44)
+        Me.banner_formulario.TabIndex = 111
+        Me.banner_formulario.TabStop = False
+        '
+        'titulo_banner_formulario
+        '
+        Me.titulo_banner_formulario.AutoSize = True
+        Me.titulo_banner_formulario.BackColor = System.Drawing.Color.Transparent
+        Me.titulo_banner_formulario.Font = New System.Drawing.Font("Arial", 20.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.titulo_banner_formulario.ForeColor = System.Drawing.Color.SteelBlue
+        Me.titulo_banner_formulario.Location = New System.Drawing.Point(12, 27)
+        Me.titulo_banner_formulario.Name = "titulo_banner_formulario"
+        Me.titulo_banner_formulario.Size = New System.Drawing.Size(213, 32)
+        Me.titulo_banner_formulario.TabIndex = 112
+        Me.titulo_banner_formulario.Text = "Importar Modelo"
+        '
         'frmImportador_Modelo
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(396, 418)
-        Me.Controls.Add(Me.btnNuevo)
-        Me.Controls.Add(Me.Label2)
-        Me.Controls.Add(Me.rbtTodos)
-        Me.Controls.Add(Me.btnFiltrar)
-        Me.Controls.Add(Me.rbtFiltro_Nombre)
-        Me.Controls.Add(Me.dgvDatos)
-        Me.Controls.Add(Me.Label1)
-        Me.Controls.Add(Me.txtParametro)
-        Me.Controls.Add(Me.btnCancelar)
-        Me.Controls.Add(Me.btnImportar)
+        Me.ClientSize = New System.Drawing.Size(396, 452)
+        Me.Controls.Add(Me.Panel1)
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "frmImportador_Modelo"
         Me.Text = "Importar Modelo"
         CType(Me.dgvDatos, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.Panel1.ResumeLayout(False)
+        Me.Panel1.PerformLayout()
+        CType(Me.banner_formulario, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
-        Me.PerformLayout()
 
     End Sub
     Friend WithEvents btnImportar As System.Windows.Forms.Button
@@ -257,4 +298,7 @@ Partial Class frmImportador_Modelo
     Friend WithEvents cve_registro As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents Nombre_Componente As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents Nombre_Clasificacion As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents Panel1 As System.Windows.Forms.Panel
+    Friend WithEvents banner_formulario As System.Windows.Forms.PictureBox
+    Friend WithEvents titulo_banner_formulario As System.Windows.Forms.Label
 End Class
