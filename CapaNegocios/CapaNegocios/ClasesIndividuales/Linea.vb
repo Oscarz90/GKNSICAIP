@@ -4,6 +4,7 @@ Public Class Linea
     Dim cadena_conexion As New CapaDatos.conexiones
     Dim oBD As New CapaDatos.CapaDatos(cadena_conexion.CadenaSicaip)
     Dim oComponente As Componente
+    Dim oEquipo_Linea As EquipoLinea
 
 #Region "IIndividual"
     Public Sub Cargar() Implements IIndividual.Cargar
@@ -103,6 +104,32 @@ Public Class Linea
         End Set
     End Property
 
+
+    'Private vLEquipo_Linea As List(Of EquipoLinea)
+    'Public Property LEquipo_Linea_Asignados() As List(Of EquipoLinea)
+    '    Get
+    '        If vLEquipo_Linea Is Nothing Then
+    '            'Cargo documentos
+    '            Me.LEquipo_Linea_Asignados = New List(Of EquipoLinea)
+    '            Dim oBD As New CapaDatos.CapaDatos(cadena_conexion.CadenaSicaip)
+    '            Dim oEq As DataTable = oBD.ObtenerTabla("SELECT EL.cve_equipo_linea FROM Equipo_Linea EL join Equipo E on EL.cve_Equipo=E.cve_Equipo WHERE EL.cve_linea =" & Me.vcve_linea)
+    '            If oEq IsNot Nothing Then
+    '                Dim oEquipoLinea As EquipoLinea = Nothing
+    '                For Each row As DataRow In oEq.Rows
+    '                    oEquipoLinea = New EquipoLinea
+    '                    oEquipoLinea.cve_equipo_linea = row("cve_equipo_linea")
+    '                    oEquipoLinea.Cargar()
+    '                    Me.vLEquipo_Linea.Add(oEquipoLinea)
+    '                Next
+    '            End If
+    '        End If
+    '        Return Me.vLEquipo_Linea
+    '    End Get
+    '    Set(ByVal value As List(Of EquipoLinea))
+    '        Me.vLEquipo_Linea = value
+    '    End Set
+    'End Property
+
     Public ReadOnly Property Nombre_Componente() As String
         Get
             If cve_componente <> 0 Then
@@ -115,6 +142,58 @@ Public Class Linea
             End If
         End Get
     End Property
+
+    Private vLEquipos_Linea_NO_Asignados As List(Of Equipo)
+    Public Property LEquipos_Linea_NO_Asignados() As List(Of Equipo)
+        Get
+            If vLEquipos_Linea_NO_Asignados Is Nothing Then
+                'Cargo documentos
+                Me.LEquipos_Linea_NO_Asignados = New List(Of Equipo)
+                Dim oBD As New CapaDatos.CapaDatos(cadena_conexion.CadenaSicaip)
+                Dim oEq As DataTable = oBD.ObtenerTabla("SELECT DISTINCT E.cve_equipo AS cve_equipo, E.Equipo FROM Equipo E WHERE E.cve_equipo NOT IN  (SELECT cve_equipo FROM equipo_linea EL WHERE EL.cve_linea =" & Me.vcve_linea & ") Order by  E.Equipo")
+                If oEq IsNot Nothing Then
+                    Dim oEquipoLinea As Equipo = Nothing
+                    For Each row As DataRow In oEq.Rows
+                        oEquipoLinea = New Equipo
+                        oEquipoLinea.Cve_Equipo = row("cve_equipo")
+                        oEquipoLinea.Cargar()
+                        Me.vLEquipos_Linea_NO_Asignados.Add(oEquipoLinea)
+                    Next
+                End If
+            End If
+            Return Me.vLEquipos_Linea_NO_Asignados
+        End Get
+        Set(ByVal value As List(Of Equipo))
+            Me.vLEquipos_Linea_NO_Asignados = value
+        End Set
+    End Property
+
+
+    Private vLEquipos_Linea_Asignados As List(Of Equipo)
+    Public Property LEquipos_Linea_Asignados() As List(Of Equipo)
+        Get
+            If vLEquipos_Linea_Asignados Is Nothing Then
+                'Cargo documentos
+                Me.LEquipos_Linea_Asignados = New List(Of Equipo)
+                Dim oBD As New CapaDatos.CapaDatos(cadena_conexion.CadenaSicaip)
+                Dim oEq As DataTable = oBD.ObtenerTabla("SELECT E.cve_equipo AS cve_equipo, E.Equipo from Equipo_Linea EL join Equipo E on EL.cve_Equipo=E.cve_Equipo Where EL.cve_linea =" & Me.vcve_linea & " Order by E.Equipo")
+                If oEq IsNot Nothing Then
+                    Dim oEquipoLinea As Equipo = Nothing
+                    For Each row As DataRow In oEq.Rows
+                        oEquipoLinea = New Equipo
+                        oEquipoLinea.Cve_Equipo = row("cve_equipo")
+                        oEquipoLinea.Cargar()
+                        Me.vLEquipos_Linea_Asignados.Add(oEquipoLinea)
+                    Next
+                End If
+            End If
+            Return Me.vLEquipos_Linea_Asignados
+        End Get
+        Set(ByVal value As List(Of Equipo))
+            Me.vLEquipos_Linea_Asignados = value
+        End Set
+    End Property
+
 
 #End Region
 

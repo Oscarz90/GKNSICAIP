@@ -29,7 +29,27 @@ Public Class TC
     End Function
 
     Public Sub Registrar() Implements IIndividual.Registrar
-
+        Using scope As New TransactionScope()
+            Try
+                Dim cmd As New SqlClient.SqlCommand
+                cmd.CommandType = CommandType.StoredProcedure
+                cmd.CommandText = "REGISTRAR_TC"
+                With cmd.Parameters
+                    .Add("cve_TC", SqlDbType.BigInt).Value = Me.vcve_TC
+                    .Add("piezas_por_hora", SqlDbType.Int).Value = Me.vpiezas_por_hora
+                    .Add("cve_linea", SqlDbType.BigInt).Value = Me.vcve_linea
+                    .Add("cve_modelo", SqlDbType.BigInt).Value = Me.vcve_modelo
+                    .Add("cod_empleado", SqlDbType.VarChar).Value = Me.vCodigo_Empleado
+                    .Add("fecha", SqlDbType.DateTime).Value = Me.vFecha
+                    .Add("estatus", SqlDbType.VarChar).Value = Me.vEstatus
+                End With
+                Dim obj As DataTable = oBD.EjecutaCommando(cmd)
+                Me.vcve_TC = obj.Rows(0)(0) 'ID               
+                scope.Complete()
+            Catch ex As Exception
+                Throw New Exception(ex.Message)
+            End Try
+        End Using
     End Sub
 #End Region
 #Region "Atributos"

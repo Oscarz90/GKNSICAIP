@@ -9,9 +9,14 @@ Public Class EquipoLinea
     Public Sub Cargar() Implements IIndividual.Cargar
 
     End Sub
-
     Public Sub Eliminar() Implements IIndividual.Eliminar
+        For Each vDR As DataRow In ObtenerElementosAsignados(vcve_linea).Rows
+            Try
+                oBD.EjecutarQuery("DELETE FROM equipo_linea WHERE cve_equipo_linea=" & vDR("cve_equipo_linea"))
+            Catch ex As Exception
 
+            End Try
+        Next
     End Sub
     Dim vId As Long
     Public Property Id As Long Implements IIndividual.Id
@@ -28,7 +33,23 @@ Public Class EquipoLinea
     End Function
 
     Public Sub Registrar() Implements IIndividual.Registrar
-
+        Using scope As New TransactionScope()
+            Try
+                Dim cmd As New SqlClient.SqlCommand
+                cmd.CommandType = CommandType.StoredProcedure
+                cmd.CommandText = "REGISTRAR_EQUIPO_LINEA"
+                With cmd.Parameters
+                    .Add("cve_equipo_linea", SqlDbType.BigInt).Value = Me.vcve_equipo_linea
+                    .Add("cve_equipo", SqlDbType.BigInt).Value = Me.vcve_equipo
+                    .Add("cve_linea", SqlDbType.BigInt).Value = Me.vcve_linea
+                End With
+                Dim obj As DataTable = oBD.EjecutaCommando(cmd)
+                Me.vcve_equipo_linea = obj.Rows(0)(0) 'ID               
+                scope.Complete()
+            Catch ex As Exception
+                Throw New Exception(ex.Message)
+            End Try
+        End Using
     End Sub
 #End Region
 #Region "Atributos"
@@ -75,7 +96,6 @@ Public Class EquipoLinea
         End Get
     End Property
 #End Region
-
 #Region "Metodos Generales"
     Public Function ObtenerElementosNoAsignados(ByVal vIdLinea As Long) As DataTable
         Dim vDT As DataTable
@@ -90,7 +110,7 @@ Public Class EquipoLinea
 
     Public Function ObtenerElementosAsignados(ByVal vIdLinea As Long) As DataTable
         Dim vDT As DataTable
-        vDT = oBD.ObtenerTabla("select E.Equipo as Equipo, E.cve_equipo from Equipo_Linea EL join Equipo E on EL.cve_Equipo=E.cve_Equipo Where EL.cve_linea =" & vIdLinea)
+        vDT = oBD.ObtenerTabla("select EL.cve_equipo_linea AS cve_equipo_linea  From Equipo_Linea EL join Equipo E on EL.cve_Equipo=E.cve_Equipo Where EL.cve_linea =" & vIdLinea)
         If vDT IsNot Nothing Then
 
         Else
@@ -100,9 +120,6 @@ Public Class EquipoLinea
     End Function
 
 #End Region
-
-
-
 
 #Region "Metodos Formulario de Produccion"
     Public Function llena_combo_lineas() As DataTable
