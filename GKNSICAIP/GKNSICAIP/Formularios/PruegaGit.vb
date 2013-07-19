@@ -1,7 +1,18 @@
 ﻿Public Class PruegaGit
 
 #Region "Julio"
-
+    '
+    ''
+    ''Esto es mio
+    ''
+    ''
+    ''jaja
+    ''
+    ''solo es pureba
+    ''
+    ''
+    '' 
+    ''hasta aqui
 #End Region
 
 #Region "Oscar"
