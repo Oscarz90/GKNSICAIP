@@ -3,16 +3,37 @@ Public Class frmTiempo_Ciclo
     Public vId_Publico As Long = 0
     Dim oTiempo_Ciclo As TC
     Dim oTiempo_Ciclo_A_MODIFICAR As TC
+    Dim oModelo As Modelo
     Dim vEmpleado As String = ""
     Dim vFecha As DateTime = Date.Now
-
-
+    Dim vSeleccion_Modelo As Boolean = False
+    Dim vSeleccion_Linea As Boolean = False
+    Dim vValidado_Modelo_En_Linea As Boolean = False
+    Dim vValidado_Modelo_Y_Linea_En_TC As Boolean = False
 
     Private Sub btnImportar_Modelo_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnImportar_Modelo.Click
         Dim vfrmImportador_Modelo As New frmImportador_Modelo
         vfrmImportador_Modelo.ShowDialog()
-        oTiempo_Ciclo.cve_modelo = vfrmImportador_Modelo.vRetorno_CVE_Modelo
-        txtModelo.Text = oTiempo_Ciclo.Nombre_Modelo
+        If vfrmImportador_Modelo.vRetorno_CVE_Modelo <> 0 Then
+            oTiempo_Ciclo.cve_modelo = vfrmImportador_Modelo.vRetorno_CVE_Modelo
+            txtModelo.Text = oTiempo_Ciclo.Nombre_Modelo
+            vSeleccion_Modelo = True
+        End If       
+    End Sub
+
+    Private Sub btnImportar_Linea_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnImportar_Linea.Click
+        Dim vfrmImportador_Linea As New frmImportador_Linea
+        vfrmImportador_Linea.ShowDialog()
+        If vfrmImportador_Linea.vRetorno_CVE_Linea <> 0 Then
+            oTiempo_Ciclo.cve_linea = vfrmImportador_Linea.vRetorno_CVE_Linea
+            txtLinea.Text = oTiempo_Ciclo.Nombre_Linea
+            vSeleccion_Linea = True
+        End If
+        If vSeleccion_Modelo = True And vSeleccion_Linea = True Then
+            btnValidar.Enabled = True
+            btnValidar_Modelo_Linea_En_TC.Enabled = True
+        End If
+
     End Sub
 
     Private Sub frmTiempo_Ciclo_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
@@ -47,8 +68,21 @@ Public Class frmTiempo_Ciclo
         Me.Close()
     End Sub
 
-    Private Sub btnModificar_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnModificar.Click
-        If MsgBox("¿Esta seguro de realizar los cambios al Tiempo Ciclo?", MsgBoxStyle.YesNo, Me.Text) = MsgBoxResult.Yes Then
+    Private Sub btnRegistrar_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnRegistrar.Click
+        If MsgBox("¿Esta seguro de registrar el nuevo Tiempo Ciclo?", MsgBoxStyle.YesNo, Me.Text) = MsgBoxResult.Yes Then
+            ''---Comentado(lineas) para hacer registro Nuevo(esto no sirve)
+            'oTiempo_Ciclo.cve_TC = 0
+            'oTiempo_Ciclo.piezas_por_hora = nudPiezas_Hora.Value
+            'oTiempo_Ciclo.Estatus = "ACTIVO"
+            'Try
+            '    oTiempo_Ciclo.Registrar()                
+            '    MsgBox("Se registro correctamente")
+            'Catch ex As Exception
+
+            'End Try
+            'Me.Close()
+
+
             oTiempo_Ciclo.cve_TC = 0
             oTiempo_Ciclo.Estatus = "ACTIVO"
             oTiempo_Ciclo.piezas_por_hora = nudPiezas_Hora.Value
@@ -62,21 +96,8 @@ Public Class frmTiempo_Ciclo
 
             End Try
             Me.Close()
-        End If
-    End Sub
 
-    Private Sub btnRegistrar_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnRegistrar.Click
-        If MsgBox("¿Esta seguro de registrar el nuevo Tiempo Ciclo?", MsgBoxStyle.YesNo, Me.Text) = MsgBoxResult.Yes Then
-            oTiempo_Ciclo.cve_TC = 0
-            oTiempo_Ciclo.piezas_por_hora = nudPiezas_Hora.Value
-            oTiempo_Ciclo.Estatus = "ACTIVO"
-            Try
-                oTiempo_Ciclo.Registrar()                
-                MsgBox("Se registro correctamente")
-            Catch ex As Exception
 
-            End Try
-            Me.Close()
         End If
     End Sub
 
@@ -108,18 +129,39 @@ Public Class frmTiempo_Ciclo
         End If
     End Sub
 
-    Private Sub btnImportar_Linea_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnImportar_Linea.Click
-        Dim vfrmImportador_Linea As New frmImportador_Linea
-        vfrmImportador_Linea.ShowDialog()
-        oTiempo_Ciclo.cve_linea = vfrmImportador_Linea.vRetorno_CVE_Linea
-        txtLinea.Text = oTiempo_Ciclo.Nombre_Linea
-    End Sub
+   
 
     Private Sub btnValidar_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnValidar.Click
+        oModelo = New Modelo
 
+        If oModelo.Validar_Exixtencia_De_Modelo_En_Linea(oTiempo_Ciclo.cve_modelo, oTiempo_Ciclo.cve_linea) = True Then
+            MsgBox("El modelo en Linea ya exixte")
+            vValidado_Modelo_En_Linea = False
+        Else
+            MsgBox("El modelo en Linea No exixte")
+            vValidado_Modelo_En_Linea = True
+        End If
+        If oTiempo_Ciclo.Validar_Exixtencia_LINEA_MODELO_EN_TC(oTiempo_Ciclo.cve_linea, oTiempo_Ciclo.cve_modelo) = True Then
+            MsgBox("La linea y el modelo en TC ya exixte")
+            vValidado_Modelo_Y_Linea_En_TC = False
+        Else
+            MsgBox("La linea y el modelo en TC no exixte")
+            vValidado_Modelo_Y_Linea_En_TC = True
+        End If
+        If vValidado_Modelo_En_Linea = True And vValidado_Modelo_Y_Linea_En_TC = True Then
+            btnRegistrar.Enabled = True
+        Else
+            btnRegistrar.Enabled = False
+        End If
     End Sub
 
     Private Sub btnValidar_Modelo_Linea_En_TC_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnValidar_Modelo_Linea_En_TC.Click
-
+        'If oTiempo_Ciclo.Validar_Exixtencia_LINEA_MODELO_EN_TC(oTiempo_Ciclo.cve_linea, oTiempo_Ciclo.cve_modelo) = True Then
+        '    MsgBox("La linea y el modelo en TC ya exixte")
+        '    vValidado_Modelo_Y_Linea_En_TC = False
+        'Else
+        '    MsgBox("La linea y el modelo en TC no exixte")
+        '    vValidado_Modelo_Y_Linea_En_TC = True
+        'End If
     End Sub
 End Class

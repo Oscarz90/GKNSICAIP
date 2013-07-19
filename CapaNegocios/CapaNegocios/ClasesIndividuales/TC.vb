@@ -163,7 +163,17 @@ Public Class TC
 
 
 #Region "Metodos Generales"
-
+    Public Function Validar_Exixtencia_LINEA_MODELO_EN_TC(ByVal vID_Linea As Long, ByVal vID_Modelo As Long) As Boolean
+        Dim vRetorno As Boolean = False
+        Dim vDT As DataTable
+        vDT = oBD.ObtenerTabla("SELECT cve_TC FROM TC WHERE cve_linea=" & vID_Linea & " AND cve_modelo=" & vID_Modelo)
+        If vDT.Rows.Count > 0 Then
+            vRetorno = True
+        Else
+            vRetorno = False
+        End If
+            Return vRetorno
+    End Function
 #End Region
 
 #Region "Metodos formulario de produccion"
