@@ -3,6 +3,10 @@ Public Class frmTiempo_Ciclo
     Public vId_Publico As Long = 0
     Dim oTiempo_Ciclo As TC
     Dim oTiempo_Ciclo_A_MODIFICAR As TC
+    Dim vEmpleado As String = ""
+    Dim vFecha As DateTime = Date.Now
+
+
 
     Private Sub btnImportar_Modelo_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnImportar_Modelo.Click
         Dim vfrmImportador_Modelo As New frmImportador_Modelo
@@ -30,6 +34,8 @@ Public Class frmTiempo_Ciclo
         Else
             oTiempo_Ciclo = New TC
             oTiempo_Ciclo.Estatus = "ACTIVO"
+            oTiempo_Ciclo.Fecha = vFecha
+            oTiempo_Ciclo.Codigo_Empleado = vEmpleado
             Controles_Registro_Nuevo(True)
         End If
         SetBindings()        
@@ -110,6 +116,10 @@ Public Class frmTiempo_Ciclo
     End Sub
 
     Private Sub btnValidar_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnValidar.Click
+
+    End Sub
+
+    Private Sub btnValidar_Modelo_Linea_En_TC_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnValidar_Modelo_Linea_En_TC.Click
 
     End Sub
 End Class

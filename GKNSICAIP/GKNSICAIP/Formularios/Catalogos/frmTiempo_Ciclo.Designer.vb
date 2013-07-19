@@ -44,6 +44,8 @@ Partial Class frmTiempo_Ciclo
         Me.Panel1 = New System.Windows.Forms.Panel()
         Me.titulo_banner_formulario = New System.Windows.Forms.Label()
         Me.banner_formulario = New System.Windows.Forms.PictureBox()
+        Me.Label7 = New System.Windows.Forms.Label()
+        Me.btnValidar_Modelo_Linea_En_TC = New System.Windows.Forms.Button()
         CType(Me.nudPiezas_Hora, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.Panel1.SuspendLayout()
         CType(Me.banner_formulario, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -218,6 +220,8 @@ Partial Class frmTiempo_Ciclo
         'Panel1
         '
         Me.Panel1.BackColor = System.Drawing.Color.White
+        Me.Panel1.Controls.Add(Me.btnValidar_Modelo_Linea_En_TC)
+        Me.Panel1.Controls.Add(Me.Label7)
         Me.Panel1.Controls.Add(Me.titulo_banner_formulario)
         Me.Panel1.Controls.Add(Me.btnSalir)
         Me.Panel1.Controls.Add(Me.banner_formulario)
@@ -269,6 +273,24 @@ Partial Class frmTiempo_Ciclo
         Me.banner_formulario.TabIndex = 110
         Me.banner_formulario.TabStop = False
         '
+        'Label7
+        '
+        Me.Label7.AutoSize = True
+        Me.Label7.Location = New System.Drawing.Point(133, 232)
+        Me.Label7.Name = "Label7"
+        Me.Label7.Size = New System.Drawing.Size(146, 13)
+        Me.Label7.TabIndex = 112
+        Me.Label7.Text = "Validar Modelo y Linea en TC"
+        '
+        'btnValidar_Modelo_Linea_En_TC
+        '
+        Me.btnValidar_Modelo_Linea_En_TC.Location = New System.Drawing.Point(15, 248)
+        Me.btnValidar_Modelo_Linea_En_TC.Name = "btnValidar_Modelo_Linea_En_TC"
+        Me.btnValidar_Modelo_Linea_En_TC.Size = New System.Drawing.Size(384, 23)
+        Me.btnValidar_Modelo_Linea_En_TC.TabIndex = 113
+        Me.btnValidar_Modelo_Linea_En_TC.Text = "Validar"
+        Me.btnValidar_Modelo_Linea_En_TC.UseVisualStyleBackColor = True
+        '
         'frmTiempo_Ciclo
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -307,4 +329,6 @@ Partial Class frmTiempo_Ciclo
     Friend WithEvents Panel1 As System.Windows.Forms.Panel
     Friend WithEvents banner_formulario As System.Windows.Forms.PictureBox
     Friend WithEvents titulo_banner_formulario As System.Windows.Forms.Label
+    Friend WithEvents btnValidar_Modelo_Linea_En_TC As System.Windows.Forms.Button
+    Friend WithEvents Label7 As System.Windows.Forms.Label
 End Class
