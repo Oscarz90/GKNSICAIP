@@ -1,5 +1,5 @@
 ﻿Public Class PruegaGit
-    ''variable global oscar
+    ''variable global osca
     ''variable global paty
 
 
