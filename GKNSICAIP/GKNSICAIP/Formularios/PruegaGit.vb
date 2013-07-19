@@ -1,5 +1,10 @@
 ﻿Public Class PruegaGit
+    ''variable global oscar
+    ''variable global paty
 
+
+
+    'ouioiu
 #Region "Julio"
     '
     ''
