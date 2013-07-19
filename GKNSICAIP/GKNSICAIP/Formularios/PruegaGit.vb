@@ -17,6 +17,21 @@
 
 #Region "Oscar"
     'metan codigo y hagamos varios commit y todo eso
+
+    'asdfasdf
+
+
+
+    'asdfasdf
+
+
+
+
+    'sdasdfasdfsdf
+
+
+
+    ' .|. ( | ) .|.
 #End Region
 
 #Region "Paty"
