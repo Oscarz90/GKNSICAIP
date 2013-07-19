@@ -560,10 +560,10 @@ Partial Class frmGraficas
         'swfGrafica
         '
         Me.swfGrafica.Enabled = True
-        Me.swfGrafica.Location = New System.Drawing.Point(16, 276)
+        Me.swfGrafica.Location = New System.Drawing.Point(12, 314)
         Me.swfGrafica.Name = "swfGrafica"
         Me.swfGrafica.OcxState = CType(resources.GetObject("swfGrafica.OcxState"), System.Windows.Forms.AxHost.State)
-        Me.swfGrafica.Size = New System.Drawing.Size(1226, 415)
+        Me.swfGrafica.Size = New System.Drawing.Size(1230, 377)
         Me.swfGrafica.TabIndex = 107
         '
         'lblError

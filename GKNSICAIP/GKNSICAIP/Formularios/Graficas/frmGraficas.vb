@@ -396,8 +396,10 @@ Public Class frmGraficas
                     Dim vContador As Integer = 1
                     vTotal = vDT.Rows.Count
                     For Each VDR As DataRow In vDT.Rows
-                        If vTotal <> vContador Then
-                            fechaGraficos = VDR("Dia_Asignado")
+                        If vContador = 1 Then
+
+                        ElseIf vContador > 1 Then
+                            fechaGraficos = VDR("DIA_ASIGNADO")
                             fechaGraficos = Mid(fechaGraficos, 1, 5)
                             cadenaXML += "<category name='" & fechaGraficos & "' />"
                         Else
@@ -469,11 +471,11 @@ Public Class frmGraficas
                 Dim vContador As Integer = 1
                 vTotal = vDT.Rows.Count
                 For Each vDR As DataRow In vDT.Rows
-                    If vTotal <> vContador Then
+                    If vContador = 1 Then
+                        vOEE_Acumulado_Final = vDR("oee")
+                    ElseIf vContador > 1 Then
                         oee = vDR("oee")
                         cadenaXML += "<set value='" & oee & "' />"
-                    Else
-                        vOEE_Acumulado_Final = vDR("oee")
                     End If
                     vContador = vContador + 1
                 Next
@@ -535,7 +537,9 @@ Public Class frmGraficas
                 Dim vContador As Integer = 1
                 vTotal = vDT.Rows.Count
                 For Each VDR As DataRow In vDT.Rows
-                    If vTotal <> vContador Then
+                    If vContador = 1 Then
+
+                    ElseIf vContador > 1 Then
                         fechaGraficos = VDR("DIA_ASIGNADO")
                         fechaGraficos = Mid(fechaGraficos, 1, 5)
                         cadenaXML += "<category name='" & fechaGraficos & "' />"
@@ -607,11 +611,11 @@ Public Class frmGraficas
                 Dim vContador As Integer = 1
                 vTotal = vDT.Rows.Count
                 For Each vDR As DataRow In vDT.Rows
-                    If vTotal <> vContador Then
+                    If vContador = 1 Then
+                        vOEE_Acumulado_Final = vDR("oee")
+                    ElseIf vContador > 1 Then
                         oee = vDR("oee")
                         cadenaXML += "<set value='" & oee & "' />"
-                    Else
-                        vOEE_Acumulado_Final = vDR("oee")
                     End If
                     vContador = vContador + 1
                 Next
@@ -2233,7 +2237,7 @@ Public Class frmGraficas
             cadenaXML += "<trendlines> <line startValue='" & valorObj & "' color='FF0000' displayValue='" & valorObj & "' showOnTop='1'/> </trendlines>"
             '' C O S T O
         ElseIf rbtCosto.Checked Then
-            'Indicador = 3
+            Indicador = 3
             If cbxTodasLineas.Checked Then
                 cadenaSELECT = "SELECT DISTINCT DIA_ASIGNADO FROM VISTA_SELECCION_INDICADOR3"
                 establece_fechas(cadenaSELECT)
@@ -2244,8 +2248,8 @@ Public Class frmGraficas
                 establece_fechas(cadenaSELECT)
                 establece_Costo(cadenaSELECT, colores(2))
             End If
-            'valorObj = obtener_Objetivo(vIdEquipo, Indicador)
-            'cadenaXML += "<trendlines> <line startValue='" & valorObj & "' color='FF0000' displayValue='OBJETIVO' showOnTop='1'/> </trendlines>"
+            valorObj = obtener_Objetivo(vIdEquipo, Indicador)
+            cadenaXML += "<trendlines> <line startValue='" & valorObj & "' color='FF0000' displayValue='OBJETIVO' showOnTop='1'/> </trendlines>"
             '' S E G U R I D A D
         ElseIf rbtSeg.Checked Then
             Indicador = 4
