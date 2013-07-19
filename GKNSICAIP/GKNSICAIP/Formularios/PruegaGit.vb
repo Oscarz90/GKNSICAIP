@@ -1,5 +1,10 @@
 ﻿Public Class PruegaGit
+    ''variable global oscar
+    ''variable global paty
 
+
+
+    'ouioiu
 #Region "Julio"
     '
     ''
@@ -38,7 +43,12 @@
 #End Region
 
 #Region "Paty"
-
+    '
+    '
+    'mi codigo
+    '
+    'region abierta
+    ''
 #End Region
 
 End Class
