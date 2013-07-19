@@ -9,12 +9,7 @@
 #End Region
 
 #Region "Paty"
-    '
-    '
-    'mi codigo
-    '
-    'region abierta
-    ''
+
 #End Region
 
 End Class
