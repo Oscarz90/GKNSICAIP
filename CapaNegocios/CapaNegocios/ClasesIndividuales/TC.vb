@@ -8,7 +8,35 @@ Public Class TC
 
 #Region "IIndividual"
     Public Sub Cargar() Implements IIndividual.Cargar
-
+        Dim rDatos As DataRow = Nothing
+        Try
+            rDatos = oBD.ObtenerRenglon("SELECT * FROM TC WHERE cve_TC=" & vcve_TC, "TC")
+            If rDatos IsNot Nothing Then
+                If rDatos("cve_TC") IsNot DBNull.Value Then
+                    Me.vcve_TC = rDatos("cve_TC")
+                    Me.vpiezas_por_hora = rDatos("piezas_por_hora")
+                    Me.vcve_linea = rDatos("cve_linea")
+                    Me.vcve_modelo = rDatos("cve_modelo")
+                    If rDatos("cod_empleado") IsNot DBNull.Value Then
+                        Me.vCodigo_Empleado = rDatos("cod_empleado")
+                    Else
+                        Me.vCodigo_Empleado = ""
+                    End If
+                    If rDatos("fecha") IsNot DBNull.Value Then
+                        Me.vFecha = rDatos("fecha")
+                    Else
+                        Me.vFecha = Date.Now
+                    End If
+                    If rDatos("estatus") IsNot DBNull.Value Then
+                        Me.vEstatus = rDatos("estatus")
+                    Else
+                        Me.vEstatus = ""
+                    End If
+                End If
+            End If
+        Catch ex As Exception
+            Throw New Exception(ex.Message)
+        End Try
     End Sub
 
     Public Sub Eliminar() Implements IIndividual.Eliminar
@@ -163,17 +191,30 @@ Public Class TC
 
 
 #Region "Metodos Generales"
+
     Public Function Validar_Exixtencia_LINEA_MODELO_EN_TC(ByVal vID_Linea As Long, ByVal vID_Modelo As Long) As Boolean
         Dim vRetorno As Boolean = False
         Dim vDT As DataTable
-        vDT = oBD.ObtenerTabla("SELECT cve_TC FROM TC WHERE cve_linea=" & vID_Linea & " AND cve_modelo=" & vID_Modelo)
+        vDT = oBD.ObtenerTabla("SELECT cve_TC FROM TC WHERE estatus !='IN' and cve_linea=" & vID_Linea & " AND cve_modelo=" & vID_Modelo)
         If vDT.Rows.Count > 0 Then
             vRetorno = True
         Else
             vRetorno = False
         End If
-            Return vRetorno
+        Return vRetorno
     End Function
+
+    Public Sub Cargar_TC(ByVal vID_Linea As Long, ByVal vID_Modelo As Long)
+        Dim rDatos As DataRow
+        rDatos = oBD.ObtenerRenglon("SELECT cve_TC FROM TC WHERE estatus !='IN' and cve_linea=" & vID_Linea & " AND cve_modelo=" & vID_Modelo, "TC")
+        If rDatos IsNot Nothing Then
+            vcve_TC = rDatos("cve_TC")
+            Cargar()
+        Else
+
+        End If
+    End Sub
+
 #End Region
 
 #Region "Metodos formulario de produccion"

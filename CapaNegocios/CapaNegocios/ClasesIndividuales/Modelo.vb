@@ -209,8 +209,7 @@ Public Class Modelo
     Public Function Validar_Exixtencia_De_Modelo_En_Linea(ByVal vId_Modelo As Long, ByVal vId_Linea As Long) As Boolean
         Dim vRetorno As Boolean = False
         Dim vDT As DataTable
-        vDT = oBD.ObtenerTabla("select * from modelo M JOIN componente C ON M.cve_componente=C.cve_componente" & _
-                               "JOIN linea L ON L.cve_componente=C.cve_componente WHERE cve_linea=" & vId_Linea & " and cve_modelo=" & vId_Modelo)
+        vDT = oBD.ObtenerTabla("select * from modelo M JOIN componente C ON M.cve_componente=C.cve_componente JOIN linea L ON L.cve_componente=C.cve_componente WHERE cve_linea=" & vId_Linea & " and cve_modelo=" & vId_Modelo)
         If vDT.Rows.Count > 0 Then
             vRetorno = True
         Else

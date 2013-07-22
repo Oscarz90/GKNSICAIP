@@ -41,7 +41,6 @@ Partial Class frmTiempo_Ciclo
         Me.btnValidar = New System.Windows.Forms.Button()
         Me.lbValidar = New System.Windows.Forms.Label()
         Me.Panel1 = New System.Windows.Forms.Panel()
-        Me.btnValidar_Modelo_Linea_En_TC = New System.Windows.Forms.Button()
         Me.Label7 = New System.Windows.Forms.Label()
         Me.titulo_banner_formulario = New System.Windows.Forms.Label()
         Me.banner_formulario = New System.Windows.Forms.PictureBox()
@@ -211,7 +210,6 @@ Partial Class frmTiempo_Ciclo
         'Panel1
         '
         Me.Panel1.BackColor = System.Drawing.Color.White
-        Me.Panel1.Controls.Add(Me.btnValidar_Modelo_Linea_En_TC)
         Me.Panel1.Controls.Add(Me.Label7)
         Me.Panel1.Controls.Add(Me.titulo_banner_formulario)
         Me.Panel1.Controls.Add(Me.btnSalir)
@@ -239,17 +237,6 @@ Partial Class frmTiempo_Ciclo
         Me.Panel1.Name = "Panel1"
         Me.Panel1.Size = New System.Drawing.Size(418, 421)
         Me.Panel1.TabIndex = 20
-        '
-        'btnValidar_Modelo_Linea_En_TC
-        '
-        Me.btnValidar_Modelo_Linea_En_TC.Enabled = False
-        Me.btnValidar_Modelo_Linea_En_TC.Location = New System.Drawing.Point(12, 355)
-        Me.btnValidar_Modelo_Linea_En_TC.Name = "btnValidar_Modelo_Linea_En_TC"
-        Me.btnValidar_Modelo_Linea_En_TC.Size = New System.Drawing.Size(384, 23)
-        Me.btnValidar_Modelo_Linea_En_TC.TabIndex = 113
-        Me.btnValidar_Modelo_Linea_En_TC.Text = "Validar"
-        Me.btnValidar_Modelo_Linea_En_TC.UseVisualStyleBackColor = True
-        Me.btnValidar_Modelo_Linea_En_TC.Visible = False
         '
         'Label7
         '
@@ -320,6 +307,5 @@ Partial Class frmTiempo_Ciclo
     Friend WithEvents Panel1 As System.Windows.Forms.Panel
     Friend WithEvents banner_formulario As System.Windows.Forms.PictureBox
     Friend WithEvents titulo_banner_formulario As System.Windows.Forms.Label
-    Friend WithEvents btnValidar_Modelo_Linea_En_TC As System.Windows.Forms.Button
     Friend WithEvents Label7 As System.Windows.Forms.Label
 End Class
