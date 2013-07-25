@@ -88,6 +88,7 @@ Partial Class frmLinea
         'nudTPCM
         '
         Me.nudTPCM.Location = New System.Drawing.Point(200, 121)
+        Me.nudTPCM.Maximum = New Decimal(New Integer() {1000, 0, 0, 0})
         Me.nudTPCM.Name = "nudTPCM"
         Me.nudTPCM.Size = New System.Drawing.Size(150, 20)
         Me.nudTPCM.TabIndex = 5
