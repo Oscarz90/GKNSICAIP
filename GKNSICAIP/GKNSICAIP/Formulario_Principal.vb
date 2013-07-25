@@ -18,7 +18,6 @@ Public Class Formulario_Principal
     Dim oCatalogo_Maquina As Catalogo_Maquina
     Dim oCatalogo_Modelo As Catalogo_Modelo
     Dim oCatalogo_Tiempo_Ciclo As Catalogo_Tiempo_Ciclo
-    Dim oCatalogo_Equipo_Linea As Catalogo_Equipo_Linea
 #End Region
 
 #Region "Declaracion de Objetos_Clases_Individiduales"
@@ -54,7 +53,8 @@ Public Class Formulario_Principal
         End Try
        
         Me.dgvRegistros.Columns("cve_linea").HeaderText = "cve_linea"
-        Me.dgvRegistros.Columns("cve_linea").IsVisible = False        
+        Me.dgvRegistros.Columns("cve_linea").IsVisible = False
+        Me.dgvRegistros.Columns("cve_linea").Name = "CVE"
 
         Me.dgvRegistros.Columns("linea").HeaderText = "Linea"
         Me.dgvRegistros.Columns("linea").Width = 250
@@ -67,19 +67,105 @@ Public Class Formulario_Principal
 
         dgvRegistros.Visible = True
         Activar_Formulario("frmLinea")
-
     End Sub
 
     Private Sub btnMaquina_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnMaquina.Click
+        oCatalogo_Maquina = New Catalogo_Maquina
+        oMaquina = New Maquina
 
+        Me.dgvRegistros.DataSource = Nothing
+        Me.dgvRegistros.Columns.Clear()
+        Me.dgvRegistros.Visible = True
+
+        Try            
+            Me.dgvRegistros.DataSource = oCatalogo_Maquina.Obtener_Maquinas
+        Catch ex As Exception
+            MsgBox(ex.Message)
+        End Try
+
+        Me.dgvRegistros.Columns("cve_maquina").HeaderText = "cve_maquina"
+        Me.dgvRegistros.Columns("cve_maquina").IsVisible = False
+        Me.dgvRegistros.Columns("cve_maquina").Name = "CVE"
+
+        Me.dgvRegistros.Columns("clave_maquina").HeaderText = "clave_maquina"
+        Me.dgvRegistros.Columns("clave_maquina").Width = 150
+
+        Me.dgvRegistros.Columns("maquina").HeaderText = "Nombre Maquina"
+        Me.dgvRegistros.Columns("maquina").Width = 250
+
+        Me.dgvRegistros.Columns("linea").HeaderText = " Linea"
+        Me.dgvRegistros.Columns("linea").Width = 250
+
+        dgvRegistros.Visible = True
+        Activar_Formulario("frmMaquina")
     End Sub
 
     Private Sub btnModelo_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnModelo.Click
+        oCatalogo_Modelo = New Catalogo_Modelo
+        oModelo = New Modelo
 
+        Me.dgvRegistros.DataSource = Nothing
+        Me.dgvRegistros.Columns.Clear()
+        Me.dgvRegistros.Visible = True
+
+        Try
+            Me.dgvRegistros.DataSource = oCatalogo_Modelo.Obtener_Modelos
+        Catch ex As Exception
+            MsgBox(ex.Message)
+        End Try
+
+        Me.dgvRegistros.Columns("cve_modelo").HeaderText = "cve_modelo"
+        Me.dgvRegistros.Columns("cve_modelo").IsVisible = False
+        Me.dgvRegistros.Columns("cve_modelo").Name = "CVE"
+
+        Me.dgvRegistros.Columns("Modelo").HeaderText = "Modelo"
+        Me.dgvRegistros.Columns("Modelo").Width = 250
+
+        Me.dgvRegistros.Columns("np_gkn").HeaderText = "NP GKN"
+        Me.dgvRegistros.Columns("np_gkn").Width = 250
+
+        Me.dgvRegistros.Columns("componente").HeaderText = " componente"
+        Me.dgvRegistros.Columns("componente").Width = 250
+
+        Me.dgvRegistros.Columns("Clasificacion_Modelo").HeaderText = " Clasificacion Modelo"
+        Me.dgvRegistros.Columns("Clasificacion_Modelo").Width = 250
+
+        dgvRegistros.Visible = True
+        Activar_Formulario("frmModelo")
     End Sub
 
     Private Sub btnTiempo_Ciclo_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnTiempo_Ciclo.Click
+        oCatalogo_Tiempo_Ciclo = New Catalogo_Tiempo_Ciclo
+        oTiempo_Ciclo = New TC
 
+        Me.dgvRegistros.DataSource = Nothing
+        Me.dgvRegistros.Columns.Clear()
+        Me.dgvRegistros.Visible = True
+
+        Try
+            Me.dgvRegistros.DataSource = oCatalogo_Tiempo_Ciclo.Obtener_Tiempos_Ciclos
+        Catch ex As Exception
+            MsgBox(ex.Message)
+        End Try
+
+        Me.dgvRegistros.Columns("cve_TC").HeaderText = "cve_TC"
+        Me.dgvRegistros.Columns("cve_TC").IsVisible = False
+        Me.dgvRegistros.Columns("cve_TC").Name = "CVE"
+
+        Me.dgvRegistros.Columns("piezas_por_hora").HeaderText = "Piezas X Hora"
+        Me.dgvRegistros.Columns("piezas_por_hora").Width = 250
+
+        Me.dgvRegistros.Columns("linea").HeaderText = "Linea"
+        Me.dgvRegistros.Columns("linea").Width = 250
+
+        Me.dgvRegistros.Columns("Modelo").HeaderText = " Modelo"
+        Me.dgvRegistros.Columns("Modelo").Width = 250
+
+        Me.dgvRegistros.Columns("estatus").HeaderText = "Estatus"
+        Me.dgvRegistros.Columns("estatus").Width = 250
+
+        dgvRegistros.Visible = True
+        Activar_Formulario("frmTiempo_Ciclo")
     End Sub
 
     Private Sub btnEquipo_Linea_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnEquipo_Linea.Click
@@ -104,9 +190,11 @@ Public Class Formulario_Principal
     Private Sub dgvRegistros_MouseDoubleClick(ByVal sender As System.Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles dgvRegistros.MouseDoubleClick
         Try
             If e.Button = Windows.Forms.MouseButtons.Right Then
-                vRowSeleccionada = dgvRegistros.CurrentRow.Index
+                'vRowSeleccionada = dgvRegistros.CurrentRow.Index
+                vRowSeleccionada = dgvRegistros.CurrentRow.Cells("CVE").Value
             ElseIf e.Button = Windows.Forms.MouseButtons.Left Then
-                vRowSeleccionada = dgvRegistros.CurrentRow.Index
+                'vRowSeleccionada = dgvRegistros.CurrentRow.Index
+                vRowSeleccionada = dgvRegistros.CurrentRow.Cells("CVE").Value
             End If
         Catch ex As Exception
             If ex.TargetSite.MetadataToken.ToString = "100670847" Then
@@ -117,7 +205,8 @@ Public Class Formulario_Principal
         If vLinea = True Then
             ofrmLinea = New frmLinea
             Try
-                ofrmLinea.vId_Publico = dgvRegistros.Rows(vRowSeleccionada).Cells(0).Value
+                'ofrmLinea.vId_Publico = dgvRegistros.Rows(vRowSeleccionada).Cells(0).Value
+                ofrmLinea.vId_Publico = vRowSeleccionada
             Catch ex As Exception
                 If ex.TargetSite.MetadataToken.ToString = "100670847" Then
                     ofrmLinea.vId_Publico = 0
@@ -126,40 +215,41 @@ Public Class Formulario_Principal
             ofrmLinea.Show()
             dgvRegistros.Refresh()
         ElseIf vMaquina = True Then
-            'oFrmEmpresa = New frmEmpresa
-            'Try
-            '    oFrmEmpresa.oEmpresa.CVE_Empresa = dgvRegistros.Rows(vRowSeleccionada).Cells(0).Value
-            'Catch ex As Exception
-            '    If ex.TargetSite.MetadataToken.ToString = "100670847" Then
-            '        oFrmEmpresa.oEmpresa.CVE_Empresa = 0
-            '    End If
-            'End Try
-            'oFrmEmpresa.Show()
-            'dgvRegistros.Refresh()
-
+            ofrmMaquina = New frmMaquina
+            Try
+                'ofrmMaquina.vId_Publico = dgvRegistros.Rows(vRowSeleccionada).Cells(0).Value
+                ofrmMaquina.vId_Publico = vRowSeleccionada
+            Catch ex As Exception
+                If ex.TargetSite.MetadataToken.ToString = "100670847" Then
+                    ofrmMaquina.vId_Publico = 0
+                End If
+            End Try
+            ofrmMaquina.Show()
+            dgvRegistros.Refresh()
         ElseIf vModelo = True Then
-            'oFrmMotivo_Baja = New frmMotivoBaja
-            'Try
-            '    oFrmMotivo_Baja.vId_Publico = dgvRegistros.Rows(vRowSeleccionada).Cells(0).Value
-            'Catch ex As Exception
-            '    If ex.TargetSite.MetadataToken.ToString = "100670847" Then
-            '        oFrmMotivo_Baja.vId_Publico = 0
-            '    End If
-            'End Try
-            'oFrmMotivo_Baja.Show()
-            'dgvRegistros.Refresh()
-
+            ofrmModelo = New frmModelo
+            Try
+                'ofrmModelo.vId_Publico = dgvRegistros.Rows(vRowSeleccionada).Cells(0).Value
+                ofrmModelo.vId_Publico = vRowSeleccionada
+            Catch ex As Exception
+                If ex.TargetSite.MetadataToken.ToString = "100670847" Then
+                    ofrmModelo.vId_Publico = 0
+                End If
+            End Try
+            ofrmModelo.Show()
+            dgvRegistros.Refresh()
         ElseIf vTiempo_Ciclo = True Then
-            'oFrmTipo_Telefono = New frmTipoTelefono
-            'Try
-            '    oFrmTipo_Telefono.vId_Publico = dgvRegistros.Rows(vRowSeleccionada).Cells(0).Value
-            'Catch ex As Exception
-            '    If ex.TargetSite.MetadataToken.ToString = "100670847" Then
-            '        oFrmTipo_Telefono.vId_Publico = 0
-            '    End If
-            'End Try
-            'oFrmTipo_Telefono.Show()
-            'dgvRegistros.Refresh()
+            ofrmTiempo_Ciclo = New frmTiempo_Ciclo
+            Try
+                'ofrmTiempo_Ciclo.vId_Publico = dgvRegistros.Rows(vRowSeleccionada).Cells(0).Value
+                ofrmTiempo_Ciclo.vId_Publico = vRowSeleccionada
+            Catch ex As Exception
+                If ex.TargetSite.MetadataToken.ToString = "100670847" Then
+                    ofrmTiempo_Ciclo.vId_Publico = 0
+                End If
+            End Try
+            ofrmTiempo_Ciclo.Show()
+            dgvRegistros.Refresh()
         End If
         ''-----------------------------------------------------------------------------------------------------------------
     End Sub

@@ -93,7 +93,7 @@ Public Class frmTiempo_Ciclo
     Private Sub frmTiempo_Ciclo_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         ''La Siguiente Linea solo es para hacer pruebas sobre un Tiempo_Ciclo()
         ''Borrar si requiere hacer registro nuevo
-        vId_Publico = 0
+        'vId_Publico = 0
 
         If Convert.ToInt64(vId_Publico) <> 0 Then
             oTiempo_Ciclo = New TC
