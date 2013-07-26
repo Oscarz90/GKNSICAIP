@@ -108,7 +108,7 @@ Public Class frmTiempo_Ciclo
             Controles_Registro_Nuevo(False)
         Else
             oTiempo_Ciclo = New TC
-            oTiempo_Ciclo.Estatus = "ACTIVO"
+            oTiempo_Ciclo.Estatus = "1"
             oTiempo_Ciclo.Fecha = vFecha
             vEmpleado = "Prueba"
             oTiempo_Ciclo.Codigo_Empleado = vEmpleado
@@ -127,19 +127,19 @@ Public Class frmTiempo_Ciclo
     Private Sub btnRegistrar_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnRegistrar.Click
         If MsgBox("El Tiempo Ciclo se remplazara con los Datos Capturados, ¿Desea Continuar?", MsgBoxStyle.YesNo, Me.Text) = MsgBoxResult.Yes Then
             oTiempo_Ciclo.cve_TC = 0
-            oTiempo_Ciclo.Estatus = "ACTIVO"
+            oTiempo_Ciclo.Estatus = "1"
             oTiempo_Ciclo.piezas_por_hora = nudPiezas_Hora.Value
             Using scope As New TransactionScope()
                 Try
                     oTiempo_Ciclo.Registrar()
                     If vValidado_Modelo_Y_Linea_En_TC = False Then
                         'If MsgBox("El Tiempo Ciclo se remplazara con los Datos Capturados, ¿Desea Continuar?", MsgBoxStyle.YesNo, Me.Text) = MsgBoxResult.Yes Then
-                        oTiempo_Ciclo_A_MODIFICAR_ENCONTRADO_VALIDACIONES.Estatus = "INACTIVO"
+                        oTiempo_Ciclo_A_MODIFICAR_ENCONTRADO_VALIDACIONES.Estatus = "0"
                         oTiempo_Ciclo_A_MODIFICAR_ENCONTRADO_VALIDACIONES.Registrar()
                         MsgBox("Se Registro correctamente")
                         'End If
                     Else
-                        oTiempo_Ciclo_A_MODIFICAR.Estatus = "INACTIVO"
+                        oTiempo_Ciclo_A_MODIFICAR.Estatus = "0"
                         oTiempo_Ciclo_A_MODIFICAR.Registrar()
                         MsgBox("Se Registro correctamente")
                     End If

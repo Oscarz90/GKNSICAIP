@@ -86,6 +86,8 @@ Public Class TC
     Private vcve_linea As Long
     Private vcve_modelo As Long
     Private vEstatus As String
+    Private vFecha As DateTime
+    Private vCodigo_Empleado As String
 #End Region
 #Region "Propiedades"
     Public Property cve_TC() As Long
@@ -121,19 +123,20 @@ Public Class TC
         End Set
     End Property
 
-
-
     Public Property Estatus() As String
         Get
-            Return vEstatus
+            If vEstatus = "0" Then
+                Return "INACTIVO"
+            ElseIf vEstatus = "1" Then
+                Return "ACTIVO"
+            Else
+                Return ""
+            End If
         End Get
         Set(ByVal value As String)
             vEstatus = value
         End Set
-    End Property
-
-
-    Private vFecha As DateTime
+    End Property    
     Public Property Fecha() As DateTime
         Get
             Return vFecha
@@ -142,9 +145,6 @@ Public Class TC
             vFecha = value
         End Set
     End Property
-
-
-    Private vCodigo_Empleado As String
     Public Property Codigo_Empleado() As String
         Get
             Return vCodigo_Empleado
@@ -153,10 +153,6 @@ Public Class TC
             vCodigo_Empleado = value
         End Set
     End Property
-
-
-
-
     Public ReadOnly Property Nombre_Linea() As String
         Get
             If cve_linea <> 0 Then
@@ -169,7 +165,6 @@ Public Class TC
             End If
         End Get
     End Property
-
     Public ReadOnly Property Nombre_Modelo() As String
         Get
             If cve_modelo <> 0 Then
@@ -182,7 +177,6 @@ Public Class TC
             End If
         End Get
     End Property
-
 #End Region
 
     Sub New()
