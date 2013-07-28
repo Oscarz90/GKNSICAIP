@@ -17,6 +17,7 @@ Public Class Modelo
                     Me.vcve_clasificacion_modelo = rDatos("cve_clasificacion_modelo")
                     Me.vnp_gkn = rDatos("np_gkn")
                     Me.vdescripcion = rDatos("descripcion")
+                    Me.vEstatus = rDatos("Estatus")
                 End If
             End If
         Catch ex As Exception
@@ -69,6 +70,7 @@ Public Class Modelo
                     .Add("cve_componente", SqlDbType.BigInt).Value = Me.vcve_componente
                     .Add("cve_clasificacion_modelo", SqlDbType.Int).Value = Me.vcve_clasificacion_modelo
                     .Add("np_gkn", SqlDbType.VarChar).Value = Me.vnp_gkn
+                    .Add("Estatus", SqlDbType.VarChar).Value = Me.vEstatus
                 End With
 
                 Dim obj As DataTable = oBD.EjecutaCommando(cmd)
@@ -152,6 +154,26 @@ Public Class Modelo
             vcve_registro_turno = value
         End Set
     End Property
+
+
+    Private vEstatus As String
+    Public Property Estatus() As String
+        Get
+            If vEstatus = "1" Then
+                Return "ACTIVO"
+            ElseIf vEstatus = "0" Then
+                Return "INACTIVO"
+            Else
+                Return ""
+            End If
+            Return vEstatus
+        End Get
+        Set(ByVal value As String)
+            vEstatus = value
+        End Set
+    End Property
+
+
 
     Public ReadOnly Property Nombre_Componente() As String
         Get

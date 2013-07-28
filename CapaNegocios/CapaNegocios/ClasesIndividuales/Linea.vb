@@ -23,6 +23,9 @@ Public Class Linea
             If Not IsDBNull(vDR("tpcdm")) Then
                 Me.vtpcdm = vDR("tpcdm")
             End If
+            If Not IsDBNull(vDR("Estatus")) Then
+                Me.vEstatus = vDR("Estatus")
+            End If
         End If
     End Sub
 
@@ -53,7 +56,8 @@ Public Class Linea
                     .Add("cve_linea", SqlDbType.BigInt).Value = Me.vcve_linea
                     .Add("cve_componente", SqlDbType.BigInt).Value = Me.vcve_componente
                     .Add("linea", SqlDbType.VarChar).Value = Me.vlinea
-                    .Add("tpcdm", SqlDbType.Int).Value = Me.vtpcdm                   
+                    .Add("tpcdm", SqlDbType.Int).Value = Me.vtpcdm
+                    .Add("Estatus", SqlDbType.VarChar).Value = Me.vEstatus
                 End With
                 Dim obj As DataTable = oBD.EjecutaCommando(cmd)
                 Me.vcve_linea = obj.Rows(0)(0) 'ID               
@@ -69,6 +73,7 @@ Public Class Linea
     Private vcve_componente As Long
     Private vlinea As String
     Private vtpcdm As Long
+    Private vEstatus As String
 #End Region
 #Region "Propiedades"
     Public Property cve_linea() As Long
@@ -103,8 +108,20 @@ Public Class Linea
             vtpcdm = value
         End Set
     End Property
-
-
+    Public Property Estatus() As String
+        Get
+            If vEstatus = "1" Then
+                Return "ACTIVO"
+            ElseIf vEstatus = "0" Then
+                Return "INACTIVO"
+            Else
+                Return ""
+            End If
+        End Get
+        Set(ByVal value As String)
+            vEstatus = value
+        End Set
+    End Property
     'Private vLEquipo_Linea As List(Of EquipoLinea)
     'Public Property LEquipo_Linea_Asignados() As List(Of EquipoLinea)
     '    Get

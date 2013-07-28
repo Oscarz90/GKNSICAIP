@@ -16,6 +16,7 @@ Public Class Maquina
                     Me.vcve_linea = rDatos("cve_linea")
                     Me.vclave_maquina = rDatos("clave_maquina")
                     Me.vmaquina = rDatos("maquina")
+                    Me.vEstatus = rDatos("Estatus")
                 End If
             End If
         Catch ex As Exception
@@ -52,6 +53,7 @@ Public Class Maquina
                     .Add("cve_linea", SqlDbType.BigInt).Value = Me.vcve_linea
                     .Add("clave_maquina", SqlDbType.VarChar).Value = Me.vclave_maquina
                     .Add("maquina", SqlDbType.VarChar).Value = Me.vmaquina
+                    .Add("Estatus", SqlDbType.VarChar).Value = Me.vEstatus
                 End With
 
                 Dim obj As DataTable = oBD.EjecutaCommando(cmd)
@@ -105,6 +107,23 @@ Public Class Maquina
             vmaquina = value
         End Set
     End Property
+    Private vEstatus As String
+    Public Property Estatus() As String
+        Get
+            If vEstatus = "1" Then
+                Return "ACTIVO"
+            ElseIf vEstatus = "0" Then
+                Return "INACTIVO"
+            Else
+                Return ""
+            End If
+            Return vEstatus
+        End Get
+        Set(ByVal value As String)
+            vEstatus = value
+        End Set
+    End Property
+
 
     Public ReadOnly Property Nombre_Linea() As String
         Get
