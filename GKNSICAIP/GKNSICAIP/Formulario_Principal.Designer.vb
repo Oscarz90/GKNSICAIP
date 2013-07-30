@@ -40,12 +40,20 @@ Partial Class Formulario_Principal
         Me.RadRibbonBarGroup4 = New Telerik.WinControls.UI.RadRibbonBarGroup()
         Me.btnSICAIP = New Telerik.WinControls.UI.RadButtonElement()
         Me.RadOffice2007ScreenTipElement1 = New Telerik.WinControls.UI.RadOffice2007ScreenTipElement()
-        Me.RadPanel1 = New Telerik.WinControls.UI.RadPanel()
+        Me.RadPanel_Registros = New Telerik.WinControls.UI.RadPanel()
+        Me.RadStatusStrip1 = New Telerik.WinControls.UI.RadStatusStrip()
         Me.dgvRegistros = New Telerik.WinControls.UI.RadGridView()
+        Me.RadMenu1 = New Telerik.WinControls.UI.RadMenu()
+        Me.RadMenuButtonItem1 = New Telerik.WinControls.UI.RadMenuButtonItem()
+        Me.RadMenuButtonItem2 = New Telerik.WinControls.UI.RadMenuButtonItem()
+        Me.RadMenuItem1 = New Telerik.WinControls.UI.RadMenuItem()
         CType(Me.RadRibbonBar1, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.RadPanel1, System.ComponentModel.ISupportInitialize).BeginInit()
-        Me.RadPanel1.SuspendLayout()
+        CType(Me.RadPanel_Registros, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.RadPanel_Registros.SuspendLayout()
+        CType(Me.RadStatusStrip1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.dgvRegistros, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.dgvRegistros.SuspendLayout()
+        CType(Me.RadMenu1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
@@ -67,7 +75,7 @@ Partial Class Formulario_Principal
         '
         Me.RibbonTab1.AccessibleDescription = "Configuración"
         Me.RibbonTab1.AccessibleName = "Configuración"
-        Me.RibbonTab1.IsSelected = False
+        Me.RibbonTab1.IsSelected = True
         Me.RibbonTab1.Items.AddRange(New Telerik.WinControls.RadItem() {Me.RadRibbonBarGroup1})
         Me.RibbonTab1.Name = "RibbonTab1"
         Me.RibbonTab1.Text = "Configuración"
@@ -104,7 +112,7 @@ Partial Class Formulario_Principal
         '
         Me.RibbonTab2.AccessibleDescription = "Catalogos"
         Me.RibbonTab2.AccessibleName = "Catalogos"
-        Me.RibbonTab2.IsSelected = True
+        Me.RibbonTab2.IsSelected = False
         Me.RibbonTab2.Items.AddRange(New Telerik.WinControls.RadItem() {Me.RadRibbonBarGroup2, Me.RadRibbonBarGroup3})
         Me.RibbonTab2.Name = "RibbonTab2"
         Me.RibbonTab2.Text = "Catalogos"
@@ -211,24 +219,34 @@ Partial Class Formulario_Principal
         CType(Me.RadOffice2007ScreenTipElement1.GetChildAt(2).GetChildAt(2), Telerik.WinControls.UI.RadLineItem).Text = "Maquinas 3"
         CType(Me.RadOffice2007ScreenTipElement1.GetChildAt(2).GetChildAt(3), Telerik.WinControls.UI.RadLabelElement).Text = "Maquinas 4"
         '
-        'RadPanel1
+        'RadPanel_Registros
         '
-        Me.RadPanel1.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+        Me.RadPanel_Registros.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
                     Or System.Windows.Forms.AnchorStyles.Left) _
                     Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.RadPanel1.BackgroundImage = Global.GKNSICAIP.My.Resources.Resources.banner_gkn_driveline
-        Me.RadPanel1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center
-        Me.RadPanel1.Controls.Add(Me.dgvRegistros)
-        Me.RadPanel1.Location = New System.Drawing.Point(0, 170)
-        Me.RadPanel1.Name = "RadPanel1"
-        Me.RadPanel1.Size = New System.Drawing.Size(1016, 553)
-        Me.RadPanel1.TabIndex = 1
+        Me.RadPanel_Registros.BackgroundImage = Global.GKNSICAIP.My.Resources.Resources.banner_gkn_driveline
+        Me.RadPanel_Registros.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center
+        Me.RadPanel_Registros.Controls.Add(Me.RadStatusStrip1)
+        Me.RadPanel_Registros.Controls.Add(Me.dgvRegistros)
+        Me.RadPanel_Registros.Location = New System.Drawing.Point(0, 164)
+        Me.RadPanel_Registros.Name = "RadPanel_Registros"
+        Me.RadPanel_Registros.Size = New System.Drawing.Size(1016, 559)
+        Me.RadPanel_Registros.TabIndex = 1
+        '
+        'RadStatusStrip1
+        '
+        Me.RadStatusStrip1.Location = New System.Drawing.Point(0, 535)
+        Me.RadStatusStrip1.Name = "RadStatusStrip1"
+        Me.RadStatusStrip1.Size = New System.Drawing.Size(1016, 24)
+        Me.RadStatusStrip1.TabIndex = 1
+        Me.RadStatusStrip1.Text = "RadStatusStrip1"
         '
         'dgvRegistros
         '
         Me.dgvRegistros.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
                     Or System.Windows.Forms.AnchorStyles.Left) _
                     Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.dgvRegistros.Controls.Add(Me.RadMenu1)
         Me.dgvRegistros.Location = New System.Drawing.Point(3, 3)
         '
         'dgvRegistros
@@ -237,10 +255,53 @@ Partial Class Formulario_Principal
         Me.dgvRegistros.MasterTemplate.EnableFiltering = True
         Me.dgvRegistros.Name = "dgvRegistros"
         Me.dgvRegistros.ReadOnly = True
-        Me.dgvRegistros.Size = New System.Drawing.Size(1010, 540)
+        Me.dgvRegistros.Size = New System.Drawing.Size(1010, 526)
         Me.dgvRegistros.TabIndex = 0
         Me.dgvRegistros.Text = "RadGridView1"
         Me.dgvRegistros.Visible = False
+        '
+        'RadMenu1
+        '
+        Me.RadMenu1.Items.AddRange(New Telerik.WinControls.RadItem() {Me.RadMenuButtonItem1, Me.RadMenuButtonItem2, Me.RadMenuItem1})
+        Me.RadMenu1.Location = New System.Drawing.Point(0, 0)
+        Me.RadMenu1.Name = "RadMenu1"
+        Me.RadMenu1.Size = New System.Drawing.Size(1010, 26)
+        Me.RadMenu1.TabIndex = 0
+        Me.RadMenu1.Text = "RadMenu1"
+        '
+        'RadMenuButtonItem1
+        '
+        Me.RadMenuButtonItem1.AccessibleDescription = "RadMenuButtonItem1"
+        Me.RadMenuButtonItem1.AccessibleName = "RadMenuButtonItem1"
+        '
+        '
+        '
+        Me.RadMenuButtonItem1.ButtonElement.AccessibleDescription = "RadMenuButtonItem1"
+        Me.RadMenuButtonItem1.ButtonElement.AccessibleName = "RadMenuButtonItem1"
+        Me.RadMenuButtonItem1.Name = "RadMenuButtonItem1"
+        Me.RadMenuButtonItem1.Text = "RadMenuButtonItem1"
+        Me.RadMenuButtonItem1.Visibility = Telerik.WinControls.ElementVisibility.Visible
+        '
+        'RadMenuButtonItem2
+        '
+        Me.RadMenuButtonItem2.AccessibleDescription = "RadMenuButtonItem2"
+        Me.RadMenuButtonItem2.AccessibleName = "RadMenuButtonItem2"
+        '
+        '
+        '
+        Me.RadMenuButtonItem2.ButtonElement.AccessibleDescription = "RadMenuButtonItem2"
+        Me.RadMenuButtonItem2.ButtonElement.AccessibleName = "RadMenuButtonItem2"
+        Me.RadMenuButtonItem2.Name = "RadMenuButtonItem2"
+        Me.RadMenuButtonItem2.Text = "RadMenuButtonItem2"
+        Me.RadMenuButtonItem2.Visibility = Telerik.WinControls.ElementVisibility.Visible
+        '
+        'RadMenuItem1
+        '
+        Me.RadMenuItem1.AccessibleDescription = "RadMenuItem1"
+        Me.RadMenuItem1.AccessibleName = "RadMenuItem1"
+        Me.RadMenuItem1.Name = "RadMenuItem1"
+        Me.RadMenuItem1.Text = "RadMenuItem1"
+        Me.RadMenuItem1.Visibility = Telerik.WinControls.ElementVisibility.Visible
         '
         'Formulario_Principal
         '
@@ -248,7 +309,7 @@ Partial Class Formulario_Principal
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.White
         Me.ClientSize = New System.Drawing.Size(1016, 723)
-        Me.Controls.Add(Me.RadPanel1)
+        Me.Controls.Add(Me.RadPanel_Registros)
         Me.Controls.Add(Me.RadRibbonBar1)
         Me.MaximumSize = New System.Drawing.Size(1366, 768)
         Me.MinimumSize = New System.Drawing.Size(1024, 726)
@@ -260,9 +321,14 @@ Partial Class Formulario_Principal
         Me.RootElement.MaxSize = New System.Drawing.Size(1366, 768)
         Me.Text = "SICAIP"
         CType(Me.RadRibbonBar1, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.RadPanel1, System.ComponentModel.ISupportInitialize).EndInit()
-        Me.RadPanel1.ResumeLayout(False)
+        CType(Me.RadPanel_Registros, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.RadPanel_Registros.ResumeLayout(False)
+        Me.RadPanel_Registros.PerformLayout()
+        CType(Me.RadStatusStrip1, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.dgvRegistros, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.dgvRegistros.ResumeLayout(False)
+        Me.dgvRegistros.PerformLayout()
+        CType(Me.RadMenu1, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
@@ -283,9 +349,14 @@ Partial Class Formulario_Principal
     Friend WithEvents RadRibbonBarGroup3 As Telerik.WinControls.UI.RadRibbonBarGroup
     Friend WithEvents btnEquipo_Linea As Telerik.WinControls.UI.RadButtonElement
     Friend WithEvents btnPermisos As Telerik.WinControls.UI.RadButtonElement
-    Friend WithEvents RadPanel1 As Telerik.WinControls.UI.RadPanel
+    Friend WithEvents RadPanel_Registros As Telerik.WinControls.UI.RadPanel
     Friend WithEvents dgvRegistros As Telerik.WinControls.UI.RadGridView
     Friend WithEvents RadRibbonBarGroup4 As Telerik.WinControls.UI.RadRibbonBarGroup
     Friend WithEvents btnSICAIP As Telerik.WinControls.UI.RadButtonElement
+    Friend WithEvents RadStatusStrip1 As Telerik.WinControls.UI.RadStatusStrip
+    Friend WithEvents RadMenu1 As Telerik.WinControls.UI.RadMenu
+    Friend WithEvents RadMenuButtonItem1 As Telerik.WinControls.UI.RadMenuButtonItem
+    Friend WithEvents RadMenuButtonItem2 As Telerik.WinControls.UI.RadMenuButtonItem
+    Friend WithEvents RadMenuItem1 As Telerik.WinControls.UI.RadMenuItem
 
 End Class

@@ -29,8 +29,19 @@ Public Class Linea
         End If
     End Sub
 
-    Public Sub Eliminar() Implements IIndividual.Eliminar
-
+    Public Sub Eliminar() Implements IIndividual.Eliminar        
+        'If Usuario.ChecaPermisoTarea("TELEFONO.ELIMINAR") Then
+        Try
+            oBD.EjecutarQuery("UPDATE LINEA SET Estatus='0' WHERE cve_linea=" & Me.vcve_linea)
+            'Dim oBitacora As Bitacora = Bitacora.ObtenInstancia
+            'oBitacora.RegistrarEnBitacora("Telefono.ELIMINAR", "Se eliminó el Teléfono: " & Me.m_Telefono_Id)
+        Catch ex As Exception
+            'Tiene relacion con otras partes del sistema
+            'Throw New CustomException(Errores.Eliminar)
+        End Try
+        'Else
+        'Throw New CustomException(Errores.Permiso)
+        'End If
     End Sub
     Dim vId As Long
     Public Property Id As Long Implements IIndividual.Id

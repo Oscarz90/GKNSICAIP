@@ -191,6 +191,7 @@ Public Class Formulario_Principal
         Try
             If e.Button = Windows.Forms.MouseButtons.Right Then
                 'vRowSeleccionada = dgvRegistros.CurrentRow.Index
+
                 vRowSeleccionada = dgvRegistros.CurrentRow.Cells("CVE").Value
             ElseIf e.Button = Windows.Forms.MouseButtons.Left Then
                 'vRowSeleccionada = dgvRegistros.CurrentRow.Index

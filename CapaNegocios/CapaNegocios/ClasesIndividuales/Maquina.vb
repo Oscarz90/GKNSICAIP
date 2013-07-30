@@ -16,7 +16,11 @@ Public Class Maquina
                     Me.vcve_linea = rDatos("cve_linea")
                     Me.vclave_maquina = rDatos("clave_maquina")
                     Me.vmaquina = rDatos("maquina")
-                    Me.vEstatus = rDatos("Estatus")
+                    If Not IsDBNull(rDatos("Estatus")) Then
+                        Me.vEstatus = rDatos("Estatus")
+                    Else
+                        Me.vEstatus = ""
+                    End If
                 End If
             End If
         Catch ex As Exception
@@ -25,7 +29,18 @@ Public Class Maquina
     End Sub
 
     Public Sub Eliminar() Implements IIndividual.Eliminar
-
+        'If Usuario.ChecaPermisoTarea("TELEFONO.ELIMINAR") Then
+        Try
+            oBD.EjecutarQuery("UPDATE Maquina SET Estatus='0' WHERE cve_maquina=" & Me.cve_maquina)
+            'Dim oBitacora As Bitacora = Bitacora.ObtenInstancia
+            'oBitacora.RegistrarEnBitacora("Telefono.ELIMINAR", "Se eliminó el Teléfono: " & Me.m_Telefono_Id)
+        Catch ex As Exception
+            'Tiene relacion con otras partes del sistema
+            'Throw New CustomException(Errores.Eliminar)
+        End Try
+        'Else
+        'Throw New CustomException(Errores.Permiso)
+        'End If
     End Sub
     Dim vId As Long
     Public Property Id As Long Implements IIndividual.Id

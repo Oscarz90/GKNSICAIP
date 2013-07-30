@@ -36,7 +36,13 @@ Public Class frmLinea
     End Sub
 
     Private Sub btnDarBaja_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnDarBaja.Click
+        If MsgBox("¿Esta seguro de Dar de Baja la Linea?", MsgBoxStyle.YesNo, Me.Text) = MsgBoxResult.Yes Then
+            Try
+                oLinea.Eliminar()
+            Catch ex As Exception
 
+            End Try
+        End If
     End Sub
 
     Private Sub btnRegistrar_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnRegistrar.Click
