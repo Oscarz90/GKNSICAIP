@@ -1342,6 +1342,10 @@ Public Class frmProduccion
 
 #End Region
 #Region "Funciones para modulo Productividad"
+    'Metodo Enviar notificaciones de sobreproduccion
+    Private Sub envia_notificacion_sobreproduccion()
+
+    End Sub
     'Registra Productividad
     Private Sub add_productividad()
         Dim oProductividad As New Productividad
@@ -1372,7 +1376,6 @@ Public Class frmProduccion
         oCalidad.nrfti = Convert.ToDouble(lblNRFTi.Text)
         oCalidad.Registrar()
     End Sub
-
     'Productividad
     Private Sub add_modelo_producido()
         Dim oProduccion As New Produccion
@@ -1977,7 +1980,4 @@ Public Class frmProduccion
         frmGraficas.Dispose()
     End Sub
 #End Region
-
-    
-
 End Class
