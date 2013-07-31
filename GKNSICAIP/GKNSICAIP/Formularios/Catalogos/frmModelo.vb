@@ -36,7 +36,13 @@ Public Class frmModelo
     End Sub
 
     Private Sub btnDarBaja_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnDarBaja.Click
+        If MsgBox("¿Esta seguro de Dar de Baja el Modelo?", MsgBoxStyle.YesNo, Me.Text) = MsgBoxResult.Yes Then
+            Try
+                oModelo.Eliminar()
+            Catch ex As Exception
 
+            End Try
+        End If
     End Sub
 
     Private Sub btnModificar_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnModificar.Click

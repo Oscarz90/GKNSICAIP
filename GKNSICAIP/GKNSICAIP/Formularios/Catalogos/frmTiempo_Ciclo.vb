@@ -98,13 +98,10 @@ Public Class frmTiempo_Ciclo
         If Convert.ToInt64(vId_Publico) <> 0 Then
             oTiempo_Ciclo = New TC
             oTiempo_Ciclo_A_MODIFICAR = New TC
-
             oTiempo_Ciclo.cve_TC = vId_Publico
             oTiempo_Ciclo_A_MODIFICAR.cve_TC = vId_Publico
-
             oTiempo_Ciclo.Cargar()
             oTiempo_Ciclo_A_MODIFICAR.Cargar()
-
             Controles_Registro_Nuevo(False)
         Else
             oTiempo_Ciclo = New TC
@@ -113,10 +110,13 @@ Public Class frmTiempo_Ciclo
             vEmpleado = "Prueba"
             oTiempo_Ciclo.Codigo_Empleado = vEmpleado
             Controles_Registro_Nuevo(True)
-            btnRegistrar.Enabled = False
+            'btnRegistrar.Visible = True
+            'btnRegistrar.Enabled = True
         End If
         SetBindings()
         Me.Show()
+        btnRegistrar.Visible = True
+        btnRegistrar.Enabled = True
         Me.nudPiezas_Hora.Focus()
     End Sub
 
