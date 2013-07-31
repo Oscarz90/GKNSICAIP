@@ -1388,7 +1388,7 @@ Public Class frmProduccion
     Private Sub get_body_notificacion(ByVal desempeno As Double)
         body_notificacion = Nothing
         body_notificacion = "Buen día." & vbCrLf & vbCrLf
-        body_notificacion += "Se detectó un incremento en el Desempeño de la linea" & cbxLinea.Text & " de " & desempeno & "%" & vbCrLf & vbCrLf
+        body_notificacion += "Se detectó un incremento en el Desempeño de la linea: " & cbxLinea.Text & " de " & desempeno & "%" & vbCrLf & vbCrLf
         body_notificacion += "Detalle del incremento: " & vbCrLf & "-Modelo: " & cbxModeloProductividad.Text & " - " & txtModeloDescripcionProductividad.Text & vbCrLf & "-Pzas.Programadas: " & txtPzasPorHora.Text & vbCrLf
         body_notificacion += "-Pzas. Reales: " & txtPiezasOkProducidas.Text & vbCrLf & "-Nombre del Equipo: " & lblNombreEquipo.Text & vbCrLf & "-Nombre del Empleado: " & lblNombreEmpleado.Text & vbCrLf
         body_notificacion += "-Codigo del Empleado: " & lblCodigoEmpleado.Text & vbCrLf & "-Fecha del Registro: " & Now.ToString("dd-MM-yyyy HH:mm") & vbCrLf & vbCrLf
