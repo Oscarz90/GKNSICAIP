@@ -1,4 +1,6 @@
 ﻿Imports CapaNegocios
+Imports System.Threading
+
 Public Class frmProduccion
 #Region "Atributos"
     'Globales
@@ -22,6 +24,8 @@ Public Class frmProduccion
     'Fecha inicio y termino del turno
     Dim ini_aux As DateTime
     Dim fin_aux As DateTime
+    'Notificaciones
+    Dim body_notificacion As String
 #End Region
 #Region "Propiedades"
     Public Property cve_registro_turno() As Long
@@ -60,7 +64,7 @@ Public Class frmProduccion
         llena_lineas_Si_gridview()
         'General
         llena_cbx_Turnos()
-        llena_cbx_Lineas()        
+        llena_cbx_Lineas()
         'CDM
         contenedor_CDM = New CDM_Class
         contenedor_CDM.set_not_used()
@@ -145,6 +149,12 @@ Public Class frmProduccion
             ElseIf desempeno < 0 Then
                 lblDesempeno.Text = "0.00"
             Else
+                If cbxModeloProductividad.SelectedIndex <> -1 Then
+                    'MsgBox("Entre a enviar email")
+                    get_body_notificacion(desempeno)
+                    Dim newThread As New System.Threading.Thread(AddressOf envia_notificacion_sobreproduccion)
+                    newThread.Start()
+                End If
                 lblDesempeno.Text = "100.00"
             End If
         Else
@@ -439,10 +449,10 @@ Public Class frmProduccion
                 End If
 
 
-                
+
             End If
         End If
-       
+
     End Sub
     'Productividad
     Private Sub cbxModeloProductividad_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cbxModeloProductividad.SelectedIndexChanged
@@ -572,14 +582,14 @@ Public Class frmProduccion
 
         'valida_botones_cinco_s()
         calcula_promedio_cinco_S()
-        
+
 
     End Sub
     Private Sub txt5s_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles txt5s.TextChanged
 
         'valida_botones_cinco_s()
         calcula_promedio_cinco_S()
-      
+
 
     End Sub
 
@@ -599,9 +609,9 @@ Public Class frmProduccion
         If valida_hora_de_captura(Now.ToString("dd-MM-yyyy HH:mm:ss")) Then
             If se_puede_añadir_produccion(Convert.ToInt64(txtTiempoOperacion.Text)) Then
                 add_modelo_producido()
-                limpia_productividad()
                 llena_productividad_gridview()
                 calcula_Productividad()
+                limpia_productividad()
                 calcula_NRFTI()
                 add_productividad()
                 add_Nrfti()
@@ -773,7 +783,7 @@ Public Class frmProduccion
         Else
             limpia_descanso()
             MsgBox("¡Solo puedes registrar descansos con fecha a partir del dia de hoy!", vbExclamation, "Error")
-        End If 
+        End If
     End Sub
     Private Sub btnQuitarDescanso_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnQuitarDescanso.Click
 
@@ -1160,7 +1170,7 @@ Public Class frmProduccion
             cbxLinea.SelectedIndex = -1
             cbxTurno.SelectedIndex = -1
         End If
-        
+
         lblFechaRegistro.Visible = False
         lblFechaRegistrodescripcion.Visible = False
         grdDetalleProductividad.DataSource = Nothing
@@ -1342,10 +1352,50 @@ Public Class frmProduccion
 
 #End Region
 #Region "Funciones para modulo Productividad"
-    'Metodo Enviar notificaciones de sobreproduccion
-    Private Sub envia_notificacion_sobreproduccion()
+    'hilos
 
+
+
+
+    'Metodo Enviar notificaciones de sobreproduccion
+    Private Sub envia_notificacion_sobreproduccion(ByVal desempeno As Double)
+        'vbCrLf 
+        Dim Message As New System.Net.Mail.MailMessage()
+        Dim SMTP As New System.Net.Mail.SmtpClient
+        'CONFIGURACIÓN DEL STMP
+        SMTP.Credentials = New System.Net.NetworkCredential("iomsz90@gmail.com", "90111915")
+        SMTP.Host = "smtp.gmail.com"
+        SMTP.Port = 587
+        SMTP.EnableSsl = True
+
+        ' CONFIGURACION DEL MENSAJE
+        Message.[To].Add("omsz90@live.com.mx") 'Cuenta de Correo al que se le quiere enviar el e-mail
+        Message.From = New System.Net.Mail.MailAddress("omsz90@live.com.mx", "Oscar Martinez Sanchez", System.Text.Encoding.UTF8) 'Quien lo envía
+        Message.Subject = "Notificacion sobreproduccion" 'Sujeto del e-mail
+        Message.SubjectEncoding = System.Text.Encoding.UTF8 'Codificacion
+        Message.Body = body_notificacion 'contenido del mail
+        Message.BodyEncoding = System.Text.Encoding.UTF8
+        Message.Priority = System.Net.Mail.MailPriority.Normal
+        '_Message.IsBodyHtml = False
+        'ENVIO
+        Try
+            SMTP.Send(Message)
+            'MessageBox.Show("Mensaje enviado correctamene", "Exito!", MessageBoxButtons.OK)
+        Catch ex As System.Net.Mail.SmtpException
+            MessageBox.Show(ex.ToString, "Error al enviar email!", MessageBoxButtons.OK)
+        End Try
     End Sub
+    Private Sub get_body_notificacion(ByVal desempeno As Double)
+        body_notificacion = Nothing
+        body_notificacion = "Buen día." & vbCrLf & vbCrLf
+        body_notificacion += "Se detectó un incremento en el Desempeño de la linea" & cbxLinea.Text & " de " & desempeno & "%" & vbCrLf & vbCrLf
+        body_notificacion += "Detalle del incremento: " & vbCrLf & "-Modelo: " & cbxModeloProductividad.Text & " - " & txtModeloDescripcionProductividad.Text & vbCrLf & "-Pzas.Programadas: " & txtPzasPorHora.Text & vbCrLf
+        body_notificacion += "-Pzas. Reales: " & txtPiezasOkProducidas.Text & vbCrLf & "-Nombre del Equipo: " & lblNombreEquipo.Text & vbCrLf & "-Nombre del Empleado: " & lblNombreEmpleado.Text & vbCrLf
+        body_notificacion += "-Codigo del Empleado: " & lblCodigoEmpleado.Text & vbCrLf & "-Fecha del Registro: " & Now.ToString("dd-MM-yyyy HH:mm") & vbCrLf & vbCrLf
+        body_notificacion += "Este documento es informativo para que se realice el análisis pertinente, y si es necesario hacer alguna actualización se reporta de manera oportuna con la persona correspondiente." & vbCrLf & vbCrLf
+        body_notificacion += "SISTEMA SICAIP v2.0"
+    End Sub
+
     'Registra Productividad
     Private Sub add_productividad()
         Dim oProductividad As New Productividad
@@ -1768,7 +1818,7 @@ Public Class frmProduccion
         Dim line_aux As Long = grdLineasNoRegistradas.Item("col_cve_linea", grdLineasNoRegistradas.CurrentRow.Index).Value
         Dim nom_aux As String = grdLineasNoRegistradas.Item("collinea", grdLineasNoRegistradas.CurrentRow.Index).Value
         If valida_registro_linea() Then
-            If verifica_registro_turno(line_aux, obten_dia_asignado_registro_turno()) Then                
+            If verifica_registro_turno(line_aux, obten_dia_asignado_registro_turno()) Then
                 If MsgBox("¿Estas seguro que el horario para la linea: " & nom_aux & " es " & cbxTurnosLineas.Text & "?. Una vez registrado ya no lo podrás modificar.", vbQuestion + vbYesNo, "Confirmación") = vbYes Then
                     'MsgBox("Registro exitoso", vbOKOnly, "Aviso")
                     Registra_Turno_Linea(line_aux)
