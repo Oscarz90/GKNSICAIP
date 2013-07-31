@@ -16,6 +16,11 @@ Public Class Maquina
                     Me.vcve_linea = rDatos("cve_linea")
                     Me.vclave_maquina = rDatos("clave_maquina")
                     Me.vmaquina = rDatos("maquina")
+                    If Not IsDBNull(rDatos("Estatus")) Then
+                        Me.vEstatus = rDatos("Estatus")
+                    Else
+                        Me.vEstatus = ""
+                    End If
                 End If
             End If
         Catch ex As Exception
@@ -24,7 +29,18 @@ Public Class Maquina
     End Sub
 
     Public Sub Eliminar() Implements IIndividual.Eliminar
-
+        'If Usuario.ChecaPermisoTarea("TELEFONO.ELIMINAR") Then
+        Try
+            oBD.EjecutarQuery("UPDATE Maquina SET Estatus='0' WHERE cve_maquina=" & Me.cve_maquina)
+            'Dim oBitacora As Bitacora = Bitacora.ObtenInstancia
+            'oBitacora.RegistrarEnBitacora("Telefono.ELIMINAR", "Se eliminó el Teléfono: " & Me.m_Telefono_Id)
+        Catch ex As Exception
+            'Tiene relacion con otras partes del sistema
+            'Throw New CustomException(Errores.Eliminar)
+        End Try
+        'Else
+        'Throw New CustomException(Errores.Permiso)
+        'End If
     End Sub
     Dim vId As Long
     Public Property Id As Long Implements IIndividual.Id
@@ -52,6 +68,7 @@ Public Class Maquina
                     .Add("cve_linea", SqlDbType.BigInt).Value = Me.vcve_linea
                     .Add("clave_maquina", SqlDbType.VarChar).Value = Me.vclave_maquina
                     .Add("maquina", SqlDbType.VarChar).Value = Me.vmaquina
+                    .Add("Estatus", SqlDbType.VarChar).Value = Me.vEstatus
                 End With
 
                 Dim obj As DataTable = oBD.EjecutaCommando(cmd)
@@ -105,6 +122,23 @@ Public Class Maquina
             vmaquina = value
         End Set
     End Property
+    Private vEstatus As String
+    Public Property Estatus() As String
+        Get
+            If vEstatus = "1" Then
+                Return "ACTIVO"
+            ElseIf vEstatus = "0" Then
+                Return "INACTIVO"
+            Else
+                Return ""
+            End If
+            Return vEstatus
+        End Get
+        Set(ByVal value As String)
+            vEstatus = value
+        End Set
+    End Property
+
 
     Public ReadOnly Property Nombre_Linea() As String
         Get

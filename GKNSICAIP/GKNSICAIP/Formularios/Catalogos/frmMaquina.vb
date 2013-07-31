@@ -34,7 +34,13 @@ Public Class frmMaquina
     End Sub
 
     Private Sub btnDar_Baja_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnDar_Baja.Click
+        If MsgBox("¿Esta seguro de Dar de Baja la Maquina?", MsgBoxStyle.YesNo, Me.Text) = MsgBoxResult.Yes Then
+            Try
+                oMaquina.Eliminar()
+            Catch ex As Exception
 
+            End Try
+        End If
     End Sub
 
     Private Sub btnRegistrar_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnRegistrar.Click

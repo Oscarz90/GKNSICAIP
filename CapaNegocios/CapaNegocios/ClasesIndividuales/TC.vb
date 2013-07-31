@@ -8,7 +8,35 @@ Public Class TC
 
 #Region "IIndividual"
     Public Sub Cargar() Implements IIndividual.Cargar
-
+        Dim rDatos As DataRow = Nothing
+        Try
+            rDatos = oBD.ObtenerRenglon("SELECT * FROM TC WHERE cve_TC=" & vcve_TC, "TC")
+            If rDatos IsNot Nothing Then
+                If rDatos("cve_TC") IsNot DBNull.Value Then
+                    Me.vcve_TC = rDatos("cve_TC")
+                    Me.vpiezas_por_hora = rDatos("piezas_por_hora")
+                    Me.vcve_linea = rDatos("cve_linea")
+                    Me.vcve_modelo = rDatos("cve_modelo")
+                    If rDatos("cod_empleado") IsNot DBNull.Value Then
+                        Me.vCodigo_Empleado = rDatos("cod_empleado")
+                    Else
+                        Me.vCodigo_Empleado = ""
+                    End If
+                    If rDatos("fecha") IsNot DBNull.Value Then
+                        Me.vFecha = rDatos("fecha")
+                    Else
+                        Me.vFecha = Date.Now
+                    End If
+                    If rDatos("estatus") IsNot DBNull.Value Then
+                        Me.vEstatus = rDatos("estatus")
+                    Else
+                        Me.vEstatus = ""
+                    End If
+                End If
+            End If
+        Catch ex As Exception
+            Throw New Exception(ex.Message)
+        End Try
     End Sub
 
     Public Sub Eliminar() Implements IIndividual.Eliminar
@@ -58,6 +86,8 @@ Public Class TC
     Private vcve_linea As Long
     Private vcve_modelo As Long
     Private vEstatus As String
+    Private vFecha As DateTime
+    Private vCodigo_Empleado As String
 #End Region
 #Region "Propiedades"
     Public Property cve_TC() As Long
@@ -93,19 +123,20 @@ Public Class TC
         End Set
     End Property
 
-
-
     Public Property Estatus() As String
         Get
-            Return vEstatus
+            If vEstatus = "0" Then
+                Return "INACTIVO"
+            ElseIf vEstatus = "1" Then
+                Return "ACTIVO"
+            Else
+                Return ""
+            End If
         End Get
         Set(ByVal value As String)
             vEstatus = value
         End Set
-    End Property
-
-
-    Private vFecha As DateTime
+    End Property    
     Public Property Fecha() As DateTime
         Get
             Return vFecha
@@ -114,9 +145,6 @@ Public Class TC
             vFecha = value
         End Set
     End Property
-
-
-    Private vCodigo_Empleado As String
     Public Property Codigo_Empleado() As String
         Get
             Return vCodigo_Empleado
@@ -125,10 +153,6 @@ Public Class TC
             vCodigo_Empleado = value
         End Set
     End Property
-
-
-
-
     Public ReadOnly Property Nombre_Linea() As String
         Get
             If cve_linea <> 0 Then
@@ -141,7 +165,6 @@ Public Class TC
             End If
         End Get
     End Property
-
     Public ReadOnly Property Nombre_Modelo() As String
         Get
             If cve_modelo <> 0 Then
@@ -154,7 +177,6 @@ Public Class TC
             End If
         End Get
     End Property
-
 #End Region
 
     Sub New()
@@ -163,6 +185,29 @@ Public Class TC
 
 
 #Region "Metodos Generales"
+
+    Public Function Validar_Exixtencia_LINEA_MODELO_EN_TC(ByVal vID_Linea As Long, ByVal vID_Modelo As Long) As Boolean
+        Dim vRetorno As Boolean = False
+        Dim vDT As DataTable
+        vDT = oBD.ObtenerTabla("SELECT cve_TC FROM TC WHERE estatus !='IN' and cve_linea=" & vID_Linea & " AND cve_modelo=" & vID_Modelo)
+        If vDT.Rows.Count > 0 Then
+            vRetorno = True
+        Else
+            vRetorno = False
+        End If
+        Return vRetorno
+    End Function
+
+    Public Sub Cargar_TC(ByVal vID_Linea As Long, ByVal vID_Modelo As Long)
+        Dim rDatos As DataRow
+        rDatos = oBD.ObtenerRenglon("SELECT cve_TC FROM TC WHERE estatus !='IN' and cve_linea=" & vID_Linea & " AND cve_modelo=" & vID_Modelo, "TC")
+        If rDatos IsNot Nothing Then
+            vcve_TC = rDatos("cve_TC")
+            Cargar()
+        Else
+
+        End If
+    End Sub
 
 #End Region
 

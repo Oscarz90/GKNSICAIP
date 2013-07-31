@@ -37,15 +37,13 @@ Partial Class frmTiempo_Ciclo
         Me.txtEstatus = New System.Windows.Forms.TextBox()
         Me.txtEmpleado = New System.Windows.Forms.TextBox()
         Me.btnRegistrar = New System.Windows.Forms.Button()
-        Me.btnModificar = New System.Windows.Forms.Button()
         Me.btnSalir = New System.Windows.Forms.Button()
         Me.btnValidar = New System.Windows.Forms.Button()
         Me.lbValidar = New System.Windows.Forms.Label()
         Me.Panel1 = New System.Windows.Forms.Panel()
+        Me.Label7 = New System.Windows.Forms.Label()
         Me.titulo_banner_formulario = New System.Windows.Forms.Label()
         Me.banner_formulario = New System.Windows.Forms.PictureBox()
-        Me.Label7 = New System.Windows.Forms.Label()
-        Me.btnValidar_Modelo_Linea_En_TC = New System.Windows.Forms.Button()
         CType(Me.nudPiezas_Hora, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.Panel1.SuspendLayout()
         CType(Me.banner_formulario, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -180,15 +178,6 @@ Partial Class frmTiempo_Ciclo
         Me.btnRegistrar.Text = "Registrar"
         Me.btnRegistrar.UseVisualStyleBackColor = True
         '
-        'btnModificar
-        '
-        Me.btnModificar.Location = New System.Drawing.Point(248, 384)
-        Me.btnModificar.Name = "btnModificar"
-        Me.btnModificar.Size = New System.Drawing.Size(75, 23)
-        Me.btnModificar.TabIndex = 15
-        Me.btnModificar.Text = "Modificar"
-        Me.btnModificar.UseVisualStyleBackColor = True
-        '
         'btnSalir
         '
         Me.btnSalir.Location = New System.Drawing.Point(329, 384)
@@ -200,7 +189,8 @@ Partial Class frmTiempo_Ciclo
         '
         'btnValidar
         '
-        Me.btnValidar.Location = New System.Drawing.Point(15, 206)
+        Me.btnValidar.Enabled = False
+        Me.btnValidar.Location = New System.Drawing.Point(12, 222)
         Me.btnValidar.Name = "btnValidar"
         Me.btnValidar.Size = New System.Drawing.Size(384, 23)
         Me.btnValidar.TabIndex = 18
@@ -220,12 +210,10 @@ Partial Class frmTiempo_Ciclo
         'Panel1
         '
         Me.Panel1.BackColor = System.Drawing.Color.White
-        Me.Panel1.Controls.Add(Me.btnValidar_Modelo_Linea_En_TC)
         Me.Panel1.Controls.Add(Me.Label7)
         Me.Panel1.Controls.Add(Me.titulo_banner_formulario)
         Me.Panel1.Controls.Add(Me.btnSalir)
         Me.Panel1.Controls.Add(Me.banner_formulario)
-        Me.Panel1.Controls.Add(Me.btnModificar)
         Me.Panel1.Controls.Add(Me.nudPiezas_Hora)
         Me.Panel1.Controls.Add(Me.btnRegistrar)
         Me.Panel1.Controls.Add(Me.lbValidar)
@@ -250,6 +238,15 @@ Partial Class frmTiempo_Ciclo
         Me.Panel1.Size = New System.Drawing.Size(418, 421)
         Me.Panel1.TabIndex = 20
         '
+        'Label7
+        '
+        Me.Label7.AutoSize = True
+        Me.Label7.Location = New System.Drawing.Point(133, 206)
+        Me.Label7.Name = "Label7"
+        Me.Label7.Size = New System.Drawing.Size(146, 13)
+        Me.Label7.TabIndex = 112
+        Me.Label7.Text = "Validar Modelo y Linea en TC"
+        '
         'titulo_banner_formulario
         '
         Me.titulo_banner_formulario.AutoSize = True
@@ -272,24 +269,6 @@ Partial Class frmTiempo_Ciclo
         Me.banner_formulario.Size = New System.Drawing.Size(418, 44)
         Me.banner_formulario.TabIndex = 110
         Me.banner_formulario.TabStop = False
-        '
-        'Label7
-        '
-        Me.Label7.AutoSize = True
-        Me.Label7.Location = New System.Drawing.Point(133, 232)
-        Me.Label7.Name = "Label7"
-        Me.Label7.Size = New System.Drawing.Size(146, 13)
-        Me.Label7.TabIndex = 112
-        Me.Label7.Text = "Validar Modelo y Linea en TC"
-        '
-        'btnValidar_Modelo_Linea_En_TC
-        '
-        Me.btnValidar_Modelo_Linea_En_TC.Location = New System.Drawing.Point(15, 248)
-        Me.btnValidar_Modelo_Linea_En_TC.Name = "btnValidar_Modelo_Linea_En_TC"
-        Me.btnValidar_Modelo_Linea_En_TC.Size = New System.Drawing.Size(384, 23)
-        Me.btnValidar_Modelo_Linea_En_TC.TabIndex = 113
-        Me.btnValidar_Modelo_Linea_En_TC.Text = "Validar"
-        Me.btnValidar_Modelo_Linea_En_TC.UseVisualStyleBackColor = True
         '
         'frmTiempo_Ciclo
         '
@@ -322,13 +301,11 @@ Partial Class frmTiempo_Ciclo
     Friend WithEvents txtEstatus As System.Windows.Forms.TextBox
     Friend WithEvents txtEmpleado As System.Windows.Forms.TextBox
     Friend WithEvents btnRegistrar As System.Windows.Forms.Button
-    Friend WithEvents btnModificar As System.Windows.Forms.Button
     Friend WithEvents btnSalir As System.Windows.Forms.Button
     Friend WithEvents btnValidar As System.Windows.Forms.Button
     Friend WithEvents lbValidar As System.Windows.Forms.Label
     Friend WithEvents Panel1 As System.Windows.Forms.Panel
     Friend WithEvents banner_formulario As System.Windows.Forms.PictureBox
     Friend WithEvents titulo_banner_formulario As System.Windows.Forms.Label
-    Friend WithEvents btnValidar_Modelo_Linea_En_TC As System.Windows.Forms.Button
     Friend WithEvents Label7 As System.Windows.Forms.Label
 End Class
