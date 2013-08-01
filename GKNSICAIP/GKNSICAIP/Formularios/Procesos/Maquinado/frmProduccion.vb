@@ -26,6 +26,7 @@ Public Class frmProduccion
     Dim fin_aux As DateTime
     'Notificaciones
     Dim body_notificacion As String
+    Dim subject_notificacion As String
 #End Region
 #Region "Propiedades"
     Public Property cve_registro_turno() As Long
@@ -1352,11 +1353,6 @@ Public Class frmProduccion
 
 #End Region
 #Region "Funciones para modulo Productividad"
-    'hilos
-
-
-
-
     'Metodo Enviar notificaciones de sobreproduccion
     Private Sub envia_notificacion_sobreproduccion(ByVal desempeno As Double)
         'vbCrLf 
@@ -1367,16 +1363,15 @@ Public Class frmProduccion
         SMTP.Host = "smtp.gmail.com"
         SMTP.Port = 587
         SMTP.EnableSsl = True
-
         ' CONFIGURACION DEL MENSAJE
         Message.[To].Add("omsz90@live.com.mx") 'Cuenta de Correo al que se le quiere enviar el e-mail
         Message.From = New System.Net.Mail.MailAddress("omsz90@live.com.mx", "Oscar Martinez Sanchez", System.Text.Encoding.UTF8) 'Quien lo envía
-        Message.Subject = "Notificacion sobreproduccion" 'Sujeto del e-mail
+        Message.Subject = subject_notificacion 'Sujeto del e-mail
         Message.SubjectEncoding = System.Text.Encoding.UTF8 'Codificacion
         Message.Body = body_notificacion 'contenido del mail
         Message.BodyEncoding = System.Text.Encoding.UTF8
         Message.Priority = System.Net.Mail.MailPriority.Normal
-        '_Message.IsBodyHtml = False
+        Message.IsBodyHtml = False
         'ENVIO
         Try
             SMTP.Send(Message)
@@ -1394,6 +1389,8 @@ Public Class frmProduccion
         body_notificacion += "-Codigo del Empleado: " & lblCodigoEmpleado.Text & vbCrLf & "-Fecha del Registro: " & Now.ToString("dd-MM-yyyy HH:mm") & vbCrLf & vbCrLf
         body_notificacion += "Este documento es informativo para que se realice el análisis pertinente, y si es necesario hacer alguna actualización se reporta de manera oportuna con la persona correspondiente." & vbCrLf & vbCrLf
         body_notificacion += "SISTEMA SICAIP v2.0"
+
+        subject_notificacion = "Incremento el Desempeño de la Linea " & cbxLinea.Text & " . Equipo: " & lblNombreEquipo.Text & ". Desempeño: " & desempeno
     End Sub
 
     'Registra Productividad
