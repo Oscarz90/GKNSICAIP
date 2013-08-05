@@ -1377,7 +1377,7 @@ Public Class frmProduccion
             SMTP.Send(Message)
             'MessageBox.Show("Mensaje enviado correctamene", "Exito!", MessageBoxButtons.OK)
         Catch ex As System.Net.Mail.SmtpException
-            MessageBox.Show(ex.ToString, "Error al enviar email!", MessageBoxButtons.OK)
+            'MessageBox.Show(ex.ToString, "Error al enviar email!", MessageBoxButtons.OK)
         End Try
     End Sub
     Private Sub get_body_notificacion(ByVal desempeno As Double)
