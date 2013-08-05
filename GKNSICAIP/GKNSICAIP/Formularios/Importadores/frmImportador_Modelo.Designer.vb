@@ -42,8 +42,8 @@ Partial Class frmImportador_Modelo
         Me.Label2 = New System.Windows.Forms.Label()
         Me.btnNuevo = New System.Windows.Forms.Button()
         Me.Panel1 = New System.Windows.Forms.Panel()
-        Me.titulo_banner_formulario = New System.Windows.Forms.Label()
         Me.banner_formulario = New System.Windows.Forms.PictureBox()
+        Me.titulo_banner_formulario = New System.Windows.Forms.Label()
         CType(Me.dgvDatos, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.Panel1.SuspendLayout()
         CType(Me.banner_formulario, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -239,6 +239,17 @@ Partial Class frmImportador_Modelo
         Me.Panel1.Size = New System.Drawing.Size(399, 454)
         Me.Panel1.TabIndex = 10
         '
+        'banner_formulario
+        '
+        Me.banner_formulario.BackColor = System.Drawing.Color.Transparent
+        Me.banner_formulario.BackgroundImage = Global.GKNSICAIP.My.Resources.Resources.banner_03
+        Me.banner_formulario.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
+        Me.banner_formulario.Location = New System.Drawing.Point(0, 0)
+        Me.banner_formulario.Name = "banner_formulario"
+        Me.banner_formulario.Size = New System.Drawing.Size(396, 44)
+        Me.banner_formulario.TabIndex = 111
+        Me.banner_formulario.TabStop = False
+        '
         'titulo_banner_formulario
         '
         Me.titulo_banner_formulario.AutoSize = True
@@ -250,17 +261,6 @@ Partial Class frmImportador_Modelo
         Me.titulo_banner_formulario.Size = New System.Drawing.Size(213, 32)
         Me.titulo_banner_formulario.TabIndex = 112
         Me.titulo_banner_formulario.Text = "Importar Modelo"
-        '
-        'banner_formulario
-        '
-        Me.banner_formulario.BackColor = System.Drawing.Color.Transparent
-        Me.banner_formulario.BackgroundImage = Global.GKNSICAIP.My.Resources.Resources.banner_03
-        Me.banner_formulario.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
-        Me.banner_formulario.Location = New System.Drawing.Point(0, 0)
-        Me.banner_formulario.Name = "banner_formulario"
-        Me.banner_formulario.Size = New System.Drawing.Size(396, 44)
-        Me.banner_formulario.TabIndex = 111
-        Me.banner_formulario.TabStop = False
         '
         'frmImportador_Modelo
         '
