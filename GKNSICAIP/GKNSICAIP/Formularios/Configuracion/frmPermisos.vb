@@ -1,3 +1,3 @@
-﻿Public Class frmPermisos
+﻿Public Class FrmPermisos
 
 End Class
