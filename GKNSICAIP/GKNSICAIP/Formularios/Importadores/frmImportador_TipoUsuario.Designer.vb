@@ -76,6 +76,7 @@ Partial Class FrmImportador_TipoUsuario
         '
         Me.dgvDatos.Location = New System.Drawing.Point(11, 62)
         Me.dgvDatos.Name = "dgvDatos"
+        Me.dgvDatos.ReadOnly = True
         Me.dgvDatos.Size = New System.Drawing.Size(281, 316)
         Me.dgvDatos.TabIndex = 123
         Me.dgvDatos.Text = "RadGridView1"

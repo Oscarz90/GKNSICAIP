@@ -72,7 +72,7 @@ Public Class SEGURIDAD_USUARIO
             Try
                 Dim cmd As New SqlClient.SqlCommand
                 cmd.CommandType = CommandType.StoredProcedure
-                cmd.CommandText = "REGISTRAR_USUARIO"
+                cmd.CommandText = "REGISTRAR_SEGURIDAD_USUARIO"
 
                 With cmd.Parameters
                     .Add("CVE_Usuario", SqlDbType.BigInt).Value = Me.vCVE_Usuario
@@ -158,15 +158,126 @@ Public Class SEGURIDAD_USUARIO
     Public ReadOnly Property Descripcion_Tipo_Usuario() As String
         Get
             If vCVE_TIPO_USUARIO <> 0 Then
+                oTipo_Usuario = New Tipo_Usuario
                 oTipo_Usuario.CVE_Tipo_Usuario = vCVE_TIPO_USUARIO
                 oTipo_Usuario.Cargar()
                 Return oTipo_Usuario.Nombre_Tipo_Usuario
             Else
                 Return ""
-            End If            
+            End If
         End Get
     End Property
 
 
 #End Region
+
+#Region "Metodos Generales"
+
+    Public Function Obtener_TIPOS_USUARIOS() As DataTable
+        Dim vRetorno As DataTable
+        Try
+            vRetorno = oBD.ObtenerTabla("SELECT * FROM SEGURIDAD_TIPO_USUARIO")
+            If vRetorno.Rows.Count = 0 Then
+                vRetorno = Nothing
+            End If
+        Catch ex As Exception
+            vRetorno = Nothing
+        End Try
+        Return vRetorno
+    End Function
+
+    Public Function Obtener_USUARIOS(ByVal vCVE_TIPO_USUARIO As Long) As DataTable
+        Dim vRetorno As DataTable
+        Try
+            vRetorno = oBD.ObtenerTabla("SELECT * FROM SEGURIDAD_USUARIO WHERE CVE_TIPO_USUARIO=" & vCVE_TIPO_USUARIO)
+            If vRetorno.Rows.Count = 0 Then
+                vRetorno = Nothing
+            End If
+        Catch ex As Exception
+            vRetorno = Nothing
+        End Try
+        Return vRetorno
+    End Function
+
+    Public Function Obtener_Arbol_Usuarios() As DataTable        
+        Dim vDT As DataTable = New DataTable("USUARIOS")
+        Crear_Tabla_Arbol(vDT)
+
+        Dim vIdetificador_Nodo As Integer = 1
+        Dim vIdetificador_Padre As Integer = 1
+
+        For Each vDR_Tipos As DataRow In Obtener_TIPOS_USUARIOS.Rows
+            Dim vDR_Nuevo As DataRow
+            vDR_Nuevo = vDT.NewRow
+            vDR_Nuevo("NombreNodo") = vDR_Tipos("Nombre_Tipo_Usuario")
+            vDR_Nuevo("IdentificadorNodo") = vIdetificador_Nodo
+            vDR_Nuevo("IdentificadorPadre") = 0
+            vDR_Nuevo("CVE_TABLA") = vDR_Tipos("CVE_Tipo_Usuario") & ".TU"
+
+            ''Inserta el Tipo de Usuario
+            vDT.Rows.Add(vDR_Nuevo)
+
+            vIdetificador_Padre = vDR_Nuevo("IdentificadorNodo")
+
+            For Each vDR_USUARIOS As DataRow In Obtener_USUARIOS(vDR_Tipos("CVE_Tipo_Usuario")).Rows
+                ''Incrementa el Identificador del Nodo
+                vIdetificador_Nodo = vIdetificador_Nodo + 1
+
+                Dim vDR_Nuevo_USUARIO As DataRow
+                vDR_Nuevo_USUARIO = vDT.NewRow
+
+                vDR_Nuevo_USUARIO("NombreNodo") = vDR_USUARIOS("Id_Usuario")
+                vDR_Nuevo_USUARIO("IdentificadorNodo") = vIdetificador_Nodo
+                vDR_Nuevo_USUARIO("IdentificadorPadre") = vIdetificador_Padre
+                vDR_Nuevo_USUARIO("CVE_TABLA") = vDR_USUARIOS("CVE_Usuario") & ".U"
+                ''Inserta el Usuario
+                vDT.Rows.Add(vDR_Nuevo_USUARIO)
+            Next
+            ''Incrementa el Identificador del Nodo
+            vIdetificador_Nodo = vIdetificador_Nodo + 1
+        Next
+        Return vDT
+    End Function
+
+
+
+
+    Private Sub Crear_Tabla_Arbol(ByRef vDT As DataTable)
+        ' Create a DataColumn and set various properties. 
+        Dim column As DataColumn = New DataColumn
+        column.DataType = System.Type.GetType("System.String")
+        column.AllowDBNull = False
+        column.Caption = "NombreNodo"
+        column.ColumnName = "NombreNodo"
+        column.DefaultValue = ""
+
+        Dim vColumn2 As DataColumn = New DataColumn
+        vColumn2.DataType = System.Type.GetType("System.Int64")
+        vColumn2.AllowDBNull = False
+        vColumn2.Caption = "IdentificadorNodo"
+        vColumn2.ColumnName = "IdentificadorNodo"
+        vColumn2.DefaultValue = 0
+
+        Dim vColumn3 As DataColumn = New DataColumn
+        vColumn3.DataType = System.Type.GetType("System.Int64")
+        vColumn3.AllowDBNull = False
+        vColumn3.Caption = "IdentificadorPadre"
+        vColumn3.ColumnName = "IdentificadorPadre"
+        vColumn3.DefaultValue = 0
+
+        Dim vColumn4 As DataColumn = New DataColumn
+        vColumn4.DataType = System.Type.GetType("System.String")
+        vColumn4.AllowDBNull = False
+        vColumn4.Caption = "CVE_TABLA"
+        vColumn4.ColumnName = "CVE_TABLA"
+        vColumn4.DefaultValue = ""
+
+        ' Add the column to the table. 
+        vDT.Columns.Add(column)
+        vDT.Columns.Add(vColumn2)
+        vDT.Columns.Add(vColumn3)
+        vDT.Columns.Add(vColumn4)
+    End Sub
+#End Region
+
 End Class

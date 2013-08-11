@@ -104,4 +104,11 @@ Public Class FrmUsuarios
         End If
     End Sub
 
+    Private Sub txtId_Usuario_Validated(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles txtId_Usuario.Validated
+        Me.txtEmail.Text = txtId_Usuario.Text & "@gkndriveline.com"
+    End Sub
+
+    Private Sub txtEmail_Validated(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles txtEmail.Validated
+        Me.txtEmail.Text = txtId_Usuario.Text & "@gkndriveline.com"
+    End Sub
 End Class

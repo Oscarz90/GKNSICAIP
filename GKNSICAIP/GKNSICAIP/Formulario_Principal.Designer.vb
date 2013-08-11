@@ -60,7 +60,7 @@ Partial Class Formulario_Principal
         CType(Me, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
-        'RadRibbonBar3
+        'RadRibbonBar1
         '
         Me.RadRibbonBar1.CommandTabs.AddRange(New Telerik.WinControls.RadItem() {Me.RibbonTab1, Me.RibbonTab2, Me.RibbonTab3})
         Me.RadRibbonBar1.Location = New System.Drawing.Point(0, 0)

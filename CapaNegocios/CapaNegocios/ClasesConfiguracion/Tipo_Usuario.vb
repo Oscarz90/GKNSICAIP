@@ -1,4 +1,6 @@
 ﻿Imports CapaDatos
+Imports System.Data.SqlClient
+
 Public Class Tipo_Usuario
     Implements IIndividual
 
@@ -11,16 +13,16 @@ Public Class Tipo_Usuario
         Try
             rDatos = oBD.ObtenerRenglon("SELECT * FROM SEGURIDAD_TIPO_USUARIO WHERE CVE_Tipo_Usuario=" & vCVE_Tipo_Usuario, "SEGURIDAD_TIPO_USUARIO")
             If rDatos IsNot Nothing Then
-                    If Not IsDBNull(rDatos("CVE_Tipo_Usuario")) Then
-                        Me.vCVE_Tipo_Usuario = rDatos("CVE_Tipo_Usuario")
-                    Else
-                        Me.vCVE_Tipo_Usuario = 0
-                    End If
-                    If Not IsDBNull(rDatos("Nombre_Tipo_Usuario")) Then
-                        Me.vNombre_Tipo_Usuario = rDatos("Nombre_Tipo_Usuario")
-                    Else
-                        Me.vNombre_Tipo_Usuario = ""
-                    End If
+                If Not IsDBNull(rDatos("CVE_Tipo_Usuario")) Then
+                    Me.vCVE_Tipo_Usuario = rDatos("CVE_Tipo_Usuario")
+                Else
+                    Me.vCVE_Tipo_Usuario = 0
+                End If
+                If Not IsDBNull(rDatos("Nombre_Tipo_Usuario")) Then
+                    Me.vNombre_Tipo_Usuario = rDatos("Nombre_Tipo_Usuario")
+                Else
+                    Me.vNombre_Tipo_Usuario = ""
+                End If
             End If
         Catch ex As Exception
             Throw New Exception(ex.Message)
@@ -34,13 +36,14 @@ Public Class Tipo_Usuario
             'Dim oBitacora As Bitacora = Bitacora.ObtenInstancia
             'oBitacora.RegistrarEnBitacora("Telefono.ELIMINAR", "Se eliminó el Teléfono: " & Me.m_Telefono_Id)
         Catch ex As Exception
+            MsgBox("No se puede eliminar este registro, el Tipo de Usuario se encuentra asignado en un Usuario")
             'Tiene relacion con otras partes del sistema
             'Throw New CustomException(Errores.Eliminar)
         End Try
         'Else
         'Throw New CustomException(Errores.Permiso)
         'End If
-    End Sub   
+    End Sub
 
     Public Function Obtener_Id(ByVal vCadena As String) As Long Implements IIndividual.Obtener_Id
         Return 1
@@ -51,7 +54,7 @@ Public Class Tipo_Usuario
             Try
                 Dim cmd As New SqlClient.SqlCommand
                 cmd.CommandType = CommandType.StoredProcedure
-                cmd.CommandText = "REGISTRAR_TIPO_USUARIO"
+                cmd.CommandText = "REGISTRAR_SEGURIDAD_TIPO_USUARIO"
 
                 With cmd.Parameters
                     .Add("CVE_Tipo_Usuario", SqlDbType.BigInt).Value = Me.vCVE_Tipo_Usuario

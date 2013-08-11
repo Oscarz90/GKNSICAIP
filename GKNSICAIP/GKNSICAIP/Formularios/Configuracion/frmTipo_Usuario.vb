@@ -32,8 +32,7 @@ Public Class FrmTipo_Usuario
     Private Sub btnRegistrar_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnRegistrar.Click
         If MsgBox("¿Esta seguro de registrar el nuevo Tipo de Usuario?", MsgBoxStyle.YesNo, Me.Text) = MsgBoxResult.Yes Then
             oTipo_Usuario.CVE_Tipo_Usuario = 0
-            oTipo_Usuario.Nombre_Tipo_Usuario = txtDescripcion.Text
-           
+            oTipo_Usuario.Nombre_Tipo_Usuario = txtDescripcion.Text           
             Try
                 oTipo_Usuario.Registrar()
                 vId_Retorno = oTipo_Usuario.CVE_Tipo_Usuario
@@ -68,7 +67,7 @@ Public Class FrmTipo_Usuario
     Private Sub SetBindings()
         Me.txtDescripcion.DataBindings.Clear()
 
-        Me.txtDescripcion.DataBindings.Add("Text", oTipo_Usuario, "Descripcion")
+        Me.txtDescripcion.DataBindings.Add("Text", oTipo_Usuario, "Nombre_Tipo_Usuario")
     End Sub
 
     Private Sub Controles_Registro_Nuevo(ByVal vEs_Registro_Nuevo As Boolean)

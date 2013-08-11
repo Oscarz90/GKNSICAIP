@@ -37,7 +37,6 @@ Partial Class FrmTipo_Usuario
         CType(Me.btnBaja, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.btnSalir, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.btnRegistrar, System.ComponentModel.ISupportInitialize).BeginInit()
-        Me.btnRegistrar.SuspendLayout()
         CType(Me.btnModificar, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.txtDescripcion, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.RadLabel1, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -48,6 +47,7 @@ Partial Class FrmTipo_Usuario
         'RadPanel1
         '
         Me.RadPanel1.BackColor = System.Drawing.Color.White
+        Me.RadPanel1.Controls.Add(Me.btnModificar)
         Me.RadPanel1.Controls.Add(Me.btnBaja)
         Me.RadPanel1.Controls.Add(Me.btnSalir)
         Me.RadPanel1.Controls.Add(Me.btnRegistrar)
@@ -83,7 +83,6 @@ Partial Class FrmTipo_Usuario
         '
         'btnRegistrar
         '
-        Me.btnRegistrar.Controls.Add(Me.btnModificar)
         Me.btnRegistrar.Image = CType(resources.GetObject("btnRegistrar.Image"), System.Drawing.Image)
         Me.btnRegistrar.Location = New System.Drawing.Point(171, 157)
         Me.btnRegistrar.Name = "btnRegistrar"
@@ -95,7 +94,7 @@ Partial Class FrmTipo_Usuario
         '
         Me.btnModificar.DialogResult = System.Windows.Forms.DialogResult.Ignore
         Me.btnModificar.Image = CType(resources.GetObject("btnModificar.Image"), System.Drawing.Image)
-        Me.btnModificar.Location = New System.Drawing.Point(0, 0)
+        Me.btnModificar.Location = New System.Drawing.Point(168, 157)
         Me.btnModificar.Name = "btnModificar"
         Me.btnModificar.Size = New System.Drawing.Size(88, 24)
         Me.btnModificar.TabIndex = 126
@@ -158,7 +157,6 @@ Partial Class FrmTipo_Usuario
         CType(Me.btnBaja, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.btnSalir, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.btnRegistrar, System.ComponentModel.ISupportInitialize).EndInit()
-        Me.btnRegistrar.ResumeLayout(False)
         CType(Me.btnModificar, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.txtDescripcion, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.RadLabel1, System.ComponentModel.ISupportInitialize).EndInit()

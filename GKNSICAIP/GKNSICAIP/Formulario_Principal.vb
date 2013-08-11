@@ -4,7 +4,7 @@ Imports CapaNegocios.Clases_Catalogos
 
 Public Class Formulario_Principal
 
-    Dim vRowSeleccionada As Integer = 0
+    Dim vRowSeleccionada As Integer = 0    
 
 #Region "Variables Identificador Opciones Menu"
     Dim vLinea As String = ""    
@@ -13,6 +13,7 @@ Public Class Formulario_Principal
     Dim vTiempo_Ciclo As Boolean = False
     Dim vUsuario As Boolean = False '---------------
     Dim vTipo_Usuario As Boolean = False '-----------
+    Dim vPermisos As Boolean = False '--------------
 #End Region
 
 #Region "Declaracion de Objetos_Clases_Catalogos"
@@ -42,6 +43,7 @@ Public Class Formulario_Principal
     Dim ofrmEquipo_Linea As frmEquipo_Linea
     Dim ofrmUsuario As FrmUsuarios
     Dim ofrmTipo_Usuario As FrmTipo_Usuario
+    Dim ofrmPermisos As FrmPermisos
 #End Region
 
 #Region "Opciones de Menu"
@@ -260,7 +262,11 @@ Public Class Formulario_Principal
     End Sub
 
     Private Sub btnPermisos_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnPermisos.Click
+        Me.dgvRegistros.Visible = False
+        Me.Barra_Tool_Registros.Visible = False
 
+        ofrmPermisos = New FrmPermisos
+        ofrmPermisos.ShowDialog()
     End Sub
 #End Region
 
@@ -383,7 +389,7 @@ Public Class Formulario_Principal
                         ofrmLinea.vId_Publico = 0
                     End If
                 End Try
-                ofrmLinea.Show()
+                ofrmLinea.ShowDialog()
                 dgvRegistros.Refresh()
             ElseIf vMaquina = True Then
                 ofrmMaquina = New frmMaquina
@@ -395,7 +401,7 @@ Public Class Formulario_Principal
                         ofrmMaquina.vId_Publico = 0
                     End If
                 End Try
-                ofrmMaquina.Show()
+                ofrmMaquina.ShowDialog()
                 dgvRegistros.Refresh()
             ElseIf vModelo = True Then
                 ofrmModelo = New frmModelo
@@ -407,7 +413,7 @@ Public Class Formulario_Principal
                         ofrmModelo.vId_Publico = 0
                     End If
                 End Try
-                ofrmModelo.Show()
+                ofrmModelo.ShowDialog()
                 dgvRegistros.Refresh()
             ElseIf vTiempo_Ciclo = True Then
                 ofrmTiempo_Ciclo = New frmTiempo_Ciclo
@@ -419,7 +425,32 @@ Public Class Formulario_Principal
                         ofrmTiempo_Ciclo.vId_Publico = 0
                     End If
                 End Try
-                ofrmTiempo_Ciclo.Show()
+                ofrmTiempo_Ciclo.ShowDialog()
+                dgvRegistros.Refresh()
+            ElseIf vUsuario = True Then
+                ofrmUsuario = New FrmUsuarios
+                Try
+                    'ofrmTiempo_Ciclo.vId_Publico = dgvRegistros.Rows(vRowSeleccionada).Cells(0).Value
+                    ofrmUsuario.vId_Publico = vRowSeleccionada
+                Catch ex As Exception
+                    If ex.TargetSite.MetadataToken.ToString = "100670847" Then
+                        ofrmUsuario.vId_Publico = 0
+                    End If
+                End Try
+                ofrmUsuario.ShowDialog()
+                dgvRegistros.Refresh()
+            ElseIf vTipo_Usuario = True Then
+                ofrmTipo_Usuario = New FrmTipo_Usuario
+                Try
+                    'ofrmTiempo_Ciclo.vId_Publico = dgvRegistros.Rows(vRowSeleccionada).Cells(0).Value
+                    ofrmTipo_Usuario.vId_Publico = vRowSeleccionada
+                Catch ex As Exception
+                    If ex.TargetSite.MetadataToken.ToString = "100670847" Then
+                        ofrmTipo_Usuario.vId_Publico = 0
+                    End If
+                End Try
+                ofrmTipo_Usuario.ShowDialog()
+
                 dgvRegistros.Refresh()
             End If
         Else
@@ -469,7 +500,7 @@ Public Class Formulario_Principal
             vModelo = False
             vMaquina = False
             vTipo_Usuario = False
-        ElseIf vNombre_De_Formulario = "frmTipo_Usuario" Then
+        ElseIf vNombre_De_Formulario = "FrmTipo_Usuario" Then
             vTipo_Usuario = True
 
             vTiempo_Ciclo = False
@@ -479,8 +510,4 @@ Public Class Formulario_Principal
             vUsuario = False
         End If
     End Sub
-
-
-    
-    
 End Class
