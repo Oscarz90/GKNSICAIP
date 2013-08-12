@@ -173,6 +173,7 @@ Public Class SEGURIDAD_USUARIO
 
 #Region "Metodos Generales"
 
+#Region "Obtencion de Informacion para Arboles"
     Public Function Obtener_TIPOS_USUARIOS() As DataTable
         Dim vRetorno As DataTable
         Try
@@ -199,7 +200,49 @@ Public Class SEGURIDAD_USUARIO
         Return vRetorno
     End Function
 
-    Public Function Obtener_Arbol_Usuarios() As DataTable        
+
+    Public Function Obtener_Categoria_Permisos() As DataTable
+        Dim vRetorno As DataTable
+        Try
+            vRetorno = oBD.ObtenerTabla("SELECT * FROM SEGURIDAD_CATEGORIA_PERMISO WHERE Categoria_Sup_Id is null")
+            If vRetorno.Rows.Count = 0 Then
+                vRetorno = Nothing
+            End If
+        Catch ex As Exception
+            vRetorno = Nothing
+        End Try
+        Return vRetorno
+    End Function
+
+    Public Function Obtener_HIJOS_Categoria_Permisos(ByVal vCategoria_Sup_Id As Integer) As DataTable
+        Dim vRetorno As DataTable
+        Try
+            vRetorno = oBD.ObtenerTabla("SELECT * FROM SEGURIDAD_CATEGORIA_PERMISO WHERE Categoria_Sup_Id= " & vCategoria_Sup_Id)
+            If vRetorno.Rows.Count = 0 Then
+                vRetorno = Nothing
+            End If
+        Catch ex As Exception
+            vRetorno = Nothing
+        End Try
+        Return vRetorno
+    End Function
+
+    Public Function Obtener_PERMISOS(ByVal vCVE_Categoria_Permiso As Long) As DataTable
+        Dim vRetorno As DataTable
+        Try
+            vRetorno = oBD.ObtenerTabla("SELECT * FROM SEGURIDAD_PERMISOS WHERE CVE_CATEGORIA_PERMISO=" & vCVE_Categoria_Permiso)
+            If vRetorno.Rows.Count = 0 Then
+                vRetorno = Nothing
+            End If
+        Catch ex As Exception
+            vRetorno = Nothing
+        End Try
+        Return vRetorno
+    End Function
+#End Region
+
+#Region "Tablas listas para Arboles"
+    Public Function Obtener_Arbol_Usuarios() As DataTable
         Dim vDT As DataTable = New DataTable("USUARIOS")
         Crear_Tabla_Arbol(vDT)
 
@@ -238,6 +281,69 @@ Public Class SEGURIDAD_USUARIO
         Next
         Return vDT
     End Function
+
+    Public Function Obtener_Arbol_Permisos() As DataTable
+        Dim vDT As DataTable = New DataTable("PERMISOS")
+        Crear_Tabla_Arbol(vDT)
+
+        Dim vIdetificador_Nodo As Integer = 1
+        Dim vIdetificador_Padre As Integer = 1
+
+        For Each vDR_Categoria_Permiso As DataRow In Obtener_Categoria_Permisos.Rows
+            ''En este primer ciclo se Obtienen las Categorias de Permisos con IDSuperior = Null (Nivel 1)
+            Dim vDR_Nuevo As DataRow
+            vDR_Nuevo = vDT.NewRow
+            vDR_Nuevo("NombreNodo") = vDR_Categoria_Permiso("Nombre_Categoria")
+            vDR_Nuevo("IdentificadorNodo") = vIdetificador_Nodo
+            vDR_Nuevo("CVE_TABLA") = vDR_Categoria_Permiso("CVE_Categoria_Permiso") & ".CP"
+            vDR_Nuevo("IdentificadorPadre") = 0
+            ''Inserta el Tipo de Usuario
+            vDT.Rows.Add(vDR_Nuevo)
+
+            vIdetificador_Padre = vDR_Nuevo("IdentificadorNodo")
+
+            For Each vDR_HIJOS_Categoria_Permiso As DataRow In Obtener_HIJOS_Categoria_Permisos(vDR_Categoria_Permiso("CVE_Categoria_Permiso")).Rows
+                ''En este ciclo se obtienen las Categorias de Permisos Anidados(Hijos) (Nivel 2)
+                ''Incrementa el Identificador del Nodo
+                vIdetificador_Nodo = vIdetificador_Nodo + 1
+
+                Dim vDR_Nuevo_HIJO_TIPO As DataRow
+                vDR_Nuevo_HIJO_TIPO = vDT.NewRow
+
+                vDR_Nuevo_HIJO_TIPO("NombreNodo") = vDR_HIJOS_Categoria_Permiso("Nombre_Categoria")
+                vDR_Nuevo_HIJO_TIPO("IdentificadorNodo") = vIdetificador_Nodo
+                vDR_Nuevo_HIJO_TIPO("IdentificadorPadre") = vDR_Nuevo("IdentificadorNodo")
+                vDR_Nuevo_HIJO_TIPO("CVE_TABLA") = vDR_HIJOS_Categoria_Permiso("CVE_Categoria_Permiso") & ".CP2"
+                ''Inserta el HIJO_TIPO_PERMISO
+                vDT.Rows.Add(vDR_Nuevo_HIJO_TIPO)
+
+                vIdetificador_Padre = vDR_Nuevo_HIJO_TIPO("IdentificadorNodo")
+
+                For Each vDR_USUARIOS As DataRow In Obtener_PERMISOS(vDR_HIJOS_Categoria_Permiso("CVE_Categoria_Permiso")).Rows
+                    ''Incrementa el Identificador del Nodo
+                    vIdetificador_Nodo = vIdetificador_Nodo + 1
+
+                    Dim vDR_Nuevo_USUARIO As DataRow
+                    vDR_Nuevo_USUARIO = vDT.NewRow
+
+                    vDR_Nuevo_USUARIO("NombreNodo") = vDR_USUARIOS("Descripcion")
+                    vDR_Nuevo_USUARIO("IdentificadorNodo") = vIdetificador_Nodo
+                    vDR_Nuevo_USUARIO("IdentificadorPadre") = vDR_Nuevo_HIJO_TIPO("IdentificadorNodo")
+                    vDR_Nuevo_USUARIO("CVE_TABLA") = vDR_USUARIOS("CVE_Permiso") & ".P"
+                    ''Inserta el Usuario
+                    vDT.Rows.Add(vDR_Nuevo_USUARIO)
+                Next
+                ''Incrementa el Identificador del Nodo
+                vIdetificador_Nodo = vIdetificador_Nodo + 1
+            Next
+            ''Incrementa el Identificador del Nodo
+            vIdetificador_Nodo = vIdetificador_Nodo + 1
+        Next
+        Return vDT
+    End Function
+#End Region
+
+    
 
 
 
