@@ -341,12 +341,6 @@ Public Class SEGURIDAD_USUARIO
         Next
         Return vDT
     End Function
-#End Region
-
-    
-
-
-
 
     Private Sub Crear_Tabla_Arbol(ByRef vDT As DataTable)
         ' Create a DataColumn and set various properties. 
@@ -384,6 +378,22 @@ Public Class SEGURIDAD_USUARIO
         vDT.Columns.Add(vColumn3)
         vDT.Columns.Add(vColumn4)
     End Sub
+
+#End Region
+
+    Public Function Obtener_Permisos_Usuario(ByVal vCve_Usuario_P As Long) As DataTable
+        Dim vDT As DataTable
+        Try
+            vDT = oBD.ObtenerTabla("SELECT * FROM SEGURIDAD_USUARIO_PERMISOS WHERE CVE_USUARIO=" & vCve_Usuario_P)
+            If vDT.Rows.Count = 0 Then
+                vDT = Nothing
+            End If
+        Catch ex As Exception
+            vDT = Nothing
+        End Try
+
+        Return vDT
+    End Function
 #End Region
 
 End Class
