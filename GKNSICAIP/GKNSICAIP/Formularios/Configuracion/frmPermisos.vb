@@ -72,8 +72,28 @@ Public Class FrmPermisos
         '(e.Node.Text)
     End Sub
 
+#Region "Metodo y Evento para Activar/Desactivar Casillas Con/Sin hijos"
+    ' Updates all child tree nodes recursively.
+    Private Sub CheckAllChildNodes(ByVal treeNode As TreeNode, ByVal nodeChecked As Boolean)
+        Dim node As TreeNode
+        For Each node In treeNode.Nodes
+            node.Checked = nodeChecked
+            If node.Nodes.Count > 0 Then
+                ' If the current node has child nodes, call the CheckAllChildsNodes method recursively.
+                Me.CheckAllChildNodes(node, nodeChecked)
+            End If
+        Next node
+    End Sub
 
-
-
-
+    Private Sub TreeView_Permisos_AfterCheck(ByVal sender As System.Object, ByVal e As System.Windows.Forms.TreeViewEventArgs) Handles TreeView_Permisos.AfterCheck
+        If e.Action <> TreeViewAction.Unknown Then
+            If e.Node.Nodes.Count > 0 Then
+                ' Calls the CheckAllChildNodes method, passing in the current 
+                ' Checked value of the TreeNode whose checked state changed. 
+                Me.CheckAllChildNodes(e.Node, e.Node.Checked)
+            End If
+        End If
+    End Sub
+#End Region
+   
 End Class
