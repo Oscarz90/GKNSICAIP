@@ -29,16 +29,19 @@ Partial Class FrmPermisos
         Me.btnSalir = New Telerik.WinControls.UI.RadButton()
         Me.titulo_banner_formulario = New System.Windows.Forms.Label()
         Me.banner_formulario = New System.Windows.Forms.PictureBox()
+        Me.btnGuardar = New Telerik.WinControls.UI.RadButton()
         CType(Me.RadPanel1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.RadPanel1.SuspendLayout()
         CType(Me.btnSalir, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.banner_formulario, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.btnGuardar, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'RadPanel1
         '
         Me.RadPanel1.BackColor = System.Drawing.Color.White
+        Me.RadPanel1.Controls.Add(Me.btnGuardar)
         Me.RadPanel1.Controls.Add(Me.TreeView_Permisos)
         Me.RadPanel1.Controls.Add(Me.TreeView_Usuarios)
         Me.RadPanel1.Controls.Add(Me.btnSalir)
@@ -46,20 +49,31 @@ Partial Class FrmPermisos
         Me.RadPanel1.Controls.Add(Me.banner_formulario)
         Me.RadPanel1.Dock = System.Windows.Forms.DockStyle.Fill
         Me.RadPanel1.Location = New System.Drawing.Point(0, 0)
+        Me.RadPanel1.MaximumSize = New System.Drawing.Size(578, 768)
+        Me.RadPanel1.MinimumSize = New System.Drawing.Size(578, 502)
         Me.RadPanel1.Name = "RadPanel1"
-        Me.RadPanel1.Size = New System.Drawing.Size(534, 502)
+        '
+        '
+        '
+        Me.RadPanel1.RootElement.MaxSize = New System.Drawing.Size(578, 768)
+        Me.RadPanel1.RootElement.MinSize = New System.Drawing.Size(578, 502)
+        Me.RadPanel1.Size = New System.Drawing.Size(578, 502)
         Me.RadPanel1.TabIndex = 107
         '
         'TreeView_Permisos
         '
+        Me.TreeView_Permisos.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+                    Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.TreeView_Permisos.CheckBoxes = True
         Me.TreeView_Permisos.Location = New System.Drawing.Point(277, 97)
         Me.TreeView_Permisos.Name = "TreeView_Permisos"
-        Me.TreeView_Permisos.Size = New System.Drawing.Size(242, 333)
+        Me.TreeView_Permisos.Size = New System.Drawing.Size(289, 333)
         Me.TreeView_Permisos.TabIndex = 115
         '
         'TreeView_Usuarios
         '
+        Me.TreeView_Usuarios.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+                    Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.TreeView_Usuarios.Location = New System.Drawing.Point(12, 97)
         Me.TreeView_Usuarios.Name = "TreeView_Usuarios"
         Me.TreeView_Usuarios.Size = New System.Drawing.Size(242, 333)
@@ -67,8 +81,9 @@ Partial Class FrmPermisos
         '
         'btnSalir
         '
+        Me.btnSalir.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.btnSalir.Image = CType(resources.GetObject("btnSalir.Image"), System.Drawing.Image)
-        Me.btnSalir.Location = New System.Drawing.Point(433, 459)
+        Me.btnSalir.Location = New System.Drawing.Point(477, 459)
         Me.btnSalir.Name = "btnSalir"
         Me.btnSalir.Size = New System.Drawing.Size(89, 31)
         Me.btnSalir.TabIndex = 113
@@ -93,30 +108,41 @@ Partial Class FrmPermisos
         Me.banner_formulario.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
         Me.banner_formulario.Location = New System.Drawing.Point(1, 0)
         Me.banner_formulario.Name = "banner_formulario"
-        Me.banner_formulario.Size = New System.Drawing.Size(532, 44)
+        Me.banner_formulario.Size = New System.Drawing.Size(577, 44)
         Me.banner_formulario.TabIndex = 111
         Me.banner_formulario.TabStop = False
+        '
+        'btnGuardar
+        '
+        Me.btnGuardar.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
+        Me.btnGuardar.Image = CType(resources.GetObject("btnGuardar.Image"), System.Drawing.Image)
+        Me.btnGuardar.Location = New System.Drawing.Point(382, 459)
+        Me.btnGuardar.Name = "btnGuardar"
+        Me.btnGuardar.Size = New System.Drawing.Size(89, 31)
+        Me.btnGuardar.TabIndex = 116
+        Me.btnGuardar.Text = "Guardar"
         '
         'FrmPermisos
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(534, 502)
+        Me.ClientSize = New System.Drawing.Size(570, 502)
         Me.Controls.Add(Me.RadPanel1)
-        Me.MaximumSize = New System.Drawing.Size(542, 700)
-        Me.MinimumSize = New System.Drawing.Size(542, 532)
+        Me.MaximumSize = New System.Drawing.Size(578, 768)
+        Me.MinimumSize = New System.Drawing.Size(578, 502)
         Me.Name = "FrmPermisos"
         '
         '
         '
         Me.RootElement.ApplyShapeToControl = True
-        Me.RootElement.MaxSize = New System.Drawing.Size(542, 700)
+        Me.RootElement.MaxSize = New System.Drawing.Size(0, 0)
         Me.Text = "Asignación de Permisos"
         CType(Me.RadPanel1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.RadPanel1.ResumeLayout(False)
         Me.RadPanel1.PerformLayout()
         CType(Me.btnSalir, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.banner_formulario, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.btnGuardar, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
@@ -127,5 +153,6 @@ Partial Class FrmPermisos
     Friend WithEvents btnSalir As Telerik.WinControls.UI.RadButton
     Friend WithEvents TreeView_Usuarios As System.Windows.Forms.TreeView
     Friend WithEvents TreeView_Permisos As System.Windows.Forms.TreeView
+    Friend WithEvents btnGuardar As Telerik.WinControls.UI.RadButton
 End Class
 

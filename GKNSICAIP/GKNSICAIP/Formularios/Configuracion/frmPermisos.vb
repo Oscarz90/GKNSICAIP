@@ -2,8 +2,10 @@
 
 Public Class FrmPermisos
     Dim oUsuario As SEGURIDAD_USUARIO
+    Dim oUsuario_Permisos As SEGURIDAD_USUARIO_PERMISOS
     Private vId_Nodo As Integer = 0
     Private vTipo_Nodo As String = ""
+    Private vUsuario_Seleccionado_Global As Integer = 0
 
     Private Sub FrmPermisos_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         oUsuario = New SEGURIDAD_USUARIO        
@@ -50,7 +52,6 @@ Public Class FrmPermisos
             Dim nuevoNodo_Permisos_Usuarios As New TreeNode
             nuevoNodo_Permisos_Usuarios.Text = dataRowCurrent("NombreNodo").ToString().Trim() ' + " " + "-->" + dataRowCurrent("estatus").ToString().Trim()            
             nuevoNodo_Permisos_Usuarios.Tag = dataRowCurrent("CVE_TABLA").ToString().Trim()
-
             ''-------------------------------------------------------------------------------------------------------------------------------
             If vAsignacion_Permisos = True Then
                 Dim vDV_Permisos As DataView
@@ -165,47 +166,27 @@ Public Class FrmPermisos
         If vTipo_Nodo = "U" Then
             ''Se busca el Id, siempre y cuando sea un Usuario, esto para optimizar recurso(no sirve de nada cargar un TU("Tipo Usuario") ya que no requerimos esto.
             vId_Nodo = Obtener_Id_Libre(vTag)
-
+            vUsuario_Seleccionado_Global = vId_Nodo
             'If oUsuario.Obtener_Permisos_Usuario(vId_Nodo) IsNot Nothing Then             
             oUsuario = New SEGURIDAD_USUARIO
             TreeView_Permisos.Nodes.Clear()
-            Carga_Permisos_Usuario(oUsuario, 0, Nothing, True, vId_Nodo)
-            'For Each vDR As DataRow In oUsuario.Obtener_Permisos_Usuario(vId_Nodo).Rows
-            '    ''----------------------------------------------------------------------------------
-            '    'Se Declara una colección de nodos apartir de tu Treeview del que se va a recorrer
-            '    Dim nodes As TreeNodeCollection = TreeView_Permisos.Nodes
-            '    'Se recorren los nodos principales
-            '    For Each n As TreeNode In nodes
-            '        'Se Declara un metodo para que recorra los hijos de los principales
-            '        'Y los hijos de los hijos....Recorrido Total en pocas palabras
-            '        'Para ello se envía el nodo actual para evaluar si tiene hijos
-            '        RecorrerNodos(n, Long.Parse(vDR("CVE_PERMISO").ToString))
-            '    Next
-            '    ''----------------------------------------------------------------------------------
-            'Next
+            Carga_Permisos_Usuario(oUsuario, 0, Nothing, True, vId_Nodo)           
             'End If
         End If
     End Sub
 
     Private Sub RecorrerNodos(ByVal treeNode As TreeNode, ByRef vCVE_Permiso As Long)
         Try
-            'Si el nodo que recibimos tiene hijos se recorrerá
-            'para luego verificar si esta o no checado
-            For Each tn As TreeNode In treeNode.Nodes
-                'Se Verifica si esta marcado...
+            'Si el nodo que recibimos tiene hijos se recorrerá            
+            For Each tn As TreeNode In treeNode.Nodes                
                 If Obtener_Tipo_ID(tn.Tag) = "P" Then
-
                     If Obtener_Id_Libre(tn.Tag) = vCVE_Permiso Then
                         tn.Checked = True
                         Exit Sub
                     Else
                         tn.Checked = False
                     End If
-                End If
-                If tn.Checked = True Then
-                    'Si esta marcado mostramos el texto del nodo
-                    'MessageBox.Show(tn.Text)
-                End If
+                End If               
                 'Ahora hago verificacion a los hijos del nodo actual            
                 'Esta iteración no acabara hasta llegar al ultimo nodo principal
                 RecorrerNodos(tn, vCVE_Permiso)
@@ -215,27 +196,41 @@ Public Class FrmPermisos
         End Try
     End Sub
 
-    'Private Sub RecorrerNodos(ByVal treeNode As TreeNode)
-    '    Try
-    '        'Si el nodo que recibimos tiene hijos se recorrerá
-    '        'para luego verificar si esta o no checado
-    '        For Each tn As TreeNode In treeNode.Nodes
-    '            'Se Verifica si esta marcado...
-    '            If tn.Checked = True Then
-    '                'Si esta marcado mostramos el texto del nodo
-    '                MessageBox.Show(tn.Text)
-    '            End If
-    '            'Ahora hago verificacion a los hijos del nodo actual            
-    '            'Esta iteración no acabara hasta llegar al ultimo nodo principal
-    '            RecorrerNodos(tn)
-    '        Next
-    '    Catch ex As Exception
-    '        MessageBox.Show(ex.ToString())
-    '    End Try
-    'End Sub
+    Private Sub RecorrerNodos_PARA_GUARDAR(ByVal treeNode As TreeNode)
+        Try            
+            'Si el nodo que recibimos tiene hijos se recorrerá para luego verificar si esta o no checado
+            For Each tn As TreeNode In treeNode.Nodes
+                'Se Verifica si esta marcado...
+                If tn.Checked = True Then
+                    If Obtener_Tipo_ID(tn.Tag) = "P" Then
+                        vId_Nodo = Obtener_Id_Libre(tn.Tag)
+                        oUsuario_Permisos = New SEGURIDAD_USUARIO_PERMISOS
+                        oUsuario_Permisos.CVE_PERMISO = vId_Nodo
+                        oUsuario_Permisos.CVE_USUARIO = vUsuario_Seleccionado_Global
+                        oUsuario.CVE_Usuario = vUsuario_Seleccionado_Global
+                        oUsuario.L_USUARIO_PERMISOS.Add(oUsuario_Permisos)                       
+                    End If
+                End If
+                'Ahora hago verificacion a los hijos del nodo actual. Esta iteración no acabara hasta llegar al ultimo nodo principal
+                RecorrerNodos_PARA_GUARDAR(tn)
+            Next           
+        Catch ex As Exception
+            MessageBox.Show(ex.ToString())
+        End Try
+    End Sub
 
-
-
-
-
+    Private Sub btnGuardar_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnGuardar.Click        
+        'Se Declara una colección de nodos apartir de tu Treeview del que se va a recorrer
+        Dim nodes As TreeNodeCollection = TreeView_Permisos.Nodes
+        'Se recorren los nodos principales
+        For Each n As TreeNode In nodes
+            'Se Declara un metodo para que recorra los hijos de los principales Y los hijos de los hijos....Recorrido Total en pocas palabras
+            'Para ello se envía el nodo actual para evaluar si tiene hijos
+            oUsuario = New SEGURIDAD_USUARIO
+            oUsuario.L_USUARIO_PERMISOS.Clear()
+            RecorrerNodos_PARA_GUARDAR(n)
+            oUsuario.Registrar_Permisos()
+            oUsuario.L_USUARIO_PERMISOS = Nothing
+        Next
+    End Sub
 End Class

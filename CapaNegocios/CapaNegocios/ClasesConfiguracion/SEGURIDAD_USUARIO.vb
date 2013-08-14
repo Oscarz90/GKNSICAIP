@@ -168,7 +168,30 @@ Public Class SEGURIDAD_USUARIO
         End Get
     End Property
 
-
+    Private vL_USUARIO_PERMISOS As List(Of SEGURIDAD_USUARIO_PERMISOS)
+    Public Property L_USUARIO_PERMISOS() As List(Of SEGURIDAD_USUARIO_PERMISOS)
+        Get
+            If vL_USUARIO_PERMISOS Is Nothing Then
+                'Cargo documentos
+                Me.L_USUARIO_PERMISOS = New List(Of SEGURIDAD_USUARIO_PERMISOS)
+                Dim oBD As New CapaDatos.CapaDatos(cadena_conexion.CadenaSicaip)
+                Dim oEq As DataTable = oBD.ObtenerTabla("SELECT CVE_Usuario_Permisos FROM SEGURIDAD_USUARIO_PERMISOS WHERE CVE_USUARIO= " & vCVE_Usuario)
+                If oEq IsNot Nothing Then
+                    Dim oUSUARIO_PERMISOS As SEGURIDAD_USUARIO_PERMISOS = Nothing
+                    For Each row As DataRow In oEq.Rows
+                        oUSUARIO_PERMISOS = New SEGURIDAD_USUARIO_PERMISOS
+                        oUSUARIO_PERMISOS.CVE_Usuario_Permisos = row("CVE_Usuario_Permisos")
+                        oUSUARIO_PERMISOS.Cargar()
+                        Me.vL_USUARIO_PERMISOS.Add(oUSUARIO_PERMISOS)
+                    Next
+                End If
+            End If
+            Return Me.vL_USUARIO_PERMISOS
+        End Get
+        Set(ByVal value As List(Of SEGURIDAD_USUARIO_PERMISOS))
+            Me.vL_USUARIO_PERMISOS = value
+        End Set
+    End Property
 #End Region
 
 #Region "Metodos Generales"
@@ -394,6 +417,22 @@ Public Class SEGURIDAD_USUARIO
 
         Return vDT
     End Function
+
+    Public Sub Registrar_Permisos()
+        Using scope As New TransactionScope()
+            Try
+                oBD.EjecutarQuery("DELETE FROM SEGURIDAD_USUARIO_PERMISOS WHERE CVE_USUARIO=" & vCVE_Usuario)
+                If vL_USUARIO_PERMISOS IsNot Nothing Then
+                    For i As Integer = 0 To vL_USUARIO_PERMISOS.Count - 1
+                        oBD.EjecutarQuery("INSERT INTO SEGURIDAD_USUARIO_PERMISOS(CVE_USUARIO,CVE_PERMISO) VALUES(" & vCVE_Usuario & ", " & vL_USUARIO_PERMISOS.Item(i).CVE_PERMISO & ")")
+                    Next
+                End If
+                scope.Complete()
+            Catch ex As Exception
+                MsgBox(ex.Message)
+            End Try
+        End Using
+    End Sub
 #End Region
 
 End Class
