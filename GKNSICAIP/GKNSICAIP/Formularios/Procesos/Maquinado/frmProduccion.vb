@@ -1377,20 +1377,21 @@ Public Class frmProduccion
             SMTP.Send(Message)
             'MessageBox.Show("Mensaje enviado correctamene", "Exito!", MessageBoxButtons.OK)
         Catch ex As System.Net.Mail.SmtpException
-            'MessageBox.Show(ex.ToString, "Error al enviar email!", MessageBoxButtons.OK)
+            MessageBox.Show(ex.ToString, "Error al enviar email!", MessageBoxButtons.OK)
         End Try
     End Sub
     Private Sub get_body_notificacion(ByVal desempeno As Double)
         body_notificacion = Nothing
         body_notificacion = "Buen día." & vbCrLf & vbCrLf
-        body_notificacion += "Se detectó un incremento en el Desempeño de la linea: " & cbxLinea.Text & " de " & desempeno & "%" & vbCrLf & vbCrLf
-        body_notificacion += "Detalle del incremento: " & vbCrLf & "-Modelo: " & cbxModeloProductividad.Text & " - " & txtModeloDescripcionProductividad.Text & vbCrLf & "-Pzas.Programadas: " & txtPzasPorHora.Text & vbCrLf
-        body_notificacion += "-Pzas. Reales: " & txtPiezasOkProducidas.Text & vbCrLf & "-Nombre del Equipo: " & lblNombreEquipo.Text & vbCrLf & "-Nombre del Empleado: " & lblNombreEmpleado.Text & vbCrLf
+        body_notificacion += "Se detectó un incremento en el Desempeño de la linea: " & cbxLinea.Text & " de " & (desempeno - 100) & "%" & vbCrLf & vbCrLf
+        body_notificacion += "Detalle del incremento: " & vbCrLf & "-Modelo: " & cbxModeloProductividad.Text & " - " & txtModeloDescripcionProductividad.Text & vbCrLf & "-Piezas por hora: " & txtPzasPorHora.Text & vbCrLf
+        body_notificacion += "-Pzas. Programadas: " & Convert.ToInt64(((Convert.ToDouble(txtPzasPorHora.Text) * Convert.ToDouble(txtTiempoOperacion.Text)) / 60)) & vbCrLf & "-Tiempo de Operacion: " & txtTiempoOperacion.Text & vbCrLf
+        body_notificacion += "-Pzas. OK: " & txtPiezasOkProducidas.Text & vbCrLf & "-Nombre del Equipo: " & lblNombreEquipo.Text & vbCrLf & "-Nombre del Empleado: " & lblNombreEmpleado.Text & vbCrLf
         body_notificacion += "-Codigo del Empleado: " & lblCodigoEmpleado.Text & vbCrLf & "-Fecha del Registro: " & Now.ToString("dd-MM-yyyy HH:mm") & vbCrLf & vbCrLf
         body_notificacion += "Este documento es informativo para que se realice el análisis pertinente, y si es necesario hacer alguna actualización se reporta de manera oportuna con la persona correspondiente." & vbCrLf & vbCrLf
         body_notificacion += "SISTEMA SICAIP v2.0"
 
-        subject_notificacion = "Incremento el Desempeño de la Linea " & cbxLinea.Text & " . Equipo: " & lblNombreEquipo.Text & ". Desempeño: " & desempeno
+        subject_notificacion = "Incremento el Desempeño de la Linea " & cbxLinea.Text & " . Equipo: " & lblNombreEquipo.Text & ". Desempeño: " & (desempeno - 100)
     End Sub
 
     'Registra Productividad
