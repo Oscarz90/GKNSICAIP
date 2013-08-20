@@ -17,8 +17,8 @@ Public Class Modelo
                     Me.vcve_clasificacion_modelo = rDatos("cve_clasificacion_modelo")
                     Me.vnp_gkn = rDatos("np_gkn")
                     Me.vdescripcion = rDatos("descripcion")
-                    If Not IsDBNull(rDatos("Estatus")) Then
-                        Me.vEstatus = rDatos("Estatus")
+                    If Not IsDBNull(rDatos("estatus")) Then
+                        Me.vEstatus = rDatos("estatus")
                     Else
                         Me.vEstatus = ""
                     End If
@@ -320,7 +320,7 @@ Public Class Modelo
             dtModelos = oBD.ObtenerTabla("select m.cve_modelo,m.np_gkn from linea l " &
                                          "join TC tc on l.cve_linea=tc.cve_linea " &
                                          "join modelo m on tc.cve_modelo=m.cve_modelo " &
-                                         "where l.cve_linea=" & vcve_linea)
+                                         "where l.cve_linea=" & vcve_linea & " and tc.estatus='1' order by tc.fecha desc")
         Catch ex As Exception
             MsgBox("ERROR_AL_OBTENER_MODELOS_DE_LINEA_CModelo")
             dtModelos = Nothing
@@ -335,7 +335,7 @@ Public Class Modelo
             "join modelo m on t.cve_modelo=m.cve_modelo " &
             "where rt.cve_registro_turno=" & vcve_registro_turno & " and " &
             "m.cve_modelo in (select p.cve_modelo from produccion p " &
-            "where p.cve_registro_turno=" & vcve_registro_turno & " and p.estatus='1')"
+            "where p.cve_registro_turno=" & vcve_registro_turno & " and p.estatus='1') and t.estatus='1' order by t.fecha desc"
         Try
             dtModelos = oBD.ObtenerTabla(query)
         Catch ex As Exception
