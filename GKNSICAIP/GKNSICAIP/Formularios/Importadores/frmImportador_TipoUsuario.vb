@@ -53,8 +53,7 @@ Public Class FrmImportador_TipoUsuario
         End If
 
         Me.dgvDatos.Columns("CVE_Tipo_Usuario").HeaderText = "CVE_Tipo_Usuario"
-        Me.dgvDatos.Columns("CVE_Tipo_Usuario").IsVisible = False
-        Me.dgvDatos.Columns("CVE_Tipo_Usuario").Name = "CVE"
+        Me.dgvDatos.Columns("CVE_Tipo_Usuario").IsVisible = False        
 
         Me.dgvDatos.Columns("Descripcion").HeaderText = "Descripcion"
         Me.dgvDatos.Columns("Descripcion").Width = 250
@@ -86,7 +85,55 @@ Public Class FrmImportador_TipoUsuario
     End Sub
 #End Region
 
-    Private Sub dgvDatos_MouseDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles dgvDatos.MouseDown
+    'Private Sub dgvDatos_MouseDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles dgvDatos.MouseDown
+    '    Try
+    '        If e.Button = Windows.Forms.MouseButtons.Right Then
+    '            'Dim hit As System.Windows.Forms.DataGridView.HitTestInfo
+    '            'hit = dgvDatos.HitTest(e.X, e.Y)
+    '            'Me.dgvDatos.ClearSelection()
+    '            'Me.dgvDatos.Rows(hit.RowIndex).Selected = True
+    '            ''vRowSeleccionada = hit.RowIndex
+    '            'CargarElementoSeleccionado(dgvDatos.Rows(hit.RowIndex).Cells("cve_Modelo").Value)
+    '            'btnImportar.Enabled = True
+    '        ElseIf e.Button = Windows.Forms.MouseButtons.Left Then
+    '            'Dim hit As System.Windows.Forms.DataGridView.HitTestInfo
+    '            'hit = dgvDatos.HitTest(e.X, e.Y)
+    '            'Me.dgvDatos.ClearSelection()
+    '            'Me.dgvDatos.Rows(hit.RowIndex).Selected = True
+    '            ''vRowSeleccionada = hit.RowIndex
+    '            'CargarElementoSeleccionado(dgvDatos.Rows(hit.RowIndex).Cells("cve_Modelo").Value)
+    '            'btnImportar.Enabled = True
+    '            oTIPO_USUARIO = New Tipo_Usuario
+    '            oTIPO_USUARIO.CVE_Tipo_Usuario = dgvDatos.CurrentRow.Cells("CVE_Tipo_Usuario").Value
+    '            oTIPO_USUARIO.Cargar()
+    '        End If
+    '    Catch ex As Exception
+    '        If ex.TargetSite.MetadataToken.ToString = "100670847" Then
+    '            'vRowSeleccionada = 0
+    '        End If
+    '    End Try
+
+    '    'Try
+    '    '    If e.Button = Windows.Forms.MouseButtons.Right Then
+    '    '        'vRowSeleccionada = dgvRegistros.CurrentRow.Index
+    '    '        'vRowSeleccionada = dgvRegistros.CurrentRow.Cells("CVE").Value
+    '    '        'vRowSeleccionada = 0
+    '    '    ElseIf e.Button = Windows.Forms.MouseButtons.Left Then
+    '    '        If Windows.Forms.Cursor.Position.X <> 0 Then
+
+    '    '        End If
+    '    '        'vRowSeleccionada = dgvRegistros.CurrentRow.Index
+    '    '        vRowSeleccionada = dgvRegistros.CurrentRow.Cells("CVE").Value
+    '    '    End If
+    '    'Catch ex As Exception
+    '    '    If ex.TargetSite.MetadataToken.ToString = "100670847" Then
+    '    '        vRowSeleccionada = 0
+    '    '    End If
+    '    'End Try
+
+    'End Sub
+
+    Private Sub dgvDatos_MouseUp(ByVal sender As System.Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles dgvDatos.MouseUp
         Try
             If e.Button = Windows.Forms.MouseButtons.Right Then
                 'Dim hit As System.Windows.Forms.DataGridView.HitTestInfo
@@ -105,7 +152,7 @@ Public Class FrmImportador_TipoUsuario
                 'CargarElementoSeleccionado(dgvDatos.Rows(hit.RowIndex).Cells("cve_Modelo").Value)
                 'btnImportar.Enabled = True
                 oTIPO_USUARIO = New Tipo_Usuario
-                oTIPO_USUARIO.CVE_Tipo_Usuario = dgvDatos.CurrentRow.Cells("CVE").Value
+                oTIPO_USUARIO.CVE_Tipo_Usuario = dgvDatos.CurrentRow.Cells("CVE_Tipo_Usuario").Value
                 oTIPO_USUARIO.Cargar()
             End If
         Catch ex As Exception

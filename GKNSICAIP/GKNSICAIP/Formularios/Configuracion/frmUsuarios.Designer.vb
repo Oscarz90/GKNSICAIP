@@ -24,12 +24,14 @@ Partial Class FrmUsuarios
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(FrmUsuarios))
         Me.RadPanel1 = New Telerik.WinControls.UI.RadPanel()
+        Me.RadLabel6 = New Telerik.WinControls.UI.RadLabel()
+        Me.txtEstatus = New Telerik.WinControls.UI.RadTextBox()
+        Me.btnModificar = New Telerik.WinControls.UI.RadButton()
         Me.btnImportar = New Telerik.WinControls.UI.RadButton()
         Me.txtPass = New Telerik.WinControls.UI.RadTextBox()
         Me.btnBaja = New Telerik.WinControls.UI.RadButton()
         Me.btnSalir = New Telerik.WinControls.UI.RadButton()
         Me.btnRegistrar = New Telerik.WinControls.UI.RadButton()
-        Me.btnModificar = New Telerik.WinControls.UI.RadButton()
         Me.txtTipo_Usuario = New Telerik.WinControls.UI.RadTextBox()
         Me.txtEmail = New Telerik.WinControls.UI.RadTextBox()
         Me.txtNombre = New Telerik.WinControls.UI.RadTextBox()
@@ -43,12 +45,14 @@ Partial Class FrmUsuarios
         Me.RadLabel1 = New Telerik.WinControls.UI.RadLabel()
         CType(Me.RadPanel1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.RadPanel1.SuspendLayout()
+        CType(Me.RadLabel6, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.txtEstatus, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.btnModificar, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.btnImportar, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.txtPass, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.btnBaja, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.btnSalir, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.btnRegistrar, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.btnModificar, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.txtTipo_Usuario, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.txtEmail, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.txtNombre, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -65,6 +69,8 @@ Partial Class FrmUsuarios
         'RadPanel1
         '
         Me.RadPanel1.BackColor = System.Drawing.Color.White
+        Me.RadPanel1.Controls.Add(Me.RadLabel6)
+        Me.RadPanel1.Controls.Add(Me.txtEstatus)
         Me.RadPanel1.Controls.Add(Me.btnModificar)
         Me.RadPanel1.Controls.Add(Me.btnImportar)
         Me.RadPanel1.Controls.Add(Me.txtPass)
@@ -85,20 +91,46 @@ Partial Class FrmUsuarios
         Me.RadPanel1.Dock = System.Windows.Forms.DockStyle.Fill
         Me.RadPanel1.Location = New System.Drawing.Point(0, 0)
         Me.RadPanel1.Name = "RadPanel1"
-        Me.RadPanel1.Size = New System.Drawing.Size(396, 237)
+        Me.RadPanel1.Size = New System.Drawing.Size(396, 283)
         Me.RadPanel1.TabIndex = 5
+        '
+        'RadLabel6
+        '
+        Me.RadLabel6.Location = New System.Drawing.Point(12, 188)
+        Me.RadLabel6.Name = "RadLabel6"
+        Me.RadLabel6.Size = New System.Drawing.Size(41, 18)
+        Me.RadLabel6.TabIndex = 124
+        Me.RadLabel6.Text = "Estatus"
+        '
+        'txtEstatus
+        '
+        Me.txtEstatus.Location = New System.Drawing.Point(103, 186)
+        Me.txtEstatus.Name = "txtEstatus"
+        Me.txtEstatus.ReadOnly = True
+        Me.txtEstatus.Size = New System.Drawing.Size(202, 20)
+        Me.txtEstatus.TabIndex = 6
+        '
+        'btnModificar
+        '
+        Me.btnModificar.DialogResult = System.Windows.Forms.DialogResult.Ignore
+        Me.btnModificar.Image = CType(resources.GetObject("btnModificar.Image"), System.Drawing.Image)
+        Me.btnModificar.Location = New System.Drawing.Point(125, 247)
+        Me.btnModificar.Name = "btnModificar"
+        Me.btnModificar.Size = New System.Drawing.Size(88, 24)
+        Me.btnModificar.TabIndex = 7
+        Me.btnModificar.Text = "Modificar"
         '
         'btnImportar
         '
         Me.btnImportar.Location = New System.Drawing.Point(311, 160)
         Me.btnImportar.Name = "btnImportar"
         Me.btnImportar.Size = New System.Drawing.Size(66, 20)
-        Me.btnImportar.TabIndex = 123
+        Me.btnImportar.TabIndex = 4
         Me.btnImportar.Text = "Importar"
         '
         'txtPass
         '
-        Me.txtPass.Location = New System.Drawing.Point(39, 182)
+        Me.txtPass.Location = New System.Drawing.Point(30, 245)
         Me.txtPass.Name = "txtPass"
         Me.txtPass.PasswordChar = Global.Microsoft.VisualBasic.ChrW(42)
         Me.txtPass.Size = New System.Drawing.Size(23, 20)
@@ -108,41 +140,31 @@ Partial Class FrmUsuarios
         'btnBaja
         '
         Me.btnBaja.Image = CType(resources.GetObject("btnBaja.Image"), System.Drawing.Image)
-        Me.btnBaja.Location = New System.Drawing.Point(222, 201)
+        Me.btnBaja.Location = New System.Drawing.Point(222, 247)
         Me.btnBaja.Name = "btnBaja"
         Me.btnBaja.Size = New System.Drawing.Size(89, 24)
-        Me.btnBaja.TabIndex = 120
+        Me.btnBaja.TabIndex = 9
         Me.btnBaja.Text = "Dar Baja"
         Me.btnBaja.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
         '
         'btnSalir
         '
         Me.btnSalir.Image = CType(resources.GetObject("btnSalir.Image"), System.Drawing.Image)
-        Me.btnSalir.Location = New System.Drawing.Point(317, 201)
+        Me.btnSalir.Location = New System.Drawing.Point(317, 247)
         Me.btnSalir.Name = "btnSalir"
         Me.btnSalir.Size = New System.Drawing.Size(67, 24)
-        Me.btnSalir.TabIndex = 119
+        Me.btnSalir.TabIndex = 10
         Me.btnSalir.Text = "Salir"
         Me.btnSalir.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
         '
         'btnRegistrar
         '
         Me.btnRegistrar.Image = CType(resources.GetObject("btnRegistrar.Image"), System.Drawing.Image)
-        Me.btnRegistrar.Location = New System.Drawing.Point(128, 201)
+        Me.btnRegistrar.Location = New System.Drawing.Point(128, 247)
         Me.btnRegistrar.Name = "btnRegistrar"
         Me.btnRegistrar.Size = New System.Drawing.Size(88, 24)
-        Me.btnRegistrar.TabIndex = 121
+        Me.btnRegistrar.TabIndex = 8
         Me.btnRegistrar.Text = "Registrar"
-        '
-        'btnModificar
-        '
-        Me.btnModificar.DialogResult = System.Windows.Forms.DialogResult.Ignore
-        Me.btnModificar.Image = CType(resources.GetObject("btnModificar.Image"), System.Drawing.Image)
-        Me.btnModificar.Location = New System.Drawing.Point(125, 201)
-        Me.btnModificar.Name = "btnModificar"
-        Me.btnModificar.Size = New System.Drawing.Size(88, 24)
-        Me.btnModificar.TabIndex = 122
-        Me.btnModificar.Text = "Modificar"
         '
         'txtTipo_Usuario
         '
@@ -150,29 +172,32 @@ Partial Class FrmUsuarios
         Me.txtTipo_Usuario.Name = "txtTipo_Usuario"
         Me.txtTipo_Usuario.ReadOnly = True
         Me.txtTipo_Usuario.Size = New System.Drawing.Size(202, 20)
-        Me.txtTipo_Usuario.TabIndex = 118
+        Me.txtTipo_Usuario.TabIndex = 5
         '
         'txtEmail
         '
         Me.txtEmail.Location = New System.Drawing.Point(103, 134)
+        Me.txtEmail.MaxLength = 200
         Me.txtEmail.Name = "txtEmail"
         Me.txtEmail.ReadOnly = True
         Me.txtEmail.Size = New System.Drawing.Size(274, 20)
-        Me.txtEmail.TabIndex = 117
+        Me.txtEmail.TabIndex = 3
         '
         'txtNombre
         '
         Me.txtNombre.Location = New System.Drawing.Point(103, 108)
+        Me.txtNombre.MaxLength = 200
         Me.txtNombre.Name = "txtNombre"
         Me.txtNombre.Size = New System.Drawing.Size(274, 20)
-        Me.txtNombre.TabIndex = 116
+        Me.txtNombre.TabIndex = 2
         '
         'txtId_Usuario
         '
         Me.txtId_Usuario.Location = New System.Drawing.Point(103, 82)
+        Me.txtId_Usuario.MaxLength = 50
         Me.txtId_Usuario.Name = "txtId_Usuario"
         Me.txtId_Usuario.Size = New System.Drawing.Size(182, 20)
-        Me.txtId_Usuario.TabIndex = 114
+        Me.txtId_Usuario.TabIndex = 1
         '
         'titulo_banner_formulario
         '
@@ -223,7 +248,7 @@ Partial Class FrmUsuarios
         '
         'RadLabel2
         '
-        Me.RadLabel2.Location = New System.Drawing.Point(12, 184)
+        Me.RadLabel2.Location = New System.Drawing.Point(3, 247)
         Me.RadLabel2.Name = "RadLabel2"
         Me.RadLabel2.Size = New System.Drawing.Size(28, 18)
         Me.RadLabel2.TabIndex = 6
@@ -242,27 +267,29 @@ Partial Class FrmUsuarios
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(396, 237)
+        Me.ClientSize = New System.Drawing.Size(396, 283)
         Me.Controls.Add(Me.RadPanel1)
         Me.MaximizeBox = False
-        Me.MaximumSize = New System.Drawing.Size(404, 267)
+        Me.MaximumSize = New System.Drawing.Size(404, 313)
         Me.MinimumSize = New System.Drawing.Size(404, 267)
         Me.Name = "FrmUsuarios"
         '
         '
         '
         Me.RootElement.ApplyShapeToControl = True
-        Me.RootElement.MaxSize = New System.Drawing.Size(404, 267)
+        Me.RootElement.MaxSize = New System.Drawing.Size(404, 313)
         Me.Text = "Registro de Usuario"
         CType(Me.RadPanel1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.RadPanel1.ResumeLayout(False)
         Me.RadPanel1.PerformLayout()
+        CType(Me.RadLabel6, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.txtEstatus, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.btnModificar, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.btnImportar, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.txtPass, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.btnBaja, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.btnSalir, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.btnRegistrar, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.btnModificar, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.txtTipo_Usuario, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.txtEmail, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.txtNombre, System.ComponentModel.ISupportInitialize).EndInit()
@@ -295,5 +322,7 @@ Partial Class FrmUsuarios
     Friend WithEvents txtPass As Telerik.WinControls.UI.RadTextBox
     Friend WithEvents txtId_Usuario As Telerik.WinControls.UI.RadTextBox
     Friend WithEvents btnImportar As Telerik.WinControls.UI.RadButton
+    Friend WithEvents RadLabel6 As Telerik.WinControls.UI.RadLabel
+    Friend WithEvents txtEstatus As Telerik.WinControls.UI.RadTextBox
 End Class
 

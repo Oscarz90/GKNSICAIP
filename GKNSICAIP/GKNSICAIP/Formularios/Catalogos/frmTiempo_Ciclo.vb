@@ -9,8 +9,6 @@ Public Class frmTiempo_Ciclo
     Dim oTiempo_Ciclo_A_MODIFICAR As TC
     Dim oTiempo_Ciclo_A_MODIFICAR_ENCONTRADO_VALIDACIONES As TC
 
-
-    Dim oModelo As Modelo
     Dim vEmpleado As String = ""
     Dim vFecha As DateTime = Date.Now
     Dim vSeleccion_Modelo As Boolean = False
@@ -22,36 +20,40 @@ Public Class frmTiempo_Ciclo
 #Region "Validaciones"
     Private Sub Controles_Registro_Nuevo(ByVal vEs_Registro_Nuevo As Boolean)
         If vEs_Registro_Nuevo = True Then
-            btnRegistrar.Visible = True
+            'btnRegistrar.Visible = True
+            btnImportar_Linea.Enabled = True
+            btnImportar_Modelo.Enabled = True
             'btnModificar.Visible = False
             'btnDarBaja.Enabled = False
         Else
-            btnRegistrar.Visible = False
+            'btnRegistrar.Visible = False
+            btnImportar_Linea.Enabled = False
+            btnImportar_Modelo.Enabled = False
             'btnModificar.Visible = True
             'btnDarBaja.Enabled = True
         End If
     End Sub
 
     Private Sub btnValidar_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnValidar.Click
-        oModelo = New Modelo
 
-        If oModelo.Validar_Exixtencia_De_Modelo_En_Linea(oTiempo_Ciclo.cve_modelo, oTiempo_Ciclo.cve_linea) = True Then
-            MsgBox("El modelo en Linea ya exixte")
-            vValidado_Modelo_En_Linea = False
-        Else
-            MsgBox("El modelo en Linea No exixte")
-            vValidado_Modelo_En_Linea = True
-        End If
-        If oTiempo_Ciclo.Validar_Exixtencia_LINEA_MODELO_EN_TC(oTiempo_Ciclo.cve_linea, oTiempo_Ciclo.cve_modelo) = True Then
-            MsgBox("La linea y el modelo en TC ya exixte")
-            vValidado_Modelo_Y_Linea_En_TC = False
-            oTiempo_Ciclo_A_MODIFICAR_ENCONTRADO_VALIDACIONES = New TC
-            oTiempo_Ciclo_A_MODIFICAR_ENCONTRADO_VALIDACIONES.Cargar_TC(oTiempo_Ciclo.cve_linea, oTiempo_Ciclo.cve_modelo)
-        Else
-            MsgBox("La linea y el modelo en TC no exixte")
-            vValidado_Modelo_Y_Linea_En_TC = True
-        End If
-        btnRegistrar.Enabled = True
+
+        'If oModelo.Validar_Exixtencia_De_Modelo_En_Linea(oTiempo_Ciclo.cve_modelo, oTiempo_Ciclo.cve_linea) = True Then
+        '    MsgBox("El modelo en Linea ya exixte")
+        '    vValidado_Modelo_En_Linea = False
+        'Else
+        '    MsgBox("El modelo en Linea No exixte")
+        '    vValidado_Modelo_En_Linea = True
+        'End If
+        'If oTiempo_Ciclo.Validar_Exixtencia_LINEA_MODELO_EN_TC(oTiempo_Ciclo.cve_linea, oTiempo_Ciclo.cve_modelo) = True Then
+        '    MsgBox("La linea y el modelo en TC ya exixte")
+        '    vValidado_Modelo_Y_Linea_En_TC = False
+        '    'oTiempo_Ciclo_A_MODIFICAR_ENCONTRADO_VALIDACIONES = New TC
+        '    oTiempo_Ciclo_A_MODIFICAR_ENCONTRADO_VALIDACIONES.Cargar_TC(oTiempo_Ciclo.cve_linea, oTiempo_Ciclo.cve_modelo)
+        'Else
+        '    MsgBox("La linea y el modelo en TC no exixte")
+        '    vValidado_Modelo_Y_Linea_En_TC = True
+        'End If
+        'btnRegistrar.Enabled = True
 
         'If vValidado_Modelo_En_Linea = True And vValidado_Modelo_Y_Linea_En_TC = True Then
         '    btnRegistrar.Enabled = True
@@ -103,6 +105,9 @@ Public Class frmTiempo_Ciclo
             oTiempo_Ciclo.Cargar()
             oTiempo_Ciclo_A_MODIFICAR.Cargar()
             Controles_Registro_Nuevo(False)
+            If oTiempo_Ciclo_A_MODIFICAR.Estatus = "INACTIVO" Then
+                Controles_Registro_Inactivo(True)
+            End If
         Else
             oTiempo_Ciclo = New TC
             oTiempo_Ciclo.Estatus = "1"
@@ -114,9 +119,7 @@ Public Class frmTiempo_Ciclo
             'btnRegistrar.Enabled = True
         End If
         SetBindings()
-        Me.Show()
-        btnRegistrar.Visible = True
-        btnRegistrar.Enabled = True
+        Me.Show()       
         Me.nudPiezas_Hora.Focus()
     End Sub
 
@@ -126,21 +129,38 @@ Public Class frmTiempo_Ciclo
 
     Private Sub btnRegistrar_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnRegistrar.Click
         If MsgBox("El Tiempo Ciclo se remplazara con los Datos Capturados, ¿Desea Continuar?", MsgBoxStyle.YesNo, Me.Text) = MsgBoxResult.Yes Then
+            oTiempo_Ciclo_A_MODIFICAR_ENCONTRADO_VALIDACIONES = New TC
             oTiempo_Ciclo.cve_TC = 0
             oTiempo_Ciclo.Estatus = "1"
             oTiempo_Ciclo.piezas_por_hora = nudPiezas_Hora.Value
             Using scope As New TransactionScope()
                 Try
+                    If oTiempo_Ciclo.Validar_Exixtencia_LINEA_MODELO_EN_TC(oTiempo_Ciclo.cve_linea, oTiempo_Ciclo.cve_modelo) = True Then
+                        MsgBox("La linea y el modelo en TC ya exixte")
+                        vValidado_Modelo_Y_Linea_En_TC = False
+                        'oTiempo_Ciclo_A_MODIFICAR_ENCONTRADO_VALIDACIONES = New TC
+                        oTiempo_Ciclo_A_MODIFICAR_ENCONTRADO_VALIDACIONES.Cargar_TC(oTiempo_Ciclo.cve_linea, oTiempo_Ciclo.cve_modelo)
+                    Else
+                        MsgBox("La linea y el modelo en TC no exixte")
+                        vValidado_Modelo_Y_Linea_En_TC = True
+                    End If
+                    'btnRegistrar.Enabled = True
                     oTiempo_Ciclo.Registrar()
                     If vValidado_Modelo_Y_Linea_En_TC = False Then
                         'If MsgBox("El Tiempo Ciclo se remplazara con los Datos Capturados, ¿Desea Continuar?", MsgBoxStyle.YesNo, Me.Text) = MsgBoxResult.Yes Then
-                        oTiempo_Ciclo_A_MODIFICAR_ENCONTRADO_VALIDACIONES.Estatus = "0"
-                        oTiempo_Ciclo_A_MODIFICAR_ENCONTRADO_VALIDACIONES.Registrar()
-                        MsgBox("Se Registro correctamente")
+                        If oTiempo_Ciclo_A_MODIFICAR_ENCONTRADO_VALIDACIONES IsNot Nothing Then
+                            oTiempo_Ciclo_A_MODIFICAR_ENCONTRADO_VALIDACIONES.Estatus = "0"
+                            oTiempo_Ciclo_A_MODIFICAR_ENCONTRADO_VALIDACIONES.Registrar()
+                            MsgBox("Se Registro correctamente")
+                        Else
+                            oTiempo_Ciclo_A_MODIFICAR.Estatus = "0"
+                            oTiempo_Ciclo_A_MODIFICAR.Registrar()
+                            MsgBox("Se Registro correctamente")
+                        End If
                         'End If
                     Else
-                        oTiempo_Ciclo_A_MODIFICAR.Estatus = "0"
-                        oTiempo_Ciclo_A_MODIFICAR.Registrar()
+                        'oTiempo_Ciclo_A_MODIFICAR.Estatus = "0"
+                        'oTiempo_Ciclo_A_MODIFICAR.Registrar()
                         MsgBox("Se Registro correctamente")
                     End If
                     scope.Complete()
@@ -153,6 +173,16 @@ Public Class frmTiempo_Ciclo
     End Sub
 #End Region
 
+
+#Region "Metodos"
+    Private Sub Controles_Registro_Inactivo(ByVal vEs_Registro_Inactivo As Boolean)
+        If vEs_Registro_Inactivo = True Then
+            btnRegistrar.Enabled = False
+            nudPiezas_Hora.ReadOnly = True
+        End If
+    End Sub
+#End Region
+    
 #Region "SetBindings"
     Private Sub SetBindings()
         Me.nudPiezas_Hora.DataBindings.Clear()
@@ -170,5 +200,8 @@ Public Class frmTiempo_Ciclo
         Me.txtEstatus.DataBindings.Add("Text", oTiempo_Ciclo, "Estatus")
     End Sub
 #End Region
+
     
+
+
 End Class

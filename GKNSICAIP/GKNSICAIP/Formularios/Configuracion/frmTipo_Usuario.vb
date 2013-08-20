@@ -11,8 +11,9 @@ Public Class FrmTipo_Usuario
     Private Sub btnBaja_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnBaja.Click
         Try
             oTipo_Usuario.Eliminar()
+            Me.Close()
         Catch ex As Exception
-
+           
         End Try
     End Sub
 

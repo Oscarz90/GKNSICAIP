@@ -42,6 +42,11 @@ Public Class SEGURIDAD_USUARIO
                 Else
                     Me.vCVE_TIPO_USUARIO = 0
                 End If
+                If Not IsDBNull(rDatos("Estatus")) Then
+                    Me.vEstatus = rDatos("Estatus")
+                Else
+                    Me.vEmail = ""
+                End If
             End If
         Catch ex As Exception
             Throw New Exception(ex.Message)
@@ -81,6 +86,7 @@ Public Class SEGURIDAD_USUARIO
                     .Add("Nombre", SqlDbType.VarChar).Value = Me.vNombre
                     .Add("Email", SqlDbType.VarChar).Value = Me.vEmail
                     .Add("CVE_TIPO_USUARIO", SqlDbType.BigInt).Value = Me.vCVE_TIPO_USUARIO
+                    .Add("Estatus", SqlDbType.VarChar).Value = Me.vEstatus
                 End With
 
                 Dim obj As DataTable = oBD.EjecutaCommando(cmd)
@@ -103,6 +109,7 @@ Public Class SEGURIDAD_USUARIO
     Private vNombre As String
     Private vEmail As String
     Private vCVE_TIPO_USUARIO As Long
+    Private vEstatus As String
 #End Region
 
 #Region "Propiedades"
@@ -154,7 +161,6 @@ Public Class SEGURIDAD_USUARIO
             vCVE_TIPO_USUARIO = value
         End Set
     End Property
-
     Public ReadOnly Property Descripcion_Tipo_Usuario() As String
         Get
             If vCVE_TIPO_USUARIO <> 0 Then
@@ -166,6 +172,19 @@ Public Class SEGURIDAD_USUARIO
                 Return ""
             End If
         End Get
+    End Property
+    Public Property Estatus() As String
+        Get
+            If vEstatus = "1" Then
+                Return "ACTIVO"
+            ElseIf vEstatus = "0" Then
+                Return "INACTIVO"
+            End If
+            Return vEstatus
+        End Get
+        Set(ByVal value As String)
+            vEstatus = value
+        End Set
     End Property
 
     Private vL_USUARIO_PERMISOS As List(Of SEGURIDAD_USUARIO_PERMISOS)
@@ -213,7 +232,7 @@ Public Class SEGURIDAD_USUARIO
     Public Function Obtener_USUARIOS(ByVal vCVE_TIPO_USUARIO As Long) As DataTable
         Dim vRetorno As DataTable
         Try
-            vRetorno = oBD.ObtenerTabla("SELECT * FROM SEGURIDAD_USUARIO WHERE CVE_TIPO_USUARIO=" & vCVE_TIPO_USUARIO)
+            vRetorno = oBD.ObtenerTabla("SELECT * FROM SEGURIDAD_USUARIO WHERE ESTATUS='1' and CVE_TIPO_USUARIO=" & vCVE_TIPO_USUARIO)
             If vRetorno.Rows.Count = 0 Then
                 vRetorno = Nothing
             End If
@@ -284,23 +303,26 @@ Public Class SEGURIDAD_USUARIO
             vDT.Rows.Add(vDR_Nuevo)
 
             vIdetificador_Padre = vDR_Nuevo("IdentificadorNodo")
+            If Obtener_USUARIOS(vDR_Tipos("CVE_Tipo_Usuario")) IsNot Nothing Then
+                For Each vDR_USUARIOS As DataRow In Obtener_USUARIOS(vDR_Tipos("CVE_Tipo_Usuario")).Rows
+                    ''Incrementa el Identificador del Nodo
+                    vIdetificador_Nodo = vIdetificador_Nodo + 1
 
-            For Each vDR_USUARIOS As DataRow In Obtener_USUARIOS(vDR_Tipos("CVE_Tipo_Usuario")).Rows
+                    Dim vDR_Nuevo_USUARIO As DataRow
+                    vDR_Nuevo_USUARIO = vDT.NewRow
+
+                    vDR_Nuevo_USUARIO("NombreNodo") = vDR_USUARIOS("Id_Usuario")
+                    vDR_Nuevo_USUARIO("IdentificadorNodo") = vIdetificador_Nodo
+                    vDR_Nuevo_USUARIO("IdentificadorPadre") = vIdetificador_Padre
+                    vDR_Nuevo_USUARIO("CVE_TABLA") = vDR_USUARIOS("CVE_Usuario") & ".U"
+                    ''Inserta el Usuario
+                    vDT.Rows.Add(vDR_Nuevo_USUARIO)
+                Next
                 ''Incrementa el Identificador del Nodo
                 vIdetificador_Nodo = vIdetificador_Nodo + 1
-
-                Dim vDR_Nuevo_USUARIO As DataRow
-                vDR_Nuevo_USUARIO = vDT.NewRow
-
-                vDR_Nuevo_USUARIO("NombreNodo") = vDR_USUARIOS("Id_Usuario")
-                vDR_Nuevo_USUARIO("IdentificadorNodo") = vIdetificador_Nodo
-                vDR_Nuevo_USUARIO("IdentificadorPadre") = vIdetificador_Padre
-                vDR_Nuevo_USUARIO("CVE_TABLA") = vDR_USUARIOS("CVE_Usuario") & ".U"
-                ''Inserta el Usuario
-                vDT.Rows.Add(vDR_Nuevo_USUARIO)
-            Next
-            ''Incrementa el Identificador del Nodo
-            vIdetificador_Nodo = vIdetificador_Nodo + 1
+            End If
+                
+               
         Next
         Return vDT
     End Function

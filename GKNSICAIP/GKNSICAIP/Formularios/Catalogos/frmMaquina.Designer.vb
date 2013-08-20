@@ -103,7 +103,7 @@ Partial Class frmMaquina
         '
         'btnModificar
         '
-        Me.btnModificar.Location = New System.Drawing.Point(177, 183)
+        Me.btnModificar.Location = New System.Drawing.Point(258, 183)
         Me.btnModificar.Name = "btnModificar"
         Me.btnModificar.Size = New System.Drawing.Size(75, 23)
         Me.btnModificar.TabIndex = 7
@@ -112,7 +112,7 @@ Partial Class frmMaquina
         '
         'btnRegistrar
         '
-        Me.btnRegistrar.Location = New System.Drawing.Point(177, 183)
+        Me.btnRegistrar.Location = New System.Drawing.Point(258, 183)
         Me.btnRegistrar.Name = "btnRegistrar"
         Me.btnRegistrar.Size = New System.Drawing.Size(75, 23)
         Me.btnRegistrar.TabIndex = 8
@@ -121,12 +121,13 @@ Partial Class frmMaquina
         '
         'btnDar_Baja
         '
-        Me.btnDar_Baja.Location = New System.Drawing.Point(258, 183)
+        Me.btnDar_Baja.Location = New System.Drawing.Point(12, 183)
         Me.btnDar_Baja.Name = "btnDar_Baja"
         Me.btnDar_Baja.Size = New System.Drawing.Size(75, 23)
         Me.btnDar_Baja.TabIndex = 9
         Me.btnDar_Baja.Text = "Dar Baja"
         Me.btnDar_Baja.UseVisualStyleBackColor = True
+        Me.btnDar_Baja.Visible = False
         '
         'btnSalir
         '

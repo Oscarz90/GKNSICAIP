@@ -51,6 +51,8 @@ Public Class Formulario_Principal
         oCatalogo_Linea = New Catalogo_Linea
         oLinea = New Linea
 
+        MapaUbicacion.Text = "Catalogo Linea"
+
         Me.dgvRegistros.DataSource = Nothing
         Me.dgvRegistros.Columns.Clear()
         Me.dgvRegistros.Visible = True
@@ -84,6 +86,8 @@ Public Class Formulario_Principal
         oCatalogo_Maquina = New Catalogo_Maquina
         oMaquina = New Maquina
 
+        MapaUbicacion.Text = "Catalogo Maquina"
+
         Me.dgvRegistros.DataSource = Nothing
         Me.dgvRegistros.Columns.Clear()
 
@@ -116,6 +120,8 @@ Public Class Formulario_Principal
     Private Sub btnModelo_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnModelo.Click
         oCatalogo_Modelo = New Catalogo_Modelo
         oModelo = New Modelo
+
+        MapaUbicacion.Text = "Catalogo Modelo"
 
         Me.dgvRegistros.DataSource = Nothing
         Me.dgvRegistros.Columns.Clear()
@@ -153,14 +159,17 @@ Public Class Formulario_Principal
         oCatalogo_Tiempo_Ciclo = New Catalogo_Tiempo_Ciclo
         oTiempo_Ciclo = New TC
 
+        MapaUbicacion.Text = "Catalogo Tiempo Ciclo"
+
         Me.dgvRegistros.DataSource = Nothing
         Me.dgvRegistros.Columns.Clear()
 
         Me.dgvRegistros.Visible = True
-        Me.Barra_Tool_Registros.Visible = True
-
+        Me.Barra_Tool_Registros.Visible = True        
+        Me.btnEliminar.VisibleInStrip = False
         Try
-            Me.dgvRegistros.DataSource = oCatalogo_Tiempo_Ciclo.Obtener_Tiempos_Ciclos
+            Me.dgvRegistros.DataSource = oCatalogo_Tiempo_Ciclo.L_TC
+
         Catch ex As Exception
             MsgBox(ex.Message)
         End Try
@@ -169,16 +178,28 @@ Public Class Formulario_Principal
         Me.dgvRegistros.Columns("cve_TC").IsVisible = False
         Me.dgvRegistros.Columns("cve_TC").Name = "CVE"
 
+        Me.dgvRegistros.Columns("fecha").HeaderText = "fecha"
+        Me.dgvRegistros.Columns("fecha").IsVisible = False
+
+        Me.dgvRegistros.Columns("Codigo_Empleado").HeaderText = "Codigo_Empleado"
+        Me.dgvRegistros.Columns("Codigo_Empleado").IsVisible = False
+
+        Me.dgvRegistros.Columns("Nombre_Linea").HeaderText = "Nombre_Linea"
+        Me.dgvRegistros.Columns("Nombre_Linea").Width = 250
+
+        Me.dgvRegistros.Columns("Nombre_Modelo").HeaderText = "Nombre_Modelo"
+        Me.dgvRegistros.Columns("Nombre_Modelo").Width = 250
+
         Me.dgvRegistros.Columns("piezas_por_hora").HeaderText = "Piezas X Hora"
         Me.dgvRegistros.Columns("piezas_por_hora").Width = 250
 
-        Me.dgvRegistros.Columns("linea").HeaderText = "Linea"
-        Me.dgvRegistros.Columns("linea").Width = 250
+        Me.dgvRegistros.Columns("cve_linea").HeaderText = "cve_linea"
+        Me.dgvRegistros.Columns("cve_linea").IsVisible = False        
 
-        Me.dgvRegistros.Columns("Modelo").HeaderText = " Modelo"
-        Me.dgvRegistros.Columns("Modelo").Width = 250
+        Me.dgvRegistros.Columns("cve_modelo").HeaderText = " cve_modelo"
+        Me.dgvRegistros.Columns("cve_modelo").IsVisible = False
 
-        Me.dgvRegistros.Columns("estatus").HeaderText = "Estatus"
+        Me.dgvRegistros.Columns("estatus").HeaderText = "estatus"
         Me.dgvRegistros.Columns("estatus").Width = 250
 
         dgvRegistros.Visible = True
@@ -189,6 +210,8 @@ Public Class Formulario_Principal
         Me.dgvRegistros.Visible = False
         Me.Barra_Tool_Registros.Visible = False
 
+        MapaUbicacion.Text = "Catalogo Equipo_Linea"
+
         ofrmEquipo_Linea = New frmEquipo_Linea
         ofrmEquipo_Linea.ShowDialog()
     End Sub
@@ -196,6 +219,8 @@ Public Class Formulario_Principal
     Private Sub btnUsuario_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnUsuario.Click
         oCatalogo_Usuario = New Catalogo_Usuario
         oUsuario = New SEGURIDAD_USUARIO
+
+        MapaUbicacion.Text = "Catalogo Usuario"
 
         Me.dgvRegistros.DataSource = Nothing
         Me.dgvRegistros.Columns.Clear()
@@ -225,11 +250,18 @@ Public Class Formulario_Principal
         Me.dgvRegistros.Columns("Email").HeaderText = "Email"
         Me.dgvRegistros.Columns("Email").Width = 250
 
+        Me.dgvRegistros.Columns("Estatus").HeaderText = "Estatus"
+        Me.dgvRegistros.Columns("Estatus").Width = 250
+
         Me.dgvRegistros.Columns("CVE_TIPO_USUARIO").HeaderText = "CVE_TIPO_USUARIO"
         Me.dgvRegistros.Columns("CVE_TIPO_USUARIO").IsVisible = False
 
         Me.dgvRegistros.Columns("Descripcion_Tipo_Usuario").HeaderText = "Tipo de Usuario"
-        Me.dgvRegistros.Columns("Descripcion_Tipo_Usuario").Width = 250        
+        Me.dgvRegistros.Columns("Descripcion_Tipo_Usuario").Width = 250
+
+        Me.dgvRegistros.Columns("L_USUARIO_PERMISOS").HeaderText = "L_USUARIO_PERMISOS"
+        Me.dgvRegistros.Columns("L_USUARIO_PERMISOS").IsVisible = False
+
         dgvRegistros.Visible = True
         Activar_Formulario("frmUsuario")
     End Sub
@@ -237,6 +269,8 @@ Public Class Formulario_Principal
     Private Sub btnTipoUsuario_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnTipoUsuario.Click
         oCatalogo_Tipo_Usuario = New Catalogo_Tipo_Usuario
         oTipo_Usuario = New Tipo_Usuario
+
+        MapaUbicacion.Text = "Catalogo Tipo de Usuario"
 
         Me.dgvRegistros.DataSource = Nothing
         Me.dgvRegistros.Columns.Clear()
@@ -264,6 +298,8 @@ Public Class Formulario_Principal
     Private Sub btnPermisos_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnPermisos.Click
         Me.dgvRegistros.Visible = False
         Me.Barra_Tool_Registros.Visible = False
+
+        MapaUbicacion.Text = "Catalogo Permisos"
 
         ofrmPermisos = New FrmPermisos
         ofrmPermisos.ShowDialog()
@@ -390,7 +426,7 @@ Public Class Formulario_Principal
                     End If
                 End Try
                 ofrmLinea.ShowDialog()
-                dgvRegistros.Refresh()
+                btnLinea.PerformClick()
             ElseIf vMaquina = True Then
                 ofrmMaquina = New frmMaquina
                 Try
@@ -402,7 +438,7 @@ Public Class Formulario_Principal
                     End If
                 End Try
                 ofrmMaquina.ShowDialog()
-                dgvRegistros.Refresh()
+                btnMaquina.PerformClick()
             ElseIf vModelo = True Then
                 ofrmModelo = New frmModelo
                 Try
@@ -414,7 +450,7 @@ Public Class Formulario_Principal
                     End If
                 End Try
                 ofrmModelo.ShowDialog()
-                dgvRegistros.Refresh()
+                btnModelo.PerformClick()
             ElseIf vTiempo_Ciclo = True Then
                 ofrmTiempo_Ciclo = New frmTiempo_Ciclo
                 Try
@@ -426,7 +462,7 @@ Public Class Formulario_Principal
                     End If
                 End Try
                 ofrmTiempo_Ciclo.ShowDialog()
-                dgvRegistros.Refresh()
+                btnTiempo_Ciclo.PerformClick()                
             ElseIf vUsuario = True Then
                 ofrmUsuario = New FrmUsuarios
                 Try
@@ -438,7 +474,7 @@ Public Class Formulario_Principal
                     End If
                 End Try
                 ofrmUsuario.ShowDialog()
-                dgvRegistros.Refresh()
+                btnUsuario.PerformClick()
             ElseIf vTipo_Usuario = True Then
                 ofrmTipo_Usuario = New FrmTipo_Usuario
                 Try
@@ -450,8 +486,7 @@ Public Class Formulario_Principal
                     End If
                 End Try
                 ofrmTipo_Usuario.ShowDialog()
-
-                dgvRegistros.Refresh()
+                btnTipoUsuario.PerformClick()
             End If
         Else
 

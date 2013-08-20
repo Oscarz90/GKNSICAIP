@@ -131,14 +131,18 @@ Partial Class FrmImportador_TipoUsuario
         '
         'rbtFiltro_Nombre
         '
+        Me.rbtFiltro_Nombre.Enabled = False
         Me.rbtFiltro_Nombre.Location = New System.Drawing.Point(162, 418)
         Me.rbtFiltro_Nombre.Name = "rbtFiltro_Nombre"
         Me.rbtFiltro_Nombre.Size = New System.Drawing.Size(114, 18)
         Me.rbtFiltro_Nombre.TabIndex = 116
+        Me.rbtFiltro_Nombre.TabStop = True
         Me.rbtFiltro_Nombre.Text = "Filtrar por Nombre"
+        Me.rbtFiltro_Nombre.ToggleState = Telerik.WinControls.Enumerations.ToggleState.[On]
         '
         'rbtTodos
         '
+        Me.rbtTodos.Enabled = False
         Me.rbtTodos.Location = New System.Drawing.Point(48, 418)
         Me.rbtTodos.Name = "rbtTodos"
         Me.rbtTodos.Size = New System.Drawing.Size(64, 18)

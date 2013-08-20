@@ -171,10 +171,13 @@ Partial Class frmImportador_Modelo
         'rbtFiltro_Nombre
         '
         Me.rbtFiltro_Nombre.AutoSize = True
+        Me.rbtFiltro_Nombre.Checked = True
+        Me.rbtFiltro_Nombre.Enabled = False
         Me.rbtFiltro_Nombre.Location = New System.Drawing.Point(121, 420)
         Me.rbtFiltro_Nombre.Name = "rbtFiltro_Nombre"
         Me.rbtFiltro_Nombre.Size = New System.Drawing.Size(108, 17)
         Me.rbtFiltro_Nombre.TabIndex = 5
+        Me.rbtFiltro_Nombre.TabStop = True
         Me.rbtFiltro_Nombre.Text = "Filtrar por Nombre"
         Me.rbtFiltro_Nombre.UseVisualStyleBackColor = True
         '
@@ -191,12 +194,11 @@ Partial Class frmImportador_Modelo
         'rbtTodos
         '
         Me.rbtTodos.AutoSize = True
-        Me.rbtTodos.Checked = True
+        Me.rbtTodos.Enabled = False
         Me.rbtTodos.Location = New System.Drawing.Point(50, 420)
         Me.rbtTodos.Name = "rbtTodos"
         Me.rbtTodos.Size = New System.Drawing.Size(65, 17)
         Me.rbtTodos.TabIndex = 7
-        Me.rbtTodos.TabStop = True
         Me.rbtTodos.Text = "Sin Filtro"
         Me.rbtTodos.UseVisualStyleBackColor = True
         '
