@@ -9,12 +9,14 @@ Public Class FrmTipo_Usuario
     End Sub
 
     Private Sub btnBaja_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnBaja.Click
-        Try
-            oTipo_Usuario.Eliminar()
-            Me.Close()
-        Catch ex As Exception
-           
-        End Try
+        If MsgBox("¿Esta seguro de Eliminar al Tipo de Usuario?", MsgBoxStyle.YesNo, Me.Text) = MsgBoxResult.Yes Then
+            Try
+                oTipo_Usuario.Eliminar()
+                Me.Close()
+            Catch ex As Exception
+
+            End Try
+        End If
     End Sub
 
     Private Sub btnModificar_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnModificar.Click

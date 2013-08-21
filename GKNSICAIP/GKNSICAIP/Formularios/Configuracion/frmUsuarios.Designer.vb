@@ -43,6 +43,7 @@ Partial Class FrmUsuarios
         Me.RadLabel3 = New Telerik.WinControls.UI.RadLabel()
         Me.RadLabel2 = New Telerik.WinControls.UI.RadLabel()
         Me.RadLabel1 = New Telerik.WinControls.UI.RadLabel()
+        Me.btnAlta = New Telerik.WinControls.UI.RadButton()
         CType(Me.RadPanel1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.RadPanel1.SuspendLayout()
         CType(Me.RadLabel6, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -63,12 +64,14 @@ Partial Class FrmUsuarios
         CType(Me.RadLabel3, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.RadLabel2, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.RadLabel1, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.btnAlta, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'RadPanel1
         '
         Me.RadPanel1.BackColor = System.Drawing.Color.White
+        Me.RadPanel1.Controls.Add(Me.btnAlta)
         Me.RadPanel1.Controls.Add(Me.RadLabel6)
         Me.RadPanel1.Controls.Add(Me.txtEstatus)
         Me.RadPanel1.Controls.Add(Me.btnModificar)
@@ -263,6 +266,16 @@ Partial Class FrmUsuarios
         Me.RadLabel1.TabIndex = 5
         Me.RadLabel1.Text = "Id_Usuario:"
         '
+        'btnAlta
+        '
+        Me.btnAlta.Image = CType(resources.GetObject("btnAlta.Image"), System.Drawing.Image)
+        Me.btnAlta.Location = New System.Drawing.Point(219, 247)
+        Me.btnAlta.Name = "btnAlta"
+        Me.btnAlta.Size = New System.Drawing.Size(89, 24)
+        Me.btnAlta.TabIndex = 10
+        Me.btnAlta.Text = "Dar Alta"
+        Me.btnAlta.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
+        '
         'FrmUsuarios
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -300,6 +313,7 @@ Partial Class FrmUsuarios
         CType(Me.RadLabel3, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.RadLabel2, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.RadLabel1, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.btnAlta, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
@@ -324,5 +338,6 @@ Partial Class FrmUsuarios
     Friend WithEvents btnImportar As Telerik.WinControls.UI.RadButton
     Friend WithEvents RadLabel6 As Telerik.WinControls.UI.RadLabel
     Friend WithEvents txtEstatus As Telerik.WinControls.UI.RadTextBox
+    Friend WithEvents btnAlta As Telerik.WinControls.UI.RadButton
 End Class
 

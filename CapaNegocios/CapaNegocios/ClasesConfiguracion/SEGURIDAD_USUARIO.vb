@@ -92,6 +92,7 @@ Public Class SEGURIDAD_USUARIO
 
                 Dim obj As DataTable = oBD.EjecutaCommando(cmd)
                 Me.vCVE_Usuario = obj.Rows(0)(0) 'ID
+                MsgBox("El Usuario se registro Correctamente")
                 'Me.RegistraDatos("DEPARTAMENTO", "Departamento_Id", Me.m_Departamento_Id)
                 'Dim oBitacora As Bitacora = Bitacora.ObtenInstancia
                 'oBitacora.RegistrarEnBitacora("DEPARTAMENTO.REGISTRAR", "Se registró el departamento: " & Me.m_Nombre)

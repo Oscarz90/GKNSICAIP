@@ -4,10 +4,11 @@
 Public Class FrmMenu
     Public user_maq As String
     Public oUsuario_Login As Login
-    Dim ofrmLogin As New frmLogin
+
 
 #Region "Opciones De Menu"
     Private Sub btnOpSICAIP_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnOpSICAIP.Click
+        Dim ofrmLogin As New frmLogin
         ofrmLogin.ShowDialog()
     End Sub
 
@@ -16,7 +17,6 @@ Public Class FrmMenu
     End Sub
 #End Region
     
-
     Private Sub FrmMenu_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         oUsuario_Login = New Login
         user_maq = Environment.UserName

@@ -47,6 +47,7 @@ Partial Class FrmMenu
         Me.btnOpCalculadora.Size = New System.Drawing.Size(516, 315)
         Me.btnOpCalculadora.TabIndex = 4
         Me.btnOpCalculadora.UseVisualStyleBackColor = False
+        Me.btnOpCalculadora.Visible = False
         '
         'FrmMenu
         '
