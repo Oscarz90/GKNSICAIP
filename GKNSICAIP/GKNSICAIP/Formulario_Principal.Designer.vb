@@ -41,7 +41,6 @@ Partial Class Formulario_Principal
         Me.RadRibbonBarGroup4 = New Telerik.WinControls.UI.RadRibbonBarGroup()
         Me.btnSICAIP = New Telerik.WinControls.UI.RadButtonElement()
         Me.RibbonTab5 = New Telerik.WinControls.UI.RibbonTab()
-        Me.RibbonTab6 = New Telerik.WinControls.UI.RibbonTab()
         Me.RibbonTab4 = New Telerik.WinControls.UI.RibbonTab()
         Me.RadOffice2007ScreenTipElement1 = New Telerik.WinControls.UI.RadOffice2007ScreenTipElement()
         Me.RadPanel_Registros = New Telerik.WinControls.UI.RadPanel()
@@ -65,7 +64,7 @@ Partial Class Formulario_Principal
         '
         'MapaUbicacion
         '
-        Me.MapaUbicacion.CommandTabs.AddRange(New Telerik.WinControls.RadItem() {Me.RibbonTab1, Me.RibbonTab2, Me.RibbonTab3, Me.RibbonTab5, Me.RibbonTab6, Me.RibbonTab4})
+        Me.MapaUbicacion.CommandTabs.AddRange(New Telerik.WinControls.RadItem() {Me.RibbonTab1, Me.RibbonTab2, Me.RibbonTab3, Me.RibbonTab5, Me.RibbonTab4})
         Me.MapaUbicacion.Location = New System.Drawing.Point(0, 0)
         Me.MapaUbicacion.Name = "MapaUbicacion"
         '
@@ -81,7 +80,7 @@ Partial Class Formulario_Principal
         '
         Me.RibbonTab1.AccessibleDescription = "Configuración"
         Me.RibbonTab1.AccessibleName = "Configuración"
-        Me.RibbonTab1.IsSelected = True
+        Me.RibbonTab1.IsSelected = False
         Me.RibbonTab1.Items.AddRange(New Telerik.WinControls.RadItem() {Me.RadRibbonBarGroup1})
         Me.RibbonTab1.Name = "RibbonTab1"
         Me.RibbonTab1.Text = "Configuración"
@@ -217,6 +216,7 @@ Partial Class Formulario_Principal
         '
         Me.RibbonTab3.AccessibleDescription = "SICAIP"
         Me.RibbonTab3.AccessibleName = "SICAIP"
+        Me.RibbonTab3.IsSelected = True
         Me.RibbonTab3.Items.AddRange(New Telerik.WinControls.RadItem() {Me.RadRibbonBarGroup4})
         Me.RibbonTab3.Name = "RibbonTab3"
         Me.RibbonTab3.Text = "SICAIP"
@@ -250,14 +250,6 @@ Partial Class Formulario_Principal
         Me.RibbonTab5.Name = "RibbonTab5"
         Me.RibbonTab5.Text = "Reportes"
         Me.RibbonTab5.Visibility = Telerik.WinControls.ElementVisibility.Visible
-        '
-        'RibbonTab6
-        '
-        Me.RibbonTab6.AccessibleDescription = "RibbonTab6"
-        Me.RibbonTab6.AccessibleName = "RibbonTab6"
-        Me.RibbonTab6.Name = "RibbonTab6"
-        Me.RibbonTab6.Text = "RibbonTab6"
-        Me.RibbonTab6.Visibility = Telerik.WinControls.ElementVisibility.Visible
         '
         'RibbonTab4
         '
@@ -461,6 +453,5 @@ Partial Class Formulario_Principal
     Friend WithEvents btnTipoUsuario As Telerik.WinControls.UI.RadButtonElement
     Friend WithEvents RibbonTab5 As Telerik.WinControls.UI.RibbonTab
     Friend WithEvents RibbonTab4 As Telerik.WinControls.UI.RibbonTab
-    Friend WithEvents RibbonTab6 As Telerik.WinControls.UI.RibbonTab
 
 End Class
