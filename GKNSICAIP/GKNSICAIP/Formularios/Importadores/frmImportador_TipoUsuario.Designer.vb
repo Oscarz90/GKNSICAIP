@@ -128,6 +128,7 @@ Partial Class FrmImportador_TipoUsuario
         Me.btnFiltrar.Size = New System.Drawing.Size(94, 24)
         Me.btnFiltrar.TabIndex = 117
         Me.btnFiltrar.Text = "Filtrar"
+        Me.btnFiltrar.Visible = False
         '
         'rbtFiltro_Nombre
         '
@@ -139,6 +140,7 @@ Partial Class FrmImportador_TipoUsuario
         Me.rbtFiltro_Nombre.TabStop = True
         Me.rbtFiltro_Nombre.Text = "Filtrar por Nombre"
         Me.rbtFiltro_Nombre.ToggleState = Telerik.WinControls.Enumerations.ToggleState.[On]
+        Me.rbtFiltro_Nombre.Visible = False
         '
         'rbtTodos
         '
@@ -148,6 +150,7 @@ Partial Class FrmImportador_TipoUsuario
         Me.rbtTodos.Size = New System.Drawing.Size(64, 18)
         Me.rbtTodos.TabIndex = 115
         Me.rbtTodos.Text = "Sin Filtro"
+        Me.rbtTodos.Visible = False
         '
         'txtParametro
         '

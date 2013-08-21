@@ -154,32 +154,43 @@ Partial Class Formulario_Principal
         '
         Me.btnLinea.AccessibleDescription = "Linea"
         Me.btnLinea.AccessibleName = "Linea"
+        Me.btnLinea.Image = CType(resources.GetObject("btnLinea.Image"), System.Drawing.Image)
         Me.btnLinea.Name = "btnLinea"
         Me.btnLinea.Text = "Linea"
+        Me.btnLinea.TextAlignment = System.Drawing.ContentAlignment.BottomCenter
         Me.btnLinea.Visibility = Telerik.WinControls.ElementVisibility.Visible
         '
         'btnMaquina
         '
         Me.btnMaquina.AccessibleDescription = "Maquina"
         Me.btnMaquina.AccessibleName = "Maquina"
+        Me.btnMaquina.Image = CType(resources.GetObject("btnMaquina.Image"), System.Drawing.Image)
+        Me.btnMaquina.ImageAlignment = System.Drawing.ContentAlignment.MiddleCenter
         Me.btnMaquina.Name = "btnMaquina"
         Me.btnMaquina.Text = "Maquina"
+        Me.btnMaquina.TextAlignment = System.Drawing.ContentAlignment.BottomCenter
         Me.btnMaquina.Visibility = Telerik.WinControls.ElementVisibility.Visible
         '
         'btnModelo
         '
         Me.btnModelo.AccessibleDescription = "Modelo"
         Me.btnModelo.AccessibleName = "Modelo"
+        Me.btnModelo.Image = CType(resources.GetObject("btnModelo.Image"), System.Drawing.Image)
+        Me.btnModelo.ImageAlignment = System.Drawing.ContentAlignment.MiddleCenter
         Me.btnModelo.Name = "btnModelo"
         Me.btnModelo.Text = "Modelo"
+        Me.btnModelo.TextAlignment = System.Drawing.ContentAlignment.BottomCenter
         Me.btnModelo.Visibility = Telerik.WinControls.ElementVisibility.Visible
         '
         'btnTiempo_Ciclo
         '
         Me.btnTiempo_Ciclo.AccessibleDescription = "Tiempo Ciclo"
         Me.btnTiempo_Ciclo.AccessibleName = "Tiempo Ciclo"
+        Me.btnTiempo_Ciclo.Image = CType(resources.GetObject("btnTiempo_Ciclo.Image"), System.Drawing.Image)
+        Me.btnTiempo_Ciclo.ImageAlignment = System.Drawing.ContentAlignment.MiddleCenter
         Me.btnTiempo_Ciclo.Name = "btnTiempo_Ciclo"
         Me.btnTiempo_Ciclo.Text = "Tiempo Ciclo"
+        Me.btnTiempo_Ciclo.TextAlignment = System.Drawing.ContentAlignment.BottomCenter
         Me.btnTiempo_Ciclo.Visibility = Telerik.WinControls.ElementVisibility.Visible
         '
         'RadRibbonBarGroup3
@@ -195,8 +206,11 @@ Partial Class Formulario_Principal
         '
         Me.btnEquipo_Linea.AccessibleDescription = "Equipo_Linea"
         Me.btnEquipo_Linea.AccessibleName = "Equipo_Linea"
+        Me.btnEquipo_Linea.Image = CType(resources.GetObject("btnEquipo_Linea.Image"), System.Drawing.Image)
+        Me.btnEquipo_Linea.ImageAlignment = System.Drawing.ContentAlignment.MiddleCenter
         Me.btnEquipo_Linea.Name = "btnEquipo_Linea"
         Me.btnEquipo_Linea.Text = "Equipo_Linea"
+        Me.btnEquipo_Linea.TextAlignment = System.Drawing.ContentAlignment.BottomCenter
         Me.btnEquipo_Linea.Visibility = Telerik.WinControls.ElementVisibility.Visible
         '
         'RibbonTab3

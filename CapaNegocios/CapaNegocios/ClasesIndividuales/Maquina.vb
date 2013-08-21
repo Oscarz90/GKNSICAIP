@@ -32,6 +32,7 @@ Public Class Maquina
         'If Usuario.ChecaPermisoTarea("TELEFONO.ELIMINAR") Then
         Try
             oBD.EjecutarQuery("UPDATE Maquina SET Estatus='0' WHERE cve_maquina=" & Me.cve_maquina)
+            MsgBox("La Baja de Maquina se realizo correctamente")
             'Dim oBitacora As Bitacora = Bitacora.ObtenInstancia
             'oBitacora.RegistrarEnBitacora("Telefono.ELIMINAR", "Se eliminó el Teléfono: " & Me.m_Telefono_Id)
         Catch ex As Exception

@@ -57,7 +57,7 @@ Public Class Formulario_Principal
         Me.dgvRegistros.Columns.Clear()
         Me.dgvRegistros.Visible = True
         Me.Barra_Tool_Registros.Visible = True
-
+        Me.btnEliminar.VisibleInStrip = False
         Try
             'Dim bs As New BindingSource(oCatalogo_Linea, "L_Linea")
             Me.dgvRegistros.DataSource = oCatalogo_Linea.Obtener_Lineas
@@ -93,7 +93,7 @@ Public Class Formulario_Principal
 
         Me.dgvRegistros.Visible = True
         Me.Barra_Tool_Registros.Visible = True
-
+        Me.btnEliminar.VisibleInStrip = False
         Try
             Me.dgvRegistros.DataSource = oCatalogo_Maquina.Obtener_Maquinas
         Catch ex As Exception
@@ -128,7 +128,7 @@ Public Class Formulario_Principal
 
         Me.dgvRegistros.Visible = True
         Me.Barra_Tool_Registros.Visible = True
-
+        Me.btnEliminar.VisibleInStrip = False
         Try
             Me.dgvRegistros.DataSource = oCatalogo_Modelo.Obtener_Modelos
         Catch ex As Exception
@@ -227,7 +227,7 @@ Public Class Formulario_Principal
 
         Me.dgvRegistros.Visible = True
         Me.Barra_Tool_Registros.Visible = True
-
+        Me.btnEliminar.VisibleInStrip = True
         Try
             Me.dgvRegistros.DataSource = oCatalogo_Usuario.L_Usuario
         Catch ex As Exception
@@ -277,7 +277,7 @@ Public Class Formulario_Principal
 
         Me.dgvRegistros.Visible = True
         Me.Barra_Tool_Registros.Visible = True
-
+        Me.btnEliminar.VisibleInStrip = True
         Try
             Me.dgvRegistros.DataSource = oCatalogo_Tipo_Usuario.L_Tipo_Usuario
         Catch ex As Exception
@@ -349,50 +349,122 @@ Public Class Formulario_Principal
 
     Private Sub btnModificar_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnModificar.Click
         If vLinea = True Then
-
+            ofrmLinea = New frmLinea
+            ofrmLinea.vId_Publico = vRowSeleccionada
+            ofrmLinea.ShowDialog()
+            ''Se realiza la llamada al evento clic del btnLinea para actualizar el dgvRegistros
+            btnLinea.PerformClick()
         ElseIf vMaquina = True Then
-
+            ofrmMaquina = New frmMaquina
+            ofrmMaquina.vId_Publico = vRowSeleccionada
+            ofrmMaquina.ShowDialog()
+            ''Se realiza la llamada al evento clic del btnLinea para actualizar el dgvRegistros
+            btnMaquina.PerformClick()
         ElseIf vModelo = True Then
-
+            ofrmModelo = New frmModelo
+            ofrmModelo.vId_Publico = vRowSeleccionada
+            ofrmModelo.ShowDialog()
+            ''Se realiza la llamada al evento clic del btnLinea para actualizar el dgvRegistros
+            btnModelo.PerformClick()
         ElseIf vTiempo_Ciclo = True Then
-
+            ofrmTiempo_Ciclo = New frmTiempo_Ciclo
+            ofrmTiempo_Ciclo.vId_Publico = vRowSeleccionada
+            ofrmTiempo_Ciclo.ShowDialog()
+            ''Se realiza la llamada al evento clic del btnLinea para actualizar el dgvRegistros
+            btnTiempo_Ciclo.PerformClick()
         ElseIf vUsuario = True Then
-
+            ofrmUsuario = New FrmUsuarios
+            ofrmUsuario.vId_Publico = vRowSeleccionada
+            ofrmUsuario.ShowDialog()
+            ''Se realiza la llamada al evento clic del btnLinea para actualizar el dgvRegistros
+            btnUsuario.PerformClick()
         ElseIf vTipo_Usuario = True Then
-
+            ofrmTipo_Usuario = New FrmTipo_Usuario
+            ofrmTipo_Usuario.vId_Publico = vRowSeleccionada
+            ofrmTipo_Usuario.ShowDialog()
+            ''Se realiza la llamada al evento clic del btnLinea para actualizar el dgvRegistros
+            btnTipoUsuario.PerformClick()
         End If
     End Sub
 
     Private Sub btnEliminar_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnEliminar.Click
         If vLinea = True Then
+            If MsgBox("¿Esta seguro de Dar de Baja la Linea?", MsgBoxStyle.YesNo, Me.Text) = MsgBoxResult.Yes Then
+                oLinea = New Linea
+                Try
+                    oLinea.cve_linea = vRowSeleccionada
+                    oLinea.Eliminar()
+                    btnLinea.PerformClick() ''Se realiza la llamada al evento clic del btnLinea para actualizar el dgvRegistros
+                Catch ex As Exception
 
+                End Try
+            End If
         ElseIf vMaquina = True Then
+            If MsgBox("¿Esta seguro de Dar de Baja la Maquina?", MsgBoxStyle.YesNo, Me.Text) = MsgBoxResult.Yes Then
+                oMaquina = New Maquina
+                Try
+                    oMaquina.cve_maquina = vRowSeleccionada
+                    oMaquina.Eliminar()
+                    btnMaquina.PerformClick() ''Se realiza la llamada al evento clic del btnLinea para actualizar el dgvRegistros
+                Catch ex As Exception
 
+                End Try
+            End If
         ElseIf vModelo = True Then
+            If MsgBox("¿Esta seguro de Dar de Baja el Modelo?", MsgBoxStyle.YesNo, Me.Text) = MsgBoxResult.Yes Then
+                oModelo = New Modelo
+                Try
+                    oModelo.cve_modelo = vRowSeleccionada
+                    oModelo.Eliminar()
+                    btnModelo.PerformClick() ''Se realiza la llamada al evento clic del btnLinea para actualizar el dgvRegistros
+                Catch ex As Exception
 
+                End Try
+            End If
         ElseIf vTiempo_Ciclo = True Then
-
+            'oLinea = New Linea
+            'oLinea.cve_linea = vRowSeleccionada
+            'oLinea.Eliminar()
+            'btnLinea.PerformClick() ''Se realiza la llamada al evento clic del btnLinea para actualizar el dgvRegistros
         ElseIf vUsuario = True Then
+            If MsgBox("¿Esta seguro de Dar de Baja al Usuario?", MsgBoxStyle.YesNo, Me.Text) = MsgBoxResult.Yes Then
+                oUsuario = New SEGURIDAD_USUARIO
+                Try
+                    oUsuario.CVE_Usuario = vRowSeleccionada
+                    oUsuario.Eliminar()
+                    btnUsuario.PerformClick() ''Se realiza la llamada al evento clic del btnLinea para actualizar el dgvRegistros
+                Catch ex As Exception
 
+                End Try
+            End If
         ElseIf vTipo_Usuario = True Then
+            If MsgBox("¿Esta seguro de Eliminar el Tipo de Usuario?", MsgBoxStyle.YesNo, Me.Text) = MsgBoxResult.Yes Then
+                oTipo_Usuario = New Tipo_Usuario
+                Try
+                    oTipo_Usuario.CVE_Tipo_Usuario = vRowSeleccionada
+                    oTipo_Usuario.Eliminar()
+                    btnTipoUsuario.PerformClick() ''Se realiza la llamada al evento clic del btnLinea para actualizar el dgvRegistros
+                Catch ex As Exception
 
+                End Try
+            End If           
         End If
     End Sub
 #End Region
     
 
     Private Sub dgvRegistros_MouseDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles dgvRegistros.MouseDown
-        Try
-            If e.Button = Windows.Forms.MouseButtons.Right Then
-                vRowSeleccionada = dgvRegistros.CurrentRow.Index
-            ElseIf e.Button = Windows.Forms.MouseButtons.Left Then
-                vRowSeleccionada = dgvRegistros.CurrentRow.Index
-            End If
-        Catch ex As Exception
-            If ex.TargetSite.MetadataToken.ToString = "100670847" Then
-                vRowSeleccionada = 0
-            End If
-        End Try
+        'Try
+        '    If e.Button = Windows.Forms.MouseButtons.Right Then
+        '        vRowSeleccionada = dgvRegistros.CurrentRow.Cells("CVE").Value 'dgvRegistros.CurrentRow.Index
+        '    ElseIf e.Button = Windows.Forms.MouseButtons.Left Then
+        '        vRowSeleccionada = dgvRegistros.CurrentRow.Cells("CVE").Value 'dgvRegistros.CurrentRow.Index
+        '    End If
+        'Catch ex As Exception
+        '    If ex.TargetSite.MetadataToken.ToString = "100670847" Then
+        '        vRowSeleccionada = 0
+        '    End If
+        'End Try
     End Sub
 
     Private Sub dgvRegistros_MouseDoubleClick(ByVal sender As System.Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles dgvRegistros.MouseDoubleClick
@@ -402,9 +474,8 @@ Public Class Formulario_Principal
                 'vRowSeleccionada = dgvRegistros.CurrentRow.Cells("CVE").Value
                 vRowSeleccionada = 0
             ElseIf e.Button = Windows.Forms.MouseButtons.Left Then
-                If Windows.Forms.Cursor.Position.X <> 0 Then
-
-                End If
+                'If Windows.Forms.Cursor.Position.X <> 0 Then
+                'End If
                 'vRowSeleccionada = dgvRegistros.CurrentRow.Index
                 vRowSeleccionada = dgvRegistros.CurrentRow.Cells("CVE").Value
             End If
@@ -544,5 +615,19 @@ Public Class Formulario_Principal
             vMaquina = False
             vUsuario = False
         End If
+    End Sub
+
+    Private Sub dgvRegistros_MouseUp(ByVal sender As System.Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles dgvRegistros.MouseUp
+        Try
+            If e.Button = Windows.Forms.MouseButtons.Right Then
+                vRowSeleccionada = dgvRegistros.CurrentRow.Cells("CVE").Value 'dgvRegistros.CurrentRow.Index
+            ElseIf e.Button = Windows.Forms.MouseButtons.Left Then
+                vRowSeleccionada = dgvRegistros.CurrentRow.Cells("CVE").Value 'dgvRegistros.CurrentRow.Index
+            End If
+        Catch ex As Exception
+            If ex.TargetSite.MetadataToken.ToString = "100670847" Then
+                vRowSeleccionada = 0
+            End If
+        End Try
     End Sub
 End Class

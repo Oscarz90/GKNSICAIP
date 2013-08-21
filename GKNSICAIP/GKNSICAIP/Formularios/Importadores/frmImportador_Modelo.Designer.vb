@@ -180,6 +180,7 @@ Partial Class frmImportador_Modelo
         Me.rbtFiltro_Nombre.TabStop = True
         Me.rbtFiltro_Nombre.Text = "Filtrar por Nombre"
         Me.rbtFiltro_Nombre.UseVisualStyleBackColor = True
+        Me.rbtFiltro_Nombre.Visible = False
         '
         'btnFiltrar
         '
@@ -201,6 +202,7 @@ Partial Class frmImportador_Modelo
         Me.rbtTodos.TabIndex = 7
         Me.rbtTodos.Text = "Sin Filtro"
         Me.rbtTodos.UseVisualStyleBackColor = True
+        Me.rbtTodos.Visible = False
         '
         'Label2
         '

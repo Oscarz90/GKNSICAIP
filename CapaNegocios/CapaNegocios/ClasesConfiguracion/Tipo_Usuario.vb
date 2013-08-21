@@ -32,7 +32,8 @@ Public Class Tipo_Usuario
     Public Sub Eliminar() Implements IIndividual.Eliminar
         'If Usuario.ChecaPermisoTarea("TELEFONO.ELIMINAR") Then
         Try
-            oBD.EjecutarQuery("DELETE SEGURIDAD_TIPO_USUARIO WHERE CVE_Tipo_Usuario=" & Me.vCVE_Tipo_Usuario)            
+            oBD.EjecutarQuery("DELETE SEGURIDAD_TIPO_USUARIO WHERE CVE_Tipo_Usuario=" & Me.vCVE_Tipo_Usuario)
+            MsgBox("Se elimino correctamente el Tipo de Usuario")
             'Dim oBitacora As Bitacora = Bitacora.ObtenInstancia
             'oBitacora.RegistrarEnBitacora("Telefono.ELIMINAR", "Se eliminó el Teléfono: " & Me.m_Telefono_Id)
         Catch ex As Exception
