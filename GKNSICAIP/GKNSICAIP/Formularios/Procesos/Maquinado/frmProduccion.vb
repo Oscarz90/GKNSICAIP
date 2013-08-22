@@ -154,7 +154,7 @@ Public Class frmProduccion
                     'MsgBox("Entre a enviar email")
                     get_body_notificacion(desempeno)
                     Dim newThread As New System.Threading.Thread(AddressOf envia_notificacion_sobreproduccion)
-                    newThread.Start()
+
                 End If
                 lblDesempeno.Text = "100.00"
             End If
