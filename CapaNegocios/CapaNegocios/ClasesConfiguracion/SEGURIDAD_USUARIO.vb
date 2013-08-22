@@ -42,6 +42,11 @@ Public Class SEGURIDAD_USUARIO
                 Else
                     Me.vCVE_TIPO_USUARIO = 0
                 End If
+                If Not IsDBNull(rDatos("Estatus")) Then
+                    Me.vEstatus = rDatos("Estatus")
+                Else
+                    Me.vEmail = ""
+                End If
             End If
         Catch ex As Exception
             Throw New Exception(ex.Message)
@@ -52,6 +57,7 @@ Public Class SEGURIDAD_USUARIO
         'If Usuario.ChecaPermisoTarea("TELEFONO.ELIMINAR") Then
         Try
             oBD.EjecutarQuery("UPDATE SEGURIDAD_USUARIO SET Estatus='0' WHERE CVE_Usuario=" & Me.vCVE_Usuario)
+            MsgBox("La Baja de Usuario se realizo correctamente")
             'Dim oBitacora As Bitacora = Bitacora.ObtenInstancia
             'oBitacora.RegistrarEnBitacora("Telefono.ELIMINAR", "Se eliminó el Teléfono: " & Me.m_Telefono_Id)
         Catch ex As Exception
@@ -81,10 +87,12 @@ Public Class SEGURIDAD_USUARIO
                     .Add("Nombre", SqlDbType.VarChar).Value = Me.vNombre
                     .Add("Email", SqlDbType.VarChar).Value = Me.vEmail
                     .Add("CVE_TIPO_USUARIO", SqlDbType.BigInt).Value = Me.vCVE_TIPO_USUARIO
+                    .Add("Estatus", SqlDbType.VarChar).Value = Me.vEstatus
                 End With
 
                 Dim obj As DataTable = oBD.EjecutaCommando(cmd)
                 Me.vCVE_Usuario = obj.Rows(0)(0) 'ID
+                MsgBox("El Usuario se registro Correctamente")
                 'Me.RegistraDatos("DEPARTAMENTO", "Departamento_Id", Me.m_Departamento_Id)
                 'Dim oBitacora As Bitacora = Bitacora.ObtenInstancia
                 'oBitacora.RegistrarEnBitacora("DEPARTAMENTO.REGISTRAR", "Se registró el departamento: " & Me.m_Nombre)
@@ -103,6 +111,7 @@ Public Class SEGURIDAD_USUARIO
     Private vNombre As String
     Private vEmail As String
     Private vCVE_TIPO_USUARIO As Long
+    Private vEstatus As String
 #End Region
 
 #Region "Propiedades"
@@ -154,7 +163,6 @@ Public Class SEGURIDAD_USUARIO
             vCVE_TIPO_USUARIO = value
         End Set
     End Property
-
     Public ReadOnly Property Descripcion_Tipo_Usuario() As String
         Get
             If vCVE_TIPO_USUARIO <> 0 Then
@@ -166,6 +174,19 @@ Public Class SEGURIDAD_USUARIO
                 Return ""
             End If
         End Get
+    End Property
+    Public Property Estatus() As String
+        Get
+            If vEstatus = "1" Then
+                Return "ACTIVO"
+            ElseIf vEstatus = "0" Then
+                Return "INACTIVO"
+            End If
+            Return vEstatus
+        End Get
+        Set(ByVal value As String)
+            vEstatus = value
+        End Set
     End Property
 
     Private vL_USUARIO_PERMISOS As List(Of SEGURIDAD_USUARIO_PERMISOS)
@@ -213,7 +234,7 @@ Public Class SEGURIDAD_USUARIO
     Public Function Obtener_USUARIOS(ByVal vCVE_TIPO_USUARIO As Long) As DataTable
         Dim vRetorno As DataTable
         Try
-            vRetorno = oBD.ObtenerTabla("SELECT * FROM SEGURIDAD_USUARIO WHERE CVE_TIPO_USUARIO=" & vCVE_TIPO_USUARIO)
+            vRetorno = oBD.ObtenerTabla("SELECT * FROM SEGURIDAD_USUARIO WHERE ESTATUS='1' and CVE_TIPO_USUARIO=" & vCVE_TIPO_USUARIO)
             If vRetorno.Rows.Count = 0 Then
                 vRetorno = Nothing
             End If
@@ -271,37 +292,39 @@ Public Class SEGURIDAD_USUARIO
 
         Dim vIdetificador_Nodo As Integer = 1
         Dim vIdetificador_Padre As Integer = 1
+        If Obtener_TIPOS_USUARIOS() IsNot Nothing Then
+            For Each vDR_Tipos As DataRow In Obtener_TIPOS_USUARIOS.Rows
+                Dim vDR_Nuevo As DataRow
+                vDR_Nuevo = vDT.NewRow
+                vDR_Nuevo("NombreNodo") = vDR_Tipos("Nombre_Tipo_Usuario")
+                vDR_Nuevo("IdentificadorNodo") = vIdetificador_Nodo
+                vDR_Nuevo("IdentificadorPadre") = 0
+                vDR_Nuevo("CVE_TABLA") = vDR_Tipos("CVE_Tipo_Usuario") & ".TU"
 
-        For Each vDR_Tipos As DataRow In Obtener_TIPOS_USUARIOS.Rows
-            Dim vDR_Nuevo As DataRow
-            vDR_Nuevo = vDT.NewRow
-            vDR_Nuevo("NombreNodo") = vDR_Tipos("Nombre_Tipo_Usuario")
-            vDR_Nuevo("IdentificadorNodo") = vIdetificador_Nodo
-            vDR_Nuevo("IdentificadorPadre") = 0
-            vDR_Nuevo("CVE_TABLA") = vDR_Tipos("CVE_Tipo_Usuario") & ".TU"
+                ''Inserta el Tipo de Usuario
+                vDT.Rows.Add(vDR_Nuevo)
 
-            ''Inserta el Tipo de Usuario
-            vDT.Rows.Add(vDR_Nuevo)
+                vIdetificador_Padre = vDR_Nuevo("IdentificadorNodo")
+                If Obtener_USUARIOS(vDR_Tipos("CVE_Tipo_Usuario")) IsNot Nothing Then
+                    For Each vDR_USUARIOS As DataRow In Obtener_USUARIOS(vDR_Tipos("CVE_Tipo_Usuario")).Rows
+                        ''Incrementa el Identificador del Nodo
+                        vIdetificador_Nodo = vIdetificador_Nodo + 1
 
-            vIdetificador_Padre = vDR_Nuevo("IdentificadorNodo")
+                        Dim vDR_Nuevo_USUARIO As DataRow
+                        vDR_Nuevo_USUARIO = vDT.NewRow
 
-            For Each vDR_USUARIOS As DataRow In Obtener_USUARIOS(vDR_Tipos("CVE_Tipo_Usuario")).Rows
-                ''Incrementa el Identificador del Nodo
-                vIdetificador_Nodo = vIdetificador_Nodo + 1
-
-                Dim vDR_Nuevo_USUARIO As DataRow
-                vDR_Nuevo_USUARIO = vDT.NewRow
-
-                vDR_Nuevo_USUARIO("NombreNodo") = vDR_USUARIOS("Id_Usuario")
-                vDR_Nuevo_USUARIO("IdentificadorNodo") = vIdetificador_Nodo
-                vDR_Nuevo_USUARIO("IdentificadorPadre") = vIdetificador_Padre
-                vDR_Nuevo_USUARIO("CVE_TABLA") = vDR_USUARIOS("CVE_Usuario") & ".U"
-                ''Inserta el Usuario
-                vDT.Rows.Add(vDR_Nuevo_USUARIO)
+                        vDR_Nuevo_USUARIO("NombreNodo") = vDR_USUARIOS("Id_Usuario")
+                        vDR_Nuevo_USUARIO("IdentificadorNodo") = vIdetificador_Nodo
+                        vDR_Nuevo_USUARIO("IdentificadorPadre") = vIdetificador_Padre
+                        vDR_Nuevo_USUARIO("CVE_TABLA") = vDR_USUARIOS("CVE_Usuario") & ".U"
+                        ''Inserta el Usuario
+                        vDT.Rows.Add(vDR_Nuevo_USUARIO)
+                    Next
+                    ''Incrementa el Identificador del Nodo
+                    vIdetificador_Nodo = vIdetificador_Nodo + 1
+                End If
             Next
-            ''Incrementa el Identificador del Nodo
-            vIdetificador_Nodo = vIdetificador_Nodo + 1
-        Next
+        End If        
         Return vDT
     End Function
 
@@ -312,56 +335,58 @@ Public Class SEGURIDAD_USUARIO
         Dim vIdetificador_Nodo As Integer = 1
         Dim vIdetificador_Padre As Integer = 1
 
-        For Each vDR_Categoria_Permiso As DataRow In Obtener_Categoria_Permisos.Rows
-            ''En este primer ciclo se Obtienen las Categorias de Permisos con IDSuperior = Null (Nivel 1)
-            Dim vDR_Nuevo As DataRow
-            vDR_Nuevo = vDT.NewRow
-            vDR_Nuevo("NombreNodo") = vDR_Categoria_Permiso("Nombre_Categoria")
-            vDR_Nuevo("IdentificadorNodo") = vIdetificador_Nodo
-            vDR_Nuevo("CVE_TABLA") = vDR_Categoria_Permiso("CVE_Categoria_Permiso") & ".CP"
-            vDR_Nuevo("IdentificadorPadre") = 0
-            ''Inserta el Tipo de Usuario
-            vDT.Rows.Add(vDR_Nuevo)
+        If Obtener_Categoria_Permisos() IsNot Nothing Then
+            For Each vDR_Categoria_Permiso As DataRow In Obtener_Categoria_Permisos.Rows
+                ''En este primer ciclo se Obtienen las Categorias de Permisos con IDSuperior = Null (Nivel 1)
+                Dim vDR_Nuevo As DataRow
+                vDR_Nuevo = vDT.NewRow
+                vDR_Nuevo("NombreNodo") = vDR_Categoria_Permiso("Nombre_Categoria")
+                vDR_Nuevo("IdentificadorNodo") = vIdetificador_Nodo
+                vDR_Nuevo("CVE_TABLA") = vDR_Categoria_Permiso("CVE_Categoria_Permiso") & ".CP"
+                vDR_Nuevo("IdentificadorPadre") = 0
+                ''Inserta el Tipo de Usuario
+                vDT.Rows.Add(vDR_Nuevo)
 
-            vIdetificador_Padre = vDR_Nuevo("IdentificadorNodo")
+                vIdetificador_Padre = vDR_Nuevo("IdentificadorNodo")
 
-            For Each vDR_HIJOS_Categoria_Permiso As DataRow In Obtener_HIJOS_Categoria_Permisos(vDR_Categoria_Permiso("CVE_Categoria_Permiso")).Rows
-                ''En este ciclo se obtienen las Categorias de Permisos Anidados(Hijos) (Nivel 2)
-                ''Incrementa el Identificador del Nodo
-                vIdetificador_Nodo = vIdetificador_Nodo + 1
-
-                Dim vDR_Nuevo_HIJO_TIPO As DataRow
-                vDR_Nuevo_HIJO_TIPO = vDT.NewRow
-
-                vDR_Nuevo_HIJO_TIPO("NombreNodo") = vDR_HIJOS_Categoria_Permiso("Nombre_Categoria")
-                vDR_Nuevo_HIJO_TIPO("IdentificadorNodo") = vIdetificador_Nodo
-                vDR_Nuevo_HIJO_TIPO("IdentificadorPadre") = vDR_Nuevo("IdentificadorNodo")
-                vDR_Nuevo_HIJO_TIPO("CVE_TABLA") = vDR_HIJOS_Categoria_Permiso("CVE_Categoria_Permiso") & ".CP2"
-                ''Inserta el HIJO_TIPO_PERMISO
-                vDT.Rows.Add(vDR_Nuevo_HIJO_TIPO)
-
-                vIdetificador_Padre = vDR_Nuevo_HIJO_TIPO("IdentificadorNodo")
-
-                For Each vDR_USUARIOS As DataRow In Obtener_PERMISOS(vDR_HIJOS_Categoria_Permiso("CVE_Categoria_Permiso")).Rows
+                For Each vDR_HIJOS_Categoria_Permiso As DataRow In Obtener_HIJOS_Categoria_Permisos(vDR_Categoria_Permiso("CVE_Categoria_Permiso")).Rows
+                    ''En este ciclo se obtienen las Categorias de Permisos Anidados(Hijos) (Nivel 2)
                     ''Incrementa el Identificador del Nodo
                     vIdetificador_Nodo = vIdetificador_Nodo + 1
 
-                    Dim vDR_Nuevo_USUARIO As DataRow
-                    vDR_Nuevo_USUARIO = vDT.NewRow
+                    Dim vDR_Nuevo_HIJO_TIPO As DataRow
+                    vDR_Nuevo_HIJO_TIPO = vDT.NewRow
 
-                    vDR_Nuevo_USUARIO("NombreNodo") = vDR_USUARIOS("Descripcion")
-                    vDR_Nuevo_USUARIO("IdentificadorNodo") = vIdetificador_Nodo
-                    vDR_Nuevo_USUARIO("IdentificadorPadre") = vDR_Nuevo_HIJO_TIPO("IdentificadorNodo")
-                    vDR_Nuevo_USUARIO("CVE_TABLA") = vDR_USUARIOS("CVE_Permiso") & ".P"
-                    ''Inserta el Usuario
-                    vDT.Rows.Add(vDR_Nuevo_USUARIO)
+                    vDR_Nuevo_HIJO_TIPO("NombreNodo") = vDR_HIJOS_Categoria_Permiso("Nombre_Categoria")
+                    vDR_Nuevo_HIJO_TIPO("IdentificadorNodo") = vIdetificador_Nodo
+                    vDR_Nuevo_HIJO_TIPO("IdentificadorPadre") = vDR_Nuevo("IdentificadorNodo")
+                    vDR_Nuevo_HIJO_TIPO("CVE_TABLA") = vDR_HIJOS_Categoria_Permiso("CVE_Categoria_Permiso") & ".CP2"
+                    ''Inserta el HIJO_TIPO_PERMISO
+                    vDT.Rows.Add(vDR_Nuevo_HIJO_TIPO)
+
+                    vIdetificador_Padre = vDR_Nuevo_HIJO_TIPO("IdentificadorNodo")
+
+                    For Each vDR_USUARIOS As DataRow In Obtener_PERMISOS(vDR_HIJOS_Categoria_Permiso("CVE_Categoria_Permiso")).Rows
+                        ''Incrementa el Identificador del Nodo
+                        vIdetificador_Nodo = vIdetificador_Nodo + 1
+
+                        Dim vDR_Nuevo_USUARIO As DataRow
+                        vDR_Nuevo_USUARIO = vDT.NewRow
+
+                        vDR_Nuevo_USUARIO("NombreNodo") = vDR_USUARIOS("Descripcion")
+                        vDR_Nuevo_USUARIO("IdentificadorNodo") = vIdetificador_Nodo
+                        vDR_Nuevo_USUARIO("IdentificadorPadre") = vDR_Nuevo_HIJO_TIPO("IdentificadorNodo")
+                        vDR_Nuevo_USUARIO("CVE_TABLA") = vDR_USUARIOS("CVE_Permiso") & ".P"
+                        ''Inserta el Usuario
+                        vDT.Rows.Add(vDR_Nuevo_USUARIO)
+                    Next
+                    ''Incrementa el Identificador del Nodo
+                    vIdetificador_Nodo = vIdetificador_Nodo + 1
                 Next
                 ''Incrementa el Identificador del Nodo
                 vIdetificador_Nodo = vIdetificador_Nodo + 1
             Next
-            ''Incrementa el Identificador del Nodo
-            vIdetificador_Nodo = vIdetificador_Nodo + 1
-        Next
+        End If       
         Return vDT
     End Function
 

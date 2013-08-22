@@ -57,14 +57,14 @@ Partial Class frmLinea
         Me.txtComponente.Name = "txtComponente"
         Me.txtComponente.ReadOnly = True
         Me.txtComponente.Size = New System.Drawing.Size(242, 20)
-        Me.txtComponente.TabIndex = 1
+        Me.txtComponente.TabIndex = 2
         '
         'btnImportar
         '
         Me.btnImportar.Location = New System.Drawing.Point(356, 95)
         Me.btnImportar.Name = "btnImportar"
         Me.btnImportar.Size = New System.Drawing.Size(75, 23)
-        Me.btnImportar.TabIndex = 2
+        Me.btnImportar.TabIndex = 3
         Me.btnImportar.Text = "Importar"
         Me.btnImportar.UseVisualStyleBackColor = True
         '
@@ -83,7 +83,7 @@ Partial Class frmLinea
         Me.txtNombre_Linea.MaxLength = 30
         Me.txtNombre_Linea.Name = "txtNombre_Linea"
         Me.txtNombre_Linea.Size = New System.Drawing.Size(242, 20)
-        Me.txtNombre_Linea.TabIndex = 4
+        Me.txtNombre_Linea.TabIndex = 1
         '
         'nudTPCM
         '
@@ -91,7 +91,7 @@ Partial Class frmLinea
         Me.nudTPCM.Maximum = New Decimal(New Integer() {1000, 0, 0, 0})
         Me.nudTPCM.Name = "nudTPCM"
         Me.nudTPCM.Size = New System.Drawing.Size(150, 20)
-        Me.nudTPCM.TabIndex = 5
+        Me.nudTPCM.TabIndex = 4
         '
         'Label3
         '
@@ -104,37 +104,38 @@ Partial Class frmLinea
         '
         'btnModificar
         '
-        Me.btnModificar.Location = New System.Drawing.Point(195, 185)
+        Me.btnModificar.Location = New System.Drawing.Point(276, 185)
         Me.btnModificar.Name = "btnModificar"
         Me.btnModificar.Size = New System.Drawing.Size(75, 23)
-        Me.btnModificar.TabIndex = 7
+        Me.btnModificar.TabIndex = 6
         Me.btnModificar.Text = "Modificar"
         Me.btnModificar.UseVisualStyleBackColor = True
         '
         'btnRegistrar
         '
-        Me.btnRegistrar.Location = New System.Drawing.Point(195, 185)
+        Me.btnRegistrar.Location = New System.Drawing.Point(275, 185)
         Me.btnRegistrar.Name = "btnRegistrar"
         Me.btnRegistrar.Size = New System.Drawing.Size(75, 23)
-        Me.btnRegistrar.TabIndex = 8
+        Me.btnRegistrar.TabIndex = 5
         Me.btnRegistrar.Text = "Registrar"
         Me.btnRegistrar.UseVisualStyleBackColor = True
         '
         'btnDarBaja
         '
-        Me.btnDarBaja.Location = New System.Drawing.Point(276, 185)
+        Me.btnDarBaja.Location = New System.Drawing.Point(11, 185)
         Me.btnDarBaja.Name = "btnDarBaja"
         Me.btnDarBaja.Size = New System.Drawing.Size(75, 23)
-        Me.btnDarBaja.TabIndex = 9
+        Me.btnDarBaja.TabIndex = 7
         Me.btnDarBaja.Text = "Dar Baja"
         Me.btnDarBaja.UseVisualStyleBackColor = True
+        Me.btnDarBaja.Visible = False
         '
         'btnSalir
         '
         Me.btnSalir.Location = New System.Drawing.Point(357, 185)
         Me.btnSalir.Name = "btnSalir"
         Me.btnSalir.Size = New System.Drawing.Size(75, 23)
-        Me.btnSalir.TabIndex = 10
+        Me.btnSalir.TabIndex = 8
         Me.btnSalir.Text = "Salir"
         Me.btnSalir.UseVisualStyleBackColor = True
         '

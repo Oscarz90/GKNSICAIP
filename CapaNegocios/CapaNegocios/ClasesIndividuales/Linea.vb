@@ -33,6 +33,7 @@ Public Class Linea
         'If Usuario.ChecaPermisoTarea("TELEFONO.ELIMINAR") Then
         Try
             oBD.EjecutarQuery("UPDATE LINEA SET Estatus='0' WHERE cve_linea=" & Me.vcve_linea)
+            MsgBox("La Baja de Linea se realizo correctamente")
             'Dim oBitacora As Bitacora = Bitacora.ObtenInstancia
             'oBitacora.RegistrarEnBitacora("Telefono.ELIMINAR", "Se eliminó el Teléfono: " & Me.m_Telefono_Id)
         Catch ex As Exception

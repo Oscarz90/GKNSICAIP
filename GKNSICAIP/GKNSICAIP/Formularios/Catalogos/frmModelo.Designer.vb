@@ -84,7 +84,7 @@ Partial Class frmModelo
         Me.txtDescripcion.MaxLength = 50
         Me.txtDescripcion.Name = "txtDescripcion"
         Me.txtDescripcion.Size = New System.Drawing.Size(273, 20)
-        Me.txtDescripcion.TabIndex = 4
+        Me.txtDescripcion.TabIndex = 1
         '
         'txtNumero_Parte
         '
@@ -92,7 +92,7 @@ Partial Class frmModelo
         Me.txtNumero_Parte.MaxLength = 20
         Me.txtNumero_Parte.Name = "txtNumero_Parte"
         Me.txtNumero_Parte.Size = New System.Drawing.Size(273, 20)
-        Me.txtNumero_Parte.TabIndex = 5
+        Me.txtNumero_Parte.TabIndex = 2
         '
         'txtComponente
         '
@@ -101,7 +101,7 @@ Partial Class frmModelo
         Me.txtComponente.Name = "txtComponente"
         Me.txtComponente.ReadOnly = True
         Me.txtComponente.Size = New System.Drawing.Size(192, 20)
-        Me.txtComponente.TabIndex = 7
+        Me.txtComponente.TabIndex = 3
         '
         'btnSalir
         '
@@ -115,7 +115,7 @@ Partial Class frmModelo
         'btnDarBaja
         '
         Me.btnDarBaja.Enabled = False
-        Me.btnDarBaja.Location = New System.Drawing.Point(222, 202)
+        Me.btnDarBaja.Location = New System.Drawing.Point(12, 202)
         Me.btnDarBaja.Name = "btnDarBaja"
         Me.btnDarBaja.Size = New System.Drawing.Size(75, 23)
         Me.btnDarBaja.TabIndex = 9
@@ -125,19 +125,19 @@ Partial Class frmModelo
         '
         'btnRegistrar
         '
-        Me.btnRegistrar.Location = New System.Drawing.Point(141, 202)
+        Me.btnRegistrar.Location = New System.Drawing.Point(222, 202)
         Me.btnRegistrar.Name = "btnRegistrar"
         Me.btnRegistrar.Size = New System.Drawing.Size(75, 23)
-        Me.btnRegistrar.TabIndex = 10
+        Me.btnRegistrar.TabIndex = 7
         Me.btnRegistrar.Text = "Registrar"
         Me.btnRegistrar.UseVisualStyleBackColor = True
         '
         'btnModificar
         '
-        Me.btnModificar.Location = New System.Drawing.Point(141, 202)
+        Me.btnModificar.Location = New System.Drawing.Point(222, 202)
         Me.btnModificar.Name = "btnModificar"
         Me.btnModificar.Size = New System.Drawing.Size(75, 23)
-        Me.btnModificar.TabIndex = 11
+        Me.btnModificar.TabIndex = 6
         Me.btnModificar.Text = "Modificar"
         Me.btnModificar.UseVisualStyleBackColor = True
         '
@@ -146,7 +146,7 @@ Partial Class frmModelo
         Me.btnImportar.Location = New System.Drawing.Point(306, 119)
         Me.btnImportar.Name = "btnImportar"
         Me.btnImportar.Size = New System.Drawing.Size(75, 23)
-        Me.btnImportar.TabIndex = 13
+        Me.btnImportar.TabIndex = 4
         Me.btnImportar.Text = "Importar"
         Me.btnImportar.UseVisualStyleBackColor = True
         '
@@ -156,7 +156,7 @@ Partial Class frmModelo
         Me.cbxClasificacion.Location = New System.Drawing.Point(108, 148)
         Me.cbxClasificacion.Name = "cbxClasificacion"
         Me.cbxClasificacion.Size = New System.Drawing.Size(192, 21)
-        Me.cbxClasificacion.TabIndex = 14
+        Me.cbxClasificacion.TabIndex = 5
         '
         'Panel1
         '

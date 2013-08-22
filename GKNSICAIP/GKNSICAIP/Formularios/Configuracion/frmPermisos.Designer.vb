@@ -24,17 +24,17 @@ Partial Class FrmPermisos
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(FrmPermisos))
         Me.RadPanel1 = New Telerik.WinControls.UI.RadPanel()
+        Me.btnGuardar = New Telerik.WinControls.UI.RadButton()
         Me.TreeView_Permisos = New System.Windows.Forms.TreeView()
         Me.TreeView_Usuarios = New System.Windows.Forms.TreeView()
         Me.btnSalir = New Telerik.WinControls.UI.RadButton()
         Me.titulo_banner_formulario = New System.Windows.Forms.Label()
         Me.banner_formulario = New System.Windows.Forms.PictureBox()
-        Me.btnGuardar = New Telerik.WinControls.UI.RadButton()
         CType(Me.RadPanel1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.RadPanel1.SuspendLayout()
+        CType(Me.btnGuardar, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.btnSalir, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.banner_formulario, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.btnGuardar, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
@@ -59,6 +59,16 @@ Partial Class FrmPermisos
         Me.RadPanel1.RootElement.MinSize = New System.Drawing.Size(578, 502)
         Me.RadPanel1.Size = New System.Drawing.Size(578, 502)
         Me.RadPanel1.TabIndex = 107
+        '
+        'btnGuardar
+        '
+        Me.btnGuardar.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
+        Me.btnGuardar.Image = CType(resources.GetObject("btnGuardar.Image"), System.Drawing.Image)
+        Me.btnGuardar.Location = New System.Drawing.Point(382, 459)
+        Me.btnGuardar.Name = "btnGuardar"
+        Me.btnGuardar.Size = New System.Drawing.Size(89, 31)
+        Me.btnGuardar.TabIndex = 116
+        Me.btnGuardar.Text = "Guardar"
         '
         'TreeView_Permisos
         '
@@ -112,16 +122,6 @@ Partial Class FrmPermisos
         Me.banner_formulario.TabIndex = 111
         Me.banner_formulario.TabStop = False
         '
-        'btnGuardar
-        '
-        Me.btnGuardar.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
-        Me.btnGuardar.Image = CType(resources.GetObject("btnGuardar.Image"), System.Drawing.Image)
-        Me.btnGuardar.Location = New System.Drawing.Point(382, 459)
-        Me.btnGuardar.Name = "btnGuardar"
-        Me.btnGuardar.Size = New System.Drawing.Size(89, 31)
-        Me.btnGuardar.TabIndex = 116
-        Me.btnGuardar.Text = "Guardar"
-        '
         'FrmPermisos
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -135,14 +135,14 @@ Partial Class FrmPermisos
         '
         '
         Me.RootElement.ApplyShapeToControl = True
-        Me.RootElement.MaxSize = New System.Drawing.Size(0, 0)
+        Me.RootElement.MaxSize = New System.Drawing.Size(578, 768)
         Me.Text = "Asignación de Permisos"
         CType(Me.RadPanel1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.RadPanel1.ResumeLayout(False)
         Me.RadPanel1.PerformLayout()
+        CType(Me.btnGuardar, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.btnSalir, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.banner_formulario, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.btnGuardar, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 

@@ -151,4 +151,20 @@ Public Class Login
         Return vRetorno
     End Function
 
+    Public Function Usuario_NO_Sindicalizado(ByVal vNombreUsuario_Login As String) As Boolean
+        Dim vRetorno As Boolean = False
+        Dim vDR As DataRow
+        Try
+            vDR = oBD_Kronos.ObtenerRenglon("select CVE_Usuario from SEGURIDAD_USUARIO where estatus=1 and Id_Usuario ='" & vNombreUsuario_Login & "'", "SEGURIDAD_USUARIO")
+            If vDR("CVE_Usuario") IsNot Nothing Then
+                vRetorno = True
+            Else
+                vRetorno = False
+            End If
+        Catch ex As Exception
+            'MsgBox("El empleado no está activo en KRONOS. Clave del Error: LIN_001", vbCritical + vbOKOnly, "Error")
+        End Try
+        Return vRetorno
+    End Function
+
 End Class

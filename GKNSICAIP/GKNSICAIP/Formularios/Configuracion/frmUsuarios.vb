@@ -10,11 +10,26 @@ Public Class FrmUsuarios
     End Sub
 
     Private Sub btnBaja_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnBaja.Click
-        Try
-            oUsuario.Eliminar()
-        Catch ex As Exception
+        If MsgBox("¿Esta seguro de Dar de Baja al Usuario?", MsgBoxStyle.YesNo, Me.Text) = MsgBoxResult.Yes Then
+            Try
+                oUsuario.Eliminar()
+                Me.Close()
+            Catch ex As Exception
 
-        End Try
+            End Try
+        End If
+    End Sub
+
+    Private Sub btnAlta_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnAlta.Click
+        If MsgBox("¿Esta seguro de Dar de Alta al Usuario?", MsgBoxStyle.YesNo, Me.Text) = MsgBoxResult.Yes Then
+            Try
+                oUsuario.Estatus = "1"
+                oUsuario.Registrar()
+                Me.Close()
+            Catch ex As Exception
+
+            End Try
+        End If
     End Sub
 
     Private Sub btnImportar_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnImportar.Click
@@ -69,8 +84,14 @@ Public Class FrmUsuarios
             oUsuario.CVE_Usuario = vId_Publico
             oUsuario.Cargar()
             Controles_Registro_Nuevo(False)
+            If oUsuario.Estatus = "INACTIVO" Then
+                Controles_Registro_Inactivo(True)
+            Else
+                Controles_Registro_Inactivo(False)
+            End If
         Else
             oUsuario = New SEGURIDAD_USUARIO
+            oUsuario.Estatus = "1"
             Controles_Registro_Nuevo(True)
         End If
         SetBindings()
@@ -90,6 +111,7 @@ Public Class FrmUsuarios
         Me.txtNombre.DataBindings.Add("Text", oUsuario, "Nombre")
         Me.txtEmail.DataBindings.Add("Text", oUsuario, "Email")
         Me.txtTipo_Usuario.DataBindings.Add("Text", oUsuario, "Descripcion_Tipo_Usuario")
+        Me.txtEstatus.DataBindings.Add("Text", oUsuario, "Estatus")
     End Sub
 
     Private Sub Controles_Registro_Nuevo(ByVal vEs_Registro_Nuevo As Boolean)
@@ -104,6 +126,29 @@ Public Class FrmUsuarios
         End If
     End Sub
 
+    Private Sub Controles_Registro_Inactivo(ByVal vEs_Registro_Inactivo As Boolean)
+        If vEs_Registro_Inactivo = True Then
+            btnRegistrar.Enabled = False
+            btnModificar.Enabled = False
+            btnBaja.Enabled = False
+            btnBaja.Visible = False
+            btnImportar.Enabled = False
+            btnAlta.Visible = True
+            btnAlta.Enabled = True
+
+
+            txtId_Usuario.ReadOnly = True
+            txtEmail.ReadOnly = True
+            txtNombre.ReadOnly = True
+        Else
+            btnAlta.Visible = False
+            btnAlta.Enabled = False
+            btnBaja.Visible = True
+            btnBaja.Enabled = True
+        End If
+    End Sub
+
+
     Private Sub txtId_Usuario_Validated(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles txtId_Usuario.Validated
         Me.txtEmail.Text = txtId_Usuario.Text & "@gkndriveline.com"
     End Sub
@@ -111,4 +156,6 @@ Public Class FrmUsuarios
     Private Sub txtEmail_Validated(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles txtEmail.Validated
         Me.txtEmail.Text = txtId_Usuario.Text & "@gkndriveline.com"
     End Sub
+
+   
 End Class

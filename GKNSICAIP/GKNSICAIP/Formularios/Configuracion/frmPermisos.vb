@@ -201,19 +201,21 @@ Public Class FrmPermisos
             'Si el nodo que recibimos tiene hijos se recorrerá para luego verificar si esta o no checado
             For Each tn As TreeNode In treeNode.Nodes
                 'Se Verifica si esta marcado...
-                If tn.Checked = True Then
-                    If Obtener_Tipo_ID(tn.Tag) = "P" Then
+                'If tn.Checked = True Then
+                If Obtener_Tipo_ID(tn.Tag) = "P" Then
+                    If tn.Checked = True Then
                         vId_Nodo = Obtener_Id_Libre(tn.Tag)
                         oUsuario_Permisos = New SEGURIDAD_USUARIO_PERMISOS
                         oUsuario_Permisos.CVE_PERMISO = vId_Nodo
                         oUsuario_Permisos.CVE_USUARIO = vUsuario_Seleccionado_Global
                         oUsuario.CVE_Usuario = vUsuario_Seleccionado_Global
-                        oUsuario.L_USUARIO_PERMISOS.Add(oUsuario_Permisos)                       
-                    End If
+                        oUsuario.L_USUARIO_PERMISOS.Add(oUsuario_Permisos)
+                    End If                    
                 End If
+                'End If
                 'Ahora hago verificacion a los hijos del nodo actual. Esta iteración no acabara hasta llegar al ultimo nodo principal
                 RecorrerNodos_PARA_GUARDAR(tn)
-            Next           
+            Next
         Catch ex As Exception
             MessageBox.Show(ex.ToString())
         End Try
@@ -223,14 +225,15 @@ Public Class FrmPermisos
         'Se Declara una colección de nodos apartir de tu Treeview del que se va a recorrer
         Dim nodes As TreeNodeCollection = TreeView_Permisos.Nodes
         'Se recorren los nodos principales
+        oUsuario = New SEGURIDAD_USUARIO
+        oUsuario.L_USUARIO_PERMISOS.Clear()
         For Each n As TreeNode In nodes
             'Se Declara un metodo para que recorra los hijos de los principales Y los hijos de los hijos....Recorrido Total en pocas palabras
-            'Para ello se envía el nodo actual para evaluar si tiene hijos
-            oUsuario = New SEGURIDAD_USUARIO
-            oUsuario.L_USUARIO_PERMISOS.Clear()
+            'Para ello se envía el nodo actual para evaluar si tiene hijos            
             RecorrerNodos_PARA_GUARDAR(n)
             oUsuario.Registrar_Permisos()
             oUsuario.L_USUARIO_PERMISOS = Nothing
         Next
+        MsgBox("Se registro correctamente")
     End Sub
 End Class

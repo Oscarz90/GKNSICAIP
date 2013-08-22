@@ -5,6 +5,34 @@ Namespace Clases_Catalogos
         Dim cadena_conexion As New CapaDatos.conexiones
         Dim oBD As New CapaDatos.CapaDatos(cadena_conexion.CadenaSicaip)
 
+        Private vL_TC As List(Of TC)
+        Public Property L_TC() As List(Of TC)
+            Get
+                If vL_TC Is Nothing Then
+                    'Cargo documentos
+                    Me.L_TC = New List(Of TC)
+                    Dim oBD As New CapaDatos.CapaDatos(cadena_conexion.CadenaSicaip)
+                    Dim oEq As DataTable = oBD.ObtenerTabla("SELECT cve_TC  FROM TC")
+                    If oEq IsNot Nothing Then
+                        Dim oTC As TC = Nothing
+                        For Each row As DataRow In oEq.Rows
+                            oTC = New TC
+                            oTC.cve_TC = row("cve_TC")
+                            oTC.Cargar()
+                            Me.vL_TC.Add(oTC)
+                        Next
+                    End If
+                End If
+                Return Me.vL_TC
+            End Get
+            Set(ByVal value As List(Of TC))
+                Me.vL_TC = value
+            End Set
+        End Property
+
+
+
+
         Public Function Obtener_Tiempos_Ciclos() As DataTable
             Dim vDT As DataTable
             vDT = oBD.ObtenerTabla("Select cve_TC, piezas_por_hora, linea, descripcion as Modelo, TiemCiclo.estatus " & _

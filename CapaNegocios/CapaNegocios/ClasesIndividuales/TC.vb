@@ -42,15 +42,15 @@ Public Class TC
     Public Sub Eliminar() Implements IIndividual.Eliminar
 
     End Sub
-    Dim vId As Long
-    Public Property Id As Long Implements IIndividual.Id
-        Get
-            Return vId
-        End Get
-        Set(ByVal value As Long)
-            vId = value
-        End Set
-    End Property
+    'Dim vId As Long
+    'Public Property Id As Long Implements IIndividual.Id
+    '    Get
+    '        Return vId
+    '    End Get
+    '    Set(ByVal value As Long)
+    '        vId = value
+    '    End Set
+    'End Property
 
     Public Function Obtener_Id(ByVal vCadena As String) As Long Implements IIndividual.Obtener_Id
         Return 1
@@ -90,7 +90,7 @@ Public Class TC
     Private vCodigo_Empleado As String
 #End Region
 #Region "Propiedades"
-    Public Property cve_TC() As Long
+    Public Property cve_TC() As Long Implements IIndividual.Id
         Get
             Return vcve_TC
         End Get
@@ -123,20 +123,7 @@ Public Class TC
         End Set
     End Property
 
-    Public Property Estatus() As String
-        Get
-            If vEstatus = "0" Then
-                Return "INACTIVO"
-            ElseIf vEstatus = "1" Then
-                Return "ACTIVO"
-            Else
-                Return ""
-            End If
-        End Get
-        Set(ByVal value As String)
-            vEstatus = value
-        End Set
-    End Property    
+    
     Public Property Fecha() As DateTime
         Get
             Return vFecha
@@ -177,6 +164,21 @@ Public Class TC
             End If
         End Get
     End Property
+
+    Public Property Estatus() As String
+        Get
+            If vEstatus = "0" Then
+                Return "INACTIVO"
+            ElseIf vEstatus = "1" Then
+                Return "ACTIVO"
+            Else
+                Return ""
+            End If
+        End Get
+        Set(ByVal value As String)
+            vEstatus = value
+        End Set
+    End Property
 #End Region
 
     Sub New()
@@ -200,7 +202,7 @@ Public Class TC
 
     Public Sub Cargar_TC(ByVal vID_Linea As Long, ByVal vID_Modelo As Long)
         Dim rDatos As DataRow
-        rDatos = oBD.ObtenerRenglon("SELECT cve_TC FROM TC WHERE estatus !='IN' and cve_linea=" & vID_Linea & " AND cve_modelo=" & vID_Modelo, "TC")
+        rDatos = oBD.ObtenerRenglon("SELECT cve_TC FROM TC WHERE estatus !='0' and cve_linea=" & vID_Linea & " AND cve_modelo=" & vID_Modelo, "TC")
         If rDatos IsNot Nothing Then
             vcve_TC = rDatos("cve_TC")
             Cargar()

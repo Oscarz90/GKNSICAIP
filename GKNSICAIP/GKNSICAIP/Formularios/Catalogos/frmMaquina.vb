@@ -27,7 +27,7 @@ Public Class frmMaquina
     End Sub
 
     Private Sub btnImportar_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnImportar.Click
-        Dim vfrmImportador_Linea As New frmImportador_Linea
+        Dim vfrmImportador_Linea As New frmImportador_Linea        
         vfrmImportador_Linea.ShowDialog()
         oMaquina.cve_linea = vfrmImportador_Linea.vRetorno_CVE_Linea
         txtLinea.Text = oMaquina.Nombre_Linea
@@ -37,6 +37,7 @@ Public Class frmMaquina
         If MsgBox("¿Esta seguro de Dar de Baja la Maquina?", MsgBoxStyle.YesNo, Me.Text) = MsgBoxResult.Yes Then
             Try
                 oMaquina.Eliminar()
+                Me.Close()
             Catch ex As Exception
 
             End Try

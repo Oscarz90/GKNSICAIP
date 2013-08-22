@@ -35,8 +35,8 @@ Partial Class frmImportador_Componente
         Me.btnFiltrar = New System.Windows.Forms.Button()
         Me.rbtTodos = New System.Windows.Forms.RadioButton()
         Me.Panel1 = New System.Windows.Forms.Panel()
-        Me.banner_formulario = New System.Windows.Forms.PictureBox()
         Me.titulo_banner_formulario = New System.Windows.Forms.Label()
+        Me.banner_formulario = New System.Windows.Forms.PictureBox()
         CType(Me.dgvDatos, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.Panel1.SuspendLayout()
         CType(Me.banner_formulario, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -125,12 +125,16 @@ Partial Class frmImportador_Componente
         'rbtFiltro_Nombre
         '
         Me.rbtFiltro_Nombre.AutoSize = True
+        Me.rbtFiltro_Nombre.Checked = True
+        Me.rbtFiltro_Nombre.Enabled = False
         Me.rbtFiltro_Nombre.Location = New System.Drawing.Point(122, 423)
         Me.rbtFiltro_Nombre.Name = "rbtFiltro_Nombre"
         Me.rbtFiltro_Nombre.Size = New System.Drawing.Size(108, 17)
         Me.rbtFiltro_Nombre.TabIndex = 5
+        Me.rbtFiltro_Nombre.TabStop = True
         Me.rbtFiltro_Nombre.Text = "Filtrar por Nombre"
         Me.rbtFiltro_Nombre.UseVisualStyleBackColor = True
+        Me.rbtFiltro_Nombre.Visible = False
         '
         'btnFiltrar
         '
@@ -145,14 +149,14 @@ Partial Class frmImportador_Componente
         'rbtTodos
         '
         Me.rbtTodos.AutoSize = True
-        Me.rbtTodos.Checked = True
+        Me.rbtTodos.Enabled = False
         Me.rbtTodos.Location = New System.Drawing.Point(51, 423)
         Me.rbtTodos.Name = "rbtTodos"
         Me.rbtTodos.Size = New System.Drawing.Size(65, 17)
         Me.rbtTodos.TabIndex = 7
-        Me.rbtTodos.TabStop = True
         Me.rbtTodos.Text = "Sin Filtro"
         Me.rbtTodos.UseVisualStyleBackColor = True
+        Me.rbtTodos.Visible = False
         '
         'Panel1
         '
@@ -172,17 +176,6 @@ Partial Class frmImportador_Componente
         Me.Panel1.Size = New System.Drawing.Size(398, 457)
         Me.Panel1.TabIndex = 8
         '
-        'banner_formulario
-        '
-        Me.banner_formulario.BackColor = System.Drawing.Color.Transparent
-        Me.banner_formulario.BackgroundImage = Global.GKNSICAIP.My.Resources.Resources.banner_03
-        Me.banner_formulario.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
-        Me.banner_formulario.Location = New System.Drawing.Point(0, 0)
-        Me.banner_formulario.Name = "banner_formulario"
-        Me.banner_formulario.Size = New System.Drawing.Size(398, 44)
-        Me.banner_formulario.TabIndex = 112
-        Me.banner_formulario.TabStop = False
-        '
         'titulo_banner_formulario
         '
         Me.titulo_banner_formulario.AutoSize = True
@@ -194,6 +187,17 @@ Partial Class frmImportador_Componente
         Me.titulo_banner_formulario.Size = New System.Drawing.Size(279, 32)
         Me.titulo_banner_formulario.TabIndex = 113
         Me.titulo_banner_formulario.Text = "Importar Componente"
+        '
+        'banner_formulario
+        '
+        Me.banner_formulario.BackColor = System.Drawing.Color.Transparent
+        Me.banner_formulario.BackgroundImage = Global.GKNSICAIP.My.Resources.Resources.banner_03
+        Me.banner_formulario.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
+        Me.banner_formulario.Location = New System.Drawing.Point(0, 0)
+        Me.banner_formulario.Name = "banner_formulario"
+        Me.banner_formulario.Size = New System.Drawing.Size(398, 44)
+        Me.banner_formulario.TabIndex = 112
+        Me.banner_formulario.TabStop = False
         '
         'frmImportador_Componente
         '
