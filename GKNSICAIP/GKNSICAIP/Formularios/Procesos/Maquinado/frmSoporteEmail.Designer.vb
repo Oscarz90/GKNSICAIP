@@ -22,6 +22,7 @@ Partial Class FrmSoporteEmail
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(FrmSoporteEmail))
         Me.RadLabel1 = New Telerik.WinControls.UI.RadLabel()
         Me.RadLabel3 = New Telerik.WinControls.UI.RadLabel()
         Me.RadLabel2 = New Telerik.WinControls.UI.RadLabel()
@@ -189,11 +190,16 @@ Partial Class FrmSoporteEmail
         Me.Controls.Add(Me.btnEnviaEmail)
         Me.Controls.Add(Me.RadLabel3)
         Me.Controls.Add(Me.RadLabel1)
+        Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
+        Me.MaximizeBox = False
+        Me.MaximumSize = New System.Drawing.Size(526, 566)
+        Me.MinimumSize = New System.Drawing.Size(526, 566)
         Me.Name = "FrmSoporteEmail"
         '
         '
         '
         Me.RootElement.ApplyShapeToControl = True
+        Me.RootElement.MaxSize = New System.Drawing.Size(526, 566)
         Me.Text = "FrmSoporteEmail"
         CType(Me.RadLabel1, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.RadLabel3, System.ComponentModel.ISupportInitialize).EndInit()
