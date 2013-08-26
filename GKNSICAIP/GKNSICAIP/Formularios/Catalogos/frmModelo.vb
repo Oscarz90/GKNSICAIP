@@ -4,6 +4,17 @@ Public Class frmModelo
     Public vId_Retorno As Long = 0
     Dim oModelo As Modelo
     Dim oClasificacion_Modelo As Clasificacion_Modelo
+    Dim vAdd_Registrar As Boolean = True
+    Dim vDelete_Eliminar As Boolean = True
+
+
+    Sub New(Optional ByVal vRegistrar As Boolean = True, Optional ByVal vEliminar As Boolean = True)
+        ' Llamada necesaria para el diseñador.
+        InitializeComponent()
+        vAdd_Registrar = vRegistrar
+        vDelete_Eliminar = vEliminar
+        ' Agregue cualquier inicialización después de la llamada a InitializeComponent().
+    End Sub
 
     Private Sub btnSalir_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSalir.Click
         Me.Close()
@@ -27,6 +38,7 @@ Public Class frmModelo
             LlenaCombos()
             Controles_Registro_Nuevo(True)
         End If
+        Controles_Permisos(vAdd_Registrar, vDelete_Eliminar)
         SetBindings()
         If vId_Publico = 0 Then
             cbxClasificacion.SelectedIndex = 0
@@ -112,6 +124,27 @@ Public Class frmModelo
             btnRegistrar.Visible = False
             btnModificar.Visible = True
             btnDarBaja.Enabled = True
+        End If
+    End Sub
+
+    Private Sub Controles_Permisos(ByVal vAdd As Boolean, ByVal vDelete As Boolean)
+        If vAdd = True Then
+            Me.btnRegistrar.Enabled = True
+            Me.btnModificar.Enabled = True
+        Else
+            Me.btnRegistrar.Enabled = False
+            Me.btnModificar.Enabled = False
+        End If
+        If vDelete = True Then
+            Me.btnDarBaja.Enabled = True
+        Else
+            Me.btnDarBaja.Enabled = False
+        End If
+        If vAdd = False And vDelete = False Then
+            txtDescripcion.ReadOnly = True
+            txtNumero_Parte.ReadOnly = True
+            cbxClasificacion.Enabled = False
+            btnImportar.Enabled = False
         End If
     End Sub
 

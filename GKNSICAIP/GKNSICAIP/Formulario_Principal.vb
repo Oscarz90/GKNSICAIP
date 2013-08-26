@@ -4,7 +4,9 @@ Imports CapaNegocios.Clases_Catalogos
 
 Public Class Formulario_Principal
     Public oUsuario_Login As New SEGURIDAD_USUARIO
-    Dim vRowSeleccionada As Integer = 0    
+    Dim vRowSeleccionada As Integer = 0
+    Dim vPermiso_Add As Boolean = True
+    Dim vPermiso_Delete As Boolean = True
 
 #Region "Variables Identificador Opciones Menu"
     Dim vLinea As String = ""    
@@ -284,13 +286,15 @@ Public Class Formulario_Principal
 
     Private Sub btnEquipo_Linea_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnEquipo_Linea.Click
         If Permiso_Asignado("EQUIPOLINEA") = True Then
-
+            If Permiso_Asignado("EQUIPOLINEA.REGISTRAR") = True Then
+                ofrmEquipo_Linea = New frmEquipo_Linea(True)
+            Else
+                ofrmEquipo_Linea = New frmEquipo_Linea(False)
+            End If
             Me.dgvRegistros.Visible = False
             Me.Barra_Tool_Registros.Visible = False
 
             MapaUbicacion.Text = "Equipo_Linea"
-
-            ofrmEquipo_Linea = New frmEquipo_Linea
             ofrmEquipo_Linea.ShowDialog()
         Else
             MsgBox("El Usuario no cuenta con los permisos suficientes para entrar en 'Asignacion Equipo_Linea'")
@@ -419,10 +423,13 @@ Public Class Formulario_Principal
         If Permiso_Asignado("PERMISOS") = True Then
             Me.dgvRegistros.Visible = False
             Me.Barra_Tool_Registros.Visible = False
-
             MapaUbicacion.Text = "Catalogo Permisos"
 
-            ofrmPermisos = New FrmPermisos(oUsuario_Login)
+            If Permiso_Asignado("PERMISOS.REGISTRAR") = True Then
+                ofrmPermisos = New FrmPermisos(oUsuario_Login, True)
+            Else
+                ofrmPermisos = New FrmPermisos(oUsuario_Login, False)
+            End If
             ofrmPermisos.ShowDialog()
         Else
             MsgBox("El Usuario no cuenta con los permisos suficientes para entrar en 'Asignacion de Permisos'")
@@ -577,19 +584,6 @@ Public Class Formulario_Principal
 #End Region
 
 #Region "Eventos para Registro Principal"
-    Private Sub dgvRegistros_MouseDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles dgvRegistros.MouseDown
-        'Try
-        '    If e.Button = Windows.Forms.MouseButtons.Right Then
-        '        vRowSeleccionada = dgvRegistros.CurrentRow.Cells("CVE").Value 'dgvRegistros.CurrentRow.Index
-        '    ElseIf e.Button = Windows.Forms.MouseButtons.Left Then
-        '        vRowSeleccionada = dgvRegistros.CurrentRow.Cells("CVE").Value 'dgvRegistros.CurrentRow.Index
-        '    End If
-        'Catch ex As Exception
-        '    If ex.TargetSite.MetadataToken.ToString = "100670847" Then
-        '        vRowSeleccionada = 0
-        '    End If
-        'End Try
-    End Sub
 
     Private Sub dgvRegistros_MouseDoubleClick(ByVal sender As System.Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles dgvRegistros.MouseDoubleClick
         Try
@@ -612,7 +606,19 @@ Public Class Formulario_Principal
         If vRowSeleccionada <> 0 Then
             If vLinea = True Then
                 If Permiso_Asignado("CATALOGOLINEA.VER") = True Then
-                    ofrmLinea = New frmLinea
+                    If Permiso_Asignado("CATALOGOLINEA.REGISTRAR") = True Then
+                        vPermiso_Add = True
+                    Else
+                        vPermiso_Add = False
+                    End If
+                    If Permiso_Asignado("CATALOGOLINEA.ELIMINAR") = True Then
+                        vPermiso_Delete = True
+                    Else
+                        vPermiso_Delete = False
+                    End If
+
+                    ofrmLinea = New frmLinea(vPermiso_Add, vPermiso_Delete)
+
                     Try
                         'ofrmLinea.vId_Publico = dgvRegistros.Rows(vRowSeleccionada).Cells(0).Value
                         ofrmLinea.vId_Publico = vRowSeleccionada
@@ -628,7 +634,19 @@ Public Class Formulario_Principal
                 End If
             ElseIf vMaquina = True Then
                 If Permiso_Asignado("CATALOGOMAQUINA.VER") = True Then
-                    ofrmMaquina = New frmMaquina
+                    If Permiso_Asignado("CATALOGOMAQUINA.REGISTRAR") = True Then
+                        vPermiso_Add = True
+                    Else
+                        vPermiso_Add = False
+                    End If
+                    If Permiso_Asignado("CATALOGOMAQUINA.ELIMINAR") = True Then
+                        vPermiso_Delete = True
+                    Else
+                        vPermiso_Delete = False
+                    End If
+
+                    ofrmMaquina = New frmMaquina(vPermiso_Add, vPermiso_Delete)
+
                     Try
                         'ofrmMaquina.vId_Publico = dgvRegistros.Rows(vRowSeleccionada).Cells(0).Value
                         ofrmMaquina.vId_Publico = vRowSeleccionada
@@ -644,7 +662,18 @@ Public Class Formulario_Principal
                 End If
             ElseIf vModelo = True Then
                 If Permiso_Asignado("CATALOGOMODELO.VER") = True Then
-                    ofrmModelo = New frmModelo
+                    If Permiso_Asignado("CATALOGOMODELO.REGISTRAR") = True Then
+                        vPermiso_Add = True
+                    Else
+                        vPermiso_Add = False
+                    End If
+                    If Permiso_Asignado("CATALOGOMODELO.ELIMINAR") = True Then
+                        vPermiso_Delete = True
+                    Else
+                        vPermiso_Delete = False
+                    End If
+
+                    ofrmModelo = New frmModelo(vPermiso_Add, vPermiso_Delete)
                     Try
                         'ofrmModelo.vId_Publico = dgvRegistros.Rows(vRowSeleccionada).Cells(0).Value
                         ofrmModelo.vId_Publico = vRowSeleccionada
@@ -660,7 +689,13 @@ Public Class Formulario_Principal
                 End If
             ElseIf vTiempo_Ciclo = True Then
                 If Permiso_Asignado("CATALOGOTC.VER") = True Then
-                    ofrmTiempo_Ciclo = New frmTiempo_Ciclo
+                    If Permiso_Asignado("CATALOGOTC.REGISTRAR") = True Then
+                        vPermiso_Add = True
+                    Else
+                        vPermiso_Add = False
+                    End If                    
+                    ofrmTiempo_Ciclo = New frmTiempo_Ciclo(vPermiso_Add)
+
                     Try
                         'ofrmTiempo_Ciclo.vId_Publico = dgvRegistros.Rows(vRowSeleccionada).Cells(0).Value
                         ofrmTiempo_Ciclo.vId_Publico = vRowSeleccionada
@@ -676,7 +711,17 @@ Public Class Formulario_Principal
                 End If
             ElseIf vUsuario = True Then
                 If Permiso_Asignado("USUARIO.VER") = True Then
-                    ofrmUsuario = New FrmUsuarios
+                    If Permiso_Asignado("USUARIOS.REGISTRAR") = True Then
+                        vPermiso_Add = True
+                    Else
+                        vPermiso_Add = False
+                    End If
+                    If Permiso_Asignado("USUARIOS.ELIMINAR") = True Then
+                        vPermiso_Delete = True
+                    Else
+                        vPermiso_Delete = False
+                    End If
+                    ofrmUsuario = New FrmUsuarios(vPermiso_Add, vPermiso_Delete)
                     Try
                         'ofrmTiempo_Ciclo.vId_Publico = dgvRegistros.Rows(vRowSeleccionada).Cells(0).Value
                         ofrmUsuario.vId_Publico = vRowSeleccionada
@@ -692,7 +737,18 @@ Public Class Formulario_Principal
                 End If
             ElseIf vTipo_Usuario = True Then
                 If Permiso_Asignado("TIPOUSUARIO.VER") = True Then
-                    ofrmTipo_Usuario = New FrmTipo_Usuario
+                    If Permiso_Asignado("TIPOUSUARIO.REGISTRAR") = True Then
+                        vPermiso_Add = True
+                    Else
+                        vPermiso_Add = False
+                    End If
+                    If Permiso_Asignado("TIPOUSUARIO.ELIMINAR") = True Then
+                        vPermiso_Delete = True
+                    Else
+                        vPermiso_Delete = False
+                    End If
+                    ofrmTipo_Usuario = New FrmTipo_Usuario(vPermiso_Add, vPermiso_Delete)
+
                     Try
                         'ofrmTiempo_Ciclo.vId_Publico = dgvRegistros.Rows(vRowSeleccionada).Cells(0).Value
                         ofrmTipo_Usuario.vId_Publico = vRowSeleccionada

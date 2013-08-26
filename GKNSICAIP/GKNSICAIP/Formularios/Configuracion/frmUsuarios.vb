@@ -3,6 +3,16 @@ Public Class FrmUsuarios
     Dim oUsuario As SEGURIDAD_USUARIO
     Public vId_Publico As Long = 0
     Public vId_Retorno As Long = 0
+    Dim vAdd_Registrar As Boolean = True
+    Dim vDelete_Eliminar As Boolean = True
+
+    Sub New(Optional ByVal vRegistrar As Boolean = True, Optional ByVal vEliminar As Boolean = True)
+        ' Llamada necesaria para el diseñador.
+        InitializeComponent()
+        vAdd_Registrar = vRegistrar
+        vDelete_Eliminar = vEliminar
+        ' Agregue cualquier inicialización después de la llamada a InitializeComponent().
+    End Sub
 
 
     Private Sub btnSalir_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSalir.Click
@@ -94,6 +104,8 @@ Public Class FrmUsuarios
             oUsuario.Estatus = "1"
             Controles_Registro_Nuevo(True)
         End If
+        Controles_Permisos(vAdd_Registrar, vDelete_Eliminar)
+
         SetBindings()
         Me.Show()
         Me.txtId_Usuario.Focus()
@@ -147,6 +159,26 @@ Public Class FrmUsuarios
             btnBaja.Enabled = True
         End If
     End Sub
+
+    Private Sub Controles_Permisos(ByVal vAdd As Boolean, ByVal vDelete As Boolean)
+        If vAdd = True Then
+            Me.btnRegistrar.Enabled = True
+            Me.btnModificar.Enabled = True
+        Else
+            Me.btnRegistrar.Enabled = False
+            Me.btnModificar.Enabled = False
+        End If
+        If vDelete = True Then
+            Me.btnBaja.Enabled = True
+        Else
+            Me.btnBaja.Enabled = False
+        End If
+        If vAdd = False And vDelete = False Then
+            txtId_Usuario.ReadOnly = True
+            txtNombre.ReadOnly = True
+        End If
+    End Sub
+
 
 
     Private Sub txtId_Usuario_Validated(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles txtId_Usuario.Validated

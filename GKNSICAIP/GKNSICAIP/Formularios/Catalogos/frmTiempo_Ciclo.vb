@@ -2,6 +2,14 @@
 Imports System.Transactions
 
 Public Class frmTiempo_Ciclo
+    Dim vAdd_Registrar As Boolean = True    
+
+    Sub New(Optional ByVal vRegistrar As Boolean = True)
+        ' Llamada necesaria para el diseñador.
+        InitializeComponent()
+        vAdd_Registrar = vRegistrar        
+        ' Agregue cualquier inicialización después de la llamada a InitializeComponent().
+    End Sub
 
 #Region "Variables y Objetos"
     Public vId_Publico As Long = 0
@@ -62,6 +70,22 @@ Public Class frmTiempo_Ciclo
         'End If
     End Sub
 
+    Private Sub Controles_Permisos(ByVal vAdd As Boolean)
+        If vAdd = True Then
+            Me.btnRegistrar.Enabled = True
+            'Me.btnModifica.Enabled = True
+        Else
+            Me.btnRegistrar.Enabled = False
+            'Me.btnModificar.Enabled = False
+        End If       
+        If vAdd = False Then
+            nudPiezas_Hora.ReadOnly = True
+            btnImportar_Linea.Enabled = False
+            btnImportar_Modelo.Enabled = False
+            btnRegistrar.Enabled = False
+        End If
+    End Sub
+
 #End Region
 
 #Region "Importadores"
@@ -118,6 +142,7 @@ Public Class frmTiempo_Ciclo
             'btnRegistrar.Visible = True
             'btnRegistrar.Enabled = True
         End If
+        Controles_Permisos(vAdd_Registrar, vDelete_Eliminar)
         SetBindings()
         Me.Show()       
         Me.nudPiezas_Hora.Focus()
@@ -172,7 +197,6 @@ Public Class frmTiempo_Ciclo
         End If
     End Sub
 #End Region
-
 
 #Region "Metodos"
     Private Sub Controles_Registro_Inactivo(ByVal vEs_Registro_Inactivo As Boolean)

@@ -9,10 +9,13 @@ Public Class FrmPermisos
     Private vTipo_Nodo As String = ""
     Private vUsuario_Seleccionado_Global As Integer = 0
 
-    Public Sub New(ByRef oUser_Login As SEGURIDAD_USUARIO)
+    Public Sub New(ByRef oUser_Login As SEGURIDAD_USUARIO, Optional ByVal vRegistrar As Boolean = True)
         ' Llamada necesaria para el diseñador.
         InitializeComponent()
         Me.oUsuario_Login = oUser_Login
+        If vRegistrar = False Then
+            btnGuardar.Enabled = False            
+        End If
 
         ' Agregue cualquier inicialización después de la llamada a InitializeComponent().
     End Sub

@@ -4,6 +4,14 @@ Public Class frmEquipo_Linea
     Dim oEquipo_Linea As New EquipoLinea
     Dim oLinea As New Linea
     Dim vId_Linea_Importada As Long = 0
+    Dim vAdd_Registrar As Boolean = True
+
+    Sub New(Optional ByVal vRegistrar As Boolean = True)
+        ' Llamada necesaria para el diseñador.
+        InitializeComponent()
+        vAdd_Registrar = vRegistrar
+        ' Agregue cualquier inicialización después de la llamada a InitializeComponent().
+    End Sub
 
     Private Sub frmEquipo_Linea_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         Me.btnAsignar_ITEM.Enabled = False
@@ -20,8 +28,12 @@ Public Class frmEquipo_Linea
         Cargar_Listas()
         Me.btnAsignar_ITEM.Enabled = True
         Me.btnLiberar_ITEM.Enabled = True
-        Me.btnGuardar.Enabled = True
-
+        If vAdd_Registrar = True Then
+            Me.btnGuardar.Enabled = True
+        Else
+            Me.btnGuardar.Enabled = False
+            MsgBox("El Usuario no tiene los privilegios para poder Registrar")
+        End If
     End Sub
 
     Private Sub btnSalir_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSalir.Click
