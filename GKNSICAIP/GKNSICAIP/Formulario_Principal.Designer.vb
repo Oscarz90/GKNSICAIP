@@ -82,7 +82,7 @@ Partial Class Formulario_Principal
         '
         Me.RibbonTab1.AccessibleDescription = "Configuración"
         Me.RibbonTab1.AccessibleName = "Configuración"
-        Me.RibbonTab1.IsSelected = False
+        Me.RibbonTab1.IsSelected = True
         Me.RibbonTab1.Items.AddRange(New Telerik.WinControls.RadItem() {Me.RadRibbonBarGroup1})
         Me.RibbonTab1.Name = "RibbonTab1"
         Me.RibbonTab1.Text = "Configuración"
@@ -136,7 +136,7 @@ Partial Class Formulario_Principal
         '
         Me.RibbonTab2.AccessibleDescription = "Catalogos"
         Me.RibbonTab2.AccessibleName = "Catalogos"
-        Me.RibbonTab2.IsSelected = True
+        Me.RibbonTab2.IsSelected = False
         Me.RibbonTab2.Items.AddRange(New Telerik.WinControls.RadItem() {Me.RadRibbonBarGroup2, Me.RadRibbonBarGroup3})
         Me.RibbonTab2.Name = "RibbonTab2"
         Me.RibbonTab2.Text = "Catalogos"
@@ -424,14 +424,13 @@ Partial Class Formulario_Principal
         Me.Controls.Add(Me.RadPanel_Registros)
         Me.Controls.Add(Me.Barra_Tool_Registros)
         Me.Controls.Add(Me.MapaUbicacion)
-        Me.MaximumSize = New System.Drawing.Size(1366, 768)
         Me.MinimumSize = New System.Drawing.Size(1024, 726)
         Me.Name = "Formulario_Principal"
         '
         '
         '
         Me.RootElement.ApplyShapeToControl = True
-        Me.RootElement.MaxSize = New System.Drawing.Size(1366, 768)
+        Me.RootElement.MaxSize = New System.Drawing.Size(0, 0)
         Me.Text = "SICAIP"
         CType(Me.MapaUbicacion, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.RadPanel_Registros, System.ComponentModel.ISupportInitialize).EndInit()

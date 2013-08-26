@@ -17,7 +17,7 @@ Public Class FrmMenu
     
     Private Sub FrmMenu_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         oUsuario_Login = New SEGURIDAD_USUARIO
-        user_maq = Environment.UserName
+        user_maq = Environment.UserName       
         Dim ofrmFormulario_Principal As New Formulario_Principal
 
         If oUsuario_Login.Usuario_NO_Sindicalizado(user_maq) = True Then
@@ -25,6 +25,8 @@ Public Class FrmMenu
             ofrmFormulario_Principal.oUsuario_Login = oUsuario_Login
             ofrmFormulario_Principal.ShowDialog()
             Me.Close()
+        Else
+            Me.WindowState = FormWindowState.Maximized
         End If
     End Sub
 

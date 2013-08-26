@@ -2,12 +2,14 @@
 Imports System.Transactions
 
 Public Class frmTiempo_Ciclo
-    Dim vAdd_Registrar As Boolean = True    
+    Dim vAdd_Registrar As Boolean = True
+    Dim vCve_User As String = ""
 
-    Sub New(Optional ByVal vRegistrar As Boolean = True)
+    Sub New(Optional ByVal vRegistrar As Boolean = True, Optional ByVal cve_Usuario_registro As String = "")
         ' Llamada necesaria para el diseñador.
         InitializeComponent()
-        vAdd_Registrar = vRegistrar        
+        vAdd_Registrar = vRegistrar
+        vCve_User = cve_Usuario_registro
         ' Agregue cualquier inicialización después de la llamada a InitializeComponent().
     End Sub
 
@@ -139,7 +141,7 @@ Public Class frmTiempo_Ciclo
             oTiempo_Ciclo = New TC
             oTiempo_Ciclo.Estatus = "1"
             oTiempo_Ciclo.Fecha = vFecha
-            vEmpleado = "Prueba"
+            vEmpleado = vCve_User
             oTiempo_Ciclo.Codigo_Empleado = vEmpleado
             Controles_Registro_Nuevo(True)
             'btnRegistrar.Visible = True

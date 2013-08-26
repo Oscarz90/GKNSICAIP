@@ -103,7 +103,7 @@ Public Class FrmTipo_Usuario
         Else
             Me.btnRegistrar.Enabled = False
             Me.btnModificar.Enabled = False
-            Me.txtDescripcion.ReadOnly = True
+            Me.txtDescripcion.ReadOnly = False
         End If
         If vDelete = True Then
             Me.btnBaja.Enabled = True
@@ -113,6 +113,9 @@ Public Class FrmTipo_Usuario
         End If
         If vAdd = False And vDelete = False Then
             txtDescripcion.ReadOnly = True
+        End If
+        If vAdd = True And vDelete = True Then
+            txtDescripcion.ReadOnly = False
         End If
     End Sub
 

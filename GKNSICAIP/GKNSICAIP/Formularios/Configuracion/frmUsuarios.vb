@@ -94,6 +94,8 @@ Public Class FrmUsuarios
             oUsuario.CVE_Usuario = vId_Publico
             oUsuario.Cargar()
             Controles_Registro_Nuevo(False)
+            Controles_Permisos(vAdd_Registrar, vDelete_Eliminar)
+
             If oUsuario.Estatus = "INACTIVO" Then
                 Controles_Registro_Inactivo(True)
             Else
@@ -103,9 +105,8 @@ Public Class FrmUsuarios
             oUsuario = New SEGURIDAD_USUARIO
             oUsuario.Estatus = "1"
             Controles_Registro_Nuevo(True)
+            Controles_Permisos(vAdd_Registrar, vDelete_Eliminar)
         End If
-        Controles_Permisos(vAdd_Registrar, vDelete_Eliminar)
-
         SetBindings()
         Me.Show()
         Me.txtId_Usuario.Focus()
@@ -131,6 +132,7 @@ Public Class FrmUsuarios
             btnRegistrar.Visible = True
             btnModificar.Visible = False
             btnBaja.Enabled = False
+            btnAlta.Enabled = False
         Else
             btnRegistrar.Visible = False
             btnModificar.Visible = True
@@ -167,9 +169,9 @@ Public Class FrmUsuarios
         Else
             Me.btnRegistrar.Enabled = False
             Me.btnModificar.Enabled = False
-            txtId_Usuario.ReadOnly = True
-            txtNombre.ReadOnly = True
-            btnImportar.Enabled = False
+            txtId_Usuario.ReadOnly = False
+            txtNombre.ReadOnly = False
+            btnImportar.Enabled = True
         End If
         If vDelete = True Then
             Me.btnBaja.Enabled = True
@@ -183,6 +185,11 @@ Public Class FrmUsuarios
             txtId_Usuario.ReadOnly = True
             txtNombre.ReadOnly = True
             btnImportar.Enabled = False
+        End If
+        If vAdd = True And vDelete = True Then
+            txtId_Usuario.ReadOnly = False
+            txtNombre.ReadOnly = False
+            btnImportar.Enabled = True
         End If
     End Sub
 
