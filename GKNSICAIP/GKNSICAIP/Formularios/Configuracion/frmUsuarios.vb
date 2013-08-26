@@ -167,15 +167,22 @@ Public Class FrmUsuarios
         Else
             Me.btnRegistrar.Enabled = False
             Me.btnModificar.Enabled = False
+            txtId_Usuario.ReadOnly = True
+            txtNombre.ReadOnly = True
+            btnImportar.Enabled = False
         End If
         If vDelete = True Then
             Me.btnBaja.Enabled = True
+            txtId_Usuario.ReadOnly = True
+            txtNombre.ReadOnly = True
+            btnImportar.Enabled = False
         Else
             Me.btnBaja.Enabled = False
         End If
         If vAdd = False And vDelete = False Then
             txtId_Usuario.ReadOnly = True
             txtNombre.ReadOnly = True
+            btnImportar.Enabled = False
         End If
     End Sub
 

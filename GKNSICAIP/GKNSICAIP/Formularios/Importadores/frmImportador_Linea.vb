@@ -3,11 +3,20 @@ Public Class frmImportador_Linea
 
     Public vRetorno_CVE_Linea As Long
     Dim oLinea As New Linea
+    Dim vCVE_Modelo_FILTRO As Long
     'Dim vRowSeleccionada As Integer = 0
+
+    Sub New(Optional ByVal vFiltro_Modelo As Long = 0)
+        ' Llamada necesaria para el diseñador.
+        InitializeComponent()
+        vCVE_Modelo_FILTRO = vFiltro_Modelo
+        ' Agregue cualquier inicialización después de la llamada a InitializeComponent().
+    End Sub
 
 #Region "Eventos Controles"
     Private Sub frmImportador_Individual_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         Cargar_Tabla(False)
+        Me.btnImportar.Enabled = False
     End Sub
 
     Private Sub dgvDatos_MouseDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles dgvDatos.MouseDown
@@ -59,9 +68,9 @@ Public Class frmImportador_Linea
     Private Sub Cargar_Tabla(Optional ByVal vTiene_Filtro As Boolean = False, Optional ByVal vFiltro As String = "")
         oLinea = New Linea
         If vTiene_Filtro = True Then
-            Me.dgvDatos.DataSource = oLinea.Obtener_Lineas(vFiltro)
+            Me.dgvDatos.DataSource = oLinea.Obtener_Lineas(vFiltro, vCVE_Modelo_FILTRO)
         Else
-            Me.dgvDatos.DataSource = oLinea.Obtener_Lineas
+            Me.dgvDatos.DataSource = oLinea.Obtener_Lineas(vCVE_Modelo_FILTRO)
         End If
         If dgvDatos.RowCount = 0 Then
             btnImportar.Enabled = False
@@ -99,6 +108,7 @@ Public Class frmImportador_Linea
         If rbtFiltro_Nombre.Checked = True Then
             Cargar_Tabla(True, txtParametro.Text)
         End If
+        Me.btnImportar.Enabled = False
     End Sub
 
     Private Sub btnNuevo_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnNuevo.Click

@@ -103,6 +103,9 @@ Public Class frmMaquina
             btnRegistrar.Visible = False
             btnModificar.Visible = True
             btnDar_Baja.Enabled = True
+            txtNombre.ReadOnly = False
+            txtCve_Maquina.ReadOnly = True
+            btnImportar.Enabled = True
         End If
     End Sub
 
@@ -113,9 +116,15 @@ Public Class frmMaquina
         Else
             Me.btnRegistrar.Enabled = False
             Me.btnModificar.Enabled = False
+            txtNombre.ReadOnly = False
+            txtCve_Maquina.ReadOnly = True
+            btnImportar.Enabled = True
         End If
         If vDelete = True Then
             Me.btnDar_Baja.Enabled = True
+            txtNombre.ReadOnly = True
+            txtCve_Maquina.ReadOnly = True
+            btnImportar.Enabled = False
         Else
             Me.btnDar_Baja.Enabled = False
         End If
@@ -124,6 +133,12 @@ Public Class frmMaquina
             txtCve_Maquina.ReadOnly = True
             btnImportar.Enabled = False
         End If
+        If vAdd = True And vDelete = True Then
+            txtNombre.ReadOnly = False
+            txtCve_Maquina.ReadOnly = True
+            btnImportar.Enabled = True
+        End If
+
     End Sub
 
 End Class

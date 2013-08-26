@@ -21,12 +21,9 @@ Public Class frmModelo
     End Sub
 
     Private Sub frmModelo_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
-
         ''La Siguiente Linea solo es para hacer pruebas sobre un modelo de Prueba(El cual se agrego y se modifico de forma Exitosa)
         ''Borrar si requiere hacer registro nuevo
         'vId_Publico = 936
-
-
         If Convert.ToInt64(vId_Publico) <> 0 Then
             oModelo = New Modelo
             oModelo.cve_modelo = vId_Publico
@@ -41,7 +38,7 @@ Public Class frmModelo
         Controles_Permisos(vAdd_Registrar, vDelete_Eliminar)
         SetBindings()
         If vId_Publico = 0 Then
-            cbxClasificacion.SelectedIndex = 0
+            cbxClasificacion.SelectedIndex = 1 ''--------------------------Cuando sea registro nuevo la clasificacion Default sera "Produccion"
         End If
         Me.Show()
         Me.txtDescripcion.Focus()
@@ -120,10 +117,18 @@ Public Class frmModelo
             btnRegistrar.Visible = True
             btnModificar.Visible = False
             btnDarBaja.Enabled = False
+            cbxClasificacion.Enabled = False
+
+
+
         Else
             btnRegistrar.Visible = False
             btnModificar.Visible = True
             btnDarBaja.Enabled = True
+            txtDescripcion.ReadOnly = False
+            txtNumero_Parte.ReadOnly = True
+            cbxClasificacion.Enabled = False
+            btnImportar.Enabled = False
         End If
     End Sub
 
@@ -134,9 +139,17 @@ Public Class frmModelo
         Else
             Me.btnRegistrar.Enabled = False
             Me.btnModificar.Enabled = False
+            txtDescripcion.ReadOnly = True
+            txtNumero_Parte.ReadOnly = True
+            cbxClasificacion.Enabled = False
+            btnImportar.Enabled = False
         End If
         If vDelete = True Then
             Me.btnDarBaja.Enabled = True
+            txtDescripcion.ReadOnly = True
+            txtNumero_Parte.ReadOnly = True
+            cbxClasificacion.Enabled = False
+            btnImportar.Enabled = False
         Else
             Me.btnDarBaja.Enabled = False
         End If
@@ -145,6 +158,12 @@ Public Class frmModelo
             txtNumero_Parte.ReadOnly = True
             cbxClasificacion.Enabled = False
             btnImportar.Enabled = False
+        End If
+        If vAdd = True And vDelete = True Then
+            txtDescripcion.ReadOnly = False
+            txtNumero_Parte.ReadOnly = True
+            cbxClasificacion.Enabled = False
+            btnImportar.Enabled = True
         End If
     End Sub
 

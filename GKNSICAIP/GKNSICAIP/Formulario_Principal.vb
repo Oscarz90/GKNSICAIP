@@ -274,8 +274,11 @@ Public Class Formulario_Principal
             Me.dgvRegistros.Columns("cve_modelo").HeaderText = " cve_modelo"
             Me.dgvRegistros.Columns("cve_modelo").IsVisible = False
 
+            'Me.dgvRegistros.Columns("estatus").HeaderText = "estatus"
+            'Me.dgvRegistros.Columns("estatus").Width = 250
+
             Me.dgvRegistros.Columns("estatus").HeaderText = "estatus"
-            Me.dgvRegistros.Columns("estatus").Width = 250
+            Me.dgvRegistros.Columns("estatus").IsVisible = False
 
             dgvRegistros.Visible = True
             Activar_Formulario("frmTiempo_Ciclo")

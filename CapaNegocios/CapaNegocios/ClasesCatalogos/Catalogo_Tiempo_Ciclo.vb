@@ -12,7 +12,7 @@ Namespace Clases_Catalogos
                     'Cargo documentos
                     Me.L_TC = New List(Of TC)
                     Dim oBD As New CapaDatos.CapaDatos(cadena_conexion.CadenaSicaip)
-                    Dim oEq As DataTable = oBD.ObtenerTabla("SELECT cve_TC  FROM TC")
+                    Dim oEq As DataTable = oBD.ObtenerTabla("SELECT cve_TC  FROM TC WHERE estatus='1'")
                     If oEq IsNot Nothing Then
                         Dim oTC As TC = Nothing
                         For Each row As DataRow In oEq.Rows
@@ -35,9 +35,10 @@ Namespace Clases_Catalogos
 
         Public Function Obtener_Tiempos_Ciclos() As DataTable
             Dim vDT As DataTable
-            vDT = oBD.ObtenerTabla("Select cve_TC, piezas_por_hora, linea, descripcion as Modelo, TiemCiclo.estatus " & _
+            vDT = oBD.ObtenerTabla("Select cve_TC, piezas_por_hora, linea as Nombre_Linea, descripcion as Nombre_Modelo, TiemCiclo.estatus, fecha, cod_empleado as Codigo_Empleado,cve_linea,cve_modelo " & _
                                    "FROM TC TiemCiclo JOIN linea l ON l.cve_linea=TiemCiclo.cve_linea " & _
-                                   "JOIN modelo m on m.cve_modelo=TiemCiclo.cve_modelo")
+                                   "JOIN modelo m on m.cve_modelo=TiemCiclo.cve_modelo " & _
+                                   "WHERE estatus='1'")
             If vDT IsNot Nothing Then
 
             Else

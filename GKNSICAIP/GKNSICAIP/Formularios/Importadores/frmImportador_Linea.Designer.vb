@@ -27,11 +27,6 @@ Partial Class frmImportador_Linea
         Me.txtParametro = New System.Windows.Forms.TextBox()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.dgvDatos = New System.Windows.Forms.DataGridView()
-        Me.cve_Linea = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.cve_componente = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Linea = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.tpcdm = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Nombre_Componente = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.rbtFiltro_Nombre = New System.Windows.Forms.RadioButton()
         Me.btnFiltrar = New System.Windows.Forms.Button()
         Me.rbtTodos = New System.Windows.Forms.RadioButton()
@@ -40,6 +35,12 @@ Partial Class frmImportador_Linea
         Me.banner_formulario = New System.Windows.Forms.PictureBox()
         Me.Panel1 = New System.Windows.Forms.Panel()
         Me.titulo_banner_formulario = New System.Windows.Forms.Label()
+        Me.cve_Linea = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Estatus = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.cve_componente = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Linea = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.tpcdm = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Nombre_Componente = New System.Windows.Forms.DataGridViewTextBoxColumn()
         CType(Me.dgvDatos, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.banner_formulario, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.Panel1.SuspendLayout()
@@ -85,52 +86,12 @@ Partial Class frmImportador_Linea
         Me.dgvDatos.AllowUserToAddRows = False
         Me.dgvDatos.AllowUserToDeleteRows = False
         Me.dgvDatos.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.dgvDatos.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.cve_Linea, Me.cve_componente, Me.Linea, Me.tpcdm, Me.Nombre_Componente})
+        Me.dgvDatos.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.cve_Linea, Me.Estatus, Me.cve_componente, Me.Linea, Me.tpcdm, Me.Nombre_Componente})
         Me.dgvDatos.Location = New System.Drawing.Point(12, 62)
         Me.dgvDatos.Name = "dgvDatos"
         Me.dgvDatos.ReadOnly = True
         Me.dgvDatos.Size = New System.Drawing.Size(291, 315)
         Me.dgvDatos.TabIndex = 4
-        '
-        'cve_Linea
-        '
-        Me.cve_Linea.DataPropertyName = "cve_Linea"
-        Me.cve_Linea.HeaderText = "cve_Linea"
-        Me.cve_Linea.Name = "cve_Linea"
-        Me.cve_Linea.ReadOnly = True
-        Me.cve_Linea.Visible = False
-        '
-        'cve_componente
-        '
-        Me.cve_componente.DataPropertyName = "cve_componente"
-        Me.cve_componente.HeaderText = "cve_componente"
-        Me.cve_componente.Name = "cve_componente"
-        Me.cve_componente.ReadOnly = True
-        Me.cve_componente.Visible = False
-        '
-        'Linea
-        '
-        Me.Linea.DataPropertyName = "Linea"
-        Me.Linea.HeaderText = "Linea"
-        Me.Linea.Name = "Linea"
-        Me.Linea.ReadOnly = True
-        Me.Linea.Width = 200
-        '
-        'tpcdm
-        '
-        Me.tpcdm.DataPropertyName = "tpcdm"
-        Me.tpcdm.HeaderText = "tpcdm"
-        Me.tpcdm.Name = "tpcdm"
-        Me.tpcdm.ReadOnly = True
-        Me.tpcdm.Visible = False
-        '
-        'Nombre_Componente
-        '
-        Me.Nombre_Componente.DataPropertyName = "Nombre_Componente"
-        Me.Nombre_Componente.HeaderText = "Nombre_Componente"
-        Me.Nombre_Componente.Name = "Nombre_Componente"
-        Me.Nombre_Componente.ReadOnly = True
-        Me.Nombre_Componente.Visible = False
         '
         'rbtFiltro_Nombre
         '
@@ -230,6 +191,54 @@ Partial Class frmImportador_Linea
         Me.titulo_banner_formulario.TabIndex = 111
         Me.titulo_banner_formulario.Text = "Importar Línea"
         '
+        'cve_Linea
+        '
+        Me.cve_Linea.DataPropertyName = "cve_Linea"
+        Me.cve_Linea.HeaderText = "cve_Linea"
+        Me.cve_Linea.Name = "cve_Linea"
+        Me.cve_Linea.ReadOnly = True
+        Me.cve_Linea.Visible = False
+        '
+        'Estatus
+        '
+        Me.Estatus.DataPropertyName = "Estatus"
+        Me.Estatus.HeaderText = "Estatus"
+        Me.Estatus.Name = "Estatus"
+        Me.Estatus.ReadOnly = True
+        Me.Estatus.Visible = False
+        '
+        'cve_componente
+        '
+        Me.cve_componente.DataPropertyName = "cve_componente"
+        Me.cve_componente.HeaderText = "cve_componente"
+        Me.cve_componente.Name = "cve_componente"
+        Me.cve_componente.ReadOnly = True
+        Me.cve_componente.Visible = False
+        '
+        'Linea
+        '
+        Me.Linea.DataPropertyName = "Linea"
+        Me.Linea.HeaderText = "Linea"
+        Me.Linea.Name = "Linea"
+        Me.Linea.ReadOnly = True
+        Me.Linea.Width = 200
+        '
+        'tpcdm
+        '
+        Me.tpcdm.DataPropertyName = "tpcdm"
+        Me.tpcdm.HeaderText = "tpcdm"
+        Me.tpcdm.Name = "tpcdm"
+        Me.tpcdm.ReadOnly = True
+        Me.tpcdm.Visible = False
+        '
+        'Nombre_Componente
+        '
+        Me.Nombre_Componente.DataPropertyName = "Nombre_Componente"
+        Me.Nombre_Componente.HeaderText = "Nombre_Componente"
+        Me.Nombre_Componente.Name = "Nombre_Componente"
+        Me.Nombre_Componente.ReadOnly = True
+        Me.Nombre_Componente.Visible = False
+        '
         'frmImportador_Linea
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -257,12 +266,13 @@ Partial Class frmImportador_Linea
     Friend WithEvents rbtTodos As System.Windows.Forms.RadioButton
     Friend WithEvents Label2 As System.Windows.Forms.Label
     Friend WithEvents btnNuevo As System.Windows.Forms.Button
+    Friend WithEvents banner_formulario As System.Windows.Forms.PictureBox
+    Friend WithEvents Panel1 As System.Windows.Forms.Panel
+    Friend WithEvents titulo_banner_formulario As System.Windows.Forms.Label
     Friend WithEvents cve_Linea As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents Estatus As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents cve_componente As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents Linea As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents tpcdm As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents Nombre_Componente As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents banner_formulario As System.Windows.Forms.PictureBox
-    Friend WithEvents Panel1 As System.Windows.Forms.Panel
-    Friend WithEvents titulo_banner_formulario As System.Windows.Forms.Label
 End Class

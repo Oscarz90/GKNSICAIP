@@ -75,15 +75,18 @@ Public Class frmTiempo_Ciclo
             Me.btnRegistrar.Enabled = True
             'Me.btnModifica.Enabled = True
         Else
-            Me.btnRegistrar.Enabled = False
-            'Me.btnModificar.Enabled = False
-        End If       
-        If vAdd = False Then
+            Me.btnRegistrar.Enabled = False            
             nudPiezas_Hora.ReadOnly = True
             btnImportar_Linea.Enabled = False
             btnImportar_Modelo.Enabled = False
             btnRegistrar.Enabled = False
-        End If
+        End If       
+        'If vAdd = False Then
+        '    nudPiezas_Hora.ReadOnly = True
+        '    btnImportar_Linea.Enabled = False
+        '    btnImportar_Modelo.Enabled = False
+        '    btnRegistrar.Enabled = False
+        'End If
     End Sub
 
 #End Region
@@ -142,7 +145,7 @@ Public Class frmTiempo_Ciclo
             'btnRegistrar.Visible = True
             'btnRegistrar.Enabled = True
         End If
-        Controles_Permisos(vAdd_Registrar, vDelete_Eliminar)
+        Controles_Permisos(vAdd_Registrar)
         SetBindings()
         Me.Show()       
         Me.nudPiezas_Hora.Focus()
