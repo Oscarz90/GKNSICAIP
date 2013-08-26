@@ -3,7 +3,7 @@
 Public Class SEGURIDAD_USUARIO
     Implements IIndividual
     Dim cadena_conexion As New CapaDatos.conexiones
-    Dim oBD As New CapaDatos.CapaDatos(cadena_conexion.CadenaSicaip)
+    Dim oBD As New CapaDatos.CapaDatos(cadena_conexion.CadenaSicaip)    
     Dim oTipo_Usuario As Tipo_Usuario
 
 #Region "IIndividual"
@@ -449,7 +449,9 @@ Public Class SEGURIDAD_USUARIO
                 oBD.EjecutarQuery("DELETE FROM SEGURIDAD_USUARIO_PERMISOS WHERE CVE_USUARIO=" & vCVE_Usuario)
                 If vL_USUARIO_PERMISOS IsNot Nothing Then
                     For i As Integer = 0 To vL_USUARIO_PERMISOS.Count - 1
-                        oBD.EjecutarQuery("INSERT INTO SEGURIDAD_USUARIO_PERMISOS(CVE_USUARIO,CVE_PERMISO) VALUES(" & vCVE_Usuario & ", " & vL_USUARIO_PERMISOS.Item(i).CVE_PERMISO & ")")
+                        If vL_USUARIO_PERMISOS.Item(i).CVE_Usuario_Permisos = 0 Then
+                            oBD.EjecutarQuery("INSERT INTO SEGURIDAD_USUARIO_PERMISOS(CVE_USUARIO,CVE_PERMISO) VALUES(" & vCVE_Usuario & ", " & vL_USUARIO_PERMISOS.Item(i).CVE_PERMISO & ")")
+                        End If
                     Next
                 End If
                 scope.Complete()
@@ -458,6 +460,23 @@ Public Class SEGURIDAD_USUARIO
             End Try
         End Using
     End Sub
+
+    Public Function Usuario_NO_Sindicalizado(ByVal vNombreUsuario_Login As String) As Boolean
+        Dim vRetorno As Boolean = False
+        Dim vDR As DataRow
+        Try
+            vDR = oBD.ObtenerRenglon("select CVE_Usuario from SEGURIDAD_USUARIO where estatus=1 and Id_Usuario ='" & vNombreUsuario_Login & "'", "SEGU_USUARIO")
+            If vDR IsNot Nothing Then
+                vRetorno = True
+                CVE_Usuario = vDR("CVE_Usuario")
+            Else
+                vRetorno = False
+            End If
+        Catch ex As Exception
+            'MsgBox("El empleado no está activo en KRONOS. Clave del Error: LIN_001", vbCritical + vbOKOnly, "Error")
+        End Try
+        Return vRetorno
+    End Function
 #End Region
 
 End Class

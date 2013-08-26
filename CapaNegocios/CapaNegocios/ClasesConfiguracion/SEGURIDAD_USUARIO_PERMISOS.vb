@@ -4,6 +4,8 @@ Public Class SEGURIDAD_USUARIO_PERMISOS
     Implements IIndividual
     Dim cadena_conexion As New CapaDatos.conexiones
     Dim oBD As New CapaDatos.CapaDatos(cadena_conexion.CadenaSicaip)
+    Dim oPermisos As SEGURIDAD_PERMISOS
+    Public vRetorno_nombreCorto As String
 
 #Region "Atributos"
     Private vCVE_Usuario_Permisos As Long
@@ -38,6 +40,40 @@ Public Class SEGURIDAD_USUARIO_PERMISOS
             vCVE_PERMISO = value
         End Set
     End Property
+
+    Public ReadOnly Property Nombre_Corto_Permiso() As String
+        Get
+            If vCVE_PERMISO <> 0 Then
+                oPermisos = New SEGURIDAD_PERMISOS
+                oPermisos.Cve_Permiso = vCVE_PERMISO
+                oPermisos.Cargar()
+                Return oPermisos.Nombre_Corto
+            Else
+                Return ""
+            End If
+        End Get
+    End Property
+
+
+    Private vNombre_Short As String
+    Public Property Nombre_Short() As String
+        Get
+            If vCVE_PERMISO <> 0 Then
+                oPermisos = New SEGURIDAD_PERMISOS
+                oPermisos.Cve_Permiso = vCVE_PERMISO
+                oPermisos.Cargar()
+                Return oPermisos.Nombre_Corto
+            Else
+                Return ""
+            End If
+        End Get
+        Set(ByVal value As String)
+            vNombre_Short = value
+        End Set
+    End Property
+
+
+
 #End Region
 
 #Region "IIndividual"
@@ -70,7 +106,11 @@ Public Class SEGURIDAD_USUARIO_PERMISOS
     End Sub
 
     Public Sub Eliminar() Implements IIndividual.Eliminar
+        Try
+            oBD.EjecutarQuery("DELETE SEGURIDAD_USUARIO_PERMISOS where CVE_USUARIO =" & vCVE_USUARIO)
+        Catch ex As Exception
 
+        End Try
     End Sub
 
     Public Function Obtener_Id(ByVal vCadena As String) As Long Implements IIndividual.Obtener_Id

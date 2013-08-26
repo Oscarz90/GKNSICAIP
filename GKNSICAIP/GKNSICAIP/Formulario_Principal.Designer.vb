@@ -47,12 +47,14 @@ Partial Class Formulario_Principal
         Me.dgvRegistros = New Telerik.WinControls.UI.RadGridView()
         Me.RadStatusStrip1 = New Telerik.WinControls.UI.RadStatusStrip()
         Me.RadLabelElement1 = New Telerik.WinControls.UI.RadLabelElement()
+        Me.RadLabel_Usuario_Login = New Telerik.WinControls.UI.RadLabelElement()
         Me.Barra_Tool_Registros = New Telerik.WinControls.UI.RadCommandBar()
         Me.CommandBarRowElement2 = New Telerik.WinControls.UI.CommandBarRowElement()
         Me.CommandBarStripElement2 = New Telerik.WinControls.UI.CommandBarStripElement()
         Me.btnAdd = New Telerik.WinControls.UI.CommandBarButton()
         Me.btnModificar = New Telerik.WinControls.UI.CommandBarButton()
         Me.btnEliminar = New Telerik.WinControls.UI.CommandBarButton()
+        Me.RadLabelElement2 = New Telerik.WinControls.UI.RadLabelElement()
         CType(Me.MapaUbicacion, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.RadPanel_Registros, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.RadPanel_Registros.SuspendLayout()
@@ -80,7 +82,7 @@ Partial Class Formulario_Principal
         '
         Me.RibbonTab1.AccessibleDescription = "Configuración"
         Me.RibbonTab1.AccessibleName = "Configuración"
-        Me.RibbonTab1.IsSelected = False
+        Me.RibbonTab1.IsSelected = True
         Me.RibbonTab1.Items.AddRange(New Telerik.WinControls.RadItem() {Me.RadRibbonBarGroup1})
         Me.RibbonTab1.Name = "RibbonTab1"
         Me.RibbonTab1.Text = "Configuración"
@@ -216,7 +218,7 @@ Partial Class Formulario_Principal
         '
         Me.RibbonTab3.AccessibleDescription = "SICAIP"
         Me.RibbonTab3.AccessibleName = "SICAIP"
-        Me.RibbonTab3.IsSelected = True
+        Me.RibbonTab3.IsSelected = False
         Me.RibbonTab3.Items.AddRange(New Telerik.WinControls.RadItem() {Me.RadRibbonBarGroup4})
         Me.RibbonTab3.Name = "RibbonTab3"
         Me.RibbonTab3.Text = "SICAIP"
@@ -309,7 +311,7 @@ Partial Class Formulario_Principal
         '
         'RadStatusStrip1
         '
-        Me.RadStatusStrip1.Items.AddRange(New Telerik.WinControls.RadItem() {Me.RadLabelElement1})
+        Me.RadStatusStrip1.Items.AddRange(New Telerik.WinControls.RadItem() {Me.RadLabelElement1, Me.RadLabel_Usuario_Login})
         Me.RadStatusStrip1.Location = New System.Drawing.Point(0, 699)
         Me.RadStatusStrip1.Name = "RadStatusStrip1"
         '
@@ -330,6 +332,16 @@ Partial Class Formulario_Principal
         Me.RadLabelElement1.Text = "Mensaje: "
         Me.RadLabelElement1.TextWrap = True
         Me.RadLabelElement1.Visibility = Telerik.WinControls.ElementVisibility.Visible
+        '
+        'RadLabel_Usuario_Login
+        '
+        Me.RadLabel_Usuario_Login.AccessibleDescription = " Usuario Login: "
+        Me.RadLabel_Usuario_Login.AccessibleName = " Usuario Login: "
+        Me.RadLabel_Usuario_Login.Name = "RadLabel_Usuario_Login"
+        Me.RadStatusStrip1.SetSpring(Me.RadLabel_Usuario_Login, False)
+        Me.RadLabel_Usuario_Login.Text = " Usuario Login: "
+        Me.RadLabel_Usuario_Login.TextWrap = True
+        Me.RadLabel_Usuario_Login.Visibility = Telerik.WinControls.ElementVisibility.Visible
         '
         'Barra_Tool_Registros
         '
@@ -393,6 +405,15 @@ Partial Class Formulario_Principal
         Me.btnEliminar.ToolTipText = "Eliminar"
         Me.btnEliminar.Visibility = Telerik.WinControls.ElementVisibility.Visible
         '
+        'RadLabelElement2
+        '
+        Me.RadLabelElement2.AccessibleDescription = "Mensaje: "
+        Me.RadLabelElement2.AccessibleName = "Mensaje: "
+        Me.RadLabelElement2.Name = "RadLabelElement2"
+        Me.RadLabelElement2.Text = "Mensaje: "
+        Me.RadLabelElement2.TextWrap = True
+        Me.RadLabelElement2.Visibility = Telerik.WinControls.ElementVisibility.Visible
+        '
         'Formulario_Principal
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -453,5 +474,7 @@ Partial Class Formulario_Principal
     Friend WithEvents btnTipoUsuario As Telerik.WinControls.UI.RadButtonElement
     Friend WithEvents RibbonTab5 As Telerik.WinControls.UI.RibbonTab
     Friend WithEvents RibbonTab4 As Telerik.WinControls.UI.RibbonTab
+    Friend WithEvents RadLabel_Usuario_Login As Telerik.WinControls.UI.RadLabelElement
+    Friend WithEvents RadLabelElement2 As Telerik.WinControls.UI.RadLabelElement
 
 End Class

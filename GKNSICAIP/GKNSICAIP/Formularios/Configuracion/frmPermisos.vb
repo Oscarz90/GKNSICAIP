@@ -1,16 +1,31 @@
 ﻿Imports CapaNegocios
+Imports System.Transactions
 
 Public Class FrmPermisos
+    Public oUsuario_Login As SEGURIDAD_USUARIO
     Dim oUsuario As SEGURIDAD_USUARIO
     Dim oUsuario_Permisos As SEGURIDAD_USUARIO_PERMISOS
     Private vId_Nodo As Integer = 0
     Private vTipo_Nodo As String = ""
     Private vUsuario_Seleccionado_Global As Integer = 0
 
+    Public Sub New(ByRef oUser_Login As SEGURIDAD_USUARIO)
+        ' Llamada necesaria para el diseñador.
+        InitializeComponent()
+        Me.oUsuario_Login = oUser_Login
+
+        ' Agregue cualquier inicialización después de la llamada a InitializeComponent().
+    End Sub
+
+
     Private Sub FrmPermisos_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
-        oUsuario = New SEGURIDAD_USUARIO        
-        Cargar_Usuarios(oUsuario, 0, Nothing)      
+        oUsuario = New SEGURIDAD_USUARIO
+        Cargar_Usuarios(oUsuario, 0, Nothing)
         Carga_Permisos_Usuario(oUsuario, 0, Nothing)
+
+
+
+
     End Sub
 
     Private Sub Cargar_Usuarios(ByRef User As SEGURIDAD_USUARIO, ByVal vIndicePadre As Integer, ByVal vNodePadre As TreeNode)
@@ -28,7 +43,7 @@ Public Class FrmPermisos
             nuevoNodo.Checked = True
             ' si el parámetro nodoPadre es nulo es porque es la primera llamada, son los Nodos
             ' del primer nivel que no dependen de otro nodo.
-            If vNodePadre Is Nothing Then                
+            If vNodePadre Is Nothing Then
                 TreeView_Usuarios.Nodes.Add(nuevoNodo)
             Else
                 '' se añade el nuevo nodo al nodo padre.                
@@ -68,7 +83,7 @@ Public Class FrmPermisos
                         Else
                             nuevoNodo_Permisos_Usuarios.Checked = False
                         End If
-                    End If                   
+                    End If
                 End If
             Else
                 nuevoNodo_Permisos_Usuarios.Checked = False
@@ -170,7 +185,7 @@ Public Class FrmPermisos
             'If oUsuario.Obtener_Permisos_Usuario(vId_Nodo) IsNot Nothing Then             
             oUsuario = New SEGURIDAD_USUARIO
             TreeView_Permisos.Nodes.Clear()
-            Carga_Permisos_Usuario(oUsuario, 0, Nothing, True, vId_Nodo)           
+            Carga_Permisos_Usuario(oUsuario, 0, Nothing, True, vId_Nodo)
             'End If
         End If
     End Sub
@@ -178,7 +193,7 @@ Public Class FrmPermisos
     Private Sub RecorrerNodos(ByVal treeNode As TreeNode, ByRef vCVE_Permiso As Long)
         Try
             'Si el nodo que recibimos tiene hijos se recorrerá            
-            For Each tn As TreeNode In treeNode.Nodes                
+            For Each tn As TreeNode In treeNode.Nodes
                 If Obtener_Tipo_ID(tn.Tag) = "P" Then
                     If Obtener_Id_Libre(tn.Tag) = vCVE_Permiso Then
                         tn.Checked = True
@@ -186,7 +201,7 @@ Public Class FrmPermisos
                     Else
                         tn.Checked = False
                     End If
-                End If               
+                End If
                 'Ahora hago verificacion a los hijos del nodo actual            
                 'Esta iteración no acabara hasta llegar al ultimo nodo principal
                 RecorrerNodos(tn, vCVE_Permiso)
@@ -197,7 +212,7 @@ Public Class FrmPermisos
     End Sub
 
     Private Sub RecorrerNodos_PARA_GUARDAR(ByVal treeNode As TreeNode)
-        Try            
+        Try
             'Si el nodo que recibimos tiene hijos se recorrerá para luego verificar si esta o no checado
             For Each tn As TreeNode In treeNode.Nodes
                 'Se Verifica si esta marcado...
@@ -210,7 +225,7 @@ Public Class FrmPermisos
                         oUsuario_Permisos.CVE_USUARIO = vUsuario_Seleccionado_Global
                         oUsuario.CVE_Usuario = vUsuario_Seleccionado_Global
                         oUsuario.L_USUARIO_PERMISOS.Add(oUsuario_Permisos)
-                    End If                    
+                    End If
                 End If
                 'End If
                 'Ahora hago verificacion a los hijos del nodo actual. Esta iteración no acabara hasta llegar al ultimo nodo principal
@@ -221,19 +236,34 @@ Public Class FrmPermisos
         End Try
     End Sub
 
-    Private Sub btnGuardar_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnGuardar.Click        
+    Private Sub btnGuardar_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnGuardar.Click
         'Se Declara una colección de nodos apartir de tu Treeview del que se va a recorrer
         Dim nodes As TreeNodeCollection = TreeView_Permisos.Nodes
         'Se recorren los nodos principales
         oUsuario = New SEGURIDAD_USUARIO
-        oUsuario.L_USUARIO_PERMISOS.Clear()
-        For Each n As TreeNode In nodes
-            'Se Declara un metodo para que recorra los hijos de los principales Y los hijos de los hijos....Recorrido Total en pocas palabras
-            'Para ello se envía el nodo actual para evaluar si tiene hijos            
-            RecorrerNodos_PARA_GUARDAR(n)
-            oUsuario.Registrar_Permisos()
-            oUsuario.L_USUARIO_PERMISOS = Nothing
-        Next
+        oUsuario_Permisos = New SEGURIDAD_USUARIO_PERMISOS
+
+        Using scope As New TransactionScope()
+            Try
+                oUsuario_Permisos.CVE_USUARIO = oUsuario.CVE_Usuario
+                oUsuario_Permisos.Eliminar()
+
+                oUsuario.L_USUARIO_PERMISOS.Clear()
+                oUsuario.L_USUARIO_PERMISOS = Nothing
+                For Each n As TreeNode In nodes
+                    'Se Declara un metodo para que recorra los hijos de los principales Y los hijos de los hijos....Recorrido Total en pocas palabras
+                    'Para ello se envía el nodo actual para evaluar si tiene hijos            
+                    RecorrerNodos_PARA_GUARDAR(n)
+                Next
+                oUsuario.Registrar_Permisos()
+            Catch ex As Exception
+
+            End Try
+
+            oUsuario_Login.L_USUARIO_PERMISOS = Nothing
+
+            scope.Complete()
+        End Using
         MsgBox("Se registro correctamente")
     End Sub
 End Class
