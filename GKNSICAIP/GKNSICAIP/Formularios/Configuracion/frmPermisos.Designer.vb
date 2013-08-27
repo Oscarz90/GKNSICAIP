@@ -24,6 +24,8 @@ Partial Class FrmPermisos
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(FrmPermisos))
         Me.RadPanel1 = New Telerik.WinControls.UI.RadPanel()
+        Me.lbUsuario_Seleccionado = New Telerik.WinControls.UI.RadLabel()
+        Me.RadLabel1 = New Telerik.WinControls.UI.RadLabel()
         Me.btnGuardar = New Telerik.WinControls.UI.RadButton()
         Me.TreeView_Permisos = New System.Windows.Forms.TreeView()
         Me.TreeView_Usuarios = New System.Windows.Forms.TreeView()
@@ -32,6 +34,8 @@ Partial Class FrmPermisos
         Me.banner_formulario = New System.Windows.Forms.PictureBox()
         CType(Me.RadPanel1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.RadPanel1.SuspendLayout()
+        CType(Me.lbUsuario_Seleccionado, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.RadLabel1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.btnGuardar, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.btnSalir, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.banner_formulario, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -41,6 +45,8 @@ Partial Class FrmPermisos
         'RadPanel1
         '
         Me.RadPanel1.BackColor = System.Drawing.Color.White
+        Me.RadPanel1.Controls.Add(Me.lbUsuario_Seleccionado)
+        Me.RadPanel1.Controls.Add(Me.RadLabel1)
         Me.RadPanel1.Controls.Add(Me.btnGuardar)
         Me.RadPanel1.Controls.Add(Me.TreeView_Permisos)
         Me.RadPanel1.Controls.Add(Me.TreeView_Usuarios)
@@ -59,6 +65,24 @@ Partial Class FrmPermisos
         Me.RadPanel1.RootElement.MinSize = New System.Drawing.Size(578, 502)
         Me.RadPanel1.Size = New System.Drawing.Size(578, 502)
         Me.RadPanel1.TabIndex = 107
+        '
+        'lbUsuario_Seleccionado
+        '
+        Me.lbUsuario_Seleccionado.Font = New System.Drawing.Font("Segoe UI", 12.0!)
+        Me.lbUsuario_Seleccionado.Location = New System.Drawing.Point(383, 66)
+        Me.lbUsuario_Seleccionado.Name = "lbUsuario_Seleccionado"
+        Me.lbUsuario_Seleccionado.Size = New System.Drawing.Size(12, 25)
+        Me.lbUsuario_Seleccionado.TabIndex = 118
+        Me.lbUsuario_Seleccionado.Text = " "
+        '
+        'RadLabel1
+        '
+        Me.RadLabel1.Font = New System.Drawing.Font("Segoe UI", 12.0!)
+        Me.RadLabel1.Location = New System.Drawing.Point(277, 66)
+        Me.RadLabel1.Name = "RadLabel1"
+        Me.RadLabel1.Size = New System.Drawing.Size(100, 25)
+        Me.RadLabel1.TabIndex = 117
+        Me.RadLabel1.Text = "Permisos de:"
         '
         'btnGuardar
         '
@@ -140,6 +164,8 @@ Partial Class FrmPermisos
         CType(Me.RadPanel1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.RadPanel1.ResumeLayout(False)
         Me.RadPanel1.PerformLayout()
+        CType(Me.lbUsuario_Seleccionado, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.RadLabel1, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.btnGuardar, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.btnSalir, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.banner_formulario, System.ComponentModel.ISupportInitialize).EndInit()
@@ -154,5 +180,7 @@ Partial Class FrmPermisos
     Friend WithEvents TreeView_Usuarios As System.Windows.Forms.TreeView
     Friend WithEvents TreeView_Permisos As System.Windows.Forms.TreeView
     Friend WithEvents btnGuardar As Telerik.WinControls.UI.RadButton
+    Friend WithEvents lbUsuario_Seleccionado As Telerik.WinControls.UI.RadLabel
+    Friend WithEvents RadLabel1 As Telerik.WinControls.UI.RadLabel
 End Class
 

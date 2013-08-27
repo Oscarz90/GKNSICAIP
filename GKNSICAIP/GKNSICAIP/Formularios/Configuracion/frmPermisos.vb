@@ -25,10 +25,6 @@ Public Class FrmPermisos
         oUsuario = New SEGURIDAD_USUARIO
         Cargar_Usuarios(oUsuario, 0, Nothing)
         Carga_Permisos_Usuario(oUsuario, 0, Nothing)
-
-
-
-
     End Sub
 
     Private Sub Cargar_Usuarios(ByRef User As SEGURIDAD_USUARIO, ByVal vIndicePadre As Integer, ByVal vNodePadre As TreeNode)
@@ -113,6 +109,9 @@ Public Class FrmPermisos
 
     Private Sub TreeView_Usuarios_NodeMouseClick(ByVal sender As System.Object, ByVal e As System.Windows.Forms.TreeNodeMouseClickEventArgs) Handles TreeView_Usuarios.NodeMouseClick
         Cargar_Permisos_Usuario_Seleccionado(e.Node.Tag)
+        If Obtener_Tipo_ID(e.Node.Tag) = "U" Then
+            lbUsuario_Seleccionado.Text = e.Node.Text
+        End If
     End Sub
 
 #Region "Metodo y Evento para Activar/Desactivar Casillas Con/Sin hijos"
@@ -269,4 +268,5 @@ Public Class FrmPermisos
         End Using
         MsgBox("Se registro correctamente")
     End Sub
+
 End Class

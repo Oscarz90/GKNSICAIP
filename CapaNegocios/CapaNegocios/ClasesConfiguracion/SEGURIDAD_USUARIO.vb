@@ -322,6 +322,9 @@ Public Class SEGURIDAD_USUARIO
                     Next
                     ''Incrementa el Identificador del Nodo
                     vIdetificador_Nodo = vIdetificador_Nodo + 1
+                Else
+                    ''Incrementa el Identificador del Nodo
+                    vIdetificador_Nodo = vIdetificador_Nodo + 1
                 End If
             Next
         End If        
