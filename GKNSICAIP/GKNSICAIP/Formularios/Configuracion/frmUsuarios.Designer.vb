@@ -24,6 +24,7 @@ Partial Class FrmUsuarios
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(FrmUsuarios))
         Me.RadPanel1 = New Telerik.WinControls.UI.RadPanel()
+        Me.btnAlta = New Telerik.WinControls.UI.RadButton()
         Me.RadLabel6 = New Telerik.WinControls.UI.RadLabel()
         Me.txtEstatus = New Telerik.WinControls.UI.RadTextBox()
         Me.btnModificar = New Telerik.WinControls.UI.RadButton()
@@ -43,9 +44,9 @@ Partial Class FrmUsuarios
         Me.RadLabel3 = New Telerik.WinControls.UI.RadLabel()
         Me.RadLabel2 = New Telerik.WinControls.UI.RadLabel()
         Me.RadLabel1 = New Telerik.WinControls.UI.RadLabel()
-        Me.btnAlta = New Telerik.WinControls.UI.RadButton()
         CType(Me.RadPanel1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.RadPanel1.SuspendLayout()
+        CType(Me.btnAlta, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.RadLabel6, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.txtEstatus, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.btnModificar, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -64,7 +65,6 @@ Partial Class FrmUsuarios
         CType(Me.RadLabel3, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.RadLabel2, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.RadLabel1, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.btnAlta, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
@@ -96,6 +96,16 @@ Partial Class FrmUsuarios
         Me.RadPanel1.Name = "RadPanel1"
         Me.RadPanel1.Size = New System.Drawing.Size(396, 283)
         Me.RadPanel1.TabIndex = 5
+        '
+        'btnAlta
+        '
+        Me.btnAlta.Image = CType(resources.GetObject("btnAlta.Image"), System.Drawing.Image)
+        Me.btnAlta.Location = New System.Drawing.Point(219, 247)
+        Me.btnAlta.Name = "btnAlta"
+        Me.btnAlta.Size = New System.Drawing.Size(89, 24)
+        Me.btnAlta.TabIndex = 10
+        Me.btnAlta.Text = "Dar Alta"
+        Me.btnAlta.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
         '
         'RadLabel6
         '
@@ -262,19 +272,9 @@ Partial Class FrmUsuarios
         '
         Me.RadLabel1.Location = New System.Drawing.Point(12, 82)
         Me.RadLabel1.Name = "RadLabel1"
-        Me.RadLabel1.Size = New System.Drawing.Size(61, 18)
+        Me.RadLabel1.Size = New System.Drawing.Size(82, 18)
         Me.RadLabel1.TabIndex = 5
-        Me.RadLabel1.Text = "Id_Usuario:"
-        '
-        'btnAlta
-        '
-        Me.btnAlta.Image = CType(resources.GetObject("btnAlta.Image"), System.Drawing.Image)
-        Me.btnAlta.Location = New System.Drawing.Point(219, 247)
-        Me.btnAlta.Name = "btnAlta"
-        Me.btnAlta.Size = New System.Drawing.Size(89, 24)
-        Me.btnAlta.TabIndex = 10
-        Me.btnAlta.Text = "Dar Alta"
-        Me.btnAlta.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
+        Me.RadLabel1.Text = "Usuario de Red"
         '
         'FrmUsuarios
         '
@@ -295,6 +295,7 @@ Partial Class FrmUsuarios
         CType(Me.RadPanel1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.RadPanel1.ResumeLayout(False)
         Me.RadPanel1.PerformLayout()
+        CType(Me.btnAlta, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.RadLabel6, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.txtEstatus, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.btnModificar, System.ComponentModel.ISupportInitialize).EndInit()
@@ -313,7 +314,6 @@ Partial Class FrmUsuarios
         CType(Me.RadLabel3, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.RadLabel2, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.RadLabel1, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.btnAlta, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 

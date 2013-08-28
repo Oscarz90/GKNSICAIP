@@ -2,6 +2,16 @@
 Imports System.Transactions
 
 Public Class frmTiempo_Ciclo
+    Dim vAdd_Registrar As Boolean = True
+    Dim vCve_User As String = ""
+
+    Sub New(Optional ByVal vRegistrar As Boolean = True, Optional ByVal cve_Usuario_registro As String = "")
+        ' Llamada necesaria para el diseñador.
+        InitializeComponent()
+        vAdd_Registrar = vRegistrar
+        vCve_User = cve_Usuario_registro
+        ' Agregue cualquier inicialización después de la llamada a InitializeComponent().
+    End Sub
 
 #Region "Variables y Objetos"
     Public vId_Publico As Long = 0
@@ -62,6 +72,25 @@ Public Class frmTiempo_Ciclo
         'End If
     End Sub
 
+    Private Sub Controles_Permisos(ByVal vAdd As Boolean)
+        If vAdd = True Then
+            Me.btnRegistrar.Enabled = True
+            'Me.btnModifica.Enabled = True
+        Else
+            Me.btnRegistrar.Enabled = False            
+            nudPiezas_Hora.ReadOnly = True
+            btnImportar_Linea.Enabled = False
+            btnImportar_Modelo.Enabled = False
+            btnRegistrar.Enabled = False
+        End If       
+        'If vAdd = False Then
+        '    nudPiezas_Hora.ReadOnly = True
+        '    btnImportar_Linea.Enabled = False
+        '    btnImportar_Modelo.Enabled = False
+        '    btnRegistrar.Enabled = False
+        'End If
+    End Sub
+
 #End Region
 
 #Region "Importadores"
@@ -112,12 +141,13 @@ Public Class frmTiempo_Ciclo
             oTiempo_Ciclo = New TC
             oTiempo_Ciclo.Estatus = "1"
             oTiempo_Ciclo.Fecha = vFecha
-            vEmpleado = "Prueba"
+            vEmpleado = vCve_User
             oTiempo_Ciclo.Codigo_Empleado = vEmpleado
             Controles_Registro_Nuevo(True)
             'btnRegistrar.Visible = True
             'btnRegistrar.Enabled = True
         End If
+        Controles_Permisos(vAdd_Registrar)
         SetBindings()
         Me.Show()       
         Me.nudPiezas_Hora.Focus()
@@ -136,12 +166,12 @@ Public Class frmTiempo_Ciclo
             Using scope As New TransactionScope()
                 Try
                     If oTiempo_Ciclo.Validar_Exixtencia_LINEA_MODELO_EN_TC(oTiempo_Ciclo.cve_linea, oTiempo_Ciclo.cve_modelo) = True Then
-                        MsgBox("La linea y el modelo en TC ya exixte")
+                        'MsgBox("La linea y el modelo en TC ya exixte")
                         vValidado_Modelo_Y_Linea_En_TC = False
                         'oTiempo_Ciclo_A_MODIFICAR_ENCONTRADO_VALIDACIONES = New TC
                         oTiempo_Ciclo_A_MODIFICAR_ENCONTRADO_VALIDACIONES.Cargar_TC(oTiempo_Ciclo.cve_linea, oTiempo_Ciclo.cve_modelo)
                     Else
-                        MsgBox("La linea y el modelo en TC no exixte")
+                        'MsgBox("La linea y el modelo en TC no exixte")
                         vValidado_Modelo_Y_Linea_En_TC = True
                     End If
                     'btnRegistrar.Enabled = True
@@ -172,7 +202,6 @@ Public Class frmTiempo_Ciclo
         End If
     End Sub
 #End Region
-
 
 #Region "Metodos"
     Private Sub Controles_Registro_Inactivo(ByVal vEs_Registro_Inactivo As Boolean)

@@ -274,6 +274,7 @@ Partial Class frmImportador_Modelo
         Me.Controls.Add(Me.Panel1)
         Me.MaximizeBox = False
         Me.MinimizeBox = False
+        Me.MinimumSize = New System.Drawing.Size(412, 490)
         Me.Name = "frmImportador_Modelo"
         Me.Text = "Importar Modelo"
         CType(Me.dgvDatos, System.ComponentModel.ISupportInitialize).EndInit()

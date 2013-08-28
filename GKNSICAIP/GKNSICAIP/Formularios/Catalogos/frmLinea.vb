@@ -4,6 +4,16 @@ Public Class frmLinea
     Public vId_Publico As Long
     Public vId_Retorno As Long
     Dim oLinea As Linea
+    Dim vAdd_Registrar As Boolean = True
+    Dim vDelete_Eliminar As Boolean = True
+
+    Sub New(Optional ByVal vRegistrar As Boolean = True, Optional ByVal vEliminar As Boolean = True)
+        ' Llamada necesaria para el diseñador.
+        InitializeComponent()
+        vAdd_Registrar = vRegistrar
+        vDelete_Eliminar = vEliminar
+        ' Agregue cualquier inicialización después de la llamada a InitializeComponent().
+    End Sub
 
     Private Sub frmLinea_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
 
@@ -19,6 +29,7 @@ Public Class frmLinea
             oLinea = New Linea            
             Controles_Registro_Nuevo(True)
         End If
+        Controles_Permisos(vAdd_Registrar, vDelete_Eliminar)
         SetBindings()        
         Me.Show()
         Me.txtNombre_Linea.Focus()
@@ -95,6 +106,41 @@ Public Class frmLinea
             btnRegistrar.Visible = False
             btnModificar.Visible = True
             btnDarBaja.Enabled = True
+
+            btnImportar.Enabled = False
+        End If
+    End Sub
+
+    Private Sub Controles_Permisos(ByVal vAdd As Boolean, ByVal vDelete As Boolean)
+        If vAdd = True Then
+            Me.btnRegistrar.Enabled = True
+            Me.btnModificar.Enabled = True
+            txtNombre_Linea.ReadOnly = False
+            nudTPCM.ReadOnly = False
+        Else
+            Me.btnRegistrar.Enabled = False
+            Me.btnModificar.Enabled = False
+            txtNombre_Linea.ReadOnly = True
+            nudTPCM.ReadOnly = True
+            btnImportar.Enabled = False
+        End If
+        If vDelete = True Then
+            Me.btnDarBaja.Enabled = True
+            txtNombre_Linea.ReadOnly = True
+            nudTPCM.ReadOnly = True
+            btnImportar.Enabled = False
+        Else
+            Me.btnDarBaja.Enabled = False
+        End If
+        If vAdd = False And vDelete = False Then
+            txtNombre_Linea.ReadOnly = True
+            nudTPCM.ReadOnly = True
+            btnImportar.Enabled = False
+        End If
+        If vAdd = True And vDelete = True Then
+            txtNombre_Linea.ReadOnly = False
+            nudTPCM.ReadOnly = False
+            btnImportar.Enabled = False
         End If
     End Sub
 End Class

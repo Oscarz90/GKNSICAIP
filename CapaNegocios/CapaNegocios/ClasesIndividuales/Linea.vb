@@ -227,9 +227,13 @@ Public Class Linea
 #End Region
 
 #Region "Metodos Generales"
-    Public Function Obtener_Lineas() As DataTable
+    Public Function Obtener_Lineas(Optional ByVal vFiltro_Modelo As Long = 0) As DataTable
         Dim vDT As DataTable
-        vDT = oBD.ObtenerTabla("select * from Linea")
+        If vFiltro_Modelo = 0 Then
+            vDT = oBD.ObtenerTabla("select * from Linea where estatus='1'")
+        Else
+            vDT = oBD.ObtenerTabla("select * from Linea where estatus='1' and cve_componente=" & vFiltro_Modelo)
+        End If
         If vDT IsNot Nothing Then
 
         Else
@@ -238,9 +242,13 @@ Public Class Linea
         Return vDT
     End Function
 
-    Public Function Obtener_Lineas(ByVal vFiltro As String) As DataTable
+    Public Function Obtener_Lineas(ByVal vFiltro As String, Optional ByVal vFiltro_Modelo As Long = 0) As DataTable
         Dim vDT As DataTable
-        vDT = oBD.ObtenerTabla("select * from Linea where linea LIKE '%" & vFiltro & "%'")
+        If vFiltro_Modelo = 0 Then
+            vDT = oBD.ObtenerTabla("select * from Linea where estatus='1' and linea LIKE '%" & vFiltro & "%'")
+        Else
+            vDT = oBD.ObtenerTabla("select * from Linea where estatus='1' and cve_componente=" & vFiltro_Modelo & " and linea LIKE '%" & vFiltro & "%'")
+        End If
         If vDT IsNot Nothing Then
 
         Else

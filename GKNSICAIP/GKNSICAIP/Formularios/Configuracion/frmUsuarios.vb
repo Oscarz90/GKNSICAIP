@@ -3,6 +3,16 @@ Public Class FrmUsuarios
     Dim oUsuario As SEGURIDAD_USUARIO
     Public vId_Publico As Long = 0
     Public vId_Retorno As Long = 0
+    Dim vAdd_Registrar As Boolean = True
+    Dim vDelete_Eliminar As Boolean = True
+
+    Sub New(Optional ByVal vRegistrar As Boolean = True, Optional ByVal vEliminar As Boolean = True)
+        ' Llamada necesaria para el diseñador.
+        InitializeComponent()
+        vAdd_Registrar = vRegistrar
+        vDelete_Eliminar = vEliminar
+        ' Agregue cualquier inicialización después de la llamada a InitializeComponent().
+    End Sub
 
 
     Private Sub btnSalir_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSalir.Click
@@ -84,6 +94,8 @@ Public Class FrmUsuarios
             oUsuario.CVE_Usuario = vId_Publico
             oUsuario.Cargar()
             Controles_Registro_Nuevo(False)
+            Controles_Permisos(vAdd_Registrar, vDelete_Eliminar)
+
             If oUsuario.Estatus = "INACTIVO" Then
                 Controles_Registro_Inactivo(True)
             Else
@@ -93,6 +105,7 @@ Public Class FrmUsuarios
             oUsuario = New SEGURIDAD_USUARIO
             oUsuario.Estatus = "1"
             Controles_Registro_Nuevo(True)
+            Controles_Permisos(vAdd_Registrar, vDelete_Eliminar)
         End If
         SetBindings()
         Me.Show()
@@ -119,6 +132,7 @@ Public Class FrmUsuarios
             btnRegistrar.Visible = True
             btnModificar.Visible = False
             btnBaja.Enabled = False
+            btnAlta.Enabled = False
         Else
             btnRegistrar.Visible = False
             btnModificar.Visible = True
@@ -142,11 +156,44 @@ Public Class FrmUsuarios
             txtNombre.ReadOnly = True
         Else
             btnAlta.Visible = False
-            btnAlta.Enabled = False
+            'btnAlta.Enabled = False
             btnBaja.Visible = True
-            btnBaja.Enabled = True
+            'btnBaja.Enabled = True
         End If
     End Sub
+
+    Private Sub Controles_Permisos(ByVal vAdd As Boolean, ByVal vDelete As Boolean)
+        If vAdd = True Then
+            Me.btnRegistrar.Enabled = True
+            Me.btnModificar.Enabled = True
+        Else
+            Me.btnRegistrar.Enabled = False
+            Me.btnModificar.Enabled = False
+            txtId_Usuario.ReadOnly = False
+            txtNombre.ReadOnly = False
+            btnImportar.Enabled = True
+            btnAlta.Enabled = True
+        End If
+        If vDelete = True Then
+            Me.btnBaja.Enabled = True
+            txtId_Usuario.ReadOnly = True
+            txtNombre.ReadOnly = True
+            btnImportar.Enabled = False
+        Else
+            Me.btnBaja.Enabled = False
+        End If
+        If vAdd = False And vDelete = False Then
+            txtId_Usuario.ReadOnly = True
+            txtNombre.ReadOnly = True
+            btnImportar.Enabled = False
+        End If
+        If vAdd = True And vDelete = True Then
+            txtId_Usuario.ReadOnly = False
+            txtNombre.ReadOnly = False
+            btnImportar.Enabled = True
+        End If
+    End Sub
+
 
 
     Private Sub txtId_Usuario_Validated(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles txtId_Usuario.Validated

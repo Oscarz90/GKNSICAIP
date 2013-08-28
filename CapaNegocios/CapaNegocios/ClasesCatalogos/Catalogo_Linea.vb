@@ -32,7 +32,9 @@ Namespace Clases_Catalogos
 
         Public Function Obtener_Lineas() As DataTable
             Dim vDT As DataTable
-            vDT = oBD.ObtenerTabla("select cve_linea, linea, componente,tpcdm from Linea l join componente c on l.cve_componente= c.cve_componente")
+            vDT = oBD.ObtenerTabla("SELECT cve_linea, linea, componente, tpcdm " & _
+                                   " FROM Linea l JOIN componente c ON l.cve_componente= c.cve_componente " & _
+                                   " WHERE l.Estatus= '1'")
             If vDT IsNot Nothing Then
 
             Else

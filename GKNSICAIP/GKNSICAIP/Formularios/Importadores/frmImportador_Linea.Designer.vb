@@ -28,6 +28,7 @@ Partial Class frmImportador_Linea
         Me.Label1 = New System.Windows.Forms.Label()
         Me.dgvDatos = New System.Windows.Forms.DataGridView()
         Me.cve_Linea = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Estatus = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.cve_componente = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Linea = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.tpcdm = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -85,7 +86,7 @@ Partial Class frmImportador_Linea
         Me.dgvDatos.AllowUserToAddRows = False
         Me.dgvDatos.AllowUserToDeleteRows = False
         Me.dgvDatos.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.dgvDatos.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.cve_Linea, Me.cve_componente, Me.Linea, Me.tpcdm, Me.Nombre_Componente})
+        Me.dgvDatos.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.cve_Linea, Me.Estatus, Me.cve_componente, Me.Linea, Me.tpcdm, Me.Nombre_Componente})
         Me.dgvDatos.Location = New System.Drawing.Point(12, 62)
         Me.dgvDatos.Name = "dgvDatos"
         Me.dgvDatos.ReadOnly = True
@@ -99,6 +100,14 @@ Partial Class frmImportador_Linea
         Me.cve_Linea.Name = "cve_Linea"
         Me.cve_Linea.ReadOnly = True
         Me.cve_Linea.Visible = False
+        '
+        'Estatus
+        '
+        Me.Estatus.DataPropertyName = "Estatus"
+        Me.Estatus.HeaderText = "Estatus"
+        Me.Estatus.Name = "Estatus"
+        Me.Estatus.ReadOnly = True
+        Me.Estatus.Visible = False
         '
         'cve_componente
         '
@@ -238,6 +247,7 @@ Partial Class frmImportador_Linea
         Me.Controls.Add(Me.Panel1)
         Me.MaximizeBox = False
         Me.MinimizeBox = False
+        Me.MinimumSize = New System.Drawing.Size(412, 489)
         Me.Name = "frmImportador_Linea"
         Me.Text = "Importar Línea"
         CType(Me.dgvDatos, System.ComponentModel.ISupportInitialize).EndInit()
@@ -257,12 +267,13 @@ Partial Class frmImportador_Linea
     Friend WithEvents rbtTodos As System.Windows.Forms.RadioButton
     Friend WithEvents Label2 As System.Windows.Forms.Label
     Friend WithEvents btnNuevo As System.Windows.Forms.Button
+    Friend WithEvents banner_formulario As System.Windows.Forms.PictureBox
+    Friend WithEvents Panel1 As System.Windows.Forms.Panel
+    Friend WithEvents titulo_banner_formulario As System.Windows.Forms.Label
     Friend WithEvents cve_Linea As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents Estatus As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents cve_componente As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents Linea As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents tpcdm As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents Nombre_Componente As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents banner_formulario As System.Windows.Forms.PictureBox
-    Friend WithEvents Panel1 As System.Windows.Forms.Panel
-    Friend WithEvents titulo_banner_formulario As System.Windows.Forms.Label
 End Class

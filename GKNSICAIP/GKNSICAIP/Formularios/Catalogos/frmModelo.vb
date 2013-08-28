@@ -4,32 +4,43 @@ Public Class frmModelo
     Public vId_Retorno As Long = 0
     Dim oModelo As Modelo
     Dim oClasificacion_Modelo As Clasificacion_Modelo
+    Dim vAdd_Registrar As Boolean = True
+    Dim vDelete_Eliminar As Boolean = True
+
+
+    Sub New(Optional ByVal vRegistrar As Boolean = True, Optional ByVal vEliminar As Boolean = True)
+        ' Llamada necesaria para el diseñador.
+        InitializeComponent()
+        vAdd_Registrar = vRegistrar
+        vDelete_Eliminar = vEliminar
+        ' Agregue cualquier inicialización después de la llamada a InitializeComponent().
+    End Sub
 
     Private Sub btnSalir_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSalir.Click
         Me.Close()
     End Sub
 
     Private Sub frmModelo_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
-
         ''La Siguiente Linea solo es para hacer pruebas sobre un modelo de Prueba(El cual se agrego y se modifico de forma Exitosa)
         ''Borrar si requiere hacer registro nuevo
         'vId_Publico = 936
-
-
         If Convert.ToInt64(vId_Publico) <> 0 Then
             oModelo = New Modelo
             oModelo.cve_modelo = vId_Publico
             oModelo.Cargar()
             LlenaCombos()
+            Controles_Permisos(vAdd_Registrar, vDelete_Eliminar)
             Controles_Registro_Nuevo(False)
         Else
             oModelo = New Modelo
             LlenaCombos()
+            Controles_Permisos(vAdd_Registrar, vDelete_Eliminar)
             Controles_Registro_Nuevo(True)
         End If
+
         SetBindings()
         If vId_Publico = 0 Then
-            cbxClasificacion.SelectedIndex = 0
+            cbxClasificacion.SelectedIndex = 1 ''--------------------------Cuando sea registro nuevo la clasificacion Default sera "Produccion"
         End If
         Me.Show()
         Me.txtDescripcion.Focus()
@@ -108,10 +119,50 @@ Public Class frmModelo
             btnRegistrar.Visible = True
             btnModificar.Visible = False
             btnDarBaja.Enabled = False
+            cbxClasificacion.Enabled = False
         Else
             btnRegistrar.Visible = False
             btnModificar.Visible = True
             btnDarBaja.Enabled = True
+            txtDescripcion.ReadOnly = False
+            txtNumero_Parte.ReadOnly = True
+            cbxClasificacion.Enabled = False
+            btnImportar.Enabled = False
+        End If
+    End Sub
+
+    Private Sub Controles_Permisos(ByVal vAdd As Boolean, ByVal vDelete As Boolean)
+        If vAdd = True Then
+            Me.btnRegistrar.Enabled = True
+            Me.btnModificar.Enabled = True
+        Else
+            Me.btnRegistrar.Enabled = False
+            Me.btnModificar.Enabled = False
+            txtDescripcion.ReadOnly = True
+            txtNumero_Parte.ReadOnly = True
+            cbxClasificacion.Enabled = False
+            btnImportar.Enabled = False
+        End If
+        If vDelete = True Then
+            Me.btnDarBaja.Enabled = True
+            txtDescripcion.ReadOnly = True
+            txtNumero_Parte.ReadOnly = True
+            cbxClasificacion.Enabled = False
+            btnImportar.Enabled = False
+        Else
+            Me.btnDarBaja.Enabled = False
+        End If
+        If vAdd = False And vDelete = False Then
+            txtDescripcion.ReadOnly = True
+            txtNumero_Parte.ReadOnly = True
+            cbxClasificacion.Enabled = False
+            btnImportar.Enabled = False
+        End If
+        If vAdd = True And vDelete = True Then
+            txtDescripcion.ReadOnly = False
+            txtNumero_Parte.ReadOnly = True
+            cbxClasificacion.Enabled = False
+            btnImportar.Enabled = True
         End If
     End Sub
 

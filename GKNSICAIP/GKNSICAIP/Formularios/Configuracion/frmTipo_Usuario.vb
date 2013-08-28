@@ -3,6 +3,17 @@ Public Class FrmTipo_Usuario
     Dim oTipo_Usuario As Tipo_Usuario
     Public vId_Publico As Long = 0
     Public vId_Retorno As Long = 0
+    Dim vAdd_Registrar As Boolean = True
+    Dim vDelete_Eliminar As Boolean = True    
+
+
+    Sub New(Optional ByVal vRegistrar As Boolean = True, Optional ByVal vEliminar As Boolean = True)
+        ' Llamada necesaria para el diseñador.
+        InitializeComponent()
+        vAdd_Registrar = vRegistrar
+        vDelete_Eliminar = vEliminar        
+        ' Agregue cualquier inicialización después de la llamada a InitializeComponent().
+    End Sub
 
     Private Sub btnSalir_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSalir.Click
         Me.Close()
@@ -52,7 +63,6 @@ Public Class FrmTipo_Usuario
         ''La Siguiente Linea solo es para hacer pruebas sobre un TIPO_USUARIO de Prueba(El cual se agrego y se modifico de forma Exitosa)
         ''Borrar si requiere hacer registro nuevo
         'vId_Publico = 936
-
         If Convert.ToInt64(vId_Publico) <> 0 Then
             oTipo_Usuario = New Tipo_Usuario
             oTipo_Usuario.CVE_Tipo_Usuario = vId_Publico
@@ -62,6 +72,7 @@ Public Class FrmTipo_Usuario
             oTipo_Usuario = New Tipo_Usuario            
             Controles_Registro_Nuevo(True)
         End If
+        Controles_Permisos(vAdd_Registrar, vDelete_Eliminar)
         SetBindings()      
         Me.Show()
         Me.txtDescripcion.Focus()
@@ -82,6 +93,29 @@ Public Class FrmTipo_Usuario
             btnRegistrar.Visible = False
             btnModificar.Visible = True
             btnBaja.Enabled = True
+        End If
+    End Sub
+
+    Private Sub Controles_Permisos(ByVal vAdd As Boolean, ByVal vDelete As Boolean)
+        If vAdd = True Then
+            Me.btnRegistrar.Enabled = True
+            Me.btnModificar.Enabled = True
+        Else
+            Me.btnRegistrar.Enabled = False
+            Me.btnModificar.Enabled = False
+            Me.txtDescripcion.ReadOnly = False
+        End If
+        If vDelete = True Then
+            Me.btnBaja.Enabled = True
+            Me.txtDescripcion.ReadOnly = True
+        Else
+            Me.btnBaja.Enabled = False
+        End If
+        If vAdd = False And vDelete = False Then
+            txtDescripcion.ReadOnly = True
+        End If
+        If vAdd = True And vDelete = True Then
+            txtDescripcion.ReadOnly = False
         End If
     End Sub
 

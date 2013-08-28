@@ -3,8 +3,10 @@ Imports CapaNegocios.Clases_Catalogos
 
 
 Public Class Formulario_Principal
-
-    Dim vRowSeleccionada As Integer = 0    
+    Public oUsuario_Login As New SEGURIDAD_USUARIO
+    Dim vRowSeleccionada As Integer = 0
+    Dim vPermiso_Add As Boolean = True
+    Dim vPermiso_Delete As Boolean = True
 
 #Region "Variables Identificador Opciones Menu"
     Dim vLinea As String = ""    
@@ -48,424 +50,716 @@ Public Class Formulario_Principal
 
 #Region "Opciones de Menu"
     Private Sub btnLinea_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnLinea.Click
-        oCatalogo_Linea = New Catalogo_Linea
-        oLinea = New Linea
+        If Permiso_Asignado("CATALOGOLINEA") = True Then
+            oCatalogo_Linea = New Catalogo_Linea
+            oLinea = New Linea
+            MapaUbicacion.Text = "Catalogo Linea"
 
-        MapaUbicacion.Text = "Catalogo Linea"
+            Me.dgvRegistros.DataSource = Nothing
+            Me.dgvRegistros.Columns.Clear()
+            Me.dgvRegistros.Visible = True
+            Me.Barra_Tool_Registros.Visible = True
+            Me.btnEliminar.VisibleInStrip = False
 
-        Me.dgvRegistros.DataSource = Nothing
-        Me.dgvRegistros.Columns.Clear()
-        Me.dgvRegistros.Visible = True
-        Me.Barra_Tool_Registros.Visible = True
-        Me.btnEliminar.VisibleInStrip = False
-        Try
-            'Dim bs As New BindingSource(oCatalogo_Linea, "L_Linea")
-            Me.dgvRegistros.DataSource = oCatalogo_Linea.Obtener_Lineas
-        Catch ex As Exception
-            MsgBox(ex.Message)
-        End Try
+            If Permiso_Asignado("CATALOGOLINEA.REGISTRAR") = True Then
+                Me.btnAdd.Enabled = True
+                Me.btnModificar.Enabled = True
+            Else
+                Me.btnAdd.Enabled = False
+                Me.btnModificar.Enabled = False
+            End If
+            If Permiso_Asignado("CATALOGOLINEA.ELIMINAR") = True Then
+                Me.btnEliminar.Enabled = True
+            Else
+                Me.btnEliminar.Enabled = False
+            End If
 
-        Me.dgvRegistros.Columns("cve_linea").HeaderText = "cve_linea"
-        Me.dgvRegistros.Columns("cve_linea").IsVisible = False
-        Me.dgvRegistros.Columns("cve_linea").Name = "CVE"
 
-        Me.dgvRegistros.Columns("linea").HeaderText = "Linea"
-        Me.dgvRegistros.Columns("linea").Width = 250
+            Try
+                'Dim bs As New BindingSource(oCatalogo_Linea, "L_Linea")
+                Me.dgvRegistros.DataSource = oCatalogo_Linea.Obtener_Lineas
+            Catch ex As Exception
+                MsgBox(ex.Message)
+            End Try
 
-        Me.dgvRegistros.Columns("componente").HeaderText = "Nombre Componente"
-        Me.dgvRegistros.Columns("componente").Width = 250
+            Me.dgvRegistros.Columns("cve_linea").HeaderText = "cve_linea"
+            Me.dgvRegistros.Columns("cve_linea").IsVisible = False
+            Me.dgvRegistros.Columns("cve_linea").Name = "CVE"
 
-        Me.dgvRegistros.Columns("tpcdm").HeaderText = " TPCDM"
-        Me.dgvRegistros.Columns("tpcdm").Width = 150
+            Me.dgvRegistros.Columns("linea").HeaderText = "Linea"
+            Me.dgvRegistros.Columns("linea").Width = 250
 
-        dgvRegistros.Visible = True
-        Activar_Formulario("frmLinea")
+            Me.dgvRegistros.Columns("componente").HeaderText = "Nombre Componente"
+            Me.dgvRegistros.Columns("componente").Width = 250
+
+            Me.dgvRegistros.Columns("tpcdm").HeaderText = " TPCDM"
+            Me.dgvRegistros.Columns("tpcdm").Width = 150
+
+            dgvRegistros.Visible = True
+            Activar_Formulario("frmLinea")
+        Else
+            MsgBox("El Usuario no cuenta con los permisos suficientes para entrar al 'Catalogo de Linea'")
+        End If
     End Sub
 
     Private Sub btnMaquina_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnMaquina.Click
-        oCatalogo_Maquina = New Catalogo_Maquina
-        oMaquina = New Maquina
+        If Permiso_Asignado("CATALOGOMAQUINA") = True Then
+            oCatalogo_Maquina = New Catalogo_Maquina
+            oMaquina = New Maquina
 
-        MapaUbicacion.Text = "Catalogo Maquina"
+            MapaUbicacion.Text = "Catalogo Maquina"
 
-        Me.dgvRegistros.DataSource = Nothing
-        Me.dgvRegistros.Columns.Clear()
+            Me.dgvRegistros.DataSource = Nothing
+            Me.dgvRegistros.Columns.Clear()
 
-        Me.dgvRegistros.Visible = True
-        Me.Barra_Tool_Registros.Visible = True
-        Me.btnEliminar.VisibleInStrip = False
-        Try
-            Me.dgvRegistros.DataSource = oCatalogo_Maquina.Obtener_Maquinas
-        Catch ex As Exception
-            MsgBox(ex.Message)
-        End Try
+            Me.dgvRegistros.Visible = True
+            Me.Barra_Tool_Registros.Visible = True
+            Me.btnEliminar.VisibleInStrip = False
 
-        Me.dgvRegistros.Columns("cve_maquina").HeaderText = "cve_maquina"
-        Me.dgvRegistros.Columns("cve_maquina").IsVisible = False
-        Me.dgvRegistros.Columns("cve_maquina").Name = "CVE"
+            If Permiso_Asignado("CATALOGOMAQUINA.REGISTRAR") = True Then
+                Me.btnAdd.Enabled = True
+                Me.btnModificar.Enabled = True
+            Else
+                Me.btnAdd.Enabled = False
+                Me.btnModificar.Enabled = False
+            End If
+            If Permiso_Asignado("CATALOGOMAQUINA.ELIMINAR") = True Then
+                Me.btnEliminar.Enabled = True
+            Else
+                Me.btnEliminar.Enabled = False
+            End If
 
-        Me.dgvRegistros.Columns("clave_maquina").HeaderText = "clave_maquina"
-        Me.dgvRegistros.Columns("clave_maquina").Width = 150
 
-        Me.dgvRegistros.Columns("maquina").HeaderText = "Nombre Maquina"
-        Me.dgvRegistros.Columns("maquina").Width = 250
+            Try
+                Me.dgvRegistros.DataSource = oCatalogo_Maquina.Obtener_Maquinas
+            Catch ex As Exception
+                MsgBox(ex.Message)
+            End Try
 
-        Me.dgvRegistros.Columns("linea").HeaderText = " Linea"
-        Me.dgvRegistros.Columns("linea").Width = 250
+            Me.dgvRegistros.Columns("cve_maquina").HeaderText = "cve_maquina"
+            Me.dgvRegistros.Columns("cve_maquina").IsVisible = False
+            Me.dgvRegistros.Columns("cve_maquina").Name = "CVE"
 
-        dgvRegistros.Visible = True
-        Activar_Formulario("frmMaquina")
+            Me.dgvRegistros.Columns("clave_maquina").HeaderText = "clave_maquina"
+            Me.dgvRegistros.Columns("clave_maquina").Width = 150
+
+            Me.dgvRegistros.Columns("maquina").HeaderText = "Nombre Maquina"
+            Me.dgvRegistros.Columns("maquina").Width = 250
+
+            Me.dgvRegistros.Columns("linea").HeaderText = " Linea"
+            Me.dgvRegistros.Columns("linea").Width = 250
+
+            dgvRegistros.Visible = True
+            Activar_Formulario("frmMaquina")
+        Else
+            MsgBox("El Usuario no cuenta con los permisos suficientes para entrar al 'Catalogo de Maquina'")
+        End If
     End Sub
 
     Private Sub btnModelo_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnModelo.Click
-        oCatalogo_Modelo = New Catalogo_Modelo
-        oModelo = New Modelo
+        If Permiso_Asignado("CATALOGOMODELO") = True Then
+            oCatalogo_Modelo = New Catalogo_Modelo
+            oModelo = New Modelo
 
-        MapaUbicacion.Text = "Catalogo Modelo"
+            MapaUbicacion.Text = "Catalogo Modelo"
 
-        Me.dgvRegistros.DataSource = Nothing
-        Me.dgvRegistros.Columns.Clear()
+            Me.dgvRegistros.DataSource = Nothing
+            Me.dgvRegistros.Columns.Clear()
 
-        Me.dgvRegistros.Visible = True
-        Me.Barra_Tool_Registros.Visible = True
-        Me.btnEliminar.VisibleInStrip = False
-        Try
-            Me.dgvRegistros.DataSource = oCatalogo_Modelo.Obtener_Modelos
-        Catch ex As Exception
-            MsgBox(ex.Message)
-        End Try
+            Me.dgvRegistros.Visible = True
+            Me.Barra_Tool_Registros.Visible = True
+            Me.btnEliminar.VisibleInStrip = False
 
-        Me.dgvRegistros.Columns("cve_modelo").HeaderText = "cve_modelo"
-        Me.dgvRegistros.Columns("cve_modelo").IsVisible = False
-        Me.dgvRegistros.Columns("cve_modelo").Name = "CVE"
+            If Permiso_Asignado("CATALOGOMODELO.REGISTRAR") = True Then
+                Me.btnAdd.Enabled = True
+                Me.btnModificar.Enabled = True
+            Else
+                Me.btnAdd.Enabled = False
+                Me.btnModificar.Enabled = False
+            End If
+            If Permiso_Asignado("CATALOGOMODELO.ELIMINAR") = True Then
+                Me.btnEliminar.Enabled = True
+            Else
+                Me.btnEliminar.Enabled = False
+            End If
 
-        Me.dgvRegistros.Columns("Modelo").HeaderText = "Modelo"
-        Me.dgvRegistros.Columns("Modelo").Width = 250
 
-        Me.dgvRegistros.Columns("np_gkn").HeaderText = "NP GKN"
-        Me.dgvRegistros.Columns("np_gkn").Width = 250
 
-        Me.dgvRegistros.Columns("componente").HeaderText = " componente"
-        Me.dgvRegistros.Columns("componente").Width = 250
+            Try
+                Me.dgvRegistros.DataSource = oCatalogo_Modelo.Obtener_Modelos
+            Catch ex As Exception
+                MsgBox(ex.Message)
+            End Try
 
-        Me.dgvRegistros.Columns("Clasificacion_Modelo").HeaderText = " Clasificacion Modelo"
-        Me.dgvRegistros.Columns("Clasificacion_Modelo").Width = 250
+            Me.dgvRegistros.Columns("cve_modelo").HeaderText = "cve_modelo"
+            Me.dgvRegistros.Columns("cve_modelo").IsVisible = False
+            Me.dgvRegistros.Columns("cve_modelo").Name = "CVE"
 
-        dgvRegistros.Visible = True
-        Activar_Formulario("frmModelo")
+            Me.dgvRegistros.Columns("Modelo").HeaderText = "Modelo"
+            Me.dgvRegistros.Columns("Modelo").Width = 250
+
+            Me.dgvRegistros.Columns("np_gkn").HeaderText = "NP GKN"
+            Me.dgvRegistros.Columns("np_gkn").Width = 250
+
+            Me.dgvRegistros.Columns("componente").HeaderText = " componente"
+            Me.dgvRegistros.Columns("componente").Width = 250
+
+            Me.dgvRegistros.Columns("Clasificacion_Modelo").HeaderText = " Clasificacion Modelo"
+            Me.dgvRegistros.Columns("Clasificacion_Modelo").IsVisible = False
+            'Me.dgvRegistros.Columns("Clasificacion_Modelo").Width = 250
+
+            dgvRegistros.Visible = True
+            Activar_Formulario("frmModelo")
+        Else
+            MsgBox("El Usuario no cuenta con los permisos suficientes para entrar al 'Catalogo de Modelo'")
+        End If
     End Sub
 
     Private Sub btnTiempo_Ciclo_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnTiempo_Ciclo.Click
-        oCatalogo_Tiempo_Ciclo = New Catalogo_Tiempo_Ciclo
-        oTiempo_Ciclo = New TC
+        If Permiso_Asignado("CATALOGOTC") = True Then
+            oCatalogo_Tiempo_Ciclo = New Catalogo_Tiempo_Ciclo
+            oTiempo_Ciclo = New TC
 
-        MapaUbicacion.Text = "Catalogo Tiempo Ciclo"
+            MapaUbicacion.Text = "Catalogo Tiempo Ciclo"
 
-        Me.dgvRegistros.DataSource = Nothing
-        Me.dgvRegistros.Columns.Clear()
+            Me.dgvRegistros.DataSource = Nothing
+            Me.dgvRegistros.Columns.Clear()
 
-        Me.dgvRegistros.Visible = True
-        Me.Barra_Tool_Registros.Visible = True        
-        Me.btnEliminar.VisibleInStrip = False
-        Try
-            Me.dgvRegistros.DataSource = oCatalogo_Tiempo_Ciclo.L_TC
+            Me.dgvRegistros.Visible = True
+            Me.Barra_Tool_Registros.Visible = True
+            Me.btnEliminar.VisibleInStrip = False
 
-        Catch ex As Exception
-            MsgBox(ex.Message)
-        End Try
+            If Permiso_Asignado("CATALOGOTC.REGISTRAR") = True Then
+                Me.btnAdd.Enabled = True
+                Me.btnModificar.Enabled = True
+            Else
+                Me.btnAdd.Enabled = False
+                Me.btnModificar.Enabled = False
+            End If
+            If Permiso_Asignado("CATALOGOTC.ELIMINAR") = True Then
+                Me.btnEliminar.Enabled = True
+            Else
+                Me.btnEliminar.Enabled = False
+            End If
 
-        Me.dgvRegistros.Columns("cve_TC").HeaderText = "cve_TC"
-        Me.dgvRegistros.Columns("cve_TC").IsVisible = False
-        Me.dgvRegistros.Columns("cve_TC").Name = "CVE"
 
-        Me.dgvRegistros.Columns("fecha").HeaderText = "fecha"
-        Me.dgvRegistros.Columns("fecha").IsVisible = False
+            Try
+                Me.dgvRegistros.DataSource = oCatalogo_Tiempo_Ciclo.L_TC
 
-        Me.dgvRegistros.Columns("Codigo_Empleado").HeaderText = "Codigo_Empleado"
-        Me.dgvRegistros.Columns("Codigo_Empleado").IsVisible = False
+            Catch ex As Exception
+                MsgBox(ex.Message)
+            End Try
 
-        Me.dgvRegistros.Columns("Nombre_Linea").HeaderText = "Nombre_Linea"
-        Me.dgvRegistros.Columns("Nombre_Linea").Width = 250
+            Me.dgvRegistros.Columns("cve_TC").HeaderText = "cve_TC"
+            Me.dgvRegistros.Columns("cve_TC").IsVisible = False
+            Me.dgvRegistros.Columns("cve_TC").Name = "CVE"
 
-        Me.dgvRegistros.Columns("Nombre_Modelo").HeaderText = "Nombre_Modelo"
-        Me.dgvRegistros.Columns("Nombre_Modelo").Width = 250
+            Me.dgvRegistros.Columns("fecha").HeaderText = "fecha"
+            Me.dgvRegistros.Columns("fecha").IsVisible = False
 
-        Me.dgvRegistros.Columns("piezas_por_hora").HeaderText = "Piezas X Hora"
-        Me.dgvRegistros.Columns("piezas_por_hora").Width = 250
+            Me.dgvRegistros.Columns("Codigo_Empleado").HeaderText = "Codigo_Empleado"
+            Me.dgvRegistros.Columns("Codigo_Empleado").IsVisible = False
 
-        Me.dgvRegistros.Columns("cve_linea").HeaderText = "cve_linea"
-        Me.dgvRegistros.Columns("cve_linea").IsVisible = False        
+            Me.dgvRegistros.Columns("Nombre_Linea").HeaderText = "Nombre_Linea"
+            Me.dgvRegistros.Columns("Nombre_Linea").Width = 250
 
-        Me.dgvRegistros.Columns("cve_modelo").HeaderText = " cve_modelo"
-        Me.dgvRegistros.Columns("cve_modelo").IsVisible = False
+            Me.dgvRegistros.Columns("Nombre_Modelo").HeaderText = "Nombre_Modelo"
+            Me.dgvRegistros.Columns("Nombre_Modelo").Width = 250
 
-        Me.dgvRegistros.Columns("estatus").HeaderText = "estatus"
-        Me.dgvRegistros.Columns("estatus").Width = 250
+            Me.dgvRegistros.Columns("piezas_por_hora").HeaderText = "Piezas X Hora"
+            Me.dgvRegistros.Columns("piezas_por_hora").Width = 250
 
-        dgvRegistros.Visible = True
-        Activar_Formulario("frmTiempo_Ciclo")
+            Me.dgvRegistros.Columns("cve_linea").HeaderText = "cve_linea"
+            Me.dgvRegistros.Columns("cve_linea").IsVisible = False
+
+            Me.dgvRegistros.Columns("cve_modelo").HeaderText = " cve_modelo"
+            Me.dgvRegistros.Columns("cve_modelo").IsVisible = False
+
+            'Me.dgvRegistros.Columns("estatus").HeaderText = "estatus"
+            'Me.dgvRegistros.Columns("estatus").Width = 250
+
+            Me.dgvRegistros.Columns("estatus").HeaderText = "estatus"
+            Me.dgvRegistros.Columns("estatus").IsVisible = False
+
+            dgvRegistros.Visible = True
+            Activar_Formulario("frmTiempo_Ciclo")
+        Else
+            MsgBox("El Usuario no cuenta con los permisos suficientes para entrar al 'Catalogo de Tiempo Ciclo'")
+        End If
     End Sub
 
     Private Sub btnEquipo_Linea_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnEquipo_Linea.Click
-        Me.dgvRegistros.Visible = False
-        Me.Barra_Tool_Registros.Visible = False
+        If Permiso_Asignado("EQUIPOLINEA") = True Then
+            If Permiso_Asignado("EQUIPOLINEA.REGISTRAR") = True Then
+                ofrmEquipo_Linea = New frmEquipo_Linea(True)
+            Else
+                ofrmEquipo_Linea = New frmEquipo_Linea(False)
+            End If
+            Me.dgvRegistros.Visible = False
+            Me.Barra_Tool_Registros.Visible = False
 
-        MapaUbicacion.Text = "Catalogo Equipo_Linea"
-
-        ofrmEquipo_Linea = New frmEquipo_Linea
-        ofrmEquipo_Linea.ShowDialog()
+            MapaUbicacion.Text = "Equipo_Linea"
+            ofrmEquipo_Linea.ShowDialog()
+        Else
+            MsgBox("El Usuario no cuenta con los permisos suficientes para entrar en 'Asignacion Equipo_Linea'")
+        End If
     End Sub
 
     Private Sub btnUsuario_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnUsuario.Click
-        oCatalogo_Usuario = New Catalogo_Usuario
-        oUsuario = New SEGURIDAD_USUARIO
+        If Permiso_Asignado("USUARIOS") = True Then
+            oCatalogo_Usuario = New Catalogo_Usuario
+            oUsuario = New SEGURIDAD_USUARIO
 
-        MapaUbicacion.Text = "Catalogo Usuario"
+            MapaUbicacion.Text = "Catalogo Usuario"
 
-        Me.dgvRegistros.DataSource = Nothing
-        Me.dgvRegistros.Columns.Clear()
+            Me.dgvRegistros.DataSource = Nothing
+            Me.dgvRegistros.Columns.Clear()
 
-        Me.dgvRegistros.Visible = True
-        Me.Barra_Tool_Registros.Visible = True
-        Me.btnEliminar.VisibleInStrip = True
-        Try
-            Me.dgvRegistros.DataSource = oCatalogo_Usuario.L_Usuario
-        Catch ex As Exception
-            MsgBox(ex.Message)
-        End Try
+            Me.dgvRegistros.Visible = True
+            Me.Barra_Tool_Registros.Visible = True
+            Me.btnEliminar.VisibleInStrip = True
 
-        Me.dgvRegistros.Columns("CVE_Usuario").HeaderText = "CVE_Usuario"
-        Me.dgvRegistros.Columns("CVE_Usuario").IsVisible = False
-        Me.dgvRegistros.Columns("CVE_Usuario").Name = "CVE"
+            If Permiso_Asignado("USUARIOS.REGISTRAR") = True Then
+                Me.btnAdd.Enabled = True
+                Me.btnModificar.Enabled = True
+            Else
+                Me.btnAdd.Enabled = False
+                Me.btnModificar.Enabled = False
+            End If
+            If Permiso_Asignado("USUARIOS.ELIMINAR") = True Then
+                Me.btnEliminar.Enabled = True
+            Else
+                Me.btnEliminar.Enabled = False
+            End If            
+            'If Permiso_Asignado("USUARIOS.VER") = True Then
+            '    Me.dgvRegistros.ReadOnly = True            
+            'End If
+            Try
+                Me.dgvRegistros.DataSource = oCatalogo_Usuario.L_Usuario
+            Catch ex As Exception
+                MsgBox(ex.Message)
+            End Try
 
-        Me.dgvRegistros.Columns("Id_Usuario").HeaderText = "Usuario"
-        Me.dgvRegistros.Columns("Id_Usuario").Width = 250
+            Me.dgvRegistros.Columns("CVE_Usuario").HeaderText = "CVE_Usuario"
+            Me.dgvRegistros.Columns("CVE_Usuario").IsVisible = False
+            Me.dgvRegistros.Columns("CVE_Usuario").Name = "CVE"
 
-        Me.dgvRegistros.Columns("Pass").HeaderText = "Pass"
-        Me.dgvRegistros.Columns("Pass").IsVisible = False
+            Me.dgvRegistros.Columns("Id_Usuario").HeaderText = "Usuario"
+            Me.dgvRegistros.Columns("Id_Usuario").Width = 250
 
-        Me.dgvRegistros.Columns("Nombre").HeaderText = "Nombre"
-        Me.dgvRegistros.Columns("Nombre").Width = 250
+            Me.dgvRegistros.Columns("Pass").HeaderText = "Pass"
+            Me.dgvRegistros.Columns("Pass").IsVisible = False
 
-        Me.dgvRegistros.Columns("Email").HeaderText = "Email"
-        Me.dgvRegistros.Columns("Email").Width = 250
+            Me.dgvRegistros.Columns("Nombre").HeaderText = "Nombre"
+            Me.dgvRegistros.Columns("Nombre").Width = 250
 
-        Me.dgvRegistros.Columns("Estatus").HeaderText = "Estatus"
-        Me.dgvRegistros.Columns("Estatus").Width = 250
+            Me.dgvRegistros.Columns("Email").HeaderText = "Email"
+            Me.dgvRegistros.Columns("Email").Width = 250
 
-        Me.dgvRegistros.Columns("CVE_TIPO_USUARIO").HeaderText = "CVE_TIPO_USUARIO"
-        Me.dgvRegistros.Columns("CVE_TIPO_USUARIO").IsVisible = False
+            Me.dgvRegistros.Columns("Estatus").HeaderText = "Estatus"
+            Me.dgvRegistros.Columns("Estatus").Width = 250
 
-        Me.dgvRegistros.Columns("Descripcion_Tipo_Usuario").HeaderText = "Tipo de Usuario"
-        Me.dgvRegistros.Columns("Descripcion_Tipo_Usuario").Width = 250
+            Me.dgvRegistros.Columns("CVE_TIPO_USUARIO").HeaderText = "CVE_TIPO_USUARIO"
+            Me.dgvRegistros.Columns("CVE_TIPO_USUARIO").IsVisible = False
 
-        Me.dgvRegistros.Columns("L_USUARIO_PERMISOS").HeaderText = "L_USUARIO_PERMISOS"
-        Me.dgvRegistros.Columns("L_USUARIO_PERMISOS").IsVisible = False
+            Me.dgvRegistros.Columns("Descripcion_Tipo_Usuario").HeaderText = "Tipo de Usuario"
+            Me.dgvRegistros.Columns("Descripcion_Tipo_Usuario").Width = 250
 
-        dgvRegistros.Visible = True
-        Activar_Formulario("frmUsuario")
+            Me.dgvRegistros.Columns("L_USUARIO_PERMISOS").HeaderText = "L_USUARIO_PERMISOS"
+            Me.dgvRegistros.Columns("L_USUARIO_PERMISOS").IsVisible = False
+
+            dgvRegistros.Visible = True
+            Activar_Formulario("frmUsuario")
+        Else
+            MsgBox("El Usuario no cuenta con los permisos suficientes para entrar en el Catalogo 'Usuarios'")
+        End If
     End Sub
 
     Private Sub btnTipoUsuario_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnTipoUsuario.Click
-        oCatalogo_Tipo_Usuario = New Catalogo_Tipo_Usuario
-        oTipo_Usuario = New Tipo_Usuario
+        If Permiso_Asignado("TIPOUSUARIO") = True Then
+            oCatalogo_Tipo_Usuario = New Catalogo_Tipo_Usuario
+            oTipo_Usuario = New Tipo_Usuario
 
-        MapaUbicacion.Text = "Catalogo Tipo de Usuario"
+            MapaUbicacion.Text = "Catalogo Tipo de Usuario"
 
-        Me.dgvRegistros.DataSource = Nothing
-        Me.dgvRegistros.Columns.Clear()
+            Me.dgvRegistros.DataSource = Nothing
+            Me.dgvRegistros.Columns.Clear()
 
-        Me.dgvRegistros.Visible = True
-        Me.Barra_Tool_Registros.Visible = True
-        Me.btnEliminar.VisibleInStrip = True
-        Try
-            Me.dgvRegistros.DataSource = oCatalogo_Tipo_Usuario.L_Tipo_Usuario
-        Catch ex As Exception
-            MsgBox(ex.Message)
-        End Try
+            Me.dgvRegistros.Visible = True
+            Me.Barra_Tool_Registros.Visible = True
+            Me.btnEliminar.VisibleInStrip = True
 
-        Me.dgvRegistros.Columns("CVE_Tipo_Usuario").HeaderText = "CVE_Tipo_Usuario"
-        Me.dgvRegistros.Columns("CVE_Tipo_Usuario").IsVisible = False
-        Me.dgvRegistros.Columns("CVE_Tipo_Usuario").Name = "CVE"
+            If Permiso_Asignado("TIPOUSUARIO.REGISTRAR") = True Then
+                Me.btnAdd.Enabled = True
+                Me.btnModificar.Enabled = True
+            Else
+                Me.btnAdd.Enabled = False
+                Me.btnModificar.Enabled = False
+            End If
+            If Permiso_Asignado("TIPOUSUARIO.ELIMINAR") = True Then
+                Me.btnEliminar.Enabled = True
+            Else
+                Me.btnEliminar.Enabled = False
+            End If
 
-        Me.dgvRegistros.Columns("Nombre_Tipo_Usuario").HeaderText = "Tipo de Usuario"
-        Me.dgvRegistros.Columns("Nombre_Tipo_Usuario").Width = 250
 
-        dgvRegistros.Visible = True
-        Activar_Formulario("FrmTipo_Usuario")        
+            Try
+                Me.dgvRegistros.DataSource = oCatalogo_Tipo_Usuario.L_Tipo_Usuario
+            Catch ex As Exception
+                MsgBox(ex.Message)
+            End Try
+
+            Me.dgvRegistros.Columns("CVE_Tipo_Usuario").HeaderText = "CVE_Tipo_Usuario"
+            Me.dgvRegistros.Columns("CVE_Tipo_Usuario").IsVisible = False
+            Me.dgvRegistros.Columns("CVE_Tipo_Usuario").Name = "CVE"
+
+            Me.dgvRegistros.Columns("Nombre_Tipo_Usuario").HeaderText = "Tipo de Usuario"
+            Me.dgvRegistros.Columns("Nombre_Tipo_Usuario").Width = 250
+
+            dgvRegistros.Visible = True
+            Activar_Formulario("FrmTipo_Usuario")
+        Else
+            MsgBox("El Usuario no cuenta con los permisos suficientes para entrar en el Catalogo 'Tipo de Usuarios'")
+        End If
     End Sub
 
     Private Sub btnPermisos_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnPermisos.Click
-        Me.dgvRegistros.Visible = False
-        Me.Barra_Tool_Registros.Visible = False
+        If Permiso_Asignado("PERMISOS") = True Then
+            Me.dgvRegistros.Visible = False
+            Me.Barra_Tool_Registros.Visible = False
+            MapaUbicacion.Text = "Catalogo Permisos"
 
-        MapaUbicacion.Text = "Catalogo Permisos"
-
-        ofrmPermisos = New FrmPermisos
-        ofrmPermisos.ShowDialog()
+            If Permiso_Asignado("PERMISOS.REGISTRAR") = True Then
+                ofrmPermisos = New FrmPermisos(oUsuario_Login, True)
+            Else
+                ofrmPermisos = New FrmPermisos(oUsuario_Login, False)
+            End If
+            ofrmPermisos.ShowDialog()
+        Else
+            MsgBox("El Usuario no cuenta con los permisos suficientes para entrar en 'Asignacion de Permisos'")
+        End If
     End Sub
 #End Region
 
 #Region "Opciones de Registros"
     Private Sub btnAdd_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnAdd.Click
         If vLinea = True Then
-            ofrmLinea = New frmLinea
-            ofrmLinea.vId_Publico = 0
-            ofrmLinea.ShowDialog()
-            ''Se realiza la llamada al evento clic del btnLinea para actualizar el dgvRegistros
-            btnLinea.PerformClick()
+            If Permiso_Asignado("CATALOGOLINEA.VER") = True Then
+                If Permiso_Asignado("CATALOGOLINEA.REGISTRAR") = True Then
+                    vPermiso_Add = True
+                Else
+                    vPermiso_Add = False
+                End If
+                'If Permiso_Asignado("CATALOGOLINEA.ELIMINAR") = True Then
+                '    vPermiso_Delete = True
+                'Else
+                '    vPermiso_Delete = False
+                'End If
+                ofrmLinea = New frmLinea(vPermiso_Add, vPermiso_Delete)
+                ofrmLinea.vId_Publico = 0
+                ofrmLinea.ShowDialog()
+                ''Se realiza la llamada al evento clic del btnLinea para actualizar el dgvRegistros
+                btnLinea.PerformClick()
+            Else
+                MsgBox("El Usuario no tiene los privilegios para ver los Detalles")
+            End If
         ElseIf vMaquina = True Then
-            ofrmMaquina = New frmMaquina
-            ofrmMaquina.vId_Publico = 0
-            ofrmMaquina.ShowDialog()
-            ''Se realiza la llamada al evento clic del btnLinea para actualizar el dgvRegistros
-            btnMaquina.PerformClick()
+            If Permiso_Asignado("CATALOGOMAQUINA.VER") = True Then
+                If Permiso_Asignado("CATALOGOMAQUINA.REGISTRAR") = True Then
+                    vPermiso_Add = True
+                Else
+                    vPermiso_Add = False
+                End If
+                'If Permiso_Asignado("CATALOGOMAQUINA.ELIMINAR") = True Then
+                '    vPermiso_Delete = True
+                'Else
+                '    vPermiso_Delete = False
+                'End If
+                ofrmMaquina = New frmMaquina(vPermiso_Add, vPermiso_Delete)
+                ofrmMaquina.vId_Publico = 0
+                ofrmMaquina.ShowDialog()
+                ''Se realiza la llamada al evento clic del btnLinea para actualizar el dgvRegistros
+                btnMaquina.PerformClick()
+            Else
+                MsgBox("El Usuario no tiene los privilegios para ver los Detalles")
+            End If
         ElseIf vModelo = True Then
-            ofrmModelo = New frmModelo
-            ofrmModelo.vId_Publico = 0
-            ofrmModelo.ShowDialog()
-            ''Se realiza la llamada al evento clic del btnLinea para actualizar el dgvRegistros
-            btnModelo.PerformClick()
+            If Permiso_Asignado("CATALOGOMODELO.VER") = True Then
+                If Permiso_Asignado("CATALOGOMODELO.REGISTRAR") = True Then
+                    vPermiso_Add = True
+                Else
+                    vPermiso_Add = False
+                End If
+                'If Permiso_Asignado("CATALOGOMODELO.ELIMINAR") = True Then
+                '    vPermiso_Delete = True
+                'Else
+                '    vPermiso_Delete = False
+                'End If
+                ofrmModelo = New frmModelo(vPermiso_Add, vPermiso_Delete)
+                ofrmModelo.vId_Publico = 0
+                ofrmModelo.ShowDialog()
+                btnModelo.PerformClick()
+            Else
+                MsgBox("El Usuario no tiene los privilegios para ver los Detalles")
+            End If
         ElseIf vTiempo_Ciclo = True Then
-            ofrmTiempo_Ciclo = New frmTiempo_Ciclo
-            ofrmTiempo_Ciclo.vId_Publico = 0
-            ofrmTiempo_Ciclo.ShowDialog()
-            ''Se realiza la llamada al evento clic del btnLinea para actualizar el dgvRegistros
-            btnTiempo_Ciclo.PerformClick()
+            If Permiso_Asignado("CATALOGOTC.VER") = True Then
+                If Permiso_Asignado("CATALOGOTC.REGISTRAR") = True Then
+                    vPermiso_Add = True
+                Else
+                    vPermiso_Add = False
+                End If
+                ofrmTiempo_Ciclo = New frmTiempo_Ciclo(vPermiso_Add, oUsuario_Login.CVE_Usuario)
+                ofrmTiempo_Ciclo.vId_Publico = 0
+                ofrmTiempo_Ciclo.ShowDialog()
+                btnTiempo_Ciclo.PerformClick()
+            Else
+                MsgBox("El Usuario no tiene los privilegios para ver los Detalles")
+            End If
         ElseIf vUsuario = True Then
-            ofrmUsuario = New FrmUsuarios
-            ofrmUsuario.vId_Publico = 0
-            ofrmUsuario.ShowDialog()
-            ''Se realiza la llamada al evento clic del btnLinea para actualizar el dgvRegistros
-            btnUsuario.PerformClick()
+            If Permiso_Asignado("USUARIO.VER") = True Then
+                If Permiso_Asignado("USUARIOS.REGISTRAR") = True Then
+                    vPermiso_Add = True
+                Else
+                    vPermiso_Add = False
+                End If
+                'If Permiso_Asignado("USUARIOS.ELIMINAR") = True Then
+                '    vPermiso_Delete = True
+                'Else
+                '    vPermiso_Delete = False
+                'End If
+                ofrmUsuario = New FrmUsuarios(vPermiso_Add, vPermiso_Delete)
+                ofrmUsuario.vId_Publico = 0
+                ofrmUsuario.ShowDialog()
+                btnUsuario.PerformClick()
+            Else
+                MsgBox("El Usuario no tiene los privilegios para ver los Detalles")
+            End If
         ElseIf vTipo_Usuario = True Then
-            ofrmTipo_Usuario = New FrmTipo_Usuario
-            ofrmTipo_Usuario.vId_Publico = 0
-            ofrmTipo_Usuario.ShowDialog()
-            ''Se realiza la llamada al evento clic del btnLinea para actualizar el dgvRegistros
-            btnTipoUsuario.PerformClick()
+            If Permiso_Asignado("TIPOUSUARIO.VER") = True Then
+                If Permiso_Asignado("TIPOUSUARIO.REGISTRAR") = True Then
+                    vPermiso_Add = True
+                Else
+                    vPermiso_Add = False
+                End If
+                'If Permiso_Asignado("TIPOUSUARIO.ELIMINAR") = True Then
+                '    vPermiso_Delete = True
+                'Else
+                '    vPermiso_Delete = False
+                'End If
+                ofrmTipo_Usuario = New FrmTipo_Usuario(vPermiso_Add, vPermiso_Delete)
+                ofrmTipo_Usuario.vId_Publico = 0
+                ofrmTipo_Usuario.ShowDialog()
+                btnTipoUsuario.PerformClick()
+            Else
+                MsgBox("El Usuario no tiene los privilegios para ver los Detalles")
+            End If           
         End If
     End Sub
 
+    'ofrmLinea.vId_Publico = vRowSeleccionada
     Private Sub btnModificar_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnModificar.Click
         If vLinea = True Then
-            ofrmLinea = New frmLinea
-            ofrmLinea.vId_Publico = vRowSeleccionada
-            ofrmLinea.ShowDialog()
-            ''Se realiza la llamada al evento clic del btnLinea para actualizar el dgvRegistros
-            btnLinea.PerformClick()
+            If Permiso_Asignado("CATALOGOLINEA.VER") = True Then
+                If Permiso_Asignado("CATALOGOLINEA.REGISTRAR") = True Then
+                    vPermiso_Add = True
+                Else
+                    vPermiso_Add = False
+                End If
+                If Permiso_Asignado("CATALOGOLINEA.ELIMINAR") = True Then
+                    vPermiso_Delete = True
+                Else
+                    vPermiso_Delete = False
+                End If
+                ofrmLinea = New frmLinea(vPermiso_Add, vPermiso_Delete)
+                ofrmLinea.vId_Publico = vRowSeleccionada
+                ofrmLinea.ShowDialog()
+                ''Se realiza la llamada al evento clic del btnLinea para actualizar el dgvRegistros
+                btnLinea.PerformClick()
+            Else
+                MsgBox("El Usuario no tiene los privilegios para ver los Detalles")
+            End If
         ElseIf vMaquina = True Then
-            ofrmMaquina = New frmMaquina
-            ofrmMaquina.vId_Publico = vRowSeleccionada
-            ofrmMaquina.ShowDialog()
-            ''Se realiza la llamada al evento clic del btnLinea para actualizar el dgvRegistros
-            btnMaquina.PerformClick()
+            If Permiso_Asignado("CATALOGOMAQUINA.VER") = True Then
+                If Permiso_Asignado("CATALOGOMAQUINA.REGISTRAR") = True Then
+                    vPermiso_Add = True
+                Else
+                    vPermiso_Add = False
+                End If
+                If Permiso_Asignado("CATALOGOMAQUINA.ELIMINAR") = True Then
+                    vPermiso_Delete = True
+                Else
+                    vPermiso_Delete = False
+                End If
+                ofrmMaquina = New frmMaquina(vPermiso_Add, vPermiso_Delete)
+                ofrmMaquina.vId_Publico = vRowSeleccionada
+                ofrmMaquina.ShowDialog()
+                ''Se realiza la llamada al evento clic del btnLinea para actualizar el dgvRegistros
+                btnMaquina.PerformClick()
+            Else
+                MsgBox("El Usuario no tiene los privilegios para ver los Detalles")
+            End If
         ElseIf vModelo = True Then
-            ofrmModelo = New frmModelo
-            ofrmModelo.vId_Publico = vRowSeleccionada
-            ofrmModelo.ShowDialog()
-            ''Se realiza la llamada al evento clic del btnLinea para actualizar el dgvRegistros
-            btnModelo.PerformClick()
+            If Permiso_Asignado("CATALOGOMODELO.VER") = True Then
+                If Permiso_Asignado("CATALOGOMODELO.REGISTRAR") = True Then
+                    vPermiso_Add = True
+                Else
+                    vPermiso_Add = False
+                End If
+                If Permiso_Asignado("CATALOGOMODELO.ELIMINAR") = True Then
+                    vPermiso_Delete = True
+                Else
+                    vPermiso_Delete = False
+                End If
+                ofrmModelo = New frmModelo(vPermiso_Add, vPermiso_Delete)
+                ofrmModelo.vId_Publico = vRowSeleccionada
+                ofrmModelo.ShowDialog()
+                btnModelo.PerformClick()
+            Else
+                MsgBox("El Usuario no tiene los privilegios para ver los Detalles")
+            End If
         ElseIf vTiempo_Ciclo = True Then
-            ofrmTiempo_Ciclo = New frmTiempo_Ciclo
-            ofrmTiempo_Ciclo.vId_Publico = vRowSeleccionada
-            ofrmTiempo_Ciclo.ShowDialog()
-            ''Se realiza la llamada al evento clic del btnLinea para actualizar el dgvRegistros
-            btnTiempo_Ciclo.PerformClick()
+            If Permiso_Asignado("CATALOGOTC.VER") = True Then
+                If Permiso_Asignado("CATALOGOTC.REGISTRAR") = True Then
+                    vPermiso_Add = True
+                Else
+                    vPermiso_Add = False
+                End If
+                ofrmTiempo_Ciclo = New frmTiempo_Ciclo(vPermiso_Add, oUsuario_Login.CVE_Usuario)
+                ofrmTiempo_Ciclo.vId_Publico = vRowSeleccionada
+                ofrmTiempo_Ciclo.ShowDialog()
+                btnTiempo_Ciclo.PerformClick()
+            Else
+                MsgBox("El Usuario no tiene los privilegios para ver los Detalles")
+            End If
         ElseIf vUsuario = True Then
-            ofrmUsuario = New FrmUsuarios
-            ofrmUsuario.vId_Publico = vRowSeleccionada
-            ofrmUsuario.ShowDialog()
-            ''Se realiza la llamada al evento clic del btnLinea para actualizar el dgvRegistros
-            btnUsuario.PerformClick()
+            If Permiso_Asignado("USUARIO.VER") = True Then
+                If Permiso_Asignado("USUARIOS.REGISTRAR") = True Then
+                    vPermiso_Add = True
+                Else
+                    vPermiso_Add = False
+                End If
+                If Permiso_Asignado("USUARIOS.ELIMINAR") = True Then
+                    vPermiso_Delete = True
+                Else
+                    vPermiso_Delete = False
+                End If
+                ofrmUsuario = New FrmUsuarios(vPermiso_Add, vPermiso_Delete)
+                ofrmUsuario.vId_Publico = vRowSeleccionada
+                ofrmUsuario.ShowDialog()
+                btnUsuario.PerformClick()
+            Else
+                MsgBox("El Usuario no tiene los privilegios para ver los Detalles")
+            End If
         ElseIf vTipo_Usuario = True Then
-            ofrmTipo_Usuario = New FrmTipo_Usuario
-            ofrmTipo_Usuario.vId_Publico = vRowSeleccionada
-            ofrmTipo_Usuario.ShowDialog()
-            ''Se realiza la llamada al evento clic del btnLinea para actualizar el dgvRegistros
-            btnTipoUsuario.PerformClick()
+            If Permiso_Asignado("TIPOUSUARIO.VER") = True Then
+                If Permiso_Asignado("TIPOUSUARIO.REGISTRAR") = True Then
+                    vPermiso_Add = True
+                Else
+                    vPermiso_Add = False
+                End If
+                If Permiso_Asignado("TIPOUSUARIO.ELIMINAR") = True Then
+                    vPermiso_Delete = True
+                Else
+                    vPermiso_Delete = False
+                End If
+                ofrmTipo_Usuario = New FrmTipo_Usuario(vPermiso_Add, vPermiso_Delete)
+                ofrmTipo_Usuario.vId_Publico = vRowSeleccionada
+                ofrmTipo_Usuario.ShowDialog()
+                btnTipoUsuario.PerformClick()
+            Else
+                MsgBox("El Usuario no tiene los privilegios para ver los Detalles")
+            End If
         End If
     End Sub
 
     Private Sub btnEliminar_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnEliminar.Click
         If vLinea = True Then
-            If MsgBox("¿Esta seguro de Dar de Baja la Linea?", MsgBoxStyle.YesNo, Me.Text) = MsgBoxResult.Yes Then
-                oLinea = New Linea
-                Try
-                    oLinea.cve_linea = vRowSeleccionada
-                    oLinea.Eliminar()
-                    btnLinea.PerformClick() ''Se realiza la llamada al evento clic del btnLinea para actualizar el dgvRegistros
-                Catch ex As Exception
+            If Permiso_Asignado("CATALOGOLINEA.ELIMINAR") = True Then
+                If MsgBox("¿Esta seguro de Dar de Baja la Linea?", MsgBoxStyle.YesNo, Me.Text) = MsgBoxResult.Yes Then
+                    oLinea = New Linea
+                    Try
+                        oLinea.cve_linea = vRowSeleccionada
+                        oLinea.Eliminar()
+                        btnLinea.PerformClick() ''Se realiza la llamada al evento clic del btnLinea para actualizar el dgvRegistros
+                    Catch ex As Exception
 
-                End Try
-            End If
+                    End Try
+                End If
+            Else
+                MsgBox("El Usuario no tiene los privilegios para Eliminar o Dar Baja")
+            End If           
         ElseIf vMaquina = True Then
-            If MsgBox("¿Esta seguro de Dar de Baja la Maquina?", MsgBoxStyle.YesNo, Me.Text) = MsgBoxResult.Yes Then
-                oMaquina = New Maquina
-                Try
-                    oMaquina.cve_maquina = vRowSeleccionada
-                    oMaquina.Eliminar()
-                    btnMaquina.PerformClick() ''Se realiza la llamada al evento clic del btnLinea para actualizar el dgvRegistros
-                Catch ex As Exception
+            If Permiso_Asignado("CATALOGOMAQUINA.ELIMINAR") = True Then
+                If MsgBox("¿Esta seguro de Dar de Baja la Maquina?", MsgBoxStyle.YesNo, Me.Text) = MsgBoxResult.Yes Then
+                    oMaquina = New Maquina
+                    Try
+                        oMaquina.cve_maquina = vRowSeleccionada
+                        oMaquina.Eliminar()
+                        btnMaquina.PerformClick() ''Se realiza la llamada al evento clic del btnLinea para actualizar el dgvRegistros
+                    Catch ex As Exception
 
-                End Try
-            End If
+                    End Try
+                End If
+            Else
+                MsgBox("El Usuario no tiene los privilegios para Eliminar o Dar Baja")
+            End If            
         ElseIf vModelo = True Then
-            If MsgBox("¿Esta seguro de Dar de Baja el Modelo?", MsgBoxStyle.YesNo, Me.Text) = MsgBoxResult.Yes Then
-                oModelo = New Modelo
-                Try
-                    oModelo.cve_modelo = vRowSeleccionada
-                    oModelo.Eliminar()
-                    btnModelo.PerformClick() ''Se realiza la llamada al evento clic del btnLinea para actualizar el dgvRegistros
-                Catch ex As Exception
+            If Permiso_Asignado("CATALOGOMODELO.ELIMINAR") = True Then
+                If MsgBox("¿Esta seguro de Dar de Baja el Modelo?", MsgBoxStyle.YesNo, Me.Text) = MsgBoxResult.Yes Then
+                    oModelo = New Modelo
+                    Try
+                        oModelo.cve_modelo = vRowSeleccionada
+                        oModelo.Eliminar()
+                        btnModelo.PerformClick() ''Se realiza la llamada al evento clic del btnLinea para actualizar el dgvRegistros
+                    Catch ex As Exception
 
-                End Try
-            End If
+                    End Try
+                End If
+            Else
+                MsgBox("El Usuario no tiene los privilegios para Eliminar o Dar Baja")
+            End If            
         ElseIf vTiempo_Ciclo = True Then
             'oLinea = New Linea
             'oLinea.cve_linea = vRowSeleccionada
             'oLinea.Eliminar()
             'btnLinea.PerformClick() ''Se realiza la llamada al evento clic del btnLinea para actualizar el dgvRegistros
         ElseIf vUsuario = True Then
-            If MsgBox("¿Esta seguro de Dar de Baja al Usuario?", MsgBoxStyle.YesNo, Me.Text) = MsgBoxResult.Yes Then
-                oUsuario = New SEGURIDAD_USUARIO
-                Try
-                    oUsuario.CVE_Usuario = vRowSeleccionada
-                    oUsuario.Eliminar()
-                    btnUsuario.PerformClick() ''Se realiza la llamada al evento clic del btnLinea para actualizar el dgvRegistros
-                Catch ex As Exception
+            If Permiso_Asignado("USUARIOS.ELIMINAR") = True Then
+                If MsgBox("¿Esta seguro de Dar de Baja al Usuario?", MsgBoxStyle.YesNo, Me.Text) = MsgBoxResult.Yes Then
+                    oUsuario = New SEGURIDAD_USUARIO
+                    Try
+                        oUsuario.CVE_Usuario = vRowSeleccionada
+                        oUsuario.Eliminar()
+                        btnUsuario.PerformClick() ''Se realiza la llamada al evento clic del btnLinea para actualizar el dgvRegistros
+                    Catch ex As Exception
 
-                End Try
+                    End Try
+                End If
+            Else
+                MsgBox("El Usuario no tiene los privilegios para Eliminar o Dar Baja")
             End If
+            
         ElseIf vTipo_Usuario = True Then
-            If MsgBox("¿Esta seguro de Eliminar el Tipo de Usuario?", MsgBoxStyle.YesNo, Me.Text) = MsgBoxResult.Yes Then
-                oTipo_Usuario = New Tipo_Usuario
-                Try
-                    oTipo_Usuario.CVE_Tipo_Usuario = vRowSeleccionada
-                    oTipo_Usuario.Eliminar()
-                    btnTipoUsuario.PerformClick() ''Se realiza la llamada al evento clic del btnLinea para actualizar el dgvRegistros
-                Catch ex As Exception
+            If Permiso_Asignado("TIPOUSUARIO.ELIMINAR") = True Then
+                If MsgBox("¿Esta seguro de Eliminar el Tipo de Usuario?", MsgBoxStyle.YesNo, Me.Text) = MsgBoxResult.Yes Then
+                    oTipo_Usuario = New Tipo_Usuario
+                    Try
+                        oTipo_Usuario.CVE_Tipo_Usuario = vRowSeleccionada
+                        oTipo_Usuario.Eliminar()
+                        btnTipoUsuario.PerformClick() ''Se realiza la llamada al evento clic del btnLinea para actualizar el dgvRegistros
+                    Catch ex As Exception
 
-                End Try
+                    End Try
+                End If
+            Else
+                MsgBox("El Usuario no tiene los privilegios para Eliminar o Dar Baja")
             End If           
         End If
     End Sub
 #End Region
-    
 
-    Private Sub dgvRegistros_MouseDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles dgvRegistros.MouseDown
-        'Try
-        '    If e.Button = Windows.Forms.MouseButtons.Right Then
-        '        vRowSeleccionada = dgvRegistros.CurrentRow.Cells("CVE").Value 'dgvRegistros.CurrentRow.Index
-        '    ElseIf e.Button = Windows.Forms.MouseButtons.Left Then
-        '        vRowSeleccionada = dgvRegistros.CurrentRow.Cells("CVE").Value 'dgvRegistros.CurrentRow.Index
-        '    End If
-        'Catch ex As Exception
-        '    If ex.TargetSite.MetadataToken.ToString = "100670847" Then
-        '        vRowSeleccionada = 0
-        '    End If
-        'End Try
-    End Sub
+#Region "Eventos para Registro Principal"
 
     Private Sub dgvRegistros_MouseDoubleClick(ByVal sender As System.Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles dgvRegistros.MouseDoubleClick
         Try
@@ -487,84 +781,186 @@ Public Class Formulario_Principal
         ''-----------------------------------------------------------------------------------------------------------------
         If vRowSeleccionada <> 0 Then
             If vLinea = True Then
-                ofrmLinea = New frmLinea
-                Try
-                    'ofrmLinea.vId_Publico = dgvRegistros.Rows(vRowSeleccionada).Cells(0).Value
-                    ofrmLinea.vId_Publico = vRowSeleccionada
-                Catch ex As Exception
-                    If ex.TargetSite.MetadataToken.ToString = "100670847" Then
-                        ofrmLinea.vId_Publico = 0
+                If Permiso_Asignado("CATALOGOLINEA.VER") = True Then
+                    If Permiso_Asignado("CATALOGOLINEA.REGISTRAR") = True Then
+                        vPermiso_Add = True
+                    Else
+                        vPermiso_Add = False
                     End If
-                End Try
-                ofrmLinea.ShowDialog()
-                btnLinea.PerformClick()
-            ElseIf vMaquina = True Then
-                ofrmMaquina = New frmMaquina
-                Try
-                    'ofrmMaquina.vId_Publico = dgvRegistros.Rows(vRowSeleccionada).Cells(0).Value
-                    ofrmMaquina.vId_Publico = vRowSeleccionada
-                Catch ex As Exception
-                    If ex.TargetSite.MetadataToken.ToString = "100670847" Then
-                        ofrmMaquina.vId_Publico = 0
+                    If Permiso_Asignado("CATALOGOLINEA.ELIMINAR") = True Then
+                        vPermiso_Delete = True
+                    Else
+                        vPermiso_Delete = False
                     End If
-                End Try
-                ofrmMaquina.ShowDialog()
-                btnMaquina.PerformClick()
-            ElseIf vModelo = True Then
-                ofrmModelo = New frmModelo
-                Try
-                    'ofrmModelo.vId_Publico = dgvRegistros.Rows(vRowSeleccionada).Cells(0).Value
-                    ofrmModelo.vId_Publico = vRowSeleccionada
-                Catch ex As Exception
-                    If ex.TargetSite.MetadataToken.ToString = "100670847" Then
-                        ofrmModelo.vId_Publico = 0
-                    End If
-                End Try
-                ofrmModelo.ShowDialog()
-                btnModelo.PerformClick()
-            ElseIf vTiempo_Ciclo = True Then
-                ofrmTiempo_Ciclo = New frmTiempo_Ciclo
-                Try
-                    'ofrmTiempo_Ciclo.vId_Publico = dgvRegistros.Rows(vRowSeleccionada).Cells(0).Value
-                    ofrmTiempo_Ciclo.vId_Publico = vRowSeleccionada
-                Catch ex As Exception
-                    If ex.TargetSite.MetadataToken.ToString = "100670847" Then
-                        ofrmTiempo_Ciclo.vId_Publico = 0
-                    End If
-                End Try
-                ofrmTiempo_Ciclo.ShowDialog()
-                btnTiempo_Ciclo.PerformClick()                
-            ElseIf vUsuario = True Then
-                ofrmUsuario = New FrmUsuarios
-                Try
-                    'ofrmTiempo_Ciclo.vId_Publico = dgvRegistros.Rows(vRowSeleccionada).Cells(0).Value
-                    ofrmUsuario.vId_Publico = vRowSeleccionada
-                Catch ex As Exception
-                    If ex.TargetSite.MetadataToken.ToString = "100670847" Then
-                        ofrmUsuario.vId_Publico = 0
-                    End If
-                End Try
-                ofrmUsuario.ShowDialog()
-                btnUsuario.PerformClick()
-            ElseIf vTipo_Usuario = True Then
-                ofrmTipo_Usuario = New FrmTipo_Usuario
-                Try
-                    'ofrmTiempo_Ciclo.vId_Publico = dgvRegistros.Rows(vRowSeleccionada).Cells(0).Value
-                    ofrmTipo_Usuario.vId_Publico = vRowSeleccionada
-                Catch ex As Exception
-                    If ex.TargetSite.MetadataToken.ToString = "100670847" Then
-                        ofrmTipo_Usuario.vId_Publico = 0
-                    End If
-                End Try
-                ofrmTipo_Usuario.ShowDialog()
-                btnTipoUsuario.PerformClick()
-            End If
-        Else
 
-        End If
-        ''-----------------------------------------------------------------------------------------------------------------
+                    ofrmLinea = New frmLinea(vPermiso_Add, vPermiso_Delete)
+
+                    Try
+                        'ofrmLinea.vId_Publico = dgvRegistros.Rows(vRowSeleccionada).Cells(0).Value
+                        ofrmLinea.vId_Publico = vRowSeleccionada
+                    Catch ex As Exception
+                        If ex.TargetSite.MetadataToken.ToString = "100670847" Then
+                            ofrmLinea.vId_Publico = 0
+                        End If
+                    End Try
+                    ofrmLinea.ShowDialog()
+                    btnLinea.PerformClick()
+                Else
+                    MsgBox("El Usuario no tiene los privilegios para ver los Detalles")
+                End If
+            ElseIf vMaquina = True Then
+                If Permiso_Asignado("CATALOGOMAQUINA.VER") = True Then
+                    If Permiso_Asignado("CATALOGOMAQUINA.REGISTRAR") = True Then
+                        vPermiso_Add = True
+                    Else
+                        vPermiso_Add = False
+                    End If
+                    If Permiso_Asignado("CATALOGOMAQUINA.ELIMINAR") = True Then
+                        vPermiso_Delete = True
+                    Else
+                        vPermiso_Delete = False
+                    End If
+
+                    ofrmMaquina = New frmMaquina(vPermiso_Add, vPermiso_Delete)
+
+                    Try
+                        'ofrmMaquina.vId_Publico = dgvRegistros.Rows(vRowSeleccionada).Cells(0).Value
+                        ofrmMaquina.vId_Publico = vRowSeleccionada
+                    Catch ex As Exception
+                        If ex.TargetSite.MetadataToken.ToString = "100670847" Then
+                            ofrmMaquina.vId_Publico = 0
+                        End If
+                    End Try
+                    ofrmMaquina.ShowDialog()
+                    btnMaquina.PerformClick()
+                Else
+                    MsgBox("El Usuario no tiene los privilegios para ver los Detalles")
+                End If
+            ElseIf vModelo = True Then
+                If Permiso_Asignado("CATALOGOMODELO.VER") = True Then
+                    If Permiso_Asignado("CATALOGOMODELO.REGISTRAR") = True Then
+                        vPermiso_Add = True
+                    Else
+                        vPermiso_Add = False
+                    End If
+                    If Permiso_Asignado("CATALOGOMODELO.ELIMINAR") = True Then
+                        vPermiso_Delete = True
+                    Else
+                        vPermiso_Delete = False
+                    End If
+
+                    ofrmModelo = New frmModelo(vPermiso_Add, vPermiso_Delete)
+                    Try
+                        'ofrmModelo.vId_Publico = dgvRegistros.Rows(vRowSeleccionada).Cells(0).Value
+                        ofrmModelo.vId_Publico = vRowSeleccionada
+                    Catch ex As Exception
+                        If ex.TargetSite.MetadataToken.ToString = "100670847" Then
+                            ofrmModelo.vId_Publico = 0
+                        End If
+                    End Try
+                    ofrmModelo.ShowDialog()
+                    btnModelo.PerformClick()
+                Else
+                    MsgBox("El Usuario no tiene los privilegios para ver los Detalles")
+                End If
+            ElseIf vTiempo_Ciclo = True Then
+                If Permiso_Asignado("CATALOGOTC.VER") = True Then
+                    If Permiso_Asignado("CATALOGOTC.REGISTRAR") = True Then
+                        vPermiso_Add = True
+                    Else
+                        vPermiso_Add = False
+                    End If                    
+                    ofrmTiempo_Ciclo = New frmTiempo_Ciclo(vPermiso_Add, oUsuario_Login.CVE_Usuario)
+
+                    Try
+                        'ofrmTiempo_Ciclo.vId_Publico = dgvRegistros.Rows(vRowSeleccionada).Cells(0).Value
+                        ofrmTiempo_Ciclo.vId_Publico = vRowSeleccionada
+                    Catch ex As Exception
+                        If ex.TargetSite.MetadataToken.ToString = "100670847" Then
+                            ofrmTiempo_Ciclo.vId_Publico = 0
+                        End If
+                    End Try
+                    ofrmTiempo_Ciclo.ShowDialog()
+                    btnTiempo_Ciclo.PerformClick()
+                Else
+                    MsgBox("El Usuario no tiene los privilegios para ver los Detalles")
+                End If
+            ElseIf vUsuario = True Then
+                If Permiso_Asignado("USUARIO.VER") = True Then
+                    If Permiso_Asignado("USUARIOS.REGISTRAR") = True Then
+                        vPermiso_Add = True
+                    Else
+                        vPermiso_Add = False
+                    End If
+                    If Permiso_Asignado("USUARIOS.ELIMINAR") = True Then
+                        vPermiso_Delete = True
+                    Else
+                        vPermiso_Delete = False
+                    End If
+                    ofrmUsuario = New FrmUsuarios(vPermiso_Add, vPermiso_Delete)
+                    Try
+                        'ofrmTiempo_Ciclo.vId_Publico = dgvRegistros.Rows(vRowSeleccionada).Cells(0).Value
+                        ofrmUsuario.vId_Publico = vRowSeleccionada
+                    Catch ex As Exception
+                        If ex.TargetSite.MetadataToken.ToString = "100670847" Then
+                            ofrmUsuario.vId_Publico = 0
+                        End If
+                    End Try
+                    ofrmUsuario.ShowDialog()
+                    btnUsuario.PerformClick()
+                Else
+                    MsgBox("El Usuario no tiene los privilegios para ver los Detalles")
+                End If
+            ElseIf vTipo_Usuario = True Then
+                If Permiso_Asignado("TIPOUSUARIO.VER") = True Then
+                    If Permiso_Asignado("TIPOUSUARIO.REGISTRAR") = True Then
+                        vPermiso_Add = True
+                    Else
+                        vPermiso_Add = False
+                    End If
+                    If Permiso_Asignado("TIPOUSUARIO.ELIMINAR") = True Then
+                        vPermiso_Delete = True
+                    Else
+                        vPermiso_Delete = False
+                    End If
+                    ofrmTipo_Usuario = New FrmTipo_Usuario(vPermiso_Add, vPermiso_Delete)
+
+                    Try
+                        'ofrmTiempo_Ciclo.vId_Publico = dgvRegistros.Rows(vRowSeleccionada).Cells(0).Value
+                        ofrmTipo_Usuario.vId_Publico = vRowSeleccionada
+                    Catch ex As Exception
+                        If ex.TargetSite.MetadataToken.ToString = "100670847" Then
+                            ofrmTipo_Usuario.vId_Publico = 0
+                        End If
+                    End Try
+                    ofrmTipo_Usuario.ShowDialog()
+                    btnTipoUsuario.PerformClick()
+                Else
+                    MsgBox("El Usuario no tiene los privilegios para ver los Detalles")
+                End If
+            End If
+            Else
+            End If
+            ''-----------------------------------------------------------------------------------------------------------------
     End Sub
 
+    Private Sub dgvRegistros_MouseUp(ByVal sender As System.Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles dgvRegistros.MouseUp
+        Try
+            If e.Button = Windows.Forms.MouseButtons.Right Then
+                vRowSeleccionada = dgvRegistros.CurrentRow.Cells("CVE").Value 'dgvRegistros.CurrentRow.Index
+            ElseIf e.Button = Windows.Forms.MouseButtons.Left Then
+                vRowSeleccionada = dgvRegistros.CurrentRow.Cells("CVE").Value 'dgvRegistros.CurrentRow.Index
+            End If
+        Catch ex As Exception
+            If ex.TargetSite.MetadataToken.ToString = "100670847" Then
+                vRowSeleccionada = 0
+            End If
+        End Try
+    End Sub
+#End Region   
+
+
+#Region "Validaciones"
     Private Sub Activar_Formulario(ByVal vNombre_De_Formulario As String)
         If vNombre_De_Formulario = "frmLinea" Then
             vLinea = True
@@ -617,17 +1013,22 @@ Public Class Formulario_Principal
         End If
     End Sub
 
-    Private Sub dgvRegistros_MouseUp(ByVal sender As System.Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles dgvRegistros.MouseUp
-        Try
-            If e.Button = Windows.Forms.MouseButtons.Right Then
-                vRowSeleccionada = dgvRegistros.CurrentRow.Cells("CVE").Value 'dgvRegistros.CurrentRow.Index
-            ElseIf e.Button = Windows.Forms.MouseButtons.Left Then
-                vRowSeleccionada = dgvRegistros.CurrentRow.Cells("CVE").Value 'dgvRegistros.CurrentRow.Index
-            End If
-        Catch ex As Exception
-            If ex.TargetSite.MetadataToken.ToString = "100670847" Then
-                vRowSeleccionada = 0
-            End If
-        End Try
+    Private Function Permiso_Asignado(ByVal vNombre_Corto_Permiso As String) As Boolean
+        Dim vRetorno As Boolean = False
+        If oUsuario_Login.L_USUARIO_PERMISOS.Count <> 0 Then
+            For Each vSeg_User_Perm As SEGURIDAD_USUARIO_PERMISOS In oUsuario_Login.L_USUARIO_PERMISOS
+                If vSeg_User_Perm.Nombre_Corto_Permiso = vNombre_Corto_Permiso Then
+                    vRetorno = True
+                    Exit For
+                End If
+            Next
+        End If
+        Return vRetorno
+    End Function
+#End Region
+    
+    Private Sub Formulario_Principal_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
+        Me.WindowState = FormWindowState.Maximized
+        RadLabel_Usuario_Login.Text = RadLabel_Usuario_Login.Text & oUsuario_Login.Nombre
     End Sub
 End Class

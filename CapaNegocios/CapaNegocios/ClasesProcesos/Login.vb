@@ -1,11 +1,10 @@
 ﻿Imports CapaDatos
-Public Class Login
+Public Class Login    
     Dim cadena_conexion As New CapaDatos.conexiones
     Dim oBD_Kronos As New CapaDatos.CapaDatos(cadena_conexion.CadenaKronos)
     Dim oBD_SICAIP As New CapaDatos.CapaDatos(cadena_conexion.CadenaSicaip)
 
-#Region "Propiedades de Empleado Kronos"   
-
+#Region "Propiedades de Empleado Kronos"
     Private vEquipo_Empleado As String
     ''' <summary>
     ''' Nombre del Equipo del Empleado
@@ -37,7 +36,6 @@ Public Class Login
             vNombre_Empleado = value
         End Set
     End Property
-
 #End Region
 
     Public Function Obtener_Cve_Empleado(ByVal vCodigo_Barras As String) As String
@@ -77,7 +75,7 @@ Public Class Login
     Public Sub Cargar_Empleado(ByVal vCve_Empleado As String)
         Dim vDR As DataRow
         vDR = oBD_Kronos.ObtenerRenglon("select personfullname, homelaborleveldsc7 from vp_employee where personnum = '" & vCve_Empleado & "'", "Login")
-        If vDR IsNot Nothing Then            
+        If vDR IsNot Nothing Then
             vNombre_Empleado = vDR("personfullname")
             vEquipo_Empleado = vDR("homelaborleveldsc7")
         End If
@@ -150,21 +148,4 @@ Public Class Login
         End Using
         Return vRetorno
     End Function
-
-    Public Function Usuario_NO_Sindicalizado(ByVal vNombreUsuario_Login As String) As Boolean
-        Dim vRetorno As Boolean = False
-        Dim vDR As DataRow
-        Try
-            vDR = oBD_Kronos.ObtenerRenglon("select CVE_Usuario from SEGURIDAD_USUARIO where estatus=1 and Id_Usuario ='" & vNombreUsuario_Login & "'", "SEGURIDAD_USUARIO")
-            If vDR("CVE_Usuario") IsNot Nothing Then
-                vRetorno = True
-            Else
-                vRetorno = False
-            End If
-        Catch ex As Exception
-            'MsgBox("El empleado no está activo en KRONOS. Clave del Error: LIN_001", vbCritical + vbOKOnly, "Error")
-        End Try
-        Return vRetorno
-    End Function
-
 End Class

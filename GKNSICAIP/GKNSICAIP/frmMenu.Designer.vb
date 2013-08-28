@@ -57,14 +57,15 @@ Partial Class FrmMenu
         Me.Controls.Add(Me.btnOpCalculadora)
         Me.Controls.Add(Me.btnOpSICAIP)
         Me.MaximizeBox = False
-        Me.MaximumSize = New System.Drawing.Size(1280, 1024)
+        Me.MaximumSize = New System.Drawing.Size(1280, 728)
         Me.MinimizeBox = False
+        Me.MinimumSize = New System.Drawing.Size(1280, 726)
         Me.Name = "FrmMenu"
         '
         '
         '
         Me.RootElement.ApplyShapeToControl = True
-        Me.RootElement.MaxSize = New System.Drawing.Size(1280, 1024)
+        Me.RootElement.MaxSize = New System.Drawing.Size(1280, 728)
         Me.Text = "INICIO SICAIP"
         CType(Me, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
