@@ -5,6 +5,7 @@ Public Class TC
     Dim oBD As New CapaDatos.CapaDatos(cadena_conexion.CadenaSicaip)
     Dim oLinea As Linea
     Dim oModelo As Modelo
+    Public vCve_TC_Existe As Long = 0
 
 #Region "IIndividual"
     Public Sub Cargar() Implements IIndividual.Cargar
@@ -191,8 +192,9 @@ Public Class TC
     Public Function Validar_Exixtencia_LINEA_MODELO_EN_TC(ByVal vID_Linea As Long, ByVal vID_Modelo As Long) As Boolean
         Dim vRetorno As Boolean = False
         Dim vDT As DataTable
-        vDT = oBD.ObtenerTabla("SELECT cve_TC FROM TC WHERE estatus !='IN' and cve_linea=" & vID_Linea & " AND cve_modelo=" & vID_Modelo)
+        vDT = oBD.ObtenerTabla("SELECT cve_TC FROM TC WHERE estatus !='0' and cve_linea=" & vID_Linea & " AND cve_modelo=" & vID_Modelo)
         If vDT.Rows.Count > 0 Then
+            vCve_TC_Existe = vDT.Rows(0).Item("cve_TC")
             vRetorno = True
         Else
             vRetorno = False
@@ -210,6 +212,8 @@ Public Class TC
 
         End If
     End Sub
+
+
 
 #End Region
 
