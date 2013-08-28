@@ -35,6 +35,7 @@ Partial Class Formulario_Principal
         Me.btnMaquina = New Telerik.WinControls.UI.RadButtonElement()
         Me.btnModelo = New Telerik.WinControls.UI.RadButtonElement()
         Me.btnTiempo_Ciclo = New Telerik.WinControls.UI.RadButtonElement()
+        Me.btnImportar_TC = New Telerik.WinControls.UI.RadButtonElement()
         Me.RadRibbonBarGroup3 = New Telerik.WinControls.UI.RadRibbonBarGroup()
         Me.btnEquipo_Linea = New Telerik.WinControls.UI.RadButtonElement()
         Me.RibbonTab3 = New Telerik.WinControls.UI.RibbonTab()
@@ -82,7 +83,7 @@ Partial Class Formulario_Principal
         '
         Me.RibbonTab1.AccessibleDescription = "Configuración"
         Me.RibbonTab1.AccessibleName = "Configuración"
-        Me.RibbonTab1.IsSelected = True
+        Me.RibbonTab1.IsSelected = False
         Me.RibbonTab1.Items.AddRange(New Telerik.WinControls.RadItem() {Me.RadRibbonBarGroup1})
         Me.RibbonTab1.Name = "RibbonTab1"
         Me.RibbonTab1.Text = "Configuración"
@@ -136,7 +137,7 @@ Partial Class Formulario_Principal
         '
         Me.RibbonTab2.AccessibleDescription = "Catalogos"
         Me.RibbonTab2.AccessibleName = "Catalogos"
-        Me.RibbonTab2.IsSelected = False
+        Me.RibbonTab2.IsSelected = True
         Me.RibbonTab2.Items.AddRange(New Telerik.WinControls.RadItem() {Me.RadRibbonBarGroup2, Me.RadRibbonBarGroup3})
         Me.RibbonTab2.Name = "RibbonTab2"
         Me.RibbonTab2.Text = "Catalogos"
@@ -146,7 +147,7 @@ Partial Class Formulario_Principal
         '
         Me.RadRibbonBarGroup2.AccessibleDescription = "Catalogos"
         Me.RadRibbonBarGroup2.AccessibleName = "Catalogos"
-        Me.RadRibbonBarGroup2.Items.AddRange(New Telerik.WinControls.RadItem() {Me.btnLinea, Me.btnMaquina, Me.btnModelo, Me.btnTiempo_Ciclo})
+        Me.RadRibbonBarGroup2.Items.AddRange(New Telerik.WinControls.RadItem() {Me.btnLinea, Me.btnMaquina, Me.btnModelo, Me.btnTiempo_Ciclo, Me.btnImportar_TC})
         Me.RadRibbonBarGroup2.Name = "RadRibbonBarGroup2"
         Me.RadRibbonBarGroup2.Text = "Catalogos"
         Me.RadRibbonBarGroup2.Visibility = Telerik.WinControls.ElementVisibility.Visible
@@ -193,6 +194,17 @@ Partial Class Formulario_Principal
         Me.btnTiempo_Ciclo.Text = "Tiempo Ciclo"
         Me.btnTiempo_Ciclo.TextAlignment = System.Drawing.ContentAlignment.BottomCenter
         Me.btnTiempo_Ciclo.Visibility = Telerik.WinControls.ElementVisibility.Visible
+        '
+        'btnImportar_TC
+        '
+        Me.btnImportar_TC.AccessibleDescription = "Importar TC"
+        Me.btnImportar_TC.AccessibleName = "Importar TC"
+        Me.btnImportar_TC.Image = CType(resources.GetObject("btnImportar_TC.Image"), System.Drawing.Image)
+        Me.btnImportar_TC.ImageAlignment = System.Drawing.ContentAlignment.MiddleCenter
+        Me.btnImportar_TC.Name = "btnImportar_TC"
+        Me.btnImportar_TC.Text = "Importar TC"
+        Me.btnImportar_TC.TextAlignment = System.Drawing.ContentAlignment.BottomCenter
+        Me.btnImportar_TC.Visibility = Telerik.WinControls.ElementVisibility.Visible
         '
         'RadRibbonBarGroup3
         '
@@ -475,5 +487,6 @@ Partial Class Formulario_Principal
     Friend WithEvents RibbonTab4 As Telerik.WinControls.UI.RibbonTab
     Friend WithEvents RadLabel_Usuario_Login As Telerik.WinControls.UI.RadLabelElement
     Friend WithEvents RadLabelElement2 As Telerik.WinControls.UI.RadLabelElement
+    Friend WithEvents btnImportar_TC As Telerik.WinControls.UI.RadButtonElement
 
 End Class
