@@ -156,9 +156,9 @@ Public Class FrmUsuarios
             txtNombre.ReadOnly = True
         Else
             btnAlta.Visible = False
-            btnAlta.Enabled = False
+            'btnAlta.Enabled = False
             btnBaja.Visible = True
-            btnBaja.Enabled = True
+            'btnBaja.Enabled = True
         End If
     End Sub
 
@@ -172,6 +172,7 @@ Public Class FrmUsuarios
             txtId_Usuario.ReadOnly = False
             txtNombre.ReadOnly = False
             btnImportar.Enabled = True
+            btnAlta.Enabled = True
         End If
         If vDelete = True Then
             Me.btnBaja.Enabled = True

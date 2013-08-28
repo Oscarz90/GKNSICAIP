@@ -166,12 +166,12 @@ Public Class frmTiempo_Ciclo
             Using scope As New TransactionScope()
                 Try
                     If oTiempo_Ciclo.Validar_Exixtencia_LINEA_MODELO_EN_TC(oTiempo_Ciclo.cve_linea, oTiempo_Ciclo.cve_modelo) = True Then
-                        MsgBox("La linea y el modelo en TC ya exixte")
+                        'MsgBox("La linea y el modelo en TC ya exixte")
                         vValidado_Modelo_Y_Linea_En_TC = False
                         'oTiempo_Ciclo_A_MODIFICAR_ENCONTRADO_VALIDACIONES = New TC
                         oTiempo_Ciclo_A_MODIFICAR_ENCONTRADO_VALIDACIONES.Cargar_TC(oTiempo_Ciclo.cve_linea, oTiempo_Ciclo.cve_modelo)
                     Else
-                        MsgBox("La linea y el modelo en TC no exixte")
+                        'MsgBox("La linea y el modelo en TC no exixte")
                         vValidado_Modelo_Y_Linea_En_TC = True
                     End If
                     'btnRegistrar.Enabled = True

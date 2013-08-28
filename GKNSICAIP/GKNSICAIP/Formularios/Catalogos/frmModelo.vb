@@ -29,13 +29,15 @@ Public Class frmModelo
             oModelo.cve_modelo = vId_Publico
             oModelo.Cargar()
             LlenaCombos()
+            Controles_Permisos(vAdd_Registrar, vDelete_Eliminar)
             Controles_Registro_Nuevo(False)
         Else
             oModelo = New Modelo
             LlenaCombos()
+            Controles_Permisos(vAdd_Registrar, vDelete_Eliminar)
             Controles_Registro_Nuevo(True)
         End If
-        Controles_Permisos(vAdd_Registrar, vDelete_Eliminar)
+
         SetBindings()
         If vId_Publico = 0 Then
             cbxClasificacion.SelectedIndex = 1 ''--------------------------Cuando sea registro nuevo la clasificacion Default sera "Produccion"
@@ -118,9 +120,6 @@ Public Class frmModelo
             btnModificar.Visible = False
             btnDarBaja.Enabled = False
             cbxClasificacion.Enabled = False
-
-
-
         Else
             btnRegistrar.Visible = False
             btnModificar.Visible = True

@@ -205,7 +205,8 @@ Public Class Formulario_Principal
             Me.dgvRegistros.Columns("componente").Width = 250
 
             Me.dgvRegistros.Columns("Clasificacion_Modelo").HeaderText = " Clasificacion Modelo"
-            Me.dgvRegistros.Columns("Clasificacion_Modelo").Width = 250
+            Me.dgvRegistros.Columns("Clasificacion_Modelo").IsVisible = False
+            'Me.dgvRegistros.Columns("Clasificacion_Modelo").Width = 250
 
             dgvRegistros.Visible = True
             Activar_Formulario("frmModelo")
