@@ -95,6 +95,13 @@ Namespace My.Resources
             End Get
         End Property
         
+        Friend ReadOnly Property frmGraficas_graficar1() As System.Drawing.Bitmap
+            Get
+                Dim obj As Object = ResourceManager.GetObject("frmGraficas_graficar1", resourceCulture)
+                Return CType(obj,System.Drawing.Bitmap)
+            End Get
+        End Property
+        
         Friend ReadOnly Property frmSoporteEmail() As System.Drawing.Bitmap
             Get
                 Dim obj As Object = ResourceManager.GetObject("frmSoporteEmail", resourceCulture)
