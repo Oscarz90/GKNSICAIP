@@ -64,9 +64,9 @@ Public Class FrmUsuarios
                 If opActivar_Nivel.Checked = True Then
                     oUsuario.Eliminar_Nivel_Usuario(oUsuario.CVE_Usuario)
                     If radUsuario_Componente.IsChecked = True Then
-                        oUsuario.Registrar_Nivel_Usuario(True, ddlComponente.SelectedValue, oUsuario.CVE_Usuario)
+                        oUsuario.Registrar_Nivel_Usuario(True, ddlComponente_W.SelectedValue, oUsuario.CVE_Usuario)
                     Else
-                        oUsuario.Registrar_Nivel_Usuario(False, ddlCadena_Valor.SelectedValue, oUsuario.CVE_Usuario)
+                        oUsuario.Registrar_Nivel_Usuario(False, ddlCadena_Valor_W.SelectedValue, oUsuario.CVE_Usuario)
                     End If
                 Else
                     oUsuario.Eliminar_Nivel_Usuario(oUsuario.CVE_Usuario)
@@ -92,9 +92,9 @@ Public Class FrmUsuarios
                     If opActivar_Nivel.Checked = True Then
                         oUsuario.Eliminar_Nivel_Usuario(oUsuario.CVE_Usuario)
                         If radUsuario_Componente.IsChecked = True Then
-                            oUsuario.Registrar_Nivel_Usuario(True, ddlComponente.SelectedValue, oUsuario.CVE_Usuario)
+                            oUsuario.Registrar_Nivel_Usuario(True, ddlComponente_W.SelectedValue, oUsuario.CVE_Usuario)
                         Else
-                            oUsuario.Registrar_Nivel_Usuario(False, ddlCadena_Valor.SelectedValue, oUsuario.CVE_Usuario)
+                            oUsuario.Registrar_Nivel_Usuario(False, ddlCadena_Valor_W.SelectedValue, oUsuario.CVE_Usuario)
                         End If
                     End If
                     vId_Retorno = oUsuario.CVE_Usuario
@@ -122,15 +122,15 @@ Public Class FrmUsuarios
             Controles_Permisos(vAdd_Registrar, vDelete_Eliminar)
             If oUsuario.Cve_Componente <> 0 Then
                 radUsuario_Componente.IsChecked = True
-                ddlComponente.Enabled = True
+                ddlComponente_W.Enabled = True
             Else
-                ddlComponente.Enabled = False
+                ddlComponente_W.Enabled = False
             End If
             If oUsuario.Cve_CV <> 0 Then
                 radUsuario_CV.IsChecked = True
-                ddlCadena_Valor.Enabled = True
+                ddlCadena_Valor_W.Enabled = True
             Else
-                ddlCadena_Valor.Enabled = False
+                ddlCadena_Valor_W.Enabled = False
             End If
 
             If oUsuario.Cve_CV = 0 And oUsuario.Cve_Componente = 0 Then
@@ -152,7 +152,7 @@ Public Class FrmUsuarios
             opActivar_Nivel.Checked = False
         End If
         LlenaCombos()
-        SetBindings()
+        SetBindings()        
         Me.Show()
         Me.txtId_Usuario.Focus()
     End Sub
@@ -163,14 +163,15 @@ Public Class FrmUsuarios
         Me.txtNombre.DataBindings.Clear()
         Me.txtEmail.DataBindings.Clear()
         Me.txtTipo_Usuario.DataBindings.Clear()
+        Me.ddlCadena_Valor_W.DataBindings.Clear()
+        Me.ddlComponente_W.DataBindings.Clear()
 
-        If oUsuario.Cve_Componente <> 0 Then
-            Me.ddlComponente.DataBindings.Add("Value", oUsuario, "Cve_Componente")
+        If oUsuario.Cve_Componente <> 0 Then            
+            Me.ddlComponente_W.DataBindings.Add("SelectedValue", oUsuario, "Cve_Componente")
         End If
         If oUsuario.Cve_CV <> 0 Then
-            Me.ddlCadena_Valor.DataBindings.Add("Value", oUsuario, "Cve_CV")
+            Me.ddlCadena_Valor_W.DataBindings.Add("SelectedValue", oUsuario, "Cve_CV")
         End If
-
         Me.txtId_Usuario.DataBindings.Add("Text", oUsuario, "Id_Usuario")
         Me.txtPass.DataBindings.Add("Text", oUsuario, "Pass")
         Me.txtNombre.DataBindings.Add("Text", oUsuario, "Nombre")
@@ -180,13 +181,13 @@ Public Class FrmUsuarios
     End Sub
 
     Private Sub LlenaCombos()
-        Me.ddlCadena_Valor.DisplayMember = "cadena"
-        Me.ddlCadena_Valor.ValueMember = "cve_cadena_valor"
-        Me.ddlCadena_Valor.DataSource = oCadena_Valor.Obtener_Cadenas_Valor
+        Me.ddlCadena_Valor_W.DisplayMember = "cadena"
+        Me.ddlCadena_Valor_W.ValueMember = "cve_cadena_valor"
+        Me.ddlCadena_Valor_W.DataSource = oCadena_Valor.Obtener_Cadenas_Valor
 
-        Me.ddlComponente.DisplayMember = "componente"
-        Me.ddlComponente.ValueMember = "cve_componente"
-        Me.ddlComponente.DataSource = oComponente.Obtener_Componentes
+        Me.ddlComponente_W.DisplayMember = "componente"
+        Me.ddlComponente_W.ValueMember = "cve_componente"
+        Me.ddlComponente_W.DataSource = oComponente.Obtener_Componentes
 
     End Sub
 
@@ -267,11 +268,11 @@ Public Class FrmUsuarios
 
     Private Sub radUsuario_Componente_ToggleStateChanged(ByVal sender As System.Object, ByVal args As Telerik.WinControls.UI.StateChangedEventArgs) Handles radUsuario_Componente.ToggleStateChanged
         If radUsuario_Componente.IsChecked = True Then
-            ddlComponente.Enabled = True
-            ddlCadena_Valor.Enabled = False
+            ddlComponente_W.Enabled = True
+            ddlCadena_Valor_W.Enabled = False
         Else
-            ddlComponente.Enabled = False
-            ddlCadena_Valor.Enabled = True
+            ddlComponente_W.Enabled = False
+            ddlCadena_Valor_W.Enabled = True
         End If
     End Sub
 

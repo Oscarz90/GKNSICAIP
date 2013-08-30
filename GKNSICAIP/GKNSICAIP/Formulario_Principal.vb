@@ -379,6 +379,11 @@ Public Class Formulario_Principal
             Me.dgvRegistros.Columns("L_USUARIO_PERMISOS").HeaderText = "L_USUARIO_PERMISOS"
             Me.dgvRegistros.Columns("L_USUARIO_PERMISOS").IsVisible = False
 
+            Me.dgvRegistros.Columns("Cve_CV").HeaderText = "Cve_CV"
+            Me.dgvRegistros.Columns("Cve_CV").IsVisible = False
+            Me.dgvRegistros.Columns("Cve_Componente").HeaderText = "Cve_Componente"
+            Me.dgvRegistros.Columns("Cve_Componente").IsVisible = False        
+
             dgvRegistros.Visible = True
             Activar_Formulario("frmUsuario")
         Else
