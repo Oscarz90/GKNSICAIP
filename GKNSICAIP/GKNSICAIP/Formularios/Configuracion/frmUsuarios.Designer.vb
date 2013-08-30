@@ -24,6 +24,11 @@ Partial Class FrmUsuarios
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(FrmUsuarios))
         Me.RadPanel1 = New Telerik.WinControls.UI.RadPanel()
+        Me.rgbGrupo_Nivel = New Telerik.WinControls.UI.RadGroupBox()
+        Me.ddlComponente = New Telerik.WinControls.UI.RadDropDownList()
+        Me.ddlCadena_Valor = New Telerik.WinControls.UI.RadDropDownList()
+        Me.radUsuario_Componente = New Telerik.WinControls.UI.RadRadioButton()
+        Me.radUsuario_CV = New Telerik.WinControls.UI.RadRadioButton()
         Me.btnAlta = New Telerik.WinControls.UI.RadButton()
         Me.RadLabel6 = New Telerik.WinControls.UI.RadLabel()
         Me.txtEstatus = New Telerik.WinControls.UI.RadTextBox()
@@ -44,8 +49,15 @@ Partial Class FrmUsuarios
         Me.RadLabel3 = New Telerik.WinControls.UI.RadLabel()
         Me.RadLabel2 = New Telerik.WinControls.UI.RadLabel()
         Me.RadLabel1 = New Telerik.WinControls.UI.RadLabel()
+        Me.opActivar_Nivel = New Telerik.WinControls.UI.RadCheckBox()
         CType(Me.RadPanel1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.RadPanel1.SuspendLayout()
+        CType(Me.rgbGrupo_Nivel, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.rgbGrupo_Nivel.SuspendLayout()
+        CType(Me.ddlComponente, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.ddlCadena_Valor, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.radUsuario_Componente, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.radUsuario_CV, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.btnAlta, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.RadLabel6, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.txtEstatus, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -65,12 +77,16 @@ Partial Class FrmUsuarios
         CType(Me.RadLabel3, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.RadLabel2, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.RadLabel1, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.opActivar_Nivel, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'RadPanel1
         '
         Me.RadPanel1.BackColor = System.Drawing.Color.White
+        Me.RadPanel1.Controls.Add(Me.btnRegistrar)
+        Me.RadPanel1.Controls.Add(Me.opActivar_Nivel)
+        Me.RadPanel1.Controls.Add(Me.rgbGrupo_Nivel)
         Me.RadPanel1.Controls.Add(Me.btnAlta)
         Me.RadPanel1.Controls.Add(Me.RadLabel6)
         Me.RadPanel1.Controls.Add(Me.txtEstatus)
@@ -79,7 +95,6 @@ Partial Class FrmUsuarios
         Me.RadPanel1.Controls.Add(Me.txtPass)
         Me.RadPanel1.Controls.Add(Me.btnBaja)
         Me.RadPanel1.Controls.Add(Me.btnSalir)
-        Me.RadPanel1.Controls.Add(Me.btnRegistrar)
         Me.RadPanel1.Controls.Add(Me.txtTipo_Usuario)
         Me.RadPanel1.Controls.Add(Me.txtEmail)
         Me.RadPanel1.Controls.Add(Me.txtNombre)
@@ -94,13 +109,61 @@ Partial Class FrmUsuarios
         Me.RadPanel1.Dock = System.Windows.Forms.DockStyle.Fill
         Me.RadPanel1.Location = New System.Drawing.Point(0, 0)
         Me.RadPanel1.Name = "RadPanel1"
-        Me.RadPanel1.Size = New System.Drawing.Size(396, 283)
+        Me.RadPanel1.Size = New System.Drawing.Size(396, 397)
         Me.RadPanel1.TabIndex = 5
+        '
+        'rgbGrupo_Nivel
+        '
+        Me.rgbGrupo_Nivel.AccessibleRole = System.Windows.Forms.AccessibleRole.Grouping
+        Me.rgbGrupo_Nivel.Controls.Add(Me.ddlComponente)
+        Me.rgbGrupo_Nivel.Controls.Add(Me.ddlCadena_Valor)
+        Me.rgbGrupo_Nivel.Controls.Add(Me.radUsuario_Componente)
+        Me.rgbGrupo_Nivel.Controls.Add(Me.radUsuario_CV)
+        Me.rgbGrupo_Nivel.HeaderText = "Nivel"
+        Me.rgbGrupo_Nivel.Location = New System.Drawing.Point(12, 208)
+        Me.rgbGrupo_Nivel.Name = "rgbGrupo_Nivel"
+        '
+        '
+        '
+        Me.rgbGrupo_Nivel.RootElement.Padding = New System.Windows.Forms.Padding(2, 18, 2, 2)
+        Me.rgbGrupo_Nivel.Size = New System.Drawing.Size(365, 80)
+        Me.rgbGrupo_Nivel.TabIndex = 128
+        Me.rgbGrupo_Nivel.Text = "Nivel"
+        '
+        'ddlComponente
+        '
+        Me.ddlComponente.Location = New System.Drawing.Point(99, 47)
+        Me.ddlComponente.Name = "ddlComponente"
+        Me.ddlComponente.Size = New System.Drawing.Size(261, 20)
+        Me.ddlComponente.TabIndex = 128
+        '
+        'ddlCadena_Valor
+        '
+        Me.ddlCadena_Valor.Location = New System.Drawing.Point(99, 21)
+        Me.ddlCadena_Valor.Name = "ddlCadena_Valor"
+        Me.ddlCadena_Valor.Size = New System.Drawing.Size(261, 20)
+        Me.ddlCadena_Valor.TabIndex = 127
+        '
+        'radUsuario_Componente
+        '
+        Me.radUsuario_Componente.Location = New System.Drawing.Point(6, 40)
+        Me.radUsuario_Componente.Name = "radUsuario_Componente"
+        Me.radUsuario_Componente.Size = New System.Drawing.Size(85, 18)
+        Me.radUsuario_Componente.TabIndex = 126
+        Me.radUsuario_Componente.Text = "Componente"
+        '
+        'radUsuario_CV
+        '
+        Me.radUsuario_CV.Location = New System.Drawing.Point(6, 21)
+        Me.radUsuario_CV.Name = "radUsuario_CV"
+        Me.radUsuario_CV.Size = New System.Drawing.Size(87, 18)
+        Me.radUsuario_CV.TabIndex = 125
+        Me.radUsuario_CV.Text = "Cadena Valor"
         '
         'btnAlta
         '
         Me.btnAlta.Image = CType(resources.GetObject("btnAlta.Image"), System.Drawing.Image)
-        Me.btnAlta.Location = New System.Drawing.Point(219, 247)
+        Me.btnAlta.Location = New System.Drawing.Point(219, 361)
         Me.btnAlta.Name = "btnAlta"
         Me.btnAlta.Size = New System.Drawing.Size(89, 24)
         Me.btnAlta.TabIndex = 10
@@ -109,7 +172,7 @@ Partial Class FrmUsuarios
         '
         'RadLabel6
         '
-        Me.RadLabel6.Location = New System.Drawing.Point(12, 188)
+        Me.RadLabel6.Location = New System.Drawing.Point(12, 296)
         Me.RadLabel6.Name = "RadLabel6"
         Me.RadLabel6.Size = New System.Drawing.Size(41, 18)
         Me.RadLabel6.TabIndex = 124
@@ -117,7 +180,7 @@ Partial Class FrmUsuarios
         '
         'txtEstatus
         '
-        Me.txtEstatus.Location = New System.Drawing.Point(103, 186)
+        Me.txtEstatus.Location = New System.Drawing.Point(103, 294)
         Me.txtEstatus.Name = "txtEstatus"
         Me.txtEstatus.ReadOnly = True
         Me.txtEstatus.Size = New System.Drawing.Size(202, 20)
@@ -127,7 +190,7 @@ Partial Class FrmUsuarios
         '
         Me.btnModificar.DialogResult = System.Windows.Forms.DialogResult.Ignore
         Me.btnModificar.Image = CType(resources.GetObject("btnModificar.Image"), System.Drawing.Image)
-        Me.btnModificar.Location = New System.Drawing.Point(125, 247)
+        Me.btnModificar.Location = New System.Drawing.Point(125, 361)
         Me.btnModificar.Name = "btnModificar"
         Me.btnModificar.Size = New System.Drawing.Size(88, 24)
         Me.btnModificar.TabIndex = 7
@@ -143,7 +206,7 @@ Partial Class FrmUsuarios
         '
         'txtPass
         '
-        Me.txtPass.Location = New System.Drawing.Point(30, 245)
+        Me.txtPass.Location = New System.Drawing.Point(30, 365)
         Me.txtPass.Name = "txtPass"
         Me.txtPass.PasswordChar = Global.Microsoft.VisualBasic.ChrW(42)
         Me.txtPass.Size = New System.Drawing.Size(23, 20)
@@ -153,7 +216,7 @@ Partial Class FrmUsuarios
         'btnBaja
         '
         Me.btnBaja.Image = CType(resources.GetObject("btnBaja.Image"), System.Drawing.Image)
-        Me.btnBaja.Location = New System.Drawing.Point(222, 247)
+        Me.btnBaja.Location = New System.Drawing.Point(222, 361)
         Me.btnBaja.Name = "btnBaja"
         Me.btnBaja.Size = New System.Drawing.Size(89, 24)
         Me.btnBaja.TabIndex = 9
@@ -163,7 +226,7 @@ Partial Class FrmUsuarios
         'btnSalir
         '
         Me.btnSalir.Image = CType(resources.GetObject("btnSalir.Image"), System.Drawing.Image)
-        Me.btnSalir.Location = New System.Drawing.Point(317, 247)
+        Me.btnSalir.Location = New System.Drawing.Point(317, 361)
         Me.btnSalir.Name = "btnSalir"
         Me.btnSalir.Size = New System.Drawing.Size(67, 24)
         Me.btnSalir.TabIndex = 10
@@ -173,7 +236,7 @@ Partial Class FrmUsuarios
         'btnRegistrar
         '
         Me.btnRegistrar.Image = CType(resources.GetObject("btnRegistrar.Image"), System.Drawing.Image)
-        Me.btnRegistrar.Location = New System.Drawing.Point(128, 247)
+        Me.btnRegistrar.Location = New System.Drawing.Point(122, 361)
         Me.btnRegistrar.Name = "btnRegistrar"
         Me.btnRegistrar.Size = New System.Drawing.Size(88, 24)
         Me.btnRegistrar.TabIndex = 8
@@ -261,7 +324,7 @@ Partial Class FrmUsuarios
         '
         'RadLabel2
         '
-        Me.RadLabel2.Location = New System.Drawing.Point(3, 247)
+        Me.RadLabel2.Location = New System.Drawing.Point(3, 367)
         Me.RadLabel2.Name = "RadLabel2"
         Me.RadLabel2.Size = New System.Drawing.Size(28, 18)
         Me.RadLabel2.TabIndex = 6
@@ -276,25 +339,40 @@ Partial Class FrmUsuarios
         Me.RadLabel1.TabIndex = 5
         Me.RadLabel1.Text = "Usuario de Red"
         '
+        'opActivar_Nivel
+        '
+        Me.opActivar_Nivel.Location = New System.Drawing.Point(18, 184)
+        Me.opActivar_Nivel.Name = "opActivar_Nivel"
+        Me.opActivar_Nivel.Size = New System.Drawing.Size(83, 18)
+        Me.opActivar_Nivel.TabIndex = 129
+        Me.opActivar_Nivel.Text = "Activar Nivel"
+        Me.opActivar_Nivel.ToggleState = Telerik.WinControls.Enumerations.ToggleState.[On]
+        '
         'FrmUsuarios
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(396, 283)
+        Me.ClientSize = New System.Drawing.Size(396, 397)
         Me.Controls.Add(Me.RadPanel1)
         Me.MaximizeBox = False
-        Me.MaximumSize = New System.Drawing.Size(404, 313)
         Me.MinimumSize = New System.Drawing.Size(404, 267)
         Me.Name = "FrmUsuarios"
         '
         '
         '
         Me.RootElement.ApplyShapeToControl = True
-        Me.RootElement.MaxSize = New System.Drawing.Size(404, 313)
+        Me.RootElement.MaxSize = New System.Drawing.Size(0, 0)
         Me.Text = "Registro de Usuario"
         CType(Me.RadPanel1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.RadPanel1.ResumeLayout(False)
         Me.RadPanel1.PerformLayout()
+        CType(Me.rgbGrupo_Nivel, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.rgbGrupo_Nivel.ResumeLayout(False)
+        Me.rgbGrupo_Nivel.PerformLayout()
+        CType(Me.ddlComponente, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.ddlCadena_Valor, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.radUsuario_Componente, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.radUsuario_CV, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.btnAlta, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.RadLabel6, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.txtEstatus, System.ComponentModel.ISupportInitialize).EndInit()
@@ -314,6 +392,7 @@ Partial Class FrmUsuarios
         CType(Me.RadLabel3, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.RadLabel2, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.RadLabel1, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.opActivar_Nivel, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
@@ -339,5 +418,11 @@ Partial Class FrmUsuarios
     Friend WithEvents RadLabel6 As Telerik.WinControls.UI.RadLabel
     Friend WithEvents txtEstatus As Telerik.WinControls.UI.RadTextBox
     Friend WithEvents btnAlta As Telerik.WinControls.UI.RadButton
+    Friend WithEvents rgbGrupo_Nivel As Telerik.WinControls.UI.RadGroupBox
+    Friend WithEvents ddlCadena_Valor As Telerik.WinControls.UI.RadDropDownList
+    Friend WithEvents radUsuario_Componente As Telerik.WinControls.UI.RadRadioButton
+    Friend WithEvents radUsuario_CV As Telerik.WinControls.UI.RadRadioButton
+    Friend WithEvents ddlComponente As Telerik.WinControls.UI.RadDropDownList
+    Friend WithEvents opActivar_Nivel As Telerik.WinControls.UI.RadCheckBox
 End Class
 
