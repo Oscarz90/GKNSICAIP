@@ -1,10 +1,14 @@
 ﻿Imports CapaNegocios
+Imports System.Transactions
+
 Public Class FrmUsuarios
     Dim oUsuario As SEGURIDAD_USUARIO
     Public vId_Publico As Long = 0
     Public vId_Retorno As Long = 0
     Dim vAdd_Registrar As Boolean = True
     Dim vDelete_Eliminar As Boolean = True
+    Dim oCadena_Valor As New Cadena_Valor
+    Dim oComponente As New Componente
 
     Sub New(Optional ByVal vRegistrar As Boolean = True, Optional ByVal vEliminar As Boolean = True)
         ' Llamada necesaria para el diseñador.
@@ -57,6 +61,16 @@ Public Class FrmUsuarios
             oUsuario.Email = txtEmail.Text
             Try
                 oUsuario.Registrar()
+                If opActivar_Nivel.Checked = True Then
+                    oUsuario.Eliminar_Nivel_Usuario(oUsuario.CVE_Usuario)
+                    If radUsuario_Componente.IsChecked = True Then
+                        oUsuario.Registrar_Nivel_Usuario(True, ddlComponente_W.SelectedValue, oUsuario.CVE_Usuario)
+                    Else
+                        oUsuario.Registrar_Nivel_Usuario(False, ddlCadena_Valor_W.SelectedValue, oUsuario.CVE_Usuario)
+                    End If
+                Else
+                    oUsuario.Eliminar_Nivel_Usuario(oUsuario.CVE_Usuario)
+                End If
                 MsgBox("Se modifico correctamente")
             Catch ex As Exception
 
@@ -71,15 +85,26 @@ Public Class FrmUsuarios
             oUsuario.Id_Usuario = txtId_Usuario.Text
             oUsuario.Pass = txtPass.Text
             oUsuario.Nombre = txtNombre.Text
-            oUsuario.Email = txtEmail.Text            
+            oUsuario.Email = txtEmail.Text
+            Using scope As New TransactionScope()
+                Try
+                    oUsuario.Registrar()
+                    If opActivar_Nivel.Checked = True Then
+                        oUsuario.Eliminar_Nivel_Usuario(oUsuario.CVE_Usuario)
+                        If radUsuario_Componente.IsChecked = True Then
+                            oUsuario.Registrar_Nivel_Usuario(True, ddlComponente_W.SelectedValue, oUsuario.CVE_Usuario)
+                        Else
+                            oUsuario.Registrar_Nivel_Usuario(False, ddlCadena_Valor_W.SelectedValue, oUsuario.CVE_Usuario)
+                        End If
+                    End If
+                    vId_Retorno = oUsuario.CVE_Usuario
+                    MsgBox("Se registro correctamente")
+                    scope.Complete()
+                Catch ex As Exception
 
-            Try
-                oUsuario.Registrar()
-                vId_Retorno = oUsuario.CVE_Usuario
-                MsgBox("Se registro correctamente")
-            Catch ex As Exception
+                End Try
+            End Using
 
-            End Try
             Me.Close()
         End If
     End Sub
@@ -95,6 +120,24 @@ Public Class FrmUsuarios
             oUsuario.Cargar()
             Controles_Registro_Nuevo(False)
             Controles_Permisos(vAdd_Registrar, vDelete_Eliminar)
+            If oUsuario.Cve_Componente <> 0 Then
+                radUsuario_Componente.IsChecked = True
+                ddlComponente_W.Enabled = True
+            Else
+                ddlComponente_W.Enabled = False
+            End If
+            If oUsuario.Cve_CV <> 0 Then
+                radUsuario_CV.IsChecked = True
+                ddlCadena_Valor_W.Enabled = True
+            Else
+                ddlCadena_Valor_W.Enabled = False
+            End If
+
+            If oUsuario.Cve_CV = 0 And oUsuario.Cve_Componente = 0 Then
+                opActivar_Nivel.Checked = False
+            Else
+                opActivar_Nivel.Checked = True
+            End If
 
             If oUsuario.Estatus = "INACTIVO" Then
                 Controles_Registro_Inactivo(True)
@@ -106,8 +149,10 @@ Public Class FrmUsuarios
             oUsuario.Estatus = "1"
             Controles_Registro_Nuevo(True)
             Controles_Permisos(vAdd_Registrar, vDelete_Eliminar)
+            opActivar_Nivel.Checked = False
         End If
-        SetBindings()
+        LlenaCombos()
+        SetBindings()        
         Me.Show()
         Me.txtId_Usuario.Focus()
     End Sub
@@ -118,13 +163,32 @@ Public Class FrmUsuarios
         Me.txtNombre.DataBindings.Clear()
         Me.txtEmail.DataBindings.Clear()
         Me.txtTipo_Usuario.DataBindings.Clear()
+        Me.ddlCadena_Valor_W.DataBindings.Clear()
+        Me.ddlComponente_W.DataBindings.Clear()
 
+        If oUsuario.Cve_Componente <> 0 Then            
+            Me.ddlComponente_W.DataBindings.Add("SelectedValue", oUsuario, "Cve_Componente")
+        End If
+        If oUsuario.Cve_CV <> 0 Then
+            Me.ddlCadena_Valor_W.DataBindings.Add("SelectedValue", oUsuario, "Cve_CV")
+        End If
         Me.txtId_Usuario.DataBindings.Add("Text", oUsuario, "Id_Usuario")
         Me.txtPass.DataBindings.Add("Text", oUsuario, "Pass")
         Me.txtNombre.DataBindings.Add("Text", oUsuario, "Nombre")
         Me.txtEmail.DataBindings.Add("Text", oUsuario, "Email")
         Me.txtTipo_Usuario.DataBindings.Add("Text", oUsuario, "Descripcion_Tipo_Usuario")
         Me.txtEstatus.DataBindings.Add("Text", oUsuario, "Estatus")
+    End Sub
+
+    Private Sub LlenaCombos()
+        Me.ddlCadena_Valor_W.DisplayMember = "cadena"
+        Me.ddlCadena_Valor_W.ValueMember = "cve_cadena_valor"
+        Me.ddlCadena_Valor_W.DataSource = oCadena_Valor.Obtener_Cadenas_Valor
+
+        Me.ddlComponente_W.DisplayMember = "componente"
+        Me.ddlComponente_W.ValueMember = "cve_componente"
+        Me.ddlComponente_W.DataSource = oComponente.Obtener_Componentes
+
     End Sub
 
     Private Sub Controles_Registro_Nuevo(ByVal vEs_Registro_Nuevo As Boolean)
@@ -194,8 +258,6 @@ Public Class FrmUsuarios
         End If
     End Sub
 
-
-
     Private Sub txtId_Usuario_Validated(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles txtId_Usuario.Validated
         Me.txtEmail.Text = txtId_Usuario.Text & "@gkndriveline.com"
     End Sub
@@ -204,5 +266,22 @@ Public Class FrmUsuarios
         Me.txtEmail.Text = txtId_Usuario.Text & "@gkndriveline.com"
     End Sub
 
-   
+    Private Sub radUsuario_Componente_ToggleStateChanged(ByVal sender As System.Object, ByVal args As Telerik.WinControls.UI.StateChangedEventArgs) Handles radUsuario_Componente.ToggleStateChanged
+        If radUsuario_Componente.IsChecked = True Then
+            ddlComponente_W.Enabled = True
+            ddlCadena_Valor_W.Enabled = False
+        Else
+            ddlComponente_W.Enabled = False
+            ddlCadena_Valor_W.Enabled = True
+        End If
+    End Sub
+
+    Private Sub opActivar_Nivel_ToggleStateChanged(ByVal sender As System.Object, ByVal args As Telerik.WinControls.UI.StateChangedEventArgs) Handles opActivar_Nivel.ToggleStateChanged
+        If opActivar_Nivel.Checked = True Then
+            radUsuario_CV.IsChecked = True
+            rgbGrupo_Nivel.Enabled = True
+        Else
+            rgbGrupo_Nivel.Enabled = False
+        End If
+    End Sub
 End Class

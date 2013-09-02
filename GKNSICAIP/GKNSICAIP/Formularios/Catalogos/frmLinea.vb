@@ -20,16 +20,17 @@ Public Class frmLinea
         ''La Siguiente Linea solo es para hacer pruebas sobre una Linea de Prueba(El cual se agrego y se modifico de forma Exitosa)
         ''Borrar si requiere hacer registro nuevo
         'vId_Publico = 80
+        Controles_Permisos(vAdd_Registrar, vDelete_Eliminar)
         If Convert.ToInt64(vId_Publico) <> 0 Then
             oLinea = New Linea
             oLinea.cve_linea = vId_Publico
-            oLinea.Cargar()            
+            oLinea.Cargar()
             Controles_Registro_Nuevo(False)
         Else
-            oLinea = New Linea            
+            oLinea = New Linea
             Controles_Registro_Nuevo(True)
         End If
-        Controles_Permisos(vAdd_Registrar, vDelete_Eliminar)
+
         SetBindings()        
         Me.Show()
         Me.txtNombre_Linea.Focus()
@@ -102,6 +103,7 @@ Public Class frmLinea
             btnRegistrar.Visible = True
             btnModificar.Visible = False
             btnDarBaja.Enabled = False
+            btnImportar.Enabled = True
         Else
             btnRegistrar.Visible = False
             btnModificar.Visible = True

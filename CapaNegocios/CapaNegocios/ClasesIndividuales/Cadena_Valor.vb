@@ -79,4 +79,11 @@ Public Class Cadena_Valor
     End Property
 
 #End Region
+
+    Public Function Obtener_Cadenas_Valor() As DataTable
+        Dim vDT_Retorno As DataTable
+        vDT_Retorno = oBD.ObtenerTabla("Select * From cadena_valor")
+
+        Return vDT_Retorno
+    End Function
 End Class

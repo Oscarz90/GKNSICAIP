@@ -47,6 +47,16 @@ Public Class SEGURIDAD_USUARIO
                 Else
                     Me.vEmail = ""
                 End If
+                If Nivel_Usuario_Componente(vCVE_Usuario) = True Then
+                    vCve_Componente = Obtener_Nivel_Usuario(vCVE_Usuario, False, True)
+                Else
+                    vCve_Componente = 0
+                End If
+                If Nivel_Usuario_CV(vCVE_Usuario) = True Then
+                    vCve_CV = Obtener_Nivel_Usuario(vCVE_Usuario, True, False)
+                Else
+                    vCve_CV = 0
+                End If
             End If
         Catch ex As Exception
             Throw New Exception(ex.Message)
@@ -79,6 +89,13 @@ Public Class SEGURIDAD_USUARIO
                 Dim cmd As New SqlClient.SqlCommand
                 cmd.CommandType = CommandType.StoredProcedure
                 cmd.CommandText = "REGISTRAR_SEGURIDAD_USUARIO"
+                Dim vEsNuevo As Boolean = False
+
+                If vCVE_Usuario = 0 Then
+                    vEsNuevo = True
+                Else
+                    vEsNuevo = False
+                End If
 
                 With cmd.Parameters
                     .Add("CVE_Usuario", SqlDbType.BigInt).Value = Me.vCVE_Usuario
@@ -92,6 +109,7 @@ Public Class SEGURIDAD_USUARIO
 
                 Dim obj As DataTable = oBD.EjecutaCommando(cmd)
                 Me.vCVE_Usuario = obj.Rows(0)(0) 'ID
+
                 MsgBox("El Usuario se registro Correctamente")
                 'Me.RegistraDatos("DEPARTAMENTO", "Departamento_Id", Me.m_Departamento_Id)
                 'Dim oBitacora As Bitacora = Bitacora.ObtenInstancia
@@ -211,6 +229,26 @@ Public Class SEGURIDAD_USUARIO
         End Get
         Set(ByVal value As List(Of SEGURIDAD_USUARIO_PERMISOS))
             Me.vL_USUARIO_PERMISOS = value
+        End Set
+    End Property
+
+    Private vCve_CV As Long
+    Public Property Cve_CV() As Long
+        Get
+            Return vCve_CV
+        End Get
+        Set(ByVal value As Long)
+            vCve_CV = value
+        End Set
+    End Property
+
+    Private vCve_Componente As Long
+    Public Property Cve_Componente() As Long
+        Get
+            Return vCve_Componente
+        End Get
+        Set(ByVal value As Long)
+            vCve_Componente = value
         End Set
     End Property
 #End Region
@@ -480,6 +518,79 @@ Public Class SEGURIDAD_USUARIO
         End Try
         Return vRetorno
     End Function
+
+    Public Function Nivel_Usuario_CV(ByVal vID_USUARIO As Long) As Boolean
+        Dim vRetorno As Boolean = False
+        Dim vDR As DataRow
+        vDR = oBD.ObtenerRenglon("SELECT * FROM USUARIO_CADENA_VALOR where CVE_Usuario=" & vID_USUARIO, "USUARIO_CADENA_VALOR")
+        If vDR IsNot Nothing Then
+            vRetorno = True
+        Else
+            vRetorno = False
+        End If
+        Return vRetorno
+    End Function
+
+    Public Function Nivel_Usuario_Componente(ByVal vID_USUARIO As Long) As Boolean
+        Dim vRetorno As Boolean = False
+        Dim vDR As DataRow
+        vDR = oBD.ObtenerRenglon("SELECT * FROM USUARIO_COMPONENTE where CVE_Usuario=" & vID_USUARIO, "USUARIO_COMPONENTE")
+        If vDR IsNot Nothing Then
+            vRetorno = True
+        Else
+            vRetorno = False
+        End If
+        Return vRetorno
+    End Function
+
+    Public Function Obtener_Nivel_Usuario(ByVal vID_Usuario As Long, Optional ByVal vUsuario_CV As Boolean = False, Optional ByVal vUsuario_Componente As Boolean = False) As Long
+        Dim vRetorno As Long = 0
+        Dim vDR As DataRow
+        If vUsuario_CV = True Then
+            vDR = oBD.ObtenerRenglon("SELECT * FROM USUARIO_CADENA_VALOR WHERE CVE_Usuario=" & vID_Usuario, "USUARIO_CADENA_VALOR")
+            If vDR IsNot Nothing Then
+                vRetorno = vDR("CVE_Cadena_Valor")
+            End If
+        ElseIf vUsuario_Componente = True Then
+            vDR = oBD.ObtenerRenglon("SELECT * FROM USUARIO_COMPONENTE WHERE CVE_Usuario=" & vID_Usuario, "USUARIO_COMPONENTE")
+            If vDR IsNot Nothing Then
+                vRetorno = vDR("CVE_Componente")
+            End If
+        End If
+        Return vRetorno
+    End Function
+
+    Public Sub Registrar_Nivel_Usuario(ByVal vEsNivel_Componente As Boolean, ByVal vCVE_NIVEL As Long, ByVal vCVE_Usuario As Long)
+        Using scope As New TransactionScope()
+            Try
+                If vEsNivel_Componente = True Then
+                    oBD.EjecutarQuery("INSERT INTO USUARIO_COMPONENTE(CVE_Componente,CVE_Usuario) values(" & vCVE_NIVEL & "," & vCVE_Usuario & ")")
+                Else
+                    oBD.EjecutarQuery("INSERT INTO USUARIO_CADENA_VALOR(CVE_Cadena_Valor,CVE_Usuario) values(" & vCVE_NIVEL & "," & vCVE_Usuario & ")")
+                End If
+                scope.Complete()
+            Catch ex As Exception
+
+            End Try
+        End Using
+    End Sub
+
+    Public Sub Eliminar_Nivel_Usuario(ByVal vCve_Usuario As Long)
+        Using scope As New TransactionScope()
+            Try
+                If Nivel_Usuario_CV(vCve_Usuario) = True Then
+                    oBD.EjecutarQuery("DELETE USUARIO_CADENA_VALOR WHERE CVE_Usuario=" & vCve_Usuario)
+                End If
+                If Nivel_Usuario_Componente(vCve_Usuario) = True Then
+                    oBD.EjecutarQuery("DELETE USUARIO_COMPONENTE WHERE CVE_Usuario=" & vCve_Usuario)
+                End If
+                scope.Complete()
+            Catch ex As Exception
+
+            End Try
+        End Using
+    End Sub
+
 #End Region
 
 End Class
