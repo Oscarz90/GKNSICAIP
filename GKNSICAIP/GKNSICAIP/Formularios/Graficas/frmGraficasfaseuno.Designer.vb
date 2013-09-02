@@ -290,7 +290,7 @@ Partial Class FrmGraficasfaseuno
         '
         'RadLabel2
         '
-        Me.RadLabel2.Location = New System.Drawing.Point(22, 133)
+        Me.RadLabel2.Location = New System.Drawing.Point(22, 103)
         Me.RadLabel2.Name = "RadLabel2"
         Me.RadLabel2.Size = New System.Drawing.Size(64, 18)
         Me.RadLabel2.TabIndex = 11
@@ -298,7 +298,7 @@ Partial Class FrmGraficasfaseuno
         '
         'RadLabel1
         '
-        Me.RadLabel1.Location = New System.Drawing.Point(17, 85)
+        Me.RadLabel1.Location = New System.Drawing.Point(17, 69)
         Me.RadLabel1.Name = "RadLabel1"
         Me.RadLabel1.Size = New System.Drawing.Size(69, 18)
         Me.RadLabel1.TabIndex = 10
@@ -306,7 +306,7 @@ Partial Class FrmGraficasfaseuno
         '
         'dtpFechaFinal
         '
-        Me.dtpFechaFinal.Location = New System.Drawing.Point(118, 131)
+        Me.dtpFechaFinal.Location = New System.Drawing.Point(118, 101)
         Me.dtpFechaFinal.Name = "dtpFechaFinal"
         Me.dtpFechaFinal.Size = New System.Drawing.Size(164, 20)
         Me.dtpFechaFinal.TabIndex = 9
@@ -316,7 +316,7 @@ Partial Class FrmGraficasfaseuno
         '
         'dtpFechaInicial
         '
-        Me.dtpFechaInicial.Location = New System.Drawing.Point(118, 83)
+        Me.dtpFechaInicial.Location = New System.Drawing.Point(118, 67)
         Me.dtpFechaInicial.Name = "dtpFechaInicial"
         Me.dtpFechaInicial.Size = New System.Drawing.Size(164, 20)
         Me.dtpFechaInicial.TabIndex = 8
@@ -326,7 +326,7 @@ Partial Class FrmGraficasfaseuno
         '
         'rdbtnMeses
         '
-        Me.rdbtnMeses.Location = New System.Drawing.Point(188, 37)
+        Me.rdbtnMeses.Location = New System.Drawing.Point(182, 33)
         Me.rdbtnMeses.Name = "rdbtnMeses"
         Me.rdbtnMeses.Size = New System.Drawing.Size(72, 18)
         Me.rdbtnMeses.TabIndex = 2
@@ -334,17 +334,20 @@ Partial Class FrmGraficasfaseuno
         '
         'rdbtnDias
         '
-        Me.rdbtnDias.Location = New System.Drawing.Point(55, 37)
+        Me.rdbtnDias.Location = New System.Drawing.Point(43, 33)
         Me.rdbtnDias.Name = "rdbtnDias"
         Me.rdbtnDias.Size = New System.Drawing.Size(61, 18)
         Me.rdbtnDias.TabIndex = 1
+        Me.rdbtnDias.TabStop = True
         Me.rdbtnDias.Text = "Por Días"
+        Me.rdbtnDias.ToggleState = Telerik.WinControls.Enumerations.ToggleState.[On]
         '
         'btnGraficar
         '
+        Me.btnGraficar.Enabled = False
         Me.btnGraficar.Image = Global.GKNSICAIP.My.Resources.Resources.frmGraficas_graficar1
         Me.btnGraficar.ImageAlignment = System.Drawing.ContentAlignment.TopCenter
-        Me.btnGraficar.Location = New System.Drawing.Point(859, 124)
+        Me.btnGraficar.Location = New System.Drawing.Point(873, 124)
         Me.btnGraficar.Name = "btnGraficar"
         Me.btnGraficar.Size = New System.Drawing.Size(99, 66)
         Me.btnGraficar.TabIndex = 8
