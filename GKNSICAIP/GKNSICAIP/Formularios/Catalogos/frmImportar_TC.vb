@@ -47,12 +47,14 @@ Public Class FrmImportar_TC
                         vEstatus = Exl.Range("F" & vRecorrido).Value
 
                         If oTC.Validar_Exixtencia_LINEA_MODELO_EN_TC(vCve_linea, vCve_Modelo) = True Then
-
                             ''Cargo el TC existente para registrarlo como Inactivo
                             oTC.cve_TC = oTC.vCve_TC_Existe
                             oTC.Cargar()
                             oTC.Estatus = "0"
+                            'oTC.piezas_por_hora = vPzas_por_Hora
                             oTC.Registrar()
+
+                            'Me.Set_Indicentes("UPDATE TC set piezas_por_hora=" & vPzas_por_Hora & " WHERE cve_TC=" & oTC.cve_TC)
 
                             ''Cargo el Objeto oTC con los Datos Obtenidos de Excel para registrar el TC Nuevo
                             oTC.cve_TC = 0
