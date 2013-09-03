@@ -68,9 +68,9 @@
     'GroupBox Fecha rangos
     Private Function valida_rdbtn_rango_fechas() As Boolean
         If rdbtnDias.IsChecked Then
-            valida_dtp_rango_fechas_dia()
+            Return valida_dtp_rango_fechas_dia()
         ElseIf rdbtnMeses.IsChecked Then
-            valida_dtp_rango_fechas_meses()
+            Return valida_dtp_rango_fechas_meses()
         Else
             Return False
         End If
@@ -78,7 +78,7 @@
     'Dias valida
     Private Function valida_dtp_rango_fechas_dia() As Boolean
         If dtpFechaFinal.Value > dtpFechaInicial.Value Then
-            Dim Diasdiferencia As Long = DateDiff(DateInterval.Day, dtpFechaInicial.Value, dtpFechaFinal)
+            Dim Diasdiferencia As Long = DateDiff(DateInterval.Day, dtpFechaInicial.Value, dtpFechaFinal.Value)
             If Diasdiferencia > 30 Then
                 Return False
             Else
@@ -91,7 +91,7 @@
     'Meses valida
     Private Function valida_dtp_rango_fechas_meses() As Boolean
         If dtpFechaFinal.Value > dtpFechaInicial.Value Then
-            Dim Diasdiferencia As Long = DateDiff(DateInterval.Month, dtpFechaInicial.Value, dtpFechaFinal)
+            Dim Diasdiferencia As Long = DateDiff(DateInterval.Month, dtpFechaInicial.Value, dtpFechaFinal.Value)
             If Diasdiferencia > 12 Then
                 Return False
             Else
@@ -135,6 +135,7 @@
         rdbtnPlanta.Enabled = False
         nivel_scil = True
     End Sub
+    'Planta
     Private Sub nivel_planta()
         nivel_planta_gkn = True
     End Sub
