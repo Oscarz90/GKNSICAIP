@@ -2,17 +2,13 @@
 Imports Microsoft.Practices.EnterpriseLibrary.Data
 
 Public Class CapaDatos
-
     Dim oBD As Microsoft.Practices.EnterpriseLibrary.Data.Sql.SqlDatabase
     'Private vCadenaConexion As String
-
     Public Sub New(ByVal vCadena_Conexion As String)
         'LeerCadenaConexion()
         oBD = New Microsoft.Practices.EnterpriseLibrary.Data.Sql.SqlDatabase(vCadena_Conexion)
     End Sub
-
 #Region "Metodos"
-
     Public Sub EjecutarQuery(ByVal vConsulta As String)
         Try
             Dim oSqlComando As New SqlClient.SqlCommand(vConsulta)
@@ -22,7 +18,6 @@ Public Class CapaDatos
         End Try
 
     End Sub
-
     Public Function EjecutaCommando(ByVal oSQL_Comando As System.Data.Common.DbCommand) As DataTable
         Try
             Dim vDS As DataSet = oBD.ExecuteDataSet(oSQL_Comando)
@@ -35,7 +30,6 @@ Public Class CapaDatos
             Throw New Exception("Error al crear una tabla " & Err.Description)
         End Try
     End Function
-
     Public Function ObtenerTabla(ByVal vConsulta_SQL As String) As DataTable
         Try
             Dim oSqlComando As New SqlClient.SqlCommand(vConsulta_SQL)
@@ -49,7 +43,6 @@ Public Class CapaDatos
             Throw New Exception("Error al crear una tabla con la siguente sentencia: " & vConsulta_SQL & " " & Err.Description)
         End Try
     End Function
-
     ''' <summary>
     ''' Se obtien un solo registro dentro de un objeto tipo DataRow
     ''' </summary>
@@ -76,7 +69,6 @@ Public Class CapaDatos
             Throw New Exception("Error al crear un renglon con la siguente sentencia: " & vConsulta_SQL & " " & Err.Description)
         End Try
     End Function
-
     Public Sub EjecutaProcedimientos(ByVal oSQL_Comando As System.Data.Common.DbCommand)
         Try
             Dim vDS As DataSet = oBD.ExecuteDataSet(oSQL_Comando)

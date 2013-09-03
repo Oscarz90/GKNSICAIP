@@ -133,14 +133,19 @@ Public Class frmProduccion
         Dim tiempo_operacion As Double = Convert.ToDouble(lblTiempoOperacion.Text)
         Dim desempeno As Double
         Dim oTC As New TC
+        Dim oProduccion As New Produccion
+        Dim oDesecho As New Desecho
+
         For Each row As DataGridViewRow In grdDetalleProductividad.Rows
-            oTC.cve_linea = Val(row.Cells(1).Value)
-            oTC.cve_modelo = Val(row.Cells(2).Value)
+            oProduccion.cve_produccion = Val(row.Cells(0).Value)
+            oProduccion.Cargar()
+            oTC.cve_TC = oProduccion.cve_TC
             produccion_d += (oTC.obtener_tiempo_ciclo() * Val(row.Cells(5).Value))
         Next
         For Each row As DataGridViewRow In grdDetalleDesecho.Rows
-            oTC.cve_linea = Val(row.Cells(1).Value)
-            oTC.cve_modelo = Val(row.Cells(2).Value)
+            oDesecho.cve_desecho = Val(row.Cells(0).Value)
+            oDesecho.Cargar()
+            oTC.cve_TC = oDesecho.cve_TC
             desechos_d += (oTC.obtener_tiempo_ciclo() * Val(row.Cells(5).Value))
         Next
         desempeno = ((produccion_d + desechos_d) / tiempo_operacion) * 100
@@ -1426,11 +1431,16 @@ Public Class frmProduccion
     End Sub
     'Productividad
     Private Sub add_modelo_producido()
+        Dim oTC As New TC
+        oTC.cve_linea = cbxLinea.SelectedValue
+        oTC.cve_modelo = cbxModeloProductividad.SelectedValue
+        oTC.obtener_piezas_por_hora()
         Dim oProduccion As New Produccion
         oProduccion.cve_registro_turno = get_registro_del_turno()
         oProduccion.cod_empleado_registro = vcodigo_empleado
         oProduccion.fecha_registro = Now.ToString("dd-MM-yyyy HH:mm")
         oProduccion.cve_modelo = cbxModeloProductividad.SelectedValue
+        oProduccion.cve_TC = oTC.cve_TC
         oProduccion.pzas_ok = Long.Parse(txtPiezasOkProducidas.Text)
         oProduccion.tom = Long.Parse(txtTiempoOperacion.Text)
         oProduccion.Registrar()
@@ -1503,11 +1513,16 @@ Public Class frmProduccion
     End Sub
     'Desechos
     Private Sub add_desecho()
+        Dim oTC As New TC
+        oTC.cve_linea = cbxLinea.SelectedValue
+        oTC.cve_modelo = cbxModeloDesecho.SelectedValue
+        oTC.obtener_piezas_por_hora()
         Dim oDesecho As New Desecho
         oDesecho.cve_registro_turno = get_registro_del_turno()
         oDesecho.cod_empleado_registro = vcodigo_empleado
         oDesecho.fecha_registro = Now.ToString("MM-dd-yyyy HH:mm")
         oDesecho.cve_modelo = cbxModeloDesecho.SelectedValue
+        oDesecho.cve_TC = oTC.cve_TC
         oDesecho.cantidad = Long.Parse(txtDesechosCantidad.Text)
         oDesecho.comentarios = txtDetalleDesecho.Text
         oDesecho.estatus = "1"

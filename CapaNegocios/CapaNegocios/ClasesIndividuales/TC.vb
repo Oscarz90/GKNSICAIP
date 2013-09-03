@@ -222,9 +222,10 @@ Public Class TC
         Dim Tiempo_ciclo As Double = 0
         Dim rDatos As DataRow = Nothing
         Try
-            rDatos = oBD.ObtenerRenglon("select top(1)cast(60 as float)/t.piezas_por_hora as tiempo_ciclo from TC t where cve_linea=" & vcve_linea & " and cve_modelo=" & vcve_modelo & " and estatus='1' order by fecha desc", "TC")
+            rDatos = oBD.ObtenerRenglon("select top(1)t.cve_TC,cast(60 as float)/t.piezas_por_hora as tiempo_ciclo from TC t where t.cve_TC=" & vcve_TC, "TC")
             If rDatos IsNot Nothing Then
                 If rDatos("tiempo_ciclo") IsNot DBNull.Value Then
+                    cve_TC = rDatos("cve_TC")
                     Tiempo_ciclo = rDatos("tiempo_ciclo")
                 End If
             End If
@@ -239,8 +240,9 @@ Public Class TC
     Public Sub obtener_piezas_por_hora()
         Dim vDR As DataRow
         Try
-            vDR = oBD.ObtenerRenglon("select top(1)t.piezas_por_hora from TC t where t.cve_linea=" & vcve_linea & " and t.cve_modelo=" & vcve_modelo & " and estatus='1' order by fecha desc", "paro")
+            vDR = oBD.ObtenerRenglon("select top(1)t.cve_TC,t.piezas_por_hora from TC t where t.cve_linea=" & vcve_linea & " and t.cve_modelo=" & vcve_modelo & " and estatus='1' order by fecha desc", "paro")
             If vDR IsNot Nothing Then
+                vcve_TC = vDR("cve_TC")
                 vpiezas_por_hora = vDR("piezas_por_hora")
             End If
         Catch

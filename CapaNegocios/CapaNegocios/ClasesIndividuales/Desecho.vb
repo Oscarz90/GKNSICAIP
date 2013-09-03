@@ -5,7 +5,37 @@ Public Class Desecho
     Dim oBD As New CapaDatos.CapaDatos(cadena_conexion.CadenaSicaip)
 #Region "Metodos IIndividual"
     Public Sub Cargar() Implements IIndividual.Cargar
-
+        Dim vDR As DataRow
+        vDR = oBD.ObtenerRenglon("select * from desecho d where d.cve_desecho=" & vcve_desecho, "desecho")
+        If vDR IsNot Nothing Then
+            Me.vcve_desecho = vDR("cve_desecho")
+            Me.vcve_registro_turno = vDR("cve_registro_turno")
+            Me.vcod_empleado_registro = vDR("cod_empleado_registro")
+            Me.vfecha_registro = vDR("fecha_registro")
+            Me.vcve_modelo = vDR("cve_modelo")
+            If vDR("cve_TC") IsNot DBNull.Value Then
+                Me.vcve_TC = vDR("cve_TC")
+            Else
+                Me.vcve_TC = Nothing
+            End If
+            Me.vcantidad = vDR("cantidad")
+            If vDR("comentarios") IsNot DBNull.Value Then
+                Me.vcomentarios = vDR("comentarios")
+            Else
+                Me.vcomentarios = ""
+            End If
+            If vDR("cod_empleado_eliminacion") IsNot DBNull.Value Then
+                Me.vcod_empleado_eliminacion = vDR("cod_empleado_eliminacion")
+            Else
+                Me.vcod_empleado_eliminacion = ""
+            End If
+            If vDR("fecha_eliminacion") IsNot DBNull.Value Then
+                Me.vfecha_eliminacion = vDR("fecha_eliminacion")
+            Else
+                Me.vcod_empleado_eliminacion = ""
+            End If
+            vestatus = vDR("estatus")
+        End If
     End Sub
     Public Sub Eliminar() Implements IIndividual.Eliminar
         Try
@@ -27,8 +57,8 @@ Public Class Desecho
         Return 1
     End Function
     Public Sub Registrar() Implements IIndividual.Registrar
-        Dim queryInsert As String = "insert into desecho(cve_registro_turno,cod_empleado_registro,fecha_registro,cve_modelo,cantidad,comentarios,estatus) " &
-                              "values(" & vcve_registro_turno & ",'" & vcod_empleado_registro & "','" & vfecha_registro & "'," & vcve_modelo & "," & vcantidad & ",'" & vcomentarios & "','" & vestatus & "')"
+        Dim queryInsert As String = "insert into desecho(cve_registro_turno,cod_empleado_registro,fecha_registro,cve_modelo,cve_TC,cantidad,comentarios,estatus) " &
+                              "values(" & vcve_registro_turno & ",'" & vcod_empleado_registro & "','" & vfecha_registro & "'," & vcve_modelo & "," & vcve_TC & "," & vcantidad & ",'" & vcomentarios & "','" & vestatus & "')"
         Try
             oBD.EjecutarQuery(queryInsert)
         Catch
@@ -42,6 +72,7 @@ Public Class Desecho
     Private vcod_empleado_registro As String
     Private vfecha_registro As String
     Private vcve_modelo As Long
+    Private vcve_TC As Long
     Private vcantidad As Long
     Private vcomentarios As String
     Private vcod_empleado_eliminacion As String
@@ -87,6 +118,14 @@ Public Class Desecho
         End Get
         Set(ByVal value As Long)
             vcve_modelo = value
+        End Set
+    End Property
+    Public Property cve_TC() As Long
+        Get
+            Return vcve_TC
+        End Get
+        Set(ByVal value As Long)
+            vcve_TC = value
         End Set
     End Property
     Public Property cantidad() As Long

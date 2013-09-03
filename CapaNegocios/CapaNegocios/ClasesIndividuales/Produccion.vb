@@ -6,7 +6,33 @@ Public Class Produccion
 #Region "Metodos IIndividual"
 
     Public Sub Cargar() Implements IIndividual.Cargar
-
+        Dim vDR As DataRow
+        vDR = oBD.ObtenerRenglon("select * from produccion p where p.cve_produccion=" & vcve_produccion, "produccion")
+        If vDR IsNot Nothing Then
+            Me.vcve_produccion = vDR("cve_produccion")
+            Me.vcve_registro_turno = vDR("cve_registro_turno")
+            Me.vcod_empleado_registro = vDR("cod_empleado_registro")
+            Me.vfecha_registro = vDR("fecha_registro")
+            Me.vcve_modelo = vDR("cve_modelo")
+            If vDR("cve_TC") IsNot DBNull.Value Then
+                Me.vcve_TC = vDR("cve_TC")
+            Else
+                Me.vcve_TC = Nothing
+            End If
+            Me.vpzas_ok = vDR("pzas_ok")
+            Me.vtom = vDR("tom")
+            If vDR("cod_empleado_eliminacion") IsNot DBNull.Value Then
+                Me.vcod_empleado_eliminacion = vDR("cod_empleado_eliminacion")
+            Else
+                Me.vcod_empleado_eliminacion = ""
+            End If
+            If vDR("fecha_eliminacion") IsNot DBNull.Value Then
+                Me.vfecha_eliminacion = vDR("fecha_eliminacion")
+            Else
+                Me.vcod_empleado_eliminacion = ""
+            End If
+            vestatus = vDR("estatus")
+        End If
     End Sub
     Public Sub Eliminar() Implements IIndividual.Eliminar
         Using scope As New TransactionScope
@@ -50,6 +76,7 @@ Public Class Produccion
                 vComando.Parameters.Add("@codempleado", SqlDbType.VarChar).Value = Me.vcod_empleado_registro
                 vComando.Parameters.Add("@fecha_registro", SqlDbType.DateTime).Value = Convert.ToDateTime(Me.vfecha_registro)
                 vComando.Parameters.Add("@cve_modelo", SqlDbType.BigInt).Value = Me.vcve_modelo
+                vComando.Parameters.Add("@cve_TC", SqlDbType.BigInt).Value = Me.vcve_TC
                 vComando.Parameters.Add("@pzas_ok", SqlDbType.Int).Value = Me.vpzas_ok
                 vComando.Parameters.Add("@tiempo_operacion", SqlDbType.Int).Value = Me.vtom
                 'Dim obj As DataTable = oBD.EjecutaCommando(vComando)
@@ -81,6 +108,7 @@ Public Class Produccion
     Private vcod_empleado_registro As String
     Private vfecha_registro As String
     Private vcve_modelo As Long
+    Private vcve_TC As Long
     Private vpzas_ok As Long
     Private vtom As Long
     Private vcod_empleado_eliminacion As String
@@ -126,6 +154,14 @@ Public Class Produccion
         End Get
         Set(ByVal value As Long)
             vcve_modelo = value
+        End Set
+    End Property
+    Public Property cve_TC() As Long
+        Get
+            Return vcve_TC
+        End Get
+        Set(ByVal value As Long)
+            vcve_TC = value
         End Set
     End Property
     Public Property pzas_ok As Long
