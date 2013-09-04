@@ -22,6 +22,7 @@ Partial Class FrmGraficasfaseuno
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Dim CartesianArea2 As Telerik.WinControls.UI.CartesianArea = New Telerik.WinControls.UI.CartesianArea()
         Me.RadGroupBox1 = New Telerik.WinControls.UI.RadGroupBox()
         Me.rdbtnGente = New Telerik.WinControls.UI.RadRadioButton()
         Me.rdbtnCincoS = New Telerik.WinControls.UI.RadRadioButton()
@@ -48,6 +49,7 @@ Partial Class FrmGraficasfaseuno
         Me.dtpFechaInicial = New Telerik.WinControls.UI.RadDateTimePicker()
         Me.rdbtnMeses = New Telerik.WinControls.UI.RadRadioButton()
         Me.rdbtnDias = New Telerik.WinControls.UI.RadRadioButton()
+        Me.radChartView1 = New Telerik.WinControls.UI.RadChartView()
         Me.btnGraficar = New Telerik.WinControls.UI.RadButton()
         CType(Me.RadGroupBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.RadGroupBox1.SuspendLayout()
@@ -78,6 +80,7 @@ Partial Class FrmGraficasfaseuno
         CType(Me.dtpFechaInicial, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.rdbtnMeses, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.rdbtnDias, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.radChartView1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.btnGraficar, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
@@ -342,6 +345,19 @@ Partial Class FrmGraficasfaseuno
         Me.rdbtnDias.Text = "Por Días"
         Me.rdbtnDias.ToggleState = Telerik.WinControls.Enumerations.ToggleState.[On]
         '
+        'radChartView1
+        '
+        CartesianArea2.GridDesign.AlternatingVerticalColor = False
+        CartesianArea2.GridDesign.DrawVerticalFills = False
+        CartesianArea2.ShowGrid = True
+        Me.radChartView1.AreaDesign = CartesianArea2
+        Me.radChartView1.Location = New System.Drawing.Point(17, 213)
+        Me.radChartView1.Name = "radChartView1"
+        Me.radChartView1.Size = New System.Drawing.Size(1225, 481)
+        Me.radChartView1.TabIndex = 9
+        CType(Me.radChartView1.GetChildAt(0), Telerik.WinControls.UI.RadChartElement).DrawText = False
+        CType(Me.radChartView1.GetChildAt(0), Telerik.WinControls.UI.RadChartElement).DrawFill = True
+        '
         'btnGraficar
         '
         Me.btnGraficar.Enabled = False
@@ -361,6 +377,7 @@ Partial Class FrmGraficasfaseuno
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.White
         Me.ClientSize = New System.Drawing.Size(1272, 706)
+        Me.Controls.Add(Me.radChartView1)
         Me.Controls.Add(Me.btnGraficar)
         Me.Controls.Add(Me.RadGroupBox3)
         Me.Controls.Add(Me.RadGroupBox2)
@@ -407,6 +424,7 @@ Partial Class FrmGraficasfaseuno
         CType(Me.dtpFechaInicial, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.rdbtnMeses, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.rdbtnDias, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.radChartView1, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.btnGraficar, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
@@ -439,5 +457,6 @@ Partial Class FrmGraficasfaseuno
     Friend WithEvents btnGraficar As Telerik.WinControls.UI.RadButton
     Friend WithEvents chkTodasLineas As Telerik.WinControls.UI.RadCheckBox
     Friend WithEvents chkTodosEquipos As Telerik.WinControls.UI.RadCheckBox
+    Friend WithEvents radChartView1 As Telerik.WinControls.UI.RadChartView
 End Class
 

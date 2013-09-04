@@ -1,4 +1,8 @@
-﻿Public Class FrmGraficasfaseuno
+﻿Imports CapaNegocios
+Imports Telerik.WinControls.UI
+Imports Telerik.Charting
+
+Public Class FrmGraficasfaseuno
 #Region "Variables globales"
     Private nivel_let As Boolean = False
     Private nivel_lgs As Boolean = False
@@ -77,7 +81,7 @@
     End Function
     'Dias valida
     Private Function valida_dtp_rango_fechas_dia() As Boolean
-        If dtpFechaFinal.Value > dtpFechaInicial.Value Then
+        If dtpFechaFinal.Value >= dtpFechaInicial.Value Then
             Dim Diasdiferencia As Long = DateDiff(DateInterval.Day, dtpFechaInicial.Value, dtpFechaFinal.Value)
             If Diasdiferencia > 30 Then
                 Return False
@@ -90,7 +94,7 @@
     End Function
     'Meses valida
     Private Function valida_dtp_rango_fechas_meses() As Boolean
-        If dtpFechaFinal.Value > dtpFechaInicial.Value Then
+        If dtpFechaFinal.Value >= dtpFechaInicial.Value Then
             Dim Diasdiferencia As Long = DateDiff(DateInterval.Month, dtpFechaInicial.Value, dtpFechaFinal.Value)
             If Diasdiferencia > 12 Then
                 Return False
@@ -105,6 +109,8 @@
     Private Sub valida_btn_graficar()
         If valida_rdbtn_indicador() And valida_rdbtn_niveles() And valida_rdbtn_rango_fechas() Then
             btnGraficar.Enabled = True
+        Else
+            btnGraficar.Enabled = False
         End If
     End Sub
 #End Region
@@ -233,7 +239,388 @@
         valida_btn_graficar()
     End Sub
 #End Region
-#Region "Metodos para graficar"
+#Region "Metodos graficar"
+    'Oee planta
+    Private Sub obtiene_oee_planta_dia_mes()
+        'Objeto obtiene_oee Clase
+        Dim oObtiene_oee As New obtiene_oee
+        oObtiene_oee.fecha_inicial = dtpFechaInicial.Value
+        oObtiene_oee.fecha_final = dtpFechaFinal.Value
+        'Creacion series
+        Dim BarSeries1 As New BarSeries()
+        Dim BarSeries2 As New BarSeries()
+        'Obtencion Datos Oee
+        Dim vDT As DataTable = Nothing
+        If rdbtnDias.IsChecked Then
+            vDT = oObtiene_oee.obtiene_oee_planta_dia()
+        ElseIf rdbtnMeses.IsChecked Then
+            vDT = oObtiene_oee.obtiene_oee_planta_mes()
+        End If
+        'Llenado de las series
+        Dim vTotal As Integer = 1
+        Dim vContador As Integer = 1
+        vTotal = vDT.Rows.Count
+        For Each vDR As DataRow In vDT.Rows
+            If vContador = vTotal Then
+                BarSeries2.DataPoints.Add(New CategoricalDataPoint(vDR("oee"), "Acumulado"))
+            Else
+                BarSeries1.DataPoints.Add(New CategoricalDataPoint(vDR("oee"), vDR("dia_asignado")))
+            End If
+            vContador = vContador + 1
+        Next
+        'Cartesian Area, CategoricalAxis, LinearAxis
+        Dim CartesianArea1 As CartesianArea = New CartesianArea()
+        Dim CategoricalAxis1 As CategoricalAxis = New CategoricalAxis()
+        Dim LinearAxis1 As LinearAxis = New LinearAxis()
+        'Personalizacion
+        CartesianArea1.GridDesign.AlternatingVerticalColor = False
+        CartesianArea1.ShowGrid = True
+        Me.radChartView1.AreaDesign = CartesianArea1
+        CategoricalAxis1.LabelFitMode = AxisLabelFitMode.Rotate
+        If rdbtnDias.IsChecked Then
+            CategoricalAxis1.LabelFormat = "{0:MMM - dd}"
+        ElseIf rdbtnMeses.IsChecked Then
+            CategoricalAxis1.LabelFormat = "{0:yyyy - MMMM}"
+        End If
+        CategoricalAxis1.LabelRotationAngle = 270.0R
+        LinearAxis1.AxisType = AxisType.Second
+        'LinearAxis1.LabelFitMode = AxisLabelFitMode.Rotate
+        'LinearAxis1.LabelRotationAngle = 300.0R
+        LinearAxis1.MajorStep = 10.0R
+        LinearAxis1.Maximum = 100
+        LinearAxis1.Title = "Oee"
+        BarSeries1.ShowLabels = True
+        BarSeries2.ShowLabels = True
+        BarSeries1.LabelFormat = "{0:##.##}"
+        BarSeries2.LabelFormat = "{0:##.##}"
+        BarSeries1.HorizontalAxis = CategoricalAxis1
+        BarSeries1.VerticalAxis = LinearAxis1
+        BarSeries1.Palette = New PaletteEntry(Color.FromArgb(249, 177, 41))
+        Me.radChartView1.ShowToolTip = True
+        radChartView1.Series.Add(BarSeries1)
+        radChartView1.Series.Add(BarSeries2)
+    End Sub
+    'Oee Cadena Valor
+    Private Sub obtiene_oee_cadena_valor_dia_mes()
+        'Objeto obtiene_oee Clase
+        Dim oObtiene_oee As New obtiene_oee
+        oObtiene_oee.cve_cadena_valor = 1
+        oObtiene_oee.fecha_inicial = dtpFechaInicial.Value
+        oObtiene_oee.fecha_final = dtpFechaFinal.Value
+        'Creacion series
+        Dim BarSeries1 As New BarSeries()
+        Dim BarSeries2 As New BarSeries()
+        'Obtencion Datos Oee
+        Dim vDT As New DataTable
+        If rdbtnDias.IsChecked Then
+            vDT = oObtiene_oee.obtiene_oee_cadena_valor_dia()
+        ElseIf rdbtnMeses.IsChecked Then
+            vDT = oObtiene_oee.obtiene_oee_cadena_valor_mes()
+        End If
+        'Llenado de las series
+        Dim vTotal As Integer = 1
+        Dim vContador As Integer = 1
+        vTotal = vDT.Rows.Count
+        For Each vDR As DataRow In vDT.Rows
+            If vContador = vTotal Then
+                BarSeries2.DataPoints.Add(New CategoricalDataPoint(vDR("oee"), "Acumulado"))
+            Else
+                BarSeries1.DataPoints.Add(New CategoricalDataPoint(vDR("oee"), vDR("dia_asignado")))
+            End If
+            vContador = vContador + 1
+        Next
+        'Cartesian Area, CategoricalAxis, LinearAxis
+        Dim CartesianArea1 As CartesianArea = New CartesianArea()
+        Dim CategoricalAxis1 As CategoricalAxis = New CategoricalAxis()
+        Dim LinearAxis1 As LinearAxis = New LinearAxis()
+        'Personalizacion
+        CartesianArea1.GridDesign.AlternatingVerticalColor = False
+        CartesianArea1.ShowGrid = True
+        Me.radChartView1.AreaDesign = CartesianArea1
+        CategoricalAxis1.LabelFitMode = AxisLabelFitMode.Rotate
+        If rdbtnDias.IsChecked Then
+            CategoricalAxis1.LabelFormat = "{0:MMM - dd}"
+        ElseIf rdbtnMeses.IsChecked Then
+            CategoricalAxis1.LabelFormat = "{0:yyyy - MMMM}"
+        End If
+        CategoricalAxis1.LabelRotationAngle = 270.0R
+        LinearAxis1.AxisType = AxisType.Second
+        'LinearAxis1.LabelFitMode = AxisLabelFitMode.Rotate
+        'LinearAxis1.LabelRotationAngle = 300.0R
+        LinearAxis1.MajorStep = 10.0R
+        LinearAxis1.Maximum = 100
+        LinearAxis1.Title = "Oee"
+        BarSeries1.ShowLabels = True
+        BarSeries2.ShowLabels = True
+        BarSeries1.LabelFormat = "{0:##.##}"
+        BarSeries2.LabelFormat = "{0:##.##}"
+        BarSeries1.HorizontalAxis = CategoricalAxis1
+        BarSeries1.VerticalAxis = LinearAxis1
+        BarSeries1.Palette = New PaletteEntry(Color.FromArgb(249, 177, 41))
+        Me.radChartView1.ShowToolTip = True
+        radChartView1.Series.Add(BarSeries1)
+        radChartView1.Series.Add(BarSeries2)
+    End Sub
+    'Oee Componente
+    Private Sub obtiene_oee_componente_dia_mes()
+        'Objeto obtiene_oee Clase
+        Dim oObtiene_oee As New obtiene_oee
+        oObtiene_oee.cve_componente = 1
+        oObtiene_oee.fecha_inicial = dtpFechaInicial.Value
+        oObtiene_oee.fecha_final = dtpFechaFinal.Value
+        'Creacion series
+        Dim BarSeries1 As New BarSeries()
+        Dim BarSeries2 As New BarSeries()
+        'Obtencion Datos Oee
+        Dim vDT As New DataTable
+        If rdbtnDias.IsChecked Then
+            vDT = oObtiene_oee.obtiene_oee_componente_dia()
+        ElseIf rdbtnMeses.IsChecked Then
+            vDT = oObtiene_oee.obtiene_oee_componente_mes()
+        End If
+        'Llenado de las series
+        Dim vTotal As Integer = 1
+        Dim vContador As Integer = 1
+        vTotal = vDT.Rows.Count
+        For Each vDR As DataRow In vDT.Rows
+            If vContador = vTotal Then
+                BarSeries2.DataPoints.Add(New CategoricalDataPoint(vDR("oee"), "Acumulado"))
+            Else
+                BarSeries1.DataPoints.Add(New CategoricalDataPoint(vDR("oee"), vDR("dia_asignado")))
+            End If
+            vContador = vContador + 1
+        Next
+        'Cartesian Area, CategoricalAxis, LinearAxis
+        Dim CartesianArea1 As CartesianArea = New CartesianArea()
+        Dim CategoricalAxis1 As CategoricalAxis = New CategoricalAxis()
+        Dim LinearAxis1 As LinearAxis = New LinearAxis()
+        'Personalizacion
+        CartesianArea1.GridDesign.AlternatingVerticalColor = False
+        CartesianArea1.ShowGrid = True
+        Me.radChartView1.AreaDesign = CartesianArea1
+        CategoricalAxis1.LabelFitMode = AxisLabelFitMode.Rotate
+        If rdbtnDias.IsChecked Then
+            CategoricalAxis1.LabelFormat = "{0:MMM - dd}"
+        ElseIf rdbtnMeses.IsChecked Then
+            CategoricalAxis1.LabelFormat = "{0:yyyy - MMMM}"
+        End If
+        CategoricalAxis1.LabelRotationAngle = 270.0R
+        LinearAxis1.AxisType = AxisType.Second
+        'LinearAxis1.LabelFitMode = AxisLabelFitMode.Rotate
+        'LinearAxis1.LabelRotationAngle = 300.0R
+        LinearAxis1.MajorStep = 10.0R
+        LinearAxis1.Maximum = 100
+        LinearAxis1.Title = "Oee"
+        BarSeries1.ShowLabels = True
+        BarSeries2.ShowLabels = True
+        BarSeries1.LabelFormat = "{0:##.##}"
+        BarSeries2.LabelFormat = "{0:##.##}"
+        BarSeries1.HorizontalAxis = CategoricalAxis1
+        BarSeries1.VerticalAxis = LinearAxis1
+        BarSeries1.Palette = New PaletteEntry(Color.FromArgb(249, 177, 41))
+        Me.radChartView1.ShowToolTip = True
+        radChartView1.Series.Add(BarSeries1)
+        radChartView1.Series.Add(BarSeries2)
+    End Sub
+    'Oee Linea
+    Private Sub obtiene_oee_linea_dia_mes()
+        'Objeto obtiene_oee Clase
+        Dim oObtiene_oee As New obtiene_oee
+        oObtiene_oee.cve_linea = 1
+        oObtiene_oee.fecha_inicial = dtpFechaInicial.Value
+        oObtiene_oee.fecha_final = dtpFechaFinal.Value
+        'Creacion series
+        Dim BarSeries1 As New BarSeries()
+        Dim BarSeries2 As New BarSeries()
+        'Obtencion Datos Oee
+        Dim vDT As New DataTable
+        If rdbtnDias.IsChecked Then
+            vDT = oObtiene_oee.obtiene_oee_linea_dia()
+        ElseIf rdbtnMeses.IsChecked Then
+            vDT = oObtiene_oee.obtiene_oee_linea_mes()
+        End If
+        'Llenado de las series
+        Dim vTotal As Integer = 1
+        Dim vContador As Integer = 1
+        vTotal = vDT.Rows.Count
+        For Each vDR As DataRow In vDT.Rows
+            If vContador = vTotal Then
+                BarSeries2.DataPoints.Add(New CategoricalDataPoint(vDR("oee"), "Acumulado"))
+            Else
+                BarSeries1.DataPoints.Add(New CategoricalDataPoint(vDR("oee"), vDR("dia_asignado")))
+            End If
+            vContador = vContador + 1
+        Next
+        'Cartesian Area, CategoricalAxis, LinearAxis
+        Dim CartesianArea1 As CartesianArea = New CartesianArea()
+        Dim CategoricalAxis1 As CategoricalAxis = New CategoricalAxis()
+        Dim LinearAxis1 As LinearAxis = New LinearAxis()
+        'Personalizacion
+        CartesianArea1.GridDesign.AlternatingVerticalColor = False
+        CartesianArea1.ShowGrid = True
+        Me.radChartView1.AreaDesign = CartesianArea1
+        CategoricalAxis1.LabelFitMode = AxisLabelFitMode.Rotate
+        If rdbtnDias.IsChecked Then
+            CategoricalAxis1.LabelFormat = "{0:MMM - dd}"
+        ElseIf rdbtnMeses.IsChecked Then
+            CategoricalAxis1.LabelFormat = "{0:yyyy - MMMM}"
+        End If
+        CategoricalAxis1.LabelRotationAngle = 270.0R
+        LinearAxis1.AxisType = AxisType.Second
+        'LinearAxis1.LabelFitMode = AxisLabelFitMode.Rotate
+        'LinearAxis1.LabelRotationAngle = 300.0R
+        LinearAxis1.MajorStep = 10.0R
+        LinearAxis1.Maximum = 100
+        LinearAxis1.Title = "Oee"
+        BarSeries1.ShowLabels = True
+        BarSeries2.ShowLabels = True
+        BarSeries1.LabelFormat = "{0:##.##}"
+        BarSeries2.LabelFormat = "{0:##.##}"
+        BarSeries1.HorizontalAxis = CategoricalAxis1
+        BarSeries1.VerticalAxis = LinearAxis1
+        BarSeries1.Palette = New PaletteEntry(Color.FromArgb(249, 177, 41))
+        Me.radChartView1.ShowToolTip = True
+        radChartView1.Series.Add(BarSeries1)
+        radChartView1.Series.Add(BarSeries2)
+    End Sub
+    'Oee Equipo
+    Private Sub obtiene_oee_equipo_dia_mes()
+        'Objeto obtiene_oee Clase
+        Dim oObtiene_oee As New obtiene_oee
+        oObtiene_oee.cve_equipo = 1
+        oObtiene_oee.fecha_inicial = dtpFechaInicial.Value
+        oObtiene_oee.fecha_final = dtpFechaFinal.Value
+        'Creacion series
+        Dim BarSeries1 As New BarSeries()
+        Dim BarSeries2 As New BarSeries()
+        'Obtencion Datos Oee
+        Dim vDT As New DataTable
+        If rdbtnDias.IsChecked Then
+            vDT = oObtiene_oee.obtiene_oee_equipo_dia()
+        ElseIf rdbtnMeses.IsChecked Then
+            vDT = oObtiene_oee.obtiene_oee_equipo_mes()
+        End If
+        'Llenado de las series
+        Dim vTotal As Integer = 1
+        Dim vContador As Integer = 1
+        vTotal = vDT.Rows.Count
+        For Each vDR As DataRow In vDT.Rows
+            If vContador = vTotal Then
+                BarSeries2.DataPoints.Add(New CategoricalDataPoint(vDR("oee"), "Acumulado"))
+            Else
+                BarSeries1.DataPoints.Add(New CategoricalDataPoint(vDR("oee"), vDR("dia_asignado")))
+            End If
+            vContador = vContador + 1
+        Next
+        'Cartesian Area, CategoricalAxis, LinearAxis
+        Dim CartesianArea1 As CartesianArea = New CartesianArea()
+        Dim CategoricalAxis1 As CategoricalAxis = New CategoricalAxis()
+        Dim LinearAxis1 As LinearAxis = New LinearAxis()
+        'Personalizacion
+        CartesianArea1.GridDesign.AlternatingVerticalColor = False
+        CartesianArea1.ShowGrid = True
+        Me.radChartView1.AreaDesign = CartesianArea1
+        CategoricalAxis1.LabelFitMode = AxisLabelFitMode.Rotate
+        If rdbtnDias.IsChecked Then
+            CategoricalAxis1.LabelFormat = "{0:MMM - dd}"
+        ElseIf rdbtnMeses.IsChecked Then
+            CategoricalAxis1.LabelFormat = "{0:yyyy - MMMM}"
+        End If
+        CategoricalAxis1.LabelRotationAngle = 270.0R
+        LinearAxis1.AxisType = AxisType.Second
+        'LinearAxis1.LabelFitMode = AxisLabelFitMode.Rotate
+        'LinearAxis1.LabelRotationAngle = 300.0R
+        LinearAxis1.MajorStep = 10.0R
+        LinearAxis1.Maximum = 100
+        LinearAxis1.Title = "Oee"
+        BarSeries1.ShowLabels = True
+        BarSeries2.ShowLabels = True
+        BarSeries1.LabelFormat = "{0:##.##}"
+        BarSeries2.LabelFormat = "{0:##.##}"
+        BarSeries1.HorizontalAxis = CategoricalAxis1
+        BarSeries1.VerticalAxis = LinearAxis1
+        BarSeries1.Palette = New PaletteEntry(Color.FromArgb(249, 177, 41))
+        Me.radChartView1.ShowToolTip = True
+        radChartView1.Series.Add(BarSeries1)
+        radChartView1.Series.Add(BarSeries2)
+    End Sub
+    'Oee Equipo-Linea
+    Private Sub obtiene_oee_equipo_linea_dia_mes()
+        'Objeto obtiene_oee Clase
+        Dim oObtiene_oee As New obtiene_oee
+        oObtiene_oee.cve_equipo = 1
+        oObtiene_oee.cve_linea = 54
+        oObtiene_oee.fecha_inicial = dtpFechaInicial.Value
+        oObtiene_oee.fecha_final = dtpFechaFinal.Value
+        'Creacion series
+        Dim BarSeries1 As New BarSeries()
+        Dim BarSeries2 As New BarSeries()
+        'Llenado de las series
+        Dim vTotal As Integer = 1
+        Dim vContador As Integer = 1
+        'Obtencion Datos Oee
+        Dim vDT As New DataTable
+        If rdbtnDias.IsChecked Then
+            vDT = oObtiene_oee.obtiene_oee_equipo_linea_dia()
+            vTotal = vDT.Rows.Count
+            For Each vDR As DataRow In vDT.Rows
+                If vContador = 1 Then
+                    BarSeries2.DataPoints.Add(New CategoricalDataPoint(vDR("oee"), "Acumulado"))
+                Else
+                    BarSeries1.DataPoints.Add(New CategoricalDataPoint(vDR("oee"), vDR("dia_asignado")))
+                End If
+                vContador = vContador + 1
+            Next
+        ElseIf rdbtnMeses.IsChecked Then
+            vDT = oObtiene_oee.obtiene_oee_equipo_linea_mes()
+            vTotal = vDT.Rows.Count
+            For Each vDR As DataRow In vDT.Rows
+                If vContador = vTotal Then
+                    BarSeries2.DataPoints.Add(New CategoricalDataPoint(vDR("oee"), "Acumulado"))
+                Else
+                    BarSeries1.DataPoints.Add(New CategoricalDataPoint(vDR("oee"), vDR("dia_asignado")))
+                End If
+                vContador = vContador + 1
+            Next
+        End If
+
+
+
+        'Cartesian Area, CategoricalAxis, LinearAxis
+        Dim CartesianArea1 As CartesianArea = New CartesianArea()
+        Dim CategoricalAxis1 As CategoricalAxis = New CategoricalAxis()
+        Dim LinearAxis1 As LinearAxis = New LinearAxis()
+        'Personalizacion
+        CartesianArea1.GridDesign.AlternatingVerticalColor = False
+        CartesianArea1.ShowGrid = True
+        Me.radChartView1.AreaDesign = CartesianArea1
+        CategoricalAxis1.LabelFitMode = AxisLabelFitMode.Rotate
+        If rdbtnDias.IsChecked Then
+            CategoricalAxis1.LabelFormat = "{0:MMM - dd}"
+        ElseIf rdbtnMeses.IsChecked Then
+            CategoricalAxis1.LabelFormat = "{0:yyyy - MMMM}"
+        End If
+        CategoricalAxis1.LabelRotationAngle = 270.0R
+        LinearAxis1.AxisType = AxisType.Second
+        'LinearAxis1.LabelFitMode = AxisLabelFitMode.Rotate
+        'LinearAxis1.LabelRotationAngle = 300.0R
+        LinearAxis1.MajorStep = 10.0R
+        LinearAxis1.Maximum = 100
+        LinearAxis1.Title = "Oee"
+        BarSeries1.ShowLabels = True
+        BarSeries2.ShowLabels = True
+        BarSeries1.LabelFormat = "{0:##.##}"
+        BarSeries2.LabelFormat = "{0:##.##}"
+        BarSeries1.HorizontalAxis = CategoricalAxis1
+        BarSeries1.VerticalAxis = LinearAxis1
+        BarSeries1.Palette = New PaletteEntry(Color.FromArgb(249, 177, 41))
+        Me.radChartView1.ShowToolTip = True
+        radChartView1.Series.Add(BarSeries1)
+        radChartView1.Series.Add(BarSeries2)
+    End Sub
+#End Region
+    
+#Region "Metodos Niveles"
     'GERENTE
     Private Sub graficos_gerente()
         'oee
@@ -241,9 +628,9 @@
             'Planta
             If rdbtnPlanta.IsChecked Then
                 If rdbtnDias.IsChecked Then
-
+                    obtiene_oee_planta_dia_mes()
                 ElseIf rdbtnMeses.IsChecked Then
-
+                    obtiene_oee_planta_dia_mes()
                 End If
             End If
             'Cadena Valor
@@ -1541,5 +1928,7 @@
     End Sub
 #End Region
 
-    
+    Private Sub btnGraficar_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnGraficar.Click
+        obtiene_oee_equipo_linea_dia_mes()
+    End Sub
 End Class
