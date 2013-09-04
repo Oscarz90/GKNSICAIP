@@ -22,6 +22,7 @@ Partial Class FrmMenu
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(FrmMenu))
         Me.btnOpSICAIP = New System.Windows.Forms.Button()
         Me.btnOpCalculadora = New System.Windows.Forms.Button()
         CType(Me, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -42,6 +43,8 @@ Partial Class FrmMenu
         'btnOpCalculadora
         '
         Me.btnOpCalculadora.BackColor = System.Drawing.Color.White
+        Me.btnOpCalculadora.BackgroundImage = CType(resources.GetObject("btnOpCalculadora.BackgroundImage"), System.Drawing.Image)
+        Me.btnOpCalculadora.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
         Me.btnOpCalculadora.Location = New System.Drawing.Point(663, 251)
         Me.btnOpCalculadora.Name = "btnOpCalculadora"
         Me.btnOpCalculadora.Size = New System.Drawing.Size(516, 315)
