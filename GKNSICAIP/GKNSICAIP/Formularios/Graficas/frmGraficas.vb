@@ -2171,7 +2171,7 @@ Public Class frmGraficas
             subcaption = "OEE"
             decimales = "1"
         ElseIf rbtNRFTi.Checked Then
-            maxEjeY = 32000
+            maxEjeY = 1000
             numberSuffix = ""
             subcaption = "NRFTi"
             decimales = "0"
