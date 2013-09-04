@@ -1,4 +1,8 @@
-﻿Public Class FrmGraficasfaseuno
+﻿Imports CapaNegocios
+Imports Telerik.WinControls.UI
+Imports Telerik.Charting
+
+Public Class FrmGraficasfaseuno
 #Region "Variables globales"
     Private nivel_let As Boolean = False
     Private nivel_lgs As Boolean = False
@@ -77,7 +81,7 @@
     End Function
     'Dias valida
     Private Function valida_dtp_rango_fechas_dia() As Boolean
-        If dtpFechaFinal.Value > dtpFechaInicial.Value Then
+        If dtpFechaFinal.Value >= dtpFechaInicial.Value Then
             Dim Diasdiferencia As Long = DateDiff(DateInterval.Day, dtpFechaInicial.Value, dtpFechaFinal.Value)
             If Diasdiferencia > 30 Then
                 Return False
@@ -90,7 +94,7 @@
     End Function
     'Meses valida
     Private Function valida_dtp_rango_fechas_meses() As Boolean
-        If dtpFechaFinal.Value > dtpFechaInicial.Value Then
+        If dtpFechaFinal.Value >= dtpFechaInicial.Value Then
             Dim Diasdiferencia As Long = DateDiff(DateInterval.Month, dtpFechaInicial.Value, dtpFechaFinal.Value)
             If Diasdiferencia > 12 Then
                 Return False
@@ -105,6 +109,8 @@
     Private Sub valida_btn_graficar()
         If valida_rdbtn_indicador() And valida_rdbtn_niveles() And valida_rdbtn_rango_fechas() Then
             btnGraficar.Enabled = True
+        Else
+            btnGraficar.Enabled = False
         End If
     End Sub
 #End Region
@@ -233,6 +239,84 @@
         valida_btn_graficar()
     End Sub
 #End Region
+    Private Sub dibuja_grafica()
+        Dim oObtiene_oee As New obtiene_oee
+        oObtiene_oee.fecha_inicial = dtpFechaInicial.Value
+        oObtiene_oee.fecha_final = dtpFechaFinal.Value
+        Dim BarSeries1 As New BarSeries()
+        Dim Barseries2 As New BarSeries
+        Dim vDT As DataTable = oObtiene_oee.obtiene_oee_planta_dia
+
+        Dim vTotal As Integer = 1
+        Dim vContador As Integer = 1
+        vTotal = vDT.Rows.Count
+        For Each vDR As DataRow In vDT.Rows
+            If vContador = vTotal Then
+                Barseries2.DataPoints.Add(New CategoricalDataPoint(vDR("oee"), vDR("dia_asignado")))
+            Else
+                BarSeries1.DataPoints.Add(New CategoricalDataPoint(vDR("oee"), vDR("dia_asignado")))
+            End If
+            '            If vContador = 1 Then
+            'vOEE_Acumulado_Final = vDR("oee")
+            'ElseIf vContador > 1 Then
+            'oee = vDR("oee")
+            'cadenaXML += "<set value='" & oee & "' />"
+            'End If
+            vContador = vContador + 1
+        Next
+
+        'Dim series As New LineSeries()
+        'series.DataPoints.Add(New CategoricalDataPoint(500, "Jan"))
+        'series.DataPoints.Add(New CategoricalDataPoint(300, "Apr"))
+        'series.DataPoints.Add(New CategoricalDataPoint(400, "Jul"))
+        'series.DataPoints.Add(New CategoricalDataPoint(250, "Oct"))
+
+
+
+        'Serie.ShowLabels = True
+        'BarSeries1.ValueMember = "oee"
+        'BarSeries1.CategoryMember = "dia_asignado"
+        'BarSeries1.DataSource = oObtiene_oee.obtiene_oee_planta_dia
+        'inicio
+        Dim CartesianArea1 As CartesianArea = New CartesianArea()
+        Dim CategoricalAxis1 As CategoricalAxis = New CategoricalAxis()
+        Dim LinearAxis1 As LinearAxis = New LinearAxis() 
+        'listo
+        CartesianArea1.GridDesign.AlternatingVerticalColor = False
+        CartesianArea1.GridDesign.DrawVerticalFills = False
+        CartesianArea1.ShowGrid = True
+        Me.radChartView1.AreaDesign = CartesianArea1
+        CategoricalAxis1.IsPrimary = True
+        CategoricalAxis1.LabelFitMode = AxisLabelFitMode.Rotate
+        CategoricalAxis1.LabelFormat = "{0:MMM - dd}"
+        CategoricalAxis1.LabelRotationAngle = 270.0R
+        CategoricalAxis1.LastLabelVisibility = AxisLastLabelVisibility.Hidden
+        'CategoricalAxis1.Title = "Dias"
+        LinearAxis1.AxisType = AxisType.Second
+        LinearAxis1.IsPrimary = True
+        LinearAxis1.LabelFitMode = AxisLabelFitMode.Rotate
+        LinearAxis1.LabelRotationAngle = 300.0R
+        LinearAxis1.MajorStep = 10.0R
+        LinearAxis1.Maximum = 100
+        'LinearAxis1.Title = ""
+        Me.radChartView1.Axes.AddRange(New Telerik.WinControls.UI.Axis() {CategoricalAxis1, LinearAxis1})
+        Me.radChartView1.Location = New System.Drawing.Point(17, 213)
+        Me.radChartView1.Name = "radChartView1"
+        'BarSeries1.DataPoints.AddRange(New Telerik.Charting.DataPoint() {CategoricalDataPoint1, CategoricalDataPoint2, CategoricalDataPoint3, CategoricalDataPoint4, CategoricalDataPoint5})
+        BarSeries1.HorizontalAxis = CategoricalAxis1
+        BarSeries1.LabelFormat = "{0:##.##}"
+        BarSeries1.LabelMode = Telerik.WinControls.UI.BarLabelModes.Top
+        BarSeries1.ShowLabels = True
+        BarSeries1.VerticalAxis = LinearAxis1
+        'lineSeria.Palette = new PaletteEntry(Color.Yellow, Color.Red);
+        BarSeries1.Palette = New PaletteEntry(Color.FromArgb(249, 177, 41))
+        Me.radChartView1.Series.AddRange(New Telerik.WinControls.UI.ChartSeries() {BarSeries1})
+        'Me.radChartView1.Size = New System.Drawing.Size(1225, 456)
+        'Me.radChartView1.TabIndex = 9
+        'final
+        radChartView1.Series.Add(BarSeries1)
+        radChartView1.Series.Add(Barseries2)
+    End Sub
 #Region "Metodos para graficar"
     'GERENTE
     Private Sub graficos_gerente()
@@ -241,6 +325,8 @@
             'Planta
             If rdbtnPlanta.IsChecked Then
                 If rdbtnDias.IsChecked Then
+                    dibuja_grafica()
+                    
 
                 ElseIf rdbtnMeses.IsChecked Then
 
@@ -1541,5 +1627,7 @@
     End Sub
 #End Region
 
-    
+    Private Sub btnGraficar_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnGraficar.Click
+        graficos_gerente()
+    End Sub
 End Class
