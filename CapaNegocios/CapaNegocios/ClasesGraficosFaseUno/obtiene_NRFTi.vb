@@ -1,5 +1,5 @@
 ﻿Imports CapaDatos
-Public Class obtiene_oee
+Public Class obtiene_NRFTi
     Implements IIndividual
     Dim cadena_conexion As New CapaDatos.conexiones
     Dim oBD As New CapaDatos.CapaDatos(cadena_conexion.CadenaSicaip)
@@ -89,40 +89,40 @@ Public Class obtiene_oee
 #End Region
 #Region "Metodos obtener oee"
     'Planta
-    Public Function obtiene_oee_planta_dia() As DataTable
+    Public Function obtiene_nrfti_planta_dia() As DataTable
         Dim obj As DataTable
         Using scope As New TransactionScope
             Try
                 Dim vComando As New SqlClient.SqlCommand
                 vComando.CommandType = CommandType.StoredProcedure
-                vComando.CommandText = "obtiene_oee_planta_dia"
+                vComando.CommandText = "obtiene_nrfti_planta_dia"
                 vComando.Parameters.Add("@fecha_inicial", SqlDbType.DateTime).Value = Me.vfecha_inicial
                 vComando.Parameters.Add("@fecha_final", SqlDbType.DateTime).Value = Me.vfecha_final
                 obj = oBD.EjecutaCommando(vComando)
                 'Me.vId = obj.Rows(0)(0)
                 scope.Complete()
             Catch 'ex As Exception
-                MsgBox("Error al obtener oee. CObtiene_oee_ERROR", vbCritical + vbOKOnly, "Error")
+                MsgBox("Error al obtener oee. CObtiene_nrfti_ERROR", vbCritical + vbOKOnly, "Error")
                 Return Nothing
                 'Throw New Exception(ex.Message)
             End Try
             Return obj
         End Using
     End Function
-    Public Function obtiene_oee_planta_mes() As DataTable
+    Public Function obtiene_nrfti_planta_mes() As DataTable
         Dim obj As DataTable
         Using scope As New TransactionScope
             Try
                 Dim vComando As New SqlClient.SqlCommand
                 vComando.CommandType = CommandType.StoredProcedure
-                vComando.CommandText = "obtiene_oee_planta_mes"
+                vComando.CommandText = "obtiene_nrfti_planta_mes"
                 vComando.Parameters.Add("@fecha_inicial", SqlDbType.DateTime).Value = Me.vfecha_inicial
                 vComando.Parameters.Add("@fecha_final", SqlDbType.DateTime).Value = Me.vfecha_final
                 obj = oBD.EjecutaCommando(vComando)
                 'Me.vId = obj.Rows(0)(0)
                 scope.Complete()
             Catch 'ex As Exception
-                MsgBox("Error al obtener oee. CObtiene_oee_ERROR", vbCritical + vbOKOnly, "Error")
+                MsgBox("Error al obtener oee. CObtiene_nrfti_ERROR", vbCritical + vbOKOnly, "Error")
                 Return Nothing
                 'Throw New Exception(ex.Message)
             End Try
@@ -130,13 +130,13 @@ Public Class obtiene_oee
         End Using
     End Function
     'Cadena Valor
-    Public Function obtiene_oee_cadena_valor_dia() As DataTable
+    Public Function obtiene_nrfti_cadena_valor_dia() As DataTable
         Dim obj As DataTable
         Using scope As New TransactionScope
             Try
                 Dim vComando As New SqlClient.SqlCommand
                 vComando.CommandType = CommandType.StoredProcedure
-                vComando.CommandText = "obtiene_oee_cadena_valor_dia"
+                vComando.CommandText = "obtiene_nrfti_cadena_valor_dia"
                 vComando.Parameters.Add("@cve_cadena_valor", SqlDbType.BigInt).Value = Me.vcve_cadena_valor
                 vComando.Parameters.Add("@fecha_inicial", SqlDbType.DateTime).Value = Me.vfecha_inicial
                 vComando.Parameters.Add("@fecha_final", SqlDbType.DateTime).Value = Me.vfecha_final
@@ -144,20 +144,20 @@ Public Class obtiene_oee
                 'Me.vId = obj.Rows(0)(0)
                 scope.Complete()
             Catch 'ex As Exception
-                MsgBox("Error al obtener oee. CObtiene_oee_ERROR", vbCritical + vbOKOnly, "Error")
+                MsgBox("Error al obtener oee. CObtiene_nrfti_ERROR", vbCritical + vbOKOnly, "Error")
                 Return Nothing
                 'Throw New Exception(ex.Message)
             End Try
             Return obj
         End Using
     End Function
-    Public Function obtiene_oee_cadena_valor_mes() As DataTable
+    Public Function obtiene_nrfti_cadena_valor_mes() As DataTable
         Dim obj As DataTable
         Using scope As New TransactionScope
             Try
                 Dim vComando As New SqlClient.SqlCommand
                 vComando.CommandType = CommandType.StoredProcedure
-                vComando.CommandText = "obtiene_oee_cadena_valor_mes"
+                vComando.CommandText = "obtiene_nrfti_cadena_valor_mes"
                 vComando.Parameters.Add("@cve_cadena_valor", SqlDbType.BigInt).Value = Me.vcve_cadena_valor
                 vComando.Parameters.Add("@fecha_inicial", SqlDbType.DateTime).Value = Me.vfecha_inicial
                 vComando.Parameters.Add("@fecha_final", SqlDbType.DateTime).Value = Me.vfecha_final
@@ -165,7 +165,7 @@ Public Class obtiene_oee
                 'Me.vId = obj.Rows(0)(0)
                 scope.Complete()
             Catch 'ex As Exception
-                MsgBox("Error al obtener oee. CObtiene_oee_ERROR", vbCritical + vbOKOnly, "Error")
+                MsgBox("Error al obtener oee. CObtiene_nrfti_ERROR", vbCritical + vbOKOnly, "Error")
                 Return Nothing
                 'Throw New Exception(ex.Message)
             End Try
@@ -173,13 +173,13 @@ Public Class obtiene_oee
         End Using
     End Function
     'Componente
-    Public Function obtiene_oee_componente_dia() As DataTable
+    Public Function obtiene_nrfti_componente_dia() As DataTable
         Dim obj As DataTable
         Using scope As New TransactionScope
             Try
                 Dim vComando As New SqlClient.SqlCommand
                 vComando.CommandType = CommandType.StoredProcedure
-                vComando.CommandText = "obtiene_oee_componente_dia"
+                vComando.CommandText = "obtiene_nrfti_componente_dia"
                 vComando.Parameters.Add("@cve_componente", SqlDbType.BigInt).Value = Me.vcve_componente
                 vComando.Parameters.Add("@fecha_inicial", SqlDbType.DateTime).Value = Me.vfecha_inicial
                 vComando.Parameters.Add("@fecha_final", SqlDbType.DateTime).Value = Me.vfecha_final
@@ -187,20 +187,20 @@ Public Class obtiene_oee
                 'Me.vId = obj.Rows(0)(0)
                 scope.Complete()
             Catch 'ex As Exception
-                MsgBox("Error al obtener oee. CObtiene_oee_ERROR", vbCritical + vbOKOnly, "Error")
+                MsgBox("Error al obtener oee. CObtiene_nrfti_ERROR", vbCritical + vbOKOnly, "Error")
                 Return Nothing
                 'Throw New Exception(ex.Message)
             End Try
             Return obj
         End Using
     End Function
-    Public Function obtiene_oee_componente_mes() As DataTable
+    Public Function obtiene_nrfti_componente_mes() As DataTable
         Dim obj As DataTable
         Using scope As New TransactionScope
             Try
                 Dim vComando As New SqlClient.SqlCommand
                 vComando.CommandType = CommandType.StoredProcedure
-                vComando.CommandText = "obtiene_oee_componente_mes"
+                vComando.CommandText = "obtiene_nrfti_componente_mes"
                 vComando.Parameters.Add("@cve_componente", SqlDbType.BigInt).Value = Me.vcve_componente
                 vComando.Parameters.Add("@fecha_inicial", SqlDbType.DateTime).Value = Me.vfecha_inicial
                 vComando.Parameters.Add("@fecha_final", SqlDbType.DateTime).Value = Me.vfecha_final
@@ -208,7 +208,7 @@ Public Class obtiene_oee
                 'Me.vId = obj.Rows(0)(0)
                 scope.Complete()
             Catch 'ex As Exception
-                MsgBox("Error al obtener oee. CObtiene_oee_ERROR", vbCritical + vbOKOnly, "Error")
+                MsgBox("Error al obtener oee. CObtiene_nrfti_ERROR", vbCritical + vbOKOnly, "Error")
                 Return Nothing
                 'Throw New Exception(ex.Message)
             End Try
@@ -216,13 +216,13 @@ Public Class obtiene_oee
         End Using
     End Function
     'Linea
-    Public Function obtiene_oee_linea_dia() As DataTable
+    Public Function obtiene_nrfti_linea_dia() As DataTable
         Dim obj As DataTable
         Using scope As New TransactionScope
             Try
                 Dim vComando As New SqlClient.SqlCommand
                 vComando.CommandType = CommandType.StoredProcedure
-                vComando.CommandText = "obtiene_oee_linea_dia"
+                vComando.CommandText = "obtiene_nrfti_linea_dia"
                 vComando.Parameters.Add("@cve_linea", SqlDbType.BigInt).Value = Me.vcve_linea
                 vComando.Parameters.Add("@fecha_inicial", SqlDbType.DateTime).Value = Me.vfecha_inicial
                 vComando.Parameters.Add("@fecha_final", SqlDbType.DateTime).Value = Me.vfecha_final
@@ -230,20 +230,20 @@ Public Class obtiene_oee
                 'Me.vId = obj.Rows(0)(0)
                 scope.Complete()
             Catch 'ex As Exception
-                MsgBox("Error al obtener oee. CObtiene_oee_ERROR", vbCritical + vbOKOnly, "Error")
+                MsgBox("Error al obtener oee. CObtiene_nrfti_ERROR", vbCritical + vbOKOnly, "Error")
                 Return Nothing
                 'Throw New Exception(ex.Message)
             End Try
             Return obj
         End Using
     End Function
-    Public Function obtiene_oee_linea_mes() As DataTable
+    Public Function obtiene_nrfti_linea_mes() As DataTable
         Dim obj As DataTable
         Using scope As New TransactionScope
             Try
                 Dim vComando As New SqlClient.SqlCommand
                 vComando.CommandType = CommandType.StoredProcedure
-                vComando.CommandText = "obtiene_oee_linea_mes"
+                vComando.CommandText = "obtiene_nrfti_linea_mes"
                 vComando.Parameters.Add("@cve_linea", SqlDbType.BigInt).Value = Me.vcve_linea
                 vComando.Parameters.Add("@fecha_inicial", SqlDbType.DateTime).Value = Me.vfecha_inicial
                 vComando.Parameters.Add("@fecha_final", SqlDbType.DateTime).Value = Me.vfecha_final
@@ -251,7 +251,7 @@ Public Class obtiene_oee
                 'Me.vId = obj.Rows(0)(0)
                 scope.Complete()
             Catch 'ex As Exception
-                MsgBox("Error al obtener oee. CObtiene_oee_ERROR", vbCritical + vbOKOnly, "Error")
+                MsgBox("Error al obtener oee. CObtiene_nrfti_ERROR", vbCritical + vbOKOnly, "Error")
                 Return Nothing
                 'Throw New Exception(ex.Message)
             End Try
@@ -259,13 +259,13 @@ Public Class obtiene_oee
         End Using
     End Function
     'Equipo
-    Public Function obtiene_oee_equipo_dia() As DataTable
+    Public Function obtiene_nrfti_equipo_dia() As DataTable
         Dim obj As DataTable
         Using scope As New TransactionScope
             Try
                 Dim vComando As New SqlClient.SqlCommand
                 vComando.CommandType = CommandType.StoredProcedure
-                vComando.CommandText = "obtiene_oee_equipo_dia"
+                vComando.CommandText = "obtiene_nrfti_equipo_dia"
                 vComando.Parameters.Add("@cve_equipo", SqlDbType.BigInt).Value = Me.vcve_equipo
                 vComando.Parameters.Add("@fecha_inicial", SqlDbType.DateTime).Value = Me.vfecha_inicial
                 vComando.Parameters.Add("@fecha_final", SqlDbType.DateTime).Value = Me.vfecha_final
@@ -280,13 +280,13 @@ Public Class obtiene_oee
             Return obj
         End Using
     End Function
-    Public Function obtiene_oee_equipo_mes() As DataTable
+    Public Function obtiene_nrfti_equipo_mes() As DataTable
         Dim obj As DataTable
         Using scope As New TransactionScope
             Try
                 Dim vComando As New SqlClient.SqlCommand
                 vComando.CommandType = CommandType.StoredProcedure
-                vComando.CommandText = "obtiene_oee_equipo_mes"
+                vComando.CommandText = "obtiene_nrfti_equipo_mes"
                 vComando.Parameters.Add("@cve_equipo", SqlDbType.BigInt).Value = Me.vcve_equipo
                 vComando.Parameters.Add("@fecha_inicial", SqlDbType.DateTime).Value = Me.vfecha_inicial
                 vComando.Parameters.Add("@fecha_final", SqlDbType.DateTime).Value = Me.vfecha_final
@@ -294,20 +294,20 @@ Public Class obtiene_oee
                 'Me.vId = obj.Rows(0)(0)
                 scope.Complete()
             Catch 'ex As Exception
-                MsgBox("Error al obtener oee. CObtiene_oee_ERROR", vbCritical + vbOKOnly, "Error")
+                MsgBox("Error al obtener oee. CObtiene_nrfti_ERROR", vbCritical + vbOKOnly, "Error")
                 Return Nothing
                 'Throw New Exception(ex.Message)
             End Try
             Return obj
         End Using
     End Function
-    Public Function obtiene_oee_equipo_linea_dia() As DataTable
+    Public Function obtiene_nrfti_equipo_linea_dia() As DataTable
         Dim obj As DataTable
         Using scope As New TransactionScope
             Try
                 Dim vComando As New SqlClient.SqlCommand
                 vComando.CommandType = CommandType.StoredProcedure
-                vComando.CommandText = "obtiene_oee_equipo_linea_dia"
+                vComando.CommandText = "obtiene_nrfti_equipo_linea_dia"
                 vComando.Parameters.Add("@cve_equipo", SqlDbType.BigInt).Value = Me.vcve_equipo
                 vComando.Parameters.Add("@cve_linea", SqlDbType.BigInt).Value = Me.vcve_linea
                 vComando.Parameters.Add("@fecha_inicial", SqlDbType.DateTime).Value = Me.vfecha_inicial
@@ -316,20 +316,20 @@ Public Class obtiene_oee
                 'Me.vId = obj.Rows(0)(0)
                 scope.Complete()
             Catch 'ex As Exception
-                MsgBox("Error al obtener oee. CObtiene_oee_ERROR", vbCritical + vbOKOnly, "Error")
+                MsgBox("Error al obtener oee. CObtiene_nrfti_ERROR", vbCritical + vbOKOnly, "Error")
                 Return Nothing
                 'Throw New Exception(ex.Message)
             End Try
             Return obj
         End Using
     End Function
-    Public Function obtiene_oee_equipo_linea_mes() As DataTable
+    Public Function obtiene_nrfti_equipo_linea_mes() As DataTable
         Dim obj As DataTable
         Using scope As New TransactionScope
             Try
                 Dim vComando As New SqlClient.SqlCommand
                 vComando.CommandType = CommandType.StoredProcedure
-                vComando.CommandText = "obtiene_oee_equipo_linea_mes"
+                vComando.CommandText = "obtiene_nrfti_equipo_linea_mes"
                 vComando.Parameters.Add("@cve_equipo", SqlDbType.BigInt).Value = Me.vcve_equipo
                 vComando.Parameters.Add("@cve_linea", SqlDbType.BigInt).Value = Me.vcve_linea
                 vComando.Parameters.Add("@fecha_inicial", SqlDbType.DateTime).Value = Me.vfecha_inicial
@@ -338,7 +338,7 @@ Public Class obtiene_oee
                 'Me.vId = obj.Rows(0)(0)
                 scope.Complete()
             Catch 'ex As Exception
-                MsgBox("Error al obtener oee. CObtiene_oee_ERROR", vbCritical + vbOKOnly, "Error")
+                MsgBox("Error al obtener oee. CObtiene_nrfti_ERROR", vbCritical + vbOKOnly, "Error")
                 Return Nothing
                 'Throw New Exception(ex.Message)
             End Try
@@ -347,3 +347,4 @@ Public Class obtiene_oee
     End Function
 #End Region
 End Class
+

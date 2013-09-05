@@ -239,7 +239,7 @@ Public Class FrmGraficasfaseuno
         valida_btn_graficar()
     End Sub
 #End Region
-#Region "Metodos graficar"
+#Region "Metodos graficar Oee"
     'Oee planta
     Private Sub obtiene_oee_planta_dia_mes()
         'Objeto obtiene_oee Clase
@@ -618,8 +618,373 @@ Public Class FrmGraficasfaseuno
         radChartView1.Series.Add(BarSeries1)
         radChartView1.Series.Add(BarSeries2)
     End Sub
-#End Region
     
+#End Region
+#Region "Metodos graficar NRFTi"
+    'NRNFTi planta
+    Private Sub obtiene_nrfti_planta_dia_mes()
+        'Objeto obtiene_nrfti Clase
+        Dim oObtiene_nrfti As New obtiene_NRFTi
+        oObtiene_nrfti.fecha_inicial = dtpFechaInicial.Value
+        oObtiene_nrfti.fecha_final = dtpFechaFinal.Value
+        'Creacion series
+        Dim BarSeries1 As New BarSeries()
+        Dim BarSeries2 As New BarSeries()
+        'Obtencion Datos
+        Dim vDT As DataTable = Nothing
+        If rdbtnDias.IsChecked Then
+            vDT = oObtiene_nrfti.obtiene_nrfti_planta_dia()
+        ElseIf rdbtnMeses.IsChecked Then
+            vDT = oObtiene_nrfti.obtiene_nrfti_planta_mes()
+        End If
+        'Llenado de las series
+        Dim vTotal As Integer = 1
+        Dim vContador As Integer = 1
+        vTotal = vDT.Rows.Count
+        For Each vDR As DataRow In vDT.Rows
+            If vContador = vTotal Then
+                BarSeries2.DataPoints.Add(New CategoricalDataPoint(vDR("nrfti"), "Acumulado"))
+            Else
+                BarSeries1.DataPoints.Add(New CategoricalDataPoint(vDR("nrfti"), vDR("dia_asignado")))
+            End If
+            vContador = vContador + 1
+        Next
+        'Cartesian Area, CategoricalAxis, LinearAxis
+        Dim CartesianArea1 As CartesianArea = New CartesianArea()
+        Dim CategoricalAxis1 As CategoricalAxis = New CategoricalAxis()
+        Dim LinearAxis1 As LinearAxis = New LinearAxis()
+        'Personalizacion
+        CartesianArea1.GridDesign.AlternatingVerticalColor = False
+        CartesianArea1.ShowGrid = True
+        Me.radChartView1.AreaDesign = CartesianArea1
+        CategoricalAxis1.LabelFitMode = AxisLabelFitMode.Rotate
+        If rdbtnDias.IsChecked Then
+            CategoricalAxis1.LabelFormat = "{0:MMM - dd}"
+        ElseIf rdbtnMeses.IsChecked Then
+            CategoricalAxis1.LabelFormat = "{0:yyyy - MMMM}"
+        End If
+        CategoricalAxis1.LabelRotationAngle = 270.0R
+        LinearAxis1.AxisType = AxisType.Second
+        LinearAxis1.Title = "NRFTi"
+        BarSeries1.ShowLabels = True
+        BarSeries2.ShowLabels = True
+        BarSeries1.LabelFormat = "{0:##,###}"
+        BarSeries2.LabelFormat = "{0:##,##}"
+        BarSeries1.HorizontalAxis = CategoricalAxis1
+        BarSeries1.VerticalAxis = LinearAxis1
+        BarSeries1.Palette = New PaletteEntry(Color.FromArgb(24, 134, 205))
+        Me.radChartView1.ShowToolTip = True
+        radChartView1.Series.Add(BarSeries1)
+        radChartView1.Series.Add(BarSeries2)
+    End Sub
+    'NRNFTi Cadena Valor
+    Private Sub obtiene_nrfti_cadena_valor_dia_mes()
+        'Objeto obtiene_nrfti Clase
+        Dim oObtiene_nrfti As New obtiene_NRFTi
+        oObtiene_nrfti.cve_cadena_valor = 1
+        oObtiene_nrfti.fecha_inicial = dtpFechaInicial.Value
+        oObtiene_nrfti.fecha_final = dtpFechaFinal.Value
+        'Creacion series
+        Dim BarSeries1 As New BarSeries()
+        Dim BarSeries2 As New BarSeries()
+        'Obtencion Datos
+        Dim vDT As New DataTable
+        If rdbtnDias.IsChecked Then
+            vDT = oObtiene_nrfti.obtiene_nrfti_cadena_valor_dia()
+        ElseIf rdbtnMeses.IsChecked Then
+            vDT = oObtiene_nrfti.obtiene_nrfti_cadena_valor_mes()
+        End If
+        'Llenado de las series
+        Dim vTotal As Integer = 1
+        Dim vContador As Integer = 1
+        vTotal = vDT.Rows.Count
+        For Each vDR As DataRow In vDT.Rows
+            If vContador = vTotal Then
+                BarSeries2.DataPoints.Add(New CategoricalDataPoint(vDR("nrfti"), "Acumulado"))
+            Else
+                BarSeries1.DataPoints.Add(New CategoricalDataPoint(vDR("nrfti"), vDR("dia_asignado")))
+            End If
+            vContador = vContador + 1
+        Next
+        'Cartesian Area, CategoricalAxis, LinearAxis
+        Dim CartesianArea1 As CartesianArea = New CartesianArea()
+        Dim CategoricalAxis1 As CategoricalAxis = New CategoricalAxis()
+        Dim LinearAxis1 As LinearAxis = New LinearAxis()
+        'Personalizacion
+        CartesianArea1.GridDesign.AlternatingVerticalColor = False
+        CartesianArea1.ShowGrid = True
+        Me.radChartView1.AreaDesign = CartesianArea1
+        CategoricalAxis1.LabelFitMode = AxisLabelFitMode.Rotate
+        If rdbtnDias.IsChecked Then
+            CategoricalAxis1.LabelFormat = "{0:MMM - dd}"
+        ElseIf rdbtnMeses.IsChecked Then
+            CategoricalAxis1.LabelFormat = "{0:yyyy - MMMM}"
+        End If
+        CategoricalAxis1.LabelRotationAngle = 270.0R
+        LinearAxis1.AxisType = AxisType.Second
+        'LinearAxis1.LabelFitMode = AxisLabelFitMode.Rotate
+        'LinearAxis1.LabelRotationAngle = 300.0R
+        'LinearAxis1.MajorStep = 10.0R
+        'LinearAxis1.Maximum = 100
+        LinearAxis1.Title = "NRFTi"
+        BarSeries1.ShowLabels = True
+        BarSeries2.ShowLabels = True
+        BarSeries1.LabelFormat = "{0:##,###}"
+        BarSeries2.LabelFormat = "{0:##,###}"
+        BarSeries1.HorizontalAxis = CategoricalAxis1
+        BarSeries1.VerticalAxis = LinearAxis1
+        BarSeries1.Palette = New PaletteEntry(Color.FromArgb(249, 177, 41))
+        Me.radChartView1.ShowToolTip = True
+        radChartView1.Series.Add(BarSeries1)
+        radChartView1.Series.Add(BarSeries2)
+    End Sub
+    'NRFTi Componente
+    Private Sub obtiene_nrfti_componente_dia_mes()
+        'Objeto obtiene_oee Clase
+        Dim oObtiene_nrfti As New obtiene_NRFTi
+        oObtiene_nrfti.cve_componente = 1
+        oObtiene_nrfti.fecha_inicial = dtpFechaInicial.Value
+        oObtiene_nrfti.fecha_final = dtpFechaFinal.Value
+        'Creacion series
+        Dim BarSeries1 As New BarSeries()
+        Dim BarSeries2 As New BarSeries()
+        'Obtencion Datos Oee
+        Dim vDT As New DataTable
+        If rdbtnDias.IsChecked Then
+            vDT = oObtiene_nrfti.obtiene_nrfti_componente_dia()
+        ElseIf rdbtnMeses.IsChecked Then
+            vDT = oObtiene_nrfti.obtiene_nrfti_componente_mes()
+        End If
+        'Llenado de las series
+        Dim vTotal As Integer = 1
+        Dim vContador As Integer = 1
+        vTotal = vDT.Rows.Count
+        For Each vDR As DataRow In vDT.Rows
+            If vContador = vTotal Then
+                BarSeries2.DataPoints.Add(New CategoricalDataPoint(vDR("nrfti"), "Acumulado"))
+            Else
+                BarSeries1.DataPoints.Add(New CategoricalDataPoint(vDR("nrfti"), vDR("dia_asignado")))
+            End If
+            vContador = vContador + 1
+        Next
+        'Cartesian Area, CategoricalAxis, LinearAxis
+        Dim CartesianArea1 As CartesianArea = New CartesianArea()
+        Dim CategoricalAxis1 As CategoricalAxis = New CategoricalAxis()
+        Dim LinearAxis1 As LinearAxis = New LinearAxis()
+        'Personalizacion
+        CartesianArea1.GridDesign.AlternatingVerticalColor = False
+        CartesianArea1.ShowGrid = True
+        Me.radChartView1.AreaDesign = CartesianArea1
+        CategoricalAxis1.LabelFitMode = AxisLabelFitMode.Rotate
+        If rdbtnDias.IsChecked Then
+            CategoricalAxis1.LabelFormat = "{0:MMM - dd}"
+        ElseIf rdbtnMeses.IsChecked Then
+            CategoricalAxis1.LabelFormat = "{0:yyyy - MMMM}"
+        End If
+        CategoricalAxis1.LabelRotationAngle = 270.0R
+        LinearAxis1.AxisType = AxisType.Second
+        'LinearAxis1.LabelFitMode = AxisLabelFitMode.Rotate
+        'LinearAxis1.LabelRotationAngle = 300.0R
+        'LinearAxis1.MajorStep = 10.0R
+        'LinearAxis1.Maximum = 100
+        LinearAxis1.Title = "NRFTi"
+        BarSeries1.ShowLabels = True
+        BarSeries2.ShowLabels = True
+        BarSeries1.LabelFormat = "{0:#,###}"
+        BarSeries2.LabelFormat = "{0:#,###}"
+        BarSeries1.HorizontalAxis = CategoricalAxis1
+        BarSeries1.VerticalAxis = LinearAxis1
+        BarSeries1.Palette = New PaletteEntry(Color.FromArgb(249, 177, 41))
+        Me.radChartView1.ShowToolTip = True
+        radChartView1.Series.Add(BarSeries1)
+        radChartView1.Series.Add(BarSeries2)
+    End Sub
+    'NRFTi Linea
+    Private Sub obtiene_nrfti_linea_dia_mes()
+        'Objeto obtiene_oee Clase
+        Dim oObtiene_nrfti As New obtiene_NRFTi
+        oObtiene_nrfti.cve_linea = 1
+        oObtiene_nrfti.fecha_inicial = dtpFechaInicial.Value
+        oObtiene_nrfti.fecha_final = dtpFechaFinal.Value
+        'Creacion series
+        Dim BarSeries1 As New BarSeries()
+        Dim BarSeries2 As New BarSeries()
+        'Obtencion Datos Oee
+        Dim vDT As New DataTable
+        If rdbtnDias.IsChecked Then
+            vDT = oObtiene_nrfti.obtiene_nrfti_linea_dia()
+        ElseIf rdbtnMeses.IsChecked Then
+            vDT = oObtiene_nrfti.obtiene_nrfti_linea_mes()
+        End If
+        'Llenado de las series
+        Dim vTotal As Integer = 1
+        Dim vContador As Integer = 1
+        vTotal = vDT.Rows.Count
+        For Each vDR As DataRow In vDT.Rows
+            If vContador = vTotal Then
+                BarSeries2.DataPoints.Add(New CategoricalDataPoint(vDR("nrfti"), "Acumulado"))
+            Else
+                BarSeries1.DataPoints.Add(New CategoricalDataPoint(vDR("nrfti"), vDR("dia_asignado")))
+            End If
+            vContador = vContador + 1
+        Next
+        'Cartesian Area, CategoricalAxis, LinearAxis
+        Dim CartesianArea1 As CartesianArea = New CartesianArea()
+        Dim CategoricalAxis1 As CategoricalAxis = New CategoricalAxis()
+        Dim LinearAxis1 As LinearAxis = New LinearAxis()
+        'Personalizacion
+        CartesianArea1.GridDesign.AlternatingVerticalColor = False
+        CartesianArea1.ShowGrid = True
+        Me.radChartView1.AreaDesign = CartesianArea1
+        CategoricalAxis1.LabelFitMode = AxisLabelFitMode.Rotate
+        If rdbtnDias.IsChecked Then
+            CategoricalAxis1.LabelFormat = "{0:MMM - dd}"
+        ElseIf rdbtnMeses.IsChecked Then
+            CategoricalAxis1.LabelFormat = "{0:yyyy - MMMM}"
+        End If
+        CategoricalAxis1.LabelRotationAngle = 270.0R
+        LinearAxis1.AxisType = AxisType.Second
+        'LinearAxis1.LabelFitMode = AxisLabelFitMode.Rotate
+        'LinearAxis1.LabelRotationAngle = 300.0R
+        'LinearAxis1.MajorStep = 10.0R
+        'LinearAxis1.Maximum = 100
+        LinearAxis1.Title = "NRFTi"
+        BarSeries1.ShowLabels = True
+        BarSeries2.ShowLabels = True
+        BarSeries1.LabelFormat = "{0:#,###}"
+        BarSeries2.LabelFormat = "{0:#,###}"
+        BarSeries1.HorizontalAxis = CategoricalAxis1
+        BarSeries1.VerticalAxis = LinearAxis1
+        BarSeries1.Palette = New PaletteEntry(Color.FromArgb(249, 177, 41))
+        Me.radChartView1.ShowToolTip = True
+        radChartView1.Series.Add(BarSeries1)
+        radChartView1.Series.Add(BarSeries2)
+    End Sub
+    'NRFTi Equipo
+    Private Sub obtiene_nrfti_equipo_dia_mes()
+        'Objeto obtiene_oee Clase
+        Dim oObtiene_nrfti As New obtiene_NRFTi
+        oObtiene_nrfti.cve_equipo = 2
+        oObtiene_nrfti.fecha_inicial = dtpFechaInicial.Value
+        oObtiene_nrfti.fecha_final = dtpFechaFinal.Value
+        'Creacion series
+        Dim BarSeries1 As New BarSeries()
+        Dim BarSeries2 As New BarSeries()
+        'Obtencion Datos Oee
+        Dim vDT As New DataTable
+        If rdbtnDias.IsChecked Then
+            vDT = oObtiene_nrfti.obtiene_nrfti_equipo_dia()
+        ElseIf rdbtnMeses.IsChecked Then
+            vDT = oObtiene_nrfti.obtiene_nrfti_equipo_mes()
+        End If
+        'Llenado de las series
+        Dim vTotal As Integer = 1
+        Dim vContador As Integer = 1
+        vTotal = vDT.Rows.Count
+        For Each vDR As DataRow In vDT.Rows
+            If vContador = vTotal Then
+                BarSeries2.DataPoints.Add(New CategoricalDataPoint(vDR("nrfti"), "Acumulado"))
+            Else
+                BarSeries1.DataPoints.Add(New CategoricalDataPoint(vDR("nrfti"), vDR("dia_asignado")))
+            End If
+            vContador = vContador + 1
+        Next
+        'Cartesian Area, CategoricalAxis, LinearAxis
+        Dim CartesianArea1 As CartesianArea = New CartesianArea()
+        Dim CategoricalAxis1 As CategoricalAxis = New CategoricalAxis()
+        Dim LinearAxis1 As LinearAxis = New LinearAxis()
+        'Personalizacion
+        CartesianArea1.GridDesign.AlternatingVerticalColor = False
+        CartesianArea1.ShowGrid = True
+        Me.radChartView1.AreaDesign = CartesianArea1
+        CategoricalAxis1.LabelFitMode = AxisLabelFitMode.Rotate
+        If rdbtnDias.IsChecked Then
+            CategoricalAxis1.LabelFormat = "{0:MMM - dd}"
+        ElseIf rdbtnMeses.IsChecked Then
+            CategoricalAxis1.LabelFormat = "{0:yyyy - MMMM}"
+        End If
+        CategoricalAxis1.LabelRotationAngle = 270.0R
+        LinearAxis1.AxisType = AxisType.Second
+        'LinearAxis1.LabelFitMode = AxisLabelFitMode.Rotate
+        'LinearAxis1.LabelRotationAngle = 300.0R
+        'LinearAxis1.MajorStep = 10.0R
+        'LinearAxis1.Maximum = 100
+        LinearAxis1.Title = "NRFTi"
+        BarSeries1.ShowLabels = True
+        BarSeries2.ShowLabels = True
+        BarSeries1.LabelFormat = "{0:#,###}"
+        BarSeries2.LabelFormat = "{0:#,###}"
+        BarSeries1.HorizontalAxis = CategoricalAxis1
+        BarSeries1.VerticalAxis = LinearAxis1
+        BarSeries1.Palette = New PaletteEntry(Color.FromArgb(249, 177, 41))
+        Me.radChartView1.ShowToolTip = True
+        radChartView1.Series.Add(BarSeries1)
+        radChartView1.Series.Add(BarSeries2)
+    End Sub
+    'NRFTi Equipo-Linea
+    Private Sub obtiene_nrfti_equipo_linea_dia_mes()
+        'Objeto obtiene_oee Clase
+        Dim oObtiene_nrfti As New obtiene_NRFTi
+        oObtiene_nrfti.cve_equipo = 2
+        oObtiene_nrfti.cve_linea = 54
+        oObtiene_nrfti.fecha_inicial = dtpFechaInicial.Value
+        oObtiene_nrfti.fecha_final = dtpFechaFinal.Value
+        'Creacion series
+        Dim BarSeries1 As New BarSeries()
+        Dim BarSeries2 As New BarSeries()
+        'Obtencion Datos Oee
+        Dim vDT As New DataTable
+        If rdbtnDias.IsChecked Then
+            vDT = oObtiene_nrfti.obtiene_nrfti_equipo_linea_dia()
+        ElseIf rdbtnMeses.IsChecked Then
+            vDT = oObtiene_nrfti.obtiene_nrfti_equipo_linea_mes()
+        End If
+        'Llenado de las series
+        Dim vTotal As Integer = 1
+        Dim vContador As Integer = 1
+        vTotal = vDT.Rows.Count
+        For Each vDR As DataRow In vDT.Rows
+            If vContador = vTotal Then
+                BarSeries2.DataPoints.Add(New CategoricalDataPoint(vDR("nrfti"), "Acumulado"))
+            Else
+                BarSeries1.DataPoints.Add(New CategoricalDataPoint(vDR("nrfti"), vDR("dia_asignado")))
+            End If
+            vContador = vContador + 1
+        Next
+
+        'Cartesian Area, CategoricalAxis, LinearAxis
+        Dim CartesianArea1 As CartesianArea = New CartesianArea()
+        Dim CategoricalAxis1 As CategoricalAxis = New CategoricalAxis()
+        Dim LinearAxis1 As LinearAxis = New LinearAxis()
+        'Personalizacion
+        CartesianArea1.GridDesign.AlternatingVerticalColor = False
+        CartesianArea1.ShowGrid = True
+        Me.radChartView1.AreaDesign = CartesianArea1
+        CategoricalAxis1.LabelFitMode = AxisLabelFitMode.Rotate
+        If rdbtnDias.IsChecked Then
+            CategoricalAxis1.LabelFormat = "{0:MMM - dd}"
+        ElseIf rdbtnMeses.IsChecked Then
+            CategoricalAxis1.LabelFormat = "{0:yyyy - MMMM}"
+        End If
+        CategoricalAxis1.LabelRotationAngle = 270.0R
+        LinearAxis1.AxisType = AxisType.Second
+        'LinearAxis1.LabelFitMode = AxisLabelFitMode.Rotate
+        'LinearAxis1.LabelRotationAngle = 300.0R
+        'LinearAxis1.MajorStep = 10.0R
+        'LinearAxis1.Maximum = 100
+        LinearAxis1.Title = "NRFTi"
+        BarSeries1.ShowLabels = True
+        BarSeries2.ShowLabels = True
+        BarSeries1.LabelFormat = "{0:#,###}"
+        BarSeries2.LabelFormat = "{0:#,###}"
+        BarSeries1.HorizontalAxis = CategoricalAxis1
+        BarSeries1.VerticalAxis = LinearAxis1
+        BarSeries1.Palette = New PaletteEntry(Color.FromArgb(249, 177, 41))
+        Me.radChartView1.ShowToolTip = True
+        radChartView1.Series.Add(BarSeries1)
+        radChartView1.Series.Add(BarSeries2)
+    End Sub
+#End Region
 #Region "Metodos Niveles"
     'GERENTE
     Private Sub graficos_gerente()
@@ -1927,8 +2292,7 @@ Public Class FrmGraficasfaseuno
         End If
     End Sub
 #End Region
-
     Private Sub btnGraficar_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnGraficar.Click
-        obtiene_oee_equipo_linea_dia_mes()
+        obtiene_nrfti_equipo_linea_dia_mes()
     End Sub
 End Class
