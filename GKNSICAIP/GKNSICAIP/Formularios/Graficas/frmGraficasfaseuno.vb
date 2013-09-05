@@ -985,6 +985,248 @@ Public Class FrmGraficasfaseuno
         radChartView1.Series.Add(BarSeries2)
     End Sub
 #End Region
+#Region "Metodos graficar cincoS"
+    '5s planta
+    Private Sub obtiene_cincoS_planta_mes()
+        'Objeto obtiene_nrfti Clase
+        Dim oObtiene_cincoS As New obtiene_cincoS
+        oObtiene_cincoS.fecha_inicial = dtpFechaInicial.Value
+        oObtiene_cincoS.fecha_final = dtpFechaFinal.Value
+        'Creacion series
+        Dim BarSeries1 As New BarSeries()
+        'Obtencion Datos
+        BarSeries1.ValueMember = "promedio"
+        BarSeries1.CategoryMember = "dia_asignado"
+        BarSeries1.DataSource = oObtiene_cincoS.obtiene_cincos_planta_mes()
+        'Cartesian Area, CategoricalAxis, LinearAxis
+        Dim CartesianArea1 As CartesianArea = New CartesianArea()
+        Dim CategoricalAxis1 As CategoricalAxis = New CategoricalAxis()
+        Dim LinearAxis1 As LinearAxis = New LinearAxis()
+        'Personalizacion
+        CartesianArea1.GridDesign.AlternatingVerticalColor = False
+        CartesianArea1.ShowGrid = True
+        Me.radChartView1.AreaDesign = CartesianArea1
+        CategoricalAxis1.LabelFitMode = AxisLabelFitMode.Rotate
+        If rdbtnDias.IsChecked Then
+            CategoricalAxis1.LabelFormat = "{0:MMM - dd}"
+        ElseIf rdbtnMeses.IsChecked Then
+            CategoricalAxis1.LabelFormat = "{0:yyyy - MMMM}"
+        End If
+        CategoricalAxis1.LabelRotationAngle = 270.0R
+        LinearAxis1.AxisType = AxisType.Second
+        LinearAxis1.MajorStep = 1.0R
+        LinearAxis1.Maximum = 5
+        LinearAxis1.Title = "5's"
+        BarSeries1.ShowLabels = True
+        BarSeries1.LabelFormat = "{0:##.#}"
+        BarSeries1.HorizontalAxis = CategoricalAxis1
+        BarSeries1.VerticalAxis = LinearAxis1
+        BarSeries1.Palette = New PaletteEntry(Color.FromArgb(24, 134, 205))
+        Me.radChartView1.ShowToolTip = True
+        radChartView1.Series.Add(BarSeries1)
+    End Sub
+    '5s cadena valor
+    Private Sub obtiene_cincoS_cadena_valor_mes()
+        'Objeto obtiene_nrfti Clase
+        Dim oObtiene_cincoS As New obtiene_cincoS
+        oObtiene_cincoS.cve_cadena_valor = 1
+        oObtiene_cincoS.fecha_inicial = dtpFechaInicial.Value
+        oObtiene_cincoS.fecha_final = dtpFechaFinal.Value
+        'Creacion series
+        Dim BarSeries1 As New BarSeries()
+        'Obtencion Datos
+        BarSeries1.ValueMember = "promedio"
+        BarSeries1.CategoryMember = "dia_asignado"
+        BarSeries1.DataSource = oObtiene_cincoS.obtiene_cincos_cadena_valor_mes()
+        'Cartesian Area, CategoricalAxis, LinearAxis
+        Dim CartesianArea1 As CartesianArea = New CartesianArea()
+        Dim CategoricalAxis1 As CategoricalAxis = New CategoricalAxis()
+        Dim LinearAxis1 As LinearAxis = New LinearAxis()
+        'Personalizacion
+        CartesianArea1.GridDesign.AlternatingVerticalColor = False
+        CartesianArea1.ShowGrid = True
+        Me.radChartView1.AreaDesign = CartesianArea1
+        CategoricalAxis1.LabelFitMode = AxisLabelFitMode.Rotate
+        If rdbtnDias.IsChecked Then
+            CategoricalAxis1.LabelFormat = "{0:MMM - dd}"
+        ElseIf rdbtnMeses.IsChecked Then
+            CategoricalAxis1.LabelFormat = "{0:yyyy - MMMM}"
+        End If
+        CategoricalAxis1.LabelRotationAngle = 270.0R
+        LinearAxis1.AxisType = AxisType.Second
+        LinearAxis1.MajorStep = 1.0R
+        LinearAxis1.Maximum = 5
+        LinearAxis1.Title = "5's"
+        BarSeries1.ShowLabels = True
+        BarSeries1.LabelFormat = "{0:##.#}"
+        BarSeries1.HorizontalAxis = CategoricalAxis1
+        BarSeries1.VerticalAxis = LinearAxis1
+        BarSeries1.Palette = New PaletteEntry(Color.FromArgb(24, 134, 205))
+        Me.radChartView1.ShowToolTip = True
+        radChartView1.Series.Add(BarSeries1)
+    End Sub
+    '5s componente
+    Private Sub obtiene_cincoS_componente_mes()
+        'Objeto obtiene_nrfti Clase
+        Dim oObtiene_cincoS As New obtiene_cincoS
+        oObtiene_cincoS.cve_componente = 1
+        oObtiene_cincoS.fecha_inicial = dtpFechaInicial.Value
+        oObtiene_cincoS.fecha_final = dtpFechaFinal.Value
+        'Creacion series
+        Dim BarSeries1 As New BarSeries()
+        'Obtencion Datos
+        BarSeries1.ValueMember = "promedio"
+        BarSeries1.CategoryMember = "dia_asignado"
+        BarSeries1.DataSource = oObtiene_cincoS.obtiene_cincos_componente_mes()
+        'Cartesian Area, CategoricalAxis, LinearAxis
+        Dim CartesianArea1 As CartesianArea = New CartesianArea()
+        Dim CategoricalAxis1 As CategoricalAxis = New CategoricalAxis()
+        Dim LinearAxis1 As LinearAxis = New LinearAxis()
+        'Personalizacion
+        CartesianArea1.GridDesign.AlternatingVerticalColor = False
+        CartesianArea1.ShowGrid = True
+        Me.radChartView1.AreaDesign = CartesianArea1
+        CategoricalAxis1.LabelFitMode = AxisLabelFitMode.Rotate
+        If rdbtnDias.IsChecked Then
+            CategoricalAxis1.LabelFormat = "{0:MMM - dd}"
+        ElseIf rdbtnMeses.IsChecked Then
+            CategoricalAxis1.LabelFormat = "{0:yyyy - MMMM}"
+        End If
+        CategoricalAxis1.LabelRotationAngle = 270.0R
+        LinearAxis1.AxisType = AxisType.Second
+        LinearAxis1.MajorStep = 1.0R
+        LinearAxis1.Maximum = 5
+        LinearAxis1.Title = "5's"
+        BarSeries1.ShowLabels = True
+        BarSeries1.LabelFormat = "{0:##.#}"
+        BarSeries1.HorizontalAxis = CategoricalAxis1
+        BarSeries1.VerticalAxis = LinearAxis1
+        BarSeries1.Palette = New PaletteEntry(Color.FromArgb(24, 134, 205))
+        Me.radChartView1.ShowToolTip = True
+        radChartView1.Series.Add(BarSeries1)
+    End Sub
+    '5s linea
+    Private Sub obtiene_linea_componente_mes()
+        'Objeto obtiene_nrfti Clase
+        Dim oObtiene_cincoS As New obtiene_cincoS
+        oObtiene_cincoS.cve_linea = 1
+        oObtiene_cincoS.fecha_inicial = dtpFechaInicial.Value
+        oObtiene_cincoS.fecha_final = dtpFechaFinal.Value
+        'Creacion series
+        Dim BarSeries1 As New BarSeries()
+        'Obtencion Datos
+        BarSeries1.ValueMember = "promedio"
+        BarSeries1.CategoryMember = "dia_asignado"
+        BarSeries1.DataSource = oObtiene_cincoS.obtiene_cincos_linea_mes()
+        'Cartesian Area, CategoricalAxis, LinearAxis
+        Dim CartesianArea1 As CartesianArea = New CartesianArea()
+        Dim CategoricalAxis1 As CategoricalAxis = New CategoricalAxis()
+        Dim LinearAxis1 As LinearAxis = New LinearAxis()
+        'Personalizacion
+        CartesianArea1.GridDesign.AlternatingVerticalColor = False
+        CartesianArea1.ShowGrid = True
+        Me.radChartView1.AreaDesign = CartesianArea1
+        CategoricalAxis1.LabelFitMode = AxisLabelFitMode.Rotate
+        If rdbtnDias.IsChecked Then
+            CategoricalAxis1.LabelFormat = "{0:MMM - dd}"
+        ElseIf rdbtnMeses.IsChecked Then
+            CategoricalAxis1.LabelFormat = "{0:yyyy - MMMM}"
+        End If
+        CategoricalAxis1.LabelRotationAngle = 270.0R
+        LinearAxis1.AxisType = AxisType.Second
+        LinearAxis1.MajorStep = 1.0R
+        LinearAxis1.Maximum = 5
+        LinearAxis1.Title = "5's"
+        BarSeries1.ShowLabels = True
+        BarSeries1.LabelFormat = "{0:##.#}"
+        BarSeries1.HorizontalAxis = CategoricalAxis1
+        BarSeries1.VerticalAxis = LinearAxis1
+        BarSeries1.Palette = New PaletteEntry(Color.FromArgb(24, 134, 205))
+        Me.radChartView1.ShowToolTip = True
+        radChartView1.Series.Add(BarSeries1)
+    End Sub
+    '5s equipo
+    Private Sub obtiene_equipo_mes()
+        'Objeto obtiene_nrfti Clase
+        Dim oObtiene_cincoS As New obtiene_cincoS
+        oObtiene_cincoS.cve_equipo = 1
+        oObtiene_cincoS.fecha_inicial = dtpFechaInicial.Value
+        oObtiene_cincoS.fecha_final = dtpFechaFinal.Value
+        'Creacion series
+        Dim BarSeries1 As New BarSeries()
+        'Obtencion Datos
+        BarSeries1.ValueMember = "promedio"
+        BarSeries1.CategoryMember = "dia_asignado"
+        BarSeries1.DataSource = oObtiene_cincoS.obtiene_cincos_equipo_mes()
+        'Cartesian Area, CategoricalAxis, LinearAxis
+        Dim CartesianArea1 As CartesianArea = New CartesianArea()
+        Dim CategoricalAxis1 As CategoricalAxis = New CategoricalAxis()
+        Dim LinearAxis1 As LinearAxis = New LinearAxis()
+        'Personalizacion
+        CartesianArea1.GridDesign.AlternatingVerticalColor = False
+        CartesianArea1.ShowGrid = True
+        Me.radChartView1.AreaDesign = CartesianArea1
+        CategoricalAxis1.LabelFitMode = AxisLabelFitMode.Rotate
+        If rdbtnDias.IsChecked Then
+            CategoricalAxis1.LabelFormat = "{0:MMM - dd}"
+        ElseIf rdbtnMeses.IsChecked Then
+            CategoricalAxis1.LabelFormat = "{0:yyyy - MMMM}"
+        End If
+        CategoricalAxis1.LabelRotationAngle = 270.0R
+        LinearAxis1.AxisType = AxisType.Second
+        LinearAxis1.MajorStep = 1.0R
+        LinearAxis1.Maximum = 5
+        LinearAxis1.Title = "5's"
+        BarSeries1.ShowLabels = True
+        BarSeries1.LabelFormat = "{0:##.#}"
+        BarSeries1.HorizontalAxis = CategoricalAxis1
+        BarSeries1.VerticalAxis = LinearAxis1
+        BarSeries1.Palette = New PaletteEntry(Color.FromArgb(24, 134, 205))
+        Me.radChartView1.ShowToolTip = True
+        radChartView1.Series.Add(BarSeries1)
+    End Sub
+    '5s equipo-linea
+    Private Sub obtiene_equipo_mes()
+        'Objeto obtiene_nrfti Clase
+        Dim oObtiene_cincoS As New obtiene_cincoS
+        oObtiene_cincoS.cve_equipo = 1
+        oObtiene_cincoS.cve_linea = 54
+        oObtiene_cincoS.fecha_inicial = dtpFechaInicial.Value
+        oObtiene_cincoS.fecha_final = dtpFechaFinal.Value
+        'Creacion series
+        Dim BarSeries1 As New BarSeries()
+        'Obtencion Datos
+        BarSeries1.ValueMember = "promedio"
+        BarSeries1.CategoryMember = "dia_asignado"
+        BarSeries1.DataSource = oObtiene_cincoS.obtiene_cincos_equipo_linea_mes()
+        'Cartesian Area, CategoricalAxis, LinearAxis
+        Dim CartesianArea1 As CartesianArea = New CartesianArea()
+        Dim CategoricalAxis1 As CategoricalAxis = New CategoricalAxis()
+        Dim LinearAxis1 As LinearAxis = New LinearAxis()
+        'Personalizacion
+        CartesianArea1.GridDesign.AlternatingVerticalColor = False
+        CartesianArea1.ShowGrid = True
+        Me.radChartView1.AreaDesign = CartesianArea1
+        CategoricalAxis1.LabelFitMode = AxisLabelFitMode.Rotate
+        If rdbtnDias.IsChecked Then
+            CategoricalAxis1.LabelFormat = "{0:MMM - dd}"
+        ElseIf rdbtnMeses.IsChecked Then
+            CategoricalAxis1.LabelFormat = "{0:yyyy - MMMM}"
+        End If
+        CategoricalAxis1.LabelRotationAngle = 270.0R
+        LinearAxis1.AxisType = AxisType.Second
+        LinearAxis1.MajorStep = 1.0R
+        LinearAxis1.Maximum = 5
+        LinearAxis1.Title = "5's"
+        BarSeries1.ShowLabels = True
+        BarSeries1.LabelFormat = "{0:##.#}"
+        BarSeries1.HorizontalAxis = CategoricalAxis1
+        BarSeries1.VerticalAxis = LinearAxis1
+        BarSeries1.Palette = New PaletteEntry(Color.FromArgb(24, 134, 205))
+        Me.radChartView1.ShowToolTip = True
+        radChartView1.Series.Add(BarSeries1)
+    End Sub
+#End Region
 #Region "Metodos Niveles"
     'GERENTE
     Private Sub graficos_gerente()
@@ -2292,7 +2534,8 @@ Public Class FrmGraficasfaseuno
         End If
     End Sub
 #End Region
+
     Private Sub btnGraficar_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnGraficar.Click
-        obtiene_nrfti_equipo_linea_dia_mes()
+        obtiene_cincoS_cadena_valor_mes()
     End Sub
 End Class
