@@ -1106,7 +1106,7 @@ Public Class FrmGraficasfaseuno
         radChartView1.Series.Add(BarSeries1)
     End Sub
     '5s linea
-    Private Sub obtiene_linea_componente_mes()
+    Private Sub obtiene_cincoS_linea_mes()
         'Objeto obtiene_nrfti Clase
         Dim oObtiene_cincoS As New obtiene_cincoS
         oObtiene_cincoS.cve_linea = 1
@@ -1146,7 +1146,7 @@ Public Class FrmGraficasfaseuno
         radChartView1.Series.Add(BarSeries1)
     End Sub
     '5s equipo
-    Private Sub obtiene_equipo_mes()
+    Private Sub obtiene_cincoS_equipo_mes()
         'Objeto obtiene_nrfti Clase
         Dim oObtiene_cincoS As New obtiene_cincoS
         oObtiene_cincoS.cve_equipo = 1
@@ -1186,7 +1186,7 @@ Public Class FrmGraficasfaseuno
         radChartView1.Series.Add(BarSeries1)
     End Sub
     '5s equipo-linea
-    Private Sub obtiene_equipo_mes()
+    Private Sub obtiene_cincoS_equipo_linea_mes()
         'Objeto obtiene_nrfti Clase
         Dim oObtiene_cincoS As New obtiene_cincoS
         oObtiene_cincoS.cve_equipo = 1
@@ -2534,8 +2534,7 @@ Public Class FrmGraficasfaseuno
         End If
     End Sub
 #End Region
-
     Private Sub btnGraficar_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnGraficar.Click
-        obtiene_cincoS_cadena_valor_mes()
+
     End Sub
 End Class
