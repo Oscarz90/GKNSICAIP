@@ -46,6 +46,7 @@ Public Class FrmImportar_TC
                         'vFecha = DateTime.Parse(vFecha.ToString("MM-dd-yyyy")) ''------------------Checar esta linea
                         vEstatus = Exl.Range("F" & vRecorrido).Value
 
+                        Me.Set_Indicentes("Select * from TC Where cve_linea=" & vCve_linea & " and cve_modelo=" & vCve_Modelo)
                         If oTC.Validar_Exixtencia_LINEA_MODELO_EN_TC(vCve_linea, vCve_Modelo) = True Then
                             ''Cargo el TC existente para registrarlo como Inactivo
                             oTC.cve_TC = oTC.vCve_TC_Existe
@@ -53,8 +54,8 @@ Public Class FrmImportar_TC
                             oTC.Estatus = "0"
                             'oTC.piezas_por_hora = vPzas_por_Hora
                             oTC.Registrar()
+                            'Me.Set_Indicentes("Registro TC EXISTENTE cve_linea=" & vCve_linea & " and cve_modelo=" & vCve_Modelo)
 
-                            'Me.Set_Indicentes("UPDATE TC set piezas_por_hora=" & vPzas_por_Hora & " WHERE cve_TC=" & oTC.cve_TC)
 
                             ''Cargo el Objeto oTC con los Datos Obtenidos de Excel para registrar el TC Nuevo
                             oTC.cve_TC = 0
@@ -66,6 +67,7 @@ Public Class FrmImportar_TC
                             oTC.Estatus = "1"
                             oTC.Registrar()
                         Else
+                            'Me.Set_Indicentes("Registro TC NUEVO cve_linea=" & vCve_linea & " and cve_modelo=" & vCve_Modelo)
                             oTC.cve_TC = 0
                             oTC.piezas_por_hora = vPzas_por_Hora
                             oTC.cve_linea = vCve_linea
@@ -118,7 +120,7 @@ Public Class FrmImportar_TC
     End Sub
 
     Public Sub Set_Indicentes(ByVal Incidente As String) 'agrega un incidente al cuadro de incidentes
-        txtIncidentes.Text = txtIncidentes.Text & Incidente & "............................." & vbCrLf
+        txtIncidentes.Text = txtIncidentes.Text & Incidente & " " & vbCrLf
         Me.Refresh()
     End Sub
 
@@ -179,7 +181,7 @@ Public Class FrmImportar_TC
         Dim vIndice As Long = vComenzar_Registro
         Dim vFinal As Boolean = False
         While vFinal = False
-            If oArchivo.Range("A" & vIndice).Value <> Nothing Then
+            If oArchivo.Range("B" & vIndice).Value <> Nothing Then
                 vIndice = vIndice + 1
             Else
                 vFinal = True
