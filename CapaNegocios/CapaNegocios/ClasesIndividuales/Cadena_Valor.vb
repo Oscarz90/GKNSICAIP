@@ -86,4 +86,13 @@ Public Class Cadena_Valor
 
         Return vDT_Retorno
     End Function
+
+    Public Function Obtener_CV_Usuario(ByVal vCve_Usuario As Long) As DataTable
+        Dim vRetorno As DataTable
+
+        vRetorno = oBD.ObtenerTabla("SELECT * FROM USUARIO_CADENA_VALOR WHERE CVE_Usuario=" & vCve_Usuario)
+
+
+        Return vRetorno
+    End Function
 End Class

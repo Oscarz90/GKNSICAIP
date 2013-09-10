@@ -118,6 +118,15 @@ Public Class Componente
         End If
         Return vDT
     End Function
+
+    Public Function Obtener_Componente_Usuario(ByVal vCve_Usuario As Long) As DataTable
+        Dim vRetorno As DataTable
+
+        vRetorno = oBD.ObtenerTabla("SELECT * FROM USUARIO_COMPONENTE WHERE CVE_Usuario=" & vCve_Usuario)
+
+
+        Return vRetorno
+    End Function
 #End Region
 
 #Region "Metodos Formulario de CDM Cambio de Modelo"
