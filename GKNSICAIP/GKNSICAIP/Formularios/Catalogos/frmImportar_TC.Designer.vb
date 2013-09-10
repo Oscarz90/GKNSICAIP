@@ -30,8 +30,8 @@ Partial Class FrmImportar_TC
         Me.btnCargar = New Telerik.WinControls.UI.RadButton()
         Me.btnSalir = New Telerik.WinControls.UI.RadButton()
         Me.RadPanel1 = New Telerik.WinControls.UI.RadPanel()
-        Me.banner_formulario = New System.Windows.Forms.PictureBox()
         Me.titulo_banner_formulario = New System.Windows.Forms.Label()
+        Me.banner_formulario = New System.Windows.Forms.PictureBox()
         Me.OpenFileDialog1 = New System.Windows.Forms.OpenFileDialog()
         CType(Me.RadLabel1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.txtRuta_Archivo, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -56,6 +56,8 @@ Partial Class FrmImportar_TC
         '
         'txtRuta_Archivo
         '
+        Me.txtRuta_Archivo.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.txtRuta_Archivo.Location = New System.Drawing.Point(12, 97)
         Me.txtRuta_Archivo.Name = "txtRuta_Archivo"
         Me.txtRuta_Archivo.Size = New System.Drawing.Size(584, 20)
@@ -63,10 +65,14 @@ Partial Class FrmImportar_TC
         '
         'txtIncidentes
         '
+        Me.txtIncidentes.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+                    Or System.Windows.Forms.AnchorStyles.Left) _
+                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.txtIncidentes.AutoSize = False
         Me.txtIncidentes.Location = New System.Drawing.Point(12, 205)
         Me.txtIncidentes.Multiline = True
         Me.txtIncidentes.Name = "txtIncidentes"
+        Me.txtIncidentes.ScrollBars = System.Windows.Forms.ScrollBars.Vertical
         Me.txtIncidentes.Size = New System.Drawing.Size(584, 142)
         Me.txtIncidentes.TabIndex = 2
         '
@@ -80,6 +86,7 @@ Partial Class FrmImportar_TC
         '
         'btnValidar_Archivo
         '
+        Me.btnValidar_Archivo.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.btnValidar_Archivo.Location = New System.Drawing.Point(254, 158)
         Me.btnValidar_Archivo.Name = "btnValidar_Archivo"
         Me.btnValidar_Archivo.Size = New System.Drawing.Size(110, 24)
@@ -88,6 +95,7 @@ Partial Class FrmImportar_TC
         '
         'btnCargar
         '
+        Me.btnCargar.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.btnCargar.Location = New System.Drawing.Point(370, 158)
         Me.btnCargar.Name = "btnCargar"
         Me.btnCargar.Size = New System.Drawing.Size(110, 24)
@@ -96,6 +104,7 @@ Partial Class FrmImportar_TC
         '
         'btnSalir
         '
+        Me.btnSalir.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.btnSalir.Location = New System.Drawing.Point(486, 158)
         Me.btnSalir.Name = "btnSalir"
         Me.btnSalir.Size = New System.Drawing.Size(110, 24)
@@ -120,17 +129,6 @@ Partial Class FrmImportar_TC
         Me.RadPanel1.Size = New System.Drawing.Size(608, 361)
         Me.RadPanel1.TabIndex = 7
         '
-        'banner_formulario
-        '
-        Me.banner_formulario.BackColor = System.Drawing.Color.Transparent
-        Me.banner_formulario.BackgroundImage = Global.GKNSICAIP.My.Resources.Resources.banner_03
-        Me.banner_formulario.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
-        Me.banner_formulario.Location = New System.Drawing.Point(0, 0)
-        Me.banner_formulario.Name = "banner_formulario"
-        Me.banner_formulario.Size = New System.Drawing.Size(608, 44)
-        Me.banner_formulario.TabIndex = 106
-        Me.banner_formulario.TabStop = False
-        '
         'titulo_banner_formulario
         '
         Me.titulo_banner_formulario.AutoSize = True
@@ -143,6 +141,19 @@ Partial Class FrmImportar_TC
         Me.titulo_banner_formulario.TabIndex = 107
         Me.titulo_banner_formulario.Text = "Importar Tiempo Ciclo"
         '
+        'banner_formulario
+        '
+        Me.banner_formulario.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.banner_formulario.BackColor = System.Drawing.Color.Transparent
+        Me.banner_formulario.BackgroundImage = Global.GKNSICAIP.My.Resources.Resources.banner_03
+        Me.banner_formulario.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
+        Me.banner_formulario.Location = New System.Drawing.Point(0, 0)
+        Me.banner_formulario.Name = "banner_formulario"
+        Me.banner_formulario.Size = New System.Drawing.Size(608, 44)
+        Me.banner_formulario.TabIndex = 106
+        Me.banner_formulario.TabStop = False
+        '
         'OpenFileDialog1
         '
         Me.OpenFileDialog1.FileName = "OpenFileDialog1"
@@ -153,7 +164,6 @@ Partial Class FrmImportar_TC
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(608, 361)
         Me.Controls.Add(Me.RadPanel1)
-        Me.MinimizeBox = False
         Me.Name = "FrmImportar_TC"
         '
         '
