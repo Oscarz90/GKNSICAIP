@@ -9,6 +9,8 @@ Public Class FrmUsuarios
     Dim vDelete_Eliminar As Boolean = True
     Dim oCadena_Valor As New Cadena_Valor
     Dim oComponente As New Componente
+    Dim oLista_Componentes As New List(Of String)
+    Dim oLista_CV As New List(Of String)
 
     Sub New(Optional ByVal vRegistrar As Boolean = True, Optional ByVal vEliminar As Boolean = True)
         ' Llamada necesaria para el diseñador.
@@ -62,12 +64,17 @@ Public Class FrmUsuarios
             Try
                 oUsuario.Registrar()
                 If opActivar_Nivel.Checked = True Then
-                    oUsuario.Eliminar_Nivel_Usuario(oUsuario.CVE_Usuario)
+                    oUsuario.Eliminar_Nivel_Usuario(oUsuario.CVE_Usuario)                    
                     If radUsuario_Componente.IsChecked = True Then
-                        oUsuario.Registrar_Nivel_Usuario(True, ddlComponente_W.SelectedValue, oUsuario.CVE_Usuario)
+                        For Each vElemento As String In oLista_Componentes
+                            oUsuario.Registrar_Nivel_Usuario(True, Long.Parse(vElemento), oUsuario.CVE_Usuario)
+                        Next
                     Else
-                        oUsuario.Registrar_Nivel_Usuario(False, ddlCadena_Valor_W.SelectedValue, oUsuario.CVE_Usuario)
+                        For Each vElemento As String In oLista_CV
+                            oUsuario.Registrar_Nivel_Usuario(False, Long.Parse(vElemento), oUsuario.CVE_Usuario)
+                        Next
                     End If
+
                 Else
                     oUsuario.Eliminar_Nivel_Usuario(oUsuario.CVE_Usuario)
                 End If
@@ -92,9 +99,13 @@ Public Class FrmUsuarios
                     If opActivar_Nivel.Checked = True Then
                         oUsuario.Eliminar_Nivel_Usuario(oUsuario.CVE_Usuario)
                         If radUsuario_Componente.IsChecked = True Then
-                            oUsuario.Registrar_Nivel_Usuario(True, ddlComponente_W.SelectedValue, oUsuario.CVE_Usuario)
+                            For Each vElemento As String In oLista_Componentes
+                                oUsuario.Registrar_Nivel_Usuario(True, Long.Parse(vElemento), oUsuario.CVE_Usuario)
+                            Next
                         Else
-                            oUsuario.Registrar_Nivel_Usuario(False, ddlCadena_Valor_W.SelectedValue, oUsuario.CVE_Usuario)
+                            For Each vElemento As String In oLista_CV
+                                oUsuario.Registrar_Nivel_Usuario(False, Long.Parse(vElemento), oUsuario.CVE_Usuario)
+                            Next
                         End If
                     End If
                     vId_Retorno = oUsuario.CVE_Usuario
@@ -123,14 +134,18 @@ Public Class FrmUsuarios
             If oUsuario.Cve_Componente <> 0 Then
                 radUsuario_Componente.IsChecked = True
                 ddlComponente_W.Enabled = True
+                btnComponente.Enabled = True
             Else
                 ddlComponente_W.Enabled = False
+                btnComponente.Enabled = False
             End If
             If oUsuario.Cve_CV <> 0 Then
                 radUsuario_CV.IsChecked = True
                 ddlCadena_Valor_W.Enabled = True
+                btnCadena_Valor.Enabled = True
             Else
                 ddlCadena_Valor_W.Enabled = False
+                btnCadena_Valor.Enabled = False
             End If
 
             If oUsuario.Cve_CV = 0 And oUsuario.Cve_Componente = 0 Then
@@ -151,7 +166,7 @@ Public Class FrmUsuarios
             Controles_Permisos(vAdd_Registrar, vDelete_Eliminar)
             opActivar_Nivel.Checked = False
         End If
-        LlenaCombos()
+        'LlenaCombos()
         SetBindings()        
         Me.Show()
         Me.txtId_Usuario.Focus()
@@ -163,15 +178,15 @@ Public Class FrmUsuarios
         Me.txtNombre.DataBindings.Clear()
         Me.txtEmail.DataBindings.Clear()
         Me.txtTipo_Usuario.DataBindings.Clear()
-        Me.ddlCadena_Valor_W.DataBindings.Clear()
-        Me.ddlComponente_W.DataBindings.Clear()
+        'Me.ddlCadena_Valor_W.DataBindings.Clear()
+        'Me.ddlComponente_W.DataBindings.Clear()
 
-        If oUsuario.Cve_Componente <> 0 Then            
-            Me.ddlComponente_W.DataBindings.Add("SelectedValue", oUsuario, "Cve_Componente")
-        End If
-        If oUsuario.Cve_CV <> 0 Then
-            Me.ddlCadena_Valor_W.DataBindings.Add("SelectedValue", oUsuario, "Cve_CV")
-        End If
+        'If oUsuario.Cve_Componente <> 0 Then            
+        '    Me.ddlComponente_W.DataBindings.Add("SelectedValue", oUsuario, "Cve_Componente")
+        'End If
+        'If oUsuario.Cve_CV <> 0 Then
+        '    Me.ddlCadena_Valor_W.DataBindings.Add("SelectedValue", oUsuario, "Cve_CV")
+        'End If
         Me.txtId_Usuario.DataBindings.Add("Text", oUsuario, "Id_Usuario")
         Me.txtPass.DataBindings.Add("Text", oUsuario, "Pass")
         Me.txtNombre.DataBindings.Add("Text", oUsuario, "Nombre")
@@ -180,16 +195,16 @@ Public Class FrmUsuarios
         Me.txtEstatus.DataBindings.Add("Text", oUsuario, "Estatus")
     End Sub
 
-    Private Sub LlenaCombos()
-        Me.ddlCadena_Valor_W.DisplayMember = "cadena"
-        Me.ddlCadena_Valor_W.ValueMember = "cve_cadena_valor"
-        Me.ddlCadena_Valor_W.DataSource = oCadena_Valor.Obtener_Cadenas_Valor
+    'Private Sub LlenaCombos()
+    '    Me.ddlCadena_Valor_W.DisplayMember = "cadena"
+    '    Me.ddlCadena_Valor_W.ValueMember = "cve_cadena_valor"
+    '    Me.ddlCadena_Valor_W.DataSource = oCadena_Valor.Obtener_Cadenas_Valor
 
-        Me.ddlComponente_W.DisplayMember = "componente"
-        Me.ddlComponente_W.ValueMember = "cve_componente"
-        Me.ddlComponente_W.DataSource = oComponente.Obtener_Componentes
+    '    Me.ddlComponente_W.DisplayMember = "componente"
+    '    Me.ddlComponente_W.ValueMember = "cve_componente"
+    '    Me.ddlComponente_W.DataSource = oComponente.Obtener_Componentes
 
-    End Sub
+    'End Sub
 
     Private Sub Controles_Registro_Nuevo(ByVal vEs_Registro_Nuevo As Boolean)
         If vEs_Registro_Nuevo = True Then
@@ -270,9 +285,15 @@ Public Class FrmUsuarios
         If radUsuario_Componente.IsChecked = True Then
             ddlComponente_W.Enabled = True
             ddlCadena_Valor_W.Enabled = False
+
+            btnComponente.Enabled = True
+            btnCadena_Valor.Enabled = False
         Else
             ddlComponente_W.Enabled = False
             ddlCadena_Valor_W.Enabled = True
+
+            btnComponente.Enabled = False
+            btnCadena_Valor.Enabled = True
         End If
     End Sub
 
@@ -283,5 +304,17 @@ Public Class FrmUsuarios
         Else
             rgbGrupo_Nivel.Enabled = False
         End If
+    End Sub
+
+    Private Sub btnComponente_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnComponente.Click
+        Dim ofrmSeleccion_Componente As New FrmSeleccion_Componentes(oUsuario.CVE_Usuario.ToString)
+        ofrmSeleccion_Componente.ShowDialog()
+        oLista_Componentes = ofrmSeleccion_Componente.oRetorno
+    End Sub
+
+    Private Sub btnCadena_Valor_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnCadena_Valor.Click
+        Dim ofrmSeleccion_CV As New FrmSeleccion_CV(oUsuario.CVE_Usuario.ToString)
+        ofrmSeleccion_CV.ShowDialog()
+        oLista_Componentes = ofrmSeleccion_CV.oRetorno
     End Sub
 End Class

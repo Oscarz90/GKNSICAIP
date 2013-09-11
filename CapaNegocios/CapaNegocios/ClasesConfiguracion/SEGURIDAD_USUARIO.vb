@@ -556,14 +556,14 @@ Public Class SEGURIDAD_USUARIO
         Dim vRetorno As Long = 0
         Dim vDR As DataRow
         If vUsuario_CV = True Then
-            vDR = oBD.ObtenerRenglon("SELECT * FROM USUARIO_CADENA_VALOR WHERE CVE_Usuario=" & vID_Usuario, "USUARIO_CADENA_VALOR")
+            vDR = oBD.ObtenerRenglon("SELECT COUNT(CVE_USUARIO_CADENA_VALOR) as TOTAL FROM USUARIO_CADENA_VALOR WHERE CVE_Usuario=" & vID_Usuario, "USUARIO_CADENA_VALOR")
             If vDR IsNot Nothing Then
-                vRetorno = vDR("CVE_Cadena_Valor")
+                vRetorno = vDR("TOTAL")
             End If
         ElseIf vUsuario_Componente = True Then
-            vDR = oBD.ObtenerRenglon("SELECT * FROM USUARIO_COMPONENTE WHERE CVE_Usuario=" & vID_Usuario, "USUARIO_COMPONENTE")
+            vDR = oBD.ObtenerRenglon("SELECT COUNT(CVE_USUARIO_COMPONENTE) as TOTAL FROM USUARIO_COMPONENTE WHERE CVE_Usuario=" & vID_Usuario, "USUARIO_COMPONENTE")
             If vDR IsNot Nothing Then
-                vRetorno = vDR("CVE_Componente")
+                vRetorno = vDR("TOTAL")
             End If
         End If
         Return vRetorno
