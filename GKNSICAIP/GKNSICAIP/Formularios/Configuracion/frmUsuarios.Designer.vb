@@ -154,35 +154,37 @@ Partial Class FrmUsuarios
         '
         'btnCadena_Valor
         '
-        Me.btnCadena_Valor.Location = New System.Drawing.Point(190, 21)
+        Me.btnCadena_Valor.Location = New System.Drawing.Point(99, 21)
         Me.btnCadena_Valor.Name = "btnCadena_Valor"
-        Me.btnCadena_Valor.Size = New System.Drawing.Size(66, 20)
+        Me.btnCadena_Valor.Size = New System.Drawing.Size(157, 20)
         Me.btnCadena_Valor.TabIndex = 5
         Me.btnCadena_Valor.Text = "Seleccionar"
         '
         'btnComponente
         '
-        Me.btnComponente.Location = New System.Drawing.Point(190, 48)
+        Me.btnComponente.Location = New System.Drawing.Point(99, 48)
         Me.btnComponente.Name = "btnComponente"
-        Me.btnComponente.Size = New System.Drawing.Size(66, 20)
+        Me.btnComponente.Size = New System.Drawing.Size(157, 20)
         Me.btnComponente.TabIndex = 130
         Me.btnComponente.Text = "Seleccionar"
         '
         'ddlComponente_W
         '
         Me.ddlComponente_W.FormattingEnabled = True
-        Me.ddlComponente_W.Location = New System.Drawing.Point(97, 46)
+        Me.ddlComponente_W.Location = New System.Drawing.Point(334, 47)
         Me.ddlComponente_W.Name = "ddlComponente_W"
-        Me.ddlComponente_W.Size = New System.Drawing.Size(86, 21)
+        Me.ddlComponente_W.Size = New System.Drawing.Size(26, 21)
         Me.ddlComponente_W.TabIndex = 130
+        Me.ddlComponente_W.Visible = False
         '
         'ddlCadena_Valor_W
         '
         Me.ddlCadena_Valor_W.FormattingEnabled = True
-        Me.ddlCadena_Valor_W.Location = New System.Drawing.Point(97, 21)
+        Me.ddlCadena_Valor_W.Location = New System.Drawing.Point(334, 20)
         Me.ddlCadena_Valor_W.Name = "ddlCadena_Valor_W"
-        Me.ddlCadena_Valor_W.Size = New System.Drawing.Size(86, 21)
+        Me.ddlCadena_Valor_W.Size = New System.Drawing.Size(26, 21)
         Me.ddlCadena_Valor_W.TabIndex = 129
+        Me.ddlCadena_Valor_W.Visible = False
         '
         'radUsuario_Componente
         '

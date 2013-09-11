@@ -23,10 +23,10 @@ Partial Class FrmSeleccion_CV
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.RadPanel1 = New Telerik.WinControls.UI.RadPanel()
+        Me.Lista_Datos_W = New System.Windows.Forms.ListView()
         Me.btnSalir = New Telerik.WinControls.UI.RadButton()
         Me.btnRegistrar = New Telerik.WinControls.UI.RadButton()
         Me.Lista_Datos = New Telerik.WinControls.UI.RadListView()
-        Me.Lista_Datos_W = New System.Windows.Forms.ListView()
         CType(Me.RadPanel1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.RadPanel1.SuspendLayout()
         CType(Me.btnSalir, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -47,6 +47,16 @@ Partial Class FrmSeleccion_CV
         Me.RadPanel1.Name = "RadPanel1"
         Me.RadPanel1.Size = New System.Drawing.Size(454, 474)
         Me.RadPanel1.TabIndex = 0
+        '
+        'Lista_Datos_W
+        '
+        Me.Lista_Datos_W.CheckBoxes = True
+        Me.Lista_Datos_W.Location = New System.Drawing.Point(12, 12)
+        Me.Lista_Datos_W.Name = "Lista_Datos_W"
+        Me.Lista_Datos_W.Size = New System.Drawing.Size(314, 450)
+        Me.Lista_Datos_W.TabIndex = 5
+        Me.Lista_Datos_W.UseCompatibleStateImageBehavior = False
+        Me.Lista_Datos_W.View = System.Windows.Forms.View.List
         '
         'btnSalir
         '
@@ -74,27 +84,21 @@ Partial Class FrmSeleccion_CV
         Me.Lista_Datos.Text = "RadListView1"
         Me.Lista_Datos.Visible = False
         '
-        'Lista_Datos_W
-        '
-        Me.Lista_Datos_W.CheckBoxes = True
-        Me.Lista_Datos_W.Location = New System.Drawing.Point(12, 12)
-        Me.Lista_Datos_W.Name = "Lista_Datos_W"
-        Me.Lista_Datos_W.Size = New System.Drawing.Size(314, 450)
-        Me.Lista_Datos_W.TabIndex = 5
-        Me.Lista_Datos_W.UseCompatibleStateImageBehavior = False
-        Me.Lista_Datos_W.View = System.Windows.Forms.View.List
-        '
         'FrmSeleccion_CV
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(454, 474)
         Me.Controls.Add(Me.RadPanel1)
+        Me.MaximizeBox = False
+        Me.MaximumSize = New System.Drawing.Size(462, 504)
+        Me.MinimumSize = New System.Drawing.Size(462, 504)
         Me.Name = "FrmSeleccion_CV"
         '
         '
         '
         Me.RootElement.ApplyShapeToControl = True
+        Me.RootElement.MaxSize = New System.Drawing.Size(462, 504)
         Me.Text = "Seleccion CV"
         CType(Me.RadPanel1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.RadPanel1.ResumeLayout(False)

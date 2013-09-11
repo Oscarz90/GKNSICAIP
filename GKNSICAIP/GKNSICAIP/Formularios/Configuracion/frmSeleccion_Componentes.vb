@@ -36,7 +36,7 @@ Public Class FrmSeleccion_Componentes
 
         If oComponente.Obtener_Componente_Usuario(oUsuario.CVE_Usuario) IsNot Nothing Then
 
-            For vIndex = 0 To Lista_Datos_W.Items.Count
+            For vIndex = 0 To Lista_Datos_W.Items.Count - 1
                 For Each vdr As DataRow In oComponente.Obtener_Componente_Usuario(oUsuario.CVE_Usuario).Rows
                     If Lista_Datos_W.Items.Item(vIndex).Tag = vdr("cve_componente") Then
                         Lista_Datos_W.Items.Item(vIndex).Checked = True
