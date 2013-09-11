@@ -80,7 +80,16 @@ Public Class SEGURIDAD_USUARIO
     End Sub
 
     Public Function Obtener_Id(ByVal vCadena As String) As Long Implements IIndividual.Obtener_Id
-        Return 1
+        Dim vRetorno As Long = 0
+
+        Dim vDR As DataRow = oBD.ObtenerRenglon("SELECT * FROM SEGURIDAD_USUARIO WHERE Id_Usuario='" & vCadena & "'", "")
+        If vDR IsNot Nothing Then
+            vRetorno = vDR("CVE_Usuario")
+        Else
+            vRetorno = 0
+        End If
+
+        Return vRetorno
     End Function
 
     Public Sub Registrar() Implements IIndividual.Registrar
