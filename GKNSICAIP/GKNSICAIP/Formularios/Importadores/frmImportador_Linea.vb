@@ -3,6 +3,7 @@ Public Class frmImportador_Linea
 
     Public vRetorno_CVE_Linea As Long
     Dim oLinea As New Linea
+    Dim oModelo As New Modelo
     Dim vCVE_Modelo_FILTRO As Long
     'Dim vRowSeleccionada As Integer = 0
 
@@ -15,7 +16,14 @@ Public Class frmImportador_Linea
 
 #Region "Eventos Controles"
     Private Sub frmImportador_Individual_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
-        Cargar_Tabla(False)
+        If vCVE_Modelo_FILTRO = 0 Then
+            Cargar_Tabla(False)
+        Else
+            oModelo.cve_modelo = vCVE_Modelo_FILTRO
+            oModelo.Cargar()
+            Cargar_Tabla(False)
+        End If
+
         Me.btnImportar.Enabled = False
     End Sub
 
@@ -70,7 +78,7 @@ Public Class frmImportador_Linea
         If vTiene_Filtro = True Then
             Me.dgvDatos.DataSource = oLinea.Obtener_Lineas(vFiltro, vCVE_Modelo_FILTRO)
         Else
-            Me.dgvDatos.DataSource = oLinea.Obtener_Lineas(vCVE_Modelo_FILTRO)
+            Me.dgvDatos.DataSource = oLinea.Obtener_Lineas(oModelo.cve_componente)
         End If
         If dgvDatos.RowCount = 0 Then
             btnImportar.Enabled = False
