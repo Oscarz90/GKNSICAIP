@@ -38,17 +38,23 @@ Public Class FrmGraficasfaseuno
         End If
         oGraficasfaseuno.obtiene_nivel_graficos()
         Dim value As String = oGraficasfaseuno.nivel_grafico
+        cve_usuario = oGraficasfaseuno.cve_usuario
         Select Case value
             Case "Planta"
                 llena_formulario_Nivel_Planta()
+                tipo_nivel_planta()
             Case "CadenaValor"
                 llena_formulario_Nivel_Cadena_Valor()
+                tipo_nivel_cadena_valor()
             Case "Componente"
                 llena_formulario_Nivel_Componente()
+                tipo_nivel_componente()
             Case "LG"
                 llena_formulario_Nivel_LG()
+                tipo_nivel_lg()
             Case "LET"
                 llena_formulario_Nivel_LET()
+                tipo_nivel_let()
             Case Else
                 'MsgBox("no se q pedo")
         End Select

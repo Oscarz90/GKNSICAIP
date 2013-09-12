@@ -31,6 +31,10 @@ Partial Class FrmGraficasfaseuno
         Me.rdbtnNrfti = New Telerik.WinControls.UI.RadRadioButton()
         Me.rdbtnOee = New Telerik.WinControls.UI.RadRadioButton()
         Me.RadGroupBox2 = New Telerik.WinControls.UI.RadGroupBox()
+        Me.cbxLinea = New System.Windows.Forms.ComboBox()
+        Me.cbxEquipo = New System.Windows.Forms.ComboBox()
+        Me.cbxComponente = New System.Windows.Forms.ComboBox()
+        Me.cbxCadenaValor = New System.Windows.Forms.ComboBox()
         Me.chkTodasLineas = New Telerik.WinControls.UI.RadCheckBox()
         Me.chkTodosEquipos = New Telerik.WinControls.UI.RadCheckBox()
         Me.rdbtnLinea = New Telerik.WinControls.UI.RadRadioButton()
@@ -47,10 +51,6 @@ Partial Class FrmGraficasfaseuno
         Me.rdbtnDias = New Telerik.WinControls.UI.RadRadioButton()
         Me.radChartView1 = New Telerik.WinControls.UI.RadChartView()
         Me.btnGraficar = New Telerik.WinControls.UI.RadButton()
-        Me.cbxCadenaValor = New System.Windows.Forms.ComboBox()
-        Me.cbxComponente = New System.Windows.Forms.ComboBox()
-        Me.cbxEquipo = New System.Windows.Forms.ComboBox()
-        Me.cbxLinea = New System.Windows.Forms.ComboBox()
         CType(Me.RadGroupBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.RadGroupBox1.SuspendLayout()
         CType(Me.rdbtnGente, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -175,6 +175,42 @@ Partial Class FrmGraficasfaseuno
         Me.RadGroupBox2.TabIndex = 4
         Me.RadGroupBox2.Text = "Selecciona:"
         Me.RadGroupBox2.ThemeName = "RadThemeManager"
+        '
+        'cbxLinea
+        '
+        Me.cbxLinea.Enabled = False
+        Me.cbxLinea.FormattingEnabled = True
+        Me.cbxLinea.Location = New System.Drawing.Point(112, 130)
+        Me.cbxLinea.Name = "cbxLinea"
+        Me.cbxLinea.Size = New System.Drawing.Size(241, 21)
+        Me.cbxLinea.TabIndex = 13
+        '
+        'cbxEquipo
+        '
+        Me.cbxEquipo.Enabled = False
+        Me.cbxEquipo.FormattingEnabled = True
+        Me.cbxEquipo.Location = New System.Drawing.Point(112, 106)
+        Me.cbxEquipo.Name = "cbxEquipo"
+        Me.cbxEquipo.Size = New System.Drawing.Size(241, 21)
+        Me.cbxEquipo.TabIndex = 12
+        '
+        'cbxComponente
+        '
+        Me.cbxComponente.Enabled = False
+        Me.cbxComponente.FormattingEnabled = True
+        Me.cbxComponente.Location = New System.Drawing.Point(112, 82)
+        Me.cbxComponente.Name = "cbxComponente"
+        Me.cbxComponente.Size = New System.Drawing.Size(241, 21)
+        Me.cbxComponente.TabIndex = 11
+        '
+        'cbxCadenaValor
+        '
+        Me.cbxCadenaValor.Enabled = False
+        Me.cbxCadenaValor.FormattingEnabled = True
+        Me.cbxCadenaValor.Location = New System.Drawing.Point(112, 58)
+        Me.cbxCadenaValor.Name = "cbxCadenaValor"
+        Me.cbxCadenaValor.Size = New System.Drawing.Size(241, 21)
+        Me.cbxCadenaValor.TabIndex = 10
         '
         'chkTodasLineas
         '
@@ -334,38 +370,6 @@ Partial Class FrmGraficasfaseuno
         Me.btnGraficar.Text = "Graficar"
         Me.btnGraficar.TextAlignment = System.Drawing.ContentAlignment.BottomCenter
         Me.btnGraficar.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText
-        '
-        'cbxCadenaValor
-        '
-        Me.cbxCadenaValor.FormattingEnabled = True
-        Me.cbxCadenaValor.Location = New System.Drawing.Point(112, 58)
-        Me.cbxCadenaValor.Name = "cbxCadenaValor"
-        Me.cbxCadenaValor.Size = New System.Drawing.Size(241, 21)
-        Me.cbxCadenaValor.TabIndex = 10
-        '
-        'cbxComponente
-        '
-        Me.cbxComponente.FormattingEnabled = True
-        Me.cbxComponente.Location = New System.Drawing.Point(112, 82)
-        Me.cbxComponente.Name = "cbxComponente"
-        Me.cbxComponente.Size = New System.Drawing.Size(241, 21)
-        Me.cbxComponente.TabIndex = 11
-        '
-        'cbxEquipo
-        '
-        Me.cbxEquipo.FormattingEnabled = True
-        Me.cbxEquipo.Location = New System.Drawing.Point(112, 106)
-        Me.cbxEquipo.Name = "cbxEquipo"
-        Me.cbxEquipo.Size = New System.Drawing.Size(241, 21)
-        Me.cbxEquipo.TabIndex = 12
-        '
-        'cbxLinea
-        '
-        Me.cbxLinea.FormattingEnabled = True
-        Me.cbxLinea.Location = New System.Drawing.Point(112, 130)
-        Me.cbxLinea.Name = "cbxLinea"
-        Me.cbxLinea.Size = New System.Drawing.Size(241, 21)
-        Me.cbxLinea.TabIndex = 13
         '
         'FrmGraficasfaseuno
         '
