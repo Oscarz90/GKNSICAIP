@@ -10,6 +10,12 @@ Public Class FrmGraficasfaseuno
     Private nivel_cadena_valors As Boolean = False
     Private nivel_planta_gkn As Boolean = False
 #End Region
+    Public Sub New()
+        ' Llamada necesaria para el diseñador.
+        InitializeComponent()
+        ' Agregue cualquier inicialización después de la llamada a InitializeComponent().
+
+    End Sub
     Private Sub FrmGraficasfaseuno_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         'tipo_nivel_let()
         'tipo_nivel_lg()
