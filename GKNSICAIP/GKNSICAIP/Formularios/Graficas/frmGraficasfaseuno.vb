@@ -1430,6 +1430,7 @@ Public Class FrmGraficasfaseuno
         'oNivel_let.cve_lider = cve_usuario
         'llena_cbx_Equipo(oNivel_lg.nivel_lg_equipos)
     End Sub
+
 #End Region
 #Region "Llena combobox"
     Private Sub llena_cbx_CadenaValor(ByVal source As DataTable)
@@ -1454,6 +1455,14 @@ Public Class FrmGraficasfaseuno
         cbxLinea.ValueMember = "cve_linea"
         cbxLinea.DisplayMember = "linea"
         cbxLinea.DataSource = source
+        cbxLinea.SelectedIndex = -1
+    End Sub
+    Private Sub llena_cbx_equipo_linea()
+        Dim oEquipoLinea As New CapaNegocios.EquipoLinea
+        oEquipoLinea.cve_equipo = cbxEquipo.SelectedValue
+        cbxLinea.ValueMember = "cve_linea"
+        cbxLinea.DisplayMember = "linea"
+        cbxLinea.DataSource = oEquipoLinea.llena_combo_lineas()
         cbxLinea.SelectedIndex = -1
     End Sub
 #End Region
@@ -1501,7 +1510,7 @@ Public Class FrmGraficasfaseuno
                 Return False
             End If
         ElseIf rdbtnEquipo.IsChecked Then
-            If cbxEquipo.SelectedIndex <> -1 Or chkTodosEquipos.Checked = True Then
+            If cbxEquipo.SelectedIndex <> -1 Then
                 Return True
             Else
                 Return False
@@ -1524,7 +1533,7 @@ Public Class FrmGraficasfaseuno
     Private Function valida_dtp_rango_fechas_dia() As Boolean
         If dtpFechaFinal.Value >= dtpFechaInicial.Value Then
             Dim Diasdiferencia As Long = DateDiff(DateInterval.Day, dtpFechaInicial.Value, dtpFechaFinal.Value)
-            If Diasdiferencia > 30 Then
+            If Diasdiferencia > 31 Then
                 Return False
             Else
                 Return True
@@ -1555,7 +1564,7 @@ Public Class FrmGraficasfaseuno
         End If
     End Sub
 #End Region
-#Region "Eventos RadioButton Niveles"
+#Region "Eventos RadioButton Combobox Niveles"
     Private Sub rdbtnNiveles_ToggleStateChanged(ByVal sender As System.Object, ByVal args As Telerik.WinControls.UI.StateChangedEventArgs) Handles rdbtnCadenaValor.ToggleStateChanged, rdbtnComponente.ToggleStateChanged, rdbtnLinea.ToggleStateChanged, rdbtnEquipo.ToggleStateChanged
         'Cadena valor
         If rdbtnCadenaValor.IsChecked Then
@@ -1612,6 +1621,12 @@ Public Class FrmGraficasfaseuno
         valida_btn_graficar()
     End Sub
     Private Sub rdbtnOee_ToggleStateChanged(ByVal sender As System.Object, ByVal args As Telerik.WinControls.UI.StateChangedEventArgs) Handles rdbtnOee.ToggleStateChanged, rdbtnNrfti.ToggleStateChanged, rdbtnCosto.ToggleStateChanged, rdbtnSeguridad.ToggleStateChanged, rdbtnGente.ToggleStateChanged, rdbtnCincoS.ToggleStateChanged
+        valida_btn_graficar()
+    End Sub
+    Private Sub cbxNiveles_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cbxCadenaValor.SelectedIndexChanged, cbxComponente.SelectedIndexChanged, cbxEquipo.SelectedIndexChanged, cbxLinea.SelectedIndexChanged
+        If rdbtnEquipo.IsChecked And cbxEquipo.SelectedIndex <> -1 Then
+            llena_cbx_equipo_linea()
+        End If
         valida_btn_graficar()
     End Sub
 #End Region
@@ -3933,4 +3948,6 @@ Public Class FrmGraficasfaseuno
     Private Sub btnGraficar_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnGraficar.Click
         obtiene_costo_planta_dia_mes()
     End Sub
+
+    
 End Class

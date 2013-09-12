@@ -36,7 +36,6 @@ Partial Class FrmGraficasfaseuno
         Me.cbxComponente = New System.Windows.Forms.ComboBox()
         Me.cbxCadenaValor = New System.Windows.Forms.ComboBox()
         Me.chkTodasLineas = New Telerik.WinControls.UI.RadCheckBox()
-        Me.chkTodosEquipos = New Telerik.WinControls.UI.RadCheckBox()
         Me.rdbtnLinea = New Telerik.WinControls.UI.RadRadioButton()
         Me.rdbtnComponente = New Telerik.WinControls.UI.RadRadioButton()
         Me.rdbtnEquipo = New Telerik.WinControls.UI.RadRadioButton()
@@ -62,7 +61,6 @@ Partial Class FrmGraficasfaseuno
         CType(Me.RadGroupBox2, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.RadGroupBox2.SuspendLayout()
         CType(Me.chkTodasLineas, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.chkTodosEquipos, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.rdbtnLinea, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.rdbtnComponente, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.rdbtnEquipo, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -158,7 +156,6 @@ Partial Class FrmGraficasfaseuno
         Me.RadGroupBox2.Controls.Add(Me.cbxComponente)
         Me.RadGroupBox2.Controls.Add(Me.cbxCadenaValor)
         Me.RadGroupBox2.Controls.Add(Me.chkTodasLineas)
-        Me.RadGroupBox2.Controls.Add(Me.chkTodosEquipos)
         Me.RadGroupBox2.Controls.Add(Me.rdbtnLinea)
         Me.RadGroupBox2.Controls.Add(Me.rdbtnComponente)
         Me.RadGroupBox2.Controls.Add(Me.rdbtnEquipo)
@@ -220,15 +217,6 @@ Partial Class FrmGraficasfaseuno
         Me.chkTodasLineas.TabIndex = 7
         Me.chkTodasLineas.Text = "Todas"
         Me.chkTodasLineas.Visible = False
-        '
-        'chkTodosEquipos
-        '
-        Me.chkTodosEquipos.Location = New System.Drawing.Point(359, 109)
-        Me.chkTodosEquipos.Name = "chkTodosEquipos"
-        Me.chkTodosEquipos.Size = New System.Drawing.Size(50, 18)
-        Me.chkTodosEquipos.TabIndex = 9
-        Me.chkTodosEquipos.Text = "Todas"
-        Me.chkTodosEquipos.Visible = False
         '
         'rdbtnLinea
         '
@@ -405,7 +393,6 @@ Partial Class FrmGraficasfaseuno
         Me.RadGroupBox2.ResumeLayout(False)
         Me.RadGroupBox2.PerformLayout()
         CType(Me.chkTodasLineas, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.chkTodosEquipos, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.rdbtnLinea, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.rdbtnComponente, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.rdbtnEquipo, System.ComponentModel.ISupportInitialize).EndInit()
@@ -448,7 +435,6 @@ Partial Class FrmGraficasfaseuno
     Friend WithEvents dtpFechaFinal As Telerik.WinControls.UI.RadDateTimePicker
     Friend WithEvents btnGraficar As Telerik.WinControls.UI.RadButton
     Friend WithEvents chkTodasLineas As Telerik.WinControls.UI.RadCheckBox
-    Friend WithEvents chkTodosEquipos As Telerik.WinControls.UI.RadCheckBox
     Friend WithEvents radChartView1 As Telerik.WinControls.UI.RadChartView
     Friend WithEvents cbxCadenaValor As System.Windows.Forms.ComboBox
     Friend WithEvents cbxLinea As System.Windows.Forms.ComboBox
