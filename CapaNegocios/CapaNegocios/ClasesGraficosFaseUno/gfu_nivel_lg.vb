@@ -4,7 +4,6 @@ Public Class gfu_nivel_lg
     Dim cadena_conexion As New CapaDatos.conexiones
     Dim oBD As New CapaDatos.CapaDatos(cadena_conexion.CadenaSicaip)
 #Region "Propiedades"
-
     Private vcve_lider As Long
     Public Property cve_lider() As Long
         Get

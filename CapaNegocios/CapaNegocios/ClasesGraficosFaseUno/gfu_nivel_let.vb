@@ -1,10 +1,9 @@
 ﻿Imports CapaDatos
-Public Class gfu_nivel_lg
+Public Class gfu_nivel_let
     Implements IIndividual
     Dim cadena_conexion As New CapaDatos.conexiones
     Dim oBD As New CapaDatos.CapaDatos(cadena_conexion.CadenaSicaip)
 #Region "Propiedades"
-
     Private vcve_lider As Long
     Public Property cve_lider() As Long
         Get
@@ -17,13 +16,9 @@ Public Class gfu_nivel_lg
 #End Region
 #Region "IIndividual"
     Public Sub Cargar() Implements IIndividual.Cargar
-
     End Sub
-
     Public Sub Eliminar() Implements IIndividual.Eliminar
-
     End Sub
-
     Public Property Id As Long Implements IIndividual.Id
         Get
             Return 1
@@ -32,13 +27,10 @@ Public Class gfu_nivel_lg
             value = 1
         End Set
     End Property
-
     Public Function Obtener_Id(ByVal vCadena As String) As Long Implements IIndividual.Obtener_Id
         Return 1
     End Function
-
     Public Sub Registrar() Implements IIndividual.Registrar
-
     End Sub
 #End Region
 #Region "Metodos Graficos Fase Uno"

@@ -1,15 +1,18 @@
 ﻿Imports CapaNegocios
 Imports Telerik.WinControls.UI
 Imports Telerik.Charting
-
 Public Class FrmGraficasfaseuno
 #Region "Variables globales"
+    Private cod_empleado As String
+    Private cve_usuario As Long
+    'Banderas
     Private nivel_lets As Boolean = False
     Private nivel_lgs As Boolean = False
     Private nivel_componentes As Boolean = False
     Private nivel_cadena_valors As Boolean = False
     Private nivel_planta_gkn As Boolean = False
 #End Region
+#Region "Inicializa formulario"
     Public Sub New()
         ' Llamada necesaria para el diseñador.
         InitializeComponent()
@@ -17,20 +20,1435 @@ Public Class FrmGraficasfaseuno
 
     End Sub
     Private Sub FrmGraficasfaseuno_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
-        'tipo_nivel_let()
-        'tipo_nivel_lg()
-        'tipo_nivel_componente()
-        'tipo_nivel_cadena_valor()
-        'tipo_nivel_planta()
-        'Dim user_maq As String
-        'user_maq = Environment.UserName
-        'MsgBox(user_maq)
+        obtiene_nivel_graficos()
         inicializa_formulario()
     End Sub
-#Region "Inicializa formulario"
     Private Sub inicializa_formulario()
         dtpFechaInicial.Format = System.Windows.Forms.DateTimePickerFormat.Custom
         dtpFechaFinal.Format = System.Windows.Forms.DateTimePickerFormat.Custom
+    End Sub
+    'Nivel Grafico
+    Private Sub obtiene_nivel_graficos()
+        Dim oGraficasfaseuno As New Graficasfaseuno
+        oGraficasfaseuno.usuario = Environment.UserName
+        If cod_empleado Is Nothing Then
+            oGraficasfaseuno.cod_empleado = ""
+        Else
+            oGraficasfaseuno.cod_empleado = cod_empleado
+        End If
+        oGraficasfaseuno.obtiene_nivel_graficos()
+        Dim value As String = oGraficasfaseuno.nivel_grafico
+        Select Case value
+            Case "Planta"
+                llena_formulario_Nivel_Planta()
+            Case "CadenaValor"
+                llena_formulario_Nivel_Cadena_Valor()
+            Case "Componente"
+                llena_formulario_Nivel_Componente()
+            Case "LG"
+                llena_formulario_Nivel_LG()
+            Case "LET"
+                llena_formulario_Nivel_LET()
+            Case Else
+                'MsgBox("no se q pedo")
+        End Select
+    End Sub
+#End Region
+#Region "Habilitar Niveles Graficos- Categorias"
+    'Lets
+    Private Sub tipo_nivel_let()
+        rdbtnPlanta.Enabled = False
+        rdbtnCadenaValor.Enabled = False
+        rdbtnComponente.Enabled = False
+        rdbtnEquipo.Enabled = False
+        nivel_lets = True
+    End Sub
+    'LG
+    Private Sub tipo_nivel_lg()
+        rdbtnPlanta.Enabled = False
+        rdbtnCadenaValor.Enabled = False
+        rdbtnComponente.Enabled = False
+        rdbtnLinea.Enabled = False
+        nivel_lgs = True
+    End Sub
+    'Componente
+    Private Sub tipo_nivel_componente()
+        rdbtnPlanta.Enabled = False
+        rdbtnCadenaValor.Enabled = False
+        nivel_componentes = True
+    End Sub
+    'Cadena Valor
+    Private Sub tipo_nivel_cadena_valor()
+        rdbtnPlanta.Enabled = False
+        nivel_cadena_valors = True
+    End Sub
+    'Planta
+    Private Sub tipo_nivel_planta()
+        nivel_planta_gkn = True
+    End Sub
+#End Region
+#Region "Metodos Graficar Niveles"
+    'GERENTE
+    Private Sub graficos_gerente()
+        'oee
+        If rdbtnOee.IsChecked Then
+            'Planta
+            If rdbtnPlanta.IsChecked Then
+                If rdbtnDias.IsChecked Then
+                    obtiene_oee_planta_dia_mes()
+                ElseIf rdbtnMeses.IsChecked Then
+                    obtiene_oee_planta_dia_mes()
+                End If
+            End If
+            'Cadena Valor
+            If rdbtnCadenaValor.IsChecked Then
+                If rdbtnDias.IsChecked Then
+
+                ElseIf rdbtnMeses.IsChecked Then
+
+                End If
+            End If
+            'Componente
+            If rdbtnComponente.IsChecked Then
+                If rdbtnDias.IsChecked Then
+
+                ElseIf rdbtnMeses.IsChecked Then
+
+                End If
+            End If
+            'Linea
+            If rdbtnLinea.IsChecked Then
+                If rdbtnDias.IsChecked Then
+
+                ElseIf rdbtnMeses.IsChecked Then
+
+                End If
+            End If
+            'Equipo
+            If rdbtnEquipo.IsChecked Then
+                If rdbtnDias.IsChecked Then
+
+                ElseIf rdbtnMeses.IsChecked Then
+
+                End If
+            End If
+        End If
+        'Nrfti
+        If rdbtnNrfti.IsChecked Then
+            'Planta
+            If rdbtnPlanta.IsChecked Then
+                If rdbtnDias.IsChecked Then
+
+                ElseIf rdbtnMeses.IsChecked Then
+
+                End If
+            End If
+            'Cadena Valor
+            If rdbtnCadenaValor.IsChecked Then
+                If rdbtnDias.IsChecked Then
+
+                ElseIf rdbtnMeses.IsChecked Then
+
+                End If
+            End If
+            'Componente
+            If rdbtnComponente.IsChecked Then
+                If rdbtnDias.IsChecked Then
+
+                ElseIf rdbtnMeses.IsChecked Then
+
+                End If
+            End If
+            'Linea
+            If rdbtnLinea.IsChecked Then
+                If rdbtnDias.IsChecked Then
+
+                ElseIf rdbtnMeses.IsChecked Then
+
+                End If
+            End If
+            'Equipo
+            If rdbtnEquipo.IsChecked Then
+                If rdbtnDias.IsChecked Then
+
+                ElseIf rdbtnMeses.IsChecked Then
+
+                End If
+            End If
+        End If
+        'Costo
+        If rdbtnCosto.IsChecked Then
+            'Planta
+            If rdbtnPlanta.IsChecked Then
+                If rdbtnDias.IsChecked Then
+
+                ElseIf rdbtnMeses.IsChecked Then
+
+                End If
+            End If
+            'Cadena Valor
+            If rdbtnCadenaValor.IsChecked Then
+                If rdbtnDias.IsChecked Then
+
+                ElseIf rdbtnMeses.IsChecked Then
+
+                End If
+            End If
+            'Componente
+            If rdbtnComponente.IsChecked Then
+                If rdbtnDias.IsChecked Then
+
+                ElseIf rdbtnMeses.IsChecked Then
+
+                End If
+            End If
+            'Linea
+            If rdbtnLinea.IsChecked Then
+                If rdbtnDias.IsChecked Then
+
+                ElseIf rdbtnMeses.IsChecked Then
+
+                End If
+            End If
+            'Equipo
+            If rdbtnEquipo.IsChecked Then
+                If rdbtnDias.IsChecked Then
+
+                ElseIf rdbtnMeses.IsChecked Then
+
+                End If
+            End If
+        End If
+        'Seguridad
+        If rdbtnSeguridad.IsChecked Then
+            'Planta
+            If rdbtnPlanta.IsChecked Then
+                If rdbtnDias.IsChecked Then
+
+                ElseIf rdbtnMeses.IsChecked Then
+
+                End If
+            End If
+            'Cadena Valor
+            If rdbtnCadenaValor.IsChecked Then
+                If rdbtnDias.IsChecked Then
+
+                ElseIf rdbtnMeses.IsChecked Then
+
+                End If
+            End If
+            'Componente
+            If rdbtnComponente.IsChecked Then
+                If rdbtnDias.IsChecked Then
+
+                ElseIf rdbtnMeses.IsChecked Then
+
+                End If
+            End If
+            'Linea
+            If rdbtnLinea.IsChecked Then
+                If rdbtnDias.IsChecked Then
+
+                ElseIf rdbtnMeses.IsChecked Then
+
+                End If
+            End If
+            'Equipo
+            If rdbtnEquipo.IsChecked Then
+                If rdbtnDias.IsChecked Then
+
+                ElseIf rdbtnMeses.IsChecked Then
+
+                End If
+            End If
+        End If
+        'Gente
+        If rdbtnGente.IsChecked Then
+            'Planta
+            If rdbtnPlanta.IsChecked Then
+                If rdbtnDias.IsChecked Then
+
+                ElseIf rdbtnMeses.IsChecked Then
+
+                End If
+            End If
+            'Cadena Valor
+            If rdbtnCadenaValor.IsChecked Then
+                If rdbtnDias.IsChecked Then
+
+                ElseIf rdbtnMeses.IsChecked Then
+
+                End If
+            End If
+            'Componente
+            If rdbtnComponente.IsChecked Then
+                If rdbtnDias.IsChecked Then
+
+                ElseIf rdbtnMeses.IsChecked Then
+
+                End If
+            End If
+            'Linea
+            If rdbtnLinea.IsChecked Then
+                If rdbtnDias.IsChecked Then
+
+                ElseIf rdbtnMeses.IsChecked Then
+
+                End If
+            End If
+            'Equipo
+            If rdbtnEquipo.IsChecked Then
+                If rdbtnDias.IsChecked Then
+
+                ElseIf rdbtnMeses.IsChecked Then
+
+                End If
+            End If
+        End If
+        '5s
+        If rdbtnCincoS.IsChecked Then
+            'Planta
+            If rdbtnPlanta.IsChecked Then
+                If rdbtnDias.IsChecked Then
+
+                ElseIf rdbtnMeses.IsChecked Then
+
+                End If
+            End If
+            'Cadena Valor
+            If rdbtnCadenaValor.IsChecked Then
+                If rdbtnDias.IsChecked Then
+
+                ElseIf rdbtnMeses.IsChecked Then
+
+                End If
+            End If
+            'Componente
+            If rdbtnComponente.IsChecked Then
+                If rdbtnDias.IsChecked Then
+
+                ElseIf rdbtnMeses.IsChecked Then
+
+                End If
+            End If
+            'Linea
+            If rdbtnLinea.IsChecked Then
+                If rdbtnDias.IsChecked Then
+
+                ElseIf rdbtnMeses.IsChecked Then
+
+                End If
+            End If
+            'Equipo
+            If rdbtnEquipo.IsChecked Then
+                If rdbtnDias.IsChecked Then
+
+                ElseIf rdbtnMeses.IsChecked Then
+
+                End If
+            End If
+        End If
+    End Sub
+    'SCIL
+    Private Sub graficos_scil()
+        'oee
+        If rdbtnOee.IsChecked Then
+            'Planta
+            If rdbtnPlanta.IsChecked Then
+                If rdbtnDias.IsChecked Then
+
+                ElseIf rdbtnMeses.IsChecked Then
+
+                End If
+            End If
+            'Cadena Valor
+            If rdbtnCadenaValor.IsChecked Then
+                If rdbtnDias.IsChecked Then
+
+                ElseIf rdbtnMeses.IsChecked Then
+
+                End If
+            End If
+            'Componente
+            If rdbtnComponente.IsChecked Then
+                If rdbtnDias.IsChecked Then
+
+                ElseIf rdbtnMeses.IsChecked Then
+
+                End If
+            End If
+            'Linea
+            If rdbtnLinea.IsChecked Then
+                If rdbtnDias.IsChecked Then
+
+                ElseIf rdbtnMeses.IsChecked Then
+
+                End If
+            End If
+            'Equipo
+            If rdbtnEquipo.IsChecked Then
+                If rdbtnDias.IsChecked Then
+
+                ElseIf rdbtnMeses.IsChecked Then
+
+                End If
+            End If
+        End If
+        'Nrfti
+        If rdbtnNrfti.IsChecked Then
+            'Planta
+            If rdbtnPlanta.IsChecked Then
+                If rdbtnDias.IsChecked Then
+
+                ElseIf rdbtnMeses.IsChecked Then
+
+                End If
+            End If
+            'Cadena Valor
+            If rdbtnCadenaValor.IsChecked Then
+                If rdbtnDias.IsChecked Then
+
+                ElseIf rdbtnMeses.IsChecked Then
+
+                End If
+            End If
+            'Componente
+            If rdbtnComponente.IsChecked Then
+                If rdbtnDias.IsChecked Then
+
+                ElseIf rdbtnMeses.IsChecked Then
+
+                End If
+            End If
+            'Linea
+            If rdbtnLinea.IsChecked Then
+                If rdbtnDias.IsChecked Then
+
+                ElseIf rdbtnMeses.IsChecked Then
+
+                End If
+            End If
+            'Equipo
+            If rdbtnEquipo.IsChecked Then
+                If rdbtnDias.IsChecked Then
+
+                ElseIf rdbtnMeses.IsChecked Then
+
+                End If
+            End If
+        End If
+        'Costo
+        If rdbtnCosto.IsChecked Then
+            'Planta
+            If rdbtnPlanta.IsChecked Then
+                If rdbtnDias.IsChecked Then
+
+                ElseIf rdbtnMeses.IsChecked Then
+
+                End If
+            End If
+            'Cadena Valor
+            If rdbtnCadenaValor.IsChecked Then
+                If rdbtnDias.IsChecked Then
+
+                ElseIf rdbtnMeses.IsChecked Then
+
+                End If
+            End If
+            'Componente
+            If rdbtnComponente.IsChecked Then
+                If rdbtnDias.IsChecked Then
+
+                ElseIf rdbtnMeses.IsChecked Then
+
+                End If
+            End If
+            'Linea
+            If rdbtnLinea.IsChecked Then
+                If rdbtnDias.IsChecked Then
+
+                ElseIf rdbtnMeses.IsChecked Then
+
+                End If
+            End If
+            'Equipo
+            If rdbtnEquipo.IsChecked Then
+                If rdbtnDias.IsChecked Then
+
+                ElseIf rdbtnMeses.IsChecked Then
+
+                End If
+            End If
+        End If
+        'Seguridad
+        If rdbtnSeguridad.IsChecked Then
+            'Planta
+            If rdbtnPlanta.IsChecked Then
+                If rdbtnDias.IsChecked Then
+
+                ElseIf rdbtnMeses.IsChecked Then
+
+                End If
+            End If
+            'Cadena Valor
+            If rdbtnCadenaValor.IsChecked Then
+                If rdbtnDias.IsChecked Then
+
+                ElseIf rdbtnMeses.IsChecked Then
+
+                End If
+            End If
+            'Componente
+            If rdbtnComponente.IsChecked Then
+                If rdbtnDias.IsChecked Then
+
+                ElseIf rdbtnMeses.IsChecked Then
+
+                End If
+            End If
+            'Linea
+            If rdbtnLinea.IsChecked Then
+                If rdbtnDias.IsChecked Then
+
+                ElseIf rdbtnMeses.IsChecked Then
+
+                End If
+            End If
+            'Equipo
+            If rdbtnEquipo.IsChecked Then
+                If rdbtnDias.IsChecked Then
+
+                ElseIf rdbtnMeses.IsChecked Then
+
+                End If
+            End If
+        End If
+        'Gente
+        If rdbtnGente.IsChecked Then
+            'Planta
+            If rdbtnPlanta.IsChecked Then
+                If rdbtnDias.IsChecked Then
+
+                ElseIf rdbtnMeses.IsChecked Then
+
+                End If
+            End If
+            'Cadena Valor
+            If rdbtnCadenaValor.IsChecked Then
+                If rdbtnDias.IsChecked Then
+
+                ElseIf rdbtnMeses.IsChecked Then
+
+                End If
+            End If
+            'Componente
+            If rdbtnComponente.IsChecked Then
+                If rdbtnDias.IsChecked Then
+
+                ElseIf rdbtnMeses.IsChecked Then
+
+                End If
+            End If
+            'Linea
+            If rdbtnLinea.IsChecked Then
+                If rdbtnDias.IsChecked Then
+
+                ElseIf rdbtnMeses.IsChecked Then
+
+                End If
+            End If
+            'Equipo
+            If rdbtnEquipo.IsChecked Then
+                If rdbtnDias.IsChecked Then
+
+                ElseIf rdbtnMeses.IsChecked Then
+
+                End If
+            End If
+        End If
+        '5s
+        If rdbtnCincoS.IsChecked Then
+            'Planta
+            If rdbtnPlanta.IsChecked Then
+                If rdbtnDias.IsChecked Then
+
+                ElseIf rdbtnMeses.IsChecked Then
+
+                End If
+            End If
+            'Cadena Valor
+            If rdbtnCadenaValor.IsChecked Then
+                If rdbtnDias.IsChecked Then
+
+                ElseIf rdbtnMeses.IsChecked Then
+
+                End If
+            End If
+            'Componente
+            If rdbtnComponente.IsChecked Then
+                If rdbtnDias.IsChecked Then
+
+                ElseIf rdbtnMeses.IsChecked Then
+
+                End If
+            End If
+            'Linea
+            If rdbtnLinea.IsChecked Then
+                If rdbtnDias.IsChecked Then
+
+                ElseIf rdbtnMeses.IsChecked Then
+
+                End If
+            End If
+            'Equipo
+            If rdbtnEquipo.IsChecked Then
+                If rdbtnDias.IsChecked Then
+
+                ElseIf rdbtnMeses.IsChecked Then
+
+                End If
+            End If
+        End If
+    End Sub
+    'SL
+    Private Sub graficos_supervisor_lider()
+        'oee
+        If rdbtnOee.IsChecked Then
+            'Planta
+            If rdbtnPlanta.IsChecked Then
+                If rdbtnDias.IsChecked Then
+
+                ElseIf rdbtnMeses.IsChecked Then
+
+                End If
+            End If
+            'Cadena Valor
+            If rdbtnCadenaValor.IsChecked Then
+                If rdbtnDias.IsChecked Then
+
+                ElseIf rdbtnMeses.IsChecked Then
+
+                End If
+            End If
+            'Componente
+            If rdbtnComponente.IsChecked Then
+                If rdbtnDias.IsChecked Then
+
+                ElseIf rdbtnMeses.IsChecked Then
+
+                End If
+            End If
+            'Linea
+            If rdbtnLinea.IsChecked Then
+                If rdbtnDias.IsChecked Then
+
+                ElseIf rdbtnMeses.IsChecked Then
+
+                End If
+            End If
+            'Equipo
+            If rdbtnEquipo.IsChecked Then
+                If rdbtnDias.IsChecked Then
+
+                ElseIf rdbtnMeses.IsChecked Then
+
+                End If
+            End If
+        End If
+        'Nrfti
+        If rdbtnNrfti.IsChecked Then
+            'Planta
+            If rdbtnPlanta.IsChecked Then
+                If rdbtnDias.IsChecked Then
+
+                ElseIf rdbtnMeses.IsChecked Then
+
+                End If
+            End If
+            'Cadena Valor
+            If rdbtnCadenaValor.IsChecked Then
+                If rdbtnDias.IsChecked Then
+
+                ElseIf rdbtnMeses.IsChecked Then
+
+                End If
+            End If
+            'Componente
+            If rdbtnComponente.IsChecked Then
+                If rdbtnDias.IsChecked Then
+
+                ElseIf rdbtnMeses.IsChecked Then
+
+                End If
+            End If
+            'Linea
+            If rdbtnLinea.IsChecked Then
+                If rdbtnDias.IsChecked Then
+
+                ElseIf rdbtnMeses.IsChecked Then
+
+                End If
+            End If
+            'Equipo
+            If rdbtnEquipo.IsChecked Then
+                If rdbtnDias.IsChecked Then
+
+                ElseIf rdbtnMeses.IsChecked Then
+
+                End If
+            End If
+        End If
+        'Costo
+        If rdbtnCosto.IsChecked Then
+            'Planta
+            If rdbtnPlanta.IsChecked Then
+                If rdbtnDias.IsChecked Then
+
+                ElseIf rdbtnMeses.IsChecked Then
+
+                End If
+            End If
+            'Cadena Valor
+            If rdbtnCadenaValor.IsChecked Then
+                If rdbtnDias.IsChecked Then
+
+                ElseIf rdbtnMeses.IsChecked Then
+
+                End If
+            End If
+            'Componente
+            If rdbtnComponente.IsChecked Then
+                If rdbtnDias.IsChecked Then
+
+                ElseIf rdbtnMeses.IsChecked Then
+
+                End If
+            End If
+            'Linea
+            If rdbtnLinea.IsChecked Then
+                If rdbtnDias.IsChecked Then
+
+                ElseIf rdbtnMeses.IsChecked Then
+
+                End If
+            End If
+            'Equipo
+            If rdbtnEquipo.IsChecked Then
+                If rdbtnDias.IsChecked Then
+
+                ElseIf rdbtnMeses.IsChecked Then
+
+                End If
+            End If
+        End If
+        'Seguridad
+        If rdbtnSeguridad.IsChecked Then
+            'Planta
+            If rdbtnPlanta.IsChecked Then
+                If rdbtnDias.IsChecked Then
+
+                ElseIf rdbtnMeses.IsChecked Then
+
+                End If
+            End If
+            'Cadena Valor
+            If rdbtnCadenaValor.IsChecked Then
+                If rdbtnDias.IsChecked Then
+
+                ElseIf rdbtnMeses.IsChecked Then
+
+                End If
+            End If
+            'Componente
+            If rdbtnComponente.IsChecked Then
+                If rdbtnDias.IsChecked Then
+
+                ElseIf rdbtnMeses.IsChecked Then
+
+                End If
+            End If
+            'Linea
+            If rdbtnLinea.IsChecked Then
+                If rdbtnDias.IsChecked Then
+
+                ElseIf rdbtnMeses.IsChecked Then
+
+                End If
+            End If
+            'Equipo
+            If rdbtnEquipo.IsChecked Then
+                If rdbtnDias.IsChecked Then
+
+                ElseIf rdbtnMeses.IsChecked Then
+
+                End If
+            End If
+        End If
+        'Gente
+        If rdbtnGente.IsChecked Then
+            'Planta
+            If rdbtnPlanta.IsChecked Then
+                If rdbtnDias.IsChecked Then
+
+                ElseIf rdbtnMeses.IsChecked Then
+
+                End If
+            End If
+            'Cadena Valor
+            If rdbtnCadenaValor.IsChecked Then
+                If rdbtnDias.IsChecked Then
+
+                ElseIf rdbtnMeses.IsChecked Then
+
+                End If
+            End If
+            'Componente
+            If rdbtnComponente.IsChecked Then
+                If rdbtnDias.IsChecked Then
+
+                ElseIf rdbtnMeses.IsChecked Then
+
+                End If
+            End If
+            'Linea
+            If rdbtnLinea.IsChecked Then
+                If rdbtnDias.IsChecked Then
+
+                ElseIf rdbtnMeses.IsChecked Then
+
+                End If
+            End If
+            'Equipo
+            If rdbtnEquipo.IsChecked Then
+                If rdbtnDias.IsChecked Then
+
+                ElseIf rdbtnMeses.IsChecked Then
+
+                End If
+            End If
+        End If
+        '5s
+        If rdbtnCincoS.IsChecked Then
+            'Planta
+            If rdbtnPlanta.IsChecked Then
+                If rdbtnDias.IsChecked Then
+
+                ElseIf rdbtnMeses.IsChecked Then
+
+                End If
+            End If
+            'Cadena Valor
+            If rdbtnCadenaValor.IsChecked Then
+                If rdbtnDias.IsChecked Then
+
+                ElseIf rdbtnMeses.IsChecked Then
+
+                End If
+            End If
+            'Componente
+            If rdbtnComponente.IsChecked Then
+                If rdbtnDias.IsChecked Then
+
+                ElseIf rdbtnMeses.IsChecked Then
+
+                End If
+            End If
+            'Linea
+            If rdbtnLinea.IsChecked Then
+                If rdbtnDias.IsChecked Then
+
+                ElseIf rdbtnMeses.IsChecked Then
+
+                End If
+            End If
+            'Equipo
+            If rdbtnEquipo.IsChecked Then
+                If rdbtnDias.IsChecked Then
+
+                ElseIf rdbtnMeses.IsChecked Then
+
+                End If
+            End If
+        End If
+    End Sub
+    'LG
+    Private Sub graficos_lider_grupo()
+        'oee
+        If rdbtnOee.IsChecked Then
+            'Planta
+            If rdbtnPlanta.IsChecked Then
+                If rdbtnDias.IsChecked Then
+
+                ElseIf rdbtnMeses.IsChecked Then
+
+                End If
+            End If
+            'Cadena Valor
+            If rdbtnCadenaValor.IsChecked Then
+                If rdbtnDias.IsChecked Then
+
+                ElseIf rdbtnMeses.IsChecked Then
+
+                End If
+            End If
+            'Componente
+            If rdbtnComponente.IsChecked Then
+                If rdbtnDias.IsChecked Then
+
+                ElseIf rdbtnMeses.IsChecked Then
+
+                End If
+            End If
+            'Linea
+            If rdbtnLinea.IsChecked Then
+                If rdbtnDias.IsChecked Then
+
+                ElseIf rdbtnMeses.IsChecked Then
+
+                End If
+            End If
+            'Equipo
+            If rdbtnEquipo.IsChecked Then
+                If rdbtnDias.IsChecked Then
+
+                ElseIf rdbtnMeses.IsChecked Then
+
+                End If
+            End If
+        End If
+        'Nrfti
+        If rdbtnNrfti.IsChecked Then
+            'Planta
+            If rdbtnPlanta.IsChecked Then
+                If rdbtnDias.IsChecked Then
+
+                ElseIf rdbtnMeses.IsChecked Then
+
+                End If
+            End If
+            'Cadena Valor
+            If rdbtnCadenaValor.IsChecked Then
+                If rdbtnDias.IsChecked Then
+
+                ElseIf rdbtnMeses.IsChecked Then
+
+                End If
+            End If
+            'Componente
+            If rdbtnComponente.IsChecked Then
+                If rdbtnDias.IsChecked Then
+
+                ElseIf rdbtnMeses.IsChecked Then
+
+                End If
+            End If
+            'Linea
+            If rdbtnLinea.IsChecked Then
+                If rdbtnDias.IsChecked Then
+
+                ElseIf rdbtnMeses.IsChecked Then
+
+                End If
+            End If
+            'Equipo
+            If rdbtnEquipo.IsChecked Then
+                If rdbtnDias.IsChecked Then
+
+                ElseIf rdbtnMeses.IsChecked Then
+
+                End If
+            End If
+        End If
+        'Costo
+        If rdbtnCosto.IsChecked Then
+            'Planta
+            If rdbtnPlanta.IsChecked Then
+                If rdbtnDias.IsChecked Then
+
+                ElseIf rdbtnMeses.IsChecked Then
+
+                End If
+            End If
+            'Cadena Valor
+            If rdbtnCadenaValor.IsChecked Then
+                If rdbtnDias.IsChecked Then
+
+                ElseIf rdbtnMeses.IsChecked Then
+
+                End If
+            End If
+            'Componente
+            If rdbtnComponente.IsChecked Then
+                If rdbtnDias.IsChecked Then
+
+                ElseIf rdbtnMeses.IsChecked Then
+
+                End If
+            End If
+            'Linea
+            If rdbtnLinea.IsChecked Then
+                If rdbtnDias.IsChecked Then
+
+                ElseIf rdbtnMeses.IsChecked Then
+
+                End If
+            End If
+            'Equipo
+            If rdbtnEquipo.IsChecked Then
+                If rdbtnDias.IsChecked Then
+
+                ElseIf rdbtnMeses.IsChecked Then
+
+                End If
+            End If
+        End If
+        'Seguridad
+        If rdbtnSeguridad.IsChecked Then
+            'Planta
+            If rdbtnPlanta.IsChecked Then
+                If rdbtnDias.IsChecked Then
+
+                ElseIf rdbtnMeses.IsChecked Then
+
+                End If
+            End If
+            'Cadena Valor
+            If rdbtnCadenaValor.IsChecked Then
+                If rdbtnDias.IsChecked Then
+
+                ElseIf rdbtnMeses.IsChecked Then
+
+                End If
+            End If
+            'Componente
+            If rdbtnComponente.IsChecked Then
+                If rdbtnDias.IsChecked Then
+
+                ElseIf rdbtnMeses.IsChecked Then
+
+                End If
+            End If
+            'Linea
+            If rdbtnLinea.IsChecked Then
+                If rdbtnDias.IsChecked Then
+
+                ElseIf rdbtnMeses.IsChecked Then
+
+                End If
+            End If
+            'Equipo
+            If rdbtnEquipo.IsChecked Then
+                If rdbtnDias.IsChecked Then
+
+                ElseIf rdbtnMeses.IsChecked Then
+
+                End If
+            End If
+        End If
+        'Gente
+        If rdbtnGente.IsChecked Then
+            'Planta
+            If rdbtnPlanta.IsChecked Then
+                If rdbtnDias.IsChecked Then
+
+                ElseIf rdbtnMeses.IsChecked Then
+
+                End If
+            End If
+            'Cadena Valor
+            If rdbtnCadenaValor.IsChecked Then
+                If rdbtnDias.IsChecked Then
+
+                ElseIf rdbtnMeses.IsChecked Then
+
+                End If
+            End If
+            'Componente
+            If rdbtnComponente.IsChecked Then
+                If rdbtnDias.IsChecked Then
+
+                ElseIf rdbtnMeses.IsChecked Then
+
+                End If
+            End If
+            'Linea
+            If rdbtnLinea.IsChecked Then
+                If rdbtnDias.IsChecked Then
+
+                ElseIf rdbtnMeses.IsChecked Then
+
+                End If
+            End If
+            'Equipo
+            If rdbtnEquipo.IsChecked Then
+                If rdbtnDias.IsChecked Then
+
+                ElseIf rdbtnMeses.IsChecked Then
+
+                End If
+            End If
+        End If
+        '5s
+        If rdbtnCincoS.IsChecked Then
+            'Planta
+            If rdbtnPlanta.IsChecked Then
+                If rdbtnDias.IsChecked Then
+
+                ElseIf rdbtnMeses.IsChecked Then
+
+                End If
+            End If
+            'Cadena Valor
+            If rdbtnCadenaValor.IsChecked Then
+                If rdbtnDias.IsChecked Then
+
+                ElseIf rdbtnMeses.IsChecked Then
+
+                End If
+            End If
+            'Componente
+            If rdbtnComponente.IsChecked Then
+                If rdbtnDias.IsChecked Then
+
+                ElseIf rdbtnMeses.IsChecked Then
+
+                End If
+            End If
+            'Linea
+            If rdbtnLinea.IsChecked Then
+                If rdbtnDias.IsChecked Then
+
+                ElseIf rdbtnMeses.IsChecked Then
+
+                End If
+            End If
+            'Equipo
+            If rdbtnEquipo.IsChecked Then
+                If rdbtnDias.IsChecked Then
+
+                ElseIf rdbtnMeses.IsChecked Then
+
+                End If
+            End If
+        End If
+    End Sub
+    'LET
+    Private Sub graficos_lider_equipo_tlatoani()
+        'oee
+        If rdbtnOee.IsChecked Then
+            'Planta
+            If rdbtnPlanta.IsChecked Then
+                If rdbtnDias.IsChecked Then
+
+                ElseIf rdbtnMeses.IsChecked Then
+
+                End If
+            End If
+            'Cadena Valor
+            If rdbtnCadenaValor.IsChecked Then
+                If rdbtnDias.IsChecked Then
+
+                ElseIf rdbtnMeses.IsChecked Then
+
+                End If
+            End If
+            'Componente
+            If rdbtnComponente.IsChecked Then
+                If rdbtnDias.IsChecked Then
+
+                ElseIf rdbtnMeses.IsChecked Then
+
+                End If
+            End If
+            'Linea
+            If rdbtnLinea.IsChecked Then
+                If rdbtnDias.IsChecked Then
+
+                ElseIf rdbtnMeses.IsChecked Then
+
+                End If
+            End If
+            'Equipo
+            If rdbtnEquipo.IsChecked Then
+                If rdbtnDias.IsChecked Then
+
+                ElseIf rdbtnMeses.IsChecked Then
+
+                End If
+            End If
+        End If
+        'Nrfti
+        If rdbtnNrfti.IsChecked Then
+            'Planta
+            If rdbtnPlanta.IsChecked Then
+                If rdbtnDias.IsChecked Then
+
+                ElseIf rdbtnMeses.IsChecked Then
+
+                End If
+            End If
+            'Cadena Valor
+            If rdbtnCadenaValor.IsChecked Then
+                If rdbtnDias.IsChecked Then
+
+                ElseIf rdbtnMeses.IsChecked Then
+
+                End If
+            End If
+            'Componente
+            If rdbtnComponente.IsChecked Then
+                If rdbtnDias.IsChecked Then
+
+                ElseIf rdbtnMeses.IsChecked Then
+
+                End If
+            End If
+            'Linea
+            If rdbtnLinea.IsChecked Then
+                If rdbtnDias.IsChecked Then
+
+                ElseIf rdbtnMeses.IsChecked Then
+
+                End If
+            End If
+            'Equipo
+            If rdbtnEquipo.IsChecked Then
+                If rdbtnDias.IsChecked Then
+
+                ElseIf rdbtnMeses.IsChecked Then
+
+                End If
+            End If
+        End If
+        'Costo
+        If rdbtnCosto.IsChecked Then
+            'Planta
+            If rdbtnPlanta.IsChecked Then
+                If rdbtnDias.IsChecked Then
+
+                ElseIf rdbtnMeses.IsChecked Then
+
+                End If
+            End If
+            'Cadena Valor
+            If rdbtnCadenaValor.IsChecked Then
+                If rdbtnDias.IsChecked Then
+
+                ElseIf rdbtnMeses.IsChecked Then
+
+                End If
+            End If
+            'Componente
+            If rdbtnComponente.IsChecked Then
+                If rdbtnDias.IsChecked Then
+
+                ElseIf rdbtnMeses.IsChecked Then
+
+                End If
+            End If
+            'Linea
+            If rdbtnLinea.IsChecked Then
+                If rdbtnDias.IsChecked Then
+
+                ElseIf rdbtnMeses.IsChecked Then
+
+                End If
+            End If
+            'Equipo
+            If rdbtnEquipo.IsChecked Then
+                If rdbtnDias.IsChecked Then
+
+                ElseIf rdbtnMeses.IsChecked Then
+
+                End If
+            End If
+        End If
+        'Seguridad
+        If rdbtnSeguridad.IsChecked Then
+            'Planta
+            If rdbtnPlanta.IsChecked Then
+                If rdbtnDias.IsChecked Then
+
+                ElseIf rdbtnMeses.IsChecked Then
+
+                End If
+            End If
+            'Cadena Valor
+            If rdbtnCadenaValor.IsChecked Then
+                If rdbtnDias.IsChecked Then
+
+                ElseIf rdbtnMeses.IsChecked Then
+
+                End If
+            End If
+            'Componente
+            If rdbtnComponente.IsChecked Then
+                If rdbtnDias.IsChecked Then
+
+                ElseIf rdbtnMeses.IsChecked Then
+
+                End If
+            End If
+            'Linea
+            If rdbtnLinea.IsChecked Then
+                If rdbtnDias.IsChecked Then
+
+                ElseIf rdbtnMeses.IsChecked Then
+
+                End If
+            End If
+            'Equipo
+            If rdbtnEquipo.IsChecked Then
+                If rdbtnDias.IsChecked Then
+
+                ElseIf rdbtnMeses.IsChecked Then
+
+                End If
+            End If
+        End If
+        'Gente
+        If rdbtnGente.IsChecked Then
+            'Planta
+            If rdbtnPlanta.IsChecked Then
+                If rdbtnDias.IsChecked Then
+
+                ElseIf rdbtnMeses.IsChecked Then
+
+                End If
+            End If
+            'Cadena Valor
+            If rdbtnCadenaValor.IsChecked Then
+                If rdbtnDias.IsChecked Then
+
+                ElseIf rdbtnMeses.IsChecked Then
+
+                End If
+            End If
+            'Componente
+            If rdbtnComponente.IsChecked Then
+                If rdbtnDias.IsChecked Then
+
+                ElseIf rdbtnMeses.IsChecked Then
+
+                End If
+            End If
+            'Linea
+            If rdbtnLinea.IsChecked Then
+                If rdbtnDias.IsChecked Then
+
+                ElseIf rdbtnMeses.IsChecked Then
+
+                End If
+            End If
+            'Equipo
+            If rdbtnEquipo.IsChecked Then
+                If rdbtnDias.IsChecked Then
+
+                ElseIf rdbtnMeses.IsChecked Then
+
+                End If
+            End If
+        End If
+        '5s
+        If rdbtnCincoS.IsChecked Then
+            'Planta
+            If rdbtnPlanta.IsChecked Then
+                If rdbtnDias.IsChecked Then
+
+                ElseIf rdbtnMeses.IsChecked Then
+
+                End If
+            End If
+            'Cadena Valor
+            If rdbtnCadenaValor.IsChecked Then
+                If rdbtnDias.IsChecked Then
+
+                ElseIf rdbtnMeses.IsChecked Then
+
+                End If
+            End If
+            'Componente
+            If rdbtnComponente.IsChecked Then
+                If rdbtnDias.IsChecked Then
+
+                ElseIf rdbtnMeses.IsChecked Then
+
+                End If
+            End If
+            'Linea
+            If rdbtnLinea.IsChecked Then
+                If rdbtnDias.IsChecked Then
+
+                ElseIf rdbtnMeses.IsChecked Then
+
+                End If
+            End If
+            'Equipo
+            If rdbtnEquipo.IsChecked Then
+                If rdbtnDias.IsChecked Then
+
+                ElseIf rdbtnMeses.IsChecked Then
+
+                End If
+            End If
+        End If
+    End Sub
+#End Region
+#Region "Llena formulario segun el Nivel"
+    Private Sub llena_formulario_Nivel_Planta()
+        Dim oNivel_Planta As New gfu_nivel_planta
+        llena_cbx_CadenaValor(oNivel_Planta.nivel_planta_cadena_valor)
+        llena_cbx_Componente(oNivel_Planta.nivel_planta_componente)
+        llena_cbx_Equipo(oNivel_Planta.nivel_planta_equipos)
+    End Sub
+    Private Sub llena_formulario_Nivel_Cadena_Valor()
+        Dim oNivel_CadenaValor As New gfu_nivel_cadena_valor
+        oNivel_CadenaValor.cve_usuario = cve_usuario
+        llena_cbx_CadenaValor(oNivel_CadenaValor.nivel_cadena_valor_CV)
+        llena_cbx_Componente(oNivel_CadenaValor.nivel_cadena_valor_componente)
+        llena_cbx_Equipo(oNivel_CadenaValor.nivel_cadena_valor_equipos)
+    End Sub
+    Private Sub llena_formulario_Nivel_Componente()
+        Dim oNivel_Componente As New gfu_nivel_componente
+        oNivel_Componente.cve_usuario = cve_usuario
+        llena_cbx_Componente(oNivel_Componente.nivel_componente_componente)
+        llena_cbx_Equipo(oNivel_Componente.nivel_componente_equipos)
+    End Sub
+    Private Sub llena_formulario_Nivel_LG()
+        Dim oNivel_lg As New gfu_nivel_lg
+        oNivel_lg.cve_lider = cve_usuario
+        llena_cbx_Equipo(oNivel_lg.nivel_lg_equipos)
+    End Sub
+    Private Sub llena_formulario_Nivel_LET()
+        'Dim oNivel_let As New gfu_nivel_let
+        'oNivel_let.cve_lider = cve_usuario
+        'llena_cbx_Equipo(oNivel_lg.nivel_lg_equipos)
+    End Sub
+#End Region
+#Region "Llena combobox"
+    Private Sub llena_cbx_CadenaValor(ByVal source As DataTable)
+        cbxCadenaValor.ValueMember = "cve_cadena_valor"
+        cbxCadenaValor.DisplayMember = "cadena"
+        cbxCadenaValor.DataSource = source
+        cbxCadenaValor.SelectedIndex = -1
+    End Sub
+    Private Sub llena_cbx_Componente(ByVal source As DataTable)
+        cbxComponente.ValueMember = "cve_componente"
+        cbxComponente.DisplayMember = "componente"
+        cbxComponente.DataSource = source
+        cbxComponente.SelectedIndex = -1
+    End Sub
+    Private Sub llena_cbx_Equipo(ByVal source As DataTable)
+        cbxEquipo.ValueMember = "cve_equipo"
+        cbxEquipo.DisplayMember = "equipo"
+        cbxEquipo.DataSource = source
+        cbxEquipo.SelectedIndex = -1
+    End Sub
+    Private Sub llena_cbx_Linea(ByVal source As DataTable)
+        cbxLinea.ValueMember = "cve_linea"
+        cbxLinea.DisplayMember = "linea"
+        cbxLinea.DataSource = source
+        cbxLinea.SelectedIndex = -1
     End Sub
 #End Region
 #Region "Validaciones"
@@ -131,39 +1549,6 @@ Public Class FrmGraficasfaseuno
         End If
     End Sub
 #End Region
-#Region "Habilitar Niveles Graficos- Categorias"
-    'Lets
-    Private Sub tipo_nivel_let()
-        rdbtnPlanta.Enabled = False
-        rdbtnCadenaValor.Enabled = False
-        rdbtnComponente.Enabled = False
-        rdbtnEquipo.Enabled = False
-        nivel_lets = True
-    End Sub
-    'LG
-    Private Sub tipo_nivel_lg()
-        rdbtnPlanta.Enabled = False
-        rdbtnCadenaValor.Enabled = False
-        rdbtnComponente.Enabled = False
-        rdbtnLinea.Enabled = False
-        nivel_lgs = True
-    End Sub
-    'Componente
-    Private Sub tipo_nivel_componente()
-        rdbtnPlanta.Enabled = False
-        rdbtnCadenaValor.Enabled = False
-        nivel_componentes = True
-    End Sub
-    'Cadena Valor
-    Private Sub tipo_nivel_cadena_valor()
-        rdbtnPlanta.Enabled = False
-        nivel_cadena_valors = True
-    End Sub
-    'Planta
-    Private Sub tipo_nivel_planta()
-        nivel_planta_gkn = True
-    End Sub
-#End Region
 #Region "Eventos RadioButton Niveles"
     Private Sub rdbtnNiveles_ToggleStateChanged(ByVal sender As System.Object, ByVal args As Telerik.WinControls.UI.StateChangedEventArgs) Handles rdbtnCadenaValor.ToggleStateChanged, rdbtnComponente.ToggleStateChanged, rdbtnLinea.ToggleStateChanged, rdbtnEquipo.ToggleStateChanged
         'Cadena valor
@@ -213,7 +1598,7 @@ Public Class FrmGraficasfaseuno
         Else
             'Otros
             deshabilita_combobox_niveles(cbxEquipo)
-                chkTodasLineas.Visible = False
+            chkTodasLineas.Visible = False
         End If
         valida_btn_graficar()
     End Sub
@@ -230,10 +1615,10 @@ Public Class FrmGraficasfaseuno
     End Sub
 #End Region
 #Region "(des)Habilita Combobox"
-    Private Sub habilita_combobox_niveles(ByRef combo_box As Telerik.WinControls.UI.RadDropDownList)
+    Private Sub habilita_combobox_niveles(ByRef combo_box As ComboBox)
         combo_box.Enabled = True
     End Sub
-    Private Sub deshabilita_combobox_niveles(ByRef combo_box As Telerik.WinControls.UI.RadDropDownList)
+    Private Sub deshabilita_combobox_niveles(ByRef combo_box As ComboBox)
         combo_box.Enabled = False
     End Sub
 #End Region
@@ -628,7 +2013,7 @@ Public Class FrmGraficasfaseuno
         radChartView1.Series.Add(BarSeries1)
         radChartView1.Series.Add(BarSeries2)
     End Sub
-    
+
 #End Region
 #Region "Metodos graficar NRFTi"
     'NRNFTi planta
@@ -2138,7 +3523,7 @@ Public Class FrmGraficasfaseuno
                     BarSeries2.DataPoints.Add(New CategoricalDataPoint(vDR("min_excedentes"), Format(vDR("dia_asignado"), "{yyyy - MMMM}") & " " & vDR("componente")))
                     LineSeries1.DataPoints.Add(New CategoricalDataPoint(vDR("costo"), Format(vDR("dia_asignado"), "{yyyy - MMMM}") & " " & vDR("componente")))
                 End If
-                
+
             End If
             vContador = vContador + 1
         Next
@@ -2160,7 +3545,7 @@ Public Class FrmGraficasfaseuno
         LinearAxis1.Title = "Minutos"
         LinearAxis2.Title = "Costo $$"
         'Personalizacion
-        
+
         'LinearAxis1.MajorStep = 10.0R
         'Series
         BarSeries1.ShowLabels = True
@@ -2484,7 +3869,7 @@ Public Class FrmGraficasfaseuno
                     BarSeries2.DataPoints.Add(New CategoricalDataPoint(vDR("min_excedentes"), vDR("dia_asignado")))
                     LineSeries1.DataPoints.Add(New CategoricalDataPoint(vDR("costo"), vDR("dia_asignado")))
                 End If
-                
+
             End If
             vContador = vContador + 1
         Next
@@ -2537,1313 +3922,6 @@ Public Class FrmGraficasfaseuno
         radChartView1.Series.Add(BarSeries2)
         BarSeries1.CombineMode = ChartSeriesCombineMode.Stack
         BarSeries2.CombineMode = ChartSeriesCombineMode.Stack
-    End Sub
-#End Region
-#Region "Metodos Niveles"
-    'GERENTE
-    Private Sub graficos_gerente()
-        'oee
-        If rdbtnOee.IsChecked Then
-            'Planta
-            If rdbtnPlanta.IsChecked Then
-                If rdbtnDias.IsChecked Then
-                    obtiene_oee_planta_dia_mes()
-                ElseIf rdbtnMeses.IsChecked Then
-                    obtiene_oee_planta_dia_mes()
-                End If
-            End If
-            'Cadena Valor
-            If rdbtnCadenaValor.IsChecked Then
-                If rdbtnDias.IsChecked Then
-
-                ElseIf rdbtnMeses.IsChecked Then
-
-                End If
-            End If
-            'Componente
-            If rdbtnComponente.IsChecked Then
-                If rdbtnDias.IsChecked Then
-
-                ElseIf rdbtnMeses.IsChecked Then
-
-                End If
-            End If
-            'Linea
-            If rdbtnLinea.IsChecked Then
-                If rdbtnDias.IsChecked Then
-
-                ElseIf rdbtnMeses.IsChecked Then
-
-                End If
-            End If
-            'Equipo
-            If rdbtnEquipo.IsChecked Then
-                If rdbtnDias.IsChecked Then
-
-                ElseIf rdbtnMeses.IsChecked Then
-
-                End If
-            End If
-        End If
-        'Nrfti
-        If rdbtnNrfti.IsChecked Then
-            'Planta
-            If rdbtnPlanta.IsChecked Then
-                If rdbtnDias.IsChecked Then
-
-                ElseIf rdbtnMeses.IsChecked Then
-
-                End If
-            End If
-            'Cadena Valor
-            If rdbtnCadenaValor.IsChecked Then
-                If rdbtnDias.IsChecked Then
-
-                ElseIf rdbtnMeses.IsChecked Then
-
-                End If
-            End If
-            'Componente
-            If rdbtnComponente.IsChecked Then
-                If rdbtnDias.IsChecked Then
-
-                ElseIf rdbtnMeses.IsChecked Then
-
-                End If
-            End If
-            'Linea
-            If rdbtnLinea.IsChecked Then
-                If rdbtnDias.IsChecked Then
-
-                ElseIf rdbtnMeses.IsChecked Then
-
-                End If
-            End If
-            'Equipo
-            If rdbtnEquipo.IsChecked Then
-                If rdbtnDias.IsChecked Then
-
-                ElseIf rdbtnMeses.IsChecked Then
-
-                End If
-            End If
-        End If
-        'Costo
-        If rdbtnCosto.IsChecked Then
-            'Planta
-            If rdbtnPlanta.IsChecked Then
-                If rdbtnDias.IsChecked Then
-
-                ElseIf rdbtnMeses.IsChecked Then
-
-                End If
-            End If
-            'Cadena Valor
-            If rdbtnCadenaValor.IsChecked Then
-                If rdbtnDias.IsChecked Then
-
-                ElseIf rdbtnMeses.IsChecked Then
-
-                End If
-            End If
-            'Componente
-            If rdbtnComponente.IsChecked Then
-                If rdbtnDias.IsChecked Then
-
-                ElseIf rdbtnMeses.IsChecked Then
-
-                End If
-            End If
-            'Linea
-            If rdbtnLinea.IsChecked Then
-                If rdbtnDias.IsChecked Then
-
-                ElseIf rdbtnMeses.IsChecked Then
-
-                End If
-            End If
-            'Equipo
-            If rdbtnEquipo.IsChecked Then
-                If rdbtnDias.IsChecked Then
-
-                ElseIf rdbtnMeses.IsChecked Then
-
-                End If
-            End If
-        End If
-        'Seguridad
-        If rdbtnSeguridad.IsChecked Then
-            'Planta
-            If rdbtnPlanta.IsChecked Then
-                If rdbtnDias.IsChecked Then
-
-                ElseIf rdbtnMeses.IsChecked Then
-
-                End If
-            End If
-            'Cadena Valor
-            If rdbtnCadenaValor.IsChecked Then
-                If rdbtnDias.IsChecked Then
-
-                ElseIf rdbtnMeses.IsChecked Then
-
-                End If
-            End If
-            'Componente
-            If rdbtnComponente.IsChecked Then
-                If rdbtnDias.IsChecked Then
-
-                ElseIf rdbtnMeses.IsChecked Then
-
-                End If
-            End If
-            'Linea
-            If rdbtnLinea.IsChecked Then
-                If rdbtnDias.IsChecked Then
-
-                ElseIf rdbtnMeses.IsChecked Then
-
-                End If
-            End If
-            'Equipo
-            If rdbtnEquipo.IsChecked Then
-                If rdbtnDias.IsChecked Then
-
-                ElseIf rdbtnMeses.IsChecked Then
-
-                End If
-            End If
-        End If
-        'Gente
-        If rdbtnGente.IsChecked Then
-            'Planta
-            If rdbtnPlanta.IsChecked Then
-                If rdbtnDias.IsChecked Then
-
-                ElseIf rdbtnMeses.IsChecked Then
-
-                End If
-            End If
-            'Cadena Valor
-            If rdbtnCadenaValor.IsChecked Then
-                If rdbtnDias.IsChecked Then
-
-                ElseIf rdbtnMeses.IsChecked Then
-
-                End If
-            End If
-            'Componente
-            If rdbtnComponente.IsChecked Then
-                If rdbtnDias.IsChecked Then
-
-                ElseIf rdbtnMeses.IsChecked Then
-
-                End If
-            End If
-            'Linea
-            If rdbtnLinea.IsChecked Then
-                If rdbtnDias.IsChecked Then
-
-                ElseIf rdbtnMeses.IsChecked Then
-
-                End If
-            End If
-            'Equipo
-            If rdbtnEquipo.IsChecked Then
-                If rdbtnDias.IsChecked Then
-
-                ElseIf rdbtnMeses.IsChecked Then
-
-                End If
-            End If
-        End If
-        '5s
-        If rdbtnCincoS.IsChecked Then
-            'Planta
-            If rdbtnPlanta.IsChecked Then
-                If rdbtnDias.IsChecked Then
-
-                ElseIf rdbtnMeses.IsChecked Then
-
-                End If
-            End If
-            'Cadena Valor
-            If rdbtnCadenaValor.IsChecked Then
-                If rdbtnDias.IsChecked Then
-
-                ElseIf rdbtnMeses.IsChecked Then
-
-                End If
-            End If
-            'Componente
-            If rdbtnComponente.IsChecked Then
-                If rdbtnDias.IsChecked Then
-
-                ElseIf rdbtnMeses.IsChecked Then
-
-                End If
-            End If
-            'Linea
-            If rdbtnLinea.IsChecked Then
-                If rdbtnDias.IsChecked Then
-
-                ElseIf rdbtnMeses.IsChecked Then
-
-                End If
-            End If
-            'Equipo
-            If rdbtnEquipo.IsChecked Then
-                If rdbtnDias.IsChecked Then
-
-                ElseIf rdbtnMeses.IsChecked Then
-
-                End If
-            End If
-        End If
-    End Sub
-    'SCIL
-    Private Sub graficos_scil()
-        'oee
-        If rdbtnOee.IsChecked Then
-            'Planta
-            If rdbtnPlanta.IsChecked Then
-                If rdbtnDias.IsChecked Then
-
-                ElseIf rdbtnMeses.IsChecked Then
-
-                End If
-            End If
-            'Cadena Valor
-            If rdbtnCadenaValor.IsChecked Then
-                If rdbtnDias.IsChecked Then
-
-                ElseIf rdbtnMeses.IsChecked Then
-
-                End If
-            End If
-            'Componente
-            If rdbtnComponente.IsChecked Then
-                If rdbtnDias.IsChecked Then
-
-                ElseIf rdbtnMeses.IsChecked Then
-
-                End If
-            End If
-            'Linea
-            If rdbtnLinea.IsChecked Then
-                If rdbtnDias.IsChecked Then
-
-                ElseIf rdbtnMeses.IsChecked Then
-
-                End If
-            End If
-            'Equipo
-            If rdbtnEquipo.IsChecked Then
-                If rdbtnDias.IsChecked Then
-
-                ElseIf rdbtnMeses.IsChecked Then
-
-                End If
-            End If
-        End If
-        'Nrfti
-        If rdbtnNrfti.IsChecked Then
-            'Planta
-            If rdbtnPlanta.IsChecked Then
-                If rdbtnDias.IsChecked Then
-
-                ElseIf rdbtnMeses.IsChecked Then
-
-                End If
-            End If
-            'Cadena Valor
-            If rdbtnCadenaValor.IsChecked Then
-                If rdbtnDias.IsChecked Then
-
-                ElseIf rdbtnMeses.IsChecked Then
-
-                End If
-            End If
-            'Componente
-            If rdbtnComponente.IsChecked Then
-                If rdbtnDias.IsChecked Then
-
-                ElseIf rdbtnMeses.IsChecked Then
-
-                End If
-            End If
-            'Linea
-            If rdbtnLinea.IsChecked Then
-                If rdbtnDias.IsChecked Then
-
-                ElseIf rdbtnMeses.IsChecked Then
-
-                End If
-            End If
-            'Equipo
-            If rdbtnEquipo.IsChecked Then
-                If rdbtnDias.IsChecked Then
-
-                ElseIf rdbtnMeses.IsChecked Then
-
-                End If
-            End If
-        End If
-        'Costo
-        If rdbtnCosto.IsChecked Then
-            'Planta
-            If rdbtnPlanta.IsChecked Then
-                If rdbtnDias.IsChecked Then
-
-                ElseIf rdbtnMeses.IsChecked Then
-
-                End If
-            End If
-            'Cadena Valor
-            If rdbtnCadenaValor.IsChecked Then
-                If rdbtnDias.IsChecked Then
-
-                ElseIf rdbtnMeses.IsChecked Then
-
-                End If
-            End If
-            'Componente
-            If rdbtnComponente.IsChecked Then
-                If rdbtnDias.IsChecked Then
-
-                ElseIf rdbtnMeses.IsChecked Then
-
-                End If
-            End If
-            'Linea
-            If rdbtnLinea.IsChecked Then
-                If rdbtnDias.IsChecked Then
-
-                ElseIf rdbtnMeses.IsChecked Then
-
-                End If
-            End If
-            'Equipo
-            If rdbtnEquipo.IsChecked Then
-                If rdbtnDias.IsChecked Then
-
-                ElseIf rdbtnMeses.IsChecked Then
-
-                End If
-            End If
-        End If
-        'Seguridad
-        If rdbtnSeguridad.IsChecked Then
-            'Planta
-            If rdbtnPlanta.IsChecked Then
-                If rdbtnDias.IsChecked Then
-
-                ElseIf rdbtnMeses.IsChecked Then
-
-                End If
-            End If
-            'Cadena Valor
-            If rdbtnCadenaValor.IsChecked Then
-                If rdbtnDias.IsChecked Then
-
-                ElseIf rdbtnMeses.IsChecked Then
-
-                End If
-            End If
-            'Componente
-            If rdbtnComponente.IsChecked Then
-                If rdbtnDias.IsChecked Then
-
-                ElseIf rdbtnMeses.IsChecked Then
-
-                End If
-            End If
-            'Linea
-            If rdbtnLinea.IsChecked Then
-                If rdbtnDias.IsChecked Then
-
-                ElseIf rdbtnMeses.IsChecked Then
-
-                End If
-            End If
-            'Equipo
-            If rdbtnEquipo.IsChecked Then
-                If rdbtnDias.IsChecked Then
-
-                ElseIf rdbtnMeses.IsChecked Then
-
-                End If
-            End If
-        End If
-        'Gente
-        If rdbtnGente.IsChecked Then
-            'Planta
-            If rdbtnPlanta.IsChecked Then
-                If rdbtnDias.IsChecked Then
-
-                ElseIf rdbtnMeses.IsChecked Then
-
-                End If
-            End If
-            'Cadena Valor
-            If rdbtnCadenaValor.IsChecked Then
-                If rdbtnDias.IsChecked Then
-
-                ElseIf rdbtnMeses.IsChecked Then
-
-                End If
-            End If
-            'Componente
-            If rdbtnComponente.IsChecked Then
-                If rdbtnDias.IsChecked Then
-
-                ElseIf rdbtnMeses.IsChecked Then
-
-                End If
-            End If
-            'Linea
-            If rdbtnLinea.IsChecked Then
-                If rdbtnDias.IsChecked Then
-
-                ElseIf rdbtnMeses.IsChecked Then
-
-                End If
-            End If
-            'Equipo
-            If rdbtnEquipo.IsChecked Then
-                If rdbtnDias.IsChecked Then
-
-                ElseIf rdbtnMeses.IsChecked Then
-
-                End If
-            End If
-        End If
-        '5s
-        If rdbtnCincoS.IsChecked Then
-            'Planta
-            If rdbtnPlanta.IsChecked Then
-                If rdbtnDias.IsChecked Then
-
-                ElseIf rdbtnMeses.IsChecked Then
-
-                End If
-            End If
-            'Cadena Valor
-            If rdbtnCadenaValor.IsChecked Then
-                If rdbtnDias.IsChecked Then
-
-                ElseIf rdbtnMeses.IsChecked Then
-
-                End If
-            End If
-            'Componente
-            If rdbtnComponente.IsChecked Then
-                If rdbtnDias.IsChecked Then
-
-                ElseIf rdbtnMeses.IsChecked Then
-
-                End If
-            End If
-            'Linea
-            If rdbtnLinea.IsChecked Then
-                If rdbtnDias.IsChecked Then
-
-                ElseIf rdbtnMeses.IsChecked Then
-
-                End If
-            End If
-            'Equipo
-            If rdbtnEquipo.IsChecked Then
-                If rdbtnDias.IsChecked Then
-
-                ElseIf rdbtnMeses.IsChecked Then
-
-                End If
-            End If
-        End If
-    End Sub
-    'SL
-    Private Sub graficos_supervisor_lider()
-        'oee
-        If rdbtnOee.IsChecked Then
-            'Planta
-            If rdbtnPlanta.IsChecked Then
-                If rdbtnDias.IsChecked Then
-
-                ElseIf rdbtnMeses.IsChecked Then
-
-                End If
-            End If
-            'Cadena Valor
-            If rdbtnCadenaValor.IsChecked Then
-                If rdbtnDias.IsChecked Then
-
-                ElseIf rdbtnMeses.IsChecked Then
-
-                End If
-            End If
-            'Componente
-            If rdbtnComponente.IsChecked Then
-                If rdbtnDias.IsChecked Then
-
-                ElseIf rdbtnMeses.IsChecked Then
-
-                End If
-            End If
-            'Linea
-            If rdbtnLinea.IsChecked Then
-                If rdbtnDias.IsChecked Then
-
-                ElseIf rdbtnMeses.IsChecked Then
-
-                End If
-            End If
-            'Equipo
-            If rdbtnEquipo.IsChecked Then
-                If rdbtnDias.IsChecked Then
-
-                ElseIf rdbtnMeses.IsChecked Then
-
-                End If
-            End If
-        End If
-        'Nrfti
-        If rdbtnNrfti.IsChecked Then
-            'Planta
-            If rdbtnPlanta.IsChecked Then
-                If rdbtnDias.IsChecked Then
-
-                ElseIf rdbtnMeses.IsChecked Then
-
-                End If
-            End If
-            'Cadena Valor
-            If rdbtnCadenaValor.IsChecked Then
-                If rdbtnDias.IsChecked Then
-
-                ElseIf rdbtnMeses.IsChecked Then
-
-                End If
-            End If
-            'Componente
-            If rdbtnComponente.IsChecked Then
-                If rdbtnDias.IsChecked Then
-
-                ElseIf rdbtnMeses.IsChecked Then
-
-                End If
-            End If
-            'Linea
-            If rdbtnLinea.IsChecked Then
-                If rdbtnDias.IsChecked Then
-
-                ElseIf rdbtnMeses.IsChecked Then
-
-                End If
-            End If
-            'Equipo
-            If rdbtnEquipo.IsChecked Then
-                If rdbtnDias.IsChecked Then
-
-                ElseIf rdbtnMeses.IsChecked Then
-
-                End If
-            End If
-        End If
-        'Costo
-        If rdbtnCosto.IsChecked Then
-            'Planta
-            If rdbtnPlanta.IsChecked Then
-                If rdbtnDias.IsChecked Then
-
-                ElseIf rdbtnMeses.IsChecked Then
-
-                End If
-            End If
-            'Cadena Valor
-            If rdbtnCadenaValor.IsChecked Then
-                If rdbtnDias.IsChecked Then
-
-                ElseIf rdbtnMeses.IsChecked Then
-
-                End If
-            End If
-            'Componente
-            If rdbtnComponente.IsChecked Then
-                If rdbtnDias.IsChecked Then
-
-                ElseIf rdbtnMeses.IsChecked Then
-
-                End If
-            End If
-            'Linea
-            If rdbtnLinea.IsChecked Then
-                If rdbtnDias.IsChecked Then
-
-                ElseIf rdbtnMeses.IsChecked Then
-
-                End If
-            End If
-            'Equipo
-            If rdbtnEquipo.IsChecked Then
-                If rdbtnDias.IsChecked Then
-
-                ElseIf rdbtnMeses.IsChecked Then
-
-                End If
-            End If
-        End If
-        'Seguridad
-        If rdbtnSeguridad.IsChecked Then
-            'Planta
-            If rdbtnPlanta.IsChecked Then
-                If rdbtnDias.IsChecked Then
-
-                ElseIf rdbtnMeses.IsChecked Then
-
-                End If
-            End If
-            'Cadena Valor
-            If rdbtnCadenaValor.IsChecked Then
-                If rdbtnDias.IsChecked Then
-
-                ElseIf rdbtnMeses.IsChecked Then
-
-                End If
-            End If
-            'Componente
-            If rdbtnComponente.IsChecked Then
-                If rdbtnDias.IsChecked Then
-
-                ElseIf rdbtnMeses.IsChecked Then
-
-                End If
-            End If
-            'Linea
-            If rdbtnLinea.IsChecked Then
-                If rdbtnDias.IsChecked Then
-
-                ElseIf rdbtnMeses.IsChecked Then
-
-                End If
-            End If
-            'Equipo
-            If rdbtnEquipo.IsChecked Then
-                If rdbtnDias.IsChecked Then
-
-                ElseIf rdbtnMeses.IsChecked Then
-
-                End If
-            End If
-        End If
-        'Gente
-        If rdbtnGente.IsChecked Then
-            'Planta
-            If rdbtnPlanta.IsChecked Then
-                If rdbtnDias.IsChecked Then
-
-                ElseIf rdbtnMeses.IsChecked Then
-
-                End If
-            End If
-            'Cadena Valor
-            If rdbtnCadenaValor.IsChecked Then
-                If rdbtnDias.IsChecked Then
-
-                ElseIf rdbtnMeses.IsChecked Then
-
-                End If
-            End If
-            'Componente
-            If rdbtnComponente.IsChecked Then
-                If rdbtnDias.IsChecked Then
-
-                ElseIf rdbtnMeses.IsChecked Then
-
-                End If
-            End If
-            'Linea
-            If rdbtnLinea.IsChecked Then
-                If rdbtnDias.IsChecked Then
-
-                ElseIf rdbtnMeses.IsChecked Then
-
-                End If
-            End If
-            'Equipo
-            If rdbtnEquipo.IsChecked Then
-                If rdbtnDias.IsChecked Then
-
-                ElseIf rdbtnMeses.IsChecked Then
-
-                End If
-            End If
-        End If
-        '5s
-        If rdbtnCincoS.IsChecked Then
-            'Planta
-            If rdbtnPlanta.IsChecked Then
-                If rdbtnDias.IsChecked Then
-
-                ElseIf rdbtnMeses.IsChecked Then
-
-                End If
-            End If
-            'Cadena Valor
-            If rdbtnCadenaValor.IsChecked Then
-                If rdbtnDias.IsChecked Then
-
-                ElseIf rdbtnMeses.IsChecked Then
-
-                End If
-            End If
-            'Componente
-            If rdbtnComponente.IsChecked Then
-                If rdbtnDias.IsChecked Then
-
-                ElseIf rdbtnMeses.IsChecked Then
-
-                End If
-            End If
-            'Linea
-            If rdbtnLinea.IsChecked Then
-                If rdbtnDias.IsChecked Then
-
-                ElseIf rdbtnMeses.IsChecked Then
-
-                End If
-            End If
-            'Equipo
-            If rdbtnEquipo.IsChecked Then
-                If rdbtnDias.IsChecked Then
-
-                ElseIf rdbtnMeses.IsChecked Then
-
-                End If
-            End If
-        End If
-    End Sub
-    'LG
-    Private Sub graficos_lider_grupo()
-        'oee
-        If rdbtnOee.IsChecked Then
-            'Planta
-            If rdbtnPlanta.IsChecked Then
-                If rdbtnDias.IsChecked Then
-
-                ElseIf rdbtnMeses.IsChecked Then
-
-                End If
-            End If
-            'Cadena Valor
-            If rdbtnCadenaValor.IsChecked Then
-                If rdbtnDias.IsChecked Then
-
-                ElseIf rdbtnMeses.IsChecked Then
-
-                End If
-            End If
-            'Componente
-            If rdbtnComponente.IsChecked Then
-                If rdbtnDias.IsChecked Then
-
-                ElseIf rdbtnMeses.IsChecked Then
-
-                End If
-            End If
-            'Linea
-            If rdbtnLinea.IsChecked Then
-                If rdbtnDias.IsChecked Then
-
-                ElseIf rdbtnMeses.IsChecked Then
-
-                End If
-            End If
-            'Equipo
-            If rdbtnEquipo.IsChecked Then
-                If rdbtnDias.IsChecked Then
-
-                ElseIf rdbtnMeses.IsChecked Then
-
-                End If
-            End If
-        End If
-        'Nrfti
-        If rdbtnNrfti.IsChecked Then
-            'Planta
-            If rdbtnPlanta.IsChecked Then
-                If rdbtnDias.IsChecked Then
-
-                ElseIf rdbtnMeses.IsChecked Then
-
-                End If
-            End If
-            'Cadena Valor
-            If rdbtnCadenaValor.IsChecked Then
-                If rdbtnDias.IsChecked Then
-
-                ElseIf rdbtnMeses.IsChecked Then
-
-                End If
-            End If
-            'Componente
-            If rdbtnComponente.IsChecked Then
-                If rdbtnDias.IsChecked Then
-
-                ElseIf rdbtnMeses.IsChecked Then
-
-                End If
-            End If
-            'Linea
-            If rdbtnLinea.IsChecked Then
-                If rdbtnDias.IsChecked Then
-
-                ElseIf rdbtnMeses.IsChecked Then
-
-                End If
-            End If
-            'Equipo
-            If rdbtnEquipo.IsChecked Then
-                If rdbtnDias.IsChecked Then
-
-                ElseIf rdbtnMeses.IsChecked Then
-
-                End If
-            End If
-        End If
-        'Costo
-        If rdbtnCosto.IsChecked Then
-            'Planta
-            If rdbtnPlanta.IsChecked Then
-                If rdbtnDias.IsChecked Then
-
-                ElseIf rdbtnMeses.IsChecked Then
-
-                End If
-            End If
-            'Cadena Valor
-            If rdbtnCadenaValor.IsChecked Then
-                If rdbtnDias.IsChecked Then
-
-                ElseIf rdbtnMeses.IsChecked Then
-
-                End If
-            End If
-            'Componente
-            If rdbtnComponente.IsChecked Then
-                If rdbtnDias.IsChecked Then
-
-                ElseIf rdbtnMeses.IsChecked Then
-
-                End If
-            End If
-            'Linea
-            If rdbtnLinea.IsChecked Then
-                If rdbtnDias.IsChecked Then
-
-                ElseIf rdbtnMeses.IsChecked Then
-
-                End If
-            End If
-            'Equipo
-            If rdbtnEquipo.IsChecked Then
-                If rdbtnDias.IsChecked Then
-
-                ElseIf rdbtnMeses.IsChecked Then
-
-                End If
-            End If
-        End If
-        'Seguridad
-        If rdbtnSeguridad.IsChecked Then
-            'Planta
-            If rdbtnPlanta.IsChecked Then
-                If rdbtnDias.IsChecked Then
-
-                ElseIf rdbtnMeses.IsChecked Then
-
-                End If
-            End If
-            'Cadena Valor
-            If rdbtnCadenaValor.IsChecked Then
-                If rdbtnDias.IsChecked Then
-
-                ElseIf rdbtnMeses.IsChecked Then
-
-                End If
-            End If
-            'Componente
-            If rdbtnComponente.IsChecked Then
-                If rdbtnDias.IsChecked Then
-
-                ElseIf rdbtnMeses.IsChecked Then
-
-                End If
-            End If
-            'Linea
-            If rdbtnLinea.IsChecked Then
-                If rdbtnDias.IsChecked Then
-
-                ElseIf rdbtnMeses.IsChecked Then
-
-                End If
-            End If
-            'Equipo
-            If rdbtnEquipo.IsChecked Then
-                If rdbtnDias.IsChecked Then
-
-                ElseIf rdbtnMeses.IsChecked Then
-
-                End If
-            End If
-        End If
-        'Gente
-        If rdbtnGente.IsChecked Then
-            'Planta
-            If rdbtnPlanta.IsChecked Then
-                If rdbtnDias.IsChecked Then
-
-                ElseIf rdbtnMeses.IsChecked Then
-
-                End If
-            End If
-            'Cadena Valor
-            If rdbtnCadenaValor.IsChecked Then
-                If rdbtnDias.IsChecked Then
-
-                ElseIf rdbtnMeses.IsChecked Then
-
-                End If
-            End If
-            'Componente
-            If rdbtnComponente.IsChecked Then
-                If rdbtnDias.IsChecked Then
-
-                ElseIf rdbtnMeses.IsChecked Then
-
-                End If
-            End If
-            'Linea
-            If rdbtnLinea.IsChecked Then
-                If rdbtnDias.IsChecked Then
-
-                ElseIf rdbtnMeses.IsChecked Then
-
-                End If
-            End If
-            'Equipo
-            If rdbtnEquipo.IsChecked Then
-                If rdbtnDias.IsChecked Then
-
-                ElseIf rdbtnMeses.IsChecked Then
-
-                End If
-            End If
-        End If
-        '5s
-        If rdbtnCincoS.IsChecked Then
-            'Planta
-            If rdbtnPlanta.IsChecked Then
-                If rdbtnDias.IsChecked Then
-
-                ElseIf rdbtnMeses.IsChecked Then
-
-                End If
-            End If
-            'Cadena Valor
-            If rdbtnCadenaValor.IsChecked Then
-                If rdbtnDias.IsChecked Then
-
-                ElseIf rdbtnMeses.IsChecked Then
-
-                End If
-            End If
-            'Componente
-            If rdbtnComponente.IsChecked Then
-                If rdbtnDias.IsChecked Then
-
-                ElseIf rdbtnMeses.IsChecked Then
-
-                End If
-            End If
-            'Linea
-            If rdbtnLinea.IsChecked Then
-                If rdbtnDias.IsChecked Then
-
-                ElseIf rdbtnMeses.IsChecked Then
-
-                End If
-            End If
-            'Equipo
-            If rdbtnEquipo.IsChecked Then
-                If rdbtnDias.IsChecked Then
-
-                ElseIf rdbtnMeses.IsChecked Then
-
-                End If
-            End If
-        End If
-    End Sub
-    'LET
-    Private Sub graficos_lider_equipo_tlatoani()
-        'oee
-        If rdbtnOee.IsChecked Then
-            'Planta
-            If rdbtnPlanta.IsChecked Then
-                If rdbtnDias.IsChecked Then
-
-                ElseIf rdbtnMeses.IsChecked Then
-
-                End If
-            End If
-            'Cadena Valor
-            If rdbtnCadenaValor.IsChecked Then
-                If rdbtnDias.IsChecked Then
-
-                ElseIf rdbtnMeses.IsChecked Then
-
-                End If
-            End If
-            'Componente
-            If rdbtnComponente.IsChecked Then
-                If rdbtnDias.IsChecked Then
-
-                ElseIf rdbtnMeses.IsChecked Then
-
-                End If
-            End If
-            'Linea
-            If rdbtnLinea.IsChecked Then
-                If rdbtnDias.IsChecked Then
-
-                ElseIf rdbtnMeses.IsChecked Then
-
-                End If
-            End If
-            'Equipo
-            If rdbtnEquipo.IsChecked Then
-                If rdbtnDias.IsChecked Then
-
-                ElseIf rdbtnMeses.IsChecked Then
-
-                End If
-            End If
-        End If
-        'Nrfti
-        If rdbtnNrfti.IsChecked Then
-            'Planta
-            If rdbtnPlanta.IsChecked Then
-                If rdbtnDias.IsChecked Then
-
-                ElseIf rdbtnMeses.IsChecked Then
-
-                End If
-            End If
-            'Cadena Valor
-            If rdbtnCadenaValor.IsChecked Then
-                If rdbtnDias.IsChecked Then
-
-                ElseIf rdbtnMeses.IsChecked Then
-
-                End If
-            End If
-            'Componente
-            If rdbtnComponente.IsChecked Then
-                If rdbtnDias.IsChecked Then
-
-                ElseIf rdbtnMeses.IsChecked Then
-
-                End If
-            End If
-            'Linea
-            If rdbtnLinea.IsChecked Then
-                If rdbtnDias.IsChecked Then
-
-                ElseIf rdbtnMeses.IsChecked Then
-
-                End If
-            End If
-            'Equipo
-            If rdbtnEquipo.IsChecked Then
-                If rdbtnDias.IsChecked Then
-
-                ElseIf rdbtnMeses.IsChecked Then
-
-                End If
-            End If
-        End If
-        'Costo
-        If rdbtnCosto.IsChecked Then
-            'Planta
-            If rdbtnPlanta.IsChecked Then
-                If rdbtnDias.IsChecked Then
-
-                ElseIf rdbtnMeses.IsChecked Then
-
-                End If
-            End If
-            'Cadena Valor
-            If rdbtnCadenaValor.IsChecked Then
-                If rdbtnDias.IsChecked Then
-
-                ElseIf rdbtnMeses.IsChecked Then
-
-                End If
-            End If
-            'Componente
-            If rdbtnComponente.IsChecked Then
-                If rdbtnDias.IsChecked Then
-
-                ElseIf rdbtnMeses.IsChecked Then
-
-                End If
-            End If
-            'Linea
-            If rdbtnLinea.IsChecked Then
-                If rdbtnDias.IsChecked Then
-
-                ElseIf rdbtnMeses.IsChecked Then
-
-                End If
-            End If
-            'Equipo
-            If rdbtnEquipo.IsChecked Then
-                If rdbtnDias.IsChecked Then
-
-                ElseIf rdbtnMeses.IsChecked Then
-
-                End If
-            End If
-        End If
-        'Seguridad
-        If rdbtnSeguridad.IsChecked Then
-            'Planta
-            If rdbtnPlanta.IsChecked Then
-                If rdbtnDias.IsChecked Then
-
-                ElseIf rdbtnMeses.IsChecked Then
-
-                End If
-            End If
-            'Cadena Valor
-            If rdbtnCadenaValor.IsChecked Then
-                If rdbtnDias.IsChecked Then
-
-                ElseIf rdbtnMeses.IsChecked Then
-
-                End If
-            End If
-            'Componente
-            If rdbtnComponente.IsChecked Then
-                If rdbtnDias.IsChecked Then
-
-                ElseIf rdbtnMeses.IsChecked Then
-
-                End If
-            End If
-            'Linea
-            If rdbtnLinea.IsChecked Then
-                If rdbtnDias.IsChecked Then
-
-                ElseIf rdbtnMeses.IsChecked Then
-
-                End If
-            End If
-            'Equipo
-            If rdbtnEquipo.IsChecked Then
-                If rdbtnDias.IsChecked Then
-
-                ElseIf rdbtnMeses.IsChecked Then
-
-                End If
-            End If
-        End If
-        'Gente
-        If rdbtnGente.IsChecked Then
-            'Planta
-            If rdbtnPlanta.IsChecked Then
-                If rdbtnDias.IsChecked Then
-
-                ElseIf rdbtnMeses.IsChecked Then
-
-                End If
-            End If
-            'Cadena Valor
-            If rdbtnCadenaValor.IsChecked Then
-                If rdbtnDias.IsChecked Then
-
-                ElseIf rdbtnMeses.IsChecked Then
-
-                End If
-            End If
-            'Componente
-            If rdbtnComponente.IsChecked Then
-                If rdbtnDias.IsChecked Then
-
-                ElseIf rdbtnMeses.IsChecked Then
-
-                End If
-            End If
-            'Linea
-            If rdbtnLinea.IsChecked Then
-                If rdbtnDias.IsChecked Then
-
-                ElseIf rdbtnMeses.IsChecked Then
-
-                End If
-            End If
-            'Equipo
-            If rdbtnEquipo.IsChecked Then
-                If rdbtnDias.IsChecked Then
-
-                ElseIf rdbtnMeses.IsChecked Then
-
-                End If
-            End If
-        End If
-        '5s
-        If rdbtnCincoS.IsChecked Then
-            'Planta
-            If rdbtnPlanta.IsChecked Then
-                If rdbtnDias.IsChecked Then
-
-                ElseIf rdbtnMeses.IsChecked Then
-
-                End If
-            End If
-            'Cadena Valor
-            If rdbtnCadenaValor.IsChecked Then
-                If rdbtnDias.IsChecked Then
-
-                ElseIf rdbtnMeses.IsChecked Then
-
-                End If
-            End If
-            'Componente
-            If rdbtnComponente.IsChecked Then
-                If rdbtnDias.IsChecked Then
-
-                ElseIf rdbtnMeses.IsChecked Then
-
-                End If
-            End If
-            'Linea
-            If rdbtnLinea.IsChecked Then
-                If rdbtnDias.IsChecked Then
-
-                ElseIf rdbtnMeses.IsChecked Then
-
-                End If
-            End If
-            'Equipo
-            If rdbtnEquipo.IsChecked Then
-                If rdbtnDias.IsChecked Then
-
-                ElseIf rdbtnMeses.IsChecked Then
-
-                End If
-            End If
-        End If
     End Sub
 #End Region
     Private Sub btnGraficar_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnGraficar.Click

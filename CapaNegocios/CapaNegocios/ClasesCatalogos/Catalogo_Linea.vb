@@ -3,7 +3,6 @@ Namespace Clases_Catalogos
     Public Class Catalogo_Linea
         Dim cadena_conexion As New CapaDatos.conexiones
         Dim oBD As New CapaDatos.CapaDatos(cadena_conexion.CadenaSicaip)
-
         Private vL_Linea As List(Of Linea)
         Public Property L_Linea() As List(Of Linea)
             Get
@@ -28,8 +27,6 @@ Namespace Clases_Catalogos
                 Me.vL_Linea = value
             End Set
         End Property
-
-
         Public Function Obtener_Lineas() As DataTable
             Dim vDT As DataTable
             vDT = oBD.ObtenerTabla("SELECT cve_linea, linea, componente, tpcdm " & _
