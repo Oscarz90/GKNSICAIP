@@ -133,18 +133,18 @@ Public Class FrmUsuarios
             Controles_Permisos(vAdd_Registrar, vDelete_Eliminar)
             If oUsuario.Cve_Componente <> 0 Then
                 radUsuario_Componente.IsChecked = True
-                ddlComponente_W.Enabled = True
+                'ddlComponente_W.Enabled = True
                 btnComponente.Enabled = True
             Else
-                ddlComponente_W.Enabled = False
+                'ddlComponente_W.Enabled = False
                 btnComponente.Enabled = False
             End If
             If oUsuario.Cve_CV <> 0 Then
                 radUsuario_CV.IsChecked = True
-                ddlCadena_Valor_W.Enabled = True
+                'ddlCadena_Valor_W.Enabled = True
                 btnCadena_Valor.Enabled = True
             Else
-                ddlCadena_Valor_W.Enabled = False
+                'ddlCadena_Valor_W.Enabled = False
                 btnCadena_Valor.Enabled = False
             End If
 
@@ -315,6 +315,6 @@ Public Class FrmUsuarios
     Private Sub btnCadena_Valor_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnCadena_Valor.Click
         Dim ofrmSeleccion_CV As New FrmSeleccion_CV(oUsuario.CVE_Usuario.ToString)
         ofrmSeleccion_CV.ShowDialog()
-        oLista_Componentes = ofrmSeleccion_CV.oRetorno
+        oLista_CV = ofrmSeleccion_CV.oRetorno
     End Sub
 End Class
