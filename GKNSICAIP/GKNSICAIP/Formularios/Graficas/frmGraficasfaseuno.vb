@@ -4,17 +4,29 @@ Imports Telerik.Charting
 
 Public Class FrmGraficasfaseuno
 #Region "Variables globales"
-    Private nivel_let As Boolean = False
+    Private nivel_lets As Boolean = False
     Private nivel_lgs As Boolean = False
-    Private nivel_sl As Boolean = False
-    Private nivel_scil As Boolean = False
+    Private nivel_componentes As Boolean = False
+    Private nivel_cadena_valors As Boolean = False
     Private nivel_planta_gkn As Boolean = False
 #End Region
     Private Sub FrmGraficasfaseuno_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
-        'nivel_lg()
+        'tipo_nivel_let()
+        'tipo_nivel_lg()
+        'tipo_nivel_componente()
+        'tipo_nivel_cadena_valor()
+        'tipo_nivel_planta()
+        'Dim user_maq As String
+        'user_maq = Environment.UserName
+        'MsgBox(user_maq)
+        inicializa_formulario()
+    End Sub
+#Region "Inicializa formulario"
+    Private Sub inicializa_formulario()
         dtpFechaInicial.Format = System.Windows.Forms.DateTimePickerFormat.Custom
         dtpFechaFinal.Format = System.Windows.Forms.DateTimePickerFormat.Custom
     End Sub
+#End Region
 #Region "Validaciones"
     'GroupBox Indicador
     Private Function valida_rdbtn_indicador() As Boolean
@@ -41,7 +53,6 @@ Public Class FrmGraficasfaseuno
         If rdbtnPlanta.IsChecked Then
             Return True
         ElseIf rdbtnCadenaValor.IsChecked Then
-
             If cbxCadenaValor.SelectedIndex <> -1 Then
                 Return True
             Else
@@ -116,33 +127,34 @@ Public Class FrmGraficasfaseuno
 #End Region
 #Region "Habilitar Niveles Graficos- Categorias"
     'Lets
-    Private Sub nivel_lets()
+    Private Sub tipo_nivel_let()
         rdbtnPlanta.Enabled = False
         rdbtnCadenaValor.Enabled = False
         rdbtnComponente.Enabled = False
         rdbtnEquipo.Enabled = False
-        nivel_let = True
+        nivel_lets = True
     End Sub
     'LG
-    Private Sub nivel_lg()
+    Private Sub tipo_nivel_lg()
         rdbtnPlanta.Enabled = False
         rdbtnCadenaValor.Enabled = False
         rdbtnComponente.Enabled = False
+        rdbtnLinea.Enabled = False
         nivel_lgs = True
     End Sub
     'Componente
-    Private Sub nivel_componente()
+    Private Sub tipo_nivel_componente()
         rdbtnPlanta.Enabled = False
         rdbtnCadenaValor.Enabled = False
-        nivel_sl = True
+        nivel_componentes = True
     End Sub
     'Cadena Valor
-    Private Sub nivel_cadena_valor()
+    Private Sub tipo_nivel_cadena_valor()
         rdbtnPlanta.Enabled = False
-        nivel_scil = True
+        nivel_cadena_valors = True
     End Sub
     'Planta
-    Private Sub nivel_planta()
+    Private Sub tipo_nivel_planta()
         nivel_planta_gkn = True
     End Sub
 #End Region
@@ -160,23 +172,20 @@ Public Class FrmGraficasfaseuno
         Else
             deshabilita_combobox_niveles(cbxComponente)
         End If
-
         'Linea
         If rdbtnLinea.IsChecked Then
-            'Lets
-            If nivel_let Then
+            'Lets.
+            If nivel_lets Then
                 habilita_combobox_niveles(cbxLinea)
                 chkTodasLineas.Visible = True
             Else
                 'Otros
                 habilita_combobox_niveles(cbxLinea)
-                habilita_combobox_niveles(cbxEquipo)
-                chkTodosEquipos.Visible = True
             End If
 
         Else
             'Lets
-            If nivel_let Then
+            If nivel_lets Then
                 deshabilita_combobox_niveles(cbxLinea)
                 chkTodasLineas.Visible = False
             Else
@@ -184,11 +193,12 @@ Public Class FrmGraficasfaseuno
                 If Not rdbtnEquipo.IsChecked Then
                     deshabilita_combobox_niveles(cbxLinea)
                     deshabilita_combobox_niveles(cbxEquipo)
-                    chkTodosEquipos.Visible = False
+                    'chkTodosEquipos.Visible = False
                 End If
-                chkTodosEquipos.Visible = False
+                'chkTodosEquipos.Visible = False
             End If
         End If
+
         'Equipo
         If rdbtnEquipo.IsChecked Then
             habilita_combobox_niveles(cbxLinea)
@@ -196,14 +206,8 @@ Public Class FrmGraficasfaseuno
             chkTodasLineas.Visible = True
         Else
             'Otros
-            If Not nivel_let Then
-                If Not rdbtnLinea.IsChecked Then
-                    deshabilita_combobox_niveles(cbxLinea)
-                    deshabilita_combobox_niveles(cbxEquipo)
-                    chkTodasLineas.Visible = False
-                End If
+            deshabilita_combobox_niveles(cbxEquipo)
                 chkTodasLineas.Visible = False
-            End If
         End If
         valida_btn_graficar()
     End Sub

@@ -22,7 +22,7 @@ Partial Class FrmGraficasfaseuno
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Dim CartesianArea2 As Telerik.WinControls.UI.CartesianArea = New Telerik.WinControls.UI.CartesianArea()
+        Dim CartesianArea1 As Telerik.WinControls.UI.CartesianArea = New Telerik.WinControls.UI.CartesianArea()
         Me.RadGroupBox1 = New Telerik.WinControls.UI.RadGroupBox()
         Me.rdbtnGente = New Telerik.WinControls.UI.RadRadioButton()
         Me.rdbtnCincoS = New Telerik.WinControls.UI.RadRadioButton()
@@ -31,15 +31,15 @@ Partial Class FrmGraficasfaseuno
         Me.rdbtnNrfti = New Telerik.WinControls.UI.RadRadioButton()
         Me.rdbtnOee = New Telerik.WinControls.UI.RadRadioButton()
         Me.RadGroupBox2 = New Telerik.WinControls.UI.RadGroupBox()
-        Me.chkTodosEquipos = New Telerik.WinControls.UI.RadCheckBox()
         Me.chkTodasLineas = New Telerik.WinControls.UI.RadCheckBox()
-        Me.cbxLinea = New Telerik.WinControls.UI.RadDropDownList()
-        Me.cbxEquipo = New Telerik.WinControls.UI.RadDropDownList()
         Me.cbxComponente = New Telerik.WinControls.UI.RadDropDownList()
-        Me.cbxCadenaValor = New Telerik.WinControls.UI.RadDropDownList()
-        Me.rdbtnEquipo = New Telerik.WinControls.UI.RadRadioButton()
-        Me.rdbtnComponente = New Telerik.WinControls.UI.RadRadioButton()
+        Me.cbxLinea = New Telerik.WinControls.UI.RadDropDownList()
+        Me.chkTodosEquipos = New Telerik.WinControls.UI.RadCheckBox()
         Me.rdbtnLinea = New Telerik.WinControls.UI.RadRadioButton()
+        Me.cbxCadenaValor = New Telerik.WinControls.UI.RadDropDownList()
+        Me.rdbtnComponente = New Telerik.WinControls.UI.RadRadioButton()
+        Me.rdbtnEquipo = New Telerik.WinControls.UI.RadRadioButton()
+        Me.cbxEquipo = New Telerik.WinControls.UI.RadDropDownList()
         Me.rdbtnCadenaValor = New Telerik.WinControls.UI.RadRadioButton()
         Me.rdbtnPlanta = New Telerik.WinControls.UI.RadRadioButton()
         Me.RadGroupBox3 = New Telerik.WinControls.UI.RadGroupBox()
@@ -61,15 +61,15 @@ Partial Class FrmGraficasfaseuno
         CType(Me.rdbtnOee, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.RadGroupBox2, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.RadGroupBox2.SuspendLayout()
-        CType(Me.chkTodosEquipos, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.chkTodasLineas, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.cbxLinea, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.cbxEquipo, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.cbxComponente, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.cbxCadenaValor, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.rdbtnEquipo, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.rdbtnComponente, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.cbxLinea, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.chkTodosEquipos, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.rdbtnLinea, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.cbxCadenaValor, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.rdbtnComponente, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.rdbtnEquipo, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.cbxEquipo, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.rdbtnCadenaValor, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.rdbtnPlanta, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.RadGroupBox3, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -157,15 +157,15 @@ Partial Class FrmGraficasfaseuno
         'RadGroupBox2
         '
         Me.RadGroupBox2.AccessibleRole = System.Windows.Forms.AccessibleRole.Grouping
-        Me.RadGroupBox2.Controls.Add(Me.chkTodosEquipos)
         Me.RadGroupBox2.Controls.Add(Me.chkTodasLineas)
-        Me.RadGroupBox2.Controls.Add(Me.cbxLinea)
-        Me.RadGroupBox2.Controls.Add(Me.cbxEquipo)
         Me.RadGroupBox2.Controls.Add(Me.cbxComponente)
-        Me.RadGroupBox2.Controls.Add(Me.cbxCadenaValor)
-        Me.RadGroupBox2.Controls.Add(Me.rdbtnEquipo)
-        Me.RadGroupBox2.Controls.Add(Me.rdbtnComponente)
+        Me.RadGroupBox2.Controls.Add(Me.cbxLinea)
+        Me.RadGroupBox2.Controls.Add(Me.chkTodosEquipos)
         Me.RadGroupBox2.Controls.Add(Me.rdbtnLinea)
+        Me.RadGroupBox2.Controls.Add(Me.cbxCadenaValor)
+        Me.RadGroupBox2.Controls.Add(Me.rdbtnComponente)
+        Me.RadGroupBox2.Controls.Add(Me.rdbtnEquipo)
+        Me.RadGroupBox2.Controls.Add(Me.cbxEquipo)
         Me.RadGroupBox2.Controls.Add(Me.rdbtnCadenaValor)
         Me.RadGroupBox2.Controls.Add(Me.rdbtnPlanta)
         Me.RadGroupBox2.HeaderText = "Selecciona:"
@@ -180,39 +180,14 @@ Partial Class FrmGraficasfaseuno
         Me.RadGroupBox2.Text = "Selecciona:"
         Me.RadGroupBox2.ThemeName = "RadThemeManager"
         '
-        'chkTodosEquipos
-        '
-        Me.chkTodosEquipos.Location = New System.Drawing.Point(359, 133)
-        Me.chkTodosEquipos.Name = "chkTodosEquipos"
-        Me.chkTodosEquipos.Size = New System.Drawing.Size(50, 18)
-        Me.chkTodosEquipos.TabIndex = 9
-        Me.chkTodosEquipos.Text = "Todas"
-        Me.chkTodosEquipos.Visible = False
-        '
         'chkTodasLineas
         '
-        Me.chkTodasLineas.Location = New System.Drawing.Point(359, 109)
+        Me.chkTodasLineas.Location = New System.Drawing.Point(359, 133)
         Me.chkTodasLineas.Name = "chkTodasLineas"
         Me.chkTodasLineas.Size = New System.Drawing.Size(50, 18)
         Me.chkTodasLineas.TabIndex = 7
         Me.chkTodasLineas.Text = "Todas"
         Me.chkTodasLineas.Visible = False
-        '
-        'cbxLinea
-        '
-        Me.cbxLinea.Enabled = False
-        Me.cbxLinea.Location = New System.Drawing.Point(112, 107)
-        Me.cbxLinea.Name = "cbxLinea"
-        Me.cbxLinea.Size = New System.Drawing.Size(241, 20)
-        Me.cbxLinea.TabIndex = 6
-        '
-        'cbxEquipo
-        '
-        Me.cbxEquipo.Enabled = False
-        Me.cbxEquipo.Location = New System.Drawing.Point(112, 131)
-        Me.cbxEquipo.Name = "cbxEquipo"
-        Me.cbxEquipo.Size = New System.Drawing.Size(241, 20)
-        Me.cbxEquipo.TabIndex = 6
         '
         'cbxComponente
         '
@@ -222,6 +197,31 @@ Partial Class FrmGraficasfaseuno
         Me.cbxComponente.Size = New System.Drawing.Size(241, 20)
         Me.cbxComponente.TabIndex = 6
         '
+        'cbxLinea
+        '
+        Me.cbxLinea.Enabled = False
+        Me.cbxLinea.Location = New System.Drawing.Point(112, 131)
+        Me.cbxLinea.Name = "cbxLinea"
+        Me.cbxLinea.Size = New System.Drawing.Size(241, 20)
+        Me.cbxLinea.TabIndex = 6
+        '
+        'chkTodosEquipos
+        '
+        Me.chkTodosEquipos.Location = New System.Drawing.Point(359, 109)
+        Me.chkTodosEquipos.Name = "chkTodosEquipos"
+        Me.chkTodosEquipos.Size = New System.Drawing.Size(50, 18)
+        Me.chkTodosEquipos.TabIndex = 9
+        Me.chkTodosEquipos.Text = "Todas"
+        Me.chkTodosEquipos.Visible = False
+        '
+        'rdbtnLinea
+        '
+        Me.rdbtnLinea.Location = New System.Drawing.Point(5, 133)
+        Me.rdbtnLinea.Name = "rdbtnLinea"
+        Me.rdbtnLinea.Size = New System.Drawing.Size(49, 18)
+        Me.rdbtnLinea.TabIndex = 3
+        Me.rdbtnLinea.Text = "Linea:"
+        '
         'cbxCadenaValor
         '
         Me.cbxCadenaValor.Enabled = False
@@ -229,14 +229,6 @@ Partial Class FrmGraficasfaseuno
         Me.cbxCadenaValor.Name = "cbxCadenaValor"
         Me.cbxCadenaValor.Size = New System.Drawing.Size(241, 20)
         Me.cbxCadenaValor.TabIndex = 5
-        '
-        'rdbtnEquipo
-        '
-        Me.rdbtnEquipo.Location = New System.Drawing.Point(5, 133)
-        Me.rdbtnEquipo.Name = "rdbtnEquipo"
-        Me.rdbtnEquipo.Size = New System.Drawing.Size(57, 18)
-        Me.rdbtnEquipo.TabIndex = 2
-        Me.rdbtnEquipo.Text = "Equipo:"
         '
         'rdbtnComponente
         '
@@ -246,13 +238,21 @@ Partial Class FrmGraficasfaseuno
         Me.rdbtnComponente.TabIndex = 2
         Me.rdbtnComponente.Text = "Componente:"
         '
-        'rdbtnLinea
+        'rdbtnEquipo
         '
-        Me.rdbtnLinea.Location = New System.Drawing.Point(5, 109)
-        Me.rdbtnLinea.Name = "rdbtnLinea"
-        Me.rdbtnLinea.Size = New System.Drawing.Size(49, 18)
-        Me.rdbtnLinea.TabIndex = 3
-        Me.rdbtnLinea.Text = "Linea:"
+        Me.rdbtnEquipo.Location = New System.Drawing.Point(5, 109)
+        Me.rdbtnEquipo.Name = "rdbtnEquipo"
+        Me.rdbtnEquipo.Size = New System.Drawing.Size(57, 18)
+        Me.rdbtnEquipo.TabIndex = 2
+        Me.rdbtnEquipo.Text = "Equipo:"
+        '
+        'cbxEquipo
+        '
+        Me.cbxEquipo.Enabled = False
+        Me.cbxEquipo.Location = New System.Drawing.Point(112, 107)
+        Me.cbxEquipo.Name = "cbxEquipo"
+        Me.cbxEquipo.Size = New System.Drawing.Size(241, 20)
+        Me.cbxEquipo.TabIndex = 6
         '
         'rdbtnCadenaValor
         '
@@ -347,10 +347,10 @@ Partial Class FrmGraficasfaseuno
         '
         'radChartView1
         '
-        CartesianArea2.GridDesign.AlternatingVerticalColor = False
-        CartesianArea2.GridDesign.DrawVerticalFills = False
-        CartesianArea2.ShowGrid = True
-        Me.radChartView1.AreaDesign = CartesianArea2
+        CartesianArea1.GridDesign.AlternatingVerticalColor = False
+        CartesianArea1.GridDesign.DrawVerticalFills = False
+        CartesianArea1.ShowGrid = True
+        Me.radChartView1.AreaDesign = CartesianArea1
         Me.radChartView1.Location = New System.Drawing.Point(17, 213)
         Me.radChartView1.Name = "radChartView1"
         Me.radChartView1.Size = New System.Drawing.Size(1225, 481)
@@ -404,15 +404,15 @@ Partial Class FrmGraficasfaseuno
         CType(Me.RadGroupBox2, System.ComponentModel.ISupportInitialize).EndInit()
         Me.RadGroupBox2.ResumeLayout(False)
         Me.RadGroupBox2.PerformLayout()
-        CType(Me.chkTodosEquipos, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.chkTodasLineas, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.cbxLinea, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.cbxEquipo, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.cbxComponente, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.cbxCadenaValor, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.rdbtnEquipo, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.rdbtnComponente, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.cbxLinea, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.chkTodosEquipos, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.rdbtnLinea, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.cbxCadenaValor, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.rdbtnComponente, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.rdbtnEquipo, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.cbxEquipo, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.rdbtnCadenaValor, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.rdbtnPlanta, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.RadGroupBox3, System.ComponentModel.ISupportInitialize).EndInit()

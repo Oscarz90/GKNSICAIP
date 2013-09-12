@@ -4,7 +4,6 @@ Public Class EquipoLinea
     Dim cadena_conexion As New CapaDatos.conexiones
     Dim oBD As New CapaDatos.CapaDatos(cadena_conexion.CadenaSicaip)
     Dim oLinea As Linea
-
 #Region "IIndividual"
     Public Sub Cargar() Implements IIndividual.Cargar
 
@@ -120,7 +119,6 @@ Public Class EquipoLinea
     End Function
 
 #End Region
-
 #Region "Metodos Formulario de Produccion"
     Public Function llena_combo_lineas() As DataTable
         Dim dtEquipoLinea As New DataTable
