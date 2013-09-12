@@ -60,6 +60,7 @@ Public Class frmMaquina
             oMaquina.cve_maquina = 0
             oMaquina.clave_maquina = txtCve_Maquina.Text
             oMaquina.maquina = txtNombre.Text
+            oMaquina.Estatus = "1"
             Try
                 oMaquina.Registrar()
                 MsgBox("Se registro correctamente")
@@ -99,6 +100,8 @@ Public Class frmMaquina
             btnRegistrar.Visible = True
             btnModificar.Visible = False
             btnDar_Baja.Enabled = False
+            txtNombre.ReadOnly = False
+            txtCve_Maquina.ReadOnly = False
         Else
             btnRegistrar.Visible = False
             btnModificar.Visible = True

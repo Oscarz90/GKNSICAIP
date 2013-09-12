@@ -25,6 +25,7 @@ Public Class frmTiempo_Ciclo
     Dim vSeleccion_Linea As Boolean = False
     Dim vValidado_Modelo_En_Linea As Boolean = False
     Dim vValidado_Modelo_Y_Linea_En_TC As Boolean = False
+    Dim vModelo_Seleccionado As String = ""
 #End Region
 
 #Region "Validaciones"
@@ -100,12 +101,13 @@ Public Class frmTiempo_Ciclo
         If vfrmImportador_Modelo.vRetorno_CVE_Modelo <> 0 Then
             oTiempo_Ciclo.cve_modelo = vfrmImportador_Modelo.vRetorno_CVE_Modelo
             txtModelo.Text = oTiempo_Ciclo.Nombre_Modelo
+            vModelo_Seleccionado = oTiempo_Ciclo.cve_modelo
             vSeleccion_Modelo = True
         End If
     End Sub
 
     Private Sub btnImportar_Linea_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnImportar_Linea.Click
-        Dim vfrmImportador_Linea As New frmImportador_Linea
+        Dim vfrmImportador_Linea As New frmImportador_Linea(Long.Parse(vModelo_Seleccionado))
         vfrmImportador_Linea.ShowDialog()
         If vfrmImportador_Linea.vRetorno_CVE_Linea <> 0 Then
             oTiempo_Ciclo.cve_linea = vfrmImportador_Linea.vRetorno_CVE_Linea

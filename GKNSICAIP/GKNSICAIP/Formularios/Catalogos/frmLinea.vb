@@ -62,7 +62,7 @@ Public Class frmLinea
             oLinea.cve_linea = 0
             oLinea.linea = txtNombre_Linea.Text
             oLinea.tpcdm = nudTPCM.Value
-
+            oLinea.Estatus = "1"
             Try
                 oLinea.Registrar()
                 vId_Retorno = oLinea.cve_linea
@@ -92,6 +92,7 @@ Public Class frmLinea
         Me.txtNombre_Linea.DataBindings.Clear()
         Me.txtComponente.DataBindings.Clear()        
         Me.nudTPCM.DataBindings.Clear()
+
 
         Me.txtNombre_Linea.DataBindings.Add("Text", oLinea, "linea")
         Me.txtComponente.DataBindings.Add("Text", oLinea, "Nombre_Componente")

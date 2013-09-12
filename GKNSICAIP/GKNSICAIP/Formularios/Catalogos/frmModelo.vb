@@ -74,6 +74,7 @@ Public Class frmModelo
     Private Sub btnRegistrar_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnRegistrar.Click
         If MsgBox("¿Esta seguro de registrar el nuevo Modelo?", MsgBoxStyle.YesNo, Me.Text) = MsgBoxResult.Yes Then
             oModelo.cve_modelo = 0
+            oModelo.Estatus = "1"
             oModelo.descripcion = txtDescripcion.Text
             oModelo.np_gkn = txtNumero_Parte.Text
             oModelo.cve_clasificacion_modelo = cbxClasificacion.SelectedValue
@@ -120,6 +121,7 @@ Public Class frmModelo
             btnModificar.Visible = False
             btnDarBaja.Enabled = False
             cbxClasificacion.Enabled = False
+            txtNumero_Parte.ReadOnly = False
         Else
             btnRegistrar.Visible = False
             btnModificar.Visible = True

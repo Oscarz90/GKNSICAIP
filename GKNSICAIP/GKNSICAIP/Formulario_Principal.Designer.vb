@@ -38,10 +38,10 @@ Partial Class Formulario_Principal
         Me.btnImportar_TC = New Telerik.WinControls.UI.RadButtonElement()
         Me.RadRibbonBarGroup3 = New Telerik.WinControls.UI.RadRibbonBarGroup()
         Me.btnEquipo_Linea = New Telerik.WinControls.UI.RadButtonElement()
-        Me.RadRibbonBarGroup4 = New Telerik.WinControls.UI.RadRibbonBarGroup()
-        Me.btnSICAIP = New Telerik.WinControls.UI.RadButtonElement()
         Me.RibbonTab5 = New Telerik.WinControls.UI.RibbonTab()
         Me.RibbonTab4 = New Telerik.WinControls.UI.RibbonTab()
+        Me.RadRibbonBarGroup4 = New Telerik.WinControls.UI.RadRibbonBarGroup()
+        Me.btnSICAIP = New Telerik.WinControls.UI.RadButtonElement()
         Me.RadOffice2007ScreenTipElement1 = New Telerik.WinControls.UI.RadOffice2007ScreenTipElement()
         Me.RadPanel_Registros = New Telerik.WinControls.UI.RadPanel()
         Me.dgvRegistros = New Telerik.WinControls.UI.RadGridView()
@@ -136,7 +136,7 @@ Partial Class Formulario_Principal
         '
         Me.RibbonTab2.AccessibleDescription = "Catalogos"
         Me.RibbonTab2.AccessibleName = "Catalogos"
-        Me.RibbonTab2.IsSelected = False
+        Me.RibbonTab2.IsSelected = True
         Me.RibbonTab2.Items.AddRange(New Telerik.WinControls.RadItem() {Me.RadRibbonBarGroup2, Me.RadRibbonBarGroup3})
         Me.RibbonTab2.Name = "RibbonTab2"
         Me.RibbonTab2.Text = "Catalogos"
@@ -225,6 +225,23 @@ Partial Class Formulario_Principal
         Me.btnEquipo_Linea.TextAlignment = System.Drawing.ContentAlignment.BottomCenter
         Me.btnEquipo_Linea.Visibility = Telerik.WinControls.ElementVisibility.Visible
         '
+        'RibbonTab5
+        '
+        Me.RibbonTab5.AccessibleDescription = "Reportes"
+        Me.RibbonTab5.AccessibleName = "Reportes"
+        Me.RibbonTab5.IsSelected = False
+        Me.RibbonTab5.Name = "RibbonTab5"
+        Me.RibbonTab5.Text = "Reportes"
+        Me.RibbonTab5.Visibility = Telerik.WinControls.ElementVisibility.Visible
+        '
+        'RibbonTab4
+        '
+        Me.RibbonTab4.AccessibleDescription = "Graficas"
+        Me.RibbonTab4.AccessibleName = "Graficas"
+        Me.RibbonTab4.Name = "RibbonTab4"
+        Me.RibbonTab4.Text = "Graficas"
+        Me.RibbonTab4.Visibility = Telerik.WinControls.ElementVisibility.Visible
+        '
         'RadRibbonBarGroup4
         '
         Me.RadRibbonBarGroup4.AccessibleDescription = "SICAIP"
@@ -245,23 +262,6 @@ Partial Class Formulario_Principal
         Me.btnSICAIP.Name = "btnSICAIP"
         Me.btnSICAIP.Text = "SICAIP"
         Me.btnSICAIP.Visibility = Telerik.WinControls.ElementVisibility.Visible
-        '
-        'RibbonTab5
-        '
-        Me.RibbonTab5.AccessibleDescription = "Reportes"
-        Me.RibbonTab5.AccessibleName = "Reportes"
-        Me.RibbonTab5.IsSelected = True
-        Me.RibbonTab5.Name = "RibbonTab5"
-        Me.RibbonTab5.Text = "Reportes"
-        Me.RibbonTab5.Visibility = Telerik.WinControls.ElementVisibility.Visible
-        '
-        'RibbonTab4
-        '
-        Me.RibbonTab4.AccessibleDescription = "Graficas"
-        Me.RibbonTab4.AccessibleName = "Graficas"
-        Me.RibbonTab4.Name = "RibbonTab4"
-        Me.RibbonTab4.Text = "Graficas"
-        Me.RibbonTab4.Visibility = Telerik.WinControls.ElementVisibility.Visible
         '
         'RadOffice2007ScreenTipElement1
         '
