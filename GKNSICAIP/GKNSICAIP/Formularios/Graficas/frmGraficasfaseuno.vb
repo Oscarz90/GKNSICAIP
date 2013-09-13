@@ -5,7 +5,7 @@ Public Class FrmGraficasfaseuno
 #Region "Variables globales"
     Private cod_empleado As String
     Private cve_usuario As Long
-    Private cve_equipo As Long = 7
+    Private cve_equipo As Long
     'Banderas
     Private nivel_lets As Boolean = False
     Private nivel_lgs As Boolean = False
@@ -24,7 +24,7 @@ Public Class FrmGraficasfaseuno
         dtpFechaInicial.Format = System.Windows.Forms.DateTimePickerFormat.Custom
         dtpFechaFinal.Format = System.Windows.Forms.DateTimePickerFormat.Custom
     End Sub
-    Private Sub inicializa_formulario(Optional ByVal codempleado As String = "", Optional ByVal cveequipo As Long = 0)
+    Public Sub inicializa_formulario(Optional ByVal codempleado As String = "", Optional ByVal cveequipo As Long = 0)
         cve_equipo = cveequipo
         cod_empleado = codempleado
     End Sub
@@ -34,9 +34,7 @@ Public Class FrmGraficasfaseuno
         oGraficasfaseuno.usuario = Environment.UserName
         If cod_empleado Is Nothing Then
             oGraficasfaseuno.cod_empleado = ""
-            MsgBox("es nulo")
         Else
-            MsgBox("no es nulo" & cod_empleado)
             oGraficasfaseuno.cod_empleado = cod_empleado
         End If
         oGraficasfaseuno.obtiene_nivel_graficos()
@@ -67,7 +65,7 @@ Public Class FrmGraficasfaseuno
                 End If
                 
             Case Else
-                'MsgBox("no se q pedo")
+
         End Select
     End Sub
 #End Region
@@ -423,7 +421,10 @@ Public Class FrmGraficasfaseuno
         oObtiene_oee.fecha_final = dtpFechaFinal.Value
         'Creacion series
         Dim BarSeries1 As New BarSeries()
+        BarSeries1.LegendTitle = "Oee"
         Dim BarSeries2 As New BarSeries()
+        BarSeries2.LegendTitle = "Acumulado"
+        Me.radChartView1.ShowLegend = True
         'Obtencion Datos Oee
         Dim vDT As DataTable = Nothing
         If rdbtnDias.IsChecked Then
@@ -470,8 +471,9 @@ Public Class FrmGraficasfaseuno
         BarSeries2.LabelFormat = "{0:##.##}"
         BarSeries1.HorizontalAxis = CategoricalAxis1
         BarSeries1.VerticalAxis = LinearAxis1
-        BarSeries1.Palette = New PaletteEntry(Color.FromArgb(249, 177, 41))
-        BarSeries2.Palette = New PaletteEntry(Color.FromArgb(194, 247, 24))
+        BarSeries2.ForeColor = Color.White
+        BarSeries1.Palette = New PaletteEntry(Color.FromArgb(255, 191, 0))
+        BarSeries2.Palette = New PaletteEntry(Color.FromArgb(233, 37, 43))
         Me.radChartView1.ShowToolTip = True
         radChartView1.Series.Add(BarSeries1)
         radChartView1.Series.Add(BarSeries2)
@@ -485,7 +487,10 @@ Public Class FrmGraficasfaseuno
         oObtiene_oee.fecha_final = dtpFechaFinal.Value
         'Creacion series
         Dim BarSeries1 As New BarSeries()
+        BarSeries1.LegendTitle = "Oee"
         Dim BarSeries2 As New BarSeries()
+        BarSeries2.LegendTitle = "Acumulado"
+        Me.radChartView1.ShowLegend = True
         'Obtencion Datos Oee
         Dim vDT As New DataTable
         If rdbtnDias.IsChecked Then
@@ -532,8 +537,9 @@ Public Class FrmGraficasfaseuno
         BarSeries2.LabelFormat = "{0:##.##}"
         BarSeries1.HorizontalAxis = CategoricalAxis1
         BarSeries1.VerticalAxis = LinearAxis1
-        BarSeries1.Palette = New PaletteEntry(Color.FromArgb(249, 177, 41))
-        BarSeries2.Palette = New PaletteEntry(Color.FromArgb(194, 247, 24))
+        BarSeries2.ForeColor = Color.White
+        BarSeries1.Palette = New PaletteEntry(Color.FromArgb(255, 191, 0))
+        BarSeries2.Palette = New PaletteEntry(Color.FromArgb(233, 37, 43))
         Me.radChartView1.ShowToolTip = True
         radChartView1.Series.Add(BarSeries1)
         radChartView1.Series.Add(BarSeries2)
@@ -547,7 +553,10 @@ Public Class FrmGraficasfaseuno
         oObtiene_oee.fecha_final = dtpFechaFinal.Value
         'Creacion series
         Dim BarSeries1 As New BarSeries()
+        BarSeries1.LegendTitle = "Oee"
         Dim BarSeries2 As New BarSeries()
+        BarSeries2.LegendTitle = "Acumulado"
+        Me.radChartView1.ShowLegend = True
         'Obtencion Datos Oee
         Dim vDT As New DataTable
         If rdbtnDias.IsChecked Then
@@ -594,8 +603,9 @@ Public Class FrmGraficasfaseuno
         BarSeries2.LabelFormat = "{0:##.##}"
         BarSeries1.HorizontalAxis = CategoricalAxis1
         BarSeries1.VerticalAxis = LinearAxis1
-        BarSeries1.Palette = New PaletteEntry(Color.FromArgb(249, 177, 41))
-        BarSeries2.Palette = New PaletteEntry(Color.FromArgb(194, 247, 24))
+        BarSeries2.ForeColor = Color.White
+        BarSeries1.Palette = New PaletteEntry(Color.FromArgb(255, 191, 0))
+        BarSeries2.Palette = New PaletteEntry(Color.FromArgb(233, 37, 43))
         Me.radChartView1.ShowToolTip = True
         radChartView1.Series.Add(BarSeries1)
         radChartView1.Series.Add(BarSeries2)
@@ -609,7 +619,10 @@ Public Class FrmGraficasfaseuno
         oObtiene_oee.fecha_final = dtpFechaFinal.Value
         'Creacion series
         Dim BarSeries1 As New BarSeries()
+        BarSeries1.LegendTitle = "Oee"
         Dim BarSeries2 As New BarSeries()
+        BarSeries2.LegendTitle = "Acumulado"
+        Me.radChartView1.ShowLegend = True
         'Obtencion Datos Oee
         Dim vDT As New DataTable
         If rdbtnDias.IsChecked Then
@@ -656,8 +669,9 @@ Public Class FrmGraficasfaseuno
         BarSeries2.LabelFormat = "{0:##.##}"
         BarSeries1.HorizontalAxis = CategoricalAxis1
         BarSeries1.VerticalAxis = LinearAxis1
-        BarSeries1.Palette = New PaletteEntry(Color.FromArgb(249, 177, 41))
-        BarSeries2.Palette = New PaletteEntry(Color.FromArgb(194, 247, 24))
+        BarSeries2.ForeColor = Color.White
+        BarSeries1.Palette = New PaletteEntry(Color.FromArgb(255, 191, 0))
+        BarSeries2.Palette = New PaletteEntry(Color.FromArgb(233, 37, 43))
         Me.radChartView1.ShowToolTip = True
         radChartView1.Series.Add(BarSeries1)
         radChartView1.Series.Add(BarSeries2)
@@ -671,7 +685,10 @@ Public Class FrmGraficasfaseuno
         oObtiene_oee.fecha_final = dtpFechaFinal.Value
         'Creacion series
         Dim BarSeries1 As New BarSeries()
+        BarSeries1.LegendTitle = "Oee"
         Dim BarSeries2 As New BarSeries()
+        BarSeries2.LegendTitle = "Acumulado"
+        Me.radChartView1.ShowLegend = True
         'Obtencion Datos Oee
         Dim vDT As New DataTable
         If rdbtnDias.IsChecked Then
@@ -718,8 +735,9 @@ Public Class FrmGraficasfaseuno
         BarSeries2.LabelFormat = "{0:##.##}"
         BarSeries1.HorizontalAxis = CategoricalAxis1
         BarSeries1.VerticalAxis = LinearAxis1
-        BarSeries1.Palette = New PaletteEntry(Color.FromArgb(249, 177, 41))
-        BarSeries2.Palette = New PaletteEntry(Color.FromArgb(194, 247, 24))
+        BarSeries2.ForeColor = Color.White
+        BarSeries1.Palette = New PaletteEntry(Color.FromArgb(255, 191, 0))
+        BarSeries2.Palette = New PaletteEntry(Color.FromArgb(233, 37, 43))
         Me.radChartView1.ShowToolTip = True
         radChartView1.Series.Add(BarSeries1)
         radChartView1.Series.Add(BarSeries2)
@@ -734,7 +752,10 @@ Public Class FrmGraficasfaseuno
         oObtiene_oee.fecha_final = dtpFechaFinal.Value
         'Creacion series
         Dim BarSeries1 As New BarSeries()
+        BarSeries1.LegendTitle = "Oee"
         Dim BarSeries2 As New BarSeries()
+        BarSeries2.LegendTitle = "Acumulado"
+        Me.radChartView1.ShowLegend = True
         'Llenado de las series
         Dim vTotal As Integer = 1
         Dim vContador As Integer = 1
@@ -793,8 +814,9 @@ Public Class FrmGraficasfaseuno
         BarSeries2.LabelFormat = "{0:##.##}"
         BarSeries1.HorizontalAxis = CategoricalAxis1
         BarSeries1.VerticalAxis = LinearAxis1
-        BarSeries1.Palette = New PaletteEntry(Color.FromArgb(249, 177, 41))
-        BarSeries2.Palette = New PaletteEntry(Color.FromArgb(194, 247, 24))
+        BarSeries2.ForeColor = Color.White
+        BarSeries1.Palette = New PaletteEntry(Color.FromArgb(255, 191, 0))
+        BarSeries2.Palette = New PaletteEntry(Color.FromArgb(233, 37, 43))
         Me.radChartView1.ShowToolTip = True
         radChartView1.Series.Add(BarSeries1)
         radChartView1.Series.Add(BarSeries2)
@@ -810,7 +832,10 @@ Public Class FrmGraficasfaseuno
         oObtiene_nrfti.fecha_final = dtpFechaFinal.Value
         'Creacion series
         Dim BarSeries1 As New BarSeries()
+        BarSeries1.LegendTitle = "nrfti"
         Dim BarSeries2 As New BarSeries()
+        BarSeries2.LegendTitle = "Acumulado"
+        Me.radChartView1.ShowLegend = True
         'Obtencion Datos
         Dim vDT As DataTable = Nothing
         If rdbtnDias.IsChecked Then
@@ -853,8 +878,10 @@ Public Class FrmGraficasfaseuno
         BarSeries2.LabelFormat = "{0:##,##}"
         BarSeries1.HorizontalAxis = CategoricalAxis1
         BarSeries1.VerticalAxis = LinearAxis1
-        BarSeries1.Palette = New PaletteEntry(Color.FromArgb(24, 134, 205))
-        BarSeries2.Palette = New PaletteEntry(Color.FromArgb(194, 247, 24))
+        BarSeries1.ForeColor = Color.White
+        BarSeries2.ForeColor = Color.White
+        BarSeries1.Palette = New PaletteEntry(Color.FromArgb(23, 87, 252))
+        BarSeries2.Palette = New PaletteEntry(Color.FromArgb(233, 37, 43))
         Me.radChartView1.ShowToolTip = True
         radChartView1.Series.Add(BarSeries1)
         radChartView1.Series.Add(BarSeries2)
@@ -868,7 +895,10 @@ Public Class FrmGraficasfaseuno
         oObtiene_nrfti.fecha_final = dtpFechaFinal.Value
         'Creacion series
         Dim BarSeries1 As New BarSeries()
+        BarSeries1.LegendTitle = "nrfti"
         Dim BarSeries2 As New BarSeries()
+        BarSeries2.LegendTitle = "Acumulado"
+        Me.radChartView1.ShowLegend = True
         'Obtencion Datos
         Dim vDT As New DataTable
         If rdbtnDias.IsChecked Then
@@ -915,8 +945,10 @@ Public Class FrmGraficasfaseuno
         BarSeries2.LabelFormat = "{0:##,###}"
         BarSeries1.HorizontalAxis = CategoricalAxis1
         BarSeries1.VerticalAxis = LinearAxis1
-        BarSeries1.Palette = New PaletteEntry(Color.FromArgb(249, 177, 41))
-        BarSeries2.Palette = New PaletteEntry(Color.FromArgb(194, 247, 24))
+        BarSeries1.ForeColor = Color.White
+        BarSeries2.ForeColor = Color.White
+        BarSeries1.Palette = New PaletteEntry(Color.FromArgb(23, 87, 252))
+        BarSeries2.Palette = New PaletteEntry(Color.FromArgb(233, 37, 43))
         Me.radChartView1.ShowToolTip = True
         radChartView1.Series.Add(BarSeries1)
         radChartView1.Series.Add(BarSeries2)
@@ -930,7 +962,10 @@ Public Class FrmGraficasfaseuno
         oObtiene_nrfti.fecha_final = dtpFechaFinal.Value
         'Creacion series
         Dim BarSeries1 As New BarSeries()
+        BarSeries1.LegendTitle = "nrfti"
         Dim BarSeries2 As New BarSeries()
+        BarSeries2.LegendTitle = "Acumulado"
+        Me.radChartView1.ShowLegend = True
         'Obtencion Datos Oee
         Dim vDT As New DataTable
         If rdbtnDias.IsChecked Then
@@ -977,8 +1012,10 @@ Public Class FrmGraficasfaseuno
         BarSeries2.LabelFormat = "{0:#,###}"
         BarSeries1.HorizontalAxis = CategoricalAxis1
         BarSeries1.VerticalAxis = LinearAxis1
-        BarSeries1.Palette = New PaletteEntry(Color.FromArgb(249, 177, 41))
-        BarSeries2.Palette = New PaletteEntry(Color.FromArgb(194, 247, 24))
+        BarSeries1.ForeColor = Color.White
+        BarSeries2.ForeColor = Color.White
+        BarSeries1.Palette = New PaletteEntry(Color.FromArgb(23, 87, 252))
+        BarSeries2.Palette = New PaletteEntry(Color.FromArgb(233, 37, 43))
         Me.radChartView1.ShowToolTip = True
         radChartView1.Series.Add(BarSeries1)
         radChartView1.Series.Add(BarSeries2)
@@ -992,7 +1029,10 @@ Public Class FrmGraficasfaseuno
         oObtiene_nrfti.fecha_final = dtpFechaFinal.Value
         'Creacion series
         Dim BarSeries1 As New BarSeries()
+        BarSeries1.LegendTitle = "nrfti"
         Dim BarSeries2 As New BarSeries()
+        BarSeries2.LegendTitle = "Acumulado"
+        Me.radChartView1.ShowLegend = True
         'Obtencion Datos Oee
         Dim vDT As New DataTable
         If rdbtnDias.IsChecked Then
@@ -1039,8 +1079,10 @@ Public Class FrmGraficasfaseuno
         BarSeries2.LabelFormat = "{0:#,###}"
         BarSeries1.HorizontalAxis = CategoricalAxis1
         BarSeries1.VerticalAxis = LinearAxis1
-        BarSeries1.Palette = New PaletteEntry(Color.FromArgb(249, 177, 41))
-        BarSeries2.Palette = New PaletteEntry(Color.FromArgb(194, 247, 24))
+        BarSeries1.ForeColor = Color.White
+        BarSeries2.ForeColor = Color.White
+        BarSeries1.Palette = New PaletteEntry(Color.FromArgb(23, 87, 252))
+        BarSeries2.Palette = New PaletteEntry(Color.FromArgb(233, 37, 43))
         Me.radChartView1.ShowToolTip = True
         radChartView1.Series.Add(BarSeries1)
         radChartView1.Series.Add(BarSeries2)
@@ -1054,7 +1096,10 @@ Public Class FrmGraficasfaseuno
         oObtiene_nrfti.fecha_final = dtpFechaFinal.Value
         'Creacion series
         Dim BarSeries1 As New BarSeries()
+        BarSeries1.LegendTitle = "nrfti"
         Dim BarSeries2 As New BarSeries()
+        BarSeries2.LegendTitle = "Acumulado"
+        Me.radChartView1.ShowLegend = True
         'Obtencion Datos Oee
         Dim vDT As New DataTable
         If rdbtnDias.IsChecked Then
@@ -1101,8 +1146,10 @@ Public Class FrmGraficasfaseuno
         BarSeries2.LabelFormat = "{0:#,###}"
         BarSeries1.HorizontalAxis = CategoricalAxis1
         BarSeries1.VerticalAxis = LinearAxis1
-        BarSeries1.Palette = New PaletteEntry(Color.FromArgb(249, 177, 41))
-        BarSeries2.Palette = New PaletteEntry(Color.FromArgb(194, 247, 24))
+        BarSeries1.ForeColor = Color.White
+        BarSeries2.ForeColor = Color.White
+        BarSeries1.Palette = New PaletteEntry(Color.FromArgb(23, 87, 252))
+        BarSeries2.Palette = New PaletteEntry(Color.FromArgb(233, 37, 43))
         Me.radChartView1.ShowToolTip = True
         radChartView1.Series.Add(BarSeries1)
         radChartView1.Series.Add(BarSeries2)
@@ -1117,7 +1164,10 @@ Public Class FrmGraficasfaseuno
         oObtiene_nrfti.fecha_final = dtpFechaFinal.Value
         'Creacion series
         Dim BarSeries1 As New BarSeries()
+        BarSeries1.LegendTitle = "nrfti"
         Dim BarSeries2 As New BarSeries()
+        BarSeries2.LegendTitle = "Acumulado"
+        Me.radChartView1.ShowLegend = True
         'Obtencion Datos Oee
         Dim vDT As New DataTable
         If rdbtnDias.IsChecked Then
@@ -1165,8 +1215,10 @@ Public Class FrmGraficasfaseuno
         BarSeries2.LabelFormat = "{0:#,###}"
         BarSeries1.HorizontalAxis = CategoricalAxis1
         BarSeries1.VerticalAxis = LinearAxis1
-        BarSeries1.Palette = New PaletteEntry(Color.FromArgb(249, 177, 41))
-        BarSeries2.Palette = New PaletteEntry(Color.FromArgb(194, 247, 24))
+        BarSeries1.ForeColor = Color.White
+        BarSeries2.ForeColor = Color.White
+        BarSeries1.Palette = New PaletteEntry(Color.FromArgb(23, 87, 252))
+        BarSeries2.Palette = New PaletteEntry(Color.FromArgb(233, 37, 43))
         Me.radChartView1.ShowToolTip = True
         radChartView1.Series.Add(BarSeries1)
         radChartView1.Series.Add(BarSeries2)
@@ -1181,6 +1233,8 @@ Public Class FrmGraficasfaseuno
         oObtiene_cincoS.fecha_final = dtpFechaFinal.Value
         'Creacion series
         Dim BarSeries1 As New BarSeries()
+        BarSeries1.LegendTitle = "5's"
+        Me.radChartView1.ShowLegend = True
         'Obtencion Datos
         BarSeries1.ValueMember = "promedio"
         BarSeries1.CategoryMember = "dia_asignado"
@@ -1208,7 +1262,7 @@ Public Class FrmGraficasfaseuno
         BarSeries1.LabelFormat = "{0:##.#}"
         BarSeries1.HorizontalAxis = CategoricalAxis1
         BarSeries1.VerticalAxis = LinearAxis1
-        BarSeries1.Palette = New PaletteEntry(Color.FromArgb(24, 134, 205))
+        BarSeries1.Palette = New PaletteEntry(Color.FromArgb(94, 228, 63))
         Me.radChartView1.ShowToolTip = True
         radChartView1.Series.Add(BarSeries1)
     End Sub
@@ -1221,6 +1275,8 @@ Public Class FrmGraficasfaseuno
         oObtiene_cincoS.fecha_final = dtpFechaFinal.Value
         'Creacion series
         Dim BarSeries1 As New BarSeries()
+        BarSeries1.LegendTitle = "5's"
+        Me.radChartView1.ShowLegend = True
         'Obtencion Datos
         BarSeries1.ValueMember = "promedio"
         BarSeries1.CategoryMember = "dia_asignado"
@@ -1248,7 +1304,7 @@ Public Class FrmGraficasfaseuno
         BarSeries1.LabelFormat = "{0:##.#}"
         BarSeries1.HorizontalAxis = CategoricalAxis1
         BarSeries1.VerticalAxis = LinearAxis1
-        BarSeries1.Palette = New PaletteEntry(Color.FromArgb(24, 134, 205))
+        BarSeries1.Palette = New PaletteEntry(Color.FromArgb(94, 228, 63))
         Me.radChartView1.ShowToolTip = True
         radChartView1.Series.Add(BarSeries1)
     End Sub
@@ -1261,6 +1317,8 @@ Public Class FrmGraficasfaseuno
         oObtiene_cincoS.fecha_final = dtpFechaFinal.Value
         'Creacion series
         Dim BarSeries1 As New BarSeries()
+        BarSeries1.LegendTitle = "5's"
+        Me.radChartView1.ShowLegend = True
         'Obtencion Datos
         BarSeries1.ValueMember = "promedio"
         BarSeries1.CategoryMember = "dia_asignado"
@@ -1288,7 +1346,7 @@ Public Class FrmGraficasfaseuno
         BarSeries1.LabelFormat = "{0:##.#}"
         BarSeries1.HorizontalAxis = CategoricalAxis1
         BarSeries1.VerticalAxis = LinearAxis1
-        BarSeries1.Palette = New PaletteEntry(Color.FromArgb(24, 134, 205))
+        BarSeries1.Palette = New PaletteEntry(Color.FromArgb(94, 228, 63))
         Me.radChartView1.ShowToolTip = True
         radChartView1.Series.Add(BarSeries1)
     End Sub
@@ -1301,6 +1359,8 @@ Public Class FrmGraficasfaseuno
         oObtiene_cincoS.fecha_final = dtpFechaFinal.Value
         'Creacion series
         Dim BarSeries1 As New BarSeries()
+        BarSeries1.LegendTitle = "5's"
+        Me.radChartView1.ShowLegend = True
         'Obtencion Datos
         BarSeries1.ValueMember = "promedio"
         BarSeries1.CategoryMember = "dia_asignado"
@@ -1328,7 +1388,7 @@ Public Class FrmGraficasfaseuno
         BarSeries1.LabelFormat = "{0:##.#}"
         BarSeries1.HorizontalAxis = CategoricalAxis1
         BarSeries1.VerticalAxis = LinearAxis1
-        BarSeries1.Palette = New PaletteEntry(Color.FromArgb(24, 134, 205))
+        BarSeries1.Palette = New PaletteEntry(Color.FromArgb(94, 228, 63))
         Me.radChartView1.ShowToolTip = True
         radChartView1.Series.Add(BarSeries1)
     End Sub
@@ -1341,6 +1401,8 @@ Public Class FrmGraficasfaseuno
         oObtiene_cincoS.fecha_final = dtpFechaFinal.Value
         'Creacion series
         Dim BarSeries1 As New BarSeries()
+        BarSeries1.LegendTitle = "5's"
+        Me.radChartView1.ShowLegend = True
         'Obtencion Datos
         BarSeries1.ValueMember = "promedio"
         BarSeries1.CategoryMember = "dia_asignado"
@@ -1368,7 +1430,7 @@ Public Class FrmGraficasfaseuno
         BarSeries1.LabelFormat = "{0:##.#}"
         BarSeries1.HorizontalAxis = CategoricalAxis1
         BarSeries1.VerticalAxis = LinearAxis1
-        BarSeries1.Palette = New PaletteEntry(Color.FromArgb(24, 134, 205))
+        BarSeries1.Palette = New PaletteEntry(Color.FromArgb(94, 228, 63))
         Me.radChartView1.ShowToolTip = True
         radChartView1.Series.Add(BarSeries1)
     End Sub
@@ -1382,6 +1444,8 @@ Public Class FrmGraficasfaseuno
         oObtiene_cincoS.fecha_final = dtpFechaFinal.Value
         'Creacion series
         Dim BarSeries1 As New BarSeries()
+        BarSeries1.LegendTitle = "5's"
+        Me.radChartView1.ShowLegend = True
         'Obtencion Datos
         BarSeries1.ValueMember = "promedio"
         BarSeries1.CategoryMember = "dia_asignado"
@@ -1409,7 +1473,7 @@ Public Class FrmGraficasfaseuno
         BarSeries1.LabelFormat = "{0:##.#}"
         BarSeries1.HorizontalAxis = CategoricalAxis1
         BarSeries1.VerticalAxis = LinearAxis1
-        BarSeries1.Palette = New PaletteEntry(Color.FromArgb(24, 134, 205))
+        BarSeries1.Palette = New PaletteEntry(Color.FromArgb(94, 228, 63))
         Me.radChartView1.ShowToolTip = True
         radChartView1.Series.Add(BarSeries1)
     End Sub
@@ -1423,8 +1487,12 @@ Public Class FrmGraficasfaseuno
         oObtiene_gente.fecha_final = dtpFechaFinal.Value
         'Creacion series
         Dim BarSeries1 As New BarSeries()
+        BarSeries1.LegendTitle = "total"
         Dim BarSeries2 As New BarSeries()
+        BarSeries2.LegendTitle = "faltas"
         Dim BarSeries3 As New BarSeries()
+        BarSeries3.LegendTitle = "retardos"
+        Me.radChartView1.ShowLegend = True
         'Obtencion Datos
         Dim vDT As DataTable = Nothing
         If rdbtnDias.IsChecked Then
@@ -1468,8 +1536,9 @@ Public Class FrmGraficasfaseuno
         BarSeries1.HorizontalAxis = CategoricalAxis1
         BarSeries1.VerticalAxis = LinearAxis1
         BarSeries1.Palette = New PaletteEntry(Color.FromArgb(24, 134, 205))
-        BarSeries2.Palette = New PaletteEntry(Color.FromArgb(255, 0, 102))
-        BarSeries3.Palette = New PaletteEntry(Color.FromArgb(0, 255, 126))
+        BarSeries2.Palette = New PaletteEntry(Color.FromArgb(233, 37, 43))
+        BarSeries3.Palette = New PaletteEntry(Color.FromArgb(255, 191, 0))
+        Me.radChartView1.ShowTrackBall = True
         Me.radChartView1.ShowToolTip = True
         radChartView1.Series.Add(BarSeries1)
         radChartView1.Series.Add(BarSeries2)
@@ -1487,8 +1556,12 @@ Public Class FrmGraficasfaseuno
         oObtiene_gente.fecha_final = dtpFechaFinal.Value
         'Creacion series
         Dim BarSeries1 As New BarSeries()
+        BarSeries1.LegendTitle = "total"
         Dim BarSeries2 As New BarSeries()
+        BarSeries2.LegendTitle = "faltas"
         Dim BarSeries3 As New BarSeries()
+        BarSeries3.LegendTitle = "retardos"
+        Me.radChartView1.ShowLegend = True
         'Obtencion Datos
         Dim vDT As DataTable = Nothing
         If rdbtnDias.IsChecked Then
@@ -1532,8 +1605,9 @@ Public Class FrmGraficasfaseuno
         BarSeries1.HorizontalAxis = CategoricalAxis1
         BarSeries1.VerticalAxis = LinearAxis1
         BarSeries1.Palette = New PaletteEntry(Color.FromArgb(24, 134, 205))
-        BarSeries2.Palette = New PaletteEntry(Color.FromArgb(255, 0, 102))
-        BarSeries3.Palette = New PaletteEntry(Color.FromArgb(0, 255, 126))
+        BarSeries2.Palette = New PaletteEntry(Color.FromArgb(233, 37, 43))
+        BarSeries3.Palette = New PaletteEntry(Color.FromArgb(255, 191, 0))
+        Me.radChartView1.ShowTrackBall = True
         Me.radChartView1.ShowToolTip = True
         radChartView1.Series.Add(BarSeries1)
         radChartView1.Series.Add(BarSeries2)
@@ -1551,8 +1625,12 @@ Public Class FrmGraficasfaseuno
         oObtiene_gente.fecha_final = dtpFechaFinal.Value
         'Creacion series
         Dim BarSeries1 As New BarSeries()
+        BarSeries1.LegendTitle = "total"
         Dim BarSeries2 As New BarSeries()
+        BarSeries2.LegendTitle = "faltas"
         Dim BarSeries3 As New BarSeries()
+        BarSeries3.LegendTitle = "retardos"
+        Me.radChartView1.ShowLegend = True
         'Obtencion Datos
         Dim vDT As DataTable = Nothing
         If rdbtnDias.IsChecked Then
@@ -1596,8 +1674,9 @@ Public Class FrmGraficasfaseuno
         BarSeries1.HorizontalAxis = CategoricalAxis1
         BarSeries1.VerticalAxis = LinearAxis1
         BarSeries1.Palette = New PaletteEntry(Color.FromArgb(24, 134, 205))
-        BarSeries2.Palette = New PaletteEntry(Color.FromArgb(255, 0, 102))
-        BarSeries3.Palette = New PaletteEntry(Color.FromArgb(0, 255, 126))
+        BarSeries2.Palette = New PaletteEntry(Color.FromArgb(233, 37, 43))
+        BarSeries3.Palette = New PaletteEntry(Color.FromArgb(255, 191, 0))
+        Me.radChartView1.ShowTrackBall = True
         Me.radChartView1.ShowToolTip = True
         radChartView1.Series.Add(BarSeries1)
         radChartView1.Series.Add(BarSeries2)
@@ -1615,8 +1694,12 @@ Public Class FrmGraficasfaseuno
         oObtiene_gente.fecha_final = dtpFechaFinal.Value
         'Creacion series
         Dim BarSeries1 As New BarSeries()
+        BarSeries1.LegendTitle = "total"
         Dim BarSeries2 As New BarSeries()
+        BarSeries2.LegendTitle = "faltas"
         Dim BarSeries3 As New BarSeries()
+        BarSeries3.LegendTitle = "retardos"
+        Me.radChartView1.ShowLegend = True
         'Obtencion Datos
         Dim vDT As DataTable = Nothing
         If rdbtnDias.IsChecked Then
@@ -1660,8 +1743,9 @@ Public Class FrmGraficasfaseuno
         BarSeries1.HorizontalAxis = CategoricalAxis1
         BarSeries1.VerticalAxis = LinearAxis1
         BarSeries1.Palette = New PaletteEntry(Color.FromArgb(24, 134, 205))
-        BarSeries2.Palette = New PaletteEntry(Color.FromArgb(255, 0, 102))
-        BarSeries3.Palette = New PaletteEntry(Color.FromArgb(0, 255, 126))
+        BarSeries2.Palette = New PaletteEntry(Color.FromArgb(233, 37, 43))
+        BarSeries3.Palette = New PaletteEntry(Color.FromArgb(255, 191, 0))
+        Me.radChartView1.ShowTrackBall = True
         Me.radChartView1.ShowToolTip = True
         radChartView1.Series.Add(BarSeries1)
         radChartView1.Series.Add(BarSeries2)
@@ -1679,8 +1763,12 @@ Public Class FrmGraficasfaseuno
         oObtiene_gente.fecha_final = dtpFechaFinal.Value
         'Creacion series
         Dim BarSeries1 As New BarSeries()
+        BarSeries1.LegendTitle = "total"
         Dim BarSeries2 As New BarSeries()
+        BarSeries2.LegendTitle = "faltas"
         Dim BarSeries3 As New BarSeries()
+        BarSeries3.LegendTitle = "retardos"
+        Me.radChartView1.ShowLegend = True
         'Obtencion Datos
         Dim vDT As DataTable = Nothing
         If rdbtnDias.IsChecked Then
@@ -1724,8 +1812,9 @@ Public Class FrmGraficasfaseuno
         BarSeries1.HorizontalAxis = CategoricalAxis1
         BarSeries1.VerticalAxis = LinearAxis1
         BarSeries1.Palette = New PaletteEntry(Color.FromArgb(24, 134, 205))
-        BarSeries2.Palette = New PaletteEntry(Color.FromArgb(255, 0, 102))
-        BarSeries3.Palette = New PaletteEntry(Color.FromArgb(0, 255, 126))
+        BarSeries2.Palette = New PaletteEntry(Color.FromArgb(233, 37, 43))
+        BarSeries3.Palette = New PaletteEntry(Color.FromArgb(255, 191, 0))
+        Me.radChartView1.ShowTrackBall = True
         Me.radChartView1.ShowToolTip = True
         radChartView1.Series.Add(BarSeries1)
         radChartView1.Series.Add(BarSeries2)
@@ -1744,8 +1833,12 @@ Public Class FrmGraficasfaseuno
         oObtiene_gente.fecha_final = dtpFechaFinal.Value
         'Creacion series
         Dim BarSeries1 As New BarSeries()
+        BarSeries1.LegendTitle = "total"
         Dim BarSeries2 As New BarSeries()
+        BarSeries2.LegendTitle = "faltas"
         Dim BarSeries3 As New BarSeries()
+        BarSeries3.LegendTitle = "retardos"
+        Me.radChartView1.ShowLegend = True
         'Obtencion Datos
         Dim vDT As DataTable = Nothing
         If rdbtnDias.IsChecked Then
@@ -1789,8 +1882,9 @@ Public Class FrmGraficasfaseuno
         BarSeries1.HorizontalAxis = CategoricalAxis1
         BarSeries1.VerticalAxis = LinearAxis1
         BarSeries1.Palette = New PaletteEntry(Color.FromArgb(24, 134, 205))
-        BarSeries2.Palette = New PaletteEntry(Color.FromArgb(255, 0, 102))
-        BarSeries3.Palette = New PaletteEntry(Color.FromArgb(0, 255, 126))
+        BarSeries2.Palette = New PaletteEntry(Color.FromArgb(233, 37, 43))
+        BarSeries3.Palette = New PaletteEntry(Color.FromArgb(255, 191, 0))
+        Me.radChartView1.ShowTrackBall = True
         Me.radChartView1.ShowToolTip = True
         radChartView1.Series.Add(BarSeries1)
         radChartView1.Series.Add(BarSeries2)
@@ -1809,8 +1903,12 @@ Public Class FrmGraficasfaseuno
         oObtiene_seguridad.fecha_final = dtpFechaFinal.Value
         'Creacion series
         Dim BarSeries1 As New BarSeries()
+        BarSeries1.LegendTitle = "total"
         Dim BarSeries2 As New BarSeries()
+        BarSeries2.LegendTitle = "resultas"
         Dim BarSeries3 As New BarSeries()
+        BarSeries3.LegendTitle = "nuevas"
+        Me.radChartView1.ShowLegend = True
         'Obtencion Datos
         Dim vDT As DataTable = Nothing
         If rdbtnDias.IsChecked Then
@@ -1821,10 +1919,10 @@ Public Class FrmGraficasfaseuno
         BarSeries1.ValueMember = "total"
         BarSeries1.CategoryMember = "dia_asignado"
         BarSeries1.DataSource = vDT
-        BarSeries2.ValueMember = "nuevas"
+        BarSeries2.ValueMember = "resueltas"
         BarSeries2.CategoryMember = "dia_asignado"
         BarSeries2.DataSource = vDT
-        BarSeries3.ValueMember = "resueltas"
+        BarSeries3.ValueMember = "nuevas"
         BarSeries3.CategoryMember = "dia_asignado"
         BarSeries3.DataSource = vDT
         'Cartesian Area, CategoricalAxis, LinearAxis
@@ -1845,7 +1943,7 @@ Public Class FrmGraficasfaseuno
         LinearAxis1.AxisType = AxisType.Second
         'LinearAxis1.MajorStep = 1.0R
         'LinearAxis1.Maximum = 5
-        LinearAxis1.Title = "5's"
+        LinearAxis1.Title = "Seguridad"
         BarSeries1.ShowLabels = True
         'BarSeries2.ShowLabels = True
         'BarSeries3.ShowLabels = True
@@ -1853,9 +1951,10 @@ Public Class FrmGraficasfaseuno
         BarSeries2.LabelFormat = "{0:###}"
         BarSeries1.HorizontalAxis = CategoricalAxis1
         BarSeries1.VerticalAxis = LinearAxis1
-        BarSeries1.Palette = New PaletteEntry(Color.FromArgb(24, 134, 205))
-        BarSeries2.Palette = New PaletteEntry(Color.FromArgb(255, 0, 102))
-        BarSeries3.Palette = New PaletteEntry(Color.FromArgb(0, 255, 126))
+        BarSeries1.Palette = New PaletteEntry(Color.FromArgb(255, 191, 0))
+        BarSeries2.Palette = New PaletteEntry(Color.FromArgb(36, 177, 22))
+        BarSeries3.Palette = New PaletteEntry(Color.FromArgb(233, 37, 43))
+        Me.radChartView1.ShowTrackBall = True
         Me.radChartView1.ShowToolTip = True
         radChartView1.Series.Add(BarSeries1)
         radChartView1.Series.Add(BarSeries2)
@@ -1873,8 +1972,12 @@ Public Class FrmGraficasfaseuno
         oObtiene_seguridad.fecha_final = dtpFechaFinal.Value
         'Creacion series
         Dim BarSeries1 As New BarSeries()
+        BarSeries1.LegendTitle = "total"
         Dim BarSeries2 As New BarSeries()
+        BarSeries2.LegendTitle = "resultas"
         Dim BarSeries3 As New BarSeries()
+        BarSeries3.LegendTitle = "nuevas"
+        Me.radChartView1.ShowLegend = True
         'Obtencion Datos
         Dim vDT As DataTable = Nothing
         If rdbtnDias.IsChecked Then
@@ -1885,10 +1988,10 @@ Public Class FrmGraficasfaseuno
         BarSeries1.ValueMember = "total"
         BarSeries1.CategoryMember = "dia_asignado"
         BarSeries1.DataSource = vDT
-        BarSeries2.ValueMember = "nuevas"
+        BarSeries2.ValueMember = "resueltas"
         BarSeries2.CategoryMember = "dia_asignado"
         BarSeries2.DataSource = vDT
-        BarSeries3.ValueMember = "resueltas"
+        BarSeries3.ValueMember = "nuevas"
         BarSeries3.CategoryMember = "dia_asignado"
         BarSeries3.DataSource = vDT
         'Cartesian Area, CategoricalAxis, LinearAxis
@@ -1909,7 +2012,7 @@ Public Class FrmGraficasfaseuno
         LinearAxis1.AxisType = AxisType.Second
         'LinearAxis1.MajorStep = 1.0R
         'LinearAxis1.Maximum = 5
-        LinearAxis1.Title = "5's"
+        LinearAxis1.Title = "Seguridad"
         BarSeries1.ShowLabels = True
         'BarSeries2.ShowLabels = True
         'BarSeries3.ShowLabels = True
@@ -1917,13 +2020,15 @@ Public Class FrmGraficasfaseuno
         BarSeries2.LabelFormat = "{0:###}"
         BarSeries1.HorizontalAxis = CategoricalAxis1
         BarSeries1.VerticalAxis = LinearAxis1
-        BarSeries1.Palette = New PaletteEntry(Color.FromArgb(24, 134, 205))
-        BarSeries2.Palette = New PaletteEntry(Color.FromArgb(255, 0, 102))
-        BarSeries3.Palette = New PaletteEntry(Color.FromArgb(0, 255, 126))
+        BarSeries1.Palette = New PaletteEntry(Color.FromArgb(255, 191, 0))
+        BarSeries2.Palette = New PaletteEntry(Color.FromArgb(36, 177, 22))
+        BarSeries3.Palette = New PaletteEntry(Color.FromArgb(233, 37, 43))
+        Me.radChartView1.ShowTrackBall = True
         Me.radChartView1.ShowToolTip = True
         radChartView1.Series.Add(BarSeries1)
         radChartView1.Series.Add(BarSeries2)
         radChartView1.Series.Add(BarSeries3)
+        Me.radChartView1.ShowTrackBall = True
         For i As Integer = 0 To Me.radChartView1.Series.Count - 1
             Me.radChartView1.GetSeries(Of BarSeries)(i).CombineMode = ChartSeriesCombineMode.Stack
         Next i
@@ -1937,8 +2042,12 @@ Public Class FrmGraficasfaseuno
         oObtiene_seguridad.fecha_final = dtpFechaFinal.Value
         'Creacion series
         Dim BarSeries1 As New BarSeries()
+        BarSeries1.LegendTitle = "total"
         Dim BarSeries2 As New BarSeries()
+        BarSeries2.LegendTitle = "resultas"
         Dim BarSeries3 As New BarSeries()
+        BarSeries3.LegendTitle = "nuevas"
+        Me.radChartView1.ShowLegend = True
         'Obtencion Datos
         Dim vDT As DataTable = Nothing
         If rdbtnDias.IsChecked Then
@@ -1949,10 +2058,10 @@ Public Class FrmGraficasfaseuno
         BarSeries1.ValueMember = "total"
         BarSeries1.CategoryMember = "dia_asignado"
         BarSeries1.DataSource = vDT
-        BarSeries2.ValueMember = "nuevas"
+        BarSeries2.ValueMember = "resueltas"
         BarSeries2.CategoryMember = "dia_asignado"
         BarSeries2.DataSource = vDT
-        BarSeries3.ValueMember = "resueltas"
+        BarSeries3.ValueMember = "nuevas"
         BarSeries3.CategoryMember = "dia_asignado"
         BarSeries3.DataSource = vDT
         'Cartesian Area, CategoricalAxis, LinearAxis
@@ -1973,7 +2082,7 @@ Public Class FrmGraficasfaseuno
         LinearAxis1.AxisType = AxisType.Second
         'LinearAxis1.MajorStep = 1.0R
         'LinearAxis1.Maximum = 5
-        LinearAxis1.Title = "5's"
+        LinearAxis1.Title = "Seguridad"
         BarSeries1.ShowLabels = True
         'BarSeries2.ShowLabels = True
         'BarSeries3.ShowLabels = True
@@ -1981,9 +2090,10 @@ Public Class FrmGraficasfaseuno
         BarSeries2.LabelFormat = "{0:###}"
         BarSeries1.HorizontalAxis = CategoricalAxis1
         BarSeries1.VerticalAxis = LinearAxis1
-        BarSeries1.Palette = New PaletteEntry(Color.FromArgb(24, 134, 205))
-        BarSeries2.Palette = New PaletteEntry(Color.FromArgb(255, 0, 102))
-        BarSeries3.Palette = New PaletteEntry(Color.FromArgb(0, 255, 126))
+        BarSeries1.Palette = New PaletteEntry(Color.FromArgb(255, 191, 0))
+        BarSeries2.Palette = New PaletteEntry(Color.FromArgb(36, 177, 22))
+        BarSeries3.Palette = New PaletteEntry(Color.FromArgb(233, 37, 43))
+        Me.radChartView1.ShowTrackBall = True
         Me.radChartView1.ShowToolTip = True
         radChartView1.Series.Add(BarSeries1)
         radChartView1.Series.Add(BarSeries2)
@@ -2001,8 +2111,12 @@ Public Class FrmGraficasfaseuno
         oObtiene_seguridad.fecha_final = dtpFechaFinal.Value
         'Creacion series
         Dim BarSeries1 As New BarSeries()
+        BarSeries1.LegendTitle = "total"
         Dim BarSeries2 As New BarSeries()
+        BarSeries2.LegendTitle = "resultas"
         Dim BarSeries3 As New BarSeries()
+        BarSeries3.LegendTitle = "nuevas"
+        Me.radChartView1.ShowLegend = True
         'Obtencion Datos
         Dim vDT As DataTable = Nothing
         If rdbtnDias.IsChecked Then
@@ -2013,10 +2127,10 @@ Public Class FrmGraficasfaseuno
         BarSeries1.ValueMember = "total"
         BarSeries1.CategoryMember = "dia_asignado"
         BarSeries1.DataSource = vDT
-        BarSeries2.ValueMember = "nuevas"
+        BarSeries2.ValueMember = "resueltas"
         BarSeries2.CategoryMember = "dia_asignado"
         BarSeries2.DataSource = vDT
-        BarSeries3.ValueMember = "resueltas"
+        BarSeries3.ValueMember = "nuevas"
         BarSeries3.CategoryMember = "dia_asignado"
         BarSeries3.DataSource = vDT
         'Cartesian Area, CategoricalAxis, LinearAxis
@@ -2037,7 +2151,7 @@ Public Class FrmGraficasfaseuno
         LinearAxis1.AxisType = AxisType.Second
         'LinearAxis1.MajorStep = 1.0R
         'LinearAxis1.Maximum = 5
-        LinearAxis1.Title = "5's"
+        LinearAxis1.Title = "Seguridad"
         BarSeries1.ShowLabels = True
         'BarSeries2.ShowLabels = True
         'BarSeries3.ShowLabels = True
@@ -2045,9 +2159,10 @@ Public Class FrmGraficasfaseuno
         BarSeries2.LabelFormat = "{0:###}"
         BarSeries1.HorizontalAxis = CategoricalAxis1
         BarSeries1.VerticalAxis = LinearAxis1
-        BarSeries1.Palette = New PaletteEntry(Color.FromArgb(24, 134, 205))
-        BarSeries2.Palette = New PaletteEntry(Color.FromArgb(255, 0, 102))
-        BarSeries3.Palette = New PaletteEntry(Color.FromArgb(0, 255, 126))
+        BarSeries1.Palette = New PaletteEntry(Color.FromArgb(255, 191, 0))
+        BarSeries2.Palette = New PaletteEntry(Color.FromArgb(36, 177, 22))
+        BarSeries3.Palette = New PaletteEntry(Color.FromArgb(233, 37, 43))
+        Me.radChartView1.ShowTrackBall = True
         Me.radChartView1.ShowToolTip = True
         radChartView1.Series.Add(BarSeries1)
         radChartView1.Series.Add(BarSeries2)
@@ -2065,8 +2180,12 @@ Public Class FrmGraficasfaseuno
         oObtiene_seguridad.fecha_final = dtpFechaFinal.Value
         'Creacion series
         Dim BarSeries1 As New BarSeries()
+        BarSeries1.LegendTitle = "total"
         Dim BarSeries2 As New BarSeries()
+        BarSeries2.LegendTitle = "resultas"
         Dim BarSeries3 As New BarSeries()
+        BarSeries3.LegendTitle = "nuevas"
+        Me.radChartView1.ShowLegend = True
         'Obtencion Datos
         Dim vDT As DataTable = Nothing
         If rdbtnDias.IsChecked Then
@@ -2077,10 +2196,10 @@ Public Class FrmGraficasfaseuno
         BarSeries1.ValueMember = "total"
         BarSeries1.CategoryMember = "dia_asignado"
         BarSeries1.DataSource = vDT
-        BarSeries2.ValueMember = "nuevas"
+        BarSeries2.ValueMember = "resueltas"
         BarSeries2.CategoryMember = "dia_asignado"
         BarSeries2.DataSource = vDT
-        BarSeries3.ValueMember = "resueltas"
+        BarSeries3.ValueMember = "nuevas"
         BarSeries3.CategoryMember = "dia_asignado"
         BarSeries3.DataSource = vDT
         'Cartesian Area, CategoricalAxis, LinearAxis
@@ -2101,7 +2220,7 @@ Public Class FrmGraficasfaseuno
         LinearAxis1.AxisType = AxisType.Second
         'LinearAxis1.MajorStep = 1.0R
         'LinearAxis1.Maximum = 5
-        LinearAxis1.Title = "5's"
+        LinearAxis1.Title = "Seguridad"
         BarSeries1.ShowLabels = True
         'BarSeries2.ShowLabels = True
         'BarSeries3.ShowLabels = True
@@ -2109,9 +2228,10 @@ Public Class FrmGraficasfaseuno
         BarSeries2.LabelFormat = "{0:###}"
         BarSeries1.HorizontalAxis = CategoricalAxis1
         BarSeries1.VerticalAxis = LinearAxis1
-        BarSeries1.Palette = New PaletteEntry(Color.FromArgb(24, 134, 205))
-        BarSeries2.Palette = New PaletteEntry(Color.FromArgb(255, 0, 102))
-        BarSeries3.Palette = New PaletteEntry(Color.FromArgb(0, 255, 126))
+        BarSeries1.Palette = New PaletteEntry(Color.FromArgb(255, 191, 0))
+        BarSeries2.Palette = New PaletteEntry(Color.FromArgb(36, 177, 22))
+        BarSeries3.Palette = New PaletteEntry(Color.FromArgb(233, 37, 43))
+        Me.radChartView1.ShowTrackBall = True
         Me.radChartView1.ShowToolTip = True
         radChartView1.Series.Add(BarSeries1)
         radChartView1.Series.Add(BarSeries2)
@@ -2130,8 +2250,12 @@ Public Class FrmGraficasfaseuno
         oObtiene_seguridad.fecha_final = dtpFechaFinal.Value
         'Creacion series
         Dim BarSeries1 As New BarSeries()
+        BarSeries1.LegendTitle = "total"
         Dim BarSeries2 As New BarSeries()
+        BarSeries2.LegendTitle = "resultas"
         Dim BarSeries3 As New BarSeries()
+        BarSeries3.LegendTitle = "nuevas"
+        Me.radChartView1.ShowLegend = True
         'Obtencion Datos
         Dim vDT As DataTable = Nothing
         If rdbtnDias.IsChecked Then
@@ -2142,10 +2266,10 @@ Public Class FrmGraficasfaseuno
         BarSeries1.ValueMember = "total"
         BarSeries1.CategoryMember = "dia_asignado"
         BarSeries1.DataSource = vDT
-        BarSeries2.ValueMember = "nuevas"
+        BarSeries2.ValueMember = "resueltas"
         BarSeries2.CategoryMember = "dia_asignado"
         BarSeries2.DataSource = vDT
-        BarSeries3.ValueMember = "resueltas"
+        BarSeries3.ValueMember = "nuevas"
         BarSeries3.CategoryMember = "dia_asignado"
         BarSeries3.DataSource = vDT
         'Cartesian Area, CategoricalAxis, LinearAxis
@@ -2166,7 +2290,7 @@ Public Class FrmGraficasfaseuno
         LinearAxis1.AxisType = AxisType.Second
         'LinearAxis1.MajorStep = 1.0R
         'LinearAxis1.Maximum = 5
-        LinearAxis1.Title = "5's"
+        LinearAxis1.Title = "Seguridad"
         BarSeries1.ShowLabels = True
         'BarSeries2.ShowLabels = True
         'BarSeries3.ShowLabels = True
@@ -2174,9 +2298,10 @@ Public Class FrmGraficasfaseuno
         BarSeries2.LabelFormat = "{0:###}"
         BarSeries1.HorizontalAxis = CategoricalAxis1
         BarSeries1.VerticalAxis = LinearAxis1
-        BarSeries1.Palette = New PaletteEntry(Color.FromArgb(24, 134, 205))
-        BarSeries2.Palette = New PaletteEntry(Color.FromArgb(255, 0, 102))
-        BarSeries3.Palette = New PaletteEntry(Color.FromArgb(0, 255, 126))
+        BarSeries1.Palette = New PaletteEntry(Color.FromArgb(255, 191, 0))
+        BarSeries2.Palette = New PaletteEntry(Color.FromArgb(36, 177, 22))
+        BarSeries3.Palette = New PaletteEntry(Color.FromArgb(233, 37, 43))
+        Me.radChartView1.ShowTrackBall = True
         Me.radChartView1.ShowToolTip = True
         radChartView1.Series.Add(BarSeries1)
         radChartView1.Series.Add(BarSeries2)
@@ -2195,8 +2320,12 @@ Public Class FrmGraficasfaseuno
         oObtiene_costo.fecha_final = dtpFechaFinal.Value
         'Creacion series
         Dim BarSeries1 As New BarSeries()
+        BarSeries1.LegendTitle = "Min. Programados"
         Dim BarSeries2 As New BarSeries()
+        BarSeries2.LegendTitle = "Min. Excedentes"
         Dim LineSeries1 As New LineSeries()
+        LineSeries1.LegendTitle = "Costo"
+        Me.radChartView1.ShowLegend = True
         'Obtencion Datos
         Dim vDT As DataTable = Nothing
         If rdbtnDias.IsChecked Then
@@ -2267,8 +2396,9 @@ Public Class FrmGraficasfaseuno
         BarSeries1.Palette = New PaletteEntry(Color.FromArgb(24, 134, 205))
         BarSeries2.Palette = New PaletteEntry(Color.FromArgb(255, 0, 102))
         LineSeries1.PointSize = New SizeF(10, 10)
-        'Chartview
+        Me.radChartView1.ShowTrackBall = True
         Me.radChartView1.ShowToolTip = True
+        'Chartview
         'Me.radChartView1.ShowGrid = True
         'Me.radChartView1.ShowSmartLabels = True
         radChartView1.Series.Add(LineSeries1)
@@ -2286,8 +2416,12 @@ Public Class FrmGraficasfaseuno
         oObtiene_costo.fecha_final = dtpFechaFinal.Value
         'Creacion series
         Dim BarSeries1 As New BarSeries()
+        BarSeries1.LegendTitle = "Min. Programados"
         Dim BarSeries2 As New BarSeries()
+        BarSeries2.LegendTitle = "Min. Excedentes"
         Dim LineSeries1 As New LineSeries()
+        LineSeries1.LegendTitle = "Costo"
+        Me.radChartView1.ShowLegend = True
         'Obtencion Datos
         Dim vDT As DataTable = Nothing
         If rdbtnDias.IsChecked Then
@@ -2355,8 +2489,9 @@ Public Class FrmGraficasfaseuno
         BarSeries1.Palette = New PaletteEntry(Color.FromArgb(24, 134, 205))
         BarSeries2.Palette = New PaletteEntry(Color.FromArgb(255, 0, 102))
         LineSeries1.PointSize = New SizeF(10, 10)
-        'Chartview
+        Me.radChartView1.ShowTrackBall = True
         Me.radChartView1.ShowToolTip = True
+        'Chartview
         'Me.radChartView1.ShowGrid = True
         'Me.radChartView1.ShowSmartLabels = True
         radChartView1.Series.Add(LineSeries1)
@@ -2374,8 +2509,12 @@ Public Class FrmGraficasfaseuno
         oObtiene_costo.fecha_final = dtpFechaFinal.Value
         'Creacion series
         Dim BarSeries1 As New BarSeries()
+        BarSeries1.LegendTitle = "Min. Programados"
         Dim BarSeries2 As New BarSeries()
+        BarSeries2.LegendTitle = "Min. Excedentes"
         Dim LineSeries1 As New LineSeries()
+        LineSeries1.LegendTitle = "Costo"
+        Me.radChartView1.ShowLegend = True
         'Obtencion Datos
         Dim vDT As DataTable = Nothing
         If rdbtnDias.IsChecked Then
@@ -2441,8 +2580,9 @@ Public Class FrmGraficasfaseuno
         BarSeries1.Palette = New PaletteEntry(Color.FromArgb(24, 134, 205))
         BarSeries2.Palette = New PaletteEntry(Color.FromArgb(255, 0, 102))
         LineSeries1.PointSize = New SizeF(10, 10)
-        'Chartview
+        Me.radChartView1.ShowTrackBall = True
         Me.radChartView1.ShowToolTip = True
+        'Chartview
         'Me.radChartView1.ShowGrid = True
         'Me.radChartView1.ShowSmartLabels = True
         radChartView1.Series.Add(LineSeries1)
@@ -2460,8 +2600,12 @@ Public Class FrmGraficasfaseuno
         oObtiene_costo.fecha_final = dtpFechaFinal.Value
         'Creacion series
         Dim BarSeries1 As New BarSeries()
+        BarSeries1.LegendTitle = "Min. Programados"
         Dim BarSeries2 As New BarSeries()
+        BarSeries2.LegendTitle = "Min. Excedentes"
         Dim LineSeries1 As New LineSeries()
+        LineSeries1.LegendTitle = "Costo"
+        Me.radChartView1.ShowLegend = True
         'Obtencion Datos
         Dim vDT As DataTable = Nothing
         If rdbtnDias.IsChecked Then
@@ -2527,8 +2671,9 @@ Public Class FrmGraficasfaseuno
         BarSeries1.Palette = New PaletteEntry(Color.FromArgb(24, 134, 205))
         BarSeries2.Palette = New PaletteEntry(Color.FromArgb(255, 0, 102))
         LineSeries1.PointSize = New SizeF(10, 10)
-        'Chartview
+        Me.radChartView1.ShowTrackBall = True
         Me.radChartView1.ShowToolTip = True
+        'Chartview
         'Me.radChartView1.ShowGrid = True
         'Me.radChartView1.ShowSmartLabels = True
         radChartView1.Series.Add(LineSeries1)
@@ -2546,8 +2691,12 @@ Public Class FrmGraficasfaseuno
         oObtiene_costo.fecha_final = dtpFechaFinal.Value
         'Creacion series
         Dim BarSeries1 As New BarSeries()
+        BarSeries1.LegendTitle = "Min. Programados"
         Dim BarSeries2 As New BarSeries()
+        BarSeries2.LegendTitle = "Min. Excedentes"
         Dim LineSeries1 As New LineSeries()
+        LineSeries1.LegendTitle = "Costo"
+        Me.radChartView1.ShowLegend = True
         'Obtencion Datos
         Dim vDT As DataTable = Nothing
         If rdbtnDias.IsChecked Then
@@ -2613,8 +2762,9 @@ Public Class FrmGraficasfaseuno
         BarSeries1.Palette = New PaletteEntry(Color.FromArgb(24, 134, 205))
         BarSeries2.Palette = New PaletteEntry(Color.FromArgb(255, 0, 102))
         LineSeries1.PointSize = New SizeF(10, 10)
-        'Chartview
+        Me.radChartView1.ShowTrackBall = True
         Me.radChartView1.ShowToolTip = True
+        'Chartview
         'Me.radChartView1.ShowGrid = True
         'Me.radChartView1.ShowSmartLabels = True
         radChartView1.Series.Add(LineSeries1)
@@ -2633,8 +2783,12 @@ Public Class FrmGraficasfaseuno
         oObtiene_costo.fecha_final = dtpFechaFinal.Value
         'Creacion series
         Dim BarSeries1 As New BarSeries()
+        BarSeries1.LegendTitle = "Min. Programados"
         Dim BarSeries2 As New BarSeries()
+        BarSeries2.LegendTitle = "Min. Excedentes"
         Dim LineSeries1 As New LineSeries()
+        LineSeries1.LegendTitle = "Costo"
+        Me.radChartView1.ShowLegend = True
         'Obtencion Datos
         Dim vDT As DataTable = Nothing
         If rdbtnDias.IsChecked Then
@@ -2705,8 +2859,9 @@ Public Class FrmGraficasfaseuno
         BarSeries1.Palette = New PaletteEntry(Color.FromArgb(24, 134, 205))
         BarSeries2.Palette = New PaletteEntry(Color.FromArgb(255, 0, 102))
         LineSeries1.PointSize = New SizeF(10, 10)
-        'Chartview
+        Me.radChartView1.ShowTrackBall = True
         Me.radChartView1.ShowToolTip = True
+        'Chartview
         'Me.radChartView1.ShowGrid = True
         'Me.radChartView1.ShowSmartLabels = True
         radChartView1.Series.Add(LineSeries1)
@@ -2818,6 +2973,7 @@ Public Class FrmGraficasfaseuno
     End Sub
 #End Region
     Private Sub btnGraficar_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnGraficar.Click
+        Me.radChartView1.ShowTrackBall = False
         obtener_grafica()
     End Sub
 End Class

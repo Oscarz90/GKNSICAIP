@@ -33,12 +33,6 @@ Partial Class Graficas_prueba
         Dim CategoricalDataPoint3 As Telerik.Charting.CategoricalDataPoint = New Telerik.Charting.CategoricalDataPoint()
         Dim CategoricalDataPoint4 As Telerik.Charting.CategoricalDataPoint = New Telerik.Charting.CategoricalDataPoint()
         Dim CategoricalDataPoint5 As Telerik.Charting.CategoricalDataPoint = New Telerik.Charting.CategoricalDataPoint()
-        Dim BarSeries2 As Telerik.WinControls.UI.BarSeries = New Telerik.WinControls.UI.BarSeries()
-        Dim CategoricalDataPoint6 As Telerik.Charting.CategoricalDataPoint = New Telerik.Charting.CategoricalDataPoint()
-        Dim CategoricalDataPoint7 As Telerik.Charting.CategoricalDataPoint = New Telerik.Charting.CategoricalDataPoint()
-        Dim CategoricalDataPoint8 As Telerik.Charting.CategoricalDataPoint = New Telerik.Charting.CategoricalDataPoint()
-        Dim CategoricalDataPoint9 As Telerik.Charting.CategoricalDataPoint = New Telerik.Charting.CategoricalDataPoint()
-        Dim CategoricalDataPoint10 As Telerik.Charting.CategoricalDataPoint = New Telerik.Charting.CategoricalDataPoint()
         Me.RadChartView1 = New Telerik.WinControls.UI.RadChartView()
         CType(Me.RadChartView1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -50,6 +44,7 @@ Partial Class Graficas_prueba
         CartesianArea1.GridDesign.AlternatingVerticalColor = False
         CartesianArea1.GridDesign.DrawHorizontalFills = False
         CartesianArea1.GridDesign.DrawVerticalFills = False
+        CartesianArea1.GridDesign.DrawVerticalStripes = False
         CartesianArea1.ShowGrid = True
         Me.RadChartView1.AreaDesign = CartesianArea1
         CategoricalAxis1.IsPrimary = True
@@ -82,30 +77,12 @@ Partial Class Graficas_prueba
         BarSeries1.DataPoints.AddRange(New Telerik.Charting.DataPoint() {CategoricalDataPoint1, CategoricalDataPoint2, CategoricalDataPoint3, CategoricalDataPoint4, CategoricalDataPoint5})
         BarSeries1.HorizontalAxis = CategoricalAxis1
         BarSeries1.LabelMode = Telerik.WinControls.UI.BarLabelModes.Top
-        BarSeries1.LegendTitle = Nothing
+        BarSeries1.LegendTitle = "oscarmartez"
         BarSeries1.VerticalAxis = LinearAxis1
-        CategoricalDataPoint6.Category = "A"
-        CategoricalDataPoint6.Label = 41.0R
-        CategoricalDataPoint6.Value = 41.0R
-        CategoricalDataPoint7.Category = "B"
-        CategoricalDataPoint7.Label = 48.0R
-        CategoricalDataPoint7.Value = 48.0R
-        CategoricalDataPoint8.Category = "C"
-        CategoricalDataPoint8.Label = 19.0R
-        CategoricalDataPoint8.Value = 19.0R
-        CategoricalDataPoint9.Category = "D"
-        CategoricalDataPoint9.Label = 94.0R
-        CategoricalDataPoint9.Value = 94.0R
-        CategoricalDataPoint10.Category = "E"
-        CategoricalDataPoint10.Label = 63.0R
-        CategoricalDataPoint10.Value = 63.0R
-        BarSeries2.DataPoints.AddRange(New Telerik.Charting.DataPoint() {CategoricalDataPoint6, CategoricalDataPoint7, CategoricalDataPoint8, CategoricalDataPoint9, CategoricalDataPoint10})
-        BarSeries2.HorizontalAxis = CategoricalAxis1
-        BarSeries2.LabelMode = Telerik.WinControls.UI.BarLabelModes.Top
-        BarSeries2.LegendTitle = Nothing
-        BarSeries2.VerticalAxis = LinearAxis1
-        Me.RadChartView1.Series.AddRange(New Telerik.WinControls.UI.ChartSeries() {BarSeries1, BarSeries2})
+        Me.RadChartView1.Series.AddRange(New Telerik.WinControls.UI.ChartSeries() {BarSeries1})
+        Me.RadChartView1.ShowLegend = True
         Me.RadChartView1.ShowToolTip = True
+        Me.RadChartView1.ShowTrackBall = True
         Me.RadChartView1.Size = New System.Drawing.Size(894, 449)
         Me.RadChartView1.TabIndex = 0
         Me.RadChartView1.Text = "RadChartView1"
