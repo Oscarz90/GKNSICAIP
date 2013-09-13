@@ -20,12 +20,13 @@ Public Class FrmGraficasfaseuno
         ' Agregue cualquier inicialización después de la llamada a InitializeComponent().
     End Sub
     Private Sub FrmGraficasfaseuno_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
-        inicializa_formulario()
         obtiene_nivel_graficos()
-    End Sub
-    Private Sub inicializa_formulario()
         dtpFechaInicial.Format = System.Windows.Forms.DateTimePickerFormat.Custom
         dtpFechaFinal.Format = System.Windows.Forms.DateTimePickerFormat.Custom
+    End Sub
+    Private Sub inicializa_formulario(Optional ByVal codempleado As String = "", Optional ByVal cveequipo As Long = 0)
+        cve_equipo = cveequipo
+        cod_empleado = codempleado
     End Sub
     'Nivel Grafico
     Private Sub obtiene_nivel_graficos()
@@ -33,7 +34,9 @@ Public Class FrmGraficasfaseuno
         oGraficasfaseuno.usuario = Environment.UserName
         If cod_empleado Is Nothing Then
             oGraficasfaseuno.cod_empleado = ""
+            MsgBox("es nulo")
         Else
+            MsgBox("no es nulo" & cod_empleado)
             oGraficasfaseuno.cod_empleado = cod_empleado
         End If
         oGraficasfaseuno.obtiene_nivel_graficos()
@@ -57,9 +60,12 @@ Public Class FrmGraficasfaseuno
                 tipo_nivel_lg()
                 nivel_lgs = True
             Case "LET"
-                llena_formulario_Nivel_LET()
-                tipo_nivel_let()
-                nivel_lets = True
+                If cve_equipo <> 0 Then
+                    llena_formulario_Nivel_LET()
+                    tipo_nivel_let()
+                    nivel_lets = True
+                End If
+                
             Case Else
                 'MsgBox("no se q pedo")
         End Select
@@ -108,6 +114,10 @@ Public Class FrmGraficasfaseuno
         llena_cbx_Componente(oNivel_Planta.nivel_planta_componente)
         llena_cbx_Equipo(oNivel_Planta.nivel_planta_equipos)
     End Sub
+    Private Sub llena_cbx_Nivel_Planta_Lineas()
+        Dim oNivel_Planta As New gfu_nivel_planta
+        llena_cbx_Linea(oNivel_Planta.nivel_planta_linea)
+    End Sub
     Private Sub llena_formulario_Nivel_Cadena_Valor()
         Dim oNivel_CadenaValor As New gfu_nivel_cadena_valor
         oNivel_CadenaValor.cve_usuario = cve_usuario
@@ -115,11 +125,21 @@ Public Class FrmGraficasfaseuno
         llena_cbx_Componente(oNivel_CadenaValor.nivel_cadena_valor_componente)
         llena_cbx_Equipo(oNivel_CadenaValor.nivel_cadena_valor_equipos)
     End Sub
+    Private Sub llena_cbx_Nivel_Cadena_Valor_Lineas()
+        Dim oNivel_CadenaValor As New gfu_nivel_cadena_valor
+        oNivel_CadenaValor.cve_usuario = cve_usuario
+        llena_cbx_Linea(oNivel_CadenaValor.nivel_cadena_valor_linea)
+    End Sub
     Private Sub llena_formulario_Nivel_Componente()
         Dim oNivel_Componente As New gfu_nivel_componente
         oNivel_Componente.cve_usuario = cve_usuario
         llena_cbx_Componente(oNivel_Componente.nivel_componente_componente)
         llena_cbx_Equipo(oNivel_Componente.nivel_componente_equipos)
+    End Sub
+    Private Sub llena_cbx_Nivel_Componente_Lineas()
+        Dim oNivel_Componente As New gfu_nivel_componente
+        oNivel_Componente.cve_usuario = cve_usuario
+        llena_cbx_Linea(oNivel_Componente.nivel_componente_linea)
     End Sub
     Private Sub llena_formulario_Nivel_LG()
         Dim oNivel_lg As New gfu_nivel_lg
@@ -132,7 +152,18 @@ Public Class FrmGraficasfaseuno
         cbxEquipo.ValueMember = "cve_equipo"
         cbxEquipo.DisplayMember = "equipo"
         cbxEquipo.DataSource = oGfu_nivel_let.llena_combo_equipo
+        cbxEquipo.SelectedIndex = -1
         llena_cbx_equipo_linea()
+    End Sub
+    'Llena cbx Linea segun Nivel: Planta, Cadena_Valor, Componente
+    Private Sub llena_cbx_lineas()
+        If nivel_planta_gkn Then
+            llena_cbx_Nivel_Planta_Lineas()
+        ElseIf nivel_cadena_valors Then
+            llena_cbx_Nivel_Cadena_Valor_Lineas()
+        ElseIf nivel_componentes Then
+            llena_cbx_Nivel_Componente_Lineas()
+        End If
     End Sub
 #End Region
 #Region "Llena combobox"
@@ -282,12 +313,14 @@ Public Class FrmGraficasfaseuno
             habilita_combobox_niveles(cbxCadenaValor)
         Else
             deshabilita_combobox_niveles(cbxCadenaValor)
+            cbxCadenaValor.SelectedIndex = -1
         End If
         'Componente
         If rdbtnComponente.IsChecked Then
             habilita_combobox_niveles(cbxComponente)
         Else
             deshabilita_combobox_niveles(cbxComponente)
+            cbxComponente.SelectedIndex = -1
         End If
         'Linea
         If rdbtnLinea.IsChecked Then
@@ -297,6 +330,7 @@ Public Class FrmGraficasfaseuno
                 chkTodasLineas.Visible = True
             Else
                 'Otros
+                llena_cbx_lineas()
                 habilita_combobox_niveles(cbxLinea)
             End If
 
@@ -305,15 +339,13 @@ Public Class FrmGraficasfaseuno
             If nivel_lets Then
                 deshabilita_combobox_niveles(cbxLinea)
                 chkTodasLineas.Visible = False
-            Else
-                'Otros
-                If Not rdbtnEquipo.IsChecked Then
-                    deshabilita_combobox_niveles(cbxLinea)
-                    deshabilita_combobox_niveles(cbxEquipo)
-                    'chkTodosEquipos.Visible = False
-                End If
-                'chkTodosEquipos.Visible = False
+                cbxLinea.SelectedIndex = -1
+            ElseIf Not rdbtnEquipo.IsChecked Then
+                deshabilita_combobox_niveles(cbxLinea)
+                deshabilita_combobox_niveles(cbxEquipo)
+                cbxLinea.SelectedIndex = -1
             End If
+            cbxLinea.DataSource = Nothing
         End If
 
         'Equipo
@@ -324,6 +356,8 @@ Public Class FrmGraficasfaseuno
         Else
             'Otros
             deshabilita_combobox_niveles(cbxEquipo)
+            cbxEquipo.SelectedIndex = -1
+            chkTodasLineas.Checked = False
             chkTodasLineas.Visible = False
         End If
         valida_btn_graficar()
@@ -341,6 +375,7 @@ Public Class FrmGraficasfaseuno
         If rdbtnEquipo.IsChecked And cbxEquipo.SelectedIndex <> -1 Then
             llena_cbx_equipo_linea()
         End If
+        valida_btn_graficar()
     End Sub
 #End Region
 #Region "Eventos checkbox"
@@ -351,19 +386,12 @@ Public Class FrmGraficasfaseuno
         Else
             cbxLinea.Enabled = True
         End If
+        valida_btn_graficar()
     End Sub
 #End Region
 #Region "Eventos Date time Picker"
     Private Sub dtpFecha_Inicial_Final_ValueChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles dtpFechaInicial.ValueChanged, dtpFechaFinal.ValueChanged
         valida_btn_graficar()
-    End Sub
-#End Region
-#Region "(des)Habilita Combobox"
-    Private Sub habilita_combobox_niveles(ByRef combo_box As ComboBox)
-        combo_box.Enabled = True
-    End Sub
-    Private Sub deshabilita_combobox_niveles(ByRef combo_box As ComboBox)
-        combo_box.Enabled = False
     End Sub
 #End Region
 #Region "Eventos DateTimePicker"
@@ -376,6 +404,14 @@ Public Class FrmGraficasfaseuno
             dtpFechaFinal.CustomFormat = "MMMM yyy"
         End If
         valida_btn_graficar()
+    End Sub
+#End Region
+#Region "(des)Habilita Combobox"
+    Private Sub habilita_combobox_niveles(ByRef combo_box As ComboBox)
+        combo_box.Enabled = True
+    End Sub
+    Private Sub deshabilita_combobox_niveles(ByRef combo_box As ComboBox)
+        combo_box.Enabled = False
     End Sub
 #End Region
 #Region "Metodos graficar Oee"
