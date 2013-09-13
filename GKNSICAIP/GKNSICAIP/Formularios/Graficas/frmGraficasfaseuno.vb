@@ -2624,10 +2624,9 @@ Public Class FrmGraficasfaseuno
                 BarSeries2.DataPoints.Add(New CategoricalDataPoint(vDR("min_excedentes"), "acumulado"))
                 LineSeries1.DataPoints.Add(New CategoricalDataPoint(vDR("costo"), "acumulado"))
             Else
-
-                BarSeries1.DataPoints.Add(New CategoricalDataPoint(vDR("min_programados"), vDR("dia_asignado")))
-                BarSeries2.DataPoints.Add(New CategoricalDataPoint(vDR("min_excedentes"), vDR("dia_asignado")))
-                LineSeries1.DataPoints.Add(New CategoricalDataPoint(vDR("costo"), vDR("dia_asignado")))
+                    BarSeries1.DataPoints.Add(New CategoricalDataPoint(vDR("min_programados"), vDR("dia_asignado")))
+                    BarSeries2.DataPoints.Add(New CategoricalDataPoint(vDR("min_excedentes"), vDR("dia_asignado")))
+                    LineSeries1.DataPoints.Add(New CategoricalDataPoint(vDR("costo"), vDR("dia_asignado")))
             End If
             vContador = vContador + 1
         Next
@@ -2715,10 +2714,16 @@ Public Class FrmGraficasfaseuno
                 BarSeries2.DataPoints.Add(New CategoricalDataPoint(vDR("min_excedentes"), "acumulado"))
                 LineSeries1.DataPoints.Add(New CategoricalDataPoint(vDR("costo"), "acumulado"))
             Else
-
-                BarSeries1.DataPoints.Add(New CategoricalDataPoint(vDR("min_programados"), vDR("dia_asignado")))
-                BarSeries2.DataPoints.Add(New CategoricalDataPoint(vDR("min_excedentes"), vDR("dia_asignado")))
-                LineSeries1.DataPoints.Add(New CategoricalDataPoint(vDR("costo"), vDR("dia_asignado")))
+                If rdbtnDias.IsChecked Then
+                    BarSeries1.DataPoints.Add(New CategoricalDataPoint(vDR("min_programados"), Format(vDR("dia_asignado"), "{MMM-dd}") & " - " & vContador))
+                    BarSeries2.DataPoints.Add(New CategoricalDataPoint(vDR("min_excedentes"), Format(vDR("dia_asignado"), "{MMM-dd}") & " - " & vContador))
+                    LineSeries1.DataPoints.Add(New CategoricalDataPoint(vDR("costo"), Format(vDR("dia_asignado"), "{MMM-dd}") & " - " & vContador))
+                ElseIf rdbtnMeses.IsChecked Then
+                    BarSeries1.DataPoints.Add(New CategoricalDataPoint(vDR("min_programados"), Format(vDR("dia_asignado"), "{yyyy - MMMM}") & " - " & vContador))
+                    BarSeries2.DataPoints.Add(New CategoricalDataPoint(vDR("min_excedentes"), Format(vDR("dia_asignado"), "{yyyy - MMMM}") & " - " & vContador))
+                    LineSeries1.DataPoints.Add(New CategoricalDataPoint(vDR("costo"), Format(vDR("dia_asignado"), "{yyyy - MMMM}") & " - " & vContador))
+                End If
+                
             End If
             vContador = vContador + 1
         Next
@@ -2807,15 +2812,14 @@ Public Class FrmGraficasfaseuno
                 LineSeries1.DataPoints.Add(New CategoricalDataPoint(vDR("costo"), "acumulado"))
             Else
                 If rdbtnDias.IsChecked Then
-                    BarSeries1.DataPoints.Add(New CategoricalDataPoint(vDR("min_programados"), vDR("dia_asignado") & " " & vContador))
-                    BarSeries2.DataPoints.Add(New CategoricalDataPoint(vDR("min_excedentes"), vDR("dia_asignado") & " " & vContador))
-                    LineSeries1.DataPoints.Add(New CategoricalDataPoint(vDR("costo"), vDR("dia_asignado") & " " & vContador))
+                    BarSeries1.DataPoints.Add(New CategoricalDataPoint(vDR("min_programados"), Format(vDR("dia_asignado"), "{MMM-dd}") & " - " & vContador))
+                    BarSeries2.DataPoints.Add(New CategoricalDataPoint(vDR("min_excedentes"), Format(vDR("dia_asignado"), "{MMM-dd}") & " - " & vContador))
+                    LineSeries1.DataPoints.Add(New CategoricalDataPoint(vDR("costo"), Format(vDR("dia_asignado"), "{MMM-dd}") & " - " & vContador))
                 ElseIf rdbtnMeses.IsChecked Then
                     BarSeries1.DataPoints.Add(New CategoricalDataPoint(vDR("min_programados"), vDR("dia_asignado")))
                     BarSeries2.DataPoints.Add(New CategoricalDataPoint(vDR("min_excedentes"), vDR("dia_asignado")))
                     LineSeries1.DataPoints.Add(New CategoricalDataPoint(vDR("costo"), vDR("dia_asignado")))
                 End If
-
             End If
             vContador = vContador + 1
         Next
@@ -2975,5 +2979,12 @@ Public Class FrmGraficasfaseuno
     Private Sub btnGraficar_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnGraficar.Click
         Me.radChartView1.ShowTrackBall = False
         obtener_grafica()
+    End Sub
+
+    Private Sub radChartView1_MouseDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles radChartView1.MouseDown
+        If e.Button = System.Windows.Forms.MouseButtons.Right Then
+
+
+        End If
     End Sub
 End Class
