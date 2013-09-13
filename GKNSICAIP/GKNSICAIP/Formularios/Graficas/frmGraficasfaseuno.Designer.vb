@@ -22,7 +22,7 @@ Partial Class FrmGraficasfaseuno
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Dim CartesianArea1 As Telerik.WinControls.UI.CartesianArea = New Telerik.WinControls.UI.CartesianArea()
+        Dim CartesianArea2 As Telerik.WinControls.UI.CartesianArea = New Telerik.WinControls.UI.CartesianArea()
         Me.RadGroupBox1 = New Telerik.WinControls.UI.RadGroupBox()
         Me.rdbtnGente = New Telerik.WinControls.UI.RadRadioButton()
         Me.rdbtnCincoS = New Telerik.WinControls.UI.RadRadioButton()
@@ -175,6 +175,7 @@ Partial Class FrmGraficasfaseuno
         '
         'cbxLinea
         '
+        Me.cbxLinea.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cbxLinea.Enabled = False
         Me.cbxLinea.FormattingEnabled = True
         Me.cbxLinea.Location = New System.Drawing.Point(112, 130)
@@ -184,6 +185,7 @@ Partial Class FrmGraficasfaseuno
         '
         'cbxEquipo
         '
+        Me.cbxEquipo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cbxEquipo.Enabled = False
         Me.cbxEquipo.FormattingEnabled = True
         Me.cbxEquipo.Location = New System.Drawing.Point(112, 106)
@@ -193,6 +195,7 @@ Partial Class FrmGraficasfaseuno
         '
         'cbxComponente
         '
+        Me.cbxComponente.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cbxComponente.Enabled = False
         Me.cbxComponente.FormattingEnabled = True
         Me.cbxComponente.Location = New System.Drawing.Point(112, 82)
@@ -202,6 +205,7 @@ Partial Class FrmGraficasfaseuno
         '
         'cbxCadenaValor
         '
+        Me.cbxCadenaValor.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cbxCadenaValor.Enabled = False
         Me.cbxCadenaValor.FormattingEnabled = True
         Me.cbxCadenaValor.Location = New System.Drawing.Point(112, 58)
@@ -335,10 +339,10 @@ Partial Class FrmGraficasfaseuno
         '
         'radChartView1
         '
-        CartesianArea1.GridDesign.AlternatingVerticalColor = False
-        CartesianArea1.GridDesign.DrawVerticalFills = False
-        CartesianArea1.ShowGrid = True
-        Me.radChartView1.AreaDesign = CartesianArea1
+        CartesianArea2.GridDesign.AlternatingVerticalColor = False
+        CartesianArea2.GridDesign.DrawVerticalFills = False
+        CartesianArea2.ShowGrid = True
+        Me.radChartView1.AreaDesign = CartesianArea2
         Me.radChartView1.Location = New System.Drawing.Point(17, 213)
         Me.radChartView1.Name = "radChartView1"
         Me.radChartView1.Size = New System.Drawing.Size(1225, 481)

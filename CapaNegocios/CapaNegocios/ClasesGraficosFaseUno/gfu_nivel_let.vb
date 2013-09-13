@@ -4,15 +4,17 @@ Public Class gfu_nivel_let
     Dim cadena_conexion As New CapaDatos.conexiones
     Dim oBD As New CapaDatos.CapaDatos(cadena_conexion.CadenaSicaip)
 #Region "Propiedades"
-    Private vcve_lider As Long
-    Public Property cve_lider() As Long
+
+    Private vcve_equipo As Long
+    Public Property cve_equipo() As Long
         Get
-            Return vcve_lider
+            Return vcve_equipo
         End Get
         Set(ByVal value As Long)
-            vcve_lider = value
+            vcve_equipo = value
         End Set
     End Property
+
 #End Region
 #Region "IIndividual"
     Public Sub Cargar() Implements IIndividual.Cargar
@@ -34,18 +36,17 @@ Public Class gfu_nivel_let
     End Sub
 #End Region
 #Region "Metodos Graficos Fase Uno"
-    Public Function nivel_lg_linea() As DataTable
-        Dim dt_componente As New DataTable
+    Public Function llena_combo_equipo() As DataTable
+        Dim dtEquipoLinea As New DataTable
         Try
-            dt_componente = oBD.ObtenerTabla("select l.cve_linea,l.linea from linea l " &
-                                             "join equipo_linea el on l.cve_linea=el.cve_linea " &
-                                             "where l.Estatus='1' and el.cve_equipo=" & vcve_lider)
+            dtEquipoLinea = oBD.ObtenerTabla("select e.cve_equipo,e.equipo from equipo e where e.cve_equipo=" & vcve_equipo)
         Catch ex As Exception
-            MsgBox("Error al obtener equipo. Cgfu_nivel_componente_ERROR", vbCritical + vbOKOnly, "Error")
-            dt_componente = Nothing
+            MsgBox("Error al obtener equipo. Cgfu_nivel_let_ERROR", vbCritical + vbOKOnly, "Error")
+            dtEquipoLinea = Nothing
         End Try
-        Return dt_componente
+        Return dtEquipoLinea
     End Function
+
 
 #End Region
 End Class
