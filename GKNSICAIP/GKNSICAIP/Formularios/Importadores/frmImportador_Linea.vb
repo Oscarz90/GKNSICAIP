@@ -3,7 +3,7 @@ Public Class frmImportador_Linea
 
     Public vRetorno_CVE_Linea As Long
     Dim oLinea As New Linea
-    Dim oModelo As New Modelo
+    Dim oModelo As Modelo
     Dim vCVE_Modelo_FILTRO As Long
     'Dim vRowSeleccionada As Integer = 0
 
@@ -16,6 +16,7 @@ Public Class frmImportador_Linea
 
 #Region "Eventos Controles"
     Private Sub frmImportador_Individual_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
+        oModelo = New Modelo
         If vCVE_Modelo_FILTRO = 0 Then
             Cargar_Tabla(False)
         Else
