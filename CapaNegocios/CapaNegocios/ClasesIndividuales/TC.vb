@@ -202,6 +202,40 @@ Public Class TC
         Return vRetorno
     End Function
 
+    Public Function Validar_MODELO_LINEA_EN_TC_COMPONENTE(ByVal vID_Linea As Long, ByVal vID_Modelo As Long) As Boolean
+        Dim vRetorno As Boolean = False
+        Dim vDR_Linea As DataRow = Nothing
+        Dim vDR_Modelo As DataRow = Nothing
+        Dim vComponente_Linea As Long = 0
+        Dim vComponente_Modelo As Long = 0
+        Try
+            vDR_Linea = oBD.ObtenerRenglon("SELECT cve_componente FROM linea where Estatus='1' and cve_linea= " & vID_Linea, "linea")
+            vDR_Modelo = oBD.ObtenerRenglon("SELECT cve_componente FROM modelo where Estatus='1' and cve_modelo= " & vID_Modelo, "modelo")
+        Catch ex As Exception
+            MsgBox("ERROR:Validar_MODELO_LINEA_EN_TC_COMPONENTE")
+        End Try
+
+        If vDR_Linea IsNot Nothing Then
+            vComponente_Linea = vDR_Linea("cve_componente")
+        End If
+        If vDR_Modelo IsNot Nothing Then
+            vComponente_Linea = vDR_Modelo("cve_componente")
+        End If
+
+        If vComponente_Linea <> 0 And vComponente_Modelo <> 0 Then
+            If vComponente_Linea = vComponente_Modelo Then
+                vRetorno = True
+            Else
+                vRetorno = False
+            End If
+        Else
+            vRetorno = False
+        End If
+        Return vRetorno
+    End Function
+
+
+
     Public Sub Cargar_TC(ByVal vID_Linea As Long, ByVal vID_Modelo As Long)
         Dim rDatos As DataRow
         rDatos = oBD.ObtenerRenglon("SELECT cve_TC FROM TC WHERE estatus !='0' and cve_linea=" & vID_Linea & " AND cve_modelo=" & vID_Modelo, "TC")

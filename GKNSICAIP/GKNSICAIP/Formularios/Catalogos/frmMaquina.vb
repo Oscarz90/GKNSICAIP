@@ -17,7 +17,7 @@ Public Class frmMaquina
         ''La Siguiente Linea solo es para hacer pruebas sobre una Maquina()
         ''Borrar si requiere hacer registro nuevo
         'vId_Publico = 936
-
+        Controles_Permisos(vAdd_Registrar, vDelete_Eliminar)
         If Convert.ToInt64(vId_Publico) <> 0 Then
             oMaquina = New Maquina
             oMaquina.cve_maquina = vId_Publico
@@ -27,7 +27,7 @@ Public Class frmMaquina
             oMaquina = New Maquina            
             Controles_Registro_Nuevo(True)
         End If
-        Controles_Permisos(vAdd_Registrar, vDelete_Eliminar)
+
         SetBindings()
         Me.Show()
         Me.txtNombre.Focus()
