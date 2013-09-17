@@ -26,7 +26,7 @@ Public Class FrmUsuarios
     End Sub
 
     Private Sub btnBaja_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnBaja.Click
-        If MsgBox("¿Esta seguro de Dar de Baja al Usuario?", MsgBoxStyle.YesNo, Me.Text) = MsgBoxResult.Yes Then
+        If MsgBox("¿Esta seguro de Desactivar al Usuario?", MsgBoxStyle.YesNo, Me.Text) = MsgBoxResult.Yes Then
             Try
                 oUsuario.Eliminar()
                 Me.Close()
@@ -37,7 +37,7 @@ Public Class FrmUsuarios
     End Sub
 
     Private Sub btnAlta_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnAlta.Click
-        If MsgBox("¿Esta seguro de Dar de Alta al Usuario?", MsgBoxStyle.YesNo, Me.Text) = MsgBoxResult.Yes Then
+        If MsgBox("¿Esta seguro de Activar al Usuario?", MsgBoxStyle.YesNo, Me.Text) = MsgBoxResult.Yes Then
             Try
                 oUsuario.Estatus = "1"
                 oUsuario.Registrar()
@@ -304,6 +304,41 @@ Public Class FrmUsuarios
         Else
             rgbGrupo_Nivel.Enabled = False
         End If
+        If oUsuario IsNot Nothing Then
+            If oUsuario.Descripcion_Tipo_Usuario = "LET" Then
+                radUsuario_Componente.Enabled = True
+                radUsuario_CV.Enabled = False
+                radUsuario_CV.IsChecked = True ''Solo es para que se active el boton de Select correspondiente
+                radUsuario_Componente.IsChecked = True
+            ElseIf oUsuario.Descripcion_Tipo_Usuario.ToUpper = "SUPERVISOR LIDER" Then
+                radUsuario_Componente.Enabled = True
+                radUsuario_CV.Enabled = False
+                radUsuario_CV.IsChecked = True ''Solo es para que se active el boton de Select correspondiente
+                radUsuario_Componente.IsChecked = True
+            ElseIf oUsuario.Descripcion_Tipo_Usuario = "LIDER DE GRUPO" Then
+                radUsuario_Componente.Enabled = True
+                radUsuario_CV.Enabled = False
+                radUsuario_CV.IsChecked = True ''Solo es para que se active el boton de Select correspondiente
+                radUsuario_Componente.IsChecked = True
+
+            ElseIf oUsuario.Descripcion_Tipo_Usuario = "ADMINISTRADOR" Then
+                radUsuario_Componente.Enabled = True
+                radUsuario_CV.Enabled = True
+                radUsuario_Componente.IsChecked = True
+                radUsuario_CV.IsChecked = True
+            ElseIf oUsuario.Descripcion_Tipo_Usuario = "ADMINISTRADOR GENERA" Then
+                radUsuario_Componente.Enabled = True
+                radUsuario_CV.Enabled = True
+                radUsuario_Componente.IsChecked = True
+                radUsuario_CV.IsChecked = True
+            Else
+                radUsuario_Componente.Enabled = False
+                radUsuario_CV.Enabled = True
+                radUsuario_Componente.IsChecked = True
+                radUsuario_CV.IsChecked = True
+            End If
+        End If
+        
     End Sub
 
     Private Sub btnComponente_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnComponente.Click

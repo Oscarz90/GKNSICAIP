@@ -209,7 +209,7 @@ Partial Class FrmUsuarios
         Me.btnAlta.Name = "btnAlta"
         Me.btnAlta.Size = New System.Drawing.Size(89, 24)
         Me.btnAlta.TabIndex = 10
-        Me.btnAlta.Text = "Dar Alta"
+        Me.btnAlta.Text = "Activar"
         Me.btnAlta.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
         '
         'RadLabel6
@@ -262,7 +262,7 @@ Partial Class FrmUsuarios
         Me.btnBaja.Name = "btnBaja"
         Me.btnBaja.Size = New System.Drawing.Size(89, 24)
         Me.btnBaja.TabIndex = 9
-        Me.btnBaja.Text = "Dar Baja"
+        Me.btnBaja.Text = "Desactivar"
         Me.btnBaja.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
         '
         'btnSalir

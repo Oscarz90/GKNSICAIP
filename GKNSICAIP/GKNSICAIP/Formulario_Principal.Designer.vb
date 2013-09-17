@@ -40,6 +40,8 @@ Partial Class Formulario_Principal
         Me.btnEquipo_Linea = New Telerik.WinControls.UI.RadButtonElement()
         Me.RibbonTab5 = New Telerik.WinControls.UI.RibbonTab()
         Me.RibbonTab4 = New Telerik.WinControls.UI.RibbonTab()
+        Me.RadRibbonBarGroup5 = New Telerik.WinControls.UI.RadRibbonBarGroup()
+        Me.btnGraficas = New Telerik.WinControls.UI.RadButtonElement()
         Me.RadRibbonBarGroup4 = New Telerik.WinControls.UI.RadRibbonBarGroup()
         Me.btnSICAIP = New Telerik.WinControls.UI.RadButtonElement()
         Me.RadOffice2007ScreenTipElement1 = New Telerik.WinControls.UI.RadOffice2007ScreenTipElement()
@@ -136,7 +138,7 @@ Partial Class Formulario_Principal
         '
         Me.RibbonTab2.AccessibleDescription = "Catalogos"
         Me.RibbonTab2.AccessibleName = "Catalogos"
-        Me.RibbonTab2.IsSelected = True
+        Me.RibbonTab2.IsSelected = False
         Me.RibbonTab2.Items.AddRange(New Telerik.WinControls.RadItem() {Me.RadRibbonBarGroup2, Me.RadRibbonBarGroup3})
         Me.RibbonTab2.Name = "RibbonTab2"
         Me.RibbonTab2.Text = "Catalogos"
@@ -238,9 +240,33 @@ Partial Class Formulario_Principal
         '
         Me.RibbonTab4.AccessibleDescription = "Graficas"
         Me.RibbonTab4.AccessibleName = "Graficas"
+        Me.RibbonTab4.IsSelected = True
+        Me.RibbonTab4.Items.AddRange(New Telerik.WinControls.RadItem() {Me.RadRibbonBarGroup5})
         Me.RibbonTab4.Name = "RibbonTab4"
         Me.RibbonTab4.Text = "Graficas"
         Me.RibbonTab4.Visibility = Telerik.WinControls.ElementVisibility.Visible
+        '
+        'RadRibbonBarGroup5
+        '
+        Me.RadRibbonBarGroup5.AccessibleDescription = "Graficos"
+        Me.RadRibbonBarGroup5.AccessibleName = "Graficos"
+        Me.RadRibbonBarGroup5.Items.AddRange(New Telerik.WinControls.RadItem() {Me.btnGraficas})
+        Me.RadRibbonBarGroup5.Name = "RadRibbonBarGroup5"
+        Me.RadRibbonBarGroup5.Text = "Graficos"
+        Me.RadRibbonBarGroup5.Visibility = Telerik.WinControls.ElementVisibility.Visible
+        '
+        'btnGraficas
+        '
+        Me.btnGraficas.AccessibleDescription = "Graficas"
+        Me.btnGraficas.AccessibleName = "Graficas"
+        Me.btnGraficas.AutoSize = True
+        Me.btnGraficas.Image = Global.GKNSICAIP.My.Resources.Resources.frmGraficas_graficar1
+        Me.btnGraficas.ImageAlignment = System.Drawing.ContentAlignment.MiddleCenter
+        Me.btnGraficas.Name = "btnGraficas"
+        Me.btnGraficas.Text = "Graficas"
+        Me.btnGraficas.TextAlignment = System.Drawing.ContentAlignment.BottomCenter
+        Me.btnGraficas.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText
+        Me.btnGraficas.Visibility = Telerik.WinControls.ElementVisibility.Visible
         '
         'RadRibbonBarGroup4
         '
@@ -477,5 +503,7 @@ Partial Class Formulario_Principal
     Friend WithEvents RadLabel_Usuario_Login As Telerik.WinControls.UI.RadLabelElement
     Friend WithEvents RadLabelElement2 As Telerik.WinControls.UI.RadLabelElement
     Friend WithEvents btnImportar_TC As Telerik.WinControls.UI.RadButtonElement
+    Friend WithEvents RadRibbonBarGroup5 As Telerik.WinControls.UI.RadRibbonBarGroup
+    Friend WithEvents btnGraficas As Telerik.WinControls.UI.RadButtonElement
 
 End Class

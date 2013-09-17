@@ -1,5 +1,6 @@
 ﻿Imports CapaNegocios
 Imports CapaNegocios.Clases_Catalogos
+Imports Telerik.WinControls.UI
 
 
 Public Class Formulario_Principal
@@ -9,7 +10,7 @@ Public Class Formulario_Principal
     Dim vPermiso_Delete As Boolean = True
 
 #Region "Variables Identificador Opciones Menu"
-    Dim vLinea As String = ""    
+    Dim vLinea As String = ""
     Dim vMaquina As Boolean = False
     Dim vModelo As Boolean = False
     Dim vTiempo_Ciclo As Boolean = False
@@ -47,6 +48,7 @@ Public Class Formulario_Principal
     Dim ofrmTipo_Usuario As FrmTipo_Usuario
     Dim ofrmPermisos As FrmPermisos
     Dim ofrmImportar_TC As FrmImportar_TC
+    Dim ofrmGraficas As FrmGraficasfaseuno
 #End Region
 
 #Region "Opciones de Menu"
@@ -98,6 +100,10 @@ Public Class Formulario_Principal
 
             dgvRegistros.Visible = True
             Activar_Formulario("frmLinea")
+
+            Me.dgvRegistros.EnableGrouping = True           
+            Me.dgvRegistros.GroupDescriptors.Clear()
+            Me.dgvRegistros.GroupDescriptors.Add(New GridGroupByExpression(Me.dgvRegistros.Columns("componente")))
         Else
             MsgBox("El Usuario no cuenta con los permisos suficientes para entrar al 'Catalogo de Linea'")
         End If
@@ -149,6 +155,10 @@ Public Class Formulario_Principal
 
             Me.dgvRegistros.Columns("linea").HeaderText = " Linea"
             Me.dgvRegistros.Columns("linea").Width = 250
+
+            Me.dgvRegistros.EnableGrouping = True
+            Me.dgvRegistros.GroupDescriptors.Clear()
+            Me.dgvRegistros.GroupDescriptors.Add(New GridGroupByExpression(Me.dgvRegistros.Columns("linea")))
 
             dgvRegistros.Visible = True
             Activar_Formulario("frmMaquina")
@@ -208,6 +218,10 @@ Public Class Formulario_Principal
             Me.dgvRegistros.Columns("Clasificacion_Modelo").HeaderText = " Clasificacion Modelo"
             Me.dgvRegistros.Columns("Clasificacion_Modelo").IsVisible = False
             'Me.dgvRegistros.Columns("Clasificacion_Modelo").Width = 250
+
+            Me.dgvRegistros.EnableGrouping = True
+            Me.dgvRegistros.GroupDescriptors.Clear()
+            Me.dgvRegistros.GroupDescriptors.Add(New GridGroupByExpression(Me.dgvRegistros.Columns("componente")))
 
             dgvRegistros.Visible = True
             Activar_Formulario("frmModelo")
@@ -280,6 +294,11 @@ Public Class Formulario_Principal
             Me.dgvRegistros.Columns("estatus").HeaderText = "estatus"
             Me.dgvRegistros.Columns("estatus").IsVisible = False
 
+
+            Me.dgvRegistros.EnableGrouping = True
+            Me.dgvRegistros.GroupDescriptors.Clear()
+            Me.dgvRegistros.GroupDescriptors.Add(New GridGroupByExpression(Me.dgvRegistros.Columns("Nombre_Linea")))
+
             dgvRegistros.Visible = True
             Activar_Formulario("frmTiempo_Ciclo")
         Else
@@ -341,7 +360,7 @@ Public Class Formulario_Principal
                 Me.btnEliminar.Enabled = True
             Else
                 Me.btnEliminar.Enabled = False
-            End If            
+            End If
             'If Permiso_Asignado("USUARIOS.VER") = True Then
             '    Me.dgvRegistros.ReadOnly = True            
             'End If
@@ -382,7 +401,11 @@ Public Class Formulario_Principal
             Me.dgvRegistros.Columns("Cve_CV").HeaderText = "Cve_CV"
             Me.dgvRegistros.Columns("Cve_CV").IsVisible = False
             Me.dgvRegistros.Columns("Cve_Componente").HeaderText = "Cve_Componente"
-            Me.dgvRegistros.Columns("Cve_Componente").IsVisible = False        
+            Me.dgvRegistros.Columns("Cve_Componente").IsVisible = False
+
+            'Me.dgvRegistros.EnableGrouping = True
+            'Me.dgvRegistros.GroupDescriptors.Clear()
+            'Me.dgvRegistros.GroupDescriptors.Add(New GridGroupByExpression(Me.dgvRegistros.Columns("Descripcion_Tipo_Usuario")))
 
             dgvRegistros.Visible = True
             Activar_Formulario("frmUsuario")
@@ -454,6 +477,19 @@ Public Class Formulario_Principal
         Else
             MsgBox("El Usuario no cuenta con los permisos suficientes para entrar en 'Asignacion de Permisos'")
         End If
+    End Sub
+
+    Private Sub btnGraficas_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnGraficas.Click
+        'If Permiso_Asignado("GRAFICAS") = True Then
+        Me.dgvRegistros.Visible = False
+        Me.Barra_Tool_Registros.Visible = False
+        MapaUbicacion.Text = "Graficas"
+
+        ofrmGraficas = New FrmGraficasfaseuno
+        ofrmGraficas.ShowDialog()
+        'Else
+        'MsgBox("El Usuario no cuenta con los permisos suficientes para entrar en 'GRAFICAS'")
+        'End If
     End Sub
 #End Region
 
@@ -569,7 +605,7 @@ Public Class Formulario_Principal
                 btnTipoUsuario.PerformClick()
             Else
                 MsgBox("El Usuario no tiene los privilegios para ver los Detalles")
-            End If           
+            End If
         End If
     End Sub
 
@@ -704,7 +740,7 @@ Public Class Formulario_Principal
                 End If
             Else
                 MsgBox("El Usuario no tiene los privilegios para Eliminar o Dar Baja")
-            End If           
+            End If
         ElseIf vMaquina = True Then
             If Permiso_Asignado("CATALOGOMAQUINA.ELIMINAR") = True Then
                 If MsgBox("¿Esta seguro de Dar de Baja la Maquina?", MsgBoxStyle.YesNo, Me.Text) = MsgBoxResult.Yes Then
@@ -719,7 +755,7 @@ Public Class Formulario_Principal
                 End If
             Else
                 MsgBox("El Usuario no tiene los privilegios para Eliminar o Dar Baja")
-            End If            
+            End If
         ElseIf vModelo = True Then
             If Permiso_Asignado("CATALOGOMODELO.ELIMINAR") = True Then
                 If MsgBox("¿Esta seguro de Dar de Baja el Modelo?", MsgBoxStyle.YesNo, Me.Text) = MsgBoxResult.Yes Then
@@ -734,7 +770,7 @@ Public Class Formulario_Principal
                 End If
             Else
                 MsgBox("El Usuario no tiene los privilegios para Eliminar o Dar Baja")
-            End If            
+            End If
         ElseIf vTiempo_Ciclo = True Then
             'oLinea = New Linea
             'oLinea.cve_linea = vRowSeleccionada
@@ -755,7 +791,7 @@ Public Class Formulario_Principal
             Else
                 MsgBox("El Usuario no tiene los privilegios para Eliminar o Dar Baja")
             End If
-            
+
         ElseIf vTipo_Usuario = True Then
             If Permiso_Asignado("TIPOUSUARIO.ELIMINAR") = True Then
                 If MsgBox("¿Esta seguro de Eliminar el Tipo de Usuario?", MsgBoxStyle.YesNo, Me.Text) = MsgBoxResult.Yes Then
@@ -770,7 +806,7 @@ Public Class Formulario_Principal
                 End If
             Else
                 MsgBox("El Usuario no tiene los privilegios para Eliminar o Dar Baja")
-            End If           
+            End If
         End If
     End Sub
 #End Region
@@ -885,7 +921,7 @@ Public Class Formulario_Principal
                         vPermiso_Add = True
                     Else
                         vPermiso_Add = False
-                    End If                    
+                    End If
                     ofrmTiempo_Ciclo = New frmTiempo_Ciclo(vPermiso_Add, oUsuario_Login.CVE_Usuario)
 
                     Try
@@ -955,9 +991,9 @@ Public Class Formulario_Principal
                     MsgBox("El Usuario no tiene los privilegios para ver los Detalles")
                 End If
             End If
-            Else
-            End If
-            ''-----------------------------------------------------------------------------------------------------------------
+        Else
+        End If
+        ''-----------------------------------------------------------------------------------------------------------------
     End Sub
 
     Private Sub dgvRegistros_MouseUp(ByVal sender As System.Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles dgvRegistros.MouseUp
@@ -973,8 +1009,7 @@ Public Class Formulario_Principal
             End If
         End Try
     End Sub
-#End Region   
-
+#End Region
 
 #Region "Validaciones"
     Private Sub Activar_Formulario(ByVal vNombre_De_Formulario As String)
@@ -1042,11 +1077,12 @@ Public Class Formulario_Principal
         Return vRetorno
     End Function
 #End Region
-    
+
     Private Sub Formulario_Principal_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         Me.WindowState = FormWindowState.Maximized
         RadLabel_Usuario_Login.Text = RadLabel_Usuario_Login.Text & oUsuario_Login.Nombre
     End Sub
+
 
     
 End Class

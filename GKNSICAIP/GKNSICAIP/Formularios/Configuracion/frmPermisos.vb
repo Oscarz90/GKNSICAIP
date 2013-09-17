@@ -16,10 +16,8 @@ Public Class FrmPermisos
         If vRegistrar = False Then
             btnGuardar.Enabled = False            
         End If
-
         ' Agregue cualquier inicialización después de la llamada a InitializeComponent().
     End Sub
-
 
     Private Sub FrmPermisos_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         oUsuario = New SEGURIDAD_USUARIO
@@ -245,28 +243,28 @@ Public Class FrmPermisos
         oUsuario = New SEGURIDAD_USUARIO
         oUsuario_Permisos = New SEGURIDAD_USUARIO_PERMISOS
 
-        Using scope As New TransactionScope()
-            Try
-                oUsuario_Permisos.CVE_USUARIO = oUsuario.CVE_Usuario
-                oUsuario_Permisos.Eliminar()
+        If oUsuario.CVE_Usuario > 0 Then
+            Using scope As New TransactionScope()
+                Try
+                    oUsuario_Permisos.CVE_USUARIO = oUsuario.CVE_Usuario
+                    oUsuario_Permisos.Eliminar()
+                    oUsuario.L_USUARIO_PERMISOS.Clear()
+                    oUsuario.L_USUARIO_PERMISOS = Nothing
+                    For Each n As TreeNode In nodes
+                        'Se Declara un metodo para que recorra los hijos de los principales Y los hijos de los hijos....Recorrido Total en pocas palabras
+                        'Para ello se envía el nodo actual para evaluar si tiene hijos            
+                        RecorrerNodos_PARA_GUARDAR(n)
+                    Next
+                    oUsuario.Registrar_Permisos()
+                Catch ex As Exception
 
-                oUsuario.L_USUARIO_PERMISOS.Clear()
-                oUsuario.L_USUARIO_PERMISOS = Nothing
-                For Each n As TreeNode In nodes
-                    'Se Declara un metodo para que recorra los hijos de los principales Y los hijos de los hijos....Recorrido Total en pocas palabras
-                    'Para ello se envía el nodo actual para evaluar si tiene hijos            
-                    RecorrerNodos_PARA_GUARDAR(n)
-                Next
-                oUsuario.Registrar_Permisos()
-            Catch ex As Exception
-
-            End Try
-
-            oUsuario_Login.L_USUARIO_PERMISOS = Nothing
-
-            scope.Complete()
-        End Using
-        MsgBox("Se registro correctamente")
+                End Try
+                oUsuario_Login.L_USUARIO_PERMISOS = Nothing
+                scope.Complete()
+            End Using
+            MsgBox("Se registro correctamente")
+        Else
+            MsgBox("Seleccione un Usuario para Asignar la lista actual de Permisos cargada")
+        End If
     End Sub
-
 End Class
