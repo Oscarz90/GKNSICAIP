@@ -54,11 +54,12 @@ Partial Class frmModelo
         'Label2
         '
         Me.Label2.AutoSize = True
-        Me.Label2.Location = New System.Drawing.Point(12, 151)
+        Me.Label2.Location = New System.Drawing.Point(93, 186)
         Me.Label2.Name = "Label2"
         Me.Label2.Size = New System.Drawing.Size(69, 13)
         Me.Label2.TabIndex = 1
         Me.Label2.Text = "Clasificación:"
+        Me.Label2.Visible = False
         '
         'Label3
         '
@@ -105,7 +106,7 @@ Partial Class frmModelo
         '
         'btnSalir
         '
-        Me.btnSalir.Location = New System.Drawing.Point(303, 202)
+        Me.btnSalir.Location = New System.Drawing.Point(306, 178)
         Me.btnSalir.Name = "btnSalir"
         Me.btnSalir.Size = New System.Drawing.Size(75, 23)
         Me.btnSalir.TabIndex = 8
@@ -115,7 +116,7 @@ Partial Class frmModelo
         'btnDarBaja
         '
         Me.btnDarBaja.Enabled = False
-        Me.btnDarBaja.Location = New System.Drawing.Point(12, 202)
+        Me.btnDarBaja.Location = New System.Drawing.Point(15, 178)
         Me.btnDarBaja.Name = "btnDarBaja"
         Me.btnDarBaja.Size = New System.Drawing.Size(75, 23)
         Me.btnDarBaja.TabIndex = 9
@@ -125,7 +126,7 @@ Partial Class frmModelo
         '
         'btnRegistrar
         '
-        Me.btnRegistrar.Location = New System.Drawing.Point(222, 202)
+        Me.btnRegistrar.Location = New System.Drawing.Point(225, 178)
         Me.btnRegistrar.Name = "btnRegistrar"
         Me.btnRegistrar.Size = New System.Drawing.Size(75, 23)
         Me.btnRegistrar.TabIndex = 7
@@ -134,7 +135,7 @@ Partial Class frmModelo
         '
         'btnModificar
         '
-        Me.btnModificar.Location = New System.Drawing.Point(222, 202)
+        Me.btnModificar.Location = New System.Drawing.Point(225, 178)
         Me.btnModificar.Name = "btnModificar"
         Me.btnModificar.Size = New System.Drawing.Size(75, 23)
         Me.btnModificar.TabIndex = 6
@@ -153,10 +154,11 @@ Partial Class frmModelo
         'cbxClasificacion
         '
         Me.cbxClasificacion.FormattingEnabled = True
-        Me.cbxClasificacion.Location = New System.Drawing.Point(108, 148)
+        Me.cbxClasificacion.Location = New System.Drawing.Point(168, 178)
         Me.cbxClasificacion.Name = "cbxClasificacion"
-        Me.cbxClasificacion.Size = New System.Drawing.Size(192, 21)
+        Me.cbxClasificacion.Size = New System.Drawing.Size(30, 21)
         Me.cbxClasificacion.TabIndex = 5
+        Me.cbxClasificacion.Visible = False
         '
         'Panel1
         '
@@ -176,9 +178,10 @@ Partial Class frmModelo
         Me.Panel1.Controls.Add(Me.txtDescripcion)
         Me.Panel1.Controls.Add(Me.txtComponente)
         Me.Panel1.Controls.Add(Me.txtNumero_Parte)
+        Me.Panel1.Dock = System.Windows.Forms.DockStyle.Fill
         Me.Panel1.Location = New System.Drawing.Point(0, 0)
         Me.Panel1.Name = "Panel1"
-        Me.Panel1.Size = New System.Drawing.Size(390, 242)
+        Me.Panel1.Size = New System.Drawing.Size(390, 213)
         Me.Panel1.TabIndex = 15
         '
         'titulo_banner_formulario
@@ -208,11 +211,11 @@ Partial Class frmModelo
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(390, 241)
+        Me.ClientSize = New System.Drawing.Size(390, 213)
         Me.Controls.Add(Me.Panel1)
         Me.MaximizeBox = False
-        Me.MaximumSize = New System.Drawing.Size(406, 279)
-        Me.MinimumSize = New System.Drawing.Size(406, 279)
+        Me.MaximumSize = New System.Drawing.Size(406, 251)
+        Me.MinimumSize = New System.Drawing.Size(406, 251)
         Me.Name = "frmModelo"
         Me.Text = "Modelo"
         Me.Panel1.ResumeLayout(False)

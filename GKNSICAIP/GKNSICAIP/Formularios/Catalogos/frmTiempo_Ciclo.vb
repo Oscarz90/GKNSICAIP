@@ -169,38 +169,40 @@ Public Class frmTiempo_Ciclo
                 Try
 
                     If oTiempo_Ciclo.Validar_MODELO_LINEA_EN_TC_COMPONENTE(oTiempo_Ciclo.cve_linea, oTiempo_Ciclo.cve_modelo) = False Then
-                        If MsgBox("La Linea y el Modelo no son del mismo Componente, ¿Desea Continuar?", MsgBoxStyle.YesNo, Me.Text) = MsgBoxResult.Yes Then
-                            If oTiempo_Ciclo.Validar_Exixtencia_LINEA_MODELO_EN_TC(oTiempo_Ciclo.cve_linea, oTiempo_Ciclo.cve_modelo) = True Then
-                                'MsgBox("La linea y el modelo en TC ya exixte")
-                                vValidado_Modelo_Y_Linea_En_TC = False
-                                'oTiempo_Ciclo_A_MODIFICAR_ENCONTRADO_VALIDACIONES = New TC
-                                oTiempo_Ciclo_A_MODIFICAR_ENCONTRADO_VALIDACIONES.Cargar_TC(oTiempo_Ciclo.cve_linea, oTiempo_Ciclo.cve_modelo)
+                        MsgBox("La Linea y el Modelo no son del mismo Componente, Verifique.")
+                    Else
+                        'If MsgBox("La Linea y el Modelo no son del mismo Componente, ¿Desea Continuar?", MsgBoxStyle.YesNo, Me.Text) = MsgBoxResult.Yes Then
+                        If oTiempo_Ciclo.Validar_Exixtencia_LINEA_MODELO_EN_TC(oTiempo_Ciclo.cve_linea, oTiempo_Ciclo.cve_modelo) = True Then
+                            'MsgBox("La linea y el modelo en TC ya exixte")
+                            vValidado_Modelo_Y_Linea_En_TC = False
+                            'oTiempo_Ciclo_A_MODIFICAR_ENCONTRADO_VALIDACIONES = New TC
+                            oTiempo_Ciclo_A_MODIFICAR_ENCONTRADO_VALIDACIONES.Cargar_TC(oTiempo_Ciclo.cve_linea, oTiempo_Ciclo.cve_modelo)
+                        Else
+                            'MsgBox("La linea y el modelo en TC no exixte")
+                            vValidado_Modelo_Y_Linea_En_TC = True
+                        End If
+                        'btnRegistrar.Enabled = True
+                        oTiempo_Ciclo.Registrar()
+                        If vValidado_Modelo_Y_Linea_En_TC = False Then
+                            'If MsgBox("El Tiempo Ciclo se remplazara con los Datos Capturados, ¿Desea Continuar?", MsgBoxStyle.YesNo, Me.Text) = MsgBoxResult.Yes Then
+                            If oTiempo_Ciclo_A_MODIFICAR_ENCONTRADO_VALIDACIONES IsNot Nothing Then
+                                oTiempo_Ciclo_A_MODIFICAR_ENCONTRADO_VALIDACIONES.Estatus = "0"
+                                oTiempo_Ciclo_A_MODIFICAR_ENCONTRADO_VALIDACIONES.Registrar()
+                                MsgBox("Se Registro correctamente")
                             Else
-                                'MsgBox("La linea y el modelo en TC no exixte")
-                                vValidado_Modelo_Y_Linea_En_TC = True
-                            End If
-                            'btnRegistrar.Enabled = True
-                            oTiempo_Ciclo.Registrar()
-                            If vValidado_Modelo_Y_Linea_En_TC = False Then
-                                'If MsgBox("El Tiempo Ciclo se remplazara con los Datos Capturados, ¿Desea Continuar?", MsgBoxStyle.YesNo, Me.Text) = MsgBoxResult.Yes Then
-                                If oTiempo_Ciclo_A_MODIFICAR_ENCONTRADO_VALIDACIONES IsNot Nothing Then
-                                    oTiempo_Ciclo_A_MODIFICAR_ENCONTRADO_VALIDACIONES.Estatus = "0"
-                                    oTiempo_Ciclo_A_MODIFICAR_ENCONTRADO_VALIDACIONES.Registrar()
-                                    MsgBox("Se Registro correctamente")
-                                Else
-                                    oTiempo_Ciclo_A_MODIFICAR.Estatus = "0"
-                                    oTiempo_Ciclo_A_MODIFICAR.Registrar()
-                                    MsgBox("Se Registro correctamente")
-                                End If
-                                'End If
-                            Else
-                                'oTiempo_Ciclo_A_MODIFICAR.Estatus = "0"
-                                'oTiempo_Ciclo_A_MODIFICAR.Registrar()
+                                oTiempo_Ciclo_A_MODIFICAR.Estatus = "0"
+                                oTiempo_Ciclo_A_MODIFICAR.Registrar()
                                 MsgBox("Se Registro correctamente")
                             End If
+                            'End If
                         Else
-
+                            'oTiempo_Ciclo_A_MODIFICAR.Estatus = "0"
+                            'oTiempo_Ciclo_A_MODIFICAR.Registrar()
+                            MsgBox("Se Registro correctamente")
                         End If
+                        'Else
+
+                        'End If
                     End If
                     scope.Complete()
                 Catch ex As Exception
