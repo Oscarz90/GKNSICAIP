@@ -243,10 +243,10 @@ Public Class FrmPermisos
         oUsuario = New SEGURIDAD_USUARIO
         oUsuario_Permisos = New SEGURIDAD_USUARIO_PERMISOS
 
-        If oUsuario.CVE_Usuario > 0 Then
+        If vUsuario_Seleccionado_Global > 0 Then
             Using scope As New TransactionScope()
                 Try
-                    oUsuario_Permisos.CVE_USUARIO = oUsuario.CVE_Usuario
+                    oUsuario_Permisos.CVE_USUARIO = vUsuario_Seleccionado_Global
                     oUsuario_Permisos.Eliminar()
                     oUsuario.L_USUARIO_PERMISOS.Clear()
                     oUsuario.L_USUARIO_PERMISOS = Nothing
