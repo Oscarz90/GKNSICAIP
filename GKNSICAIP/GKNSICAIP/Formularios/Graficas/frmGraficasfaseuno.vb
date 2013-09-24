@@ -701,11 +701,20 @@ Public Class FrmGraficasfaseuno
         Dim vContador As Integer = 1
         vTotal = vDT.Rows.Count
         For Each vDR As DataRow In vDT.Rows
-            If vContador = vTotal Then
-                BarSeries2.DataPoints.Add(New CategoricalDataPoint(vDR("oee"), "Acumulado"))
-            Else
-                BarSeries1.DataPoints.Add(New CategoricalDataPoint(vDR("oee"), vDR("dia_asignado")))
+            If rdbtnDias.IsChecked Then
+                If vContador = 1 Then
+                    BarSeries2.DataPoints.Add(New CategoricalDataPoint(vDR("oee"), "Acumulado"))
+                Else
+                    BarSeries1.DataPoints.Add(New CategoricalDataPoint(vDR("oee"), vDR("dia_asignado")))
+                End If
+            ElseIf rdbtnMeses.IsChecked Then
+                If vContador = vTotal Then
+                    BarSeries2.DataPoints.Add(New CategoricalDataPoint(vDR("oee"), "Acumulado"))
+                Else
+                    BarSeries1.DataPoints.Add(New CategoricalDataPoint(vDR("oee"), vDR("dia_asignado")))
+                End If
             End If
+            
             vContador = vContador + 1
         Next
         'Cartesian Area, CategoricalAxis, LinearAxis
@@ -763,30 +772,26 @@ Public Class FrmGraficasfaseuno
         Dim vDT As New DataTable
         If rdbtnDias.IsChecked Then
             vDT = oObtiene_oee.obtiene_oee_equipo_linea_dia()
-            vTotal = vDT.Rows.Count
-            For Each vDR As DataRow In vDT.Rows
+        ElseIf rdbtnMeses.IsChecked Then
+            vDT = oObtiene_oee.obtiene_oee_equipo_linea_mes()
+        End If
+        vTotal = vDT.Rows.Count
+        For Each vDR As DataRow In vDT.Rows
+            If rdbtnDias.IsChecked Then
                 If vContador = 1 Then
                     BarSeries2.DataPoints.Add(New CategoricalDataPoint(vDR("oee"), "Acumulado"))
                 Else
                     BarSeries1.DataPoints.Add(New CategoricalDataPoint(vDR("oee"), vDR("dia_asignado")))
                 End If
-                vContador = vContador + 1
-            Next
-        ElseIf rdbtnMeses.IsChecked Then
-            vDT = oObtiene_oee.obtiene_oee_equipo_linea_mes()
-            vTotal = vDT.Rows.Count
-            For Each vDR As DataRow In vDT.Rows
+            ElseIf rdbtnMeses.IsChecked Then
                 If vContador = vTotal Then
                     BarSeries2.DataPoints.Add(New CategoricalDataPoint(vDR("oee"), "Acumulado"))
                 Else
                     BarSeries1.DataPoints.Add(New CategoricalDataPoint(vDR("oee"), vDR("dia_asignado")))
                 End If
-                vContador = vContador + 1
-            Next
-        End If
-
-
-
+            End If
+            vContador = vContador + 1
+        Next
         'Cartesian Area, CategoricalAxis, LinearAxis
         Dim CartesianArea1 As CartesianArea = New CartesianArea()
         Dim CategoricalAxis1 As CategoricalAxis = New CategoricalAxis()
@@ -1112,13 +1117,22 @@ Public Class FrmGraficasfaseuno
         Dim vContador As Integer = 1
         vTotal = vDT.Rows.Count
         For Each vDR As DataRow In vDT.Rows
-            If vContador = vTotal Then
-                BarSeries2.DataPoints.Add(New CategoricalDataPoint(vDR("nrfti"), "Acumulado"))
-            Else
-                BarSeries1.DataPoints.Add(New CategoricalDataPoint(vDR("nrfti"), vDR("dia_asignado")))
+            If rdbtnDias.IsChecked Then
+                If vContador = 1 Then
+                    BarSeries2.DataPoints.Add(New CategoricalDataPoint(vDR("nrfti"), "Acumulado"))
+                Else
+                    BarSeries1.DataPoints.Add(New CategoricalDataPoint(vDR("nrfti"), vDR("dia_asignado")))
+                End If
+            ElseIf rdbtnMeses.IsChecked Then
+                If vContador = vTotal Then
+                    BarSeries2.DataPoints.Add(New CategoricalDataPoint(vDR("nrfti"), "Acumulado"))
+                Else
+                    BarSeries1.DataPoints.Add(New CategoricalDataPoint(vDR("nrfti"), vDR("dia_asignado")))
+                End If
             End If
             vContador = vContador + 1
         Next
+
         'Cartesian Area, CategoricalAxis, LinearAxis
         Dim CartesianArea1 As CartesianArea = New CartesianArea()
         Dim CategoricalAxis1 As CategoricalAxis = New CategoricalAxis()
@@ -1180,10 +1194,18 @@ Public Class FrmGraficasfaseuno
         Dim vContador As Integer = 1
         vTotal = vDT.Rows.Count
         For Each vDR As DataRow In vDT.Rows
-            If vContador = vTotal Then
-                BarSeries2.DataPoints.Add(New CategoricalDataPoint(vDR("nrfti"), "Acumulado"))
-            Else
-                BarSeries1.DataPoints.Add(New CategoricalDataPoint(vDR("nrfti"), vDR("dia_asignado")))
+            If rdbtnDias.IsChecked Then
+                If vContador = 1 Then
+                    BarSeries2.DataPoints.Add(New CategoricalDataPoint(vDR("nrfti"), "Acumulado"))
+                Else
+                    BarSeries1.DataPoints.Add(New CategoricalDataPoint(vDR("nrfti"), vDR("dia_asignado")))
+                End If
+            ElseIf rdbtnMeses.IsChecked Then
+                If vContador = vTotal Then
+                    BarSeries2.DataPoints.Add(New CategoricalDataPoint(vDR("nrfti"), "Acumulado"))
+                Else
+                    BarSeries1.DataPoints.Add(New CategoricalDataPoint(vDR("nrfti"), vDR("dia_asignado")))
+                End If
             End If
             vContador = vContador + 1
         Next
@@ -1233,12 +1255,31 @@ Public Class FrmGraficasfaseuno
         oObtiene_cincoS.fecha_final = dtpFechaFinal.Value
         'Creacion series
         Dim BarSeries1 As New BarSeries()
-        BarSeries1.LegendTitle = "5's"
+        BarSeries1.LegendTitle = "Admon Visual"
+        Dim BarSeries2 As New BarSeries() 'mantto_autto
+        BarSeries2.LegendTitle = "5's"
+        Dim BarSeries3 As New BarSeries() 'admon_visual
+        BarSeries3.LegendTitle = "Mantto Autto"
+        Dim BarSeries4 As New BarSeries() 'cincoS
+        BarSeries4.LegendTitle = "Promedio 5's"
         Me.radChartView1.ShowLegend = True
         'Obtencion Datos
-        BarSeries1.ValueMember = "promedio"
+        Dim vDT As DataTable = Nothing
+        If rdbtnMeses.IsChecked Then
+            vDT = oObtiene_cincoS.obtiene_cincos_planta_mes()
+        End If
+        BarSeries1.ValueMember = "admon_visual"
         BarSeries1.CategoryMember = "dia_asignado"
-        BarSeries1.DataSource = oObtiene_cincoS.obtiene_cincos_planta_mes()
+        BarSeries1.DataSource = vDT
+        BarSeries2.ValueMember = "cincoS"
+        BarSeries2.CategoryMember = "dia_asignado"
+        BarSeries2.DataSource = vDT
+        BarSeries3.ValueMember = "mantto_autto"
+        BarSeries3.CategoryMember = "dia_asignado"
+        BarSeries3.DataSource = vDT
+        BarSeries4.ValueMember = "promedio"
+        BarSeries4.CategoryMember = "dia_asignado"
+        BarSeries4.DataSource = vDT
         'Cartesian Area, CategoricalAxis, LinearAxis
         Dim CartesianArea1 As CartesianArea = New CartesianArea()
         Dim CategoricalAxis1 As CategoricalAxis = New CategoricalAxis()
@@ -1258,13 +1299,30 @@ Public Class FrmGraficasfaseuno
         LinearAxis1.MajorStep = 1.0R
         LinearAxis1.Maximum = 5
         LinearAxis1.Title = "5's"
+        'serie1
         BarSeries1.ShowLabels = True
         BarSeries1.LabelFormat = "{0:##.#}"
         BarSeries1.HorizontalAxis = CategoricalAxis1
         BarSeries1.VerticalAxis = LinearAxis1
-        BarSeries1.Palette = New PaletteEntry(Color.FromArgb(94, 228, 63))
+        BarSeries1.Palette = New PaletteEntry(Color.FromArgb(217, 217, 217))
+        'serie2
+        BarSeries2.ShowLabels = True
+        BarSeries2.LabelFormat = "{0:##.#}"
+        BarSeries2.Palette = New PaletteEntry(Color.FromArgb(255, 192, 0))
+        'serie3
+        BarSeries3.ShowLabels = True
+        BarSeries3.LabelFormat = "{0:##.#}"
+        BarSeries3.Palette = New PaletteEntry(Color.FromArgb(37, 64, 92))
+        'serie4
+        BarSeries4.ShowLabels = True
+        BarSeries4.LabelFormat = "{0:##.#}"
+        BarSeries4.Palette = New PaletteEntry(Color.FromArgb(127, 127, 127))
+
         Me.radChartView1.ShowToolTip = True
         radChartView1.Series.Add(BarSeries1)
+        radChartView1.Series.Add(BarSeries2)
+        radChartView1.Series.Add(BarSeries3)
+        radChartView1.Series.Add(BarSeries4)
     End Sub
     '5s cadena valor
     Private Sub obtiene_cincoS_cadena_valor_mes()
@@ -1275,12 +1333,31 @@ Public Class FrmGraficasfaseuno
         oObtiene_cincoS.fecha_final = dtpFechaFinal.Value
         'Creacion series
         Dim BarSeries1 As New BarSeries()
-        BarSeries1.LegendTitle = "5's"
+        BarSeries1.LegendTitle = "Admon Visual"
+        Dim BarSeries2 As New BarSeries() 'mantto_autto
+        BarSeries2.LegendTitle = "5's"
+        Dim BarSeries3 As New BarSeries() 'admon_visual
+        BarSeries3.LegendTitle = "Mantto Autto"
+        Dim BarSeries4 As New BarSeries() 'cincoS
+        BarSeries4.LegendTitle = "Promedio 5's"
         Me.radChartView1.ShowLegend = True
         'Obtencion Datos
-        BarSeries1.ValueMember = "promedio"
+        Dim vDT As DataTable = Nothing
+        If rdbtnMeses.IsChecked Then
+            vDT = oObtiene_cincoS.obtiene_cincos_cadena_valor_mes()
+        End If
+        BarSeries1.ValueMember = "admon_visual"
         BarSeries1.CategoryMember = "dia_asignado"
-        BarSeries1.DataSource = oObtiene_cincoS.obtiene_cincos_cadena_valor_mes()
+        BarSeries1.DataSource = vDT
+        BarSeries2.ValueMember = "cincoS"
+        BarSeries2.CategoryMember = "dia_asignado"
+        BarSeries2.DataSource = vDT
+        BarSeries3.ValueMember = "mantto_autto"
+        BarSeries3.CategoryMember = "dia_asignado"
+        BarSeries3.DataSource = vDT
+        BarSeries4.ValueMember = "promedio"
+        BarSeries4.CategoryMember = "dia_asignado"
+        BarSeries4.DataSource = vDT
         'Cartesian Area, CategoricalAxis, LinearAxis
         Dim CartesianArea1 As CartesianArea = New CartesianArea()
         Dim CategoricalAxis1 As CategoricalAxis = New CategoricalAxis()
@@ -1300,13 +1377,30 @@ Public Class FrmGraficasfaseuno
         LinearAxis1.MajorStep = 1.0R
         LinearAxis1.Maximum = 5
         LinearAxis1.Title = "5's"
+        'serie1
         BarSeries1.ShowLabels = True
         BarSeries1.LabelFormat = "{0:##.#}"
         BarSeries1.HorizontalAxis = CategoricalAxis1
         BarSeries1.VerticalAxis = LinearAxis1
-        BarSeries1.Palette = New PaletteEntry(Color.FromArgb(94, 228, 63))
+        BarSeries1.Palette = New PaletteEntry(Color.FromArgb(217, 217, 217))
+        'serie2
+        BarSeries2.ShowLabels = True
+        BarSeries2.LabelFormat = "{0:##.#}"
+        BarSeries2.Palette = New PaletteEntry(Color.FromArgb(255, 192, 0))
+        'serie3
+        BarSeries3.ShowLabels = True
+        BarSeries3.LabelFormat = "{0:##.#}"
+        BarSeries3.Palette = New PaletteEntry(Color.FromArgb(37, 64, 92))
+        'serie4
+        BarSeries4.ShowLabels = True
+        BarSeries4.LabelFormat = "{0:##.#}"
+        BarSeries4.Palette = New PaletteEntry(Color.FromArgb(127, 127, 127))
+
         Me.radChartView1.ShowToolTip = True
         radChartView1.Series.Add(BarSeries1)
+        radChartView1.Series.Add(BarSeries2)
+        radChartView1.Series.Add(BarSeries3)
+        radChartView1.Series.Add(BarSeries4)
     End Sub
     '5s componente
     Private Sub obtiene_cincoS_componente_mes()
@@ -1317,12 +1411,31 @@ Public Class FrmGraficasfaseuno
         oObtiene_cincoS.fecha_final = dtpFechaFinal.Value
         'Creacion series
         Dim BarSeries1 As New BarSeries()
-        BarSeries1.LegendTitle = "5's"
+        BarSeries1.LegendTitle = "Admon Visual"
+        Dim BarSeries2 As New BarSeries() 'mantto_autto
+        BarSeries2.LegendTitle = "5's"
+        Dim BarSeries3 As New BarSeries() 'admon_visual
+        BarSeries3.LegendTitle = "Mantto Autto"
+        Dim BarSeries4 As New BarSeries() 'cincoS
+        BarSeries4.LegendTitle = "Promedio 5's"
         Me.radChartView1.ShowLegend = True
         'Obtencion Datos
-        BarSeries1.ValueMember = "promedio"
+        Dim vDT As DataTable = Nothing
+        If rdbtnMeses.IsChecked Then
+            vDT = oObtiene_cincoS.obtiene_cincos_componente_mes()
+        End If
+        BarSeries1.ValueMember = "admon_visual"
         BarSeries1.CategoryMember = "dia_asignado"
-        BarSeries1.DataSource = oObtiene_cincoS.obtiene_cincos_componente_mes()
+        BarSeries1.DataSource = vDT
+        BarSeries2.ValueMember = "cincoS"
+        BarSeries2.CategoryMember = "dia_asignado"
+        BarSeries2.DataSource = vDT
+        BarSeries3.ValueMember = "mantto_autto"
+        BarSeries3.CategoryMember = "dia_asignado"
+        BarSeries3.DataSource = vDT
+        BarSeries4.ValueMember = "promedio"
+        BarSeries4.CategoryMember = "dia_asignado"
+        BarSeries4.DataSource = vDT
         'Cartesian Area, CategoricalAxis, LinearAxis
         Dim CartesianArea1 As CartesianArea = New CartesianArea()
         Dim CategoricalAxis1 As CategoricalAxis = New CategoricalAxis()
@@ -1342,13 +1455,30 @@ Public Class FrmGraficasfaseuno
         LinearAxis1.MajorStep = 1.0R
         LinearAxis1.Maximum = 5
         LinearAxis1.Title = "5's"
+        'serie1
         BarSeries1.ShowLabels = True
         BarSeries1.LabelFormat = "{0:##.#}"
         BarSeries1.HorizontalAxis = CategoricalAxis1
         BarSeries1.VerticalAxis = LinearAxis1
-        BarSeries1.Palette = New PaletteEntry(Color.FromArgb(94, 228, 63))
+        BarSeries1.Palette = New PaletteEntry(Color.FromArgb(217, 217, 217))
+        'serie2
+        BarSeries2.ShowLabels = True
+        BarSeries2.LabelFormat = "{0:##.#}"
+        BarSeries2.Palette = New PaletteEntry(Color.FromArgb(255, 192, 0))
+        'serie3
+        BarSeries3.ShowLabels = True
+        BarSeries3.LabelFormat = "{0:##.#}"
+        BarSeries3.Palette = New PaletteEntry(Color.FromArgb(37, 64, 92))
+        'serie4
+        BarSeries4.ShowLabels = True
+        BarSeries4.LabelFormat = "{0:##.#}"
+        BarSeries4.Palette = New PaletteEntry(Color.FromArgb(127, 127, 127))
+
         Me.radChartView1.ShowToolTip = True
         radChartView1.Series.Add(BarSeries1)
+        radChartView1.Series.Add(BarSeries2)
+        radChartView1.Series.Add(BarSeries3)
+        radChartView1.Series.Add(BarSeries4)
     End Sub
     '5s linea
     Private Sub obtiene_cincoS_linea_mes()
@@ -1359,12 +1489,31 @@ Public Class FrmGraficasfaseuno
         oObtiene_cincoS.fecha_final = dtpFechaFinal.Value
         'Creacion series
         Dim BarSeries1 As New BarSeries()
-        BarSeries1.LegendTitle = "5's"
+        BarSeries1.LegendTitle = "Admon Visual"
+        Dim BarSeries2 As New BarSeries() 'mantto_autto
+        BarSeries2.LegendTitle = "5's"
+        Dim BarSeries3 As New BarSeries() 'admon_visual
+        BarSeries3.LegendTitle = "Mantto Autto"
+        Dim BarSeries4 As New BarSeries() 'cincoS
+        BarSeries4.LegendTitle = "Promedio 5's"
         Me.radChartView1.ShowLegend = True
         'Obtencion Datos
-        BarSeries1.ValueMember = "promedio"
+        Dim vDT As DataTable = Nothing
+        If rdbtnMeses.IsChecked Then
+            vDT = oObtiene_cincoS.obtiene_cincos_linea_mes()
+        End If
+        BarSeries1.ValueMember = "admon_visual"
         BarSeries1.CategoryMember = "dia_asignado"
-        BarSeries1.DataSource = oObtiene_cincoS.obtiene_cincos_linea_mes()
+        BarSeries1.DataSource = vDT
+        BarSeries2.ValueMember = "cincoS"
+        BarSeries2.CategoryMember = "dia_asignado"
+        BarSeries2.DataSource = vDT
+        BarSeries3.ValueMember = "mantto_autto"
+        BarSeries3.CategoryMember = "dia_asignado"
+        BarSeries3.DataSource = vDT
+        BarSeries4.ValueMember = "promedio"
+        BarSeries4.CategoryMember = "dia_asignado"
+        BarSeries4.DataSource = vDT
         'Cartesian Area, CategoricalAxis, LinearAxis
         Dim CartesianArea1 As CartesianArea = New CartesianArea()
         Dim CategoricalAxis1 As CategoricalAxis = New CategoricalAxis()
@@ -1384,13 +1533,30 @@ Public Class FrmGraficasfaseuno
         LinearAxis1.MajorStep = 1.0R
         LinearAxis1.Maximum = 5
         LinearAxis1.Title = "5's"
+        'serie1
         BarSeries1.ShowLabels = True
         BarSeries1.LabelFormat = "{0:##.#}"
         BarSeries1.HorizontalAxis = CategoricalAxis1
         BarSeries1.VerticalAxis = LinearAxis1
-        BarSeries1.Palette = New PaletteEntry(Color.FromArgb(94, 228, 63))
+        BarSeries1.Palette = New PaletteEntry(Color.FromArgb(217, 217, 217))
+        'serie2
+        BarSeries2.ShowLabels = True
+        BarSeries2.LabelFormat = "{0:##.#}"
+        BarSeries2.Palette = New PaletteEntry(Color.FromArgb(255, 192, 0))
+        'serie3
+        BarSeries3.ShowLabels = True
+        BarSeries3.LabelFormat = "{0:##.#}"
+        BarSeries3.Palette = New PaletteEntry(Color.FromArgb(37, 64, 92))
+        'serie4
+        BarSeries4.ShowLabels = True
+        BarSeries4.LabelFormat = "{0:##.#}"
+        BarSeries4.Palette = New PaletteEntry(Color.FromArgb(127, 127, 127))
+
         Me.radChartView1.ShowToolTip = True
         radChartView1.Series.Add(BarSeries1)
+        radChartView1.Series.Add(BarSeries2)
+        radChartView1.Series.Add(BarSeries3)
+        radChartView1.Series.Add(BarSeries4)
     End Sub
     '5s equipo
     Private Sub obtiene_cincoS_equipo_mes()
@@ -1401,12 +1567,32 @@ Public Class FrmGraficasfaseuno
         oObtiene_cincoS.fecha_final = dtpFechaFinal.Value
         'Creacion series
         Dim BarSeries1 As New BarSeries()
-        BarSeries1.LegendTitle = "5's"
+        BarSeries1.LegendTitle = "Admon Visual"
+        Dim BarSeries2 As New BarSeries() 'mantto_autto
+        BarSeries2.LegendTitle = "5's"
+        Dim BarSeries3 As New BarSeries() 'admon_visual
+        BarSeries3.LegendTitle = "Mantto Autto"
+        Dim BarSeries4 As New BarSeries() 'cincoS
+        BarSeries4.LegendTitle = "Promedio 5's"
         Me.radChartView1.ShowLegend = True
         'Obtencion Datos
-        BarSeries1.ValueMember = "promedio"
+        Dim vDT As DataTable = Nothing
+        If rdbtnMeses.IsChecked Then
+            vDT = oObtiene_cincoS.obtiene_cincos_equipo_mes()
+        End If
+        BarSeries1.ValueMember = "admon_visual"
         BarSeries1.CategoryMember = "dia_asignado"
-        BarSeries1.DataSource = oObtiene_cincoS.obtiene_cincos_equipo_mes()
+        BarSeries1.DataSource = vDT
+        BarSeries2.ValueMember = "cincoS"
+        BarSeries2.CategoryMember = "dia_asignado"
+        BarSeries2.DataSource = vDT
+        BarSeries3.ValueMember = "mantto_autto"
+        BarSeries3.CategoryMember = "dia_asignado"
+        BarSeries3.DataSource = vDT
+        BarSeries4.ValueMember = "promedio"
+        BarSeries4.CategoryMember = "dia_asignado"
+        BarSeries4.DataSource = vDT
+
         'Cartesian Area, CategoricalAxis, LinearAxis
         Dim CartesianArea1 As CartesianArea = New CartesianArea()
         Dim CategoricalAxis1 As CategoricalAxis = New CategoricalAxis()
@@ -1426,13 +1612,30 @@ Public Class FrmGraficasfaseuno
         LinearAxis1.MajorStep = 1.0R
         LinearAxis1.Maximum = 5
         LinearAxis1.Title = "5's"
+        'serie1
         BarSeries1.ShowLabels = True
         BarSeries1.LabelFormat = "{0:##.#}"
         BarSeries1.HorizontalAxis = CategoricalAxis1
         BarSeries1.VerticalAxis = LinearAxis1
-        BarSeries1.Palette = New PaletteEntry(Color.FromArgb(94, 228, 63))
+        BarSeries1.Palette = New PaletteEntry(Color.FromArgb(217, 217, 217))
+        'serie2
+        BarSeries2.ShowLabels = True
+        BarSeries2.LabelFormat = "{0:##.#}"
+        BarSeries2.Palette = New PaletteEntry(Color.FromArgb(255, 192, 0))
+        'serie3
+        BarSeries3.ShowLabels = True
+        BarSeries3.LabelFormat = "{0:##.#}"
+        BarSeries3.Palette = New PaletteEntry(Color.FromArgb(37, 64, 92))
+        'serie4
+        BarSeries4.ShowLabels = True
+        BarSeries4.LabelFormat = "{0:##.#}"
+        BarSeries4.Palette = New PaletteEntry(Color.FromArgb(127, 127, 127))
+
         Me.radChartView1.ShowToolTip = True
         radChartView1.Series.Add(BarSeries1)
+        radChartView1.Series.Add(BarSeries2)
+        radChartView1.Series.Add(BarSeries3)
+        radChartView1.Series.Add(BarSeries4)
     End Sub
     '5s equipo-linea
     Private Sub obtiene_cincoS_equipo_linea_mes()
@@ -1444,12 +1647,31 @@ Public Class FrmGraficasfaseuno
         oObtiene_cincoS.fecha_final = dtpFechaFinal.Value
         'Creacion series
         Dim BarSeries1 As New BarSeries()
-        BarSeries1.LegendTitle = "5's"
+        BarSeries1.LegendTitle = "Admon Visual"
+        Dim BarSeries2 As New BarSeries() 'mantto_autto
+        BarSeries2.LegendTitle = "5's"
+        Dim BarSeries3 As New BarSeries() 'admon_visual
+        BarSeries3.LegendTitle = "Mantto Autto"
+        Dim BarSeries4 As New BarSeries() 'cincoS
+        BarSeries4.LegendTitle = "Promedio 5's"
         Me.radChartView1.ShowLegend = True
         'Obtencion Datos
-        BarSeries1.ValueMember = "promedio"
+        Dim vDT As DataTable = Nothing
+        If rdbtnMeses.IsChecked Then
+            vDT = oObtiene_cincoS.obtiene_cincos_equipo_linea_mes()
+        End If
+        BarSeries1.ValueMember = "admon_visual"
         BarSeries1.CategoryMember = "dia_asignado"
-        BarSeries1.DataSource = oObtiene_cincoS.obtiene_cincos_equipo_linea_mes()
+        BarSeries1.DataSource = vDT
+        BarSeries2.ValueMember = "cincoS"
+        BarSeries2.CategoryMember = "dia_asignado"
+        BarSeries2.DataSource = vDT
+        BarSeries3.ValueMember = "mantto_autto"
+        BarSeries3.CategoryMember = "dia_asignado"
+        BarSeries3.DataSource = vDT
+        BarSeries4.ValueMember = "promedio"
+        BarSeries4.CategoryMember = "dia_asignado"
+        BarSeries4.DataSource = vDT
         'Cartesian Area, CategoricalAxis, LinearAxis
         Dim CartesianArea1 As CartesianArea = New CartesianArea()
         Dim CategoricalAxis1 As CategoricalAxis = New CategoricalAxis()
@@ -1469,13 +1691,30 @@ Public Class FrmGraficasfaseuno
         LinearAxis1.MajorStep = 1.0R
         LinearAxis1.Maximum = 5
         LinearAxis1.Title = "5's"
+        'serie1
         BarSeries1.ShowLabels = True
         BarSeries1.LabelFormat = "{0:##.#}"
         BarSeries1.HorizontalAxis = CategoricalAxis1
         BarSeries1.VerticalAxis = LinearAxis1
-        BarSeries1.Palette = New PaletteEntry(Color.FromArgb(94, 228, 63))
+        BarSeries1.Palette = New PaletteEntry(Color.FromArgb(217, 217, 217))
+        'serie2
+        BarSeries2.ShowLabels = True
+        BarSeries2.LabelFormat = "{0:##.#}"
+        BarSeries2.Palette = New PaletteEntry(Color.FromArgb(255, 192, 0))
+        'serie3
+        BarSeries3.ShowLabels = True
+        BarSeries3.LabelFormat = "{0:##.#}"
+        BarSeries3.Palette = New PaletteEntry(Color.FromArgb(37, 64, 92))
+        'serie4
+        BarSeries4.ShowLabels = True
+        BarSeries4.LabelFormat = "{0:##.#}"
+        BarSeries4.Palette = New PaletteEntry(Color.FromArgb(127, 127, 127))
+
         Me.radChartView1.ShowToolTip = True
         radChartView1.Series.Add(BarSeries1)
+        radChartView1.Series.Add(BarSeries2)
+        radChartView1.Series.Add(BarSeries3)
+        radChartView1.Series.Add(BarSeries4)
     End Sub
 #End Region
 #Region "Metodos graficar gente"
@@ -2980,7 +3219,6 @@ Public Class FrmGraficasfaseuno
         Me.radChartView1.ShowTrackBall = False
         obtener_grafica()
     End Sub
-
     Private Sub radChartView1_MouseDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles radChartView1.MouseDown
         If e.Button = System.Windows.Forms.MouseButtons.Right Then
 
