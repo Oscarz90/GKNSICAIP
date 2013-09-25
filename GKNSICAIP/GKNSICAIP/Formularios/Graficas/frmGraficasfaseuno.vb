@@ -2934,6 +2934,8 @@ Public Class FrmGraficasfaseuno
         BarSeries2.LegendTitle = "Min. Excedentes"
         Dim LineSeries1 As New LineSeries()
         LineSeries1.LegendTitle = "Costo"
+        Dim LineSeries2 As New LineSeries()
+        LineSeries2.LegendTitle = "Objetivo CDM"
         Me.radChartView1.ShowLegend = True
         'Obtencion Datos
         Dim vDT As DataTable = Nothing
@@ -2952,15 +2954,18 @@ Public Class FrmGraficasfaseuno
                 BarSeries1.DataPoints.Add(New CategoricalDataPoint(vDR("min_programados"), "acumulado"))
                 BarSeries2.DataPoints.Add(New CategoricalDataPoint(vDR("min_excedentes"), "acumulado"))
                 LineSeries1.DataPoints.Add(New CategoricalDataPoint(vDR("costo"), "acumulado"))
+                LineSeries2.DataPoints.Add(New CategoricalDataPoint(vDR("objetivo_tcdm"), "acumulado"))
             Else
                 If rdbtnDias.IsChecked Then
                     BarSeries1.DataPoints.Add(New CategoricalDataPoint(vDR("min_programados"), Format(vDR("dia_asignado"), "{MMM-dd}") & " - " & vContador))
                     BarSeries2.DataPoints.Add(New CategoricalDataPoint(vDR("min_excedentes"), Format(vDR("dia_asignado"), "{MMM-dd}") & " - " & vContador))
                     LineSeries1.DataPoints.Add(New CategoricalDataPoint(vDR("costo"), Format(vDR("dia_asignado"), "{MMM-dd}") & " - " & vContador))
+                    LineSeries2.DataPoints.Add(New CategoricalDataPoint(vDR("objetivo_tcdm"), Format(vDR("dia_asignado"), "{MMM-dd}") & " - " & vContador))
                 ElseIf rdbtnMeses.IsChecked Then
                     BarSeries1.DataPoints.Add(New CategoricalDataPoint(vDR("min_programados"), Format(vDR("dia_asignado"), "{yyyy - MMMM}") & " - " & vContador))
                     BarSeries2.DataPoints.Add(New CategoricalDataPoint(vDR("min_excedentes"), Format(vDR("dia_asignado"), "{yyyy - MMMM}") & " - " & vContador))
                     LineSeries1.DataPoints.Add(New CategoricalDataPoint(vDR("costo"), Format(vDR("dia_asignado"), "{yyyy - MMMM}") & " - " & vContador))
+                    LineSeries2.DataPoints.Add(New CategoricalDataPoint(vDR("objetivo_tcdm"), Format(vDR("dia_asignado"), "{MMM-dd}") & " - " & vContador))
                 End If
                 
             End If
@@ -2994,18 +2999,27 @@ Public Class FrmGraficasfaseuno
         BarSeries1.ShowLabels = True
         BarSeries2.ShowLabels = True
         LineSeries1.ShowLabels = True
+        LineSeries2.ShowLabels = True
+
         BarSeries1.LabelFormat = "{0:###}"
         BarSeries2.LabelFormat = "{0:###}"
         LineSeries1.LabelFormat = "{0:##.##}"
+        'LineSeries2.LabelFormat = "{0:##.##}"
+
         BarSeries1.HorizontalAxis = CategoricalAxis1
         BarSeries2.HorizontalAxis = CategoricalAxis1
         LineSeries1.HorizontalAxis = CategoricalAxis1
+        LineSeries2.HorizontalAxis = CategoricalAxis1
+
         BarSeries1.VerticalAxis = LinearAxis1
         BarSeries2.VerticalAxis = LinearAxis1
+        LineSeries2.VerticalAxis = LinearAxis1
         LineSeries1.VerticalAxis = LinearAxis2
         BarSeries1.Palette = New PaletteEntry(Color.FromArgb(24, 134, 205))
         BarSeries2.Palette = New PaletteEntry(Color.FromArgb(255, 0, 102))
+        'LineSeries2.Palette = New PaletteEntry(Color.FromArgb(50, 215, 239))
         LineSeries1.PointSize = New SizeF(10, 10)
+        LineSeries2.PointSize = New SizeF(5, 5)
         Me.radChartView1.ShowTrackBall = True
         Me.radChartView1.ShowToolTip = True
         'Chartview
@@ -3014,6 +3028,7 @@ Public Class FrmGraficasfaseuno
         radChartView1.Series.Add(LineSeries1)
         radChartView1.Series.Add(BarSeries1)
         radChartView1.Series.Add(BarSeries2)
+        radChartView1.Series.Add(LineSeries2)
         BarSeries1.CombineMode = ChartSeriesCombineMode.Stack
         BarSeries2.CombineMode = ChartSeriesCombineMode.Stack
     End Sub
