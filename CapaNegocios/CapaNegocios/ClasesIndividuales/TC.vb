@@ -219,7 +219,7 @@ Public Class TC
             vComponente_Linea = vDR_Linea("cve_componente")
         End If
         If vDR_Modelo IsNot Nothing Then
-            vComponente_Linea = vDR_Modelo("cve_componente")
+            vComponente_Modelo = vDR_Modelo("cve_componente")
         End If
 
         If vComponente_Linea <> 0 And vComponente_Modelo <> 0 Then

@@ -1083,6 +1083,4 @@ Public Class Formulario_Principal
         RadLabel_Usuario_Login.Text = RadLabel_Usuario_Login.Text & oUsuario_Login.Nombre
     End Sub
 
-
-    
 End Class

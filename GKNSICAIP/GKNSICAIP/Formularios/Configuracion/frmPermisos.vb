@@ -22,7 +22,9 @@ Public Class FrmPermisos
     Private Sub FrmPermisos_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         oUsuario = New SEGURIDAD_USUARIO
         Cargar_Usuarios(oUsuario, 0, Nothing)
-        Carga_Permisos_Usuario(oUsuario, 0, Nothing)
+        Carga_Permisos_Usuario(oUsuario, 0, Nothing)        
+        btnGuardar.Enabled = False
+        RadLabel1.Visible = False
     End Sub
 
     Private Sub Cargar_Usuarios(ByRef User As SEGURIDAD_USUARIO, ByVal vIndicePadre As Integer, ByVal vNodePadre As TreeNode)
@@ -109,6 +111,16 @@ Public Class FrmPermisos
         Cargar_Permisos_Usuario_Seleccionado(e.Node.Tag)
         If Obtener_Tipo_ID(e.Node.Tag) = "U" Then
             lbUsuario_Seleccionado.Text = e.Node.Text
+            lbUsuario_Seleccionado.Visible = True
+            btnGuardar.Enabled = True
+            RadLabel1.Visible = True
+            TreeView_Permisos.Enabled = True
+            TreeView_Permisos.ExpandAll()
+        Else
+            btnGuardar.Enabled = False
+            RadLabel1.Visible = False
+            lbUsuario_Seleccionado.Visible = False
+            TreeView_Permisos.Enabled = False
         End If
     End Sub
 
