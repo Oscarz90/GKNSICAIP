@@ -110,7 +110,7 @@ Partial Class FrmPrueba_Indicador_Objetivo
         Me.RadGroupBox3.Controls.Add(Me.RadSpinEditor14)
         Me.RadGroupBox3.HeaderAlignment = Telerik.WinControls.UI.HeaderAlignment.Center
         Me.RadGroupBox3.HeaderText = "Puntos"
-        Me.RadGroupBox3.Location = New System.Drawing.Point(746, 198)
+        Me.RadGroupBox3.Location = New System.Drawing.Point(901, 527)
         Me.RadGroupBox3.Name = "RadGroupBox3"
         '
         '
@@ -164,7 +164,7 @@ Partial Class FrmPrueba_Indicador_Objetivo
         Me.RadGroupBox2.Controls.Add(Me.RadLabel5)
         Me.RadGroupBox2.HeaderAlignment = Telerik.WinControls.UI.HeaderAlignment.Center
         Me.RadGroupBox2.HeaderText = "Objetivos"
-        Me.RadGroupBox2.Location = New System.Drawing.Point(575, 30)
+        Me.RadGroupBox2.Location = New System.Drawing.Point(337, 527)
         Me.RadGroupBox2.Name = "RadGroupBox2"
         '
         '
@@ -305,7 +305,7 @@ Partial Class FrmPrueba_Indicador_Objetivo
         Me.RadGroupBox1.Controls.Add(Me.RadLabel2)
         Me.RadGroupBox1.HeaderAlignment = Telerik.WinControls.UI.HeaderAlignment.Center
         Me.RadGroupBox1.HeaderText = "Indicador"
-        Me.RadGroupBox1.Location = New System.Drawing.Point(575, 411)
+        Me.RadGroupBox1.Location = New System.Drawing.Point(695, 527)
         Me.RadGroupBox1.Name = "RadGroupBox1"
         '
         '

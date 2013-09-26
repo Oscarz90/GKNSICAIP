@@ -23,7 +23,16 @@ Public Class FrmPrueba_Indicador_Objetivo
             vAltura = vAltura + 150
         Next vIndice
 
-
+        For vIndice = 0 To 1
+            Dim vGrupo_Indicador As New RadGroupBox
+            vGrupo_Indicador = GrupoRAD_Indicador("GrupoObjetivos" & vIndice, 400, 77, "Indicador" & vIndice, 140, 350)
+            EtiquetasRAD("Etiqueta_Mejora" & vIndice, 5, 21, "Mejora del:", vGrupo_Indicador)
+            NumeradorRAD("nudMejora_" & vIndice, 73, 21, vGrupo_Indicador)
+            EtiquetasRAD("Etiqueta_Sostenida" & vIndice, 139, 21, "sostenida por:", vGrupo_Indicador)
+            NumeradorRAD("nudSostenida_" & vIndice, 222, 21, vGrupo_Indicador)
+            EtiquetasRAD("Etiqueta_Meses" & vIndice, 288, 21, "meses.", vGrupo_Indicador)
+            'vAltura = vAltura + 150
+        Next vIndice
 
 
     End Sub
