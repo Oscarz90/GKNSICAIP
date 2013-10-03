@@ -6,33 +6,34 @@ Imports Microsoft
 Public Class FrmPrueba_Indicador_Objetivo
 
     Private Sub FrmPrueba_Indicador_Objetivo_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
-        Dim vIndice As Integer = 0
-        Dim vLado As Integer = 12
-        Dim vAltura As Integer = 77
+        'Dim vIndice As Integer = 0
+        'Dim vLado As Integer = 12
+        'Dim vAltura As Integer = 77
 
-        For vIndice = 0 To 3
-            Dim vGrupo_Indicador As New RadGroupBox
-            vGrupo_Indicador = GrupoRAD_Indicador("GrupoIndicador1", vLado, vAltura, "Indicador1", 140, 200)
-            EtiquetasRAD("Etiqueta_Sup_" & vIndice, 60, 15, "Valores entre:", vGrupo_Indicador)
-            NumeradorRAD("nudDesde_" & vIndice, 20, 40, vGrupo_Indicador)
-            EtiquetasRAD("Etiqueta_Separador_" & vIndice, 80, 40, "--------", vGrupo_Indicador)
-            NumeradorRAD("nudDesde_" & vIndice, 130, 40, vGrupo_Indicador)
-            EtiquetasRAD("Etiqueta_Rango_" & vIndice, 15, 75, "Rango:", vGrupo_Indicador)
-            TextBoxRAD("txtRango1_" & vIndice, 70, 75, vGrupo_Indicador)
-            BtnRAD("btn_" & vIndice, 60, 110, vIndice, vGrupo_Indicador)
-            vAltura = vAltura + 150
-        Next vIndice
+        'For vIndice = 0 To 3
+        '    Dim vGrupo_Indicador As New RadGroupBox
+        '    vGrupo_Indicador = GrupoRAD_Indicador("GrupoIndicador1", vLado, vAltura, "Indicador1", 140, 200)
+        '    EtiquetasRAD("Etiqueta_Sup_" & vIndice, 60, 15, "Valores entre:", vGrupo_Indicador)
+        '    NumeradorRAD("nudDesde_" & vIndice, 20, 40, vGrupo_Indicador)
+        '    EtiquetasRAD("Etiqueta_Separador_" & vIndice, 80, 40, "--------", vGrupo_Indicador)
+        '    NumeradorRAD("nudDesde_" & vIndice, 130, 40, vGrupo_Indicador)
+        '    EtiquetasRAD("Etiqueta_Rango_" & vIndice, 15, 75, "Rango:", vGrupo_Indicador)
+        '    TextBoxRAD("txtRango1_" & vIndice, 70, 75, vGrupo_Indicador)
+        '    BtnRAD("btn_" & vIndice, 60, 110, vIndice, vGrupo_Indicador)
+        '    vAltura = vAltura + 150
+        'Next vIndice
 
-        For vIndice = 0 To 1
-            Dim vGrupo_Indicador As New RadGroupBox
-            vGrupo_Indicador = GrupoRAD_Indicador("GrupoObjetivos" & vIndice, 400, 77, "Indicador" & vIndice, 140, 350)
-            EtiquetasRAD("Etiqueta_Mejora" & vIndice, 5, 21, "Mejora del:", vGrupo_Indicador)
-            NumeradorRAD("nudMejora_" & vIndice, 73, 21, vGrupo_Indicador)
-            EtiquetasRAD("Etiqueta_Sostenida" & vIndice, 139, 21, "sostenida por:", vGrupo_Indicador)
-            NumeradorRAD("nudSostenida_" & vIndice, 222, 21, vGrupo_Indicador)
-            EtiquetasRAD("Etiqueta_Meses" & vIndice, 288, 21, "meses.", vGrupo_Indicador)
-            'vAltura = vAltura + 150
-        Next vIndice
+        'For vIndice = 0 To 1
+        '    Dim vGrupo_Indicador As New RadGroupBox
+        '    vGrupo_Indicador = GrupoRAD_Indicador("GrupoObjetivos" & vIndice, 400, 77, "Indicador" & vIndice, 140, 500)
+        '    EtiquetasRAD("Etiqueta_Mejora" & vIndice, 5, 21, "Mejora del:", vGrupo_Indicador)
+        '    NumeradorRAD("nudMejora_" & vIndice, 73, 21, vGrupo_Indicador)
+        '    EtiquetasRAD("Etiqueta_Sostenida" & vIndice, 139, 21, "sostenida por:", vGrupo_Indicador)
+        '    NumeradorRAD("nudSostenida_" & vIndice, 222, 21, vGrupo_Indicador)
+        '    EtiquetasRAD("Etiqueta_Meses" & vIndice, 288, 21, "meses. Para obtener ", vGrupo_Indicador)
+        '    NumeradorRAD("nudPuntos_" & vIndice, 400, 21, vGrupo_Indicador)
+        '    'vAltura = vAltura + 150
+        'Next vIndice
 
 
     End Sub
@@ -62,6 +63,7 @@ Public Class FrmPrueba_Indicador_Objetivo
         oRGroupBox.Top = altura
         oRGroupBox.Left = lado
         oRGroupBox.Text = vText
+
         Panel1.Controls.Add(oRGroupBox)
         Return oRGroupBox
     End Function
