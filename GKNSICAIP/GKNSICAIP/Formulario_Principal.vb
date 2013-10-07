@@ -206,12 +206,14 @@ Public Class Formulario_Principal
             Me.dgvRegistros.Columns("cve_modelo").IsVisible = False
             Me.dgvRegistros.Columns("cve_modelo").Name = "CVE"
 
-            Me.dgvRegistros.Columns("Modelo").HeaderText = "Modelo"
-            Me.dgvRegistros.Columns("Modelo").Width = 250
-
             Me.dgvRegistros.Columns("np_gkn").HeaderText = "NP GKN"
             Me.dgvRegistros.Columns("np_gkn").Width = 250
 
+
+            Me.dgvRegistros.Columns("Modelo").HeaderText = "Modelo"
+            Me.dgvRegistros.Columns("Modelo").Width = 250
+
+           
             Me.dgvRegistros.Columns("componente").HeaderText = " componente"
             Me.dgvRegistros.Columns("componente").Width = 250
 

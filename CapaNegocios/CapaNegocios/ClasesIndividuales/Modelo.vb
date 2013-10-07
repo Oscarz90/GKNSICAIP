@@ -122,6 +122,16 @@ Public Class Modelo
             vcve_modelo = value
         End Set
     End Property
+
+    Public Property np_gkn() As String
+        Get
+            Return vnp_gkn
+        End Get
+        Set(ByVal value As String)
+            vnp_gkn = value
+        End Set
+    End Property
+
     Public Property cve_componente() As Long
         Get
             Return vcve_componente
@@ -138,14 +148,7 @@ Public Class Modelo
             vcve_clasificacion_modelo = value
         End Set
     End Property
-    Public Property np_gkn() As String
-        Get
-            Return vnp_gkn
-        End Get
-        Set(ByVal value As String)
-            vnp_gkn = value
-        End Set
-    End Property
+    
     Public Property descripcion() As String
         Get
             Return vdescripcion
@@ -170,8 +173,6 @@ Public Class Modelo
             vcve_registro_turno = value
         End Set
     End Property
-
-
     Private vEstatus As String
     Public Property Estatus() As String
         Get
@@ -188,9 +189,6 @@ Public Class Modelo
             vEstatus = value
         End Set
     End Property
-
-
-
     Public ReadOnly Property Nombre_Componente() As String
         Get
             If cve_componente <> 0 Then
@@ -203,7 +201,6 @@ Public Class Modelo
             End If
         End Get
     End Property
-
     Public ReadOnly Property Nombre_Clasificacion_Modelo() As String
         Get
             If vcve_clasificacion_modelo <> 0 Then
@@ -216,9 +213,6 @@ Public Class Modelo
             End If
         End Get
     End Property
-
-
-
 #End Region
 
 #Region "Metodos Generales"
