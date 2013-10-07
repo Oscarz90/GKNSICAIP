@@ -172,7 +172,7 @@ Public Class frmProduccion
         If lblTiempoTurno.Text <> "0" And get_suma_piezas_producidas() = 0 Then
             lblCalidad.Text = "0.00"
         ElseIf varvalida <> 0 And get_suma_piezas_producidas() <> 0 Then
-            Dim resultado As Double = (((get_suma_piezas_producidas() - (get_suma_rechazos() + get_suma_adeudos())) / varvalida) * 100)
+            Dim resultado As Double = ((((get_suma_piezas_producidas() + get_suma_desechos()) - get_suma_desechos_aplicables()) / varvalida) * 100)
             If resultado <= 100 And resultado >= 0 Then
                 lblCalidad.Text = Format(resultado, "##0.00")
             ElseIf resultado < 0 Then
@@ -188,10 +188,9 @@ Public Class frmProduccion
         lblOEE.Text = Format((Convert.ToDouble(lblCalidad.Text) / 100) * (Convert.ToDouble(lblDisponibilidad.Text) / 100) * (Convert.ToDouble(lblDesempeno.Text) / 100) * 100, "##0.00")
     End Sub
     Private Sub calcula_NRFTI()
-        Dim varvalida As Double = (get_suma_desechos() + get_suma_piezas_producidas() + get_suma_rechazos())
-        If varvalida <> 0 And (get_suma_desechos() + get_suma_rechazos()) <> 0 Then
-
-            Dim resultado As Double = ((get_suma_desechos() + get_suma_rechazos()) / (varvalida)) * 1000000
+        Dim varvalida As Double = (get_suma_piezas_producidas() + get_suma_desechos())
+        If varvalida <> 0 And get_suma_desechos_aplicables() <> 0 Then
+            Dim resultado As Double = (get_suma_desechos_aplicables() / varvalida) * 1000000
             If resultado < 0 Then
                 lblNRFTi.Text = "0.00"
             Else
@@ -1469,6 +1468,12 @@ Public Class frmProduccion
         oRegistro_turno.cve_registro_turno = get_registro_del_turno()
         oRegistro_turno.Cargar()
         Return oRegistro_turno.adeudo
+    End Function
+    Private Function get_suma_desechos_aplicables() As Double
+        Dim oRegistro_turno As New Registro_Turno
+        oRegistro_turno.cve_registro_turno = get_registro_del_turno()
+        oRegistro_turno.Cargar()
+        Return oRegistro_turno.desecho_aplicable
     End Function
     Private Function get_minutos_disponibles() As Double
         Dim mindisponibles As Integer = Convert.ToDouble(lblTiempoOperacion.Text)
