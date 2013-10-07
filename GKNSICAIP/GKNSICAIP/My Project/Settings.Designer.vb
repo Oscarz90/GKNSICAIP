@@ -53,6 +53,17 @@ Namespace My
                 Return defaultInstance
             End Get
         End Property
+        
+        <Global.System.Configuration.ApplicationScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.SpecialSettingAttribute(Global.System.Configuration.SpecialSetting.ConnectionString),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("Data Source=JC-PC\SQLEXP2008_R2;Initial Catalog=GKN_SICAIP_V2;Integrated Security"& _ 
+            "=True")>  _
+        Public ReadOnly Property SICAIP_V2_DS() As String
+            Get
+                Return CType(Me("SICAIP_V2_DS"),String)
+            End Get
+        End Property
     End Class
 End Namespace
 
