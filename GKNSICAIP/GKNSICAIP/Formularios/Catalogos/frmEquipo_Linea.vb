@@ -83,16 +83,22 @@ Public Class frmEquipo_Linea
         Me.lbLibres.Items.Clear()
         oLinea.cve_linea = vId_Linea_Importada ''--------------------Asignacion de Linea Seleccionada(Importada)
 
+        lbAsignados.ValueMember = "cve_equipo"
+        lbAsignados.DisplayMember = "Equipo"
+
+
         For Each vEquipo As Equipo In oLinea.LEquipos_Linea_Asignados            
             lbAsignados.Items.Add(vEquipo)
-            lbAsignados.ValueMember = "cve_equipo"
-            lbAsignados.DisplayMember = "Equipo"
+            'lbAsignados.ValueMember = "cve_equipo"
+            'lbAsignados.DisplayMember = "Equipo"
         Next
 
+        lbLibres.ValueMember = "cve_equipo"
+        lbLibres.DisplayMember = "Equipo"
         For Each vEquipo As Equipo In oLinea.LEquipos_Linea_NO_Asignados
             lbLibres.Items.Add(vEquipo)
-            lbLibres.ValueMember = "cve_equipo"
-            lbLibres.DisplayMember = "Equipo"
+            'lbLibres.ValueMember = "cve_equipo"
+            'lbLibres.DisplayMember = "Equipo"
         Next
 
     End Sub

@@ -7,6 +7,7 @@ Public Class frmImportador_Modelo
 #Region "Eventos Controles"
     Private Sub frmImportador_Individual_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         Cargar_Tabla(False)
+        btnImportar.Enabled = False
     End Sub
 
     Private Sub dgvDatos_MouseDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles dgvDatos.MouseDown
@@ -96,6 +97,7 @@ Public Class frmImportador_Modelo
     Private Sub txtParametro_KeyUp(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtParametro.KeyUp
         If rbtFiltro_Nombre.Checked = True Then
             Cargar_Tabla(True, txtParametro.Text)
+            btnImportar.Enabled = False
         End If
 
     End Sub

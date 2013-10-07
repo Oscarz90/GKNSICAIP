@@ -65,6 +65,7 @@ Partial Class FrmSeleccion_CV
         Me.btnSalir.Size = New System.Drawing.Size(110, 24)
         Me.btnSalir.TabIndex = 4
         Me.btnSalir.Text = "Salir"
+        Me.btnSalir.Visible = False
         '
         'btnRegistrar
         '

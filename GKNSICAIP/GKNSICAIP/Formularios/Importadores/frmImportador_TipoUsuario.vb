@@ -23,6 +23,7 @@ Public Class FrmImportador_TipoUsuario
     Private Sub txtParametro_KeyUp(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtParametro.KeyUp
         If rbtFiltro_Nombre.IsChecked = True Then
             Cargar_Tabla(True, txtParametro.Text)
+            btnImportar.Enabled = False
         End If
     End Sub
 
@@ -36,6 +37,7 @@ Public Class FrmImportador_TipoUsuario
 
     Private Sub FrmImportador_TipoUsuario_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         Cargar_Tabla(False)
+        btnImportar.Enabled = False
     End Sub
 
 #Region "Metodos"
@@ -154,6 +156,7 @@ Public Class FrmImportador_TipoUsuario
                 oTIPO_USUARIO = New Tipo_Usuario
                 oTIPO_USUARIO.CVE_Tipo_Usuario = dgvDatos.CurrentRow.Cells("CVE_Tipo_Usuario").Value
                 oTIPO_USUARIO.Cargar()
+                btnImportar.Enabled = True
             End If
         Catch ex As Exception
             If ex.TargetSite.MetadataToken.ToString = "100670847" Then

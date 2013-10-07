@@ -335,25 +335,25 @@ Partial Class FrmUsuarios
         '
         Me.RadLabel5.Location = New System.Drawing.Point(12, 160)
         Me.RadLabel5.Name = "RadLabel5"
-        Me.RadLabel5.Size = New System.Drawing.Size(85, 18)
+        Me.RadLabel5.Size = New System.Drawing.Size(90, 18)
         Me.RadLabel5.TabIndex = 9
-        Me.RadLabel5.Text = "Tipo de Usuario"
+        Me.RadLabel5.Text = "*Tipo de Usuario"
         '
         'RadLabel4
         '
         Me.RadLabel4.Location = New System.Drawing.Point(12, 134)
         Me.RadLabel4.Name = "RadLabel4"
-        Me.RadLabel4.Size = New System.Drawing.Size(35, 18)
+        Me.RadLabel4.Size = New System.Drawing.Size(40, 18)
         Me.RadLabel4.TabIndex = 8
-        Me.RadLabel4.Text = "Email:"
+        Me.RadLabel4.Text = "*Email:"
         '
         'RadLabel3
         '
         Me.RadLabel3.Location = New System.Drawing.Point(12, 108)
         Me.RadLabel3.Name = "RadLabel3"
-        Me.RadLabel3.Size = New System.Drawing.Size(50, 18)
+        Me.RadLabel3.Size = New System.Drawing.Size(55, 18)
         Me.RadLabel3.TabIndex = 7
-        Me.RadLabel3.Text = "Nombre:"
+        Me.RadLabel3.Text = "*Nombre:"
         '
         'RadLabel2
         '
@@ -368,9 +368,9 @@ Partial Class FrmUsuarios
         '
         Me.RadLabel1.Location = New System.Drawing.Point(12, 82)
         Me.RadLabel1.Name = "RadLabel1"
-        Me.RadLabel1.Size = New System.Drawing.Size(82, 18)
+        Me.RadLabel1.Size = New System.Drawing.Size(87, 18)
         Me.RadLabel1.TabIndex = 5
-        Me.RadLabel1.Text = "Usuario de Red"
+        Me.RadLabel1.Text = "*Usuario de Red"
         '
         'FrmUsuarios
         '
