@@ -116,8 +116,9 @@ Public Class frmImportador_Linea
     Private Sub txtParametro_KeyUp(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtParametro.KeyUp
         If rbtFiltro_Nombre.Checked = True Then
             Cargar_Tabla(True, txtParametro.Text)
+            Me.btnImportar.Enabled = False
         End If
-        Me.btnImportar.Enabled = False
+
     End Sub
 
     Private Sub btnNuevo_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnNuevo.Click

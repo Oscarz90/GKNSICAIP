@@ -13,6 +13,7 @@ Public Class Registro_Turno
             vcve_linea = vDR("cve_linea")
             vcve_turno = vDR("cve_turno")
             vdia_asignado = vDR("dia_asignado")
+            vdesecho_aplicable = vDR("desecho_aplicable")
             vadeudo = vDR("adeudo")
         End If
     End Sub
@@ -36,11 +37,11 @@ Public Class Registro_Turno
 
     Public Sub Registrar() Implements IIndividual.Registrar
         Dim queryInsert As String = "insert into registro_turno(cve_equipo,cve_linea,cve_turno,dia_asignado,adeudo) " &
-                              "values(" & vcve_equipo & "," & vcve_linea & "," & vcve_turno & ",'" & vdia_asignado.ToString("MM-dd-yyyy") & "',0)"
+                              "values(" & vcve_equipo & "," & vcve_linea & "," & vcve_turno & ",'" & vdia_asignado.ToString("MM-dd-yyyy") & "'," & vdesecho_aplicable & ",0)"
         Try
             oBD.EjecutarQuery(queryInsert)
         Catch
-            MsgBox("Error al Registrar_Linea_turno. CREgistro_Turno_ERROR", vbCritical + vbOKOnly, "Error")
+            MsgBox("Error al Registrar_Registro_turno. CREgistro_Turno_ERROR", vbCritical + vbOKOnly, "Error")
         End Try
     End Sub
 #End Region
@@ -50,6 +51,7 @@ Public Class Registro_Turno
     Private vcve_linea As Long
     Private vcve_turno As Long
     Private vdia_asignado As DateTime
+    Private vdesecho_aplicable As Long
     Private vadeudo As Long
     'auxiliares
     Private vbandera_registro_turno As Long
@@ -103,6 +105,14 @@ Public Class Registro_Turno
             vadeudo = value
         End Set
     End Property
+    Public Property desecho_aplicable() As Long
+        Get
+            Return vdesecho_aplicable
+        End Get
+        Set(ByVal value As Long)
+            vdesecho_aplicable = value
+        End Set
+    End Property
     Public Property bandera_registro_turno() As Long
         Get
             Return vbandera_registro_turno
@@ -111,12 +121,10 @@ Public Class Registro_Turno
             vbandera_registro_turno = value
         End Set
     End Property
-
 #End Region
 #Region "Metodos formulario de produccion"
     Public Sub verifica_registro_turno()
         Using scope As New TransactionScope
-
             Try
                 Dim cmd As New SqlClient.SqlCommand
                 cmd.CommandType = CommandType.StoredProcedure
@@ -136,7 +144,6 @@ Public Class Registro_Turno
     End Sub
     Public Sub verifica_registro_turno_produccion()
         Using scope As New TransactionScope
-
             Try
                 Dim cmd As New SqlClient.SqlCommand
                 cmd.CommandType = CommandType.StoredProcedure
@@ -175,7 +182,7 @@ Public Class Registro_Turno
     'Descansos
     Public sub registra_dia_descanso()
         Dim queryInsert As String = "insert into registro_turno " &
-            "select el.cve_equipo,l.cve_linea,(Select t.cve_turno from turno t where turno='Descanso'),'" & vdia_asignado.ToString("MM-dd-yyyy") & "',0 from linea l join equipo_linea el on l.cve_linea=el.cve_linea where el.cve_equipo=" & cve_equipo
+            "select el.cve_equipo,l.cve_linea,(Select t.cve_turno from turno t where turno='Descanso'),'" & vdia_asignado.ToString("MM-dd-yyyy") & "',0,0 from linea l join equipo_linea el on l.cve_linea=el.cve_linea where l.Estatus='1' and el.cve_equipo=" & cve_equipo
         Try
             oBD.EjecutarQuery(queryInsert)
         Catch
@@ -201,7 +208,7 @@ Public Class Registro_Turno
             "day(rt.dia_asignado)=day('" & vdia_asignado.ToString("MM-dd-yyyy") & "') and " &
             "month(rt.dia_asignado)=month('" & vdia_asignado.ToString("MM-dd-yyyy") & "') and " &
             "year(rt.dia_asignado)=year('" & vdia_asignado.ToString("MM-dd-yyyy") & "') and " &
-            "rt.cve_linea in (select l.cve_linea from linea l join equipo_linea el on l.cve_linea=el.cve_linea where el.cve_equipo=" & vcve_equipo & ")"
+            "rt.cve_linea in (select l.cve_linea from linea l join equipo_linea el on l.cve_linea=el.cve_linea where l.Estatus='1' and el.cve_equipo=" & vcve_equipo & ")"
         vDR = oBD.ObtenerRenglon(query, "registro_turno")
         If vDR IsNot Nothing Then
             vbandera_registro_turno = vDR("contador")            
@@ -219,7 +226,7 @@ Public Class Registro_Turno
             "rt.dia_asignado>='" & date_inicio.ToString("MM-dd-yyyy") & "' and " &
             "rt.dia_asignado<='" & date_fin.ToString("MM-dd-yyyy") & "'" &
             "group by rt.dia_asignado,day(rt.dia_asignado),month(rt.dia_asignado),year(rt.dia_asignado)) as rts " &
-            "where rts.contador_lineas=(select count(l.cve_linea) from linea l join equipo_linea el on l.cve_linea=el.cve_linea where el.cve_equipo=" & vcve_equipo & ")"
+            "where rts.contador_lineas=(select count(l.cve_linea) from linea l join equipo_linea el on l.cve_linea=el.cve_linea where l.Estatus='1' and el.cve_equipo=" & vcve_equipo & ")"
         Try
             dtDescanso = oBD.ObtenerTabla(query)
         Catch ex As Exception

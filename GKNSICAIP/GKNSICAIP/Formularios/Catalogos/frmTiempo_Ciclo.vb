@@ -167,7 +167,6 @@ Public Class frmTiempo_Ciclo
             oTiempo_Ciclo.piezas_por_hora = nudPiezas_Hora.Value
             Using scope As New TransactionScope()
                 Try
-
                     If oTiempo_Ciclo.Validar_MODELO_LINEA_EN_TC_COMPONENTE(oTiempo_Ciclo.cve_linea, oTiempo_Ciclo.cve_modelo) = False Then
                         MsgBox("La Linea y el Modelo no son del mismo Componente, Verifique.")
                     Else
@@ -206,7 +205,7 @@ Public Class frmTiempo_Ciclo
                     End If
                     scope.Complete()
                 Catch ex As Exception
-
+                    Me.Close()
                 End Try
             End Using
             Me.Close()

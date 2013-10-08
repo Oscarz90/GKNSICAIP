@@ -11,6 +11,10 @@ Public Class FrmUsuarios
     Dim oComponente As New Componente
     Dim oLista_Componentes As New List(Of String)
     Dim oLista_CV As New List(Of String)
+    Dim vValida_Usuario_Red As Integer = 0
+    Dim vValida_Nombre As Integer = 0
+    Dim vValida_Tipo_Usuario As Integer = 0
+
 
     Sub New(Optional ByVal vRegistrar As Boolean = True, Optional ByVal vEliminar As Boolean = True)
         ' Llamada necesaria para el diseñador.
@@ -53,6 +57,14 @@ Public Class FrmUsuarios
         ofrmImportar_Tipo_Usuario.ShowDialog()
         oUsuario.CVE_TIPO_USUARIO = ofrmImportar_Tipo_Usuario.vRetorno_CVE_TIPO_USUARIO
         txtTipo_Usuario.Text = oUsuario.Descripcion_Tipo_Usuario
+        vValida_Tipo_Usuario = txtTipo_Usuario.Text.Count
+        If vValida_Usuario_Red > 0 And vValida_Nombre > 0 And vValida_Tipo_Usuario > 0 Then
+            btnRegistrar.Enabled = True
+        Else
+            btnRegistrar.Enabled = False
+        End If        
+        Call opActivar_Nivel_ToggleStateChanged(Nothing, Nothing)
+
     End Sub
 
     Private Sub btnModificar_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnModificar.Click
@@ -87,36 +99,41 @@ Public Class FrmUsuarios
     End Sub
 
     Private Sub btnRegistrar_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnRegistrar.Click
-        If MsgBox("¿Esta seguro de registrar el nuevo Usuario?", MsgBoxStyle.YesNo, Me.Text) = MsgBoxResult.Yes Then
-            oUsuario.CVE_Usuario = 0
-            oUsuario.Id_Usuario = txtId_Usuario.Text
-            oUsuario.Pass = txtPass.Text
-            oUsuario.Nombre = txtNombre.Text
-            oUsuario.Email = txtEmail.Text
-            Using scope As New TransactionScope()
-                Try
-                    oUsuario.Registrar()
-                    If opActivar_Nivel.Checked = True Then
-                        oUsuario.Eliminar_Nivel_Usuario(oUsuario.CVE_Usuario)
-                        If radUsuario_Componente.IsChecked = True Then
-                            For Each vElemento As String In oLista_Componentes
-                                oUsuario.Registrar_Nivel_Usuario(True, Long.Parse(vElemento), oUsuario.CVE_Usuario)
-                            Next
-                        Else
-                            For Each vElemento As String In oLista_CV
-                                oUsuario.Registrar_Nivel_Usuario(False, Long.Parse(vElemento), oUsuario.CVE_Usuario)
-                            Next
+        If vValida_Usuario_Red > 0 And vValida_Nombre > 0 And vValida_Tipo_Usuario > 0 Then
+            btnRegistrar.Enabled = True
+            If MsgBox("¿Esta seguro de registrar el nuevo Usuario?", MsgBoxStyle.YesNo, Me.Text) = MsgBoxResult.Yes Then
+                oUsuario.CVE_Usuario = 0
+                oUsuario.Id_Usuario = txtId_Usuario.Text
+                oUsuario.Pass = txtPass.Text
+                oUsuario.Nombre = txtNombre.Text
+                oUsuario.Email = txtEmail.Text
+                Using scope As New TransactionScope()
+                    Try
+                        oUsuario.Registrar()
+                        If opActivar_Nivel.Checked = True Then
+                            oUsuario.Eliminar_Nivel_Usuario(oUsuario.CVE_Usuario)
+                            If radUsuario_Componente.IsChecked = True Then
+                                For Each vElemento As String In oLista_Componentes
+                                    oUsuario.Registrar_Nivel_Usuario(True, Long.Parse(vElemento), oUsuario.CVE_Usuario)
+                                Next
+                            Else
+                                For Each vElemento As String In oLista_CV
+                                    oUsuario.Registrar_Nivel_Usuario(False, Long.Parse(vElemento), oUsuario.CVE_Usuario)
+                                Next
+                            End If
                         End If
-                    End If
-                    vId_Retorno = oUsuario.CVE_Usuario
-                    MsgBox("Se registro correctamente")
-                    scope.Complete()
-                Catch ex As Exception
+                        vId_Retorno = oUsuario.CVE_Usuario
+                        MsgBox("Se registro correctamente")
+                        scope.Complete()
+                    Catch ex As Exception
 
-                End Try
-            End Using
+                    End Try
+                End Using
 
-            Me.Close()
+                Me.Close()
+            End If
+        Else
+            btnRegistrar.Enabled = False
         End If
     End Sub
 
@@ -131,6 +148,9 @@ Public Class FrmUsuarios
             oUsuario.Cargar()
             Controles_Registro_Nuevo(False)
             Controles_Permisos(vAdd_Registrar, vDelete_Eliminar)
+
+            Call opActivar_Nivel_ToggleStateChanged(Nothing, Nothing)
+
             If oUsuario.Cve_Componente <> 0 Then
                 radUsuario_Componente.IsChecked = True
                 'ddlComponente_W.Enabled = True
@@ -142,7 +162,7 @@ Public Class FrmUsuarios
             If oUsuario.Cve_CV <> 0 Then
                 radUsuario_CV.IsChecked = True
                 'ddlCadena_Valor_W.Enabled = True
-                btnCadena_Valor.Enabled = True
+                btnCadena_Valor.Enabled = True                
             Else
                 'ddlCadena_Valor_W.Enabled = False
                 btnCadena_Valor.Enabled = False
@@ -153,6 +173,7 @@ Public Class FrmUsuarios
             Else
                 opActivar_Nivel.Checked = True
             End If
+
 
             If oUsuario.Estatus = "INACTIVO" Then
                 Controles_Registro_Inactivo(True)
@@ -229,6 +250,8 @@ Public Class FrmUsuarios
             btnAlta.Visible = True
             btnAlta.Enabled = True
 
+            rgbGrupo_Nivel.Enabled = False
+            opActivar_Nivel.Enabled = False
 
             txtId_Usuario.ReadOnly = True
             txtEmail.ReadOnly = True
@@ -238,6 +261,8 @@ Public Class FrmUsuarios
             'btnAlta.Enabled = False
             btnBaja.Visible = True
             'btnBaja.Enabled = True
+            rgbGrupo_Nivel.Enabled = True
+            opActivar_Nivel.Enabled = True
         End If
     End Sub
 
@@ -274,8 +299,27 @@ Public Class FrmUsuarios
     End Sub
 
     Private Sub txtId_Usuario_Validated(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles txtId_Usuario.Validated
+        vValida_Usuario_Red = txtId_Usuario.Text.Count
         Me.txtEmail.Text = txtId_Usuario.Text & "@gkndriveline.com"
+
+        If vValida_Usuario_Red > 0 And vValida_Nombre > 0 And vValida_Tipo_Usuario > 0 Then
+            btnRegistrar.Enabled = True
+        Else
+            btnRegistrar.Enabled = False
+        End If
+
     End Sub
+
+    Private Sub txtNombre_Validated(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles txtNombre.Validated
+        vValida_Nombre = txtNombre.Text.Count
+
+        If vValida_Usuario_Red > 0 And vValida_Nombre > 0 And vValida_Tipo_Usuario > 0 Then
+            btnRegistrar.Enabled = True
+        Else
+            btnRegistrar.Enabled = False
+        End If
+    End Sub
+
 
     Private Sub txtEmail_Validated(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles txtEmail.Validated
         Me.txtEmail.Text = txtId_Usuario.Text & "@gkndriveline.com"
@@ -331,6 +375,11 @@ Public Class FrmUsuarios
                 radUsuario_CV.Enabled = True
                 radUsuario_Componente.IsChecked = True
                 radUsuario_CV.IsChecked = True
+            ElseIf oUsuario.Descripcion_Tipo_Usuario = "GERENTE" Then
+                radUsuario_Componente.Enabled = False
+                radUsuario_CV.Enabled = True
+                radUsuario_Componente.IsChecked = True
+                radUsuario_CV.IsChecked = True
             Else
                 radUsuario_Componente.Enabled = False
                 radUsuario_CV.Enabled = True
@@ -352,4 +401,6 @@ Public Class FrmUsuarios
         ofrmSeleccion_CV.ShowDialog()
         oLista_CV = ofrmSeleccion_CV.oRetorno
     End Sub
+
+ 
 End Class

@@ -35,8 +35,8 @@ Namespace Clases_Catalogos
 
         Public Function Obtener_Tiempos_Ciclos() As DataTable
             Dim vDT As DataTable
-            vDT = oBD.ObtenerTabla("Select cve_TC, piezas_por_hora, linea as Nombre_Linea, descripcion as Nombre_Modelo, " & _
-                                   "TiemCiclo.estatus, fecha, cod_empleado as Codigo_Empleado,TiemCiclo.cve_linea,TiemCiclo.cve_modelo, m.np_gkn as NumParte " & _
+            vDT = oBD.ObtenerTabla("Select cve_TC, m.np_gkn as NumParte, descripcion as Nombre_Modelo, piezas_por_hora, linea as Nombre_Linea,  " & _
+                                   "TiemCiclo.estatus, fecha, cod_empleado as Codigo_Empleado,TiemCiclo.cve_linea,TiemCiclo.cve_modelo " & _
                                    "FROM TC TiemCiclo JOIN linea l ON l.cve_linea=TiemCiclo.cve_linea " & _
                                    "JOIN modelo m on m.cve_modelo=TiemCiclo.cve_modelo " & _
                                    "WHERE TiemCiclo.estatus='1'")

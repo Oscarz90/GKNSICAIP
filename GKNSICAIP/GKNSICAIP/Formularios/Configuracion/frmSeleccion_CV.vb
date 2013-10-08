@@ -38,7 +38,7 @@ Public Class FrmSeleccion_CV
         'Lista_Datos.ValueMember = "cve_componente"
         'Lista_Datos.DisplayMember = "componente"        
 
-        If oCV.Obtener_Cadenas_Valor(oUsuario.CVE_Usuario) IsNot Nothing Then
+        If oCV.Obtener_CV_Usuario(oUsuario.CVE_Usuario) IsNot Nothing Then
 
             For vIndex = 0 To Lista_Datos_W.Items.Count - 1
                 For Each vdr As DataRow In oCV.Obtener_CV_Usuario(oUsuario.CVE_Usuario).Rows
