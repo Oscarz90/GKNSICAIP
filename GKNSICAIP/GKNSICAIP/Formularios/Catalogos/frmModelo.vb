@@ -6,6 +6,7 @@ Public Class frmModelo
     Dim oClasificacion_Modelo As Clasificacion_Modelo
     Dim vAdd_Registrar As Boolean = True
     Dim vDelete_Eliminar As Boolean = True
+    Dim vValida_Nombre As Integer = 0
 
 
     Sub New(Optional ByVal vRegistrar As Boolean = True, Optional ByVal vEliminar As Boolean = True)
@@ -33,11 +34,19 @@ Public Class frmModelo
             Controles_Registro_Nuevo(False)
         Else
             oModelo = New Modelo
+            oModelo.descripcion = ""
             LlenaCombos()
             Controles_Permisos(vAdd_Registrar, vDelete_Eliminar)
             Controles_Registro_Nuevo(True)
         End If
-
+        vValida_Nombre = oModelo.descripcion.Count
+        If vValida_Nombre > 0 Then
+            btnRegistrar.Enabled = True
+            btnModificar.Enabled = True
+        Else
+            btnRegistrar.Enabled = False
+            btnModificar.Enabled = False
+        End If
         SetBindings()
         If vId_Publico = 0 Then
             cbxClasificacion.SelectedIndex = 1 ''--------------------------Cuando sea registro nuevo la clasificacion Default sera "Produccion"
@@ -57,35 +66,39 @@ Public Class frmModelo
     End Sub
 
     Private Sub btnModificar_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnModificar.Click
-        If MsgBox("¿Esta seguro de realizar los cambios al Modelo?", MsgBoxStyle.YesNo, Me.Text) = MsgBoxResult.Yes Then
-            oModelo.descripcion = txtDescripcion.Text
-            oModelo.np_gkn = txtNumero_Parte.Text
-            oModelo.cve_clasificacion_modelo = cbxClasificacion.SelectedValue
-            Try
-                oModelo.Registrar()
-                MsgBox("Se modifico correctamente")
-            Catch ex As Exception
+        If vValida_Nombre > 0 Then
+            If MsgBox("¿Esta seguro de realizar los cambios al Modelo?", MsgBoxStyle.YesNo, Me.Text) = MsgBoxResult.Yes Then
+                oModelo.descripcion = txtDescripcion.Text
+                oModelo.np_gkn = txtNumero_Parte.Text
+                oModelo.cve_clasificacion_modelo = cbxClasificacion.SelectedValue
+                Try
+                    oModelo.Registrar()
+                    MsgBox("Se modifico correctamente")
+                Catch ex As Exception
 
-            End Try
-            Me.Close()
+                End Try
+                Me.Close()
+            End If
         End If
     End Sub
 
     Private Sub btnRegistrar_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnRegistrar.Click
-        If MsgBox("¿Esta seguro de registrar el nuevo Modelo?", MsgBoxStyle.YesNo, Me.Text) = MsgBoxResult.Yes Then
-            oModelo.cve_modelo = 0
-            oModelo.Estatus = "1"
-            oModelo.descripcion = txtDescripcion.Text
-            oModelo.np_gkn = txtNumero_Parte.Text
-            oModelo.cve_clasificacion_modelo = cbxClasificacion.SelectedValue
-            Try
-                oModelo.Registrar()
-                vId_Retorno = oModelo.cve_modelo
-                MsgBox("Se registro correctamente")
-            Catch ex As Exception
+        If vValida_Nombre > 0 Then
+            If MsgBox("¿Esta seguro de registrar el nuevo Modelo?", MsgBoxStyle.YesNo, Me.Text) = MsgBoxResult.Yes Then
+                oModelo.cve_modelo = 0
+                oModelo.Estatus = "1"
+                oModelo.descripcion = txtDescripcion.Text
+                oModelo.np_gkn = txtNumero_Parte.Text
+                oModelo.cve_clasificacion_modelo = cbxClasificacion.SelectedValue
+                Try
+                    oModelo.Registrar()
+                    vId_Retorno = oModelo.cve_modelo
+                    MsgBox("Se registro correctamente")
+                Catch ex As Exception
 
-            End Try
-            Me.Close()
+                End Try
+                Me.Close()
+            End If
         End If
     End Sub
 
@@ -168,4 +181,19 @@ Public Class frmModelo
         End If
     End Sub
 
+    Private Sub txtDescripcion_KeyUp(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtDescripcion.KeyUp
+        vValida_Nombre = txtDescripcion.Text.Count
+
+        If vValida_Nombre > 0 Then
+            btnRegistrar.Enabled = True
+            btnModificar.Enabled = True
+        Else
+            btnRegistrar.Enabled = False
+            btnModificar.Enabled = False
+        End If
+    End Sub
+
+    Private Sub txtNumero_Parte_KeyUp(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtNumero_Parte.KeyUp
+
+    End Sub
 End Class

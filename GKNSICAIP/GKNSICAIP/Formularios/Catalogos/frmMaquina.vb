@@ -4,6 +4,7 @@ Public Class frmMaquina
     Dim oMaquina As Maquina
     Dim vAdd_Registrar As Boolean = True
     Dim vDelete_Eliminar As Boolean = True
+    Dim vValida_Nombre As Integer = 0
 
     Sub New(Optional ByVal vRegistrar As Boolean = True, Optional ByVal vEliminar As Boolean = True)
         ' Llamada necesaria para el diseñador.
@@ -24,10 +25,18 @@ Public Class frmMaquina
             oMaquina.Cargar()
             Controles_Registro_Nuevo(False)
         Else
-            oMaquina = New Maquina            
+            oMaquina = New Maquina
+            oMaquina.maquina = ""
             Controles_Registro_Nuevo(True)
         End If
-
+        vValida_Nombre = oMaquina.maquina.Count
+        If vValida_Nombre > 0 Then
+            btnRegistrar.Enabled = True
+            btnModificar.Enabled = True
+        Else
+            btnRegistrar.Enabled = False
+            btnModificar.Enabled = False
+        End If
         SetBindings()
         Me.Show()
         Me.txtNombre.Focus()
@@ -56,32 +65,36 @@ Public Class frmMaquina
     End Sub
 
     Private Sub btnRegistrar_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnRegistrar.Click
-        If MsgBox("¿Esta seguro de registrar la nueva Maquina?", MsgBoxStyle.YesNo, Me.Text) = MsgBoxResult.Yes Then
-            oMaquina.cve_maquina = 0
-            oMaquina.clave_maquina = txtCve_Maquina.Text
-            oMaquina.maquina = txtNombre.Text
-            oMaquina.Estatus = "1"
-            Try
-                oMaquina.Registrar()
-                MsgBox("Se registro correctamente")
-            Catch ex As Exception
+        If vValida_Nombre > 0 Then
+            If MsgBox("¿Esta seguro de registrar la nueva Maquina?", MsgBoxStyle.YesNo, Me.Text) = MsgBoxResult.Yes Then
+                oMaquina.cve_maquina = 0
+                oMaquina.clave_maquina = txtCve_Maquina.Text
+                oMaquina.maquina = txtNombre.Text
+                oMaquina.Estatus = "1"
+                Try
+                    oMaquina.Registrar()
+                    MsgBox("Se registro correctamente")
+                Catch ex As Exception
 
-            End Try
-            Me.Close()
+                End Try
+                Me.Close()
+            End If
         End If
     End Sub
 
     Private Sub btnModificar_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnModificar.Click
-        If MsgBox("¿Esta seguro de realizar los cambios a la Maquina?", MsgBoxStyle.YesNo, Me.Text) = MsgBoxResult.Yes Then
-            oMaquina.clave_maquina = txtCve_Maquina.Text
-            oMaquina.maquina = txtNombre.Text            
-            Try
-                oMaquina.Registrar()
-                MsgBox("Se modifico correctamente")
-            Catch ex As Exception
+        If vValida_Nombre > 0 Then
+            If MsgBox("¿Esta seguro de realizar los cambios a la Maquina?", MsgBoxStyle.YesNo, Me.Text) = MsgBoxResult.Yes Then
+                oMaquina.clave_maquina = txtCve_Maquina.Text
+                oMaquina.maquina = txtNombre.Text
+                Try
+                    oMaquina.Registrar()
+                    MsgBox("Se modifico correctamente")
+                Catch ex As Exception
 
-            End Try
-            Me.Close()
+                End Try
+                Me.Close()
+            End If
         End If
     End Sub
 
@@ -144,4 +157,19 @@ Public Class frmMaquina
 
     End Sub
 
+    Private Sub txtNombre_KeyUp(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtNombre.KeyUp
+        vValida_Nombre = txtNombre.Text.Count
+
+        If vValida_Nombre > 0 Then
+            btnRegistrar.Enabled = True
+            btnModificar.Enabled = True
+        Else
+            btnRegistrar.Enabled = False
+            btnModificar.Enabled = False
+        End If
+    End Sub
+
+    Private Sub txtCve_Maquina_KeyUp(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtCve_Maquina.KeyUp
+
+    End Sub
 End Class
