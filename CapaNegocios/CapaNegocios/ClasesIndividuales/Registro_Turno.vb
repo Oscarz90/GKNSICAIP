@@ -36,7 +36,7 @@ Public Class Registro_Turno
     End Function
 
     Public Sub Registrar() Implements IIndividual.Registrar
-        Dim queryInsert As String = "insert into registro_turno(cve_equipo,cve_linea,cve_turno,dia_asignado,adeudo) " &
+        Dim queryInsert As String = "insert into registro_turno(cve_equipo,cve_linea,cve_turno,dia_asignado,desecho_aplicable,adeudo) " &
                               "values(" & vcve_equipo & "," & vcve_linea & "," & vcve_turno & ",'" & vdia_asignado.ToString("MM-dd-yyyy") & "'," & vdesecho_aplicable & ",0)"
         Try
             oBD.EjecutarQuery(queryInsert)
