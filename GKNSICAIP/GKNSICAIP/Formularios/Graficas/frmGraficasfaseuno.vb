@@ -471,14 +471,14 @@ Public Class FrmGraficasfaseuno
         Dim CategoricalAxis1 As CategoricalAxis = New CategoricalAxis()
         Dim LinearAxis1 As LinearAxis = New LinearAxis()
         'Personalizacion
-        CartesianArea1.GridDesign.AlternatingVerticalColor = False
-        CartesianArea1.ShowGrid = True
+        'CartesianArea1.GridDesign.AlternatingVerticalColor = False
+        'CartesianArea1.ShowGrid = True
         Me.radChartView1.AreaDesign = CartesianArea1
         CategoricalAxis1.LabelFitMode = AxisLabelFitMode.Rotate
         If rdbtnDias.IsChecked Then
-            CategoricalAxis1.LabelFormat = "{0:MMM - dd}"
+            CategoricalAxis1.LabelFormat = "{0:dd - MMM}"
         ElseIf rdbtnMeses.IsChecked Then
-            CategoricalAxis1.LabelFormat = "{0:yyyy - MMMM}"
+            CategoricalAxis1.LabelFormat = "{0:MMM - yyyy}"
         End If
         CategoricalAxis1.LabelRotationAngle = 270.0R
         LinearAxis1.AxisType = AxisType.Second
@@ -489,13 +489,13 @@ Public Class FrmGraficasfaseuno
         LinearAxis1.Title = "Oee"
         BarSeries1.ShowLabels = True
         BarSeries2.ShowLabels = True
-        BarSeries1.LabelFormat = "{0:##.##}"
-        BarSeries2.LabelFormat = "{0:##.##}"
+        BarSeries1.LabelFormat = "{0:##.#}" & " %"
+        BarSeries2.LabelFormat = "{0:##.#}" & " %"
         BarSeries1.HorizontalAxis = CategoricalAxis1
         BarSeries1.VerticalAxis = LinearAxis1
         'BarSeries2.ForeColor = Color.White
-        BarSeries1.Palette = New PaletteEntry(Color.FromArgb(255, 191, 0))
-        BarSeries2.Palette = New PaletteEntry(Color.FromArgb(233, 37, 43))
+        BarSeries1.Palette = New PaletteEntry(Color.FromArgb(255, 205, 47))
+        BarSeries2.Palette = New PaletteEntry(Color.FromArgb(246, 172, 38))
         Me.radChartView1.ShowToolTip = True
         radChartView1.Series.Add(BarSeries1)
         radChartView1.Series.Add(BarSeries2)
@@ -541,14 +541,14 @@ Public Class FrmGraficasfaseuno
         Dim CategoricalAxis1 As CategoricalAxis = New CategoricalAxis()
         Dim LinearAxis1 As LinearAxis = New LinearAxis()
         'Personalizacion
-        CartesianArea1.GridDesign.AlternatingVerticalColor = False
-        CartesianArea1.ShowGrid = True
+        'CartesianArea1.GridDesign.AlternatingVerticalColor = False
+        'CartesianArea1.ShowGrid = True
         Me.radChartView1.AreaDesign = CartesianArea1
         CategoricalAxis1.LabelFitMode = AxisLabelFitMode.Rotate
         If rdbtnDias.IsChecked Then
-            CategoricalAxis1.LabelFormat = "{0:MMM - dd}"
+            CategoricalAxis1.LabelFormat = "{0:dd - MMM}"
         ElseIf rdbtnMeses.IsChecked Then
-            CategoricalAxis1.LabelFormat = "{0:yyyy - MMMM}"
+            CategoricalAxis1.LabelFormat = "{0:MMM - yyyy}"
         End If
         CategoricalAxis1.LabelRotationAngle = 270.0R
         LinearAxis1.AxisType = AxisType.Second
@@ -559,13 +559,13 @@ Public Class FrmGraficasfaseuno
         LinearAxis1.Title = "Oee"
         BarSeries1.ShowLabels = True
         BarSeries2.ShowLabels = True
-        BarSeries1.LabelFormat = "{0:##.##}"
-        BarSeries2.LabelFormat = "{0:##.##}"
+        BarSeries1.LabelFormat = "{0:##.#}" & " %"
+        BarSeries2.LabelFormat = "{0:##.#}" & " %"
         BarSeries1.HorizontalAxis = CategoricalAxis1
         BarSeries1.VerticalAxis = LinearAxis1
         'BarSeries2.ForeColor = Color.White
-        BarSeries1.Palette = New PaletteEntry(Color.FromArgb(255, 191, 0))
-        BarSeries2.Palette = New PaletteEntry(Color.FromArgb(233, 37, 43))
+        BarSeries1.Palette = New PaletteEntry(Color.FromArgb(255, 205, 47))
+        BarSeries2.Palette = New PaletteEntry(Color.FromArgb(246, 172, 38))
         Me.radChartView1.ShowToolTip = True
         radChartView1.Series.Add(BarSeries1)
         radChartView1.Series.Add(BarSeries2)
@@ -611,14 +611,14 @@ Public Class FrmGraficasfaseuno
         Dim CategoricalAxis1 As CategoricalAxis = New CategoricalAxis()
         Dim LinearAxis1 As LinearAxis = New LinearAxis()
         'Personalizacion
-        CartesianArea1.GridDesign.AlternatingVerticalColor = False
-        CartesianArea1.ShowGrid = True
+        'CartesianArea1.GridDesign.AlternatingVerticalColor = False
+        'CartesianArea1.ShowGrid = True
         Me.radChartView1.AreaDesign = CartesianArea1
         CategoricalAxis1.LabelFitMode = AxisLabelFitMode.Rotate
         If rdbtnDias.IsChecked Then
-            CategoricalAxis1.LabelFormat = "{0:MMM - dd}"
+            CategoricalAxis1.LabelFormat = "{0:dd - MMM}"
         ElseIf rdbtnMeses.IsChecked Then
-            CategoricalAxis1.LabelFormat = "{0:yyyy - MMMM}"
+            CategoricalAxis1.LabelFormat = "{0:MMM - yyyy}"
         End If
         CategoricalAxis1.LabelRotationAngle = 270.0R
         LinearAxis1.AxisType = AxisType.Second
@@ -629,13 +629,13 @@ Public Class FrmGraficasfaseuno
         LinearAxis1.Title = "Oee"
         BarSeries1.ShowLabels = True
         BarSeries2.ShowLabels = True
-        BarSeries1.LabelFormat = "{0:##.##}"
-        BarSeries2.LabelFormat = "{0:##.##}"
+        BarSeries1.LabelFormat = "{0:##.#}" & " %"
+        BarSeries2.LabelFormat = "{0:##.#}" & " %"
         BarSeries1.HorizontalAxis = CategoricalAxis1
         BarSeries1.VerticalAxis = LinearAxis1
         'BarSeries2.ForeColor = Color.White
-        BarSeries1.Palette = New PaletteEntry(Color.FromArgb(255, 191, 0))
-        BarSeries2.Palette = New PaletteEntry(Color.FromArgb(233, 37, 43))
+        BarSeries1.Palette = New PaletteEntry(Color.FromArgb(255, 205, 47))
+        BarSeries2.Palette = New PaletteEntry(Color.FromArgb(246, 172, 38))
         Me.radChartView1.ShowToolTip = True
         radChartView1.Series.Add(BarSeries1)
         radChartView1.Series.Add(BarSeries2)
@@ -681,14 +681,14 @@ Public Class FrmGraficasfaseuno
         Dim CategoricalAxis1 As CategoricalAxis = New CategoricalAxis()
         Dim LinearAxis1 As LinearAxis = New LinearAxis()
         'Personalizacion
-        CartesianArea1.GridDesign.AlternatingVerticalColor = False
-        CartesianArea1.ShowGrid = True
+        'CartesianArea1.GridDesign.AlternatingVerticalColor = False
+        'CartesianArea1.ShowGrid = True
         Me.radChartView1.AreaDesign = CartesianArea1
         CategoricalAxis1.LabelFitMode = AxisLabelFitMode.Rotate
         If rdbtnDias.IsChecked Then
-            CategoricalAxis1.LabelFormat = "{0:MMM - dd}"
+            CategoricalAxis1.LabelFormat = "{0:dd - MMM}"
         ElseIf rdbtnMeses.IsChecked Then
-            CategoricalAxis1.LabelFormat = "{0:yyyy - MMMM}"
+            CategoricalAxis1.LabelFormat = "{0:MMM - yyyy}"
         End If
         CategoricalAxis1.LabelRotationAngle = 270.0R
         LinearAxis1.AxisType = AxisType.Second
@@ -699,13 +699,13 @@ Public Class FrmGraficasfaseuno
         LinearAxis1.Title = "Oee"
         BarSeries1.ShowLabels = True
         BarSeries2.ShowLabels = True
-        BarSeries1.LabelFormat = "{0:##.##}"
-        BarSeries2.LabelFormat = "{0:##.##}"
+        BarSeries1.LabelFormat = "{0:##.#}" & " %"
+        BarSeries2.LabelFormat = "{0:##.#}" & " %"
         BarSeries1.HorizontalAxis = CategoricalAxis1
         BarSeries1.VerticalAxis = LinearAxis1
         'BarSeries2.ForeColor = Color.White
-        BarSeries1.Palette = New PaletteEntry(Color.FromArgb(255, 191, 0))
-        BarSeries2.Palette = New PaletteEntry(Color.FromArgb(233, 37, 43))
+        BarSeries1.Palette = New PaletteEntry(Color.FromArgb(255, 205, 47))
+        BarSeries2.Palette = New PaletteEntry(Color.FromArgb(246, 172, 38))
         Me.radChartView1.ShowToolTip = True
         radChartView1.Series.Add(BarSeries1)
         radChartView1.Series.Add(BarSeries2)
@@ -751,14 +751,14 @@ Public Class FrmGraficasfaseuno
         Dim CategoricalAxis1 As CategoricalAxis = New CategoricalAxis()
         Dim LinearAxis1 As LinearAxis = New LinearAxis()
         'Personalizacion
-        CartesianArea1.GridDesign.AlternatingVerticalColor = False
-        CartesianArea1.ShowGrid = True
+        'CartesianArea1.GridDesign.AlternatingVerticalColor = False
+        'CartesianArea1.ShowGrid = True
         Me.radChartView1.AreaDesign = CartesianArea1
         CategoricalAxis1.LabelFitMode = AxisLabelFitMode.Rotate
         If rdbtnDias.IsChecked Then
-            CategoricalAxis1.LabelFormat = "{0:MMM - dd}"
+            CategoricalAxis1.LabelFormat = "{0:dd - MMM}"
         ElseIf rdbtnMeses.IsChecked Then
-            CategoricalAxis1.LabelFormat = "{0:yyyy - MMMM}"
+            CategoricalAxis1.LabelFormat = "{0:MMM - yyyy}"
         End If
         CategoricalAxis1.LabelRotationAngle = 270.0R
         LinearAxis1.AxisType = AxisType.Second
@@ -769,13 +769,13 @@ Public Class FrmGraficasfaseuno
         LinearAxis1.Title = "Oee"
         BarSeries1.ShowLabels = True
         BarSeries2.ShowLabels = True
-        BarSeries1.LabelFormat = "{0:##.##}"
-        BarSeries2.LabelFormat = "{0:##.##}"
+        BarSeries1.LabelFormat = "{0:##.#}" & " %"
+        BarSeries2.LabelFormat = "{0:##.#}" & " %"
         BarSeries1.HorizontalAxis = CategoricalAxis1
         BarSeries1.VerticalAxis = LinearAxis1
         'BarSeries2.ForeColor = Color.White
-        BarSeries1.Palette = New PaletteEntry(Color.FromArgb(255, 191, 0))
-        BarSeries2.Palette = New PaletteEntry(Color.FromArgb(233, 37, 43))
+        BarSeries1.Palette = New PaletteEntry(Color.FromArgb(255, 205, 47))
+        BarSeries2.Palette = New PaletteEntry(Color.FromArgb(246, 172, 38))
         Me.radChartView1.ShowToolTip = True
         radChartView1.Series.Add(BarSeries1)
         radChartView1.Series.Add(BarSeries2)
@@ -830,14 +830,14 @@ Public Class FrmGraficasfaseuno
         Dim CategoricalAxis1 As CategoricalAxis = New CategoricalAxis()
         Dim LinearAxis1 As LinearAxis = New LinearAxis()
         'Personalizacion
-        CartesianArea1.GridDesign.AlternatingVerticalColor = False
-        CartesianArea1.ShowGrid = True
+        'CartesianArea1.GridDesign.AlternatingVerticalColor = False
+        'CartesianArea1.ShowGrid = True
         Me.radChartView1.AreaDesign = CartesianArea1
         CategoricalAxis1.LabelFitMode = AxisLabelFitMode.Rotate
         If rdbtnDias.IsChecked Then
-            CategoricalAxis1.LabelFormat = "{0:MMM - dd}"
+            CategoricalAxis1.LabelFormat = "{0:dd - MMM}"
         ElseIf rdbtnMeses.IsChecked Then
-            CategoricalAxis1.LabelFormat = "{0:yyyy - MMMM}"
+            CategoricalAxis1.LabelFormat = "{0:MMM - yyyy}"
         End If
         CategoricalAxis1.LabelRotationAngle = 270.0R
         LinearAxis1.AxisType = AxisType.Second
@@ -848,13 +848,13 @@ Public Class FrmGraficasfaseuno
         LinearAxis1.Title = "Oee"
         BarSeries1.ShowLabels = True
         BarSeries2.ShowLabels = True
-        BarSeries1.LabelFormat = "{0:##.##}"
-        BarSeries2.LabelFormat = "{0:##.##}"
+        BarSeries1.LabelFormat = "{0:##.#}" & " %"
+        BarSeries2.LabelFormat = "{0:##.#}" & " %"
         BarSeries1.HorizontalAxis = CategoricalAxis1
         BarSeries1.VerticalAxis = LinearAxis1
         'BarSeries2.ForeColor = Color.White
-        BarSeries1.Palette = New PaletteEntry(Color.FromArgb(255, 191, 0))
-        BarSeries2.Palette = New PaletteEntry(Color.FromArgb(233, 37, 43))
+        BarSeries1.Palette = New PaletteEntry(Color.FromArgb(255, 205, 47))
+        BarSeries2.Palette = New PaletteEntry(Color.FromArgb(246, 172, 38))
         Me.radChartView1.ShowToolTip = True
         radChartView1.Series.Add(BarSeries1)
         radChartView1.Series.Add(BarSeries2)
@@ -1392,7 +1392,7 @@ Public Class FrmGraficasfaseuno
         'serie3
         BarSeries3.ShowLabels = True
         BarSeries3.LabelFormat = "{0:##.#}"
-        BarSeries3.Palette = New PaletteEntry(Color.FromArgb(37, 64, 92))
+        BarSeries3.Palette = New PaletteEntry(Color.FromArgb(37, 64, 97))
         'serie4
         BarSeries4.ShowLabels = True
         BarSeries4.LabelFormat = "{0:##.#}"
@@ -1476,7 +1476,7 @@ Public Class FrmGraficasfaseuno
         'serie3
         BarSeries3.ShowLabels = True
         BarSeries3.LabelFormat = "{0:##.#}"
-        BarSeries3.Palette = New PaletteEntry(Color.FromArgb(37, 64, 92))
+        BarSeries3.Palette = New PaletteEntry(Color.FromArgb(37, 64, 97))
         'serie4
         BarSeries4.ShowLabels = True
         BarSeries4.LabelFormat = "{0:##.#}"
@@ -1560,7 +1560,7 @@ Public Class FrmGraficasfaseuno
         'serie3
         BarSeries3.ShowLabels = True
         BarSeries3.LabelFormat = "{0:##.#}"
-        BarSeries3.Palette = New PaletteEntry(Color.FromArgb(37, 64, 92))
+        BarSeries3.Palette = New PaletteEntry(Color.FromArgb(37, 64, 97))
         'serie4
         BarSeries4.ShowLabels = True
         BarSeries4.LabelFormat = "{0:##.#}"
@@ -1644,7 +1644,7 @@ Public Class FrmGraficasfaseuno
         'serie3
         BarSeries3.ShowLabels = True
         BarSeries3.LabelFormat = "{0:##.#}"
-        BarSeries3.Palette = New PaletteEntry(Color.FromArgb(37, 64, 92))
+        BarSeries3.Palette = New PaletteEntry(Color.FromArgb(37, 64, 97))
         'serie4
         BarSeries4.ShowLabels = True
         BarSeries4.LabelFormat = "{0:##.#}"
@@ -1729,7 +1729,7 @@ Public Class FrmGraficasfaseuno
         'serie3
         BarSeries3.ShowLabels = True
         BarSeries3.LabelFormat = "{0:##.#}"
-        BarSeries3.Palette = New PaletteEntry(Color.FromArgb(37, 64, 92))
+        BarSeries3.Palette = New PaletteEntry(Color.FromArgb(37, 64, 97))
         'serie4
         BarSeries4.ShowLabels = True
         BarSeries4.LabelFormat = "{0:##.#}"
@@ -1814,7 +1814,7 @@ Public Class FrmGraficasfaseuno
         'serie3
         BarSeries3.ShowLabels = True
         BarSeries3.LabelFormat = "{0:##.#}"
-        BarSeries3.Palette = New PaletteEntry(Color.FromArgb(37, 64, 92))
+        BarSeries3.Palette = New PaletteEntry(Color.FromArgb(37, 64, 97))
         'serie4
         BarSeries4.ShowLabels = True
         BarSeries4.LabelFormat = "{0:##.#}"
