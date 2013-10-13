@@ -1,8 +1,21 @@
-﻿Public Class conexiones
+﻿Imports System.Configuration
+Imports System.Data
+Imports System.Data.SqlClient
+
+
+Public Class conexiones
+    Protected configuracion_SICAIP As ConnectionStringSettings = ConfigurationManager.ConnectionStrings("Conexion_SICAIP")
+    Protected configuracion_Kronos As ConnectionStringSettings = ConfigurationManager.ConnectionStrings("Conexion_Kronos")
+
+    Dim cn_SICAIP As New SqlConnection(configuracion_SICAIP.ConnectionString)
+    Dim cn_Kronos As New SqlConnection(configuracion_Kronos.ConnectionString)
+
     Public Sub New()
         '"Data Source= Oscar-PC\SQLExpress; initial Catalog=GKNSICAIP; Integrated Security = True"
-        vCadenaSicaip = "Data Source=PATRICIA-PC\SQLEXPRESS2008R2;Integrated Security=SSPI; Password=sistemas; User ID=sa;Initial Catalog=GKNSICAIP_V2"
-        vCadenaKronos = "Data Source=PATRICIA-PC\SQLEXPRESS2008R2;Integrated Security=SSPI; Password=sistemas; User ID=sa;Initial Catalog=wtk52db"
+        'vCadenaSicaip = "Data Source=JC-PC\SQLEXP2008_R2;Integrated Security=SSPI; Password=sistemas; User ID=sa;Initial Catalog=GKN_SICAIP_V2"
+        'vCadenaKronos = "Data Source=JC-PC\SQLEXP2008_R2;Integrated Security=SSPI; Password=sistemas; User ID=sa;Initial Catalog=wtk52db"
+        vCadenaSicaip = cn_SICAIP.ConnectionString
+        vCadenaKronos = cn_Kronos.ConnectionString
     End Sub
 
 #Region "Propiedades Cadenas de Conexion de Sicaip y Kronos"
