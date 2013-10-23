@@ -343,9 +343,9 @@ Partial Class FrmGraficasfaseuno
         CartesianArea1.GridDesign.DrawVerticalFills = False
         CartesianArea1.ShowGrid = True
         Me.radChartView1.AreaDesign = CartesianArea1
-        Me.radChartView1.Location = New System.Drawing.Point(17, 213)
+        Me.radChartView1.Location = New System.Drawing.Point(3, 213)
         Me.radChartView1.Name = "radChartView1"
-        Me.radChartView1.Size = New System.Drawing.Size(1225, 481)
+        Me.radChartView1.Size = New System.Drawing.Size(1257, 481)
         Me.radChartView1.TabIndex = 9
         CType(Me.radChartView1.GetChildAt(0), Telerik.WinControls.UI.RadChartElement).DrawText = False
         CType(Me.radChartView1.GetChildAt(0), Telerik.WinControls.UI.RadChartElement).DrawFill = True

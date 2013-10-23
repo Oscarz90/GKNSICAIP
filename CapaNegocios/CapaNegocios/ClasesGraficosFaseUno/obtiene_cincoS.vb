@@ -36,6 +36,7 @@ Public Class obtiene_cincoS
     Private vcve_equipo As Long
     Private vfecha_inicial As DateTime
     Private vfecha_final As DateTime
+    Private vbandera As Long
 #End Region
 #Region "Propiedades"
     Public Property cve_cadena_valor() As Long
@@ -86,6 +87,14 @@ Public Class obtiene_cincoS
             vfecha_final = value
         End Set
     End Property
+    Public Property bandera() As Long
+        Get
+            Return vbandera
+        End Get
+        Set(ByVal value As Long)
+            vbandera = value
+        End Set
+    End Property
 #End Region
 #Region "Metodos obtener oee"
     'Planta
@@ -98,6 +107,7 @@ Public Class obtiene_cincoS
                 vComando.CommandText = "obtiene_cincos_planta_mes"
                 vComando.Parameters.Add("@fecha_inicial", SqlDbType.DateTime).Value = Me.vfecha_inicial
                 vComando.Parameters.Add("@fecha_final", SqlDbType.DateTime).Value = Me.vfecha_final
+                vComando.Parameters.Add("@bandera", SqlDbType.Int).Value = Me.vbandera
                 obj = oBD.EjecutaCommando(vComando)
                 'Me.vId = obj.Rows(0)(0)
                 scope.Complete()
@@ -120,6 +130,7 @@ Public Class obtiene_cincoS
                 vComando.Parameters.Add("@cve_cadena_valor", SqlDbType.BigInt).Value = Me.vcve_cadena_valor
                 vComando.Parameters.Add("@fecha_inicial", SqlDbType.DateTime).Value = Me.vfecha_inicial
                 vComando.Parameters.Add("@fecha_final", SqlDbType.DateTime).Value = Me.vfecha_final
+                vComando.Parameters.Add("@bandera", SqlDbType.Int).Value = Me.vbandera
                 obj = oBD.EjecutaCommando(vComando)
                 'Me.vId = obj.Rows(0)(0)
                 scope.Complete()
@@ -142,6 +153,7 @@ Public Class obtiene_cincoS
                 vComando.Parameters.Add("@cve_componente", SqlDbType.BigInt).Value = Me.vcve_componente
                 vComando.Parameters.Add("@fecha_inicial", SqlDbType.DateTime).Value = Me.vfecha_inicial
                 vComando.Parameters.Add("@fecha_final", SqlDbType.DateTime).Value = Me.vfecha_final
+                vComando.Parameters.Add("@bandera", SqlDbType.Int).Value = Me.vbandera
                 obj = oBD.EjecutaCommando(vComando)
                 'Me.vId = obj.Rows(0)(0)
                 scope.Complete()
@@ -164,6 +176,7 @@ Public Class obtiene_cincoS
                 vComando.Parameters.Add("@cve_linea", SqlDbType.BigInt).Value = Me.vcve_linea
                 vComando.Parameters.Add("@fecha_inicial", SqlDbType.DateTime).Value = Me.vfecha_inicial
                 vComando.Parameters.Add("@fecha_final", SqlDbType.DateTime).Value = Me.vfecha_final
+                vComando.Parameters.Add("@bandera", SqlDbType.Int).Value = Me.vbandera
                 obj = oBD.EjecutaCommando(vComando)
                 'Me.vId = obj.Rows(0)(0)
                 scope.Complete()
@@ -186,6 +199,7 @@ Public Class obtiene_cincoS
                 vComando.Parameters.Add("@cve_equipo", SqlDbType.BigInt).Value = Me.vcve_equipo
                 vComando.Parameters.Add("@fecha_inicial", SqlDbType.DateTime).Value = Me.vfecha_inicial
                 vComando.Parameters.Add("@fecha_final", SqlDbType.DateTime).Value = Me.vfecha_final
+                vComando.Parameters.Add("@bandera", SqlDbType.Int).Value = Me.vbandera
                 obj = oBD.EjecutaCommando(vComando)
                 'Me.vId = obj.Rows(0)(0)
                 scope.Complete()
@@ -208,6 +222,7 @@ Public Class obtiene_cincoS
                 vComando.Parameters.Add("@cve_linea", SqlDbType.BigInt).Value = Me.vcve_linea
                 vComando.Parameters.Add("@fecha_inicial", SqlDbType.DateTime).Value = Me.vfecha_inicial
                 vComando.Parameters.Add("@fecha_final", SqlDbType.DateTime).Value = Me.vfecha_final
+                vComando.Parameters.Add("@bandera", SqlDbType.Int).Value = Me.vbandera
                 obj = oBD.EjecutaCommando(vComando)
                 'Me.vId = obj.Rows(0)(0)
                 scope.Complete()
