@@ -842,6 +842,7 @@ Public Class FrmGraficasfaseuno
         Dim oObtiene_nrfti As New obtiene_NRFTi
         oObtiene_nrfti.fecha_inicial = dtpFechaInicial.Value
         oObtiene_nrfti.fecha_final = dtpFechaFinal.Value
+        oObtiene_nrfti.bandera = bandera_graficos
         'Creacion series
         Dim BarSeries1 As New BarSeries()
         BarSeries1.LegendTitle = "nrfti"
@@ -905,6 +906,7 @@ Public Class FrmGraficasfaseuno
         oObtiene_nrfti.cve_cadena_valor = cbxCadenaValor.SelectedValue
         oObtiene_nrfti.fecha_inicial = dtpFechaInicial.Value
         oObtiene_nrfti.fecha_final = dtpFechaFinal.Value
+        oObtiene_nrfti.bandera = bandera_graficos
         'Creacion series
         Dim BarSeries1 As New BarSeries()
         BarSeries1.LegendTitle = "nrfti"
@@ -972,6 +974,7 @@ Public Class FrmGraficasfaseuno
         oObtiene_nrfti.cve_componente = cbxComponente.SelectedValue
         oObtiene_nrfti.fecha_inicial = dtpFechaInicial.Value
         oObtiene_nrfti.fecha_final = dtpFechaFinal.Value
+        oObtiene_nrfti.bandera = bandera_graficos
         'Creacion series
         Dim BarSeries1 As New BarSeries()
         BarSeries1.LegendTitle = "nrfti"
@@ -1039,6 +1042,7 @@ Public Class FrmGraficasfaseuno
         oObtiene_nrfti.cve_linea = cbxLinea.SelectedValue
         oObtiene_nrfti.fecha_inicial = dtpFechaInicial.Value
         oObtiene_nrfti.fecha_final = dtpFechaFinal.Value
+        oObtiene_nrfti.bandera = bandera_graficos
         'Creacion series
         Dim BarSeries1 As New BarSeries()
         BarSeries1.LegendTitle = "nrfti"
@@ -1106,6 +1110,7 @@ Public Class FrmGraficasfaseuno
         oObtiene_nrfti.cve_equipo = cbxEquipo.SelectedValue
         oObtiene_nrfti.fecha_inicial = dtpFechaInicial.Value
         oObtiene_nrfti.fecha_final = dtpFechaFinal.Value
+        oObtiene_nrfti.bandera = bandera_graficos
         'Creacion series
         Dim BarSeries1 As New BarSeries()
         BarSeries1.LegendTitle = "nrfti"
@@ -1183,6 +1188,7 @@ Public Class FrmGraficasfaseuno
         oObtiene_nrfti.cve_linea = cbxLinea.SelectedValue
         oObtiene_nrfti.fecha_inicial = dtpFechaInicial.Value
         oObtiene_nrfti.fecha_final = dtpFechaFinal.Value
+        oObtiene_nrfti.bandera = bandera_graficos
         'Creacion series
         Dim BarSeries1 As New BarSeries()
         BarSeries1.LegendTitle = "nrfti"
