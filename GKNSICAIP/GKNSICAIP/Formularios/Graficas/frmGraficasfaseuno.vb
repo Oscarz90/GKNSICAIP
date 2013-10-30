@@ -708,20 +708,11 @@ Public Class FrmGraficasfaseuno
         Dim vContador As Integer = 1
         vTotal = vDT.Rows.Count
         For Each vDR As DataRow In vDT.Rows
-            If rdbtnDias.IsChecked Then
-                If vContador = 1 Then
-                    BarSeries2.DataPoints.Add(New CategoricalDataPoint(vDR("oee"), "Acumulado"))
-                Else
-                    BarSeries1.DataPoints.Add(New CategoricalDataPoint(vDR("oee"), vDR("dia_asignado")))
-                End If
-            ElseIf rdbtnMeses.IsChecked Then
-                If vContador = vTotal Then
-                    BarSeries2.DataPoints.Add(New CategoricalDataPoint(vDR("oee"), "Acumulado"))
-                Else
-                    BarSeries1.DataPoints.Add(New CategoricalDataPoint(vDR("oee"), vDR("dia_asignado")))
-                End If
+            If vContador = vTotal Then
+                BarSeries2.DataPoints.Add(New CategoricalDataPoint(vDR("oee"), "Acumulado"))
+            Else
+                BarSeries1.DataPoints.Add(New CategoricalDataPoint(vDR("oee"), vDR("dia_asignado")))
             End If
-
             vContador = vContador + 1
         Next
         'Cartesian Area, CategoricalAxis, LinearAxis
