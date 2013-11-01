@@ -2409,7 +2409,7 @@ Public Class FrmGraficasfaseuno
         CategoricalAxis1.LabelRotationAngle = 270.0R
         LinearAxis1.AxisType = AxisType.Second
         'LinearAxis1.MajorStep = 1.0R
-        'LinearAxis1.Maximum = 5
+
         LinearAxis1.Title = "Seguridad"
         BarSeries1.ShowLabels = True
         'BarSeries2.ShowLabels = True
@@ -2429,6 +2429,7 @@ Public Class FrmGraficasfaseuno
         For i As Integer = 0 To Me.radChartView1.Series.Count - 1
             Me.radChartView1.GetSeries(Of BarSeries)(i).CombineMode = ChartSeriesCombineMode.Stack
         Next i
+        MsgBox(LinearAxis1.ActualRange(r1))
     End Sub
     'Gente equipo
     Private Sub obtiene_seguridad_equipo_dia_mes()
