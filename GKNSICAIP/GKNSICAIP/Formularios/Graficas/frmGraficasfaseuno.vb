@@ -474,7 +474,7 @@ Public Class FrmGraficasfaseuno
         BarSeries2.LabelFormat = "{0:##.##}"
         BarSeries1.HorizontalAxis = CategoricalAxis1
         BarSeries1.VerticalAxis = LinearAxis1
-        BarSeries2.ForeColor = Color.White
+        'BarSeries2.ForeColor = Color.White
         BarSeries1.Palette = New PaletteEntry(Color.FromArgb(255, 191, 0))
         BarSeries2.Palette = New PaletteEntry(Color.FromArgb(233, 37, 43))
         Me.radChartView1.ShowToolTip = True
@@ -541,7 +541,7 @@ Public Class FrmGraficasfaseuno
         BarSeries2.LabelFormat = "{0:##.##}"
         BarSeries1.HorizontalAxis = CategoricalAxis1
         BarSeries1.VerticalAxis = LinearAxis1
-        BarSeries2.ForeColor = Color.White
+        'BarSeries2.ForeColor = Color.White
         BarSeries1.Palette = New PaletteEntry(Color.FromArgb(255, 191, 0))
         BarSeries2.Palette = New PaletteEntry(Color.FromArgb(233, 37, 43))
         Me.radChartView1.ShowToolTip = True
@@ -608,7 +608,7 @@ Public Class FrmGraficasfaseuno
         BarSeries2.LabelFormat = "{0:##.##}"
         BarSeries1.HorizontalAxis = CategoricalAxis1
         BarSeries1.VerticalAxis = LinearAxis1
-        BarSeries2.ForeColor = Color.White
+        'BarSeries2.ForeColor = Color.White
         BarSeries1.Palette = New PaletteEntry(Color.FromArgb(255, 191, 0))
         BarSeries2.Palette = New PaletteEntry(Color.FromArgb(233, 37, 43))
         Me.radChartView1.ShowToolTip = True
@@ -675,7 +675,7 @@ Public Class FrmGraficasfaseuno
         BarSeries2.LabelFormat = "{0:##.##}"
         BarSeries1.HorizontalAxis = CategoricalAxis1
         BarSeries1.VerticalAxis = LinearAxis1
-        BarSeries2.ForeColor = Color.White
+        'BarSeries2.ForeColor = Color.White
         BarSeries1.Palette = New PaletteEntry(Color.FromArgb(255, 191, 0))
         BarSeries2.Palette = New PaletteEntry(Color.FromArgb(233, 37, 43))
         Me.radChartView1.ShowToolTip = True
@@ -742,7 +742,7 @@ Public Class FrmGraficasfaseuno
         BarSeries2.LabelFormat = "{0:##.##}"
         BarSeries1.HorizontalAxis = CategoricalAxis1
         BarSeries1.VerticalAxis = LinearAxis1
-        BarSeries2.ForeColor = Color.White
+        'BarSeries2.ForeColor = Color.White
         BarSeries1.Palette = New PaletteEntry(Color.FromArgb(255, 191, 0))
         BarSeries2.Palette = New PaletteEntry(Color.FromArgb(233, 37, 43))
         Me.radChartView1.ShowToolTip = True
@@ -818,7 +818,7 @@ Public Class FrmGraficasfaseuno
         BarSeries2.LabelFormat = "{0:##.##}"
         BarSeries1.HorizontalAxis = CategoricalAxis1
         BarSeries1.VerticalAxis = LinearAxis1
-        BarSeries2.ForeColor = Color.White
+        'BarSeries2.ForeColor = Color.White
         BarSeries1.Palette = New PaletteEntry(Color.FromArgb(255, 191, 0))
         BarSeries2.Palette = New PaletteEntry(Color.FromArgb(233, 37, 43))
         Me.radChartView1.ShowToolTip = True
@@ -882,13 +882,16 @@ Public Class FrmGraficasfaseuno
         BarSeries2.LabelFormat = "{0:##,##}"
         BarSeries1.HorizontalAxis = CategoricalAxis1
         BarSeries1.VerticalAxis = LinearAxis1
-        BarSeries1.ForeColor = Color.White
-        BarSeries2.ForeColor = Color.White
+        'BarSeries1.ForeColor = Color.White
+        'BarSeries2.ForeColor = Color.White
         BarSeries1.Palette = New PaletteEntry(Color.FromArgb(23, 87, 252))
         BarSeries2.Palette = New PaletteEntry(Color.FromArgb(233, 37, 43))
         Me.radChartView1.ShowToolTip = True
         radChartView1.Series.Add(BarSeries1)
         radChartView1.Series.Add(BarSeries2)
+        If (LinearAxis1.ActualRange.Maximum = 0) Then
+            LinearAxis1.Maximum = 5
+        End If
     End Sub
     'NRNFTi Cadena Valor
     Private Sub obtiene_nrfti_cadena_valor_dia_mes()
@@ -950,13 +953,16 @@ Public Class FrmGraficasfaseuno
         BarSeries2.LabelFormat = "{0:##,###}"
         BarSeries1.HorizontalAxis = CategoricalAxis1
         BarSeries1.VerticalAxis = LinearAxis1
-        BarSeries1.ForeColor = Color.White
-        BarSeries2.ForeColor = Color.White
+        'BarSeries1.ForeColor = Color.White
+        'BarSeries2.ForeColor = Color.White
         BarSeries1.Palette = New PaletteEntry(Color.FromArgb(23, 87, 252))
         BarSeries2.Palette = New PaletteEntry(Color.FromArgb(233, 37, 43))
         Me.radChartView1.ShowToolTip = True
         radChartView1.Series.Add(BarSeries1)
         radChartView1.Series.Add(BarSeries2)
+        If (LinearAxis1.ActualRange.Maximum = 0) Then
+            LinearAxis1.Maximum = 5
+        End If
     End Sub
     'NRFTi Componente
     Private Sub obtiene_nrfti_componente_dia_mes()
@@ -1018,13 +1024,16 @@ Public Class FrmGraficasfaseuno
         BarSeries2.LabelFormat = "{0:#,###}"
         BarSeries1.HorizontalAxis = CategoricalAxis1
         BarSeries1.VerticalAxis = LinearAxis1
-        BarSeries1.ForeColor = Color.White
-        BarSeries2.ForeColor = Color.White
+        'BarSeries1.ForeColor = Color.White
+        'BarSeries2.ForeColor = Color.White
         BarSeries1.Palette = New PaletteEntry(Color.FromArgb(23, 87, 252))
         BarSeries2.Palette = New PaletteEntry(Color.FromArgb(233, 37, 43))
         Me.radChartView1.ShowToolTip = True
         radChartView1.Series.Add(BarSeries1)
         radChartView1.Series.Add(BarSeries2)
+        If (LinearAxis1.ActualRange.Maximum = 0) Then
+            LinearAxis1.Maximum = 5
+        End If
     End Sub
     'NRFTi Linea
     Private Sub obtiene_nrfti_linea_dia_mes()
@@ -1086,13 +1095,16 @@ Public Class FrmGraficasfaseuno
         BarSeries2.LabelFormat = "{0:#,###}"
         BarSeries1.HorizontalAxis = CategoricalAxis1
         BarSeries1.VerticalAxis = LinearAxis1
-        BarSeries1.ForeColor = Color.White
-        BarSeries2.ForeColor = Color.White
+        'BarSeries1.ForeColor = Color.White
+        'BarSeries2.ForeColor = Color.White
         BarSeries1.Palette = New PaletteEntry(Color.FromArgb(23, 87, 252))
         BarSeries2.Palette = New PaletteEntry(Color.FromArgb(233, 37, 43))
         Me.radChartView1.ShowToolTip = True
         radChartView1.Series.Add(BarSeries1)
         radChartView1.Series.Add(BarSeries2)
+        If (LinearAxis1.ActualRange.Maximum = 0) Then
+            LinearAxis1.Maximum = 5
+        End If
     End Sub
     'NRFTi Equipo
     Private Sub obtiene_nrfti_equipo_dia_mes()
@@ -1163,13 +1175,16 @@ Public Class FrmGraficasfaseuno
         BarSeries2.LabelFormat = "{0:#,###}"
         BarSeries1.HorizontalAxis = CategoricalAxis1
         BarSeries1.VerticalAxis = LinearAxis1
-        BarSeries1.ForeColor = Color.White
-        BarSeries2.ForeColor = Color.White
+        'BarSeries1.ForeColor = Color.White
+        'BarSeries2.ForeColor = Color.White
         BarSeries1.Palette = New PaletteEntry(Color.FromArgb(23, 87, 252))
         BarSeries2.Palette = New PaletteEntry(Color.FromArgb(233, 37, 43))
         Me.radChartView1.ShowToolTip = True
         radChartView1.Series.Add(BarSeries1)
         radChartView1.Series.Add(BarSeries2)
+        If (LinearAxis1.ActualRange.Maximum = 0) Then
+            LinearAxis1.Maximum = 5
+        End If
     End Sub
     'NRFTi Equipo-Linea
     Private Sub obtiene_nrfti_equipo_linea_dia_mes()
@@ -1241,13 +1256,16 @@ Public Class FrmGraficasfaseuno
         BarSeries2.LabelFormat = "{0:#,###}"
         BarSeries1.HorizontalAxis = CategoricalAxis1
         BarSeries1.VerticalAxis = LinearAxis1
-        BarSeries1.ForeColor = Color.White
-        BarSeries2.ForeColor = Color.White
+        'BarSeries1.ForeColor = Color.White
+        'BarSeries2.ForeColor = Color.White
         BarSeries1.Palette = New PaletteEntry(Color.FromArgb(23, 87, 252))
         BarSeries2.Palette = New PaletteEntry(Color.FromArgb(233, 37, 43))
         Me.radChartView1.ShowToolTip = True
         radChartView1.Series.Add(BarSeries1)
         radChartView1.Series.Add(BarSeries2)
+        If (LinearAxis1.ActualRange.Maximum = 0) Then
+            LinearAxis1.Maximum = 5
+        End If
     End Sub
 #End Region
 #Region "Metodos graficar cincoS"
@@ -1796,6 +1814,9 @@ Public Class FrmGraficasfaseuno
         For i As Integer = 0 To Me.radChartView1.Series.Count - 1
             Me.radChartView1.GetSeries(Of BarSeries)(i).CombineMode = ChartSeriesCombineMode.Stack
         Next i
+        If (LinearAxis1.ActualRange.Maximum = 0) Then
+            LinearAxis1.Maximum = 5
+        End If
     End Sub
     'Gente cadena valor
     Private Sub obtiene_gente_cadena_valor_dia_mes()
@@ -1866,6 +1887,9 @@ Public Class FrmGraficasfaseuno
         For i As Integer = 0 To Me.radChartView1.Series.Count - 1
             Me.radChartView1.GetSeries(Of BarSeries)(i).CombineMode = ChartSeriesCombineMode.Stack
         Next i
+        If (LinearAxis1.ActualRange.Maximum = 0) Then
+            LinearAxis1.Maximum = 5
+        End If
     End Sub
     'Gente componente
     Private Sub obtiene_gente_componente_dia_mes()
@@ -1936,6 +1960,9 @@ Public Class FrmGraficasfaseuno
         For i As Integer = 0 To Me.radChartView1.Series.Count - 1
             Me.radChartView1.GetSeries(Of BarSeries)(i).CombineMode = ChartSeriesCombineMode.Stack
         Next i
+        If (LinearAxis1.ActualRange.Maximum = 0) Then
+            LinearAxis1.Maximum = 5
+        End If
     End Sub
     'Gente linea
     Private Sub obtiene_gente_linea_dia_mes()
@@ -2006,6 +2033,9 @@ Public Class FrmGraficasfaseuno
         For i As Integer = 0 To Me.radChartView1.Series.Count - 1
             Me.radChartView1.GetSeries(Of BarSeries)(i).CombineMode = ChartSeriesCombineMode.Stack
         Next i
+        If (LinearAxis1.ActualRange.Maximum = 0) Then
+            LinearAxis1.Maximum = 5
+        End If
     End Sub
     'Gente equipo
     Private Sub obtiene_gente_equipo_dia_mes()
@@ -2076,6 +2106,9 @@ Public Class FrmGraficasfaseuno
         For i As Integer = 0 To Me.radChartView1.Series.Count - 1
             Me.radChartView1.GetSeries(Of BarSeries)(i).CombineMode = ChartSeriesCombineMode.Stack
         Next i
+        If (LinearAxis1.ActualRange.Maximum = 0) Then
+            LinearAxis1.Maximum = 5
+        End If
     End Sub
     'Gente equipo-linea
     Private Sub obtiene_gente_equipo_linea_dia_mes()
@@ -2147,6 +2180,9 @@ Public Class FrmGraficasfaseuno
         For i As Integer = 0 To Me.radChartView1.Series.Count - 1
             Me.radChartView1.GetSeries(Of BarSeries)(i).CombineMode = ChartSeriesCombineMode.Stack
         Next i
+        If (LinearAxis1.ActualRange.Maximum = 0) Then
+            LinearAxis1.Maximum = 5
+        End If
     End Sub
 #End Region
 #Region "Metodos graficar seguridad"
@@ -2198,7 +2234,6 @@ Public Class FrmGraficasfaseuno
         CategoricalAxis1.LabelRotationAngle = 270.0R
         LinearAxis1.AxisType = AxisType.Second
         'LinearAxis1.MajorStep = 1.0R
-        'LinearAxis1.Maximum = 5
         LinearAxis1.Title = "Seguridad"
         BarSeries1.ShowLabels = True
         'BarSeries2.ShowLabels = True
@@ -2218,6 +2253,9 @@ Public Class FrmGraficasfaseuno
         For i As Integer = 0 To Me.radChartView1.Series.Count - 1
             Me.radChartView1.GetSeries(Of BarSeries)(i).CombineMode = ChartSeriesCombineMode.Stack
         Next i
+        If (LinearAxis1.ActualRange.Maximum = 0) Then
+            LinearAxis1.Maximum = 5
+        End If
     End Sub
     'Gente Cadena Valor
     Private Sub obtiene_seguridad_cadena_valor_dia_mes()
@@ -2289,6 +2327,9 @@ Public Class FrmGraficasfaseuno
         For i As Integer = 0 To Me.radChartView1.Series.Count - 1
             Me.radChartView1.GetSeries(Of BarSeries)(i).CombineMode = ChartSeriesCombineMode.Stack
         Next i
+        If (LinearAxis1.ActualRange.Maximum = 0) Then
+            LinearAxis1.Maximum = 5
+        End If
     End Sub
     'Gente Componente
     Private Sub obtiene_seguridad_componente_dia_mes()
@@ -2359,6 +2400,9 @@ Public Class FrmGraficasfaseuno
         For i As Integer = 0 To Me.radChartView1.Series.Count - 1
             Me.radChartView1.GetSeries(Of BarSeries)(i).CombineMode = ChartSeriesCombineMode.Stack
         Next i
+        If (LinearAxis1.ActualRange.Maximum = 0) Then
+            LinearAxis1.Maximum = 5
+        End If
     End Sub
     'Gente linea
     Private Sub obtiene_seguridad_linea_dia_mes()
@@ -2429,7 +2473,9 @@ Public Class FrmGraficasfaseuno
         For i As Integer = 0 To Me.radChartView1.Series.Count - 1
             Me.radChartView1.GetSeries(Of BarSeries)(i).CombineMode = ChartSeriesCombineMode.Stack
         Next i
-        MsgBox(LinearAxis1.ActualRange(r1))
+        If (LinearAxis1.ActualRange.Maximum = 0) Then
+            LinearAxis1.Maximum = 5
+        End If
     End Sub
     'Gente equipo
     Private Sub obtiene_seguridad_equipo_dia_mes()
@@ -2500,6 +2546,9 @@ Public Class FrmGraficasfaseuno
         For i As Integer = 0 To Me.radChartView1.Series.Count - 1
             Me.radChartView1.GetSeries(Of BarSeries)(i).CombineMode = ChartSeriesCombineMode.Stack
         Next i
+        If (LinearAxis1.ActualRange.Maximum = 0) Then
+            LinearAxis1.Maximum = 5
+        End If
     End Sub
     'Gente equipo-linea
     Private Sub obtiene_seguridad_equipo_linea_dia_mes()
@@ -2571,6 +2620,9 @@ Public Class FrmGraficasfaseuno
         For i As Integer = 0 To Me.radChartView1.Series.Count - 1
             Me.radChartView1.GetSeries(Of BarSeries)(i).CombineMode = ChartSeriesCombineMode.Stack
         Next i
+        If (LinearAxis1.ActualRange.Maximum = 0) Then
+            LinearAxis1.Maximum = 5
+        End If
     End Sub
 #End Region
 #Region "Metodos graficar costo"
@@ -2588,6 +2640,8 @@ Public Class FrmGraficasfaseuno
         BarSeries2.LegendTitle = "Min. Excedentes"
         Dim LineSeries1 As New LineSeries()
         LineSeries1.LegendTitle = "Costo"
+        Dim LineSeries2 As New LineSeries()
+        LineSeries2.LegendTitle = "Min. Objetivo"
         Me.radChartView1.ShowLegend = True
         'Obtencion Datos
         Dim vDT As DataTable = Nothing
@@ -2606,10 +2660,12 @@ Public Class FrmGraficasfaseuno
                 BarSeries1.DataPoints.Add(New CategoricalDataPoint(vDR("min_programados"), "acumulado"))
                 BarSeries2.DataPoints.Add(New CategoricalDataPoint(vDR("min_excedentes"), "acumulado"))
                 LineSeries1.DataPoints.Add(New CategoricalDataPoint(vDR("costo"), "acumulado"))
+                LineSeries2.DataPoints.Add(New CategoricalDataPoint(vDR("objetivo_tcdm"), "acumulado"))
             Else
                     BarSeries1.DataPoints.Add(New CategoricalDataPoint(vDR("min_programados"), vDR("dia_asignado")))
                     BarSeries2.DataPoints.Add(New CategoricalDataPoint(vDR("min_excedentes"), vDR("dia_asignado")))
-                    LineSeries1.DataPoints.Add(New CategoricalDataPoint(vDR("costo"), vDR("dia_asignado")))
+                LineSeries1.DataPoints.Add(New CategoricalDataPoint(vDR("costo"), vDR("dia_asignado")))
+                LineSeries2.DataPoints.Add(New CategoricalDataPoint(vDR("objetivo_tcdm"), "dia_asignado"))
             End If
             vContador = vContador + 1
         Next
@@ -2629,7 +2685,7 @@ Public Class FrmGraficasfaseuno
         LinearAxis2.AxisType = AxisType.Second
         LinearAxis2.HorizontalLocation = AxisHorizontalLocation.Right
         LinearAxis1.Title = "Minutos"
-        LinearAxis2.Title = "Costo $$"
+        LinearAxis2.Title = "Costo $"
         'Personalizacion
         If rdbtnDias.IsChecked Then
             CategoricalAxis1.LabelFormat = "{0:MMM - dd}"
@@ -2641,18 +2697,29 @@ Public Class FrmGraficasfaseuno
         BarSeries1.ShowLabels = True
         BarSeries2.ShowLabels = True
         LineSeries1.ShowLabels = True
+        LineSeries2.ShowLabels = True
+
         BarSeries1.LabelFormat = "{0:###}"
         BarSeries2.LabelFormat = "{0:###}"
         LineSeries1.LabelFormat = "{0:##.##}"
+        LineSeries2.LabelFormat = "{0:##.##}"
+
         BarSeries1.HorizontalAxis = CategoricalAxis1
         BarSeries2.HorizontalAxis = CategoricalAxis1
         LineSeries1.HorizontalAxis = CategoricalAxis1
+        LineSeries2.HorizontalAxis = CategoricalAxis1
+
         BarSeries1.VerticalAxis = LinearAxis1
         BarSeries2.VerticalAxis = LinearAxis1
+        LineSeries2.VerticalAxis = LinearAxis1
         LineSeries1.VerticalAxis = LinearAxis2
-        BarSeries1.Palette = New PaletteEntry(Color.FromArgb(24, 134, 205))
-        BarSeries2.Palette = New PaletteEntry(Color.FromArgb(255, 0, 102))
+
+        BarSeries1.Palette = New PaletteEntry(Color.FromArgb(37, 64, 97))
+        BarSeries2.Palette = New PaletteEntry(Color.FromArgb(255, 192, 0))
+        'LineSeries2.Palette = New PaletteEntry(Color.FromArgb(217, 217, 217))
+
         LineSeries1.PointSize = New SizeF(10, 10)
+        LineSeries2.PointSize = New SizeF(10, 10)
         Me.radChartView1.ShowTrackBall = True
         Me.radChartView1.ShowToolTip = True
         'Chartview
@@ -2661,8 +2728,14 @@ Public Class FrmGraficasfaseuno
         radChartView1.Series.Add(LineSeries1)
         radChartView1.Series.Add(BarSeries1)
         radChartView1.Series.Add(BarSeries2)
+        'radChartView1.Series.Add(LineSeries2)
         BarSeries1.CombineMode = ChartSeriesCombineMode.Stack
         BarSeries2.CombineMode = ChartSeriesCombineMode.Stack
+        'LineSeries1.CombineMode = ChartSeriesCombineMode.Cluster
+
+        If (LinearAxis1.ActualRange.Maximum = 0) Then
+            LinearAxis1.Maximum = 5
+        End If
     End Sub
     'Costo Cadena Valor
     Private Sub obtiene_costo_cadena_valor_dia_mes()
@@ -2755,6 +2828,9 @@ Public Class FrmGraficasfaseuno
         radChartView1.Series.Add(BarSeries2)
         BarSeries1.CombineMode = ChartSeriesCombineMode.Stack
         BarSeries2.CombineMode = ChartSeriesCombineMode.Stack
+        If (LinearAxis1.ActualRange.Maximum = 0) Then
+            LinearAxis1.Maximum = 5
+        End If
     End Sub
     'Costo Componente
     Private Sub obtiene_costo_componente_dia_mes()
@@ -2846,6 +2922,9 @@ Public Class FrmGraficasfaseuno
         radChartView1.Series.Add(BarSeries2)
         BarSeries1.CombineMode = ChartSeriesCombineMode.Stack
         BarSeries2.CombineMode = ChartSeriesCombineMode.Stack
+        If (LinearAxis1.ActualRange.Maximum = 0) Then
+            LinearAxis1.Maximum = 5
+        End If
     End Sub
     'Costo Linea
     Private Sub obtiene_costo_linea_dia_mes()
@@ -2937,6 +3016,9 @@ Public Class FrmGraficasfaseuno
         radChartView1.Series.Add(BarSeries2)
         BarSeries1.CombineMode = ChartSeriesCombineMode.Stack
         BarSeries2.CombineMode = ChartSeriesCombineMode.Stack
+        If (LinearAxis1.ActualRange.Maximum = 0) Then
+            LinearAxis1.Maximum = 5
+        End If
     End Sub
     'Costo Equipo
     Private Sub obtiene_costo_equipo_dia_mes()
@@ -3042,6 +3124,9 @@ Public Class FrmGraficasfaseuno
         radChartView1.Series.Add(LineSeries2)
         BarSeries1.CombineMode = ChartSeriesCombineMode.Stack
         BarSeries2.CombineMode = ChartSeriesCombineMode.Stack
+        If (LinearAxis1.ActualRange.Maximum = 0) Then
+            LinearAxis1.Maximum = 5
+        End If
     End Sub
     'Costo equipo-linea
     Private Sub obtiene_costo_equipo_linea_dia_mes()
@@ -3133,6 +3218,9 @@ Public Class FrmGraficasfaseuno
         radChartView1.Series.Add(BarSeries2)
         BarSeries1.CombineMode = ChartSeriesCombineMode.Stack
         BarSeries2.CombineMode = ChartSeriesCombineMode.Stack
+        If (LinearAxis1.ActualRange.Maximum = 0) Then
+            LinearAxis1.Maximum = 5
+        End If
     End Sub
 #End Region
 #Region "Graficar "
@@ -3244,10 +3332,11 @@ Public Class FrmGraficasfaseuno
         Me.radChartView1.ShowTrackBall = False
         obtener_grafica()
     End Sub
-    Private Sub radChartView1_MouseDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles radChartView1.MouseDown
-        If e.Button = System.Windows.Forms.MouseButtons.Right Then
-
-
-        End If
+    Private Sub radChartView1_LabelFormatting(ByVal sender As System.Object, ByVal e As Telerik.WinControls.UI.ChartViewLabelFormattingEventArgs) Handles radChartView1.LabelFormatting
+        e.LabelElement.BackColor = Color.Transparent
     End Sub
+    '(object sender, ChartViewLabelFormattingEventArgs e)
+
+
+
 End Class
