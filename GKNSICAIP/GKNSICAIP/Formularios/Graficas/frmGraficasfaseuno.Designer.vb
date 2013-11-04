@@ -306,8 +306,7 @@ Partial Class FrmGraficasfaseuno
         Me.dtpFechaFinal.Size = New System.Drawing.Size(164, 20)
         Me.dtpFechaFinal.TabIndex = 9
         Me.dtpFechaFinal.TabStop = False
-        Me.dtpFechaFinal.Text = "miércoles, 28 de agosto de 2013"
-        Me.dtpFechaFinal.Value = New Date(2013, 8, 28, 13, 5, 45, 983)
+        Me.dtpFechaFinal.Value = New Date(CType(0, Long))
         '
         'dtpFechaInicial
         '
@@ -316,8 +315,7 @@ Partial Class FrmGraficasfaseuno
         Me.dtpFechaInicial.Size = New System.Drawing.Size(164, 20)
         Me.dtpFechaInicial.TabIndex = 8
         Me.dtpFechaInicial.TabStop = False
-        Me.dtpFechaInicial.Text = "miércoles, 28 de agosto de 2013"
-        Me.dtpFechaInicial.Value = New Date(2013, 8, 28, 13, 5, 45, 983)
+        Me.dtpFechaInicial.Value = New Date(CType(0, Long))
         '
         'rdbtnMeses
         '

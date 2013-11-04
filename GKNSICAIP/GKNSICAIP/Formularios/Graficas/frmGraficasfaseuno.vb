@@ -13,6 +13,12 @@ Public Class FrmGraficasfaseuno
     Private nivel_cadena_valors As Boolean = False
     Private nivel_planta_gkn As Boolean = False
     Private bandera_graficos As Integer
+    'Variables validar rango datetime sql server 2005
+    '01-01-1753
+    'Dim minDatetime = New DateTime(1753, 1, 1)
+    Dim minDatetime As New DateTime(1753, 1, 1)
+    '12-31-9999 23:59:59:997
+    Dim maxDatetime As New DateTime(9999, 12, 31, 23, 59, 59, 997)
 #End Region
 #Region "Inicializa formulario"
     Public Sub New()
@@ -297,9 +303,17 @@ Public Class FrmGraficasfaseuno
             Return False
         End If
     End Function
+    'Valida Rango fecha valido sql server 2005
+    Private Function valida_fecha_rango_max_min() As Boolean
+        If dtpFechaInicial.Value >= minDatetime.Date And dtpFechaInicial.Value <= maxDatetime.Date And dtpFechaFinal.Value >= minDatetime.Date And dtpFechaFinal.Value <= maxDatetime.Date Then
+            Return True
+        Else
+            Return False
+        End If
+    End Function
     'Valida boton graficar
     Private Sub valida_btn_graficar()
-        If valida_rdbtn_indicador() And valida_rdbtn_niveles() And valida_rdbtn_rango_fechas() And valida_cinco_S_mes() Then
+        If valida_rdbtn_indicador() And valida_rdbtn_niveles() And valida_rdbtn_rango_fechas() And valida_cinco_S_mes() And valida_fecha_rango_max_min() Then
             btnGraficar.Enabled = True
         Else
             btnGraficar.Enabled = False
@@ -2640,9 +2654,9 @@ Public Class FrmGraficasfaseuno
         BarSeries2.LegendTitle = "Min. Excedentes"
         Dim LineSeries1 As New LineSeries()
         LineSeries1.LegendTitle = "Costo"
-        Dim LineSeries2 As New LineSeries()
-        LineSeries2.LegendTitle = "Min. Objetivo"
         Me.radChartView1.ShowLegend = True
+        Dim LineSeries2 As New LineSeries()
+        LineSeries2.LegendTitle = "Objetivo"
         'Obtencion Datos
         Dim vDT As DataTable = Nothing
         If rdbtnDias.IsChecked Then
@@ -2650,6 +2664,8 @@ Public Class FrmGraficasfaseuno
         ElseIf rdbtnMeses.IsChecked Then
             vDT = oObtiene_costo.obtiene_costo_planta_mes()
         End If
+
+        
         'Llenado de las series
         Dim vTotal As Integer = 1
         Dim vContador As Integer = 1
@@ -2661,11 +2677,12 @@ Public Class FrmGraficasfaseuno
                 BarSeries2.DataPoints.Add(New CategoricalDataPoint(vDR("min_excedentes"), "acumulado"))
                 LineSeries1.DataPoints.Add(New CategoricalDataPoint(vDR("costo"), "acumulado"))
                 LineSeries2.DataPoints.Add(New CategoricalDataPoint(vDR("objetivo_tcdm"), "acumulado"))
+
             Else
-                    BarSeries1.DataPoints.Add(New CategoricalDataPoint(vDR("min_programados"), vDR("dia_asignado")))
-                    BarSeries2.DataPoints.Add(New CategoricalDataPoint(vDR("min_excedentes"), vDR("dia_asignado")))
+                BarSeries1.DataPoints.Add(New CategoricalDataPoint(vDR("min_programados"), vDR("dia_asignado")))
+                BarSeries2.DataPoints.Add(New CategoricalDataPoint(vDR("min_excedentes"), vDR("dia_asignado")))
                 LineSeries1.DataPoints.Add(New CategoricalDataPoint(vDR("costo"), vDR("dia_asignado")))
-                LineSeries2.DataPoints.Add(New CategoricalDataPoint(vDR("objetivo_tcdm"), "dia_asignado"))
+                LineSeries2.DataPoints.Add(New CategoricalDataPoint(vDR("objetivo_tcdm"), vDR("dia_asignado")))
             End If
             vContador = vContador + 1
         Next
@@ -2701,8 +2718,9 @@ Public Class FrmGraficasfaseuno
 
         BarSeries1.LabelFormat = "{0:###}"
         BarSeries2.LabelFormat = "{0:###}"
+        LineSeries2.LabelFormat = "{0:###}"
         LineSeries1.LabelFormat = "{0:##.##}"
-        LineSeries2.LabelFormat = "{0:##.##}"
+
 
         BarSeries1.HorizontalAxis = CategoricalAxis1
         BarSeries2.HorizontalAxis = CategoricalAxis1
@@ -2716,7 +2734,11 @@ Public Class FrmGraficasfaseuno
 
         BarSeries1.Palette = New PaletteEntry(Color.FromArgb(37, 64, 97))
         BarSeries2.Palette = New PaletteEntry(Color.FromArgb(255, 192, 0))
-        'LineSeries2.Palette = New PaletteEntry(Color.FromArgb(217, 217, 217))
+        LineSeries1.Palette = New PaletteEntry(Color.FromArgb(127, 127, 127))
+        LineSeries2.Palette = New PaletteEntry(Color.FromArgb(217, 217, 217))
+
+        LineSeries1.BorderColor = Color.FromArgb(127, 127, 127)
+        LineSeries2.BorderColor = Color.FromArgb(217, 217, 217)
 
         LineSeries1.PointSize = New SizeF(10, 10)
         LineSeries2.PointSize = New SizeF(10, 10)
@@ -2726,12 +2748,16 @@ Public Class FrmGraficasfaseuno
         'Me.radChartView1.ShowGrid = True
         'Me.radChartView1.ShowSmartLabels = True
         radChartView1.Series.Add(LineSeries1)
+        radChartView1.Series.Add(LineSeries2)
         radChartView1.Series.Add(BarSeries1)
         radChartView1.Series.Add(BarSeries2)
-        'radChartView1.Series.Add(LineSeries2)
+
+
         BarSeries1.CombineMode = ChartSeriesCombineMode.Stack
         BarSeries2.CombineMode = ChartSeriesCombineMode.Stack
-        'LineSeries1.CombineMode = ChartSeriesCombineMode.Cluster
+        LineSeries1.CombineMode = ChartSeriesCombineMode.None
+        LineSeries2.CombineMode = ChartSeriesCombineMode.None
+
 
         If (LinearAxis1.ActualRange.Maximum = 0) Then
             LinearAxis1.Maximum = 5
@@ -2753,6 +2779,8 @@ Public Class FrmGraficasfaseuno
         Dim LineSeries1 As New LineSeries()
         LineSeries1.LegendTitle = "Costo"
         Me.radChartView1.ShowLegend = True
+        Dim LineSeries2 As New LineSeries()
+        LineSeries2.LegendTitle = "Objetivo"
         'Obtencion Datos
         Dim vDT As DataTable = Nothing
         If rdbtnDias.IsChecked Then
@@ -2770,10 +2798,12 @@ Public Class FrmGraficasfaseuno
                 BarSeries1.DataPoints.Add(New CategoricalDataPoint(vDR("min_programados"), "acumulado"))
                 BarSeries2.DataPoints.Add(New CategoricalDataPoint(vDR("min_excedentes"), "acumulado"))
                 LineSeries1.DataPoints.Add(New CategoricalDataPoint(vDR("costo"), "acumulado"))
+                LineSeries2.DataPoints.Add(New CategoricalDataPoint(vDR("objetivo_tcdm"), "acumulado"))
             Else
-                    BarSeries1.DataPoints.Add(New CategoricalDataPoint(vDR("min_programados"), vDR("dia_asignado")))
-                    BarSeries2.DataPoints.Add(New CategoricalDataPoint(vDR("min_excedentes"), vDR("dia_asignado")))
-                    LineSeries1.DataPoints.Add(New CategoricalDataPoint(vDR("costo"), vDR("dia_asignado")))
+                BarSeries1.DataPoints.Add(New CategoricalDataPoint(vDR("min_programados"), vDR("dia_asignado")))
+                BarSeries2.DataPoints.Add(New CategoricalDataPoint(vDR("min_excedentes"), vDR("dia_asignado")))
+                LineSeries1.DataPoints.Add(New CategoricalDataPoint(vDR("costo"), vDR("dia_asignado")))
+                LineSeries2.DataPoints.Add(New CategoricalDataPoint(vDR("objetivo_tcdm"), vDR("dia_asignado")))
             End If
             vContador = vContador + 1
         Next
@@ -2806,28 +2836,50 @@ Public Class FrmGraficasfaseuno
         BarSeries1.ShowLabels = True
         BarSeries2.ShowLabels = True
         LineSeries1.ShowLabels = True
+        LineSeries2.ShowLabels = True
+
         BarSeries1.LabelFormat = "{0:###}"
         BarSeries2.LabelFormat = "{0:###}"
+        LineSeries2.LabelFormat = "{0:###}"
         LineSeries1.LabelFormat = "{0:##.##}"
+
         BarSeries1.HorizontalAxis = CategoricalAxis1
         BarSeries2.HorizontalAxis = CategoricalAxis1
         LineSeries1.HorizontalAxis = CategoricalAxis1
+        LineSeries2.HorizontalAxis = CategoricalAxis1
+
         BarSeries1.VerticalAxis = LinearAxis1
         BarSeries2.VerticalAxis = LinearAxis1
+        LineSeries2.VerticalAxis = LinearAxis1
         LineSeries1.VerticalAxis = LinearAxis2
-        BarSeries1.Palette = New PaletteEntry(Color.FromArgb(24, 134, 205))
-        BarSeries2.Palette = New PaletteEntry(Color.FromArgb(255, 0, 102))
+
+        BarSeries1.Palette = New PaletteEntry(Color.FromArgb(37, 64, 97))
+        BarSeries2.Palette = New PaletteEntry(Color.FromArgb(255, 192, 0))
+        LineSeries1.Palette = New PaletteEntry(Color.FromArgb(127, 127, 127))
+        LineSeries2.Palette = New PaletteEntry(Color.FromArgb(217, 217, 217))
+
+        LineSeries1.BorderColor = Color.FromArgb(127, 127, 127)
+        LineSeries2.BorderColor = Color.FromArgb(217, 217, 217)
+
+        LineSeries1.PointSize = New SizeF(10, 10)
+        LineSeries2.PointSize = New SizeF(10, 10)
+
         LineSeries1.PointSize = New SizeF(10, 10)
         Me.radChartView1.ShowTrackBall = True
         Me.radChartView1.ShowToolTip = True
+
         'Chartview
-        'Me.radChartView1.ShowGrid = True
-        'Me.radChartView1.ShowSmartLabels = True
         radChartView1.Series.Add(LineSeries1)
+        radChartView1.Series.Add(LineSeries2)
         radChartView1.Series.Add(BarSeries1)
         radChartView1.Series.Add(BarSeries2)
+
+
         BarSeries1.CombineMode = ChartSeriesCombineMode.Stack
         BarSeries2.CombineMode = ChartSeriesCombineMode.Stack
+        LineSeries1.CombineMode = ChartSeriesCombineMode.None
+        LineSeries2.CombineMode = ChartSeriesCombineMode.None
+
         If (LinearAxis1.ActualRange.Maximum = 0) Then
             LinearAxis1.Maximum = 5
         End If
@@ -2847,6 +2899,8 @@ Public Class FrmGraficasfaseuno
         BarSeries2.LegendTitle = "Min. Excedentes"
         Dim LineSeries1 As New LineSeries()
         LineSeries1.LegendTitle = "Costo"
+        Dim LineSeries2 As New LineSeries()
+        LineSeries2.LegendTitle = "Objetivo"
         Me.radChartView1.ShowLegend = True
         'Obtencion Datos
         Dim vDT As DataTable = Nothing
@@ -2865,202 +2919,12 @@ Public Class FrmGraficasfaseuno
                 BarSeries1.DataPoints.Add(New CategoricalDataPoint(vDR("min_programados"), "acumulado"))
                 BarSeries2.DataPoints.Add(New CategoricalDataPoint(vDR("min_excedentes"), "acumulado"))
                 LineSeries1.DataPoints.Add(New CategoricalDataPoint(vDR("costo"), "acumulado"))
-            Else
-                BarSeries1.DataPoints.Add(New CategoricalDataPoint(vDR("min_programados"), vDR("dia_asignado")))
-                BarSeries2.DataPoints.Add(New CategoricalDataPoint(vDR("min_excedentes"), vDR("dia_asignado")))
-                LineSeries1.DataPoints.Add(New CategoricalDataPoint(vDR("costo"), vDR("dia_asignado")))
-            End If
-            vContador = vContador + 1
-        Next
-        'Cartesian Area
-        Dim CartesianArea1 As CartesianArea = New CartesianArea()
-        CartesianArea1.ShowGrid = True
-        Me.radChartView1.AreaDesign = CartesianArea1
-        'Categorical axis
-        Dim CategoricalAxis1 As CategoricalAxis = New CategoricalAxis()
-        CategoricalAxis1.LabelFitMode = AxisLabelFitMode.Rotate
-        CategoricalAxis1.LabelRotationAngle = 270.0R
-
-        'LinearAxis
-        Dim LinearAxis1 As LinearAxis = New LinearAxis()
-        Dim LinearAxis2 As LinearAxis = New LinearAxis()
-        LinearAxis1.AxisType = AxisType.Second
-        LinearAxis2.AxisType = AxisType.Second
-        LinearAxis2.HorizontalLocation = AxisHorizontalLocation.Right
-        LinearAxis1.Title = "Minutos"
-        LinearAxis2.Title = "Costo $$"
-        'Personalizacion
-        If rdbtnDias.IsChecked Then
-            CategoricalAxis1.LabelFormat = "{0:MMM - dd}"
-        ElseIf rdbtnMeses.IsChecked Then
-            CategoricalAxis1.LabelFormat = "{0:yyyy - MMMM}"
-        End If
-        'LinearAxis1.MajorStep = 10.0R
-        'Series
-        BarSeries1.ShowLabels = True
-        BarSeries2.ShowLabels = True
-        LineSeries1.ShowLabels = True
-        BarSeries1.LabelFormat = "{0:###}"
-        BarSeries2.LabelFormat = "{0:###}"
-        LineSeries1.LabelFormat = "{0:##.##}"
-        BarSeries1.HorizontalAxis = CategoricalAxis1
-        BarSeries2.HorizontalAxis = CategoricalAxis1
-        LineSeries1.HorizontalAxis = CategoricalAxis1
-        BarSeries1.VerticalAxis = LinearAxis1
-        BarSeries2.VerticalAxis = LinearAxis1
-        LineSeries1.VerticalAxis = LinearAxis2
-        BarSeries1.Palette = New PaletteEntry(Color.FromArgb(24, 134, 205))
-        BarSeries2.Palette = New PaletteEntry(Color.FromArgb(255, 0, 102))
-        LineSeries1.PointSize = New SizeF(10, 10)
-        Me.radChartView1.ShowTrackBall = True
-        Me.radChartView1.ShowToolTip = True
-        'Chartview
-        'Me.radChartView1.ShowGrid = True
-        'Me.radChartView1.ShowSmartLabels = True
-        radChartView1.Series.Add(LineSeries1)
-        radChartView1.Series.Add(BarSeries1)
-        radChartView1.Series.Add(BarSeries2)
-        BarSeries1.CombineMode = ChartSeriesCombineMode.Stack
-        BarSeries2.CombineMode = ChartSeriesCombineMode.Stack
-        If (LinearAxis1.ActualRange.Maximum = 0) Then
-            LinearAxis1.Maximum = 5
-        End If
-    End Sub
-    'Costo Linea
-    Private Sub obtiene_costo_linea_dia_mes()
-        'Objeto obtiene_nrfti Clase
-        Dim oObtiene_costo As New obtiene_costo
-        oObtiene_costo.cve_linea = cbxLinea.SelectedValue
-        oObtiene_costo.fecha_inicial = dtpFechaInicial.Value
-        oObtiene_costo.fecha_final = dtpFechaFinal.Value
-        oObtiene_costo.bandera = bandera_graficos
-        'Creacion series
-        Dim BarSeries1 As New BarSeries()
-        BarSeries1.LegendTitle = "Min. Programados"
-        Dim BarSeries2 As New BarSeries()
-        BarSeries2.LegendTitle = "Min. Excedentes"
-        Dim LineSeries1 As New LineSeries()
-        LineSeries1.LegendTitle = "Costo"
-        Me.radChartView1.ShowLegend = True
-        'Obtencion Datos
-        Dim vDT As DataTable = Nothing
-        If rdbtnDias.IsChecked Then
-            vDT = oObtiene_costo.obtiene_costo_linea_dia()
-        ElseIf rdbtnMeses.IsChecked Then
-            vDT = oObtiene_costo.obtiene_costo_linea_mes()
-        End If
-        'Llenado de las series
-        Dim vTotal As Integer = 1
-        Dim vContador As Integer = 1
-        vTotal = vDT.Rows.Count
-
-        For Each vDR As DataRow In vDT.Rows
-            If vTotal = vContador Then
-                BarSeries1.DataPoints.Add(New CategoricalDataPoint(vDR("min_programados"), "acumulado"))
-                BarSeries2.DataPoints.Add(New CategoricalDataPoint(vDR("min_excedentes"), "acumulado"))
-                LineSeries1.DataPoints.Add(New CategoricalDataPoint(vDR("costo"), "acumulado"))
-            Else
-                BarSeries1.DataPoints.Add(New CategoricalDataPoint(vDR("min_programados"), vDR("dia_asignado")))
-                BarSeries2.DataPoints.Add(New CategoricalDataPoint(vDR("min_excedentes"), vDR("dia_asignado")))
-                LineSeries1.DataPoints.Add(New CategoricalDataPoint(vDR("costo"), vDR("dia_asignado")))
-            End If
-            vContador = vContador + 1
-        Next
-        'Cartesian Area
-        Dim CartesianArea1 As CartesianArea = New CartesianArea()
-        CartesianArea1.ShowGrid = True
-        Me.radChartView1.AreaDesign = CartesianArea1
-        'Categorical axis
-        Dim CategoricalAxis1 As CategoricalAxis = New CategoricalAxis()
-        CategoricalAxis1.LabelFitMode = AxisLabelFitMode.Rotate
-        CategoricalAxis1.LabelRotationAngle = 270.0R
-
-        'LinearAxis
-        Dim LinearAxis1 As LinearAxis = New LinearAxis()
-        Dim LinearAxis2 As LinearAxis = New LinearAxis()
-        LinearAxis1.AxisType = AxisType.Second
-        LinearAxis2.AxisType = AxisType.Second
-        LinearAxis2.HorizontalLocation = AxisHorizontalLocation.Right
-        LinearAxis1.Title = "Minutos"
-        LinearAxis2.Title = "Costo $$"
-        'Personalizacion
-        If rdbtnDias.IsChecked Then
-            CategoricalAxis1.LabelFormat = "{0:MMM - dd}"
-        ElseIf rdbtnMeses.IsChecked Then
-            CategoricalAxis1.LabelFormat = "{0:yyyy - MMMM}"
-        End If
-        'LinearAxis1.MajorStep = 10.0R
-        'Series
-        BarSeries1.ShowLabels = True
-        BarSeries2.ShowLabels = True
-        LineSeries1.ShowLabels = True
-        BarSeries1.LabelFormat = "{0:###}"
-        BarSeries2.LabelFormat = "{0:###}"
-        LineSeries1.LabelFormat = "{0:##.##}"
-        BarSeries1.HorizontalAxis = CategoricalAxis1
-        BarSeries2.HorizontalAxis = CategoricalAxis1
-        LineSeries1.HorizontalAxis = CategoricalAxis1
-        BarSeries1.VerticalAxis = LinearAxis1
-        BarSeries2.VerticalAxis = LinearAxis1
-        LineSeries1.VerticalAxis = LinearAxis2
-        BarSeries1.Palette = New PaletteEntry(Color.FromArgb(24, 134, 205))
-        BarSeries2.Palette = New PaletteEntry(Color.FromArgb(255, 0, 102))
-        LineSeries1.PointSize = New SizeF(10, 10)
-        Me.radChartView1.ShowTrackBall = True
-        Me.radChartView1.ShowToolTip = True
-        'Chartview
-        'Me.radChartView1.ShowGrid = True
-        'Me.radChartView1.ShowSmartLabels = True
-        radChartView1.Series.Add(LineSeries1)
-        radChartView1.Series.Add(BarSeries1)
-        radChartView1.Series.Add(BarSeries2)
-        BarSeries1.CombineMode = ChartSeriesCombineMode.Stack
-        BarSeries2.CombineMode = ChartSeriesCombineMode.Stack
-        If (LinearAxis1.ActualRange.Maximum = 0) Then
-            LinearAxis1.Maximum = 5
-        End If
-    End Sub
-    'Costo Equipo
-    Private Sub obtiene_costo_equipo_dia_mes()
-        'Objeto obtiene_nrfti Clase
-        Dim oObtiene_costo As New obtiene_costo
-        oObtiene_costo.cve_equipo = cbxEquipo.SelectedValue
-        oObtiene_costo.fecha_inicial = dtpFechaInicial.Value
-        oObtiene_costo.fecha_final = dtpFechaFinal.Value
-        oObtiene_costo.bandera = bandera_graficos
-        'Creacion series
-        Dim BarSeries1 As New BarSeries()
-        BarSeries1.LegendTitle = "Min. Programados"
-        Dim BarSeries2 As New BarSeries()
-        BarSeries2.LegendTitle = "Min. Excedentes"
-        Dim LineSeries1 As New LineSeries()
-        LineSeries1.LegendTitle = "Costo"
-        Dim LineSeries2 As New LineSeries()
-        LineSeries2.LegendTitle = "Objetivo CDM"
-        Me.radChartView1.ShowLegend = True
-        'Obtencion Datos
-        Dim vDT As DataTable = Nothing
-        If rdbtnDias.IsChecked Then
-            vDT = oObtiene_costo.obtiene_costo_equipo_dia()
-        ElseIf rdbtnMeses.IsChecked Then
-            vDT = oObtiene_costo.obtiene_costo_equipo_mes()
-        End If
-        'Llenado de las series
-        Dim vTotal As Integer = 1
-        Dim vContador As Integer = 1
-        vTotal = vDT.Rows.Count
-
-        For Each vDR As DataRow In vDT.Rows
-            If vTotal = vContador Then
-                BarSeries1.DataPoints.Add(New CategoricalDataPoint(vDR("min_programados"), "acumulado"))
-                BarSeries2.DataPoints.Add(New CategoricalDataPoint(vDR("min_excedentes"), "acumulado"))
-                LineSeries1.DataPoints.Add(New CategoricalDataPoint(vDR("costo"), "acumulado"))
                 LineSeries2.DataPoints.Add(New CategoricalDataPoint(vDR("objetivo_tcdm"), "acumulado"))
             Else
-                    BarSeries1.DataPoints.Add(New CategoricalDataPoint(vDR("min_programados"), vDR("dia_asignado")))
-                    BarSeries2.DataPoints.Add(New CategoricalDataPoint(vDR("min_excedentes"), vDR("dia_asignado")))
-                    LineSeries1.DataPoints.Add(New CategoricalDataPoint(vDR("costo"), vDR("dia_asignado")))
-                    LineSeries2.DataPoints.Add(New CategoricalDataPoint(vDR("objetivo_tcdm"), vDR("dia_asignado")))
+                BarSeries1.DataPoints.Add(New CategoricalDataPoint(vDR("min_programados"), vDR("dia_asignado")))
+                BarSeries2.DataPoints.Add(New CategoricalDataPoint(vDR("min_excedentes"), vDR("dia_asignado")))
+                LineSeries1.DataPoints.Add(New CategoricalDataPoint(vDR("costo"), vDR("dia_asignado")))
+                LineSeries2.DataPoints.Add(New CategoricalDataPoint(vDR("objetivo_tcdm"), vDR("dia_asignado")))
             End If
             vContador = vContador + 1
         Next
@@ -3096,8 +2960,9 @@ Public Class FrmGraficasfaseuno
 
         BarSeries1.LabelFormat = "{0:###}"
         BarSeries2.LabelFormat = "{0:###}"
+        LineSeries2.LabelFormat = "{0:###}"
         LineSeries1.LabelFormat = "{0:##.##}"
-        'LineSeries2.LabelFormat = "{0:##.##}"
+
 
         BarSeries1.HorizontalAxis = CategoricalAxis1
         BarSeries2.HorizontalAxis = CategoricalAxis1
@@ -3108,31 +2973,41 @@ Public Class FrmGraficasfaseuno
         BarSeries2.VerticalAxis = LinearAxis1
         LineSeries2.VerticalAxis = LinearAxis1
         LineSeries1.VerticalAxis = LinearAxis2
-        BarSeries1.Palette = New PaletteEntry(Color.FromArgb(24, 134, 205))
-        BarSeries2.Palette = New PaletteEntry(Color.FromArgb(255, 0, 102))
-        'LineSeries2.Palette = New PaletteEntry(Color.FromArgb(50, 215, 239))
+
+        BarSeries1.Palette = New PaletteEntry(Color.FromArgb(37, 64, 97))
+        BarSeries2.Palette = New PaletteEntry(Color.FromArgb(255, 192, 0))
+        LineSeries1.Palette = New PaletteEntry(Color.FromArgb(127, 127, 127))
+        LineSeries2.Palette = New PaletteEntry(Color.FromArgb(217, 217, 217))
+
+        LineSeries1.BorderColor = Color.FromArgb(127, 127, 127)
+        LineSeries2.BorderColor = Color.FromArgb(217, 217, 217)
+
         LineSeries1.PointSize = New SizeF(10, 10)
-        LineSeries2.PointSize = New SizeF(5, 5)
+        LineSeries2.PointSize = New SizeF(10, 10)
         Me.radChartView1.ShowTrackBall = True
         Me.radChartView1.ShowToolTip = True
         'Chartview
         'Me.radChartView1.ShowGrid = True
         'Me.radChartView1.ShowSmartLabels = True
         radChartView1.Series.Add(LineSeries1)
+        radChartView1.Series.Add(LineSeries2)
         radChartView1.Series.Add(BarSeries1)
         radChartView1.Series.Add(BarSeries2)
-        radChartView1.Series.Add(LineSeries2)
+
+
         BarSeries1.CombineMode = ChartSeriesCombineMode.Stack
         BarSeries2.CombineMode = ChartSeriesCombineMode.Stack
+        LineSeries1.CombineMode = ChartSeriesCombineMode.None
+        LineSeries2.CombineMode = ChartSeriesCombineMode.None
+
         If (LinearAxis1.ActualRange.Maximum = 0) Then
             LinearAxis1.Maximum = 5
         End If
     End Sub
-    'Costo equipo-linea
-    Private Sub obtiene_costo_equipo_linea_dia_mes()
+    'Costo Linea
+    Private Sub obtiene_costo_linea_dia_mes()
         'Objeto obtiene_nrfti Clase
         Dim oObtiene_costo As New obtiene_costo
-        oObtiene_costo.cve_equipo = cbxEquipo.SelectedValue
         oObtiene_costo.cve_linea = cbxLinea.SelectedValue
         oObtiene_costo.fecha_inicial = dtpFechaInicial.Value
         oObtiene_costo.fecha_final = dtpFechaFinal.Value
@@ -3144,27 +3019,32 @@ Public Class FrmGraficasfaseuno
         BarSeries2.LegendTitle = "Min. Excedentes"
         Dim LineSeries1 As New LineSeries()
         LineSeries1.LegendTitle = "Costo"
+        Dim LineSeries2 As New LineSeries()
+        LineSeries2.LegendTitle = "Objetivo"
         Me.radChartView1.ShowLegend = True
         'Obtencion Datos
         Dim vDT As DataTable = Nothing
         If rdbtnDias.IsChecked Then
-            vDT = oObtiene_costo.obtiene_costo_equipo_linea_dia()
+            vDT = oObtiene_costo.obtiene_costo_linea_dia()
         ElseIf rdbtnMeses.IsChecked Then
-            vDT = oObtiene_costo.obtiene_costo_equipo_linea_mes()
+            vDT = oObtiene_costo.obtiene_costo_linea_mes()
         End If
         'Llenado de las series
         Dim vTotal As Integer = 1
         Dim vContador As Integer = 1
         vTotal = vDT.Rows.Count
+
         For Each vDR As DataRow In vDT.Rows
             If vTotal = vContador Then
                 BarSeries1.DataPoints.Add(New CategoricalDataPoint(vDR("min_programados"), "acumulado"))
                 BarSeries2.DataPoints.Add(New CategoricalDataPoint(vDR("min_excedentes"), "acumulado"))
                 LineSeries1.DataPoints.Add(New CategoricalDataPoint(vDR("costo"), "acumulado"))
+                LineSeries2.DataPoints.Add(New CategoricalDataPoint(vDR("objetivo_tcdm"), "acumulado"))
             Else
-                    BarSeries1.DataPoints.Add(New CategoricalDataPoint(vDR("min_programados"), vDR("dia_asignado")))
-                    BarSeries2.DataPoints.Add(New CategoricalDataPoint(vDR("min_excedentes"), vDR("dia_asignado")))
-                    LineSeries1.DataPoints.Add(New CategoricalDataPoint(vDR("costo"), vDR("dia_asignado")))
+                BarSeries1.DataPoints.Add(New CategoricalDataPoint(vDR("min_programados"), vDR("dia_asignado")))
+                BarSeries2.DataPoints.Add(New CategoricalDataPoint(vDR("min_excedentes"), vDR("dia_asignado")))
+                LineSeries1.DataPoints.Add(New CategoricalDataPoint(vDR("costo"), vDR("dia_asignado")))
+                LineSeries2.DataPoints.Add(New CategoricalDataPoint(vDR("objetivo_tcdm"), vDR("dia_asignado")))
             End If
             vContador = vContador + 1
         Next
@@ -3196,28 +3076,290 @@ Public Class FrmGraficasfaseuno
         BarSeries1.ShowLabels = True
         BarSeries2.ShowLabels = True
         LineSeries1.ShowLabels = True
+        LineSeries2.ShowLabels = True
+
         BarSeries1.LabelFormat = "{0:###}"
         BarSeries2.LabelFormat = "{0:###}"
+        LineSeries2.LabelFormat = "{0:###}"
         LineSeries1.LabelFormat = "{0:##.##}"
+
+
         BarSeries1.HorizontalAxis = CategoricalAxis1
         BarSeries2.HorizontalAxis = CategoricalAxis1
         LineSeries1.HorizontalAxis = CategoricalAxis1
+        LineSeries2.HorizontalAxis = CategoricalAxis1
+
         BarSeries1.VerticalAxis = LinearAxis1
         BarSeries2.VerticalAxis = LinearAxis1
+        LineSeries2.VerticalAxis = LinearAxis1
         LineSeries1.VerticalAxis = LinearAxis2
-        BarSeries1.Palette = New PaletteEntry(Color.FromArgb(24, 134, 205))
-        BarSeries2.Palette = New PaletteEntry(Color.FromArgb(255, 0, 102))
+
+        BarSeries1.Palette = New PaletteEntry(Color.FromArgb(37, 64, 97))
+        BarSeries2.Palette = New PaletteEntry(Color.FromArgb(255, 192, 0))
+        LineSeries1.Palette = New PaletteEntry(Color.FromArgb(127, 127, 127))
+        LineSeries2.Palette = New PaletteEntry(Color.FromArgb(217, 217, 217))
+
+        LineSeries1.BorderColor = Color.FromArgb(127, 127, 127)
+        LineSeries2.BorderColor = Color.FromArgb(217, 217, 217)
+
         LineSeries1.PointSize = New SizeF(10, 10)
+        LineSeries2.PointSize = New SizeF(10, 10)
         Me.radChartView1.ShowTrackBall = True
         Me.radChartView1.ShowToolTip = True
         'Chartview
         'Me.radChartView1.ShowGrid = True
         'Me.radChartView1.ShowSmartLabels = True
         radChartView1.Series.Add(LineSeries1)
+        radChartView1.Series.Add(LineSeries2)
         radChartView1.Series.Add(BarSeries1)
         radChartView1.Series.Add(BarSeries2)
+
+
         BarSeries1.CombineMode = ChartSeriesCombineMode.Stack
         BarSeries2.CombineMode = ChartSeriesCombineMode.Stack
+        LineSeries1.CombineMode = ChartSeriesCombineMode.None
+        LineSeries2.CombineMode = ChartSeriesCombineMode.None
+
+        If (LinearAxis1.ActualRange.Maximum = 0) Then
+            LinearAxis1.Maximum = 5
+        End If
+    End Sub
+    'Costo Equipo
+    Private Sub obtiene_costo_equipo_dia_mes()
+        'Objeto obtiene_nrfti Clase
+        Dim oObtiene_costo As New obtiene_costo
+        oObtiene_costo.cve_equipo = cbxEquipo.SelectedValue
+        oObtiene_costo.fecha_inicial = dtpFechaInicial.Value
+        oObtiene_costo.fecha_final = dtpFechaFinal.Value
+        oObtiene_costo.bandera = bandera_graficos
+        'Creacion series
+        Dim BarSeries1 As New BarSeries()
+        BarSeries1.LegendTitle = "Min. Programados"
+        Dim BarSeries2 As New BarSeries()
+        BarSeries2.LegendTitle = "Min. Excedentes"
+        Dim LineSeries1 As New LineSeries()
+        LineSeries1.LegendTitle = "Costo"
+        Dim LineSeries2 As New LineSeries()
+        LineSeries2.LegendTitle = "Objetivo"
+        Me.radChartView1.ShowLegend = True
+        'Obtencion Datos
+        Dim vDT As DataTable = Nothing
+        If rdbtnDias.IsChecked Then
+            vDT = oObtiene_costo.obtiene_costo_equipo_dia()
+        ElseIf rdbtnMeses.IsChecked Then
+            vDT = oObtiene_costo.obtiene_costo_equipo_mes()
+        End If
+        'Llenado de las series
+        Dim vTotal As Integer = 1
+        Dim vContador As Integer = 1
+        vTotal = vDT.Rows.Count
+
+        For Each vDR As DataRow In vDT.Rows
+            If vTotal = vContador Then
+                BarSeries1.DataPoints.Add(New CategoricalDataPoint(vDR("min_programados"), "acumulado"))
+                BarSeries2.DataPoints.Add(New CategoricalDataPoint(vDR("min_excedentes"), "acumulado"))
+                LineSeries1.DataPoints.Add(New CategoricalDataPoint(vDR("costo"), "acumulado"))
+                LineSeries2.DataPoints.Add(New CategoricalDataPoint(vDR("objetivo_tcdm"), "acumulado"))
+            Else
+                BarSeries1.DataPoints.Add(New CategoricalDataPoint(vDR("min_programados"), vDR("dia_asignado")))
+                BarSeries2.DataPoints.Add(New CategoricalDataPoint(vDR("min_excedentes"), vDR("dia_asignado")))
+                LineSeries1.DataPoints.Add(New CategoricalDataPoint(vDR("costo"), vDR("dia_asignado")))
+                LineSeries2.DataPoints.Add(New CategoricalDataPoint(vDR("objetivo_tcdm"), vDR("dia_asignado")))
+            End If
+            vContador = vContador + 1
+        Next
+        'Cartesian Area
+        Dim CartesianArea1 As CartesianArea = New CartesianArea()
+        CartesianArea1.ShowGrid = True
+        Me.radChartView1.AreaDesign = CartesianArea1
+        'Categorical axis
+        Dim CategoricalAxis1 As CategoricalAxis = New CategoricalAxis()
+        CategoricalAxis1.LabelFitMode = AxisLabelFitMode.Rotate
+        CategoricalAxis1.LabelRotationAngle = 270.0R
+
+        'LinearAxis
+        Dim LinearAxis1 As LinearAxis = New LinearAxis()
+        Dim LinearAxis2 As LinearAxis = New LinearAxis()
+        LinearAxis1.AxisType = AxisType.Second
+        LinearAxis2.AxisType = AxisType.Second
+        LinearAxis2.HorizontalLocation = AxisHorizontalLocation.Right
+        LinearAxis1.Title = "Minutos"
+        LinearAxis2.Title = "Costo $$"
+        'Personalizacion
+        If rdbtnDias.IsChecked Then
+            CategoricalAxis1.LabelFormat = "{0:MMM - dd}"
+        ElseIf rdbtnMeses.IsChecked Then
+            CategoricalAxis1.LabelFormat = "{0:yyyy - MMMM}"
+        End If
+        'LinearAxis1.MajorStep = 10.0R
+        'Series
+        BarSeries1.ShowLabels = True
+        BarSeries2.ShowLabels = True
+        LineSeries1.ShowLabels = True
+        LineSeries2.ShowLabels = True
+
+        BarSeries1.LabelFormat = "{0:###}"
+        BarSeries2.LabelFormat = "{0:###}"
+        LineSeries2.LabelFormat = "{0:###}"
+        LineSeries1.LabelFormat = "{0:##.##}"
+
+
+        BarSeries1.HorizontalAxis = CategoricalAxis1
+        BarSeries2.HorizontalAxis = CategoricalAxis1
+        LineSeries1.HorizontalAxis = CategoricalAxis1
+        LineSeries2.HorizontalAxis = CategoricalAxis1
+
+        BarSeries1.VerticalAxis = LinearAxis1
+        BarSeries2.VerticalAxis = LinearAxis1
+        LineSeries2.VerticalAxis = LinearAxis1
+        LineSeries1.VerticalAxis = LinearAxis2
+
+        BarSeries1.Palette = New PaletteEntry(Color.FromArgb(37, 64, 97))
+        BarSeries2.Palette = New PaletteEntry(Color.FromArgb(255, 192, 0))
+        LineSeries1.Palette = New PaletteEntry(Color.FromArgb(127, 127, 127))
+        LineSeries2.Palette = New PaletteEntry(Color.FromArgb(217, 217, 217))
+
+        LineSeries1.BorderColor = Color.FromArgb(127, 127, 127)
+        LineSeries2.BorderColor = Color.FromArgb(217, 217, 217)
+
+        LineSeries1.PointSize = New SizeF(10, 10)
+        LineSeries2.PointSize = New SizeF(10, 10)
+        Me.radChartView1.ShowTrackBall = True
+        Me.radChartView1.ShowToolTip = True
+        'Chartview
+        'Me.radChartView1.ShowGrid = True
+        'Me.radChartView1.ShowSmartLabels = True
+        radChartView1.Series.Add(LineSeries1)
+        radChartView1.Series.Add(LineSeries2)
+        radChartView1.Series.Add(BarSeries1)
+        radChartView1.Series.Add(BarSeries2)
+
+
+        BarSeries1.CombineMode = ChartSeriesCombineMode.Stack
+        BarSeries2.CombineMode = ChartSeriesCombineMode.Stack
+        LineSeries1.CombineMode = ChartSeriesCombineMode.None
+        LineSeries2.CombineMode = ChartSeriesCombineMode.None
+
+        If (LinearAxis1.ActualRange.Maximum = 0) Then
+            LinearAxis1.Maximum = 5
+        End If
+    End Sub
+    'Costo equipo-linea
+    Private Sub obtiene_costo_equipo_linea_dia_mes()
+        'Objeto obtiene_nrfti Clase
+        Dim oObtiene_costo As New obtiene_costo
+        oObtiene_costo.cve_equipo = cbxEquipo.SelectedValue
+        oObtiene_costo.cve_linea = cbxLinea.SelectedValue
+        oObtiene_costo.fecha_inicial = dtpFechaInicial.Value
+        oObtiene_costo.fecha_final = dtpFechaFinal.Value
+        oObtiene_costo.bandera = bandera_graficos
+        'Creacion series
+        Dim BarSeries1 As New BarSeries()
+        BarSeries1.LegendTitle = "Min. Programados"
+        Dim BarSeries2 As New BarSeries()
+        BarSeries2.LegendTitle = "Min. Excedentes"
+        Dim LineSeries1 As New LineSeries()
+        LineSeries1.LegendTitle = "Costo"
+        Dim LineSeries2 As New LineSeries()
+        LineSeries2.LegendTitle = "Objetivo"
+        Me.radChartView1.ShowLegend = True
+        'Obtencion Datos
+        Dim vDT As DataTable = Nothing
+        If rdbtnDias.IsChecked Then
+            vDT = oObtiene_costo.obtiene_costo_equipo_linea_dia()
+        ElseIf rdbtnMeses.IsChecked Then
+            vDT = oObtiene_costo.obtiene_costo_equipo_linea_mes()
+        End If
+        'Llenado de las series
+        Dim vTotal As Integer = 1
+        Dim vContador As Integer = 1
+        vTotal = vDT.Rows.Count
+        For Each vDR As DataRow In vDT.Rows
+            If vTotal = vContador Then
+                BarSeries1.DataPoints.Add(New CategoricalDataPoint(vDR("min_programados"), "acumulado"))
+                BarSeries2.DataPoints.Add(New CategoricalDataPoint(vDR("min_excedentes"), "acumulado"))
+                LineSeries1.DataPoints.Add(New CategoricalDataPoint(vDR("costo"), "acumulado"))
+                LineSeries2.DataPoints.Add(New CategoricalDataPoint(vDR("objetivo_tcdm"), "acumulado"))
+            Else
+                BarSeries1.DataPoints.Add(New CategoricalDataPoint(vDR("min_programados"), vDR("dia_asignado")))
+                BarSeries2.DataPoints.Add(New CategoricalDataPoint(vDR("min_excedentes"), vDR("dia_asignado")))
+                LineSeries1.DataPoints.Add(New CategoricalDataPoint(vDR("costo"), vDR("dia_asignado")))
+                LineSeries2.DataPoints.Add(New CategoricalDataPoint(vDR("objetivo_tcdm"), vDR("dia_asignado")))
+            End If
+            vContador = vContador + 1
+        Next
+        'Cartesian Area
+        Dim CartesianArea1 As CartesianArea = New CartesianArea()
+        CartesianArea1.ShowGrid = True
+        Me.radChartView1.AreaDesign = CartesianArea1
+        'Categorical axis
+        Dim CategoricalAxis1 As CategoricalAxis = New CategoricalAxis()
+        CategoricalAxis1.LabelFitMode = AxisLabelFitMode.Rotate
+        CategoricalAxis1.LabelRotationAngle = 270.0R
+
+        'LinearAxis
+        Dim LinearAxis1 As LinearAxis = New LinearAxis()
+        Dim LinearAxis2 As LinearAxis = New LinearAxis()
+        LinearAxis1.AxisType = AxisType.Second
+        LinearAxis2.AxisType = AxisType.Second
+        LinearAxis2.HorizontalLocation = AxisHorizontalLocation.Right
+        LinearAxis1.Title = "Minutos"
+        LinearAxis2.Title = "Costo $$"
+        'Personalizacion
+        If rdbtnDias.IsChecked Then
+            CategoricalAxis1.LabelFormat = "{0:MMM - dd}"
+        ElseIf rdbtnMeses.IsChecked Then
+            CategoricalAxis1.LabelFormat = "{0:yyyy - MMMM}"
+        End If
+        'LinearAxis1.MajorStep = 10.0R
+        'Series
+        BarSeries1.ShowLabels = True
+        BarSeries2.ShowLabels = True
+        LineSeries1.ShowLabels = True
+        LineSeries2.ShowLabels = True
+
+        BarSeries1.LabelFormat = "{0:###}"
+        BarSeries2.LabelFormat = "{0:###}"
+        LineSeries2.LabelFormat = "{0:###}"
+        LineSeries1.LabelFormat = "{0:##.##}"
+
+
+        BarSeries1.HorizontalAxis = CategoricalAxis1
+        BarSeries2.HorizontalAxis = CategoricalAxis1
+        LineSeries1.HorizontalAxis = CategoricalAxis1
+        LineSeries2.HorizontalAxis = CategoricalAxis1
+
+        BarSeries1.VerticalAxis = LinearAxis1
+        BarSeries2.VerticalAxis = LinearAxis1
+        LineSeries2.VerticalAxis = LinearAxis1
+        LineSeries1.VerticalAxis = LinearAxis2
+
+        BarSeries1.Palette = New PaletteEntry(Color.FromArgb(37, 64, 97))
+        BarSeries2.Palette = New PaletteEntry(Color.FromArgb(255, 192, 0))
+        LineSeries1.Palette = New PaletteEntry(Color.FromArgb(127, 127, 127))
+        LineSeries2.Palette = New PaletteEntry(Color.FromArgb(217, 217, 217))
+
+        LineSeries1.BorderColor = Color.FromArgb(127, 127, 127)
+        LineSeries2.BorderColor = Color.FromArgb(217, 217, 217)
+
+        LineSeries1.PointSize = New SizeF(10, 10)
+        LineSeries2.PointSize = New SizeF(10, 10)
+        Me.radChartView1.ShowTrackBall = True
+        Me.radChartView1.ShowToolTip = True
+        'Chartview
+        'Me.radChartView1.ShowGrid = True
+        'Me.radChartView1.ShowSmartLabels = True
+        radChartView1.Series.Add(LineSeries1)
+        radChartView1.Series.Add(LineSeries2)
+        radChartView1.Series.Add(BarSeries1)
+        radChartView1.Series.Add(BarSeries2)
+
+
+        BarSeries1.CombineMode = ChartSeriesCombineMode.Stack
+        BarSeries2.CombineMode = ChartSeriesCombineMode.Stack
+        LineSeries1.CombineMode = ChartSeriesCombineMode.None
+        LineSeries2.CombineMode = ChartSeriesCombineMode.None
+
         If (LinearAxis1.ActualRange.Maximum = 0) Then
             LinearAxis1.Maximum = 5
         End If
@@ -3334,9 +3476,6 @@ Public Class FrmGraficasfaseuno
     End Sub
     Private Sub radChartView1_LabelFormatting(ByVal sender As System.Object, ByVal e As Telerik.WinControls.UI.ChartViewLabelFormattingEventArgs) Handles radChartView1.LabelFormatting
         e.LabelElement.BackColor = Color.Transparent
+        e.LabelElement.BorderColor = Color.Transparent
     End Sub
-    '(object sender, ChartViewLabelFormattingEventArgs e)
-
-
-
 End Class
