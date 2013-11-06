@@ -453,6 +453,9 @@ Public Class FrmGraficasfaseuno
         Dim vTotal As Integer = 1
         Dim vContador As Integer = 1
         vTotal = vDT.Rows.Count
+        If vTotal = 0 Then
+            habilita_etiqueta_datos()
+        End If
         For Each vDR As DataRow In vDT.Rows
             If vContador = vTotal Then
                 BarSeries2.DataPoints.Add(New CategoricalDataPoint(vDR("oee"), "Acumulado"))
@@ -520,6 +523,9 @@ Public Class FrmGraficasfaseuno
         Dim vTotal As Integer = 1
         Dim vContador As Integer = 1
         vTotal = vDT.Rows.Count
+        If vTotal = 0 Then
+            habilita_etiqueta_datos()
+        End If
         For Each vDR As DataRow In vDT.Rows
             If vContador = vTotal Then
                 BarSeries2.DataPoints.Add(New CategoricalDataPoint(vDR("oee"), "Acumulado"))
@@ -587,6 +593,9 @@ Public Class FrmGraficasfaseuno
         Dim vTotal As Integer = 1
         Dim vContador As Integer = 1
         vTotal = vDT.Rows.Count
+        If vTotal = 0 Then
+            habilita_etiqueta_datos()
+        End If
         For Each vDR As DataRow In vDT.Rows
             If vContador = vTotal Then
                 BarSeries2.DataPoints.Add(New CategoricalDataPoint(vDR("oee"), "Acumulado"))
@@ -654,6 +663,9 @@ Public Class FrmGraficasfaseuno
         Dim vTotal As Integer = 1
         Dim vContador As Integer = 1
         vTotal = vDT.Rows.Count
+        If vTotal = 0 Then
+            habilita_etiqueta_datos()
+        End If
         For Each vDR As DataRow In vDT.Rows
             If vContador = vTotal Then
                 BarSeries2.DataPoints.Add(New CategoricalDataPoint(vDR("oee"), "Acumulado"))
@@ -721,6 +733,9 @@ Public Class FrmGraficasfaseuno
         Dim vTotal As Integer = 1
         Dim vContador As Integer = 1
         vTotal = vDT.Rows.Count
+        If vTotal = 0 Then
+            habilita_etiqueta_datos()
+        End If
         For Each vDR As DataRow In vDT.Rows
             If vContador = vTotal Then
                 BarSeries2.DataPoints.Add(New CategoricalDataPoint(vDR("oee"), "Acumulado"))
@@ -789,6 +804,9 @@ Public Class FrmGraficasfaseuno
             vDT = oObtiene_oee.obtiene_oee_equipo_linea_mes()
         End If
         vTotal = vDT.Rows.Count
+        If vTotal = 0 Then
+            habilita_etiqueta_datos()
+        End If
         For Each vDR As DataRow In vDT.Rows
             If rdbtnDias.IsChecked Then
                 If vContador = 1 Then
@@ -865,6 +883,9 @@ Public Class FrmGraficasfaseuno
         Dim vTotal As Integer = 1
         Dim vContador As Integer = 1
         vTotal = vDT.Rows.Count
+        If vTotal = 0 Then
+            habilita_etiqueta_datos()
+        End If
         For Each vDR As DataRow In vDT.Rows
             If vContador = vTotal Then
                 BarSeries2.DataPoints.Add(New CategoricalDataPoint(vDR("nrfti"), "Acumulado"))
@@ -932,6 +953,9 @@ Public Class FrmGraficasfaseuno
         Dim vTotal As Integer = 1
         Dim vContador As Integer = 1
         vTotal = vDT.Rows.Count
+        If vTotal = 0 Then
+            habilita_etiqueta_datos()
+        End If
         For Each vDR As DataRow In vDT.Rows
             If vContador = vTotal Then
                 BarSeries2.DataPoints.Add(New CategoricalDataPoint(vDR("nrfti"), "Acumulado"))
@@ -1003,6 +1027,9 @@ Public Class FrmGraficasfaseuno
         Dim vTotal As Integer = 1
         Dim vContador As Integer = 1
         vTotal = vDT.Rows.Count
+        If vTotal = 0 Then
+            habilita_etiqueta_datos()
+        End If
         For Each vDR As DataRow In vDT.Rows
             If vContador = vTotal Then
                 BarSeries2.DataPoints.Add(New CategoricalDataPoint(vDR("nrfti"), "Acumulado"))
@@ -1074,6 +1101,9 @@ Public Class FrmGraficasfaseuno
         Dim vTotal As Integer = 1
         Dim vContador As Integer = 1
         vTotal = vDT.Rows.Count
+        If vTotal = 0 Then
+            habilita_etiqueta_datos()
+        End If
         For Each vDR As DataRow In vDT.Rows
             If vContador = vTotal Then
                 BarSeries2.DataPoints.Add(New CategoricalDataPoint(vDR("nrfti"), "Acumulado"))
@@ -1145,6 +1175,9 @@ Public Class FrmGraficasfaseuno
         Dim vTotal As Integer = 1
         Dim vContador As Integer = 1
         vTotal = vDT.Rows.Count
+        If vTotal = 0 Then
+            habilita_etiqueta_datos()
+        End If
         For Each vDR As DataRow In vDT.Rows
             If rdbtnDias.IsChecked Then
                 If vContador = 1 Then
@@ -1226,6 +1259,9 @@ Public Class FrmGraficasfaseuno
         Dim vTotal As Integer = 1
         Dim vContador As Integer = 1
         vTotal = vDT.Rows.Count
+        If vTotal = 0 Then
+            habilita_etiqueta_datos()
+        End If
         For Each vDR As DataRow In vDT.Rows
             If rdbtnDias.IsChecked Then
                 If vContador = 1 Then
@@ -1305,6 +1341,11 @@ Public Class FrmGraficasfaseuno
         If rdbtnMeses.IsChecked Then
             vDT = oObtiene_cincoS.obtiene_cincos_planta_mes()
         End If
+
+        If vDT.Rows.Count = 0 Then
+            habilita_etiqueta_datos()
+        End If
+
         BarSeries1.ValueMember = "admon_visual"
         BarSeries1.CategoryMember = "dia_asignado"
         BarSeries1.DataSource = vDT
@@ -1384,6 +1425,11 @@ Public Class FrmGraficasfaseuno
         If rdbtnMeses.IsChecked Then
             vDT = oObtiene_cincoS.obtiene_cincos_cadena_valor_mes()
         End If
+
+        If vDT.Rows.Count = 0 Then
+            habilita_etiqueta_datos()
+        End If
+
         BarSeries1.ValueMember = "admon_visual"
         BarSeries1.CategoryMember = "dia_asignado"
         BarSeries1.DataSource = vDT
@@ -1463,6 +1509,11 @@ Public Class FrmGraficasfaseuno
         If rdbtnMeses.IsChecked Then
             vDT = oObtiene_cincoS.obtiene_cincos_componente_mes()
         End If
+
+        If vDT.Rows.Count = 0 Then
+            habilita_etiqueta_datos()
+        End If
+
         BarSeries1.ValueMember = "admon_visual"
         BarSeries1.CategoryMember = "dia_asignado"
         BarSeries1.DataSource = vDT
@@ -1542,6 +1593,11 @@ Public Class FrmGraficasfaseuno
         If rdbtnMeses.IsChecked Then
             vDT = oObtiene_cincoS.obtiene_cincos_linea_mes()
         End If
+
+        If vDT.Rows.Count = 0 Then
+            habilita_etiqueta_datos()
+        End If
+
         BarSeries1.ValueMember = "admon_visual"
         BarSeries1.CategoryMember = "dia_asignado"
         BarSeries1.DataSource = vDT
@@ -1621,6 +1677,11 @@ Public Class FrmGraficasfaseuno
         If rdbtnMeses.IsChecked Then
             vDT = oObtiene_cincoS.obtiene_cincos_equipo_mes()
         End If
+
+        If vDT.Rows.Count = 0 Then
+            habilita_etiqueta_datos()
+        End If
+
         BarSeries1.ValueMember = "admon_visual"
         BarSeries1.CategoryMember = "dia_asignado"
         BarSeries1.DataSource = vDT
@@ -1702,6 +1763,11 @@ Public Class FrmGraficasfaseuno
         If rdbtnMeses.IsChecked Then
             vDT = oObtiene_cincoS.obtiene_cincos_equipo_linea_mes()
         End If
+
+        If vDT.Rows.Count = 0 Then
+            habilita_etiqueta_datos()
+        End If
+
         BarSeries1.ValueMember = "admon_visual"
         BarSeries1.CategoryMember = "dia_asignado"
         BarSeries1.DataSource = vDT
@@ -1782,6 +1848,11 @@ Public Class FrmGraficasfaseuno
         ElseIf rdbtnMeses.IsChecked Then
             vDT = oObtiene_gente.obtiene_gente_planta_mes()
         End If
+
+        If vDT.Rows.Count = 0 Then
+            habilita_etiqueta_datos()
+        End If
+
         BarSeries1.ValueMember = "total"
         BarSeries1.CategoryMember = "dia_asignado"
         BarSeries1.DataSource = vDT
@@ -1855,6 +1926,11 @@ Public Class FrmGraficasfaseuno
         ElseIf rdbtnMeses.IsChecked Then
             vDT = oObtiene_gente.obtiene_gente_cadena_valor_mes()
         End If
+
+        If vDT.Rows.Count = 0 Then
+            habilita_etiqueta_datos()
+        End If
+
         BarSeries1.ValueMember = "total"
         BarSeries1.CategoryMember = "dia_asignado"
         BarSeries1.DataSource = vDT
@@ -1928,6 +2004,11 @@ Public Class FrmGraficasfaseuno
         ElseIf rdbtnMeses.IsChecked Then
             vDT = oObtiene_gente.obtiene_gente_componente_mes()
         End If
+
+        If vDT.Rows.Count = 0 Then
+            habilita_etiqueta_datos()
+        End If
+
         BarSeries1.ValueMember = "total"
         BarSeries1.CategoryMember = "dia_asignado"
         BarSeries1.DataSource = vDT
@@ -2001,6 +2082,11 @@ Public Class FrmGraficasfaseuno
         ElseIf rdbtnMeses.IsChecked Then
             vDT = oObtiene_gente.obtiene_gente_linea_mes()
         End If
+
+        If vDT.Rows.Count = 0 Then
+            habilita_etiqueta_datos()
+        End If
+
         BarSeries1.ValueMember = "total"
         BarSeries1.CategoryMember = "dia_asignado"
         BarSeries1.DataSource = vDT
@@ -2074,6 +2160,11 @@ Public Class FrmGraficasfaseuno
         ElseIf rdbtnMeses.IsChecked Then
             vDT = oObtiene_gente.obtiene_gente_equipo_mes()
         End If
+
+        If vDT.Rows.Count = 0 Then
+            habilita_etiqueta_datos()
+        End If
+
         BarSeries1.ValueMember = "total"
         BarSeries1.CategoryMember = "dia_asignado"
         BarSeries1.DataSource = vDT
@@ -2148,6 +2239,11 @@ Public Class FrmGraficasfaseuno
         ElseIf rdbtnMeses.IsChecked Then
             vDT = oObtiene_gente.obtiene_gente_equipo_linea_mes()
         End If
+
+        If vDT.Rows.Count = 0 Then
+            habilita_etiqueta_datos()
+        End If
+
         BarSeries1.ValueMember = "total"
         BarSeries1.CategoryMember = "dia_asignado"
         BarSeries1.DataSource = vDT
@@ -2222,6 +2318,11 @@ Public Class FrmGraficasfaseuno
         ElseIf rdbtnMeses.IsChecked Then
             vDT = oObtiene_seguridad.obtiene_seguridad_planta_mes()
         End If
+
+        If vDT.Rows.Count = 0 Then
+            habilita_etiqueta_datos()
+        End If
+
         BarSeries1.ValueMember = "barra_amarilla"
         BarSeries1.CategoryMember = "dia_asignado"
         BarSeries1.DataSource = vDT
@@ -2294,6 +2395,11 @@ Public Class FrmGraficasfaseuno
         ElseIf rdbtnMeses.IsChecked Then
             vDT = oObtiene_seguridad.obtiene_seguridad_cadena_valor_mes()
         End If
+
+        If vDT.Rows.Count = 0 Then
+            habilita_etiqueta_datos()
+        End If
+
         BarSeries1.ValueMember = "barra_amarilla"
         BarSeries1.CategoryMember = "dia_asignado"
         BarSeries1.DataSource = vDT
@@ -2368,6 +2474,11 @@ Public Class FrmGraficasfaseuno
         ElseIf rdbtnMeses.IsChecked Then
             vDT = oObtiene_seguridad.obtiene_seguridad_componente_mes()
         End If
+
+        If vDT.Rows.Count = 0 Then
+            habilita_etiqueta_datos()
+        End If
+
         BarSeries1.ValueMember = "barra_amarilla"
         BarSeries1.CategoryMember = "dia_asignado"
         BarSeries1.DataSource = vDT
@@ -2441,6 +2552,11 @@ Public Class FrmGraficasfaseuno
         ElseIf rdbtnMeses.IsChecked Then
             vDT = oObtiene_seguridad.obtiene_seguridad_linea_mes()
         End If
+
+        If vDT.Rows.Count = 0 Then
+            habilita_etiqueta_datos()
+        End If
+
         BarSeries1.ValueMember = "barra_amarilla"
         BarSeries1.CategoryMember = "dia_asignado"
         BarSeries1.DataSource = vDT
@@ -2514,6 +2630,11 @@ Public Class FrmGraficasfaseuno
         ElseIf rdbtnMeses.IsChecked Then
             vDT = oObtiene_seguridad.obtiene_seguridad_equipo_mes()
         End If
+
+        If vDT.Rows.Count = 0 Then
+            habilita_etiqueta_datos()
+        End If
+
         BarSeries1.ValueMember = "barra_amarilla"
         BarSeries1.CategoryMember = "dia_asignado"
         BarSeries1.DataSource = vDT
@@ -2588,6 +2709,11 @@ Public Class FrmGraficasfaseuno
         ElseIf rdbtnMeses.IsChecked Then
             vDT = oObtiene_seguridad.obtiene_seguridad_equipo_linea_mes()
         End If
+
+        If vDT.Rows.Count = 0 Then
+            habilita_etiqueta_datos()
+        End If
+
         BarSeries1.ValueMember = "barra_amarilla"
         BarSeries1.CategoryMember = "dia_asignado"
         BarSeries1.DataSource = vDT
@@ -2665,11 +2791,14 @@ Public Class FrmGraficasfaseuno
             vDT = oObtiene_costo.obtiene_costo_planta_mes()
         End If
 
-        
         'Llenado de las series
         Dim vTotal As Integer = 1
         Dim vContador As Integer = 1
         vTotal = vDT.Rows.Count
+
+        If vTotal = 0 Then
+            habilita_etiqueta_datos()
+        End If
 
         For Each vDR As DataRow In vDT.Rows
             If vTotal = vContador Then
@@ -2793,6 +2922,10 @@ Public Class FrmGraficasfaseuno
         Dim vContador As Integer = 1
         vTotal = vDT.Rows.Count
 
+        If vTotal = 0 Then
+            habilita_etiqueta_datos()
+        End If
+
         For Each vDR As DataRow In vDT.Rows
             If vTotal = vContador Then
                 BarSeries1.DataPoints.Add(New CategoricalDataPoint(vDR("min_programados"), "acumulado"))
@@ -2914,6 +3047,10 @@ Public Class FrmGraficasfaseuno
         Dim vContador As Integer = 1
         vTotal = vDT.Rows.Count
 
+        If vTotal = 0 Then
+            habilita_etiqueta_datos()
+        End If
+
         For Each vDR As DataRow In vDT.Rows
             If vTotal = vContador Then
                 BarSeries1.DataPoints.Add(New CategoricalDataPoint(vDR("min_programados"), "acumulado"))
@@ -3033,6 +3170,10 @@ Public Class FrmGraficasfaseuno
         Dim vTotal As Integer = 1
         Dim vContador As Integer = 1
         vTotal = vDT.Rows.Count
+
+        If vTotal = 0 Then
+            habilita_etiqueta_datos()
+        End If
 
         For Each vDR As DataRow In vDT.Rows
             If vTotal = vContador Then
@@ -3154,6 +3295,10 @@ Public Class FrmGraficasfaseuno
         Dim vContador As Integer = 1
         vTotal = vDT.Rows.Count
 
+        If vTotal = 0 Then
+            habilita_etiqueta_datos()
+        End If
+
         For Each vDR As DataRow In vDT.Rows
             If vTotal = vContador Then
                 BarSeries1.DataPoints.Add(New CategoricalDataPoint(vDR("min_programados"), "acumulado"))
@@ -3274,6 +3419,11 @@ Public Class FrmGraficasfaseuno
         Dim vTotal As Integer = 1
         Dim vContador As Integer = 1
         vTotal = vDT.Rows.Count
+
+        If vTotal = 0 Then
+            habilita_etiqueta_datos()
+        End If
+
         For Each vDR As DataRow In vDT.Rows
             If vTotal = vContador Then
                 BarSeries1.DataPoints.Add(New CategoricalDataPoint(vDR("min_programados"), "acumulado"))
@@ -3366,6 +3516,12 @@ Public Class FrmGraficasfaseuno
     End Sub
 #End Region
 #Region "Graficar "
+    Private Sub habilita_etiqueta_datos()
+        lblError.Visible = True
+    End Sub
+    Private Sub deshabilita_etiqueta_datos()
+        lblError.Visible = False
+    End Sub
     'Bandera Graficos
     Private Sub set_bandera_graficos(ByVal valor As Integer)
         bandera_graficos = valor
@@ -3469,9 +3625,10 @@ Public Class FrmGraficasfaseuno
             End If
         End If
     End Sub
-#End Region
+#End Region   
     Private Sub btnGraficar_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnGraficar.Click
         Me.radChartView1.ShowTrackBall = False
+        deshabilita_etiqueta_datos()
         obtener_grafica()
     End Sub
     Private Sub radChartView1_LabelFormatting(ByVal sender As System.Object, ByVal e As Telerik.WinControls.UI.ChartViewLabelFormattingEventArgs) Handles radChartView1.LabelFormatting
