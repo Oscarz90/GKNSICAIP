@@ -322,6 +322,8 @@ Public Class FrmGraficasfaseuno
 #End Region
 #Region "Eventos RadioButton Combobox Niveles"
     Private Sub rdbtnNiveles_ToggleStateChanged(ByVal sender As System.Object, ByVal args As Telerik.WinControls.UI.StateChangedEventArgs) Handles rdbtnCadenaValor.ToggleStateChanged, rdbtnComponente.ToggleStateChanged, rdbtnLinea.ToggleStateChanged, rdbtnEquipo.ToggleStateChanged
+
+
         'Cadena valor
         If rdbtnCadenaValor.IsChecked Then
             habilita_combobox_niveles(cbxCadenaValor)
