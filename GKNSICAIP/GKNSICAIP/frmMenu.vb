@@ -11,7 +11,11 @@ Public Class FrmMenu
     End Sub
 
     Private Sub btnOpCalculadora_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnOpCalculadora.Click
-        'Process.Start("exe")
+        Try            
+            Process.Start("\\celsr014\gknsicaip$\CALCULADORA\calculadorPrestaciones.exe")
+        Catch ex As Exception
+            MsgBox("No se encontro la ruta de la aplicacion. Error 0001")
+        End Try
     End Sub
 #End Region
     
