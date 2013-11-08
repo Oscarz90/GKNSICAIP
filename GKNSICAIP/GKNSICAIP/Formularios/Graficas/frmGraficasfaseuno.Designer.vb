@@ -22,7 +22,7 @@ Partial Class FrmGraficasfaseuno
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Dim CartesianArea2 As Telerik.WinControls.UI.CartesianArea = New Telerik.WinControls.UI.CartesianArea()
+        Dim CartesianArea1 As Telerik.WinControls.UI.CartesianArea = New Telerik.WinControls.UI.CartesianArea()
         Me.RadGroupBox1 = New Telerik.WinControls.UI.RadGroupBox()
         Me.rdbtnGente = New Telerik.WinControls.UI.RadRadioButton()
         Me.rdbtnCincoS = New Telerik.WinControls.UI.RadRadioButton()
@@ -49,8 +49,8 @@ Partial Class FrmGraficasfaseuno
         Me.rdbtnMeses = New Telerik.WinControls.UI.RadRadioButton()
         Me.rdbtnDias = New Telerik.WinControls.UI.RadRadioButton()
         Me.radChartView1 = New Telerik.WinControls.UI.RadChartView()
-        Me.btnGraficar = New Telerik.WinControls.UI.RadButton()
         Me.lblError = New System.Windows.Forms.Label()
+        Me.btnGraficar = New Telerik.WinControls.UI.RadButton()
         CType(Me.RadGroupBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.RadGroupBox1.SuspendLayout()
         CType(Me.rdbtnGente, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -339,10 +339,10 @@ Partial Class FrmGraficasfaseuno
         '
         'radChartView1
         '
-        CartesianArea2.GridDesign.AlternatingVerticalColor = False
-        CartesianArea2.GridDesign.DrawVerticalFills = False
-        CartesianArea2.ShowGrid = True
-        Me.radChartView1.AreaDesign = CartesianArea2
+        CartesianArea1.GridDesign.AlternatingVerticalColor = False
+        CartesianArea1.GridDesign.DrawVerticalFills = False
+        CartesianArea1.ShowGrid = True
+        Me.radChartView1.AreaDesign = CartesianArea1
         Me.radChartView1.Controls.Add(Me.lblError)
         Me.radChartView1.Location = New System.Drawing.Point(3, 213)
         Me.radChartView1.Name = "radChartView1"
@@ -350,19 +350,6 @@ Partial Class FrmGraficasfaseuno
         Me.radChartView1.TabIndex = 9
         CType(Me.radChartView1.GetChildAt(0), Telerik.WinControls.UI.RadChartElement).DrawText = False
         CType(Me.radChartView1.GetChildAt(0), Telerik.WinControls.UI.RadChartElement).DrawFill = True
-        '
-        'btnGraficar
-        '
-        Me.btnGraficar.Enabled = False
-        Me.btnGraficar.Image = Global.GKNSICAIP.My.Resources.Resources.frmGraficas_graficar1
-        Me.btnGraficar.ImageAlignment = System.Drawing.ContentAlignment.TopCenter
-        Me.btnGraficar.Location = New System.Drawing.Point(873, 124)
-        Me.btnGraficar.Name = "btnGraficar"
-        Me.btnGraficar.Size = New System.Drawing.Size(99, 66)
-        Me.btnGraficar.TabIndex = 8
-        Me.btnGraficar.Text = "Graficar"
-        Me.btnGraficar.TextAlignment = System.Drawing.ContentAlignment.BottomCenter
-        Me.btnGraficar.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText
         '
         'lblError
         '
@@ -376,6 +363,19 @@ Partial Class FrmGraficasfaseuno
         Me.lblError.Text = "NO HAY DATOS A MOSTRAR."
         Me.lblError.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.lblError.Visible = False
+        '
+        'btnGraficar
+        '
+        Me.btnGraficar.Enabled = False
+        Me.btnGraficar.Image = Global.GKNSICAIP.My.Resources.Resources.frmGraficas_graficar1
+        Me.btnGraficar.ImageAlignment = System.Drawing.ContentAlignment.TopCenter
+        Me.btnGraficar.Location = New System.Drawing.Point(873, 124)
+        Me.btnGraficar.Name = "btnGraficar"
+        Me.btnGraficar.Size = New System.Drawing.Size(99, 66)
+        Me.btnGraficar.TabIndex = 8
+        Me.btnGraficar.Text = "Graficar"
+        Me.btnGraficar.TextAlignment = System.Drawing.ContentAlignment.BottomCenter
+        Me.btnGraficar.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText
         '
         'FrmGraficasfaseuno
         '
