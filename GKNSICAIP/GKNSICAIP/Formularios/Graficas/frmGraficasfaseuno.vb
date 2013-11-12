@@ -2426,7 +2426,7 @@ Public Class FrmGraficasfaseuno
         CategoricalAxis1.LabelRotationAngle = 270.0R
         LinearAxis1.AxisType = AxisType.Second
         'LinearAxis1.MajorStep = 1.0R
-        LinearAxis1.Title = "Seguridad (CI)"
+        LinearAxis1.Title = "CI"
         BarSeries1.ShowLabels = True
         'BarSeries2.ShowLabels = True
         'BarSeries3.ShowLabels = True
@@ -2507,7 +2507,7 @@ Public Class FrmGraficasfaseuno
         LinearAxis1.AxisType = AxisType.Second
         'LinearAxis1.MajorStep = 1.0R
         'LinearAxis1.Maximum = 5
-        LinearAxis1.Title = "Seguridad (CI)"
+        LinearAxis1.Title = "CI"
         BarSeries1.ShowLabels = True
         'BarSeries2.ShowLabels = True
         'BarSeries3.ShowLabels = True
@@ -2589,7 +2589,7 @@ Public Class FrmGraficasfaseuno
         LinearAxis1.AxisType = AxisType.Second
         'LinearAxis1.MajorStep = 1.0R
         'LinearAxis1.Maximum = 5
-        LinearAxis1.Title = "Seguridad (CI)"
+        LinearAxis1.Title = "CI"
         BarSeries1.ShowLabels = True
         'BarSeries2.ShowLabels = True
         'BarSeries3.ShowLabels = True
@@ -2670,7 +2670,7 @@ Public Class FrmGraficasfaseuno
         LinearAxis1.AxisType = AxisType.Second
         'LinearAxis1.MajorStep = 1.0R
 
-        LinearAxis1.Title = "Seguridad (CI)"
+        LinearAxis1.Title = "CI"
         BarSeries1.ShowLabels = True
         'BarSeries2.ShowLabels = True
         'BarSeries3.ShowLabels = True
@@ -2751,7 +2751,7 @@ Public Class FrmGraficasfaseuno
         LinearAxis1.AxisType = AxisType.Second
         'LinearAxis1.MajorStep = 1.0R
         'LinearAxis1.Maximum = 5
-        LinearAxis1.Title = "Seguridad (CI)"
+        LinearAxis1.Title = "CI"
         BarSeries1.ShowLabels = True
         'BarSeries2.ShowLabels = True
         'BarSeries3.ShowLabels = True
@@ -2833,7 +2833,7 @@ Public Class FrmGraficasfaseuno
         LinearAxis1.AxisType = AxisType.Second
         'LinearAxis1.MajorStep = 1.0R
         'LinearAxis1.Maximum = 5
-        LinearAxis1.Title = "Seguridad (CI)"
+        LinearAxis1.Title = "CI"
         BarSeries1.ShowLabels = True
         'BarSeries2.ShowLabels = True
         'BarSeries3.ShowLabels = True
