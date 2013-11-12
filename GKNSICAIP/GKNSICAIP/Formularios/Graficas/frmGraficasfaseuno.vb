@@ -2875,6 +2875,9 @@ Public Class FrmGraficasfaseuno
         Me.radChartView1.ShowLegend = True
         Dim LineSeries2 As New LineSeries()
         LineSeries2.LegendTitle = "Objetivo"
+        'Legend & Position
+        Me.radChartView1.ChartElement.LegendElement.StackElement.Orientation = Orientation.Horizontal
+        Me.radChartView1.ChartElement.LegendPosition = LegendPosition.Bottom
         'Obtencion Datos
         Dim vDT As DataTable = Nothing
         If rdbtnDias.IsChecked Then
