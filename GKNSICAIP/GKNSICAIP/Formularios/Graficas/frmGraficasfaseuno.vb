@@ -4036,4 +4036,8 @@ Public Class FrmGraficasfaseuno
         e.LabelElement.BackColor = Color.Transparent
         e.LabelElement.BorderColor = Color.Transparent
     End Sub
+
+    Private Sub btnGraficar_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnGraficar.Click
+
+    End Sub
 End Class
