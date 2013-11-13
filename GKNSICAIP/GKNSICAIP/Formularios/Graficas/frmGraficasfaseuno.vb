@@ -4032,12 +4032,13 @@ Public Class FrmGraficasfaseuno
         End If
     End Sub
 #End Region
+    Private Sub btnGraficar_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnGraficar.Click
+        Me.radChartView1.ShowTrackBall = False
+        deshabilita_etiqueta_datos()
+        obtener_grafica()
+    End Sub
     Private Sub radChartView1_LabelFormatting(ByVal sender As System.Object, ByVal e As Telerik.WinControls.UI.ChartViewLabelFormattingEventArgs) Handles radChartView1.LabelFormatting
         e.LabelElement.BackColor = Color.Transparent
         e.LabelElement.BorderColor = Color.Transparent
-    End Sub
-
-    Private Sub btnGraficar_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnGraficar.Click
-
     End Sub
 End Class
