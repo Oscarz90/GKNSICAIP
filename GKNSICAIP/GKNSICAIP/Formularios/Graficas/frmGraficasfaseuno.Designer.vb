@@ -91,7 +91,7 @@ Partial Class FrmGraficasfaseuno
         Me.RadGroupBox1.Controls.Add(Me.rdbtnNrfti)
         Me.RadGroupBox1.Controls.Add(Me.rdbtnOee)
         Me.RadGroupBox1.HeaderText = "Indicador:"
-        Me.RadGroupBox1.Location = New System.Drawing.Point(12, 12)
+        Me.RadGroupBox1.Location = New System.Drawing.Point(3, 2)
         Me.RadGroupBox1.Name = "RadGroupBox1"
         '
         '
@@ -164,7 +164,7 @@ Partial Class FrmGraficasfaseuno
         Me.RadGroupBox2.Controls.Add(Me.rdbtnCadenaValor)
         Me.RadGroupBox2.Controls.Add(Me.rdbtnPlanta)
         Me.RadGroupBox2.HeaderText = "Selecciona:"
-        Me.RadGroupBox2.Location = New System.Drawing.Point(117, 12)
+        Me.RadGroupBox2.Location = New System.Drawing.Point(108, 2)
         Me.RadGroupBox2.Name = "RadGroupBox2"
         '
         '
@@ -274,7 +274,7 @@ Partial Class FrmGraficasfaseuno
         Me.RadGroupBox3.Controls.Add(Me.rdbtnMeses)
         Me.RadGroupBox3.Controls.Add(Me.rdbtnDias)
         Me.RadGroupBox3.HeaderText = "Seleccion Fecha:"
-        Me.RadGroupBox3.Location = New System.Drawing.Point(547, 12)
+        Me.RadGroupBox3.Location = New System.Drawing.Point(538, 2)
         Me.RadGroupBox3.Name = "RadGroupBox3"
         '
         '
@@ -344,9 +344,9 @@ Partial Class FrmGraficasfaseuno
         CartesianArea1.ShowGrid = True
         Me.radChartView1.AreaDesign = CartesianArea1
         Me.radChartView1.Controls.Add(Me.lblError)
-        Me.radChartView1.Location = New System.Drawing.Point(3, 213)
+        Me.radChartView1.Location = New System.Drawing.Point(3, 186)
         Me.radChartView1.Name = "radChartView1"
-        Me.radChartView1.Size = New System.Drawing.Size(1257, 481)
+        Me.radChartView1.Size = New System.Drawing.Size(1257, 516)
         Me.radChartView1.TabIndex = 9
         CType(Me.radChartView1.GetChildAt(0), Telerik.WinControls.UI.RadChartElement).DrawText = False
         CType(Me.radChartView1.GetChildAt(0), Telerik.WinControls.UI.RadChartElement).DrawFill = True
@@ -369,7 +369,7 @@ Partial Class FrmGraficasfaseuno
         Me.btnGraficar.Enabled = False
         Me.btnGraficar.Image = Global.GKNSICAIP.My.Resources.Resources.frmGraficas_graficar1
         Me.btnGraficar.ImageAlignment = System.Drawing.ContentAlignment.TopCenter
-        Me.btnGraficar.Location = New System.Drawing.Point(873, 124)
+        Me.btnGraficar.Location = New System.Drawing.Point(850, 114)
         Me.btnGraficar.Name = "btnGraficar"
         Me.btnGraficar.Size = New System.Drawing.Size(99, 66)
         Me.btnGraficar.TabIndex = 8

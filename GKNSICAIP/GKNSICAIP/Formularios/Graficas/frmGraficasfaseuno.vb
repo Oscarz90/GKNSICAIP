@@ -476,6 +476,11 @@ Public Class FrmGraficasfaseuno
         'Personalizacion
         'CartesianArea1.GridDesign.AlternatingVerticalColor = False
         'CartesianArea1.ShowGrid = True
+
+        'Legend & Position
+        Me.radChartView1.ChartElement.LegendElement.StackElement.Orientation = Orientation.Horizontal
+        Me.radChartView1.ChartElement.LegendPosition = LegendPosition.Bottom
+
         Me.radChartView1.AreaDesign = CartesianArea1
         CategoricalAxis1.LabelFitMode = AxisLabelFitMode.Rotate
         If rdbtnDias.IsChecked Then
@@ -549,6 +554,11 @@ Public Class FrmGraficasfaseuno
         'Personalizacion
         'CartesianArea1.GridDesign.AlternatingVerticalColor = False
         'CartesianArea1.ShowGrid = True
+
+        'Legend & Position
+        Me.radChartView1.ChartElement.LegendElement.StackElement.Orientation = Orientation.Horizontal
+        Me.radChartView1.ChartElement.LegendPosition = LegendPosition.Bottom
+
         Me.radChartView1.AreaDesign = CartesianArea1
         CategoricalAxis1.LabelFitMode = AxisLabelFitMode.Rotate
         If rdbtnDias.IsChecked Then
@@ -622,6 +632,11 @@ Public Class FrmGraficasfaseuno
         'Personalizacion
         'CartesianArea1.GridDesign.AlternatingVerticalColor = False
         'CartesianArea1.ShowGrid = True
+
+        'Legend & Position
+        Me.radChartView1.ChartElement.LegendElement.StackElement.Orientation = Orientation.Horizontal
+        Me.radChartView1.ChartElement.LegendPosition = LegendPosition.Bottom
+
         Me.radChartView1.AreaDesign = CartesianArea1
         CategoricalAxis1.LabelFitMode = AxisLabelFitMode.Rotate
         If rdbtnDias.IsChecked Then
@@ -695,6 +710,11 @@ Public Class FrmGraficasfaseuno
         'Personalizacion
         'CartesianArea1.GridDesign.AlternatingVerticalColor = False
         'CartesianArea1.ShowGrid = True
+
+        'Legend & Position
+        Me.radChartView1.ChartElement.LegendElement.StackElement.Orientation = Orientation.Horizontal
+        Me.radChartView1.ChartElement.LegendPosition = LegendPosition.Bottom
+
         Me.radChartView1.AreaDesign = CartesianArea1
         CategoricalAxis1.LabelFitMode = AxisLabelFitMode.Rotate
         If rdbtnDias.IsChecked Then
@@ -768,6 +788,11 @@ Public Class FrmGraficasfaseuno
         'Personalizacion
         'CartesianArea1.GridDesign.AlternatingVerticalColor = False
         'CartesianArea1.ShowGrid = True
+
+        'Legend & Position
+        Me.radChartView1.ChartElement.LegendElement.StackElement.Orientation = Orientation.Horizontal
+        Me.radChartView1.ChartElement.LegendPosition = LegendPosition.Bottom
+
         Me.radChartView1.AreaDesign = CartesianArea1
         CategoricalAxis1.LabelFitMode = AxisLabelFitMode.Rotate
         If rdbtnDias.IsChecked Then
@@ -850,6 +875,11 @@ Public Class FrmGraficasfaseuno
         'Personalizacion
         'CartesianArea1.GridDesign.AlternatingVerticalColor = False
         'CartesianArea1.ShowGrid = True
+
+        'Legend & Position
+        Me.radChartView1.ChartElement.LegendElement.StackElement.Orientation = Orientation.Horizontal
+        Me.radChartView1.ChartElement.LegendPosition = LegendPosition.Bottom
+
         Me.radChartView1.AreaDesign = CartesianArea1
         CategoricalAxis1.LabelFitMode = AxisLabelFitMode.Rotate
         If rdbtnDias.IsChecked Then
@@ -924,6 +954,11 @@ Public Class FrmGraficasfaseuno
         'Personalizacion
         'CartesianArea1.GridDesign.AlternatingVerticalColor = False
         'CartesianArea1.ShowGrid = True
+
+        'Legend & Position
+        Me.radChartView1.ChartElement.LegendElement.StackElement.Orientation = Orientation.Horizontal
+        Me.radChartView1.ChartElement.LegendPosition = LegendPosition.Bottom
+
         Me.radChartView1.AreaDesign = CartesianArea1
         CategoricalAxis1.LabelFitMode = AxisLabelFitMode.Rotate
         If rdbtnDias.IsChecked Then
@@ -933,7 +968,7 @@ Public Class FrmGraficasfaseuno
         End If
         CategoricalAxis1.LabelRotationAngle = 270.0R
         LinearAxis1.AxisType = AxisType.Second
-        LinearAxis1.Title = "NRFTi (PPM'S) "
+        LinearAxis1.Title = "NRFTi ( PPM'S ) "
         BarSeries1.ShowLabels = True
         BarSeries2.ShowLabels = True
         BarSeries1.LabelFormat = "{0:##,###}"
@@ -997,6 +1032,11 @@ Public Class FrmGraficasfaseuno
         'Personalizacion
         'CartesianArea1.GridDesign.AlternatingVerticalColor = False
         'CartesianArea1.ShowGrid = True
+
+        'Legend & Position
+        Me.radChartView1.ChartElement.LegendElement.StackElement.Orientation = Orientation.Horizontal
+        Me.radChartView1.ChartElement.LegendPosition = LegendPosition.Bottom
+
         Me.radChartView1.AreaDesign = CartesianArea1
         CategoricalAxis1.LabelFitMode = AxisLabelFitMode.Rotate
         If rdbtnDias.IsChecked Then
@@ -1010,7 +1050,7 @@ Public Class FrmGraficasfaseuno
         'LinearAxis1.LabelRotationAngle = 300.0R
         'LinearAxis1.MajorStep = 10.0R
         'LinearAxis1.Maximum = 100
-        LinearAxis1.Title = "NRFTi (PPM'S)"
+        LinearAxis1.Title = "NRFTi ( PPM'S )"
         BarSeries1.ShowLabels = True
         BarSeries2.ShowLabels = True
         BarSeries1.LabelFormat = "{0:##,###}"
@@ -1074,6 +1114,11 @@ Public Class FrmGraficasfaseuno
         'Personalizacion
         'CartesianArea1.GridDesign.AlternatingVerticalColor = False
         'CartesianArea1.ShowGrid = True
+
+        'Legend & Position
+        Me.radChartView1.ChartElement.LegendElement.StackElement.Orientation = Orientation.Horizontal
+        Me.radChartView1.ChartElement.LegendPosition = LegendPosition.Bottom
+
         Me.radChartView1.AreaDesign = CartesianArea1
         CategoricalAxis1.LabelFitMode = AxisLabelFitMode.Rotate
         If rdbtnDias.IsChecked Then
@@ -1087,7 +1132,7 @@ Public Class FrmGraficasfaseuno
         'LinearAxis1.LabelRotationAngle = 300.0R
         'LinearAxis1.MajorStep = 10.0R
         'LinearAxis1.Maximum = 100
-        LinearAxis1.Title = "NRFTi (PPM'S)"
+        LinearAxis1.Title = "NRFTi ( PPM'S )"
         BarSeries1.ShowLabels = True
         BarSeries2.ShowLabels = True
         BarSeries1.LabelFormat = "{0:#,###}"
@@ -1134,7 +1179,7 @@ Public Class FrmGraficasfaseuno
             habilita_etiqueta_datos()
             Me.radChartView1.Title = ""
         Else
-            Me.radChartView1.Title = "NRFTi (PPM'S) " & cbxLinea.Text
+            Me.radChartView1.Title = "NRFTi ( PPM'S ) " & cbxLinea.Text
         End If
         For Each vDR As DataRow In vDT.Rows
             If vContador = vTotal Then
@@ -1151,6 +1196,11 @@ Public Class FrmGraficasfaseuno
         'Personalizacion
         'CartesianArea1.GridDesign.AlternatingVerticalColor = False
         'CartesianArea1.ShowGrid = True
+
+        'Legend & Position
+        Me.radChartView1.ChartElement.LegendElement.StackElement.Orientation = Orientation.Horizontal
+        Me.radChartView1.ChartElement.LegendPosition = LegendPosition.Bottom
+
         Me.radChartView1.AreaDesign = CartesianArea1
         CategoricalAxis1.LabelFitMode = AxisLabelFitMode.Rotate
         If rdbtnDias.IsChecked Then
@@ -1211,7 +1261,7 @@ Public Class FrmGraficasfaseuno
             habilita_etiqueta_datos()
             Me.radChartView1.Title = ""
         Else
-            Me.radChartView1.Title = "NRFTi (PPM'S) " & cbxEquipo.Text
+            Me.radChartView1.Title = "NRFTi ( PPM'S ) " & cbxEquipo.Text
         End If
         For Each vDR As DataRow In vDT.Rows
             If rdbtnDias.IsChecked Then
@@ -1237,6 +1287,11 @@ Public Class FrmGraficasfaseuno
         'Personalizacion
         'CartesianArea1.GridDesign.AlternatingVerticalColor = False
         'CartesianArea1.ShowGrid = True
+
+        'Legend & Position
+        Me.radChartView1.ChartElement.LegendElement.StackElement.Orientation = Orientation.Horizontal
+        Me.radChartView1.ChartElement.LegendPosition = LegendPosition.Bottom
+
         Me.radChartView1.AreaDesign = CartesianArea1
         CategoricalAxis1.LabelFitMode = AxisLabelFitMode.Rotate
         If rdbtnDias.IsChecked Then
@@ -1298,7 +1353,7 @@ Public Class FrmGraficasfaseuno
             habilita_etiqueta_datos()
             Me.radChartView1.Title = ""
         Else
-            Me.radChartView1.Title = "NRFTi (PPM'S) " & cbxEquipo.Text & " - " & cbxLinea.Text
+            Me.radChartView1.Title = "NRFTi ( PPM'S ) " & cbxEquipo.Text & " - " & cbxLinea.Text
         End If
         For Each vDR As DataRow In vDT.Rows
             If rdbtnDias.IsChecked Then
@@ -1324,6 +1379,11 @@ Public Class FrmGraficasfaseuno
         'Personalizacion
         'CartesianArea1.GridDesign.AlternatingVerticalColor = False
         'CartesianArea1.ShowGrid = True
+
+        'Legend & Position
+        Me.radChartView1.ChartElement.LegendElement.StackElement.Orientation = Orientation.Horizontal
+        Me.radChartView1.ChartElement.LegendPosition = LegendPosition.Bottom
+
         Me.radChartView1.AreaDesign = CartesianArea1
         CategoricalAxis1.LabelFitMode = AxisLabelFitMode.Rotate
         If rdbtnDias.IsChecked Then
@@ -1406,6 +1466,11 @@ Public Class FrmGraficasfaseuno
         'Personalizacion
         'CartesianArea1.GridDesign.AlternatingVerticalColor = False
         'CartesianArea1.ShowGrid = True
+
+        'Legend & Position
+        Me.radChartView1.ChartElement.LegendElement.StackElement.Orientation = Orientation.Horizontal
+        Me.radChartView1.ChartElement.LegendPosition = LegendPosition.Bottom
+
         Me.radChartView1.AreaDesign = CartesianArea1
         CategoricalAxis1.LabelFitMode = AxisLabelFitMode.Rotate
         If rdbtnDias.IsChecked Then
@@ -1493,6 +1558,11 @@ Public Class FrmGraficasfaseuno
         'Personalizacion
         'CartesianArea1.GridDesign.AlternatingVerticalColor = False
         'CartesianArea1.ShowGrid = True
+
+        'Legend & Position
+        Me.radChartView1.ChartElement.LegendElement.StackElement.Orientation = Orientation.Horizontal
+        Me.radChartView1.ChartElement.LegendPosition = LegendPosition.Bottom
+
         Me.radChartView1.AreaDesign = CartesianArea1
         CategoricalAxis1.LabelFitMode = AxisLabelFitMode.Rotate
         If rdbtnDias.IsChecked Then
@@ -1580,6 +1650,11 @@ Public Class FrmGraficasfaseuno
         'Personalizacion
         'CartesianArea1.GridDesign.AlternatingVerticalColor = False
         'CartesianArea1.ShowGrid = True
+
+        'Legend & Position
+        Me.radChartView1.ChartElement.LegendElement.StackElement.Orientation = Orientation.Horizontal
+        Me.radChartView1.ChartElement.LegendPosition = LegendPosition.Bottom
+
         Me.radChartView1.AreaDesign = CartesianArea1
         CategoricalAxis1.LabelFitMode = AxisLabelFitMode.Rotate
         If rdbtnDias.IsChecked Then
@@ -1667,6 +1742,11 @@ Public Class FrmGraficasfaseuno
         'Personalizacion
         'CartesianArea1.GridDesign.AlternatingVerticalColor = False
         'CartesianArea1.ShowGrid = True
+
+        'Legend & Position
+        Me.radChartView1.ChartElement.LegendElement.StackElement.Orientation = Orientation.Horizontal
+        Me.radChartView1.ChartElement.LegendPosition = LegendPosition.Bottom
+
         Me.radChartView1.AreaDesign = CartesianArea1
         CategoricalAxis1.LabelFitMode = AxisLabelFitMode.Rotate
         If rdbtnDias.IsChecked Then
@@ -1755,6 +1835,11 @@ Public Class FrmGraficasfaseuno
         'Personalizacion
         'CartesianArea1.GridDesign.AlternatingVerticalColor = False
         'CartesianArea1.ShowGrid = True
+
+        'Legend & Position
+        Me.radChartView1.ChartElement.LegendElement.StackElement.Orientation = Orientation.Horizontal
+        Me.radChartView1.ChartElement.LegendPosition = LegendPosition.Bottom
+
         Me.radChartView1.AreaDesign = CartesianArea1
         CategoricalAxis1.LabelFitMode = AxisLabelFitMode.Rotate
         If rdbtnDias.IsChecked Then
@@ -1843,6 +1928,11 @@ Public Class FrmGraficasfaseuno
         'Personalizacion
         'CartesianArea1.GridDesign.AlternatingVerticalColor = False
         'CartesianArea1.ShowGrid = True
+
+        'Legend & Position
+        Me.radChartView1.ChartElement.LegendElement.StackElement.Orientation = Orientation.Horizontal
+        Me.radChartView1.ChartElement.LegendPosition = LegendPosition.Bottom
+
         Me.radChartView1.AreaDesign = CartesianArea1
         CategoricalAxis1.LabelFitMode = AxisLabelFitMode.Rotate
         If rdbtnDias.IsChecked Then
@@ -1928,6 +2018,11 @@ Public Class FrmGraficasfaseuno
         'Personalizacion
         'CartesianArea1.GridDesign.AlternatingVerticalColor = False
         'CartesianArea1.ShowGrid = True
+
+        'Legend & Position
+        Me.radChartView1.ChartElement.LegendElement.StackElement.Orientation = Orientation.Horizontal
+        Me.radChartView1.ChartElement.LegendPosition = LegendPosition.Bottom
+
         Me.radChartView1.AreaDesign = CartesianArea1
         CategoricalAxis1.LabelFitMode = AxisLabelFitMode.Rotate
         If rdbtnDias.IsChecked Then
@@ -2009,6 +2104,11 @@ Public Class FrmGraficasfaseuno
         'Personalizacion
         'CartesianArea1.GridDesign.AlternatingVerticalColor = False
         'CartesianArea1.ShowGrid = True
+
+        'Legend & Position
+        Me.radChartView1.ChartElement.LegendElement.StackElement.Orientation = Orientation.Horizontal
+        Me.radChartView1.ChartElement.LegendPosition = LegendPosition.Bottom
+
         Me.radChartView1.AreaDesign = CartesianArea1
         CategoricalAxis1.LabelFitMode = AxisLabelFitMode.Rotate
         If rdbtnDias.IsChecked Then
@@ -2090,6 +2190,11 @@ Public Class FrmGraficasfaseuno
         'Personalizacion
         'CartesianArea1.GridDesign.AlternatingVerticalColor = False
         'CartesianArea1.ShowGrid = True
+
+        'Legend & Position
+        Me.radChartView1.ChartElement.LegendElement.StackElement.Orientation = Orientation.Horizontal
+        Me.radChartView1.ChartElement.LegendPosition = LegendPosition.Bottom
+
         Me.radChartView1.AreaDesign = CartesianArea1
         CategoricalAxis1.LabelFitMode = AxisLabelFitMode.Rotate
         If rdbtnDias.IsChecked Then
@@ -2171,6 +2276,11 @@ Public Class FrmGraficasfaseuno
         'Personalizacion
         'CartesianArea1.GridDesign.AlternatingVerticalColor = False
         'CartesianArea1.ShowGrid = True
+
+        'Legend & Position
+        Me.radChartView1.ChartElement.LegendElement.StackElement.Orientation = Orientation.Horizontal
+        Me.radChartView1.ChartElement.LegendPosition = LegendPosition.Bottom
+
         Me.radChartView1.AreaDesign = CartesianArea1
         CategoricalAxis1.LabelFitMode = AxisLabelFitMode.Rotate
         If rdbtnDias.IsChecked Then
@@ -2252,6 +2362,11 @@ Public Class FrmGraficasfaseuno
         'Personalizacion
         'CartesianArea1.GridDesign.AlternatingVerticalColor = False
         'CartesianArea1.ShowGrid = True
+
+        'Legend & Position
+        Me.radChartView1.ChartElement.LegendElement.StackElement.Orientation = Orientation.Horizontal
+        Me.radChartView1.ChartElement.LegendPosition = LegendPosition.Bottom
+
         Me.radChartView1.AreaDesign = CartesianArea1
         CategoricalAxis1.LabelFitMode = AxisLabelFitMode.Rotate
         If rdbtnDias.IsChecked Then
@@ -2334,6 +2449,11 @@ Public Class FrmGraficasfaseuno
         'Personalizacion
         'CartesianArea1.GridDesign.AlternatingVerticalColor = False
         'CartesianArea1.ShowGrid = True
+
+        'Legend & Position
+        Me.radChartView1.ChartElement.LegendElement.StackElement.Orientation = Orientation.Horizontal
+        Me.radChartView1.ChartElement.LegendPosition = LegendPosition.Bottom
+
         Me.radChartView1.AreaDesign = CartesianArea1
         CategoricalAxis1.LabelFitMode = AxisLabelFitMode.Rotate
         If rdbtnDias.IsChecked Then
@@ -2416,6 +2536,11 @@ Public Class FrmGraficasfaseuno
         'Personalizacion
         'CartesianArea1.GridDesign.AlternatingVerticalColor = False
         'CartesianArea1.ShowGrid = True
+
+        'Legend & Position
+        Me.radChartView1.ChartElement.LegendElement.StackElement.Orientation = Orientation.Horizontal
+        Me.radChartView1.ChartElement.LegendPosition = LegendPosition.Bottom
+
         Me.radChartView1.AreaDesign = CartesianArea1
         CategoricalAxis1.LabelFitMode = AxisLabelFitMode.Rotate
         If rdbtnDias.IsChecked Then
@@ -2496,6 +2621,11 @@ Public Class FrmGraficasfaseuno
         'Personalizacion
         'CartesianArea1.GridDesign.AlternatingVerticalColor = False
         'CartesianArea1.ShowGrid = True
+
+        'Legend & Position
+        Me.radChartView1.ChartElement.LegendElement.StackElement.Orientation = Orientation.Horizontal
+        Me.radChartView1.ChartElement.LegendPosition = LegendPosition.Bottom
+
         Me.radChartView1.AreaDesign = CartesianArea1
         CategoricalAxis1.LabelFitMode = AxisLabelFitMode.Rotate
         If rdbtnDias.IsChecked Then
@@ -2578,6 +2708,11 @@ Public Class FrmGraficasfaseuno
         'Personalizacion
         'CartesianArea1.GridDesign.AlternatingVerticalColor = False
         'CartesianArea1.ShowGrid = True
+
+        'Legend & Position
+        Me.radChartView1.ChartElement.LegendElement.StackElement.Orientation = Orientation.Horizontal
+        Me.radChartView1.ChartElement.LegendPosition = LegendPosition.Bottom
+
         Me.radChartView1.AreaDesign = CartesianArea1
         CategoricalAxis1.LabelFitMode = AxisLabelFitMode.Rotate
         If rdbtnDias.IsChecked Then
@@ -2659,6 +2794,11 @@ Public Class FrmGraficasfaseuno
         'Personalizacion
         'CartesianArea1.GridDesign.AlternatingVerticalColor = False
         'CartesianArea1.ShowGrid = True
+
+        'Legend & Position
+        Me.radChartView1.ChartElement.LegendElement.StackElement.Orientation = Orientation.Horizontal
+        Me.radChartView1.ChartElement.LegendPosition = LegendPosition.Bottom
+
         Me.radChartView1.AreaDesign = CartesianArea1
         CategoricalAxis1.LabelFitMode = AxisLabelFitMode.Rotate
         If rdbtnDias.IsChecked Then
@@ -2740,6 +2880,11 @@ Public Class FrmGraficasfaseuno
         'Personalizacion
         'CartesianArea1.GridDesign.AlternatingVerticalColor = False
         'CartesianArea1.ShowGrid = True
+
+        'Legend & Position
+        Me.radChartView1.ChartElement.LegendElement.StackElement.Orientation = Orientation.Horizontal
+        Me.radChartView1.ChartElement.LegendPosition = LegendPosition.Bottom
+
         Me.radChartView1.AreaDesign = CartesianArea1
         CategoricalAxis1.LabelFitMode = AxisLabelFitMode.Rotate
         If rdbtnDias.IsChecked Then
@@ -2822,6 +2967,11 @@ Public Class FrmGraficasfaseuno
         'Personalizacion
         'CartesianArea1.GridDesign.AlternatingVerticalColor = False
         'CartesianArea1.ShowGrid = True
+
+        'Legend & Position
+        Me.radChartView1.ChartElement.LegendElement.StackElement.Orientation = Orientation.Horizontal
+        Me.radChartView1.ChartElement.LegendPosition = LegendPosition.Bottom
+
         Me.radChartView1.AreaDesign = CartesianArea1
         CategoricalAxis1.LabelFitMode = AxisLabelFitMode.Rotate
         If rdbtnDias.IsChecked Then
@@ -2875,9 +3025,6 @@ Public Class FrmGraficasfaseuno
         Me.radChartView1.ShowLegend = True
         Dim LineSeries2 As New LineSeries()
         LineSeries2.LegendTitle = "Objetivo"
-        'Legend & Position
-        Me.radChartView1.ChartElement.LegendElement.StackElement.Orientation = Orientation.Horizontal
-        Me.radChartView1.ChartElement.LegendPosition = LegendPosition.Bottom
         'Obtencion Datos
         Dim vDT As DataTable = Nothing
         If rdbtnDias.IsChecked Then
@@ -2930,6 +3077,11 @@ Public Class FrmGraficasfaseuno
         LinearAxis1.Title = "Minutos"
         LinearAxis2.Title = "Costo $"
         'Personalizacion
+
+        'Legend & Position
+        Me.radChartView1.ChartElement.LegendElement.StackElement.Orientation = Orientation.Horizontal
+        Me.radChartView1.ChartElement.LegendPosition = LegendPosition.Bottom
+
         If rdbtnDias.IsChecked Then
             CategoricalAxis1.LabelFormat = "{0:dd - MMM}"
         ElseIf rdbtnMeses.IsChecked Then
@@ -3060,6 +3212,11 @@ Public Class FrmGraficasfaseuno
         LinearAxis1.Title = "Minutos"
         LinearAxis2.Title = "Costo $$"
         'Personalizacion
+
+        'Legend & Position
+        Me.radChartView1.ChartElement.LegendElement.StackElement.Orientation = Orientation.Horizontal
+        Me.radChartView1.ChartElement.LegendPosition = LegendPosition.Bottom
+
         If rdbtnDias.IsChecked Then
             CategoricalAxis1.LabelFormat = "{0:dd - MMM}"
         ElseIf rdbtnMeses.IsChecked Then
@@ -3189,6 +3346,11 @@ Public Class FrmGraficasfaseuno
         LinearAxis1.Title = "Minutos"
         LinearAxis2.Title = "Costo $$"
         'Personalizacion
+
+        'Legend & Position
+        Me.radChartView1.ChartElement.LegendElement.StackElement.Orientation = Orientation.Horizontal
+        Me.radChartView1.ChartElement.LegendPosition = LegendPosition.Bottom
+
         If rdbtnDias.IsChecked Then
             CategoricalAxis1.LabelFormat = "{0:dd - MMM}"
         ElseIf rdbtnMeses.IsChecked Then
@@ -3318,6 +3480,11 @@ Public Class FrmGraficasfaseuno
         LinearAxis1.Title = "Minutos"
         LinearAxis2.Title = "Costo $$"
         'Personalizacion
+
+        'Legend & Position
+        Me.radChartView1.ChartElement.LegendElement.StackElement.Orientation = Orientation.Horizontal
+        Me.radChartView1.ChartElement.LegendPosition = LegendPosition.Bottom
+
         If rdbtnDias.IsChecked Then
             CategoricalAxis1.LabelFormat = "{0:dd - MMM}"
         ElseIf rdbtnMeses.IsChecked Then
@@ -3445,6 +3612,11 @@ Public Class FrmGraficasfaseuno
         LinearAxis1.Title = "Minutos"
         LinearAxis2.Title = "Costo $$"
         'Personalizacion
+
+        'Legend & Position
+        Me.radChartView1.ChartElement.LegendElement.StackElement.Orientation = Orientation.Horizontal
+        Me.radChartView1.ChartElement.LegendPosition = LegendPosition.Bottom
+
         If rdbtnDias.IsChecked Then
             CategoricalAxis1.LabelFormat = "{0:dd - MMM}"
         ElseIf rdbtnMeses.IsChecked Then
@@ -3575,6 +3747,11 @@ Public Class FrmGraficasfaseuno
         LinearAxis1.Title = "Minutos"
         LinearAxis2.Title = "Costo $$"
         'Personalizacion
+
+        'Legend & Position
+        Me.radChartView1.ChartElement.LegendElement.StackElement.Orientation = Orientation.Horizontal
+        Me.radChartView1.ChartElement.LegendPosition = LegendPosition.Bottom
+
         If rdbtnDias.IsChecked Then
             CategoricalAxis1.LabelFormat = "{0:dd - MMM}"
         ElseIf rdbtnMeses.IsChecked Then
