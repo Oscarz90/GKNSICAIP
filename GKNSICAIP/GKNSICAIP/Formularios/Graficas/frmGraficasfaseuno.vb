@@ -477,6 +477,9 @@ Public Class FrmGraficasfaseuno
         'CartesianArea1.GridDesign.AlternatingVerticalColor = False
         'CartesianArea1.ShowGrid = True
 
+        'Logo Indicador
+        picboxIndicador.ImageLocation = Application.StartupPath & "\graficas_fase_uno\logo_indicador_productividad.jpg"
+
         'Legend & Position
         Me.radChartView1.ChartElement.LegendElement.StackElement.Orientation = Orientation.Horizontal
         Me.radChartView1.ChartElement.LegendPosition = LegendPosition.Bottom
@@ -554,6 +557,9 @@ Public Class FrmGraficasfaseuno
         'Personalizacion
         'CartesianArea1.GridDesign.AlternatingVerticalColor = False
         'CartesianArea1.ShowGrid = True
+
+        'Logo Indicador
+        picboxIndicador.ImageLocation = Application.StartupPath & "\graficas_fase_uno\logo_indicador_productividad.jpg"
 
         'Legend & Position
         Me.radChartView1.ChartElement.LegendElement.StackElement.Orientation = Orientation.Horizontal
@@ -633,6 +639,9 @@ Public Class FrmGraficasfaseuno
         'CartesianArea1.GridDesign.AlternatingVerticalColor = False
         'CartesianArea1.ShowGrid = True
 
+        'Logo Indicador
+        picboxIndicador.ImageLocation = Application.StartupPath & "\graficas_fase_uno\logo_indicador_productividad.jpg"
+
         'Legend & Position
         Me.radChartView1.ChartElement.LegendElement.StackElement.Orientation = Orientation.Horizontal
         Me.radChartView1.ChartElement.LegendPosition = LegendPosition.Bottom
@@ -711,6 +720,9 @@ Public Class FrmGraficasfaseuno
         'CartesianArea1.GridDesign.AlternatingVerticalColor = False
         'CartesianArea1.ShowGrid = True
 
+        'Logo Indicador
+        picboxIndicador.ImageLocation = Application.StartupPath & "\graficas_fase_uno\logo_indicador_productividad.jpg"
+
         'Legend & Position
         Me.radChartView1.ChartElement.LegendElement.StackElement.Orientation = Orientation.Horizontal
         Me.radChartView1.ChartElement.LegendPosition = LegendPosition.Bottom
@@ -788,6 +800,9 @@ Public Class FrmGraficasfaseuno
         'Personalizacion
         'CartesianArea1.GridDesign.AlternatingVerticalColor = False
         'CartesianArea1.ShowGrid = True
+
+        'Logo Indicador
+        picboxIndicador.ImageLocation = Application.StartupPath & "\graficas_fase_uno\logo_indicador_productividad.jpg"
 
         'Legend & Position
         Me.radChartView1.ChartElement.LegendElement.StackElement.Orientation = Orientation.Horizontal
@@ -876,6 +891,9 @@ Public Class FrmGraficasfaseuno
         'CartesianArea1.GridDesign.AlternatingVerticalColor = False
         'CartesianArea1.ShowGrid = True
 
+        'Logo Indicador
+        picboxIndicador.ImageLocation = Application.StartupPath & "\graficas_fase_uno\logo_indicador_productividad.jpg"
+
         'Legend & Position
         Me.radChartView1.ChartElement.LegendElement.StackElement.Orientation = Orientation.Horizontal
         Me.radChartView1.ChartElement.LegendPosition = LegendPosition.Bottom
@@ -955,6 +973,9 @@ Public Class FrmGraficasfaseuno
         'CartesianArea1.GridDesign.AlternatingVerticalColor = False
         'CartesianArea1.ShowGrid = True
 
+        'Logo Indicador
+        picboxIndicador.ImageLocation = Application.StartupPath & "\graficas_fase_uno\logo_indicador_calidad.jpg"
+
         'Legend & Position
         Me.radChartView1.ChartElement.LegendElement.StackElement.Orientation = Orientation.Horizontal
         Me.radChartView1.ChartElement.LegendPosition = LegendPosition.Bottom
@@ -1032,6 +1053,9 @@ Public Class FrmGraficasfaseuno
         'Personalizacion
         'CartesianArea1.GridDesign.AlternatingVerticalColor = False
         'CartesianArea1.ShowGrid = True
+
+        'Logo Indicador
+        picboxIndicador.ImageLocation = Application.StartupPath & "\graficas_fase_uno\logo_indicador_calidad.jpg"
 
         'Legend & Position
         Me.radChartView1.ChartElement.LegendElement.StackElement.Orientation = Orientation.Horizontal
@@ -1115,6 +1139,9 @@ Public Class FrmGraficasfaseuno
         'CartesianArea1.GridDesign.AlternatingVerticalColor = False
         'CartesianArea1.ShowGrid = True
 
+        'Logo Indicador
+        picboxIndicador.ImageLocation = Application.StartupPath & "\graficas_fase_uno\logo_indicador_calidad.jpg"
+
         'Legend & Position
         Me.radChartView1.ChartElement.LegendElement.StackElement.Orientation = Orientation.Horizontal
         Me.radChartView1.ChartElement.LegendPosition = LegendPosition.Bottom
@@ -1196,6 +1223,9 @@ Public Class FrmGraficasfaseuno
         'Personalizacion
         'CartesianArea1.GridDesign.AlternatingVerticalColor = False
         'CartesianArea1.ShowGrid = True
+
+        'Logo Indicador
+        picboxIndicador.ImageLocation = Application.StartupPath & "\graficas_fase_uno\logo_indicador_calidad.jpg"
 
         'Legend & Position
         Me.radChartView1.ChartElement.LegendElement.StackElement.Orientation = Orientation.Horizontal
@@ -1287,6 +1317,9 @@ Public Class FrmGraficasfaseuno
         'Personalizacion
         'CartesianArea1.GridDesign.AlternatingVerticalColor = False
         'CartesianArea1.ShowGrid = True
+
+        'Logo Indicador
+        picboxIndicador.ImageLocation = Application.StartupPath & "\graficas_fase_uno\logo_indicador_calidad.jpg"
 
         'Legend & Position
         Me.radChartView1.ChartElement.LegendElement.StackElement.Orientation = Orientation.Horizontal
@@ -1380,6 +1413,9 @@ Public Class FrmGraficasfaseuno
         'CartesianArea1.GridDesign.AlternatingVerticalColor = False
         'CartesianArea1.ShowGrid = True
 
+        'Logo Indicador
+        picboxIndicador.ImageLocation = Application.StartupPath & "\graficas_fase_uno\logo_indicador_calidad.jpg"
+
         'Legend & Position
         Me.radChartView1.ChartElement.LegendElement.StackElement.Orientation = Orientation.Horizontal
         Me.radChartView1.ChartElement.LegendPosition = LegendPosition.Bottom
@@ -1466,6 +1502,9 @@ Public Class FrmGraficasfaseuno
         'Personalizacion
         'CartesianArea1.GridDesign.AlternatingVerticalColor = False
         'CartesianArea1.ShowGrid = True
+
+        'Logo Indicador
+        picboxIndicador.ImageLocation = Application.StartupPath & "\graficas_fase_uno\logo_indicador_cincos.jpg"
 
         'Legend & Position
         Me.radChartView1.ChartElement.LegendElement.StackElement.Orientation = Orientation.Horizontal
@@ -1559,6 +1598,9 @@ Public Class FrmGraficasfaseuno
         'CartesianArea1.GridDesign.AlternatingVerticalColor = False
         'CartesianArea1.ShowGrid = True
 
+        'Logo Indicador
+        picboxIndicador.ImageLocation = Application.StartupPath & "\graficas_fase_uno\logo_indicador_cincos.jpg"
+
         'Legend & Position
         Me.radChartView1.ChartElement.LegendElement.StackElement.Orientation = Orientation.Horizontal
         Me.radChartView1.ChartElement.LegendPosition = LegendPosition.Bottom
@@ -1651,6 +1693,9 @@ Public Class FrmGraficasfaseuno
         'CartesianArea1.GridDesign.AlternatingVerticalColor = False
         'CartesianArea1.ShowGrid = True
 
+        'Logo Indicador
+        picboxIndicador.ImageLocation = Application.StartupPath & "\graficas_fase_uno\logo_indicador_cincos.jpg"
+
         'Legend & Position
         Me.radChartView1.ChartElement.LegendElement.StackElement.Orientation = Orientation.Horizontal
         Me.radChartView1.ChartElement.LegendPosition = LegendPosition.Bottom
@@ -1742,6 +1787,9 @@ Public Class FrmGraficasfaseuno
         'Personalizacion
         'CartesianArea1.GridDesign.AlternatingVerticalColor = False
         'CartesianArea1.ShowGrid = True
+
+        'Logo Indicador
+        picboxIndicador.ImageLocation = Application.StartupPath & "\graficas_fase_uno\logo_indicador_cincos.jpg"
 
         'Legend & Position
         Me.radChartView1.ChartElement.LegendElement.StackElement.Orientation = Orientation.Horizontal
@@ -1836,6 +1884,9 @@ Public Class FrmGraficasfaseuno
         'CartesianArea1.GridDesign.AlternatingVerticalColor = False
         'CartesianArea1.ShowGrid = True
 
+        'Logo Indicador
+        picboxIndicador.ImageLocation = Application.StartupPath & "\graficas_fase_uno\logo_indicador_cincos.jpg"
+
         'Legend & Position
         Me.radChartView1.ChartElement.LegendElement.StackElement.Orientation = Orientation.Horizontal
         Me.radChartView1.ChartElement.LegendPosition = LegendPosition.Bottom
@@ -1929,6 +1980,9 @@ Public Class FrmGraficasfaseuno
         'CartesianArea1.GridDesign.AlternatingVerticalColor = False
         'CartesianArea1.ShowGrid = True
 
+        'Logo Indicador
+        picboxIndicador.ImageLocation = Application.StartupPath & "\graficas_fase_uno\logo_indicador_cincos.jpg"
+
         'Legend & Position
         Me.radChartView1.ChartElement.LegendElement.StackElement.Orientation = Orientation.Horizontal
         Me.radChartView1.ChartElement.LegendPosition = LegendPosition.Bottom
@@ -2019,6 +2073,9 @@ Public Class FrmGraficasfaseuno
         'CartesianArea1.GridDesign.AlternatingVerticalColor = False
         'CartesianArea1.ShowGrid = True
 
+        'Logo Indicador
+        picboxIndicador.ImageLocation = Application.StartupPath & "\graficas_fase_uno\logo_indicador_gente.jpg"
+
         'Legend & Position
         Me.radChartView1.ChartElement.LegendElement.StackElement.Orientation = Orientation.Horizontal
         Me.radChartView1.ChartElement.LegendPosition = LegendPosition.Bottom
@@ -2104,6 +2161,9 @@ Public Class FrmGraficasfaseuno
         'Personalizacion
         'CartesianArea1.GridDesign.AlternatingVerticalColor = False
         'CartesianArea1.ShowGrid = True
+
+        'Logo Indicador
+        picboxIndicador.ImageLocation = Application.StartupPath & "\graficas_fase_uno\logo_indicador_gente.jpg"
 
         'Legend & Position
         Me.radChartView1.ChartElement.LegendElement.StackElement.Orientation = Orientation.Horizontal
@@ -2191,6 +2251,9 @@ Public Class FrmGraficasfaseuno
         'CartesianArea1.GridDesign.AlternatingVerticalColor = False
         'CartesianArea1.ShowGrid = True
 
+        'Logo Indicador
+        picboxIndicador.ImageLocation = Application.StartupPath & "\graficas_fase_uno\logo_indicador_gente.jpg"
+
         'Legend & Position
         Me.radChartView1.ChartElement.LegendElement.StackElement.Orientation = Orientation.Horizontal
         Me.radChartView1.ChartElement.LegendPosition = LegendPosition.Bottom
@@ -2277,6 +2340,9 @@ Public Class FrmGraficasfaseuno
         'CartesianArea1.GridDesign.AlternatingVerticalColor = False
         'CartesianArea1.ShowGrid = True
 
+        'Logo Indicador
+        picboxIndicador.ImageLocation = Application.StartupPath & "\graficas_fase_uno\logo_indicador_gente.jpg"
+
         'Legend & Position
         Me.radChartView1.ChartElement.LegendElement.StackElement.Orientation = Orientation.Horizontal
         Me.radChartView1.ChartElement.LegendPosition = LegendPosition.Bottom
@@ -2362,6 +2428,9 @@ Public Class FrmGraficasfaseuno
         'Personalizacion
         'CartesianArea1.GridDesign.AlternatingVerticalColor = False
         'CartesianArea1.ShowGrid = True
+
+        'Logo Indicador
+        picboxIndicador.ImageLocation = Application.StartupPath & "\graficas_fase_uno\logo_indicador_gente.jpg"
 
         'Legend & Position
         Me.radChartView1.ChartElement.LegendElement.StackElement.Orientation = Orientation.Horizontal
@@ -2450,6 +2519,9 @@ Public Class FrmGraficasfaseuno
         'CartesianArea1.GridDesign.AlternatingVerticalColor = False
         'CartesianArea1.ShowGrid = True
 
+        'Logo Indicador
+        picboxIndicador.ImageLocation = Application.StartupPath & "\graficas_fase_uno\logo_indicador_gente.jpg"
+
         'Legend & Position
         Me.radChartView1.ChartElement.LegendElement.StackElement.Orientation = Orientation.Horizontal
         Me.radChartView1.ChartElement.LegendPosition = LegendPosition.Bottom
@@ -2537,6 +2609,9 @@ Public Class FrmGraficasfaseuno
         'CartesianArea1.GridDesign.AlternatingVerticalColor = False
         'CartesianArea1.ShowGrid = True
 
+        'Logo Indicador
+        picboxIndicador.ImageLocation = Application.StartupPath & "\graficas_fase_uno\logo_indicador_seguridad.jpg"
+
         'Legend & Position
         Me.radChartView1.ChartElement.LegendElement.StackElement.Orientation = Orientation.Horizontal
         Me.radChartView1.ChartElement.LegendPosition = LegendPosition.Bottom
@@ -2621,6 +2696,9 @@ Public Class FrmGraficasfaseuno
         'Personalizacion
         'CartesianArea1.GridDesign.AlternatingVerticalColor = False
         'CartesianArea1.ShowGrid = True
+
+        'Logo Indicador
+        picboxIndicador.ImageLocation = Application.StartupPath & "\graficas_fase_uno\logo_indicador_seguridad.jpg"
 
         'Legend & Position
         Me.radChartView1.ChartElement.LegendElement.StackElement.Orientation = Orientation.Horizontal
@@ -2709,6 +2787,9 @@ Public Class FrmGraficasfaseuno
         'CartesianArea1.GridDesign.AlternatingVerticalColor = False
         'CartesianArea1.ShowGrid = True
 
+        'Logo Indicador
+        picboxIndicador.ImageLocation = Application.StartupPath & "\graficas_fase_uno\logo_indicador_seguridad.jpg"
+
         'Legend & Position
         Me.radChartView1.ChartElement.LegendElement.StackElement.Orientation = Orientation.Horizontal
         Me.radChartView1.ChartElement.LegendPosition = LegendPosition.Bottom
@@ -2794,6 +2875,9 @@ Public Class FrmGraficasfaseuno
         'Personalizacion
         'CartesianArea1.GridDesign.AlternatingVerticalColor = False
         'CartesianArea1.ShowGrid = True
+
+        'Logo Indicador
+        picboxIndicador.ImageLocation = Application.StartupPath & "\graficas_fase_uno\logo_indicador_seguridad.jpg"
 
         'Legend & Position
         Me.radChartView1.ChartElement.LegendElement.StackElement.Orientation = Orientation.Horizontal
@@ -2881,6 +2965,9 @@ Public Class FrmGraficasfaseuno
         'CartesianArea1.GridDesign.AlternatingVerticalColor = False
         'CartesianArea1.ShowGrid = True
 
+        'Logo Indicador
+        picboxIndicador.ImageLocation = Application.StartupPath & "\graficas_fase_uno\logo_indicador_seguridad.jpg"
+
         'Legend & Position
         Me.radChartView1.ChartElement.LegendElement.StackElement.Orientation = Orientation.Horizontal
         Me.radChartView1.ChartElement.LegendPosition = LegendPosition.Bottom
@@ -2967,6 +3054,9 @@ Public Class FrmGraficasfaseuno
         'Personalizacion
         'CartesianArea1.GridDesign.AlternatingVerticalColor = False
         'CartesianArea1.ShowGrid = True
+
+        'Logo Indicador
+        picboxIndicador.ImageLocation = Application.StartupPath & "\graficas_fase_uno\logo_indicador_seguridad.jpg"
 
         'Legend & Position
         Me.radChartView1.ChartElement.LegendElement.StackElement.Orientation = Orientation.Horizontal
@@ -3077,6 +3167,9 @@ Public Class FrmGraficasfaseuno
         LinearAxis1.Title = "Minutos"
         LinearAxis2.Title = "Costo $"
         'Personalizacion
+
+        'Logo Indicador
+        picboxIndicador.ImageLocation = Application.StartupPath & "\graficas_fase_uno\logo_indicador_costo.jpg"
 
         'Legend & Position
         Me.radChartView1.ChartElement.LegendElement.StackElement.Orientation = Orientation.Horizontal
@@ -3213,6 +3306,9 @@ Public Class FrmGraficasfaseuno
         LinearAxis2.Title = "Costo $$"
         'Personalizacion
 
+        'Logo Indicador
+        picboxIndicador.ImageLocation = Application.StartupPath & "\graficas_fase_uno\logo_indicador_costo.jpg"
+
         'Legend & Position
         Me.radChartView1.ChartElement.LegendElement.StackElement.Orientation = Orientation.Horizontal
         Me.radChartView1.ChartElement.LegendPosition = LegendPosition.Bottom
@@ -3346,6 +3442,9 @@ Public Class FrmGraficasfaseuno
         LinearAxis1.Title = "Minutos"
         LinearAxis2.Title = "Costo $$"
         'Personalizacion
+
+        'Logo Indicador
+        picboxIndicador.ImageLocation = Application.StartupPath & "\graficas_fase_uno\logo_indicador_costo.jpg"
 
         'Legend & Position
         Me.radChartView1.ChartElement.LegendElement.StackElement.Orientation = Orientation.Horizontal
@@ -3481,6 +3580,9 @@ Public Class FrmGraficasfaseuno
         LinearAxis2.Title = "Costo $$"
         'Personalizacion
 
+        'Logo Indicador
+        picboxIndicador.ImageLocation = Application.StartupPath & "\graficas_fase_uno\logo_indicador_costo.jpg"
+
         'Legend & Position
         Me.radChartView1.ChartElement.LegendElement.StackElement.Orientation = Orientation.Horizontal
         Me.radChartView1.ChartElement.LegendPosition = LegendPosition.Bottom
@@ -3612,6 +3714,9 @@ Public Class FrmGraficasfaseuno
         LinearAxis1.Title = "Minutos"
         LinearAxis2.Title = "Costo $$"
         'Personalizacion
+
+        'Logo Indicador
+        picboxIndicador.ImageLocation = Application.StartupPath & "\graficas_fase_uno\logo_indicador_costo.jpg"
 
         'Legend & Position
         Me.radChartView1.ChartElement.LegendElement.StackElement.Orientation = Orientation.Horizontal
@@ -3747,6 +3852,9 @@ Public Class FrmGraficasfaseuno
         LinearAxis1.Title = "Minutos"
         LinearAxis2.Title = "Costo $$"
         'Personalizacion
+
+        'Logo Indicador
+        picboxIndicador.ImageLocation = Application.StartupPath & "\graficas_fase_uno\logo_indicador_costo.jpg"
 
         'Legend & Position
         Me.radChartView1.ChartElement.LegendElement.StackElement.Orientation = Orientation.Horizontal
@@ -3924,11 +4032,6 @@ Public Class FrmGraficasfaseuno
         End If
     End Sub
 #End Region
-    Private Sub btnGraficar_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnGraficar.Click
-        Me.radChartView1.ShowTrackBall = False
-        deshabilita_etiqueta_datos()
-        obtener_grafica()
-    End Sub
     Private Sub radChartView1_LabelFormatting(ByVal sender As System.Object, ByVal e As Telerik.WinControls.UI.ChartViewLabelFormattingEventArgs) Handles radChartView1.LabelFormatting
         e.LabelElement.BackColor = Color.Transparent
         e.LabelElement.BorderColor = Color.Transparent
