@@ -341,6 +341,9 @@ Partial Class FrmGraficasfaseuno
         '
         'radChartView1
         '
+        Me.radChartView1.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+                    Or System.Windows.Forms.AnchorStyles.Left) _
+                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         CartesianArea1.GridDesign.AlternatingVerticalColor = False
         CartesianArea1.GridDesign.DrawVerticalFills = False
         CartesianArea1.ShowGrid = True
@@ -400,14 +403,13 @@ Partial Class FrmGraficasfaseuno
         Me.Controls.Add(Me.RadGroupBox3)
         Me.Controls.Add(Me.RadGroupBox2)
         Me.Controls.Add(Me.RadGroupBox1)
-        Me.MaximumSize = New System.Drawing.Size(1280, 768)
         Me.MinimumSize = New System.Drawing.Size(1280, 736)
         Me.Name = "FrmGraficasfaseuno"
         '
         '
         '
         Me.RootElement.ApplyShapeToControl = True
-        Me.RootElement.MaxSize = New System.Drawing.Size(1280, 768)
+        Me.RootElement.MaxSize = New System.Drawing.Size(0, 0)
         Me.Text = "Gráficos SICAIP"
         Me.ThemeName = "RadThemeManager"
         CType(Me.RadGroupBox1, System.ComponentModel.ISupportInitialize).EndInit()

@@ -3192,7 +3192,7 @@ Public Class FrmGraficasfaseuno
         BarSeries1.LabelFormat = "{0:###}"
         BarSeries2.LabelFormat = "{0:###}"
         'LineSeries2.LabelFormat = "{0:###}"
-        LineSeries1.LabelFormat = "{0:##.##}"
+        LineSeries1.LabelFormat = "$ " & "{0:##.##}"
 
 
         BarSeries1.HorizontalAxis = CategoricalAxis1
@@ -3205,7 +3205,7 @@ Public Class FrmGraficasfaseuno
         LineSeries2.VerticalAxis = LinearAxis1
         LineSeries1.VerticalAxis = LinearAxis2
 
-        BarSeries1.Palette = New PaletteEntry(Color.FromArgb(37, 64, 97))
+        BarSeries1.Palette = New PaletteEntry(Color.FromArgb(62, 105, 157))
         BarSeries2.Palette = New PaletteEntry(Color.FromArgb(255, 192, 0))
         LineSeries1.Palette = New PaletteEntry(Color.FromArgb(127, 127, 127))
         LineSeries2.Palette = New PaletteEntry(Color.FromArgb(217, 217, 217))
@@ -3331,7 +3331,7 @@ Public Class FrmGraficasfaseuno
         BarSeries1.LabelFormat = "{0:###}"
         BarSeries2.LabelFormat = "{0:###}"
         'LineSeries2.LabelFormat = "{0:###}"
-        LineSeries1.LabelFormat = "{0:##.##}"
+        LineSeries1.LabelFormat = "$ " & "{0:##.##}"
 
         BarSeries1.HorizontalAxis = CategoricalAxis1
         BarSeries2.HorizontalAxis = CategoricalAxis1
@@ -3343,7 +3343,7 @@ Public Class FrmGraficasfaseuno
         LineSeries2.VerticalAxis = LinearAxis1
         LineSeries1.VerticalAxis = LinearAxis2
 
-        BarSeries1.Palette = New PaletteEntry(Color.FromArgb(37, 64, 97))
+        BarSeries1.Palette = New PaletteEntry(Color.FromArgb(62, 105, 157))
         BarSeries2.Palette = New PaletteEntry(Color.FromArgb(255, 192, 0))
         LineSeries1.Palette = New PaletteEntry(Color.FromArgb(127, 127, 127))
         LineSeries2.Palette = New PaletteEntry(Color.FromArgb(217, 217, 217))
@@ -3467,7 +3467,7 @@ Public Class FrmGraficasfaseuno
         BarSeries1.LabelFormat = "{0:###}"
         BarSeries2.LabelFormat = "{0:###}"
         'LineSeries2.LabelFormat = "{0:###}"
-        LineSeries1.LabelFormat = "{0:##.##}"
+        LineSeries1.LabelFormat = "$ " & "{0:##.##}"
 
 
         BarSeries1.HorizontalAxis = CategoricalAxis1
@@ -3480,7 +3480,7 @@ Public Class FrmGraficasfaseuno
         LineSeries2.VerticalAxis = LinearAxis1
         LineSeries1.VerticalAxis = LinearAxis2
 
-        BarSeries1.Palette = New PaletteEntry(Color.FromArgb(37, 64, 97))
+        BarSeries1.Palette = New PaletteEntry(Color.FromArgb(62, 105, 157))
         BarSeries2.Palette = New PaletteEntry(Color.FromArgb(255, 192, 0))
         LineSeries1.Palette = New PaletteEntry(Color.FromArgb(127, 127, 127))
         LineSeries2.Palette = New PaletteEntry(Color.FromArgb(217, 217, 217))
@@ -3602,7 +3602,7 @@ Public Class FrmGraficasfaseuno
         BarSeries1.LabelFormat = "{0:###}"
         BarSeries2.LabelFormat = "{0:###}"
         'LineSeries2.LabelFormat = "{0:###}"
-        LineSeries1.LabelFormat = "{0:##.##}"
+        LineSeries1.LabelFormat = "$ " & "{0:##.##}"
 
 
         BarSeries1.HorizontalAxis = CategoricalAxis1
@@ -3615,7 +3615,7 @@ Public Class FrmGraficasfaseuno
         LineSeries2.VerticalAxis = LinearAxis1
         LineSeries1.VerticalAxis = LinearAxis2
 
-        BarSeries1.Palette = New PaletteEntry(Color.FromArgb(37, 64, 97))
+        BarSeries1.Palette = New PaletteEntry(Color.FromArgb(62, 105, 157))
         BarSeries2.Palette = New PaletteEntry(Color.FromArgb(255, 192, 0))
         LineSeries1.Palette = New PaletteEntry(Color.FromArgb(127, 127, 127))
         LineSeries2.Palette = New PaletteEntry(Color.FromArgb(217, 217, 217))
@@ -3739,7 +3739,7 @@ Public Class FrmGraficasfaseuno
         BarSeries1.LabelFormat = "{0:###}"
         BarSeries2.LabelFormat = "{0:###}"
         'LineSeries2.LabelFormat = "{0:###}"
-        LineSeries1.LabelFormat = "{0:##.##}"
+        LineSeries1.LabelFormat = "$ " & "{0:##.##}"
 
 
         BarSeries1.HorizontalAxis = CategoricalAxis1
@@ -3752,7 +3752,7 @@ Public Class FrmGraficasfaseuno
         LineSeries2.VerticalAxis = LinearAxis1
         LineSeries1.VerticalAxis = LinearAxis2
 
-        BarSeries1.Palette = New PaletteEntry(Color.FromArgb(37, 64, 97))
+        BarSeries1.Palette = New PaletteEntry(Color.FromArgb(62, 105, 157))
         BarSeries2.Palette = New PaletteEntry(Color.FromArgb(255, 192, 0))
         LineSeries1.Palette = New PaletteEntry(Color.FromArgb(127, 127, 127))
         LineSeries2.Palette = New PaletteEntry(Color.FromArgb(217, 217, 217))
@@ -3877,7 +3877,7 @@ Public Class FrmGraficasfaseuno
         BarSeries1.LabelFormat = "{0:###}"
         BarSeries2.LabelFormat = "{0:###}"
         'LineSeries2.LabelFormat = "{0:###}"
-        LineSeries1.LabelFormat = "{0:##.##}"
+        LineSeries1.LabelFormat = "$ " & "{0:##.##}"
 
 
         BarSeries1.HorizontalAxis = CategoricalAxis1
@@ -3890,7 +3890,7 @@ Public Class FrmGraficasfaseuno
         LineSeries2.VerticalAxis = LinearAxis1
         LineSeries1.VerticalAxis = LinearAxis2
 
-        BarSeries1.Palette = New PaletteEntry(Color.FromArgb(37, 64, 97))
+        BarSeries1.Palette = New PaletteEntry(Color.FromArgb(62, 105, 157))
         BarSeries2.Palette = New PaletteEntry(Color.FromArgb(255, 192, 0))
         LineSeries1.Palette = New PaletteEntry(Color.FromArgb(127, 127, 127))
         LineSeries2.Palette = New PaletteEntry(Color.FromArgb(217, 217, 217))
