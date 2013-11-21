@@ -34,13 +34,13 @@ Public Class Manejo_Consultas
 
 
 
-    Public Function Obtener_Componentes() As DataTable
+    'Public Function Obtener_Componentes() As DataTable
 
 
 
 
 
-    End Function
+    'End Function
 
 
 
