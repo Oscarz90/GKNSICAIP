@@ -2043,13 +2043,13 @@ Public Class frmProduccion
 #End Region
 #Region "Funciones para módulo GRÁFICAS "
     Private Sub AbrirGraficos()
-        'Dim GFU As New FrmGraficasfaseuno
-        'GFU.inicializa_formulario(vcodigo_empleado, vcve_equipo)
-        'GFU.ShowDialog()
-        'GFU.Dispose()
-        frmGraficas.Set_IdEquipo(vcve_equipo)
-        frmGraficas.ShowDialog()
-        frmGraficas.Dispose()
+        Dim GFU As New FrmGraficasfaseuno
+        GFU.inicializa_formulario(vcodigo_empleado, vcve_equipo)
+        GFU.ShowDialog()
+        GFU.Dispose()
+        'frmGraficas.Set_IdEquipo(vcve_equipo)
+        'frmGraficas.ShowDialog()
+        'frmGraficas.Dispose()
     End Sub
 #End Region
 End Class
