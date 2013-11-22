@@ -250,6 +250,22 @@ Public Class Modelo
         Return vRetorno
     End Function
 
+    Public Function Validar_Existencia_De_Modelo_En_BD(ByVal vNP_GKN As String) As Boolean
+        Dim vRetorno As Boolean = False
+        Dim vDR As DataRow
+
+        vDR = oBD.ObtenerRenglon("Select count(np_gkn) as Total from modelo where np_gkn='" & vNP_GKN & "'", "Modelo")
+
+        If vDR IsNot Nothing Then
+            If vDR("Total") > 0 Then
+                vRetorno = True
+            Else
+                vRetorno = False
+            End If
+        End If
+        Return vRetorno
+    End Function
+
     'Public Function Modelo_Asignado_En_Linea(ByVal vId_Modelo As Long) As Boolean
     '    Dim vRetorno As Boolean = False
     '    Dim vDT As DataTable

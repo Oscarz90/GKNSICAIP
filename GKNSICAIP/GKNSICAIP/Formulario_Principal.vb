@@ -49,6 +49,7 @@ Public Class Formulario_Principal
     Dim ofrmPermisos As FrmPermisos
     Dim ofrmImportar_TC As FrmImportar_TC
     Dim ofrmGraficas As FrmGraficasfaseuno
+    Dim ofrmImportar_Modelo As frmImportador_Modelo
 #End Region
 
 #Region "Opciones de Menu"
@@ -492,6 +493,18 @@ Public Class Formulario_Principal
         'Else
         'MsgBox("El Usuario no cuenta con los permisos suficientes para entrar en 'GRAFICAS'")
         'End If
+    End Sub
+
+    Private Sub btnImportar_Modelo_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnImportar_Modelo.Click
+        If Permiso_Asignado("IMPORTAR_MODELO") = True Then
+            Me.dgvRegistros.Visible = False
+            Me.Barra_Tool_Registros.Visible = False
+            MapaUbicacion.Text = "Catalogo IMPORTAR MODELO"
+            ofrmImportar_Modelo = New frmImportador_Modelo
+            ofrmImportar_Modelo.ShowDialog()
+        Else
+            MsgBox("El Usuario no cuenta con los permisos suficientes para entrar en 'Importar Modelo'")
+        End If
     End Sub
 #End Region
 
@@ -1085,4 +1098,6 @@ Public Class Formulario_Principal
         RadLabel_Usuario_Login.Text = RadLabel_Usuario_Login.Text & oUsuario_Login.Nombre
     End Sub
 
+    
+   
 End Class
