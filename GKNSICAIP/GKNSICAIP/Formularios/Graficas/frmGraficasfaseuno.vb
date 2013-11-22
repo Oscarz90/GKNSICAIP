@@ -457,6 +457,9 @@ Public Class FrmGraficasfaseuno
         vTotal = vDT.Rows.Count
         If vTotal = 0 Then
             habilita_etiqueta_datos()
+            Me.radChartView1.Title = ""
+        Else
+            Me.radChartView1.Title = "Oee Planta GKN Driveline México"
         End If
         For Each vDR As DataRow In vDT.Rows
             If vContador = vTotal Then
@@ -473,6 +476,14 @@ Public Class FrmGraficasfaseuno
         'Personalizacion
         'CartesianArea1.GridDesign.AlternatingVerticalColor = False
         'CartesianArea1.ShowGrid = True
+
+        'Logo Indicador
+        picboxIndicador.ImageLocation = Application.StartupPath & "\graficas_fase_uno\logo_indicador_productividad.jpg"
+
+        'Legend & Position
+        Me.radChartView1.ChartElement.LegendElement.StackElement.Orientation = Orientation.Horizontal
+        Me.radChartView1.ChartElement.LegendPosition = LegendPosition.Bottom
+
         Me.radChartView1.AreaDesign = CartesianArea1
         CategoricalAxis1.LabelFitMode = AxisLabelFitMode.Rotate
         If rdbtnDias.IsChecked Then
@@ -527,6 +538,9 @@ Public Class FrmGraficasfaseuno
         vTotal = vDT.Rows.Count
         If vTotal = 0 Then
             habilita_etiqueta_datos()
+            Me.radChartView1.Title = ""
+        Else
+            Me.radChartView1.Title = "Oee " & cbxCadenaValor.Text
         End If
         For Each vDR As DataRow In vDT.Rows
             If vContador = vTotal Then
@@ -543,6 +557,14 @@ Public Class FrmGraficasfaseuno
         'Personalizacion
         'CartesianArea1.GridDesign.AlternatingVerticalColor = False
         'CartesianArea1.ShowGrid = True
+
+        'Logo Indicador
+        picboxIndicador.ImageLocation = Application.StartupPath & "\graficas_fase_uno\logo_indicador_productividad.jpg"
+
+        'Legend & Position
+        Me.radChartView1.ChartElement.LegendElement.StackElement.Orientation = Orientation.Horizontal
+        Me.radChartView1.ChartElement.LegendPosition = LegendPosition.Bottom
+
         Me.radChartView1.AreaDesign = CartesianArea1
         CategoricalAxis1.LabelFitMode = AxisLabelFitMode.Rotate
         If rdbtnDias.IsChecked Then
@@ -597,6 +619,9 @@ Public Class FrmGraficasfaseuno
         vTotal = vDT.Rows.Count
         If vTotal = 0 Then
             habilita_etiqueta_datos()
+            Me.radChartView1.Title = ""
+        Else
+            Me.radChartView1.Title = "Oee " & cbxComponente.Text
         End If
         For Each vDR As DataRow In vDT.Rows
             If vContador = vTotal Then
@@ -613,6 +638,14 @@ Public Class FrmGraficasfaseuno
         'Personalizacion
         'CartesianArea1.GridDesign.AlternatingVerticalColor = False
         'CartesianArea1.ShowGrid = True
+
+        'Logo Indicador
+        picboxIndicador.ImageLocation = Application.StartupPath & "\graficas_fase_uno\logo_indicador_productividad.jpg"
+
+        'Legend & Position
+        Me.radChartView1.ChartElement.LegendElement.StackElement.Orientation = Orientation.Horizontal
+        Me.radChartView1.ChartElement.LegendPosition = LegendPosition.Bottom
+
         Me.radChartView1.AreaDesign = CartesianArea1
         CategoricalAxis1.LabelFitMode = AxisLabelFitMode.Rotate
         If rdbtnDias.IsChecked Then
@@ -667,6 +700,9 @@ Public Class FrmGraficasfaseuno
         vTotal = vDT.Rows.Count
         If vTotal = 0 Then
             habilita_etiqueta_datos()
+            Me.radChartView1.Title = ""
+        Else
+            Me.radChartView1.Title = "Oee " & cbxLinea.Text
         End If
         For Each vDR As DataRow In vDT.Rows
             If vContador = vTotal Then
@@ -683,6 +719,14 @@ Public Class FrmGraficasfaseuno
         'Personalizacion
         'CartesianArea1.GridDesign.AlternatingVerticalColor = False
         'CartesianArea1.ShowGrid = True
+
+        'Logo Indicador
+        picboxIndicador.ImageLocation = Application.StartupPath & "\graficas_fase_uno\logo_indicador_productividad.jpg"
+
+        'Legend & Position
+        Me.radChartView1.ChartElement.LegendElement.StackElement.Orientation = Orientation.Horizontal
+        Me.radChartView1.ChartElement.LegendPosition = LegendPosition.Bottom
+
         Me.radChartView1.AreaDesign = CartesianArea1
         CategoricalAxis1.LabelFitMode = AxisLabelFitMode.Rotate
         If rdbtnDias.IsChecked Then
@@ -737,6 +781,9 @@ Public Class FrmGraficasfaseuno
         vTotal = vDT.Rows.Count
         If vTotal = 0 Then
             habilita_etiqueta_datos()
+            Me.radChartView1.Title = ""
+        Else
+            Me.radChartView1.Title = "Oee " & cbxEquipo.Text
         End If
         For Each vDR As DataRow In vDT.Rows
             If vContador = vTotal Then
@@ -753,6 +800,14 @@ Public Class FrmGraficasfaseuno
         'Personalizacion
         'CartesianArea1.GridDesign.AlternatingVerticalColor = False
         'CartesianArea1.ShowGrid = True
+
+        'Logo Indicador
+        picboxIndicador.ImageLocation = Application.StartupPath & "\graficas_fase_uno\logo_indicador_productividad.jpg"
+
+        'Legend & Position
+        Me.radChartView1.ChartElement.LegendElement.StackElement.Orientation = Orientation.Horizontal
+        Me.radChartView1.ChartElement.LegendPosition = LegendPosition.Bottom
+
         Me.radChartView1.AreaDesign = CartesianArea1
         CategoricalAxis1.LabelFitMode = AxisLabelFitMode.Rotate
         If rdbtnDias.IsChecked Then
@@ -808,6 +863,9 @@ Public Class FrmGraficasfaseuno
         vTotal = vDT.Rows.Count
         If vTotal = 0 Then
             habilita_etiqueta_datos()
+            Me.radChartView1.Title = ""
+        Else
+            Me.radChartView1.Title = "Oee " & cbxEquipo.Text & " - " & cbxLinea.Text
         End If
         For Each vDR As DataRow In vDT.Rows
             If rdbtnDias.IsChecked Then
@@ -832,6 +890,14 @@ Public Class FrmGraficasfaseuno
         'Personalizacion
         'CartesianArea1.GridDesign.AlternatingVerticalColor = False
         'CartesianArea1.ShowGrid = True
+
+        'Logo Indicador
+        picboxIndicador.ImageLocation = Application.StartupPath & "\graficas_fase_uno\logo_indicador_productividad.jpg"
+
+        'Legend & Position
+        Me.radChartView1.ChartElement.LegendElement.StackElement.Orientation = Orientation.Horizontal
+        Me.radChartView1.ChartElement.LegendPosition = LegendPosition.Bottom
+
         Me.radChartView1.AreaDesign = CartesianArea1
         CategoricalAxis1.LabelFitMode = AxisLabelFitMode.Rotate
         If rdbtnDias.IsChecked Then
@@ -887,6 +953,9 @@ Public Class FrmGraficasfaseuno
         vTotal = vDT.Rows.Count
         If vTotal = 0 Then
             habilita_etiqueta_datos()
+            Me.radChartView1.Title = ""
+        Else
+            Me.radChartView1.Title = "NRFTi (PPM'S) Planta GKN Driveline México"
         End If
         For Each vDR As DataRow In vDT.Rows
             If vContador = vTotal Then
@@ -901,18 +970,26 @@ Public Class FrmGraficasfaseuno
         Dim CategoricalAxis1 As CategoricalAxis = New CategoricalAxis()
         Dim LinearAxis1 As LinearAxis = New LinearAxis()
         'Personalizacion
-        CartesianArea1.GridDesign.AlternatingVerticalColor = False
-        CartesianArea1.ShowGrid = True
+        'CartesianArea1.GridDesign.AlternatingVerticalColor = False
+        'CartesianArea1.ShowGrid = True
+
+        'Logo Indicador
+        picboxIndicador.ImageLocation = Application.StartupPath & "\graficas_fase_uno\logo_indicador_calidad.jpg"
+
+        'Legend & Position
+        Me.radChartView1.ChartElement.LegendElement.StackElement.Orientation = Orientation.Horizontal
+        Me.radChartView1.ChartElement.LegendPosition = LegendPosition.Bottom
+
         Me.radChartView1.AreaDesign = CartesianArea1
         CategoricalAxis1.LabelFitMode = AxisLabelFitMode.Rotate
         If rdbtnDias.IsChecked Then
-            CategoricalAxis1.LabelFormat = "{0:MMM - dd}"
+            CategoricalAxis1.LabelFormat = "{0:dd - MMM}"
         ElseIf rdbtnMeses.IsChecked Then
-            CategoricalAxis1.LabelFormat = "{0:yyyy - MMMM}"
+            CategoricalAxis1.LabelFormat = "{0:MMM - yyyy}"
         End If
         CategoricalAxis1.LabelRotationAngle = 270.0R
         LinearAxis1.AxisType = AxisType.Second
-        LinearAxis1.Title = "NRFTi"
+        LinearAxis1.Title = "NRFTi ( PPM'S ) "
         BarSeries1.ShowLabels = True
         BarSeries2.ShowLabels = True
         BarSeries1.LabelFormat = "{0:##,###}"
@@ -921,8 +998,8 @@ Public Class FrmGraficasfaseuno
         BarSeries1.VerticalAxis = LinearAxis1
         'BarSeries1.ForeColor = Color.White
         'BarSeries2.ForeColor = Color.White
-        BarSeries1.Palette = New PaletteEntry(Color.FromArgb(23, 87, 252))
-        BarSeries2.Palette = New PaletteEntry(Color.FromArgb(233, 37, 43))
+        BarSeries1.Palette = New PaletteEntry(Color.FromArgb(55, 96, 146))
+        BarSeries2.Palette = New PaletteEntry(Color.FromArgb(37, 64, 97))
         Me.radChartView1.ShowToolTip = True
         radChartView1.Series.Add(BarSeries1)
         radChartView1.Series.Add(BarSeries2)
@@ -957,6 +1034,9 @@ Public Class FrmGraficasfaseuno
         vTotal = vDT.Rows.Count
         If vTotal = 0 Then
             habilita_etiqueta_datos()
+            Me.radChartView1.Title = ""
+        Else
+            Me.radChartView1.Title = "NRFTi (PPM'S) " & cbxCadenaValor.Text
         End If
         For Each vDR As DataRow In vDT.Rows
             If vContador = vTotal Then
@@ -971,14 +1051,22 @@ Public Class FrmGraficasfaseuno
         Dim CategoricalAxis1 As CategoricalAxis = New CategoricalAxis()
         Dim LinearAxis1 As LinearAxis = New LinearAxis()
         'Personalizacion
-        CartesianArea1.GridDesign.AlternatingVerticalColor = False
-        CartesianArea1.ShowGrid = True
+        'CartesianArea1.GridDesign.AlternatingVerticalColor = False
+        'CartesianArea1.ShowGrid = True
+
+        'Logo Indicador
+        picboxIndicador.ImageLocation = Application.StartupPath & "\graficas_fase_uno\logo_indicador_calidad.jpg"
+
+        'Legend & Position
+        Me.radChartView1.ChartElement.LegendElement.StackElement.Orientation = Orientation.Horizontal
+        Me.radChartView1.ChartElement.LegendPosition = LegendPosition.Bottom
+
         Me.radChartView1.AreaDesign = CartesianArea1
         CategoricalAxis1.LabelFitMode = AxisLabelFitMode.Rotate
         If rdbtnDias.IsChecked Then
-            CategoricalAxis1.LabelFormat = "{0:MMM - dd}"
+            CategoricalAxis1.LabelFormat = "{0:dd - MMM}"
         ElseIf rdbtnMeses.IsChecked Then
-            CategoricalAxis1.LabelFormat = "{0:yyyy - MMMM}"
+            CategoricalAxis1.LabelFormat = "{0:MMM - yyyy}"
         End If
         CategoricalAxis1.LabelRotationAngle = 270.0R
         LinearAxis1.AxisType = AxisType.Second
@@ -986,7 +1074,7 @@ Public Class FrmGraficasfaseuno
         'LinearAxis1.LabelRotationAngle = 300.0R
         'LinearAxis1.MajorStep = 10.0R
         'LinearAxis1.Maximum = 100
-        LinearAxis1.Title = "NRFTi"
+        LinearAxis1.Title = "NRFTi ( PPM'S )"
         BarSeries1.ShowLabels = True
         BarSeries2.ShowLabels = True
         BarSeries1.LabelFormat = "{0:##,###}"
@@ -995,8 +1083,8 @@ Public Class FrmGraficasfaseuno
         BarSeries1.VerticalAxis = LinearAxis1
         'BarSeries1.ForeColor = Color.White
         'BarSeries2.ForeColor = Color.White
-        BarSeries1.Palette = New PaletteEntry(Color.FromArgb(23, 87, 252))
-        BarSeries2.Palette = New PaletteEntry(Color.FromArgb(233, 37, 43))
+        BarSeries1.Palette = New PaletteEntry(Color.FromArgb(55, 96, 146))
+        BarSeries2.Palette = New PaletteEntry(Color.FromArgb(37, 64, 97))
         Me.radChartView1.ShowToolTip = True
         radChartView1.Series.Add(BarSeries1)
         radChartView1.Series.Add(BarSeries2)
@@ -1031,6 +1119,9 @@ Public Class FrmGraficasfaseuno
         vTotal = vDT.Rows.Count
         If vTotal = 0 Then
             habilita_etiqueta_datos()
+            Me.radChartView1.Title = ""
+        Else
+            Me.radChartView1.Title = "NRFTi (PPM'S) " & cbxComponente.Text
         End If
         For Each vDR As DataRow In vDT.Rows
             If vContador = vTotal Then
@@ -1045,14 +1136,22 @@ Public Class FrmGraficasfaseuno
         Dim CategoricalAxis1 As CategoricalAxis = New CategoricalAxis()
         Dim LinearAxis1 As LinearAxis = New LinearAxis()
         'Personalizacion
-        CartesianArea1.GridDesign.AlternatingVerticalColor = False
-        CartesianArea1.ShowGrid = True
+        'CartesianArea1.GridDesign.AlternatingVerticalColor = False
+        'CartesianArea1.ShowGrid = True
+
+        'Logo Indicador
+        picboxIndicador.ImageLocation = Application.StartupPath & "\graficas_fase_uno\logo_indicador_calidad.jpg"
+
+        'Legend & Position
+        Me.radChartView1.ChartElement.LegendElement.StackElement.Orientation = Orientation.Horizontal
+        Me.radChartView1.ChartElement.LegendPosition = LegendPosition.Bottom
+
         Me.radChartView1.AreaDesign = CartesianArea1
         CategoricalAxis1.LabelFitMode = AxisLabelFitMode.Rotate
         If rdbtnDias.IsChecked Then
-            CategoricalAxis1.LabelFormat = "{0:MMM - dd}"
+            CategoricalAxis1.LabelFormat = "{0:dd - MMM}"
         ElseIf rdbtnMeses.IsChecked Then
-            CategoricalAxis1.LabelFormat = "{0:yyyy - MMMM}"
+            CategoricalAxis1.LabelFormat = "{0:MMM - yyyy}"
         End If
         CategoricalAxis1.LabelRotationAngle = 270.0R
         LinearAxis1.AxisType = AxisType.Second
@@ -1060,7 +1159,7 @@ Public Class FrmGraficasfaseuno
         'LinearAxis1.LabelRotationAngle = 300.0R
         'LinearAxis1.MajorStep = 10.0R
         'LinearAxis1.Maximum = 100
-        LinearAxis1.Title = "NRFTi"
+        LinearAxis1.Title = "NRFTi ( PPM'S )"
         BarSeries1.ShowLabels = True
         BarSeries2.ShowLabels = True
         BarSeries1.LabelFormat = "{0:#,###}"
@@ -1069,8 +1168,8 @@ Public Class FrmGraficasfaseuno
         BarSeries1.VerticalAxis = LinearAxis1
         'BarSeries1.ForeColor = Color.White
         'BarSeries2.ForeColor = Color.White
-        BarSeries1.Palette = New PaletteEntry(Color.FromArgb(23, 87, 252))
-        BarSeries2.Palette = New PaletteEntry(Color.FromArgb(233, 37, 43))
+        BarSeries1.Palette = New PaletteEntry(Color.FromArgb(55, 96, 146))
+        BarSeries2.Palette = New PaletteEntry(Color.FromArgb(37, 64, 97))
         Me.radChartView1.ShowToolTip = True
         radChartView1.Series.Add(BarSeries1)
         radChartView1.Series.Add(BarSeries2)
@@ -1105,6 +1204,9 @@ Public Class FrmGraficasfaseuno
         vTotal = vDT.Rows.Count
         If vTotal = 0 Then
             habilita_etiqueta_datos()
+            Me.radChartView1.Title = ""
+        Else
+            Me.radChartView1.Title = "NRFTi ( PPM'S ) " & cbxLinea.Text
         End If
         For Each vDR As DataRow In vDT.Rows
             If vContador = vTotal Then
@@ -1119,14 +1221,22 @@ Public Class FrmGraficasfaseuno
         Dim CategoricalAxis1 As CategoricalAxis = New CategoricalAxis()
         Dim LinearAxis1 As LinearAxis = New LinearAxis()
         'Personalizacion
-        CartesianArea1.GridDesign.AlternatingVerticalColor = False
-        CartesianArea1.ShowGrid = True
+        'CartesianArea1.GridDesign.AlternatingVerticalColor = False
+        'CartesianArea1.ShowGrid = True
+
+        'Logo Indicador
+        picboxIndicador.ImageLocation = Application.StartupPath & "\graficas_fase_uno\logo_indicador_calidad.jpg"
+
+        'Legend & Position
+        Me.radChartView1.ChartElement.LegendElement.StackElement.Orientation = Orientation.Horizontal
+        Me.radChartView1.ChartElement.LegendPosition = LegendPosition.Bottom
+
         Me.radChartView1.AreaDesign = CartesianArea1
         CategoricalAxis1.LabelFitMode = AxisLabelFitMode.Rotate
         If rdbtnDias.IsChecked Then
-            CategoricalAxis1.LabelFormat = "{0:MMM - dd}"
+            CategoricalAxis1.LabelFormat = "{0:dd - MMM}"
         ElseIf rdbtnMeses.IsChecked Then
-            CategoricalAxis1.LabelFormat = "{0:yyyy - MMMM}"
+            CategoricalAxis1.LabelFormat = "{0:MMM - yyyy}"
         End If
         CategoricalAxis1.LabelRotationAngle = 270.0R
         LinearAxis1.AxisType = AxisType.Second
@@ -1134,7 +1244,7 @@ Public Class FrmGraficasfaseuno
         'LinearAxis1.LabelRotationAngle = 300.0R
         'LinearAxis1.MajorStep = 10.0R
         'LinearAxis1.Maximum = 100
-        LinearAxis1.Title = "NRFTi"
+        LinearAxis1.Title = "NRFTi (PPM'S)"
         BarSeries1.ShowLabels = True
         BarSeries2.ShowLabels = True
         BarSeries1.LabelFormat = "{0:#,###}"
@@ -1143,8 +1253,8 @@ Public Class FrmGraficasfaseuno
         BarSeries1.VerticalAxis = LinearAxis1
         'BarSeries1.ForeColor = Color.White
         'BarSeries2.ForeColor = Color.White
-        BarSeries1.Palette = New PaletteEntry(Color.FromArgb(23, 87, 252))
-        BarSeries2.Palette = New PaletteEntry(Color.FromArgb(233, 37, 43))
+        BarSeries1.Palette = New PaletteEntry(Color.FromArgb(55, 96, 146))
+        BarSeries2.Palette = New PaletteEntry(Color.FromArgb(37, 64, 97))
         Me.radChartView1.ShowToolTip = True
         radChartView1.Series.Add(BarSeries1)
         radChartView1.Series.Add(BarSeries2)
@@ -1179,6 +1289,9 @@ Public Class FrmGraficasfaseuno
         vTotal = vDT.Rows.Count
         If vTotal = 0 Then
             habilita_etiqueta_datos()
+            Me.radChartView1.Title = ""
+        Else
+            Me.radChartView1.Title = "NRFTi ( PPM'S ) " & cbxEquipo.Text
         End If
         For Each vDR As DataRow In vDT.Rows
             If rdbtnDias.IsChecked Then
@@ -1202,14 +1315,22 @@ Public Class FrmGraficasfaseuno
         Dim CategoricalAxis1 As CategoricalAxis = New CategoricalAxis()
         Dim LinearAxis1 As LinearAxis = New LinearAxis()
         'Personalizacion
-        CartesianArea1.GridDesign.AlternatingVerticalColor = False
-        CartesianArea1.ShowGrid = True
+        'CartesianArea1.GridDesign.AlternatingVerticalColor = False
+        'CartesianArea1.ShowGrid = True
+
+        'Logo Indicador
+        picboxIndicador.ImageLocation = Application.StartupPath & "\graficas_fase_uno\logo_indicador_calidad.jpg"
+
+        'Legend & Position
+        Me.radChartView1.ChartElement.LegendElement.StackElement.Orientation = Orientation.Horizontal
+        Me.radChartView1.ChartElement.LegendPosition = LegendPosition.Bottom
+
         Me.radChartView1.AreaDesign = CartesianArea1
         CategoricalAxis1.LabelFitMode = AxisLabelFitMode.Rotate
         If rdbtnDias.IsChecked Then
-            CategoricalAxis1.LabelFormat = "{0:MMM - dd}"
+            CategoricalAxis1.LabelFormat = "{0:dd - MMM}"
         ElseIf rdbtnMeses.IsChecked Then
-            CategoricalAxis1.LabelFormat = "{0:yyyy - MMMM}"
+            CategoricalAxis1.LabelFormat = "{0:MMM - yyyy}"
         End If
         CategoricalAxis1.LabelRotationAngle = 270.0R
         LinearAxis1.AxisType = AxisType.Second
@@ -1217,7 +1338,7 @@ Public Class FrmGraficasfaseuno
         'LinearAxis1.LabelRotationAngle = 300.0R
         'LinearAxis1.MajorStep = 10.0R
         'LinearAxis1.Maximum = 100
-        LinearAxis1.Title = "NRFTi"
+        LinearAxis1.Title = "NRFTi (PPM'S)"
         BarSeries1.ShowLabels = True
         BarSeries2.ShowLabels = True
         BarSeries1.LabelFormat = "{0:#,###}"
@@ -1226,8 +1347,8 @@ Public Class FrmGraficasfaseuno
         BarSeries1.VerticalAxis = LinearAxis1
         'BarSeries1.ForeColor = Color.White
         'BarSeries2.ForeColor = Color.White
-        BarSeries1.Palette = New PaletteEntry(Color.FromArgb(23, 87, 252))
-        BarSeries2.Palette = New PaletteEntry(Color.FromArgb(233, 37, 43))
+        BarSeries1.Palette = New PaletteEntry(Color.FromArgb(55, 96, 146))
+        BarSeries2.Palette = New PaletteEntry(Color.FromArgb(37, 64, 97))
         Me.radChartView1.ShowToolTip = True
         radChartView1.Series.Add(BarSeries1)
         radChartView1.Series.Add(BarSeries2)
@@ -1263,6 +1384,9 @@ Public Class FrmGraficasfaseuno
         vTotal = vDT.Rows.Count
         If vTotal = 0 Then
             habilita_etiqueta_datos()
+            Me.radChartView1.Title = ""
+        Else
+            Me.radChartView1.Title = "NRFTi ( PPM'S ) " & cbxEquipo.Text & " - " & cbxLinea.Text
         End If
         For Each vDR As DataRow In vDT.Rows
             If rdbtnDias.IsChecked Then
@@ -1286,14 +1410,22 @@ Public Class FrmGraficasfaseuno
         Dim CategoricalAxis1 As CategoricalAxis = New CategoricalAxis()
         Dim LinearAxis1 As LinearAxis = New LinearAxis()
         'Personalizacion
-        CartesianArea1.GridDesign.AlternatingVerticalColor = False
-        CartesianArea1.ShowGrid = True
+        'CartesianArea1.GridDesign.AlternatingVerticalColor = False
+        'CartesianArea1.ShowGrid = True
+
+        'Logo Indicador
+        picboxIndicador.ImageLocation = Application.StartupPath & "\graficas_fase_uno\logo_indicador_calidad.jpg"
+
+        'Legend & Position
+        Me.radChartView1.ChartElement.LegendElement.StackElement.Orientation = Orientation.Horizontal
+        Me.radChartView1.ChartElement.LegendPosition = LegendPosition.Bottom
+
         Me.radChartView1.AreaDesign = CartesianArea1
         CategoricalAxis1.LabelFitMode = AxisLabelFitMode.Rotate
         If rdbtnDias.IsChecked Then
-            CategoricalAxis1.LabelFormat = "{0:MMM - dd}"
+            CategoricalAxis1.LabelFormat = "{0:dd - MMM}"
         ElseIf rdbtnMeses.IsChecked Then
-            CategoricalAxis1.LabelFormat = "{0:yyyy - MMMM}"
+            CategoricalAxis1.LabelFormat = "{0:MMM - yyyy}"
         End If
         CategoricalAxis1.LabelRotationAngle = 270.0R
         LinearAxis1.AxisType = AxisType.Second
@@ -1301,7 +1433,7 @@ Public Class FrmGraficasfaseuno
         'LinearAxis1.LabelRotationAngle = 300.0R
         'LinearAxis1.MajorStep = 10.0R
         'LinearAxis1.Maximum = 100
-        LinearAxis1.Title = "NRFTi"
+        LinearAxis1.Title = "NRFTi (PPM'S)"
         BarSeries1.ShowLabels = True
         BarSeries2.ShowLabels = True
         BarSeries1.LabelFormat = "{0:#,###}"
@@ -1310,8 +1442,8 @@ Public Class FrmGraficasfaseuno
         BarSeries1.VerticalAxis = LinearAxis1
         'BarSeries1.ForeColor = Color.White
         'BarSeries2.ForeColor = Color.White
-        BarSeries1.Palette = New PaletteEntry(Color.FromArgb(23, 87, 252))
-        BarSeries2.Palette = New PaletteEntry(Color.FromArgb(233, 37, 43))
+        BarSeries1.Palette = New PaletteEntry(Color.FromArgb(55, 96, 146))
+        BarSeries2.Palette = New PaletteEntry(Color.FromArgb(37, 64, 97))
         Me.radChartView1.ShowToolTip = True
         radChartView1.Series.Add(BarSeries1)
         radChartView1.Series.Add(BarSeries2)
@@ -1346,6 +1478,9 @@ Public Class FrmGraficasfaseuno
 
         If vDT.Rows.Count = 0 Then
             habilita_etiqueta_datos()
+            Me.radChartView1.Title = ""
+        Else
+            Me.radChartView1.Title = "5's Planta GKN Driveline México"
         End If
 
         BarSeries1.ValueMember = "admon_visual"
@@ -1365,14 +1500,22 @@ Public Class FrmGraficasfaseuno
         Dim CategoricalAxis1 As CategoricalAxis = New CategoricalAxis()
         Dim LinearAxis1 As LinearAxis = New LinearAxis()
         'Personalizacion
-        CartesianArea1.GridDesign.AlternatingVerticalColor = False
-        CartesianArea1.ShowGrid = True
+        'CartesianArea1.GridDesign.AlternatingVerticalColor = False
+        'CartesianArea1.ShowGrid = True
+
+        'Logo Indicador
+        picboxIndicador.ImageLocation = Application.StartupPath & "\graficas_fase_uno\logo_indicador_cincos.jpg"
+
+        'Legend & Position
+        Me.radChartView1.ChartElement.LegendElement.StackElement.Orientation = Orientation.Horizontal
+        Me.radChartView1.ChartElement.LegendPosition = LegendPosition.Bottom
+
         Me.radChartView1.AreaDesign = CartesianArea1
         CategoricalAxis1.LabelFitMode = AxisLabelFitMode.Rotate
         If rdbtnDias.IsChecked Then
-            CategoricalAxis1.LabelFormat = "{0:MMM - dd}"
+            CategoricalAxis1.LabelFormat = "{0:dd - MMM}"
         ElseIf rdbtnMeses.IsChecked Then
-            CategoricalAxis1.LabelFormat = "{0:yyyy - MMMM}"
+            CategoricalAxis1.LabelFormat = "{0:MMM - yyyy}"
         End If
         CategoricalAxis1.LabelRotationAngle = 270.0R
         LinearAxis1.AxisType = AxisType.Second
@@ -1430,6 +1573,9 @@ Public Class FrmGraficasfaseuno
 
         If vDT.Rows.Count = 0 Then
             habilita_etiqueta_datos()
+            Me.radChartView1.Title = ""
+        Else
+            Me.radChartView1.Title = "5's " & cbxCadenaValor.Text
         End If
 
         BarSeries1.ValueMember = "admon_visual"
@@ -1449,14 +1595,22 @@ Public Class FrmGraficasfaseuno
         Dim CategoricalAxis1 As CategoricalAxis = New CategoricalAxis()
         Dim LinearAxis1 As LinearAxis = New LinearAxis()
         'Personalizacion
-        CartesianArea1.GridDesign.AlternatingVerticalColor = False
-        CartesianArea1.ShowGrid = True
+        'CartesianArea1.GridDesign.AlternatingVerticalColor = False
+        'CartesianArea1.ShowGrid = True
+
+        'Logo Indicador
+        picboxIndicador.ImageLocation = Application.StartupPath & "\graficas_fase_uno\logo_indicador_cincos.jpg"
+
+        'Legend & Position
+        Me.radChartView1.ChartElement.LegendElement.StackElement.Orientation = Orientation.Horizontal
+        Me.radChartView1.ChartElement.LegendPosition = LegendPosition.Bottom
+
         Me.radChartView1.AreaDesign = CartesianArea1
         CategoricalAxis1.LabelFitMode = AxisLabelFitMode.Rotate
         If rdbtnDias.IsChecked Then
-            CategoricalAxis1.LabelFormat = "{0:MMM - dd}"
+            CategoricalAxis1.LabelFormat = "{0:dd - MMM}"
         ElseIf rdbtnMeses.IsChecked Then
-            CategoricalAxis1.LabelFormat = "{0:yyyy - MMMM}"
+            CategoricalAxis1.LabelFormat = "{0:MMM - yyyy}"
         End If
         CategoricalAxis1.LabelRotationAngle = 270.0R
         LinearAxis1.AxisType = AxisType.Second
@@ -1514,6 +1668,9 @@ Public Class FrmGraficasfaseuno
 
         If vDT.Rows.Count = 0 Then
             habilita_etiqueta_datos()
+            Me.radChartView1.Title = ""
+        Else
+            Me.radChartView1.Title = "5's " & cbxComponente.Text
         End If
 
         BarSeries1.ValueMember = "admon_visual"
@@ -1533,14 +1690,22 @@ Public Class FrmGraficasfaseuno
         Dim CategoricalAxis1 As CategoricalAxis = New CategoricalAxis()
         Dim LinearAxis1 As LinearAxis = New LinearAxis()
         'Personalizacion
-        CartesianArea1.GridDesign.AlternatingVerticalColor = False
-        CartesianArea1.ShowGrid = True
+        'CartesianArea1.GridDesign.AlternatingVerticalColor = False
+        'CartesianArea1.ShowGrid = True
+
+        'Logo Indicador
+        picboxIndicador.ImageLocation = Application.StartupPath & "\graficas_fase_uno\logo_indicador_cincos.jpg"
+
+        'Legend & Position
+        Me.radChartView1.ChartElement.LegendElement.StackElement.Orientation = Orientation.Horizontal
+        Me.radChartView1.ChartElement.LegendPosition = LegendPosition.Bottom
+
         Me.radChartView1.AreaDesign = CartesianArea1
         CategoricalAxis1.LabelFitMode = AxisLabelFitMode.Rotate
         If rdbtnDias.IsChecked Then
-            CategoricalAxis1.LabelFormat = "{0:MMM - dd}"
+            CategoricalAxis1.LabelFormat = "{0:dd - MMM}"
         ElseIf rdbtnMeses.IsChecked Then
-            CategoricalAxis1.LabelFormat = "{0:yyyy - MMMM}"
+            CategoricalAxis1.LabelFormat = "{0:MMM - yyyy}"
         End If
         CategoricalAxis1.LabelRotationAngle = 270.0R
         LinearAxis1.AxisType = AxisType.Second
@@ -1598,6 +1763,9 @@ Public Class FrmGraficasfaseuno
 
         If vDT.Rows.Count = 0 Then
             habilita_etiqueta_datos()
+            Me.radChartView1.Title = ""
+        Else
+            Me.radChartView1.Title = "5's " & cbxLinea.Text
         End If
 
         BarSeries1.ValueMember = "admon_visual"
@@ -1617,14 +1785,22 @@ Public Class FrmGraficasfaseuno
         Dim CategoricalAxis1 As CategoricalAxis = New CategoricalAxis()
         Dim LinearAxis1 As LinearAxis = New LinearAxis()
         'Personalizacion
-        CartesianArea1.GridDesign.AlternatingVerticalColor = False
-        CartesianArea1.ShowGrid = True
+        'CartesianArea1.GridDesign.AlternatingVerticalColor = False
+        'CartesianArea1.ShowGrid = True
+
+        'Logo Indicador
+        picboxIndicador.ImageLocation = Application.StartupPath & "\graficas_fase_uno\logo_indicador_cincos.jpg"
+
+        'Legend & Position
+        Me.radChartView1.ChartElement.LegendElement.StackElement.Orientation = Orientation.Horizontal
+        Me.radChartView1.ChartElement.LegendPosition = LegendPosition.Bottom
+
         Me.radChartView1.AreaDesign = CartesianArea1
         CategoricalAxis1.LabelFitMode = AxisLabelFitMode.Rotate
         If rdbtnDias.IsChecked Then
-            CategoricalAxis1.LabelFormat = "{0:MMM - dd}"
+            CategoricalAxis1.LabelFormat = "{0:dd - MMM}"
         ElseIf rdbtnMeses.IsChecked Then
-            CategoricalAxis1.LabelFormat = "{0:yyyy - MMMM}"
+            CategoricalAxis1.LabelFormat = "{0:MMM - yyyy}"
         End If
         CategoricalAxis1.LabelRotationAngle = 270.0R
         LinearAxis1.AxisType = AxisType.Second
@@ -1682,6 +1858,9 @@ Public Class FrmGraficasfaseuno
 
         If vDT.Rows.Count = 0 Then
             habilita_etiqueta_datos()
+            Me.radChartView1.Title = ""
+        Else
+            Me.radChartView1.Title = "5's " & cbxEquipo.Text
         End If
 
         BarSeries1.ValueMember = "admon_visual"
@@ -1702,14 +1881,22 @@ Public Class FrmGraficasfaseuno
         Dim CategoricalAxis1 As CategoricalAxis = New CategoricalAxis()
         Dim LinearAxis1 As LinearAxis = New LinearAxis()
         'Personalizacion
-        CartesianArea1.GridDesign.AlternatingVerticalColor = False
-        CartesianArea1.ShowGrid = True
+        'CartesianArea1.GridDesign.AlternatingVerticalColor = False
+        'CartesianArea1.ShowGrid = True
+
+        'Logo Indicador
+        picboxIndicador.ImageLocation = Application.StartupPath & "\graficas_fase_uno\logo_indicador_cincos.jpg"
+
+        'Legend & Position
+        Me.radChartView1.ChartElement.LegendElement.StackElement.Orientation = Orientation.Horizontal
+        Me.radChartView1.ChartElement.LegendPosition = LegendPosition.Bottom
+
         Me.radChartView1.AreaDesign = CartesianArea1
         CategoricalAxis1.LabelFitMode = AxisLabelFitMode.Rotate
         If rdbtnDias.IsChecked Then
-            CategoricalAxis1.LabelFormat = "{0:MMM - dd}"
+            CategoricalAxis1.LabelFormat = "{0:dd - MMM}"
         ElseIf rdbtnMeses.IsChecked Then
-            CategoricalAxis1.LabelFormat = "{0:yyyy - MMMM}"
+            CategoricalAxis1.LabelFormat = "{0:MMM - yyyy}"
         End If
         CategoricalAxis1.LabelRotationAngle = 270.0R
         LinearAxis1.AxisType = AxisType.Second
@@ -1768,6 +1955,9 @@ Public Class FrmGraficasfaseuno
 
         If vDT.Rows.Count = 0 Then
             habilita_etiqueta_datos()
+            Me.radChartView1.Title = ""
+        Else
+            Me.radChartView1.Title = "5's " & cbxEquipo.Text & " - " & cbxLinea.Text
         End If
 
         BarSeries1.ValueMember = "admon_visual"
@@ -1787,14 +1977,22 @@ Public Class FrmGraficasfaseuno
         Dim CategoricalAxis1 As CategoricalAxis = New CategoricalAxis()
         Dim LinearAxis1 As LinearAxis = New LinearAxis()
         'Personalizacion
-        CartesianArea1.GridDesign.AlternatingVerticalColor = False
-        CartesianArea1.ShowGrid = True
+        'CartesianArea1.GridDesign.AlternatingVerticalColor = False
+        'CartesianArea1.ShowGrid = True
+
+        'Logo Indicador
+        picboxIndicador.ImageLocation = Application.StartupPath & "\graficas_fase_uno\logo_indicador_cincos.jpg"
+
+        'Legend & Position
+        Me.radChartView1.ChartElement.LegendElement.StackElement.Orientation = Orientation.Horizontal
+        Me.radChartView1.ChartElement.LegendPosition = LegendPosition.Bottom
+
         Me.radChartView1.AreaDesign = CartesianArea1
         CategoricalAxis1.LabelFitMode = AxisLabelFitMode.Rotate
         If rdbtnDias.IsChecked Then
-            CategoricalAxis1.LabelFormat = "{0:MMM - dd}"
+            CategoricalAxis1.LabelFormat = "{0:dd - MMM}"
         ElseIf rdbtnMeses.IsChecked Then
-            CategoricalAxis1.LabelFormat = "{0:yyyy - MMMM}"
+            CategoricalAxis1.LabelFormat = "{0:MMM - yyyy}"
         End If
         CategoricalAxis1.LabelRotationAngle = 270.0R
         LinearAxis1.AxisType = AxisType.Second
@@ -1853,6 +2051,9 @@ Public Class FrmGraficasfaseuno
 
         If vDT.Rows.Count = 0 Then
             habilita_etiqueta_datos()
+            Me.radChartView1.Title = ""
+        Else
+            Me.radChartView1.Title = "Gente Planta GKN Driveline México"
         End If
 
         BarSeries1.ValueMember = "total"
@@ -1869,14 +2070,22 @@ Public Class FrmGraficasfaseuno
         Dim CategoricalAxis1 As CategoricalAxis = New CategoricalAxis()
         Dim LinearAxis1 As LinearAxis = New LinearAxis()
         'Personalizacion
-        CartesianArea1.GridDesign.AlternatingVerticalColor = False
-        CartesianArea1.ShowGrid = True
+        'CartesianArea1.GridDesign.AlternatingVerticalColor = False
+        'CartesianArea1.ShowGrid = True
+
+        'Logo Indicador
+        picboxIndicador.ImageLocation = Application.StartupPath & "\graficas_fase_uno\logo_indicador_gente.jpg"
+
+        'Legend & Position
+        Me.radChartView1.ChartElement.LegendElement.StackElement.Orientation = Orientation.Horizontal
+        Me.radChartView1.ChartElement.LegendPosition = LegendPosition.Bottom
+
         Me.radChartView1.AreaDesign = CartesianArea1
         CategoricalAxis1.LabelFitMode = AxisLabelFitMode.Rotate
         If rdbtnDias.IsChecked Then
-            CategoricalAxis1.LabelFormat = "{0:MMM - dd}"
+            CategoricalAxis1.LabelFormat = "{0:dd - MMM}"
         ElseIf rdbtnMeses.IsChecked Then
-            CategoricalAxis1.LabelFormat = "{0:yyyy - MMMM}"
+            CategoricalAxis1.LabelFormat = "{0:MMM - yyyy}"
         End If
         CategoricalAxis1.LabelRotationAngle = 270.0R
         LinearAxis1.AxisType = AxisType.Second
@@ -1890,7 +2099,7 @@ Public Class FrmGraficasfaseuno
         BarSeries2.LabelFormat = "{0:###}"
         BarSeries1.HorizontalAxis = CategoricalAxis1
         BarSeries1.VerticalAxis = LinearAxis1
-        BarSeries1.Palette = New PaletteEntry(Color.FromArgb(24, 134, 205))
+        BarSeries1.Palette = New PaletteEntry(Color.FromArgb(108, 96, 190))
         BarSeries2.Palette = New PaletteEntry(Color.FromArgb(233, 37, 43))
         BarSeries3.Palette = New PaletteEntry(Color.FromArgb(255, 191, 0))
         Me.radChartView1.ShowTrackBall = True
@@ -1931,6 +2140,9 @@ Public Class FrmGraficasfaseuno
 
         If vDT.Rows.Count = 0 Then
             habilita_etiqueta_datos()
+            Me.radChartView1.Title = ""
+        Else
+            Me.radChartView1.Title = "Gente " & cbxCadenaValor.Text
         End If
 
         BarSeries1.ValueMember = "total"
@@ -1947,14 +2159,22 @@ Public Class FrmGraficasfaseuno
         Dim CategoricalAxis1 As CategoricalAxis = New CategoricalAxis()
         Dim LinearAxis1 As LinearAxis = New LinearAxis()
         'Personalizacion
-        CartesianArea1.GridDesign.AlternatingVerticalColor = False
-        CartesianArea1.ShowGrid = True
+        'CartesianArea1.GridDesign.AlternatingVerticalColor = False
+        'CartesianArea1.ShowGrid = True
+
+        'Logo Indicador
+        picboxIndicador.ImageLocation = Application.StartupPath & "\graficas_fase_uno\logo_indicador_gente.jpg"
+
+        'Legend & Position
+        Me.radChartView1.ChartElement.LegendElement.StackElement.Orientation = Orientation.Horizontal
+        Me.radChartView1.ChartElement.LegendPosition = LegendPosition.Bottom
+
         Me.radChartView1.AreaDesign = CartesianArea1
         CategoricalAxis1.LabelFitMode = AxisLabelFitMode.Rotate
         If rdbtnDias.IsChecked Then
-            CategoricalAxis1.LabelFormat = "{0:MMM - dd}"
+            CategoricalAxis1.LabelFormat = "{0:dd - MMM}"
         ElseIf rdbtnMeses.IsChecked Then
-            CategoricalAxis1.LabelFormat = "{0:yyyy - MMMM}"
+            CategoricalAxis1.LabelFormat = "{0:MMM - yyyy}"
         End If
         CategoricalAxis1.LabelRotationAngle = 270.0R
         LinearAxis1.AxisType = AxisType.Second
@@ -1968,7 +2188,7 @@ Public Class FrmGraficasfaseuno
         BarSeries2.LabelFormat = "{0:###}"
         BarSeries1.HorizontalAxis = CategoricalAxis1
         BarSeries1.VerticalAxis = LinearAxis1
-        BarSeries1.Palette = New PaletteEntry(Color.FromArgb(24, 134, 205))
+        BarSeries1.Palette = New PaletteEntry(Color.FromArgb(108, 96, 190))
         BarSeries2.Palette = New PaletteEntry(Color.FromArgb(233, 37, 43))
         BarSeries3.Palette = New PaletteEntry(Color.FromArgb(255, 191, 0))
         Me.radChartView1.ShowTrackBall = True
@@ -2009,6 +2229,9 @@ Public Class FrmGraficasfaseuno
 
         If vDT.Rows.Count = 0 Then
             habilita_etiqueta_datos()
+            Me.radChartView1.Title = ""
+        Else
+            Me.radChartView1.Title = "Gente " & cbxComponente.Text
         End If
 
         BarSeries1.ValueMember = "total"
@@ -2025,14 +2248,22 @@ Public Class FrmGraficasfaseuno
         Dim CategoricalAxis1 As CategoricalAxis = New CategoricalAxis()
         Dim LinearAxis1 As LinearAxis = New LinearAxis()
         'Personalizacion
-        CartesianArea1.GridDesign.AlternatingVerticalColor = False
-        CartesianArea1.ShowGrid = True
+        'CartesianArea1.GridDesign.AlternatingVerticalColor = False
+        'CartesianArea1.ShowGrid = True
+
+        'Logo Indicador
+        picboxIndicador.ImageLocation = Application.StartupPath & "\graficas_fase_uno\logo_indicador_gente.jpg"
+
+        'Legend & Position
+        Me.radChartView1.ChartElement.LegendElement.StackElement.Orientation = Orientation.Horizontal
+        Me.radChartView1.ChartElement.LegendPosition = LegendPosition.Bottom
+
         Me.radChartView1.AreaDesign = CartesianArea1
         CategoricalAxis1.LabelFitMode = AxisLabelFitMode.Rotate
         If rdbtnDias.IsChecked Then
-            CategoricalAxis1.LabelFormat = "{0:MMM - dd}"
+            CategoricalAxis1.LabelFormat = "{0:dd - MMM}"
         ElseIf rdbtnMeses.IsChecked Then
-            CategoricalAxis1.LabelFormat = "{0:yyyy - MMMM}"
+            CategoricalAxis1.LabelFormat = "{0:MMM - yyyy}"
         End If
         CategoricalAxis1.LabelRotationAngle = 270.0R
         LinearAxis1.AxisType = AxisType.Second
@@ -2046,7 +2277,7 @@ Public Class FrmGraficasfaseuno
         BarSeries2.LabelFormat = "{0:###}"
         BarSeries1.HorizontalAxis = CategoricalAxis1
         BarSeries1.VerticalAxis = LinearAxis1
-        BarSeries1.Palette = New PaletteEntry(Color.FromArgb(24, 134, 205))
+        BarSeries1.Palette = New PaletteEntry(Color.FromArgb(108, 96, 190))
         BarSeries2.Palette = New PaletteEntry(Color.FromArgb(233, 37, 43))
         BarSeries3.Palette = New PaletteEntry(Color.FromArgb(255, 191, 0))
         Me.radChartView1.ShowTrackBall = True
@@ -2087,6 +2318,9 @@ Public Class FrmGraficasfaseuno
 
         If vDT.Rows.Count = 0 Then
             habilita_etiqueta_datos()
+            Me.radChartView1.Title = ""
+        Else
+            Me.radChartView1.Title = "Gente " & cbxLinea.Text
         End If
 
         BarSeries1.ValueMember = "total"
@@ -2103,14 +2337,22 @@ Public Class FrmGraficasfaseuno
         Dim CategoricalAxis1 As CategoricalAxis = New CategoricalAxis()
         Dim LinearAxis1 As LinearAxis = New LinearAxis()
         'Personalizacion
-        CartesianArea1.GridDesign.AlternatingVerticalColor = False
-        CartesianArea1.ShowGrid = True
+        'CartesianArea1.GridDesign.AlternatingVerticalColor = False
+        'CartesianArea1.ShowGrid = True
+
+        'Logo Indicador
+        picboxIndicador.ImageLocation = Application.StartupPath & "\graficas_fase_uno\logo_indicador_gente.jpg"
+
+        'Legend & Position
+        Me.radChartView1.ChartElement.LegendElement.StackElement.Orientation = Orientation.Horizontal
+        Me.radChartView1.ChartElement.LegendPosition = LegendPosition.Bottom
+
         Me.radChartView1.AreaDesign = CartesianArea1
         CategoricalAxis1.LabelFitMode = AxisLabelFitMode.Rotate
         If rdbtnDias.IsChecked Then
-            CategoricalAxis1.LabelFormat = "{0:MMM - dd}"
+            CategoricalAxis1.LabelFormat = "{0:dd - MMM}"
         ElseIf rdbtnMeses.IsChecked Then
-            CategoricalAxis1.LabelFormat = "{0:yyyy - MMMM}"
+            CategoricalAxis1.LabelFormat = "{0:MMM - yyyy}"
         End If
         CategoricalAxis1.LabelRotationAngle = 270.0R
         LinearAxis1.AxisType = AxisType.Second
@@ -2124,7 +2366,7 @@ Public Class FrmGraficasfaseuno
         BarSeries2.LabelFormat = "{0:###}"
         BarSeries1.HorizontalAxis = CategoricalAxis1
         BarSeries1.VerticalAxis = LinearAxis1
-        BarSeries1.Palette = New PaletteEntry(Color.FromArgb(24, 134, 205))
+        BarSeries1.Palette = New PaletteEntry(Color.FromArgb(108, 96, 190))
         BarSeries2.Palette = New PaletteEntry(Color.FromArgb(233, 37, 43))
         BarSeries3.Palette = New PaletteEntry(Color.FromArgb(255, 191, 0))
         Me.radChartView1.ShowTrackBall = True
@@ -2165,6 +2407,9 @@ Public Class FrmGraficasfaseuno
 
         If vDT.Rows.Count = 0 Then
             habilita_etiqueta_datos()
+            Me.radChartView1.Title = ""
+        Else
+            Me.radChartView1.Title = "Gente " & cbxEquipo.Text
         End If
 
         BarSeries1.ValueMember = "total"
@@ -2181,14 +2426,22 @@ Public Class FrmGraficasfaseuno
         Dim CategoricalAxis1 As CategoricalAxis = New CategoricalAxis()
         Dim LinearAxis1 As LinearAxis = New LinearAxis()
         'Personalizacion
-        CartesianArea1.GridDesign.AlternatingVerticalColor = False
-        CartesianArea1.ShowGrid = True
+        'CartesianArea1.GridDesign.AlternatingVerticalColor = False
+        'CartesianArea1.ShowGrid = True
+
+        'Logo Indicador
+        picboxIndicador.ImageLocation = Application.StartupPath & "\graficas_fase_uno\logo_indicador_gente.jpg"
+
+        'Legend & Position
+        Me.radChartView1.ChartElement.LegendElement.StackElement.Orientation = Orientation.Horizontal
+        Me.radChartView1.ChartElement.LegendPosition = LegendPosition.Bottom
+
         Me.radChartView1.AreaDesign = CartesianArea1
         CategoricalAxis1.LabelFitMode = AxisLabelFitMode.Rotate
         If rdbtnDias.IsChecked Then
             CategoricalAxis1.LabelFormat = "{0:MMM - dd}"
         ElseIf rdbtnMeses.IsChecked Then
-            CategoricalAxis1.LabelFormat = "{0:yyyy - MMMM}"
+            CategoricalAxis1.LabelFormat = "{0:MMM - yyyy}"
         End If
         CategoricalAxis1.LabelRotationAngle = 270.0R
         LinearAxis1.AxisType = AxisType.Second
@@ -2202,7 +2455,7 @@ Public Class FrmGraficasfaseuno
         BarSeries2.LabelFormat = "{0:###}"
         BarSeries1.HorizontalAxis = CategoricalAxis1
         BarSeries1.VerticalAxis = LinearAxis1
-        BarSeries1.Palette = New PaletteEntry(Color.FromArgb(24, 134, 205))
+        BarSeries1.Palette = New PaletteEntry(Color.FromArgb(108, 96, 190))
         BarSeries2.Palette = New PaletteEntry(Color.FromArgb(233, 37, 43))
         BarSeries3.Palette = New PaletteEntry(Color.FromArgb(255, 191, 0))
         Me.radChartView1.ShowTrackBall = True
@@ -2244,6 +2497,9 @@ Public Class FrmGraficasfaseuno
 
         If vDT.Rows.Count = 0 Then
             habilita_etiqueta_datos()
+            Me.radChartView1.Title = ""
+        Else
+            Me.radChartView1.Title = "Gente " & cbxEquipo.Text & " - " & cbxLinea.Text
         End If
 
         BarSeries1.ValueMember = "total"
@@ -2260,14 +2516,22 @@ Public Class FrmGraficasfaseuno
         Dim CategoricalAxis1 As CategoricalAxis = New CategoricalAxis()
         Dim LinearAxis1 As LinearAxis = New LinearAxis()
         'Personalizacion
-        CartesianArea1.GridDesign.AlternatingVerticalColor = False
-        CartesianArea1.ShowGrid = True
+        'CartesianArea1.GridDesign.AlternatingVerticalColor = False
+        'CartesianArea1.ShowGrid = True
+
+        'Logo Indicador
+        picboxIndicador.ImageLocation = Application.StartupPath & "\graficas_fase_uno\logo_indicador_gente.jpg"
+
+        'Legend & Position
+        Me.radChartView1.ChartElement.LegendElement.StackElement.Orientation = Orientation.Horizontal
+        Me.radChartView1.ChartElement.LegendPosition = LegendPosition.Bottom
+
         Me.radChartView1.AreaDesign = CartesianArea1
         CategoricalAxis1.LabelFitMode = AxisLabelFitMode.Rotate
         If rdbtnDias.IsChecked Then
-            CategoricalAxis1.LabelFormat = "{0:MMM - dd}"
+            CategoricalAxis1.LabelFormat = "{0:dd - MMM}"
         ElseIf rdbtnMeses.IsChecked Then
-            CategoricalAxis1.LabelFormat = "{0:yyyy - MMMM}"
+            CategoricalAxis1.LabelFormat = "{0:MMM - yyyy}"
         End If
         CategoricalAxis1.LabelRotationAngle = 270.0R
         LinearAxis1.AxisType = AxisType.Second
@@ -2281,7 +2545,7 @@ Public Class FrmGraficasfaseuno
         BarSeries2.LabelFormat = "{0:###}"
         BarSeries1.HorizontalAxis = CategoricalAxis1
         BarSeries1.VerticalAxis = LinearAxis1
-        BarSeries1.Palette = New PaletteEntry(Color.FromArgb(24, 134, 205))
+        BarSeries1.Palette = New PaletteEntry(Color.FromArgb(108, 96, 190))
         BarSeries2.Palette = New PaletteEntry(Color.FromArgb(233, 37, 43))
         BarSeries3.Palette = New PaletteEntry(Color.FromArgb(255, 191, 0))
         Me.radChartView1.ShowTrackBall = True
@@ -2323,6 +2587,9 @@ Public Class FrmGraficasfaseuno
 
         If vDT.Rows.Count = 0 Then
             habilita_etiqueta_datos()
+            Me.radChartView1.Title = ""
+        Else
+            Me.radChartView1.Title = "Seguridad Planta GKN Driveline México"
         End If
 
         BarSeries1.ValueMember = "barra_amarilla"
@@ -2339,19 +2606,27 @@ Public Class FrmGraficasfaseuno
         Dim CategoricalAxis1 As CategoricalAxis = New CategoricalAxis()
         Dim LinearAxis1 As LinearAxis = New LinearAxis()
         'Personalizacion
-        CartesianArea1.GridDesign.AlternatingVerticalColor = False
-        CartesianArea1.ShowGrid = True
+        'CartesianArea1.GridDesign.AlternatingVerticalColor = False
+        'CartesianArea1.ShowGrid = True
+
+        'Logo Indicador
+        picboxIndicador.ImageLocation = Application.StartupPath & "\graficas_fase_uno\logo_indicador_seguridad.jpg"
+
+        'Legend & Position
+        Me.radChartView1.ChartElement.LegendElement.StackElement.Orientation = Orientation.Horizontal
+        Me.radChartView1.ChartElement.LegendPosition = LegendPosition.Bottom
+
         Me.radChartView1.AreaDesign = CartesianArea1
         CategoricalAxis1.LabelFitMode = AxisLabelFitMode.Rotate
         If rdbtnDias.IsChecked Then
-            CategoricalAxis1.LabelFormat = "{0:MMM - dd}"
+            CategoricalAxis1.LabelFormat = "{0:dd - MMM}"
         ElseIf rdbtnMeses.IsChecked Then
-            CategoricalAxis1.LabelFormat = "{0:yyyy - MMMM}"
+            CategoricalAxis1.LabelFormat = "{0:MMM - yyyy}"
         End If
         CategoricalAxis1.LabelRotationAngle = 270.0R
         LinearAxis1.AxisType = AxisType.Second
         'LinearAxis1.MajorStep = 1.0R
-        LinearAxis1.Title = "Seguridad"
+        LinearAxis1.Title = "CI"
         BarSeries1.ShowLabels = True
         'BarSeries2.ShowLabels = True
         'BarSeries3.ShowLabels = True
@@ -2400,6 +2675,9 @@ Public Class FrmGraficasfaseuno
 
         If vDT.Rows.Count = 0 Then
             habilita_etiqueta_datos()
+            Me.radChartView1.Title = ""
+        Else
+            Me.radChartView1.Title = "Seguridad " & cbxCadenaValor.Text
         End If
 
         BarSeries1.ValueMember = "barra_amarilla"
@@ -2416,20 +2694,28 @@ Public Class FrmGraficasfaseuno
         Dim CategoricalAxis1 As CategoricalAxis = New CategoricalAxis()
         Dim LinearAxis1 As LinearAxis = New LinearAxis()
         'Personalizacion
-        CartesianArea1.GridDesign.AlternatingVerticalColor = False
-        CartesianArea1.ShowGrid = True
+        'CartesianArea1.GridDesign.AlternatingVerticalColor = False
+        'CartesianArea1.ShowGrid = True
+
+        'Logo Indicador
+        picboxIndicador.ImageLocation = Application.StartupPath & "\graficas_fase_uno\logo_indicador_seguridad.jpg"
+
+        'Legend & Position
+        Me.radChartView1.ChartElement.LegendElement.StackElement.Orientation = Orientation.Horizontal
+        Me.radChartView1.ChartElement.LegendPosition = LegendPosition.Bottom
+
         Me.radChartView1.AreaDesign = CartesianArea1
         CategoricalAxis1.LabelFitMode = AxisLabelFitMode.Rotate
         If rdbtnDias.IsChecked Then
-            CategoricalAxis1.LabelFormat = "{0:MMM - dd}"
+            CategoricalAxis1.LabelFormat = "{0:dd - MMM}"
         ElseIf rdbtnMeses.IsChecked Then
-            CategoricalAxis1.LabelFormat = "{0:yyyy - MMMM}"
+            CategoricalAxis1.LabelFormat = "{0:MMM - yyyy}"
         End If
         CategoricalAxis1.LabelRotationAngle = 270.0R
         LinearAxis1.AxisType = AxisType.Second
         'LinearAxis1.MajorStep = 1.0R
         'LinearAxis1.Maximum = 5
-        LinearAxis1.Title = "Seguridad"
+        LinearAxis1.Title = "CI"
         BarSeries1.ShowLabels = True
         'BarSeries2.ShowLabels = True
         'BarSeries3.ShowLabels = True
@@ -2479,6 +2765,9 @@ Public Class FrmGraficasfaseuno
 
         If vDT.Rows.Count = 0 Then
             habilita_etiqueta_datos()
+            Me.radChartView1.Title = ""
+        Else
+            Me.radChartView1.Title = "Seguridad " & cbxComponente.Text
         End If
 
         BarSeries1.ValueMember = "barra_amarilla"
@@ -2495,20 +2784,28 @@ Public Class FrmGraficasfaseuno
         Dim CategoricalAxis1 As CategoricalAxis = New CategoricalAxis()
         Dim LinearAxis1 As LinearAxis = New LinearAxis()
         'Personalizacion
-        CartesianArea1.GridDesign.AlternatingVerticalColor = False
-        CartesianArea1.ShowGrid = True
+        'CartesianArea1.GridDesign.AlternatingVerticalColor = False
+        'CartesianArea1.ShowGrid = True
+
+        'Logo Indicador
+        picboxIndicador.ImageLocation = Application.StartupPath & "\graficas_fase_uno\logo_indicador_seguridad.jpg"
+
+        'Legend & Position
+        Me.radChartView1.ChartElement.LegendElement.StackElement.Orientation = Orientation.Horizontal
+        Me.radChartView1.ChartElement.LegendPosition = LegendPosition.Bottom
+
         Me.radChartView1.AreaDesign = CartesianArea1
         CategoricalAxis1.LabelFitMode = AxisLabelFitMode.Rotate
         If rdbtnDias.IsChecked Then
-            CategoricalAxis1.LabelFormat = "{0:MMM - dd}"
+            CategoricalAxis1.LabelFormat = "{0:dd - MMM}"
         ElseIf rdbtnMeses.IsChecked Then
-            CategoricalAxis1.LabelFormat = "{0:yyyy - MMMM}"
+            CategoricalAxis1.LabelFormat = "{0:MMM - yyyy}"
         End If
         CategoricalAxis1.LabelRotationAngle = 270.0R
         LinearAxis1.AxisType = AxisType.Second
         'LinearAxis1.MajorStep = 1.0R
         'LinearAxis1.Maximum = 5
-        LinearAxis1.Title = "Seguridad"
+        LinearAxis1.Title = "CI"
         BarSeries1.ShowLabels = True
         'BarSeries2.ShowLabels = True
         'BarSeries3.ShowLabels = True
@@ -2557,6 +2854,9 @@ Public Class FrmGraficasfaseuno
 
         If vDT.Rows.Count = 0 Then
             habilita_etiqueta_datos()
+            Me.radChartView1.Title = ""
+        Else
+            Me.radChartView1.Title = "Seguridad " & cbxLinea.Text
         End If
 
         BarSeries1.ValueMember = "barra_amarilla"
@@ -2573,20 +2873,28 @@ Public Class FrmGraficasfaseuno
         Dim CategoricalAxis1 As CategoricalAxis = New CategoricalAxis()
         Dim LinearAxis1 As LinearAxis = New LinearAxis()
         'Personalizacion
-        CartesianArea1.GridDesign.AlternatingVerticalColor = False
-        CartesianArea1.ShowGrid = True
+        'CartesianArea1.GridDesign.AlternatingVerticalColor = False
+        'CartesianArea1.ShowGrid = True
+
+        'Logo Indicador
+        picboxIndicador.ImageLocation = Application.StartupPath & "\graficas_fase_uno\logo_indicador_seguridad.jpg"
+
+        'Legend & Position
+        Me.radChartView1.ChartElement.LegendElement.StackElement.Orientation = Orientation.Horizontal
+        Me.radChartView1.ChartElement.LegendPosition = LegendPosition.Bottom
+
         Me.radChartView1.AreaDesign = CartesianArea1
         CategoricalAxis1.LabelFitMode = AxisLabelFitMode.Rotate
         If rdbtnDias.IsChecked Then
-            CategoricalAxis1.LabelFormat = "{0:MMM - dd}"
+            CategoricalAxis1.LabelFormat = "{0:dd - MMM}"
         ElseIf rdbtnMeses.IsChecked Then
-            CategoricalAxis1.LabelFormat = "{0:yyyy - MMMM}"
+            CategoricalAxis1.LabelFormat = "{0:MMM - yyyy}"
         End If
         CategoricalAxis1.LabelRotationAngle = 270.0R
         LinearAxis1.AxisType = AxisType.Second
         'LinearAxis1.MajorStep = 1.0R
 
-        LinearAxis1.Title = "Seguridad"
+        LinearAxis1.Title = "CI"
         BarSeries1.ShowLabels = True
         'BarSeries2.ShowLabels = True
         'BarSeries3.ShowLabels = True
@@ -2635,6 +2943,9 @@ Public Class FrmGraficasfaseuno
 
         If vDT.Rows.Count = 0 Then
             habilita_etiqueta_datos()
+            Me.radChartView1.Title = ""
+        Else
+            Me.radChartView1.Title = "Seguridad " & cbxEquipo.Text
         End If
 
         BarSeries1.ValueMember = "barra_amarilla"
@@ -2651,20 +2962,28 @@ Public Class FrmGraficasfaseuno
         Dim CategoricalAxis1 As CategoricalAxis = New CategoricalAxis()
         Dim LinearAxis1 As LinearAxis = New LinearAxis()
         'Personalizacion
-        CartesianArea1.GridDesign.AlternatingVerticalColor = False
-        CartesianArea1.ShowGrid = True
+        'CartesianArea1.GridDesign.AlternatingVerticalColor = False
+        'CartesianArea1.ShowGrid = True
+
+        'Logo Indicador
+        picboxIndicador.ImageLocation = Application.StartupPath & "\graficas_fase_uno\logo_indicador_seguridad.jpg"
+
+        'Legend & Position
+        Me.radChartView1.ChartElement.LegendElement.StackElement.Orientation = Orientation.Horizontal
+        Me.radChartView1.ChartElement.LegendPosition = LegendPosition.Bottom
+
         Me.radChartView1.AreaDesign = CartesianArea1
         CategoricalAxis1.LabelFitMode = AxisLabelFitMode.Rotate
         If rdbtnDias.IsChecked Then
-            CategoricalAxis1.LabelFormat = "{0:MMM - dd}"
+            CategoricalAxis1.LabelFormat = "{0:dd - MMM}"
         ElseIf rdbtnMeses.IsChecked Then
-            CategoricalAxis1.LabelFormat = "{0:yyyy - MMMM}"
+            CategoricalAxis1.LabelFormat = "{0:MMM - yyyy}"
         End If
         CategoricalAxis1.LabelRotationAngle = 270.0R
         LinearAxis1.AxisType = AxisType.Second
         'LinearAxis1.MajorStep = 1.0R
         'LinearAxis1.Maximum = 5
-        LinearAxis1.Title = "Seguridad"
+        LinearAxis1.Title = "CI"
         BarSeries1.ShowLabels = True
         'BarSeries2.ShowLabels = True
         'BarSeries3.ShowLabels = True
@@ -2714,6 +3033,9 @@ Public Class FrmGraficasfaseuno
 
         If vDT.Rows.Count = 0 Then
             habilita_etiqueta_datos()
+            Me.radChartView1.Title = ""
+        Else
+            Me.radChartView1.Title = "Seguridad " & cbxEquipo.Text & " - " & cbxLinea.Text
         End If
 
         BarSeries1.ValueMember = "barra_amarilla"
@@ -2730,20 +3052,28 @@ Public Class FrmGraficasfaseuno
         Dim CategoricalAxis1 As CategoricalAxis = New CategoricalAxis()
         Dim LinearAxis1 As LinearAxis = New LinearAxis()
         'Personalizacion
-        CartesianArea1.GridDesign.AlternatingVerticalColor = False
-        CartesianArea1.ShowGrid = True
+        'CartesianArea1.GridDesign.AlternatingVerticalColor = False
+        'CartesianArea1.ShowGrid = True
+
+        'Logo Indicador
+        picboxIndicador.ImageLocation = Application.StartupPath & "\graficas_fase_uno\logo_indicador_seguridad.jpg"
+
+        'Legend & Position
+        Me.radChartView1.ChartElement.LegendElement.StackElement.Orientation = Orientation.Horizontal
+        Me.radChartView1.ChartElement.LegendPosition = LegendPosition.Bottom
+
         Me.radChartView1.AreaDesign = CartesianArea1
         CategoricalAxis1.LabelFitMode = AxisLabelFitMode.Rotate
         If rdbtnDias.IsChecked Then
-            CategoricalAxis1.LabelFormat = "{0:MMM - dd}"
+            CategoricalAxis1.LabelFormat = "{0:dd - MMM}"
         ElseIf rdbtnMeses.IsChecked Then
-            CategoricalAxis1.LabelFormat = "{0:yyyy - MMMM}"
+            CategoricalAxis1.LabelFormat = "{0:MMM - yyyy}"
         End If
         CategoricalAxis1.LabelRotationAngle = 270.0R
         LinearAxis1.AxisType = AxisType.Second
         'LinearAxis1.MajorStep = 1.0R
         'LinearAxis1.Maximum = 5
-        LinearAxis1.Title = "Seguridad"
+        LinearAxis1.Title = "CI"
         BarSeries1.ShowLabels = True
         'BarSeries2.ShowLabels = True
         'BarSeries3.ShowLabels = True
@@ -2800,6 +3130,9 @@ Public Class FrmGraficasfaseuno
 
         If vTotal = 0 Then
             habilita_etiqueta_datos()
+            Me.radChartView1.Title = ""
+        Else
+            Me.radChartView1.Title = "Costo Planta GKN Driveline México"
         End If
 
         For Each vDR As DataRow In vDT.Rows
@@ -2808,7 +3141,6 @@ Public Class FrmGraficasfaseuno
                 BarSeries2.DataPoints.Add(New CategoricalDataPoint(vDR("min_excedentes"), "acumulado"))
                 LineSeries1.DataPoints.Add(New CategoricalDataPoint(vDR("costo"), "acumulado"))
                 LineSeries2.DataPoints.Add(New CategoricalDataPoint(vDR("objetivo_tcdm"), "acumulado"))
-
             Else
                 BarSeries1.DataPoints.Add(New CategoricalDataPoint(vDR("min_programados"), vDR("dia_asignado")))
                 BarSeries2.DataPoints.Add(New CategoricalDataPoint(vDR("min_excedentes"), vDR("dia_asignado")))
@@ -2819,7 +3151,7 @@ Public Class FrmGraficasfaseuno
         Next
         'Cartesian Area
         Dim CartesianArea1 As CartesianArea = New CartesianArea()
-        CartesianArea1.ShowGrid = True
+        'CartesianArea1.ShowGrid = True
         Me.radChartView1.AreaDesign = CartesianArea1
         'Categorical axis
         Dim CategoricalAxis1 As CategoricalAxis = New CategoricalAxis()
@@ -2835,22 +3167,32 @@ Public Class FrmGraficasfaseuno
         LinearAxis1.Title = "Minutos"
         LinearAxis2.Title = "Costo $"
         'Personalizacion
+
+        'Logo Indicador
+        picboxIndicador.ImageLocation = Application.StartupPath & "\graficas_fase_uno\logo_indicador_costo.jpg"
+
+        'Legend & Position
+        Me.radChartView1.ChartElement.LegendElement.StackElement.Orientation = Orientation.Horizontal
+        Me.radChartView1.ChartElement.LegendPosition = LegendPosition.Bottom
+
         If rdbtnDias.IsChecked Then
-            CategoricalAxis1.LabelFormat = "{0:MMM - dd}"
+            CategoricalAxis1.LabelFormat = "{0:dd - MMM}"
         ElseIf rdbtnMeses.IsChecked Then
-            CategoricalAxis1.LabelFormat = "{0:yyyy - MMMM}"
+            CategoricalAxis1.LabelFormat = "{0:MMM - yyyy}"
         End If
         'LinearAxis1.MajorStep = 10.0R
         'Series
+        BarSeries1.ForeColor = Color.White
+
         BarSeries1.ShowLabels = True
         BarSeries2.ShowLabels = True
         LineSeries1.ShowLabels = True
-        LineSeries2.ShowLabels = True
+        'LineSeries2.ShowLabels = True
 
         BarSeries1.LabelFormat = "{0:###}"
         BarSeries2.LabelFormat = "{0:###}"
-        LineSeries2.LabelFormat = "{0:###}"
-        LineSeries1.LabelFormat = "{0:##.##}"
+        'LineSeries2.LabelFormat = "{0:###}"
+        LineSeries1.LabelFormat = "$ " & "{0:##.##}"
 
 
         BarSeries1.HorizontalAxis = CategoricalAxis1
@@ -2863,7 +3205,7 @@ Public Class FrmGraficasfaseuno
         LineSeries2.VerticalAxis = LinearAxis1
         LineSeries1.VerticalAxis = LinearAxis2
 
-        BarSeries1.Palette = New PaletteEntry(Color.FromArgb(37, 64, 97))
+        BarSeries1.Palette = New PaletteEntry(Color.FromArgb(62, 105, 157))
         BarSeries2.Palette = New PaletteEntry(Color.FromArgb(255, 192, 0))
         LineSeries1.Palette = New PaletteEntry(Color.FromArgb(127, 127, 127))
         LineSeries2.Palette = New PaletteEntry(Color.FromArgb(217, 217, 217))
@@ -2872,7 +3214,7 @@ Public Class FrmGraficasfaseuno
         LineSeries2.BorderColor = Color.FromArgb(217, 217, 217)
 
         LineSeries1.PointSize = New SizeF(10, 10)
-        LineSeries2.PointSize = New SizeF(10, 10)
+        'LineSeries2.PointSize = New SizeF(10, 10)
         Me.radChartView1.ShowTrackBall = True
         Me.radChartView1.ShowToolTip = True
         'Chartview
@@ -2926,6 +3268,9 @@ Public Class FrmGraficasfaseuno
 
         If vTotal = 0 Then
             habilita_etiqueta_datos()
+            Me.radChartView1.Title = ""
+        Else
+            Me.radChartView1.Title = "Costo " & cbxCadenaValor.Text
         End If
 
         For Each vDR As DataRow In vDT.Rows
@@ -2944,7 +3289,7 @@ Public Class FrmGraficasfaseuno
         Next
         'Cartesian Area
         Dim CartesianArea1 As CartesianArea = New CartesianArea()
-        CartesianArea1.ShowGrid = True
+        'CartesianArea1.ShowGrid = True
         Me.radChartView1.AreaDesign = CartesianArea1
         'Categorical axis
         Dim CategoricalAxis1 As CategoricalAxis = New CategoricalAxis()
@@ -2960,23 +3305,33 @@ Public Class FrmGraficasfaseuno
         LinearAxis1.Title = "Minutos"
         LinearAxis2.Title = "Costo $$"
         'Personalizacion
+
+        'Logo Indicador
+        picboxIndicador.ImageLocation = Application.StartupPath & "\graficas_fase_uno\logo_indicador_costo.jpg"
+
+        'Legend & Position
+        Me.radChartView1.ChartElement.LegendElement.StackElement.Orientation = Orientation.Horizontal
+        Me.radChartView1.ChartElement.LegendPosition = LegendPosition.Bottom
+
         If rdbtnDias.IsChecked Then
-            CategoricalAxis1.LabelFormat = "{0:MMM - dd}"
+            CategoricalAxis1.LabelFormat = "{0:dd - MMM}"
         ElseIf rdbtnMeses.IsChecked Then
-            CategoricalAxis1.LabelFormat = "{0:yyyy - MMMM}"
+            CategoricalAxis1.LabelFormat = "{0:MMM - yyyy}"
         End If
 
         'LinearAxis1.MajorStep = 10.0R
         'Series
+        BarSeries1.ForeColor = Color.White
+
         BarSeries1.ShowLabels = True
         BarSeries2.ShowLabels = True
         LineSeries1.ShowLabels = True
-        LineSeries2.ShowLabels = True
+        'LineSeries2.ShowLabels = True
 
         BarSeries1.LabelFormat = "{0:###}"
         BarSeries2.LabelFormat = "{0:###}"
-        LineSeries2.LabelFormat = "{0:###}"
-        LineSeries1.LabelFormat = "{0:##.##}"
+        'LineSeries2.LabelFormat = "{0:###}"
+        LineSeries1.LabelFormat = "$ " & "{0:##.##}"
 
         BarSeries1.HorizontalAxis = CategoricalAxis1
         BarSeries2.HorizontalAxis = CategoricalAxis1
@@ -2988,7 +3343,7 @@ Public Class FrmGraficasfaseuno
         LineSeries2.VerticalAxis = LinearAxis1
         LineSeries1.VerticalAxis = LinearAxis2
 
-        BarSeries1.Palette = New PaletteEntry(Color.FromArgb(37, 64, 97))
+        BarSeries1.Palette = New PaletteEntry(Color.FromArgb(62, 105, 157))
         BarSeries2.Palette = New PaletteEntry(Color.FromArgb(255, 192, 0))
         LineSeries1.Palette = New PaletteEntry(Color.FromArgb(127, 127, 127))
         LineSeries2.Palette = New PaletteEntry(Color.FromArgb(217, 217, 217))
@@ -2997,9 +3352,8 @@ Public Class FrmGraficasfaseuno
         LineSeries2.BorderColor = Color.FromArgb(217, 217, 217)
 
         LineSeries1.PointSize = New SizeF(10, 10)
-        LineSeries2.PointSize = New SizeF(10, 10)
+        'LineSeries2.PointSize = New SizeF(10, 10)
 
-        LineSeries1.PointSize = New SizeF(10, 10)
         Me.radChartView1.ShowTrackBall = True
         Me.radChartView1.ShowToolTip = True
 
@@ -3051,6 +3405,9 @@ Public Class FrmGraficasfaseuno
 
         If vTotal = 0 Then
             habilita_etiqueta_datos()
+            Me.radChartView1.Title = ""
+        Else
+            Me.radChartView1.Title = "Costo " & cbxComponente.Text
         End If
 
         For Each vDR As DataRow In vDT.Rows
@@ -3069,7 +3426,7 @@ Public Class FrmGraficasfaseuno
         Next
         'Cartesian Area
         Dim CartesianArea1 As CartesianArea = New CartesianArea()
-        CartesianArea1.ShowGrid = True
+        'CartesianArea1.ShowGrid = True
         Me.radChartView1.AreaDesign = CartesianArea1
         'Categorical axis
         Dim CategoricalAxis1 As CategoricalAxis = New CategoricalAxis()
@@ -3085,22 +3442,32 @@ Public Class FrmGraficasfaseuno
         LinearAxis1.Title = "Minutos"
         LinearAxis2.Title = "Costo $$"
         'Personalizacion
+
+        'Logo Indicador
+        picboxIndicador.ImageLocation = Application.StartupPath & "\graficas_fase_uno\logo_indicador_costo.jpg"
+
+        'Legend & Position
+        Me.radChartView1.ChartElement.LegendElement.StackElement.Orientation = Orientation.Horizontal
+        Me.radChartView1.ChartElement.LegendPosition = LegendPosition.Bottom
+
         If rdbtnDias.IsChecked Then
-            CategoricalAxis1.LabelFormat = "{0:MMM - dd}"
+            CategoricalAxis1.LabelFormat = "{0:dd - MMM}"
         ElseIf rdbtnMeses.IsChecked Then
-            CategoricalAxis1.LabelFormat = "{0:yyyy - MMMM}"
+            CategoricalAxis1.LabelFormat = "{0:MMM - yyyy}"
         End If
         'LinearAxis1.MajorStep = 10.0R
         'Series
+        BarSeries1.ForeColor = Color.White
+
         BarSeries1.ShowLabels = True
         BarSeries2.ShowLabels = True
         LineSeries1.ShowLabels = True
-        LineSeries2.ShowLabels = True
+        'LineSeries2.ShowLabels = True
 
         BarSeries1.LabelFormat = "{0:###}"
         BarSeries2.LabelFormat = "{0:###}"
-        LineSeries2.LabelFormat = "{0:###}"
-        LineSeries1.LabelFormat = "{0:##.##}"
+        'LineSeries2.LabelFormat = "{0:###}"
+        LineSeries1.LabelFormat = "$ " & "{0:##.##}"
 
 
         BarSeries1.HorizontalAxis = CategoricalAxis1
@@ -3113,7 +3480,7 @@ Public Class FrmGraficasfaseuno
         LineSeries2.VerticalAxis = LinearAxis1
         LineSeries1.VerticalAxis = LinearAxis2
 
-        BarSeries1.Palette = New PaletteEntry(Color.FromArgb(37, 64, 97))
+        BarSeries1.Palette = New PaletteEntry(Color.FromArgb(62, 105, 157))
         BarSeries2.Palette = New PaletteEntry(Color.FromArgb(255, 192, 0))
         LineSeries1.Palette = New PaletteEntry(Color.FromArgb(127, 127, 127))
         LineSeries2.Palette = New PaletteEntry(Color.FromArgb(217, 217, 217))
@@ -3122,7 +3489,7 @@ Public Class FrmGraficasfaseuno
         LineSeries2.BorderColor = Color.FromArgb(217, 217, 217)
 
         LineSeries1.PointSize = New SizeF(10, 10)
-        LineSeries2.PointSize = New SizeF(10, 10)
+        'LineSeries2.PointSize = New SizeF(10, 10)
         Me.radChartView1.ShowTrackBall = True
         Me.radChartView1.ShowToolTip = True
         'Chartview
@@ -3175,6 +3542,9 @@ Public Class FrmGraficasfaseuno
 
         If vTotal = 0 Then
             habilita_etiqueta_datos()
+            Me.radChartView1.Title = ""
+        Else
+            Me.radChartView1.Title = "Costo " & cbxLinea.Text
         End If
 
         For Each vDR As DataRow In vDT.Rows
@@ -3193,7 +3563,7 @@ Public Class FrmGraficasfaseuno
         Next
         'Cartesian Area
         Dim CartesianArea1 As CartesianArea = New CartesianArea()
-        CartesianArea1.ShowGrid = True
+        'CartesianArea1.ShowGrid = True
         Me.radChartView1.AreaDesign = CartesianArea1
         'Categorical axis
         Dim CategoricalAxis1 As CategoricalAxis = New CategoricalAxis()
@@ -3209,22 +3579,30 @@ Public Class FrmGraficasfaseuno
         LinearAxis1.Title = "Minutos"
         LinearAxis2.Title = "Costo $$"
         'Personalizacion
+
+        'Logo Indicador
+        picboxIndicador.ImageLocation = Application.StartupPath & "\graficas_fase_uno\logo_indicador_costo.jpg"
+
+        'Legend & Position
+        Me.radChartView1.ChartElement.LegendElement.StackElement.Orientation = Orientation.Horizontal
+        Me.radChartView1.ChartElement.LegendPosition = LegendPosition.Bottom
+
         If rdbtnDias.IsChecked Then
-            CategoricalAxis1.LabelFormat = "{0:MMM - dd}"
+            CategoricalAxis1.LabelFormat = "{0:dd - MMM}"
         ElseIf rdbtnMeses.IsChecked Then
-            CategoricalAxis1.LabelFormat = "{0:yyyy - MMMM}"
+            CategoricalAxis1.LabelFormat = "{0:MMM - yyyy}"
         End If
         'LinearAxis1.MajorStep = 10.0R
         'Series
         BarSeries1.ShowLabels = True
         BarSeries2.ShowLabels = True
         LineSeries1.ShowLabels = True
-        LineSeries2.ShowLabels = True
+        'LineSeries2.ShowLabels = True
 
         BarSeries1.LabelFormat = "{0:###}"
         BarSeries2.LabelFormat = "{0:###}"
-        LineSeries2.LabelFormat = "{0:###}"
-        LineSeries1.LabelFormat = "{0:##.##}"
+        'LineSeries2.LabelFormat = "{0:###}"
+        LineSeries1.LabelFormat = "$ " & "{0:##.##}"
 
 
         BarSeries1.HorizontalAxis = CategoricalAxis1
@@ -3237,7 +3615,7 @@ Public Class FrmGraficasfaseuno
         LineSeries2.VerticalAxis = LinearAxis1
         LineSeries1.VerticalAxis = LinearAxis2
 
-        BarSeries1.Palette = New PaletteEntry(Color.FromArgb(37, 64, 97))
+        BarSeries1.Palette = New PaletteEntry(Color.FromArgb(62, 105, 157))
         BarSeries2.Palette = New PaletteEntry(Color.FromArgb(255, 192, 0))
         LineSeries1.Palette = New PaletteEntry(Color.FromArgb(127, 127, 127))
         LineSeries2.Palette = New PaletteEntry(Color.FromArgb(217, 217, 217))
@@ -3246,7 +3624,7 @@ Public Class FrmGraficasfaseuno
         LineSeries2.BorderColor = Color.FromArgb(217, 217, 217)
 
         LineSeries1.PointSize = New SizeF(10, 10)
-        LineSeries2.PointSize = New SizeF(10, 10)
+        'LineSeries2.PointSize = New SizeF(10, 10)
         Me.radChartView1.ShowTrackBall = True
         Me.radChartView1.ShowToolTip = True
         'Chartview
@@ -3299,6 +3677,9 @@ Public Class FrmGraficasfaseuno
 
         If vTotal = 0 Then
             habilita_etiqueta_datos()
+            Me.radChartView1.Title = ""
+        Else
+            Me.radChartView1.Title = "Costo " & cbxEquipo.Text
         End If
 
         For Each vDR As DataRow In vDT.Rows
@@ -3317,7 +3698,7 @@ Public Class FrmGraficasfaseuno
         Next
         'Cartesian Area
         Dim CartesianArea1 As CartesianArea = New CartesianArea()
-        CartesianArea1.ShowGrid = True
+        'CartesianArea1.ShowGrid = True
         Me.radChartView1.AreaDesign = CartesianArea1
         'Categorical axis
         Dim CategoricalAxis1 As CategoricalAxis = New CategoricalAxis()
@@ -3333,22 +3714,32 @@ Public Class FrmGraficasfaseuno
         LinearAxis1.Title = "Minutos"
         LinearAxis2.Title = "Costo $$"
         'Personalizacion
+
+        'Logo Indicador
+        picboxIndicador.ImageLocation = Application.StartupPath & "\graficas_fase_uno\logo_indicador_costo.jpg"
+
+        'Legend & Position
+        Me.radChartView1.ChartElement.LegendElement.StackElement.Orientation = Orientation.Horizontal
+        Me.radChartView1.ChartElement.LegendPosition = LegendPosition.Bottom
+
         If rdbtnDias.IsChecked Then
-            CategoricalAxis1.LabelFormat = "{0:MMM - dd}"
+            CategoricalAxis1.LabelFormat = "{0:dd - MMM}"
         ElseIf rdbtnMeses.IsChecked Then
-            CategoricalAxis1.LabelFormat = "{0:yyyy - MMMM}"
+            CategoricalAxis1.LabelFormat = "{0:MMM - yyyy}"
         End If
         'LinearAxis1.MajorStep = 10.0R
         'Series
+        BarSeries1.ForeColor = Color.White
+
         BarSeries1.ShowLabels = True
         BarSeries2.ShowLabels = True
         LineSeries1.ShowLabels = True
-        LineSeries2.ShowLabels = True
+        'LineSeries2.ShowLabels = True
 
         BarSeries1.LabelFormat = "{0:###}"
         BarSeries2.LabelFormat = "{0:###}"
-        LineSeries2.LabelFormat = "{0:###}"
-        LineSeries1.LabelFormat = "{0:##.##}"
+        'LineSeries2.LabelFormat = "{0:###}"
+        LineSeries1.LabelFormat = "$ " & "{0:##.##}"
 
 
         BarSeries1.HorizontalAxis = CategoricalAxis1
@@ -3361,7 +3752,7 @@ Public Class FrmGraficasfaseuno
         LineSeries2.VerticalAxis = LinearAxis1
         LineSeries1.VerticalAxis = LinearAxis2
 
-        BarSeries1.Palette = New PaletteEntry(Color.FromArgb(37, 64, 97))
+        BarSeries1.Palette = New PaletteEntry(Color.FromArgb(62, 105, 157))
         BarSeries2.Palette = New PaletteEntry(Color.FromArgb(255, 192, 0))
         LineSeries1.Palette = New PaletteEntry(Color.FromArgb(127, 127, 127))
         LineSeries2.Palette = New PaletteEntry(Color.FromArgb(217, 217, 217))
@@ -3370,7 +3761,7 @@ Public Class FrmGraficasfaseuno
         LineSeries2.BorderColor = Color.FromArgb(217, 217, 217)
 
         LineSeries1.PointSize = New SizeF(10, 10)
-        LineSeries2.PointSize = New SizeF(10, 10)
+        'LineSeries2.PointSize = New SizeF(10, 10)
         Me.radChartView1.ShowTrackBall = True
         Me.radChartView1.ShowToolTip = True
         'Chartview
@@ -3424,6 +3815,9 @@ Public Class FrmGraficasfaseuno
 
         If vTotal = 0 Then
             habilita_etiqueta_datos()
+            Me.radChartView1.Title = ""
+        Else
+            Me.radChartView1.Title = "Costo " & cbxEquipo.Text & " - " & cbxLinea.Text
         End If
 
         For Each vDR As DataRow In vDT.Rows
@@ -3442,7 +3836,7 @@ Public Class FrmGraficasfaseuno
         Next
         'Cartesian Area
         Dim CartesianArea1 As CartesianArea = New CartesianArea()
-        CartesianArea1.ShowGrid = True
+        'CartesianArea1.ShowGrid = True
         Me.radChartView1.AreaDesign = CartesianArea1
         'Categorical axis
         Dim CategoricalAxis1 As CategoricalAxis = New CategoricalAxis()
@@ -3458,22 +3852,32 @@ Public Class FrmGraficasfaseuno
         LinearAxis1.Title = "Minutos"
         LinearAxis2.Title = "Costo $$"
         'Personalizacion
+
+        'Logo Indicador
+        picboxIndicador.ImageLocation = Application.StartupPath & "\graficas_fase_uno\logo_indicador_costo.jpg"
+
+        'Legend & Position
+        Me.radChartView1.ChartElement.LegendElement.StackElement.Orientation = Orientation.Horizontal
+        Me.radChartView1.ChartElement.LegendPosition = LegendPosition.Bottom
+
         If rdbtnDias.IsChecked Then
-            CategoricalAxis1.LabelFormat = "{0:MMM - dd}"
+            CategoricalAxis1.LabelFormat = "{0:dd - MMM}"
         ElseIf rdbtnMeses.IsChecked Then
-            CategoricalAxis1.LabelFormat = "{0:yyyy - MMMM}"
+            CategoricalAxis1.LabelFormat = "{0:MMM - yyyy}"
         End If
         'LinearAxis1.MajorStep = 10.0R
         'Series
+        BarSeries1.ForeColor = Color.White
+
         BarSeries1.ShowLabels = True
         BarSeries2.ShowLabels = True
         LineSeries1.ShowLabels = True
-        LineSeries2.ShowLabels = True
+        'LineSeries2.ShowLabels = True
 
         BarSeries1.LabelFormat = "{0:###}"
         BarSeries2.LabelFormat = "{0:###}"
-        LineSeries2.LabelFormat = "{0:###}"
-        LineSeries1.LabelFormat = "{0:##.##}"
+        'LineSeries2.LabelFormat = "{0:###}"
+        LineSeries1.LabelFormat = "$ " & "{0:##.##}"
 
 
         BarSeries1.HorizontalAxis = CategoricalAxis1
@@ -3486,7 +3890,7 @@ Public Class FrmGraficasfaseuno
         LineSeries2.VerticalAxis = LinearAxis1
         LineSeries1.VerticalAxis = LinearAxis2
 
-        BarSeries1.Palette = New PaletteEntry(Color.FromArgb(37, 64, 97))
+        BarSeries1.Palette = New PaletteEntry(Color.FromArgb(62, 105, 157))
         BarSeries2.Palette = New PaletteEntry(Color.FromArgb(255, 192, 0))
         LineSeries1.Palette = New PaletteEntry(Color.FromArgb(127, 127, 127))
         LineSeries2.Palette = New PaletteEntry(Color.FromArgb(217, 217, 217))
@@ -3495,7 +3899,7 @@ Public Class FrmGraficasfaseuno
         LineSeries2.BorderColor = Color.FromArgb(217, 217, 217)
 
         LineSeries1.PointSize = New SizeF(10, 10)
-        LineSeries2.PointSize = New SizeF(10, 10)
+        'LineSeries2.PointSize = New SizeF(10, 10)
         Me.radChartView1.ShowTrackBall = True
         Me.radChartView1.ShowToolTip = True
         'Chartview
@@ -3627,11 +4031,13 @@ Public Class FrmGraficasfaseuno
             End If
         End If
     End Sub
-#End Region   
+#End Region
     Private Sub btnGraficar_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnGraficar.Click
         Me.radChartView1.ShowTrackBall = False
+        picboxIndicador.Image = Nothing
         deshabilita_etiqueta_datos()
         obtener_grafica()
+
     End Sub
     Private Sub radChartView1_LabelFormatting(ByVal sender As System.Object, ByVal e As Telerik.WinControls.UI.ChartViewLabelFormattingEventArgs) Handles radChartView1.LabelFormatting
         e.LabelElement.BackColor = Color.Transparent

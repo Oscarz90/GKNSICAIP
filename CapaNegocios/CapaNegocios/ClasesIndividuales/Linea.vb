@@ -179,7 +179,11 @@ Public Class Linea
                 'Cargo documentos
                 Me.LEquipos_Linea_NO_Asignados = New List(Of Equipo)
                 Dim oBD As New CapaDatos.CapaDatos(cadena_conexion.CadenaSicaip)
-                Dim oEq As DataTable = oBD.ObtenerTabla("SELECT DISTINCT E.cve_equipo AS cve_equipo, E.Equipo FROM Equipo E WHERE E.cve_equipo NOT IN  (SELECT cve_equipo FROM equipo_linea EL WHERE EL.cve_linea =" & Me.vcve_linea & ") Order by  E.Equipo")
+                Dim oEq As DataTable = oBD.ObtenerTabla("SELECT DISTINCT E.cve_equipo AS cve_equipo, E.Equipo" & _
+                                                        " FROM Equipo E " & _
+                                                        " WHERE E.cve_equipo NOT IN  (SELECT cve_equipo FROM equipo_linea EL WHERE EL.cve_linea =" & Me.vcve_linea & ")" & _
+                                                        " and E.cve_equipo IN (SELECT cve_equipo FROM equipo_linea EL join linea l on l.cve_linea=EL.cve_linea WHERE l.cve_componente =" & Obtener_CVEComponente_EN_Linea(Me.vcve_linea) & ")" & _
+                                                        " Order by  E.Equipo")
                 If oEq IsNot Nothing Then
                     Dim oEquipoLinea As Equipo = Nothing
                     For Each row As DataRow In oEq.Rows
@@ -256,13 +260,29 @@ Public Class Linea
         End If
         Return vDT
     End Function
+
+
+    Public Function Obtener_CVEComponente_EN_Linea(ByVal vCve_Linea As Long) As Long
+        Dim vRetorno As Long
+        Dim vDR As DataRow
+
+        vDR = oBD.ObtenerRenglon("Select cve_componente from linea where cve_linea=" & vCve_Linea, "Componente")
+        If vDR IsNot Nothing Then
+            vRetorno = vDR("cve_componente")
+        Else
+            vRetorno = 0
+        End If
+
+        Return vRetorno
+    End Function
+
 #End Region
 
 #Region "Metodos Formulario de Produccion"
     Public Function llena_combo_lineas() As DataTable
         Dim dtTurnos As New DataTable
         Try
-            dtTurnos = oBD.ObtenerTabla("select l.cve_linea,l.linea from linea l join equipo_linea el on l.cve_linea=el.cve_linea where el.cve_equipo="& vcve_linea)
+            dtTurnos = oBD.ObtenerTabla("select l.cve_linea,l.linea from linea l join equipo_linea el on l.cve_linea=el.cve_linea where el.cve_equipo=" & vcve_linea)
         Catch ex As Exception
             MsgBox("Error al eliminar produccion. CLineas_ERROR", vbCritical + vbOKOnly, "Error")
             dtTurnos = Nothing

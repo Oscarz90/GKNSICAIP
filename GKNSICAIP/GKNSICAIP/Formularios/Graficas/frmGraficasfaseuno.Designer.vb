@@ -22,7 +22,7 @@ Partial Class FrmGraficasfaseuno
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Dim CartesianArea2 As Telerik.WinControls.UI.CartesianArea = New Telerik.WinControls.UI.CartesianArea()
+        Dim CartesianArea1 As Telerik.WinControls.UI.CartesianArea = New Telerik.WinControls.UI.CartesianArea()
         Me.RadGroupBox1 = New Telerik.WinControls.UI.RadGroupBox()
         Me.rdbtnGente = New Telerik.WinControls.UI.RadRadioButton()
         Me.rdbtnCincoS = New Telerik.WinControls.UI.RadRadioButton()
@@ -49,8 +49,9 @@ Partial Class FrmGraficasfaseuno
         Me.rdbtnMeses = New Telerik.WinControls.UI.RadRadioButton()
         Me.rdbtnDias = New Telerik.WinControls.UI.RadRadioButton()
         Me.radChartView1 = New Telerik.WinControls.UI.RadChartView()
-        Me.btnGraficar = New Telerik.WinControls.UI.RadButton()
         Me.lblError = New System.Windows.Forms.Label()
+        Me.btnGraficar = New Telerik.WinControls.UI.RadButton()
+        Me.picboxIndicador = New System.Windows.Forms.PictureBox()
         CType(Me.RadGroupBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.RadGroupBox1.SuspendLayout()
         CType(Me.rdbtnGente, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -78,6 +79,7 @@ Partial Class FrmGraficasfaseuno
         CType(Me.radChartView1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.radChartView1.SuspendLayout()
         CType(Me.btnGraficar, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.picboxIndicador, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
@@ -91,7 +93,7 @@ Partial Class FrmGraficasfaseuno
         Me.RadGroupBox1.Controls.Add(Me.rdbtnNrfti)
         Me.RadGroupBox1.Controls.Add(Me.rdbtnOee)
         Me.RadGroupBox1.HeaderText = "Indicador:"
-        Me.RadGroupBox1.Location = New System.Drawing.Point(12, 12)
+        Me.RadGroupBox1.Location = New System.Drawing.Point(3, 2)
         Me.RadGroupBox1.Name = "RadGroupBox1"
         '
         '
@@ -164,7 +166,7 @@ Partial Class FrmGraficasfaseuno
         Me.RadGroupBox2.Controls.Add(Me.rdbtnCadenaValor)
         Me.RadGroupBox2.Controls.Add(Me.rdbtnPlanta)
         Me.RadGroupBox2.HeaderText = "Selecciona:"
-        Me.RadGroupBox2.Location = New System.Drawing.Point(117, 12)
+        Me.RadGroupBox2.Location = New System.Drawing.Point(108, 2)
         Me.RadGroupBox2.Name = "RadGroupBox2"
         '
         '
@@ -274,7 +276,7 @@ Partial Class FrmGraficasfaseuno
         Me.RadGroupBox3.Controls.Add(Me.rdbtnMeses)
         Me.RadGroupBox3.Controls.Add(Me.rdbtnDias)
         Me.RadGroupBox3.HeaderText = "Seleccion Fecha:"
-        Me.RadGroupBox3.Location = New System.Drawing.Point(547, 12)
+        Me.RadGroupBox3.Location = New System.Drawing.Point(538, 2)
         Me.RadGroupBox3.Name = "RadGroupBox3"
         '
         '
@@ -339,30 +341,20 @@ Partial Class FrmGraficasfaseuno
         '
         'radChartView1
         '
-        CartesianArea2.GridDesign.AlternatingVerticalColor = False
-        CartesianArea2.GridDesign.DrawVerticalFills = False
-        CartesianArea2.ShowGrid = True
-        Me.radChartView1.AreaDesign = CartesianArea2
+        Me.radChartView1.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+                    Or System.Windows.Forms.AnchorStyles.Left) _
+                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        CartesianArea1.GridDesign.AlternatingVerticalColor = False
+        CartesianArea1.GridDesign.DrawVerticalFills = False
+        CartesianArea1.ShowGrid = True
+        Me.radChartView1.AreaDesign = CartesianArea1
         Me.radChartView1.Controls.Add(Me.lblError)
-        Me.radChartView1.Location = New System.Drawing.Point(3, 213)
+        Me.radChartView1.Location = New System.Drawing.Point(3, 186)
         Me.radChartView1.Name = "radChartView1"
-        Me.radChartView1.Size = New System.Drawing.Size(1257, 481)
+        Me.radChartView1.Size = New System.Drawing.Size(1257, 516)
         Me.radChartView1.TabIndex = 9
         CType(Me.radChartView1.GetChildAt(0), Telerik.WinControls.UI.RadChartElement).DrawText = False
         CType(Me.radChartView1.GetChildAt(0), Telerik.WinControls.UI.RadChartElement).DrawFill = True
-        '
-        'btnGraficar
-        '
-        Me.btnGraficar.Enabled = False
-        Me.btnGraficar.Image = Global.GKNSICAIP.My.Resources.Resources.frmGraficas_graficar1
-        Me.btnGraficar.ImageAlignment = System.Drawing.ContentAlignment.TopCenter
-        Me.btnGraficar.Location = New System.Drawing.Point(873, 124)
-        Me.btnGraficar.Name = "btnGraficar"
-        Me.btnGraficar.Size = New System.Drawing.Size(99, 66)
-        Me.btnGraficar.TabIndex = 8
-        Me.btnGraficar.Text = "Graficar"
-        Me.btnGraficar.TextAlignment = System.Drawing.ContentAlignment.BottomCenter
-        Me.btnGraficar.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText
         '
         'lblError
         '
@@ -377,25 +369,47 @@ Partial Class FrmGraficasfaseuno
         Me.lblError.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.lblError.Visible = False
         '
+        'btnGraficar
+        '
+        Me.btnGraficar.Enabled = False
+        Me.btnGraficar.Image = Global.GKNSICAIP.My.Resources.Resources.frmGraficas_graficar1
+        Me.btnGraficar.ImageAlignment = System.Drawing.ContentAlignment.TopCenter
+        Me.btnGraficar.Location = New System.Drawing.Point(850, 114)
+        Me.btnGraficar.Name = "btnGraficar"
+        Me.btnGraficar.Size = New System.Drawing.Size(99, 66)
+        Me.btnGraficar.TabIndex = 8
+        Me.btnGraficar.Text = "Graficar"
+        Me.btnGraficar.TextAlignment = System.Drawing.ContentAlignment.BottomCenter
+        Me.btnGraficar.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText
+        '
+        'picboxIndicador
+        '
+        Me.picboxIndicador.Location = New System.Drawing.Point(955, 1)
+        Me.picboxIndicador.Name = "picboxIndicador"
+        Me.picboxIndicador.Size = New System.Drawing.Size(305, 179)
+        Me.picboxIndicador.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom
+        Me.picboxIndicador.TabIndex = 10
+        Me.picboxIndicador.TabStop = False
+        '
         'FrmGraficasfaseuno
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.White
         Me.ClientSize = New System.Drawing.Size(1272, 706)
+        Me.Controls.Add(Me.picboxIndicador)
         Me.Controls.Add(Me.radChartView1)
         Me.Controls.Add(Me.btnGraficar)
         Me.Controls.Add(Me.RadGroupBox3)
         Me.Controls.Add(Me.RadGroupBox2)
         Me.Controls.Add(Me.RadGroupBox1)
-        Me.MaximumSize = New System.Drawing.Size(1280, 768)
         Me.MinimumSize = New System.Drawing.Size(1280, 736)
         Me.Name = "FrmGraficasfaseuno"
         '
         '
         '
         Me.RootElement.ApplyShapeToControl = True
-        Me.RootElement.MaxSize = New System.Drawing.Size(1280, 768)
+        Me.RootElement.MaxSize = New System.Drawing.Size(0, 0)
         Me.Text = "Gráficos SICAIP"
         Me.ThemeName = "RadThemeManager"
         CType(Me.RadGroupBox1, System.ComponentModel.ISupportInitialize).EndInit()
@@ -429,6 +443,7 @@ Partial Class FrmGraficasfaseuno
         Me.radChartView1.ResumeLayout(False)
         Me.radChartView1.PerformLayout()
         CType(Me.btnGraficar, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.picboxIndicador, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
@@ -461,5 +476,6 @@ Partial Class FrmGraficasfaseuno
     Friend WithEvents cbxEquipo As System.Windows.Forms.ComboBox
     Friend WithEvents cbxComponente As System.Windows.Forms.ComboBox
     Friend WithEvents lblError As System.Windows.Forms.Label
+    Friend WithEvents picboxIndicador As System.Windows.Forms.PictureBox
 End Class
 
