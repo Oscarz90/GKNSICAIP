@@ -49,7 +49,8 @@ Public Class Formulario_Principal
     Dim ofrmPermisos As FrmPermisos
     Dim ofrmImportar_TC As FrmImportar_TC
     Dim ofrmGraficas As FrmGraficasfaseuno
-    Dim ofrmImportar_Modelo As frmImportador_Modelo
+    Dim ofrmImportar_Modelo As FrmImportar_Modelo
+
 #End Region
 
 #Region "Opciones de Menu"
@@ -500,7 +501,7 @@ Public Class Formulario_Principal
             Me.dgvRegistros.Visible = False
             Me.Barra_Tool_Registros.Visible = False
             MapaUbicacion.Text = "Catalogo IMPORTAR MODELO"
-            ofrmImportar_Modelo = New frmImportador_Modelo
+            ofrmImportar_Modelo = New FrmImportar_Modelo
             ofrmImportar_Modelo.ShowDialog()
         Else
             MsgBox("El Usuario no cuenta con los permisos suficientes para entrar en 'Importar Modelo'")

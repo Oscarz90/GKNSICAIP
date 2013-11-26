@@ -86,7 +86,7 @@ Public Class FrmImportar_Modelo
         Me.btnSeleccion_Archivo.Enabled = False
         Me.btnValidar_Archivo.Enabled = False
         Me.btnCargar.Enabled = False
-        Me.Set_Indicentes("Carga de TC Exitosa")
+        Me.Set_Indicentes("Carga de Modelo Exitosa")
     End Sub
 
     Private Sub btnValidar_Archivo_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnValidar_Archivo.Click
