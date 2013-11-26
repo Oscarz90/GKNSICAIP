@@ -8,6 +8,7 @@ Public Class frmProduccion
     Private vnombre_equipo As String
     Private vnombre_empleado As String
     Private vcodigo_empleado As String
+    Private vCve_Linea_CBX As Integer
     'Temporal de desarrollo
     Private vcve_registro_turno As Long
     Private vcve_turno As Long
@@ -37,6 +38,18 @@ Public Class frmProduccion
             vcve_registro_turno = value
         End Set
     End Property
+
+    Public Property Cve_Linea_CBX() As Integer
+        Get
+            Return vCve_Linea_CBX
+        End Get
+        Set(ByVal value As Integer)
+            vCve_Linea_CBX = cbxLinea.SelectedValue
+        End Set
+    End Property
+
+
+
 
 #End Region
 #Region "Inicializando formulario"
@@ -730,10 +743,31 @@ Public Class frmProduccion
     End Sub
     'Seguridad Condiciones Inseguras
     Private Sub btnAgregarCondInseg_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnAgregarCondInseg.Click
+        Dim acumulado As Integer = 0
+        Dim ci_nuevas As Integer = 0
+        Dim ci_resueltas As Integer = 0
+        Dim vMaximo_Resueltas As Integer = 0
         If valida_hora_de_captura(Now.ToString("dd-MM-yyyy HH:mm:ss")) Then
-            add_cond_inseg()
-            limpia_cond_inseg()
-            llena_cond_inseg_gridview()
+            If cbxTipoCondInseg.SelectedValue = 1 Then ''SI SON NUEVAS
+                add_cond_inseg()
+                limpia_cond_inseg()
+                llena_cond_inseg_gridview()
+            ElseIf cbxTipoCondInseg.SelectedValue = 2 Then ''SI SON RESUELTAS
+                acumulado = acumulado_dia_anterior()
+                ci_nuevas = obtener_nuevas_hoy()
+                ci_resueltas = obtener_resueltas_hoy()
+                'OBTENER MAXIMO VALOR PARA RESUELTAS
+                vMaximo_Resueltas = (acumulado + ci_nuevas) - ci_resueltas
+
+                If vMaximo_Resueltas <= txtCondInsegCantidad.Text Then
+                    add_cond_inseg()
+                    limpia_cond_inseg()
+                    llena_cond_inseg_gridview()
+                Else
+                    MsgBox("El valor maximo permitido para registrar RESUELTAS es:" & vMaximo_Resueltas & ", VERIFIQUE")
+                    txtCondInsegCantidad.Text = ""
+                End If
+            End If
         End If
     End Sub
     Private Sub btnQuitarCondInseg_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnQuitarCondInseg.Click
@@ -1803,6 +1837,25 @@ Public Class frmProduccion
             btnQuitarAccidente.Enabled = False
         End If
     End Sub
+    Private Function acumulado_dia_anterior() As Integer
+        Dim AdA As Integer
+        Dim caso As Integer = 5
+        Dim oSeguridad As New Seguridad
+        AdA = oSeguridad.obtener_acum_dia_anterior(Date.Now.ToString("dd-MM-yyyy"), caso, vcve_equipo, vCve_Linea_CBX)
+        Return AdA
+    End Function
+    Private Function obtener_nuevas_hoy()
+        Dim oSeguridad As New Seguridad
+        Dim nuevas As Integer
+        nuevas = oSeguridad.obtener_nuevas_seguridad(vcve_equipo, vCve_Linea_CBX, Date.Now.ToString("dd-MM-yyyy"))
+        Return nuevas
+    End Function
+    Private Function obtener_resueltas_hoy()
+        Dim oSeguridad As New Seguridad
+        Dim resueltas As Integer
+        resueltas = oSeguridad.obtener_resueltas_seguridad(vcve_equipo, vCve_Linea_CBX, Date.Now.ToString("dd-MM-yyyy"))
+        Return resueltas
+    End Function
 #End Region
 #Region "Funciones para modulo Turnos-Lineas"
     'Registra todas las Lineas
