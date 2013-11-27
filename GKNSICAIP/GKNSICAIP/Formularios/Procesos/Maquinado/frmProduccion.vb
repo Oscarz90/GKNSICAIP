@@ -39,14 +39,14 @@ Public Class frmProduccion
         End Set
     End Property
 
-    Public Property Cve_Linea_CBX() As Integer
-        Get
-            Return vCve_Linea_CBX
-        End Get
-        Set(ByVal value As Integer)
-            vCve_Linea_CBX = cbxLinea.SelectedValue
-        End Set
-    End Property
+    'Public Property Cve_Linea_CBX() As Integer
+    '    Get
+    '        Return vCve_Linea_CBX
+    '    End Get
+    '    Set(ByVal value As Integer)
+    '        vCve_Linea_CBX = cbxLinea.SelectedValue
+    '    End Set
+    'End Property
 
 
 
@@ -446,6 +446,7 @@ Public Class frmProduccion
 #Region "Eventos ComboBox"
     'General
     Private Sub cbxLinea_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cbxLinea.SelectedIndexChanged
+        vCve_Linea_CBX = cbxLinea.SelectedValue
         If cbxLinea.SelectedIndex <> -1 And flgBanderacbxLineas Then
             If verifica_registro_turno_produccion(cbxLinea.SelectedValue, Convert.ToDateTime(Now.ToString("dd-MM-yyyy HH:mm"))) Then
                 MsgBox("No has registrado Turno para la Linea: " & cbxLinea.Text)

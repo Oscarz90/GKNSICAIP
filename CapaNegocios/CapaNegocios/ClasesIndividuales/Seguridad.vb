@@ -175,10 +175,10 @@ Public Class Seguridad
                 Dim cmd As New SqlClient.SqlCommand
                 cmd.CommandType = CommandType.StoredProcedure
                 cmd.CommandText = "Obtener_Total_Anterior_Seguridad"
-                cmd.Parameters.Add("fecha_puntero", SqlDbType.DateTime).Value = fecha_puntero
-                cmd.Parameters.Add("caso", SqlDbType.BigInt).Value = caso
-                cmd.Parameters.Add("uno", SqlDbType.BigInt).Value = cve_equipo
-                cmd.Parameters.Add("dos", SqlDbType.BigInt).Value = cve_linea
+                cmd.Parameters.Add("@fecha_puntero", SqlDbType.DateTime).Value = fecha_puntero
+                cmd.Parameters.Add("@caso", SqlDbType.BigInt).Value = caso
+                cmd.Parameters.Add("@uno", SqlDbType.BigInt).Value = cve_equipo
+                cmd.Parameters.Add("@dos", SqlDbType.BigInt).Value = cve_linea
 
                 Dim obj As DataTable = oBD.EjecutaCommando(cmd)
                 Adeudo_dia_anterior = obj.Rows(0)(0)
