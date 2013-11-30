@@ -38,81 +38,84 @@ Public Class frmLogin
 
                     'aqui seleccionar el form que se debe abrir
                     Select Case vTipoTlatoani
-                        Case 1
+                        Case 1 'Almacen de Forja'
                             'frmCapturaAlmacenForja.set_Datos_Equipo(idEquipo, cod_empleado, nombre_empleado, cod_empleado)
                             'frmCapturaAlmacenForja.ShowDialog()
                             MsgBox("Aún no está disponible el formulario de captura para ALMACEN FORJA")
-                        Case 2
+                        Case 2 'Carburizado'
                             'frmCapturaCarburizado.set_Datos_Equipo(idEquipo, cod_empleado, nombre_empleado, cod_empleado)
                             'frmCapturaCarburizado.ShowDialog()
                             MsgBox("Aún no está disponible el formulario de captura para CARBURIZADO")
-                        Case 3
+                        Case 3 'CDM'
                             'frmCapturaCDM.set_Datos_Equipo(idEquipo, cod_empleado, nombre_empleado, cod_empleado)
                             'frmCapturaCDM.ShowDialog()
                             MsgBox("Aún no está disponible el formulario de captura para CDM")
-                        Case 4
+                        Case 4 'Calidad Forja'
                             'frmCapturaCalidadForja.set_Datos_Equipo(idEquipo, cod_empleado, nombre_empleado, cod_empleado)
                             'frmCapturaCalidadForja.ShowDialog()
                             MsgBox("Aún no está disponible el formulario de captura para CALIDAD FORJA")
-                        Case 5
-                            ''detalle = 5 E Ensamble
-                            'frmCapturaEmbarques.set_Datos_Equipo(idEquipo, cod_empleado, nombre_empleado, cod_empleado)
-                            'frmCapturaEmbarques.ShowDialog()
-                            MsgBox("Aún no está disponible el formulario de captura para EMBARQUE")
-                        Case 6
-                            'frmCapturaManttoCorrectivo.set_Datos_Equipo(idEquipo, cod_empleado, nombre_empleado, cod_empleado)
-                            'frmCapturaManttoCorrectivo.ShowDialog()
-                            MsgBox("Aún no está disponible el formulario de captura para MANTTO. CORRECTIVO")
-                        Case 7
-                            'frmCapturaManttoForja.set_Datos_Equipo(idEquipo, cod_empleado, nombre_empleado, cod_empleado)
-                            'frmCapturaManttoForja.ShowDialog()
-                            MsgBox("Aún no está disponible el formulario de captura para MANTTO. FORJA")
-                        Case 8
-                            ''frmCapturaManttoPredictivo.set_Datos_Equipo(idEquipo, cod_empleado, nombre_empleado, cod_empleado)
-                            ''frmCapturaManttoPredictivo.ShowDialog()
-                            MsgBox("Aún no está disponible el formulario de captura para MANTTO. PREDICTIVO")
-                        Case 9
-                            'frmCapturaManttoPreventivo.set_Datos_Equipo(idEquipo, cod_empleado, nombre_empleado, cod_empleado)
-                            'frmCapturaManttoPreventivo.ShowDialog()
-                            MsgBox("Aún no está disponible el formulario de captura para MANTTO. PREVENTIVO")
-                        Case 10
+                        Case 5 'Ensamble'
                             frmProduccion.set_Datos_Equipo(vIdEquipo, oLogin.Equipo_Empleado, oLogin.Nombre_Empleado, vCodEmpleado)
                             frmProduccion.ShowDialog()
                             frmProduccion.Dispose()
-                        Case 11
+                        Case 6 'Mantto. Correctivo'
+                            'frmCapturaManttoCorrectivo.set_Datos_Equipo(idEquipo, cod_empleado, nombre_empleado, cod_empleado)
+                            'frmCapturaManttoCorrectivo.ShowDialog()
+                            MsgBox("Aún no está disponible el formulario de captura para MANTTO. CORRECTIVO")
+                        Case 7 'Mantto. Forja'
+                            'frmCapturaManttoForja.set_Datos_Equipo(idEquipo, cod_empleado, nombre_empleado, cod_empleado)
+                            'frmCapturaManttoForja.ShowDialog()
+                            MsgBox("Aún no está disponible el formulario de captura para MANTTO. FORJA")
+                        Case 8 'Mantto.Predictivo'
+                            ''frmCapturaManttoPredictivo.set_Datos_Equipo(idEquipo, cod_empleado, nombre_empleado, cod_empleado)
+                            ''frmCapturaManttoPredictivo.ShowDialog()
+                            MsgBox("Aún no está disponible el formulario de captura para MANTTO. PREDICTIVO")
+                        Case 9 'Mantto.Preventivo'
+                            'frmCapturaManttoPreventivo.set_Datos_Equipo(idEquipo, cod_empleado, nombre_empleado, cod_empleado)
+                            'frmCapturaManttoPreventivo.ShowDialog()
+                            MsgBox("Aún no está disponible el formulario de captura para MANTTO. PREVENTIVO")
+                        Case 10 'Produccion'
+                            frmProduccion.set_Datos_Equipo(vIdEquipo, oLogin.Equipo_Empleado, oLogin.Nombre_Empleado, vCodEmpleado)
+                            frmProduccion.ShowDialog()
+                            frmProduccion.Dispose()
+                        Case 11 'Paletizado Ensamble'
                             'frmCapturaPaletizado.set_Datos_Equipo(idEquipo, cod_empleado, nombre_empleado, cod_empleado)
                             'frmCapturaPaletizado.ShowDialog()
                             MsgBox("Aún no está disponible el formulario de captura para PALETIZADO")
-                        Case 12
+                        Case 12 'Presseting'
                             ''detalle = 19 SG Servicios Generales 
                             'frmCapturaPresetting.set_Datos_Equipo(idEquipo, cod_empleado, nombre_empleado, cod_empleado)
                             'frmCapturaPresetting.ShowDialog()
                             MsgBox("Aún no está disponible el formulario de captura para PRESETTING")
-                        Case 13
+                        Case 13 'Refacciones Ensamble'
                             'frmCapturaRefacciones.set_Datos_Equipo(idEquipo, cod_empleado, nombre_empleado, cod_empleado)
                             'frmCapturaRefacciones.ShowDialog()
                             MsgBox("Aún no está disponible el formulario de captura para REFACCIONES")
-                        Case 14
+                        Case 14 'Subemsambles'
                             'frmCapturaSubensambles.set_Datos_Equipo(idEquipo, cod_empleado, nombre_empleado, cod_empleado)
                             'frmCapturaSubensambles.ShowDialog()
                             MsgBox("Aún no está disponible el formulario de captura para SUBENSAMBLES")
-                        Case 15
+                        Case 15 'Servicios Generales'
                             'frmCapturaCasadeMaquinas.set_Datos_Equipo(idEquipo, equipo_empleado, nombre_empleado, cod_empleado)
                             'frmCapturaCasadeMaquinas.ShowDialog()
                             MsgBox("Aún no está disponible el formulario de captura para CASA DE MAQUINAS (SG)")
-                        Case 16
+                        Case 16 'Taller Herramental'
                             'frmCapturaTallerHerramental.set_Datos_Equipo(idEquipo, cod_empleado, nombre_empleado, cod_empleado)
                             'frmCapturaTallerHerramental.ShowDialog()
                             MsgBox("Aún no está disponible el formulario de captura para TALLER HERRAMENTAL")
-                        Case 17
+                        Case 17 'Taller Inductores'
                             'frmCapturaTallerInductores.set_Datos_Equipo(idEquipo, cod_empleado, nombre_empleado, cod_empleado)
                             'frmCapturaTallerInductores.ShowDialog()
                             MsgBox("Aún no está disponible el formulario de captura para TALLER INDUCTORES")
-                        Case 18
+                        Case 18 'Tool Room'
                             'frmCapturaToolRoom.set_Datos_Equipo(idEquipo, cod_empleado, nombre_empleado, cod_empleado)
                             'frmCapturaToolRoom.ShowDialog()
                             MsgBox("Aún no está disponible el formulario de captura para TOOL ROOM")
-                        Case 19
+                        Case 19 'Forja'
+                            frmProduccion.set_Datos_Equipo(vIdEquipo, oLogin.Equipo_Empleado, oLogin.Nombre_Empleado, vCodEmpleado)
+                            frmProduccion.ShowDialog()
+                            frmProduccion.Dispose()
+                        Case 20 'Embolado'
                             'frmCapturaEmbolado.set_Datos_Equipo(idEquipo, cod_empleado, nombre_empleado, cod_empleado)
                             'frmCapturaEmbolado.ShowDialog()
                             MsgBox("Aún no está disponible el formulario de captura para EMBOLADO")

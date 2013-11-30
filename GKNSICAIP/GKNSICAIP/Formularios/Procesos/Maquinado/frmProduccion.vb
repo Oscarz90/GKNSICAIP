@@ -754,19 +754,21 @@ Public Class frmProduccion
                 limpia_cond_inseg()
                 llena_cond_inseg_gridview()
             ElseIf cbxTipoCondInseg.SelectedValue = 2 Then ''SI SON RESUELTAS
+                '------------------------------------------
+                'Exec proc para actualixar historico
+                '------------------------------------------
                 acumulado = acumulado_dia_anterior()
                 ci_nuevas = obtener_nuevas_hoy()
                 ci_resueltas = obtener_resueltas_hoy()
                 'OBTENER MAXIMO VALOR PARA RESUELTAS
                 vMaximo_Resueltas = (acumulado + ci_nuevas) - ci_resueltas
-
-                If vMaximo_Resueltas <= txtCondInsegCantidad.Text Then
+                If txtCondInsegCantidad.Text <= vMaximo_Resueltas Then
                     add_cond_inseg()
                     limpia_cond_inseg()
                     llena_cond_inseg_gridview()
                 Else
-                    MsgBox("El valor maximo permitido para registrar RESUELTAS es:" & vMaximo_Resueltas & ", VERIFIQUE")
-                    txtCondInsegCantidad.Text = ""
+                    MsgBox("El valor maximo permitido para registrar RESUELTAS es: " & vMaximo_Resueltas & ", VERIFIQUE")
+                    limpia_cond_inseg()
                 End If
             End If
         End If
@@ -1840,9 +1842,8 @@ Public Class frmProduccion
     End Sub
     Private Function acumulado_dia_anterior() As Integer
         Dim AdA As Integer
-        Dim caso As Integer = 5
         Dim oSeguridad As New Seguridad
-        AdA = oSeguridad.obtener_acum_dia_anterior(Date.Now.ToString("dd-MM-yyyy"), caso, vcve_equipo, vCve_Linea_CBX)
+        AdA = oSeguridad.obtener_acum_dia_anterior(Date.Now.ToString("dd-MM-yyyy"), vcve_equipo, vCve_Linea_CBX)
         Return AdA
     End Function
     Private Function obtener_nuevas_hoy()

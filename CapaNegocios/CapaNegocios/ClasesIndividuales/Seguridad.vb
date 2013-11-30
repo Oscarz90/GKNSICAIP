@@ -168,39 +168,39 @@ Public Class Seguridad
         End Using
     End Function
     ''Obtener el acumulado del dia anterior para seguridad
-    Public Function obtener_acum_dia_anterior(ByVal fecha_puntero As DateTime, ByVal caso As Integer, ByVal cve_equipo As Integer, ByVal cve_linea As Integer) As Integer
+    Public Function obtener_acum_dia_anterior(ByVal fecha_puntero As DateTime, ByVal cve_equipo As Integer, ByVal cve_linea As Integer) As Integer
         Dim Adeudo_dia_anterior As Integer
+        Dim vDR As DataRow = Nothing
         Using scope As New TransactionScope
             Try
-                Dim cmd As New SqlClient.SqlCommand
-                cmd.CommandType = CommandType.StoredProcedure
-                cmd.CommandText = "Obtener_Total_Anterior_Seguridad"
-                cmd.Parameters.Add("@fecha_puntero", SqlDbType.DateTime).Value = fecha_puntero
-                cmd.Parameters.Add("@caso", SqlDbType.BigInt).Value = caso
-                cmd.Parameters.Add("@uno", SqlDbType.BigInt).Value = cve_equipo
-                cmd.Parameters.Add("@dos", SqlDbType.BigInt).Value = cve_linea
+                vDR = oBD.ObtenerRenglon("select top 1 (cve_equipo), dia_asignado, acumulado from h_seguridad_equipo_linea_dia where dia_asignado < '" & fecha_puntero.ToString("MM/dd/yyyy") & "' and cve_equipo=" & cve_equipo & " and cve_linea=" & cve_linea & " order by dia_asignado DESC", "seguridad")
 
-                Dim obj As DataTable = oBD.EjecutaCommando(cmd)
-                Adeudo_dia_anterior = obj.Rows(0)(0)
-                scope.Complete()
+                If vDR IsNot Nothing Then
+                    If vDR("acumulado") IsNot DBNull.Value Then
+                        Adeudo_dia_anterior = vDR("acumulado")
+                    End If
+                End If
+
             Catch ex As Exception
                 MsgBox("Error al validar obtener_acum_dia_anterior. CTurno_ERROR", vbCritical + vbOKOnly, "Error")
             End Try
+            Return Adeudo_dia_anterior
         End Using
-        Return Adeudo_dia_anterior
     End Function
     ''Obtener las condiciones inseguras nuevas en seguridad    
     Public Function obtener_nuevas_seguridad(ByVal vCve_Equipo As Integer, ByVal vCve_Linea As Integer, ByVal vFecha As DateTime) As Integer
         Dim nuevas As Integer
         Dim rDatos As DataRow = Nothing
         Try
-            rDatos = oBD.ObtenerRenglon("select s.cantidad " & _
+            rDatos = oBD.ObtenerRenglon("select sum(s.cantidad) as cantidad " & _
                                         " from registro_turno rt join seguridad s on rt.cve_registro_turno=s.cve_registro_turno " & _
-                                        " where s.estatus='1' and s.cve_detalle_seguridad=1 and rt.cve_equipo=" & vCve_Equipo & "and rt.cve_linea= " & vCve_Linea & " " & _
-                                        " and rt.dia_asignado='" & vFecha & "'", "seguridad")
+                                        " where s.estatus='1' and s.cve_detalle_seguridad=1 and rt.cve_equipo=" & vCve_Equipo & " and rt.cve_linea=" & vCve_Linea & "" & _
+                                        " and rt.dia_asignado='" & vFecha.ToString("MM/dd/yyyy") & "'", "seguridad")
             If rDatos IsNot Nothing Then
                 If rDatos("cantidad") IsNot DBNull.Value Then
                     nuevas = rDatos("cantidad")
+                Else
+                    nuevas = 0
                 End If
             End If
         Catch ex As Exception
@@ -213,13 +213,15 @@ Public Class Seguridad
         Dim resueltas As Integer
         Dim rDatos As DataRow = Nothing
         Try
-            rDatos = oBD.ObtenerRenglon("select s.cantidad " & _
+            rDatos = oBD.ObtenerRenglon("select sum(s.cantidad) as cantidad " & _
                                         "from registro_turno rt join seguridad s on rt.cve_registro_turno=s.cve_registro_turno " & _
-                                        " where s.estatus='2' and s.cve_detalle_seguridad=1 and rt.cve_equipo=" & vCve_Equipo & "and rt.cve_linea= " & vCve_Linea & " " & _
-                                        " and rt.dia_asignado='" & vFecha & "'", "seguridad")
+                                        " where s.estatus='1' and s.cve_detalle_seguridad=2 and rt.cve_equipo=" & vCve_Equipo & "and rt.cve_linea= " & vCve_Linea & " " & _
+                                        " and rt.dia_asignado='" & vFecha.ToString("MM/dd/yyyy") & "'", "seguridad")
             If rDatos IsNot Nothing Then
                 If rDatos("cantidad") IsNot DBNull.Value Then
                     resueltas = rDatos("cantidad")
+                Else
+                    resueltas = 0
                 End If
             End If
         Catch ex As Exception
