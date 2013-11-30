@@ -50,7 +50,7 @@ Public Class Formulario_Principal
     Dim ofrmImportar_TC As FrmImportar_TC
     Dim ofrmGraficas As FrmGraficasfaseuno
     Dim ofrmImportar_Modelo As FrmImportar_Modelo
-
+    Dim ofrmAcceso_Sistema_SICAIP As frmLogin
 #End Region
 
 #Region "Opciones de Menu"
@@ -507,6 +507,19 @@ Public Class Formulario_Principal
             MsgBox("El Usuario no cuenta con los permisos suficientes para entrar en 'Importar Modelo'")
         End If
     End Sub
+
+    Private Sub btnAcceso_Sistema_Captura_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnAcceso_Sistema_Captura.Click
+        If Permiso_Asignado("ACCESO_CAPTURA_SICAIP") = True Then
+            Me.dgvRegistros.Visible = False
+            Me.Barra_Tool_Registros.Visible = False
+            MapaUbicacion.Text = "Acceso Captura SICAIP"
+            ofrmAcceso_Sistema_SICAIP = New frmLogin
+            ofrmAcceso_Sistema_SICAIP.ShowDialog()
+        Else
+            MsgBox("El Usuario no cuenta con los permisos suficientes para entrar en 'Acceso Captura SICAIP'")
+        End If
+    End Sub
+
 #End Region
 
 #Region "Opciones de Registros"
@@ -1101,4 +1114,5 @@ Public Class Formulario_Principal
 
     
    
+  
 End Class
