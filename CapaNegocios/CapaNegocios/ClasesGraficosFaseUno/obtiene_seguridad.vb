@@ -269,7 +269,7 @@ Public Class obtiene_seguridad
                 'Me.vId = obj.Rows(0)(0)
                 scope.Complete()
             Catch 'ex As Exception
-                MsgBox("Error al obtener seguridad. CObtiene_seguridad_ERROR, vbCritical + vbOKOnly, "Error")
+                MsgBox("Error al obtener seguridad. CObtiene_seguridad_ERROR", vbCritical + vbOKOnly, "Error")
                 Return Nothing
                 'Throw New Exception(ex.Message)
             End Try
