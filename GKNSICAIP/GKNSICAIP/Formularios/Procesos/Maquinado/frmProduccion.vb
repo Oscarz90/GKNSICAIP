@@ -748,6 +748,7 @@ Public Class frmProduccion
         Dim ci_nuevas As Integer = 0
         Dim ci_resueltas As Integer = 0
         Dim vMaximo_Resueltas As Integer = 0
+        Dim oObtieneSeguridad As obtiene_seguridad
         If valida_hora_de_captura(Now.ToString("dd-MM-yyyy HH:mm:ss")) Then
             If cbxTipoCondInseg.SelectedValue = 1 Then ''SI SON NUEVAS
                 add_cond_inseg()
@@ -755,7 +756,16 @@ Public Class frmProduccion
                 llena_cond_inseg_gridview()
             ElseIf cbxTipoCondInseg.SelectedValue = 2 Then ''SI SON RESUELTAS
                 '------------------------------------------
+                oObtieneSeguridad = New obtiene_seguridad
+                oObtieneSeguridad.cve_equipo = vcve_equipo
+                oObtieneSeguridad.cve_linea = vCve_Linea_CBX
+                oObtieneSeguridad.fecha_inicial = Date.Now.AddDays(-5) '-----restarle unos 3 dias
+                oObtieneSeguridad.fecha_final = Date.Now
+                oObtieneSeguridad.bandera = 1
+                oObtieneSeguridad.obtiene_seguridad_equipo_linea_dia()                
+
                 'Exec proc para actualixar historico
+
                 '------------------------------------------
                 acumulado = acumulado_dia_anterior()
                 ci_nuevas = obtener_nuevas_hoy()
