@@ -260,7 +260,7 @@ Public Class obtiene_seguridad
             Try
                 Dim vComando As New SqlClient.SqlCommand
                 vComando.CommandType = CommandType.StoredProcedure
-                vComando.CommandText = "obtiene_gente_linea_mes"
+                vComando.CommandText = "obtiene_seguridad_linea_mes"
                 vComando.Parameters.Add("@cve_linea", SqlDbType.BigInt).Value = Me.vcve_linea
                 vComando.Parameters.Add("@fecha_inicial", SqlDbType.DateTime).Value = Me.vfecha_inicial
                 vComando.Parameters.Add("@fecha_final", SqlDbType.DateTime).Value = Me.vfecha_final
@@ -283,7 +283,7 @@ Public Class obtiene_seguridad
             Try
                 Dim vComando As New SqlClient.SqlCommand
                 vComando.CommandType = CommandType.StoredProcedure
-                vComando.CommandText = "obtiene_gente_equipo_dia"
+                vComando.CommandText = "obtiene_seguridad_equipo_dia"
                 vComando.Parameters.Add("@cve_equipo", SqlDbType.BigInt).Value = Me.vcve_equipo
                 vComando.Parameters.Add("@fecha_inicial", SqlDbType.DateTime).Value = Me.vfecha_inicial
                 vComando.Parameters.Add("@fecha_final", SqlDbType.DateTime).Value = Me.vfecha_final
@@ -305,7 +305,7 @@ Public Class obtiene_seguridad
             Try
                 Dim vComando As New SqlClient.SqlCommand
                 vComando.CommandType = CommandType.StoredProcedure
-                vComando.CommandText = "obtiene_gente_equipo_mes"
+                vComando.CommandText = "obtiene_seguridad_equipo_mes"
                 vComando.Parameters.Add("@cve_equipo", SqlDbType.BigInt).Value = Me.vcve_equipo
                 vComando.Parameters.Add("@fecha_inicial", SqlDbType.DateTime).Value = Me.vfecha_inicial
                 vComando.Parameters.Add("@fecha_final", SqlDbType.DateTime).Value = Me.vfecha_final
@@ -327,7 +327,7 @@ Public Class obtiene_seguridad
             Try
                 Dim vComando As New SqlClient.SqlCommand
                 vComando.CommandType = CommandType.StoredProcedure
-                vComando.CommandText = "obtiene_gente_equipo_linea_dia"
+                vComando.CommandText = "obtiene_seguridad_equipo_linea_dia"
                 vComando.Parameters.Add("@cve_equipo", SqlDbType.BigInt).Value = Me.vcve_equipo
                 vComando.Parameters.Add("@cve_linea", SqlDbType.BigInt).Value = Me.vcve_linea
                 vComando.Parameters.Add("@fecha_inicial", SqlDbType.DateTime).Value = Me.vfecha_inicial
@@ -350,7 +350,7 @@ Public Class obtiene_seguridad
             Try
                 Dim vComando As New SqlClient.SqlCommand
                 vComando.CommandType = CommandType.StoredProcedure
-                vComando.CommandText = "obtiene_gente_equipo_linea_mes"
+                vComando.CommandText = "obtiene_seguridad_equipo_linea_mes"
                 vComando.Parameters.Add("@cve_equipo", SqlDbType.BigInt).Value = Me.vcve_equipo
                 vComando.Parameters.Add("@cve_linea", SqlDbType.BigInt).Value = Me.vcve_linea
                 vComando.Parameters.Add("@fecha_inicial", SqlDbType.DateTime).Value = Me.vfecha_inicial
