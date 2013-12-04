@@ -269,7 +269,7 @@ Public Class obtiene_seguridad
                 'Me.vId = obj.Rows(0)(0)
                 scope.Complete()
             Catch 'ex As Exception
-                MsgBox("Error al obtener gente. CObtiene_gente_ERROR", vbCritical + vbOKOnly, "Error")
+                MsgBox("Error al obtener seguridad. CObtiene_gente_ERROR", vbCritical + vbOKOnly, "Error")
                 Return Nothing
                 'Throw New Exception(ex.Message)
             End Try
@@ -292,7 +292,7 @@ Public Class obtiene_seguridad
                 'Me.vId = obj.Rows(0)(0)
                 scope.Complete()
             Catch 'ex As Exception
-                MsgBox("Error al obtener gente. CObtiene_gente_ERROR", vbCritical + vbOKOnly, "Error")
+                MsgBox("Error al obtener seguridad. CObtiene_gente_ERROR", vbCritical + vbOKOnly, "Error")
                 Return Nothing
                 'Throw New Exception(ex.Message)
             End Try
@@ -314,7 +314,7 @@ Public Class obtiene_seguridad
                 'Me.vId = obj.Rows(0)(0)
                 scope.Complete()
             Catch 'ex As Exception
-                MsgBox("Error al obtener gente. CObtiene_gente_ERROR", vbCritical + vbOKOnly, "Error")
+                MsgBox("Error al obtener seguridad. CObtiene_gente_ERROR", vbCritical + vbOKOnly, "Error")
                 Return Nothing
                 'Throw New Exception(ex.Message)
             End Try
@@ -337,7 +337,7 @@ Public Class obtiene_seguridad
                 'Me.vId = obj.Rows(0)(0)
                 scope.Complete()
             Catch 'ex As Exception
-                MsgBox("Error al obtener gente. CObtiene_gente_ERROR", vbCritical + vbOKOnly, "Error")
+                MsgBox("Error al obtener seguridad. CObtiene_gente_ERROR", vbCritical + vbOKOnly, "Error")
                 Return Nothing
                 'Throw New Exception(ex.Message)
             End Try
@@ -360,7 +360,7 @@ Public Class obtiene_seguridad
                 'Me.vId = obj.Rows(0)(0)
                 scope.Complete()
             Catch 'ex As Exception
-                MsgBox("Error al obtener gente. CObtiene_gente_ERROR", vbCritical + vbOKOnly, "Error")
+                MsgBox("Error al obtener seguridad. CObtiene_gente_ERROR", vbCritical + vbOKOnly, "Error")
                 Return Nothing
                 'Throw New Exception(ex.Message)
             End Try
