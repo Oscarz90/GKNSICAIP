@@ -260,7 +260,7 @@ Public Class obtiene_seguridad
             Try
                 Dim vComando As New SqlClient.SqlCommand
                 vComando.CommandType = CommandType.StoredProcedure
-                vComando.CommandText = "obtiene_gente_linea_mes"
+                vComando.CommandText = "obtiene_seguridad_linea_mes"
                 vComando.Parameters.Add("@cve_linea", SqlDbType.BigInt).Value = Me.vcve_linea
                 vComando.Parameters.Add("@fecha_inicial", SqlDbType.DateTime).Value = Me.vfecha_inicial
                 vComando.Parameters.Add("@fecha_final", SqlDbType.DateTime).Value = Me.vfecha_final
@@ -269,7 +269,7 @@ Public Class obtiene_seguridad
                 'Me.vId = obj.Rows(0)(0)
                 scope.Complete()
             Catch 'ex As Exception
-                MsgBox("Error al obtener gente. CObtiene_gente_ERROR", vbCritical + vbOKOnly, "Error")
+                MsgBox("Error al obtener seguridad. CObtiene_gente_ERROR", vbCritical + vbOKOnly, "Error")
                 Return Nothing
                 'Throw New Exception(ex.Message)
             End Try
@@ -283,7 +283,7 @@ Public Class obtiene_seguridad
             Try
                 Dim vComando As New SqlClient.SqlCommand
                 vComando.CommandType = CommandType.StoredProcedure
-                vComando.CommandText = "obtiene_gente_equipo_dia"
+                vComando.CommandText = "obtiene_seguridad_equipo_dia"
                 vComando.Parameters.Add("@cve_equipo", SqlDbType.BigInt).Value = Me.vcve_equipo
                 vComando.Parameters.Add("@fecha_inicial", SqlDbType.DateTime).Value = Me.vfecha_inicial
                 vComando.Parameters.Add("@fecha_final", SqlDbType.DateTime).Value = Me.vfecha_final
@@ -292,7 +292,7 @@ Public Class obtiene_seguridad
                 'Me.vId = obj.Rows(0)(0)
                 scope.Complete()
             Catch 'ex As Exception
-                MsgBox("Error al obtener gente. CObtiene_gente_ERROR", vbCritical + vbOKOnly, "Error")
+                MsgBox("Error al obtener seguridad. CObtiene_gente_ERROR", vbCritical + vbOKOnly, "Error")
                 Return Nothing
                 'Throw New Exception(ex.Message)
             End Try
@@ -305,7 +305,7 @@ Public Class obtiene_seguridad
             Try
                 Dim vComando As New SqlClient.SqlCommand
                 vComando.CommandType = CommandType.StoredProcedure
-                vComando.CommandText = "obtiene_gente_equipo_mes"
+                vComando.CommandText = "obtiene_seguridad_equipo_mes"
                 vComando.Parameters.Add("@cve_equipo", SqlDbType.BigInt).Value = Me.vcve_equipo
                 vComando.Parameters.Add("@fecha_inicial", SqlDbType.DateTime).Value = Me.vfecha_inicial
                 vComando.Parameters.Add("@fecha_final", SqlDbType.DateTime).Value = Me.vfecha_final
@@ -314,7 +314,7 @@ Public Class obtiene_seguridad
                 'Me.vId = obj.Rows(0)(0)
                 scope.Complete()
             Catch 'ex As Exception
-                MsgBox("Error al obtener gente. CObtiene_gente_ERROR", vbCritical + vbOKOnly, "Error")
+                MsgBox("Error al obtener seguridad. CObtiene_gente_ERROR", vbCritical + vbOKOnly, "Error")
                 Return Nothing
                 'Throw New Exception(ex.Message)
             End Try
@@ -327,7 +327,7 @@ Public Class obtiene_seguridad
             Try
                 Dim vComando As New SqlClient.SqlCommand
                 vComando.CommandType = CommandType.StoredProcedure
-                vComando.CommandText = "obtiene_gente_equipo_linea_dia"
+                vComando.CommandText = "obtiene_seguridad_equipo_linea_dia"
                 vComando.Parameters.Add("@cve_equipo", SqlDbType.BigInt).Value = Me.vcve_equipo
                 vComando.Parameters.Add("@cve_linea", SqlDbType.BigInt).Value = Me.vcve_linea
                 vComando.Parameters.Add("@fecha_inicial", SqlDbType.DateTime).Value = Me.vfecha_inicial
@@ -337,7 +337,7 @@ Public Class obtiene_seguridad
                 'Me.vId = obj.Rows(0)(0)
                 scope.Complete()
             Catch 'ex As Exception
-                MsgBox("Error al obtener gente. CObtiene_gente_ERROR", vbCritical + vbOKOnly, "Error")
+                MsgBox("Error al obtener seguridad. CObtiene_gente_ERROR", vbCritical + vbOKOnly, "Error")
                 Return Nothing
                 'Throw New Exception(ex.Message)
             End Try
@@ -350,7 +350,7 @@ Public Class obtiene_seguridad
             Try
                 Dim vComando As New SqlClient.SqlCommand
                 vComando.CommandType = CommandType.StoredProcedure
-                vComando.CommandText = "obtiene_gente_equipo_linea_mes"
+                vComando.CommandText = "obtiene_seguridad_equipo_linea_mes"
                 vComando.Parameters.Add("@cve_equipo", SqlDbType.BigInt).Value = Me.vcve_equipo
                 vComando.Parameters.Add("@cve_linea", SqlDbType.BigInt).Value = Me.vcve_linea
                 vComando.Parameters.Add("@fecha_inicial", SqlDbType.DateTime).Value = Me.vfecha_inicial
@@ -360,7 +360,7 @@ Public Class obtiene_seguridad
                 'Me.vId = obj.Rows(0)(0)
                 scope.Complete()
             Catch 'ex As Exception
-                MsgBox("Error al obtener gente. CObtiene_gente_ERROR", vbCritical + vbOKOnly, "Error")
+                MsgBox("Error al obtener seguridad. CObtiene_gente_ERROR", vbCritical + vbOKOnly, "Error")
                 Return Nothing
                 'Throw New Exception(ex.Message)
             End Try
