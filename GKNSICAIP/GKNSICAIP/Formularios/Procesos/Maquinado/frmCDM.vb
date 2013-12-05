@@ -9,8 +9,8 @@ Public Class frmCDM
     Private bandera_modelo_salida As Boolean = False
     'valores para inicializar el formulario
     Private linea As String
-    Private paro_detalle(7, 1) As String
-    Private paro_comentarios(8, 0) As String
+    Private paro_detalle(8, 1) As String
+    Private paro_comentarios(9, 0) As String
     Private indice_x As Integer
     Private indice_y As Integer
     Private id_CDM As Integer
@@ -175,7 +175,6 @@ Public Class frmCDM
 
     End Sub
 #End Region
-
     Private Sub guardar()
         If se_puede_añadir_paro(minutosdisponibles) Then
             contenedor.set_used()
@@ -320,6 +319,9 @@ Public Class frmCDM
     Private Sub chkT_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles chkT.CheckedChanged
         valida_chk_paros_detalle(chkT, txtParoT, cmdParoT, 7)
     End Sub
+    Private Sub chkU7_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles chkU7.CheckedChanged
+        valida_chk_paros_detalle(chkU7, txtParoU7, cmdParoU7, 8)
+    End Sub
 #End Region
 #Region "Valida Minutos Detalles Paros"
     Private Sub valida_txt_paros_detalle(ByRef txtTxtBox As TextBox, ByVal mindice As Integer)
@@ -356,6 +358,9 @@ Public Class frmCDM
     End Sub
     Private Sub txtParoT_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles txtParoT.TextChanged
         valida_txt_paros_detalle(txtParoT, 7)
+    End Sub
+    Private Sub txtParoU7_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles txtParoU7.TextChanged
+        valida_txt_paros_detalle(txtParoU7, 8)
     End Sub
 #End Region
 #Region "Modulo de Paros-Comentarios"
@@ -407,7 +412,7 @@ Public Class frmCDM
 #End Region
 #Region "Eventos Boton Comentarios Detalle Paros"
     Private Sub cmdCDM_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmdCDM.Click
-        detalle_comentario_paro(8, 0)
+        detalle_comentario_paro(9, 0)
     End Sub
     Private Sub cmdParoA3_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmdParoA3.Click
         detalle_comentario_paro(0, 0)
@@ -433,6 +438,9 @@ Public Class frmCDM
     Private Sub cmdParoT_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmdParoT.Click
         detalle_comentario_paro(7, 0)
     End Sub
+    Private Sub cmdParoU7_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmdParoU7.Click
+        detalle_comentario_paro(8, 0)
+    End Sub
 #End Region
 #Region "Minutos totaldes de Paros de CDM"
     Private Sub total_min_paros(ByRef chk As CheckBox, ByRef txt As TextBox, ByVal code_paro As String, ByVal mindice As Integer)
@@ -452,6 +460,7 @@ Public Class frmCDM
         total_min_paros(chkQ, txtParoQ, "Q", 5)
         total_min_paros(chkS, txtParoS, "S", 6)
         total_min_paros(chkT, txtParoT, "T", 7)
+        total_min_paros(chkU7, txtParoU7, "U.7", 8)
         Label12.Text = minutosDetParos
         calcula_costo()
         calcula_mejora()
@@ -581,4 +590,6 @@ Public Class frmCDM
             End If
         End If
     End Sub
+
+    
 End Class

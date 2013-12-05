@@ -70,15 +70,15 @@ Partial Class frmCDM
         Me.cmdAgregaComent = New System.Windows.Forms.Button()
         Me.lblAgregarComent = New System.Windows.Forms.Label()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
+        Me.cmdParoU7 = New System.Windows.Forms.Button()
+        Me.txtParoU7 = New System.Windows.Forms.TextBox()
+        Me.chkU7 = New System.Windows.Forms.CheckBox()
         Me.cmdParoA3 = New System.Windows.Forms.Button()
         Me.txtParoA3 = New System.Windows.Forms.TextBox()
         Me.chkA3 = New System.Windows.Forms.CheckBox()
         Me.lblcosto = New System.Windows.Forms.Label()
         Me.lblmejora = New System.Windows.Forms.Label()
         Me.cmdCDM = New System.Windows.Forms.Button()
-        Me.CheckBox1 = New System.Windows.Forms.CheckBox()
-        Me.TextBox1 = New System.Windows.Forms.TextBox()
-        Me.Button1 = New System.Windows.Forms.Button()
         CType(Me.imgBanner, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupBox1.SuspendLayout()
         Me.SuspendLayout()
@@ -506,9 +506,9 @@ Partial Class frmCDM
         '
         'GroupBox1
         '
-        Me.GroupBox1.Controls.Add(Me.Button1)
-        Me.GroupBox1.Controls.Add(Me.TextBox1)
-        Me.GroupBox1.Controls.Add(Me.CheckBox1)
+        Me.GroupBox1.Controls.Add(Me.cmdParoU7)
+        Me.GroupBox1.Controls.Add(Me.txtParoU7)
+        Me.GroupBox1.Controls.Add(Me.chkU7)
         Me.GroupBox1.Controls.Add(Me.cmdParoA3)
         Me.GroupBox1.Controls.Add(Me.txtParoA3)
         Me.GroupBox1.Controls.Add(Me.chkA3)
@@ -545,6 +545,33 @@ Partial Class frmCDM
         Me.GroupBox1.TabIndex = 203
         Me.GroupBox1.TabStop = False
         Me.GroupBox1.Text = "Paros "
+        '
+        'cmdParoU7
+        '
+        Me.cmdParoU7.Image = CType(resources.GetObject("cmdParoU7.Image"), System.Drawing.Image)
+        Me.cmdParoU7.Location = New System.Drawing.Point(414, 236)
+        Me.cmdParoU7.Name = "cmdParoU7"
+        Me.cmdParoU7.Size = New System.Drawing.Size(22, 22)
+        Me.cmdParoU7.TabIndex = 208
+        Me.cmdParoU7.UseVisualStyleBackColor = True
+        '
+        'txtParoU7
+        '
+        Me.txtParoU7.Location = New System.Drawing.Point(293, 238)
+        Me.txtParoU7.Name = "txtParoU7"
+        Me.txtParoU7.Size = New System.Drawing.Size(106, 20)
+        Me.txtParoU7.TabIndex = 207
+        Me.txtParoU7.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
+        '
+        'chkU7
+        '
+        Me.chkU7.AutoSize = True
+        Me.chkU7.Location = New System.Drawing.Point(15, 240)
+        Me.chkU7.Name = "chkU7"
+        Me.chkU7.Size = New System.Drawing.Size(150, 17)
+        Me.chkU7.TabIndex = 206
+        Me.chkU7.Text = "U.7. Surtimiento de Piezas"
+        Me.chkU7.UseVisualStyleBackColor = True
         '
         'cmdParoA3
         '
@@ -603,33 +630,6 @@ Partial Class frmCDM
         Me.cmdCDM.Size = New System.Drawing.Size(22, 22)
         Me.cmdCDM.TabIndex = 203
         Me.cmdCDM.UseVisualStyleBackColor = True
-        '
-        'CheckBox1
-        '
-        Me.CheckBox1.AutoSize = True
-        Me.CheckBox1.Location = New System.Drawing.Point(15, 240)
-        Me.CheckBox1.Name = "CheckBox1"
-        Me.CheckBox1.Size = New System.Drawing.Size(217, 17)
-        Me.CheckBox1.TabIndex = 206
-        Me.CheckBox1.Text = "U.7. Esperando liberación PAP por CDM"
-        Me.CheckBox1.UseVisualStyleBackColor = True
-        '
-        'TextBox1
-        '
-        Me.TextBox1.Location = New System.Drawing.Point(293, 238)
-        Me.TextBox1.Name = "TextBox1"
-        Me.TextBox1.Size = New System.Drawing.Size(106, 20)
-        Me.TextBox1.TabIndex = 207
-        Me.TextBox1.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
-        '
-        'Button1
-        '
-        Me.Button1.Image = CType(resources.GetObject("Button1.Image"), System.Drawing.Image)
-        Me.Button1.Location = New System.Drawing.Point(414, 236)
-        Me.Button1.Name = "Button1"
-        Me.Button1.Size = New System.Drawing.Size(22, 22)
-        Me.Button1.TabIndex = 208
-        Me.Button1.UseVisualStyleBackColor = True
         '
         'frmCDM
         '
@@ -724,7 +724,7 @@ Partial Class frmCDM
     Friend WithEvents cmdParoA3 As System.Windows.Forms.Button
     Friend WithEvents txtParoA3 As System.Windows.Forms.TextBox
     Friend WithEvents chkA3 As System.Windows.Forms.CheckBox
-    Friend WithEvents Button1 As System.Windows.Forms.Button
-    Friend WithEvents TextBox1 As System.Windows.Forms.TextBox
-    Friend WithEvents CheckBox1 As System.Windows.Forms.CheckBox
+    Friend WithEvents cmdParoU7 As System.Windows.Forms.Button
+    Friend WithEvents txtParoU7 As System.Windows.Forms.TextBox
+    Friend WithEvents chkU7 As System.Windows.Forms.CheckBox
 End Class
