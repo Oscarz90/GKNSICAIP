@@ -336,7 +336,7 @@ Public Class obtiene_costo
                 'Me.vId = obj.Rows(0)(0)
                 scope.Complete()
             Catch 'ex As Exception
-                MsgBox("Error al obtener gente. CObtiene_gente_ERROR", vbCritical + vbOKOnly, "Error")
+                MsgBox("Error al obtener costo. CObtiene_costo_ERROR", vbCritical + vbOKOnly, "Error")
                 Return Nothing
                 'Throw New Exception(ex.Message)
             End Try
