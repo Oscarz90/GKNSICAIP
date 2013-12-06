@@ -42,6 +42,7 @@ Public Class frmCDM
         txtParoT.Enabled = False
         txtParoS.Enabled = False
         txtParoA3.Enabled = False
+        txtParoU7.Enabled = False
         cmdParoL.Enabled = False
         cmdParoM.Enabled = False
         cmdParoN.Enabled = False
@@ -50,6 +51,7 @@ Public Class frmCDM
         cmdParoT.Enabled = False
         cmdParoS.Enabled = False
         cmdParoA3.Enabled = False
+        cmdParoU7.Enabled = False
         GroupBox1.Enabled = False
         dtpInicio.Enabled = False
         dtpFinal.Enabled = False
