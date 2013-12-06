@@ -761,7 +761,7 @@ Public Class frmProduccion
                 oObtieneSeguridad.cve_linea = vCve_Linea_CBX
                 oObtieneSeguridad.fecha_inicial = Date.Now.AddDays(-5) '-----restarle unos 3 dias
                 oObtieneSeguridad.fecha_final = Date.Now
-                oObtieneSeguridad.bandera = 1
+                oObtieneSeguridad.bandera = 2
                 oObtieneSeguridad.obtiene_seguridad_equipo_linea_dia()                
 
                 'Exec proc para actualixar historico
