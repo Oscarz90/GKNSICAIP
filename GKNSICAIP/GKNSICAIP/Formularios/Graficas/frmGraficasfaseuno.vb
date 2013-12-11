@@ -498,15 +498,21 @@ Public Class FrmGraficasfaseuno
         LinearAxis1.MajorStep = 10.0R
         LinearAxis1.Maximum = 100
         LinearAxis1.Title = "Oee"
+
         BarSeries1.ShowLabels = True
         BarSeries2.ShowLabels = True
+
         BarSeries1.LabelFormat = "{0:##.#}" & " %"
         BarSeries2.LabelFormat = "{0:##.#}" & " %"
-        BarSeries1.HorizontalAxis = CategoricalAxis1
+
+
+        BarSeries1.HorizontalAxis = CategoricalAxis1        
+
         BarSeries1.VerticalAxis = LinearAxis1
-        'BarSeries2.ForeColor = Color.White
+
         BarSeries1.Palette = New PaletteEntry(Color.FromArgb(255, 205, 47))
-        BarSeries2.Palette = New PaletteEntry(Color.FromArgb(246, 172, 38))
+        BarSeries2.Palette = New PaletteEntry(Color.FromArgb(246, 172, 38))        
+
         Me.radChartView1.ShowToolTip = True
         radChartView1.Series.Add(BarSeries1)
         radChartView1.Series.Add(BarSeries2)
