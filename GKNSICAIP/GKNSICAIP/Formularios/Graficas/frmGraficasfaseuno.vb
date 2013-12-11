@@ -506,12 +506,12 @@ Public Class FrmGraficasfaseuno
         BarSeries2.LabelFormat = "{0:##.#}" & " %"
 
 
-        BarSeries1.HorizontalAxis = CategoricalAxis1        
+        BarSeries1.HorizontalAxis = CategoricalAxis1
 
         BarSeries1.VerticalAxis = LinearAxis1
 
         BarSeries1.Palette = New PaletteEntry(Color.FromArgb(255, 205, 47))
-        BarSeries2.Palette = New PaletteEntry(Color.FromArgb(246, 172, 38))        
+        BarSeries2.Palette = New PaletteEntry(Color.FromArgb(246, 172, 38))
 
         Me.radChartView1.ShowToolTip = True
         radChartView1.Series.Add(BarSeries1)
