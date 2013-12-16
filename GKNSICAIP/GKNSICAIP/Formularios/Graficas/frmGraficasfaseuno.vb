@@ -530,6 +530,8 @@ Public Class FrmGraficasfaseuno
         BarSeries1.LegendTitle = "Oee"
         Dim BarSeries2 As New BarSeries()
         BarSeries2.LegendTitle = "Acumulado"
+        Dim LineSeries1 As New LineSeries()
+        LineSeries1.LegendTitle = "Objetivo Oee"
         Me.radChartView1.ShowLegend = True
         'Obtencion Datos Oee
         Dim vDT As New DataTable
@@ -553,6 +555,9 @@ Public Class FrmGraficasfaseuno
                 BarSeries2.DataPoints.Add(New CategoricalDataPoint(vDR("oee"), "Acumulado"))
             Else
                 BarSeries1.DataPoints.Add(New CategoricalDataPoint(vDR("oee"), vDR("dia_asignado")))
+                If Not IsDBNull(vDR("objetivo")) Then
+                    LineSeries1.DataPoints.Add(New CategoricalDataPoint(vDR("objetivo"), vDR("dia_asignado")))
+                End If
             End If
             vContador = vContador + 1
         Next
@@ -585,18 +590,38 @@ Public Class FrmGraficasfaseuno
         LinearAxis1.MajorStep = 10.0R
         LinearAxis1.Maximum = 100
         LinearAxis1.Title = "Oee"
+
         BarSeries1.ShowLabels = True
         BarSeries2.ShowLabels = True
+        LineSeries1.ShowLabels = True
+
         BarSeries1.LabelFormat = "{0:##.#}" & " %"
         BarSeries2.LabelFormat = "{0:##.#}" & " %"
+        LineSeries1.LabelFormat = "{0:##.#}" & " %"
+
         BarSeries1.HorizontalAxis = CategoricalAxis1
+        LineSeries1.HorizontalAxis = CategoricalAxis1
+
         BarSeries1.VerticalAxis = LinearAxis1
+        LineSeries1.VerticalAxis = LinearAxis1
+
         'BarSeries2.ForeColor = Color.White
         BarSeries1.Palette = New PaletteEntry(Color.FromArgb(255, 205, 47))
         BarSeries2.Palette = New PaletteEntry(Color.FromArgb(246, 172, 38))
+        LineSeries1.Palette = New PaletteEntry(Color.FromArgb(44, 250, 54))
+
+        LineSeries1.BorderColor = Color.FromArgb(44, 250, 54)
+        LineSeries1.PointSize = New SizeF(10, 10)
+
         Me.radChartView1.ShowToolTip = True
+        radChartView1.Series.Add(LineSeries1)
         radChartView1.Series.Add(BarSeries1)
         radChartView1.Series.Add(BarSeries2)
+
+        BarSeries1.CombineMode = ChartSeriesCombineMode.None
+        BarSeries2.CombineMode = ChartSeriesCombineMode.None
+        LineSeries1.CombineMode = ChartSeriesCombineMode.None
+
     End Sub
     'Oee Componente
     Private Sub obtiene_oee_componente_dia_mes()
@@ -611,6 +636,8 @@ Public Class FrmGraficasfaseuno
         BarSeries1.LegendTitle = "Oee"
         Dim BarSeries2 As New BarSeries()
         BarSeries2.LegendTitle = "Acumulado"
+        Dim LineSeries1 As New LineSeries()
+        LineSeries1.LegendTitle = "Objetivo Oee"
         Me.radChartView1.ShowLegend = True
         'Obtencion Datos Oee
         Dim vDT As New DataTable
@@ -634,6 +661,9 @@ Public Class FrmGraficasfaseuno
                 BarSeries2.DataPoints.Add(New CategoricalDataPoint(vDR("oee"), "Acumulado"))
             Else
                 BarSeries1.DataPoints.Add(New CategoricalDataPoint(vDR("oee"), vDR("dia_asignado")))
+                If Not IsDBNull(vDR("objetivo")) Then
+                    LineSeries1.DataPoints.Add(New CategoricalDataPoint(vDR("objetivo"), vDR("dia_asignado")))
+                End If
             End If
             vContador = vContador + 1
         Next
@@ -666,18 +696,36 @@ Public Class FrmGraficasfaseuno
         LinearAxis1.MajorStep = 10.0R
         LinearAxis1.Maximum = 100
         LinearAxis1.Title = "Oee"
+
         BarSeries1.ShowLabels = True
         BarSeries2.ShowLabels = True
+        LineSeries1.ShowLabels = True
+
         BarSeries1.LabelFormat = "{0:##.#}" & " %"
         BarSeries2.LabelFormat = "{0:##.#}" & " %"
+        LineSeries1.LabelFormat = "{0:##.#}" & " %"
+
         BarSeries1.HorizontalAxis = CategoricalAxis1
+        LineSeries1.HorizontalAxis = CategoricalAxis1
+
         BarSeries1.VerticalAxis = LinearAxis1
-        'BarSeries2.ForeColor = Color.White
+        LineSeries1.VerticalAxis = LinearAxis1
+
         BarSeries1.Palette = New PaletteEntry(Color.FromArgb(255, 205, 47))
         BarSeries2.Palette = New PaletteEntry(Color.FromArgb(246, 172, 38))
+        LineSeries1.Palette = New PaletteEntry(Color.FromArgb(44, 250, 54))
+
+        LineSeries1.BorderColor = Color.FromArgb(44, 250, 54)
+        LineSeries1.PointSize = New SizeF(10, 10)
+
         Me.radChartView1.ShowToolTip = True
+        radChartView1.Series.Add(LineSeries1)
         radChartView1.Series.Add(BarSeries1)
         radChartView1.Series.Add(BarSeries2)
+
+        BarSeries1.CombineMode = ChartSeriesCombineMode.None
+        BarSeries2.CombineMode = ChartSeriesCombineMode.None
+        LineSeries1.CombineMode = ChartSeriesCombineMode.None
     End Sub
     'Oee Linea
     Private Sub obtiene_oee_linea_dia_mes()
@@ -800,6 +848,8 @@ Public Class FrmGraficasfaseuno
         BarSeries1.LegendTitle = "Oee"
         Dim BarSeries2 As New BarSeries()
         BarSeries2.LegendTitle = "Acumulado"
+        Dim LineSeries1 As New LineSeries()
+        LineSeries1.LegendTitle = "Objetivo Oee"
         Me.radChartView1.ShowLegend = True
         'Obtencion Datos Oee
         Dim vDT As New DataTable
@@ -823,6 +873,9 @@ Public Class FrmGraficasfaseuno
                 BarSeries2.DataPoints.Add(New CategoricalDataPoint(vDR("oee"), "Acumulado"))
             Else
                 BarSeries1.DataPoints.Add(New CategoricalDataPoint(vDR("oee"), vDR("dia_asignado")))
+                If Not IsDBNull(vDR("objetivo")) Then
+                    LineSeries1.DataPoints.Add(New CategoricalDataPoint(vDR("objetivo"), vDR("dia_asignado")))
+                End If
             End If
             vContador = vContador + 1
         Next
@@ -857,16 +910,34 @@ Public Class FrmGraficasfaseuno
         LinearAxis1.Title = "Oee"
         BarSeries1.ShowLabels = True
         BarSeries2.ShowLabels = True
+        LineSeries1.ShowLabels = True
+
         BarSeries1.LabelFormat = "{0:##.#}" & " %"
         BarSeries2.LabelFormat = "{0:##.#}" & " %"
+        LineSeries1.LabelFormat = "{0:##.#}" & " %"
+
         BarSeries1.HorizontalAxis = CategoricalAxis1
+        LineSeries1.HorizontalAxis = CategoricalAxis1
+
         BarSeries1.VerticalAxis = LinearAxis1
-        'BarSeries2.ForeColor = Color.White
+        LineSeries1.VerticalAxis = LinearAxis1
+
+
         BarSeries1.Palette = New PaletteEntry(Color.FromArgb(255, 205, 47))
         BarSeries2.Palette = New PaletteEntry(Color.FromArgb(246, 172, 38))
+        LineSeries1.Palette = New PaletteEntry(Color.FromArgb(44, 250, 54))
+
+        LineSeries1.BorderColor = Color.FromArgb(44, 250, 54)
+        LineSeries1.PointSize = New SizeF(10, 10)
+
         Me.radChartView1.ShowToolTip = True
+        radChartView1.Series.Add(LineSeries1)
         radChartView1.Series.Add(BarSeries1)
         radChartView1.Series.Add(BarSeries2)
+
+        BarSeries1.CombineMode = ChartSeriesCombineMode.None
+        BarSeries2.CombineMode = ChartSeriesCombineMode.None
+        LineSeries1.CombineMode = ChartSeriesCombineMode.None
     End Sub
     'Oee Equipo-Linea
     Private Sub obtiene_oee_equipo_linea_dia_mes()
@@ -882,6 +953,8 @@ Public Class FrmGraficasfaseuno
         BarSeries1.LegendTitle = "Oee"
         Dim BarSeries2 As New BarSeries()
         BarSeries2.LegendTitle = "Acumulado"
+        Dim LineSeries1 As New LineSeries()
+        LineSeries1.LegendTitle = "Objetivo Oee"
         Me.radChartView1.ShowLegend = True
         'Llenado de las series
         Dim vTotal As Integer = 1
@@ -906,12 +979,18 @@ Public Class FrmGraficasfaseuno
                     BarSeries2.DataPoints.Add(New CategoricalDataPoint(vDR("oee"), "Acumulado"))
                 Else
                     BarSeries1.DataPoints.Add(New CategoricalDataPoint(vDR("oee"), vDR("dia_asignado")))
+                    If Not IsDBNull(vDR("objetivo")) Then
+                        LineSeries1.DataPoints.Add(New CategoricalDataPoint(vDR("objetivo"), vDR("dia_asignado")))
+                    End If
                 End If
             ElseIf rdbtnMeses.IsChecked Then
                 If vContador = vTotal Then
                     BarSeries2.DataPoints.Add(New CategoricalDataPoint(vDR("oee"), "Acumulado"))
                 Else
                     BarSeries1.DataPoints.Add(New CategoricalDataPoint(vDR("oee"), vDR("dia_asignado")))
+                    If Not IsDBNull(vDR("objetivo")) Then
+                        LineSeries1.DataPoints.Add(New CategoricalDataPoint(vDR("objetivo"), vDR("dia_asignado")))
+                    End If
                 End If
             End If
             vContador = vContador + 1
@@ -945,18 +1024,37 @@ Public Class FrmGraficasfaseuno
         LinearAxis1.MajorStep = 10.0R
         LinearAxis1.Maximum = 100
         LinearAxis1.Title = "Oee"
+
         BarSeries1.ShowLabels = True
         BarSeries2.ShowLabels = True
+        LineSeries1.ShowLabels = True
+
         BarSeries1.LabelFormat = "{0:##.#}" & " %"
         BarSeries2.LabelFormat = "{0:##.#}" & " %"
+        LineSeries1.LabelFormat = "{0:##.#}" & " %"
+
         BarSeries1.HorizontalAxis = CategoricalAxis1
+        LineSeries1.HorizontalAxis = CategoricalAxis1
+
         BarSeries1.VerticalAxis = LinearAxis1
-        'BarSeries2.ForeColor = Color.White
+        LineSeries1.VerticalAxis = LinearAxis1
+
+
         BarSeries1.Palette = New PaletteEntry(Color.FromArgb(255, 205, 47))
         BarSeries2.Palette = New PaletteEntry(Color.FromArgb(246, 172, 38))
+        LineSeries1.Palette = New PaletteEntry(Color.FromArgb(44, 250, 54))
+
+        LineSeries1.BorderColor = Color.FromArgb(44, 250, 54)
+        LineSeries1.PointSize = New SizeF(10, 10)
+
         Me.radChartView1.ShowToolTip = True
+        radChartView1.Series.Add(LineSeries1)
         radChartView1.Series.Add(BarSeries1)
         radChartView1.Series.Add(BarSeries2)
+
+        BarSeries1.CombineMode = ChartSeriesCombineMode.None
+        BarSeries2.CombineMode = ChartSeriesCombineMode.None
+        LineSeries1.CombineMode = ChartSeriesCombineMode.None
     End Sub
 #End Region
 #Region "Metodos graficar NRFTi"
@@ -1053,6 +1151,8 @@ Public Class FrmGraficasfaseuno
         BarSeries1.LegendTitle = "nrfti"
         Dim BarSeries2 As New BarSeries()
         BarSeries2.LegendTitle = "Acumulado"
+        Dim LineSeries1 As New LineSeries()
+        LineSeries1.LegendTitle = "Objetivo Oee"
         Me.radChartView1.ShowLegend = True
         'Obtencion Datos
         Dim vDT As New DataTable
@@ -1108,19 +1208,37 @@ Public Class FrmGraficasfaseuno
         'LinearAxis1.MajorStep = 10.0R
         'LinearAxis1.Maximum = 100
         LinearAxis1.Title = "NRFTi ( PPM'S )"
+
         BarSeries1.ShowLabels = True
         BarSeries2.ShowLabels = True
+        LineSeries1.ShowLabels = True
+
         BarSeries1.LabelFormat = "{0:##,###}"
         BarSeries2.LabelFormat = "{0:##,###}"
+        LineSeries1.LabelFormat = "{0:##,###}"
+
         BarSeries1.HorizontalAxis = CategoricalAxis1
+        LineSeries1.HorizontalAxis = CategoricalAxis1
+
         BarSeries1.VerticalAxis = LinearAxis1
-        'BarSeries1.ForeColor = Color.White
-        'BarSeries2.ForeColor = Color.White
+        LineSeries1.VerticalAxis = LinearAxis1
+
         BarSeries1.Palette = New PaletteEntry(Color.FromArgb(55, 96, 146))
         BarSeries2.Palette = New PaletteEntry(Color.FromArgb(37, 64, 97))
+        LineSeries1.Palette = New PaletteEntry(Color.FromArgb(44, 250, 54))
+
+        LineSeries1.BorderColor = Color.FromArgb(44, 250, 54)
+        LineSeries1.PointSize = New SizeF(10, 10)
+
         Me.radChartView1.ShowToolTip = True
+        radChartView1.Series.Add(LineSeries1)
         radChartView1.Series.Add(BarSeries1)
         radChartView1.Series.Add(BarSeries2)
+
+        BarSeries1.CombineMode = ChartSeriesCombineMode.None
+        BarSeries2.CombineMode = ChartSeriesCombineMode.None
+        LineSeries1.CombineMode = ChartSeriesCombineMode.None
+
         If (LinearAxis1.ActualRange.Maximum = 0) Then
             LinearAxis1.Maximum = 5
         End If
