@@ -1759,7 +1759,7 @@ Public Class frmProduccion
         oRegistro_Paro.Cve_paro = cbxTipoParo.SelectedValue
         oRegistro_Paro.Cve_maquina = cbxMaquina.SelectedValue
         oRegistro_Paro.Minutos = contenedor_CDM.minutosTotales
-        oRegistro_Paro.Detalles = contenedor_CDM.comentarios(8, 0)
+        oRegistro_Paro.Detalles = contenedor_CDM.comentarios(9, 0)
         'Detalle_CDM_Total
         oDetalle_CDM_total.cve_CDM = contenedor_CDM.CDM
         oDetalle_CDM_total.mejora = contenedor_CDM.mejora

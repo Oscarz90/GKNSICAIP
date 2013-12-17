@@ -70,6 +70,9 @@ Partial Class frmCDM
         Me.cmdAgregaComent = New System.Windows.Forms.Button()
         Me.lblAgregarComent = New System.Windows.Forms.Label()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
+        Me.cmdParoU7 = New System.Windows.Forms.Button()
+        Me.txtParoU7 = New System.Windows.Forms.TextBox()
+        Me.chkU7 = New System.Windows.Forms.CheckBox()
         Me.cmdParoA3 = New System.Windows.Forms.Button()
         Me.txtParoA3 = New System.Windows.Forms.TextBox()
         Me.chkA3 = New System.Windows.Forms.CheckBox()
@@ -202,7 +205,7 @@ Partial Class frmCDM
         'chkO
         '
         Me.chkO.AutoSize = True
-        Me.chkO.Location = New System.Drawing.Point(15, 132)
+        Me.chkO.Location = New System.Drawing.Point(16, 132)
         Me.chkO.Name = "chkO"
         Me.chkO.Size = New System.Drawing.Size(180, 17)
         Me.chkO.TabIndex = 166
@@ -288,7 +291,7 @@ Partial Class frmCDM
         '
         'txtComents
         '
-        Me.txtComents.Location = New System.Drawing.Point(16, 268)
+        Me.txtComents.Location = New System.Drawing.Point(15, 279)
         Me.txtComents.Multiline = True
         Me.txtComents.Name = "txtComents"
         Me.txtComents.ScrollBars = System.Windows.Forms.ScrollBars.Vertical
@@ -298,7 +301,7 @@ Partial Class frmCDM
         'Label7
         '
         Me.Label7.AutoSize = True
-        Me.Label7.Location = New System.Drawing.Point(13, 252)
+        Me.Label7.Location = New System.Drawing.Point(12, 263)
         Me.Label7.Name = "Label7"
         Me.Label7.Size = New System.Drawing.Size(68, 13)
         Me.Label7.TabIndex = 178
@@ -336,7 +339,7 @@ Partial Class frmCDM
         'chkS
         '
         Me.chkS.AutoSize = True
-        Me.chkS.Location = New System.Drawing.Point(15, 187)
+        Me.chkS.Location = New System.Drawing.Point(15, 186)
         Me.chkS.Name = "chkS"
         Me.chkS.Size = New System.Drawing.Size(118, 17)
         Me.chkS.TabIndex = 184
@@ -345,7 +348,7 @@ Partial Class frmCDM
         '
         'txtParoS
         '
-        Me.txtParoS.Location = New System.Drawing.Point(294, 184)
+        Me.txtParoS.Location = New System.Drawing.Point(293, 184)
         Me.txtParoS.Name = "txtParoS"
         Me.txtParoS.Size = New System.Drawing.Size(106, 20)
         Me.txtParoS.TabIndex = 185
@@ -358,7 +361,7 @@ Partial Class frmCDM
         Me.cmdGuardar.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center
         Me.cmdGuardar.Enabled = False
         Me.cmdGuardar.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.cmdGuardar.Location = New System.Drawing.Point(114, 532)
+        Me.cmdGuardar.Location = New System.Drawing.Point(114, 554)
         Me.cmdGuardar.Name = "cmdGuardar"
         Me.cmdGuardar.Size = New System.Drawing.Size(104, 62)
         Me.cmdGuardar.TabIndex = 186
@@ -370,7 +373,7 @@ Partial Class frmCDM
         Me.cmdSalir.BackgroundImage = CType(resources.GetObject("cmdSalir.BackgroundImage"), System.Drawing.Image)
         Me.cmdSalir.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center
         Me.cmdSalir.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.cmdSalir.Location = New System.Drawing.Point(283, 532)
+        Me.cmdSalir.Location = New System.Drawing.Point(283, 554)
         Me.cmdSalir.Name = "cmdSalir"
         Me.cmdSalir.Size = New System.Drawing.Size(104, 61)
         Me.cmdSalir.TabIndex = 187
@@ -380,7 +383,7 @@ Partial Class frmCDM
         '
         Me.Label10.AutoSize = True
         Me.Label10.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label10.Location = New System.Drawing.Point(136, 597)
+        Me.Label10.Location = New System.Drawing.Point(136, 619)
         Me.Label10.Name = "Label10"
         Me.Label10.Size = New System.Drawing.Size(65, 18)
         Me.Label10.TabIndex = 188
@@ -390,7 +393,7 @@ Partial Class frmCDM
         '
         Me.Label11.AutoSize = True
         Me.Label11.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label11.Location = New System.Drawing.Point(316, 596)
+        Me.Label11.Location = New System.Drawing.Point(316, 618)
         Me.Label11.Name = "Label11"
         Me.Label11.Size = New System.Drawing.Size(40, 18)
         Me.Label11.TabIndex = 189
@@ -413,7 +416,7 @@ Partial Class frmCDM
         'Label12
         '
         Me.Label12.AutoSize = True
-        Me.Label12.Location = New System.Drawing.Point(329, 252)
+        Me.Label12.Location = New System.Drawing.Point(328, 263)
         Me.Label12.Name = "Label12"
         Me.Label12.Size = New System.Drawing.Size(45, 13)
         Me.Label12.TabIndex = 192
@@ -486,7 +489,7 @@ Partial Class frmCDM
         'cmdAgregaComent
         '
         Me.cmdAgregaComent.Image = CType(resources.GetObject("cmdAgregaComent.Image"), System.Drawing.Image)
-        Me.cmdAgregaComent.Location = New System.Drawing.Point(390, 268)
+        Me.cmdAgregaComent.Location = New System.Drawing.Point(389, 279)
         Me.cmdAgregaComent.Name = "cmdAgregaComent"
         Me.cmdAgregaComent.Size = New System.Drawing.Size(47, 47)
         Me.cmdAgregaComent.TabIndex = 201
@@ -495,7 +498,7 @@ Partial Class frmCDM
         'lblAgregarComent
         '
         Me.lblAgregarComent.AutoSize = True
-        Me.lblAgregarComent.Location = New System.Drawing.Point(392, 324)
+        Me.lblAgregarComent.Location = New System.Drawing.Point(391, 335)
         Me.lblAgregarComent.Name = "lblAgregarComent"
         Me.lblAgregarComent.Size = New System.Drawing.Size(44, 13)
         Me.lblAgregarComent.TabIndex = 202
@@ -503,6 +506,9 @@ Partial Class frmCDM
         '
         'GroupBox1
         '
+        Me.GroupBox1.Controls.Add(Me.cmdParoU7)
+        Me.GroupBox1.Controls.Add(Me.txtParoU7)
+        Me.GroupBox1.Controls.Add(Me.chkU7)
         Me.GroupBox1.Controls.Add(Me.cmdParoA3)
         Me.GroupBox1.Controls.Add(Me.txtParoA3)
         Me.GroupBox1.Controls.Add(Me.chkA3)
@@ -535,10 +541,37 @@ Partial Class frmCDM
         Me.GroupBox1.Controls.Add(Me.txtParoS)
         Me.GroupBox1.Location = New System.Drawing.Point(24, 183)
         Me.GroupBox1.Name = "GroupBox1"
-        Me.GroupBox1.Size = New System.Drawing.Size(451, 343)
+        Me.GroupBox1.Size = New System.Drawing.Size(451, 365)
         Me.GroupBox1.TabIndex = 203
         Me.GroupBox1.TabStop = False
         Me.GroupBox1.Text = "Paros "
+        '
+        'cmdParoU7
+        '
+        Me.cmdParoU7.Image = CType(resources.GetObject("cmdParoU7.Image"), System.Drawing.Image)
+        Me.cmdParoU7.Location = New System.Drawing.Point(414, 236)
+        Me.cmdParoU7.Name = "cmdParoU7"
+        Me.cmdParoU7.Size = New System.Drawing.Size(22, 22)
+        Me.cmdParoU7.TabIndex = 208
+        Me.cmdParoU7.UseVisualStyleBackColor = True
+        '
+        'txtParoU7
+        '
+        Me.txtParoU7.Location = New System.Drawing.Point(293, 238)
+        Me.txtParoU7.Name = "txtParoU7"
+        Me.txtParoU7.Size = New System.Drawing.Size(106, 20)
+        Me.txtParoU7.TabIndex = 207
+        Me.txtParoU7.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
+        '
+        'chkU7
+        '
+        Me.chkU7.AutoSize = True
+        Me.chkU7.Location = New System.Drawing.Point(15, 240)
+        Me.chkU7.Name = "chkU7"
+        Me.chkU7.Size = New System.Drawing.Size(150, 17)
+        Me.chkU7.TabIndex = 206
+        Me.chkU7.Text = "U.7. Surtimiento de Piezas"
+        Me.chkU7.UseVisualStyleBackColor = True
         '
         'cmdParoA3
         '
@@ -560,7 +593,7 @@ Partial Class frmCDM
         'chkA3
         '
         Me.chkA3.AutoSize = True
-        Me.chkA3.Location = New System.Drawing.Point(16, 28)
+        Me.chkA3.Location = New System.Drawing.Point(15, 28)
         Me.chkA3.Name = "chkA3"
         Me.chkA3.Size = New System.Drawing.Size(237, 17)
         Me.chkA3.TabIndex = 203
@@ -571,7 +604,7 @@ Partial Class frmCDM
         '
         Me.lblcosto.AutoSize = True
         Me.lblcosto.Font = New System.Drawing.Font("Arial", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblcosto.Location = New System.Drawing.Point(37, 555)
+        Me.lblcosto.Location = New System.Drawing.Point(37, 577)
         Me.lblcosto.Name = "lblcosto"
         Me.lblcosto.Size = New System.Drawing.Size(41, 16)
         Me.lblcosto.TabIndex = 204
@@ -582,7 +615,7 @@ Partial Class frmCDM
         '
         Me.lblmejora.AutoSize = True
         Me.lblmejora.Font = New System.Drawing.Font("Arial", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblmejora.Location = New System.Drawing.Point(422, 556)
+        Me.lblmejora.Location = New System.Drawing.Point(422, 578)
         Me.lblmejora.Name = "lblmejora"
         Me.lblmejora.Size = New System.Drawing.Size(53, 16)
         Me.lblmejora.TabIndex = 205
@@ -603,7 +636,7 @@ Partial Class frmCDM
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.White
-        Me.ClientSize = New System.Drawing.Size(504, 630)
+        Me.ClientSize = New System.Drawing.Size(504, 645)
         Me.ControlBox = False
         Me.Controls.Add(Me.cmdCDM)
         Me.Controls.Add(Me.lblmejora)
@@ -691,4 +724,7 @@ Partial Class frmCDM
     Friend WithEvents cmdParoA3 As System.Windows.Forms.Button
     Friend WithEvents txtParoA3 As System.Windows.Forms.TextBox
     Friend WithEvents chkA3 As System.Windows.Forms.CheckBox
+    Friend WithEvents cmdParoU7 As System.Windows.Forms.Button
+    Friend WithEvents txtParoU7 As System.Windows.Forms.TextBox
+    Friend WithEvents chkU7 As System.Windows.Forms.CheckBox
 End Class

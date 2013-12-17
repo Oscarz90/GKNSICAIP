@@ -3,8 +3,8 @@
     Public fecha_inicio As String
     Public fecha_final As String
     Public minutosTotales As Integer
-    Public paros_detalle(7, 1) As String
-    Public comentarios(8, 0) As String
+    Public paros_detalle(8, 1) As String
+    Public comentarios(9, 0) As String
     Public mejora As Double = 0
     Public costo As Double = 0
     Private Property usado As Boolean
