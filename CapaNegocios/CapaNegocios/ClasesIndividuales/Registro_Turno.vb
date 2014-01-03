@@ -123,6 +123,20 @@ Public Class Registro_Turno
     End Property
 #End Region
 #Region "Metodos formulario de produccion"
+    Public Sub calcula_adeudo_desecho_aplicable()
+        Using scope As New TransactionScope
+            Try
+                Dim cmd As New SqlClient.SqlCommand
+                cmd.CommandType = CommandType.StoredProcedure
+                cmd.CommandText = "calcula_adeudo"
+                cmd.Parameters.Add("@cve_registro_turno", SqlDbType.BigInt).Value = Me.vcve_registro_turno
+                Dim obj As DataTable = oBD.EjecutaCommando(cmd)
+                scope.Complete()
+            Catch
+                MsgBox("CRegistro_Turno_ERROR", vbCritical + vbOKOnly, "Error")
+            End Try
+        End Using
+    End Sub
     Public Sub verifica_registro_turno()
         Using scope As New TransactionScope
             Try
@@ -180,7 +194,7 @@ Public Class Registro_Turno
         End Using
     End Function
     'Descansos
-    Public sub registra_dia_descanso()
+    Public Sub registra_dia_descanso()
         Dim queryInsert As String = "insert into registro_turno " &
             "select el.cve_equipo,l.cve_linea,(Select t.cve_turno from turno t where turno='Descanso'),'" & vdia_asignado.ToString("MM-dd-yyyy") & "',0,0 from linea l join equipo_linea el on l.cve_linea=el.cve_linea where l.Estatus='1' and el.cve_equipo=" & cve_equipo
         Try
@@ -211,7 +225,7 @@ Public Class Registro_Turno
             "rt.cve_linea in (select l.cve_linea from linea l join equipo_linea el on l.cve_linea=el.cve_linea where l.Estatus='1' and el.cve_equipo=" & vcve_equipo & ")"
         vDR = oBD.ObtenerRenglon(query, "registro_turno")
         If vDR IsNot Nothing Then
-            vbandera_registro_turno = vDR("contador")            
+            vbandera_registro_turno = vDR("contador")
         End If
     End Sub
     Public Function llena_Descanso_gridview() As DataTable

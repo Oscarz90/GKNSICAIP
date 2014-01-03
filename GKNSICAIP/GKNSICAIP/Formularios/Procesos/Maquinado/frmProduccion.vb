@@ -654,6 +654,7 @@ Public Class frmProduccion
     Private Sub btnAgregarDesecho_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnAgregarDesecho.Click
         If valida_hora_de_captura(Now.ToString("dd-MM-yyyy HH:mm:ss")) Then
             add_desecho()
+            calcula_adeudo()
             limpia_desechos()
             llena_desecho_gridview()
             calcula_Productividad()
@@ -665,6 +666,7 @@ Public Class frmProduccion
     Private Sub btnQuitarDesecho_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnQuitarDesecho.Click
         If valida_hora_de_captura(Now.ToString("dd-MM-yyyy HH:mm:ss")) Then
             remove_desecho()
+            calcula_adeudo()
             llena_desecho_gridview()
             deshabilitar_btn_quitar_desecho()
             calcula_Productividad()
@@ -1445,6 +1447,12 @@ Public Class frmProduccion
         subject_notificacion = "Incremento el Desempeño de la Linea " & cbxLinea.Text & " . Equipo: " & lblNombreEquipo.Text & ". Desempeño: " & (desempeno - 100)
     End Sub
 
+    'Calcula adeudo y desecho_aplicable
+    Private Sub calcula_adeudo()
+        Dim oRegistro_turno As New Registro_Turno
+        oRegistro_turno.cve_registro_turno = get_registro_del_turno()
+        oRegistro_turno.calcula_adeudo_desecho_aplicable()
+    End Sub
     'Registra Productividad
     Private Sub add_productividad()
         Dim oProductividad As New Productividad
@@ -1751,7 +1759,7 @@ Public Class frmProduccion
         oRegistro_Paro.Cve_paro = cbxTipoParo.SelectedValue
         oRegistro_Paro.Cve_maquina = cbxMaquina.SelectedValue
         oRegistro_Paro.Minutos = contenedor_CDM.minutosTotales
-        oRegistro_Paro.Detalles = contenedor_CDM.comentarios(8, 0)
+        oRegistro_Paro.Detalles = contenedor_CDM.comentarios(9, 0)
         'Detalle_CDM_Total
         oDetalle_CDM_total.cve_CDM = contenedor_CDM.CDM
         oDetalle_CDM_total.mejora = contenedor_CDM.mejora

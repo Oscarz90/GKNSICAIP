@@ -410,7 +410,7 @@ Partial Class FrmGraficasfaseuno
         '
         Me.RootElement.ApplyShapeToControl = True
         Me.RootElement.MaxSize = New System.Drawing.Size(0, 0)
-        Me.Text = "Gráficos SICAIP"
+        Me.Text = "SICAIP"
         Me.ThemeName = "RadThemeManager"
         CType(Me.RadGroupBox1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.RadGroupBox1.ResumeLayout(False)
