@@ -14,6 +14,7 @@ Public Class FrmUsuarios
     Dim vValida_Usuario_Red As Integer = 0
     Dim vValida_Nombre As Integer = 0
     Dim vValida_Tipo_Usuario As Integer = 0
+    Dim vEmail_Respaldo As String = ""
 
 
     Sub New(Optional ByVal vRegistrar As Boolean = True, Optional ByVal vEliminar As Boolean = True)
@@ -53,6 +54,8 @@ Public Class FrmUsuarios
     End Sub
 
     Private Sub btnImportar_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnImportar.Click
+
+
         Dim ofrmImportar_Tipo_Usuario As New FrmImportador_TipoUsuario
         ofrmImportar_Tipo_Usuario.ShowDialog()
         oUsuario.CVE_TIPO_USUARIO = ofrmImportar_Tipo_Usuario.vRetorno_CVE_TIPO_USUARIO
@@ -72,7 +75,8 @@ Public Class FrmUsuarios
             oUsuario.Id_Usuario = txtId_Usuario.Text
             oUsuario.Pass = txtPass.Text
             oUsuario.Nombre = txtNombre.Text
-            oUsuario.Email = txtEmail.Text
+            'oUsuario.Email = txtEmail.Text
+            oUsuario.Email = vEmail_Respaldo
             Try
                 oUsuario.Registrar()
                 If opActivar_Nivel.Checked = True Then
@@ -106,7 +110,8 @@ Public Class FrmUsuarios
                 oUsuario.Id_Usuario = txtId_Usuario.Text
                 oUsuario.Pass = txtPass.Text
                 oUsuario.Nombre = txtNombre.Text
-                oUsuario.Email = txtEmail.Text
+                'oUsuario.Email = txtEmail.Text
+                oUsuario.Email = vEmail_Respaldo
                 Using scope As New TransactionScope()
                     Try
                         oUsuario.Registrar()
@@ -301,6 +306,7 @@ Public Class FrmUsuarios
     Private Sub txtId_Usuario_Validated(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles txtId_Usuario.Validated
         vValida_Usuario_Red = txtId_Usuario.Text.Count
         Me.txtEmail.Text = txtId_Usuario.Text & "@gkndriveline.com"
+        vEmail_Respaldo = Me.txtEmail.Text
 
         If vValida_Usuario_Red > 0 And vValida_Nombre > 0 And vValida_Tipo_Usuario > 0 Then
             btnRegistrar.Enabled = True
@@ -322,7 +328,14 @@ Public Class FrmUsuarios
 
 
     Private Sub txtEmail_Validated(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles txtEmail.Validated
-        Me.txtEmail.Text = txtId_Usuario.Text & "@gkndriveline.com"
+        If txtEmail.Text <> "" Then
+            Me.txtEmail.Text = txtId_Usuario.Text & "@gkndriveline.com"
+            vEmail_Respaldo = Me.txtEmail.Text
+        Else
+            Me.txtEmail.Text = vEmail_Respaldo
+        End If
+        'Me.txtEmail.Text = txtId_Usuario.Text & "@gkndriveline.com"
+        'vEmail_Respaldo = Me.txtEmail.Text
     End Sub
 
     Private Sub radUsuario_Componente_ToggleStateChanged(ByVal sender As System.Object, ByVal args As Telerik.WinControls.UI.StateChangedEventArgs) Handles radUsuario_Componente.ToggleStateChanged
@@ -349,6 +362,7 @@ Public Class FrmUsuarios
             rgbGrupo_Nivel.Enabled = False
         End If
         If oUsuario IsNot Nothing Then
+            'opActivar_Nivel.Enabled = True
             If oUsuario.Descripcion_Tipo_Usuario = "LET" Then
                 radUsuario_Componente.Enabled = True
                 radUsuario_CV.Enabled = False
@@ -386,6 +400,8 @@ Public Class FrmUsuarios
                 radUsuario_Componente.IsChecked = True
                 radUsuario_CV.IsChecked = True
             End If
+            'Else
+            '    opActivar_Nivel.Enabled = False
         End If
         
     End Sub
@@ -403,4 +419,7 @@ Public Class FrmUsuarios
     End Sub
 
  
+    'Private Sub btnImportar_MouseClick(ByVal sender As System.Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles btnImportar.MouseClick
+    '    vEmail_Respaldo = Me.txtEmail.Text
+    'End Sub
 End Class
