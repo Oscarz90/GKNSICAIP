@@ -229,7 +229,7 @@ Public Class Modelo
 
     Public Function Obtener_Modelos(ByVal vFiltro As String) As DataTable
         Dim vDT As DataTable
-        vDT = oBD.ObtenerTabla("select * from Modelo where descripcion LIKE '%" & vFiltro & "%'")
+        vDT = oBD.ObtenerTabla("select * from Modelo where np_gkn LIKE '%" & vFiltro & "%'")
         If vDT IsNot Nothing Then
 
         Else
