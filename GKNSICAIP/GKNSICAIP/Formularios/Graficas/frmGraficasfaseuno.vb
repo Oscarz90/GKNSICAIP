@@ -37,13 +37,16 @@ Public Class FrmGraficasfaseuno
     End Sub
     'Nivel Grafico
     Private Sub obtiene_nivel_graficos()
+        'Obtiene nombre de Usuario-PC
         Dim oGraficasfaseuno As New Graficasfaseuno
         oGraficasfaseuno.usuario = Environment.UserName
+        'Valida si el codigo de empleado es nulo
         If cod_empleado Is Nothing Then
             oGraficasfaseuno.cod_empleado = ""
         Else
             oGraficasfaseuno.cod_empleado = cod_empleado
         End If
+        'Llama el Procedimiento Almacenado obtiene_nivel_graficos_usuario
         oGraficasfaseuno.obtiene_nivel_graficos()
         Dim value As String = oGraficasfaseuno.nivel_grafico
         cve_usuario = oGraficasfaseuno.cve_usuario
@@ -70,7 +73,7 @@ Public Class FrmGraficasfaseuno
                     tipo_nivel_let()
                     nivel_lets = True
                 End If
-                
+
             Case Else
 
         End Select
@@ -322,8 +325,6 @@ Public Class FrmGraficasfaseuno
 #End Region
 #Region "Eventos RadioButton Combobox Niveles"
     Private Sub rdbtnNiveles_ToggleStateChanged(ByVal sender As System.Object, ByVal args As Telerik.WinControls.UI.StateChangedEventArgs) Handles rdbtnCadenaValor.ToggleStateChanged, rdbtnComponente.ToggleStateChanged, rdbtnLinea.ToggleStateChanged, rdbtnEquipo.ToggleStateChanged
-
-
         'Cadena valor
         If rdbtnCadenaValor.IsChecked Then
             habilita_combobox_niveles(cbxCadenaValor)
