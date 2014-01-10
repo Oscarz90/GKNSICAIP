@@ -67,18 +67,24 @@ Public Class frmMaquina
     Private Sub btnRegistrar_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnRegistrar.Click
         If vValida_Nombre > 0 Then
             If MsgBox("¿Esta seguro de registrar la nueva Maquina?", MsgBoxStyle.YesNo, Me.Text) = MsgBoxResult.Yes Then
-                oMaquina.cve_maquina = 0
                 oMaquina.clave_maquina = txtCve_Maquina.Text
-                oMaquina.maquina = txtNombre.Text
-                oMaquina.Estatus = "1"
-                Try
-                    oMaquina.Registrar()
-                    MsgBox("Se registro correctamente")
-                Catch ex As Exception
 
-                End Try
-                Me.Close()
-            End If
+                If oMaquina.Valida_Existe_Clave_Maquina(oMaquina.clave_maquina) = False Then
+                    oMaquina.cve_maquina = 0
+                    oMaquina.maquina = txtNombre.Text
+                    oMaquina.Estatus = "1"
+                    Try
+                        oMaquina.Registrar()
+                        MsgBox("Se registro correctamente")
+                    Catch ex As Exception
+
+                    End Try
+                    Me.Close()
+                Else
+                    MsgBox("La maquina que quiere registrar ya se encuentra en la Base de Datos, verifique la clave de maquina")
+                    Me.Close()
+                End If
+        End If
         End If
     End Sub
 
@@ -169,7 +175,25 @@ Public Class frmMaquina
         End If
     End Sub
 
-    Private Sub txtCve_Maquina_KeyUp(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtCve_Maquina.KeyUp
-
+    Private Sub txtCve_Maquina_KeyPress(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txtCve_Maquina.KeyPress
+        If Char.IsLetter(e.KeyChar) Then
+            e.Handled = False
+        ElseIf Char.IsNumber(e.KeyChar) Then
+            e.Handled = False
+        ElseIf Char.IsSeparator(e.KeyChar) Then
+            e.Handled = True
+        ElseIf Char.IsDigit(e.KeyChar) Then
+            e.Handled = False
+        ElseIf Char.IsWhiteSpace(e.KeyChar) Then
+            e.Handled = True
+        ElseIf Char.IsControl(e.KeyChar) Then
+            e.Handled = False
+        ElseIf Char.IsSymbol(e.KeyChar) Then
+            e.Handled = True
+        ElseIf Chr(AscW(e.KeyChar)) = "-" Then
+            e.Handled = False
+        Else
+            e.Handled = True
+        End If
     End Sub
 End Class
