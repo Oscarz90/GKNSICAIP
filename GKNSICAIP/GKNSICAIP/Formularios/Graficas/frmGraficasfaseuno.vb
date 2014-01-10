@@ -55,6 +55,10 @@ Public Class FrmGraficasfaseuno
                 llena_formulario_Nivel_Planta()
                 tipo_nivel_planta()
                 nivel_planta_gkn = True
+            Case "Champion"
+                llena_formulario_Nivel_Planta()
+                tipo_nivel_planta()
+                nivel_planta_gkn = True
             Case "CadenaValor"
                 llena_formulario_Nivel_Cadena_Valor()
                 tipo_nivel_cadena_valor()
