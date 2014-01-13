@@ -28,6 +28,8 @@ Public Class FrmMenu
             oUsuario_Login.Cargar()
             ofrmFormulario_Principal.oUsuario_Login = oUsuario_Login
             ofrmFormulario_Principal.ShowDialog()
+
+
             Me.Close()
         Else
             Me.WindowState = FormWindowState.Maximized
