@@ -123,7 +123,7 @@ Public Class EquipoLinea
     Public Function llena_combo_lineas() As DataTable
         Dim dtEquipoLinea As New DataTable
         Try
-            dtEquipoLinea = oBD.ObtenerTabla("select l.cve_linea,l.linea from linea l join equipo_linea el on l.cve_linea=el.cve_linea where el.cve_equipo=" & vcve_equipo)
+            dtEquipoLinea = oBD.ObtenerTabla("select l.cve_linea,l.linea from linea l join equipo_linea el on l.cve_linea=el.cve_linea where l.estatus='1' and el.cve_equipo=" & vcve_equipo)
         Catch ex As Exception
             MsgBox("ERROR_AL_OBTENER_Equipo_Lineas_CLineas")
             dtEquipoLinea = Nothing

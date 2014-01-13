@@ -331,7 +331,7 @@ Public Class Modelo
             dtModelos = oBD.ObtenerTabla("select m.cve_modelo,m.np_gkn from linea l " &
                                          "join TC tc on l.cve_linea=tc.cve_linea " &
                                          "join modelo m on tc.cve_modelo=m.cve_modelo " &
-                                         "where l.cve_linea=" & vcve_linea & " and tc.estatus='1' order by tc.fecha desc")
+                                         "where l.cve_linea=" & vcve_linea & " and tc.estatus='1' and l.estatus='1' and m.estatus='1' order by tc.fecha desc")
         Catch ex As Exception
             MsgBox("ERROR_AL_OBTENER_MODELOS_DE_LINEA_CModelo")
             dtModelos = Nothing
@@ -345,8 +345,8 @@ Public Class Modelo
             "join TC t on t.cve_linea=l.cve_linea " &
             "join modelo m on t.cve_modelo=m.cve_modelo " &
             "where rt.cve_registro_turno=" & vcve_registro_turno & " and " &
-            "m.cve_modelo in (select p.cve_modelo from produccion p " &
-            "where p.cve_registro_turno=" & vcve_registro_turno & " and p.estatus='1') and t.estatus='1' order by t.fecha desc"
+            "m.cve_modelo in (select p.cve_modelo from produccion p join modelo mod on mod.cve_modelo=p.cve_modelo" &
+            "where p.cve_registro_turno=" & vcve_registro_turno & " and p.estatus='1' and mod.estatus='1') and t.estatus='1' and m.estatus='1' and l.estatus='1' order by t.fecha desc"
         Try
             dtModelos = oBD.ObtenerTabla(query)
         Catch ex As Exception
