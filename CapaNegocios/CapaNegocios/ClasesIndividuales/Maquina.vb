@@ -155,6 +155,30 @@ Public Class Maquina
     End Property
 
 #End Region
+#Region "Metodos Generales"
+    Public Function Valida_Existe_Clave_Maquina(ByVal vCve_Maquina_Validar As String) As Boolean
+        Dim vRetorno As Boolean = False
+        Dim vTotal As Integer = 0
+        Dim rDatos As DataRow = Nothing
+        Try
+            rDatos = oBD.ObtenerRenglon("SELECT sum(cve_maquina) as Total FROM maquina WHERE clave_maquina='" & vCve_Maquina_Validar & "' and estatus='1'", "turno")
+            If rDatos IsNot Nothing Then
+                If rDatos("Total") IsNot DBNull.Value Then
+                    vTotal = rDatos("Total")
+                    If vTotal > 0 Then
+                        vRetorno = True
+                    Else
+                        vRetorno = False
+                    End If
+                End If
+            End If
+        Catch ex As Exception
+            Throw New Exception(ex.Message)
+            vRetorno = False
+        End Try
+        Return vRetorno
+    End Function
+#End Region
 #Region "Metodos formulario de produccion"
     Public Function llena_combo_maquina() As DataTable
         Dim dtMaquina As New DataTable
