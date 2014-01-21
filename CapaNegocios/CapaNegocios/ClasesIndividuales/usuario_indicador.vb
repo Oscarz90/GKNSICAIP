@@ -84,7 +84,18 @@ Public Class usuario_indicador
         End Set
     End Property
 #End Region
-
+#Region "Metodos"
+    Public Sub obtiene_indicador()
+        Dim vDR As DataRow
+        Dim query As String = "select i.indicador from USUARIO_INDICADOR ui " &
+            "join indicador i on ui.cve_indicador=i.cve_indicador " &
+            "where ui.cve_usuario =" & vcve_usuario
+        vDR = oBD.ObtenerRenglon(query, "usuario_indicador")
+        If vDR IsNot Nothing Then
+            vindicador = vDR("indicador")
+        End If
+    End Sub
+#End Region
 End Class
 
 

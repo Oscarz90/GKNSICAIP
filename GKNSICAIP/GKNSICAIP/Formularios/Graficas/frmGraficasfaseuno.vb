@@ -58,6 +58,7 @@ Public Class FrmGraficasfaseuno
             Case "Champion"
                 llena_formulario_Nivel_Planta()
                 tipo_nivel_planta()
+                tipo_nivel_champion()
                 nivel_planta_gkn = True
             Case "CadenaValor"
                 llena_formulario_Nivel_Cadena_Valor()
@@ -121,6 +122,30 @@ Public Class FrmGraficasfaseuno
     End Sub
     'Champion
     Private Sub tipo_nivel_champion()
+        Dim oUsuario_indicador As New usuario_indicador
+        oUsuario_indicador.cve_usuario = cve_usuario
+        oUsuario_indicador.obtiene_indicador()
+        If Not IsNothing(oUsuario_indicador.indicador) Then
+            If oUsuario_indicador.indicador <> "oee" Then
+                deshabilita_radiobutton_niveles(rdbtnOee)
+            End If
+            If oUsuario_indicador.indicador <> "nrft" Then
+                deshabilita_radiobutton_niveles(rdbtnNrfti)
+            End If
+
+            If oUsuario_indicador.indicador <> "costo" Then
+                deshabilita_radiobutton_niveles(rdbtnCosto)
+            End If
+            If oUsuario_indicador.indicador <> "seguridad" Then
+                deshabilita_radiobutton_niveles(rdbtnSeguridad)
+            End If
+            If oUsuario_indicador.indicador <> "gente" Then
+                deshabilita_radiobutton_niveles(rdbtnGente)
+            End If
+            If oUsuario_indicador.indicador <> "cincos" Then
+                deshabilita_radiobutton_niveles(rdbtnCincoS)
+            End If
+        End If
         nivel_planta_gkn = True
     End Sub
 #End Region
