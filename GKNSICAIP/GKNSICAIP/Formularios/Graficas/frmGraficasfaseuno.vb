@@ -119,6 +119,10 @@ Public Class FrmGraficasfaseuno
     Private Sub tipo_nivel_planta()
         nivel_planta_gkn = True
     End Sub
+    'Champion
+    Private Sub tipo_nivel_champion()
+        nivel_planta_gkn = True
+    End Sub
 #End Region
 #Region "Llena formulario segun el Nivel"
     Private Sub llena_formulario_Nivel_Planta()
@@ -427,12 +431,18 @@ Public Class FrmGraficasfaseuno
         valida_btn_graficar()
     End Sub
 #End Region
-#Region "(des)Habilita Combobox"
+#Region "(des)Habilita Combobox & Radio Button"
     Private Sub habilita_combobox_niveles(ByRef combo_box As ComboBox)
         combo_box.Enabled = True
     End Sub
     Private Sub deshabilita_combobox_niveles(ByRef combo_box As ComboBox)
         combo_box.Enabled = False
+    End Sub
+    Private Sub habilita_radiobutton_niveles(ByRef rdbtn As RadRadioButton)
+        rdbtn.Enabled = True
+    End Sub
+    Private Sub deshabilita_radiobutton_niveles(ByRef rdbtn As RadRadioButton)
+        rdbtn.Enabled = False
     End Sub
 #End Region
 #Region "Metodos graficar Oee"
