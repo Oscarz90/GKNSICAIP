@@ -73,8 +73,12 @@ Public Class FrmGraficasfaseuno
                 tipo_nivel_lg()
                 nivel_lgs = True
             Case "LET"
-                If cve_equipo <> 0 Then
+                If cve_equipo <> 0 And cve_usuario = 0 Then
                     llena_formulario_Nivel_LET()
+                    tipo_nivel_let()
+                    nivel_lets = True
+                ElseIf cve_usuario <> 0 Then
+                    llena_formulario_Nivel_LET_Equipos()
                     tipo_nivel_let()
                     nivel_lets = True
                 End If
@@ -194,6 +198,15 @@ Public Class FrmGraficasfaseuno
         cbxEquipo.ValueMember = "cve_equipo"
         cbxEquipo.DisplayMember = "equipo"
         cbxEquipo.DataSource = oGfu_nivel_let.llena_combo_equipo
+        cbxEquipo.SelectedIndex = -1
+        llena_cbx_equipo_linea()
+    End Sub
+    Private Sub llena_formulario_Nivel_LET_Equipos()
+        Dim oGfu_nivel_let As New gfu_nivel_let
+        oGfu_nivel_let.cve_usuario = cve_usuario
+        cbxEquipo.ValueMember = "cve_equipo"
+        cbxEquipo.DisplayMember = "equipo"
+        cbxEquipo.DataSource = oGfu_nivel_let.llena_combo_equipo_let
         cbxEquipo.SelectedIndex = -1
         llena_cbx_equipo_linea()
     End Sub

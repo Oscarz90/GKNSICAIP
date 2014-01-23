@@ -5,6 +5,16 @@ Public Class gfu_nivel_let
     Dim oBD As New CapaDatos.CapaDatos(cadena_conexion.CadenaSicaip)
 #Region "Propiedades"
 
+    Private vcve_usuario As Long
+    Public Property cve_usuario() As Long
+        Get
+            Return vcve_usuario
+        End Get
+        Set(ByVal value As Long)
+            vcve_usuario = value
+        End Set
+    End Property
+
     Private vcve_equipo As Long
     Public Property cve_equipo() As Long
         Get
@@ -47,6 +57,17 @@ Public Class gfu_nivel_let
         Return dtEquipoLinea
     End Function
 
-
+    Public Function llena_combo_equipo_let() As DataTable
+        Dim dtEquipoLinea As New DataTable
+        Try
+            dtEquipoLinea = oBD.ObtenerTabla("select e.cve_equipo,e.equipo from USUARIO_EQUIPO ue " &
+                                             "join equipo e on ue.CVE_Equipo=e.cve_equipo " &
+                                             "where ue.CVE_Usuario = " & vcve_usuario)
+        Catch ex As Exception
+            MsgBox("Error al obtener equipo. Cgfu_nivel_let_ERROR", vbCritical + vbOKOnly, "Error")
+            dtEquipoLinea = Nothing
+        End Try
+        Return dtEquipoLinea
+    End Function
 #End Region
 End Class
