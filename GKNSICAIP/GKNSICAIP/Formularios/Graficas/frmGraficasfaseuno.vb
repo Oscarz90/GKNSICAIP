@@ -3114,7 +3114,7 @@ Public Class FrmGraficasfaseuno
         LineSeries1.LegendTitle = "Costo"
         Me.radChartView1.ShowLegend = True
         Dim LineSeries2 As New LineSeries()
-        LineSeries2.LegendTitle = "Objetivo"
+        LineSeries2.LegendTitle = "Objetivo mins"
         'Obtencion Datos
         Dim vDT As DataTable = Nothing
         If rdbtnDias.IsChecked Then
@@ -3253,7 +3253,7 @@ Public Class FrmGraficasfaseuno
         LineSeries1.LegendTitle = "Costo"
         Me.radChartView1.ShowLegend = True
         Dim LineSeries2 As New LineSeries()
-        LineSeries2.LegendTitle = "Objetivo"
+        LineSeries2.LegendTitle = "Objetivo mins"
         'Obtencion Datos
         Dim vDT As DataTable = Nothing
         If rdbtnDias.IsChecked Then
@@ -3389,7 +3389,7 @@ Public Class FrmGraficasfaseuno
         Dim LineSeries1 As New LineSeries()
         LineSeries1.LegendTitle = "Costo"
         Dim LineSeries2 As New LineSeries()
-        LineSeries2.LegendTitle = "Objetivo"
+        LineSeries2.LegendTitle = "Objetivo mins"
         Me.radChartView1.ShowLegend = True
         'Obtencion Datos
         Dim vDT As DataTable = Nothing
@@ -3526,7 +3526,7 @@ Public Class FrmGraficasfaseuno
         Dim LineSeries1 As New LineSeries()
         LineSeries1.LegendTitle = "Costo"
         Dim LineSeries2 As New LineSeries()
-        LineSeries2.LegendTitle = "Objetivo"
+        LineSeries2.LegendTitle = "Objetivo mins"
         Me.radChartView1.ShowLegend = True
         'Obtencion Datos
         Dim vDT As DataTable = Nothing
@@ -3661,7 +3661,7 @@ Public Class FrmGraficasfaseuno
         Dim LineSeries1 As New LineSeries()
         LineSeries1.LegendTitle = "Costo"
         Dim LineSeries2 As New LineSeries()
-        LineSeries2.LegendTitle = "Objetivo"
+        LineSeries2.LegendTitle = "Objetivo mins"
         Me.radChartView1.ShowLegend = True
         'Obtencion Datos
         Dim vDT As DataTable = Nothing
@@ -3799,7 +3799,7 @@ Public Class FrmGraficasfaseuno
         Dim LineSeries1 As New LineSeries()
         LineSeries1.LegendTitle = "Costo"
         Dim LineSeries2 As New LineSeries()
-        LineSeries2.LegendTitle = "Objetivo"
+        LineSeries2.LegendTitle = "Objetivo mins"
         Me.radChartView1.ShowLegend = True
         'Obtencion Datos
         Dim vDT As DataTable = Nothing
