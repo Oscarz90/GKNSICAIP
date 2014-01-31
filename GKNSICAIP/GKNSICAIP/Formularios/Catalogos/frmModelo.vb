@@ -61,6 +61,7 @@ Public Class frmModelo
         If MsgBox("¿Esta seguro de Dar de Baja el Modelo?, se daran de baja los TC relacionados con este modelo", MsgBoxStyle.YesNo, Me.Text) = MsgBoxResult.Yes Then
             Try
                 oModelo.Eliminar()
+                Me.Close()
             Catch ex As Exception
 
             End Try

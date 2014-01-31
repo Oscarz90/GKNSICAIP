@@ -76,6 +76,7 @@ Public Class frmLinea
         If MsgBox("¿Esta seguro de Dar de Baja la Linea?, se daran de baja los TC relacionados con esta linea", MsgBoxStyle.YesNo, Me.Text) = MsgBoxResult.Yes Then
             Try
                 oLinea.Eliminar()
+                Me.Close()
             Catch ex As Exception
 
             End Try
