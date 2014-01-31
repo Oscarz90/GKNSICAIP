@@ -29,20 +29,29 @@ Public Class Linea
         End If
     End Sub
 
-    Public Sub Eliminar() Implements IIndividual.Eliminar        
-        'If Usuario.ChecaPermisoTarea("TELEFONO.ELIMINAR") Then
-        Try
-            oBD.EjecutarQuery("UPDATE LINEA SET Estatus='0' WHERE cve_linea=" & Me.vcve_linea)
-            MsgBox("La Baja de Linea se realizo correctamente")
-            'Dim oBitacora As Bitacora = Bitacora.ObtenInstancia
-            'oBitacora.RegistrarEnBitacora("Telefono.ELIMINAR", "Se eliminó el Teléfono: " & Me.m_Telefono_Id)
-        Catch ex As Exception
-            'Tiene relacion con otras partes del sistema
-            'Throw New CustomException(Errores.Eliminar)
-        End Try
-        'Else
-        'Throw New CustomException(Errores.Permiso)
-        'End If
+    Public Sub Eliminar() Implements IIndividual.Eliminar              
+        Dim oTC As New TC
+        Dim vDT_TC_CON_Lineas_Para_Baja As DataTable
+
+        Using scope As New TransactionScope()
+            Try
+                oBD.EjecutarQuery("UPDATE LINEA SET Estatus='0' WHERE cve_linea=" & Me.vcve_linea)
+                vDT_TC_CON_Lineas_Para_Baja = oTC.Obtener_TC_con_Linea(vcve_linea) ''---Obtiene los TC relacionados con la linea, para darlos de baja
+
+                If IsNothing(vDT_TC_CON_Lineas_Para_Baja) = False Then
+                    For Each vDR As DataRow In vDT_TC_CON_Lineas_Para_Baja.Rows
+                        oTC.cve_TC = vDR("cve_TC")
+                        oTC.Eliminar()
+                    Next
+                End If
+
+                MsgBox("La Baja de Linea se realizo correctamente")
+               
+                scope.Complete()
+            Catch ex As Exception
+               
+            End Try
+        End Using          
     End Sub
     Dim vId As Long
     Public Property Id As Long Implements IIndividual.Id

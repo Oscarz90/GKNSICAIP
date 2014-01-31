@@ -30,14 +30,16 @@ Public Class frmModelo
             oModelo.cve_modelo = vId_Publico
             oModelo.Cargar()
             LlenaCombos()
-            Controles_Permisos(vAdd_Registrar, vDelete_Eliminar)
+
             Controles_Registro_Nuevo(False)
+            Controles_Permisos(vAdd_Registrar, vDelete_Eliminar)
         Else
             oModelo = New Modelo
             oModelo.descripcion = ""
             LlenaCombos()
-            Controles_Permisos(vAdd_Registrar, vDelete_Eliminar)
+
             Controles_Registro_Nuevo(True)
+            Controles_Permisos(vAdd_Registrar, vDelete_Eliminar)
         End If
         vValida_Nombre = oModelo.descripcion.Count
         If vValida_Nombre > 0 Then
@@ -56,7 +58,7 @@ Public Class frmModelo
     End Sub
 
     Private Sub btnDarBaja_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnDarBaja.Click
-        If MsgBox("¿Esta seguro de Dar de Baja el Modelo?", MsgBoxStyle.YesNo, Me.Text) = MsgBoxResult.Yes Then
+        If MsgBox("¿Esta seguro de Dar de Baja el Modelo?, se daran de baja los TC relacionados con este modelo", MsgBoxStyle.YesNo, Me.Text) = MsgBoxResult.Yes Then
             Try
                 oModelo.Eliminar()
             Catch ex As Exception
@@ -138,6 +140,7 @@ Public Class frmModelo
         Else
             btnRegistrar.Visible = False
             btnModificar.Visible = True
+            btnDarBaja.Visible = True
             btnDarBaja.Enabled = True
             txtDescripcion.ReadOnly = False
             txtNumero_Parte.ReadOnly = True
@@ -150,7 +153,9 @@ Public Class frmModelo
         If vAdd = True Then
             Me.btnRegistrar.Enabled = True
             Me.btnModificar.Enabled = True
+            Me.btnDarBaja.Enabled = False
         Else
+            'Me.btnDarBaja.Enabled = True
             Me.btnRegistrar.Enabled = False
             Me.btnModificar.Enabled = False
             txtDescripcion.ReadOnly = True

@@ -64,7 +64,7 @@ Public Class Formulario_Principal
             Me.dgvRegistros.Columns.Clear()
             Me.dgvRegistros.Visible = True
             Me.Barra_Tool_Registros.Visible = True
-            Me.btnEliminar.VisibleInStrip = False
+            'Me.btnEliminar.VisibleInStrip = False
 
             If Permiso_Asignado("CATALOGOLINEA.REGISTRAR") = True Then
                 Me.btnAdd.Enabled = True
@@ -123,7 +123,7 @@ Public Class Formulario_Principal
 
             Me.dgvRegistros.Visible = True
             Me.Barra_Tool_Registros.Visible = True
-            Me.btnEliminar.VisibleInStrip = False
+            'Me.btnEliminar.VisibleInStrip = False
 
             If Permiso_Asignado("CATALOGOMAQUINA.REGISTRAR") = True Then
                 Me.btnAdd.Enabled = True
@@ -181,7 +181,7 @@ Public Class Formulario_Principal
 
             Me.dgvRegistros.Visible = True
             Me.Barra_Tool_Registros.Visible = True
-            Me.btnEliminar.VisibleInStrip = False
+            'Me.btnEliminar.VisibleInStrip = False
 
             If Permiso_Asignado("CATALOGOMODELO.REGISTRAR") = True Then
                 Me.btnAdd.Enabled = True
@@ -757,7 +757,7 @@ Public Class Formulario_Principal
     Private Sub btnEliminar_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnEliminar.Click
         If vLinea = True Then
             If Permiso_Asignado("CATALOGOLINEA.ELIMINAR") = True Then
-                If MsgBox("¿Esta seguro de Dar de Baja la Linea?", MsgBoxStyle.YesNo, Me.Text) = MsgBoxResult.Yes Then
+                If MsgBox("¿Esta seguro de Dar de Baja la Linea?, se daran de baja los TC relacionados con esta linea", MsgBoxStyle.YesNo, Me.Text) = MsgBoxResult.Yes Then
                     oLinea = New Linea
                     Try
                         oLinea.cve_linea = vRowSeleccionada
@@ -787,7 +787,7 @@ Public Class Formulario_Principal
             End If
         ElseIf vModelo = True Then
             If Permiso_Asignado("CATALOGOMODELO.ELIMINAR") = True Then
-                If MsgBox("¿Esta seguro de Dar de Baja el Modelo?", MsgBoxStyle.YesNo, Me.Text) = MsgBoxResult.Yes Then
+                If MsgBox("¿Esta seguro de Dar de Baja el Modelo?, se daran de baja los TC relacionados con este Modelo", MsgBoxStyle.YesNo, Me.Text) = MsgBoxResult.Yes Then
                     oModelo = New Modelo
                     Try
                         oModelo.cve_modelo = vRowSeleccionada

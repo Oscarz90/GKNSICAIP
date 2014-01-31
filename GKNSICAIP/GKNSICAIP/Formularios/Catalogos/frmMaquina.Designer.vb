@@ -121,7 +121,7 @@ Partial Class frmMaquina
         '
         'btnDar_Baja
         '
-        Me.btnDar_Baja.Location = New System.Drawing.Point(12, 183)
+        Me.btnDar_Baja.Location = New System.Drawing.Point(177, 183)
         Me.btnDar_Baja.Name = "btnDar_Baja"
         Me.btnDar_Baja.Size = New System.Drawing.Size(75, 23)
         Me.btnDar_Baja.TabIndex = 9
@@ -186,7 +186,7 @@ Partial Class frmMaquina
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.White
-        Me.ClientSize = New System.Drawing.Size(426, 222)
+        Me.ClientSize = New System.Drawing.Size(426, 221)
         Me.Controls.Add(Me.Panel1)
         Me.MaximizeBox = False
         Me.MaximumSize = New System.Drawing.Size(442, 260)

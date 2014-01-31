@@ -54,7 +54,7 @@ Partial Class frmModelo
         'Label2
         '
         Me.Label2.AutoSize = True
-        Me.Label2.Location = New System.Drawing.Point(93, 186)
+        Me.Label2.Location = New System.Drawing.Point(3, 187)
         Me.Label2.Name = "Label2"
         Me.Label2.Size = New System.Drawing.Size(69, 13)
         Me.Label2.TabIndex = 1
@@ -116,7 +116,7 @@ Partial Class frmModelo
         'btnDarBaja
         '
         Me.btnDarBaja.Enabled = False
-        Me.btnDarBaja.Location = New System.Drawing.Point(15, 178)
+        Me.btnDarBaja.Location = New System.Drawing.Point(144, 177)
         Me.btnDarBaja.Name = "btnDarBaja"
         Me.btnDarBaja.Size = New System.Drawing.Size(75, 23)
         Me.btnDarBaja.TabIndex = 9
@@ -154,7 +154,7 @@ Partial Class frmModelo
         'cbxClasificacion
         '
         Me.cbxClasificacion.FormattingEnabled = True
-        Me.cbxClasificacion.Location = New System.Drawing.Point(168, 178)
+        Me.cbxClasificacion.Location = New System.Drawing.Point(78, 179)
         Me.cbxClasificacion.Name = "cbxClasificacion"
         Me.cbxClasificacion.Size = New System.Drawing.Size(30, 21)
         Me.cbxClasificacion.TabIndex = 5
@@ -181,7 +181,7 @@ Partial Class frmModelo
         Me.Panel1.Dock = System.Windows.Forms.DockStyle.Fill
         Me.Panel1.Location = New System.Drawing.Point(0, 0)
         Me.Panel1.Name = "Panel1"
-        Me.Panel1.Size = New System.Drawing.Size(390, 213)
+        Me.Panel1.Size = New System.Drawing.Size(390, 212)
         Me.Panel1.TabIndex = 15
         '
         'titulo_banner_formulario
@@ -211,7 +211,7 @@ Partial Class frmModelo
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(390, 213)
+        Me.ClientSize = New System.Drawing.Size(390, 212)
         Me.Controls.Add(Me.Panel1)
         Me.MaximizeBox = False
         Me.MaximumSize = New System.Drawing.Size(406, 251)

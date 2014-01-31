@@ -30,19 +30,45 @@ Public Class Modelo
     End Sub
 
     Public Sub Eliminar() Implements IIndividual.Eliminar
-        'If Usuario.ChecaPermisoTarea("TELEFONO.ELIMINAR") Then
-        Try
-            oBD.EjecutarQuery("UPDATE MODELO SET Estatus='0' WHERE cve_modelo=" & Me.vcve_modelo)
-            MsgBox("La Baja de Modelo se realizo correctamente")
-            'Dim oBitacora As Bitacora = Bitacora.ObtenInstancia
-            'oBitacora.RegistrarEnBitacora("Telefono.ELIMINAR", "Se eliminó el Teléfono: " & Me.m_Telefono_Id)
-        Catch ex As Exception
-            'Tiene relacion con otras partes del sistema
-            'Throw New CustomException(Errores.Eliminar)
-        End Try
-        'Else
-        'Throw New CustomException(Errores.Permiso)
-        'End If
+        ''If Usuario.ChecaPermisoTarea("TELEFONO.ELIMINAR") Then
+        'Try
+        '    oBD.EjecutarQuery("UPDATE MODELO SET Estatus='0' WHERE cve_modelo=" & Me.vcve_modelo)
+        '    MsgBox("La Baja de Modelo se realizo correctamente")
+        '    'Dim oBitacora As Bitacora = Bitacora.ObtenInstancia
+        '    'oBitacora.RegistrarEnBitacora("Telefono.ELIMINAR", "Se eliminó el Teléfono: " & Me.m_Telefono_Id)
+        'Catch ex As Exception
+        '    'Tiene relacion con otras partes del sistema
+        '    'Throw New CustomException(Errores.Eliminar)
+        'End Try
+        ''Else
+        ''Throw New CustomException(Errores.Permiso)
+        ''End If
+
+        Dim oTC As New TC
+        Dim vDT_TC_CON_Modelo_Para_Baja As DataTable
+
+        Using scope As New TransactionScope()
+            Try
+                oBD.EjecutarQuery("UPDATE MODELO SET Estatus='0' WHERE cve_modelo=" & Me.vcve_modelo)
+
+                vDT_TC_CON_Modelo_Para_Baja = oTC.Obtener_TC_con_Modelo(vcve_modelo) ''---Obtiene los TC relacionados con la linea, para darlos de baja
+
+                If IsNothing(vDT_TC_CON_Modelo_Para_Baja) = False Then
+                    For Each vDR As DataRow In vDT_TC_CON_Modelo_Para_Baja.Rows
+                        oTC.cve_TC = vDR("cve_TC")
+                        oTC.Eliminar()
+                    Next
+                End If
+
+                MsgBox("La Baja de Modelo se realizo correctamente")
+
+                scope.Complete()
+            Catch ex As Exception
+
+            End Try
+        End Using
+
+
     End Sub
     Dim vId As Long
     Public Property Id As Long Implements IIndividual.Id

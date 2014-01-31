@@ -21,7 +21,7 @@ Public Class frmLinea
         ''La Siguiente Linea solo es para hacer pruebas sobre una Linea de Prueba(El cual se agrego y se modifico de forma Exitosa)
         ''Borrar si requiere hacer registro nuevo
         'vId_Publico = 80
-        Controles_Permisos(vAdd_Registrar, vDelete_Eliminar)
+
         If Convert.ToInt64(vId_Publico) <> 0 Then
             oLinea = New Linea
             oLinea.cve_linea = vId_Publico
@@ -55,6 +55,7 @@ Public Class frmLinea
             btnRegistrar.Enabled = False
             btnModificar.Enabled = False
         End If
+        Controles_Permisos(vAdd_Registrar, vDelete_Eliminar)
         SetBindings()
         Me.Show()
         Me.txtNombre_Linea.Focus()
@@ -72,7 +73,7 @@ Public Class frmLinea
     End Sub
 
     Private Sub btnDarBaja_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnDarBaja.Click
-        If MsgBox("¿Esta seguro de Dar de Baja la Linea?", MsgBoxStyle.YesNo, Me.Text) = MsgBoxResult.Yes Then
+        If MsgBox("¿Esta seguro de Dar de Baja la Linea?, se daran de baja los TC relacionados con esta linea", MsgBoxStyle.YesNo, Me.Text) = MsgBoxResult.Yes Then
             Try
                 oLinea.Eliminar()
             Catch ex As Exception
@@ -136,6 +137,7 @@ Public Class frmLinea
         Else
             btnRegistrar.Visible = False
             btnModificar.Visible = True
+            btnDarBaja.Visible = True
             btnDarBaja.Enabled = True
 
             btnImportar.Enabled = False

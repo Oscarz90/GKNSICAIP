@@ -122,7 +122,7 @@ Partial Class frmLinea
         '
         'btnDarBaja
         '
-        Me.btnDarBaja.Location = New System.Drawing.Point(11, 185)
+        Me.btnDarBaja.Location = New System.Drawing.Point(195, 184)
         Me.btnDarBaja.Name = "btnDarBaja"
         Me.btnDarBaja.Size = New System.Drawing.Size(75, 23)
         Me.btnDarBaja.TabIndex = 7
@@ -187,7 +187,7 @@ Partial Class frmLinea
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.White
-        Me.ClientSize = New System.Drawing.Size(445, 220)
+        Me.ClientSize = New System.Drawing.Size(445, 219)
         Me.Controls.Add(Me.Panel1)
         Me.MaximizeBox = False
         Me.MaximumSize = New System.Drawing.Size(461, 258)
