@@ -585,15 +585,14 @@ Public Class FrmGraficasfaseuno
         End If
         CategoricalAxis1.LabelRotationAngle = 270.0R
         LinearAxis1.AxisType = AxisType.Second
-        'LinearAxis1.LabelFitMode = AxisLabelFitMode.Rotate
-        'LinearAxis1.LabelRotationAngle = 300.0R
+        
         LinearAxis1.MajorStep = 10.0R
         LinearAxis1.Maximum = 100
         LinearAxis1.Title = "Oee"
 
         BarSeries1.ShowLabels = True
         BarSeries2.ShowLabels = True
-        LineSeries1.ShowLabels = True
+        'LineSeries1.ShowLabels = True
 
         BarSeries1.LabelFormat = "{0:##.#}" & " %"
         BarSeries2.LabelFormat = "{0:##.#}" & " %"
@@ -608,10 +607,10 @@ Public Class FrmGraficasfaseuno
         'BarSeries2.ForeColor = Color.White
         BarSeries1.Palette = New PaletteEntry(Color.FromArgb(255, 205, 47))
         BarSeries2.Palette = New PaletteEntry(Color.FromArgb(246, 172, 38))
-        LineSeries1.Palette = New PaletteEntry(Color.FromArgb(44, 250, 54))
+        LineSeries1.Palette = New PaletteEntry(Color.FromArgb(202, 0, 0))
 
-        LineSeries1.BorderColor = Color.FromArgb(44, 250, 54)
-        LineSeries1.PointSize = New SizeF(10, 10)
+        LineSeries1.BorderColor = Color.FromArgb(202, 0, 0)
+        'LineSeries1.PointSize = New SizeF(10, 10)
 
         Me.radChartView1.ShowToolTip = True
         radChartView1.Series.Add(LineSeries1)
@@ -699,7 +698,7 @@ Public Class FrmGraficasfaseuno
 
         BarSeries1.ShowLabels = True
         BarSeries2.ShowLabels = True
-        LineSeries1.ShowLabels = True
+        'LineSeries1.ShowLabels = True
 
         BarSeries1.LabelFormat = "{0:##.#}" & " %"
         BarSeries2.LabelFormat = "{0:##.#}" & " %"
@@ -713,10 +712,10 @@ Public Class FrmGraficasfaseuno
 
         BarSeries1.Palette = New PaletteEntry(Color.FromArgb(255, 205, 47))
         BarSeries2.Palette = New PaletteEntry(Color.FromArgb(246, 172, 38))
-        LineSeries1.Palette = New PaletteEntry(Color.FromArgb(44, 250, 54))
+        LineSeries1.Palette = New PaletteEntry(Color.FromArgb(202, 0, 0))
 
-        LineSeries1.BorderColor = Color.FromArgb(44, 250, 54)
-        LineSeries1.PointSize = New SizeF(10, 10)
+        LineSeries1.BorderColor = Color.FromArgb(202, 0, 0)
+        'LineSeries1.PointSize = New SizeF(10, 10)
 
         Me.radChartView1.ShowToolTip = True
         radChartView1.Series.Add(LineSeries1)
@@ -799,7 +798,7 @@ Public Class FrmGraficasfaseuno
         'LinearAxis1.LabelRotationAngle = 300.0R
         LinearAxis1.MajorStep = 10.0R
         LinearAxis1.Maximum = 100
-        LinearAxis1.Title = "Oee"
+        'LinearAxis1.Title = "Oee"
 
         BarSeries1.ShowLabels = True
         BarSeries2.ShowLabels = True
@@ -817,10 +816,10 @@ Public Class FrmGraficasfaseuno
 
         BarSeries1.Palette = New PaletteEntry(Color.FromArgb(255, 205, 47))
         BarSeries2.Palette = New PaletteEntry(Color.FromArgb(246, 172, 38))
-        LineSeries1.Palette = New PaletteEntry(Color.FromArgb(44, 250, 54))
+        LineSeries1.Palette = New PaletteEntry(Color.FromArgb(202, 0, 0))
 
-        LineSeries1.BorderColor = Color.FromArgb(44, 250, 54)
-        LineSeries1.PointSize = New SizeF(10, 10)
+        LineSeries1.BorderColor = Color.FromArgb(202, 0, 0)
+        'LineSeries1.PointSize = New SizeF(10, 10)
 
         'Me.radChartView1.ShowTrackBall = True
         'Me.radChartView1.ShowToolTip = True
@@ -910,7 +909,7 @@ Public Class FrmGraficasfaseuno
         LinearAxis1.Title = "Oee"
         BarSeries1.ShowLabels = True
         BarSeries2.ShowLabels = True
-        LineSeries1.ShowLabels = True
+        'LineSeries1.ShowLabels = True
 
         BarSeries1.LabelFormat = "{0:##.#}" & " %"
         BarSeries2.LabelFormat = "{0:##.#}" & " %"
@@ -925,10 +924,10 @@ Public Class FrmGraficasfaseuno
 
         BarSeries1.Palette = New PaletteEntry(Color.FromArgb(255, 205, 47))
         BarSeries2.Palette = New PaletteEntry(Color.FromArgb(246, 172, 38))
-        LineSeries1.Palette = New PaletteEntry(Color.FromArgb(44, 250, 54))
+        LineSeries1.Palette = New PaletteEntry(Color.FromArgb(202, 0, 0))
 
-        LineSeries1.BorderColor = Color.FromArgb(44, 250, 54)
-        LineSeries1.PointSize = New SizeF(10, 10)
+        LineSeries1.BorderColor = Color.FromArgb(202, 0, 0)
+        'LineSeries1.PointSize = New SizeF(10, 10)
 
         Me.radChartView1.ShowToolTip = True
         radChartView1.Series.Add(LineSeries1)
@@ -1027,7 +1026,7 @@ Public Class FrmGraficasfaseuno
 
         BarSeries1.ShowLabels = True
         BarSeries2.ShowLabels = True
-        LineSeries1.ShowLabels = True
+        'LineSeries1.ShowLabels = True
 
         BarSeries1.LabelFormat = "{0:##.#}" & " %"
         BarSeries2.LabelFormat = "{0:##.#}" & " %"
@@ -1042,10 +1041,10 @@ Public Class FrmGraficasfaseuno
 
         BarSeries1.Palette = New PaletteEntry(Color.FromArgb(255, 205, 47))
         BarSeries2.Palette = New PaletteEntry(Color.FromArgb(246, 172, 38))
-        LineSeries1.Palette = New PaletteEntry(Color.FromArgb(44, 250, 54))
+        LineSeries1.Palette = New PaletteEntry(Color.FromArgb(202, 0, 0))
 
-        LineSeries1.BorderColor = Color.FromArgb(44, 250, 54)
-        LineSeries1.PointSize = New SizeF(10, 10)
+        LineSeries1.BorderColor = Color.FromArgb(202, 0, 0)
+        'LineSeries1.PointSize = New SizeF(10, 10)
 
         Me.radChartView1.ShowToolTip = True
         radChartView1.Series.Add(LineSeries1)
@@ -1214,7 +1213,7 @@ Public Class FrmGraficasfaseuno
 
         BarSeries1.ShowLabels = True
         BarSeries2.ShowLabels = True
-        LineSeries1.ShowLabels = True
+        'LineSeries1.ShowLabels = True
 
         BarSeries1.LabelFormat = "{0:##,###}"
         BarSeries2.LabelFormat = "{0:##,###}"
@@ -1228,10 +1227,10 @@ Public Class FrmGraficasfaseuno
 
         BarSeries1.Palette = New PaletteEntry(Color.FromArgb(55, 96, 146))
         BarSeries2.Palette = New PaletteEntry(Color.FromArgb(37, 64, 97))
-        LineSeries1.Palette = New PaletteEntry(Color.FromArgb(44, 250, 54))
+        LineSeries1.Palette = New PaletteEntry(Color.FromArgb(202, 0, 0))
 
-        LineSeries1.BorderColor = Color.FromArgb(44, 250, 54)
-        LineSeries1.PointSize = New SizeF(10, 10)
+        LineSeries1.BorderColor = Color.FromArgb(202, 0, 0)
+        'LineSeries1.PointSize = New SizeF(1, 1)
 
         Me.radChartView1.ShowToolTip = True
         radChartView1.Series.Add(LineSeries1)
@@ -1322,7 +1321,7 @@ Public Class FrmGraficasfaseuno
 
         BarSeries1.ShowLabels = True
         BarSeries2.ShowLabels = True
-        LineSeries1.ShowLabels = True
+        'LineSeries1.ShowLabels = True
 
         BarSeries1.LabelFormat = "{0:#,###}"
         BarSeries2.LabelFormat = "{0:#,###}"
@@ -1336,10 +1335,10 @@ Public Class FrmGraficasfaseuno
         
         BarSeries1.Palette = New PaletteEntry(Color.FromArgb(55, 96, 146))
         BarSeries2.Palette = New PaletteEntry(Color.FromArgb(37, 64, 97))
-        LineSeries1.Palette = New PaletteEntry(Color.FromArgb(44, 250, 54))
+        LineSeries1.Palette = New PaletteEntry(Color.FromArgb(202, 0, 0))
 
-        LineSeries1.BorderColor = Color.FromArgb(44, 250, 54)
-        LineSeries1.PointSize = New SizeF(10, 10)
+        LineSeries1.BorderColor = Color.FromArgb(202, 0, 0)
+        'LineSeries1.PointSize = New SizeF(10, 10)
 
         Me.radChartView1.ShowToolTip = True
         radChartView1.Series.Add(LineSeries1)
@@ -1426,7 +1425,7 @@ Public Class FrmGraficasfaseuno
         LinearAxis1.Title = "NRFTi (PPM'S)"
         BarSeries1.ShowLabels = True
         BarSeries2.ShowLabels = True
-        LineSeries1.ShowLabels = True
+        'LineSeries1.ShowLabels = True
 
         BarSeries1.LabelFormat = "{0:#,###}"
         BarSeries2.LabelFormat = "{0:#,###}"
@@ -1440,10 +1439,10 @@ Public Class FrmGraficasfaseuno
         
         BarSeries1.Palette = New PaletteEntry(Color.FromArgb(55, 96, 146))
         BarSeries2.Palette = New PaletteEntry(Color.FromArgb(37, 64, 97))
-        LineSeries1.Palette = New PaletteEntry(Color.FromArgb(44, 250, 54))
+        LineSeries1.Palette = New PaletteEntry(Color.FromArgb(202, 0, 0))
 
-        LineSeries1.BorderColor = Color.FromArgb(44, 250, 54)
-        LineSeries1.PointSize = New SizeF(10, 10)
+        LineSeries1.BorderColor = Color.FromArgb(202, 0, 0)
+        'LineSeries1.PointSize = New SizeF(10, 10)
 
         Me.radChartView1.ShowToolTip = True
         radChartView1.Series.Add(LineSeries1)
@@ -1545,7 +1544,7 @@ Public Class FrmGraficasfaseuno
         LinearAxis1.Title = "NRFTi (PPM'S)"
         BarSeries1.ShowLabels = True
         BarSeries2.ShowLabels = True
-        LineSeries1.ShowLabels = True
+        'LineSeries1.ShowLabels = True
 
         BarSeries1.LabelFormat = "{0:#,###}"
         BarSeries2.LabelFormat = "{0:#,###}"
@@ -1561,10 +1560,10 @@ Public Class FrmGraficasfaseuno
         'BarSeries2.ForeColor = Color.White
         BarSeries1.Palette = New PaletteEntry(Color.FromArgb(55, 96, 146))
         BarSeries2.Palette = New PaletteEntry(Color.FromArgb(37, 64, 97))
-        LineSeries1.Palette = New PaletteEntry(Color.FromArgb(44, 250, 54))
+        LineSeries1.Palette = New PaletteEntry(Color.FromArgb(202, 0, 0))
 
-        LineSeries1.BorderColor = Color.FromArgb(44, 250, 54)
-        LineSeries1.PointSize = New SizeF(10, 10)
+        LineSeries1.BorderColor = Color.FromArgb(202, 0, 0)
+        'LineSeries1.PointSize = New SizeF(10, 10)
 
         Me.radChartView1.ShowToolTip = True
         radChartView1.Series.Add(LineSeries1)
@@ -1667,7 +1666,7 @@ Public Class FrmGraficasfaseuno
         LinearAxis1.Title = "NRFTi (PPM'S)"
         BarSeries1.ShowLabels = True
         BarSeries2.ShowLabels = True
-        LineSeries1.ShowLabels = True
+        'LineSeries1.ShowLabels = True
 
         BarSeries1.LabelFormat = "{0:#,###}"
         BarSeries2.LabelFormat = "{0:#,###}"
@@ -1678,14 +1677,13 @@ Public Class FrmGraficasfaseuno
 
         BarSeries1.VerticalAxis = LinearAxis1
         LineSeries1.VerticalAxis = LinearAxis1
-        'BarSeries1.ForeColor = Color.White
-        'BarSeries2.ForeColor = Color.White
+        
         BarSeries1.Palette = New PaletteEntry(Color.FromArgb(55, 96, 146))
         BarSeries2.Palette = New PaletteEntry(Color.FromArgb(37, 64, 97))
-        LineSeries1.Palette = New PaletteEntry(Color.FromArgb(44, 250, 54))
+        LineSeries1.Palette = New PaletteEntry(Color.FromArgb(202, 0, 0))
 
-        LineSeries1.BorderColor = Color.FromArgb(44, 250, 54)
-        LineSeries1.PointSize = New SizeF(10, 10)
+        LineSeries1.BorderColor = Color.FromArgb(202, 0, 0)
+        'LineSeries1.PointSize = New SizeF(10, 10)
 
         Me.radChartView1.ShowToolTip = True
         radChartView1.Series.Add(LineSeries1)
@@ -1892,13 +1890,13 @@ Public Class FrmGraficasfaseuno
         BarSeries4.LabelFormat = "{0:##.#}"
         BarSeries4.Palette = New PaletteEntry(Color.FromArgb(127, 127, 127))
         'lineseries
-        LineSeries1.ShowLabels = True
+        'LineSeries1.ShowLabels = True
         LineSeries1.LabelFormat = "{0:##.#}"
         LineSeries1.HorizontalAxis = CategoricalAxis1
         LineSeries1.VerticalAxis = LinearAxis1
-        LineSeries1.Palette = New PaletteEntry(Color.FromArgb(44, 250, 54))
-        LineSeries1.BorderColor = Color.FromArgb(44, 250, 54)
-        LineSeries1.PointSize = New SizeF(10, 10)
+        LineSeries1.Palette = New PaletteEntry(Color.FromArgb(202, 0, 0))
+        LineSeries1.BorderColor = Color.FromArgb(202, 0, 0)
+        'LineSeries1.PointSize = New SizeF(10, 10)
 
 
         Me.radChartView1.ShowToolTip = True
@@ -2011,13 +2009,13 @@ Public Class FrmGraficasfaseuno
         BarSeries4.LabelFormat = "{0:##.#}"
         BarSeries4.Palette = New PaletteEntry(Color.FromArgb(127, 127, 127))
         'lineseries
-        LineSeries1.ShowLabels = True
+        'LineSeries1.ShowLabels = True
         LineSeries1.LabelFormat = "{0:##.#}"
         LineSeries1.HorizontalAxis = CategoricalAxis1
         LineSeries1.VerticalAxis = LinearAxis1
-        LineSeries1.Palette = New PaletteEntry(Color.FromArgb(44, 250, 54))
-        LineSeries1.BorderColor = Color.FromArgb(44, 250, 54)
-        LineSeries1.PointSize = New SizeF(10, 10)
+        LineSeries1.Palette = New PaletteEntry(Color.FromArgb(202, 0, 0))
+        LineSeries1.BorderColor = Color.FromArgb(202, 0, 0)
+        'LineSeries1.PointSize = New SizeF(10, 10)
 
         Me.radChartView1.ShowToolTip = True
         radChartView1.Series.Add(LineSeries1)
@@ -2127,13 +2125,13 @@ Public Class FrmGraficasfaseuno
         BarSeries4.LabelFormat = "{0:##.#}"
         BarSeries4.Palette = New PaletteEntry(Color.FromArgb(127, 127, 127))
         'lineseries
-        LineSeries1.ShowLabels = True
+        'LineSeries1.ShowLabels = True
         LineSeries1.LabelFormat = "{0:##.#}"
         LineSeries1.HorizontalAxis = CategoricalAxis1
         LineSeries1.VerticalAxis = LinearAxis1
-        LineSeries1.Palette = New PaletteEntry(Color.FromArgb(44, 250, 54))
-        LineSeries1.BorderColor = Color.FromArgb(44, 250, 54)
-        LineSeries1.PointSize = New SizeF(10, 10)
+        LineSeries1.Palette = New PaletteEntry(Color.FromArgb(202, 0, 0))
+        LineSeries1.BorderColor = Color.FromArgb(202, 0, 0)
+        'LineSeries1.PointSize = New SizeF(10, 10)
 
         Me.radChartView1.ShowToolTip = True
         radChartView1.Series.Add(LineSeries1)
@@ -2242,13 +2240,13 @@ Public Class FrmGraficasfaseuno
         BarSeries4.LabelFormat = "{0:##.#}"
         BarSeries4.Palette = New PaletteEntry(Color.FromArgb(127, 127, 127))
         'lineseries
-        LineSeries1.ShowLabels = True
+        'LineSeries1.ShowLabels = True
         LineSeries1.LabelFormat = "{0:##.#}"
         LineSeries1.HorizontalAxis = CategoricalAxis1
         LineSeries1.VerticalAxis = LinearAxis1
-        LineSeries1.Palette = New PaletteEntry(Color.FromArgb(44, 250, 54))
-        LineSeries1.BorderColor = Color.FromArgb(44, 250, 54)
-        LineSeries1.PointSize = New SizeF(10, 10)
+        LineSeries1.Palette = New PaletteEntry(Color.FromArgb(202, 0, 0))
+        LineSeries1.BorderColor = Color.FromArgb(202, 0, 0)
+        'LineSeries1.PointSize = New SizeF(10, 10)
 
         Me.radChartView1.ShowToolTip = True
         radChartView1.Series.Add(LineSeries1)
@@ -2360,13 +2358,13 @@ Public Class FrmGraficasfaseuno
         BarSeries4.LabelFormat = "{0:##.#}"
         BarSeries4.Palette = New PaletteEntry(Color.FromArgb(127, 127, 127))
         'lineseries
-        LineSeries1.ShowLabels = True
+        'LineSeries1.ShowLabels = True
         LineSeries1.LabelFormat = "{0:##.#}"
         LineSeries1.HorizontalAxis = CategoricalAxis1
         LineSeries1.VerticalAxis = LinearAxis1
-        LineSeries1.Palette = New PaletteEntry(Color.FromArgb(44, 250, 54))
-        LineSeries1.BorderColor = Color.FromArgb(44, 250, 54)
-        LineSeries1.PointSize = New SizeF(10, 10)
+        LineSeries1.Palette = New PaletteEntry(Color.FromArgb(202, 0, 0))
+        LineSeries1.BorderColor = Color.FromArgb(202, 0, 0)
+        'LineSeries1.PointSize = New SizeF(10, 10)
 
         Me.radChartView1.ShowToolTip = True
         radChartView1.Series.Add(LineSeries1)
@@ -2544,7 +2542,7 @@ Public Class FrmGraficasfaseuno
         'LinearAxis1.Maximum = 5
         LinearAxis1.Title = "Gente"
         BarSeries1.ShowLabels = True
-        LineSeries1.ShowLabels = True
+        'LineSeries1.ShowLabels = True
         'BarSeries2.ShowLabels = True
         'BarSeries3.ShowLabels = True
         BarSeries1.LabelFormat = "{0:###}"
@@ -2559,10 +2557,10 @@ Public Class FrmGraficasfaseuno
         BarSeries1.Palette = New PaletteEntry(Color.FromArgb(108, 96, 190))
         BarSeries2.Palette = New PaletteEntry(Color.FromArgb(233, 37, 43))
         BarSeries3.Palette = New PaletteEntry(Color.FromArgb(255, 191, 0))
-        LineSeries1.Palette = New PaletteEntry(Color.FromArgb(44, 250, 54))
+        LineSeries1.Palette = New PaletteEntry(Color.FromArgb(202, 0, 0))
 
-        LineSeries1.BorderColor = Color.FromArgb(44, 250, 54)
-        LineSeries1.PointSize = New SizeF(10, 10)
+        LineSeries1.BorderColor = Color.FromArgb(202, 0, 0)
+        'LineSeries1.PointSize = New SizeF(10, 10)
 
         Me.radChartView1.ShowTrackBall = True
         Me.radChartView1.ShowToolTip = True
@@ -2658,7 +2656,7 @@ Public Class FrmGraficasfaseuno
         'LinearAxis1.Maximum = 5
         LinearAxis1.Title = "Gente"
         BarSeries1.ShowLabels = True
-        LineSeries1.ShowLabels = True
+        'LineSeries1.ShowLabels = True
 
         'BarSeries2.ShowLabels = True
         'BarSeries3.ShowLabels = True
@@ -2672,10 +2670,10 @@ Public Class FrmGraficasfaseuno
         BarSeries1.Palette = New PaletteEntry(Color.FromArgb(108, 96, 190))
         BarSeries2.Palette = New PaletteEntry(Color.FromArgb(233, 37, 43))
         BarSeries3.Palette = New PaletteEntry(Color.FromArgb(255, 191, 0))
-        LineSeries1.Palette = New PaletteEntry(Color.FromArgb(44, 250, 54))
+        LineSeries1.Palette = New PaletteEntry(Color.FromArgb(202, 0, 0))
 
-        LineSeries1.BorderColor = Color.FromArgb(44, 250, 54)
-        LineSeries1.PointSize = New SizeF(10, 10)
+        LineSeries1.BorderColor = Color.FromArgb(202, 0, 0)
+        'LineSeries1.PointSize = New SizeF(10, 10)
 
         Me.radChartView1.ShowTrackBall = True
         Me.radChartView1.ShowToolTip = True
@@ -2771,7 +2769,7 @@ Public Class FrmGraficasfaseuno
         BarSeries1.ShowLabels = True
         BarSeries2.ShowLabels = True
         BarSeries3.ShowLabels = True
-        LineSeries1.ShowLabels = True
+        'LineSeries1.ShowLabels = True
 
         BarSeries1.LabelFormat = "{0:###}"
         BarSeries2.LabelFormat = "{0:###}"
@@ -2785,10 +2783,10 @@ Public Class FrmGraficasfaseuno
         BarSeries1.Palette = New PaletteEntry(Color.FromArgb(108, 96, 190))
         BarSeries2.Palette = New PaletteEntry(Color.FromArgb(233, 37, 43))
         BarSeries3.Palette = New PaletteEntry(Color.FromArgb(255, 191, 0))
-        LineSeries1.Palette = New PaletteEntry(Color.FromArgb(44, 250, 54))
+        LineSeries1.Palette = New PaletteEntry(Color.FromArgb(202, 0, 0))
 
-        LineSeries1.BorderColor = Color.FromArgb(44, 250, 54)
-        LineSeries1.PointSize = New SizeF(10, 10)
+        LineSeries1.BorderColor = Color.FromArgb(202, 0, 0)
+        'LineSeries1.PointSize = New SizeF(10, 10)
 
         Me.radChartView1.ShowTrackBall = True
         Me.radChartView1.ShowToolTip = True
@@ -2884,7 +2882,7 @@ Public Class FrmGraficasfaseuno
         BarSeries1.ShowLabels = True
         BarSeries2.ShowLabels = True
         BarSeries3.ShowLabels = True
-        LineSeries1.ShowLabels = True
+        'LineSeries1.ShowLabels = True
 
         BarSeries1.LabelFormat = "{0:###}"
         BarSeries2.LabelFormat = "{0:###}"
@@ -2896,10 +2894,10 @@ Public Class FrmGraficasfaseuno
         BarSeries1.Palette = New PaletteEntry(Color.FromArgb(108, 96, 190))
         BarSeries2.Palette = New PaletteEntry(Color.FromArgb(233, 37, 43))
         BarSeries3.Palette = New PaletteEntry(Color.FromArgb(255, 191, 0))
-        LineSeries1.Palette = New PaletteEntry(Color.FromArgb(44, 250, 54))
+        LineSeries1.Palette = New PaletteEntry(Color.FromArgb(202, 0, 0))
 
-        LineSeries1.BorderColor = Color.FromArgb(44, 250, 54)
-        LineSeries1.PointSize = New SizeF(10, 10)
+        LineSeries1.BorderColor = Color.FromArgb(202, 0, 0)
+        'LineSeries1.PointSize = New SizeF(10, 10)
         Me.radChartView1.ShowTrackBall = True
         Me.radChartView1.ShowToolTip = True
         radChartView1.Series.Add(LineSeries1)
@@ -2994,7 +2992,7 @@ Public Class FrmGraficasfaseuno
         BarSeries1.ShowLabels = True
         BarSeries2.ShowLabels = True
         BarSeries3.ShowLabels = True
-        LineSeries1.ShowLabels = True
+        'LineSeries1.ShowLabels = True
 
         BarSeries1.LabelFormat = "{0:###}"
         BarSeries2.LabelFormat = "{0:###}"
@@ -3009,10 +3007,10 @@ Public Class FrmGraficasfaseuno
         BarSeries1.Palette = New PaletteEntry(Color.FromArgb(108, 96, 190))
         BarSeries2.Palette = New PaletteEntry(Color.FromArgb(233, 37, 43))
         BarSeries3.Palette = New PaletteEntry(Color.FromArgb(255, 191, 0))
-        LineSeries1.Palette = New PaletteEntry(Color.FromArgb(44, 250, 54))
+        LineSeries1.Palette = New PaletteEntry(Color.FromArgb(202, 0, 0))
 
-        LineSeries1.BorderColor = Color.FromArgb(44, 250, 54)
-        LineSeries1.PointSize = New SizeF(10, 10)
+        LineSeries1.BorderColor = Color.FromArgb(202, 0, 0)
+        'LineSeries1.PointSize = New SizeF(10, 10)
 
         Me.radChartView1.ShowTrackBall = True
         Me.radChartView1.ShowToolTip = True
@@ -3197,7 +3195,7 @@ Public Class FrmGraficasfaseuno
         'LinearAxis1.Maximum = 5
         LinearAxis1.Title = "CI"
         BarSeries1.ShowLabels = True
-        LineSeries1.ShowLabels = True
+        'LineSeries1.ShowLabels = True
         'BarSeries2.ShowLabels = True
         'BarSeries3.ShowLabels = True
         BarSeries1.LabelFormat = "{0:###}"
@@ -3213,10 +3211,10 @@ Public Class FrmGraficasfaseuno
         BarSeries1.Palette = New PaletteEntry(Color.FromArgb(255, 191, 0))
         BarSeries2.Palette = New PaletteEntry(Color.FromArgb(233, 37, 43))
         BarSeries3.Palette = New PaletteEntry(Color.FromArgb(36, 177, 22))
-        LineSeries1.Palette = New PaletteEntry(Color.FromArgb(44, 250, 54))
+        LineSeries1.Palette = New PaletteEntry(Color.FromArgb(202, 0, 0))
 
-        LineSeries1.BorderColor = Color.FromArgb(44, 250, 54)
-        LineSeries1.PointSize = New SizeF(10, 10)
+        LineSeries1.BorderColor = Color.FromArgb(202, 0, 0)
+        'LineSeries1.PointSize = New SizeF(10, 10)
 
         Me.radChartView1.ShowTrackBall = True
         Me.radChartView1.ShowToolTip = True
@@ -3311,7 +3309,7 @@ Public Class FrmGraficasfaseuno
         'LinearAxis1.Maximum = 5
         LinearAxis1.Title = "CI"
         BarSeries1.ShowLabels = True
-        LineSeries1.ShowLabels = True
+        'LineSeries1.ShowLabels = True
         'BarSeries2.ShowLabels = True
         'BarSeries3.ShowLabels = True
         BarSeries1.LabelFormat = "{0:###}"
@@ -3327,10 +3325,10 @@ Public Class FrmGraficasfaseuno
         BarSeries1.Palette = New PaletteEntry(Color.FromArgb(255, 191, 0))
         BarSeries2.Palette = New PaletteEntry(Color.FromArgb(233, 37, 43))
         BarSeries3.Palette = New PaletteEntry(Color.FromArgb(36, 177, 22))
-        LineSeries1.Palette = New PaletteEntry(Color.FromArgb(44, 250, 54))
+        LineSeries1.Palette = New PaletteEntry(Color.FromArgb(202, 0, 0))
 
-        LineSeries1.BorderColor = Color.FromArgb(44, 250, 54)
-        LineSeries1.PointSize = New SizeF(10, 10)
+        LineSeries1.BorderColor = Color.FromArgb(202, 0, 0)
+        'LineSeries1.PointSize = New SizeF(10, 10)
 
         Me.radChartView1.ShowTrackBall = True
         Me.radChartView1.ShowToolTip = True
@@ -3427,7 +3425,7 @@ Public Class FrmGraficasfaseuno
 
         LinearAxis1.Title = "CI"
         BarSeries1.ShowLabels = True
-        LineSeries1.ShowLabels = True
+        'LineSeries1.ShowLabels = True
         'BarSeries2.ShowLabels = True
         'BarSeries3.ShowLabels = True
         BarSeries1.LabelFormat = "{0:###}"
@@ -3442,10 +3440,10 @@ Public Class FrmGraficasfaseuno
         BarSeries1.Palette = New PaletteEntry(Color.FromArgb(255, 191, 0))
         BarSeries2.Palette = New PaletteEntry(Color.FromArgb(233, 37, 43))
         BarSeries3.Palette = New PaletteEntry(Color.FromArgb(36, 177, 22))
-        LineSeries1.Palette = New PaletteEntry(Color.FromArgb(44, 250, 54))
+        LineSeries1.Palette = New PaletteEntry(Color.FromArgb(202, 0, 0))
 
-        LineSeries1.BorderColor = Color.FromArgb(44, 250, 54)
-        LineSeries1.PointSize = New SizeF(10, 10)
+        LineSeries1.BorderColor = Color.FromArgb(202, 0, 0)
+        'LineSeries1.PointSize = New SizeF(10, 10)
 
         Me.radChartView1.ShowTrackBall = True
         Me.radChartView1.ShowToolTip = True
@@ -3542,7 +3540,7 @@ Public Class FrmGraficasfaseuno
         'LinearAxis1.Maximum = 5
         LinearAxis1.Title = "CI"
         BarSeries1.ShowLabels = True
-        LineSeries1.ShowLabels = True
+        'LineSeries1.ShowLabels = True
         'BarSeries2.ShowLabels = True
         'BarSeries3.ShowLabels = True
         BarSeries1.LabelFormat = "{0:###}"
@@ -3557,10 +3555,10 @@ Public Class FrmGraficasfaseuno
         BarSeries1.Palette = New PaletteEntry(Color.FromArgb(255, 191, 0))
         BarSeries2.Palette = New PaletteEntry(Color.FromArgb(233, 37, 43))
         BarSeries3.Palette = New PaletteEntry(Color.FromArgb(36, 177, 22))
-        LineSeries1.Palette = New PaletteEntry(Color.FromArgb(44, 250, 54))
+        LineSeries1.Palette = New PaletteEntry(Color.FromArgb(202, 0, 0))
 
-        LineSeries1.BorderColor = Color.FromArgb(44, 250, 54)
-        LineSeries1.PointSize = New SizeF(10, 10)
+        LineSeries1.BorderColor = Color.FromArgb(202, 0, 0)
+        'LineSeries1.PointSize = New SizeF(10, 10)
 
         Me.radChartView1.ShowTrackBall = True
         Me.radChartView1.ShowToolTip = True
@@ -3660,7 +3658,7 @@ Public Class FrmGraficasfaseuno
         'LinearAxis1.Maximum = 5
         LinearAxis1.Title = "CI"
         BarSeries1.ShowLabels = True
-        LineSeries1.ShowLabels = True
+        'LineSeries1.ShowLabels = True
         'BarSeries2.ShowLabels = True
         'BarSeries3.ShowLabels = True
         BarSeries1.LabelFormat = "{0:###}"
@@ -3677,10 +3675,10 @@ Public Class FrmGraficasfaseuno
         BarSeries1.Palette = New PaletteEntry(Color.FromArgb(255, 191, 0))
         BarSeries2.Palette = New PaletteEntry(Color.FromArgb(233, 37, 43))
         BarSeries3.Palette = New PaletteEntry(Color.FromArgb(36, 177, 22))
-        LineSeries1.Palette = New PaletteEntry(Color.FromArgb(44, 250, 54))
+        LineSeries1.Palette = New PaletteEntry(Color.FromArgb(202, 0, 0))
 
-        LineSeries1.BorderColor = Color.FromArgb(44, 250, 54)
-        LineSeries1.PointSize = New SizeF(10, 10)
+        LineSeries1.BorderColor = Color.FromArgb(202, 0, 0)
+        'LineSeries1.PointSize = New SizeF(10, 10)
 
         Me.radChartView1.ShowTrackBall = True
         Me.radChartView1.ShowToolTip = True
@@ -3934,7 +3932,7 @@ Public Class FrmGraficasfaseuno
         BarSeries1.ShowLabels = True
         BarSeries2.ShowLabels = True
         LineSeries1.ShowLabels = True
-        LineSeries3.ShowLabels = True
+        'LineSeries3.ShowLabels = True
         'LineSeries2.ShowLabels = True
 
         BarSeries1.LabelFormat = "{0:###}"
@@ -3960,10 +3958,10 @@ Public Class FrmGraficasfaseuno
         BarSeries2.Palette = New PaletteEntry(Color.FromArgb(255, 192, 0))
         LineSeries1.Palette = New PaletteEntry(Color.FromArgb(127, 127, 127))
         LineSeries2.Palette = New PaletteEntry(Color.FromArgb(217, 217, 217))
-        LineSeries3.Palette = New PaletteEntry(Color.FromArgb(44, 250, 54))
+        LineSeries3.Palette = New PaletteEntry(Color.FromArgb(202, 0, 0))
 
-        LineSeries3.BorderColor = Color.FromArgb(44, 250, 54)
-        LineSeries3.PointSize = New SizeF(10, 10)
+        LineSeries3.BorderColor = Color.FromArgb(202, 0, 0)
+        'LineSeries3.PointSize = New SizeF(10, 10)
 
         LineSeries1.BorderColor = Color.FromArgb(127, 127, 127)
         LineSeries2.BorderColor = Color.FromArgb(217, 217, 217)
@@ -4086,7 +4084,7 @@ Public Class FrmGraficasfaseuno
         BarSeries1.ShowLabels = True
         BarSeries2.ShowLabels = True
         LineSeries1.ShowLabels = True
-        LineSeries3.ShowLabels = True
+        'LineSeries3.ShowLabels = True
         'LineSeries2.ShowLabels = True
 
         BarSeries1.LabelFormat = "{0:###}"
@@ -4112,10 +4110,10 @@ Public Class FrmGraficasfaseuno
         BarSeries2.Palette = New PaletteEntry(Color.FromArgb(255, 192, 0))
         LineSeries1.Palette = New PaletteEntry(Color.FromArgb(127, 127, 127))
         LineSeries2.Palette = New PaletteEntry(Color.FromArgb(217, 217, 217))
-        LineSeries3.Palette = New PaletteEntry(Color.FromArgb(44, 250, 54))
+        LineSeries3.Palette = New PaletteEntry(Color.FromArgb(202, 0, 0))
 
-        LineSeries3.BorderColor = Color.FromArgb(44, 250, 54)
-        LineSeries3.PointSize = New SizeF(10, 10)
+        LineSeries3.BorderColor = Color.FromArgb(202, 0, 0)
+        'LineSeries3.PointSize = New SizeF(10, 10)
 
         LineSeries1.BorderColor = Color.FromArgb(127, 127, 127)
         LineSeries2.BorderColor = Color.FromArgb(217, 217, 217)
@@ -4236,7 +4234,7 @@ Public Class FrmGraficasfaseuno
         BarSeries1.ShowLabels = True
         BarSeries2.ShowLabels = True
         LineSeries1.ShowLabels = True
-        LineSeries3.ShowLabels = True
+        'LineSeries3.ShowLabels = True
         'LineSeries2.ShowLabels = True
 
         BarSeries1.LabelFormat = "{0:###}"
@@ -4262,10 +4260,10 @@ Public Class FrmGraficasfaseuno
         BarSeries2.Palette = New PaletteEntry(Color.FromArgb(255, 192, 0))
         LineSeries1.Palette = New PaletteEntry(Color.FromArgb(127, 127, 127))
         LineSeries2.Palette = New PaletteEntry(Color.FromArgb(217, 217, 217))
-        LineSeries3.Palette = New PaletteEntry(Color.FromArgb(44, 250, 54))
+        LineSeries3.Palette = New PaletteEntry(Color.FromArgb(202, 0, 0))
 
-        LineSeries3.BorderColor = Color.FromArgb(44, 250, 54)
-        LineSeries3.PointSize = New SizeF(10, 10)
+        LineSeries3.BorderColor = Color.FromArgb(202, 0, 0)
+        'LineSeries3.PointSize = New SizeF(10, 10)
 
         LineSeries1.BorderColor = Color.FromArgb(127, 127, 127)
         LineSeries2.BorderColor = Color.FromArgb(217, 217, 217)
@@ -4388,7 +4386,7 @@ Public Class FrmGraficasfaseuno
         BarSeries1.ShowLabels = True
         BarSeries2.ShowLabels = True
         LineSeries1.ShowLabels = True
-        LineSeries3.ShowLabels = True
+        'LineSeries3.ShowLabels = True
         'LineSeries2.ShowLabels = True
 
         BarSeries1.LabelFormat = "{0:###}"
@@ -4414,10 +4412,10 @@ Public Class FrmGraficasfaseuno
         BarSeries2.Palette = New PaletteEntry(Color.FromArgb(255, 192, 0))
         LineSeries1.Palette = New PaletteEntry(Color.FromArgb(127, 127, 127))
         LineSeries2.Palette = New PaletteEntry(Color.FromArgb(217, 217, 217))
-        LineSeries3.Palette = New PaletteEntry(Color.FromArgb(44, 250, 54))
+        LineSeries3.Palette = New PaletteEntry(Color.FromArgb(202, 0, 0))
 
-        LineSeries3.BorderColor = Color.FromArgb(44, 250, 54)
-        LineSeries3.PointSize = New SizeF(10, 10)
+        LineSeries3.BorderColor = Color.FromArgb(202, 0, 0)
+        'LineSeries3.PointSize = New SizeF(10, 10)
 
         LineSeries1.BorderColor = Color.FromArgb(127, 127, 127)
         LineSeries2.BorderColor = Color.FromArgb(217, 217, 217)
@@ -4541,7 +4539,7 @@ Public Class FrmGraficasfaseuno
         BarSeries1.ShowLabels = True
         BarSeries2.ShowLabels = True
         LineSeries1.ShowLabels = True
-        LineSeries3.ShowLabels = True
+        'LineSeries3.ShowLabels = True
         'LineSeries2.ShowLabels = True
 
         BarSeries1.LabelFormat = "{0:###}"
@@ -4567,10 +4565,10 @@ Public Class FrmGraficasfaseuno
         BarSeries2.Palette = New PaletteEntry(Color.FromArgb(255, 192, 0))
         LineSeries1.Palette = New PaletteEntry(Color.FromArgb(127, 127, 127))
         LineSeries2.Palette = New PaletteEntry(Color.FromArgb(217, 217, 217))
-        LineSeries3.Palette = New PaletteEntry(Color.FromArgb(44, 250, 54))
+        LineSeries3.Palette = New PaletteEntry(Color.FromArgb(202, 0, 0))
 
-        LineSeries3.BorderColor = Color.FromArgb(44, 250, 54)
-        LineSeries3.PointSize = New SizeF(10, 10)
+        LineSeries3.BorderColor = Color.FromArgb(202, 0, 0)
+        'LineSeries3.PointSize = New SizeF(10, 10)
 
         LineSeries1.BorderColor = Color.FromArgb(127, 127, 127)
         LineSeries2.BorderColor = Color.FromArgb(217, 217, 217)
