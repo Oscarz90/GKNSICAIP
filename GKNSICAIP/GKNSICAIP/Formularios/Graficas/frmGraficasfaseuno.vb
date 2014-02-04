@@ -2097,14 +2097,21 @@ Public Class FrmGraficasfaseuno
         'BarSeries3.ShowLabels = True
         BarSeries1.LabelFormat = "{0:###}"
         BarSeries2.LabelFormat = "{0:###}"
-        BarSeries1.HorizontalAxis = CategoricalAxis1
-        BarSeries1.VerticalAxis = LinearAxis1
+        If rdbtnDias.IsChecked Then
+            BarSeries1.HorizontalAxis = CategoricalAxis1
+            BarSeries1.VerticalAxis = LinearAxis1
+        ElseIf rdbtnMeses.IsChecked Then
+            BarSeries2.HorizontalAxis = CategoricalAxis1
+            BarSeries2.VerticalAxis = LinearAxis1
+        End If
         BarSeries1.Palette = New PaletteEntry(Color.FromArgb(108, 96, 190))
         BarSeries2.Palette = New PaletteEntry(Color.FromArgb(233, 37, 43))
         BarSeries3.Palette = New PaletteEntry(Color.FromArgb(255, 191, 0))
         Me.radChartView1.ShowTrackBall = True
         Me.radChartView1.ShowToolTip = True
-        radChartView1.Series.Add(BarSeries1)
+        If rdbtnDias.IsChecked Then
+            radChartView1.Series.Add(BarSeries1)
+        End If
         radChartView1.Series.Add(BarSeries2)
         radChartView1.Series.Add(BarSeries3)
         For i As Integer = 0 To Me.radChartView1.Series.Count - 1
@@ -2186,14 +2193,21 @@ Public Class FrmGraficasfaseuno
         'BarSeries3.ShowLabels = True
         BarSeries1.LabelFormat = "{0:###}"
         BarSeries2.LabelFormat = "{0:###}"
-        BarSeries1.HorizontalAxis = CategoricalAxis1
-        BarSeries1.VerticalAxis = LinearAxis1
+        If rdbtnDias.IsChecked Then
+            BarSeries1.HorizontalAxis = CategoricalAxis1
+            BarSeries1.VerticalAxis = LinearAxis1
+        ElseIf rdbtnMeses.IsChecked Then
+            BarSeries2.HorizontalAxis = CategoricalAxis1
+            BarSeries2.VerticalAxis = LinearAxis1
+        End If
         BarSeries1.Palette = New PaletteEntry(Color.FromArgb(108, 96, 190))
         BarSeries2.Palette = New PaletteEntry(Color.FromArgb(233, 37, 43))
         BarSeries3.Palette = New PaletteEntry(Color.FromArgb(255, 191, 0))
         Me.radChartView1.ShowTrackBall = True
         Me.radChartView1.ShowToolTip = True
-        radChartView1.Series.Add(BarSeries1)
+        If rdbtnDias.IsChecked Then
+            radChartView1.Series.Add(BarSeries1)
+        End If
         radChartView1.Series.Add(BarSeries2)
         radChartView1.Series.Add(BarSeries3)
         For i As Integer = 0 To Me.radChartView1.Series.Count - 1
@@ -2275,14 +2289,21 @@ Public Class FrmGraficasfaseuno
         'BarSeries3.ShowLabels = True
         BarSeries1.LabelFormat = "{0:###}"
         BarSeries2.LabelFormat = "{0:###}"
-        BarSeries1.HorizontalAxis = CategoricalAxis1
-        BarSeries1.VerticalAxis = LinearAxis1
+        If rdbtnDias.IsChecked Then
+            BarSeries1.HorizontalAxis = CategoricalAxis1
+            BarSeries1.VerticalAxis = LinearAxis1
+        ElseIf rdbtnMeses.IsChecked Then
+            BarSeries2.HorizontalAxis = CategoricalAxis1
+            BarSeries2.VerticalAxis = LinearAxis1
+        End If
         BarSeries1.Palette = New PaletteEntry(Color.FromArgb(108, 96, 190))
         BarSeries2.Palette = New PaletteEntry(Color.FromArgb(233, 37, 43))
         BarSeries3.Palette = New PaletteEntry(Color.FromArgb(255, 191, 0))
         Me.radChartView1.ShowTrackBall = True
         Me.radChartView1.ShowToolTip = True
-        radChartView1.Series.Add(BarSeries1)
+        If rdbtnDias.IsChecked Then
+            radChartView1.Series.Add(BarSeries1)
+        End If
         radChartView1.Series.Add(BarSeries2)
         radChartView1.Series.Add(BarSeries3)
         For i As Integer = 0 To Me.radChartView1.Series.Count - 1
@@ -2364,14 +2385,21 @@ Public Class FrmGraficasfaseuno
         BarSeries3.ShowLabels = True
         BarSeries1.LabelFormat = "{0:###}"
         BarSeries2.LabelFormat = "{0:###}"
-        BarSeries1.HorizontalAxis = CategoricalAxis1
-        BarSeries1.VerticalAxis = LinearAxis1
+        If rdbtnDias.IsChecked Then
+            BarSeries1.HorizontalAxis = CategoricalAxis1
+            BarSeries1.VerticalAxis = LinearAxis1
+        ElseIf rdbtnMeses.IsChecked Then
+            BarSeries2.HorizontalAxis = CategoricalAxis1
+            BarSeries2.VerticalAxis = LinearAxis1
+        End If
         BarSeries1.Palette = New PaletteEntry(Color.FromArgb(108, 96, 190))
         BarSeries2.Palette = New PaletteEntry(Color.FromArgb(233, 37, 43))
         BarSeries3.Palette = New PaletteEntry(Color.FromArgb(255, 191, 0))
         Me.radChartView1.ShowTrackBall = True
         Me.radChartView1.ShowToolTip = True
-        radChartView1.Series.Add(BarSeries1)
+        If rdbtnDias.IsChecked Then
+            radChartView1.Series.Add(BarSeries1)
+        End If
         radChartView1.Series.Add(BarSeries2)
         radChartView1.Series.Add(BarSeries3)
         For i As Integer = 0 To Me.radChartView1.Series.Count - 1
@@ -2453,14 +2481,21 @@ Public Class FrmGraficasfaseuno
         BarSeries3.ShowLabels = True
         BarSeries1.LabelFormat = "{0:###}"
         BarSeries2.LabelFormat = "{0:###}"
-        BarSeries1.HorizontalAxis = CategoricalAxis1
-        BarSeries1.VerticalAxis = LinearAxis1
+        If rdbtnDias.IsChecked Then
+            BarSeries1.HorizontalAxis = CategoricalAxis1
+            BarSeries1.VerticalAxis = LinearAxis1
+        ElseIf rdbtnMeses.IsChecked Then
+            BarSeries2.HorizontalAxis = CategoricalAxis1
+            BarSeries2.VerticalAxis = LinearAxis1
+        End If
         BarSeries1.Palette = New PaletteEntry(Color.FromArgb(108, 96, 190))
         BarSeries2.Palette = New PaletteEntry(Color.FromArgb(233, 37, 43))
         BarSeries3.Palette = New PaletteEntry(Color.FromArgb(255, 191, 0))
         Me.radChartView1.ShowTrackBall = True
         Me.radChartView1.ShowToolTip = True
-        radChartView1.Series.Add(BarSeries1)
+        If rdbtnDias.IsChecked Then
+            radChartView1.Series.Add(BarSeries1)
+        End If
         radChartView1.Series.Add(BarSeries2)
         radChartView1.Series.Add(BarSeries3)
         For i As Integer = 0 To Me.radChartView1.Series.Count - 1
@@ -2535,22 +2570,27 @@ Public Class FrmGraficasfaseuno
         End If
         CategoricalAxis1.LabelRotationAngle = 270.0R
         LinearAxis1.AxisType = AxisType.Second
-        'LinearAxis1.MajorStep = 1.0R
-        'LinearAxis1.Maximum = 5
         LinearAxis1.Title = "Gente"
         BarSeries1.ShowLabels = True
         BarSeries2.ShowLabels = True
         BarSeries3.ShowLabels = True
         BarSeries1.LabelFormat = "{0:###}"
         BarSeries2.LabelFormat = "{0:###}"
-        BarSeries1.HorizontalAxis = CategoricalAxis1
-        BarSeries1.VerticalAxis = LinearAxis1
+        If rdbtnDias.IsChecked Then
+            BarSeries1.HorizontalAxis = CategoricalAxis1
+            BarSeries1.VerticalAxis = LinearAxis1
+        ElseIf rdbtnMeses.IsChecked Then
+            BarSeries2.HorizontalAxis = CategoricalAxis1
+            BarSeries2.VerticalAxis = LinearAxis1
+        End If
         BarSeries1.Palette = New PaletteEntry(Color.FromArgb(108, 96, 190))
         BarSeries2.Palette = New PaletteEntry(Color.FromArgb(233, 37, 43))
         BarSeries3.Palette = New PaletteEntry(Color.FromArgb(255, 191, 0))
         Me.radChartView1.ShowTrackBall = True
         Me.radChartView1.ShowToolTip = True
-        radChartView1.Series.Add(BarSeries1)
+        If rdbtnDias.IsChecked Then
+            radChartView1.Series.Add(BarSeries1)
+        End If
         radChartView1.Series.Add(BarSeries2)
         radChartView1.Series.Add(BarSeries3)
         For i As Integer = 0 To Me.radChartView1.Series.Count - 1
