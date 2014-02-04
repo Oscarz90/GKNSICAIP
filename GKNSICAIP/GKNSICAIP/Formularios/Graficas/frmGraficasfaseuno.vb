@@ -37,13 +37,16 @@ Public Class FrmGraficasfaseuno
     End Sub
     'Nivel Grafico
     Private Sub obtiene_nivel_graficos()
+        'Obtiene nombre de Usuario-PC
         Dim oGraficasfaseuno As New Graficasfaseuno
         oGraficasfaseuno.usuario = Environment.UserName
+        'Valida si el codigo de empleado es nulo
         If cod_empleado Is Nothing Then
             oGraficasfaseuno.cod_empleado = ""
         Else
             oGraficasfaseuno.cod_empleado = cod_empleado
         End If
+        'Llama el Procedimiento Almacenado obtiene_nivel_graficos_usuario
         oGraficasfaseuno.obtiene_nivel_graficos()
         Dim value As String = oGraficasfaseuno.nivel_grafico
         cve_usuario = oGraficasfaseuno.cve_usuario
@@ -51,6 +54,11 @@ Public Class FrmGraficasfaseuno
             Case "Planta"
                 llena_formulario_Nivel_Planta()
                 tipo_nivel_planta()
+                nivel_planta_gkn = True
+            Case "Champion"
+                llena_formulario_Nivel_Planta()
+                tipo_nivel_planta()
+                tipo_nivel_champion()
                 nivel_planta_gkn = True
             Case "CadenaValor"
                 llena_formulario_Nivel_Cadena_Valor()
@@ -65,12 +73,16 @@ Public Class FrmGraficasfaseuno
                 tipo_nivel_lg()
                 nivel_lgs = True
             Case "LET"
-                If cve_equipo <> 0 Then
+                If cve_equipo <> 0 And cve_usuario = 0 Then
                     llena_formulario_Nivel_LET()
                     tipo_nivel_let()
                     nivel_lets = True
+                ElseIf cve_usuario <> 0 Then
+                    llena_formulario_Nivel_LET_Equipos()
+                    tipo_nivel_let()
+                    nivel_lets = True
                 End If
-                
+
             Case Else
 
         End Select
@@ -110,6 +122,34 @@ Public Class FrmGraficasfaseuno
     End Sub
     'Planta
     Private Sub tipo_nivel_planta()
+        nivel_planta_gkn = True
+    End Sub
+    'Champion
+    Private Sub tipo_nivel_champion()
+        Dim oUsuario_indicador As New usuario_indicador
+        oUsuario_indicador.cve_usuario = cve_usuario
+        oUsuario_indicador.obtiene_indicador()
+        If Not IsNothing(oUsuario_indicador.indicador) Then
+            If oUsuario_indicador.indicador <> "oee" Then
+                deshabilita_radiobutton_niveles(rdbtnOee)
+            End If
+            If oUsuario_indicador.indicador <> "nrft" Then
+                deshabilita_radiobutton_niveles(rdbtnNrfti)
+            End If
+
+            If oUsuario_indicador.indicador <> "costo" Then
+                deshabilita_radiobutton_niveles(rdbtnCosto)
+            End If
+            If oUsuario_indicador.indicador <> "seguridad" Then
+                deshabilita_radiobutton_niveles(rdbtnSeguridad)
+            End If
+            If oUsuario_indicador.indicador <> "gente" Then
+                deshabilita_radiobutton_niveles(rdbtnGente)
+            End If
+            If oUsuario_indicador.indicador <> "cincos" Then
+                deshabilita_radiobutton_niveles(rdbtnCincoS)
+            End If
+        End If
         nivel_planta_gkn = True
     End Sub
 #End Region
@@ -158,6 +198,15 @@ Public Class FrmGraficasfaseuno
         cbxEquipo.ValueMember = "cve_equipo"
         cbxEquipo.DisplayMember = "equipo"
         cbxEquipo.DataSource = oGfu_nivel_let.llena_combo_equipo
+        cbxEquipo.SelectedIndex = -1
+        llena_cbx_equipo_linea()
+    End Sub
+    Private Sub llena_formulario_Nivel_LET_Equipos()
+        Dim oGfu_nivel_let As New gfu_nivel_let
+        oGfu_nivel_let.cve_usuario = cve_usuario
+        cbxEquipo.ValueMember = "cve_equipo"
+        cbxEquipo.DisplayMember = "equipo"
+        cbxEquipo.DataSource = oGfu_nivel_let.llena_combo_equipo_let
         cbxEquipo.SelectedIndex = -1
         llena_cbx_equipo_linea()
     End Sub
@@ -322,8 +371,6 @@ Public Class FrmGraficasfaseuno
 #End Region
 #Region "Eventos RadioButton Combobox Niveles"
     Private Sub rdbtnNiveles_ToggleStateChanged(ByVal sender As System.Object, ByVal args As Telerik.WinControls.UI.StateChangedEventArgs) Handles rdbtnCadenaValor.ToggleStateChanged, rdbtnComponente.ToggleStateChanged, rdbtnLinea.ToggleStateChanged, rdbtnEquipo.ToggleStateChanged
-
-
         'Cadena valor
         If rdbtnCadenaValor.IsChecked Then
             habilita_combobox_niveles(cbxCadenaValor)
@@ -422,12 +469,18 @@ Public Class FrmGraficasfaseuno
         valida_btn_graficar()
     End Sub
 #End Region
-#Region "(des)Habilita Combobox"
+#Region "(des)Habilita Combobox & Radio Button"
     Private Sub habilita_combobox_niveles(ByRef combo_box As ComboBox)
         combo_box.Enabled = True
     End Sub
     Private Sub deshabilita_combobox_niveles(ByRef combo_box As ComboBox)
         combo_box.Enabled = False
+    End Sub
+    Private Sub habilita_radiobutton_niveles(ByRef rdbtn As RadRadioButton)
+        rdbtn.Enabled = True
+    End Sub
+    Private Sub deshabilita_radiobutton_niveles(ByRef rdbtn As RadRadioButton)
+        rdbtn.Enabled = False
     End Sub
 #End Region
 #Region "Metodos graficar Oee"
