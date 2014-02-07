@@ -2243,6 +2243,7 @@ Public Class FrmGraficasfaseuno
         BarSeries3.DataSource = vDT
         BarSeries4.ValueMember = "promedio"
         BarSeries4.CategoryMember = "dia_asignado"
+        BarSeries4.DataSource = vDT
         LineSeries1.ValueMember = "objetivo"
         LineSeries1.CategoryMember = "dia_asignado"
         LineSeries1.DataSource = vDT
