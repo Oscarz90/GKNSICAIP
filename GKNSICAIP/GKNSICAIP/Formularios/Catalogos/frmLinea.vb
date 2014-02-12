@@ -135,6 +135,8 @@ Public Class frmLinea
             btnModificar.Visible = False
             btnDarBaja.Enabled = False
             btnImportar.Enabled = True
+            txtNombre_Linea.ReadOnly = False
+            nudTPCM.ReadOnly = False
         Else
             btnRegistrar.Visible = False
             btnModificar.Visible = True
@@ -142,6 +144,9 @@ Public Class frmLinea
             btnDarBaja.Enabled = True
 
             btnImportar.Enabled = False
+            txtNombre_Linea.ReadOnly = False
+            nudTPCM.ReadOnly = False
+
         End If
     End Sub
 
@@ -149,32 +154,44 @@ Public Class frmLinea
         If vAdd = True Then
             Me.btnRegistrar.Enabled = True
             Me.btnModificar.Enabled = True
-            txtNombre_Linea.ReadOnly = False
-            nudTPCM.ReadOnly = False
+            Me.btnDarBaja.Enabled = False
+            'txtNombre_Linea.ReadOnly = False
+            'nudTPCM.ReadOnly = False
         Else
             Me.btnRegistrar.Enabled = False
             Me.btnModificar.Enabled = False
-            txtNombre_Linea.ReadOnly = True
-            nudTPCM.ReadOnly = True
-            btnImportar.Enabled = False
+            Me.btnDarBaja.Enabled = True
+            'txtNombre_Linea.ReadOnly = True
+            'nudTPCM.ReadOnly = True
+            'btnImportar.Enabled = False
         End If
         If vDelete = True Then
             Me.btnDarBaja.Enabled = True
-            txtNombre_Linea.ReadOnly = True
-            nudTPCM.ReadOnly = True
-            btnImportar.Enabled = False
+            Me.btnRegistrar.Enabled = False
+            Me.btnModificar.Enabled = False
+            'txtNombre_Linea.ReadOnly = True
+            'nudTPCM.ReadOnly = True
+            'btnImportar.Enabled = False
         Else
             Me.btnDarBaja.Enabled = False
+            Me.btnRegistrar.Enabled = True
+            Me.btnModificar.Enabled = True
         End If
         If vAdd = False And vDelete = False Then
-            txtNombre_Linea.ReadOnly = True
-            nudTPCM.ReadOnly = True
-            btnImportar.Enabled = False
+            'txtNombre_Linea.ReadOnly = True
+            'nudTPCM.ReadOnly = True
+            'btnImportar.Enabled = False
+            Me.btnDarBaja.Enabled = False
+            Me.btnRegistrar.Enabled = False
+            Me.btnModificar.Enabled = False
         End If
         If vAdd = True And vDelete = True Then
-            txtNombre_Linea.ReadOnly = False
-            nudTPCM.ReadOnly = False
-            btnImportar.Enabled = False
+            'txtNombre_Linea.ReadOnly = False
+            'nudTPCM.ReadOnly = False
+            'btnImportar.Enabled = False
+            Me.btnDarBaja.Enabled = True
+            Me.btnRegistrar.Enabled = True
+            Me.btnModificar.Enabled = True
         End If
     End Sub
 

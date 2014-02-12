@@ -159,31 +159,42 @@ Public Class frmModelo
             'Me.btnDarBaja.Enabled = True
             Me.btnRegistrar.Enabled = False
             Me.btnModificar.Enabled = False
-            txtDescripcion.ReadOnly = True
-            txtNumero_Parte.ReadOnly = True
-            cbxClasificacion.Enabled = False
-            btnImportar.Enabled = False
+            Me.btnDarBaja.Enabled = True
+            'txtDescripcion.ReadOnly = True
+            'txtNumero_Parte.ReadOnly = True
+            'cbxClasificacion.Enabled = False
+            'btnImportar.Enabled = False
         End If
         If vDelete = True Then
             Me.btnDarBaja.Enabled = True
-            txtDescripcion.ReadOnly = True
-            txtNumero_Parte.ReadOnly = True
-            cbxClasificacion.Enabled = False
-            btnImportar.Enabled = False
+            Me.btnRegistrar.Enabled = False
+            Me.btnModificar.Enabled = False
+            'txtDescripcion.ReadOnly = True
+            'txtNumero_Parte.ReadOnly = True
+            'cbxClasificacion.Enabled = False
+            'btnImportar.Enabled = False
         Else
             Me.btnDarBaja.Enabled = False
+            Me.btnRegistrar.Enabled = True
+            Me.btnModificar.Enabled = True
         End If
         If vAdd = False And vDelete = False Then
-            txtDescripcion.ReadOnly = True
-            txtNumero_Parte.ReadOnly = True
-            cbxClasificacion.Enabled = False
-            btnImportar.Enabled = False
+            Me.btnDarBaja.Enabled = False
+            Me.btnRegistrar.Enabled = False
+            Me.btnModificar.Enabled = False
+            'txtDescripcion.ReadOnly = True
+            'txtNumero_Parte.ReadOnly = True
+            'cbxClasificacion.Enabled = False
+            'btnImportar.Enabled = False
         End If
         If vAdd = True And vDelete = True Then
-            txtDescripcion.ReadOnly = False
-            txtNumero_Parte.ReadOnly = True
-            cbxClasificacion.Enabled = False
-            btnImportar.Enabled = True
+            Me.btnDarBaja.Enabled = True
+            Me.btnRegistrar.Enabled = True
+            Me.btnModificar.Enabled = True
+            'txtDescripcion.ReadOnly = False
+            'txtNumero_Parte.ReadOnly = True
+            'cbxClasificacion.Enabled = False
+            'btnImportar.Enabled = True
         End If
     End Sub
 

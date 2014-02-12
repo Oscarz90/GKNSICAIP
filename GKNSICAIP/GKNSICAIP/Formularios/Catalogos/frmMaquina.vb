@@ -138,30 +138,43 @@ Public Class frmMaquina
         If vAdd = True Then
             Me.btnRegistrar.Enabled = True
             Me.btnModificar.Enabled = True
+            Me.btnDar_Baja.Enabled = False
+            'txtCve_Maquina.ReadOnly = False
         Else
             Me.btnRegistrar.Enabled = False
             Me.btnModificar.Enabled = False
-            txtNombre.ReadOnly = False
-            txtCve_Maquina.ReadOnly = True
-            btnImportar.Enabled = True
+            Me.btnDar_Baja.Enabled = True
+            'txtNombre.ReadOnly = False
+            'txtCve_Maquina.ReadOnly = True
+            'btnImportar.Enabled = True
         End If
         If vDelete = True Then
             Me.btnDar_Baja.Enabled = True
-            txtNombre.ReadOnly = True
-            txtCve_Maquina.ReadOnly = True
-            btnImportar.Enabled = False
+            Me.btnRegistrar.Enabled = False
+            Me.btnModificar.Enabled = False
+            'txtNombre.ReadOnly = True
+            'txtCve_Maquina.ReadOnly = True
+            'btnImportar.Enabled = False
         Else
             Me.btnDar_Baja.Enabled = False
+            Me.btnRegistrar.Enabled = True
+            Me.btnModificar.Enabled = True
         End If
         If vAdd = False And vDelete = False Then
-            txtNombre.ReadOnly = True
-            txtCve_Maquina.ReadOnly = True
-            btnImportar.Enabled = False
+            Me.btnDar_Baja.Enabled = False
+            Me.btnRegistrar.Enabled = False
+            Me.btnModificar.Enabled = False
+            'txtNombre.ReadOnly = True
+            'txtCve_Maquina.ReadOnly = True
+            'btnImportar.Enabled = False
         End If
         If vAdd = True And vDelete = True Then
-            txtNombre.ReadOnly = False
-            txtCve_Maquina.ReadOnly = True
-            btnImportar.Enabled = True
+            'txtNombre.ReadOnly = False
+            'txtCve_Maquina.ReadOnly = True
+            'btnImportar.Enabled = True
+            Me.btnDar_Baja.Enabled = True
+            Me.btnRegistrar.Enabled = True
+            Me.btnModificar.Enabled = True
         End If
 
     End Sub
