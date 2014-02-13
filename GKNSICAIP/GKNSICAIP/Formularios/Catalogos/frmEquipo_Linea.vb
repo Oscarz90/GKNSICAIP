@@ -87,7 +87,7 @@ Public Class frmEquipo_Linea
         lbAsignados.DisplayMember = "Equipo"
 
 
-        For Each vEquipo As Equipo In oLinea.LEquipos_Linea_Asignados            
+        For Each vEquipo As Equipo In oLinea.LEquipos_Linea_Asignados
             lbAsignados.Items.Add(vEquipo)
             'lbAsignados.ValueMember = "cve_equipo"
             'lbAsignados.DisplayMember = "Equipo"
