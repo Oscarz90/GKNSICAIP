@@ -21,7 +21,7 @@ Public Class frmLinea
         ''La Siguiente Linea solo es para hacer pruebas sobre una Linea de Prueba(El cual se agrego y se modifico de forma Exitosa)
         ''Borrar si requiere hacer registro nuevo
         'vId_Publico = 80
-        Controles_Permisos(vAdd_Registrar, vDelete_Eliminar)
+
         If Convert.ToInt64(vId_Publico) <> 0 Then
             oLinea = New Linea
             oLinea.cve_linea = vId_Publico
@@ -55,6 +55,7 @@ Public Class frmLinea
             btnRegistrar.Enabled = False
             btnModificar.Enabled = False
         End If
+        Controles_Permisos(vAdd_Registrar, vDelete_Eliminar)
         SetBindings()
         Me.Show()
         Me.txtNombre_Linea.Focus()
@@ -72,9 +73,10 @@ Public Class frmLinea
     End Sub
 
     Private Sub btnDarBaja_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnDarBaja.Click
-        If MsgBox("¿Esta seguro de Dar de Baja la Linea?", MsgBoxStyle.YesNo, Me.Text) = MsgBoxResult.Yes Then
+        If MsgBox("¿Esta seguro de Dar de Baja la Linea?, se daran de baja los TC relacionados con esta linea", MsgBoxStyle.YesNo, Me.Text) = MsgBoxResult.Yes Then
             Try
                 oLinea.Eliminar()
+                Me.Close()
             Catch ex As Exception
 
             End Try
@@ -133,12 +135,18 @@ Public Class frmLinea
             btnModificar.Visible = False
             btnDarBaja.Enabled = False
             btnImportar.Enabled = True
+            txtNombre_Linea.ReadOnly = False
+            nudTPCM.ReadOnly = False
         Else
             btnRegistrar.Visible = False
             btnModificar.Visible = True
+            btnDarBaja.Visible = True
             btnDarBaja.Enabled = True
 
             btnImportar.Enabled = False
+            txtNombre_Linea.ReadOnly = False
+            nudTPCM.ReadOnly = False
+
         End If
     End Sub
 
@@ -146,32 +154,44 @@ Public Class frmLinea
         If vAdd = True Then
             Me.btnRegistrar.Enabled = True
             Me.btnModificar.Enabled = True
-            txtNombre_Linea.ReadOnly = False
-            nudTPCM.ReadOnly = False
+            Me.btnDarBaja.Enabled = False
+            'txtNombre_Linea.ReadOnly = False
+            'nudTPCM.ReadOnly = False
         Else
             Me.btnRegistrar.Enabled = False
             Me.btnModificar.Enabled = False
-            txtNombre_Linea.ReadOnly = True
-            nudTPCM.ReadOnly = True
-            btnImportar.Enabled = False
+            Me.btnDarBaja.Enabled = True
+            'txtNombre_Linea.ReadOnly = True
+            'nudTPCM.ReadOnly = True
+            'btnImportar.Enabled = False
         End If
         If vDelete = True Then
             Me.btnDarBaja.Enabled = True
-            txtNombre_Linea.ReadOnly = True
-            nudTPCM.ReadOnly = True
-            btnImportar.Enabled = False
+            Me.btnRegistrar.Enabled = False
+            Me.btnModificar.Enabled = False
+            'txtNombre_Linea.ReadOnly = True
+            'nudTPCM.ReadOnly = True
+            'btnImportar.Enabled = False
         Else
             Me.btnDarBaja.Enabled = False
+            Me.btnRegistrar.Enabled = True
+            Me.btnModificar.Enabled = True
         End If
         If vAdd = False And vDelete = False Then
-            txtNombre_Linea.ReadOnly = True
-            nudTPCM.ReadOnly = True
-            btnImportar.Enabled = False
+            'txtNombre_Linea.ReadOnly = True
+            'nudTPCM.ReadOnly = True
+            'btnImportar.Enabled = False
+            Me.btnDarBaja.Enabled = False
+            Me.btnRegistrar.Enabled = False
+            Me.btnModificar.Enabled = False
         End If
         If vAdd = True And vDelete = True Then
-            txtNombre_Linea.ReadOnly = False
-            nudTPCM.ReadOnly = False
-            btnImportar.Enabled = False
+            'txtNombre_Linea.ReadOnly = False
+            'nudTPCM.ReadOnly = False
+            'btnImportar.Enabled = False
+            Me.btnDarBaja.Enabled = True
+            Me.btnRegistrar.Enabled = True
+            Me.btnModificar.Enabled = True
         End If
     End Sub
 

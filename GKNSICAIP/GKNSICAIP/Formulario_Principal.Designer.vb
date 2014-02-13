@@ -70,6 +70,7 @@ Partial Class Formulario_Principal
         CType(Me.RadPanel_Registros, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.RadPanel_Registros.SuspendLayout()
         CType(Me.dgvRegistros, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.dgvRegistros.MasterTemplate, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.MapaUbicacion, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
@@ -320,7 +321,7 @@ Partial Class Formulario_Principal
         '
         Me.RibbonTab2.AccessibleDescription = "Catalogos"
         Me.RibbonTab2.AccessibleName = "Catalogos"
-        Me.RibbonTab2.IsSelected = False
+        Me.RibbonTab2.IsSelected = True
         Me.RibbonTab2.Items.AddRange(New Telerik.WinControls.RadItem() {Me.RadRibbonBarGroup2, Me.RadRibbonBarGroup3, Me.RadRibbonBarGroup7})
         Me.RibbonTab2.Name = "RibbonTab2"
         Me.RibbonTab2.Text = "Catalogos SICAIP"
@@ -557,6 +558,7 @@ Partial Class Formulario_Principal
         CType(Me.Barra_Tool_Registros, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.RadPanel_Registros, System.ComponentModel.ISupportInitialize).EndInit()
         Me.RadPanel_Registros.ResumeLayout(False)
+        CType(Me.dgvRegistros.MasterTemplate, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.dgvRegistros, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.MapaUbicacion, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me, System.ComponentModel.ISupportInitialize).EndInit()

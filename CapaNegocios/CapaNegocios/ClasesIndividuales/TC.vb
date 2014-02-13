@@ -41,7 +41,11 @@ Public Class TC
     End Sub
 
     Public Sub Eliminar() Implements IIndividual.Eliminar
+        Try
+            oBD.EjecutarQuery("update TC set estatus='0' where cve_TC=" & vcve_TC)
+        Catch ex As Exception
 
+        End Try
     End Sub
     'Dim vId As Long
     'Public Property Id As Long Implements IIndividual.Id
@@ -234,8 +238,6 @@ Public Class TC
         Return vRetorno
     End Function
 
-
-
     Public Sub Cargar_TC(ByVal vID_Linea As Long, ByVal vID_Modelo As Long)
         Dim rDatos As DataRow
         rDatos = oBD.ObtenerRenglon("SELECT cve_TC FROM TC WHERE estatus !='0' and cve_linea=" & vID_Linea & " AND cve_modelo=" & vID_Modelo, "TC")
@@ -246,6 +248,29 @@ Public Class TC
 
         End If
     End Sub
+
+
+    Public Function Obtener_TC_con_Linea(ByVal vCve_Linea_Parametro As Long) As DataTable
+        Dim vRetorno As DataTable
+        Try
+            vRetorno = oBD.ObtenerTabla("Select cve_TC,cve_linea,cve_modelo from TC where estatus='1' and cve_linea=" & vCve_Linea_Parametro)
+        Catch ex As Exception
+            vRetorno = Nothing
+        End Try
+
+        Return vRetorno
+    End Function
+
+    Public Function Obtener_TC_con_Modelo(ByVal vCve_Modelo_Parametro As Long) As DataTable
+        Dim vRetorno As DataTable
+        Try
+            vRetorno = oBD.ObtenerTabla("Select cve_TC,cve_linea,cve_modelo from TC where estatus='1' and cve_modelo=" & vCve_Modelo_Parametro)
+        Catch ex As Exception
+            vRetorno = Nothing
+        End Try
+
+        Return vRetorno
+    End Function
 
 
 

@@ -30,19 +30,45 @@ Public Class Modelo
     End Sub
 
     Public Sub Eliminar() Implements IIndividual.Eliminar
-        'If Usuario.ChecaPermisoTarea("TELEFONO.ELIMINAR") Then
-        Try
-            oBD.EjecutarQuery("UPDATE MODELO SET Estatus='0' WHERE cve_modelo=" & Me.vcve_modelo)
-            MsgBox("La Baja de Modelo se realizo correctamente")
-            'Dim oBitacora As Bitacora = Bitacora.ObtenInstancia
-            'oBitacora.RegistrarEnBitacora("Telefono.ELIMINAR", "Se eliminó el Teléfono: " & Me.m_Telefono_Id)
-        Catch ex As Exception
-            'Tiene relacion con otras partes del sistema
-            'Throw New CustomException(Errores.Eliminar)
-        End Try
-        'Else
-        'Throw New CustomException(Errores.Permiso)
-        'End If
+        ''If Usuario.ChecaPermisoTarea("TELEFONO.ELIMINAR") Then
+        'Try
+        '    oBD.EjecutarQuery("UPDATE MODELO SET Estatus='0' WHERE cve_modelo=" & Me.vcve_modelo)
+        '    MsgBox("La Baja de Modelo se realizo correctamente")
+        '    'Dim oBitacora As Bitacora = Bitacora.ObtenInstancia
+        '    'oBitacora.RegistrarEnBitacora("Telefono.ELIMINAR", "Se eliminó el Teléfono: " & Me.m_Telefono_Id)
+        'Catch ex As Exception
+        '    'Tiene relacion con otras partes del sistema
+        '    'Throw New CustomException(Errores.Eliminar)
+        'End Try
+        ''Else
+        ''Throw New CustomException(Errores.Permiso)
+        ''End If
+
+        Dim oTC As New TC
+        Dim vDT_TC_CON_Modelo_Para_Baja As DataTable
+
+        Using scope As New TransactionScope()
+            Try
+                oBD.EjecutarQuery("UPDATE MODELO SET Estatus='0' WHERE cve_modelo=" & Me.vcve_modelo)
+
+                vDT_TC_CON_Modelo_Para_Baja = oTC.Obtener_TC_con_Modelo(vcve_modelo) ''---Obtiene los TC relacionados con la linea, para darlos de baja
+
+                If IsNothing(vDT_TC_CON_Modelo_Para_Baja) = False Then
+                    For Each vDR As DataRow In vDT_TC_CON_Modelo_Para_Baja.Rows
+                        oTC.cve_TC = vDR("cve_TC")
+                        oTC.Eliminar()
+                    Next
+                End If
+
+                MsgBox("La Baja de Modelo se realizo correctamente")
+
+                scope.Complete()
+            Catch ex As Exception
+
+            End Try
+        End Using
+
+
     End Sub
     Dim vId As Long
     Public Property Id As Long Implements IIndividual.Id
@@ -331,7 +357,7 @@ Public Class Modelo
             dtModelos = oBD.ObtenerTabla("select m.cve_modelo,m.np_gkn from linea l " &
                                          "join TC tc on l.cve_linea=tc.cve_linea " &
                                          "join modelo m on tc.cve_modelo=m.cve_modelo " &
-                                         "where l.cve_linea=" & vcve_linea & " and tc.estatus='1' order by tc.fecha desc")
+                                         "where l.cve_linea=" & vcve_linea & " and tc.estatus='1' and l.estatus='1' and m.estatus='1' order by tc.fecha desc")
         Catch ex As Exception
             MsgBox("ERROR_AL_OBTENER_MODELOS_DE_LINEA_CModelo")
             dtModelos = Nothing
@@ -345,8 +371,8 @@ Public Class Modelo
             "join TC t on t.cve_linea=l.cve_linea " &
             "join modelo m on t.cve_modelo=m.cve_modelo " &
             "where rt.cve_registro_turno=" & vcve_registro_turno & " and " &
-            "m.cve_modelo in (select p.cve_modelo from produccion p " &
-            "where p.cve_registro_turno=" & vcve_registro_turno & " and p.estatus='1') and t.estatus='1' order by t.fecha desc"
+            "m.cve_modelo in (select p.cve_modelo from produccion p join modelo mod on mod.cve_modelo=p.cve_modelo" &
+            "where p.cve_registro_turno=" & vcve_registro_turno & " and p.estatus='1' and mod.estatus='1') and t.estatus='1' and m.estatus='1' and l.estatus='1' order by t.fecha desc"
         Try
             dtModelos = oBD.ObtenerTabla(query)
         Catch ex As Exception

@@ -18,7 +18,7 @@ Public Class frmMaquina
         ''La Siguiente Linea solo es para hacer pruebas sobre una Maquina()
         ''Borrar si requiere hacer registro nuevo
         'vId_Publico = 936
-        Controles_Permisos(vAdd_Registrar, vDelete_Eliminar)
+
         If Convert.ToInt64(vId_Publico) <> 0 Then
             oMaquina = New Maquina
             oMaquina.cve_maquina = vId_Publico
@@ -29,6 +29,7 @@ Public Class frmMaquina
             oMaquina.maquina = ""
             Controles_Registro_Nuevo(True)
         End If
+
         vValida_Nombre = oMaquina.maquina.Count
         If vValida_Nombre > 0 Then
             btnRegistrar.Enabled = True
@@ -37,6 +38,7 @@ Public Class frmMaquina
             btnRegistrar.Enabled = False
             btnModificar.Enabled = False
         End If
+        Controles_Permisos(vAdd_Registrar, vDelete_Eliminar)
         SetBindings()
         Me.Show()
         Me.txtNombre.Focus()
@@ -124,6 +126,7 @@ Public Class frmMaquina
         Else
             btnRegistrar.Visible = False
             btnModificar.Visible = True
+            btnDar_Baja.Visible = True
             btnDar_Baja.Enabled = True
             txtNombre.ReadOnly = False
             txtCve_Maquina.ReadOnly = True
@@ -135,30 +138,43 @@ Public Class frmMaquina
         If vAdd = True Then
             Me.btnRegistrar.Enabled = True
             Me.btnModificar.Enabled = True
+            Me.btnDar_Baja.Enabled = False
+            'txtCve_Maquina.ReadOnly = False
         Else
             Me.btnRegistrar.Enabled = False
             Me.btnModificar.Enabled = False
-            txtNombre.ReadOnly = False
-            txtCve_Maquina.ReadOnly = True
-            btnImportar.Enabled = True
+            Me.btnDar_Baja.Enabled = True
+            'txtNombre.ReadOnly = False
+            'txtCve_Maquina.ReadOnly = True
+            'btnImportar.Enabled = True
         End If
         If vDelete = True Then
             Me.btnDar_Baja.Enabled = True
-            txtNombre.ReadOnly = True
-            txtCve_Maquina.ReadOnly = True
-            btnImportar.Enabled = False
+            Me.btnRegistrar.Enabled = False
+            Me.btnModificar.Enabled = False
+            'txtNombre.ReadOnly = True
+            'txtCve_Maquina.ReadOnly = True
+            'btnImportar.Enabled = False
         Else
             Me.btnDar_Baja.Enabled = False
+            Me.btnRegistrar.Enabled = True
+            Me.btnModificar.Enabled = True
         End If
         If vAdd = False And vDelete = False Then
-            txtNombre.ReadOnly = True
-            txtCve_Maquina.ReadOnly = True
-            btnImportar.Enabled = False
+            Me.btnDar_Baja.Enabled = False
+            Me.btnRegistrar.Enabled = False
+            Me.btnModificar.Enabled = False
+            'txtNombre.ReadOnly = True
+            'txtCve_Maquina.ReadOnly = True
+            'btnImportar.Enabled = False
         End If
         If vAdd = True And vDelete = True Then
-            txtNombre.ReadOnly = False
-            txtCve_Maquina.ReadOnly = True
-            btnImportar.Enabled = True
+            'txtNombre.ReadOnly = False
+            'txtCve_Maquina.ReadOnly = True
+            'btnImportar.Enabled = True
+            Me.btnDar_Baja.Enabled = True
+            Me.btnRegistrar.Enabled = True
+            Me.btnModificar.Enabled = True
         End If
 
     End Sub
