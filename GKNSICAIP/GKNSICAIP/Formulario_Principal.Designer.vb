@@ -65,12 +65,14 @@ Partial Class Formulario_Principal
         Me.btnEstrategias = New Telerik.WinControls.UI.RadButtonElement()
         Me.btnCategorias = New Telerik.WinControls.UI.RadButtonElement()
         Me.btnSubCategorias = New Telerik.WinControls.UI.RadButtonElement()
+        Me.RadRibbonBarButtonGroup1 = New Telerik.WinControls.UI.RadRibbonBarButtonGroup()
+        Me.btnEquipo = New Telerik.WinControls.UI.RadButtonElement()
+        Me.btnMatch_Equipos = New Telerik.WinControls.UI.RadButtonElement()
         CType(Me.RadStatusStrip1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.Barra_Tool_Registros, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.RadPanel_Registros, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.RadPanel_Registros.SuspendLayout()
         CType(Me.dgvRegistros, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.dgvRegistros.MasterTemplate, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.MapaUbicacion, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
@@ -267,7 +269,7 @@ Partial Class Formulario_Principal
         '
         Me.RibbonTab1.AccessibleDescription = "Configuración"
         Me.RibbonTab1.AccessibleName = "Configuración"
-        Me.RibbonTab1.IsSelected = True
+        Me.RibbonTab1.IsSelected = False
         Me.RibbonTab1.Items.AddRange(New Telerik.WinControls.RadItem() {Me.RadRibbonBarGroup1})
         Me.RibbonTab1.Name = "RibbonTab1"
         Me.RibbonTab1.Text = "Configuración"
@@ -331,7 +333,7 @@ Partial Class Formulario_Principal
         '
         Me.RadRibbonBarGroup2.AccessibleDescription = "Catalogos"
         Me.RadRibbonBarGroup2.AccessibleName = "Catalogos"
-        Me.RadRibbonBarGroup2.Items.AddRange(New Telerik.WinControls.RadItem() {Me.btnLinea, Me.btnMaquina, Me.btnModelo, Me.btnTiempo_Ciclo, Me.btnImportar_TC, Me.btnImportar_Modelo})
+        Me.RadRibbonBarGroup2.Items.AddRange(New Telerik.WinControls.RadItem() {Me.btnLinea, Me.btnMaquina, Me.btnModelo, Me.btnTiempo_Ciclo, Me.btnImportar_TC, Me.btnImportar_Modelo, Me.btnEquipo})
         Me.RadRibbonBarGroup2.Name = "RadRibbonBarGroup2"
         Me.RadRibbonBarGroup2.Text = "Catalogos SICAIP"
         Me.RadRibbonBarGroup2.Visibility = Telerik.WinControls.ElementVisibility.Visible
@@ -405,9 +407,9 @@ Partial Class Formulario_Principal
         '
         Me.RadRibbonBarGroup3.AccessibleDescription = "Asignaciones"
         Me.RadRibbonBarGroup3.AccessibleName = "Asignaciones"
-        Me.RadRibbonBarGroup3.Items.AddRange(New Telerik.WinControls.RadItem() {Me.btnEquipo_Linea})
+        Me.RadRibbonBarGroup3.Items.AddRange(New Telerik.WinControls.RadItem() {Me.btnEquipo_Linea, Me.btnMatch_Equipos})
         Me.RadRibbonBarGroup3.Name = "RadRibbonBarGroup3"
-        Me.RadRibbonBarGroup3.Text = "Asignaciones"
+        Me.RadRibbonBarGroup3.Text = "Otros"
         Me.RadRibbonBarGroup3.Visibility = Telerik.WinControls.ElementVisibility.Visible
         '
         'btnEquipo_Linea
@@ -535,6 +537,33 @@ Partial Class Formulario_Principal
         Me.btnSubCategorias.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText
         Me.btnSubCategorias.Visibility = Telerik.WinControls.ElementVisibility.Visible
         '
+        'RadRibbonBarButtonGroup1
+        '
+        Me.RadRibbonBarButtonGroup1.AccessibleDescription = "RadRibbonBarButtonGroup1"
+        Me.RadRibbonBarButtonGroup1.AccessibleName = "RadRibbonBarButtonGroup1"
+        Me.RadRibbonBarButtonGroup1.Name = "RadRibbonBarButtonGroup1"
+        Me.RadRibbonBarButtonGroup1.Orientation = System.Windows.Forms.Orientation.Vertical
+        Me.RadRibbonBarButtonGroup1.Text = "RadRibbonBarButtonGroup1"
+        Me.RadRibbonBarButtonGroup1.Visibility = Telerik.WinControls.ElementVisibility.Visible
+        '
+        'btnEquipo
+        '
+        Me.btnEquipo.AccessibleDescription = "Equipo"
+        Me.btnEquipo.AccessibleName = "Equipo"
+        Me.btnEquipo.Name = "btnEquipo"
+        Me.btnEquipo.Text = "Equipo"
+        Me.btnEquipo.TextAlignment = System.Drawing.ContentAlignment.BottomCenter
+        Me.btnEquipo.Visibility = Telerik.WinControls.ElementVisibility.Visible
+        '
+        'btnMatch_Equipos
+        '
+        Me.btnMatch_Equipos.AccessibleDescription = "Match Equipos"
+        Me.btnMatch_Equipos.AccessibleName = "Match Equipos"
+        Me.btnMatch_Equipos.Name = "btnMatch_Equipos"
+        Me.btnMatch_Equipos.Text = "Match Equipos"
+        Me.btnMatch_Equipos.TextAlignment = System.Drawing.ContentAlignment.BottomCenter
+        Me.btnMatch_Equipos.Visibility = Telerik.WinControls.ElementVisibility.Visible
+        '
         'Formulario_Principal
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -558,7 +587,6 @@ Partial Class Formulario_Principal
         CType(Me.Barra_Tool_Registros, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.RadPanel_Registros, System.ComponentModel.ISupportInitialize).EndInit()
         Me.RadPanel_Registros.ResumeLayout(False)
-        CType(Me.dgvRegistros.MasterTemplate, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.dgvRegistros, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.MapaUbicacion, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me, System.ComponentModel.ISupportInitialize).EndInit()
@@ -608,5 +636,8 @@ Partial Class Formulario_Principal
     Friend WithEvents btnImportar_Modelo As Telerik.WinControls.UI.RadButtonElement
     Friend WithEvents RadRibbonBarGroup7 As Telerik.WinControls.UI.RadRibbonBarGroup
     Friend WithEvents btnAcceso_Sistema_Captura As Telerik.WinControls.UI.RadButtonElement
+    Friend WithEvents btnEquipo As Telerik.WinControls.UI.RadButtonElement
+    Friend WithEvents btnMatch_Equipos As Telerik.WinControls.UI.RadButtonElement
+    Friend WithEvents RadRibbonBarButtonGroup1 As Telerik.WinControls.UI.RadRibbonBarButtonGroup
 
 End Class
