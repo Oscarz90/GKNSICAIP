@@ -371,7 +371,7 @@ Public Class Modelo
             "join TC t on t.cve_linea=l.cve_linea " &
             "join modelo m on t.cve_modelo=m.cve_modelo " &
             "where rt.cve_registro_turno=" & vcve_registro_turno & " and " &
-            "m.cve_modelo in (select p.cve_modelo from produccion p join modelo mod on mod.cve_modelo=p.cve_modelo" &
+            "m.cve_modelo in (select p.cve_modelo from produccion p join modelo mod on mod.cve_modelo=p.cve_modelo " &
             "where p.cve_registro_turno=" & vcve_registro_turno & " and p.estatus='1' and mod.estatus='1') and t.estatus='1' and m.estatus='1' and l.estatus='1' order by t.fecha desc"
         Try
             dtModelos = oBD.ObtenerTabla(query)

@@ -174,7 +174,7 @@ Public Class Turno
                 cmd.CommandType = CommandType.StoredProcedure
                 cmd.CommandText = "valida_inicio_fin"
                 cmd.Parameters.Add("@turno", SqlDbType.BigInt).Value = Me.vcve_turno
-                cmd.Parameters.Add("@fecha", SqlDbType.VarChar).Value = Me.vfecha_registro.ToString("MM-dd-yyyy HH:mm")
+                cmd.Parameters.Add("@fecha", SqlDbType.DateTime).Value = Me.vfecha_registro.ToString("yyyy-MM-dd HH:mm")
                 Dim obj As DataTable = oBD.EjecutaCommando(cmd)
                 'Me.vinicio = obj.Rows(0)(0)
                 Me.vbandera_registro = obj.Rows(0)(0)
