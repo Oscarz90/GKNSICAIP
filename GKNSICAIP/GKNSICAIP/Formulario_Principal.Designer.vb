@@ -52,8 +52,10 @@ Partial Class Formulario_Principal
         Me.btnTiempo_Ciclo = New Telerik.WinControls.UI.RadButtonElement()
         Me.btnImportar_TC = New Telerik.WinControls.UI.RadButtonElement()
         Me.btnImportar_Modelo = New Telerik.WinControls.UI.RadButtonElement()
+        Me.btnEquipo = New Telerik.WinControls.UI.RadButtonElement()
         Me.RadRibbonBarGroup3 = New Telerik.WinControls.UI.RadRibbonBarGroup()
         Me.btnEquipo_Linea = New Telerik.WinControls.UI.RadButtonElement()
+        Me.btnMatch_Equipos = New Telerik.WinControls.UI.RadButtonElement()
         Me.RadRibbonBarGroup7 = New Telerik.WinControls.UI.RadRibbonBarGroup()
         Me.btnAcceso_Sistema_Captura = New Telerik.WinControls.UI.RadButtonElement()
         Me.RibbonTab5 = New Telerik.WinControls.UI.RibbonTab()
@@ -66,8 +68,6 @@ Partial Class Formulario_Principal
         Me.btnCategorias = New Telerik.WinControls.UI.RadButtonElement()
         Me.btnSubCategorias = New Telerik.WinControls.UI.RadButtonElement()
         Me.RadRibbonBarButtonGroup1 = New Telerik.WinControls.UI.RadRibbonBarButtonGroup()
-        Me.btnEquipo = New Telerik.WinControls.UI.RadButtonElement()
-        Me.btnMatch_Equipos = New Telerik.WinControls.UI.RadButtonElement()
         CType(Me.RadStatusStrip1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.Barra_Tool_Registros, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.RadPanel_Registros, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -403,6 +403,15 @@ Partial Class Formulario_Principal
         Me.btnImportar_Modelo.TextAlignment = System.Drawing.ContentAlignment.BottomCenter
         Me.btnImportar_Modelo.Visibility = Telerik.WinControls.ElementVisibility.Visible
         '
+        'btnEquipo
+        '
+        Me.btnEquipo.AccessibleDescription = "Equipo"
+        Me.btnEquipo.AccessibleName = "Equipo"
+        Me.btnEquipo.Name = "btnEquipo"
+        Me.btnEquipo.Text = "Equipo"
+        Me.btnEquipo.TextAlignment = System.Drawing.ContentAlignment.BottomCenter
+        Me.btnEquipo.Visibility = Telerik.WinControls.ElementVisibility.Visible
+        '
         'RadRibbonBarGroup3
         '
         Me.RadRibbonBarGroup3.AccessibleDescription = "Asignaciones"
@@ -422,6 +431,15 @@ Partial Class Formulario_Principal
         Me.btnEquipo_Linea.Text = "Equipo_Linea"
         Me.btnEquipo_Linea.TextAlignment = System.Drawing.ContentAlignment.BottomCenter
         Me.btnEquipo_Linea.Visibility = Telerik.WinControls.ElementVisibility.Visible
+        '
+        'btnMatch_Equipos
+        '
+        Me.btnMatch_Equipos.AccessibleDescription = "Match Equipos"
+        Me.btnMatch_Equipos.AccessibleName = "Match Equipos"
+        Me.btnMatch_Equipos.Name = "btnMatch_Equipos"
+        Me.btnMatch_Equipos.Text = "Match Equipos"
+        Me.btnMatch_Equipos.TextAlignment = System.Drawing.ContentAlignment.BottomCenter
+        Me.btnMatch_Equipos.Visibility = Telerik.WinControls.ElementVisibility.Visible
         '
         'RadRibbonBarGroup7
         '
@@ -545,24 +563,6 @@ Partial Class Formulario_Principal
         Me.RadRibbonBarButtonGroup1.Orientation = System.Windows.Forms.Orientation.Vertical
         Me.RadRibbonBarButtonGroup1.Text = "RadRibbonBarButtonGroup1"
         Me.RadRibbonBarButtonGroup1.Visibility = Telerik.WinControls.ElementVisibility.Visible
-        '
-        'btnEquipo
-        '
-        Me.btnEquipo.AccessibleDescription = "Equipo"
-        Me.btnEquipo.AccessibleName = "Equipo"
-        Me.btnEquipo.Name = "btnEquipo"
-        Me.btnEquipo.Text = "Equipo"
-        Me.btnEquipo.TextAlignment = System.Drawing.ContentAlignment.BottomCenter
-        Me.btnEquipo.Visibility = Telerik.WinControls.ElementVisibility.Visible
-        '
-        'btnMatch_Equipos
-        '
-        Me.btnMatch_Equipos.AccessibleDescription = "Match Equipos"
-        Me.btnMatch_Equipos.AccessibleName = "Match Equipos"
-        Me.btnMatch_Equipos.Name = "btnMatch_Equipos"
-        Me.btnMatch_Equipos.Text = "Match Equipos"
-        Me.btnMatch_Equipos.TextAlignment = System.Drawing.ContentAlignment.BottomCenter
-        Me.btnMatch_Equipos.Visibility = Telerik.WinControls.ElementVisibility.Visible
         '
         'Formulario_Principal
         '

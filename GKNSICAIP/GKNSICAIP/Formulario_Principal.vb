@@ -17,6 +17,7 @@ Public Class Formulario_Principal
     Dim vUsuario As Boolean = False '---------------
     Dim vTipo_Usuario As Boolean = False '-----------
     Dim vPermisos As Boolean = False '--------------
+    Dim vEquipo As Boolean = False '--------------
 #End Region
 
 #Region "Declaracion de Objetos_Clases_Catalogos"
@@ -26,6 +27,7 @@ Public Class Formulario_Principal
     Dim oCatalogo_Tiempo_Ciclo As Catalogo_Tiempo_Ciclo
     Dim oCatalogo_Tipo_Usuario As Catalogo_Tipo_Usuario '--------
     Dim oCatalogo_Usuario As Catalogo_Usuario '--------
+    Dim oCatalogo_Equipo As Catalogo_Equipo '--------
 #End Region
 
 #Region "Declaracion de Objetos_Clases_Individiduales"
@@ -36,6 +38,7 @@ Public Class Formulario_Principal
     Dim oEquipo_Linea As EquipoLinea
     Dim oUsuario As SEGURIDAD_USUARIO
     Dim oTipo_Usuario As Tipo_Usuario
+    Dim oEquipo As Equipo '--------
 #End Region
 
 #Region "Declaracion de Objetos de Formularios"
@@ -51,6 +54,7 @@ Public Class Formulario_Principal
     Dim ofrmGraficas As FrmGraficasfaseuno
     Dim ofrmImportar_Modelo As FrmImportar_Modelo
     Dim ofrmAcceso_Sistema_SICAIP As frmLogin
+    Dim ofrmEquipo As frmEquipo
 #End Region
 
 #Region "Opciones de Menu"
@@ -519,7 +523,65 @@ Public Class Formulario_Principal
             MsgBox("El Usuario no cuenta con los permisos suficientes para entrar en 'Acceso Captura SICAIP'")
         End If
     End Sub
+    ''Abrir gridview con la informacion de los equipos
+    Private Sub btnEquipo_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnEquipo.Click
+        If Permiso_Asignado("CATALOGOEQUIPO") = True Then
+            oCatalogo_Equipo = New Catalogo_Equipo
+            oEquipo = New Equipo
+            MapaUbicacion.Text = "Catalogo Equipo"
 
+            Me.dgvRegistros.DataSource = Nothing
+            Me.dgvRegistros.Columns.Clear()
+            Me.dgvRegistros.Visible = True
+            Me.Barra_Tool_Registros.Visible = True
+            'Me.btnEliminar.VisibleInStrip = False
+
+            If Permiso_Asignado("CATALOGOEQUIPO.REGISTRAR") = True Then
+                Me.btnAdd.Enabled = False
+                Me.btnModificar.Enabled = True
+            Else
+                Me.btnAdd.Enabled = False
+                Me.btnModificar.Enabled = False
+            End If
+            If Permiso_Asignado("CATALOGOEQUIPO.ELIMINAR") = True Then
+                Me.btnEliminar.Enabled = False
+            Else
+                Me.btnEliminar.Enabled = False
+            End If
+
+
+            Try
+                Me.dgvRegistros.DataSource = oCatalogo_Equipo.Obtener_Equipos()
+            Catch ex As Exception
+                MsgBox(ex.Message)
+            End Try
+
+            Me.dgvRegistros.Columns("cve_equipo").HeaderText = "cve_equipo"
+            Me.dgvRegistros.Columns("cve_equipo").IsVisible = False
+            Me.dgvRegistros.Columns("cve_equipo").Name = "CVE"
+
+            Me.dgvRegistros.Columns("equipo").HeaderText = "equipo"
+            Me.dgvRegistros.Columns("equipo").Width = 250
+
+            Me.dgvRegistros.Columns("LET").HeaderText = "Nombre Let"
+            Me.dgvRegistros.Columns("LET").Width = 250
+
+            Me.dgvRegistros.Columns("LG").HeaderText = "Nombre LG"
+            Me.dgvRegistros.Columns("LG").Width = 150
+
+            Me.dgvRegistros.Columns("descripcion").HeaderText = "Tipo tlatoani"
+            Me.dgvRegistros.Columns("descripcion").Width = 150
+
+            dgvRegistros.Visible = True
+            Activar_Formulario("frmEquipo")
+
+            Me.dgvRegistros.EnableGrouping = True
+            Me.dgvRegistros.GroupDescriptors.Clear()
+            Me.dgvRegistros.GroupDescriptors.Add(New GridGroupByExpression(Me.dgvRegistros.Columns("descripcion")))
+        Else
+            MsgBox("El Usuario no cuenta con los permisos suficientes para entrar al 'Catalogo de Equipo'")
+        End If
+    End Sub
 #End Region
 
 #Region "Opciones de Registros"
@@ -632,6 +694,26 @@ Public Class Formulario_Principal
                 ofrmTipo_Usuario.vId_Publico = 0
                 ofrmTipo_Usuario.ShowDialog()
                 btnTipoUsuario.PerformClick()
+            Else
+                MsgBox("El Usuario no tiene los privilegios para ver los Detalles")
+            End If
+        ElseIf vEquipo = True Then
+            If Permiso_Asignado("CATALOGOEQUIPO.VER") = True Then
+                If Permiso_Asignado("CATALOGOEQUIPO.REGISTRAR") = True Then
+                    vPermiso_Add = False
+                Else
+                    vPermiso_Add = False
+                End If
+                'If Permiso_Asignado("CATALOGOMAQUINA.ELIMINAR") = True Then
+                '    vPermiso_Delete = True
+                'Else
+                '    vPermiso_Delete = False
+                'End If
+                ofrmEquipo = New frmEquipo(vPermiso_Add, vPermiso_Delete)
+                ofrmMaquina.vId_Publico = 0
+                ofrmMaquina.ShowDialog()
+                ''Se realiza la llamada al evento clic del btnEquipo para actualizar el dgvRegistros
+                btnMaquina.PerformClick()
             Else
                 MsgBox("El Usuario no tiene los privilegios para ver los Detalles")
             End If
@@ -751,6 +833,27 @@ Public Class Formulario_Principal
             Else
                 MsgBox("El Usuario no tiene los privilegios para ver los Detalles")
             End If
+            ''Codigo para Modificar catalogo equipo
+        ElseIf vEquipo = True Then
+            If Permiso_Asignado("CATALOGOEQUIPO.VER") = True Then
+                If Permiso_Asignado("CATALOGOEQUIPO.REGISTRAR") = True Then
+                    vPermiso_Add = True
+                Else
+                    vPermiso_Add = False
+                End If
+                If Permiso_Asignado("CATALOGOEQUIPO.ELIMINAR") = True Then
+                    vPermiso_Delete = False
+                Else
+                    vPermiso_Delete = False
+                End If
+                ofrmEquipo = New frmEquipo(vPermiso_Add, vPermiso_Delete)
+                ofrmEquipo.vId_Publico = vRowSeleccionada
+                ofrmEquipo.ShowDialog()
+                ''Se realiza la llamada al evento clic del btnLinea para actualizar el dgvRegistros
+                btnEquipo.PerformClick()
+            Else
+                MsgBox("El Usuario no tiene los privilegios para ver los Detalles")
+            End If
         End If
     End Sub
 
@@ -836,6 +939,23 @@ Public Class Formulario_Principal
             Else
                 MsgBox("El Usuario no tiene los privilegios para Eliminar o Dar Baja")
             End If
+            ''--------
+        ElseIf vEquipo = True Then
+            If Permiso_Asignado("CATALOGOEQUIPO.ELIMINAR") = True Then
+                If MsgBox("¿Esta seguro de Dar de Baja el Equipo?", MsgBoxStyle.YesNo, Me.Text) = MsgBoxResult.Yes Then
+                    oEquipo = New Equipo
+                    Try
+                        oEquipo.Cve_Equipo = vRowSeleccionada
+                        oEquipo.Eliminar()
+                        btnEquipo.PerformClick() ''Se realiza la llamada al evento clic del btnLinea para actualizar el dgvRegistros
+                    Catch ex As Exception
+
+                    End Try
+                End If
+            Else
+                MsgBox("El Usuario no tiene los privilegios para Eliminar o Dar Baja")
+            End If
+            ''--------
         End If
     End Sub
 #End Region
@@ -1019,6 +1139,36 @@ Public Class Formulario_Principal
                 Else
                     MsgBox("El Usuario no tiene los privilegios para ver los Detalles")
                 End If
+                '------------------
+            ElseIf vEquipo = True Then
+                If Permiso_Asignado("CATALOGOEQUIPO.VER") = True Then
+                    If Permiso_Asignado("CATALOGOEQUIPO.REGISTRAR") = True Then
+                        vPermiso_Add = True
+                    Else
+                        vPermiso_Add = False
+                    End If
+                    If Permiso_Asignado("CATALOGOEQUIPO.ELIMINAR") = True Then
+                        vPermiso_Delete = False
+                    Else
+                        vPermiso_Delete = False
+                    End If
+                    ofrmEquipo = New frmEquipo(vPermiso_Add, vPermiso_Delete)
+
+                    Try
+                        'ofrmTiempo_Ciclo.vId_Publico = dgvRegistros.Rows(vRowSeleccionada).Cells(0).Value
+                        ofrmEquipo.vId_Publico = vRowSeleccionada
+                    Catch ex As Exception
+                        If ex.TargetSite.MetadataToken.ToString = "100670847" Then
+                            ofrmEquipo.vId_Publico = 0
+                        End If
+                    End Try
+                    ofrmEquipo.ShowDialog()
+                    btnEquipo.PerformClick()
+                Else
+                    MsgBox("El Usuario no tiene los privilegios para ver los Detalles")
+                End If
+
+                '---------------
             End If
         Else
         End If
@@ -1050,6 +1200,7 @@ Public Class Formulario_Principal
             vTiempo_Ciclo = False
             vUsuario = False
             vTipo_Usuario = False
+            vEquipo = False
         ElseIf vNombre_De_Formulario = "frmModelo" Then
             vModelo = True
             '--
@@ -1058,6 +1209,7 @@ Public Class Formulario_Principal
             vTiempo_Ciclo = False
             vUsuario = False
             vTipo_Usuario = False
+            vEquipo = False
         ElseIf vNombre_De_Formulario = "frmMaquina" Then
             vMaquina = True
             '--
@@ -1066,6 +1218,7 @@ Public Class Formulario_Principal
             vTiempo_Ciclo = False
             vUsuario = False
             vTipo_Usuario = False
+            vEquipo = False
         ElseIf vNombre_De_Formulario = "frmTiempo_Ciclo" Then
             vTiempo_Ciclo = True
             '--
@@ -1074,6 +1227,7 @@ Public Class Formulario_Principal
             vMaquina = False
             vUsuario = False
             vTipo_Usuario = False
+            vEquipo = False
         ElseIf vNombre_De_Formulario = "frmUsuario" Then
             vUsuario = True
 
@@ -1082,6 +1236,7 @@ Public Class Formulario_Principal
             vModelo = False
             vMaquina = False
             vTipo_Usuario = False
+            vEquipo = False
         ElseIf vNombre_De_Formulario = "FrmTipo_Usuario" Then
             vTipo_Usuario = True
 
@@ -1090,6 +1245,16 @@ Public Class Formulario_Principal
             vModelo = False
             vMaquina = False
             vUsuario = False
+            vEquipo = False
+        ElseIf vEquipo = "frmEquipo" Then
+            vEquipo = True
+            '--
+            vLinea = False
+            vModelo = False
+            vMaquina = False
+            vTiempo_Ciclo = False
+            vUsuario = False
+            vTipo_Usuario = False
         End If
     End Sub
 
@@ -1112,7 +1277,5 @@ Public Class Formulario_Principal
         RadLabel_Usuario_Login.Text = RadLabel_Usuario_Login.Text & oUsuario_Login.Nombre
     End Sub
 
-    
-   
-  
+
 End Class
