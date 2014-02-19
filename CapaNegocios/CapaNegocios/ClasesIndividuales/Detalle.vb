@@ -88,4 +88,30 @@ Public Class Detalle
     End Property
 
 #End Region
+
+#Region "Metodos generales"
+    Public Function Obtener_Detalles() As DataTable
+        Dim vDT As DataTable
+        vDT = oBD.ObtenerTabla("select * from detalle")
+        If vDT IsNot Nothing Then
+
+        Else
+            vDT = Nothing
+        End If
+        Return vDT
+    End Function
+
+    Public Function Obtener_Detalles(ByVal vFiltro As String) As DataTable
+        Dim vDT As DataTable
+        vDT = oBD.ObtenerTabla("select * from detalle where componente LIKE '%" & vFiltro & "%'")
+        If vDT IsNot Nothing Then
+
+        Else
+            vDT = Nothing
+        End If
+        Return vDT
+    End Function
+
+#End Region
+
 End Class

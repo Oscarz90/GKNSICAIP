@@ -710,10 +710,10 @@ Public Class Formulario_Principal
                 '    vPermiso_Delete = False
                 'End If
                 ofrmEquipo = New frmEquipo(vPermiso_Add, vPermiso_Delete)
-                ofrmMaquina.vId_Publico = 0
-                ofrmMaquina.ShowDialog()
+                ofrmEquipo.vId_Publico = 0
+                ofrmEquipo.ShowDialog()
                 ''Se realiza la llamada al evento clic del btnEquipo para actualizar el dgvRegistros
-                btnMaquina.PerformClick()
+                btnEquipo.PerformClick()
             Else
                 MsgBox("El Usuario no tiene los privilegios para ver los Detalles")
             End If

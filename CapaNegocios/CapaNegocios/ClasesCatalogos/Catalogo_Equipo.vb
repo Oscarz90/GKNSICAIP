@@ -9,7 +9,7 @@ Namespace Clases_Catalogos
             Dim vDT As DataTable
             vDT = oBD.ObtenerTabla("SELECT cve_equipo, equipo, LET, LG, descripcion " & _
                                    " FROM lider l join equipo e on l.cve_lider=e.cve_lider " & _
-                                   " join detalle d on e.cve_detalle=d.cve_detalle")
+                                   " join detalle d on e.cve_detalle=d.cve_detalle order by d.descripcion asc")
             If vDT IsNot Nothing Then
 
             Else

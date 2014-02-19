@@ -1,5 +1,6 @@
 ﻿Imports CapaNegocios
 Public Class frmEquipo
+
     Public vId_Publico As Long
     Public vId_Retorno As Long
     Dim oEquipo As Equipo
@@ -16,44 +17,17 @@ Public Class frmEquipo
     End Sub
 
     Private Sub frmEquipo_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
-
         If Convert.ToInt64(vId_Publico) <> 0 Then
             oEquipo = New Equipo
             oEquipo.Cve_Equipo = vId_Publico
-            oEquipo.Cargar()
-            Controles_Registro_Nuevo(False) ''------hacer codigo
-            'vValida_Nombre = oLinea.linea.Count
-            'If vValida_Nombre > 0 Then
-            '    btnRegistrar.Enabled = True
-            '    btnModificar.Enabled = True
-            'Else
-            '    btnRegistrar.Enabled = False
-            '    btnModificar.Enabled = False
-            'End If
+            oEquipo.Cargar()            
         Else
-            oEquipo = New Equipo
-            oEquipo.Equipo = ""
-            Controles_Registro_Nuevo(True) ''------hacer codigo
-            'If vValida_Nombre > 0 Then
-            '    btnRegistrar.Enabled = True
-            '    btnModificar.Enabled = True
-            'Else
-            '    btnRegistrar.Enabled = False
-            '    btnModificar.Enabled = False
-            'End If
-        End If
-        vValida_Nombre = oEquipo.Equipo.Count
-        If vValida_Nombre > 0 Then
-            'btnRegistrar.Enabled = True
-            btnModificar.Enabled = True
-        Else
-            'btnRegistrar.Enabled = False
-            btnModificar.Enabled = False
-        End If
-        'Controles_Permisos(vAdd_Registrar, vDelete_Eliminar)
+            
+        End If      
+        Controles_Permisos(vAdd_Registrar, vDelete_Eliminar)
         SetBindings()
         Me.Show()
-        Me.txtEquipo.Focus()
+        Me.btnImportar.Focus()
     End Sub
 
     Private Sub btnSalir_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSalir.Click
@@ -61,10 +35,11 @@ Public Class frmEquipo
     End Sub
 
     Private Sub btnImportar_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnImportar.Click
+        'Importar Tipo Tlatoani
         Dim ofrmImportador_TipoTlatoani As New frmImportador_TipoTlatoani
         ofrmImportador_TipoTlatoani.ShowDialog()
-        ''oEquipo.Cve_Equipo = ofrmImportador_TipoTlatoani.vRetorno_CVE_Equipo
-        txtEquipo.Text = oEquipo.Equipo
+        oEquipo.Cve_Detalle = ofrmImportador_TipoTlatoani.vRetorno_CVE_Detalle
+        'txtTipo_Tlatoani.Text
 
         'txtComponente.Text = oLinea.Nombre_Componente
     End Sub
@@ -78,86 +53,45 @@ Public Class frmEquipo
     End Sub
 
     Private Sub btnModificar_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnModificar.Click
+        If vValida_Nombre > 0 Then
+            If MsgBox("¿Esta seguro de realizar los cambios al equipo?", MsgBoxStyle.YesNo, Me.Text) = MsgBoxResult.Yes Then
+                oEquipo.LETT = txtLet.Text
+                ''falta LG, img, tlatoani
+                Try
+                    oEquipo.Registrar()
+                    MsgBox("Se modifico correctamente")
+                Catch ex As Exception
 
+                End Try
+                Me.Close()
+            End If
+        End If
     End Sub
 
     ''---------------
     Private Sub SetBindings()
+        Me.txtCve_Kronos.DataBindings.Clear()
         Me.txtEquipo.DataBindings.Clear()
         Me.txtTipo_Tlatoani.DataBindings.Clear()
         Me.txtLG.DataBindings.Clear()
         Me.txtLet.DataBindings.Clear()
-        'img?
-
+        Me.txtImagen.DataBindings.Clear()
+        'picture box img?
+        Me.txtCve_Kronos.DataBindings.Add("Text", oEquipo, "cve_equipo_kronos")
         Me.txtEquipo.DataBindings.Add("Text", oEquipo, "equipo")
-        Me.txtTipo_Tlatoani.DataBindings.Add("Text", oEquipo, "Tipo tlatoani")
-        'Me.nudTPCM.DataBindings.Add("Value", oEquipo, "tpcdm")
+        Me.txtTipo_Tlatoani.DataBindings.Add("Text", oEquipo, "cve_detalle")
+        Me.txtLG.DataBindings.Add("Text", oEquipo, "cve_lider")
+        Me.txtLet.DataBindings.Add("Text", oEquipo, "LET")
+        Me.txtImagen.DataBindings.Add("Text", oEquipo, "rutaImagen")
     End Sub
 
-    Private Sub Controles_Registro_Nuevo(ByVal vEs_Registro_Nuevo As Boolean)
-        If vEs_Registro_Nuevo = True Then
-            'btnRegistrar.Visible = True
-            btnModificar.Visible = False
-            'btnDarBaja.Enabled = False
-            btnImportar.Enabled = True
-            txtEquipo.ReadOnly = False
-            'nudTPCM.ReadOnly = False
+    Private Sub Controles_Permisos(ByVal vAdd As Boolean, ByVal vDelete As Boolean)
+        If vAdd = True Then
+            Me.btnModificar.Enabled = True
         Else
-            'btnRegistrar.Visible = False
-            btnModificar.Visible = True
-            'btnDarBaja.Visible = True
-            'btnDarBaja.Enabled = True
-
-            btnImportar.Enabled = False
-            'txtNombre_Linea.ReadOnly = False
-            'nudTPCM.ReadOnly = False
-
+            Me.btnModificar.Enabled = False
         End If
+        
     End Sub
 
-    'Private Sub Controles_Permisos(ByVal vAdd As Boolean, ByVal vDelete As Boolean)
-    '    If vAdd = True Then
-    '        'Me.btnRegistrar.Enabled = True
-    '        Me.btnModificar.Enabled = True
-    '        'Me.btnDarBaja.Enabled = False
-    '        'txtNombre_Linea.ReadOnly = False
-    '        'nudTPCM.ReadOnly = False
-    '    Else
-    '        'Me.btnRegistrar.Enabled = False
-    '        Me.btnModificar.Enabled = False
-    '        'Me.btnDarBaja.Enabled = True
-    '        'txtNombre_Linea.ReadOnly = True
-    '        'nudTPCM.ReadOnly = True
-    '        'btnImportar.Enabled = False
-    '    End If
-    '    If vDelete = True Then
-    '        'Me.btnDarBaja.Enabled = True
-    '        'Me.btnRegistrar.Enabled = False
-    '        'Me.btnModificar.Enabled = False
-    '        'txtNombre_Linea.ReadOnly = True
-    '        'nudTPCM.ReadOnly = True
-    '        'btnImportar.Enabled = False
-    '    Else
-    '        'Me.btnDarBaja.Enabled = False
-    '        'Me.btnRegistrar.Enabled = True
-    '        Me.btnModificar.Enabled = True
-    '    End If
-    '    If vAdd = False And vDelete = False Then
-    '        'txtNombre_Linea.ReadOnly = True
-    '        'nudTPCM.ReadOnly = True
-    '        'btnImportar.Enabled = False
-    '        Me.btnDarBaja.Enabled = False
-    '        Me.btnRegistrar.Enabled = False
-    '        Me.btnModificar.Enabled = False
-    '    End If
-    '    If vAdd = True And vDelete = True Then
-    '        'txtNombre_Linea.ReadOnly = False
-    '        'nudTPCM.ReadOnly = False
-    '        'btnImportar.Enabled = False
-    '        Me.btnDarBaja.Enabled = True
-    '        Me.btnRegistrar.Enabled = True
-    '        Me.btnModificar.Enabled = True
-    '    End If
-    'End Sub
-    ''----------------
 End Class
