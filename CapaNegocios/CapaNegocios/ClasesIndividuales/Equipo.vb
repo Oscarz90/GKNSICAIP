@@ -2,6 +2,8 @@
 Public Class Equipo
     Implements IIndividual
     Dim cadena_conexion As New CapaDatos.conexiones
+    Dim oDetalle As Detalle
+    Dim oLider As Lider
     Dim oBD As New CapaDatos.CapaDatos(cadena_conexion.CadenaSicaip)
 #Region "IIndividual"
     Public Sub Cargar() Implements IIndividual.Cargar
@@ -163,6 +165,32 @@ Public Class Equipo
         Set(ByVal value As String)
             vRuta_Imagen = value
         End Set
+    End Property
+
+    Public ReadOnly Property Nombre_Detalle() As String
+        Get
+            If Cve_Detalle <> 0 Then
+                oDetalle = New Detalle
+                oDetalle.Cve_Detalle = Cve_Detalle
+                oDetalle.Cargar()
+                Return oDetalle.Descripcion
+            Else
+                Return ""
+            End If
+        End Get
+    End Property
+
+    Public ReadOnly Property Nombre_Lider() As String
+        Get
+            If Cve_Lider <> 0 Then
+                oLider = New Lider
+                oLider.cve_lider = Cve_Lider
+                oLider.Cargar()
+                Return oLider.LG
+            Else
+                Return ""
+            End If
+        End Get
     End Property
 
 #End Region

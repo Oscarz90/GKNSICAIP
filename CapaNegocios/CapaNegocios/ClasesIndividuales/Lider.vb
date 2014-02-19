@@ -87,4 +87,29 @@ Public Class Lider
     End Property
 
 #End Region
+#Region "Metodos generales"
+
+    Public Function Obtener_Lineas() As DataTable
+        Dim vDT As DataTable
+        vDT = oBD.ObtenerTabla("select * from linea")
+        If vDT IsNot Nothing Then
+
+        Else
+            vDT = Nothing
+        End If
+        Return vDT
+    End Function
+
+    Public Function Obtener_Lineas(ByVal vFiltro As String) As DataTable
+        Dim vDT As DataTable
+        vDT = oBD.ObtenerTabla("select * from linea where linea LIKE '%" & vFiltro & "%'")
+        If vDT IsNot Nothing Then
+
+        Else
+            vDT = Nothing
+        End If
+        Return vDT
+    End Function
+
+#End Region
 End Class

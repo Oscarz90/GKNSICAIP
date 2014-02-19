@@ -81,6 +81,13 @@ Namespace My.Resources
             End Get
         End Property
         
+        Friend ReadOnly Property Estrategias3() As System.Drawing.Bitmap
+            Get
+                Dim obj As Object = ResourceManager.GetObject("Estrategias3", resourceCulture)
+                Return CType(obj,System.Drawing.Bitmap)
+            End Get
+        End Property
+        
         Friend ReadOnly Property frmEnviarEmailAddTo() As System.Drawing.Bitmap
             Get
                 Dim obj As Object = ResourceManager.GetObject("frmEnviarEmailAddTo", resourceCulture)

@@ -6,7 +6,7 @@ Public Class frmEquipo
     Dim oEquipo As Equipo
     Dim vAdd_Registrar As Boolean = True
     Dim vDelete_Eliminar As Boolean = True
-    Dim vValida_Nombre As Integer = 0
+    Dim vValida_Tlatoani As Integer = 0
 
     Sub New(Optional ByVal vRegistrar As Boolean = True, Optional ByVal vEliminar As Boolean = True)
         ' Llamada necesaria para el diseñador.
@@ -16,14 +16,15 @@ Public Class frmEquipo
         ' Agregue cualquier inicialización después de la llamada a InitializeComponent().
     End Sub
 
+#Region "Eventos de controles"
     Private Sub frmEquipo_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         If Convert.ToInt64(vId_Publico) <> 0 Then
             oEquipo = New Equipo
             oEquipo.Cve_Equipo = vId_Publico
-            oEquipo.Cargar()            
+            oEquipo.Cargar()
         Else
-            
-        End If      
+
+        End If
         Controles_Permisos(vAdd_Registrar, vDelete_Eliminar)
         SetBindings()
         Me.Show()
@@ -39,13 +40,15 @@ Public Class frmEquipo
         Dim ofrmImportador_TipoTlatoani As New frmImportador_TipoTlatoani
         ofrmImportador_TipoTlatoani.ShowDialog()
         oEquipo.Cve_Detalle = ofrmImportador_TipoTlatoani.vRetorno_CVE_Detalle
-        'txtTipo_Tlatoani.Text
-
-        'txtComponente.Text = oLinea.Nombre_Componente
+        txtTipo_Tlatoani.Text = oEquipo.Nombre_Detalle
     End Sub
 
     Private Sub btnImportar_LG_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnImportar_LG.Click
-
+        'Importar Lider
+        Dim ofrmImportador_LG As New frmImportador_LG
+        ofrmImportador_LG.ShowDialog()
+        oEquipo.Cve_Lider = ofrmImportador_LG.vRetorno_CVE_Lider
+        txtLG.Text = oEquipo.Nombre_Lider
     End Sub
 
     Private Sub btnImportar_Imagen_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnImportar_Imagen.Click
@@ -53,10 +56,14 @@ Public Class frmEquipo
     End Sub
 
     Private Sub btnModificar_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnModificar.Click
-        If vValida_Nombre > 0 Then
+        If vValida_Tlatoani > 0 Then
             If MsgBox("¿Esta seguro de realizar los cambios al equipo?", MsgBoxStyle.YesNo, Me.Text) = MsgBoxResult.Yes Then
+                Dim ofrmImportador_TipoTlatoani As New frmImportador_TipoTlatoani
+                Dim ofrmImportador_LG As New frmImportador_LG
+                oEquipo.Cve_Detalle = ofrmImportador_TipoTlatoani.vRetorno_CVE_Detalle
+                oEquipo.Cve_Lider = ofrmImportador_LG.vRetorno_CVE_Lider
                 oEquipo.LETT = txtLet.Text
-                ''falta LG, img, tlatoani
+                'img hacer importador
                 Try
                     oEquipo.Registrar()
                     MsgBox("Se modifico correctamente")
@@ -68,7 +75,18 @@ Public Class frmEquipo
         End If
     End Sub
 
-    ''---------------
+    Private Sub txtTipo_Tlatoani_KeyUp(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtTipo_Tlatoani.KeyUp
+        vValida_Tlatoani = txtTipo_Tlatoani.Text.Count
+
+        If vValida_Tlatoani > 0 Then
+            btnModificar.Enabled = True
+        Else
+            btnModificar.Enabled = False
+        End If
+    End Sub
+#End Region
+
+#Region "Metodos"
     Private Sub SetBindings()
         Me.txtCve_Kronos.DataBindings.Clear()
         Me.txtEquipo.DataBindings.Clear()
@@ -91,7 +109,8 @@ Public Class frmEquipo
         Else
             Me.btnModificar.Enabled = False
         End If
-        
+
     End Sub
+#End Region
 
 End Class

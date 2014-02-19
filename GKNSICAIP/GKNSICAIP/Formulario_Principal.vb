@@ -551,7 +551,10 @@ Public Class Formulario_Principal
 
 
             Try
-                Me.dgvRegistros.DataSource = oCatalogo_Equipo.Obtener_Equipos()
+                Dim vDT As DataTable
+                vDT = oCatalogo_Equipo.Obtener_Equipos()
+                Me.dgvRegistros.DataSource = vDT
+
             Catch ex As Exception
                 MsgBox(ex.Message)
             End Try
@@ -1246,7 +1249,7 @@ Public Class Formulario_Principal
             vMaquina = False
             vUsuario = False
             vEquipo = False
-        ElseIf vEquipo = "frmEquipo" Then
+        ElseIf vNombre_De_Formulario = "frmEquipo" Then
             vEquipo = True
             '--
             vLinea = False

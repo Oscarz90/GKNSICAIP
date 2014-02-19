@@ -40,9 +40,6 @@ Partial Class frmEquipo
         Me.titulo_banner_formulario = New System.Windows.Forms.Label()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.Label1 = New System.Windows.Forms.Label()
-        Me.PictureBox2 = New System.Windows.Forms.PictureBox()
-        Me.pbImagen = New System.Windows.Forms.PictureBox()
-        Me.PictureBox1 = New System.Windows.Forms.PictureBox()
         Me.Label7 = New System.Windows.Forms.Label()
         Me.Label8 = New System.Windows.Forms.Label()
         Me.Label9 = New System.Windows.Forms.Label()
@@ -50,6 +47,9 @@ Partial Class frmEquipo
         Me.Label11 = New System.Windows.Forms.Label()
         Me.Label12 = New System.Windows.Forms.Label()
         Me.Label13 = New System.Windows.Forms.Label()
+        Me.PictureBox2 = New System.Windows.Forms.PictureBox()
+        Me.pbImagen = New System.Windows.Forms.PictureBox()
+        Me.PictureBox1 = New System.Windows.Forms.PictureBox()
         CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.pbImagen, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -216,34 +216,6 @@ Partial Class frmEquipo
         Me.Label1.TabIndex = 129
         Me.Label1.Text = "Cve_Kronos:"
         '
-        'PictureBox2
-        '
-        Me.PictureBox2.BackgroundImage = Global.GKNSICAIP.My.Resources.Resources.banner_03
-        Me.PictureBox2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
-        Me.PictureBox2.Location = New System.Drawing.Point(-1, 1)
-        Me.PictureBox2.Name = "PictureBox2"
-        Me.PictureBox2.Size = New System.Drawing.Size(469, 54)
-        Me.PictureBox2.TabIndex = 148
-        Me.PictureBox2.TabStop = False
-        '
-        'pbImagen
-        '
-        Me.pbImagen.Location = New System.Drawing.Point(90, 237)
-        Me.pbImagen.Name = "pbImagen"
-        Me.pbImagen.Size = New System.Drawing.Size(250, 170)
-        Me.pbImagen.TabIndex = 145
-        Me.pbImagen.TabStop = False
-        '
-        'PictureBox1
-        '
-        Me.PictureBox1.BackgroundImage = Global.GKNSICAIP.My.Resources.Resources.banner_03
-        Me.PictureBox1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
-        Me.PictureBox1.Location = New System.Drawing.Point(-92, -101)
-        Me.PictureBox1.Name = "PictureBox1"
-        Me.PictureBox1.Size = New System.Drawing.Size(469, 54)
-        Me.PictureBox1.TabIndex = 128
-        Me.PictureBox1.TabStop = False
-        '
         'Label7
         '
         Me.Label7.AutoSize = True
@@ -309,6 +281,34 @@ Partial Class frmEquipo
         Me.Label13.Size = New System.Drawing.Size(68, 13)
         Me.Label13.TabIndex = 149
         Me.Label13.Text = "Cve_Kronos:"
+        '
+        'PictureBox2
+        '
+        Me.PictureBox2.BackgroundImage = Global.GKNSICAIP.My.Resources.Resources.banner_03
+        Me.PictureBox2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
+        Me.PictureBox2.Location = New System.Drawing.Point(-1, 1)
+        Me.PictureBox2.Name = "PictureBox2"
+        Me.PictureBox2.Size = New System.Drawing.Size(469, 54)
+        Me.PictureBox2.TabIndex = 148
+        Me.PictureBox2.TabStop = False
+        '
+        'pbImagen
+        '
+        Me.pbImagen.Location = New System.Drawing.Point(90, 237)
+        Me.pbImagen.Name = "pbImagen"
+        Me.pbImagen.Size = New System.Drawing.Size(250, 170)
+        Me.pbImagen.TabIndex = 145
+        Me.pbImagen.TabStop = False
+        '
+        'PictureBox1
+        '
+        Me.PictureBox1.BackgroundImage = Global.GKNSICAIP.My.Resources.Resources.banner_03
+        Me.PictureBox1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
+        Me.PictureBox1.Location = New System.Drawing.Point(-92, -101)
+        Me.PictureBox1.Name = "PictureBox1"
+        Me.PictureBox1.Size = New System.Drawing.Size(469, 54)
+        Me.PictureBox1.TabIndex = 128
+        Me.PictureBox1.TabStop = False
         '
         'frmEquipo
         '
