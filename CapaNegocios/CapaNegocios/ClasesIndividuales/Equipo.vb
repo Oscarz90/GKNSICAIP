@@ -45,6 +45,11 @@ Public Class Equipo
             Else
                 vRuta_Imagen = ""
             End If
+            If Not IsDBNull(vDR("imagen")) Then
+                vImagen = vDR("imagen")
+            Else
+                vImagen = ""
+            End If
         End If
     End Sub
 
@@ -100,6 +105,7 @@ Public Class Equipo
     Private vEquipo As String
     Private vLET As String
     Private vRuta_Imagen As String
+    Private vImagen As Object
 #End Region
 #Region "Propiedades"
 
@@ -166,6 +172,17 @@ Public Class Equipo
             vRuta_Imagen = value
         End Set
     End Property
+
+
+    Public Property Imagen() As Object
+        Get
+            Return vImagen
+        End Get
+        Set(ByVal value As Object)
+            vImagen = value
+        End Set
+    End Property
+
 
     Public ReadOnly Property Nombre_Detalle() As String
         Get

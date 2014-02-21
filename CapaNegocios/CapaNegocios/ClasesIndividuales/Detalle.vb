@@ -103,7 +103,7 @@ Public Class Detalle
 
     Public Function Obtener_Detalles(ByVal vFiltro As String) As DataTable
         Dim vDT As DataTable
-        vDT = oBD.ObtenerTabla("select * from detalle where componente LIKE '%" & vFiltro & "%'")
+        vDT = oBD.ObtenerTabla("select * from detalle where descripcion LIKE '%" & vFiltro & "%'")
         If vDT IsNot Nothing Then
 
         Else

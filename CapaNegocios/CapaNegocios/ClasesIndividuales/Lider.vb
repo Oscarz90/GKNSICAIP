@@ -91,7 +91,7 @@ Public Class Lider
 
     Public Function Obtener_Lineas() As DataTable
         Dim vDT As DataTable
-        vDT = oBD.ObtenerTabla("select * from linea")
+        vDT = oBD.ObtenerTabla("select * from lider")
         If vDT IsNot Nothing Then
 
         Else
@@ -102,7 +102,7 @@ Public Class Lider
 
     Public Function Obtener_Lineas(ByVal vFiltro As String) As DataTable
         Dim vDT As DataTable
-        vDT = oBD.ObtenerTabla("select * from linea where linea LIKE '%" & vFiltro & "%'")
+        vDT = oBD.ObtenerTabla("select * from lider where LG LIKE '%" & vFiltro & "%'")
         If vDT IsNot Nothing Then
 
         Else

@@ -50,6 +50,7 @@ Partial Class frmEquipo
         Me.PictureBox2 = New System.Windows.Forms.PictureBox()
         Me.pbImagen = New System.Windows.Forms.PictureBox()
         Me.PictureBox1 = New System.Windows.Forms.PictureBox()
+        Me.ofdImagen = New System.Windows.Forms.OpenFileDialog()
         CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.pbImagen, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -132,6 +133,7 @@ Partial Class frmEquipo
         Me.txtImagen.Location = New System.Drawing.Point(98, 209)
         Me.txtImagen.MaxLength = 30
         Me.txtImagen.Name = "txtImagen"
+        Me.txtImagen.ReadOnly = True
         Me.txtImagen.Size = New System.Drawing.Size(242, 20)
         Me.txtImagen.TabIndex = 138
         '
@@ -148,6 +150,7 @@ Partial Class frmEquipo
         Me.txtLG.Location = New System.Drawing.Point(98, 156)
         Me.txtLG.MaxLength = 30
         Me.txtLG.Name = "txtLG"
+        Me.txtLG.ReadOnly = True
         Me.txtLG.Size = New System.Drawing.Size(242, 20)
         Me.txtLG.TabIndex = 136
         '
@@ -156,6 +159,7 @@ Partial Class frmEquipo
         Me.txtTipo_Tlatoani.Location = New System.Drawing.Point(98, 129)
         Me.txtTipo_Tlatoani.MaxLength = 30
         Me.txtTipo_Tlatoani.Name = "txtTipo_Tlatoani"
+        Me.txtTipo_Tlatoani.ReadOnly = True
         Me.txtTipo_Tlatoani.Size = New System.Drawing.Size(242, 20)
         Me.txtTipo_Tlatoani.TabIndex = 135
         '
@@ -310,6 +314,10 @@ Partial Class frmEquipo
         Me.PictureBox1.TabIndex = 128
         Me.PictureBox1.TabStop = False
         '
+        'ofdImagen
+        '
+        Me.ofdImagen.FileName = "OpenFileDialog1"
+        '
         'frmEquipo
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -381,4 +389,5 @@ Partial Class frmEquipo
     Friend WithEvents Label11 As System.Windows.Forms.Label
     Friend WithEvents Label12 As System.Windows.Forms.Label
     Friend WithEvents Label13 As System.Windows.Forms.Label
+    Friend WithEvents ofdImagen As System.Windows.Forms.OpenFileDialog
 End Class

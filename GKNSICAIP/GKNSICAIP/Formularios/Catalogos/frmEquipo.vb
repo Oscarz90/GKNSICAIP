@@ -52,7 +52,17 @@ Public Class frmEquipo
     End Sub
 
     Private Sub btnImportar_Imagen_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnImportar_Imagen.Click
+        'Cargar una imagen
+        Try
+            ofdImagen.ShowDialog()
+            pbImagen.ImageLocation = ofdImagen.FileName
+            pbImagen.Refresh()
+            'validar tamaño de imagen
+            'pbImagen.Image.Width
 
+        Catch ex As Exception
+
+        End Try
     End Sub
 
     Private Sub btnModificar_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnModificar.Click
@@ -94,13 +104,15 @@ Public Class frmEquipo
         Me.txtLG.DataBindings.Clear()
         Me.txtLet.DataBindings.Clear()
         Me.txtImagen.DataBindings.Clear()
-        'picture box img?
+        Me.pbImagen.DataBindings.Clear()
+
         Me.txtCve_Kronos.DataBindings.Add("Text", oEquipo, "cve_equipo_kronos")
         Me.txtEquipo.DataBindings.Add("Text", oEquipo, "equipo")
-        Me.txtTipo_Tlatoani.DataBindings.Add("Text", oEquipo, "cve_detalle")
-        Me.txtLG.DataBindings.Add("Text", oEquipo, "cve_lider")
-        Me.txtLet.DataBindings.Add("Text", oEquipo, "LET")
-        Me.txtImagen.DataBindings.Add("Text", oEquipo, "rutaImagen")
+        Me.txtTipo_Tlatoani.DataBindings.Add("Text", oEquipo, "Nombre_Detalle")
+        Me.txtLG.DataBindings.Add("Text", oEquipo, "Nombre_Lider")
+        Me.txtLet.DataBindings.Add("Text", oEquipo, "LETT")
+        Me.txtImagen.DataBindings.Add("Text", oEquipo, "Ruta_Imagen")
+        Me.pbImagen.DataBindings.Add("Text", oEquipo, "Imagen")
     End Sub
 
     Private Sub Controles_Permisos(ByVal vAdd As Boolean, ByVal vDelete As Boolean)

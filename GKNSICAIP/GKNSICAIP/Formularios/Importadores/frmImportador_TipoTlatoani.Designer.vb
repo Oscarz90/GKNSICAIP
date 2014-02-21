@@ -25,9 +25,6 @@ Partial Class frmImportador_TipoTlatoani
         Me.banner_formulario = New System.Windows.Forms.PictureBox()
         Me.titulo_banner_formulario = New System.Windows.Forms.Label()
         Me.dgvDatos = New System.Windows.Forms.DataGridView()
-        Me.cve_detalle = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.tipo = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.descripcion = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.btnImportar = New System.Windows.Forms.Button()
         Me.btnCancelar = New System.Windows.Forms.Button()
         Me.rbtTodos = New System.Windows.Forms.RadioButton()
@@ -35,6 +32,9 @@ Partial Class frmImportador_TipoTlatoani
         Me.rbtFiltro_Nombre = New System.Windows.Forms.RadioButton()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.txtParametro = New System.Windows.Forms.TextBox()
+        Me.cve_detalle = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.tipo = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.descripcion = New System.Windows.Forms.DataGridViewTextBoxColumn()
         CType(Me.banner_formulario, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.dgvDatos, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
@@ -73,25 +73,6 @@ Partial Class frmImportador_TipoTlatoani
         Me.dgvDatos.ReadOnly = True
         Me.dgvDatos.Size = New System.Drawing.Size(291, 315)
         Me.dgvDatos.TabIndex = 114
-        '
-        'cve_detalle
-        '
-        Me.cve_detalle.HeaderText = "cve_detalle"
-        Me.cve_detalle.Name = "cve_detalle"
-        Me.cve_detalle.ReadOnly = True
-        Me.cve_detalle.Visible = False
-        '
-        'tipo
-        '
-        Me.tipo.HeaderText = "tipo"
-        Me.tipo.Name = "tipo"
-        Me.tipo.ReadOnly = True
-        '
-        'descripcion
-        '
-        Me.descripcion.HeaderText = "descripcion"
-        Me.descripcion.Name = "descripcion"
-        Me.descripcion.ReadOnly = True
         '
         'btnImportar
         '
@@ -164,6 +145,30 @@ Partial Class frmImportador_TipoTlatoani
         Me.txtParametro.Size = New System.Drawing.Size(334, 20)
         Me.txtParametro.TabIndex = 118
         '
+        'cve_detalle
+        '
+        Me.cve_detalle.DataPropertyName = "Cve_detalle"
+        Me.cve_detalle.HeaderText = "cve_detalle"
+        Me.cve_detalle.Name = "cve_detalle"
+        Me.cve_detalle.ReadOnly = True
+        Me.cve_detalle.Visible = False
+        '
+        'tipo
+        '
+        Me.tipo.DataPropertyName = "Tipo"
+        Me.tipo.HeaderText = "tipo"
+        Me.tipo.Name = "tipo"
+        Me.tipo.ReadOnly = True
+        Me.tipo.Visible = False
+        '
+        'descripcion
+        '
+        Me.descripcion.DataPropertyName = "Descripcion"
+        Me.descripcion.HeaderText = "Descripcion"
+        Me.descripcion.Name = "descripcion"
+        Me.descripcion.ReadOnly = True
+        Me.descripcion.Width = 230
+        '
         'frmImportador_TipoTlatoani
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -191,9 +196,6 @@ Partial Class frmImportador_TipoTlatoani
     Friend WithEvents banner_formulario As System.Windows.Forms.PictureBox
     Friend WithEvents titulo_banner_formulario As System.Windows.Forms.Label
     Friend WithEvents dgvDatos As System.Windows.Forms.DataGridView
-    Friend WithEvents cve_detalle As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents tipo As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents descripcion As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents btnImportar As System.Windows.Forms.Button
     Friend WithEvents btnCancelar As System.Windows.Forms.Button
     Friend WithEvents rbtTodos As System.Windows.Forms.RadioButton
@@ -201,4 +203,7 @@ Partial Class frmImportador_TipoTlatoani
     Friend WithEvents rbtFiltro_Nombre As System.Windows.Forms.RadioButton
     Friend WithEvents Label1 As System.Windows.Forms.Label
     Friend WithEvents txtParametro As System.Windows.Forms.TextBox
+    Friend WithEvents cve_detalle As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents tipo As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents descripcion As System.Windows.Forms.DataGridViewTextBoxColumn
 End Class
