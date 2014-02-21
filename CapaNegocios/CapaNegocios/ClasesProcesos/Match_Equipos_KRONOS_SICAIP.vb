@@ -69,15 +69,14 @@ Public Class Match_Equipos_KRONOS_SICAIP
 
         Dim vDT_Equipos_Nuevos As DataTable
 
-        Try
-            'vDT_SICAIP = Obtener_Equipos_SICAIP()
-            'vDT_KRONOS = Obtener_Equipos_KRONOS()
+        If vDT_KRONOS.Rows.Count > vDT_SICAIP.Rows.Count Then
+            ''------------------------------------------------------------------------
+            ''-----Mandar mensaje de que se encontro un equipo nuevo
+            ''------------------------------------------------------------------------
 
-            If vDT_KRONOS.Rows.Count > vDT_SICAIP.Rows.Count Then
-                ''------------------------------------------------------------------------
-                ''-----Mandar mensaje de que se encontro un equipo nuevo
-                ''------------------------------------------------------------------------
-                vDT_Equipos_Nuevos = oBD_Kronos.ObtenerTabla(CrearConsultaKronos_filtrado_Equipos)
+            vDT_Equipos_Nuevos = Obtener_Equipos_nuevos_filtrado_Equipos()
+
+            If IsNothing(vDT_Equipos_Nuevos) = False Then
                 oEquipo = New Equipo
 
                 For Each vDR_Nuevo_Equipo As DataRow In vDT_Equipos_Nuevos.Rows
@@ -88,15 +87,19 @@ Public Class Match_Equipos_KRONOS_SICAIP
                     oEquipo.Equipo = vDR_Nuevo_Equipo("nombre")
                     oEquipo.LETT = ""
                     oEquipo.Ruta_Imagen = ""
+
+
+                    oEquipo.Registrar()
                 Next
             Else
-                ''------------------------------------------------------------------------
-                ''-----Mandar mensaje de que se no se encontro equipos nuevos en KRONOS
-                ''------------------------------------------------------------------------
+                MsgBox("No hay equipos nuevos")
             End If
-        Catch ex As Exception
-            MsgBox("Error al obtener Equipos Nuevos")
-        End Try
+        Else
+            ''------------------------------------------------------------------------
+            ''-----Mandar mensaje de que se no se encontro equipos nuevos en KRONOS
+            ''------------------------------------------------------------------------
+        End If
+       
     End Sub
 
     
@@ -117,50 +120,68 @@ Public Class Match_Equipos_KRONOS_SICAIP
 
         End Try
 
-        Using scope As New TransactionScope()
-            Try                
-                If IsNothing(vDT_KRONOS) = False And IsNothing(vDT_SICAIP) = False Then
-                    ''Recorrer Todos los equipos de SICAIP
-                    ReDim vCveS_Equipos_En_SICAIP(vDT_SICAIP.Rows.Count)
-
-                    For Each oDR_SICAIP As DataRow In vDT_SICAIP.Rows
-                        vDR_S = oDR_SICAIP
-                        vCveS_Equipos_En_SICAIP(vIndice) = vDR_S("cve").ToString
-                        For Each oDR_KRONOS As DataRow In vDT_KRONOS.Rows
-                            If vDR_S("cve") = oDR_KRONOS("cve") Then
-                                If Nombres_Equipos_Diferentes(vDR_S("nombre"), oDR_KRONOS("nombre")) = True Then
-
-                                    Actualizar_Nombre_Equipo(vDR_S("cve"), oDR_KRONOS("nombre"))
-                                    ''------------------------------------------------------------------------
-                                    ''-----Mandar mensaje de que se actualizo un equipo en SICAIP
-                                    ''------------------------------------------------------------------------
-                                    Exit For
-                                End If
+        'Using scope As New TransactionScope()
+        Try
+            If IsNothing(vDT_KRONOS) = False And IsNothing(vDT_SICAIP) = False Then
+                ''Recorrer Todos los equipos de SICAIP
+                ReDim vCveS_Equipos_En_SICAIP(vDT_SICAIP.Rows.Count - 1)
+                Using scope As New TransactionScope()
+                    Try
+                        For Each oDR_SICAIP As DataRow In vDT_SICAIP.Rows
+                            vDR_S = oDR_SICAIP
+                            If vDR_S("cve") = 200 Then
+                                MsgBox("Ya llege a 200")
                             End If
+                            vCveS_Equipos_En_SICAIP(vIndice) = vDR_S("cve").ToString
+                            For Each oDR_KRONOS As DataRow In vDT_KRONOS.Rows
+                                If vDR_S("cve") = oDR_KRONOS("cve") Then
+                                    If Nombres_Equipos_Diferentes(vDR_S("nombre"), oDR_KRONOS("nombre")) = True Then
+
+                                        Actualizar_Nombre_Equipo(vDR_S("cve"), oDR_KRONOS("nombre"))
+                                        ''------------------------------------------------------------------------
+                                        ''-----Mandar mensaje de que se actualizo un equipo en SICAIP
+                                        ''------------------------------------------------------------------------
+                                        Exit For
+                                    End If
+                                End If
+                            Next
+                            vIndice = vIndice + 1
                         Next
-                        vIndice = vIndice + 1
-                    Next
-                    ''------------------------------------------------------------------------
-                    ''-----Mandar mensaje de que se buscaran Equipos Nuevos
-                    ''------------------------------------------------------------------------
-                    Obtener_Equipos_Nuevos()
-                End If
-                scope.Complete()
-            Catch ex As Exception
-                MsgBox("Error al hacer Match de Equipos con Kronos")
-            End Try
-        End Using
+                        scope.Complete()
+                    Catch ex As Exception
+
+                    End Try
+                End Using
+
+                ''------------------------------------------------------------------------
+                ''-----Mandar mensaje de que se buscaran Equipos Nuevos
+                ''------------------------------------------------------------------------
+                Obtener_Equipos_Nuevos()
+            End If
+        Catch ex As Exception
+            MsgBox("Error al hacer Match de Equipos con Kronos")
+        End Try
+        'End Using
     End Sub
 
-    Public Function CrearConsultaKronos_filtrado_Equipos() As String
+    Public Function Obtener_Equipos_nuevos_filtrado_Equipos() As DataTable
         Dim vretorno As String = "SELECT name AS cve, description AS nombre FROM VR_LABORLEVEL WHERE LLDEF_SHORTNAME='EQU' AND name != '-' AND name != 'Default'"
+        Dim vDT As DataTable
 
         If vCveS_Equipos_En_SICAIP.Length > 0 Then
             For Each vEmpleado As String In vCveS_Equipos_En_SICAIP
-                vretorno = vretorno & " OR name != '" & vEmpleado & "' "
-            Next            
+                vretorno = vretorno & " AND name != '" & vEmpleado & "' "
+            Next
         End If
-        Return vretorno
+        Try
+            vDT = oBD_Kronos.ObtenerTabla(vretorno)
+        Catch ex As Exception
+            vDT = Nothing
+
+            MsgBox("Error al Obtener Equipos Nuevos")
+        End Try
+
+        Return vDT
     End Function
 
 
