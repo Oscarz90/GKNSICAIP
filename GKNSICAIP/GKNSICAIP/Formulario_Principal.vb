@@ -1281,4 +1281,7 @@ Public Class Formulario_Principal
     End Sub
 
 
+    Private Sub MapaUbicacion_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MapaUbicacion.Click
+
+    End Sub
 End Class
