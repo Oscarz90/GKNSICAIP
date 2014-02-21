@@ -24,17 +24,17 @@ Partial Class frmMatch_Equipos_Kronos_SICAIP
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmMatch_Equipos_Kronos_SICAIP))
         Me.Panel1 = New System.Windows.Forms.Panel()
+        Me.RadLabel1 = New Telerik.WinControls.UI.RadLabel()
+        Me.btnSalir = New Telerik.WinControls.UI.RadButton()
+        Me.btnMatch = New Telerik.WinControls.UI.RadButton()
+        Me.txtIndicentes = New System.Windows.Forms.TextBox()
         Me.Label11 = New System.Windows.Forms.Label()
         Me.PictureBox2 = New System.Windows.Forms.PictureBox()
-        Me.txtIndicentes = New System.Windows.Forms.TextBox()
-        Me.btnMatch = New Telerik.WinControls.UI.RadButton()
-        Me.btnSalir = New Telerik.WinControls.UI.RadButton()
-        Me.RadLabel1 = New Telerik.WinControls.UI.RadLabel()
         Me.Panel1.SuspendLayout()
-        CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.btnMatch, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.btnSalir, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.RadLabel1, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.btnSalir, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.btnMatch, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'Panel1
@@ -51,6 +51,44 @@ Partial Class frmMatch_Equipos_Kronos_SICAIP
         Me.Panel1.Name = "Panel1"
         Me.Panel1.Size = New System.Drawing.Size(847, 401)
         Me.Panel1.TabIndex = 0
+        '
+        'RadLabel1
+        '
+        Me.RadLabel1.Location = New System.Drawing.Point(12, 114)
+        Me.RadLabel1.Name = "RadLabel1"
+        Me.RadLabel1.Size = New System.Drawing.Size(56, 18)
+        Me.RadLabel1.TabIndex = 157
+        Me.RadLabel1.Text = "EVENTOS:"
+        '
+        'btnSalir
+        '
+        Me.btnSalir.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Bold)
+        Me.btnSalir.Image = CType(resources.GetObject("btnSalir.Image"), System.Drawing.Image)
+        Me.btnSalir.Location = New System.Drawing.Point(693, 91)
+        Me.btnSalir.Name = "btnSalir"
+        Me.btnSalir.Size = New System.Drawing.Size(123, 41)
+        Me.btnSalir.TabIndex = 156
+        Me.btnSalir.Text = "Salir"
+        '
+        'btnMatch
+        '
+        Me.btnMatch.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Bold)
+        Me.btnMatch.Image = CType(resources.GetObject("btnMatch.Image"), System.Drawing.Image)
+        Me.btnMatch.Location = New System.Drawing.Point(564, 91)
+        Me.btnMatch.Name = "btnMatch"
+        Me.btnMatch.Size = New System.Drawing.Size(123, 41)
+        Me.btnMatch.TabIndex = 155
+        Me.btnMatch.Text = "Match"
+        '
+        'txtIndicentes
+        '
+        Me.txtIndicentes.BackColor = System.Drawing.Color.White
+        Me.txtIndicentes.Location = New System.Drawing.Point(12, 138)
+        Me.txtIndicentes.Multiline = True
+        Me.txtIndicentes.Name = "txtIndicentes"
+        Me.txtIndicentes.ReadOnly = True
+        Me.txtIndicentes.Size = New System.Drawing.Size(823, 251)
+        Me.txtIndicentes.TabIndex = 154
         '
         'Label11
         '
@@ -74,42 +112,6 @@ Partial Class frmMatch_Equipos_Kronos_SICAIP
         Me.PictureBox2.TabIndex = 152
         Me.PictureBox2.TabStop = False
         '
-        'txtIndicentes
-        '
-        Me.txtIndicentes.Location = New System.Drawing.Point(12, 138)
-        Me.txtIndicentes.Multiline = True
-        Me.txtIndicentes.Name = "txtIndicentes"
-        Me.txtIndicentes.Size = New System.Drawing.Size(823, 251)
-        Me.txtIndicentes.TabIndex = 154
-        '
-        'btnMatch
-        '
-        Me.btnMatch.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Bold)
-        Me.btnMatch.Image = CType(resources.GetObject("btnMatch.Image"), System.Drawing.Image)
-        Me.btnMatch.Location = New System.Drawing.Point(564, 91)
-        Me.btnMatch.Name = "btnMatch"
-        Me.btnMatch.Size = New System.Drawing.Size(123, 41)
-        Me.btnMatch.TabIndex = 155
-        Me.btnMatch.Text = "Match"
-        '
-        'btnSalir
-        '
-        Me.btnSalir.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Bold)
-        Me.btnSalir.Image = CType(resources.GetObject("btnSalir.Image"), System.Drawing.Image)
-        Me.btnSalir.Location = New System.Drawing.Point(693, 91)
-        Me.btnSalir.Name = "btnSalir"
-        Me.btnSalir.Size = New System.Drawing.Size(123, 41)
-        Me.btnSalir.TabIndex = 156
-        Me.btnSalir.Text = "Salir"
-        '
-        'RadLabel1
-        '
-        Me.RadLabel1.Location = New System.Drawing.Point(12, 114)
-        Me.RadLabel1.Name = "RadLabel1"
-        Me.RadLabel1.Size = New System.Drawing.Size(56, 18)
-        Me.RadLabel1.TabIndex = 157
-        Me.RadLabel1.Text = "EVENTOS:"
-        '
         'frmMatch_Equipos_Kronos_SICAIP
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -124,10 +126,10 @@ Partial Class frmMatch_Equipos_Kronos_SICAIP
         Me.Text = "Match Equipos KRONOS-SICAIP"
         Me.Panel1.ResumeLayout(False)
         Me.Panel1.PerformLayout()
-        CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.btnMatch, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.btnSalir, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.RadLabel1, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.btnSalir, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.btnMatch, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub

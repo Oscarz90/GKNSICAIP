@@ -5,10 +5,13 @@ Public Class frmMatch_Equipos_Kronos_SICAIP
 
 
     Private Sub btnMatch_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnMatch.Click
-        oMatch = New Match_Equipos_KRONOS_SICAIP
+        Dim vInformacion As String = ""
+        oMatch = New Match_Equipos_KRONOS_SICAIP()
         btnSalir.Enabled = False
         Try
+            txtIndicentes.Text = "Espere...Realizando Match"
             oMatch.Hacer_Match()
+            txtIndicentes.Text = oMatch.oMensajes_Text
             btnSalir.Enabled = True
         Catch ex As Exception
 
@@ -23,9 +26,6 @@ Public Class frmMatch_Equipos_Kronos_SICAIP
 
     End Sub
 
-    Public Sub Set_Indicentes(ByVal Incidente As String) 'agrega un incidente al cuadro de incidentes
-        txtIndicentes.Text = txtIndicentes.Text & Incidente & "............................." & vbCrLf
-        Me.Refresh()
-    End Sub
+    
 
 End Class
