@@ -5,6 +5,8 @@ Public Class Equipo
     Dim oDetalle As Detalle
     Dim oLider As Lider
     Dim oBD As New CapaDatos.CapaDatos(cadena_conexion.CadenaSicaip)
+    Public vErrorRegistro As Boolean = False
+
 #Region "IIndividual"
     Public Sub Cargar() Implements IIndividual.Cargar
         Dim vDR As DataRow
@@ -92,7 +94,7 @@ Public Class Equipo
                 Me.vCve_Equipo = obj.Rows(0)(0)
                 scope.Complete()
             Catch ex As Exception
-
+                vErrorRegistro = True
             End Try
         End Using
     End Sub

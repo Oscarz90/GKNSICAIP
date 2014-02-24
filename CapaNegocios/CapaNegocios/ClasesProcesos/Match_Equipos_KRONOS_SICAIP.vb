@@ -72,20 +72,13 @@ Public Class Match_Equipos_KRONOS_SICAIP
         Dim vDT_Equipos_Nuevos As DataTable
         vDT_KRONOS = vDatosKRONOS
         vDT_SICAIP = vDatosSICAIP
-
         Mensajes("Revisando existencia de Equipos Nuevos en KRONOS")
 
         If vDT_KRONOS.Rows.Count > vDT_SICAIP.Rows.Count Then
-
             Mensajes("Obteniendo Equipos Nuevos en KRONOS")
-
             vDT_Equipos_Nuevos = Obtener_Equipos_nuevos_filtrado_Equipos()
-
             If IsNothing(vDT_Equipos_Nuevos) = False Then
-
-
-                For Each vDR_Nuevo_Equipo As DataRow In vDT_Equipos_Nuevos.Rows
-                    'Try
+                For Each vDR_Nuevo_Equipo As DataRow In vDT_Equipos_Nuevos.Rows                  
                     oEquipo = New Equipo
 
                     oEquipo.Cve_Equipo = 0
@@ -96,12 +89,11 @@ Public Class Match_Equipos_KRONOS_SICAIP
                     oEquipo.LETT = ""
                     oEquipo.Ruta_Imagen = ""
                     oEquipo.Registrar()
-                    Mensajes("Equipo Nuevo Registrado: " & oEquipo.Equipo)
-                    'Catch ex As Exception
-                    '    Mensajes("Error al Registrar Equipo Nuevo: " & oEquipo.Equipo)
-                    'End Try
-
-
+                    If oEquipo.vErrorRegistro = True Then
+                        Mensajes("Error al Registrar Equipo Nuevo: " & oEquipo.Equipo)
+                    Else
+                        Mensajes("Equipo Nuevo Registrado: " & oEquipo.Equipo)
+                    End If
                 Next
             Else
                 Mensajes("No existen Equipos Nuevos en KRONOS ISNothing")
@@ -158,9 +150,8 @@ Public Class Match_Equipos_KRONOS_SICAIP
                         Mensajes("Comparando nombres de Equipos")
                         For Each oDR_SICAIP As DataRow In vDT_SICAIP.Rows
                             vDR_S = oDR_SICAIP
-                            If vDR_S("cve") = 200 Then
-                                'MsgBox("Ya llege a 200")
-                            End If
+                            'If vDR_S("cve") = 200 Then                                
+                            'End If
                             vCveS_Equipos_En_SICAIP(vIndice) = vDR_S("cve").ToString
                             For Each oDR_KRONOS As DataRow In vDT_KRONOS.Rows
                                 If vDR_S("cve") = oDR_KRONOS("cve") Then
@@ -192,8 +183,7 @@ Public Class Match_Equipos_KRONOS_SICAIP
             End If
         Catch ex As Exception
             MsgBox("Error al hacer Match de Equipos con Kronos")
-        End Try
-        'End Using
+        End Try        
     End Sub
 
     
@@ -202,9 +192,7 @@ Public Class Match_Equipos_KRONOS_SICAIP
             oMensajes_Text = oMensajes_Text & vMensaje & "............................." & vbCrLf            
         Catch ex As Exception
 
-        End Try
-       
-        'oMensajes_Text.Refresh()
+        End Try               
     End Sub
 
 
