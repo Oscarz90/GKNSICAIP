@@ -1,4 +1,8 @@
 ﻿Imports CapaDatos
+Imports System.Drawing
+Imports System.IO
+Imports System.Drawing.Imaging
+
 Public Class Equipo
     Implements IIndividual
     Dim cadena_conexion As New CapaDatos.conexiones
@@ -50,7 +54,7 @@ Public Class Equipo
             If Not IsDBNull(vDR("imagen")) Then
                 vImagen = vDR("imagen")
             Else
-                vImagen = ""
+                vImagen = Nothing
             End If
         End If
     End Sub
@@ -99,6 +103,19 @@ Public Class Equipo
             End Try
         End Using
     End Sub
+
+
+    Public Function ByteArrayToImage(ByVal byteArrayIn As Byte()) As Image
+        Dim ms As New MemoryStream(byteArrayIn)
+        Return Image.FromStream(ms)
+    End Function
+
+    Public Function ImageToByteArray(ByVal imageIn As Image) As Byte()
+        Dim ms As New MemoryStream()
+        imageIn.Save(ms, ImageFormat.Jpeg)
+        Return ms.ToArray()
+    End Function
+
 #End Region
 #Region "Atributos"
     Private vCve_Equipo As Long
@@ -108,7 +125,9 @@ Public Class Equipo
     Private vEquipo As String
     Private vLET As String
     Private vRuta_Imagen As String
-    Private vImagen As Object
+    Private vImagen As Byte()
+    Private vImagen_Image As Image
+
 #End Region
 #Region "Propiedades"
 
@@ -177,14 +196,25 @@ Public Class Equipo
     End Property
 
 
-    Public Property Imagen() As Object
+    Public Property Imagen() As Byte()
         Get
             Return vImagen
         End Get
-        Set(ByVal value As Object)
+        Set(ByVal value As Byte())
             vImagen = value
         End Set
     End Property
+
+    Public Property Imagen_Image() As Image
+        Get
+            Return vImagen_Image
+        End Get
+        Set(ByVal value As Image)
+            vImagen_Image = value
+        End Set
+    End Property
+
+
 
 
     Public ReadOnly Property Nombre_Detalle() As String
