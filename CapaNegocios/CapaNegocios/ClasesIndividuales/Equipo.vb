@@ -87,6 +87,7 @@ Public Class Equipo
                 cmd.Parameters.Add("@equipo", SqlDbType.VarChar).Value = Me.vEquipo
                 cmd.Parameters.Add("@LET", SqlDbType.VarChar).Value = Me.vLET
                 cmd.Parameters.Add("@rutaImagen", SqlDbType.VarChar).Value = Me.vRuta_Imagen
+                cmd.Parameters.Add("@imagen", SqlDbType.Image).Value = Me.vImagen
 
                 Dim obj As DataTable = oBD.EjecutaCommando(cmd)
                 Me.vCve_Equipo = obj.Rows(0)(0)

@@ -73,7 +73,7 @@ Public Class frmEquipo
                 oEquipo.Cve_Detalle = ofrmImportador_TipoTlatoani.vRetorno_CVE_Detalle
                 oEquipo.Cve_Lider = ofrmImportador_LG.vRetorno_CVE_Lider
                 oEquipo.LETT = txtLet.Text
-                'img hacer importador
+                'img?
                 Try
                     oEquipo.Registrar()
                     MsgBox("Se modifico correctamente")
@@ -112,7 +112,7 @@ Public Class frmEquipo
         Me.txtLG.DataBindings.Add("Text", oEquipo, "Nombre_Lider")
         Me.txtLet.DataBindings.Add("Text", oEquipo, "LETT")
         Me.txtImagen.DataBindings.Add("Text", oEquipo, "Ruta_Imagen")
-        Me.pbImagen.DataBindings.Add("Text", oEquipo, "Imagen")
+        'img?
     End Sub
 
     Private Sub Controles_Permisos(ByVal vAdd As Boolean, ByVal vDelete As Boolean)
