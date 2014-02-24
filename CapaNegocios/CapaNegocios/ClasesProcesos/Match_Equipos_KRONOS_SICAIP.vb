@@ -85,6 +85,7 @@ Public Class Match_Equipos_KRONOS_SICAIP
 
 
                 For Each vDR_Nuevo_Equipo As DataRow In vDT_Equipos_Nuevos.Rows
+                    'Try
                     oEquipo = New Equipo
 
                     oEquipo.Cve_Equipo = 0
@@ -94,12 +95,11 @@ Public Class Match_Equipos_KRONOS_SICAIP
                     oEquipo.Equipo = vDR_Nuevo_Equipo("nombre")
                     oEquipo.LETT = ""
                     oEquipo.Ruta_Imagen = ""
-                    Try
-                        oEquipo.Registrar()
-                        Mensajes("Equipo Nuevo Registrado: " & oEquipo.Equipo)
-                    Catch ex As Exception
-                        Mensajes("Error al Registrar Equipo Nuevo: " & oEquipo.Equipo)
-                    End Try
+                    oEquipo.Registrar()
+                    Mensajes("Equipo Nuevo Registrado: " & oEquipo.Equipo)
+                    'Catch ex As Exception
+                    '    Mensajes("Error al Registrar Equipo Nuevo: " & oEquipo.Equipo)
+                    'End Try
 
 
                 Next
