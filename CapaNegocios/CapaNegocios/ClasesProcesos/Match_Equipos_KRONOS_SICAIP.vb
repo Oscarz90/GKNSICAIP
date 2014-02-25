@@ -88,6 +88,8 @@ Public Class Match_Equipos_KRONOS_SICAIP
                     oEquipo.Equipo = vDR_Nuevo_Equipo("nombre")
                     oEquipo.LETT = ""
                     oEquipo.Ruta_Imagen = ""
+                    oEquipo.Imagen = Nothing
+
                     oEquipo.Registrar()
                     If oEquipo.vErrorRegistro = True Then
                         Mensajes("Error al Registrar Equipo Nuevo: " & oEquipo.Equipo)
