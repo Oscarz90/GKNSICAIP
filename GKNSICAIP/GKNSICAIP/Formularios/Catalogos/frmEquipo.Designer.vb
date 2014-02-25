@@ -79,7 +79,7 @@ Partial Class frmEquipo
         Me.btnImportar_Imagen.Location = New System.Drawing.Point(351, 207)
         Me.btnImportar_Imagen.Name = "btnImportar_Imagen"
         Me.btnImportar_Imagen.Size = New System.Drawing.Size(75, 23)
-        Me.btnImportar_Imagen.TabIndex = 144
+        Me.btnImportar_Imagen.TabIndex = 4
         Me.btnImportar_Imagen.Text = "Importar"
         Me.btnImportar_Imagen.UseVisualStyleBackColor = True
         '
@@ -97,7 +97,7 @@ Partial Class frmEquipo
         Me.btnImportar_LG.Location = New System.Drawing.Point(351, 154)
         Me.btnImportar_LG.Name = "btnImportar_LG"
         Me.btnImportar_LG.Size = New System.Drawing.Size(75, 23)
-        Me.btnImportar_LG.TabIndex = 142
+        Me.btnImportar_LG.TabIndex = 2
         Me.btnImportar_LG.Text = "Importar"
         Me.btnImportar_LG.UseVisualStyleBackColor = True
         '
@@ -106,7 +106,7 @@ Partial Class frmEquipo
         Me.btnImportar.Location = New System.Drawing.Point(351, 127)
         Me.btnImportar.Name = "btnImportar"
         Me.btnImportar.Size = New System.Drawing.Size(75, 23)
-        Me.btnImportar.TabIndex = 141
+        Me.btnImportar.TabIndex = 1
         Me.btnImportar.Text = "Importar"
         Me.btnImportar.UseVisualStyleBackColor = True
         '
@@ -143,7 +143,7 @@ Partial Class frmEquipo
         Me.txtLet.MaxLength = 30
         Me.txtLet.Name = "txtLet"
         Me.txtLet.Size = New System.Drawing.Size(242, 20)
-        Me.txtLet.TabIndex = 137
+        Me.txtLet.TabIndex = 3
         '
         'txtLG
         '
