@@ -99,6 +99,5 @@ Public Class gfu_nivel_cadena_valor
         End Try
         Return dt_componente
     End Function
-    
 #End Region
 End Class

@@ -1173,10 +1173,17 @@ Public Class FrmGraficasfaseuno
         CategoricalAxis1.LabelRotationAngle = 270.0R
         LinearAxis1.AxisType = AxisType.Second
         LinearAxis1.Title = "NRFTi ( PPM'S ) "
+
         BarSeries1.ShowLabels = True
         BarSeries2.ShowLabels = True
+
         BarSeries1.LabelFormat = "{0:##,###}"
         BarSeries2.LabelFormat = "{0:##,##}"
+
+        BarSeries1.LabelMode = BarLabelModes.Top
+        BarSeries2.LabelMode = BarLabelModes.Top
+
+
         BarSeries1.HorizontalAxis = CategoricalAxis1
         BarSeries1.VerticalAxis = LinearAxis1
         'BarSeries1.ForeColor = Color.White
@@ -1258,11 +1265,12 @@ Public Class FrmGraficasfaseuno
         End If
         CategoricalAxis1.LabelRotationAngle = 270.0R
         LinearAxis1.AxisType = AxisType.Second
+        LinearAxis1.Title = "NRFTi ( PPM'S )"
         'LinearAxis1.LabelFitMode = AxisLabelFitMode.Rotate
         'LinearAxis1.LabelRotationAngle = 300.0R
         'LinearAxis1.MajorStep = 10.0R
         'LinearAxis1.Maximum = 100
-        LinearAxis1.Title = "NRFTi ( PPM'S )"
+
 
         BarSeries1.ShowLabels = True
         BarSeries2.ShowLabels = True
@@ -1271,6 +1279,9 @@ Public Class FrmGraficasfaseuno
         BarSeries1.LabelFormat = "{0:##,###}"
         BarSeries2.LabelFormat = "{0:##,###}"
         LineSeries1.LabelFormat = "{0:##,###}"
+
+        BarSeries1.LabelMode = BarLabelModes.Top
+        BarSeries2.LabelMode = BarLabelModes.Top
 
         BarSeries1.HorizontalAxis = CategoricalAxis1
         LineSeries1.HorizontalAxis = CategoricalAxis1
@@ -1380,6 +1391,9 @@ Public Class FrmGraficasfaseuno
         BarSeries2.LabelFormat = "{0:#,###}"
         LineSeries1.LabelFormat = "{0:##,###}"
 
+        BarSeries1.LabelMode = BarLabelModes.Top
+        BarSeries2.LabelMode = BarLabelModes.Top
+
         BarSeries1.HorizontalAxis = CategoricalAxis1
         LineSeries1.HorizontalAxis = CategoricalAxis1
 
@@ -1483,6 +1497,9 @@ Public Class FrmGraficasfaseuno
         BarSeries1.LabelFormat = "{0:#,###}"
         BarSeries2.LabelFormat = "{0:#,###}"
         LineSeries1.LabelFormat = "{0:##,###}"
+
+        BarSeries1.LabelMode = BarLabelModes.Top
+        BarSeries2.LabelMode = BarLabelModes.Top
 
         BarSeries1.HorizontalAxis = CategoricalAxis1
         LineSeries1.HorizontalAxis = CategoricalAxis1
@@ -1602,6 +1619,9 @@ Public Class FrmGraficasfaseuno
         BarSeries1.LabelFormat = "{0:#,###}"
         BarSeries2.LabelFormat = "{0:#,###}"
         LineSeries1.LabelFormat = "{0:##,###}"
+
+        BarSeries1.LabelMode = BarLabelModes.Top
+        BarSeries2.LabelMode = BarLabelModes.Top
 
         BarSeries1.HorizontalAxis = CategoricalAxis1
         LineSeries1.HorizontalAxis = CategoricalAxis1
@@ -1724,6 +1744,9 @@ Public Class FrmGraficasfaseuno
         BarSeries1.LabelFormat = "{0:#,###}"
         BarSeries2.LabelFormat = "{0:#,###}"
         LineSeries1.LabelFormat = "{0:##,###}"
+
+        BarSeries1.LabelMode = BarLabelModes.Top
+        BarSeries2.LabelMode = BarLabelModes.Top
 
         BarSeries1.HorizontalAxis = CategoricalAxis1
         LineSeries1.HorizontalAxis = CategoricalAxis1
