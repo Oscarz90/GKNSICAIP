@@ -182,17 +182,65 @@ Public Class Linea
     End Property
 
     Private vLEquipos_Linea_NO_Asignados As List(Of Equipo)
+    'Public Property LEquipos_Linea_NO_Asignados() As List(Of Equipo)
+    '    Get
+    '        If vLEquipos_Linea_NO_Asignados Is Nothing Then
+    '            'Cargo documentos
+    '            Me.LEquipos_Linea_NO_Asignados = New List(Of Equipo)
+    '            Dim oBD As New CapaDatos.CapaDatos(cadena_conexion.CadenaSicaip)
+    '            Dim oEq As DataTable = oBD.ObtenerTabla("SELECT DISTINCT E.cve_equipo AS cve_equipo, E.Equipo" & _
+    '                                                    " FROM Equipo E " & _
+    '                                                    " WHERE E.cve_equipo NOT IN  (SELECT cve_equipo FROM equipo_linea EL WHERE EL.cve_linea =" & Me.vcve_linea & ")" & _
+    '                                                    " and E.cve_equipo IN (SELECT cve_equipo FROM equipo_linea EL join linea l on l.cve_linea=EL.cve_linea WHERE l.cve_componente =" & Obtener_CVEComponente_EN_Linea(Me.vcve_linea) & ")" & _
+    '                                                    " Order by  E.Equipo")
+    '            If oEq IsNot Nothing Then
+    '                Dim oEquipoLinea As Equipo = Nothing
+    '                For Each row As DataRow In oEq.Rows
+    '                    oEquipoLinea = New Equipo
+    '                    oEquipoLinea.Cve_Equipo = row("cve_equipo")
+    '                    oEquipoLinea.Cargar()
+    '                    Me.vLEquipos_Linea_NO_Asignados.Add(oEquipoLinea)
+    '                Next
+    '            End If
+    '        End If
+    '        Return Me.vLEquipos_Linea_NO_Asignados
+    '    End Get
+    '    Set(ByVal value As List(Of Equipo))
+    '        Me.vLEquipos_Linea_NO_Asignados = value
+    '    End Set
+    'End Property
     Public Property LEquipos_Linea_NO_Asignados() As List(Of Equipo)
         Get
             If vLEquipos_Linea_NO_Asignados Is Nothing Then
                 'Cargo documentos
                 Me.LEquipos_Linea_NO_Asignados = New List(Of Equipo)
                 Dim oBD As New CapaDatos.CapaDatos(cadena_conexion.CadenaSicaip)
-                Dim oEq As DataTable = oBD.ObtenerTabla("SELECT DISTINCT E.cve_equipo AS cve_equipo, E.Equipo" & _
-                                                        " FROM Equipo E " & _
-                                                        " WHERE E.cve_equipo NOT IN  (SELECT cve_equipo FROM equipo_linea EL WHERE EL.cve_linea =" & Me.vcve_linea & ")" & _
-                                                        " and E.cve_equipo IN (SELECT cve_equipo FROM equipo_linea EL join linea l on l.cve_linea=EL.cve_linea WHERE l.cve_componente =" & Obtener_CVEComponente_EN_Linea(Me.vcve_linea) & ")" & _
-                                                        " Order by  E.Equipo")
+                Dim odr As DataRow
+                Dim vEquipo_Existe_En_EquipoLinea As Boolean = False
+
+                odr = oBD.ObtenerRenglon("SELECT count(cve_equipo) as Total FROM equipo_linea EL WHERE EL.cve_linea =" & Me.vcve_linea, "equipo_linea")
+
+                If IsNothing(odr) = False Then
+                    If odr("total") > 0 Then
+                        vEquipo_Existe_En_EquipoLinea = True
+                    Else
+                        vEquipo_Existe_En_EquipoLinea = False
+                    End If
+                Else
+                    vEquipo_Existe_En_EquipoLinea = False
+                End If
+                Dim oEq As DataTable
+
+                If vEquipo_Existe_En_EquipoLinea = True Then
+                    oEq = oBD.ObtenerTabla("SELECT DISTINCT E.cve_equipo AS cve_equipo, E.Equipo" & _
+                                                      " FROM Equipo E " & _
+                                                      " WHERE E.cve_equipo NOT IN  (SELECT cve_equipo FROM equipo_linea EL WHERE EL.cve_linea =" & Me.vcve_linea & ")" & _
+                                                      " and E.cve_equipo IN (SELECT cve_equipo FROM equipo_linea EL join linea l on l.cve_linea=EL.cve_linea WHERE l.cve_componente =" & Obtener_CVEComponente_EN_Linea(Me.vcve_linea) & ")" & _
+                                                      " Order by  E.Equipo")
+                Else
+                    oEq = oBD.ObtenerTabla("SELECT e.cve_equipo from equipo e Order by e.equipo")
+                End If
+
                 If oEq IsNot Nothing Then
                     Dim oEquipoLinea As Equipo = Nothing
                     For Each row As DataRow In oEq.Rows
@@ -209,6 +257,7 @@ Public Class Linea
             Me.vLEquipos_Linea_NO_Asignados = value
         End Set
     End Property
+
 
 
     Private vLEquipos_Linea_Asignados As List(Of Equipo)
