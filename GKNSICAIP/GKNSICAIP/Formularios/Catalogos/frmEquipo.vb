@@ -162,6 +162,8 @@ Public Class frmEquipo
         Dim opb As New PictureBox() 'Creamos un objeto pb
         opb.Image = System.Drawing.Image.FromFile(ofdImagen.FileName) 'Asignamos la imagen
         opb.SizeMode = PictureBoxSizeMode.AutoSize 'Dejamos su propiedad en autosize para tener el tamaño original de la misma
+
+
         If opb.Size.Width <> 250 Or opb.Size.Height <> 170 Then
             MsgBox("ERROR, La imagen debe tener un tamaño de de 250px,170px, FAVOR DE SELECCIONAR OTRA IMAGEN", MsgBoxStyle.Exclamation, "")
             vRetorno = False
@@ -181,6 +183,19 @@ Public Class frmEquipo
         Else
             vRetorno = True
         End If
+        Return vRetorno
+    End Function
+
+    Private Function Obtener_Extencion_Imagen(ByVal vNombre_Imagen_Con_Extencion As String) As String
+        Dim vRetorno As String = ""
+        Dim vTotal_Caracteres As Integer = 0
+
+        vTotal_Caracteres = vNombre_Imagen_Con_Extencion.Length
+
+
+       
+
+
         Return vRetorno
     End Function
 

@@ -316,7 +316,7 @@ Partial Class frmEquipo
         '
         'ofdImagen
         '
-        Me.ofdImagen.FileName = "OpenFileDialog1"
+        Me.ofdImagen.Filter = "*.jpg|"
         '
         'frmEquipo
         '
@@ -352,6 +352,10 @@ Partial Class frmEquipo
         Me.Controls.Add(Me.Label2)
         Me.Controls.Add(Me.Label1)
         Me.Controls.Add(Me.PictureBox1)
+        Me.MaximizeBox = False
+        Me.MaximumSize = New System.Drawing.Size(484, 516)
+        Me.MinimizeBox = False
+        Me.MinimumSize = New System.Drawing.Size(484, 516)
         Me.Name = "frmEquipo"
         Me.Text = "Equipo"
         CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).EndInit()

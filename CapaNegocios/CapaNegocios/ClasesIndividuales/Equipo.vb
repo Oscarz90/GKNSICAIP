@@ -106,8 +106,13 @@ Public Class Equipo
 
 
     Public Function ByteArrayToImage(ByVal byteArrayIn As Byte()) As Image
-        Dim ms As New MemoryStream(byteArrayIn)
-        Return Image.FromStream(ms)
+        Try
+            Dim ms As New MemoryStream(byteArrayIn)
+            Return Image.FromStream(ms)
+        Catch ex As Exception
+
+        End Try
+      
     End Function
 
     Public Function ImageToByteArray(ByVal imageIn As Image) As Byte()
