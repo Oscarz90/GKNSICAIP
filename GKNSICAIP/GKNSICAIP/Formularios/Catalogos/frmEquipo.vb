@@ -163,16 +163,24 @@ Public Class frmEquipo
         opb.Image = System.Drawing.Image.FromFile(ofdImagen.FileName) 'Asignamos la imagen
         opb.SizeMode = PictureBoxSizeMode.AutoSize 'Dejamos su propiedad en autosize para tener el tamaño original de la misma
 
+        Dim vExtencion As String = Obtener_Extencion_Imagen(ofdImagen.FileName)
 
-        If opb.Size.Width <> 250 Or opb.Size.Height <> 170 Then
-            MsgBox("ERROR, La imagen debe tener un tamaño de de 250px,170px, FAVOR DE SELECCIONAR OTRA IMAGEN", MsgBoxStyle.Exclamation, "")
-            vRetorno = False
+        If vExtencion = "jpg" Or vExtencion = "png" Then
+
+            If opb.Size.Width <> 250 Or opb.Size.Height <> 170 Then
+                MsgBox("ERROR, La imagen debe tener un tamaño de de 250px,170px, FAVOR DE SELECCIONAR OTRA IMAGEN", MsgBoxStyle.Exclamation, "")
+                vRetorno = False
+            Else
+                pbImagen.ImageLocation = ofdImagen.FileName
+                pbImagen.Refresh()
+                txtImagen.Text = ofdImagen.FileName
+                vRetorno = True
+            End If
         Else
-            pbImagen.ImageLocation = ofdImagen.FileName
-            pbImagen.Refresh()
-            txtImagen.Text = ofdImagen.FileName
-            vRetorno = True
+            MsgBox("ERROR formato no valido, La imagen debe tener una extencion valida como '.jpg' o '.png', por favor verifique")
+            vRetorno = False
         End If
+
         Return vRetorno
     End Function
 
@@ -188,16 +196,15 @@ Public Class frmEquipo
 
     Private Function Obtener_Extencion_Imagen(ByVal vNombre_Imagen_Con_Extencion As String) As String
         Dim vRetorno As String = ""
-        Dim vTotal_Caracteres As Integer = 0
+        Dim aText() As String
+        'vNombre_Imagen_Con_Extencion = "Hola/mundo.arto/hola.png"
 
-        vTotal_Caracteres = vNombre_Imagen_Con_Extencion.Length
-
-
-       
-
-
+        aText = Split(vNombre_Imagen_Con_Extencion, ".")
+        vRetorno = aText(UBound(aText))
         Return vRetorno
     End Function
+
+
 
 #End Region
 
