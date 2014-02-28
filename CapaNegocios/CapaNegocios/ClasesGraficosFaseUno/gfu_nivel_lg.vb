@@ -46,7 +46,7 @@ Public Class gfu_nivel_lg
         Try
             dt_componente = oBD.ObtenerTabla("select e.cve_equipo,e.equipo from equipo e " &
                                              "join lider l on e.cve_lider=l.cve_lider " &
-                                             "where l.cve_lider =" & vcve_lider)
+                                             "where l.cve_lider =" & vcve_lider & " order by e.equipo asc")
         Catch ex As Exception
             MsgBox("Error al obtener equipo. Cgfu_nivel_componente_ERROR", vbCritical + vbOKOnly, "Error")
             dt_componente = Nothing
