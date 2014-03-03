@@ -1125,6 +1125,9 @@ Public Class FrmGraficasfaseuno
         Dim BarSeries2 As New BarSeries()
         BarSeries2.LegendTitle = "Acumulado"
         Me.radChartView1.ShowLegend = True
+        'BarSeries1.Font = New Font("Arial", 10, Drawing.FontStyle.Bold)
+        BarSeries1.Font = New Font("Arial", 10)
+        BarSeries2.Font = New Font("Arial", 10)
         'Obtencion Datos
         Dim vDT As DataTable = Nothing
         If rdbtnDias.IsChecked Then
@@ -1215,6 +1218,8 @@ Public Class FrmGraficasfaseuno
         Dim LineSeries1 As New LineSeries()
         LineSeries1.LegendTitle = "Objetivo NRFTi"
         Me.radChartView1.ShowLegend = True
+        BarSeries1.Font = New Font("Arial", 10)
+        BarSeries2.Font = New Font("Arial", 10)
         'Obtencion Datos
         Dim vDT As New DataTable
         If rdbtnDias.IsChecked Then
@@ -1327,6 +1332,8 @@ Public Class FrmGraficasfaseuno
         Dim LineSeries1 As New LineSeries()
         LineSeries1.LegendTitle = "Objetivo NRFTi"
         Me.radChartView1.ShowLegend = True
+        BarSeries1.Font = New Font("Arial", 10)
+        BarSeries2.Font = New Font("Arial", 10)
         'Obtencion Datos Oee
         Dim vDT As New DataTable
         If rdbtnDias.IsChecked Then
@@ -1438,6 +1445,8 @@ Public Class FrmGraficasfaseuno
         Dim LineSeries1 As New LineSeries()
         LineSeries1.LegendTitle = "Objetivo NRFTi"
         Me.radChartView1.ShowLegend = True
+        BarSeries1.Font = New Font("Arial", 10)
+        BarSeries2.Font = New Font("Arial", 10)
         'Obtencion Datos Oee
         Dim vDT As New DataTable
         If rdbtnDias.IsChecked Then
@@ -1545,6 +1554,8 @@ Public Class FrmGraficasfaseuno
         Dim LineSeries1 As New LineSeries()
         LineSeries1.LegendTitle = "Objetivo NRFTi"
         Me.radChartView1.ShowLegend = True
+        BarSeries1.Font = New Font("Arial", 10)
+        BarSeries2.Font = New Font("Arial", 10)
         'Obtencion Datos Oee
         Dim vDT As New DataTable
         If rdbtnDias.IsChecked Then
@@ -1670,6 +1681,8 @@ Public Class FrmGraficasfaseuno
         Dim LineSeries1 As New LineSeries()
         LineSeries1.LegendTitle = "Objetivo NRFTi"
         Me.radChartView1.ShowLegend = True
+        BarSeries1.Font = New Font("Arial", 10)
+        BarSeries2.Font = New Font("Arial", 10)
         'Obtencion Datos Oee
         Dim vDT As New DataTable
         If rdbtnDias.IsChecked Then
