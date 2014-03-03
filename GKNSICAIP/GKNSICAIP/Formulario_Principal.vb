@@ -18,6 +18,7 @@ Public Class Formulario_Principal
     Dim vTipo_Usuario As Boolean = False '-----------
     Dim vPermisos As Boolean = False '--------------
     Dim vEquipo As Boolean = False '--------------
+    Dim vMatch_Equipos As Boolean = False
 #End Region
 
 #Region "Declaracion de Objetos_Clases_Catalogos"
@@ -55,6 +56,7 @@ Public Class Formulario_Principal
     Dim ofrmImportar_Modelo As FrmImportar_Modelo
     Dim ofrmAcceso_Sistema_SICAIP As frmLogin
     Dim ofrmEquipo As frmEquipo
+    Dim ofrmMatch_Equipos As frmMatch_Equipos_Kronos_SICAIP
 #End Region
 
 #Region "Opciones de Menu"
@@ -585,6 +587,19 @@ Public Class Formulario_Principal
             MsgBox("El Usuario no cuenta con los permisos suficientes para entrar al 'Catalogo de Equipo'")
         End If
     End Sub
+
+    Private Sub btnMatch_Equipos_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnMatch_Equipos.Click
+        If Permiso_Asignado("MATCH_EQUIPOS") = True Then
+            Me.dgvRegistros.Visible = False
+            Me.Barra_Tool_Registros.Visible = False
+            MapaUbicacion.Text = "Match Equipos KRONOS_SICAIP"
+            ofrmMatch_Equipos = New frmMatch_Equipos_Kronos_SICAIP
+            ofrmMatch_Equipos.ShowDialog()
+        Else
+            MsgBox("El Usuario no cuenta con los permisos suficientes para entrar en 'MATCH_EQUIPOS'")
+        End If
+    End Sub
+
 #End Region
 
 #Region "Opciones de Registros"
@@ -967,14 +982,9 @@ Public Class Formulario_Principal
 
     Private Sub dgvRegistros_MouseDoubleClick(ByVal sender As System.Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles dgvRegistros.MouseDoubleClick
         Try
-            If e.Button = Windows.Forms.MouseButtons.Right Then
-                'vRowSeleccionada = dgvRegistros.CurrentRow.Index
-                'vRowSeleccionada = dgvRegistros.CurrentRow.Cells("CVE").Value
+            If e.Button = Windows.Forms.MouseButtons.Right Then                
                 vRowSeleccionada = 0
-            ElseIf e.Button = Windows.Forms.MouseButtons.Left Then
-                'If Windows.Forms.Cursor.Position.X <> 0 Then
-                'End If
-                'vRowSeleccionada = dgvRegistros.CurrentRow.Index
+            ElseIf e.Button = Windows.Forms.MouseButtons.Left Then                
                 vRowSeleccionada = dgvRegistros.CurrentRow.Cells("CVE").Value
             End If
         Catch ex As Exception
@@ -1284,4 +1294,6 @@ Public Class Formulario_Principal
     Private Sub MapaUbicacion_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MapaUbicacion.Click
 
     End Sub
+
+   
 End Class
