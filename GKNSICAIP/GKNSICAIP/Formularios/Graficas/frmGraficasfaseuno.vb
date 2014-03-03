@@ -558,6 +558,7 @@ Public Class FrmGraficasfaseuno
         BarSeries1.LabelFormat = "{0:##.#}" & " %"
         BarSeries2.LabelFormat = "{0:##.#}" & " %"
 
+        BarSeries1.Font = New Font("Segoe UI", 12)
 
         BarSeries1.HorizontalAxis = CategoricalAxis1
 
@@ -569,6 +570,7 @@ Public Class FrmGraficasfaseuno
         Me.radChartView1.ShowToolTip = True
         radChartView1.Series.Add(BarSeries1)
         radChartView1.Series.Add(BarSeries2)
+
     End Sub
     'Oee Cadena Valor
     Private Sub obtiene_oee_cadena_valor_dia_mes()
