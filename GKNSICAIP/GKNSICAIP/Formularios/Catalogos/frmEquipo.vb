@@ -160,12 +160,13 @@ Public Class frmEquipo
         Dim vRetorno As Boolean = False
         'validar formato y tamaño de imagen
         Dim opb As New PictureBox() 'Creamos un objeto pb
-        opb.Image = System.Drawing.Image.FromFile(ofdImagen.FileName) 'Asignamos la imagen
-        opb.SizeMode = PictureBoxSizeMode.AutoSize 'Dejamos su propiedad en autosize para tener el tamaño original de la misma
+       
 
         Dim vExtencion As String = Obtener_Extencion_Imagen(ofdImagen.FileName)
 
         If vExtencion = "jpg" Or vExtencion = "png" Then
+            opb.Image = System.Drawing.Image.FromFile(ofdImagen.FileName) 'Asignamos la imagen
+            opb.SizeMode = PictureBoxSizeMode.AutoSize 'Dejamos su propiedad en autosize para tener el tamaño original de la misma
 
             If opb.Size.Width <> 250 Or opb.Size.Height <> 170 Then
                 MsgBox("ERROR, La imagen debe tener un tamaño de de 250px,170px, FAVOR DE SELECCIONAR OTRA IMAGEN", MsgBoxStyle.Exclamation, "")
@@ -177,7 +178,7 @@ Public Class frmEquipo
                 vRetorno = True
             End If
         Else
-            MsgBox("ERROR formato no valido, La imagen debe tener una extencion valida como '.jpg' o '.png', por favor verifique")
+            MsgBox("ERROR formato no valido, el archivo debe tener una extencion valida de imagen como '.jpg' o '.png', por favor verifique")
             vRetorno = False
         End If
 

@@ -106,13 +106,11 @@ Public Class Equipo
 
 
     Public Function ByteArrayToImage(ByVal byteArrayIn As Byte()) As Image
-        Try
-            Dim ms As New MemoryStream(byteArrayIn)
-            Return Image.FromStream(ms)
-        Catch ex As Exception
 
-        End Try
-      
+        Dim ms As New MemoryStream(byteArrayIn)
+        Return Image.FromStream(ms)
+
+
     End Function
 
     Public Function ImageToByteArray(ByVal imageIn As Image) As Byte()
@@ -190,7 +188,6 @@ Public Class Equipo
         End Set
     End Property
 
-
     Public Property Ruta_Imagen() As String
         Get
             Return vRuta_Imagen
@@ -199,7 +196,6 @@ Public Class Equipo
             vRuta_Imagen = value
         End Set
     End Property
-
 
     Public Property Imagen() As Byte()
         Get
@@ -218,9 +214,6 @@ Public Class Equipo
             vImagen_Image = value
         End Set
     End Property
-
-
-
 
     Public ReadOnly Property Nombre_Detalle() As String
         Get
