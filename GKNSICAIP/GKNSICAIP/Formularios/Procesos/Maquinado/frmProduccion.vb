@@ -1362,7 +1362,8 @@ Public Class frmProduccion
         Dim oEquipo As New Equipo
         oEquipo.Cve_Equipo = vcve_equipo
         oEquipo.Cargar()
-        imgEscudo.ImageLocation = Application.StartupPath & oEquipo.Ruta_Imagen
+        'imgEscudo.ImageLocation = Application.StartupPath & oEquipo.Ruta_Imagen
+        Me.imgEscudo.Image = oEquipo.ByteArrayToImage(oEquipo.Imagen)
     End Sub 'Obtiene el escudo del equipo
     'Cve_RegistroTurno
     Private Function get_registro_del_turno() As Long

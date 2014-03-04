@@ -140,7 +140,7 @@ Partial Class frmEquipo
         'txtLet
         '
         Me.txtLet.Location = New System.Drawing.Point(98, 182)
-        Me.txtLet.MaxLength = 30
+        Me.txtLet.MaxLength = 50
         Me.txtLet.Name = "txtLet"
         Me.txtLet.Size = New System.Drawing.Size(242, 20)
         Me.txtLet.TabIndex = 3
@@ -323,7 +323,7 @@ Partial Class frmEquipo
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.White
-        Me.ClientSize = New System.Drawing.Size(468, 477)
+        Me.ClientSize = New System.Drawing.Size(468, 478)
         Me.Controls.Add(Me.Label7)
         Me.Controls.Add(Me.Label8)
         Me.Controls.Add(Me.Label9)
@@ -357,7 +357,7 @@ Partial Class frmEquipo
         Me.MinimizeBox = False
         Me.MinimumSize = New System.Drawing.Size(484, 516)
         Me.Name = "frmEquipo"
-        Me.Text = "Equipo"
+        Me.Text = "Catalogo Equipo"
         CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.pbImagen, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).EndInit()

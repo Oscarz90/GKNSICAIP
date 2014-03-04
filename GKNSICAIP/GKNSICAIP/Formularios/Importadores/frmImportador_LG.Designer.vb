@@ -25,6 +25,9 @@ Partial Class frmImportador_LG
         Me.banner_formulario = New System.Windows.Forms.PictureBox()
         Me.titulo_banner_formulario = New System.Windows.Forms.Label()
         Me.dgvDatos = New System.Windows.Forms.DataGridView()
+        Me.cve_lider = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.LG = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.codigo_LG = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.btnImportar = New System.Windows.Forms.Button()
         Me.btnCancelar = New System.Windows.Forms.Button()
         Me.rbtTodos = New System.Windows.Forms.RadioButton()
@@ -32,9 +35,6 @@ Partial Class frmImportador_LG
         Me.rbtFiltro_Nombre = New System.Windows.Forms.RadioButton()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.txtParametro = New System.Windows.Forms.TextBox()
-        Me.cve_lider = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.LG = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.codigo_LG = New System.Windows.Forms.DataGridViewTextBoxColumn()
         CType(Me.banner_formulario, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.dgvDatos, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
@@ -73,6 +73,30 @@ Partial Class frmImportador_LG
         Me.dgvDatos.ReadOnly = True
         Me.dgvDatos.Size = New System.Drawing.Size(291, 315)
         Me.dgvDatos.TabIndex = 115
+        '
+        'cve_lider
+        '
+        Me.cve_lider.DataPropertyName = "cve_lider"
+        Me.cve_lider.HeaderText = "cve_lider"
+        Me.cve_lider.Name = "cve_lider"
+        Me.cve_lider.ReadOnly = True
+        Me.cve_lider.Visible = False
+        '
+        'LG
+        '
+        Me.LG.DataPropertyName = "LG"
+        Me.LG.HeaderText = "LG"
+        Me.LG.Name = "LG"
+        Me.LG.ReadOnly = True
+        Me.LG.Width = 230
+        '
+        'codigo_LG
+        '
+        Me.codigo_LG.DataPropertyName = "Codigo_LG"
+        Me.codigo_LG.HeaderText = "codigo_LG"
+        Me.codigo_LG.Name = "codigo_LG"
+        Me.codigo_LG.ReadOnly = True
+        Me.codigo_LG.Visible = False
         '
         'btnImportar
         '
@@ -145,30 +169,6 @@ Partial Class frmImportador_LG
         Me.txtParametro.Size = New System.Drawing.Size(334, 20)
         Me.txtParametro.TabIndex = 118
         '
-        'cve_lider
-        '
-        Me.cve_lider.DataPropertyName = "cve_lider"
-        Me.cve_lider.HeaderText = "cve_lider"
-        Me.cve_lider.Name = "cve_lider"
-        Me.cve_lider.ReadOnly = True
-        Me.cve_lider.Visible = False
-        '
-        'LG
-        '
-        Me.LG.DataPropertyName = "LG"
-        Me.LG.HeaderText = "LG"
-        Me.LG.Name = "LG"
-        Me.LG.ReadOnly = True
-        Me.LG.Width = 230
-        '
-        'codigo_LG
-        '
-        Me.codigo_LG.DataPropertyName = "Codigo_LG"
-        Me.codigo_LG.HeaderText = "codigo_LG"
-        Me.codigo_LG.Name = "codigo_LG"
-        Me.codigo_LG.ReadOnly = True
-        Me.codigo_LG.Visible = False
-        '
         'frmImportador_LG
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -186,7 +186,7 @@ Partial Class frmImportador_LG
         Me.Controls.Add(Me.titulo_banner_formulario)
         Me.Controls.Add(Me.banner_formulario)
         Me.Name = "frmImportador_LG"
-        Me.Text = "frmImportador_LG"
+        Me.Text = "Importador LG"
         CType(Me.banner_formulario, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.dgvDatos, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
