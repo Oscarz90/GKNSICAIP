@@ -49,7 +49,7 @@ Partial Class frmMatch_Equipos_Kronos_SICAIP
         Me.Panel1.Dock = System.Windows.Forms.DockStyle.Fill
         Me.Panel1.Location = New System.Drawing.Point(0, 0)
         Me.Panel1.Name = "Panel1"
-        Me.Panel1.Size = New System.Drawing.Size(847, 401)
+        Me.Panel1.Size = New System.Drawing.Size(847, 402)
         Me.Panel1.TabIndex = 0
         '
         'RadLabel1
@@ -87,6 +87,7 @@ Partial Class frmMatch_Equipos_Kronos_SICAIP
         Me.txtIndicentes.Multiline = True
         Me.txtIndicentes.Name = "txtIndicentes"
         Me.txtIndicentes.ReadOnly = True
+        Me.txtIndicentes.ScrollBars = System.Windows.Forms.ScrollBars.Vertical
         Me.txtIndicentes.Size = New System.Drawing.Size(823, 251)
         Me.txtIndicentes.TabIndex = 154
         '
@@ -116,7 +117,7 @@ Partial Class frmMatch_Equipos_Kronos_SICAIP
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(847, 401)
+        Me.ClientSize = New System.Drawing.Size(847, 402)
         Me.Controls.Add(Me.Panel1)
         Me.MaximizeBox = False
         Me.MaximumSize = New System.Drawing.Size(863, 440)

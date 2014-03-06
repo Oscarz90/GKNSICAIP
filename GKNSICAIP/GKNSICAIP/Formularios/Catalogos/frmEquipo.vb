@@ -164,7 +164,7 @@ Public Class frmEquipo
 
         Dim vExtencion As String = Obtener_Extencion_Imagen(ofdImagen.FileName)
 
-        If vExtencion = "jpg" Or vExtencion = "png" Then
+        If vExtencion = "jpg" Or vExtencion = "JPG" Or vExtencion = "png" Or vExtencion = "PNG" Then
             opb.Image = System.Drawing.Image.FromFile(ofdImagen.FileName) 'Asignamos la imagen
             opb.SizeMode = PictureBoxSizeMode.AutoSize 'Dejamos su propiedad en autosize para tener el tamaño original de la misma
 

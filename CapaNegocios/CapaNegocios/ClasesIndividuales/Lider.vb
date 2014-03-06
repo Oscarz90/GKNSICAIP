@@ -25,7 +25,7 @@ Public Class Lider
     Public Function Obtener_Id(ByVal vCadena As String) As Long Implements IIndividual.Obtener_Id
         Dim vDR As DataRow
         Dim vRetorno As Long
-        vDR = oBD.ObtenerRenglon("Select cve_lider from lider where codigo_LG=" & vCadena, "")
+        vDR = oBD.ObtenerRenglon("Select cve_lider from lider where codigo_LG='" & vCadena & "'", "")
         If vDR IsNot Nothing Then
             vRetorno = vDR("cve_lider")
         Else

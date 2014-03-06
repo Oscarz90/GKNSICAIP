@@ -13,6 +13,8 @@ Public Class Match_Equipos_KRONOS_SICAIP
     Dim vCveS_Equipos_En_SICAIP() As String
     Public oMensajes_Text As String
     Public oFrm As Object
+    Dim oDetalle As Detalle
+    Dim oLider As Lider
 
 
     Public Function Obtener_Equipos_KRONOS() As DataTable
@@ -78,13 +80,21 @@ Public Class Match_Equipos_KRONOS_SICAIP
             Mensajes("Obteniendo Equipos Nuevos en KRONOS")
             vDT_Equipos_Nuevos = Obtener_Equipos_nuevos_filtrado_Equipos()
             If IsNothing(vDT_Equipos_Nuevos) = False Then
-                For Each vDR_Nuevo_Equipo As DataRow In vDT_Equipos_Nuevos.Rows                  
+                oLider = New Lider
+                oDetalle = New Detalle
+
+                oLider.cve_lider = oLider.Obtener_Id("Default")                
+
+                oDetalle.Cve_Detalle = oDetalle.Obtener_Id("Default")                
+
+
+                For Each vDR_Nuevo_Equipo As DataRow In vDT_Equipos_Nuevos.Rows
                     oEquipo = New Equipo
 
                     oEquipo.Cve_Equipo = 0
                     oEquipo.Cve_Equipo_Kronos = vDR_Nuevo_Equipo("cve")
-                    oEquipo.Cve_Lider = 0
-                    oEquipo.Cve_Detalle = 0
+                    oEquipo.Cve_Lider = oLider.cve_lider
+                    oEquipo.Cve_Detalle = oDetalle.Cve_Detalle
                     oEquipo.Equipo = vDR_Nuevo_Equipo("nombre")
                     oEquipo.LETT = ""
                     oEquipo.Ruta_Imagen = ""
