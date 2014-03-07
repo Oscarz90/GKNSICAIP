@@ -199,8 +199,13 @@ Public Class frmLinea
         vValida_Nombre = txtNombre_Linea.Text.Count
 
         If vValida_Nombre > 0 Then
-            btnRegistrar.Enabled = True
-            btnModificar.Enabled = True
+            If vAdd_Registrar = True Then
+                btnRegistrar.Enabled = True
+                btnModificar.Enabled = True
+            Else
+                btnRegistrar.Enabled = False
+                btnModificar.Enabled = False
+            End If           
         Else
             btnRegistrar.Enabled = False
             btnModificar.Enabled = False
