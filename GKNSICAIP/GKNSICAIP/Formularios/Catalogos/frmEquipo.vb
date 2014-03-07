@@ -146,11 +146,22 @@ Public Class frmEquipo
 
     Private Function Validar_Datos_Completos(ByVal vTipo_Tlatoani As Boolean, ByVal vLG As Boolean, ByVal vLET As Boolean, ByVal vImagen As Boolean) As Boolean
         Dim vRetorno As Boolean = False
+
+        
+
         If vTipo_Tlatoani = True And vLG = True And vLET = True And vImagen = True Then
             vRetorno = True
-            btnModificar.Enabled = True
+            If vAdd_Registrar = True Then
+                btnModificar.Enabled = True
+            Else
+                btnModificar.Enabled = False
+            End If
         Else
-            btnModificar.Enabled = False
+            If vAdd_Registrar = True Then
+                btnModificar.Enabled = False
+            Else
+                btnModificar.Enabled = False
+            End If
             vRetorno = False
         End If
         Return vRetorno
