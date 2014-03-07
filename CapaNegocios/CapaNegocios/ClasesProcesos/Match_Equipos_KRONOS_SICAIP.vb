@@ -41,6 +41,29 @@ Public Class Match_Equipos_KRONOS_SICAIP
         Return vRetorno
     End Function
 
+    Public Function Existe_Equipo_KRONOS(ByVal vCve_Equipo As String) As Boolean
+        Dim vRetorno As Boolean = False
+        Dim vDR As DataRow
+        Try
+            vDR = oBD_Kronos.ObtenerRenglon("SELECT count(name) AS Total FROM VR_LABORLEVEL WHERE LLDEF_SHORTNAME='EQU' AND name != '-' and name != 'Default' and name='" & vCve_Equipo & "'", "")
+
+            If IsNothing(vDR) = False Then
+                If vDR("Total") > 0 Then
+                    vRetorno = True
+                Else
+                    vRetorno = False
+                End If
+            Else
+                vRetorno = False
+            End If
+
+        Catch ex As Exception
+            vRetorno = False
+            Mensajes("Error al Obtener Equipo de KRONOS")
+        End Try
+
+        Return vRetorno
+    End Function
 
     Private Sub Actualizar_Nombre_Equipo(ByVal vCve_Equipo As Integer, ByVal vNombre_Nuevo As String)
         oEquipo = New Equipo
@@ -119,6 +142,34 @@ Public Class Match_Equipos_KRONOS_SICAIP
        
     End Sub
 
+    Private Sub Obtener_Equipos_Faltantes_Kronos()
+        Dim vDT_SICAIP As DataTable
+        Dim vDT_KRONOS As DataTable
+
+        vDT_KRONOS = vDatosKRONOS
+        vDT_SICAIP = Obtener_Equipos_SICAIP()
+        Mensajes("Revisando existencia de Equipos Faltantes en KRONOS")
+
+        If vDT_KRONOS.Rows.Count < vDT_SICAIP.Rows.Count Then
+
+            For Each vdrSICAIP As DataRow In vDT_SICAIP.Rows
+
+                If Existe_Equipo_KRONOS(vdrSICAIP("cve")) = False Then
+                    Mensajes("El Equipos ... " & vdrSICAIP("nombre") & " Falta en KRONOS.............................")
+                End If
+            Next
+
+        ElseIf vDT_KRONOS.Rows.Count = vDT_SICAIP.Rows.Count Then
+            Mensajes("El numero de Equipos en KRONOS es igual que en SICAIP")
+        Else
+            Mensajes("No hay Equipos Faltantes en KRONOS")
+        End If
+
+
+
+    End Sub
+
+
     Public Function Obtener_Equipos_nuevos_filtrado_Equipos() As DataTable
         Dim vretorno As String = "SELECT name AS cve, description AS nombre FROM VR_LABORLEVEL WHERE LLDEF_SHORTNAME='EQU' AND name != '-' AND name != 'Default'"
         Dim vDT As DataTable
@@ -191,12 +242,19 @@ Public Class Match_Equipos_KRONOS_SICAIP
                 ''-----Mandar mensaje de que se buscaran Equipos Nuevos
                 ''------------------------------------------------------------------------
                 Obtener_Equipos_Nuevos()
+
+
+                Obtener_Equipos_Faltantes_Kronos()
+
+
                 Mensajes("Fin")
             End If
         Catch ex As Exception
             MsgBox("Error al hacer Match de Equipos con Kronos")
         End Try        
     End Sub
+
+
 
     
     Private Sub Mensajes(ByVal vMensaje As String)
