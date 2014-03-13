@@ -231,14 +231,23 @@ Public Class Linea
                 End If
                 Dim oEq As DataTable
 
+                Dim oEq_No_Asignado As DataTable
+
                 If vEquipo_Existe_En_EquipoLinea = True Then
                     oEq = oBD.ObtenerTabla("SELECT DISTINCT E.cve_equipo AS cve_equipo, E.Equipo" & _
                                                       " FROM Equipo E " & _
                                                       " WHERE E.cve_equipo NOT IN  (SELECT cve_equipo FROM equipo_linea EL WHERE EL.cve_linea =" & Me.vcve_linea & ")" & _
                                                       " and E.cve_equipo IN (SELECT cve_equipo FROM equipo_linea EL join linea l on l.cve_linea=EL.cve_linea WHERE l.cve_componente =" & Obtener_CVEComponente_EN_Linea(Me.vcve_linea) & ")" & _
                                                       " Order by  E.Equipo")
+
+
+                    oEq_No_Asignado = oBD.ObtenerTabla("SELECT DISTINCT E.cve_equipo AS cve_equipo, E.Equipo " & _
+                                                       " FROM Equipo E " & _
+                                                       " WHERE E.cve_equipo NOT IN (SELECT distinct(cve_equipo) FROM equipo_linea) order by E.Equipo")
+
                 Else
                     oEq = oBD.ObtenerTabla("SELECT e.cve_equipo from equipo e Order by e.equipo")
+                    oEq_No_Asignado = oBD.ObtenerTabla("SELECT e.cve_equipo from equipo e where e.cve_equipo < 0")
                 End If
 
                 If oEq IsNot Nothing Then
@@ -249,6 +258,16 @@ Public Class Linea
                         oEquipoLinea.Cargar()
                         Me.vLEquipos_Linea_NO_Asignados.Add(oEquipoLinea)
                     Next
+
+                    For Each row As DataRow In oEq_No_Asignado.Rows
+                        oEquipoLinea = New Equipo
+                        oEquipoLinea.Cve_Equipo = row("cve_equipo")
+                        oEquipoLinea.Cargar()
+                        Me.vLEquipos_Linea_NO_Asignados.Add(oEquipoLinea)
+                    Next
+
+
+
                 End If
             End If
             Return Me.vLEquipos_Linea_NO_Asignados

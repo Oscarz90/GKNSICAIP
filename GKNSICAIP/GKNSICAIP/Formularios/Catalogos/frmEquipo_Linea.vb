@@ -101,6 +101,8 @@ Public Class frmEquipo_Linea
             'lbLibres.DisplayMember = "Equipo"
         Next
 
+
+
     End Sub
 #End Region
 
