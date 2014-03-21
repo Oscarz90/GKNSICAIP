@@ -368,7 +368,7 @@ Public Class FrmUsuarios
                 radUsuario_CV.Enabled = False
                 radUsuario_CV.IsChecked = True ''Solo es para que se active el boton de Select correspondiente
                 radUsuario_Componente.IsChecked = True
-            ElseIf oUsuario.Descripcion_Tipo_Usuario.ToUpper = "SUPERVISOR LIDER" Then
+            ElseIf oUsuario.Descripcion_Tipo_Usuario.ToUpper = "COMPONENTE" Then ''Antes era Supervisor Lider
                 radUsuario_Componente.Enabled = True
                 radUsuario_CV.Enabled = False
                 radUsuario_CV.IsChecked = True ''Solo es para que se active el boton de Select correspondiente
@@ -389,7 +389,7 @@ Public Class FrmUsuarios
                 radUsuario_CV.Enabled = True
                 radUsuario_Componente.IsChecked = True
                 radUsuario_CV.IsChecked = True
-            ElseIf oUsuario.Descripcion_Tipo_Usuario = "GERENTE" Then
+            ElseIf oUsuario.Descripcion_Tipo_Usuario = "CADENA DE VALOR" Then ''Antes era Gerente
                 radUsuario_Componente.Enabled = False
                 radUsuario_CV.Enabled = True
                 radUsuario_Componente.IsChecked = True

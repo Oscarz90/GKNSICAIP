@@ -558,6 +558,7 @@ Public Class FrmGraficasfaseuno
         BarSeries1.LabelFormat = "{0:##.#}" & " %"
         BarSeries2.LabelFormat = "{0:##.#}" & " %"
 
+        BarSeries1.Font = New Font("Segoe UI", 12)
 
         BarSeries1.HorizontalAxis = CategoricalAxis1
 
@@ -569,6 +570,7 @@ Public Class FrmGraficasfaseuno
         Me.radChartView1.ShowToolTip = True
         radChartView1.Series.Add(BarSeries1)
         radChartView1.Series.Add(BarSeries2)
+
     End Sub
     'Oee Cadena Valor
     Private Sub obtiene_oee_cadena_valor_dia_mes()
@@ -1123,6 +1125,9 @@ Public Class FrmGraficasfaseuno
         Dim BarSeries2 As New BarSeries()
         BarSeries2.LegendTitle = "Acumulado"
         Me.radChartView1.ShowLegend = True
+        'BarSeries1.Font = New Font("Arial", 10, Drawing.FontStyle.Bold)
+        BarSeries1.Font = New Font("Arial", 10)
+        BarSeries2.Font = New Font("Arial", 10)
         'Obtencion Datos
         Dim vDT As DataTable = Nothing
         If rdbtnDias.IsChecked Then
@@ -1173,10 +1178,17 @@ Public Class FrmGraficasfaseuno
         CategoricalAxis1.LabelRotationAngle = 270.0R
         LinearAxis1.AxisType = AxisType.Second
         LinearAxis1.Title = "NRFTi ( PPM'S ) "
+
         BarSeries1.ShowLabels = True
         BarSeries2.ShowLabels = True
+
         BarSeries1.LabelFormat = "{0:##,###}"
         BarSeries2.LabelFormat = "{0:##,##}"
+
+        BarSeries1.LabelMode = BarLabelModes.Top
+        BarSeries2.LabelMode = BarLabelModes.Top
+
+
         BarSeries1.HorizontalAxis = CategoricalAxis1
         BarSeries1.VerticalAxis = LinearAxis1
         'BarSeries1.ForeColor = Color.White
@@ -1206,6 +1218,8 @@ Public Class FrmGraficasfaseuno
         Dim LineSeries1 As New LineSeries()
         LineSeries1.LegendTitle = "Objetivo NRFTi"
         Me.radChartView1.ShowLegend = True
+        BarSeries1.Font = New Font("Arial", 10)
+        BarSeries2.Font = New Font("Arial", 10)
         'Obtencion Datos
         Dim vDT As New DataTable
         If rdbtnDias.IsChecked Then
@@ -1258,11 +1272,12 @@ Public Class FrmGraficasfaseuno
         End If
         CategoricalAxis1.LabelRotationAngle = 270.0R
         LinearAxis1.AxisType = AxisType.Second
+        LinearAxis1.Title = "NRFTi ( PPM'S )"
         'LinearAxis1.LabelFitMode = AxisLabelFitMode.Rotate
         'LinearAxis1.LabelRotationAngle = 300.0R
         'LinearAxis1.MajorStep = 10.0R
         'LinearAxis1.Maximum = 100
-        LinearAxis1.Title = "NRFTi ( PPM'S )"
+
 
         BarSeries1.ShowLabels = True
         BarSeries2.ShowLabels = True
@@ -1271,6 +1286,9 @@ Public Class FrmGraficasfaseuno
         BarSeries1.LabelFormat = "{0:##,###}"
         BarSeries2.LabelFormat = "{0:##,###}"
         LineSeries1.LabelFormat = "{0:##,###}"
+
+        BarSeries1.LabelMode = BarLabelModes.Top
+        BarSeries2.LabelMode = BarLabelModes.Top
 
         BarSeries1.HorizontalAxis = CategoricalAxis1
         LineSeries1.HorizontalAxis = CategoricalAxis1
@@ -1314,6 +1332,8 @@ Public Class FrmGraficasfaseuno
         Dim LineSeries1 As New LineSeries()
         LineSeries1.LegendTitle = "Objetivo NRFTi"
         Me.radChartView1.ShowLegend = True
+        BarSeries1.Font = New Font("Arial", 10)
+        BarSeries2.Font = New Font("Arial", 10)
         'Obtencion Datos Oee
         Dim vDT As New DataTable
         If rdbtnDias.IsChecked Then
@@ -1380,6 +1400,9 @@ Public Class FrmGraficasfaseuno
         BarSeries2.LabelFormat = "{0:#,###}"
         LineSeries1.LabelFormat = "{0:##,###}"
 
+        BarSeries1.LabelMode = BarLabelModes.Top
+        BarSeries2.LabelMode = BarLabelModes.Top
+
         BarSeries1.HorizontalAxis = CategoricalAxis1
         LineSeries1.HorizontalAxis = CategoricalAxis1
 
@@ -1422,6 +1445,8 @@ Public Class FrmGraficasfaseuno
         Dim LineSeries1 As New LineSeries()
         LineSeries1.LegendTitle = "Objetivo NRFTi"
         Me.radChartView1.ShowLegend = True
+        BarSeries1.Font = New Font("Arial", 10)
+        BarSeries2.Font = New Font("Arial", 10)
         'Obtencion Datos Oee
         Dim vDT As New DataTable
         If rdbtnDias.IsChecked Then
@@ -1484,6 +1509,9 @@ Public Class FrmGraficasfaseuno
         BarSeries2.LabelFormat = "{0:#,###}"
         LineSeries1.LabelFormat = "{0:##,###}"
 
+        BarSeries1.LabelMode = BarLabelModes.Top
+        BarSeries2.LabelMode = BarLabelModes.Top
+
         BarSeries1.HorizontalAxis = CategoricalAxis1
         LineSeries1.HorizontalAxis = CategoricalAxis1
 
@@ -1526,6 +1554,8 @@ Public Class FrmGraficasfaseuno
         Dim LineSeries1 As New LineSeries()
         LineSeries1.LegendTitle = "Objetivo NRFTi"
         Me.radChartView1.ShowLegend = True
+        BarSeries1.Font = New Font("Arial", 10)
+        BarSeries2.Font = New Font("Arial", 10)
         'Obtencion Datos Oee
         Dim vDT As New DataTable
         If rdbtnDias.IsChecked Then
@@ -1603,6 +1633,9 @@ Public Class FrmGraficasfaseuno
         BarSeries2.LabelFormat = "{0:#,###}"
         LineSeries1.LabelFormat = "{0:##,###}"
 
+        BarSeries1.LabelMode = BarLabelModes.Top
+        BarSeries2.LabelMode = BarLabelModes.Top
+
         BarSeries1.HorizontalAxis = CategoricalAxis1
         LineSeries1.HorizontalAxis = CategoricalAxis1
 
@@ -1648,6 +1681,8 @@ Public Class FrmGraficasfaseuno
         Dim LineSeries1 As New LineSeries()
         LineSeries1.LegendTitle = "Objetivo NRFTi"
         Me.radChartView1.ShowLegend = True
+        BarSeries1.Font = New Font("Arial", 10)
+        BarSeries2.Font = New Font("Arial", 10)
         'Obtencion Datos Oee
         Dim vDT As New DataTable
         If rdbtnDias.IsChecked Then
@@ -1724,6 +1759,9 @@ Public Class FrmGraficasfaseuno
         BarSeries1.LabelFormat = "{0:#,###}"
         BarSeries2.LabelFormat = "{0:#,###}"
         LineSeries1.LabelFormat = "{0:##,###}"
+
+        BarSeries1.LabelMode = BarLabelModes.Top
+        BarSeries2.LabelMode = BarLabelModes.Top
 
         BarSeries1.HorizontalAxis = CategoricalAxis1
         LineSeries1.HorizontalAxis = CategoricalAxis1
@@ -3182,7 +3220,7 @@ Public Class FrmGraficasfaseuno
         LinearAxis1.AxisType = AxisType.Second
         'LinearAxis1.MajorStep = 1.0R
         LinearAxis1.Title = "CI"
-        BarSeries1.ShowLabels = True
+        'BarSeries1.ShowLabels = True
         'BarSeries2.ShowLabels = True
         'BarSeries3.ShowLabels = True
         BarSeries1.LabelFormat = "{0:###}"
@@ -3279,7 +3317,7 @@ Public Class FrmGraficasfaseuno
         'LinearAxis1.MajorStep = 1.0R
         'LinearAxis1.Maximum = 5
         LinearAxis1.Title = "CI"
-        BarSeries1.ShowLabels = True
+        'BarSeries1.ShowLabels = True
         'LineSeries1.ShowLabels = True
         'BarSeries2.ShowLabels = True
         'BarSeries3.ShowLabels = True
@@ -3393,7 +3431,7 @@ Public Class FrmGraficasfaseuno
         'LinearAxis1.MajorStep = 1.0R
         'LinearAxis1.Maximum = 5
         LinearAxis1.Title = "CI"
-        BarSeries1.ShowLabels = True
+        'BarSeries1.ShowLabels = True
         'LineSeries1.ShowLabels = True
         'BarSeries2.ShowLabels = True
         'BarSeries3.ShowLabels = True
@@ -3509,7 +3547,7 @@ Public Class FrmGraficasfaseuno
         'LinearAxis1.MajorStep = 1.0R
 
         LinearAxis1.Title = "CI"
-        BarSeries1.ShowLabels = True
+        'BarSeries1.ShowLabels = True
         'LineSeries1.ShowLabels = True
         'BarSeries2.ShowLabels = True
         'BarSeries3.ShowLabels = True
@@ -3624,7 +3662,7 @@ Public Class FrmGraficasfaseuno
         'LinearAxis1.MajorStep = 1.0R
         'LinearAxis1.Maximum = 5
         LinearAxis1.Title = "CI"
-        BarSeries1.ShowLabels = True
+        'BarSeries1.ShowLabels = True
         'LineSeries1.ShowLabels = True
         'BarSeries2.ShowLabels = True
         'BarSeries3.ShowLabels = True
@@ -3742,7 +3780,7 @@ Public Class FrmGraficasfaseuno
         'LinearAxis1.MajorStep = 1.0R
         'LinearAxis1.Maximum = 5
         LinearAxis1.Title = "CI"
-        BarSeries1.ShowLabels = True
+        'BarSeries1.ShowLabels = True
         'LineSeries1.ShowLabels = True
         'BarSeries2.ShowLabels = True
         'BarSeries3.ShowLabels = True
