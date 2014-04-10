@@ -62,9 +62,9 @@ Partial Class msg_Dialogo
         Me.lbMensaje.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lbMensaje.Location = New System.Drawing.Point(12, 9)
         Me.lbMensaje.Name = "lbMensaje"
-        Me.lbMensaje.Size = New System.Drawing.Size(413, 24)
+        Me.lbMensaje.Size = New System.Drawing.Size(437, 24)
         Me.lbMensaje.TabIndex = 2
-        Me.lbMensaje.Text = "¿Estás seguro del horario y línea elegidos?"
+        Me.lbMensaje.Text = "¿Estás seguro del horario y línea(s) elegidos?"
         '
         'Label3
         '

@@ -2,6 +2,11 @@
 Imports System.Threading
 
 Public Class frmProduccion
+    Dim ofrmMensaje_Turno As msg_Dialogo
+    Dim ofrmMensaje_Descanso_Equipo As msg_Dialogo_Descanso_All_Lineas
+
+
+
 #Region "Atributos"
     'Globales
     Private vcve_equipo As Integer
@@ -764,7 +769,7 @@ Public Class frmProduccion
                 oObtieneSeguridad.fecha_inicial = Date.Now.AddDays(-5) '-----restarle unos 3 dias
                 oObtieneSeguridad.fecha_final = Date.Now
                 oObtieneSeguridad.bandera = 2
-                oObtieneSeguridad.obtiene_seguridad_equipo_linea_dia()                
+                oObtieneSeguridad.obtiene_seguridad_equipo_linea_dia()
 
                 'Exec proc para actualixar historico
 
@@ -1883,7 +1888,11 @@ Public Class frmProduccion
     Private Sub registra_todas_lineas()
         Dim line_aux As Long
         If cbxTurnosLineas.Text <> "Descanso" Then
-            If MsgBox("¿Estas seguro que el horario para las lineas (todas/restantes) es: " & cbxTurnosLineas.Text & "?. Una vez registrado el horario ya no lo podrás modificar.", vbQuestion + vbYesNo, "Confirmación") = vbYes Then
+            ofrmMensaje_Turno = New msg_Dialogo
+            ofrmMensaje_Turno.vEntrada = "Turno: " & cbxTurnosLineas.Text & " --- Lineas: Todas"
+            ofrmMensaje_Turno.ShowDialog()
+
+            If ofrmMensaje_Turno.vRespuesta = True Then
                 If valida_registro_linea() Then
                     For Each row As DataGridViewRow In grdLineasNoRegistradas.Rows
                         line_aux = Val(row.Cells(0).Value)
@@ -1898,6 +1907,23 @@ Public Class frmProduccion
                     llena_lineas_Si_gridview()
                 End If
             End If
+
+
+            'If MsgBox("¿Estas seguro que el horario para las lineas (todas/restantes) es: " & cbxTurnosLineas.Text & "?. Una vez registrado el horario ya no lo podrás modificar.", vbQuestion + vbYesNo, "Confirmación") = vbYes Then
+            '    If valida_registro_linea() Then
+            '        For Each row As DataGridViewRow In grdLineasNoRegistradas.Rows
+            '            line_aux = Val(row.Cells(0).Value)
+            '            If verifica_registro_turno(line_aux, obten_dia_asignado_registro_turno()) Then
+            '                Registra_Turno_Linea(line_aux)
+            '            End If
+
+            '            line_aux = Nothing
+            '        Next
+            '        limpia_turno_linea()
+            '        deshabilitar_btn_Turno_linea()
+            '        llena_lineas_Si_gridview()
+            '    End If
+            'End If
         Else
             MsgBox("Para Registrar todas lineas con descanso dirijase a la pestaña 'Descansos' ", vbCritical + vbOKOnly, "Error")
             limpia_turno_linea()
@@ -1911,13 +1937,25 @@ Public Class frmProduccion
         Dim nom_aux As String = grdLineasNoRegistradas.Item("collinea", grdLineasNoRegistradas.CurrentRow.Index).Value
         If valida_registro_linea() Then
             If verifica_registro_turno(line_aux, obten_dia_asignado_registro_turno()) Then
-                If MsgBox("¿Estas seguro que el horario para la linea: " & nom_aux & " es " & cbxTurnosLineas.Text & "?. Una vez registrado ya no lo podrás modificar.", vbQuestion + vbYesNo, "Confirmación") = vbYes Then
+                ofrmMensaje_Turno = New msg_Dialogo
+                ofrmMensaje_Turno.vEntrada = "Turno: " & cbxTurnosLineas.Text & " --- Linea: " & nom_aux
+                ofrmMensaje_Turno.ShowDialog()
+
+                If ofrmMensaje_Turno.vRespuesta = True Then
                     'MsgBox("Registro exitoso", vbOKOnly, "Aviso")
                     Registra_Turno_Linea(line_aux)
                     limpia_turno_linea()
                     deshabilitar_btn_Turno_linea()
                     llena_lineas_Si_gridview()
                 End If
+
+                'If MsgBox("¿Estas seguro que el horario para la linea: " & nom_aux & " es " & cbxTurnosLineas.Text & "?. Una vez registrado ya no lo podrás modificar.", vbQuestion + vbYesNo, "Confirmación") = vbYes Then
+                '    'MsgBox("Registro exitoso", vbOKOnly, "Aviso")
+                '    Registra_Turno_Linea(line_aux)
+                '    limpia_turno_linea()
+                '    deshabilitar_btn_Turno_linea()
+                '    llena_lineas_Si_gridview()
+                'End If
             Else
                 limpia_turno_linea()
                 MsgBox("Esta Linea ya ha sido registrada.", vbExclamation, "Error")
@@ -2055,11 +2093,21 @@ Public Class frmProduccion
 #Region "Funciones para modulo Descanso"
     Private Sub registra_descanso()
         If valida_captura_descanso() Then
-            If MsgBox("¿Seguro que desea guardar dia descanso?", vbQuestion + vbYesNo, "Confirmación") = vbYes Then
+            ofrmMensaje_Descanso_Equipo = New msg_Dialogo_Descanso_All_Lineas
+            ofrmMensaje_Descanso_Equipo.vEntrada = dtpDescanso.Value.Day & "/" & dtpDescanso.Value.Month & "/" & dtpDescanso.Value.Year
+            ofrmMensaje_Descanso_Equipo.ShowDialog()
+
+            If ofrmMensaje_Descanso_Equipo.vRespuesta = True Then
                 add_descanso()
                 llena_Descanso_gridview()
                 llena_lineas_Si_gridview()
             End If
+
+            'If MsgBox("¿Seguro que desea guardar dia descanso?", vbQuestion + vbYesNo, "Confirmación") = vbYes Then
+            '    add_descanso()
+            '    llena_Descanso_gridview()
+            '    llena_lineas_Si_gridview()
+            'End If
         End If
     End Sub
     Private Sub add_descanso()

@@ -10,7 +10,7 @@
         Me.btnSi.Enabled = False
         Me.btnNo.TabStop = False
         Me.btnSi.TabStop = False
-
+        Me.lb_Entrada.Focus()
         Me.ControlBox = False
 
         Me.lb_Entrada.Text = vEntrada
