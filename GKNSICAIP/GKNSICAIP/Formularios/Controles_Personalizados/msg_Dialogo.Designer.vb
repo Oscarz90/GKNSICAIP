@@ -37,7 +37,7 @@ Partial Class msg_Dialogo
         'btnSi
         '
         Me.btnSi.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnSi.Location = New System.Drawing.Point(494, 166)
+        Me.btnSi.Location = New System.Drawing.Point(507, 166)
         Me.btnSi.Name = "btnSi"
         Me.btnSi.Size = New System.Drawing.Size(94, 29)
         Me.btnSi.TabIndex = 0
@@ -48,7 +48,7 @@ Partial Class msg_Dialogo
         'btnNo
         '
         Me.btnNo.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnNo.Location = New System.Drawing.Point(594, 166)
+        Me.btnNo.Location = New System.Drawing.Point(607, 166)
         Me.btnNo.Name = "btnNo"
         Me.btnNo.Size = New System.Drawing.Size(94, 29)
         Me.btnNo.TabIndex = 1
@@ -104,11 +104,11 @@ Partial Class msg_Dialogo
         Me.lb_Entrada.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
                     Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.lb_Entrada.AutoSize = True
-        Me.lb_Entrada.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lb_Entrada.Font = New System.Drawing.Font("Microsoft Sans Serif", 22.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lb_Entrada.ForeColor = System.Drawing.Color.DodgerBlue
         Me.lb_Entrada.Location = New System.Drawing.Point(12, 45)
         Me.lb_Entrada.Name = "lb_Entrada"
-        Me.lb_Entrada.Size = New System.Drawing.Size(240, 20)
+        Me.lb_Entrada.Size = New System.Drawing.Size(429, 36)
         Me.lb_Entrada.TabIndex = 8
         Me.lb_Entrada.Text = "(Linea_Seleccion) es (Turno)"
         '
@@ -127,7 +127,7 @@ Partial Class msg_Dialogo
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.AutoSize = True
-        Me.ClientSize = New System.Drawing.Size(696, 205)
+        Me.ClientSize = New System.Drawing.Size(714, 205)
         Me.ControlBox = False
         Me.Controls.Add(Me.PictureBox1)
         Me.Controls.Add(Me.lb_Entrada)
