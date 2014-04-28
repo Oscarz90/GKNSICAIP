@@ -32,7 +32,6 @@ Partial Class msg_Dialogo_Descanso_All_Lineas
         Me.PictureBox1 = New System.Windows.Forms.PictureBox()
         Me.lb_Entrada = New System.Windows.Forms.Label()
         Me.Label2 = New System.Windows.Forms.Label()
-        Me.Label4 = New System.Windows.Forms.Label()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
@@ -42,9 +41,9 @@ Partial Class msg_Dialogo_Descanso_All_Lineas
         Me.Label1.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label1.Location = New System.Drawing.Point(195, 111)
         Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(479, 17)
+        Me.Label1.Size = New System.Drawing.Size(483, 17)
         Me.Label1.TabIndex = 15
-        Me.Label1.Text = "No se podrá modificar el descanso después de la fecha de dicho"
+        Me.Label1.Text = "No se podrá modificar el descanso después de la fecha indicada."
         '
         'ckbAcuerdo
         '
@@ -82,7 +81,7 @@ Partial Class msg_Dialogo_Descanso_All_Lineas
         'btnNo
         '
         Me.btnNo.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnNo.Location = New System.Drawing.Point(592, 166)
+        Me.btnNo.Location = New System.Drawing.Point(560, 164)
         Me.btnNo.Name = "btnNo"
         Me.btnNo.Size = New System.Drawing.Size(94, 29)
         Me.btnNo.TabIndex = 11
@@ -93,7 +92,7 @@ Partial Class msg_Dialogo_Descanso_All_Lineas
         'btnSi
         '
         Me.btnSi.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnSi.Location = New System.Drawing.Point(492, 166)
+        Me.btnSi.Location = New System.Drawing.Point(460, 164)
         Me.btnSi.Name = "btnSi"
         Me.btnSi.Size = New System.Drawing.Size(94, 29)
         Me.btnSi.TabIndex = 10
@@ -116,11 +115,11 @@ Partial Class msg_Dialogo_Descanso_All_Lineas
         Me.lb_Entrada.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
                     Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.lb_Entrada.AutoSize = True
-        Me.lb_Entrada.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lb_Entrada.Font = New System.Drawing.Font("Microsoft Sans Serif", 22.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lb_Entrada.ForeColor = System.Drawing.Color.DodgerBlue
-        Me.lb_Entrada.Location = New System.Drawing.Point(85, 45)
+        Me.lb_Entrada.Location = New System.Drawing.Point(135, 45)
         Me.lb_Entrada.Name = "lb_Entrada"
-        Me.lb_Entrada.Size = New System.Drawing.Size(99, 20)
+        Me.lb_Entrada.Size = New System.Drawing.Size(177, 36)
         Me.lb_Entrada.TabIndex = 17
         Me.lb_Entrada.Text = "25/03/2014"
         '
@@ -129,29 +128,18 @@ Partial Class msg_Dialogo_Descanso_All_Lineas
         Me.Label2.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
                     Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.Label2.AutoSize = True
-        Me.Label2.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label2.Font = New System.Drawing.Font("Microsoft Sans Serif", 22.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label2.Location = New System.Drawing.Point(10, 45)
         Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(69, 20)
+        Me.Label2.Size = New System.Drawing.Size(120, 36)
         Me.Label2.TabIndex = 18
         Me.Label2.Text = "Fecha: "
-        '
-        'Label4
-        '
-        Me.Label4.AutoSize = True
-        Me.Label4.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label4.Location = New System.Drawing.Point(195, 128)
-        Me.Label4.Name = "Label4"
-        Me.Label4.Size = New System.Drawing.Size(82, 17)
-        Me.Label4.TabIndex = 19
-        Me.Label4.Text = "descanso."
         '
         'msg_Dialogo_Descanso_All_Lineas
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(696, 205)
-        Me.Controls.Add(Me.Label4)
+        Me.ClientSize = New System.Drawing.Size(674, 205)
         Me.Controls.Add(Me.Label2)
         Me.Controls.Add(Me.lb_Entrada)
         Me.Controls.Add(Me.PictureBox1)
@@ -162,7 +150,7 @@ Partial Class msg_Dialogo_Descanso_All_Lineas
         Me.Controls.Add(Me.btnNo)
         Me.Controls.Add(Me.btnSi)
         Me.Name = "msg_Dialogo_Descanso_All_Lineas"
-        Me.Text = "Conformición"
+        Me.Text = "Confirmación"
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
@@ -177,5 +165,4 @@ Partial Class msg_Dialogo_Descanso_All_Lineas
     Friend WithEvents btnSi As System.Windows.Forms.Button
     Friend WithEvents lb_Entrada As System.Windows.Forms.Label
     Friend WithEvents Label2 As System.Windows.Forms.Label
-    Friend WithEvents Label4 As System.Windows.Forms.Label
 End Class
