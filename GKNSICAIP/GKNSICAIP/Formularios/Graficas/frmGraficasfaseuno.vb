@@ -680,9 +680,10 @@ Public Class FrmGraficasfaseuno
         'LineSeries1.PointSize = New SizeF(10, 10)
 
         Me.radChartView1.ShowToolTip = True
-        radChartView1.Series.Add(LineSeries1)
+
         radChartView1.Series.Add(BarSeries1)
         radChartView1.Series.Add(BarSeries2)
+        radChartView1.Series.Add(LineSeries1)
 
         BarSeries1.CombineMode = ChartSeriesCombineMode.None
         BarSeries2.CombineMode = ChartSeriesCombineMode.None
@@ -793,9 +794,10 @@ Public Class FrmGraficasfaseuno
         'LineSeries1.PointSize = New SizeF(10, 10)
 
         Me.radChartView1.ShowToolTip = True
-        radChartView1.Series.Add(LineSeries1)
+
         radChartView1.Series.Add(BarSeries1)
         radChartView1.Series.Add(BarSeries2)
+        radChartView1.Series.Add(LineSeries1)
 
         BarSeries1.CombineMode = ChartSeriesCombineMode.None
         BarSeries2.CombineMode = ChartSeriesCombineMode.None
@@ -908,10 +910,10 @@ Public Class FrmGraficasfaseuno
         'Me.radChartView1.ShowToolTip = True
 
         Me.radChartView1.ShowToolTip = True
-        radChartView1.Series.Add(LineSeries1)
+
         radChartView1.Series.Add(BarSeries1)
         radChartView1.Series.Add(BarSeries2)
-
+        radChartView1.Series.Add(LineSeries1)
 
         BarSeries1.CombineMode = ChartSeriesCombineMode.None
         BarSeries2.CombineMode = ChartSeriesCombineMode.None
@@ -1021,9 +1023,10 @@ Public Class FrmGraficasfaseuno
         'LineSeries1.PointSize = New SizeF(10, 10)
 
         Me.radChartView1.ShowToolTip = True
-        radChartView1.Series.Add(LineSeries1)
+
         radChartView1.Series.Add(BarSeries1)
         radChartView1.Series.Add(BarSeries2)
+        radChartView1.Series.Add(LineSeries1)
 
         BarSeries1.CombineMode = ChartSeriesCombineMode.None
         BarSeries2.CombineMode = ChartSeriesCombineMode.None
@@ -1146,9 +1149,10 @@ Public Class FrmGraficasfaseuno
         'LineSeries1.PointSize = New SizeF(10, 10)
 
         Me.radChartView1.ShowToolTip = True
-        radChartView1.Series.Add(LineSeries1)
+
         radChartView1.Series.Add(BarSeries1)
         radChartView1.Series.Add(BarSeries2)
+        radChartView1.Series.Add(LineSeries1)
 
         BarSeries1.CombineMode = ChartSeriesCombineMode.None
         BarSeries2.CombineMode = ChartSeriesCombineMode.None
@@ -1362,9 +1366,10 @@ Public Class FrmGraficasfaseuno
         'LineSeries1.PointSize = New SizeF(1, 1)
 
         Me.radChartView1.ShowToolTip = True
-        radChartView1.Series.Add(LineSeries1)
+
         radChartView1.Series.Add(BarSeries1)
         radChartView1.Series.Add(BarSeries2)
+        radChartView1.Series.Add(LineSeries1)
 
         BarSeries1.CombineMode = ChartSeriesCombineMode.None
         BarSeries2.CombineMode = ChartSeriesCombineMode.None
@@ -1487,9 +1492,10 @@ Public Class FrmGraficasfaseuno
         'LineSeries1.PointSize = New SizeF(10, 10)
 
         Me.radChartView1.ShowToolTip = True
-        radChartView1.Series.Add(LineSeries1)
+
         radChartView1.Series.Add(BarSeries1)
         radChartView1.Series.Add(BarSeries2)
+        radChartView1.Series.Add(LineSeries1)
 
         BarSeries1.CombineMode = ChartSeriesCombineMode.None
         BarSeries2.CombineMode = ChartSeriesCombineMode.None
@@ -1608,9 +1614,10 @@ Public Class FrmGraficasfaseuno
         'LineSeries1.PointSize = New SizeF(10, 10)
 
         Me.radChartView1.ShowToolTip = True
-        radChartView1.Series.Add(LineSeries1)
+
         radChartView1.Series.Add(BarSeries1)
         radChartView1.Series.Add(BarSeries2)
+        radChartView1.Series.Add(LineSeries1)
 
         BarSeries1.CombineMode = ChartSeriesCombineMode.None
         BarSeries2.CombineMode = ChartSeriesCombineMode.None
@@ -1746,9 +1753,10 @@ Public Class FrmGraficasfaseuno
         'LineSeries1.PointSize = New SizeF(10, 10)
 
         Me.radChartView1.ShowToolTip = True
-        radChartView1.Series.Add(LineSeries1)
+
         radChartView1.Series.Add(BarSeries1)
         radChartView1.Series.Add(BarSeries2)
+        radChartView1.Series.Add(LineSeries1)
 
         BarSeries1.CombineMode = ChartSeriesCombineMode.None
         BarSeries2.CombineMode = ChartSeriesCombineMode.None
@@ -1882,9 +1890,10 @@ Public Class FrmGraficasfaseuno
         'LineSeries1.PointSize = New SizeF(10, 10)
 
         Me.radChartView1.ShowToolTip = True
-        radChartView1.Series.Add(LineSeries1)
+
         radChartView1.Series.Add(BarSeries1)
         radChartView1.Series.Add(BarSeries2)
+        radChartView1.Series.Add(LineSeries1)
 
         BarSeries1.CombineMode = ChartSeriesCombineMode.None
         BarSeries2.CombineMode = ChartSeriesCombineMode.None
@@ -4063,10 +4072,10 @@ Public Class FrmGraficasfaseuno
         'Me.radChartView1.ShowGrid = True
         'Me.radChartView1.ShowSmartLabels = True
         radChartView1.Series.Add(LineSeries1)
-        radChartView1.Series.Add(LineSeries2)
+
         radChartView1.Series.Add(BarSeries1)
         radChartView1.Series.Add(BarSeries2)
-
+        radChartView1.Series.Add(LineSeries2)
 
         BarSeries1.CombineMode = ChartSeriesCombineMode.Stack
         BarSeries2.CombineMode = ChartSeriesCombineMode.Stack
@@ -4213,12 +4222,13 @@ Public Class FrmGraficasfaseuno
         Me.radChartView1.ShowToolTip = True
 
         'Chartview
-        radChartView1.Series.Add(LineSeries3)
+
         radChartView1.Series.Add(LineSeries1)
-        radChartView1.Series.Add(LineSeries2)
+
         radChartView1.Series.Add(BarSeries1)
         radChartView1.Series.Add(BarSeries2)
-
+        radChartView1.Series.Add(LineSeries3)
+        radChartView1.Series.Add(LineSeries2)
 
         BarSeries1.CombineMode = ChartSeriesCombineMode.Stack
         BarSeries2.CombineMode = ChartSeriesCombineMode.Stack
@@ -4365,12 +4375,14 @@ Public Class FrmGraficasfaseuno
         'Chartview
         'Me.radChartView1.ShowGrid = True
         'Me.radChartView1.ShowSmartLabels = True
-        radChartView1.Series.Add(LineSeries3)
+
         radChartView1.Series.Add(LineSeries1)
-        radChartView1.Series.Add(LineSeries2)
+
         radChartView1.Series.Add(BarSeries1)
         radChartView1.Series.Add(BarSeries2)
 
+        radChartView1.Series.Add(LineSeries3)
+        radChartView1.Series.Add(LineSeries2)
 
         BarSeries1.CombineMode = ChartSeriesCombineMode.Stack
         BarSeries2.CombineMode = ChartSeriesCombineMode.Stack
@@ -4515,12 +4527,14 @@ Public Class FrmGraficasfaseuno
         'Chartview
         'Me.radChartView1.ShowGrid = True
         'Me.radChartView1.ShowSmartLabels = True
-        radChartView1.Series.Add(LineSeries3)
+
         radChartView1.Series.Add(LineSeries1)
-        radChartView1.Series.Add(LineSeries2)
+
         radChartView1.Series.Add(BarSeries1)
         radChartView1.Series.Add(BarSeries2)
 
+        radChartView1.Series.Add(LineSeries3)
+        radChartView1.Series.Add(LineSeries2)
 
         BarSeries1.CombineMode = ChartSeriesCombineMode.Stack
         BarSeries2.CombineMode = ChartSeriesCombineMode.Stack
@@ -4667,12 +4681,14 @@ Public Class FrmGraficasfaseuno
         'Chartview
         'Me.radChartView1.ShowGrid = True
         'Me.radChartView1.ShowSmartLabels = True
-        radChartView1.Series.Add(LineSeries3)
+
         radChartView1.Series.Add(LineSeries1)
-        radChartView1.Series.Add(LineSeries2)
+
         radChartView1.Series.Add(BarSeries1)
         radChartView1.Series.Add(BarSeries2)
 
+        radChartView1.Series.Add(LineSeries3)
+        radChartView1.Series.Add(LineSeries2)
 
         BarSeries1.CombineMode = ChartSeriesCombineMode.Stack
         BarSeries2.CombineMode = ChartSeriesCombineMode.Stack
@@ -4820,12 +4836,14 @@ Public Class FrmGraficasfaseuno
         'Chartview
         'Me.radChartView1.ShowGrid = True
         'Me.radChartView1.ShowSmartLabels = True
-        radChartView1.Series.Add(LineSeries3)
+
         radChartView1.Series.Add(LineSeries1)
-        radChartView1.Series.Add(LineSeries2)
+
         radChartView1.Series.Add(BarSeries1)
         radChartView1.Series.Add(BarSeries2)
 
+        radChartView1.Series.Add(LineSeries3)
+        radChartView1.Series.Add(LineSeries2)
 
         BarSeries1.CombineMode = ChartSeriesCombineMode.Stack
         BarSeries2.CombineMode = ChartSeriesCombineMode.Stack
