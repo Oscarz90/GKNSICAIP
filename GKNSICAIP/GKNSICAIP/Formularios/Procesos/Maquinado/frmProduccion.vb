@@ -1419,11 +1419,11 @@ Public Class frmProduccion
         Dim SMTP As New System.Net.Mail.SmtpClient
         'CONFIGURACIÓN DEL STMP
         SMTP.Credentials = New System.Net.NetworkCredential("Sicaip.Soporte@gkndriveline.com", "Password32704")
-        SMTP.Host = "smtp.gmail.com"
-        SMTP.Port = 587
+        SMTP.Host = "GKNAUBEXH01.gkn.com"
+        SMTP.Port = 25
         SMTP.EnableSsl = True
         ' CONFIGURACION DEL MENSAJE
-        Message.[To].Add("omsz90@live.com.mx") 'Cuenta de Correo al que se le quiere enviar el e-mail
+        Message.[To].Add("madai.ortiz@gkndriveline.com") 'Cuenta de Correo al que se le quiere enviar el e-mail
         Message.From = New System.Net.Mail.MailAddress("Sicaip.Soporte@gkndriveline.com", "Soporte SICAIP", System.Text.Encoding.UTF8) 'Quien lo envía
         Message.Subject = subject_notificacion 'Sujeto del e-mail
         Message.SubjectEncoding = System.Text.Encoding.UTF8 'Codificacion
