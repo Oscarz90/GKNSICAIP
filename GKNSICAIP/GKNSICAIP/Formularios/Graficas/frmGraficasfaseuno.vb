@@ -497,6 +497,9 @@ Public Class FrmGraficasfaseuno
         Dim BarSeries2 As New BarSeries()
         BarSeries2.LegendTitle = "Acumulado"
         Me.radChartView1.ShowLegend = True
+        Me.radChartView1.ShowSmartLabels = True
+        BarSeries1.DrawLinesToLabels = True
+        BarSeries1.SyncLinesToLabelsColor = True
         'Obtencion Datos Oee
         Dim vDT As DataTable = Nothing
         If rdbtnDias.IsChecked Then
@@ -550,15 +553,16 @@ Public Class FrmGraficasfaseuno
         'LinearAxis1.LabelRotationAngle = 300.0R
         LinearAxis1.MajorStep = 10.0R
         LinearAxis1.Maximum = 100
-        LinearAxis1.Title = "Oee"
+        LinearAxis1.Title = "% Oee"
 
         BarSeries1.ShowLabels = True
         BarSeries2.ShowLabels = True
 
-        BarSeries1.LabelFormat = "{0:##.#}" & " %"
-        BarSeries2.LabelFormat = "{0:##.#}" & " %"
+        BarSeries1.LabelFormat = "{0:##}" ' & " %"
+        BarSeries2.LabelFormat = "{0:##}" ' & " %"
 
-        BarSeries1.Font = New Font("Segoe UI", 12)
+        BarSeries1.Font = New Font("Segoe UI", 11)
+        BarSeries2.Font = New Font("Segoe UI", 11)
 
         BarSeries1.HorizontalAxis = CategoricalAxis1
 
@@ -570,6 +574,9 @@ Public Class FrmGraficasfaseuno
         Me.radChartView1.ShowToolTip = True
         radChartView1.Series.Add(BarSeries1)
         radChartView1.Series.Add(BarSeries2)
+
+        BarSeries1.LabelMode = BarLabelModes.Top
+        BarSeries2.LabelMode = BarLabelModes.Top
 
     End Sub
     'Oee Cadena Valor
@@ -588,6 +595,9 @@ Public Class FrmGraficasfaseuno
         Dim LineSeries1 As New LineSeries()
         LineSeries1.LegendTitle = "Objetivo Oee"
         Me.radChartView1.ShowLegend = True
+        Me.radChartView1.ShowSmartLabels = True
+        BarSeries1.DrawLinesToLabels = True
+        BarSeries1.SyncLinesToLabelsColor = True
         'Obtencion Datos Oee
         Dim vDT As New DataTable
         If rdbtnDias.IsChecked Then
@@ -643,15 +653,17 @@ Public Class FrmGraficasfaseuno
         
         LinearAxis1.MajorStep = 10.0R
         LinearAxis1.Maximum = 100
-        LinearAxis1.Title = "Oee"
+        LinearAxis1.Title = "% Oee"
 
         BarSeries1.ShowLabels = True
         BarSeries2.ShowLabels = True
         'LineSeries1.ShowLabels = True
 
-        BarSeries1.LabelFormat = "{0:##.#}" & " %"
-        BarSeries2.LabelFormat = "{0:##.#}" & " %"
-        LineSeries1.LabelFormat = "{0:##.#}" & " %"
+        BarSeries1.LabelFormat = "{0:##}" '& " %"
+        BarSeries2.LabelFormat = "{0:##}" '& " %"
+        LineSeries1.LabelFormat = "{0:##.#}" '& " %"
+        BarSeries1.Font = New Font("Segoe UI", 11)
+        BarSeries2.Font = New Font("Segoe UI", 11)
 
         BarSeries1.HorizontalAxis = CategoricalAxis1
         LineSeries1.HorizontalAxis = CategoricalAxis1
@@ -676,6 +688,9 @@ Public Class FrmGraficasfaseuno
         BarSeries2.CombineMode = ChartSeriesCombineMode.None
         LineSeries1.CombineMode = ChartSeriesCombineMode.None
 
+        BarSeries1.LabelMode = BarLabelModes.Top
+        BarSeries2.LabelMode = BarLabelModes.Top
+
     End Sub
     'Oee Componente
     Private Sub obtiene_oee_componente_dia_mes()
@@ -693,6 +708,9 @@ Public Class FrmGraficasfaseuno
         Dim LineSeries1 As New LineSeries()
         LineSeries1.LegendTitle = "Objetivo Oee"
         Me.radChartView1.ShowLegend = True
+        Me.radChartView1.ShowSmartLabels = True
+        BarSeries1.DrawLinesToLabels = True
+        BarSeries1.SyncLinesToLabelsColor = True
         'Obtencion Datos Oee
         Dim vDT As New DataTable
         If rdbtnDias.IsChecked Then
@@ -749,15 +767,17 @@ Public Class FrmGraficasfaseuno
         'LinearAxis1.LabelRotationAngle = 300.0R
         LinearAxis1.MajorStep = 10.0R
         LinearAxis1.Maximum = 100
-        LinearAxis1.Title = "Oee"
+        LinearAxis1.Title = "% Oee"
 
         BarSeries1.ShowLabels = True
         BarSeries2.ShowLabels = True
         'LineSeries1.ShowLabels = True
 
-        BarSeries1.LabelFormat = "{0:##.#}" & " %"
-        BarSeries2.LabelFormat = "{0:##.#}" & " %"
-        LineSeries1.LabelFormat = "{0:##.#}" & " %"
+        BarSeries1.LabelFormat = "{0:##}" ' & " %"
+        BarSeries2.LabelFormat = "{0:##}" '& " %"
+        LineSeries1.LabelFormat = "{0:##.#}" '& " %"
+        BarSeries1.Font = New Font("Segoe UI", 11)
+        BarSeries2.Font = New Font("Segoe UI", 11)
 
         BarSeries1.HorizontalAxis = CategoricalAxis1
         LineSeries1.HorizontalAxis = CategoricalAxis1
@@ -780,6 +800,9 @@ Public Class FrmGraficasfaseuno
         BarSeries1.CombineMode = ChartSeriesCombineMode.None
         BarSeries2.CombineMode = ChartSeriesCombineMode.None
         LineSeries1.CombineMode = ChartSeriesCombineMode.None
+
+        BarSeries1.LabelMode = BarLabelModes.Top
+        BarSeries2.LabelMode = BarLabelModes.Top
     End Sub
     'Oee Linea
     Private Sub obtiene_oee_linea_dia_mes()
@@ -797,6 +820,9 @@ Public Class FrmGraficasfaseuno
         Dim LineSeries1 As New LineSeries()
         LineSeries1.LegendTitle = "Objetivo Oee"
         Me.radChartView1.ShowLegend = True
+        Me.radChartView1.ShowSmartLabels = True
+        BarSeries1.DrawLinesToLabels = True
+        BarSeries1.SyncLinesToLabelsColor = True
         'Obtencion Datos Oee
         Dim vDT As New DataTable
         If rdbtnDias.IsChecked Then
@@ -853,15 +879,17 @@ Public Class FrmGraficasfaseuno
         'LinearAxis1.LabelRotationAngle = 300.0R
         LinearAxis1.MajorStep = 10.0R
         LinearAxis1.Maximum = 100
-        'LinearAxis1.Title = "Oee"
+        LinearAxis1.Title = "% Oee"
 
         BarSeries1.ShowLabels = True
         BarSeries2.ShowLabels = True
-        LineSeries1.ShowLabels = True
+        'LineSeries1.ShowLabels = True
 
-        BarSeries1.LabelFormat = "{0:##.#}" & " %"
-        BarSeries2.LabelFormat = "{0:##.#}" & " %"
-        LineSeries1.LabelFormat = "{0:##.#}" & " %"
+        BarSeries1.LabelFormat = "{0:##}" '& " %"
+        BarSeries2.LabelFormat = "{0:##}" ' & " %"
+        LineSeries1.LabelFormat = "{0:##.#}" ' & " %"
+        BarSeries1.Font = New Font("Segoe UI", 11)
+        BarSeries2.Font = New Font("Segoe UI", 11)
 
         BarSeries1.HorizontalAxis = CategoricalAxis1
         LineSeries1.HorizontalAxis = CategoricalAxis1
@@ -888,6 +916,9 @@ Public Class FrmGraficasfaseuno
         BarSeries1.CombineMode = ChartSeriesCombineMode.None
         BarSeries2.CombineMode = ChartSeriesCombineMode.None
         LineSeries1.CombineMode = ChartSeriesCombineMode.None
+
+        BarSeries1.LabelMode = BarLabelModes.Top
+        BarSeries2.LabelMode = BarLabelModes.Top
     End Sub
     'Oee Equipo
     Private Sub obtiene_oee_equipo_dia_mes()
@@ -905,6 +936,9 @@ Public Class FrmGraficasfaseuno
         Dim LineSeries1 As New LineSeries()
         LineSeries1.LegendTitle = "Objetivo Oee"
         Me.radChartView1.ShowLegend = True
+        Me.radChartView1.ShowSmartLabels = True
+        BarSeries1.DrawLinesToLabels = True
+        BarSeries1.SyncLinesToLabelsColor = True
         'Obtencion Datos Oee
         Dim vDT As New DataTable
         If rdbtnDias.IsChecked Then
@@ -961,14 +995,16 @@ Public Class FrmGraficasfaseuno
         'LinearAxis1.LabelRotationAngle = 300.0R
         LinearAxis1.MajorStep = 10.0R
         LinearAxis1.Maximum = 100
-        LinearAxis1.Title = "Oee"
+        LinearAxis1.Title = "% Oee"
         BarSeries1.ShowLabels = True
         BarSeries2.ShowLabels = True
         'LineSeries1.ShowLabels = True
 
-        BarSeries1.LabelFormat = "{0:##.#}" & " %"
-        BarSeries2.LabelFormat = "{0:##.#}" & " %"
-        LineSeries1.LabelFormat = "{0:##.#}" & " %"
+        BarSeries1.LabelFormat = "{0:##}" '& " %"
+        BarSeries2.LabelFormat = "{0:##}" '& " %"
+        LineSeries1.LabelFormat = "{0:##.#}" ' & " %"
+        BarSeries1.Font = New Font("Segoe UI", 11)
+        BarSeries2.Font = New Font("Segoe UI", 11)
 
         BarSeries1.HorizontalAxis = CategoricalAxis1
         LineSeries1.HorizontalAxis = CategoricalAxis1
@@ -992,6 +1028,9 @@ Public Class FrmGraficasfaseuno
         BarSeries1.CombineMode = ChartSeriesCombineMode.None
         BarSeries2.CombineMode = ChartSeriesCombineMode.None
         LineSeries1.CombineMode = ChartSeriesCombineMode.None
+
+        BarSeries1.LabelMode = BarLabelModes.Top
+        BarSeries2.LabelMode = BarLabelModes.Top
     End Sub
     'Oee Equipo-Linea
     Private Sub obtiene_oee_equipo_linea_dia_mes()
@@ -1010,6 +1049,9 @@ Public Class FrmGraficasfaseuno
         Dim LineSeries1 As New LineSeries()
         LineSeries1.LegendTitle = "Objetivo Oee"
         Me.radChartView1.ShowLegend = True
+        Me.radChartView1.ShowSmartLabels = True
+        BarSeries1.DrawLinesToLabels = True
+        BarSeries1.SyncLinesToLabelsColor = True
         'Llenado de las series
         Dim vTotal As Integer = 1
         Dim vContador As Integer = 1
@@ -1077,15 +1119,17 @@ Public Class FrmGraficasfaseuno
         'LinearAxis1.LabelRotationAngle = 300.0R
         LinearAxis1.MajorStep = 10.0R
         LinearAxis1.Maximum = 100
-        LinearAxis1.Title = "Oee"
+        LinearAxis1.Title = "% Oee"
 
         BarSeries1.ShowLabels = True
         BarSeries2.ShowLabels = True
         'LineSeries1.ShowLabels = True
 
-        BarSeries1.LabelFormat = "{0:##.#}" & " %"
-        BarSeries2.LabelFormat = "{0:##.#}" & " %"
-        LineSeries1.LabelFormat = "{0:##.#}" & " %"
+        BarSeries1.LabelFormat = "{0:##}" ' & " %"
+        BarSeries2.LabelFormat = "{0:##}" '& " %"
+        LineSeries1.LabelFormat = "{0:##.#}" ' & " %"
+        BarSeries1.Font = New Font("Segoe UI", 11)
+        BarSeries2.Font = New Font("Segoe UI", 11)
 
         BarSeries1.HorizontalAxis = CategoricalAxis1
         LineSeries1.HorizontalAxis = CategoricalAxis1
@@ -1109,6 +1153,9 @@ Public Class FrmGraficasfaseuno
         BarSeries1.CombineMode = ChartSeriesCombineMode.None
         BarSeries2.CombineMode = ChartSeriesCombineMode.None
         LineSeries1.CombineMode = ChartSeriesCombineMode.None
+
+        BarSeries1.LabelMode = BarLabelModes.Top
+        BarSeries2.LabelMode = BarLabelModes.Top
     End Sub
 #End Region
 #Region "Metodos graficar NRFTi"
@@ -1125,9 +1172,11 @@ Public Class FrmGraficasfaseuno
         Dim BarSeries2 As New BarSeries()
         BarSeries2.LegendTitle = "Acumulado"
         Me.radChartView1.ShowLegend = True
-        'BarSeries1.Font = New Font("Arial", 10, Drawing.FontStyle.Bold)
-        BarSeries1.Font = New Font("Arial", 10)
-        BarSeries2.Font = New Font("Arial", 10)
+        Me.radChartView1.ShowSmartLabels = True
+        BarSeries1.DrawLinesToLabels = True
+        BarSeries1.SyncLinesToLabelsColor = True
+        BarSeries1.Font = New Font("Segoe UI", 11)
+        BarSeries2.Font = New Font("Segoe UI", 11)
         'Obtencion Datos
         Dim vDT As DataTable = Nothing
         If rdbtnDias.IsChecked Then
@@ -1185,10 +1234,6 @@ Public Class FrmGraficasfaseuno
         BarSeries1.LabelFormat = "{0:##,###}"
         BarSeries2.LabelFormat = "{0:##,##}"
 
-        BarSeries1.LabelMode = BarLabelModes.Top
-        BarSeries2.LabelMode = BarLabelModes.Top
-
-
         BarSeries1.HorizontalAxis = CategoricalAxis1
         BarSeries1.VerticalAxis = LinearAxis1
         'BarSeries1.ForeColor = Color.White
@@ -1198,9 +1243,22 @@ Public Class FrmGraficasfaseuno
         Me.radChartView1.ShowToolTip = True
         radChartView1.Series.Add(BarSeries1)
         radChartView1.Series.Add(BarSeries2)
+
+        BarSeries1.LabelMode = BarLabelModes.Top
+        BarSeries2.LabelMode = BarLabelModes.Top
+
         If (LinearAxis1.ActualRange.Maximum = 0) Then
             LinearAxis1.Maximum = 5
         End If
+
+        For Each controller As ChartViewController In Me.radChartView1.Controllers
+            Dim control As SmartLabelsController = TryCast(controller, SmartLabelsController)
+            If control IsNot Nothing Then
+                control.Strategy.DistanceToLabel = CInt(Fix(12.0))
+                Me.radChartView1.View.PerformRefresh(Me.radChartView1.View, False)
+            End If
+        Next controller
+
     End Sub
     'NRNFTi Cadena Valor
     Private Sub obtiene_nrfti_cadena_valor_dia_mes()
@@ -1218,8 +1276,11 @@ Public Class FrmGraficasfaseuno
         Dim LineSeries1 As New LineSeries()
         LineSeries1.LegendTitle = "Objetivo NRFTi"
         Me.radChartView1.ShowLegend = True
-        BarSeries1.Font = New Font("Arial", 10)
-        BarSeries2.Font = New Font("Arial", 10)
+        Me.radChartView1.ShowSmartLabels = True
+        BarSeries1.DrawLinesToLabels = True
+        BarSeries1.SyncLinesToLabelsColor = True
+        BarSeries1.Font = New Font("Segoe UI", 11)
+        BarSeries2.Font = New Font("Segoe UI", 11)
         'Obtencion Datos
         Dim vDT As New DataTable
         If rdbtnDias.IsChecked Then
@@ -1287,9 +1348,6 @@ Public Class FrmGraficasfaseuno
         BarSeries2.LabelFormat = "{0:##,###}"
         LineSeries1.LabelFormat = "{0:##,###}"
 
-        BarSeries1.LabelMode = BarLabelModes.Top
-        BarSeries2.LabelMode = BarLabelModes.Top
-
         BarSeries1.HorizontalAxis = CategoricalAxis1
         LineSeries1.HorizontalAxis = CategoricalAxis1
 
@@ -1312,9 +1370,21 @@ Public Class FrmGraficasfaseuno
         BarSeries2.CombineMode = ChartSeriesCombineMode.None
         LineSeries1.CombineMode = ChartSeriesCombineMode.None
 
+        BarSeries1.LabelMode = BarLabelModes.Top
+        BarSeries2.LabelMode = BarLabelModes.Top
+
         If (LinearAxis1.ActualRange.Maximum = 0) Then
             LinearAxis1.Maximum = 5
         End If
+
+        For Each controller As ChartViewController In Me.radChartView1.Controllers
+            Dim control As SmartLabelsController = TryCast(controller, SmartLabelsController)
+            If control IsNot Nothing Then
+                control.Strategy.DistanceToLabel = CInt(Fix(25.0))
+                Me.radChartView1.View.PerformRefresh(Me.radChartView1.View, False)
+            End If
+        Next controller
+
     End Sub
     'NRFTi Componente
     Private Sub obtiene_nrfti_componente_dia_mes()
@@ -1332,8 +1402,11 @@ Public Class FrmGraficasfaseuno
         Dim LineSeries1 As New LineSeries()
         LineSeries1.LegendTitle = "Objetivo NRFTi"
         Me.radChartView1.ShowLegend = True
-        BarSeries1.Font = New Font("Arial", 10)
-        BarSeries2.Font = New Font("Arial", 10)
+        Me.radChartView1.ShowSmartLabels = True
+        BarSeries1.DrawLinesToLabels = True
+        BarSeries1.SyncLinesToLabelsColor = True
+        BarSeries1.Font = New Font("Segoe UI", 11)
+        BarSeries2.Font = New Font("Segoe UI", 11)
         'Obtencion Datos Oee
         Dim vDT As New DataTable
         If rdbtnDias.IsChecked Then
@@ -1400,9 +1473,6 @@ Public Class FrmGraficasfaseuno
         BarSeries2.LabelFormat = "{0:#,###}"
         LineSeries1.LabelFormat = "{0:##,###}"
 
-        BarSeries1.LabelMode = BarLabelModes.Top
-        BarSeries2.LabelMode = BarLabelModes.Top
-
         BarSeries1.HorizontalAxis = CategoricalAxis1
         LineSeries1.HorizontalAxis = CategoricalAxis1
 
@@ -1425,9 +1495,21 @@ Public Class FrmGraficasfaseuno
         BarSeries2.CombineMode = ChartSeriesCombineMode.None
         LineSeries1.CombineMode = ChartSeriesCombineMode.None
 
+        BarSeries1.LabelMode = BarLabelModes.Top
+        BarSeries2.LabelMode = BarLabelModes.Top
+
         If (LinearAxis1.ActualRange.Maximum = 0) Then
             LinearAxis1.Maximum = 5
         End If
+
+        For Each controller As ChartViewController In Me.radChartView1.Controllers
+            Dim control As SmartLabelsController = TryCast(controller, SmartLabelsController)
+            If control IsNot Nothing Then
+                control.Strategy.DistanceToLabel = CInt(Fix(25.0))
+                Me.radChartView1.View.PerformRefresh(Me.radChartView1.View, False)
+            End If
+        Next controller
+
     End Sub
     'NRFTi Linea
     Private Sub obtiene_nrfti_linea_dia_mes()
@@ -1445,8 +1527,11 @@ Public Class FrmGraficasfaseuno
         Dim LineSeries1 As New LineSeries()
         LineSeries1.LegendTitle = "Objetivo NRFTi"
         Me.radChartView1.ShowLegend = True
-        BarSeries1.Font = New Font("Arial", 10)
-        BarSeries2.Font = New Font("Arial", 10)
+        Me.radChartView1.ShowSmartLabels = True
+        BarSeries1.DrawLinesToLabels = True
+        BarSeries1.SyncLinesToLabelsColor = True
+        BarSeries1.Font = New Font("Segoe UI", 11)
+        BarSeries2.Font = New Font("Segoe UI", 11)
         'Obtencion Datos Oee
         Dim vDT As New DataTable
         If rdbtnDias.IsChecked Then
@@ -1509,9 +1594,6 @@ Public Class FrmGraficasfaseuno
         BarSeries2.LabelFormat = "{0:#,###}"
         LineSeries1.LabelFormat = "{0:##,###}"
 
-        BarSeries1.LabelMode = BarLabelModes.Top
-        BarSeries2.LabelMode = BarLabelModes.Top
-
         BarSeries1.HorizontalAxis = CategoricalAxis1
         LineSeries1.HorizontalAxis = CategoricalAxis1
 
@@ -1534,9 +1616,21 @@ Public Class FrmGraficasfaseuno
         BarSeries2.CombineMode = ChartSeriesCombineMode.None
         LineSeries1.CombineMode = ChartSeriesCombineMode.None
 
+        BarSeries1.LabelMode = BarLabelModes.Top
+        BarSeries2.LabelMode = BarLabelModes.Top
+
         If (LinearAxis1.ActualRange.Maximum = 0) Then
             LinearAxis1.Maximum = 5
         End If
+
+        For Each controller As ChartViewController In Me.radChartView1.Controllers
+            Dim control As SmartLabelsController = TryCast(controller, SmartLabelsController)
+            If control IsNot Nothing Then
+                control.Strategy.DistanceToLabel = CInt(Fix(25.0))
+                Me.radChartView1.View.PerformRefresh(Me.radChartView1.View, False)
+            End If
+        Next controller
+
     End Sub
     'NRFTi Equipo
     Private Sub obtiene_nrfti_equipo_dia_mes()
@@ -1554,8 +1648,11 @@ Public Class FrmGraficasfaseuno
         Dim LineSeries1 As New LineSeries()
         LineSeries1.LegendTitle = "Objetivo NRFTi"
         Me.radChartView1.ShowLegend = True
-        BarSeries1.Font = New Font("Arial", 10)
-        BarSeries2.Font = New Font("Arial", 10)
+        Me.radChartView1.ShowSmartLabels = True
+        BarSeries1.DrawLinesToLabels = True
+        BarSeries1.SyncLinesToLabelsColor = True
+        BarSeries1.Font = New Font("Segoe UI", 11)
+        BarSeries2.Font = New Font("Segoe UI", 11)
         'Obtencion Datos Oee
         Dim vDT As New DataTable
         If rdbtnDias.IsChecked Then
@@ -1633,9 +1730,6 @@ Public Class FrmGraficasfaseuno
         BarSeries2.LabelFormat = "{0:#,###}"
         LineSeries1.LabelFormat = "{0:##,###}"
 
-        BarSeries1.LabelMode = BarLabelModes.Top
-        BarSeries2.LabelMode = BarLabelModes.Top
-
         BarSeries1.HorizontalAxis = CategoricalAxis1
         LineSeries1.HorizontalAxis = CategoricalAxis1
 
@@ -1660,6 +1754,17 @@ Public Class FrmGraficasfaseuno
         BarSeries2.CombineMode = ChartSeriesCombineMode.None
         LineSeries1.CombineMode = ChartSeriesCombineMode.None
 
+        BarSeries1.LabelMode = BarLabelModes.Top
+        BarSeries2.LabelMode = BarLabelModes.Top
+
+        For Each controller As ChartViewController In Me.radChartView1.Controllers
+            Dim control As SmartLabelsController = TryCast(controller, SmartLabelsController)
+            If control IsNot Nothing Then
+                control.Strategy.DistanceToLabel = CInt(Fix(25.0))
+                Me.radChartView1.View.PerformRefresh(Me.radChartView1.View, False)
+            End If
+        Next controller
+
         If (LinearAxis1.ActualRange.Maximum = 0) Then
             LinearAxis1.Maximum = 5
         End If
@@ -1681,8 +1786,11 @@ Public Class FrmGraficasfaseuno
         Dim LineSeries1 As New LineSeries()
         LineSeries1.LegendTitle = "Objetivo NRFTi"
         Me.radChartView1.ShowLegend = True
-        BarSeries1.Font = New Font("Arial", 10)
-        BarSeries2.Font = New Font("Arial", 10)
+        Me.radChartView1.ShowSmartLabels = True
+        BarSeries1.DrawLinesToLabels = True
+        BarSeries1.SyncLinesToLabelsColor = True
+        BarSeries1.Font = New Font("Segoe UI", 11)
+        BarSeries2.Font = New Font("Segoe UI", 11)
         'Obtencion Datos Oee
         Dim vDT As New DataTable
         If rdbtnDias.IsChecked Then
@@ -1760,9 +1868,6 @@ Public Class FrmGraficasfaseuno
         BarSeries2.LabelFormat = "{0:#,###}"
         LineSeries1.LabelFormat = "{0:##,###}"
 
-        BarSeries1.LabelMode = BarLabelModes.Top
-        BarSeries2.LabelMode = BarLabelModes.Top
-
         BarSeries1.HorizontalAxis = CategoricalAxis1
         LineSeries1.HorizontalAxis = CategoricalAxis1
 
@@ -1785,9 +1890,21 @@ Public Class FrmGraficasfaseuno
         BarSeries2.CombineMode = ChartSeriesCombineMode.None
         LineSeries1.CombineMode = ChartSeriesCombineMode.None
 
+        BarSeries1.LabelMode = BarLabelModes.Top
+        BarSeries2.LabelMode = BarLabelModes.Top
+
         If (LinearAxis1.ActualRange.Maximum = 0) Then
             LinearAxis1.Maximum = 5
         End If
+
+        For Each controller As ChartViewController In Me.radChartView1.Controllers
+            Dim control As SmartLabelsController = TryCast(controller, SmartLabelsController)
+            If control IsNot Nothing Then
+                control.Strategy.DistanceToLabel = CInt(Fix(25.0))
+                Me.radChartView1.View.PerformRefresh(Me.radChartView1.View, False)
+            End If
+        Next controller
+
     End Sub
 #End Region
 #Region "Metodos graficar cincoS"
