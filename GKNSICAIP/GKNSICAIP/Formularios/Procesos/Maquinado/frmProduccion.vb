@@ -2093,21 +2093,21 @@ Public Class frmProduccion
 #Region "Funciones para modulo Descanso"
     Private Sub registra_descanso()
         If valida_captura_descanso() Then
-            ofrmMensaje_Descanso_Equipo = New msg_Dialogo_Descanso_All_Lineas
-            ofrmMensaje_Descanso_Equipo.vEntrada = dtpDescanso.Value.Day & "/" & dtpDescanso.Value.Month & "/" & dtpDescanso.Value.Year
-            ofrmMensaje_Descanso_Equipo.ShowDialog()
+            'ofrmMensaje_Descanso_Equipo = New msg_Dialogo_Descanso_All_Lineas
+            'ofrmMensaje_Descanso_Equipo.vEntrada = dtpDescanso.Value.Day & "/" & dtpDescanso.Value.Month & "/" & dtpDescanso.Value.Year
+            'ofrmMensaje_Descanso_Equipo.ShowDialog()
 
-            If ofrmMensaje_Descanso_Equipo.vRespuesta = True Then
-                add_descanso()
-                llena_Descanso_gridview()
-                llena_lineas_Si_gridview()
-            End If
-
-            'If MsgBox("¿Seguro que desea guardar dia descanso?", vbQuestion + vbYesNo, "Confirmación") = vbYes Then
+            'If ofrmMensaje_Descanso_Equipo.vRespuesta = True Then
             '    add_descanso()
             '    llena_Descanso_gridview()
             '    llena_lineas_Si_gridview()
             'End If
+
+            If MsgBox("¿Seguro que desea guardar dia descanso?", vbQuestion + vbYesNo, "Confirmación") = vbYes Then
+                add_descanso()
+                llena_Descanso_gridview()
+                llena_lineas_Si_gridview()
+            End If
         End If
     End Sub
     Private Sub add_descanso()
