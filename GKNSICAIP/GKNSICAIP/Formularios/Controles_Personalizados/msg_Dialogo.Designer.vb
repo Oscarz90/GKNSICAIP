@@ -31,13 +31,15 @@ Partial Class msg_Dialogo
         Me.Label1 = New System.Windows.Forms.Label()
         Me.lb_Entrada = New System.Windows.Forms.Label()
         Me.PictureBox1 = New System.Windows.Forms.PictureBox()
+        Me.Panel1 = New System.Windows.Forms.Panel()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.Panel1.SuspendLayout()
         Me.SuspendLayout()
         '
         'btnSi
         '
         Me.btnSi.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnSi.Location = New System.Drawing.Point(507, 166)
+        Me.btnSi.Location = New System.Drawing.Point(615, 163)
         Me.btnSi.Name = "btnSi"
         Me.btnSi.Size = New System.Drawing.Size(94, 29)
         Me.btnSi.TabIndex = 0
@@ -48,7 +50,7 @@ Partial Class msg_Dialogo
         'btnNo
         '
         Me.btnNo.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnNo.Location = New System.Drawing.Point(607, 166)
+        Me.btnNo.Location = New System.Drawing.Point(715, 163)
         Me.btnNo.Name = "btnNo"
         Me.btnNo.Size = New System.Drawing.Size(94, 29)
         Me.btnNo.TabIndex = 1
@@ -104,11 +106,11 @@ Partial Class msg_Dialogo
         Me.lb_Entrada.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
                     Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.lb_Entrada.AutoSize = True
-        Me.lb_Entrada.Font = New System.Drawing.Font("Microsoft Sans Serif", 22.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lb_Entrada.Font = New System.Drawing.Font("Microsoft Sans Serif", 19.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lb_Entrada.ForeColor = System.Drawing.Color.DodgerBlue
         Me.lb_Entrada.Location = New System.Drawing.Point(12, 45)
         Me.lb_Entrada.Name = "lb_Entrada"
-        Me.lb_Entrada.Size = New System.Drawing.Size(429, 36)
+        Me.lb_Entrada.Size = New System.Drawing.Size(372, 30)
         Me.lb_Entrada.TabIndex = 8
         Me.lb_Entrada.Text = "(Linea_Seleccion) es (Turno)"
         '
@@ -122,24 +124,39 @@ Partial Class msg_Dialogo
         Me.PictureBox1.TabIndex = 9
         Me.PictureBox1.TabStop = False
         '
+        'Panel1
+        '
+        Me.Panel1.AutoSize = True
+        Me.Panel1.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.Panel1.Controls.Add(Me.lbMensaje)
+        Me.Panel1.Controls.Add(Me.PictureBox1)
+        Me.Panel1.Controls.Add(Me.btnSi)
+        Me.Panel1.Controls.Add(Me.lb_Entrada)
+        Me.Panel1.Controls.Add(Me.btnNo)
+        Me.Panel1.Controls.Add(Me.Label1)
+        Me.Panel1.Controls.Add(Me.Label3)
+        Me.Panel1.Controls.Add(Me.ckbAcuerdo)
+        Me.Panel1.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.Panel1.Location = New System.Drawing.Point(0, 0)
+        Me.Panel1.Name = "Panel1"
+        Me.Panel1.Size = New System.Drawing.Size(821, 204)
+        Me.Panel1.TabIndex = 10
+        '
         'msg_Dialogo
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.AutoSize = True
-        Me.ClientSize = New System.Drawing.Size(714, 205)
+        Me.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ClientSize = New System.Drawing.Size(821, 204)
         Me.ControlBox = False
-        Me.Controls.Add(Me.PictureBox1)
-        Me.Controls.Add(Me.lb_Entrada)
-        Me.Controls.Add(Me.Label1)
-        Me.Controls.Add(Me.ckbAcuerdo)
-        Me.Controls.Add(Me.Label3)
-        Me.Controls.Add(Me.lbMensaje)
-        Me.Controls.Add(Me.btnNo)
-        Me.Controls.Add(Me.btnSi)
+        Me.Controls.Add(Me.Panel1)
         Me.Name = "msg_Dialogo"
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "Confirmación"
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.Panel1.ResumeLayout(False)
+        Me.Panel1.PerformLayout()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -152,4 +169,5 @@ Partial Class msg_Dialogo
     Friend WithEvents Label1 As System.Windows.Forms.Label
     Friend WithEvents lb_Entrada As System.Windows.Forms.Label
     Friend WithEvents PictureBox1 As System.Windows.Forms.PictureBox
+    Friend WithEvents Panel1 As System.Windows.Forms.Panel
 End Class

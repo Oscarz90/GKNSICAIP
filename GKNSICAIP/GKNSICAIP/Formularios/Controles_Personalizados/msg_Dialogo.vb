@@ -16,6 +16,8 @@
         Me.ControlBox = False
 
         Me.lb_Entrada.Text = vEntrada
+        Me.Panel1.AutoSize = True
+        Me.AutoSize = True
     End Sub
 
     Private Sub btnSi_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSi.Click

@@ -150,6 +150,7 @@ Partial Class msg_Dialogo_Descanso_All_Lineas
         Me.Controls.Add(Me.btnNo)
         Me.Controls.Add(Me.btnSi)
         Me.Name = "msg_Dialogo_Descanso_All_Lineas"
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "Confirmación"
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
