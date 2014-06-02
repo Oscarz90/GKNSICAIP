@@ -972,12 +972,12 @@ Public Class frmProduccion
     'Productividad
     Private Sub valida_botones_productividad()
         If cbxTurno.SelectedIndex <> -1 And cbxModeloProductividad.SelectedIndex <> -1 And txtTiempoOperacion.Text <> "" And txtPiezasOkProducidas.Text <> "" Then
-            ' If Convert.ToInt64(txtTiempoOperacion.Text) <> 0 And Convert.ToInt64(txtPiezasOkProducidas.Text) <> 0 Then
-            btnAgregarModelo.Enabled = True
-            btnAgregarModelo.BackColor = Color.FromArgb(107, 198, 223)
-            'Else
-            '  btnAgregarModelo.Enabled = False
-            ' End If
+            If Convert.ToInt64(txtTiempoOperacion.Text) <> 0 And Convert.ToInt64(txtPiezasOkProducidas.Text) <> 0 Then
+                btnAgregarModelo.Enabled = True
+                btnAgregarModelo.BackColor = Color.FromArgb(107, 198, 223)
+            Else
+                btnAgregarModelo.Enabled = False
+            End If
         Else
             btnAgregarModelo.Enabled = False
             btnAgregarModelo.BackColor = Color.Transparent
@@ -1557,12 +1557,13 @@ Public Class frmProduccion
     End Function
     Private Function se_puede_añadir_produccion(ByVal min As Integer) As Boolean
         If get_minutos_disponibles() = 0 Then
-            'MsgBox("Los minutos disponibles son insuficientes .", vbCritical + vbOKOnly, "Error")
-            Return True
+            MsgBox("Los minutos disponibles son insuficientes .", vbCritical + vbOKOnly, "Alerta!")
+            Return False
+            'Return True
         ElseIf min <= get_minutos_disponibles() Then
             Return True
         Else
-            MsgBox("Los minutos disponibles son insuficientes .", vbCritical + vbOKOnly, "Error")
+            MsgBox("Los minutos disponibles son insuficientes .", vbCritical + vbOKOnly, "Alerta!")
             Return False
         End If
     End Function
