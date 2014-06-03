@@ -50,12 +50,14 @@ Partial Class FrmGraficasfaseuno
         Me.rdbtnDias = New Telerik.WinControls.UI.RadRadioButton()
         Me.radChartView1 = New Telerik.WinControls.UI.RadChartView()
         Me.TabControl1 = New System.Windows.Forms.TabControl()
+        Me.TabPage1 = New System.Windows.Forms.TabPage()
+        Me.Button1 = New System.Windows.Forms.Button()
         Me.TabPage2 = New System.Windows.Forms.TabPage()
         Me.lblError = New System.Windows.Forms.Label()
         Me.btnGraficar = New Telerik.WinControls.UI.RadButton()
         Me.picboxIndicador = New System.Windows.Forms.PictureBox()
-        Me.Button1 = New System.Windows.Forms.Button()
-        Me.TabPage1 = New System.Windows.Forms.TabPage()
+        Me.Button2 = New System.Windows.Forms.Button()
+        Me.Button3 = New System.Windows.Forms.Button()
         CType(Me.RadGroupBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.RadGroupBox1.SuspendLayout()
         CType(Me.rdbtnGente, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -83,9 +85,9 @@ Partial Class FrmGraficasfaseuno
         CType(Me.radChartView1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.radChartView1.SuspendLayout()
         Me.TabControl1.SuspendLayout()
+        Me.TabPage1.SuspendLayout()
         CType(Me.btnGraficar, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.picboxIndicador, System.ComponentModel.ISupportInitialize).BeginInit()
-        Me.TabPage1.SuspendLayout()
         CType(Me, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
@@ -373,6 +375,30 @@ Partial Class FrmGraficasfaseuno
         Me.TabControl1.Size = New System.Drawing.Size(1252, 473)
         Me.TabControl1.TabIndex = 110
         '
+        'TabPage1
+        '
+        Me.TabPage1.Controls.Add(Me.Button3)
+        Me.TabPage1.Controls.Add(Me.Button2)
+        Me.TabPage1.Controls.Add(Me.Button1)
+        Me.TabPage1.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.TabPage1.Location = New System.Drawing.Point(4, 22)
+        Me.TabPage1.Name = "TabPage1"
+        Me.TabPage1.Padding = New System.Windows.Forms.Padding(3)
+        Me.TabPage1.Size = New System.Drawing.Size(1244, 447)
+        Me.TabPage1.TabIndex = 0
+        Me.TabPage1.Text = "Tablas"
+        Me.TabPage1.UseVisualStyleBackColor = True
+        '
+        'Button1
+        '
+        Me.Button1.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Button1.Location = New System.Drawing.Point(1166, 8)
+        Me.Button1.Name = "Button1"
+        Me.Button1.Size = New System.Drawing.Size(71, 29)
+        Me.Button1.TabIndex = 0
+        Me.Button1.Text = "Exportar..."
+        Me.Button1.UseVisualStyleBackColor = True
+        '
         'TabPage2
         '
         Me.TabPage2.Font = New System.Drawing.Font("Segoe UI", 15.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
@@ -419,41 +445,39 @@ Partial Class FrmGraficasfaseuno
         Me.picboxIndicador.TabIndex = 10
         Me.picboxIndicador.TabStop = False
         '
-        'Button1
+        'Button2
         '
-        Me.Button1.Font = New System.Drawing.Font("Segoe UI", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Button1.Location = New System.Drawing.Point(1150, 8)
-        Me.Button1.Name = "Button1"
-        Me.Button1.Size = New System.Drawing.Size(81, 29)
-        Me.Button1.TabIndex = 0
-        Me.Button1.Text = "Exportar..."
-        Me.Button1.UseVisualStyleBackColor = True
+        Me.Button2.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Button2.Location = New System.Drawing.Point(1089, 8)
+        Me.Button2.Name = "Button2"
+        Me.Button2.Size = New System.Drawing.Size(71, 29)
+        Me.Button2.TabIndex = 1
+        Me.Button2.Text = "Detalle"
+        Me.Button2.UseVisualStyleBackColor = True
         '
-        'TabPage1
+        'Button3
         '
-        Me.TabPage1.Controls.Add(Me.Button1)
-        Me.TabPage1.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TabPage1.Location = New System.Drawing.Point(4, 22)
-        Me.TabPage1.Name = "TabPage1"
-        Me.TabPage1.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabPage1.Size = New System.Drawing.Size(1244, 447)
-        Me.TabPage1.TabIndex = 0
-        Me.TabPage1.Text = "Tablas"
-        Me.TabPage1.UseVisualStyleBackColor = True
+        Me.Button3.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Button3.Location = New System.Drawing.Point(1012, 8)
+        Me.Button3.Name = "Button3"
+        Me.Button3.Size = New System.Drawing.Size(71, 29)
+        Me.Button3.TabIndex = 2
+        Me.Button3.Text = "Resumen"
+        Me.Button3.UseVisualStyleBackColor = True
         '
         'FrmGraficasfaseuno
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.White
-        Me.ClientSize = New System.Drawing.Size(1272, 706)
+        Me.ClientSize = New System.Drawing.Size(1272, 698)
         Me.Controls.Add(Me.picboxIndicador)
         Me.Controls.Add(Me.radChartView1)
         Me.Controls.Add(Me.btnGraficar)
         Me.Controls.Add(Me.RadGroupBox3)
         Me.Controls.Add(Me.RadGroupBox2)
         Me.Controls.Add(Me.RadGroupBox1)
-        Me.MinimumSize = New System.Drawing.Size(1280, 736)
+        Me.MinimumSize = New System.Drawing.Size(1280, 726)
         Me.Name = "FrmGraficasfaseuno"
         '
         '
@@ -493,9 +517,9 @@ Partial Class FrmGraficasfaseuno
         Me.radChartView1.ResumeLayout(False)
         Me.radChartView1.PerformLayout()
         Me.TabControl1.ResumeLayout(False)
+        Me.TabPage1.ResumeLayout(False)
         CType(Me.btnGraficar, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.picboxIndicador, System.ComponentModel.ISupportInitialize).EndInit()
-        Me.TabPage1.ResumeLayout(False)
         CType(Me, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
@@ -533,5 +557,7 @@ Partial Class FrmGraficasfaseuno
     Friend WithEvents TabPage2 As System.Windows.Forms.TabPage
     Friend WithEvents TabPage1 As System.Windows.Forms.TabPage
     Friend WithEvents Button1 As System.Windows.Forms.Button
+    Friend WithEvents Button3 As System.Windows.Forms.Button
+    Friend WithEvents Button2 As System.Windows.Forms.Button
 End Class
 
