@@ -249,4 +249,28 @@ Public Class Equipo
     End Property
 
 #End Region
+
+#Region "Metodos Generales"
+    Public Function Obtener_Equipos() As DataTable
+        Dim vDT As DataTable
+        vDT = oBD.ObtenerTabla("select cve_equipo, equipo as Descripcion from Equipo")
+        If vDT IsNot Nothing Then
+
+        Else
+            vDT = Nothing
+        End If
+        Return vDT
+    End Function
+
+    Public Function Obtener_Equipos(ByVal vFiltro As String) As DataTable
+        Dim vDT As DataTable
+        vDT = oBD.ObtenerTabla("select cve_equipo, equipo as Descripcion from Equipo where equipo LIKE '%" & vFiltro & "%'")
+        If vDT IsNot Nothing Then
+
+        Else
+            vDT = Nothing
+        End If
+        Return vDT
+    End Function
+#End Region
 End Class
