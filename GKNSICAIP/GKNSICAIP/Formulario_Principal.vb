@@ -41,6 +41,7 @@ Public Class Formulario_Principal
     Dim oTipo_Usuario As Tipo_Usuario
     Dim oEquipo As Equipo '--------
     Dim oLineaClasificacion As Linea_Clasificacion
+    Dim oRelacionLineaClasificacion As Relacion_Linea_Clasificacion
 #End Region
 
 #Region "Declaracion de Objetos de Formularios"
@@ -1298,8 +1299,7 @@ Public Class Formulario_Principal
 
     Private Sub btnClasf_Lineas_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnClasf_Lineas.Click
         If Permiso_Asignado("CLASF_LINEAS") = True Then
-            oCatalogo_Linea = New Catalogo_Linea
-            oLinea = New Linea
+            'oCatalogo_Linea = New Catalogo_Linea
             oLineaClasificacion = New Linea_Clasificacion
 
             MapaUbicacion.Text = "Catalogo Clasificacion Linea"
@@ -1328,21 +1328,19 @@ Public Class Formulario_Principal
 
 
             Try
-                'Dim bs As New BindingSource(oCatalogo_Linea, "L_Linea")
-                'Me.dgvRegistros.DataSource = oCatalogo_Linea.Obtener_Lineas
                 Me.dgvRegistros.DataSource = oLineaClasificacion.obtiene_linea_clasificacion_activos()
             Catch ex As Exception
                 MsgBox(ex.Message)
             End Try
 
-            Me.dgvRegistros.Columns("cve_linea_clasificacion").HeaderText = "cve_linea"
+            Me.dgvRegistros.Columns("cve_linea_clasificacion").HeaderText = "cve_linea_clasificacion"
             Me.dgvRegistros.Columns("cve_linea_clasificacion").IsVisible = False
             Me.dgvRegistros.Columns("cve_linea_clasificacion").Name = "CVE"
 
-            Me.dgvRegistros.Columns("nombre").HeaderText = "Linea"
+            Me.dgvRegistros.Columns("nombre").HeaderText = "Nombre"
             Me.dgvRegistros.Columns("nombre").Width = 250
 
-            Me.dgvRegistros.Columns("descripcion").HeaderText = "Nombre Componente"
+            Me.dgvRegistros.Columns("descripcion").HeaderText = "Descripcion"
             Me.dgvRegistros.Columns("descripcion").Width = 250
 
             Me.dgvRegistros.Columns("estatus").HeaderText = " estatus"
@@ -1356,6 +1354,70 @@ Public Class Formulario_Principal
             'Me.dgvRegistros.GroupDescriptors.Add(New GridGroupByExpression(Me.dgvRegistros.Columns("componente")))
         Else
             MsgBox("El Usuario no cuenta con los permisos suficientes para entrar al 'Catalogo de Clasificación de Línea'")
+        End If
+    End Sub
+
+    Private Sub btnAsig_Clasf_Lineas_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnAsig_Clasf_Lineas.Click
+        If Permiso_Asignado("REL_CLASF_LINEAS") = True Then
+            'oCatalogo_Linea = New Catalogo_Linea
+            oRelacionLineaClasificacion = New Relacion_Linea_Clasificacion
+
+            MapaUbicacion.Text = "Catalogo Relacion Clasificacion Linea"
+
+            Me.dgvRegistros.DataSource = Nothing
+            Me.dgvRegistros.Columns.Clear()
+            Me.dgvRegistros.Visible = True
+            Me.Barra_Tool_Registros.Visible = True
+            'Me.btnEliminar.VisibleInStrip = False
+
+            If Permiso_Asignado("REL_CLASF_LINEAS.REGISTRAR") = True Then
+                Me.btnAdd.Enabled = True
+            Else
+                Me.btnAdd.Enabled = False
+            End If
+            If Permiso_Asignado("REL_CLASF_LINEAS.ACTUALIZAR") = True Then
+                Me.btnModificar.Enabled = True
+            Else
+                Me.btnModificar.Enabled = False
+            End If
+            'No ser permite eliminar por cuestiones de confiabilidad de información
+            'If Permiso_Asignado("CLASF_LINEAS.ELIMINAR") = True Then
+            '    Me.btnEliminar.Enabled = True
+            'Else
+            '    Me.btnEliminar.Enabled = False
+            'End If
+
+
+            Try
+                Me.dgvRegistros.DataSource = oRelacionLineaClasificacion.obtiene_asignacion_linea_clasificacion()
+            Catch ex As Exception
+                MsgBox(ex.Message)
+            End Try
+
+            Me.dgvRegistros.Columns("cve_relacion_linea_clasificacion").HeaderText = "cve_relacion_linea_clasificacion"
+            Me.dgvRegistros.Columns("cve_relacion_linea_clasificacion").IsVisible = False
+            Me.dgvRegistros.Columns("cve_relacion_linea_clasificacion").Name = "CVE"
+
+            Me.dgvRegistros.Columns("linea").HeaderText = "Linea"
+            Me.dgvRegistros.Columns("nombre").Width = 250
+
+            Me.dgvRegistros.Columns("nombre").HeaderText = "Clasificacion"
+            Me.dgvRegistros.Columns("nombre").Width = 250
+
+            Me.dgvRegistros.Columns("fecha_inicio").HeaderText = "Fecha Inicio"
+            Me.dgvRegistros.Columns("fecha_inicio").Width = 250
+
+            Me.dgvRegistros.Columns("fecha_inicio").HeaderText = "Fecha Final"
+            Me.dgvRegistros.Columns("fecha_inicio").Width = 250
+
+            dgvRegistros.Visible = True
+            Activar_Formulario("frmRelacionLineaClasificacion")
+
+            Me.dgvRegistros.EnableGrouping = True
+            Me.dgvRegistros.GroupDescriptors.Clear()
+            Me.dgvRegistros.GroupDescriptors.Add(New GridGroupByExpression(Me.dgvRegistros.Columns("linea")))
+        Else
+            MsgBox("El Usuario no cuenta con los permisos suficientes para entrar al 'Catalogo Asignacion de Clasificación de Línea'")
         End If
     End Sub
 End Class
