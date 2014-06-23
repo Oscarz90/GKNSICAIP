@@ -95,7 +95,21 @@ Public Class Modificacion_Permiso
     End Property
 #End Region
 #Region "Metodos formulario de produccion"
-
+    Public Function obtiene_registros_catalogo() As DataTable
+        Dim obj As DataTable
+        Using scope As New TransactionScope
+            Try
+                obj = oBD.ObtenerTabla("select mp.cve_modificacion_permiso,su.Id_Usuario,su.Nombre,mp.dia_modificacion,mp.fecha_inicio,mp.fecha_final" &
+                                 " from modificacion_permiso mp" &
+                                 " join seguridad_usuario su on mp.cve_usuario=su.CVE_Usuario" &
+                                 " order by mp.dia_modificacion desc")
+            Catch
+                MsgBox("Problema al Obtener Catalogo Permiso Modificacion. CModificacion_Permiso_ERROR", vbExclamation + vbOKOnly, "Problema")
+                Return Nothing
+            End Try
+            Return obj
+        End Using
+    End Function
 #End Region
 
 End Class
