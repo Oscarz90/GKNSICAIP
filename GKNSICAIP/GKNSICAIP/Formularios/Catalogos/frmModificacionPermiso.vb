@@ -1,0 +1,4 @@
+﻿Imports CapaNegocios.Modificacion_Permiso
+Public Class frmModificacionPermiso
+
+End Class
