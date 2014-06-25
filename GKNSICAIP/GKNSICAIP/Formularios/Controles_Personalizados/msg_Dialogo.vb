@@ -2,8 +2,6 @@
 
     Public vRespuesta As Boolean = False
     Public vEntrada As String = ""
-
-
     Private Sub msg_Dialogo_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         Me.ckbAcuerdo.Checked = True
         Me.ckbAcuerdo.Checked = False
@@ -38,5 +36,9 @@
             Me.btnNo.Enabled = False
             Me.btnSi.Enabled = False
         End If
+    End Sub
+
+    Private Sub Panel1_Paint(ByVal sender As System.Object, ByVal e As System.Windows.Forms.PaintEventArgs) Handles Panel1.Paint
+
     End Sub
 End Class

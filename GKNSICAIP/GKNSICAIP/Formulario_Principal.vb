@@ -59,6 +59,7 @@ Public Class Formulario_Principal
     Dim ofrmAcceso_Sistema_SICAIP As frmLogin
     Dim ofrmEquipo As frmEquipo
     Dim ofrmMatch_Equipos As frmMatch_Equipos_Kronos_SICAIP
+    Dim ofrmModificacion_Permiso As frmModificacionPermiso
 #End Region
 
 #Region "Opciones de Menu"
@@ -738,22 +739,31 @@ Public Class Formulario_Principal
                 MsgBox("El Usuario no tiene los privilegios para ver los Detalles")
             End If
         ElseIf vModificacion_Permisos = True Then
-            If Permiso_Asignado("CATALOGOEQUIPO.VER") = True Then
-                If Permiso_Asignado("CATALOGOEQUIPO.REGISTRAR") = True Then
-                    vPermiso_Add = False
+            If Permiso_Asignado("MODIF_CATALOGO.VER") = True Then
+                If Permiso_Asignado("MODIF_CATALOGO.REGISTRAR") = True Then
+                    'vPermiso_Add = False
+                    Try
+                        ofrmModificacion_Permiso = New frmModificacionPermiso()
+                        ofrmModificacion_Permiso.voperacion = "INSERT"
+                        ofrmModificacion_Permiso.ShowDialog()
+                    Catch ex As Exception
+                        MsgBox(ex)
+                    End Try
+                    
                 Else
-                    vPermiso_Add = False
+                    'vPermiso_Add = False
                 End If
                 'If Permiso_Asignado("CATALOGOMAQUINA.ELIMINAR") = True Then
                 '    vPermiso_Delete = True
                 'Else
                 '    vPermiso_Delete = False
                 'End If
-                ofrmEquipo = New frmEquipo(vPermiso_Add, vPermiso_Delete)
-                ofrmEquipo.vId_Publico = 0
-                ofrmEquipo.ShowDialog()
+                'ofrmEquipo = New frmEquipo(vPermiso_Add, vPermiso_Delete)
+                'ofrmEquipo.vId_Publico = 0
+                'ofrmEquipo.ShowDialog()
                 ''Se realiza la llamada al evento clic del btnEquipo para actualizar el dgvRegistros
-                btnEquipo.PerformClick()
+                btnModifPermiso.PerformClick()
+                'btnEquipo.PerformClick()
             Else
                 MsgBox("El Usuario no tiene los privilegios para ver los Detalles")
             End If
@@ -1379,6 +1389,7 @@ Public Class Formulario_Principal
 
             Me.dgvRegistros.Columns("dia_modificacion").HeaderText = "Día Modificación"
             Me.dgvRegistros.Columns("dia_modificacion").Width = 250
+            'DirectCast(Me.dgvRegistros.Columns("dia_modificacion"), GridViewDataColumn).FormatString = "dd, MMM, yyyy"
 
             Me.dgvRegistros.Columns("fecha_inicio").HeaderText = "Fecha Inicio"
             Me.dgvRegistros.Columns("fecha_inicio").Width = 250

@@ -604,6 +604,20 @@ Public Class SEGURIDAD_USUARIO
         End Using
     End Sub
 
+    Public Function obtener_usuarios_activos() As DataTable
+        Dim oDT As New DataTable
+        Using scope As New TransactionScope
+            Try
+                oDT = oBD.ObtenerTabla("select su.CVE_Usuario,su.Id_Usuario,su.Nombre" &
+                                       " from SEGURIDAD_USUARIO su" &
+                                       " where su.Estatus='1' order by su.Id_Usuario")
+            Catch
+                MsgBox("Problema al Obtener Usuarios. CSeguridad_Usuario_ERROR", vbExclamation + vbOKOnly, "Problema")
+                Return Nothing
+            End Try
+            Return oDT
+        End Using
+    End Function
 #End Region
 
 End Class

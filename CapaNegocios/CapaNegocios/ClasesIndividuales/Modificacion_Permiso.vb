@@ -35,14 +35,13 @@ Public Class Modificacion_Permiso
 
     Public Sub Registrar() Implements IIndividual.Registrar
         Dim queryInsert As String = "insert into modificacion_permiso " &
-            "values (" & vcve_usuario & ",'" & vdia_modificacion.ToString("MM-dd-yyyy") & "','" & vfecha_inicio.ToString("MM-dd-yyyy") & "','" & vfecha_final.ToString("MM-dd-yyyy") & "')"
-        Using scope As New TransactionScope
-            Try
-                oBD.EjecutarQuery(queryInsert)
-            Catch ex As Exception
-                MsgBox("Problema al Registrar Permiso Modificacion. CModificacion_Permiso_ERROR", vbExclamation + vbOKOnly, "Problema")
-            End Try
-        End Using
+            "values (" & vcve_usuario & ",'" & vdia_modificacion.ToString("MM-dd-yyyy") & "','" & vfecha_inicio.ToString("MM-dd-yyyy HH:mm") & "','" & vfecha_final.ToString("MM-dd-yyyy HH:mm") & "')"
+        Try
+            oBD.EjecutarQuery(queryInsert)
+            MsgBox("Se registro correctamente", vbInformation + vbOKOnly, "Permiso Modificación de Captura")
+        Catch ex As Exception
+            MsgBox("Problema al Registrar Permiso Modificacion. CModificacion_Permiso_ERROR", vbExclamation + vbOKOnly, "Problema")
+        End Try
     End Sub
 #End Region
 #Region "Atributos"
@@ -108,6 +107,33 @@ Public Class Modificacion_Permiso
                 Return Nothing
             End Try
             Return obj
+        End Using
+    End Function
+    Public Function valida_registro_modificacion_permiso() As Boolean
+        Dim vResponse As String
+        Using scope As New TransactionScope
+            Try
+                Dim cmd As New SqlClient.SqlCommand
+                cmd.CommandType = CommandType.StoredProcedure
+                cmd.CommandText = "valida_registro_modificacion_permiso"
+                cmd.Parameters.Add("@cve_usuario", SqlDbType.BigInt).Value = Me.vcve_usuario
+                cmd.Parameters.Add("@fecha_modificacion", SqlDbType.DateTime).Value = Me.vdia_modificacion
+                cmd.Parameters.Add("@fecha_inicio", SqlDbType.DateTime).Value = Me.vfecha_inicio
+                cmd.Parameters.Add("@fecha_final", SqlDbType.DateTime).Value = Me.vfecha_final
+                Dim obj As DataTable = oBD.EjecutaCommando(cmd)
+                vResponse = obj.Rows(0)(0)
+                'Me.vcve_registro_turno = obj.Rows(0)(1)
+                'Me.vcve_turno = obj.Rows(0)(2)
+                scope.Complete()
+                If vResponse = "OK" Then
+                    Return True
+                Else
+                    Return False
+                End If
+            Catch
+                MsgBox("Problema al validar Modificacion Permiso. CModificacion_Permiso_ERROR", vbExclamation + vbOKOnly, "Problema")
+                Return False
+            End Try
         End Using
     End Function
 #End Region
