@@ -30,6 +30,7 @@ Public Class Formulario_Principal
     Dim oCatalogo_Tipo_Usuario As Catalogo_Tipo_Usuario '--------
     Dim oCatalogo_Usuario As Catalogo_Usuario '--------
     Dim oCatalogo_Equipo As Catalogo_Equipo '--------
+    Dim omsg_Modificacion_Permiso As msg_ModificacionesPermiso
 #End Region
 
 #Region "Declaracion de Objetos_Clases_Individiduales"
@@ -742,28 +743,14 @@ Public Class Formulario_Principal
             If Permiso_Asignado("MODIF_CATALOGO.VER") = True Then
                 If Permiso_Asignado("MODIF_CATALOGO.REGISTRAR") = True Then
                     'vPermiso_Add = False
-                    Try
-                        ofrmModificacion_Permiso = New frmModificacionPermiso()
-                        ofrmModificacion_Permiso.voperacion = "INSERT"
-                        ofrmModificacion_Permiso.ShowDialog()
-                    Catch ex As Exception
-                        MsgBox(ex)
-                    End Try
-                    
+                    ofrmModificacion_Permiso = New frmModificacionPermiso()
+                    ofrmModificacion_Permiso.operacion = "INSERT"
+                    ofrmModificacion_Permiso.ShowDialog()
                 Else
-                    'vPermiso_Add = False
+                    MsgBox("El Usuario no tiene los privilegios para ver los Detalles")
                 End If
-                'If Permiso_Asignado("CATALOGOMAQUINA.ELIMINAR") = True Then
-                '    vPermiso_Delete = True
-                'Else
-                '    vPermiso_Delete = False
-                'End If
-                'ofrmEquipo = New frmEquipo(vPermiso_Add, vPermiso_Delete)
-                'ofrmEquipo.vId_Publico = 0
-                'ofrmEquipo.ShowDialog()
-                ''Se realiza la llamada al evento clic del btnEquipo para actualizar el dgvRegistros
                 btnModifPermiso.PerformClick()
-                'btnEquipo.PerformClick()
+                vRowSeleccionada = 0
             Else
                 MsgBox("El Usuario no tiene los privilegios para ver los Detalles")
             End If
@@ -904,6 +891,26 @@ Public Class Formulario_Principal
             Else
                 MsgBox("El Usuario no tiene los privilegios para ver los Detalles")
             End If
+        ElseIf vModificacion_Permisos = True Then
+            If vRowSeleccionada <> 0 Then
+                If Permiso_Asignado("MODIF_CATALOGO.VER") = True Then
+                    If Permiso_Asignado("MODIF_CATALOGO.REGISTRAR") = True Then
+                        'vPermiso_Add = False
+                        ofrmModificacion_Permiso = New frmModificacionPermiso()
+                        ofrmModificacion_Permiso.operacion = "UPDATE"
+                        ofrmModificacion_Permiso.cve_modificacion_permiso = vRowSeleccionada
+                        ofrmModificacion_Permiso.ShowDialog()
+                    Else
+                        MsgBox("El Usuario no tiene los privilegios para registrar")
+                    End If
+                    btnModifPermiso.PerformClick()
+                    vRowSeleccionada = 0
+                Else
+                    MsgBox("El Usuario no tiene los privilegios para ver los Detalles")
+                End If
+            Else
+                MsgBox("No has seleccionado ningun registro", vbInformation + vbOKOnly, "Modificación Permiso")
+            End If
         End If
     End Sub
 
@@ -1006,6 +1013,40 @@ Public Class Formulario_Principal
                 MsgBox("El Usuario no tiene los privilegios para Eliminar o Dar Baja")
             End If
             ''--------
+        ElseIf vModificacion_Permisos = True Then
+            If vRowSeleccionada <> 0 Then
+                If Permiso_Asignado("MODIF_CATALOGO.ELIMINAR") = True Then
+
+                    oModificacionPermiso = New Modificacion_Permiso
+                    oModificacionPermiso.cve_modificacion_permiso = vRowSeleccionada
+                    oModificacionPermiso.operacion = "DELETE"
+                    oModificacionPermiso.dia_modificacion = Now
+                    oModificacionPermiso.fecha_inicio = Now
+                    oModificacionPermiso.fecha_final = Now
+                    If oModificacionPermiso.valida_registro_modificacion_permiso Then
+                        omsg_Modificacion_Permiso = New msg_ModificacionesPermiso
+
+                        oModificacionPermiso.cve_modificacion_permiso = vRowSeleccionada
+                        omsg_Modificacion_Permiso.operacion = "DELETE"
+                        omsg_Modificacion_Permiso.ShowDialog()
+                        If omsg_Modificacion_Permiso.vRespuesta Then
+                            oModificacionPermiso.Eliminar()
+                        End If
+                    Else
+                        MsgBox("No se puede borrar el registro. La fecha actual es mayor o igual a la fecha de inicio del registro a borrar.", vbExclamation + vbOKOnly, "Modificación Permiso")
+
+                    End If
+
+                    
+                    btnModifPermiso.PerformClick()
+                    vRowSeleccionada = 0
+                Else
+                    MsgBox("El Usuario no tiene los privilegios para Eliminar o Dar Baja")
+                End If
+            Else
+                MsgBox("No has seleccionado ningun registro", vbInformation + vbOKOnly, "Modificación Permiso")
+            End If
+            
         End If
     End Sub
 #End Region
@@ -1402,6 +1443,7 @@ Public Class Formulario_Principal
 
             Me.dgvRegistros.EnableGrouping = True
             Me.dgvRegistros.GroupDescriptors.Clear()
+            vRowSeleccionada = 0
             'Me.dgvRegistros.GroupDescriptors.Add(New GridGroupByExpression(Me.dgvRegistros.Columns("componente")))
         Else
             MsgBox("El Usuario no cuenta con los permisos suficientes para entrar al 'Catalogo de Permiso Modificaciones'")

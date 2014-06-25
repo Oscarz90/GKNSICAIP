@@ -17,7 +17,14 @@ Public Class Modificacion_Permiso
     End Sub
 
     Public Sub Eliminar() Implements IIndividual.Eliminar
-
+        Dim queryInsert As String = "delete modificacion_permiso" &
+            " where cve_modificacion_permiso=" & vcve_modificacion_permiso
+        Try
+            oBD.EjecutarQuery(queryInsert)
+            MsgBox("Se eliminó correctamente", vbInformation + vbOKOnly, "Permiso Modificación de Captura")
+        Catch ex As Exception
+            MsgBox("Problema al eliminar Modificacion Permiso. CModificacion_Permiso_ERROR", vbExclamation + vbOKOnly, "Problema")
+        End Try
     End Sub
     Dim vId As Long
     Public Property Id As Long Implements IIndividual.Id
@@ -50,6 +57,9 @@ Public Class Modificacion_Permiso
     Private vdia_modificacion As DateTime
     Private vfecha_inicio As DateTime
     Private vfecha_final As DateTime
+    'Variables para catalogo de admon.
+    Private vusuario As String
+    Private voperacion As String
 #End Region
 #Region "Propiedades"
     Public Property cve_modificacion_permiso() As Long
@@ -92,6 +102,22 @@ Public Class Modificacion_Permiso
             vfecha_final = value
         End Set
     End Property
+    Public Property usuario() As String
+        Get
+            Return vusuario
+        End Get
+        Set(ByVal value As String)
+            vusuario = value
+        End Set
+    End Property
+    Public Property operacion() As String
+        Get
+            Return voperacion
+        End Get
+        Set(ByVal value As String)
+            voperacion = value
+        End Set
+    End Property
 #End Region
 #Region "Metodos formulario de produccion"
     Public Function obtiene_registros_catalogo() As DataTable
@@ -116,10 +142,12 @@ Public Class Modificacion_Permiso
                 Dim cmd As New SqlClient.SqlCommand
                 cmd.CommandType = CommandType.StoredProcedure
                 cmd.CommandText = "valida_registro_modificacion_permiso"
+                cmd.Parameters.Add("@cve_modificacion_permiso", SqlDbType.BigInt).Value = Me.vcve_modificacion_permiso
                 cmd.Parameters.Add("@cve_usuario", SqlDbType.BigInt).Value = Me.vcve_usuario
                 cmd.Parameters.Add("@fecha_modificacion", SqlDbType.DateTime).Value = Me.vdia_modificacion
                 cmd.Parameters.Add("@fecha_inicio", SqlDbType.DateTime).Value = Me.vfecha_inicio
                 cmd.Parameters.Add("@fecha_final", SqlDbType.DateTime).Value = Me.vfecha_final
+                cmd.Parameters.Add("@operacion", SqlDbType.VarChar).Value = Me.voperacion
                 Dim obj As DataTable = oBD.EjecutaCommando(cmd)
                 vResponse = obj.Rows(0)(0)
                 'Me.vcve_registro_turno = obj.Rows(0)(1)
@@ -136,6 +164,20 @@ Public Class Modificacion_Permiso
             End Try
         End Using
     End Function
+    Public Sub actualizar_registro()
+        Dim queryInsert As String = "UPDATE modificacion_permiso  SET" &
+            " cve_usuario=" & vcve_usuario & "," &
+            " dia_modificacion='" & vdia_modificacion.ToString("MM-dd-yyyy") & "'," &
+            " fecha_inicio='" & vfecha_inicio.ToString("MM-dd-yyyy HH:mm") & "'," &
+            " fecha_final ='" & vfecha_final.ToString("MM-dd-yyyy HH:mm") & "' " &
+            " WHERE cve_modificacion_permiso =" & vcve_modificacion_permiso
+        Try
+            oBD.EjecutarQuery(queryInsert)
+            MsgBox("Se actualizó correctamente", vbInformation + vbOKOnly, "Permiso Modificación de Captura")
+        Catch ex As Exception
+            MsgBox("Problema al actualizar Modificacion Permiso. CModificacion_Permiso_ERROR", vbExclamation + vbOKOnly, "Problema")
+        End Try
+    End Sub
 #End Region
 
 End Class

@@ -23,46 +23,47 @@ Partial Class msg_ModificacionesPermiso
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(msg_ModificacionesPermiso))
-        Me.Label1 = New System.Windows.Forms.Label()
-        Me.Label2 = New System.Windows.Forms.Label()
+        Me.lbltitulo = New System.Windows.Forms.Label()
+        Me.lbl1 = New System.Windows.Forms.Label()
         Me.lblUsuario = New System.Windows.Forms.Label()
         Me.PictureBox1 = New System.Windows.Forms.PictureBox()
-        Me.Label3 = New System.Windows.Forms.Label()
+        Me.lbl2 = New System.Windows.Forms.Label()
         Me.lblDiaModificacion = New System.Windows.Forms.Label()
         Me.chkbxAcuerdo = New System.Windows.Forms.CheckBox()
-        Me.label00 = New System.Windows.Forms.Label()
-        Me.Label6 = New System.Windows.Forms.Label()
-        Me.Label7 = New System.Windows.Forms.Label()
+        Me.lbl3 = New System.Windows.Forms.Label()
+        Me.lbl5 = New System.Windows.Forms.Label()
+        Me.lbl4 = New System.Windows.Forms.Label()
         Me.lblFechaInicio = New System.Windows.Forms.Label()
         Me.lblFechaFin = New System.Windows.Forms.Label()
         Me.Label10 = New System.Windows.Forms.Label()
-        Me.TextBox1 = New System.Windows.Forms.TextBox()
+        Me.txtAdvertencia = New System.Windows.Forms.TextBox()
         Me.btnAceptar = New System.Windows.Forms.Button()
         Me.btnCancelar = New System.Windows.Forms.Button()
+        Me.lblDelete = New System.Windows.Forms.Label()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
-        'Label1
+        'lbltitulo
         '
-        Me.Label1.AutoSize = True
-        Me.Label1.Font = New System.Drawing.Font("Calibri", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label1.ForeColor = System.Drawing.Color.SteelBlue
-        Me.Label1.Location = New System.Drawing.Point(108, 9)
-        Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(286, 19)
-        Me.Label1.TabIndex = 0
-        Me.Label1.Text = "¿Está seguro que desea crear el registro?"
+        Me.lbltitulo.AutoSize = True
+        Me.lbltitulo.Font = New System.Drawing.Font("Calibri", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lbltitulo.ForeColor = System.Drawing.Color.SteelBlue
+        Me.lbltitulo.Location = New System.Drawing.Point(108, 9)
+        Me.lbltitulo.Name = "lbltitulo"
+        Me.lbltitulo.Size = New System.Drawing.Size(286, 19)
+        Me.lbltitulo.TabIndex = 0
+        Me.lbltitulo.Text = "¿Está seguro que desea crear el registro?"
         '
-        'Label2
+        'lbl1
         '
-        Me.Label2.AutoSize = True
-        Me.Label2.Font = New System.Drawing.Font("Calibri", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label2.ForeColor = System.Drawing.Color.Black
-        Me.Label2.Location = New System.Drawing.Point(108, 41)
-        Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(236, 19)
-        Me.Label2.TabIndex = 1
-        Me.Label2.Text = "Se asignará el permiso al usuario:"
+        Me.lbl1.AutoSize = True
+        Me.lbl1.Font = New System.Drawing.Font("Calibri", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lbl1.ForeColor = System.Drawing.Color.Black
+        Me.lbl1.Location = New System.Drawing.Point(108, 41)
+        Me.lbl1.Name = "lbl1"
+        Me.lbl1.Size = New System.Drawing.Size(236, 19)
+        Me.lbl1.TabIndex = 1
+        Me.lbl1.Text = "Se asignará el permiso al usuario:"
         '
         'lblUsuario
         '
@@ -85,16 +86,16 @@ Partial Class msg_ModificacionesPermiso
         Me.PictureBox1.TabIndex = 17
         Me.PictureBox1.TabStop = False
         '
-        'Label3
+        'lbl2
         '
-        Me.Label3.AutoSize = True
-        Me.Label3.Font = New System.Drawing.Font("Calibri", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label3.ForeColor = System.Drawing.Color.Black
-        Me.Label3.Location = New System.Drawing.Point(108, 78)
-        Me.Label3.Name = "Label3"
-        Me.Label3.Size = New System.Drawing.Size(154, 19)
-        Me.Label3.TabIndex = 18
-        Me.Label3.Text = "Para modificar el día:"
+        Me.lbl2.AutoSize = True
+        Me.lbl2.Font = New System.Drawing.Font("Calibri", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lbl2.ForeColor = System.Drawing.Color.Black
+        Me.lbl2.Location = New System.Drawing.Point(108, 78)
+        Me.lbl2.Name = "lbl2"
+        Me.lbl2.Size = New System.Drawing.Size(154, 19)
+        Me.lbl2.TabIndex = 18
+        Me.lbl2.Text = "Para modificar el día:"
         '
         'lblDiaModificacion
         '
@@ -118,38 +119,38 @@ Partial Class msg_ModificacionesPermiso
         Me.chkbxAcuerdo.Text = "Estoy de Acuerdo."
         Me.chkbxAcuerdo.UseVisualStyleBackColor = True
         '
-        'label00
+        'lbl3
         '
-        Me.label00.AutoSize = True
-        Me.label00.Font = New System.Drawing.Font("Calibri", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.label00.ForeColor = System.Drawing.Color.Black
-        Me.label00.Location = New System.Drawing.Point(108, 97)
-        Me.label00.Name = "label00"
-        Me.label00.Size = New System.Drawing.Size(321, 19)
-        Me.label00.TabIndex = 21
-        Me.label00.Text = "Con permiso de modificación entre las fechas."
+        Me.lbl3.AutoSize = True
+        Me.lbl3.Font = New System.Drawing.Font("Calibri", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lbl3.ForeColor = System.Drawing.Color.Black
+        Me.lbl3.Location = New System.Drawing.Point(108, 97)
+        Me.lbl3.Name = "lbl3"
+        Me.lbl3.Size = New System.Drawing.Size(321, 19)
+        Me.lbl3.TabIndex = 21
+        Me.lbl3.Text = "Con permiso de modificación entre las fechas."
         '
-        'Label6
+        'lbl5
         '
-        Me.Label6.AutoSize = True
-        Me.Label6.Font = New System.Drawing.Font("Calibri", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label6.ForeColor = System.Drawing.Color.Black
-        Me.Label6.Location = New System.Drawing.Point(108, 135)
-        Me.Label6.Name = "Label6"
-        Me.Label6.Size = New System.Drawing.Size(97, 19)
-        Me.Label6.TabIndex = 22
-        Me.Label6.Text = "Fecha de Fin:"
+        Me.lbl5.AutoSize = True
+        Me.lbl5.Font = New System.Drawing.Font("Calibri", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lbl5.ForeColor = System.Drawing.Color.Black
+        Me.lbl5.Location = New System.Drawing.Point(108, 135)
+        Me.lbl5.Name = "lbl5"
+        Me.lbl5.Size = New System.Drawing.Size(97, 19)
+        Me.lbl5.TabIndex = 22
+        Me.lbl5.Text = "Fecha de Fin:"
         '
-        'Label7
+        'lbl4
         '
-        Me.Label7.AutoSize = True
-        Me.Label7.Font = New System.Drawing.Font("Calibri", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label7.ForeColor = System.Drawing.Color.Black
-        Me.Label7.Location = New System.Drawing.Point(108, 116)
-        Me.Label7.Name = "Label7"
-        Me.Label7.Size = New System.Drawing.Size(114, 19)
-        Me.Label7.TabIndex = 23
-        Me.Label7.Text = "Fecha de Inicio:"
+        Me.lbl4.AutoSize = True
+        Me.lbl4.Font = New System.Drawing.Font("Calibri", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lbl4.ForeColor = System.Drawing.Color.Black
+        Me.lbl4.Location = New System.Drawing.Point(108, 116)
+        Me.lbl4.Name = "lbl4"
+        Me.lbl4.Size = New System.Drawing.Size(114, 19)
+        Me.lbl4.TabIndex = 23
+        Me.lbl4.Text = "Fecha de Inicio:"
         '
         'lblFechaInicio
         '
@@ -184,16 +185,16 @@ Partial Class msg_ModificacionesPermiso
         Me.Label10.TabIndex = 26
         Me.Label10.Text = "Advertencia:"
         '
-        'TextBox1
+        'txtAdvertencia
         '
-        Me.TextBox1.BorderStyle = System.Windows.Forms.BorderStyle.None
-        Me.TextBox1.Font = New System.Drawing.Font("Calibri", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TextBox1.Location = New System.Drawing.Point(136, 168)
-        Me.TextBox1.Multiline = True
-        Me.TextBox1.Name = "TextBox1"
-        Me.TextBox1.Size = New System.Drawing.Size(345, 51)
-        Me.TextBox1.TabIndex = 28
-        Me.TextBox1.Text = "Una vez creado solo se podrá modificar o borrar antes de la FECHA DE INICIO."
+        Me.txtAdvertencia.BorderStyle = System.Windows.Forms.BorderStyle.None
+        Me.txtAdvertencia.Font = New System.Drawing.Font("Calibri", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtAdvertencia.Location = New System.Drawing.Point(125, 168)
+        Me.txtAdvertencia.Multiline = True
+        Me.txtAdvertencia.Name = "txtAdvertencia"
+        Me.txtAdvertencia.Size = New System.Drawing.Size(345, 51)
+        Me.txtAdvertencia.TabIndex = 28
+        Me.txtAdvertencia.Text = "Una vez creado solo se podrá modificar o borrar antes de la FECHA DE INICIO."
         '
         'btnAceptar
         '
@@ -216,28 +217,41 @@ Partial Class msg_ModificacionesPermiso
         Me.btnCancelar.Text = "Cancelar"
         Me.btnCancelar.UseVisualStyleBackColor = True
         '
+        'lblDelete
+        '
+        Me.lblDelete.AutoSize = True
+        Me.lblDelete.Font = New System.Drawing.Font("Calibri", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblDelete.ForeColor = System.Drawing.Color.SteelBlue
+        Me.lblDelete.Location = New System.Drawing.Point(121, 78)
+        Me.lblDelete.Name = "lblDelete"
+        Me.lblDelete.Size = New System.Drawing.Size(344, 23)
+        Me.lblDelete.TabIndex = 31
+        Me.lblDelete.Text = "¿Está seguro que desea borrar el registro?"
+        Me.lblDelete.Visible = False
+        '
         'msg_ModificacionesPermiso
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.White
         Me.ClientSize = New System.Drawing.Size(493, 265)
+        Me.Controls.Add(Me.lblDelete)
         Me.Controls.Add(Me.btnCancelar)
         Me.Controls.Add(Me.btnAceptar)
-        Me.Controls.Add(Me.TextBox1)
+        Me.Controls.Add(Me.txtAdvertencia)
         Me.Controls.Add(Me.Label10)
         Me.Controls.Add(Me.lblFechaFin)
         Me.Controls.Add(Me.lblFechaInicio)
-        Me.Controls.Add(Me.Label7)
-        Me.Controls.Add(Me.Label6)
-        Me.Controls.Add(Me.label00)
+        Me.Controls.Add(Me.lbl4)
+        Me.Controls.Add(Me.lbl5)
+        Me.Controls.Add(Me.lbl3)
         Me.Controls.Add(Me.chkbxAcuerdo)
         Me.Controls.Add(Me.lblDiaModificacion)
-        Me.Controls.Add(Me.Label3)
+        Me.Controls.Add(Me.lbl2)
         Me.Controls.Add(Me.PictureBox1)
         Me.Controls.Add(Me.lblUsuario)
-        Me.Controls.Add(Me.Label2)
-        Me.Controls.Add(Me.Label1)
+        Me.Controls.Add(Me.lbl1)
+        Me.Controls.Add(Me.lbltitulo)
         Me.MaximizeBox = False
         Me.MaximumSize = New System.Drawing.Size(509, 304)
         Me.MinimumSize = New System.Drawing.Size(509, 304)
@@ -249,20 +263,21 @@ Partial Class msg_ModificacionesPermiso
         Me.PerformLayout()
 
     End Sub
-    Friend WithEvents Label1 As System.Windows.Forms.Label
-    Friend WithEvents Label2 As System.Windows.Forms.Label
+    Friend WithEvents lbltitulo As System.Windows.Forms.Label
+    Friend WithEvents lbl1 As System.Windows.Forms.Label
     Friend WithEvents lblUsuario As System.Windows.Forms.Label
     Friend WithEvents PictureBox1 As System.Windows.Forms.PictureBox
-    Friend WithEvents Label3 As System.Windows.Forms.Label
+    Friend WithEvents lbl2 As System.Windows.Forms.Label
     Friend WithEvents lblDiaModificacion As System.Windows.Forms.Label
     Friend WithEvents chkbxAcuerdo As System.Windows.Forms.CheckBox
-    Friend WithEvents label00 As System.Windows.Forms.Label
-    Friend WithEvents Label6 As System.Windows.Forms.Label
-    Friend WithEvents Label7 As System.Windows.Forms.Label
+    Friend WithEvents lbl3 As System.Windows.Forms.Label
+    Friend WithEvents lbl5 As System.Windows.Forms.Label
+    Friend WithEvents lbl4 As System.Windows.Forms.Label
     Friend WithEvents lblFechaInicio As System.Windows.Forms.Label
     Friend WithEvents lblFechaFin As System.Windows.Forms.Label
     Friend WithEvents Label10 As System.Windows.Forms.Label
-    Friend WithEvents TextBox1 As System.Windows.Forms.TextBox
+    Friend WithEvents txtAdvertencia As System.Windows.Forms.TextBox
     Friend WithEvents btnAceptar As System.Windows.Forms.Button
     Friend WithEvents btnCancelar As System.Windows.Forms.Button
+    Friend WithEvents lblDelete As System.Windows.Forms.Label
 End Class
