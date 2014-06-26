@@ -2,11 +2,11 @@
 Imports System.Threading
 
 Public Class frmProduccion
+#Region "Objetos"
     Dim ofrmMensaje_Turno As msg_Dialogo
     Dim ofrmMensaje_Descanso_Equipo As msg_Dialogo_Descanso_All_Lineas
-
-
-
+    Dim oModificaciones_permiso As Modificacion_Permiso
+#End Region
 #Region "Atributos"
     'Globales
     Private vcve_equipo As Integer
@@ -43,7 +43,6 @@ Public Class frmProduccion
             vcve_registro_turno = value
         End Set
     End Property
-
     'Public Property Cve_Linea_CBX() As Integer
     '    Get
     '        Return vCve_Linea_CBX
@@ -52,16 +51,13 @@ Public Class frmProduccion
     '        vCve_Linea_CBX = cbxLinea.SelectedValue
     '    End Set
     'End Property
-
-
-
-
 #End Region
 #Region "Inicializando formulario"
     'Load
     Private Sub frmProduccion_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         inicializa_formulario()
     End Sub
+
     'Establece variables globales
     Public Sub set_Datos_Equipo(ByVal idEq As Integer, ByVal NomEquipo As String, ByVal Empleado As String, ByVal CodEmpleado As String)
         vcve_equipo = idEq
@@ -89,6 +85,7 @@ Public Class frmProduccion
         contenedor_CDM.set_not_used()
         obtenedor_CDM = New frmCDM(contenedor_CDM)
         establece_dia_descanso()
+        valida_dia_modificaciones()
     End Sub
     'Llena info del formulario
     Private Sub llena_informacion_tabs_formulario()
@@ -876,9 +873,22 @@ Public Class frmProduccion
         End If
     End Sub
     'Graficas
-
     Private Sub cmdGraficar_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmdGraficar.Click
         AbrirGraficos()
+    End Sub
+    'Modificaciones
+    'Evento al presionar boton para iniciar Modificaciones
+    Private Sub btnModModificar_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnModModificar.Click
+        btnModTerminar.Enabled = True
+        cldrModificaciones.Enabled = False
+        btnModModificar.Enabled = False
+    End Sub
+    'Evento al presionar boton para terminar Modificaciones
+    Private Sub btnModTerminar_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnModTerminar.Click
+        btnModTerminar.Enabled = False
+        btnModModificar.Enabled = False
+        cldrModificaciones.Enabled = True
+        cldrModificaciones.SelectedDate = Now
     End Sub
 #End Region
 #Region "Eventos Gridviews"
@@ -925,6 +935,18 @@ Public Class frmProduccion
     Private Sub dtpDescanso_ValueChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles dtpDescanso.ValueChanged
         valida_botones_Descansos()
         deshabilitar_btn_quitar_descanso()
+    End Sub
+    'Valida el calendario de mOdificaciones y (des)Habilita el boton de modificar.
+    Private Sub cldrModificaciones_SelectionChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cldrModificaciones.SelectionChanged
+        oModificaciones_permiso = New Modificacion_Permiso
+        oModificaciones_permiso.usuario = Environment.UserName
+        oModificaciones_permiso.dia_modificacion = cldrModificaciones.SelectedDate
+        oModificaciones_permiso.bandera = 2
+        If oModificaciones_permiso.valida_dia_modificacion_permiso Then
+            btnModModificar.Enabled = True
+        Else
+            btnModModificar.Enabled = False
+        End If
     End Sub
 #End Region
 #Region "Validaciones"
@@ -1409,7 +1431,17 @@ Public Class frmProduccion
         lblFechaRegistro.Visible = True
         lblFechaRegistrodescripcion.Visible = True
     End Sub
+    'Valida si actualmente tiene permisos para modificar y habilita el modulo de modificaciones
+    Private Sub valida_dia_modificaciones()
+        oModificaciones_permiso = New Modificacion_Permiso
+        oModificaciones_permiso.usuario = Environment.UserName
+        'bandera en 1 solo para ver si tiene permisos hoy
+        oModificaciones_permiso.bandera = 1
+        If oModificaciones_permiso.valida_dia_modificacion_permiso Then
+            grpModificaciones.Visible = True
+        End If
 
+    End Sub
 #End Region
 #Region "Funciones para modulo Productividad"
     'Metodo Enviar notificaciones de sobreproduccion

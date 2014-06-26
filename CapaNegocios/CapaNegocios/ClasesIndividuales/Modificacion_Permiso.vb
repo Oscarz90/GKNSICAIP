@@ -60,6 +60,7 @@ Public Class Modificacion_Permiso
     'Variables para catalogo de admon.
     Private vusuario As String
     Private voperacion As String
+    Private vbandera As Long
 #End Region
 #Region "Propiedades"
     Public Property cve_modificacion_permiso() As Long
@@ -118,6 +119,15 @@ Public Class Modificacion_Permiso
             voperacion = value
         End Set
     End Property
+    Public Property bandera() As Long
+        Get
+            Return vbandera
+        End Get
+        Set(ByVal value As Long)
+            vbandera = value
+        End Set
+    End Property
+
 #End Region
 #Region "Metodos formulario de produccion"
     Public Function obtiene_registros_catalogo() As DataTable
@@ -135,6 +145,7 @@ Public Class Modificacion_Permiso
             Return obj
         End Using
     End Function
+    'Valida antes de hacer un registro en modificacion_permiso
     Public Function valida_registro_modificacion_permiso() As Boolean
         Dim vResponse As String
         Using scope As New TransactionScope
@@ -152,6 +163,36 @@ Public Class Modificacion_Permiso
                 vResponse = obj.Rows(0)(0)
                 'Me.vcve_registro_turno = obj.Rows(0)(1)
                 'Me.vcve_turno = obj.Rows(0)(2)
+                scope.Complete()
+                If vResponse = "OK" Then
+                    Return True
+                Else
+                    Return False
+                End If
+            Catch
+                MsgBox("Problema al validar Modificacion Permiso. CModificacion_Permiso_ERROR", vbExclamation + vbOKOnly, "Problema")
+                Return False
+            End Try
+        End Using
+    End Function
+    Public Function valida_dia_modificacion_permiso() As Boolean
+        Dim vResponse As String
+        Using scope As New TransactionScope
+            Try
+                Dim cmd As New SqlClient.SqlCommand
+                cmd.CommandType = CommandType.StoredProcedure
+                cmd.CommandText = "valida_dia_modificacion_permiso"
+                cmd.Parameters.Add("@usuario", SqlDbType.VarChar).Value = Me.vusuario
+                cmd.Parameters.Add("@fecha_actual", SqlDbType.DateTime).Value = Now
+                If vbandera = 2 Then
+                    cmd.Parameters.Add("@dia_modificacion", SqlDbType.DateTime).Value = Me.vdia_modificacion
+                Else
+                    cmd.Parameters.Add("@dia_modificacion", SqlDbType.DateTime).Value = Now
+                End If
+                cmd.Parameters.Add("@bandera", SqlDbType.BigInt).Value = Me.vbandera
+                Dim obj As DataTable = oBD.EjecutaCommando(cmd)
+                vResponse = obj.Rows(0)(0)
+                vcve_modificacion_permiso = obj.Rows(0)(1)
                 scope.Complete()
                 If vResponse = "OK" Then
                     Return True

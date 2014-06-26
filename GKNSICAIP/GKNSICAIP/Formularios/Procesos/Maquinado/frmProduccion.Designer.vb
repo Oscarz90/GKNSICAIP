@@ -218,6 +218,7 @@ Partial Class frmProduccion
         Me.Label62 = New System.Windows.Forms.Label()
         Me.tabPageGente = New System.Windows.Forms.TabPage()
         Me.grp5s = New System.Windows.Forms.GroupBox()
+        Me.prom = New System.Windows.Forms.Label()
         Me.lblAlertaCincoS = New System.Windows.Forms.Label()
         Me.txtprom = New System.Windows.Forms.TextBox()
         Me.Label83 = New System.Windows.Forms.Label()
@@ -289,7 +290,10 @@ Partial Class frmProduccion
         Me.banner_formulario = New System.Windows.Forms.PictureBox()
         Me.cmdGraficar = New System.Windows.Forms.Button()
         Me.Label34 = New System.Windows.Forms.Label()
-        Me.prom = New System.Windows.Forms.Label()
+        Me.btnModModificar = New System.Windows.Forms.Button()
+        Me.btnModTerminar = New System.Windows.Forms.Button()
+        Me.grpModificaciones = New System.Windows.Forms.GroupBox()
+        Me.cldrModificaciones = New Telerik.WinControls.UI.RadCalendar()
         Me.tabPageContenido.SuspendLayout()
         Me.tabPageTurnosLineas.SuspendLayout()
         CType(Me.grdLineasRegistradas, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -323,6 +327,8 @@ Partial Class frmProduccion
         CType(Me.grdDetalleDescansos, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.imgEscudo, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.banner_formulario, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.grpModificaciones.SuspendLayout()
+        CType(Me.cldrModificaciones, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'tabPageContenido
@@ -2443,6 +2449,16 @@ Partial Class frmProduccion
         Me.grp5s.TabStop = False
         Me.grp5s.Text = "5'S"
         '
+        'prom
+        '
+        Me.prom.AutoSize = True
+        Me.prom.Font = New System.Drawing.Font("Calibri", 12.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.prom.Location = New System.Drawing.Point(256, 175)
+        Me.prom.Name = "prom"
+        Me.prom.Size = New System.Drawing.Size(83, 21)
+        Me.prom.TabIndex = 415
+        Me.prom.Text = "Promedio:"
+        '
         'lblAlertaCincoS
         '
         Me.lblAlertaCincoS.AutoSize = True
@@ -3044,7 +3060,7 @@ Partial Class frmProduccion
         Me.titulo_banner_formulario.ForeColor = System.Drawing.Color.SteelBlue
         Me.titulo_banner_formulario.Location = New System.Drawing.Point(4, 27)
         Me.titulo_banner_formulario.Name = "titulo_banner_formulario"
-        Me.titulo_banner_formulario.Size = New System.Drawing.Size(474, 32)
+        Me.titulo_banner_formulario.Size = New System.Drawing.Size(476, 32)
         Me.titulo_banner_formulario.TabIndex = 0
         Me.titulo_banner_formulario.Text = "Captura de Resultados de Producción"
         '
@@ -3132,7 +3148,7 @@ Partial Class frmProduccion
         'lblFechaRegistro
         '
         Me.lblFechaRegistro.Font = New System.Drawing.Font("Calibri", 12.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblFechaRegistro.Location = New System.Drawing.Point(825, 70)
+        Me.lblFechaRegistro.Location = New System.Drawing.Point(848, 47)
         Me.lblFechaRegistro.Name = "lblFechaRegistro"
         Me.lblFechaRegistro.Size = New System.Drawing.Size(121, 19)
         Me.lblFechaRegistro.TabIndex = 0
@@ -3143,7 +3159,7 @@ Partial Class frmProduccion
         '
         Me.lblFechaRegistrodescripcion.AutoSize = True
         Me.lblFechaRegistrodescripcion.Font = New System.Drawing.Font("Calibri", 12.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblFechaRegistrodescripcion.Location = New System.Drawing.Point(703, 69)
+        Me.lblFechaRegistrodescripcion.Location = New System.Drawing.Point(726, 46)
         Me.lblFechaRegistrodescripcion.Name = "lblFechaRegistrodescripcion"
         Me.lblFechaRegistrodescripcion.Size = New System.Drawing.Size(122, 21)
         Me.lblFechaRegistrodescripcion.TabIndex = 0
@@ -3191,15 +3207,49 @@ Partial Class frmProduccion
         Me.Label34.TabIndex = 318
         Me.Label34.Text = "Ir a gráficas"
         '
-        'prom
+        'btnModModificar
         '
-        Me.prom.AutoSize = True
-        Me.prom.Font = New System.Drawing.Font("Calibri", 12.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.prom.Location = New System.Drawing.Point(256, 175)
-        Me.prom.Name = "prom"
-        Me.prom.Size = New System.Drawing.Size(83, 21)
-        Me.prom.TabIndex = 415
-        Me.prom.Text = "Promedio:"
+        Me.btnModModificar.Enabled = False
+        Me.btnModModificar.Font = New System.Drawing.Font("Calibri", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnModModificar.Location = New System.Drawing.Point(229, 53)
+        Me.btnModModificar.Name = "btnModModificar"
+        Me.btnModModificar.Size = New System.Drawing.Size(103, 27)
+        Me.btnModModificar.TabIndex = 319
+        Me.btnModModificar.Text = "Modificar"
+        Me.btnModModificar.UseVisualStyleBackColor = True
+        '
+        'btnModTerminar
+        '
+        Me.btnModTerminar.Enabled = False
+        Me.btnModTerminar.Font = New System.Drawing.Font("Calibri", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnModTerminar.Location = New System.Drawing.Point(229, 105)
+        Me.btnModTerminar.Name = "btnModTerminar"
+        Me.btnModTerminar.Size = New System.Drawing.Size(103, 27)
+        Me.btnModTerminar.TabIndex = 320
+        Me.btnModTerminar.Text = "Terminar"
+        Me.btnModTerminar.UseVisualStyleBackColor = True
+        '
+        'grpModificaciones
+        '
+        Me.grpModificaciones.Controls.Add(Me.cldrModificaciones)
+        Me.grpModificaciones.Controls.Add(Me.btnModModificar)
+        Me.grpModificaciones.Controls.Add(Me.btnModTerminar)
+        Me.grpModificaciones.Font = New System.Drawing.Font("Calibri", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.grpModificaciones.Location = New System.Drawing.Point(492, 76)
+        Me.grpModificaciones.Name = "grpModificaciones"
+        Me.grpModificaciones.Size = New System.Drawing.Size(338, 166)
+        Me.grpModificaciones.TabIndex = 321
+        Me.grpModificaciones.TabStop = False
+        Me.grpModificaciones.Text = "Módulo de Modificaciones"
+        Me.grpModificaciones.Visible = False
+        '
+        'cldrModificaciones
+        '
+        Me.cldrModificaciones.Location = New System.Drawing.Point(6, 19)
+        Me.cldrModificaciones.Name = "cldrModificaciones"
+        Me.cldrModificaciones.Size = New System.Drawing.Size(204, 141)
+        Me.cldrModificaciones.TabIndex = 321
+        Me.cldrModificaciones.Text = "RadCalendar1"
         '
         'frmProduccion
         '
@@ -3208,6 +3258,7 @@ Partial Class frmProduccion
         Me.BackColor = System.Drawing.Color.White
         Me.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None
         Me.ClientSize = New System.Drawing.Size(1254, 722)
+        Me.Controls.Add(Me.grpModificaciones)
         Me.Controls.Add(Me.Label34)
         Me.Controls.Add(Me.cmdGraficar)
         Me.Controls.Add(Me.lblFechaRegistrodescripcion)
@@ -3277,6 +3328,8 @@ Partial Class frmProduccion
         CType(Me.grdDetalleDescansos, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.imgEscudo, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.banner_formulario, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.grpModificaciones.ResumeLayout(False)
+        CType(Me.cldrModificaciones, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -3548,4 +3601,8 @@ Partial Class frmProduccion
     Friend WithEvents cmdGraficar As System.Windows.Forms.Button
     Friend WithEvents Label34 As System.Windows.Forms.Label
     Friend WithEvents prom As System.Windows.Forms.Label
+    Friend WithEvents btnModModificar As System.Windows.Forms.Button
+    Friend WithEvents btnModTerminar As System.Windows.Forms.Button
+    Friend WithEvents grpModificaciones As System.Windows.Forms.GroupBox
+    Friend WithEvents cldrModificaciones As Telerik.WinControls.UI.RadCalendar
 End Class
