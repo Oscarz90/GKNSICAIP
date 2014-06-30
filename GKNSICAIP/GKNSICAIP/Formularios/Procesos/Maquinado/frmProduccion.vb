@@ -24,6 +24,7 @@ Public Class frmProduccion
     Private flgBanderacbxTurnos As Boolean = False
     Private flgBanderacbxMaquinas As Boolean = False
     Private flgBanderacbxParos As Boolean = False
+    Private flgBanderaModificacionPermiso As Boolean = False
     'CDM
     Private contenedor_CDM As CDM_Class
     Private obtenedor_CDM As frmCDM
@@ -413,14 +414,16 @@ Public Class frmProduccion
     Private Sub llena_lineas_Si_gridview()
         Dim oRegistro_Turno As New Registro_Turno
         oRegistro_Turno.cve_equipo = vcve_equipo
-        oRegistro_Turno.dia_asignado = Convert.ToDateTime(Now.ToString("dd-MM-yyyy HH:mm:ss"))
+        'oRegistro_Turno.dia_asignado = Convert.ToDateTime(Now.ToString("dd-MM-yyyy HH:mm:ss")) Modificacion Permiso
+        oRegistro_Turno.dia_asignado = obtiene_fecha_actual.ToString("dd-MM-yyyy HH:mm:ss")
         grdLineasRegistradas.DataSource = oRegistro_Turno.llena_lineas_registradas_hoy()
     End Sub
     'Descansos
     Private Sub llena_Descanso_gridview()
         Dim oRegistro_turno As New Registro_Turno
         oRegistro_turno.cve_equipo = vcve_equipo
-        oRegistro_turno.dia_asignado = Convert.ToDateTime(Now.ToString("dd-MM-yyyy"))
+        'oRegistro_turno.dia_asignado = Convert.ToDateTime(Now.ToString("dd-MM-yyyy")) Modificacion Permiso
+        oRegistro_turno.dia_asignado = obtiene_fecha_actual.ToString("dd-MM-yyyy")
         grdDetalleDescansos.DataSource = oRegistro_turno.llena_Descanso_gridview()
     End Sub
     '5S
@@ -1380,9 +1383,15 @@ Public Class frmProduccion
 #End Region
 #Region "Funciones Generales"
     Private Sub define_calendario_descanso()
-        Dim diafinal As Date = DateSerial(Year(Now.ToString("yyyy-MM-dd")), Month(Now.ToString("yyyy-MM-dd")) + 1, 0)
+        'Lineas de codigo antes de modificaciones permiso
+        'Dim diafinal As Date = DateSerial(Year(Now.ToString("yyyy-MM-dd")), Month(Now.ToString("yyyy-MM-dd")) + 1, 0)
+        'diafinal = diafinal.AddDays(5)
+        'dtpDescanso.MinDate = DateSerial(Year(Now.ToString("yyyy-MM-dd")), Month(Now.ToString("yyyy-MM-dd")), 1)
+        'dtpDescanso.MaxDate = diafinal
+        'Lineas de codigo antes de modificaciones permiso
+        Dim diafinal As DateTime = DateSerial(obtiene_fecha_actual.Year, obtiene_fecha_actual.Month + 1, 0)
         diafinal = diafinal.AddDays(5)
-        dtpDescanso.MinDate = DateSerial(Year(Now.ToString("yyyy-MM-dd")), Month(Now.ToString("yyyy-MM-dd")), 1)
+        dtpDescanso.MinDate = DateSerial(obtiene_fecha_actual.Year, obtiene_fecha_actual.Month, 1)
         dtpDescanso.MaxDate = diafinal
     End Sub
     Private Sub get_Imagen_Equipo()
@@ -1999,7 +2008,8 @@ Public Class frmProduccion
     Private Function valida_registro_linea() As Boolean
         Dim oTurno As New Turno
         oTurno.cve_turno = cbxTurnosLineas.SelectedValue
-        oTurno.fecha_registro = Convert.ToDateTime(Now.ToString("dd-MM-yyyy HH:mm"))
+        'oTurno.fecha_registro = Convert.ToDateTime(Now.ToString("dd-MM-yyyy HH:mm")) Modificaciones Permiso
+        oTurno.fecha_registro = obtiene_fecha_actual.ToString("dd-MM-yyyy HH:mm")
         oTurno.valida_inicio_fin()
         If oTurno.bandera_registro = 1 Then
             Return True
@@ -2029,7 +2039,8 @@ Public Class frmProduccion
     Private Function obten_dia_asignado_registro_turno() As Date
         Dim oTurno As New Turno
         oTurno.cve_turno = cbxTurnosLineas.SelectedValue
-        oTurno.fecha_registro = Convert.ToDateTime(Now.ToString("dd-MM-yyyy HH:mm"))
+        'oTurno.fecha_registro = Convert.ToDateTime(Now.ToString("dd-MM-yyyy HH:mm"))
+        oTurno.fecha_registro = obtiene_fecha_actual.ToString("dd-MM-yyyy HH:mm")
         oTurno.valida_inicio_fin()
         ' MsgBox(oTurno.inicio)
         Return oTurno.inicio
@@ -2205,5 +2216,16 @@ Public Class frmProduccion
         'frmGraficas.ShowDialog()
         'frmGraficas.Dispose()
     End Sub
+#End Region
+#Region "Funciones para modulo de Modificaciones"
+    Private Function obtiene_fecha_actual() As DateTime
+        If flgBanderaModificacionPermiso = True Then
+            Return cldrModificaciones.SelectedDate
+        ElseIf flgBanderaModificacionPermiso = False Then
+            Return Convert.ToDateTime(Now)
+        Else
+            Return Convert.ToDateTime(Now)
+        End If
+    End Function
 #End Region
 End Class
