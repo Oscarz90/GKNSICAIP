@@ -453,7 +453,8 @@ Public Class frmProduccion
     Private Sub cbxLinea_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cbxLinea.SelectedIndexChanged
         vCve_Linea_CBX = cbxLinea.SelectedValue
         If cbxLinea.SelectedIndex <> -1 And flgBanderacbxLineas Then
-            If verifica_registro_turno_produccion(cbxLinea.SelectedValue, Convert.ToDateTime(Now.ToString("dd-MM-yyyy HH:mm"))) Then
+            'If verifica_registro_turno_produccion(cbxLinea.SelectedValue, Convert.ToDateTime(Now.ToString("dd-MM-yyyy HH:mm"))) Then Modificacion Permiso
+            If verifica_registro_turno_produccion(cbxLinea.SelectedValue, obtiene_fecha_actual.ToString("dd-MM-yyyy HH:mm")) Then
                 MsgBox("No has registrado Turno para la Linea: " & cbxLinea.Text)
                 establece_dia_descanso()
             Else
@@ -882,9 +883,12 @@ Public Class frmProduccion
     'Modificaciones
     'Evento al presionar boton para iniciar Modificaciones
     Private Sub btnModModificar_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnModModificar.Click
-        btnModTerminar.Enabled = True
-        cldrModificaciones.Enabled = False
-        btnModModificar.Enabled = False
+        If valida_modificacion_permiso() Then
+            btnModTerminar.Enabled = True
+            cldrModificaciones.Enabled = False
+            btnModModificar.Enabled = False
+            flgBanderaModificacionPermiso = True
+        End If
     End Sub
     'Evento al presionar boton para terminar Modificaciones
     Private Sub btnModTerminar_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnModTerminar.Click
@@ -892,6 +896,7 @@ Public Class frmProduccion
         btnModModificar.Enabled = False
         cldrModificaciones.Enabled = True
         cldrModificaciones.SelectedDate = Now
+        flgBanderaModificacionPermiso = False
     End Sub
 #End Region
 #Region "Eventos Gridviews"
@@ -1423,13 +1428,19 @@ Public Class frmProduccion
     End Function
     'Establece la hora de inicio y fin validas para capturar
     Private Sub establece_hora_inicio_fin_captura()
-        ini_aux = Nothing
-        fin_aux = Nothing
-        Dim oTurno As New Turno
-        oTurno.cve_registro_turno = vcve_registro_turno
-        oTurno.valida_inicio_fin_produccion()
-        ini_aux = oTurno.inicio
-        fin_aux = oTurno.fin
+        If flgBanderaModificacionPermiso = True Then
+
+            
+        Else
+            ini_aux = Nothing
+            fin_aux = Nothing
+            Dim oTurno As New Turno
+            oTurno.cve_registro_turno = vcve_registro_turno
+            oTurno.valida_inicio_fin_produccion()
+            ini_aux = oTurno.inicio
+            fin_aux = oTurno.fin
+        End If
+        
     End Sub
     'Obtiene y muestra la fecha a la cual pertenece la captura
     Private Sub establece_label_fecha_captura()
@@ -1442,15 +1453,27 @@ Public Class frmProduccion
     End Sub
     'Valida si actualmente tiene permisos para modificar y habilita el modulo de modificaciones
     Private Sub valida_dia_modificaciones()
-        oModificaciones_permiso = New Modificacion_Permiso
-        oModificaciones_permiso.usuario = Environment.UserName
+        'oModificaciones_permiso = New Modificacion_Permiso
+        'oModificaciones_permiso.usuario = Environment.UserName
         'bandera en 1 solo para ver si tiene permisos hoy
-        oModificaciones_permiso.bandera = 1
-        If oModificaciones_permiso.valida_dia_modificacion_permiso Then
-            grpModificaciones.Visible = True
-        End If
+        'oModificaciones_permiso.bandera = 1
+        'If oModificaciones_permiso.valida_dia_modificacion_permiso Then
+        '    grpModificaciones.Visible = True
+        'End If
 
     End Sub
+    Private Function valida_modificacion_permiso() As Boolean
+        oModificaciones_permiso = New Modificacion_Permiso
+        oModificaciones_permiso.usuario = Environment.UserName
+        'bandera en 1 solo para ver si tiene permisos hoy con la hora y fecha actual
+        oModificaciones_permiso.bandera = 1
+        If oModificaciones_permiso.valida_dia_modificacion_permiso Then
+            Return True
+        Else
+            Return False
+        End If
+    End Function
+
 #End Region
 #Region "Funciones para modulo Productividad"
     'Metodo Enviar notificaciones de sobreproduccion

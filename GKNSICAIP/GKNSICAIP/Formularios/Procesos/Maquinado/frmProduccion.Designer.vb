@@ -3241,7 +3241,6 @@ Partial Class frmProduccion
         Me.grpModificaciones.TabIndex = 321
         Me.grpModificaciones.TabStop = False
         Me.grpModificaciones.Text = "Módulo de Modificaciones"
-        Me.grpModificaciones.Visible = False
         '
         'cldrModificaciones
         '

@@ -205,6 +205,10 @@ Public Class Modificacion_Permiso
             End Try
         End Using
     End Function
+    Public Sub obten_hora_inicio_fin_captura()
+
+    End Sub
+
     Public Sub actualizar_registro()
         Dim queryInsert As String = "UPDATE modificacion_permiso  SET" &
             " cve_usuario=" & vcve_usuario & "," &
