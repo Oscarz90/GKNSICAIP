@@ -888,6 +888,7 @@ Public Class frmProduccion
             cldrModificaciones.Enabled = False
             btnModModificar.Enabled = False
             flgBanderaModificacionPermiso = True
+            inicializa_formulario()
         End If
     End Sub
     'Evento al presionar boton para terminar Modificaciones
@@ -897,6 +898,11 @@ Public Class frmProduccion
         cldrModificaciones.Enabled = True
         cldrModificaciones.SelectedDate = Now
         flgBanderaModificacionPermiso = False
+        cbxLinea.SelectedIndex = -1
+        cbxTurno.SelectedIndex = -1
+        flgBanderacbxLineas = False
+        establece_dia_descanso()
+        inicializa_formulario()
     End Sub
 #End Region
 #Region "Eventos Gridviews"
@@ -1419,7 +1425,14 @@ Public Class frmProduccion
         If hora_actual >= fecha_inicio And hora_actual <= fecha_final Then
             Return True
         Else
-            MsgBox("Ha finalizado el turno ya no puedes capturar. Para elegir un nuevo turno y dia Da Click en la pestaña Turnos-Lineas", vbExclamation + vbOKOnly, "Aviso!")
+            If flgBanderaModificacionPermiso = True Then
+                MsgBox("Ha finalizado el turno ya no puedes capturar. Para elegir un nuevo turno y dia Da Click en la pestaña Turnos-Lineas", vbExclamation + vbOKOnly, "Aviso!")
+            Else
+                flgBanderaModificacionPermiso = False
+                btnModTerminar.PerformClick()
+                MsgBox("Ha finalizado el permiso de captura. Para elegir un nuevo turno y dia Da Click en la pestaña Turnos-Lineas", vbExclamation + vbOKOnly, "Aviso!")
+            End If
+
             cbxLinea.SelectedIndex = -1
             cbxTurno.SelectedIndex = -1
             establece_dia_descanso()
@@ -1429,8 +1442,19 @@ Public Class frmProduccion
     'Establece la hora de inicio y fin validas para capturar
     Private Sub establece_hora_inicio_fin_captura()
         If flgBanderaModificacionPermiso = True Then
-
-            
+            oModificaciones_permiso = New Modificacion_Permiso
+            oModificaciones_permiso.usuario = Environment.UserName
+            oModificaciones_permiso.dia_modificacion = cldrModificaciones.SelectedDate
+            oModificaciones_permiso.bandera = 2
+            If oModificaciones_permiso.valida_dia_modificacion_permiso() Then
+                oModificaciones_permiso.Cargar()
+                ini_aux = Nothing
+                fin_aux = Nothing
+                ini_aux = oModificaciones_permiso.fecha_inicio
+                ini_aux = oModificaciones_permiso.fecha_final
+            Else
+                establece_dia_descanso()
+            End If
         Else
             ini_aux = Nothing
             fin_aux = Nothing
