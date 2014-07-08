@@ -57,6 +57,7 @@ Public Class frmProduccion
     'Load
     Private Sub frmProduccion_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         inicializa_formulario()
+        MsgBox(My.Computer.Name)
     End Sub
 
     'Establece variables globales
