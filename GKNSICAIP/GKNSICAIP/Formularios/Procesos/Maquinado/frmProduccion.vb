@@ -642,6 +642,7 @@ Public Class frmProduccion
                 add_productividad()
                 add_Nrfti()
                 llena_cbx_Modelos_Desecho()
+
             End If
         End If
     End Sub
@@ -1593,6 +1594,7 @@ Public Class frmProduccion
         oProduccion.pzas_ok = Long.Parse(txtPiezasOkProducidas.Text)
         oProduccion.tom = Long.Parse(txtTiempoOperacion.Text)
         oProduccion.Registrar()
+
     End Sub
     Private Sub remove_modelo_producido()
         If grdDetalleProductividad.Rows.Count <> 0 Then
@@ -2275,5 +2277,11 @@ Public Class frmProduccion
             Return Convert.ToDateTime(Now)
         End If
     End Function
+    Private Sub log_modificaciones_permiso(ByVal vMensaje As String)
+        If flgBanderaModificacionPermiso = True Then
+
+        End If
+    End Sub
+
 #End Region
 End Class

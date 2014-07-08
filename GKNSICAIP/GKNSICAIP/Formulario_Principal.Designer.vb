@@ -69,6 +69,7 @@ Partial Class Formulario_Principal
         Me.btnEstrategias = New Telerik.WinControls.UI.RadButtonElement()
         Me.btnCategorias = New Telerik.WinControls.UI.RadButtonElement()
         Me.btnSubCategorias = New Telerik.WinControls.UI.RadButtonElement()
+        Me.btnModifPermLog = New Telerik.WinControls.UI.RadButtonElement()
         CType(Me.RadStatusStrip1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.Barra_Tool_Registros, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.RadPanel_Registros, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -150,10 +151,10 @@ Partial Class Formulario_Principal
         'Barra_Tool_Registros
         '
         Me.Barra_Tool_Registros.Dock = System.Windows.Forms.DockStyle.Top
-        Me.Barra_Tool_Registros.Location = New System.Drawing.Point(0, 161)
+        Me.Barra_Tool_Registros.Location = New System.Drawing.Point(0, 159)
         Me.Barra_Tool_Registros.Name = "Barra_Tool_Registros"
         Me.Barra_Tool_Registros.Rows.AddRange(New Telerik.WinControls.UI.CommandBarRowElement() {Me.CommandBarRowElement2})
-        Me.Barra_Tool_Registros.Size = New System.Drawing.Size(1016, 55)
+        Me.Barra_Tool_Registros.Size = New System.Drawing.Size(1016, 30)
         Me.Barra_Tool_Registros.TabIndex = 2
         Me.Barra_Tool_Registros.Text = "RadCommandBar2"
         Me.Barra_Tool_Registros.Visible = False
@@ -233,9 +234,9 @@ Partial Class Formulario_Principal
         Me.RadPanel_Registros.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center
         Me.RadPanel_Registros.Controls.Add(Me.dgvRegistros)
         Me.RadPanel_Registros.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.RadPanel_Registros.Location = New System.Drawing.Point(0, 216)
+        Me.RadPanel_Registros.Location = New System.Drawing.Point(0, 189)
         Me.RadPanel_Registros.Name = "RadPanel_Registros"
-        Me.RadPanel_Registros.Size = New System.Drawing.Size(1016, 507)
+        Me.RadPanel_Registros.Size = New System.Drawing.Size(1016, 534)
         Me.RadPanel_Registros.TabIndex = 1
         '
         'dgvRegistros
@@ -256,7 +257,7 @@ Partial Class Formulario_Principal
         Me.dgvRegistros.MasterTemplate.EnableFiltering = True
         Me.dgvRegistros.Name = "dgvRegistros"
         Me.dgvRegistros.ReadOnly = True
-        Me.dgvRegistros.Size = New System.Drawing.Size(1010, 480)
+        Me.dgvRegistros.Size = New System.Drawing.Size(1010, 507)
         Me.dgvRegistros.TabIndex = 0
         Me.dgvRegistros.Text = "RadGridView1"
         Me.dgvRegistros.UseScrollbarsInHierarchy = True
@@ -271,7 +272,7 @@ Partial Class Formulario_Principal
         '
         '
         Me.MapaUbicacion.RootElement.AutoSizeMode = Telerik.WinControls.RadAutoSizeMode.WrapAroundChildren
-        Me.MapaUbicacion.Size = New System.Drawing.Size(1016, 161)
+        Me.MapaUbicacion.Size = New System.Drawing.Size(1016, 159)
         Me.MapaUbicacion.StartButtonImage = CType(resources.GetObject("MapaUbicacion.StartButtonImage"), System.Drawing.Image)
         Me.MapaUbicacion.TabIndex = 0
         Me.MapaUbicacion.Text = "SICAIP"
@@ -429,7 +430,7 @@ Partial Class Formulario_Principal
         '
         Me.RadRibbonBarGroup3.AccessibleDescription = "Asignaciones"
         Me.RadRibbonBarGroup3.AccessibleName = "Asignaciones"
-        Me.RadRibbonBarGroup3.Items.AddRange(New Telerik.WinControls.RadItem() {Me.btnEquipo_Linea, Me.btnMatch_Equipos, Me.btnModifPermiso})
+        Me.RadRibbonBarGroup3.Items.AddRange(New Telerik.WinControls.RadItem() {Me.btnEquipo_Linea, Me.btnMatch_Equipos, Me.btnModifPermiso, Me.btnModifPermLog})
         Me.RadRibbonBarGroup3.Name = "RadRibbonBarGroup3"
         Me.RadRibbonBarGroup3.Text = "Otros"
         Me.RadRibbonBarGroup3.Visibility = Telerik.WinControls.ElementVisibility.Visible
@@ -578,6 +579,14 @@ Partial Class Formulario_Principal
         Me.btnSubCategorias.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText
         Me.btnSubCategorias.Visibility = Telerik.WinControls.ElementVisibility.Visible
         '
+        'btnModifPermLog
+        '
+        Me.btnModifPermLog.AccessibleDescription = "Log Modif"
+        Me.btnModifPermLog.AccessibleName = "Log Modif"
+        Me.btnModifPermLog.Name = "btnModifPermLog"
+        Me.btnModifPermLog.Text = "Log Modif"
+        Me.btnModifPermLog.Visibility = Telerik.WinControls.ElementVisibility.Visible
+        '
         'Formulario_Principal
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -655,5 +664,6 @@ Partial Class Formulario_Principal
     Friend WithEvents btnMatch_Equipos As Telerik.WinControls.UI.RadButtonElement
     Friend WithEvents RadRibbonBarButtonGroup1 As Telerik.WinControls.UI.RadRibbonBarButtonGroup
     Friend WithEvents btnModifPermiso As Telerik.WinControls.UI.RadButtonElement
+    Friend WithEvents btnModifPermLog As Telerik.WinControls.UI.RadButtonElement
 
 End Class

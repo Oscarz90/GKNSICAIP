@@ -137,7 +137,8 @@ Public Class Modificacion_Permiso_Log
             Try
                 obj = oBD.ObtenerTabla("select mpl.cve_modificacion_permiso_log,e.equipo,mpl.maquina,mpl.cod_empleado,mpl.fecha_modificacion,mpl.fecha_captura,mpl.descripcion" &
                                        " from modificacion_permiso_log mpl" &
-                                       " join equipo e on mpl.cve_equipo=e.cve_equipo")
+                                       " join equipo e on mpl.cve_equipo=e.cve_equipo" &
+                                       " order by mpl.fecha_captura desc")
             Catch
                 MsgBox("Problema al Obtener Catalogo Log Permiso Modificacion. CModificacion_Permiso_Log_ERROR", vbExclamation + vbOKOnly, "Problema")
                 Return Nothing

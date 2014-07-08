@@ -20,6 +20,7 @@ Public Class Formulario_Principal
     Dim vEquipo As Boolean = False '--------------
     Dim vMatch_Equipos As Boolean = False
     Dim vModificacion_Permisos As Boolean = False
+    Dim vModificacion_Permisos_Log As Boolean = False
 #End Region
 
 #Region "Declaracion de Objetos_Clases_Catalogos"
@@ -43,6 +44,7 @@ Public Class Formulario_Principal
     Dim oTipo_Usuario As Tipo_Usuario
     Dim oEquipo As Equipo '--------
     Dim oModificacionPermiso As Modificacion_Permiso
+    Dim oModificacionPermisoLog As Modificacion_Permiso_Log
 #End Region
 
 #Region "Declaracion de Objetos de Formularios"
@@ -113,7 +115,7 @@ Public Class Formulario_Principal
             dgvRegistros.Visible = True
             Activar_Formulario("frmLinea")
 
-            Me.dgvRegistros.EnableGrouping = True           
+            Me.dgvRegistros.EnableGrouping = True
             Me.dgvRegistros.GroupDescriptors.Clear()
             Me.dgvRegistros.GroupDescriptors.Add(New GridGroupByExpression(Me.dgvRegistros.Columns("componente")))
         Else
@@ -1288,6 +1290,7 @@ Public Class Formulario_Principal
             vTipo_Usuario = False
             vEquipo = False
             vModificacion_Permisos = False
+            vModificacion_Permisos_Log = False
         ElseIf vNombre_De_Formulario = "frmModelo" Then
             vModelo = True
             '--
@@ -1298,6 +1301,7 @@ Public Class Formulario_Principal
             vTipo_Usuario = False
             vEquipo = False
             vModificacion_Permisos = False
+            vModificacion_Permisos_Log = False
         ElseIf vNombre_De_Formulario = "frmMaquina" Then
             vMaquina = True
             '--
@@ -1308,6 +1312,7 @@ Public Class Formulario_Principal
             vTipo_Usuario = False
             vEquipo = False
             vModificacion_Permisos = False
+            vModificacion_Permisos_Log = False
         ElseIf vNombre_De_Formulario = "frmTiempo_Ciclo" Then
             vTiempo_Ciclo = True
             '--
@@ -1318,6 +1323,7 @@ Public Class Formulario_Principal
             vTipo_Usuario = False
             vEquipo = False
             vModificacion_Permisos = False
+            vModificacion_Permisos_Log = False
         ElseIf vNombre_De_Formulario = "frmUsuario" Then
             vUsuario = True
 
@@ -1328,6 +1334,7 @@ Public Class Formulario_Principal
             vTipo_Usuario = False
             vEquipo = False
             vModificacion_Permisos = False
+            vModificacion_Permisos_Log = False
         ElseIf vNombre_De_Formulario = "FrmTipo_Usuario" Then
             vTipo_Usuario = True
 
@@ -1338,6 +1345,7 @@ Public Class Formulario_Principal
             vUsuario = False
             vEquipo = False
             vModificacion_Permisos = False
+            vModificacion_Permisos_Log = False
         ElseIf vNombre_De_Formulario = "frmEquipo" Then
             vEquipo = True
             '--
@@ -1348,6 +1356,7 @@ Public Class Formulario_Principal
             vUsuario = False
             vTipo_Usuario = False
             vModificacion_Permisos = False
+            vModificacion_Permisos_Log = False
         ElseIf vNombre_De_Formulario = "frmModificacionPermiso" Then
             vModificacion_Permisos = True
             '--
@@ -1358,6 +1367,18 @@ Public Class Formulario_Principal
             vTiempo_Ciclo = False
             vUsuario = False
             vTipo_Usuario = False
+            vModificacion_Permisos_Log = False
+        ElseIf vNombre_De_Formulario = "frmModificacionPermisoLog" Then
+            vModificacion_Permisos_Log = True
+            '--
+            vEquipo = False
+            vLinea = False
+            vModelo = False
+            vMaquina = False
+            vTiempo_Ciclo = False
+            vUsuario = False
+            vTipo_Usuario = False
+            vModificacion_Permisos = False
         End If
     End Sub
 
@@ -1447,6 +1468,73 @@ Public Class Formulario_Principal
             'Me.dgvRegistros.GroupDescriptors.Add(New GridGroupByExpression(Me.dgvRegistros.Columns("componente")))
         Else
             MsgBox("El Usuario no cuenta con los permisos suficientes para entrar al 'Catalogo de Permiso Modificaciones'")
+        End If
+
+    End Sub
+
+    Private Sub btnModifPermLog_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnModifPermLog.Click
+        If Permiso_Asignado("LOG_MODIF_CATALOGO") = True Then
+            oModificacionPermisoLog = New Modificacion_Permiso_Log
+            'oModificacionPermiso = New Modificacion_Permiso
+            MapaUbicacion.Text = "Catalogo Modificacion Permiso Log"
+
+            Me.dgvRegistros.DataSource = Nothing
+            Me.dgvRegistros.Columns.Clear()
+            Me.dgvRegistros.Visible = True
+            Me.Barra_Tool_Registros.Visible = False
+            'Me.btnEliminar.VisibleInStrip = False
+
+            'If Permiso_Asignado("MODIF_CATALOGO.REGISTRAR") = True Then
+            '    Me.btnAdd.Enabled = True
+            '    Me.btnModificar.Enabled = True
+            'Else
+            '    Me.btnAdd.Enabled = False
+            '    Me.btnModificar.Enabled = False
+            'End If
+            'If Permiso_Asignado("MODIF_CATALOGO.ELIMINAR") = True Then
+            '    Me.btnEliminar.Enabled = True
+            'Else
+            '    Me.btnEliminar.Enabled = False
+            'End If
+
+
+            Try
+                Me.dgvRegistros.DataSource = oModificacionPermisoLog.obtiene_registros_catalogo
+            Catch ex As Exception
+                MsgBox(ex.Message)
+            End Try
+
+            Me.dgvRegistros.Columns("cve_modificacion_permiso_log").HeaderText = "cve_modificacion_permiso_log"
+            Me.dgvRegistros.Columns("cve_modificacion_permiso_log").IsVisible = False
+            Me.dgvRegistros.Columns("cve_modificacion_permiso_log").Name = "CVE"
+
+            Me.dgvRegistros.Columns("equipo").HeaderText = "Equipo"
+            Me.dgvRegistros.Columns("equipo").Width = 250
+
+            Me.dgvRegistros.Columns("maquina").HeaderText = "Maquina"
+            Me.dgvRegistros.Columns("maquina").Width = 200
+
+            Me.dgvRegistros.Columns("cod_empleado").HeaderText = "Código Empleado"
+            Me.dgvRegistros.Columns("cod_empleado").Width = 150
+
+            Me.dgvRegistros.Columns("fecha_modificacion").HeaderText = "Día de modificación"
+            Me.dgvRegistros.Columns("fecha_modificacion").Width = 200
+
+            Me.dgvRegistros.Columns("fecha_captura").HeaderText = "Fecha del movimiento"
+            Me.dgvRegistros.Columns("fecha_captura").Width = 200
+
+            Me.dgvRegistros.Columns("descripcion").HeaderText = "Descripcion Movimiento"
+            Me.dgvRegistros.Columns("descripcion").Width = 500
+
+            dgvRegistros.Visible = True
+            Activar_Formulario("frmModificacionPermisoLog")
+
+            Me.dgvRegistros.EnableGrouping = True
+            Me.dgvRegistros.GroupDescriptors.Clear()
+            vRowSeleccionada = 0
+            'Me.dgvRegistros.GroupDescriptors.Add(New GridGroupByExpression(Me.dgvRegistros.Columns("componente")))
+        Else
+            MsgBox("El Usuario no cuenta con los permisos suficientes para entrar al 'Catalogo de Log de Permiso Modificaciones'")
         End If
 
     End Sub
