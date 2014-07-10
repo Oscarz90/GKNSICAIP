@@ -148,7 +148,6 @@ Public Class Modificacion_Permiso_Log
     End Function
     'Valida antes de hacer un registro en modificacion_permiso
     Public Sub registra_modificacion_permiso_log()
-        Dim vResponse As String
         Using scope As New TransactionScope
             Try
                 Dim cmd As New SqlClient.SqlCommand

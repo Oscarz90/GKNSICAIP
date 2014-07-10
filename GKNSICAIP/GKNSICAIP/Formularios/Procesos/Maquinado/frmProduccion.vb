@@ -14,6 +14,7 @@ Public Class frmProduccion
     Private vnombre_empleado As String
     Private vcodigo_empleado As String
     Private vCve_Linea_CBX As Integer
+    Private vLogModifPermDes As String
     'Temporal de desarrollo
     Private vcve_registro_turno As Long
     Private vcve_turno As Long
@@ -634,6 +635,23 @@ Public Class frmProduccion
     Private Sub btnAgregarModelo_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnAgregarModelo.Click
         If valida_hora_de_captura(Now.ToString("dd-MM-yyyy HH:mm:ss")) Then
             If se_puede_añadir_produccion(Convert.ToInt64(txtTiempoOperacion.Text)) Then
+                '
+                Dim oTC As New TC
+                oTC.cve_linea = cbxLinea.SelectedValue
+                oTC.cve_modelo = cbxModeloProductividad.SelectedValue
+                oTC.obtener_piezas_por_hora()
+                Dim oProduccion As New Produccion
+                oProduccion.cve_registro_turno = get_registro_del_turno()
+                oProduccion.cod_empleado_registro = vcodigo_empleado
+                oProduccion.fecha_registro = Now.ToString("dd-MM-yyyy HH:mm")
+                oProduccion.cve_modelo = cbxModeloProductividad.SelectedValue
+                oProduccion.cve_TC = oTC.cve_TC
+                oProduccion.pzas_ok = Long.Parse(txtPiezasOkProducidas.Text)
+                oProduccion.tom = Long.Parse(txtTiempoOperacion.Text)
+                oProduccion.Registrar()
+
+
+                '
                 add_modelo_producido()
                 llena_productividad_gridview()
                 calcula_Productividad()
@@ -2277,11 +2295,10 @@ Public Class frmProduccion
             Return Convert.ToDateTime(Now)
         End If
     End Function
-    Private Sub log_modificaciones_permiso(ByVal vMensaje As String)
+    Private Sub log_modificaciones_permiso(ByVal descripcion As String)
         If flgBanderaModificacionPermiso = True Then
 
         End If
     End Sub
-
 #End Region
 End Class
