@@ -39,20 +39,9 @@ Partial Class frmProduccion
         Me.col_turno = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.col_dia_asignado = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.grdLineasNoRegistradas = New System.Windows.Forms.DataGridView()
-        Me.col_cve_linea = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.collinea = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.tabPageProductividad = New System.Windows.Forms.TabPage()
         Me.grpProductividad = New System.Windows.Forms.GroupBox()
         Me.grdDetalleProductividad = New System.Windows.Forms.DataGridView()
-        Me.colcve_produccion = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.colcve_linea = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.colcve_modelo = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.np_gkn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.coldescripcion = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.colpzas_ok = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.coltom = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.colCapacidad = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.colAdeudo = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Label54 = New System.Windows.Forms.Label()
         Me.txtPzasPorHora = New System.Windows.Forms.TextBox()
         Me.Label53 = New System.Windows.Forms.Label()
@@ -111,16 +100,6 @@ Partial Class frmProduccion
         Me.Label31 = New System.Windows.Forms.Label()
         Me.grpParos = New System.Windows.Forms.GroupBox()
         Me.grdDetalleParo = New System.Windows.Forms.DataGridView()
-        Me.colcve_registro_paro = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.colcve_lineab = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.colcve_maquina = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.colcve_paro = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.colcod_paro = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.paro = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.colminutos = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.colclave_maquina = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.colmaquina = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.coldetalles = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.txtParosDescripcion = New System.Windows.Forms.TextBox()
         Me.txtMaquinaDescripcion = New System.Windows.Forms.TextBox()
         Me.txtMinutosParo = New System.Windows.Forms.TextBox()
@@ -138,12 +117,6 @@ Partial Class frmProduccion
         Me.tabPageRechazos5s = New System.Windows.Forms.TabPage()
         Me.grpRechazos = New System.Windows.Forms.GroupBox()
         Me.grdDetalleRechazo = New System.Windows.Forms.DataGridView()
-        Me.colcve_rechazo = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.col_np_gkn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.col_descripcion = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.colcantidad = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.coltipo_rechazo = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.colmotivo = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.txtModeloRechazo = New System.Windows.Forms.TextBox()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.cbxTipoRechazo = New System.Windows.Forms.ComboBox()
@@ -164,13 +137,6 @@ Partial Class frmProduccion
         Me.lblNRFTi = New System.Windows.Forms.Label()
         Me.txtDetalleDesecho = New System.Windows.Forms.TextBox()
         Me.grdDetalleDesecho = New System.Windows.Forms.DataGridView()
-        Me.colcve_desecho = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.col__cve_linea = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.col_cve_modelo = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.colnp_gkn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.colmodelodescripcion = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.coldesechocantidad = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.col_comentarios_desecho = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Label59 = New System.Windows.Forms.Label()
         Me.cbxModeloDesecho = New System.Windows.Forms.ComboBox()
         Me.Label78 = New System.Windows.Forms.Label()
@@ -186,10 +152,6 @@ Partial Class frmProduccion
         Me.tabPageCondInsegAccidentes = New System.Windows.Forms.TabPage()
         Me.grpAccidentes = New System.Windows.Forms.GroupBox()
         Me.grdDetalleAccidente = New System.Windows.Forms.DataGridView()
-        Me.col_cve_seguridad = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.col_descripcion_ = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Cantidad = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.col_comentarios_ = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.btnQuitarAccidente = New System.Windows.Forms.Button()
         Me.btnAgregarAccidente = New System.Windows.Forms.Button()
         Me.Label63 = New System.Windows.Forms.Label()
@@ -202,10 +164,6 @@ Partial Class frmProduccion
         Me.Label67 = New System.Windows.Forms.Label()
         Me.grpCondInseg = New System.Windows.Forms.GroupBox()
         Me.grdDetalleCondInseg = New System.Windows.Forms.DataGridView()
-        Me.colcve_seguridad = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.coldescripciondetalle = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.colcantidaddetalle = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.colcomentarios = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.btnQuitarCondInseg = New System.Windows.Forms.Button()
         Me.btnAgregarCondInseg = New System.Windows.Forms.Button()
         Me.Label20 = New System.Windows.Forms.Label()
@@ -240,10 +198,6 @@ Partial Class frmProduccion
         Me.Label71 = New System.Windows.Forms.Label()
         Me.grpGente = New System.Windows.Forms.GroupBox()
         Me.grdDetalleGente = New System.Windows.Forms.DataGridView()
-        Me.colcve_gente = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.colgdescripcion = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.colgcantidad = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.comentarios = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.btnQuitarGente = New System.Windows.Forms.Button()
         Me.btnAgregarGente = New System.Windows.Forms.Button()
         Me.Label61 = New System.Windows.Forms.Label()
@@ -257,8 +211,6 @@ Partial Class frmProduccion
         Me.tabPageComentarios = New System.Windows.Forms.TabPage()
         Me.grpComentarios = New System.Windows.Forms.GroupBox()
         Me.grdDetalleComentario = New System.Windows.Forms.DataGridView()
-        Me.col_cve_comentarios_generales = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.col_comentarios = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Label90 = New System.Windows.Forms.Label()
         Me.txtDetallesComentario = New System.Windows.Forms.TextBox()
         Me.btnQuitarComentario = New System.Windows.Forms.Button()
@@ -271,8 +223,6 @@ Partial Class frmProduccion
         Me.Label85 = New System.Windows.Forms.Label()
         Me.Label86 = New System.Windows.Forms.Label()
         Me.grdDetalleDescansos = New System.Windows.Forms.DataGridView()
-        Me.col_fecha_descanso = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.col_Descanso = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Label84 = New System.Windows.Forms.Label()
         Me.dtpDescanso = New System.Windows.Forms.DateTimePicker()
         Me.titulo_banner_formulario = New System.Windows.Forms.Label()
@@ -294,6 +244,56 @@ Partial Class frmProduccion
         Me.btnModTerminar = New System.Windows.Forms.Button()
         Me.grpModificaciones = New System.Windows.Forms.GroupBox()
         Me.cldrModificaciones = New Telerik.WinControls.UI.RadCalendar()
+        Me.cve_linea = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.linea = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.cve_produccion = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.colcve_linea = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.colcve_modelo = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.np_gkn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.coldescripcion = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.colpzas_ok = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.coltom = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.colCapacidad = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.colAdeudo = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.cve_registro_paro = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.colcve_lineab = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.colcve_maquina = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.colcve_paro = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.colcod_paro = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.paro = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.colminutos = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.colclave_maquina = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.colmaquina = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.coldetalles = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.cve_desecho = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.col__cve_linea = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.col_cve_modelo = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.colnp_gkn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.colmodelodescripcion = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.coldesechocantidad = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.col_comentarios_desecho = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.cve_rechazo = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.col_np_gkn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.col_descripcion = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.colcantidad = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.coltipo_rechazo = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.colmotivo = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.cve_seguridad = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.coldescripciondetalle = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.colcantidaddetalle = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.colcomentarios = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.cve_seguridadd = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.col_descripcion_ = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Cantidad = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.col_comentarios_ = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.cve_gente = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.colgdescripcion = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.colgcantidad = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.comentarios = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.cve_comentarios_generales = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.col_comentarios = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.dia_asignado = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.col_Descanso = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.tabPageContenido.SuspendLayout()
         Me.tabPageTurnosLineas.SuspendLayout()
         CType(Me.grdLineasRegistradas, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -501,28 +501,12 @@ Partial Class frmProduccion
         Me.grdLineasNoRegistradas.AllowUserToDeleteRows = False
         Me.grdLineasNoRegistradas.BackgroundColor = System.Drawing.SystemColors.Control
         Me.grdLineasNoRegistradas.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.grdLineasNoRegistradas.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.col_cve_linea, Me.collinea})
+        Me.grdLineasNoRegistradas.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.cve_linea, Me.linea})
         Me.grdLineasNoRegistradas.Location = New System.Drawing.Point(17, 62)
         Me.grdLineasNoRegistradas.Name = "grdLineasNoRegistradas"
         Me.grdLineasNoRegistradas.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
         Me.grdLineasNoRegistradas.Size = New System.Drawing.Size(396, 334)
         Me.grdLineasNoRegistradas.TabIndex = 0
-        '
-        'col_cve_linea
-        '
-        Me.col_cve_linea.DataPropertyName = "cve_linea"
-        Me.col_cve_linea.HeaderText = "cve_linea"
-        Me.col_cve_linea.Name = "col_cve_linea"
-        Me.col_cve_linea.ReadOnly = True
-        Me.col_cve_linea.Visible = False
-        '
-        'collinea
-        '
-        Me.collinea.DataPropertyName = "linea"
-        Me.collinea.HeaderText = "linea"
-        Me.collinea.Name = "collinea"
-        Me.collinea.ReadOnly = True
-        Me.collinea.Width = 350
         '
         'tabPageProductividad
         '
@@ -595,92 +579,12 @@ Partial Class frmProduccion
         Me.grdDetalleProductividad.AllowUserToDeleteRows = False
         Me.grdDetalleProductividad.BackgroundColor = System.Drawing.SystemColors.ControlLight
         Me.grdDetalleProductividad.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.grdDetalleProductividad.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.colcve_produccion, Me.colcve_linea, Me.colcve_modelo, Me.np_gkn, Me.coldescripcion, Me.colpzas_ok, Me.coltom, Me.colCapacidad, Me.colAdeudo})
+        Me.grdDetalleProductividad.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.cve_produccion, Me.colcve_linea, Me.colcve_modelo, Me.np_gkn, Me.coldescripcion, Me.colpzas_ok, Me.coltom, Me.colCapacidad, Me.colAdeudo})
         Me.grdDetalleProductividad.Location = New System.Drawing.Point(3, 257)
         Me.grdDetalleProductividad.Name = "grdDetalleProductividad"
         Me.grdDetalleProductividad.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
         Me.grdDetalleProductividad.Size = New System.Drawing.Size(741, 150)
         Me.grdDetalleProductividad.TabIndex = 0
-        '
-        'colcve_produccion
-        '
-        Me.colcve_produccion.DataPropertyName = "cve_produccion"
-        Me.colcve_produccion.HeaderText = "cve_produccion"
-        Me.colcve_produccion.Name = "colcve_produccion"
-        Me.colcve_produccion.ReadOnly = True
-        Me.colcve_produccion.Visible = False
-        '
-        'colcve_linea
-        '
-        Me.colcve_linea.DataPropertyName = "cve_linea"
-        Me.colcve_linea.HeaderText = "cve_linea"
-        Me.colcve_linea.Name = "colcve_linea"
-        Me.colcve_linea.ReadOnly = True
-        Me.colcve_linea.Visible = False
-        '
-        'colcve_modelo
-        '
-        Me.colcve_modelo.DataPropertyName = "cve_modelo"
-        Me.colcve_modelo.HeaderText = "cve_modelo"
-        Me.colcve_modelo.Name = "colcve_modelo"
-        Me.colcve_modelo.ReadOnly = True
-        Me.colcve_modelo.Visible = False
-        '
-        'np_gkn
-        '
-        Me.np_gkn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells
-        Me.np_gkn.DataPropertyName = "np_gkn"
-        Me.np_gkn.HeaderText = "No. Parte GKN"
-        Me.np_gkn.Name = "np_gkn"
-        Me.np_gkn.ReadOnly = True
-        Me.np_gkn.Resizable = System.Windows.Forms.DataGridViewTriState.[False]
-        Me.np_gkn.Width = 123
-        '
-        'coldescripcion
-        '
-        Me.coldescripcion.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells
-        Me.coldescripcion.DataPropertyName = "descripcion"
-        Me.coldescripcion.HeaderText = "Modelo"
-        Me.coldescripcion.Name = "coldescripcion"
-        Me.coldescripcion.ReadOnly = True
-        Me.coldescripcion.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.coldescripcion.Width = 89
-        '
-        'colpzas_ok
-        '
-        Me.colpzas_ok.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells
-        Me.colpzas_ok.DataPropertyName = "pzas_ok"
-        Me.colpzas_ok.HeaderText = "Piezas Ok"
-        Me.colpzas_ok.Name = "colpzas_ok"
-        Me.colpzas_ok.ReadOnly = True
-        Me.colpzas_ok.Width = 93
-        '
-        'coltom
-        '
-        Me.coltom.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells
-        Me.coltom.DataPropertyName = "tom"
-        Me.coltom.HeaderText = "Tiempo Operación"
-        Me.coltom.Name = "coltom"
-        Me.coltom.ReadOnly = True
-        Me.coltom.Width = 148
-        '
-        'colCapacidad
-        '
-        Me.colCapacidad.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells
-        Me.colCapacidad.DataPropertyName = "capacidad"
-        Me.colCapacidad.HeaderText = "Capacidad"
-        Me.colCapacidad.Name = "colCapacidad"
-        Me.colCapacidad.ReadOnly = True
-        Me.colCapacidad.Width = 106
-        '
-        'colAdeudo
-        '
-        Me.colAdeudo.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells
-        Me.colAdeudo.DataPropertyName = "adeudo"
-        Me.colAdeudo.HeaderText = "Adeudo"
-        Me.colAdeudo.Name = "colAdeudo"
-        Me.colAdeudo.ReadOnly = True
-        Me.colAdeudo.Width = 89
         '
         'Label54
         '
@@ -1295,98 +1199,13 @@ Partial Class frmProduccion
         Me.grdDetalleParo.AllowUserToDeleteRows = False
         Me.grdDetalleParo.BackgroundColor = System.Drawing.SystemColors.ControlLight
         Me.grdDetalleParo.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.grdDetalleParo.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.colcve_registro_paro, Me.colcve_lineab, Me.colcve_maquina, Me.colcve_paro, Me.colcod_paro, Me.paro, Me.colminutos, Me.colclave_maquina, Me.colmaquina, Me.coldetalles})
+        Me.grdDetalleParo.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.cve_registro_paro, Me.colcve_lineab, Me.colcve_maquina, Me.colcve_paro, Me.colcod_paro, Me.paro, Me.colminutos, Me.colclave_maquina, Me.colmaquina, Me.coldetalles})
         Me.grdDetalleParo.Location = New System.Drawing.Point(6, 171)
         Me.grdDetalleParo.Name = "grdDetalleParo"
         Me.grdDetalleParo.ReadOnly = True
         Me.grdDetalleParo.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
         Me.grdDetalleParo.Size = New System.Drawing.Size(824, 231)
         Me.grdDetalleParo.TabIndex = 0
-        '
-        'colcve_registro_paro
-        '
-        Me.colcve_registro_paro.DataPropertyName = "cve_registro_paro"
-        Me.colcve_registro_paro.HeaderText = "cve_registro_paro"
-        Me.colcve_registro_paro.Name = "colcve_registro_paro"
-        Me.colcve_registro_paro.ReadOnly = True
-        Me.colcve_registro_paro.Visible = False
-        '
-        'colcve_lineab
-        '
-        Me.colcve_lineab.DataPropertyName = "cve_linea"
-        Me.colcve_lineab.HeaderText = "cve_linea"
-        Me.colcve_lineab.Name = "colcve_lineab"
-        Me.colcve_lineab.ReadOnly = True
-        Me.colcve_lineab.Visible = False
-        '
-        'colcve_maquina
-        '
-        Me.colcve_maquina.DataPropertyName = "cve_maquina"
-        Me.colcve_maquina.HeaderText = "cve_maquina"
-        Me.colcve_maquina.Name = "colcve_maquina"
-        Me.colcve_maquina.ReadOnly = True
-        Me.colcve_maquina.Visible = False
-        '
-        'colcve_paro
-        '
-        Me.colcve_paro.DataPropertyName = "cve_paro"
-        Me.colcve_paro.HeaderText = "cve_paro"
-        Me.colcve_paro.Name = "colcve_paro"
-        Me.colcve_paro.ReadOnly = True
-        Me.colcve_paro.Visible = False
-        '
-        'colcod_paro
-        '
-        Me.colcod_paro.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells
-        Me.colcod_paro.DataPropertyName = "cod_paro"
-        Me.colcod_paro.HeaderText = "Cod. Paro"
-        Me.colcod_paro.Name = "colcod_paro"
-        Me.colcod_paro.ReadOnly = True
-        Me.colcod_paro.Width = 102
-        '
-        'paro
-        '
-        Me.paro.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells
-        Me.paro.DataPropertyName = "paro"
-        Me.paro.HeaderText = "Descripción"
-        Me.paro.Name = "paro"
-        Me.paro.ReadOnly = True
-        Me.paro.Width = 115
-        '
-        'colminutos
-        '
-        Me.colminutos.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells
-        Me.colminutos.DataPropertyName = "minutos"
-        Me.colminutos.HeaderText = "Minutos"
-        Me.colminutos.Name = "colminutos"
-        Me.colminutos.ReadOnly = True
-        Me.colminutos.Width = 94
-        '
-        'colclave_maquina
-        '
-        Me.colclave_maquina.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells
-        Me.colclave_maquina.DataPropertyName = "clave_maquina"
-        Me.colclave_maquina.HeaderText = "Clave Maquina"
-        Me.colclave_maquina.Name = "colclave_maquina"
-        Me.colclave_maquina.ReadOnly = True
-        Me.colclave_maquina.Width = 138
-        '
-        'colmaquina
-        '
-        Me.colmaquina.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells
-        Me.colmaquina.DataPropertyName = "maquina"
-        Me.colmaquina.HeaderText = "Maquina"
-        Me.colmaquina.Name = "colmaquina"
-        Me.colmaquina.ReadOnly = True
-        Me.colmaquina.Width = 97
-        '
-        'coldetalles
-        '
-        Me.coldetalles.DataPropertyName = "detalles"
-        Me.coldetalles.HeaderText = "Detalles"
-        Me.coldetalles.Name = "coldetalles"
-        Me.coldetalles.ReadOnly = True
-        Me.coldetalles.Width = 140
         '
         'txtParosDescripcion
         '
@@ -1576,64 +1395,12 @@ Partial Class frmProduccion
         Me.grdDetalleRechazo.AllowUserToDeleteRows = False
         Me.grdDetalleRechazo.BackgroundColor = System.Drawing.SystemColors.ControlLight
         Me.grdDetalleRechazo.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.grdDetalleRechazo.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.colcve_rechazo, Me.col_np_gkn, Me.col_descripcion, Me.colcantidad, Me.coltipo_rechazo, Me.colmotivo})
+        Me.grdDetalleRechazo.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.cve_rechazo, Me.col_np_gkn, Me.col_descripcion, Me.colcantidad, Me.coltipo_rechazo, Me.colmotivo})
         Me.grdDetalleRechazo.Location = New System.Drawing.Point(10, 234)
         Me.grdDetalleRechazo.Name = "grdDetalleRechazo"
         Me.grdDetalleRechazo.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
         Me.grdDetalleRechazo.Size = New System.Drawing.Size(609, 174)
         Me.grdDetalleRechazo.TabIndex = 0
-        '
-        'colcve_rechazo
-        '
-        Me.colcve_rechazo.DataPropertyName = "cve_rechazo"
-        Me.colcve_rechazo.HeaderText = "cve_rechazo"
-        Me.colcve_rechazo.Name = "colcve_rechazo"
-        Me.colcve_rechazo.ReadOnly = True
-        Me.colcve_rechazo.Visible = False
-        '
-        'col_np_gkn
-        '
-        Me.col_np_gkn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells
-        Me.col_np_gkn.DataPropertyName = "np_gkn"
-        Me.col_np_gkn.HeaderText = "No. Parte GKN"
-        Me.col_np_gkn.Name = "col_np_gkn"
-        Me.col_np_gkn.ReadOnly = True
-        Me.col_np_gkn.Width = 135
-        '
-        'col_descripcion
-        '
-        Me.col_descripcion.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells
-        Me.col_descripcion.DataPropertyName = "descripcion"
-        Me.col_descripcion.HeaderText = "Modelo"
-        Me.col_descripcion.Name = "col_descripcion"
-        Me.col_descripcion.ReadOnly = True
-        Me.col_descripcion.Width = 89
-        '
-        'colcantidad
-        '
-        Me.colcantidad.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells
-        Me.colcantidad.DataPropertyName = "cantidad"
-        Me.colcantidad.HeaderText = "Cantidad"
-        Me.colcantidad.Name = "colcantidad"
-        Me.colcantidad.ReadOnly = True
-        Me.colcantidad.Width = 96
-        '
-        'coltipo_rechazo
-        '
-        Me.coltipo_rechazo.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells
-        Me.coltipo_rechazo.DataPropertyName = "tipo"
-        Me.coltipo_rechazo.HeaderText = "Rechazo"
-        Me.coltipo_rechazo.Name = "coltipo_rechazo"
-        Me.coltipo_rechazo.ReadOnly = True
-        Me.coltipo_rechazo.Width = 92
-        '
-        'colmotivo
-        '
-        Me.colmotivo.DataPropertyName = "motivo"
-        Me.colmotivo.HeaderText = "motivo"
-        Me.colmotivo.Name = "colmotivo"
-        Me.colmotivo.ReadOnly = True
-        Me.colmotivo.Width = 140
         '
         'txtModeloRechazo
         '
@@ -1854,72 +1621,13 @@ Partial Class frmProduccion
         Me.grdDetalleDesecho.AllowUserToDeleteRows = False
         Me.grdDetalleDesecho.BackgroundColor = System.Drawing.SystemColors.ControlLight
         Me.grdDetalleDesecho.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.grdDetalleDesecho.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.colcve_desecho, Me.col__cve_linea, Me.col_cve_modelo, Me.colnp_gkn, Me.colmodelodescripcion, Me.coldesechocantidad, Me.col_comentarios_desecho})
+        Me.grdDetalleDesecho.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.cve_desecho, Me.col__cve_linea, Me.col_cve_modelo, Me.colnp_gkn, Me.colmodelodescripcion, Me.coldesechocantidad, Me.col_comentarios_desecho})
         Me.grdDetalleDesecho.Location = New System.Drawing.Point(6, 215)
         Me.grdDetalleDesecho.Name = "grdDetalleDesecho"
         Me.grdDetalleDesecho.ReadOnly = True
         Me.grdDetalleDesecho.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
         Me.grdDetalleDesecho.Size = New System.Drawing.Size(567, 144)
         Me.grdDetalleDesecho.TabIndex = 0
-        '
-        'colcve_desecho
-        '
-        Me.colcve_desecho.DataPropertyName = "cve_desecho"
-        Me.colcve_desecho.HeaderText = "cve_desecho"
-        Me.colcve_desecho.Name = "colcve_desecho"
-        Me.colcve_desecho.ReadOnly = True
-        Me.colcve_desecho.Visible = False
-        '
-        'col__cve_linea
-        '
-        Me.col__cve_linea.DataPropertyName = "cve_linea"
-        Me.col__cve_linea.HeaderText = "cve_linea"
-        Me.col__cve_linea.Name = "col__cve_linea"
-        Me.col__cve_linea.ReadOnly = True
-        Me.col__cve_linea.Visible = False
-        '
-        'col_cve_modelo
-        '
-        Me.col_cve_modelo.DataPropertyName = "cve_modelo"
-        Me.col_cve_modelo.HeaderText = "cve_modelo"
-        Me.col_cve_modelo.Name = "col_cve_modelo"
-        Me.col_cve_modelo.ReadOnly = True
-        Me.col_cve_modelo.Visible = False
-        '
-        'colnp_gkn
-        '
-        Me.colnp_gkn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells
-        Me.colnp_gkn.DataPropertyName = "np_gkn"
-        Me.colnp_gkn.HeaderText = "No.Parte GKN"
-        Me.colnp_gkn.Name = "colnp_gkn"
-        Me.colnp_gkn.ReadOnly = True
-        Me.colnp_gkn.Width = 131
-        '
-        'colmodelodescripcion
-        '
-        Me.colmodelodescripcion.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells
-        Me.colmodelodescripcion.DataPropertyName = "descripcion"
-        Me.colmodelodescripcion.HeaderText = "Modelo"
-        Me.colmodelodescripcion.Name = "colmodelodescripcion"
-        Me.colmodelodescripcion.ReadOnly = True
-        Me.colmodelodescripcion.Width = 89
-        '
-        'coldesechocantidad
-        '
-        Me.coldesechocantidad.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells
-        Me.coldesechocantidad.DataPropertyName = "cantidad"
-        Me.coldesechocantidad.HeaderText = "Cantidad"
-        Me.coldesechocantidad.Name = "coldesechocantidad"
-        Me.coldesechocantidad.ReadOnly = True
-        Me.coldesechocantidad.Width = 96
-        '
-        'col_comentarios_desecho
-        '
-        Me.col_comentarios_desecho.DataPropertyName = "comentarios"
-        Me.col_comentarios_desecho.HeaderText = "Comentarios"
-        Me.col_comentarios_desecho.Name = "col_comentarios_desecho"
-        Me.col_comentarios_desecho.ReadOnly = True
-        Me.col_comentarios_desecho.Width = 140
         '
         'Label59
         '
@@ -2086,46 +1794,12 @@ Partial Class frmProduccion
         Me.grdDetalleAccidente.AllowUserToDeleteRows = False
         Me.grdDetalleAccidente.BackgroundColor = System.Drawing.SystemColors.ControlLight
         Me.grdDetalleAccidente.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.grdDetalleAccidente.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.col_cve_seguridad, Me.col_descripcion_, Me.Cantidad, Me.col_comentarios_})
+        Me.grdDetalleAccidente.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.cve_seguridadd, Me.col_descripcion_, Me.Cantidad, Me.col_comentarios_})
         Me.grdDetalleAccidente.Location = New System.Drawing.Point(6, 242)
         Me.grdDetalleAccidente.Name = "grdDetalleAccidente"
         Me.grdDetalleAccidente.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
         Me.grdDetalleAccidente.Size = New System.Drawing.Size(588, 171)
         Me.grdDetalleAccidente.TabIndex = 0
-        '
-        'col_cve_seguridad
-        '
-        Me.col_cve_seguridad.DataPropertyName = "cve_seguridad"
-        Me.col_cve_seguridad.HeaderText = "cve_seguridad"
-        Me.col_cve_seguridad.Name = "col_cve_seguridad"
-        Me.col_cve_seguridad.ReadOnly = True
-        Me.col_cve_seguridad.Visible = False
-        '
-        'col_descripcion_
-        '
-        Me.col_descripcion_.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells
-        Me.col_descripcion_.DataPropertyName = "descripcion"
-        Me.col_descripcion_.HeaderText = "Descripción"
-        Me.col_descripcion_.Name = "col_descripcion_"
-        Me.col_descripcion_.ReadOnly = True
-        Me.col_descripcion_.Width = 115
-        '
-        'Cantidad
-        '
-        Me.Cantidad.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells
-        Me.Cantidad.DataPropertyName = "cantidad"
-        Me.Cantidad.HeaderText = "Cantidad"
-        Me.Cantidad.Name = "Cantidad"
-        Me.Cantidad.ReadOnly = True
-        Me.Cantidad.Width = 96
-        '
-        'col_comentarios_
-        '
-        Me.col_comentarios_.DataPropertyName = "comentarios"
-        Me.col_comentarios_.HeaderText = "Comentarios"
-        Me.col_comentarios_.Name = "col_comentarios_"
-        Me.col_comentarios_.ReadOnly = True
-        Me.col_comentarios_.Width = 140
         '
         'btnQuitarAccidente
         '
@@ -2260,46 +1934,12 @@ Partial Class frmProduccion
         Me.grdDetalleCondInseg.AllowUserToDeleteRows = False
         Me.grdDetalleCondInseg.BackgroundColor = System.Drawing.SystemColors.ControlLight
         Me.grdDetalleCondInseg.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.grdDetalleCondInseg.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.colcve_seguridad, Me.coldescripciondetalle, Me.colcantidaddetalle, Me.colcomentarios})
+        Me.grdDetalleCondInseg.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.cve_seguridad, Me.coldescripciondetalle, Me.colcantidaddetalle, Me.colcomentarios})
         Me.grdDetalleCondInseg.Location = New System.Drawing.Point(6, 242)
         Me.grdDetalleCondInseg.Name = "grdDetalleCondInseg"
         Me.grdDetalleCondInseg.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
         Me.grdDetalleCondInseg.Size = New System.Drawing.Size(591, 171)
         Me.grdDetalleCondInseg.TabIndex = 0
-        '
-        'colcve_seguridad
-        '
-        Me.colcve_seguridad.DataPropertyName = "cve_seguridad"
-        Me.colcve_seguridad.HeaderText = "cve_seguridad"
-        Me.colcve_seguridad.Name = "colcve_seguridad"
-        Me.colcve_seguridad.ReadOnly = True
-        Me.colcve_seguridad.Visible = False
-        '
-        'coldescripciondetalle
-        '
-        Me.coldescripciondetalle.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells
-        Me.coldescripciondetalle.DataPropertyName = "descripcion"
-        Me.coldescripciondetalle.HeaderText = "Descripción"
-        Me.coldescripciondetalle.Name = "coldescripciondetalle"
-        Me.coldescripciondetalle.ReadOnly = True
-        Me.coldescripciondetalle.Width = 115
-        '
-        'colcantidaddetalle
-        '
-        Me.colcantidaddetalle.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells
-        Me.colcantidaddetalle.DataPropertyName = "cantidad"
-        Me.colcantidaddetalle.HeaderText = "Cantidad"
-        Me.colcantidaddetalle.Name = "colcantidaddetalle"
-        Me.colcantidaddetalle.ReadOnly = True
-        Me.colcantidaddetalle.Width = 96
-        '
-        'colcomentarios
-        '
-        Me.colcomentarios.DataPropertyName = "comentarios"
-        Me.colcomentarios.HeaderText = "Comentarios"
-        Me.colcomentarios.Name = "colcomentarios"
-        Me.colcomentarios.ReadOnly = True
-        Me.colcomentarios.Width = 140
         '
         'btnQuitarCondInseg
         '
@@ -2672,45 +2312,12 @@ Partial Class frmProduccion
         Me.grdDetalleGente.AllowUserToDeleteRows = False
         Me.grdDetalleGente.BackgroundColor = System.Drawing.SystemColors.ControlLight
         Me.grdDetalleGente.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.grdDetalleGente.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.colcve_gente, Me.colgdescripcion, Me.colgcantidad, Me.comentarios})
+        Me.grdDetalleGente.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.cve_gente, Me.colgdescripcion, Me.colgcantidad, Me.comentarios})
         Me.grdDetalleGente.Location = New System.Drawing.Point(14, 242)
         Me.grdDetalleGente.Name = "grdDetalleGente"
         Me.grdDetalleGente.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
         Me.grdDetalleGente.Size = New System.Drawing.Size(580, 150)
         Me.grdDetalleGente.TabIndex = 0
-        '
-        'colcve_gente
-        '
-        Me.colcve_gente.DataPropertyName = "cve_gente"
-        Me.colcve_gente.HeaderText = "cve_gente"
-        Me.colcve_gente.Name = "colcve_gente"
-        Me.colcve_gente.Visible = False
-        '
-        'colgdescripcion
-        '
-        Me.colgdescripcion.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells
-        Me.colgdescripcion.DataPropertyName = "descripcion"
-        Me.colgdescripcion.HeaderText = "descripcion"
-        Me.colgdescripcion.Name = "colgdescripcion"
-        Me.colgdescripcion.ReadOnly = True
-        Me.colgdescripcion.Width = 114
-        '
-        'colgcantidad
-        '
-        Me.colgcantidad.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells
-        Me.colgcantidad.DataPropertyName = "cantidad"
-        Me.colgcantidad.HeaderText = "cantidad"
-        Me.colgcantidad.Name = "colgcantidad"
-        Me.colgcantidad.ReadOnly = True
-        Me.colgcantidad.Width = 94
-        '
-        'comentarios
-        '
-        Me.comentarios.DataPropertyName = "comentarios"
-        Me.comentarios.HeaderText = "comentarios"
-        Me.comentarios.Name = "comentarios"
-        Me.comentarios.ReadOnly = True
-        Me.comentarios.Width = 140
         '
         'btnQuitarGente
         '
@@ -2852,28 +2459,12 @@ Partial Class frmProduccion
         Me.grdDetalleComentario.AllowUserToDeleteRows = False
         Me.grdDetalleComentario.BackgroundColor = System.Drawing.SystemColors.ControlLight
         Me.grdDetalleComentario.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.grdDetalleComentario.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.col_cve_comentarios_generales, Me.col_comentarios})
+        Me.grdDetalleComentario.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.cve_comentarios_generales, Me.col_comentarios})
         Me.grdDetalleComentario.Location = New System.Drawing.Point(11, 202)
         Me.grdDetalleComentario.Name = "grdDetalleComentario"
         Me.grdDetalleComentario.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
         Me.grdDetalleComentario.Size = New System.Drawing.Size(606, 189)
         Me.grdDetalleComentario.TabIndex = 0
-        '
-        'col_cve_comentarios_generales
-        '
-        Me.col_cve_comentarios_generales.DataPropertyName = "cve_comentarios_generales"
-        Me.col_cve_comentarios_generales.HeaderText = "cve_comentarios_generales"
-        Me.col_cve_comentarios_generales.Name = "col_cve_comentarios_generales"
-        Me.col_cve_comentarios_generales.ReadOnly = True
-        Me.col_cve_comentarios_generales.Visible = False
-        '
-        'col_comentarios
-        '
-        Me.col_comentarios.DataPropertyName = "comentarios"
-        Me.col_comentarios.HeaderText = "Comentario"
-        Me.col_comentarios.Name = "col_comentarios"
-        Me.col_comentarios.ReadOnly = True
-        Me.col_comentarios.Width = 560
         '
         'Label90
         '
@@ -3011,28 +2602,12 @@ Partial Class frmProduccion
         Me.grdDetalleDescansos.AllowUserToDeleteRows = False
         Me.grdDetalleDescansos.BackgroundColor = System.Drawing.SystemColors.ControlLight
         Me.grdDetalleDescansos.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.grdDetalleDescansos.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.col_fecha_descanso, Me.col_Descanso})
+        Me.grdDetalleDescansos.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.dia_asignado, Me.col_Descanso})
         Me.grdDetalleDescansos.Location = New System.Drawing.Point(17, 154)
         Me.grdDetalleDescansos.Name = "grdDetalleDescansos"
         Me.grdDetalleDescansos.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
         Me.grdDetalleDescansos.Size = New System.Drawing.Size(478, 257)
         Me.grdDetalleDescansos.TabIndex = 0
-        '
-        'col_fecha_descanso
-        '
-        Me.col_fecha_descanso.DataPropertyName = "dia_asignado"
-        Me.col_fecha_descanso.HeaderText = "Fecha Descanso"
-        Me.col_fecha_descanso.Name = "col_fecha_descanso"
-        Me.col_fecha_descanso.ReadOnly = True
-        Me.col_fecha_descanso.Width = 217
-        '
-        'col_Descanso
-        '
-        Me.col_Descanso.DataPropertyName = "descripcion"
-        Me.col_Descanso.HeaderText = "Descripcion"
-        Me.col_Descanso.Name = "col_Descanso"
-        Me.col_Descanso.ReadOnly = True
-        Me.col_Descanso.Width = 218
         '
         'Label84
         '
@@ -3249,6 +2824,431 @@ Partial Class frmProduccion
         Me.cldrModificaciones.Size = New System.Drawing.Size(204, 141)
         Me.cldrModificaciones.TabIndex = 321
         Me.cldrModificaciones.Text = "RadCalendar1"
+        '
+        'cve_linea
+        '
+        Me.cve_linea.DataPropertyName = "cve_linea"
+        Me.cve_linea.HeaderText = "cve_linea"
+        Me.cve_linea.Name = "cve_linea"
+        Me.cve_linea.ReadOnly = True
+        Me.cve_linea.Visible = False
+        '
+        'linea
+        '
+        Me.linea.DataPropertyName = "linea"
+        Me.linea.HeaderText = "linea"
+        Me.linea.Name = "linea"
+        Me.linea.ReadOnly = True
+        Me.linea.Width = 350
+        '
+        'cve_produccion
+        '
+        Me.cve_produccion.DataPropertyName = "cve_produccion"
+        Me.cve_produccion.HeaderText = "cve_produccion"
+        Me.cve_produccion.Name = "cve_produccion"
+        Me.cve_produccion.ReadOnly = True
+        Me.cve_produccion.Visible = False
+        '
+        'colcve_linea
+        '
+        Me.colcve_linea.DataPropertyName = "cve_linea"
+        Me.colcve_linea.HeaderText = "cve_linea"
+        Me.colcve_linea.Name = "colcve_linea"
+        Me.colcve_linea.ReadOnly = True
+        Me.colcve_linea.Visible = False
+        '
+        'colcve_modelo
+        '
+        Me.colcve_modelo.DataPropertyName = "cve_modelo"
+        Me.colcve_modelo.HeaderText = "cve_modelo"
+        Me.colcve_modelo.Name = "colcve_modelo"
+        Me.colcve_modelo.ReadOnly = True
+        Me.colcve_modelo.Visible = False
+        '
+        'np_gkn
+        '
+        Me.np_gkn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells
+        Me.np_gkn.DataPropertyName = "np_gkn"
+        Me.np_gkn.HeaderText = "No. Parte GKN"
+        Me.np_gkn.Name = "np_gkn"
+        Me.np_gkn.ReadOnly = True
+        Me.np_gkn.Resizable = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.np_gkn.Width = 135
+        '
+        'coldescripcion
+        '
+        Me.coldescripcion.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells
+        Me.coldescripcion.DataPropertyName = "descripcion"
+        Me.coldescripcion.HeaderText = "Modelo"
+        Me.coldescripcion.Name = "coldescripcion"
+        Me.coldescripcion.ReadOnly = True
+        Me.coldescripcion.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.coldescripcion.Width = 89
+        '
+        'colpzas_ok
+        '
+        Me.colpzas_ok.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells
+        Me.colpzas_ok.DataPropertyName = "pzas_ok"
+        Me.colpzas_ok.HeaderText = "Piezas Ok"
+        Me.colpzas_ok.Name = "colpzas_ok"
+        Me.colpzas_ok.ReadOnly = True
+        Me.colpzas_ok.Width = 101
+        '
+        'coltom
+        '
+        Me.coltom.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells
+        Me.coltom.DataPropertyName = "tom"
+        Me.coltom.HeaderText = "Tiempo Operación"
+        Me.coltom.Name = "coltom"
+        Me.coltom.ReadOnly = True
+        Me.coltom.Width = 148
+        '
+        'colCapacidad
+        '
+        Me.colCapacidad.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells
+        Me.colCapacidad.DataPropertyName = "capacidad"
+        Me.colCapacidad.HeaderText = "Capacidad"
+        Me.colCapacidad.Name = "colCapacidad"
+        Me.colCapacidad.ReadOnly = True
+        Me.colCapacidad.Width = 106
+        '
+        'colAdeudo
+        '
+        Me.colAdeudo.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells
+        Me.colAdeudo.DataPropertyName = "adeudo"
+        Me.colAdeudo.HeaderText = "Adeudo"
+        Me.colAdeudo.Name = "colAdeudo"
+        Me.colAdeudo.ReadOnly = True
+        Me.colAdeudo.Width = 89
+        '
+        'cve_registro_paro
+        '
+        Me.cve_registro_paro.DataPropertyName = "cve_registro_paro"
+        Me.cve_registro_paro.HeaderText = "cve_registro_paro"
+        Me.cve_registro_paro.Name = "cve_registro_paro"
+        Me.cve_registro_paro.ReadOnly = True
+        Me.cve_registro_paro.Visible = False
+        '
+        'colcve_lineab
+        '
+        Me.colcve_lineab.DataPropertyName = "cve_linea"
+        Me.colcve_lineab.HeaderText = "cve_linea"
+        Me.colcve_lineab.Name = "colcve_lineab"
+        Me.colcve_lineab.ReadOnly = True
+        Me.colcve_lineab.Visible = False
+        '
+        'colcve_maquina
+        '
+        Me.colcve_maquina.DataPropertyName = "cve_maquina"
+        Me.colcve_maquina.HeaderText = "cve_maquina"
+        Me.colcve_maquina.Name = "colcve_maquina"
+        Me.colcve_maquina.ReadOnly = True
+        Me.colcve_maquina.Visible = False
+        '
+        'colcve_paro
+        '
+        Me.colcve_paro.DataPropertyName = "cve_paro"
+        Me.colcve_paro.HeaderText = "cve_paro"
+        Me.colcve_paro.Name = "colcve_paro"
+        Me.colcve_paro.ReadOnly = True
+        Me.colcve_paro.Visible = False
+        '
+        'colcod_paro
+        '
+        Me.colcod_paro.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells
+        Me.colcod_paro.DataPropertyName = "cod_paro"
+        Me.colcod_paro.HeaderText = "Cod. Paro"
+        Me.colcod_paro.Name = "colcod_paro"
+        Me.colcod_paro.ReadOnly = True
+        Me.colcod_paro.Width = 102
+        '
+        'paro
+        '
+        Me.paro.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells
+        Me.paro.DataPropertyName = "paro"
+        Me.paro.HeaderText = "Descripción"
+        Me.paro.Name = "paro"
+        Me.paro.ReadOnly = True
+        Me.paro.Width = 115
+        '
+        'colminutos
+        '
+        Me.colminutos.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells
+        Me.colminutos.DataPropertyName = "minutos"
+        Me.colminutos.HeaderText = "Minutos"
+        Me.colminutos.Name = "colminutos"
+        Me.colminutos.ReadOnly = True
+        Me.colminutos.Width = 94
+        '
+        'colclave_maquina
+        '
+        Me.colclave_maquina.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells
+        Me.colclave_maquina.DataPropertyName = "clave_maquina"
+        Me.colclave_maquina.HeaderText = "Clave Maquina"
+        Me.colclave_maquina.Name = "colclave_maquina"
+        Me.colclave_maquina.ReadOnly = True
+        Me.colclave_maquina.Width = 138
+        '
+        'colmaquina
+        '
+        Me.colmaquina.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells
+        Me.colmaquina.DataPropertyName = "maquina"
+        Me.colmaquina.HeaderText = "Maquina"
+        Me.colmaquina.Name = "colmaquina"
+        Me.colmaquina.ReadOnly = True
+        Me.colmaquina.Width = 97
+        '
+        'coldetalles
+        '
+        Me.coldetalles.DataPropertyName = "detalles"
+        Me.coldetalles.HeaderText = "Detalles"
+        Me.coldetalles.Name = "coldetalles"
+        Me.coldetalles.ReadOnly = True
+        Me.coldetalles.Width = 140
+        '
+        'cve_desecho
+        '
+        Me.cve_desecho.DataPropertyName = "cve_desecho"
+        Me.cve_desecho.HeaderText = "cve_desecho"
+        Me.cve_desecho.Name = "cve_desecho"
+        Me.cve_desecho.ReadOnly = True
+        Me.cve_desecho.Visible = False
+        '
+        'col__cve_linea
+        '
+        Me.col__cve_linea.DataPropertyName = "cve_linea"
+        Me.col__cve_linea.HeaderText = "cve_linea"
+        Me.col__cve_linea.Name = "col__cve_linea"
+        Me.col__cve_linea.ReadOnly = True
+        Me.col__cve_linea.Visible = False
+        '
+        'col_cve_modelo
+        '
+        Me.col_cve_modelo.DataPropertyName = "cve_modelo"
+        Me.col_cve_modelo.HeaderText = "cve_modelo"
+        Me.col_cve_modelo.Name = "col_cve_modelo"
+        Me.col_cve_modelo.ReadOnly = True
+        Me.col_cve_modelo.Visible = False
+        '
+        'colnp_gkn
+        '
+        Me.colnp_gkn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells
+        Me.colnp_gkn.DataPropertyName = "np_gkn"
+        Me.colnp_gkn.HeaderText = "No.Parte GKN"
+        Me.colnp_gkn.Name = "colnp_gkn"
+        Me.colnp_gkn.ReadOnly = True
+        Me.colnp_gkn.Width = 131
+        '
+        'colmodelodescripcion
+        '
+        Me.colmodelodescripcion.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells
+        Me.colmodelodescripcion.DataPropertyName = "descripcion"
+        Me.colmodelodescripcion.HeaderText = "Modelo"
+        Me.colmodelodescripcion.Name = "colmodelodescripcion"
+        Me.colmodelodescripcion.ReadOnly = True
+        Me.colmodelodescripcion.Width = 89
+        '
+        'coldesechocantidad
+        '
+        Me.coldesechocantidad.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells
+        Me.coldesechocantidad.DataPropertyName = "cantidad"
+        Me.coldesechocantidad.HeaderText = "Cantidad"
+        Me.coldesechocantidad.Name = "coldesechocantidad"
+        Me.coldesechocantidad.ReadOnly = True
+        Me.coldesechocantidad.Width = 96
+        '
+        'col_comentarios_desecho
+        '
+        Me.col_comentarios_desecho.DataPropertyName = "comentarios"
+        Me.col_comentarios_desecho.HeaderText = "Comentarios"
+        Me.col_comentarios_desecho.Name = "col_comentarios_desecho"
+        Me.col_comentarios_desecho.ReadOnly = True
+        Me.col_comentarios_desecho.Width = 140
+        '
+        'cve_rechazo
+        '
+        Me.cve_rechazo.DataPropertyName = "cve_rechazo"
+        Me.cve_rechazo.HeaderText = "cve_rechazo"
+        Me.cve_rechazo.Name = "cve_rechazo"
+        Me.cve_rechazo.ReadOnly = True
+        Me.cve_rechazo.Visible = False
+        '
+        'col_np_gkn
+        '
+        Me.col_np_gkn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells
+        Me.col_np_gkn.DataPropertyName = "np_gkn"
+        Me.col_np_gkn.HeaderText = "No. Parte GKN"
+        Me.col_np_gkn.Name = "col_np_gkn"
+        Me.col_np_gkn.ReadOnly = True
+        Me.col_np_gkn.Width = 135
+        '
+        'col_descripcion
+        '
+        Me.col_descripcion.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells
+        Me.col_descripcion.DataPropertyName = "descripcion"
+        Me.col_descripcion.HeaderText = "Modelo"
+        Me.col_descripcion.Name = "col_descripcion"
+        Me.col_descripcion.ReadOnly = True
+        Me.col_descripcion.Width = 89
+        '
+        'colcantidad
+        '
+        Me.colcantidad.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells
+        Me.colcantidad.DataPropertyName = "cantidad"
+        Me.colcantidad.HeaderText = "Cantidad"
+        Me.colcantidad.Name = "colcantidad"
+        Me.colcantidad.ReadOnly = True
+        Me.colcantidad.Width = 96
+        '
+        'coltipo_rechazo
+        '
+        Me.coltipo_rechazo.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells
+        Me.coltipo_rechazo.DataPropertyName = "tipo"
+        Me.coltipo_rechazo.HeaderText = "Rechazo"
+        Me.coltipo_rechazo.Name = "coltipo_rechazo"
+        Me.coltipo_rechazo.ReadOnly = True
+        Me.coltipo_rechazo.Width = 92
+        '
+        'colmotivo
+        '
+        Me.colmotivo.DataPropertyName = "motivo"
+        Me.colmotivo.HeaderText = "motivo"
+        Me.colmotivo.Name = "colmotivo"
+        Me.colmotivo.ReadOnly = True
+        Me.colmotivo.Width = 140
+        '
+        'cve_seguridad
+        '
+        Me.cve_seguridad.DataPropertyName = "cve_seguridad"
+        Me.cve_seguridad.HeaderText = "cve_seguridad"
+        Me.cve_seguridad.Name = "cve_seguridad"
+        Me.cve_seguridad.ReadOnly = True
+        Me.cve_seguridad.Visible = False
+        '
+        'coldescripciondetalle
+        '
+        Me.coldescripciondetalle.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells
+        Me.coldescripciondetalle.DataPropertyName = "descripcion"
+        Me.coldescripciondetalle.HeaderText = "Descripción"
+        Me.coldescripciondetalle.Name = "coldescripciondetalle"
+        Me.coldescripciondetalle.ReadOnly = True
+        Me.coldescripciondetalle.Width = 115
+        '
+        'colcantidaddetalle
+        '
+        Me.colcantidaddetalle.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells
+        Me.colcantidaddetalle.DataPropertyName = "cantidad"
+        Me.colcantidaddetalle.HeaderText = "Cantidad"
+        Me.colcantidaddetalle.Name = "colcantidaddetalle"
+        Me.colcantidaddetalle.ReadOnly = True
+        Me.colcantidaddetalle.Width = 96
+        '
+        'colcomentarios
+        '
+        Me.colcomentarios.DataPropertyName = "comentarios"
+        Me.colcomentarios.HeaderText = "Comentarios"
+        Me.colcomentarios.Name = "colcomentarios"
+        Me.colcomentarios.ReadOnly = True
+        Me.colcomentarios.Width = 140
+        '
+        'cve_seguridadd
+        '
+        Me.cve_seguridadd.DataPropertyName = "cve_seguridadd"
+        Me.cve_seguridadd.HeaderText = "cve_seguridad"
+        Me.cve_seguridadd.Name = "cve_seguridadd"
+        Me.cve_seguridadd.ReadOnly = True
+        Me.cve_seguridadd.Visible = False
+        '
+        'col_descripcion_
+        '
+        Me.col_descripcion_.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells
+        Me.col_descripcion_.DataPropertyName = "descripcion"
+        Me.col_descripcion_.HeaderText = "Descripción"
+        Me.col_descripcion_.Name = "col_descripcion_"
+        Me.col_descripcion_.ReadOnly = True
+        Me.col_descripcion_.Width = 115
+        '
+        'Cantidad
+        '
+        Me.Cantidad.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells
+        Me.Cantidad.DataPropertyName = "cantidad"
+        Me.Cantidad.HeaderText = "Cantidad"
+        Me.Cantidad.Name = "Cantidad"
+        Me.Cantidad.ReadOnly = True
+        Me.Cantidad.Width = 96
+        '
+        'col_comentarios_
+        '
+        Me.col_comentarios_.DataPropertyName = "comentarios"
+        Me.col_comentarios_.HeaderText = "Comentarios"
+        Me.col_comentarios_.Name = "col_comentarios_"
+        Me.col_comentarios_.ReadOnly = True
+        Me.col_comentarios_.Width = 140
+        '
+        'cve_gente
+        '
+        Me.cve_gente.DataPropertyName = "cve_gente"
+        Me.cve_gente.HeaderText = "cve_gente"
+        Me.cve_gente.Name = "cve_gente"
+        Me.cve_gente.Visible = False
+        '
+        'colgdescripcion
+        '
+        Me.colgdescripcion.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells
+        Me.colgdescripcion.DataPropertyName = "descripcion"
+        Me.colgdescripcion.HeaderText = "descripcion"
+        Me.colgdescripcion.Name = "colgdescripcion"
+        Me.colgdescripcion.ReadOnly = True
+        Me.colgdescripcion.Width = 114
+        '
+        'colgcantidad
+        '
+        Me.colgcantidad.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells
+        Me.colgcantidad.DataPropertyName = "cantidad"
+        Me.colgcantidad.HeaderText = "cantidad"
+        Me.colgcantidad.Name = "colgcantidad"
+        Me.colgcantidad.ReadOnly = True
+        Me.colgcantidad.Width = 94
+        '
+        'comentarios
+        '
+        Me.comentarios.DataPropertyName = "comentarios"
+        Me.comentarios.HeaderText = "comentarios"
+        Me.comentarios.Name = "comentarios"
+        Me.comentarios.ReadOnly = True
+        Me.comentarios.Width = 140
+        '
+        'cve_comentarios_generales
+        '
+        Me.cve_comentarios_generales.DataPropertyName = "cve_comentarios_generales"
+        Me.cve_comentarios_generales.HeaderText = "cve_comentarios_generales"
+        Me.cve_comentarios_generales.Name = "cve_comentarios_generales"
+        Me.cve_comentarios_generales.ReadOnly = True
+        Me.cve_comentarios_generales.Visible = False
+        '
+        'col_comentarios
+        '
+        Me.col_comentarios.DataPropertyName = "comentarios"
+        Me.col_comentarios.HeaderText = "Comentario"
+        Me.col_comentarios.Name = "col_comentarios"
+        Me.col_comentarios.ReadOnly = True
+        Me.col_comentarios.Width = 560
+        '
+        'dia_asignado
+        '
+        Me.dia_asignado.DataPropertyName = "dia_asignado"
+        Me.dia_asignado.HeaderText = "Fecha Descanso"
+        Me.dia_asignado.Name = "dia_asignado"
+        Me.dia_asignado.ReadOnly = True
+        Me.dia_asignado.Width = 217
+        '
+        'col_Descanso
+        '
+        Me.col_Descanso.DataPropertyName = "descripcion"
+        Me.col_Descanso.HeaderText = "Descripcion"
+        Me.col_Descanso.Name = "col_Descanso"
+        Me.col_Descanso.ReadOnly = True
+        Me.col_Descanso.Width = 218
         '
         'frmProduccion
         '
@@ -3539,38 +3539,24 @@ Partial Class frmProduccion
     Friend WithEvents btnAgregarComentario As System.Windows.Forms.Button
     Friend WithEvents Label88 As System.Windows.Forms.Label
     Friend WithEvents Label89 As System.Windows.Forms.Label
-    Friend WithEvents col_cve_comentarios_generales As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents col_comentarios As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents col_cve_linea As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents collinea As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents col_cve_registro_turno As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents col_linea As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents col_turno As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents col_dia_asignado As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents colcve_desecho As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents col__cve_linea As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents col_cve_modelo As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents colnp_gkn As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents colmodelodescripcion As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents coldesechocantidad As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents col_comentarios_desecho As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents colcve_rechazo As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents col_np_gkn As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents col_descripcion As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents colcantidad As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents coltipo_rechazo As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents colmotivo As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents colcve_gente As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents colgdescripcion As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents colgcantidad As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents comentarios As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents GroupBox2 As System.Windows.Forms.GroupBox
     Friend WithEvents Label98 As System.Windows.Forms.Label
     Friend WithEvents Label99 As System.Windows.Forms.Label
     Friend WithEvents Label100 As System.Windows.Forms.Label
-    Friend WithEvents col_fecha_descanso As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents col_Descanso As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents colcve_produccion As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents cmdGraficar As System.Windows.Forms.Button
+    Friend WithEvents Label34 As System.Windows.Forms.Label
+    Friend WithEvents prom As System.Windows.Forms.Label
+    Friend WithEvents btnModModificar As System.Windows.Forms.Button
+    Friend WithEvents btnModTerminar As System.Windows.Forms.Button
+    Friend WithEvents grpModificaciones As System.Windows.Forms.GroupBox
+    Friend WithEvents cldrModificaciones As Telerik.WinControls.UI.RadCalendar
+    Friend WithEvents cve_linea As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents linea As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents cve_produccion As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents colcve_linea As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents colcve_modelo As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents np_gkn As System.Windows.Forms.DataGridViewTextBoxColumn
@@ -3579,7 +3565,7 @@ Partial Class frmProduccion
     Friend WithEvents coltom As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents colCapacidad As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents colAdeudo As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents colcve_registro_paro As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents cve_registro_paro As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents colcve_lineab As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents colcve_maquina As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents colcve_paro As System.Windows.Forms.DataGridViewTextBoxColumn
@@ -3589,19 +3575,33 @@ Partial Class frmProduccion
     Friend WithEvents colclave_maquina As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents colmaquina As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents coldetalles As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents col_cve_seguridad As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents col_descripcion_ As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents Cantidad As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents col_comentarios_ As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents colcve_seguridad As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents cve_desecho As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents col__cve_linea As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents col_cve_modelo As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents colnp_gkn As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents colmodelodescripcion As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents coldesechocantidad As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents col_comentarios_desecho As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents cve_rechazo As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents col_np_gkn As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents col_descripcion As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents colcantidad As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents coltipo_rechazo As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents colmotivo As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents cve_seguridad As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents coldescripciondetalle As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents colcantidaddetalle As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents colcomentarios As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents cmdGraficar As System.Windows.Forms.Button
-    Friend WithEvents Label34 As System.Windows.Forms.Label
-    Friend WithEvents prom As System.Windows.Forms.Label
-    Friend WithEvents btnModModificar As System.Windows.Forms.Button
-    Friend WithEvents btnModTerminar As System.Windows.Forms.Button
-    Friend WithEvents grpModificaciones As System.Windows.Forms.GroupBox
-    Friend WithEvents cldrModificaciones As Telerik.WinControls.UI.RadCalendar
+    Friend WithEvents cve_seguridadd As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents col_descripcion_ As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents Cantidad As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents col_comentarios_ As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents cve_gente As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents colgdescripcion As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents colgcantidad As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents comentarios As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents cve_comentarios_generales As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents col_comentarios As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents dia_asignado As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents col_Descanso As System.Windows.Forms.DataGridViewTextBoxColumn
 End Class

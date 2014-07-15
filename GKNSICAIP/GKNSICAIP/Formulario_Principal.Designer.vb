@@ -58,6 +58,7 @@ Partial Class Formulario_Principal
         Me.btnEquipo_Linea = New Telerik.WinControls.UI.RadButtonElement()
         Me.btnMatch_Equipos = New Telerik.WinControls.UI.RadButtonElement()
         Me.btnModifPermiso = New Telerik.WinControls.UI.RadButtonElement()
+        Me.btnModifPermLog = New Telerik.WinControls.UI.RadButtonElement()
         Me.RadRibbonBarGroup7 = New Telerik.WinControls.UI.RadRibbonBarGroup()
         Me.btnAcceso_Sistema_Captura = New Telerik.WinControls.UI.RadButtonElement()
         Me.RibbonTab5 = New Telerik.WinControls.UI.RibbonTab()
@@ -69,7 +70,6 @@ Partial Class Formulario_Principal
         Me.btnEstrategias = New Telerik.WinControls.UI.RadButtonElement()
         Me.btnCategorias = New Telerik.WinControls.UI.RadButtonElement()
         Me.btnSubCategorias = New Telerik.WinControls.UI.RadButtonElement()
-        Me.btnModifPermLog = New Telerik.WinControls.UI.RadButtonElement()
         CType(Me.RadStatusStrip1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.Barra_Tool_Registros, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.RadPanel_Registros, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -465,6 +465,14 @@ Partial Class Formulario_Principal
         Me.btnModifPermiso.Text = "Mod. Modif."
         Me.btnModifPermiso.Visibility = Telerik.WinControls.ElementVisibility.Visible
         '
+        'btnModifPermLog
+        '
+        Me.btnModifPermLog.AccessibleDescription = "Log Modif"
+        Me.btnModifPermLog.AccessibleName = "Log Modif"
+        Me.btnModifPermLog.Name = "btnModifPermLog"
+        Me.btnModifPermLog.Text = "Log Modif"
+        Me.btnModifPermLog.Visibility = Telerik.WinControls.ElementVisibility.Visible
+        '
         'RadRibbonBarGroup7
         '
         Me.RadRibbonBarGroup7.AccessibleDescription = "Accesos Directos"
@@ -578,14 +586,6 @@ Partial Class Formulario_Principal
         Me.btnSubCategorias.Text = "SubCategorias"
         Me.btnSubCategorias.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText
         Me.btnSubCategorias.Visibility = Telerik.WinControls.ElementVisibility.Visible
-        '
-        'btnModifPermLog
-        '
-        Me.btnModifPermLog.AccessibleDescription = "Log Modif"
-        Me.btnModifPermLog.AccessibleName = "Log Modif"
-        Me.btnModifPermLog.Name = "btnModifPermLog"
-        Me.btnModifPermLog.Text = "Log Modif"
-        Me.btnModifPermLog.Visibility = Telerik.WinControls.ElementVisibility.Visible
         '
         'Formulario_Principal
         '

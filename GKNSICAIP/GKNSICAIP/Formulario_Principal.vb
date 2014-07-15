@@ -1511,20 +1511,23 @@ Public Class Formulario_Principal
             Me.dgvRegistros.Columns("equipo").HeaderText = "Equipo"
             Me.dgvRegistros.Columns("equipo").Width = 250
 
-            Me.dgvRegistros.Columns("maquina").HeaderText = "Maquina"
+            Me.dgvRegistros.Columns("maquina").HeaderText = "Nombre Maquina"
             Me.dgvRegistros.Columns("maquina").Width = 200
+
+            Me.dgvRegistros.Columns("maquina_usuario").HeaderText = "Usuario Maquina"
+            Me.dgvRegistros.Columns("maquina_usuario").Width = 150
 
             Me.dgvRegistros.Columns("cod_empleado").HeaderText = "Código Empleado"
             Me.dgvRegistros.Columns("cod_empleado").Width = 150
 
-            Me.dgvRegistros.Columns("fecha_modificacion").HeaderText = "Día de modificación"
-            Me.dgvRegistros.Columns("fecha_modificacion").Width = 200
+            Me.dgvRegistros.Columns("dia_modificacion").HeaderText = "Día de modificación"
+            Me.dgvRegistros.Columns("dia_modificacion").Width = 200
 
             Me.dgvRegistros.Columns("fecha_captura").HeaderText = "Fecha del movimiento"
             Me.dgvRegistros.Columns("fecha_captura").Width = 200
 
             Me.dgvRegistros.Columns("descripcion").HeaderText = "Descripcion Movimiento"
-            Me.dgvRegistros.Columns("descripcion").Width = 500
+            Me.dgvRegistros.Columns("descripcion").Width = 1000
 
             dgvRegistros.Visible = True
             Activar_Formulario("frmModificacionPermisoLog")

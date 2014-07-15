@@ -6,6 +6,7 @@ Public Class frmProduccion
     Dim ofrmMensaje_Turno As msg_Dialogo
     Dim ofrmMensaje_Descanso_Equipo As msg_Dialogo_Descanso_All_Lineas
     Dim oModificaciones_permiso As Modificacion_Permiso
+    Dim oModificaciones_permiso_log As Modificacion_Permiso_Log
 #End Region
 #Region "Atributos"
     'Globales
@@ -58,7 +59,6 @@ Public Class frmProduccion
     'Load
     Private Sub frmProduccion_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         inicializa_formulario()
-        MsgBox(My.Computer.Name)
     End Sub
 
     'Establece variables globales
@@ -88,7 +88,7 @@ Public Class frmProduccion
         contenedor_CDM.set_not_used()
         obtenedor_CDM = New frmCDM(contenedor_CDM)
         establece_dia_descanso()
-        valida_dia_modificaciones()
+        'valida_dia_modificaciones()
     End Sub
     'Llena info del formulario
     Private Sub llena_informacion_tabs_formulario()
@@ -238,6 +238,7 @@ Public Class frmProduccion
     End Sub
     'Lineas
     Private Sub llena_cbx_Lineas()
+        flgBanderacbxLineas = False
         Dim oEquipoLinea As New CapaNegocios.EquipoLinea
         oEquipoLinea.cve_equipo = vcve_equipo
         cbxLinea.ValueMember = "cve_linea"
@@ -367,6 +368,7 @@ Public Class frmProduccion
 #Region "Llenado Gridsviews"
     'Productividad
     Private Sub llena_productividad_gridview()
+        grdDetalleProductividad.AutoGenerateColumns = False
         Dim oProduccion As New Produccion
         oProduccion.cve_registro_turno = get_registro_del_turno()
         grdDetalleProductividad.DataSource = oProduccion.llena_productividad_gridview()
@@ -635,24 +637,15 @@ Public Class frmProduccion
     Private Sub btnAgregarModelo_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnAgregarModelo.Click
         If valida_hora_de_captura(Now.ToString("dd-MM-yyyy HH:mm:ss")) Then
             If se_puede_añadir_produccion(Convert.ToInt64(txtTiempoOperacion.Text)) Then
-                '
-                Dim oTC As New TC
-                oTC.cve_linea = cbxLinea.SelectedValue
-                oTC.cve_modelo = cbxModeloProductividad.SelectedValue
-                oTC.obtener_piezas_por_hora()
-                Dim oProduccion As New Produccion
-                oProduccion.cve_registro_turno = get_registro_del_turno()
-                oProduccion.cod_empleado_registro = vcodigo_empleado
-                oProduccion.fecha_registro = Now.ToString("dd-MM-yyyy HH:mm")
-                oProduccion.cve_modelo = cbxModeloProductividad.SelectedValue
-                oProduccion.cve_TC = oTC.cve_TC
-                oProduccion.pzas_ok = Long.Parse(txtPiezasOkProducidas.Text)
-                oProduccion.tom = Long.Parse(txtTiempoOperacion.Text)
-                oProduccion.Registrar()
-
-
-                '
+                If flgBanderaModificacionPermiso Then
+                    vLogModifPermDes = "Registro - Equipo: " & vnombre_equipo & " Linea: " & cbxLinea.Text &
+                    " Modelo: " & cbxModeloProductividad.Text & "-(" & cbxModeloProductividad.SelectedValue & ")" &
+                    " Cantidad: " & txtPiezasOkProducidas.Text &
+                    " Tiempo Operacion: " & txtTiempoOperacion.Text &
+                    " #cve_registro_turno: " & get_registro_del_turno()
+                End If
                 add_modelo_producido()
+                log_modificaciones_permiso(vLogModifPermDes)
                 llena_productividad_gridview()
                 calcula_Productividad()
                 limpia_productividad()
@@ -666,14 +659,27 @@ Public Class frmProduccion
     End Sub
     Private Sub btnQuitarModelo_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnQuitarModelo.Click
         If valida_hora_de_captura(Now.ToString("dd-MM-yyyy HH:mm:ss")) Then
-            remove_modelo_producido()
-            llena_productividad_gridview()
-            deshabilitar_btn_quitar_modelo()
-            calcula_Productividad()
-            calcula_NRFTI()
-            add_productividad()
-            add_Nrfti()
-            llena_cbx_Modelos_Desecho()
+            Try
+                If flgBanderaModificacionPermiso Then
+                    vLogModifPermDes = "Elimino - Equipo: " & vnombre_equipo & " Linea: " & cbxLinea.Text &
+                   " Modelo: " & grdDetalleProductividad.Item(4, grdDetalleProductividad.CurrentRow.Index).Value &
+                   "-(" & grdDetalleProductividad.Item(3, grdDetalleProductividad.CurrentRow.Index).Value & ")" &
+                   " Cantidad: " & grdDetalleProductividad.Item(5, grdDetalleProductividad.CurrentRow.Index).Value &
+                   " Tiempo Operacion: " & grdDetalleProductividad.Item(6, grdDetalleProductividad.CurrentRow.Index).Value &
+                   " #cve_registro_turno: " & get_registro_del_turno()
+                End If
+                remove_modelo_producido()
+                log_modificaciones_permiso(vLogModifPermDes)
+                llena_productividad_gridview()
+                deshabilitar_btn_quitar_modelo()
+                calcula_Productividad()
+                calcula_NRFTI()
+                add_productividad()
+                add_Nrfti()
+                llena_cbx_Modelos_Desecho()
+            Catch ex As Exception
+                MsgBox(ex.Message)
+            End Try
         End If
     End Sub
     'Desechos
@@ -730,7 +736,15 @@ Public Class frmProduccion
     Private Sub btnAgregarParo_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnAgregarParo.Click
         If valida_hora_de_captura(Now.ToString("dd-MM-yyyy HH:mm:ss")) Then
             If se_puede_añadir_produccion_o_paro(Convert.ToInt64(txtMinutosParo.Text)) Then
+                If flgBanderaModificacionPermiso Then
+                    vLogModifPermDes = "Registro - Equipo: " & vnombre_equipo & " Linea: " & cbxLinea.Text &
+                        " Paro: " & cbxTipoParo.Text &
+                        " Minutos: " & txtMinutosParo.Text &
+                        " Maquina: " & cbxMaquina.Text & "-(" & cbxMaquina.SelectedValue & ")" &
+                        " #cve_registro_turno: " & get_registro_del_turno()
+                End If
                 add_paro()
+                log_modificaciones_permiso(vLogModifPermDes)
                 limpia_paros()
                 llena_paro_gridview()
                 actualiza_tabla_turno_minutos()
@@ -743,7 +757,15 @@ Public Class frmProduccion
     End Sub
     Private Sub btnQuitarParo_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnQuitarParo.Click
         If valida_hora_de_captura(Now.ToString("dd-MM-yyyy HH:mm:ss")) Then
+            If flgBanderaModificacionPermiso Then
+                vLogModifPermDes = "Elimino - Equipo: " & vnombre_equipo & " Linea: " & cbxLinea.Text &
+               " Paro: " & grdDetalleParo.Item(4, grdDetalleParo.CurrentRow.Index).Value &
+               " Minutos: " & grdDetalleParo.Item(6, grdDetalleParo.CurrentRow.Index).Value &
+               " Maquina: " & grdDetalleParo.Item(7, grdDetalleParo.CurrentRow.Index).Value &
+               " #cve_registro_turno: " & get_registro_del_turno()
+            End If
             remove_paro()
+            log_modificaciones_permiso(vLogModifPermDes)
             limpia_paros()
             deshabilitar_btn_quitar_paro()
             llena_paro_gridview()
@@ -856,7 +878,8 @@ Public Class frmProduccion
     End Sub
     'Descanso
     Private Sub btnAgregarDescanso_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnAgregarDescanso.Click
-        If dtpDescanso.Value >= Now.ToString("dd-MM-yyy") Then
+        'If dtpDescanso.Value >= Now.ToString("dd-MM-yyy") Then
+        If dtpDescanso.Value >= obtiene_fecha_actual.ToString("dd-MM-yyyy") Then
             registra_descanso()
             limpia_descanso()
             llena_Descanso_gridview()
@@ -866,9 +889,9 @@ Public Class frmProduccion
         End If
     End Sub
     Private Sub btnQuitarDescanso_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnQuitarDescanso.Click
-
-        Dim Fecha As Date = grdDetalleDescansos.Item("col_fecha_descanso", grdDetalleDescansos.CurrentRow.Index).Value
-        If Fecha >= Now.ToString("dd-MM-yyy") Then
+        Dim Fecha As Date = grdDetalleDescansos.Item("dia_asignado", grdDetalleDescansos.CurrentRow.Index).Value
+        'If Fecha >= Now.ToString("dd-MM-yyy") Then
+        If Fecha >= obtiene_fecha_actual.ToString("dd-MM-yyy") Then
             remove_descanso()
             limpia_descanso()
             deshabilitar_btn_quitar_descanso()
@@ -903,25 +926,21 @@ Public Class frmProduccion
     'Modificaciones
     'Evento al presionar boton para iniciar Modificaciones
     Private Sub btnModModificar_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnModModificar.Click
-        If valida_modificacion_permiso() Then
-            btnModTerminar.Enabled = True
-            cldrModificaciones.Enabled = False
-            btnModModificar.Enabled = False
-            flgBanderaModificacionPermiso = True
-            inicializa_formulario()
-        End If
+        'If valida_modificacion_permiso() Then
+        btnModTerminar.Enabled = True
+        cldrModificaciones.Enabled = False
+        btnModModificar.Enabled = False
+        flgBanderaModificacionPermiso = True
+        inicializa_formulario()
+        'End If
     End Sub
     'Evento al presionar boton para terminar Modificaciones
     Private Sub btnModTerminar_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnModTerminar.Click
+        flgBanderaModificacionPermiso = False
         btnModTerminar.Enabled = False
-        btnModModificar.Enabled = False
+        btnModModificar.Enabled = True
         cldrModificaciones.Enabled = True
         cldrModificaciones.SelectedDate = Now
-        flgBanderaModificacionPermiso = False
-        cbxLinea.SelectedIndex = -1
-        cbxTurno.SelectedIndex = -1
-        flgBanderacbxLineas = False
-        establece_dia_descanso()
         inicializa_formulario()
     End Sub
 #End Region
@@ -958,7 +977,7 @@ Public Class frmProduccion
     'Descansos
     Private Sub grdDetalleDescansos_CellClick(ByVal sender As System.Object, ByVal e As System.Windows.Forms.DataGridViewCellEventArgs) Handles grdDetalleDescansos.CellClick
         habilita_btn_quitar_descanso()
-        limpia_descanso()
+        'limpia_descanso()
     End Sub
     'Comentarios Generales
     Private Sub grdDetalleComentario_CellClick(ByVal sender As System.Object, ByVal e As System.Windows.Forms.DataGridViewCellEventArgs) Handles grdDetalleComentario.CellClick
@@ -992,6 +1011,10 @@ Public Class frmProduccion
         fecha_final = fin_aux
         If fecha_inicio <= hora_actual And hora_actual <= fecha_final And ini_aux <> Nothing And fin_aux <> Nothing Then
             Return True
+        ElseIf flgBanderaModificacionPermiso Then
+            MsgBox("Ha finalizado el permiso de modificación de captura. Se restablecerá la pantalla de captura al día actual.", vbExclamation + vbOKOnly, "Aviso!")
+            btnModTerminar.PerformClick()
+            Return False
         Else
             MsgBox("Ha finalizado el turno ya no puedes capturar. Para elegir un nuevo turno y dia Da Click en la pestaña Turnos-Lineas", vbExclamation + vbOKOnly, "Aviso!")
             Return False
@@ -1404,7 +1427,7 @@ Public Class frmProduccion
     'Descanso
     Private Sub limpia_descanso()
         dtpDescanso.Checked = False
-        dtpDescanso.Value = Date.Today
+        dtpDescanso.Value = obtiene_fecha_actual()
     End Sub
     'Comentarios Generales
     Private Sub limpia_comentarios_generales()
@@ -1420,10 +1443,16 @@ Public Class frmProduccion
         'dtpDescanso.MinDate = DateSerial(Year(Now.ToString("yyyy-MM-dd")), Month(Now.ToString("yyyy-MM-dd")), 1)
         'dtpDescanso.MaxDate = diafinal
         'Lineas de codigo antes de modificaciones permiso
+        Dim diainicial As DateTime = DateSerial(obtiene_fecha_actual.Year, obtiene_fecha_actual.Month, 1)
         Dim diafinal As DateTime = DateSerial(obtiene_fecha_actual.Year, obtiene_fecha_actual.Month + 1, 0)
         diafinal = diafinal.AddDays(5)
-        dtpDescanso.MinDate = DateSerial(obtiene_fecha_actual.Year, obtiene_fecha_actual.Month, 1)
-        dtpDescanso.MaxDate = diafinal
+        If diainicial >= dtpDescanso.MaxDate Then
+            dtpDescanso.MaxDate = diafinal
+            dtpDescanso.MinDate = diainicial
+        Else
+            dtpDescanso.MinDate = diainicial
+            dtpDescanso.MaxDate = diafinal
+        End If
     End Sub
     Private Sub get_Imagen_Equipo()
         Dim oEquipo As New Equipo
@@ -1444,15 +1473,12 @@ Public Class frmProduccion
         fecha_final = fin_aux
         If hora_actual >= fecha_inicio And hora_actual <= fecha_final Then
             Return True
+        ElseIf flgBanderaModificacionPermiso Then
+            MsgBox("Ha finalizado el permiso de modificación de captura. Se restablecerá la pantalla de captura al día actual.", vbExclamation + vbOKOnly, "Aviso!")
+            btnModTerminar.PerformClick()
+            Return False
         Else
-            If flgBanderaModificacionPermiso = True Then
-                MsgBox("Ha finalizado el turno ya no puedes capturar. Para elegir un nuevo turno y dia Da Click en la pestaña Turnos-Lineas", vbExclamation + vbOKOnly, "Aviso!")
-            Else
-                flgBanderaModificacionPermiso = False
-                btnModTerminar.PerformClick()
-                MsgBox("Ha finalizado el permiso de captura. Para elegir un nuevo turno y dia Da Click en la pestaña Turnos-Lineas", vbExclamation + vbOKOnly, "Aviso!")
-            End If
-
+            MsgBox("Ha finalizado el turno ya no puedes capturar. Para elegir un nuevo turno y dia Da Click en la pestaña Turnos-Lineas", vbExclamation + vbOKOnly, "Aviso!")
             cbxLinea.SelectedIndex = -1
             cbxTurno.SelectedIndex = -1
             establece_dia_descanso()
@@ -1461,30 +1487,27 @@ Public Class frmProduccion
     End Function
     'Establece la hora de inicio y fin validas para capturar
     Private Sub establece_hora_inicio_fin_captura()
-        If flgBanderaModificacionPermiso = True Then
+        ini_aux = Nothing
+        fin_aux = Nothing
+        If flgBanderaModificacionPermiso Then
             oModificaciones_permiso = New Modificacion_Permiso
             oModificaciones_permiso.usuario = Environment.UserName
             oModificaciones_permiso.dia_modificacion = cldrModificaciones.SelectedDate
             oModificaciones_permiso.bandera = 2
-            If oModificaciones_permiso.valida_dia_modificacion_permiso() Then
+            If oModificaciones_permiso.valida_dia_modificacion_permiso Then
                 oModificaciones_permiso.Cargar()
-                ini_aux = Nothing
-                fin_aux = Nothing
                 ini_aux = oModificaciones_permiso.fecha_inicio
-                ini_aux = oModificaciones_permiso.fecha_final
+                fin_aux = oModificaciones_permiso.fecha_final
             Else
-                establece_dia_descanso()
+                btnModTerminar.PerformClick()
             End If
         Else
-            ini_aux = Nothing
-            fin_aux = Nothing
             Dim oTurno As New Turno
             oTurno.cve_registro_turno = vcve_registro_turno
             oTurno.valida_inicio_fin_produccion()
             ini_aux = oTurno.inicio
             fin_aux = oTurno.fin
         End If
-        
     End Sub
     'Obtiene y muestra la fecha a la cual pertenece la captura
     Private Sub establece_label_fecha_captura()
@@ -1497,14 +1520,13 @@ Public Class frmProduccion
     End Sub
     'Valida si actualmente tiene permisos para modificar y habilita el modulo de modificaciones
     Private Sub valida_dia_modificaciones()
-        'oModificaciones_permiso = New Modificacion_Permiso
-        'oModificaciones_permiso.usuario = Environment.UserName
+        oModificaciones_permiso = New Modificacion_Permiso
+        oModificaciones_permiso.usuario = Environment.UserName
         'bandera en 1 solo para ver si tiene permisos hoy
-        'oModificaciones_permiso.bandera = 1
-        'If oModificaciones_permiso.valida_dia_modificacion_permiso Then
-        '    grpModificaciones.Visible = True
-        'End If
-
+        oModificaciones_permiso.bandera = 1
+        If oModificaciones_permiso.valida_dia_modificacion_permiso Then
+            grpModificaciones.Visible = True
+        End If
     End Sub
     Private Function valida_modificacion_permiso() As Boolean
         oModificaciones_permiso = New Modificacion_Permiso
@@ -1517,7 +1539,6 @@ Public Class frmProduccion
             Return False
         End If
     End Function
-
 #End Region
 #Region "Funciones para modulo Productividad"
     'Metodo Enviar notificaciones de sobreproduccion
@@ -1612,13 +1633,12 @@ Public Class frmProduccion
         oProduccion.pzas_ok = Long.Parse(txtPiezasOkProducidas.Text)
         oProduccion.tom = Long.Parse(txtTiempoOperacion.Text)
         oProduccion.Registrar()
-
     End Sub
     Private Sub remove_modelo_producido()
         If grdDetalleProductividad.Rows.Count <> 0 Then
             Dim oProduccion As New Produccion
             oProduccion.cve_registro_turno = get_registro_del_turno()
-            oProduccion.cve_produccion = grdDetalleProductividad.Item("colcve_produccion", grdDetalleProductividad.CurrentRow.Index).Value
+            oProduccion.cve_produccion = grdDetalleProductividad.Item("cve_produccion", grdDetalleProductividad.CurrentRow.Index).Value
             oProduccion.cod_empleado_eliminacion = vcodigo_empleado
             oProduccion.fecha_eliminacion = Now.ToString("dd-MM-yyyy HH:mm")
             oProduccion.Eliminar()
@@ -1708,7 +1728,7 @@ Public Class frmProduccion
             Dim oDesecho As New Desecho
             oDesecho.cod_empleado_eliminacion = vcodigo_empleado
             oDesecho.fecha_eliminacion = Now.ToString("MM-dd-yyyy HH:mm")
-            oDesecho.cve_desecho = grdDetalleDesecho.Item("colcve_desecho", grdDetalleDesecho.CurrentRow.Index).Value
+            oDesecho.cve_desecho = grdDetalleDesecho.Item("cve_desecho", grdDetalleDesecho.CurrentRow.Index).Value
             oDesecho.Eliminar()
         Else
             btnQuitarDesecho.Enabled = False
@@ -1773,7 +1793,7 @@ Public Class frmProduccion
     Private Sub remove_paro()
         If grdDetalleParo.Rows.Count <> 0 Then
             Dim oRegistro_Paro As New Registro_Paro
-            oRegistro_Paro.Cve_registro_paro = grdDetalleParo.Item("colcve_registro_paro", grdDetalleParo.CurrentRow.Index).Value
+            oRegistro_Paro.Cve_registro_paro = grdDetalleParo.Item("cve_registro_paro", grdDetalleParo.CurrentRow.Index).Value
             oRegistro_Paro.Cod_empleado_eliminacion = vcodigo_empleado
             oRegistro_Paro.Fecha_eliminacion = Convert.ToDateTime(Now.ToString("dd-MM-yyyy HH:mm"))
             oRegistro_Paro.Eliminar()
@@ -1821,7 +1841,7 @@ Public Class frmProduccion
         If grdDetalleRechazo.Rows.Count <> 0 Then
             Dim oRechazo As New Rechazo
             oRechazo.cve_registro_turno = get_registro_del_turno()
-            oRechazo.cve_rechazo = grdDetalleRechazo.Item("colcve_rechazo", grdDetalleRechazo.CurrentRow.Index).Value
+            oRechazo.cve_rechazo = grdDetalleRechazo.Item("cve_rechazo", grdDetalleRechazo.CurrentRow.Index).Value
             oRechazo.cod_empleado_elimino = "118737"
             oRechazo.fecha_eliminacion = Now.ToString("dd-MM-yyyy HH:mm")
             oRechazo.Eliminar()
@@ -1920,12 +1940,11 @@ Public Class frmProduccion
             Dim oGente As New Gente
             oGente.cod_empleado_eliminacion = vcodigo_empleado
             oGente.fecha_eliminacion = Now.ToString("dd-MM-yyyy HH:mm")
-            oGente.cve_gente = grdDetalleGente.Item("colcve_gente", grdDetalleGente.CurrentRow.Index).Value
+            oGente.cve_gente = grdDetalleGente.Item("cve_gente", grdDetalleGente.CurrentRow.Index).Value
             oGente.Eliminar()
         Else
             btnQuitarGente.Enabled = False
         End If
-
     End Sub
 #End Region
 #Region "Funciones para modulo Seguridad"
@@ -1945,7 +1964,7 @@ Public Class frmProduccion
             Dim oSeguridad As New Seguridad
             oSeguridad.cod_empleado_eliminacion = vcodigo_empleado
             oSeguridad.fecha_eliminacion = Convert.ToDateTime(Now.ToString("dd-MM-yyyy HH:mm"))
-            oSeguridad.cve_seguridad = grdDetalleCondInseg.Item("colcve_seguridad", grdDetalleCondInseg.CurrentRow.Index).Value
+            oSeguridad.cve_seguridad = grdDetalleCondInseg.Item("cve_seguridad", grdDetalleCondInseg.CurrentRow.Index).Value
             oSeguridad.Eliminar()
         Else
             btnQuitarCondInseg.Enabled = False
@@ -1967,7 +1986,7 @@ Public Class frmProduccion
             Dim oSeguridad As New Seguridad
             oSeguridad.cod_empleado_eliminacion = vcodigo_empleado
             oSeguridad.fecha_eliminacion = Convert.ToDateTime(Now.ToString("dd-MM-yyyy HH:mm"))
-            oSeguridad.cve_seguridad = grdDetalleAccidente.Item("col_cve_seguridad", grdDetalleAccidente.CurrentRow.Index).Value
+            oSeguridad.cve_seguridad = grdDetalleAccidente.Item("cve_seguridadd", grdDetalleAccidente.CurrentRow.Index).Value
             oSeguridad.Eliminar()
         Else
             btnQuitarAccidente.Enabled = False
@@ -2008,7 +2027,6 @@ Public Class frmProduccion
                         If verifica_registro_turno(line_aux, obten_dia_asignado_registro_turno()) Then
                             Registra_Turno_Linea(line_aux)
                         End If
-
                         line_aux = Nothing
                     Next
                     limpia_turno_linea()
@@ -2016,8 +2034,6 @@ Public Class frmProduccion
                     llena_lineas_Si_gridview()
                 End If
             End If
-
-
             'If MsgBox("¿Estas seguro que el horario para las lineas (todas/restantes) es: " & cbxTurnosLineas.Text & "?. Una vez registrado el horario ya no lo podrás modificar.", vbQuestion + vbYesNo, "Confirmación") = vbYes Then
             '    If valida_registro_linea() Then
             '        For Each row As DataGridViewRow In grdLineasNoRegistradas.Rows
@@ -2042,8 +2058,8 @@ Public Class frmProduccion
     End Sub
     'Registra una Linea
     Private Sub registra_linea()
-        Dim line_aux As Long = grdLineasNoRegistradas.Item("col_cve_linea", grdLineasNoRegistradas.CurrentRow.Index).Value
-        Dim nom_aux As String = grdLineasNoRegistradas.Item("collinea", grdLineasNoRegistradas.CurrentRow.Index).Value
+        Dim line_aux As Long = grdLineasNoRegistradas.Item("cve_linea", grdLineasNoRegistradas.CurrentRow.Index).Value
+        Dim nom_aux As String = grdLineasNoRegistradas.Item("linea", grdLineasNoRegistradas.CurrentRow.Index).Value
         If valida_registro_linea() Then
             If verifica_registro_turno(line_aux, obten_dia_asignado_registro_turno()) Then
                 ofrmMensaje_Turno = New msg_Dialogo
@@ -2213,7 +2229,6 @@ Public Class frmProduccion
             '    llena_Descanso_gridview()
             '    llena_lineas_Si_gridview()
             'End If
-
             If MsgBox("¿Seguro que desea guardar dia descanso?", vbQuestion + vbYesNo, "Confirmación") = vbYes Then
                 add_descanso()
                 llena_Descanso_gridview()
@@ -2232,7 +2247,7 @@ Public Class frmProduccion
             If MsgBox("¿Seguro que desea guardar dia descanso?", vbQuestion + vbYesNo, "Confirmación") = vbYes Then
                 Dim oRegistro_Turno As New Registro_Turno
                 oRegistro_Turno.cve_equipo = vcve_equipo
-                oRegistro_Turno.dia_asignado = Convert.ToDateTime(grdDetalleDescansos.Item("col_fecha_descanso", grdDetalleDescansos.CurrentRow.Index).Value)
+                oRegistro_Turno.dia_asignado = Convert.ToDateTime(grdDetalleDescansos.Item("dia_asignado", grdDetalleDescansos.CurrentRow.Index).Value)
                 oRegistro_Turno.borra_dia_descanso()
             End If
         Else
@@ -2266,7 +2281,7 @@ Public Class frmProduccion
             Dim oComentariosGenerales As New Comentarios_Generales
             oComentariosGenerales.cod_empleado_eliminacion = vcodigo_empleado
             oComentariosGenerales.fecha_eliminacion = Convert.ToDateTime(Now.ToString("dd-MM-yyyy HH:mm"))
-            oComentariosGenerales.cve_comentarios_generales = grdDetalleComentario.Item("col_cve_comentarios_generales", grdDetalleComentario.CurrentRow.Index).Value
+            oComentariosGenerales.cve_comentarios_generales = grdDetalleComentario.Item("cve_comentarios_generales", grdDetalleComentario.CurrentRow.Index).Value
             oComentariosGenerales.Eliminar()
         Else
             btnQuitarCondInseg.Enabled = False
@@ -2287,8 +2302,12 @@ Public Class frmProduccion
 #End Region
 #Region "Funciones para modulo de Modificaciones"
     Private Function obtiene_fecha_actual() As DateTime
+        Dim cldrHora As DateTime
         If flgBanderaModificacionPermiso = True Then
-            Return cldrModificaciones.SelectedDate
+            cldrHora = cldrModificaciones.SelectedDate
+            cldrHora = cldrHora.AddHours(23)
+            cldrHora = cldrHora.AddMinutes(59)
+            Return cldrHora
         ElseIf flgBanderaModificacionPermiso = False Then
             Return Convert.ToDateTime(Now)
         Else
@@ -2297,7 +2316,15 @@ Public Class frmProduccion
     End Function
     Private Sub log_modificaciones_permiso(ByVal descripcion As String)
         If flgBanderaModificacionPermiso = True Then
-
+            oModificaciones_permiso_log = New Modificacion_Permiso_Log
+            oModificaciones_permiso_log.cve_registro_turno = get_registro_del_turno()
+            oModificaciones_permiso_log.maquina = My.Computer.Name
+            oModificaciones_permiso_log.maquina_usuario = Environment.UserName
+            oModificaciones_permiso_log.cod_empleado = vcodigo_empleado
+            oModificaciones_permiso_log.fecha_captura = Now.ToString("dd-MM-yyyy HH:mm")
+            oModificaciones_permiso_log.descripcion = descripcion
+            oModificaciones_permiso_log.registra_modificacion_permiso_log()
+            vLogModifPermDes = ""
         End If
     End Sub
 #End Region

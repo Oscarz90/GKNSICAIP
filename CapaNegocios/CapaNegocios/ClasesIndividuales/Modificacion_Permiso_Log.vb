@@ -11,8 +11,9 @@ Public Class Modificacion_Permiso_Log
             vcve_modificacion_permiso_log = vDR("cve_modificacion_permiso_log")
             vcve_equipo = vDR("cve_equipo")
             vmaquina = vDR("maquina")
+            vmaquina_usuario = vDR("maquina_usuario")
             vcod_empleado = vDR("cod_empleado")
-            vfecha_modificacion = vDR("fecha_modificacion")
+            vdia_modificacion = vDR("dia_modificacion")
             vfecha_captura = vDR("fecha_captura")
             vdescripcion = vDR("descripcion")
         End If
@@ -44,8 +45,7 @@ Public Class Modificacion_Permiso_Log
 
     Public Sub Registrar() Implements IIndividual.Registrar
         Dim queryInsert As String = "insert into modificacion_permiso_log" &
-            " values(" & vcve_equipo & ",'" & vmaquina & "','" & vcod_empleado & "','" & vfecha_modificacion.ToString("MM-dd-yyyy HH:mm") & "','" & vfecha_captura.ToString("MM-dd-yyyy HH:mm") & "','" & vdescripcion & "')"
-
+            " values(" & vcve_equipo & ",'" & vmaquina & "','" & vmaquina_usuario & "','" & vcod_empleado & "','" & vdia_modificacion.ToString("MM-dd-yyyy HH:mm") & "','" & vfecha_captura.ToString("MM-dd-yyyy HH:mm") & "','" & vdescripcion & "')"
         Try
             oBD.EjecutarQuery(queryInsert)
             MsgBox("Se registro correctamente", vbInformation + vbOKOnly, "Log Permiso Modificación de Captura")
@@ -59,8 +59,9 @@ Public Class Modificacion_Permiso_Log
     Private vcve_modificacion_permiso_log As Long
     Private vcve_equipo As Long
     Private vmaquina As String
+    Private vmaquina_usuario As String
     Private vcod_empleado As String
-    Private vfecha_modificacion As DateTime
+    Private vdia_modificacion As DateTime
     Private vfecha_captura As DateTime
     Private vdescripcion As String
 #End Region
@@ -97,6 +98,14 @@ Public Class Modificacion_Permiso_Log
             vmaquina = value
         End Set
     End Property
+    Public Property maquina_usuario() As String
+        Get
+            Return vmaquina_usuario
+        End Get
+        Set(ByVal value As String)
+            vmaquina_usuario = value
+        End Set
+    End Property
     Public Property cod_empleado() As String
         Get
             Return vcod_empleado
@@ -105,12 +114,12 @@ Public Class Modificacion_Permiso_Log
             vcod_empleado = value
         End Set
     End Property
-    Public Property fecha_modificacion() As DateTime
+    Public Property dia_modificacion() As DateTime
         Get
-            Return vfecha_modificacion
+            Return vdia_modificacion
         End Get
         Set(ByVal value As Date)
-            vfecha_modificacion = value
+            vdia_modificacion = value
         End Set
     End Property
     Public Property fecha_captura() As DateTime
@@ -135,7 +144,7 @@ Public Class Modificacion_Permiso_Log
         Dim obj As DataTable
         Using scope As New TransactionScope
             Try
-                obj = oBD.ObtenerTabla("select mpl.cve_modificacion_permiso_log,e.equipo,mpl.maquina,mpl.cod_empleado,mpl.fecha_modificacion,mpl.fecha_captura,mpl.descripcion" &
+                obj = oBD.ObtenerTabla("select mpl.cve_modificacion_permiso_log,e.equipo,mpl.maquina,mpl.maquina_usuario,mpl.cod_empleado,mpl.dia_modificacion,mpl.fecha_captura,mpl.descripcion" &
                                        " from modificacion_permiso_log mpl" &
                                        " join equipo e on mpl.cve_equipo=e.cve_equipo" &
                                        " order by mpl.fecha_captura desc")
@@ -153,8 +162,9 @@ Public Class Modificacion_Permiso_Log
                 Dim cmd As New SqlClient.SqlCommand
                 cmd.CommandType = CommandType.StoredProcedure
                 cmd.CommandText = "registra_modificacion_permiso_log"
-                cmd.Parameters.Add("@cve_registro_turno", SqlDbType.BigInt).Value = Me.vcve_modificacion_permiso_log
+                cmd.Parameters.Add("@cve_registro_turno", SqlDbType.BigInt).Value = Me.vcve_registro_turno
                 cmd.Parameters.Add("@maquina", SqlDbType.VarChar).Value = Me.vmaquina
+                cmd.Parameters.Add("@maquina_usuario", SqlDbType.VarChar).Value = Me.vmaquina_usuario
                 cmd.Parameters.Add("@cod_empleado", SqlDbType.VarChar).Value = Me.vcod_empleado
                 cmd.Parameters.Add("@fecha_captura", SqlDbType.DateTime).Value = Me.vfecha_captura
                 cmd.Parameters.Add("@descripcion", SqlDbType.VarChar).Value = Me.vdescripcion
@@ -169,7 +179,7 @@ Public Class Modificacion_Permiso_Log
                 '    Return False
                 'End If
             Catch
-                MsgBox("Problema al validar Modificacion Permiso. CModificacion_Permiso_ERROR", vbExclamation + vbOKOnly, "Problema")
+                MsgBox("Problema al registrar Modificacion Permiso Log. CModificacion_Permiso_Log_ERROR", vbExclamation + vbOKOnly, "Problema")
             End Try
         End Using
     End Sub
