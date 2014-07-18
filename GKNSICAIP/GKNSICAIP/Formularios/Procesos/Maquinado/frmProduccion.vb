@@ -2132,6 +2132,12 @@ Public Class frmProduccion
                         End If
                         line_aux = Nothing
                     Next
+                    If flgBanderaModificacionPermiso Then
+                        vLogModifPermDes = "Registro turno todas las lineas - Equipo: " & vnombre_equipo & " Linea: " & cbxLinea.Text &
+                        " - Turno: " & cbxTurnosLineas.Text & "-(" & cbxTurnosLineas.SelectedValue & ")" &
+                        " #cve_registro_turno: " & get_registro_del_turno()
+                    End If
+                    log_modificaciones_permiso(vLogModifPermDes)
                     limpia_turno_linea()
                     deshabilitar_btn_Turno_linea()
                     llena_lineas_Si_gridview()
@@ -2172,6 +2178,14 @@ Public Class frmProduccion
                 If ofrmMensaje_Turno.vRespuesta = True Then
                     'MsgBox("Registro exitoso", vbOKOnly, "Aviso")
                     Registra_Turno_Linea(line_aux)
+                    If flgBanderaModificacionPermiso Then
+                        vLogModifPermDes = "Registro turno - Equipo: " & vnombre_equipo & " Linea: " & cbxLinea.Text &
+                            " - Linea: " & grdLineasNoRegistradas.Item(1, grdLineasNoRegistradas.CurrentRow.Index).Value &
+                            "-(" & grdLineasNoRegistradas.Item(0, grdLineasNoRegistradas.CurrentRow.Index).Value & ")" &
+                            " - Turno: " & cbxTurnosLineas.Text & "-(" & cbxTurnosLineas.SelectedValue & ")" &
+                            " #cve_registro_turno: " & get_registro_del_turno()
+                    End If
+                    log_modificaciones_permiso(vLogModifPermDes)
                     limpia_turno_linea()
                     deshabilitar_btn_Turno_linea()
                     llena_lineas_Si_gridview()
