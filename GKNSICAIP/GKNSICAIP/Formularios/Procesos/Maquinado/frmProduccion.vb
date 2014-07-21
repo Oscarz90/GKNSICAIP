@@ -58,7 +58,8 @@ Public Class frmProduccion
 #Region "Inicializando formulario"
     'Load
     Private Sub frmProduccion_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
-        inicializa_formulario()
+        'inicializa_formulario()
+        accion_btnTerminar()
     End Sub
 
     'Establece variables globales
@@ -959,13 +960,7 @@ Public Class frmProduccion
     Private Sub btnAgregarDescanso_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnAgregarDescanso.Click
         'If dtpDescanso.Value >= Now.ToString("dd-MM-yyy") Then
         If dtpDescanso.Value >= obtiene_fecha_actual.ToString("dd-MM-yyyy") Then
-            If flgBanderaModificacionPermiso Then
-                vLogModifPermDes = "Registro Descanso de todas las lineas - Equipo: " & vnombre_equipo & " Linea: " & cbxLinea.Text &
-                " - Dia: " & dtpDescanso.Value &
-                " #cve_registro_turno: " & get_registro_del_turno()
-            End If
             registra_descanso()
-            log_modificaciones_permiso(vLogModifPermDes)
             limpia_descanso()
             llena_Descanso_gridview()
         Else
@@ -977,13 +972,7 @@ Public Class frmProduccion
         Dim Fecha As Date = grdDetalleDescansos.Item("dia_asignado", grdDetalleDescansos.CurrentRow.Index).Value
         'If Fecha >= Now.ToString("dd-MM-yyy") Then
         If Fecha >= obtiene_fecha_actual.ToString("dd-MM-yyy") Then
-            If flgBanderaModificacionPermiso Then
-                vLogModifPermDes = "Elimino Descanso de todas las lineas - Equipo: " & vnombre_equipo & " Linea: " & cbxLinea.Text &
-               " Dia: " & grdDetalleDescansos.Item(0, grdDetalleDescansos.CurrentRow.Index).Value &
-               " #cve_registro_turno: " & get_registro_del_turno()
-            End If
             remove_descanso()
-            log_modificaciones_permiso(vLogModifPermDes)
             limpia_descanso()
             deshabilitar_btn_quitar_descanso()
             llena_lineas_Si_gridview()
@@ -1017,6 +1006,7 @@ Public Class frmProduccion
                " #cve_registro_turno: " & get_registro_del_turno()
             End If
             remove_comentario()
+            log_modificaciones_permiso(vLogModifPermDes)
             limpia_comentarios_generales()
             deshabilitar_btn_Quitar_comentario()
             llena_comentarios_generales_gridview()
@@ -1034,17 +1024,15 @@ Public Class frmProduccion
         cldrModificaciones.Enabled = False
         btnModModificar.Enabled = False
         flgBanderaModificacionPermiso = True
+        If flgBanderaModificacionPermiso Then
+            establece_hora_inicio_fin_captura()
+        End If
         inicializa_formulario()
         'End If
     End Sub
     'Evento al presionar boton para terminar Modificaciones
     Private Sub btnModTerminar_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnModTerminar.Click
-        flgBanderaModificacionPermiso = False
-        btnModTerminar.Enabled = False
-        btnModModificar.Enabled = True
-        cldrModificaciones.Enabled = True
-        cldrModificaciones.SelectedDate = Now
-        inicializa_formulario()
+        accion_btnTerminar()
     End Sub
 #End Region
 #Region "Eventos Gridviews"
@@ -2125,19 +2113,29 @@ Public Class frmProduccion
 
             If ofrmMensaje_Turno.vRespuesta = True Then
                 If valida_registro_linea() Then
-                    For Each row As DataGridViewRow In grdLineasNoRegistradas.Rows
-                        line_aux = Val(row.Cells(0).Value)
-                        If verifica_registro_turno(line_aux, obten_dia_asignado_registro_turno()) Then
-                            Registra_Turno_Linea(line_aux)
-                        End If
-                        line_aux = Nothing
-                    Next
                     If flgBanderaModificacionPermiso Then
-                        vLogModifPermDes = "Registro turno todas las lineas - Equipo: " & vnombre_equipo & " Linea: " & cbxLinea.Text &
-                        " - Turno: " & cbxTurnosLineas.Text & "-(" & cbxTurnosLineas.SelectedValue & ")" &
-                        " #cve_registro_turno: " & get_registro_del_turno()
+                        If valida_hora_de_captura(Now.ToString("dd-MM-yyyy HH:mm:ss")) Then
+                            For Each row As DataGridViewRow In grdLineasNoRegistradas.Rows
+                                line_aux = Val(row.Cells(0).Value)
+                                If verifica_registro_turno(line_aux, obten_dia_asignado_registro_turno()) Then
+                                    Registra_Turno_Linea(line_aux)
+                                End If
+                                line_aux = Nothing
+                            Next
+                            vLogModifPermDes = "Registro turno todas las lineas - Equipo: " & vnombre_equipo &
+                                " - Turno: " & cbxTurnosLineas.Text & "-(" & cbxTurnosLineas.SelectedValue & ")" &
+                                " #cve_registro_turno: " & get_registro_del_turno()
+                            log_modificaciones_permiso(vLogModifPermDes)
+                        End If
+                    Else
+                        For Each row As DataGridViewRow In grdLineasNoRegistradas.Rows
+                            line_aux = Val(row.Cells(0).Value)
+                            If verifica_registro_turno(line_aux, obten_dia_asignado_registro_turno()) Then
+                                Registra_Turno_Linea(line_aux)
+                            End If
+                            line_aux = Nothing
+                        Next
                     End If
-                    log_modificaciones_permiso(vLogModifPermDes)
                     limpia_turno_linea()
                     deshabilitar_btn_Turno_linea()
                     llena_lineas_Si_gridview()
@@ -2177,15 +2175,19 @@ Public Class frmProduccion
 
                 If ofrmMensaje_Turno.vRespuesta = True Then
                     'MsgBox("Registro exitoso", vbOKOnly, "Aviso")
-                    Registra_Turno_Linea(line_aux)
                     If flgBanderaModificacionPermiso Then
-                        vLogModifPermDes = "Registro turno - Equipo: " & vnombre_equipo & " Linea: " & cbxLinea.Text &
-                            " - Linea: " & grdLineasNoRegistradas.Item(1, grdLineasNoRegistradas.CurrentRow.Index).Value &
-                            "-(" & grdLineasNoRegistradas.Item(0, grdLineasNoRegistradas.CurrentRow.Index).Value & ")" &
-                            " - Turno: " & cbxTurnosLineas.Text & "-(" & cbxTurnosLineas.SelectedValue & ")" &
-                            " #cve_registro_turno: " & get_registro_del_turno()
+                        If valida_hora_de_captura(Now.ToString("dd-MM-yyyy HH:mm:ss")) Then
+                            vLogModifPermDes = "Registro turno - Equipo: " & vnombre_equipo & " Linea: " & cbxLinea.Text &
+                                " - Linea: " & grdLineasNoRegistradas.Item(1, grdLineasNoRegistradas.CurrentRow.Index).Value &
+                                "-(" & grdLineasNoRegistradas.Item(0, grdLineasNoRegistradas.CurrentRow.Index).Value & ")" &
+                                " - Turno: " & cbxTurnosLineas.Text & "-(" & cbxTurnosLineas.SelectedValue & ")" &
+                                " #cve_registro_turno: " & get_registro_del_turno()
+                            Registra_Turno_Linea(line_aux)
+                            log_modificaciones_permiso(vLogModifPermDes)
+                        End If
+                    Else
+                        Registra_Turno_Linea(line_aux)
                     End If
-                    log_modificaciones_permiso(vLogModifPermDes)
                     limpia_turno_linea()
                     deshabilitar_btn_Turno_linea()
                     llena_lineas_Si_gridview()
@@ -2347,7 +2349,17 @@ Public Class frmProduccion
             '    llena_lineas_Si_gridview()
             'End If
             If MsgBox("¿Seguro que desea guardar dia descanso?", vbQuestion + vbYesNo, "Confirmación") = vbYes Then
-                add_descanso()
+                If flgBanderaModificacionPermiso Then
+                    If valida_hora_de_captura(Now.ToString("dd-MM-yyyy HH:mm:ss")) Then
+                        vLogModifPermDes = "Registro Descanso de todas las lineas - Equipo: " & vnombre_equipo &
+                   " - Dia: " & dtpDescanso.Value &
+                   " #cve_registro_turno: " & get_registro_del_turno()
+                        add_descanso()
+                        log_modificaciones_permiso(vLogModifPermDes)
+                    End If
+                Else
+                    add_descanso()
+                End If
                 llena_Descanso_gridview()
                 llena_lineas_Si_gridview()
             End If
@@ -2364,11 +2376,21 @@ Public Class frmProduccion
             If MsgBox("¿Seguro que desea guardar dia descanso?", vbQuestion + vbYesNo, "Confirmación") = vbYes Then
                 Dim oRegistro_Turno As New Registro_Turno
                 oRegistro_Turno.cve_equipo = vcve_equipo
-                oRegistro_Turno.dia_asignado = Convert.ToDateTime(grdDetalleDescansos.Item("dia_asignado", grdDetalleDescansos.CurrentRow.Index).Value)
-                oRegistro_Turno.borra_dia_descanso()
+                oRegistro_Turno.dia_asignado = Convert.ToDateTime(grdDetalleDescansos.Item(0, grdDetalleDescansos.CurrentRow.Index).Value)
+                If flgBanderaModificacionPermiso Then
+                    If valida_hora_de_captura(Now.ToString("dd-MM-yyyy HH:mm:ss")) Then
+                        vLogModifPermDes = "Elimino Descanso de todas las lineas - Equipo: " & vnombre_equipo & " Linea: " & cbxLinea.Text &
+                   " Dia: " & grdDetalleDescansos.Item("dia_asignado", grdDetalleDescansos.CurrentRow.Index).Value &
+                   " #cve_registro_turno: " & get_registro_del_turno()
+                        oRegistro_Turno.borra_dia_descanso()
+                        log_modificaciones_permiso(vLogModifPermDes)
+                    End If
+                Else
+                    oRegistro_Turno.borra_dia_descanso()
+                End If
             End If
         Else
-            btnQuitarGente.Enabled = False
+            btnQuitarDescanso.Enabled = False
         End If
     End Sub
     Private Function valida_captura_descanso() As Boolean
@@ -2438,11 +2460,19 @@ Public Class frmProduccion
             oModificaciones_permiso_log.maquina = My.Computer.Name
             oModificaciones_permiso_log.maquina_usuario = Environment.UserName
             oModificaciones_permiso_log.cod_empleado = vcodigo_empleado
-            oModificaciones_permiso_log.fecha_captura = Now.ToString("dd-MM-yyyy HH:mm")
+            oModificaciones_permiso_log.fecha_captura = Now.ToString("dd-MM-yyyy HH:mm:ss")
             oModificaciones_permiso_log.descripcion = descripcion
             oModificaciones_permiso_log.registra_modificacion_permiso_log()
             vLogModifPermDes = ""
         End If
+    End Sub
+    Private Sub accion_btnTerminar()
+        flgBanderaModificacionPermiso = False
+        btnModTerminar.Enabled = False
+        btnModModificar.Enabled = True
+        cldrModificaciones.Enabled = True
+        cldrModificaciones.SelectedDate = Now
+        inicializa_formulario()
     End Sub
 #End Region
 End Class

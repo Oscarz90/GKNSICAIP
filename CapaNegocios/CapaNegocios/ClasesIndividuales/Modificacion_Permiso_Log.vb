@@ -144,7 +144,7 @@ Public Class Modificacion_Permiso_Log
         Dim obj As DataTable
         Using scope As New TransactionScope
             Try
-                obj = oBD.ObtenerTabla("select mpl.cve_modificacion_permiso_log,e.equipo,mpl.maquina,mpl.maquina_usuario,mpl.cod_empleado,mpl.dia_modificacion,mpl.fecha_captura,mpl.descripcion" &
+                obj = oBD.ObtenerTabla("select mpl.cve_modificacion_permiso_log,e.equipo,mpl.maquina,mpl.maquina_usuario,mpl.cod_empleado,convert(varchar,  mpl.dia_modificacion, 103) as dia_modificacion,mpl.fecha_captura,mpl.descripcion" &
                                        " from modificacion_permiso_log mpl" &
                                        " join equipo e on mpl.cve_equipo=e.cve_equipo" &
                                        " order by mpl.fecha_captura desc")
@@ -166,7 +166,7 @@ Public Class Modificacion_Permiso_Log
                 cmd.Parameters.Add("@maquina", SqlDbType.VarChar).Value = Me.vmaquina
                 cmd.Parameters.Add("@maquina_usuario", SqlDbType.VarChar).Value = Me.vmaquina_usuario
                 cmd.Parameters.Add("@cod_empleado", SqlDbType.VarChar).Value = Me.vcod_empleado
-                cmd.Parameters.Add("@fecha_captura", SqlDbType.DateTime).Value = Me.vfecha_captura
+                cmd.Parameters.Add("@fecha_captura", SqlDbType.DateTime).Value = Me.vfecha_captura.ToString("dd-MM-yyyy HH:mm:ss")
                 cmd.Parameters.Add("@descripcion", SqlDbType.VarChar).Value = Me.vdescripcion
                 Dim obj As DataTable = oBD.EjecutaCommando(cmd)
                 'vResponse = obj.Rows(0)(0)

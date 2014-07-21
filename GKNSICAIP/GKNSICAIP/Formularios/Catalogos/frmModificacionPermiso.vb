@@ -44,10 +44,10 @@ Public Class frmModificacionPermiso
         Me.dtpDiaModificacion.DateTimePickerElement.CustomFormat = "dddd, dd/MMMM/yyyy"
         'Calendario Inicial
         Me.dtpFechaInicial.Format = System.Windows.Forms.DateTimePickerFormat.Custom
-        Me.dtpFechaInicial.DateTimePickerElement.CustomFormat = "dddd, dd/MMMM/yyyy HH:mm" ' tt"
+        Me.dtpFechaInicial.DateTimePickerElement.CustomFormat = "dddd, dd/MMMM/yyyy HH:mm tt" 'tt am o pm para eso es
         'Calendario Final
         Me.dtpFechaFinal.Format = System.Windows.Forms.DateTimePickerFormat.Custom
-        Me.dtpFechaFinal.DateTimePickerElement.CustomFormat = "dddd, dd/MMMM/yyyy HH:mm" ' tt"
+        Me.dtpFechaFinal.DateTimePickerElement.CustomFormat = "dddd, dd/MMMM/yyyy HH:mm tt"
         If voperacion = "INSERT" Then
             btnRegistrar.Text = "Registrar"
         ElseIf voperacion = "UPDATE" And vcve_modificacion_permiso <> 0 Then
