@@ -68,6 +68,7 @@ Partial Class Formulario_Principal
         Me.btnEstrategias = New Telerik.WinControls.UI.RadButtonElement()
         Me.btnCategorias = New Telerik.WinControls.UI.RadButtonElement()
         Me.btnSubCategorias = New Telerik.WinControls.UI.RadButtonElement()
+        Me.RadButtonElement1 = New Telerik.WinControls.UI.RadButtonElement()
         CType(Me.RadStatusStrip1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.Barra_Tool_Registros, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.RadPanel_Registros, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -150,7 +151,7 @@ Partial Class Formulario_Principal
         'Barra_Tool_Registros
         '
         Me.Barra_Tool_Registros.Dock = System.Windows.Forms.DockStyle.Top
-        Me.Barra_Tool_Registros.Location = New System.Drawing.Point(0, 167)
+        Me.Barra_Tool_Registros.Location = New System.Drawing.Point(0, 170)
         Me.Barra_Tool_Registros.Margin = New System.Windows.Forms.Padding(4)
         Me.Barra_Tool_Registros.Name = "Barra_Tool_Registros"
         Me.Barra_Tool_Registros.Rows.AddRange(New Telerik.WinControls.UI.CommandBarRowElement() {Me.CommandBarRowElement2})
@@ -234,10 +235,10 @@ Partial Class Formulario_Principal
         Me.RadPanel_Registros.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center
         Me.RadPanel_Registros.Controls.Add(Me.dgvRegistros)
         Me.RadPanel_Registros.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.RadPanel_Registros.Location = New System.Drawing.Point(0, 197)
+        Me.RadPanel_Registros.Location = New System.Drawing.Point(0, 200)
         Me.RadPanel_Registros.Margin = New System.Windows.Forms.Padding(4)
         Me.RadPanel_Registros.Name = "RadPanel_Registros"
-        Me.RadPanel_Registros.Size = New System.Drawing.Size(1363, 700)
+        Me.RadPanel_Registros.Size = New System.Drawing.Size(1363, 697)
         Me.RadPanel_Registros.TabIndex = 1
         '
         'dgvRegistros
@@ -259,7 +260,7 @@ Partial Class Formulario_Principal
         Me.dgvRegistros.MasterTemplate.EnableFiltering = True
         Me.dgvRegistros.Name = "dgvRegistros"
         Me.dgvRegistros.ReadOnly = True
-        Me.dgvRegistros.Size = New System.Drawing.Size(1355, 667)
+        Me.dgvRegistros.Size = New System.Drawing.Size(1355, 664)
         Me.dgvRegistros.TabIndex = 0
         Me.dgvRegistros.Text = "RadGridView1"
         Me.dgvRegistros.UseScrollbarsInHierarchy = True
@@ -275,7 +276,7 @@ Partial Class Formulario_Principal
         '
         '
         Me.MapaUbicacion.RootElement.AutoSizeMode = Telerik.WinControls.RadAutoSizeMode.WrapAroundChildren
-        Me.MapaUbicacion.Size = New System.Drawing.Size(1363, 167)
+        Me.MapaUbicacion.Size = New System.Drawing.Size(1363, 170)
         Me.MapaUbicacion.StartButtonImage = CType(resources.GetObject("MapaUbicacion.StartButtonImage"), System.Drawing.Image)
         Me.MapaUbicacion.TabIndex = 0
         Me.MapaUbicacion.Text = "SICAIP"
@@ -338,7 +339,7 @@ Partial Class Formulario_Principal
         '
         Me.RibbonTab2.AccessibleDescription = "Catalogos"
         Me.RibbonTab2.AccessibleName = "Catalogos"
-        Me.RibbonTab2.IsSelected = True
+        Me.RibbonTab2.IsSelected = False
         Me.RibbonTab2.Items.AddRange(New Telerik.WinControls.RadItem() {Me.RadRibbonBarGroup2, Me.RadRibbonBarGroup3, Me.RadRibbonBarGroup7})
         Me.RibbonTab2.Name = "RibbonTab2"
         Me.RibbonTab2.Text = "Catalogos SICAIP"
@@ -494,7 +495,7 @@ Partial Class Formulario_Principal
         '
         Me.RibbonTab4.AccessibleDescription = "Graficas"
         Me.RibbonTab4.AccessibleName = "Graficas"
-        Me.RibbonTab4.IsSelected = False
+        Me.RibbonTab4.IsSelected = True
         Me.RibbonTab4.Items.AddRange(New Telerik.WinControls.RadItem() {Me.RadRibbonBarGroup5})
         Me.RibbonTab4.Name = "RibbonTab4"
         Me.RibbonTab4.Text = "Graficas"
@@ -504,7 +505,7 @@ Partial Class Formulario_Principal
         '
         Me.RadRibbonBarGroup5.AccessibleDescription = "Graficos"
         Me.RadRibbonBarGroup5.AccessibleName = "Graficos"
-        Me.RadRibbonBarGroup5.Items.AddRange(New Telerik.WinControls.RadItem() {Me.btnGraficas})
+        Me.RadRibbonBarGroup5.Items.AddRange(New Telerik.WinControls.RadItem() {Me.btnGraficas, Me.RadButtonElement1})
         Me.RadRibbonBarGroup5.Name = "RadRibbonBarGroup5"
         Me.RadRibbonBarGroup5.Text = "Graficos"
         Me.RadRibbonBarGroup5.Visibility = Telerik.WinControls.ElementVisibility.Visible
@@ -573,6 +574,14 @@ Partial Class Formulario_Principal
         Me.btnSubCategorias.Text = "SubCategorias"
         Me.btnSubCategorias.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText
         Me.btnSubCategorias.Visibility = Telerik.WinControls.ElementVisibility.Visible
+        '
+        'RadButtonElement1
+        '
+        Me.RadButtonElement1.AccessibleDescription = "Graficas Nuevas"
+        Me.RadButtonElement1.AccessibleName = "Graficas Nuevas"
+        Me.RadButtonElement1.Name = "RadButtonElement1"
+        Me.RadButtonElement1.Text = "Graficas Nuevas"
+        Me.RadButtonElement1.Visibility = Telerik.WinControls.ElementVisibility.Visible
         '
         'Formulario_Principal
         '
@@ -651,5 +660,6 @@ Partial Class Formulario_Principal
     Friend WithEvents btnEquipo As Telerik.WinControls.UI.RadButtonElement
     Friend WithEvents btnMatch_Equipos As Telerik.WinControls.UI.RadButtonElement
     Friend WithEvents RadRibbonBarButtonGroup1 As Telerik.WinControls.UI.RadRibbonBarButtonGroup
+    Friend WithEvents RadButtonElement1 As Telerik.WinControls.UI.RadButtonElement
 
 End Class
