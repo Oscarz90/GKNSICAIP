@@ -32,13 +32,14 @@ Partial Class Formulario_Principal
         Me.Barra_Tool_Registros = New Telerik.WinControls.UI.RadCommandBar()
         Me.CommandBarRowElement2 = New Telerik.WinControls.UI.CommandBarRowElement()
         Me.CommandBarStripElement2 = New Telerik.WinControls.UI.CommandBarStripElement()
+        Me.btnAdd = New Telerik.WinControls.UI.CommandBarButton()
+        Me.btnModificar = New Telerik.WinControls.UI.CommandBarButton()
+        Me.btnEliminar = New Telerik.WinControls.UI.CommandBarButton()
+        Me.btnExportar = New Telerik.WinControls.UI.CommandBarButton()
         Me.RadLabelElement2 = New Telerik.WinControls.UI.RadLabelElement()
         Me.RadRibbonBarButtonGroup1 = New Telerik.WinControls.UI.RadRibbonBarButtonGroup()
         Me.RadPanel_Registros = New Telerik.WinControls.UI.RadPanel()
         Me.dgvRegistros = New Telerik.WinControls.UI.RadGridView()
-        Me.btnAdd = New Telerik.WinControls.UI.CommandBarButton()
-        Me.btnModificar = New Telerik.WinControls.UI.CommandBarButton()
-        Me.btnEliminar = New Telerik.WinControls.UI.CommandBarButton()
         Me.MapaUbicacion = New Telerik.WinControls.UI.RadRibbonBar()
         Me.RibbonTab1 = New Telerik.WinControls.UI.RibbonTab()
         Me.RadRibbonBarGroup1 = New Telerik.WinControls.UI.RadRibbonBarGroup()
@@ -70,6 +71,7 @@ Partial Class Formulario_Principal
         Me.btnEstrategias = New Telerik.WinControls.UI.RadButtonElement()
         Me.btnCategorias = New Telerik.WinControls.UI.RadButtonElement()
         Me.btnSubCategorias = New Telerik.WinControls.UI.RadButtonElement()
+        Me.sfdExportalExcel = New System.Windows.Forms.SaveFileDialog()
         CType(Me.RadStatusStrip1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.Barra_Tool_Registros, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.RadPanel_Registros, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -151,7 +153,7 @@ Partial Class Formulario_Principal
         'Barra_Tool_Registros
         '
         Me.Barra_Tool_Registros.Dock = System.Windows.Forms.DockStyle.Top
-        Me.Barra_Tool_Registros.Location = New System.Drawing.Point(0, 158)
+        Me.Barra_Tool_Registros.Location = New System.Drawing.Point(0, 159)
         Me.Barra_Tool_Registros.Name = "Barra_Tool_Registros"
         Me.Barra_Tool_Registros.Rows.AddRange(New Telerik.WinControls.UI.CommandBarRowElement() {Me.CommandBarRowElement2})
         Me.Barra_Tool_Registros.Size = New System.Drawing.Size(1016, 30)
@@ -167,8 +169,62 @@ Partial Class Formulario_Principal
         'CommandBarStripElement2
         '
         Me.CommandBarStripElement2.DisplayName = "CommandBarStripElement2"
-        Me.CommandBarStripElement2.Items.AddRange(New Telerik.WinControls.UI.RadCommandBarBaseItem() {Me.btnAdd, Me.btnModificar, Me.btnEliminar})
+        Me.CommandBarStripElement2.Items.AddRange(New Telerik.WinControls.UI.RadCommandBarBaseItem() {Me.btnAdd, Me.btnModificar, Me.btnEliminar, Me.btnExportar})
         Me.CommandBarStripElement2.Name = "CommandBarStripElement2"
+        '
+        'btnAdd
+        '
+        Me.btnAdd.AccessibleDescription = "btnAdd"
+        Me.btnAdd.AccessibleName = "CommandBarButton1"
+        Me.btnAdd.AutoToolTip = True
+        Me.btnAdd.ClipDrawing = False
+        Me.btnAdd.ClipText = False
+        Me.btnAdd.DisplayName = "Nuevo"
+        Me.btnAdd.DrawText = False
+        Me.btnAdd.Image = CType(resources.GetObject("btnAdd.Image"), System.Drawing.Image)
+        Me.btnAdd.Name = "btnAdd"
+        Me.btnAdd.Text = "CommandBarButton1"
+        Me.btnAdd.TextWrap = False
+        Me.btnAdd.ToolTipText = "Nuevo"
+        Me.btnAdd.Visibility = Telerik.WinControls.ElementVisibility.Visible
+        '
+        'btnModificar
+        '
+        Me.btnModificar.AccessibleDescription = "btnModificar"
+        Me.btnModificar.AccessibleName = "CommandBarButton2"
+        Me.btnModificar.AutoToolTip = True
+        Me.btnModificar.DisplayName = "Modificar"
+        Me.btnModificar.Image = CType(resources.GetObject("btnModificar.Image"), System.Drawing.Image)
+        Me.btnModificar.Margin = New System.Windows.Forms.Padding(5, 0, 0, 0)
+        Me.btnModificar.Name = "btnModificar"
+        Me.btnModificar.Text = "CommandBarButton2"
+        Me.btnModificar.ToolTipText = "Modificar"
+        Me.btnModificar.Visibility = Telerik.WinControls.ElementVisibility.Visible
+        '
+        'btnEliminar
+        '
+        Me.btnEliminar.AccessibleDescription = "btnEliminar"
+        Me.btnEliminar.AccessibleName = "CommandBarButton3"
+        Me.btnEliminar.AutoToolTip = True
+        Me.btnEliminar.DisplayName = "Eliminar"
+        Me.btnEliminar.Image = CType(resources.GetObject("btnEliminar.Image"), System.Drawing.Image)
+        Me.btnEliminar.Margin = New System.Windows.Forms.Padding(5, 0, 0, 0)
+        Me.btnEliminar.Name = "btnEliminar"
+        Me.btnEliminar.Text = "CommandBarButton3"
+        Me.btnEliminar.ToolTipText = "Eliminar"
+        Me.btnEliminar.Visibility = Telerik.WinControls.ElementVisibility.Visible
+        '
+        'btnExportar
+        '
+        Me.btnExportar.AccessibleDescription = "CommandBarButton1"
+        Me.btnExportar.AccessibleName = "CommandBarButton1"
+        Me.btnExportar.DisplayName = "CommandBarButton1"
+        Me.btnExportar.Image = Global.GKNSICAIP.My.Resources.Resources.save
+        Me.btnExportar.ImageAlignment = System.Drawing.ContentAlignment.MiddleRight
+        Me.btnExportar.Margin = New System.Windows.Forms.Padding(5, 0, 0, 0)
+        Me.btnExportar.Name = "btnExportar"
+        Me.btnExportar.Text = ""
+        Me.btnExportar.Visibility = Telerik.WinControls.ElementVisibility.Visible
         '
         'RadLabelElement2
         '
@@ -194,9 +250,9 @@ Partial Class Formulario_Principal
         Me.RadPanel_Registros.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center
         Me.RadPanel_Registros.Controls.Add(Me.dgvRegistros)
         Me.RadPanel_Registros.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.RadPanel_Registros.Location = New System.Drawing.Point(0, 188)
+        Me.RadPanel_Registros.Location = New System.Drawing.Point(0, 189)
         Me.RadPanel_Registros.Name = "RadPanel_Registros"
-        Me.RadPanel_Registros.Size = New System.Drawing.Size(1016, 535)
+        Me.RadPanel_Registros.Size = New System.Drawing.Size(1016, 534)
         Me.RadPanel_Registros.TabIndex = 1
         '
         'dgvRegistros
@@ -217,51 +273,11 @@ Partial Class Formulario_Principal
         Me.dgvRegistros.MasterTemplate.EnableFiltering = True
         Me.dgvRegistros.Name = "dgvRegistros"
         Me.dgvRegistros.ReadOnly = True
-        Me.dgvRegistros.Size = New System.Drawing.Size(1010, 510)
+        Me.dgvRegistros.Size = New System.Drawing.Size(1010, 509)
         Me.dgvRegistros.TabIndex = 0
         Me.dgvRegistros.Text = "RadGridView1"
         Me.dgvRegistros.UseScrollbarsInHierarchy = True
         Me.dgvRegistros.Visible = False
-        '
-        'btnAdd
-        '
-        Me.btnAdd.AccessibleDescription = "btnAdd"
-        Me.btnAdd.AccessibleName = "CommandBarButton1"
-        Me.btnAdd.AutoToolTip = True
-        Me.btnAdd.ClipDrawing = False
-        Me.btnAdd.ClipText = False
-        Me.btnAdd.DisplayName = "Nuevo"
-        Me.btnAdd.DrawText = False
-        Me.btnAdd.Image = CType(resources.GetObject("btnAdd.Image"), System.Drawing.Image)
-        Me.btnAdd.Name = "btnAdd"
-        Me.btnAdd.Text = "CommandBarButton1"
-        Me.btnAdd.TextWrap = False
-        Me.btnAdd.ToolTipText = "Nuevo"
-        Me.btnAdd.Visibility = Telerik.WinControls.ElementVisibility.Visible
-        '
-        'btnModificar
-        '
-        Me.btnModificar.AccessibleDescription = "btnModificar"
-        Me.btnModificar.AccessibleName = "CommandBarButton2"
-        Me.btnModificar.AutoToolTip = True
-        Me.btnModificar.DisplayName = "Modificar"
-        Me.btnModificar.Image = CType(resources.GetObject("btnModificar.Image"), System.Drawing.Image)
-        Me.btnModificar.Name = "btnModificar"
-        Me.btnModificar.Text = "CommandBarButton2"
-        Me.btnModificar.ToolTipText = "Modificar"
-        Me.btnModificar.Visibility = Telerik.WinControls.ElementVisibility.Visible
-        '
-        'btnEliminar
-        '
-        Me.btnEliminar.AccessibleDescription = "btnEliminar"
-        Me.btnEliminar.AccessibleName = "CommandBarButton3"
-        Me.btnEliminar.AutoToolTip = True
-        Me.btnEliminar.DisplayName = "Eliminar"
-        Me.btnEliminar.Image = CType(resources.GetObject("btnEliminar.Image"), System.Drawing.Image)
-        Me.btnEliminar.Name = "btnEliminar"
-        Me.btnEliminar.Text = "CommandBarButton3"
-        Me.btnEliminar.ToolTipText = "Eliminar"
-        Me.btnEliminar.Visibility = Telerik.WinControls.ElementVisibility.Visible
         '
         'MapaUbicacion
         '
@@ -272,7 +288,7 @@ Partial Class Formulario_Principal
         '
         '
         Me.MapaUbicacion.RootElement.AutoSizeMode = Telerik.WinControls.RadAutoSizeMode.WrapAroundChildren
-        Me.MapaUbicacion.Size = New System.Drawing.Size(1016, 158)
+        Me.MapaUbicacion.Size = New System.Drawing.Size(1016, 159)
         Me.MapaUbicacion.StartButtonImage = CType(resources.GetObject("MapaUbicacion.StartButtonImage"), System.Drawing.Image)
         Me.MapaUbicacion.TabIndex = 0
         Me.MapaUbicacion.Text = "SICAIP"
@@ -281,7 +297,7 @@ Partial Class Formulario_Principal
         '
         Me.RibbonTab1.AccessibleDescription = "Configuración"
         Me.RibbonTab1.AccessibleName = "Configuración"
-        Me.RibbonTab1.IsSelected = False
+        Me.RibbonTab1.IsSelected = True
         Me.RibbonTab1.Items.AddRange(New Telerik.WinControls.RadItem() {Me.RadRibbonBarGroup1})
         Me.RibbonTab1.Name = "RibbonTab1"
         Me.RibbonTab1.Text = "Configuración"
@@ -335,7 +351,7 @@ Partial Class Formulario_Principal
         '
         Me.RibbonTab2.AccessibleDescription = "Catalogos"
         Me.RibbonTab2.AccessibleName = "Catalogos"
-        Me.RibbonTab2.IsSelected = True
+        Me.RibbonTab2.IsSelected = False
         Me.RibbonTab2.Items.AddRange(New Telerik.WinControls.RadItem() {Me.RadRibbonBarGroup2, Me.RadRibbonBarGroup3, Me.RadRibbonBarGroup7})
         Me.RibbonTab2.Name = "RibbonTab2"
         Me.RibbonTab2.Text = "Catalogos SICAIP"
@@ -678,5 +694,7 @@ Partial Class Formulario_Principal
     Friend WithEvents RadRibbonBarButtonGroup1 As Telerik.WinControls.UI.RadRibbonBarButtonGroup
     Friend WithEvents btnModifPermiso As Telerik.WinControls.UI.RadButtonElement
     Friend WithEvents btnModifPermLog As Telerik.WinControls.UI.RadButtonElement
+    Friend WithEvents btnExportar As Telerik.WinControls.UI.CommandBarButton
+    Friend WithEvents sfdExportalExcel As System.Windows.Forms.SaveFileDialog
 
 End Class
