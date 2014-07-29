@@ -22,6 +22,7 @@ Partial Class frmModificacionPermiso
     'No lo modifique con el editor de código.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Me.components = New System.ComponentModel.Container()
         Me.PictureBox2 = New System.Windows.Forms.PictureBox()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.Label2 = New System.Windows.Forms.Label()
@@ -34,6 +35,7 @@ Partial Class frmModificacionPermiso
         Me.dtpFechaFinal = New Telerik.WinControls.UI.RadDateTimePicker()
         Me.Label5 = New System.Windows.Forms.Label()
         Me.cbxUsuarios = New Telerik.WinControls.UI.RadMultiColumnComboBox()
+        Me.errorProv = New System.Windows.Forms.ErrorProvider(Me.components)
         CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.dtpDiaModificacion, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.dtpFechaInicial, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -41,6 +43,7 @@ Partial Class frmModificacionPermiso
         CType(Me.cbxUsuarios, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.cbxUsuarios.EditorControl, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.cbxUsuarios.EditorControl.MasterTemplate, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.errorProv, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'PictureBox2
@@ -169,7 +172,7 @@ Partial Class frmModificacionPermiso
         Me.cbxUsuarios.EditorControl.ForeColor = System.Drawing.SystemColors.ControlText
         Me.cbxUsuarios.EditorControl.Location = New System.Drawing.Point(0, 0)
         '
-        '
+        'cbxUsuarios.NestedRadGridView
         '
         Me.cbxUsuarios.EditorControl.MasterTemplate.AllowAddNewRow = False
         Me.cbxUsuarios.EditorControl.MasterTemplate.AllowCellContextMenu = False
@@ -188,6 +191,10 @@ Partial Class frmModificacionPermiso
         Me.cbxUsuarios.Size = New System.Drawing.Size(267, 26)
         Me.cbxUsuarios.TabIndex = 161
         Me.cbxUsuarios.TabStop = False
+        '
+        'errorProv
+        '
+        Me.errorProv.ContainerControl = Me
         '
         'frmModificacionPermiso
         '
@@ -220,6 +227,7 @@ Partial Class frmModificacionPermiso
         CType(Me.cbxUsuarios.EditorControl.MasterTemplate, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.cbxUsuarios.EditorControl, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.cbxUsuarios, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.errorProv, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -236,4 +244,5 @@ Partial Class frmModificacionPermiso
     Friend WithEvents dtpFechaFinal As Telerik.WinControls.UI.RadDateTimePicker
     Friend WithEvents Label5 As System.Windows.Forms.Label
     Friend WithEvents cbxUsuarios As Telerik.WinControls.UI.RadMultiColumnComboBox
+    Friend WithEvents errorProv As System.Windows.Forms.ErrorProvider
 End Class

@@ -51,7 +51,7 @@ Public Class frmModificacionPermiso
         If voperacion = "INSERT" Then
             btnRegistrar.Text = "Registrar"
         ElseIf voperacion = "UPDATE" And vcve_modificacion_permiso <> 0 Then
-            btnRegistrar.Text = "Actualizar"
+            btnRegistrar.Text = "Modificar"
         End If
 
     End Sub
@@ -98,13 +98,80 @@ Public Class frmModificacionPermiso
     End Sub
 #End Region
 #Region "Validaciones"
+    Private Sub valida_captura_error_provider()
+        Dim flgFechaInicioFin As Boolean = False
+        Dim auxString As String = ""
+        'Selecciona un usuario
+        If cbxUsuarios.SelectedIndex <> -1 Then
+            auxString = String.Format(cbxUsuarios.EditorControl.Rows(cbxUsuarios.SelectedIndex).Cells("Id_Usuario").Value)
+            If auxString <> cbxUsuarios.Text Then
+                errorProv.SetError(Me.cbxUsuarios, "Selecciona un usuario")
+            Else
+                errorProv.SetError(Me.cbxUsuarios, "")
+            End If
+        Else
+            errorProv.SetError(Me.cbxUsuarios, "Selecciona un usuario.")
+        End If
+        'Valida Fecha Inicial y Final
+        If dtpFechaInicial.Text <> "" And dtpFechaFinal.Text <> "" Then
+            'Fecha Inicial debe ser menor a Fecha Final
+            If Not dtpFechaFinal.Value > dtpFechaInicial.Value Then
+                errorProv.SetError(Me.dtpFechaInicial, "La fecha Inicial debe ser menor a la Fecha Final!.")
+                errorProv.SetError(Me.dtpFechaFinal, "La fecha Final debe ser mayor a la Fecha Inicial!.")
+            Else
+                'Fecha Inicial mayor a fecha actual
+                If Not dtpFechaInicial.Value >= Now.ToString("dd-MM-yyyy HH:mm") Then
+                    errorProv.SetError(Me.dtpFechaInicial, "La fecha Inicial debe mayor a la Fecha y Hora Actual!.")
+                Else
+                    errorProv.SetError(Me.dtpFechaInicial, "")
+                    flgFechaInicioFin = True
+                End If
+                errorProv.SetError(Me.dtpFechaFinal, "")
+            End If
+        Else
+            If dtpFechaInicial.Text <> "" Then
+                errorProv.SetError(Me.dtpFechaInicial, "")
+            Else
+                errorProv.SetError(Me.dtpFechaInicial, "Selecciona la fecha inicial.")
+            End If
+            If dtpFechaFinal.Text <> "" Then
+                errorProv.SetError(Me.dtpFechaFinal, "")
+            Else
+                errorProv.SetError(Me.dtpFechaFinal, "Selecciona la fecha final.")
+            End If
+        End If
+        'Valida traslape
+        If dtpDiaModificacion.Text <> "" Then
+            If flgFechaInicioFin = True And cbxUsuarios.SelectedIndex <> -1 Then
+                If valida_traslape_fecha_inicio_fin() Then
+                    errorProv.SetError(Me.dtpDiaModificacion, "")
+                Else
+                    errorProv.SetError(Me.dtpDiaModificacion, "La Fecha Inicial y Final se traslapan con un permiso de modificaciones " & vbCr & "existente para el usuario seleccionado. No puede haber traslapes!.")
+                End If
+            Else
+                errorProv.SetError(Me.dtpDiaModificacion, "Llena los demas campos correctamente.")
+            End If
+        Else
+            errorProv.SetError(Me.dtpDiaModificacion, "Selecciona un dia de modificación.")
+        End If
+    End Sub
     'Valida todo para la captura
     Private Function valida_captura() As Boolean
-        If cbxUsuarios.SelectedIndex <> -1 And valida_fecha_inicio_fin() And valida_traslape_fecha_inicio_fin() Then
+        valida_captura_error_provider()
+        Dim flgCbxUsuarios As Boolean = False
+        Dim auxString As String = ""
+        If cbxUsuarios.SelectedIndex <> -1 Then
+            auxString = String.Format(cbxUsuarios.EditorControl.Rows(cbxUsuarios.SelectedIndex).Cells("Id_Usuario").Value)
+            If Not auxString <> cbxUsuarios.Text Then
+                flgCbxUsuarios = True
+            End If
+        End If
+        If flgCbxUsuarios = True And valida_fecha_inicio_fin() And valida_traslape_fecha_inicio_fin() Then
             Return True
         Else
             Return False
         End If
+
     End Function
     'Valida la fecha final e inicial
     Private Function valida_fecha_inicio_fin() As Boolean
@@ -126,6 +193,12 @@ Public Class frmModificacionPermiso
             Return False
         End If
     End Function
+    'Valida cambio de texto
+    Private Sub cbxUsuarios_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cbxUsuarios.TextChanged
+        If flgcbxUsuarios Then
+            valida_btn_Registrar()
+        End If
+    End Sub
 #End Region
 #Region "Eventos"
     'Evento DatetimePicker Dia_Modificacion,Fecha_Inicial,Fecha_Final

@@ -257,7 +257,7 @@ Partial Class msg_ModificacionesPermiso
         Me.MinimumSize = New System.Drawing.Size(509, 304)
         Me.Name = "msg_ModificacionesPermiso"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
-        Me.Text = "msg_ModificacionesPermiso"
+        Me.Text = "Permiso Modificaciones"
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()

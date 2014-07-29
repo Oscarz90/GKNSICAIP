@@ -643,7 +643,7 @@ Public Class frmProduccion
                     " Modelo: " & cbxModeloProductividad.Text & "-(" & cbxModeloProductividad.SelectedValue & ")" &
                     " Cantidad: " & txtPiezasOkProducidas.Text &
                     " Tiempo Operacion: " & txtTiempoOperacion.Text &
-                    " #cve_registro_turno: " & get_registro_del_turno()
+                    " #cve: " & get_registro_del_turno()
                 End If
                 add_modelo_producido()
                 log_modificaciones_permiso(vLogModifPermDes)
@@ -666,7 +666,7 @@ Public Class frmProduccion
                "-(" & grdDetalleProductividad.Item(3, grdDetalleProductividad.CurrentRow.Index).Value & ")" &
                " Cantidad: " & grdDetalleProductividad.Item(5, grdDetalleProductividad.CurrentRow.Index).Value &
                " Tiempo Operacion: " & grdDetalleProductividad.Item(6, grdDetalleProductividad.CurrentRow.Index).Value &
-               " #cve_registro_turno: " & get_registro_del_turno()
+               " #cve: " & get_registro_del_turno()
             End If
             remove_modelo_producido()
             log_modificaciones_permiso(vLogModifPermDes)
@@ -686,7 +686,7 @@ Public Class frmProduccion
                 vLogModifPermDes = "Registro Desecho - Equipo: " & vnombre_equipo & " Linea: " & cbxLinea.Text &
                 " Modelo: " & cbxModeloDesecho.Text & "-(" & cbxModeloDesecho.SelectedValue & ")" &
                 " Cantidad: " & txtDesechosCantidad.Text &
-                " #cve_registro_turno: " & get_registro_del_turno()
+                " #cve: " & get_registro_del_turno()
             End If
             add_desecho()
             log_modificaciones_permiso(vLogModifPermDes)
@@ -706,7 +706,7 @@ Public Class frmProduccion
                " Modelo: " & grdDetalleDesecho.Item(4, grdDetalleDesecho.CurrentRow.Index).Value &
                "-(" & grdDetalleDesecho.Item(2, grdDetalleDesecho.CurrentRow.Index).Value & ")" &
                " Cantidad: " & grdDetalleDesecho.Item(5, grdDetalleDesecho.CurrentRow.Index).Value &
-               " #cve_registro_turno: " & get_registro_del_turno()
+               " #cve: " & get_registro_del_turno()
             End If
             remove_desecho()
             log_modificaciones_permiso(vLogModifPermDes)
@@ -727,7 +727,7 @@ Public Class frmProduccion
                 " Modelo: " & cbxModeloRechazo.Text & "-(" & cbxModeloRechazo.SelectedValue & ")" &
                 " Cantidad: " & txtRechazosCantidad.Text &
                 " Tipo: " & cbxTipoRechazo.Text &
-                " #cve_registro_turno: " & get_registro_del_turno()
+                " #cve: " & get_registro_del_turno()
             End If
             add_rechazo()
             log_modificaciones_permiso(vLogModifPermDes)
@@ -747,7 +747,7 @@ Public Class frmProduccion
                " Modelo: " & grdDetalleRechazo.Item(2, grdDetalleRechazo.CurrentRow.Index).Value &
                "-(" & grdDetalleRechazo.Item(1, grdDetalleRechazo.CurrentRow.Index).Value & ")" &
                " Cantidad: " & grdDetalleRechazo.Item(3, grdDetalleRechazo.CurrentRow.Index).Value &
-               " #cve_registro_turno: " & get_registro_del_turno()
+               " #cve: " & get_registro_del_turno()
             End If
             remove_rechazo()
             log_modificaciones_permiso(vLogModifPermDes)
@@ -769,7 +769,7 @@ Public Class frmProduccion
                         " Paro: " & cbxTipoParo.Text &
                         " Minutos: " & txtMinutosParo.Text &
                         " Maquina: " & cbxMaquina.Text & "-(" & cbxMaquina.SelectedValue & ")" &
-                        " #cve_registro_turno: " & get_registro_del_turno()
+                        " #cve: " & get_registro_del_turno()
                 End If
                 add_paro()
                 log_modificaciones_permiso(vLogModifPermDes)
@@ -790,7 +790,7 @@ Public Class frmProduccion
                " Paro: " & grdDetalleParo.Item(4, grdDetalleParo.CurrentRow.Index).Value &
                " Minutos: " & grdDetalleParo.Item(6, grdDetalleParo.CurrentRow.Index).Value &
                " Maquina: " & grdDetalleParo.Item(7, grdDetalleParo.CurrentRow.Index).Value &
-               " #cve_registro_turno: " & get_registro_del_turno()
+               " #cve: " & get_registro_del_turno()
             End If
             remove_paro()
             log_modificaciones_permiso(vLogModifPermDes)
@@ -811,7 +811,7 @@ Public Class frmProduccion
                 vLogModifPermDes = "Registro Gente - Equipo: " & vnombre_equipo & " Linea: " & cbxLinea.Text &
                 " Tipo Gente: " & cbxTipoDetalleGente.Text & "-(" & cbxTipoDetalleGente.SelectedValue & ")" &
                 " Cantidad: " & txtGenteCantidad.Text &
-                " #cve_registro_turno: " & get_registro_del_turno()
+                " #cve: " & get_registro_del_turno()
             End If
             add_gente()
             log_modificaciones_permiso(vLogModifPermDes)
@@ -825,7 +825,7 @@ Public Class frmProduccion
                 vLogModifPermDes = "Elimino Gente - Equipo: " & vnombre_equipo & " Linea: " & cbxLinea.Text &
                " Descripcion: " & grdDetalleGente.Item(1, grdDetalleGente.CurrentRow.Index).Value &
                " Cantidad: " & grdDetalleGente.Item(2, grdDetalleGente.CurrentRow.Index).Value &
-               " #cve_registro_turno: " & get_registro_del_turno()
+               " #cve: " & get_registro_del_turno()
             End If
             remove_gente()
             log_modificaciones_permiso(vLogModifPermDes)
@@ -846,7 +846,7 @@ Public Class frmProduccion
                 vLogModifPermDes = "Registro Cond. Insegura - Equipo: " & vnombre_equipo & " Linea: " & cbxLinea.Text &
                 " Tipo Condicion Insegura: " & cbxTipoCondInseg.Text & "-(" & cbxTipoCondInseg.SelectedValue & ")" &
                 " Cantidad: " & txtCondInsegCantidad.Text &
-                " #cve_registro_turno: " & get_registro_del_turno()
+                " #cve: " & get_registro_del_turno()
             End If
             If cbxTipoCondInseg.SelectedValue = 1 Then ''SI SON NUEVAS
                 add_cond_inseg()
@@ -889,7 +889,7 @@ Public Class frmProduccion
                 vLogModifPermDes = "Elimino Cond. Insegura - Equipo: " & vnombre_equipo & " Linea: " & cbxLinea.Text &
                " Descripcion: " & grdDetalleCondInseg.Item(1, grdDetalleCondInseg.CurrentRow.Index).Value &
                " Cantidad: " & grdDetalleCondInseg.Item(2, grdDetalleCondInseg.CurrentRow.Index).Value &
-               " #cve_registro_turno: " & get_registro_del_turno()
+               " #cve: " & get_registro_del_turno()
             End If
             remove_cond_inseg()
             log_modificaciones_permiso(vLogModifPermDes)
@@ -905,7 +905,7 @@ Public Class frmProduccion
                 vLogModifPermDes = "Registro Accidente - Equipo: " & vnombre_equipo & " Linea: " & cbxLinea.Text &
                 " Tipo Accidente: " & cbxTipoAccidente.Text & "-(" & cbxTipoAccidente.SelectedValue & ")" &
                 " Cantidad: " & txtAccidenteCantidad.Text &
-                " #cve_registro_turno: " & get_registro_del_turno()
+                " #cve: " & get_registro_del_turno()
             End If
             add_accidentes()
             log_modificaciones_permiso(vLogModifPermDes)
@@ -919,7 +919,7 @@ Public Class frmProduccion
                 vLogModifPermDes = "Elimino Accidente - Equipo: " & vnombre_equipo & " Linea: " & cbxLinea.Text &
                " Descripcion: " & grdDetalleAccidente.Item(1, grdDetalleAccidente.CurrentRow.Index).Value &
                " Cantidad: " & grdDetalleAccidente.Item(2, grdDetalleAccidente.CurrentRow.Index).Value &
-               " #cve_registro_turno: " & get_registro_del_turno()
+               " #cve: " & get_registro_del_turno()
             End If
             remove_accidentes()
             log_modificaciones_permiso(vLogModifPermDes)
@@ -945,7 +945,7 @@ Public Class frmProduccion
                     " - Tipo Admon. Visual: " & txtAdmonVisual.Text &
                     " - Tipo 5s: " & txt5s.Text &
                     " - Promedio: " & txtPromedio.Text &
-                    " #cve_registro_turno: " & get_registro_del_turno()
+                    " #cve: " & get_registro_del_turno()
                 End If
                 add_cinco_s()
                 log_modificaciones_permiso(vLogModifPermDes)
@@ -989,7 +989,7 @@ Public Class frmProduccion
             If flgBanderaModificacionPermiso Then
                 vLogModifPermDes = "Registro Comentario General - Equipo: " & vnombre_equipo & " Linea: " & cbxLinea.Text &
                 " - Comentario: " & txtDetallesComentario.Text &
-                " #cve_registro_turno: " & get_registro_del_turno()
+                " #cve: " & get_registro_del_turno()
             End If
             add_comentario()
             log_modificaciones_permiso(vLogModifPermDes)
@@ -1003,7 +1003,7 @@ Public Class frmProduccion
                 vLogModifPermDes = "Elimino Comentario General - Equipo: " & vnombre_equipo & " Linea: " & cbxLinea.Text &
                " - Comentario: " & grdDetalleComentario.Item(1, grdDetalleComentario.CurrentRow.Index).Value &
                " - (" & grdDetalleComentario.Item(0, grdDetalleComentario.CurrentRow.Index).Value & ")" &
-               " #cve_registro_turno: " & get_registro_del_turno()
+               " #cve: " & get_registro_del_turno()
             End If
             remove_comentario()
             log_modificaciones_permiso(vLogModifPermDes)
@@ -1565,7 +1565,12 @@ Public Class frmProduccion
         If hora_actual >= fecha_inicio And hora_actual <= fecha_final Then
             Return True
         ElseIf flgBanderaModificacionPermiso Then
+
+            vLogModifPermDes = "Finalizo permiso de Modificacion - Equipo: " & vnombre_equipo & " Linea: " & cbxLinea.Text &
+            " #cve: " & get_registro_del_turno()
+
             MsgBox("Ha finalizado el permiso de modificación de captura. Se restablecerá la pantalla de captura al día actual.", vbExclamation + vbOKOnly, "Aviso!")
+            log_modificaciones_permiso(vLogModifPermDes)
             btnModTerminar.PerformClick()
             Return False
         Else
@@ -2124,7 +2129,7 @@ Public Class frmProduccion
                             Next
                             vLogModifPermDes = "Registro turno todas las lineas - Equipo: " & vnombre_equipo &
                                 " - Turno: " & cbxTurnosLineas.Text & "-(" & cbxTurnosLineas.SelectedValue & ")" &
-                                " #cve_registro_turno: " & get_registro_del_turno()
+                                " #cve: " & get_registro_del_turno()
                             log_modificaciones_permiso(vLogModifPermDes)
                         End If
                     Else
@@ -2181,7 +2186,7 @@ Public Class frmProduccion
                                 " - Linea: " & grdLineasNoRegistradas.Item(1, grdLineasNoRegistradas.CurrentRow.Index).Value &
                                 "-(" & grdLineasNoRegistradas.Item(0, grdLineasNoRegistradas.CurrentRow.Index).Value & ")" &
                                 " - Turno: " & cbxTurnosLineas.Text & "-(" & cbxTurnosLineas.SelectedValue & ")" &
-                                " #cve_registro_turno: " & get_registro_del_turno()
+                                " #cve: " & get_registro_del_turno()
                             Registra_Turno_Linea(line_aux)
                             log_modificaciones_permiso(vLogModifPermDes)
                         End If
@@ -2353,7 +2358,7 @@ Public Class frmProduccion
                     If valida_hora_de_captura(Now.ToString("dd-MM-yyyy HH:mm:ss")) Then
                         vLogModifPermDes = "Registro Descanso de todas las lineas - Equipo: " & vnombre_equipo &
                    " - Dia: " & dtpDescanso.Value &
-                   " #cve_registro_turno: " & get_registro_del_turno()
+                   " #cve: " & get_registro_del_turno()
                         add_descanso()
                         log_modificaciones_permiso(vLogModifPermDes)
                     End If
@@ -2381,7 +2386,7 @@ Public Class frmProduccion
                     If valida_hora_de_captura(Now.ToString("dd-MM-yyyy HH:mm:ss")) Then
                         vLogModifPermDes = "Elimino Descanso de todas las lineas - Equipo: " & vnombre_equipo & " Linea: " & cbxLinea.Text &
                    " Dia: " & grdDetalleDescansos.Item("dia_asignado", grdDetalleDescansos.CurrentRow.Index).Value &
-                   " #cve_registro_turno: " & get_registro_del_turno()
+                   " #cve: " & get_registro_del_turno()
                         oRegistro_Turno.borra_dia_descanso()
                         log_modificaciones_permiso(vLogModifPermDes)
                     End If

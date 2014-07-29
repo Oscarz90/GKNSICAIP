@@ -656,7 +656,7 @@ Public Class Formulario_Principal
             Me.dgvRegistros.Columns("fecha_inicio").HeaderText = "Fecha Inicio"
             Me.dgvRegistros.Columns("fecha_inicio").Width = 250
 
-            Me.dgvRegistros.Columns("fecha_final").HeaderText = "Nombre"
+            Me.dgvRegistros.Columns("fecha_final").HeaderText = "Fecha Final"
             Me.dgvRegistros.Columns("fecha_final").Width = 250
 
             dgvRegistros.Visible = True
@@ -682,22 +682,12 @@ Public Class Formulario_Principal
             Me.dgvRegistros.Columns.Clear()
             Me.dgvRegistros.Visible = True
             Me.Barra_Tool_Registros.Visible = True
-            'Me.btnEliminar.VisibleInStrip = False
-
-            'If Permiso_Asignado("MODIF_CATALOGO.REGISTRAR") = True Then
-            '    Me.btnAdd.Enabled = True
-            '    Me.btnModificar.Enabled = True
-            'Else
-            '    Me.btnAdd.Enabled = False
-            '    Me.btnModificar.Enabled = False
-            'End If
-            'If Permiso_Asignado("MODIF_CATALOGO.ELIMINAR") = True Then
-            '    Me.btnEliminar.Enabled = True
-            'Else
-            '    Me.btnEliminar.Enabled = False
-            'End If
-
             Me.btnExportar.Enabled = True
+            Me.btnAdd.Enabled = False
+            Me.btnModificar.Enabled = False
+            Me.btnEliminar.Enabled = False
+            
+
             Try
                 Me.dgvRegistros.DataSource = oModificacionPermisoLog.obtiene_registros_catalogo
             Catch ex As Exception
@@ -1554,7 +1544,7 @@ Public Class Formulario_Principal
         If sfdExportalExcel.FileName <> "" Then
             Try
                 exporter.RunExport(sfdExportalExcel.FileName)
-                MsgBox("Se exportó exitosamente los datos a la ubicacion:  " & sfdExportalExcel.FileName, vbInformation + vbOKOnly, "Información")
+                MsgBox("Se exportó exitosamente los datos a la ubicación:  " & sfdExportalExcel.FileName, vbInformation + vbOKOnly, "Información")
             Catch ex As Exception
                 MsgBox(ex.ToString)
             Finally
