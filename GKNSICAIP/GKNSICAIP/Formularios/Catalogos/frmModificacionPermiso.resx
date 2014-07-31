@@ -117,62 +117,7 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="gkn_modificaciones copia" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\gkn_modificaciones copia.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="save_download_32" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\ICON\save_download_32.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="Estrategias3" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Estrategias3.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="gkn_mod_log" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\gkn_mod_log.ico;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="next-next" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\next-next.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="gkn_modificaciones copia1" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\gkn_modificaciones copia.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="frmSoporteEmail" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\frmSoporteEmail.bmp;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="frmSoporteEmail1" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\frmSoporteEmail.gif;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="frmEnviarEmailAddTo" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\frmEnviarEmailAddTo.gif;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="banner_03" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\banner_03.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="gkn_mod" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\gkn_mod.ico;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="next" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\next.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="frmEnvioEmailCancel" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\frmEnvioEmailCancel.gif;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="frmGraficas_graficar1" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\frmGraficas_graficar.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="TLATOANI IMAGOTIPO REV0a" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\TLATOANI IMAGOTIPO REV0a.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="04_Save_16x16" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\ICON\04_Save_16x16.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="04_Save_24x24" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\ICON\04_Save_24x24.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="banner-gkn-driveline" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\banner-gkn-driveline.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="save" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\save.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
+  <metadata name="errorProv.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>17, 17</value>
+  </metadata>
 </root>
