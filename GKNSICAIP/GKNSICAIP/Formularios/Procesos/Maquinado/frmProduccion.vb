@@ -456,6 +456,7 @@ Public Class frmProduccion
 #Region "Eventos ComboBox"
     'General
     Private Sub cbxLinea_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cbxLinea.SelectedIndexChanged
+        Dim flgModifValida As Boolean = False
         vCve_Linea_CBX = cbxLinea.SelectedValue
         If cbxLinea.SelectedIndex <> -1 And flgBanderacbxLineas Then
             'If verifica_registro_turno_produccion(cbxLinea.SelectedValue, Convert.ToDateTime(Now.ToString("dd-MM-yyyy HH:mm"))) Then Modificacion Permiso
@@ -463,23 +464,33 @@ Public Class frmProduccion
                 MsgBox("No has registrado Turno para la Linea: " & cbxLinea.Text)
                 establece_dia_descanso()
             Else
-                ' MsgBox("Linea con horario asignado")
                 cbxTurno.SelectedIndex = vcve_turno - 1
                 If cbxTurno.Text = "Descanso" Then
                     establece_dia_descanso()
                     establece_label_fecha_captura()
                 Else
-                    establece_dia_laboral()
-                    establece_hora_inicio_fin_captura()
-                    llena_cbx_Modelos()
-                    llena_cbx_Modelos_Desecho()
-                    llena_cbx_Maquinas()
-                    llena_informacion_tabs_formulario()
-                    establece_label_fecha_captura()
+                    'If solo para modificaciones
+                    If flgBanderaModificacionPermiso Then
+                        If valida_hora_de_captura(Now.ToString("dd-MM-yyyy HH:mm:ss")) Then
+                            establece_dia_laboral()
+                            establece_hora_inicio_fin_captura()
+                            llena_cbx_Modelos()
+                            llena_cbx_Modelos_Desecho()
+                            llena_cbx_Maquinas()
+                            llena_informacion_tabs_formulario()
+                            establece_label_fecha_captura()
+                        End If
+                    Else
+                        establece_dia_laboral()
+                        establece_hora_inicio_fin_captura()
+                        llena_cbx_Modelos()
+                        llena_cbx_Modelos_Desecho()
+                        llena_cbx_Maquinas()
+                        llena_informacion_tabs_formulario()
+                        establece_label_fecha_captura()
+                    End If
+
                 End If
-
-
-
             End If
         End If
 
@@ -1565,10 +1576,8 @@ Public Class frmProduccion
         If hora_actual >= fecha_inicio And hora_actual <= fecha_final Then
             Return True
         ElseIf flgBanderaModificacionPermiso Then
-
             vLogModifPermDes = "Finalizo permiso de Modificacion - Equipo: " & vnombre_equipo & " Linea: " & cbxLinea.Text &
             " #cve: " & get_registro_del_turno()
-
             MsgBox("Ha finalizado el permiso de modificación de captura. Se restablecerá la pantalla de captura al día actual.", vbExclamation + vbOKOnly, "Aviso!")
             log_modificaciones_permiso(vLogModifPermDes)
             btnModTerminar.PerformClick()
@@ -2477,6 +2486,9 @@ Public Class frmProduccion
         btnModModificar.Enabled = True
         cldrModificaciones.Enabled = True
         cldrModificaciones.SelectedDate = Now
+        'cbxLinea.SelectedIndex = -1
+        'cbxTurno.SelectedIndex = -1
+        'establece_dia_descanso()
         inicializa_formulario()
     End Sub
 #End Region

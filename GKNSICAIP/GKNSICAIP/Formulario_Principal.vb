@@ -1023,11 +1023,20 @@ Public Class Formulario_Principal
             If vRowSeleccionada <> 0 Then
                 If Permiso_Asignado("MODIF_CATALOGO.VER") = True Then
                     If Permiso_Asignado("MODIF_CATALOGO.REGISTRAR") = True Then
-                        'vPermiso_Add = False
-                        ofrmModificacion_Permiso = New frmModificacionPermiso()
-                        ofrmModificacion_Permiso.operacion = "UPDATE"
-                        ofrmModificacion_Permiso.cve_modificacion_permiso = vRowSeleccionada
-                        ofrmModificacion_Permiso.ShowDialog()
+                        oModificacionPermiso = New Modificacion_Permiso
+                        oModificacionPermiso.cve_modificacion_permiso = vRowSeleccionada
+                        oModificacionPermiso.operacion = "DELETE"
+                        oModificacionPermiso.dia_modificacion = Now
+                        oModificacionPermiso.fecha_inicio = Now
+                        oModificacionPermiso.fecha_final = Now
+                        If oModificacionPermiso.valida_registro_modificacion_permiso Then
+                            ofrmModificacion_Permiso = New frmModificacionPermiso()
+                            ofrmModificacion_Permiso.operacion = "UPDATE"
+                            ofrmModificacion_Permiso.cve_modificacion_permiso = vRowSeleccionada
+                            ofrmModificacion_Permiso.ShowDialog()
+                        Else
+                            MsgBox("No se puede actualizar el registro. La fecha actual es mayor o igual a la fecha de inicio del registro a actualizar.", vbExclamation + vbOKOnly, "Modificación Permiso")
+                        End If
                     Else
                         MsgBox("El Usuario no tiene los privilegios para registrar")
                     End If
@@ -1144,7 +1153,6 @@ Public Class Formulario_Principal
         ElseIf vModificacion_Permisos = True Then
             If vRowSeleccionada <> 0 Then
                 If Permiso_Asignado("MODIF_CATALOGO.ELIMINAR") = True Then
-
                     oModificacionPermiso = New Modificacion_Permiso
                     oModificacionPermiso.cve_modificacion_permiso = vRowSeleccionada
                     oModificacionPermiso.operacion = "DELETE"
@@ -1153,7 +1161,6 @@ Public Class Formulario_Principal
                     oModificacionPermiso.fecha_final = Now
                     If oModificacionPermiso.valida_registro_modificacion_permiso Then
                         omsg_Modificacion_Permiso = New msg_ModificacionesPermiso
-
                         oModificacionPermiso.cve_modificacion_permiso = vRowSeleccionada
                         omsg_Modificacion_Permiso.operacion = "DELETE"
                         omsg_Modificacion_Permiso.ShowDialog()
@@ -1164,8 +1171,6 @@ Public Class Formulario_Principal
                         MsgBox("No se puede borrar el registro. La fecha actual es mayor o igual a la fecha de inicio del registro a borrar.", vbExclamation + vbOKOnly, "Modificación Permiso")
 
                     End If
-
-
                     btnModifPermiso.PerformClick()
                     vRowSeleccionada = 0
                 Else
