@@ -5,7 +5,6 @@
     Private Sub msg_Dialogo_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         Me.ckbAcuerdo.Checked = True
         Me.ckbAcuerdo.Checked = False
-        Me.btnNo.Enabled = False
         Me.btnSi.Enabled = False
         Me.btnNo.TabStop = False
         Me.btnSi.TabStop = False
@@ -30,10 +29,8 @@
 
     Private Sub ckbAcuerdo_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ckbAcuerdo.CheckedChanged
         If ckbAcuerdo.Checked = True Then
-            Me.btnNo.Enabled = True
             Me.btnSi.Enabled = True
         ElseIf ckbAcuerdo.Checked = False Then
-            Me.btnNo.Enabled = False
             Me.btnSi.Enabled = False
         End If
     End Sub
