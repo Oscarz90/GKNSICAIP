@@ -1,6 +1,7 @@
 ﻿Imports CapaNegocios
 Imports System.Threading
-
+Imports System.Configuration
+Imports System.Collections.Specialized
 Public Class frmProduccion
 #Region "Objetos"
     Dim ofrmMensaje_Turno As msg_Dialogo
@@ -175,10 +176,12 @@ Public Class frmProduccion
                 lblDesempeno.Text = "0.00"
             Else
                 If cbxModeloProductividad.SelectedIndex <> -1 Then
-                    'MsgBox("Entre a enviar email")
                     get_body_notificacion(desempeno)
-                    Dim newThread As New System.Threading.Thread(AddressOf envia_notificacion_sobreproduccion)
-
+                    'Dim newThread As New System.Threading.Thread(AddressOf envia_notificacion_sobreproduccion)
+                    Try
+                        envia_notificacion_sobreproduccion(desempeno)
+                    Catch ex As Exception
+                    End Try
                 End If
                 lblDesempeno.Text = "100.00"
             End If
@@ -620,18 +623,12 @@ Public Class frmProduccion
     End Sub
     '5s
     Private Sub txtAdmonVisual_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles txtAdmonVisual.TextChanged
-
         'valida_botones_cinco_s()
         calcula_promedio_cinco_S()
-
-
     End Sub
     Private Sub txt5s_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles txt5s.TextChanged
-
         'valida_botones_cinco_s()
         calcula_promedio_cinco_S()
-
-
     End Sub
 
     Private Sub txtManttoAutonomo_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles txtManttoAutonomo.TextChanged
@@ -665,7 +662,6 @@ Public Class frmProduccion
                 add_productividad()
                 add_Nrfti()
                 llena_cbx_Modelos_Desecho()
-
             End If
         End If
     End Sub
@@ -1158,6 +1154,7 @@ Public Class frmProduccion
                 btnAgregarModelo.BackColor = Color.FromArgb(107, 198, 223)
             Else
                 btnAgregarModelo.Enabled = False
+                btnAgregarModelo.BackColor = Color.Transparent
             End If
         Else
             btnAgregarModelo.Enabled = False
@@ -1648,17 +1645,33 @@ Public Class frmProduccion
 #Region "Funciones para modulo Productividad"
     'Metodo Enviar notificaciones de sobreproduccion
     Private Sub envia_notificacion_sobreproduccion(ByVal desempeno As Double)
-        'vbCrLf 
+        'Protected ToEmail As appsetings = ConfigurationManager.ConnectionStrings("Conexion_SICAIP")
+        Dim ToEmail As String = ConfigurationManager.AppSettings("ToEmailNotificacion")
+        Dim FromEmail As String = ConfigurationManager.AppSettings("FromEmailNotificacion")
+        Dim FromDescEmail As String = ConfigurationManager.AppSettings("FromDescEmailNotificacion")
+        Dim CredentialUser As String = ConfigurationManager.AppSettings("CredentialUserEmailNotificacion")
+        Dim CredentialPass As String = ConfigurationManager.AppSettings("CredentialPasswordEmailNotificacion")
+        Dim HostEmail As String = ConfigurationManager.AppSettings("HostEmailNotificacion")
+        Dim PortEmail As String = ConfigurationManager.AppSettings("PortEmailNotificacion")
+        Dim SSLEmail As String = ConfigurationManager.AppSettings("SSLEmailNotificacion")
+        Dim UseSSLEmail = False
+        If SSLEmail = "True" Then
+            UseSSLEmail = True
+        ElseIf SSLEmail = "False" Then
+            UseSSLEmail = False
+        Else
+            UseSSLEmail = False
+        End If
         Dim Message As New System.Net.Mail.MailMessage()
         Dim SMTP As New System.Net.Mail.SmtpClient
         'CONFIGURACIÓN DEL STMP
-        SMTP.Credentials = New System.Net.NetworkCredential("Sicaip.Soporte@gkndriveline.com", "Password32704")
-        SMTP.Host = "GKNAUBEXH01.gkn.com"
-        SMTP.Port = 25
-        SMTP.EnableSsl = True
+        SMTP.Credentials = New System.Net.NetworkCredential(CredentialUser, CredentialPass)
+        SMTP.Host = HostEmail
+        SMTP.Port = Integer.Parse(PortEmail)
+        SMTP.EnableSsl = UseSSLEmail
         ' CONFIGURACION DEL MENSAJE
-        Message.[To].Add("madai.ortiz@gkndriveline.com") 'Cuenta de Correo al que se le quiere enviar el e-mail
-        Message.From = New System.Net.Mail.MailAddress("Sicaip.Soporte@gkndriveline.com", "Soporte SICAIP", System.Text.Encoding.UTF8) 'Quien lo envía
+        Message.[To].Add(ToEmail) 'Cuenta de Correo al que se le quiere enviar el e-mail
+        Message.From = New System.Net.Mail.MailAddress(FromEmail, FromDescEmail, System.Text.Encoding.UTF8) 'Quien lo envía
         Message.Subject = subject_notificacion 'Sujeto del e-mail
         Message.SubjectEncoding = System.Text.Encoding.UTF8 'Codificacion
         Message.Body = body_notificacion 'contenido del mail
@@ -1670,7 +1683,7 @@ Public Class frmProduccion
             SMTP.Send(Message)
             'MessageBox.Show("Mensaje enviado correctamene", "Exito!", MessageBoxButtons.OK)
         Catch ex As System.Net.Mail.SmtpException
-            MessageBox.Show(ex.ToString, "Error al enviar email!", MessageBoxButtons.OK)
+            'MessageBox.Show(ex.ToString, "Error al enviar email!", MessageBoxButtons.OK)
         End Try
     End Sub
     Private Sub get_body_notificacion(ByVal desempeno As Double)
