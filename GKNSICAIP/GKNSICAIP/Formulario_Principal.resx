@@ -205,19 +205,6 @@
         rkJggg==
 </value>
   </data>
-  <data name="MapaUbicacion.StartButtonImage" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-    <value>
-        iVBORw0KGgoAAAANSUhEUgAAACEAAAAhCAYAAABX5MJvAAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6
-        JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAABd0lEQVRYR+2W3U6DMBTHeQJdGIwNBmwi
-        m6D7YCRzk8VtGjXRuHizG703u/ERfAifGO2xh8RuTAgfu+kvIWlP29N//rQHBA6Hk4XF4zo0bSek3UR4
-        00VouYNUa2JZPq3DI1GEp6bpiZJ6V8toTauTTvwW3b4PiaSGGjreZSIhxAEyTzXbYavrQrvx06bD6bDc
-        fpSMhoThdP4rRG3uTIoClKYRjc/uXyAmKkp6IeQMaG1ra2F/PIOkMiPED263BCDj+cPOeCYGk+s/joyC
-        G+jXDTPfjf4Dra9IUqwDpSA3NBBAHhoqF7yG6ERdP9CrUOjGJ04P+rrVKUcIOsCeASKAxE/Pc6qSceCt
-        iLPesLownlu5ZgnuVrCBrGp7NzDtM5hHqi0N5cfz6zskr8jy3uToRqc3KsYNFFLTdpdtPBf2xbAYAUgk
-        hCnbrj+BOLkpNFQsrCN4YzJ/ttOCQo6rVSoo2b9G7qzeNiCA/aKWzsfn12EFcDicYhGEb79Vq2L6EChd
-        AAAAAElFTkSuQmCC
-</value>
-  </data>
   <data name="btnUsuario.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAABGdBTUEAALGOfPtRkwAAACBjSFJNAACH
@@ -1091,6 +1078,19 @@
         uvDDtAQRudj0E2moKb8N7n3t/374DO8vjnYbRPYw70HLCXVaWqgRkCqtPrsl+9go0yJOQrBKVJBiktRK
         TL3w53/0fzqi3UxFBNeNlscMrkJ2UaZCJJRK1AsKdC6mFFFviKgooQAzA22RRFH8z2r+8znH79v/viCF
         RaQ8Q0sIWomAFehczNC0UhUA/J1MRH10ur8J7HX7Tff+xfjgg/8E6EqXWe7wKR8AAAAASUVORK5CYII=
+</value>
+  </data>
+  <data name="MapaUbicacion.StartButtonImage" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAACEAAAAhCAYAAABX5MJvAAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6
+        JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAABd0lEQVRYR+2W3U6DMBTHeQJdGIwNBmwi
+        m6D7YCRzk8VtGjXRuHizG703u/ERfAifGO2xh8RuTAgfu+kvIWlP29N//rQHBA6Hk4XF4zo0bSek3UR4
+        00VouYNUa2JZPq3DI1GEp6bpiZJ6V8toTauTTvwW3b4PiaSGGjreZSIhxAEyTzXbYavrQrvx06bD6bDc
+        fpSMhoThdP4rRG3uTIoClKYRjc/uXyAmKkp6IeQMaG1ra2F/PIOkMiPED263BCDj+cPOeCYGk+s/joyC
+        G+jXDTPfjf4Dra9IUqwDpSA3NBBAHhoqF7yG6ERdP9CrUOjGJ04P+rrVKUcIOsCeASKAxE/Pc6qSceCt
+        iLPesLownlu5ZgnuVrCBrGp7NzDtM5hHqi0N5cfz6zskr8jy3uToRqc3KsYNFFLTdpdtPBf2xbAYAUgk
+        hCnbrj+BOLkpNFQsrCN4YzJ/ttOCQo6rVSoo2b9G7qzeNiCA/aKWzsfn12EFcDicYhGEb79Vq2L6EChd
+        AAAAAElFTkSuQmCC
 </value>
   </data>
   <metadata name="sfdExportalExcel.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
