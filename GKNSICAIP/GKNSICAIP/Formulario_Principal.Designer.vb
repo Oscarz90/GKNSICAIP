@@ -153,7 +153,7 @@ Partial Class Formulario_Principal
         'Barra_Tool_Registros
         '
         Me.Barra_Tool_Registros.Dock = System.Windows.Forms.DockStyle.Top
-        Me.Barra_Tool_Registros.Location = New System.Drawing.Point(0, 159)
+        Me.Barra_Tool_Registros.Location = New System.Drawing.Point(0, 161)
         Me.Barra_Tool_Registros.Name = "Barra_Tool_Registros"
         Me.Barra_Tool_Registros.Rows.AddRange(New Telerik.WinControls.UI.CommandBarRowElement() {Me.CommandBarRowElement2})
         Me.Barra_Tool_Registros.Size = New System.Drawing.Size(1016, 30)
@@ -250,9 +250,9 @@ Partial Class Formulario_Principal
         Me.RadPanel_Registros.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center
         Me.RadPanel_Registros.Controls.Add(Me.dgvRegistros)
         Me.RadPanel_Registros.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.RadPanel_Registros.Location = New System.Drawing.Point(0, 189)
+        Me.RadPanel_Registros.Location = New System.Drawing.Point(0, 191)
         Me.RadPanel_Registros.Name = "RadPanel_Registros"
-        Me.RadPanel_Registros.Size = New System.Drawing.Size(1016, 534)
+        Me.RadPanel_Registros.Size = New System.Drawing.Size(1016, 532)
         Me.RadPanel_Registros.TabIndex = 1
         '
         'dgvRegistros
@@ -273,7 +273,7 @@ Partial Class Formulario_Principal
         Me.dgvRegistros.MasterTemplate.EnableFiltering = True
         Me.dgvRegistros.Name = "dgvRegistros"
         Me.dgvRegistros.ReadOnly = True
-        Me.dgvRegistros.Size = New System.Drawing.Size(1010, 509)
+        Me.dgvRegistros.Size = New System.Drawing.Size(1010, 507)
         Me.dgvRegistros.TabIndex = 0
         Me.dgvRegistros.Text = "RadGridView1"
         Me.dgvRegistros.UseScrollbarsInHierarchy = True
@@ -288,7 +288,7 @@ Partial Class Formulario_Principal
         '
         '
         Me.MapaUbicacion.RootElement.AutoSizeMode = Telerik.WinControls.RadAutoSizeMode.WrapAroundChildren
-        Me.MapaUbicacion.Size = New System.Drawing.Size(1016, 159)
+        Me.MapaUbicacion.Size = New System.Drawing.Size(1016, 161)
         Me.MapaUbicacion.StartButtonImage = CType(resources.GetObject("MapaUbicacion.StartButtonImage"), System.Drawing.Image)
         Me.MapaUbicacion.TabIndex = 0
         Me.MapaUbicacion.Text = "SICAIP"
@@ -297,7 +297,7 @@ Partial Class Formulario_Principal
         '
         Me.RibbonTab1.AccessibleDescription = "Configuración"
         Me.RibbonTab1.AccessibleName = "Configuración"
-        Me.RibbonTab1.IsSelected = False
+        Me.RibbonTab1.IsSelected = True
         Me.RibbonTab1.Items.AddRange(New Telerik.WinControls.RadItem() {Me.RadRibbonBarGroup1})
         Me.RibbonTab1.Name = "RibbonTab1"
         Me.RibbonTab1.Text = "Configuración"
@@ -536,7 +536,7 @@ Partial Class Formulario_Principal
         '
         Me.RibbonTab4.AccessibleDescription = "Graficas"
         Me.RibbonTab4.AccessibleName = "Graficas"
-        Me.RibbonTab4.IsSelected = True
+        Me.RibbonTab4.IsSelected = False
         Me.RibbonTab4.Items.AddRange(New Telerik.WinControls.RadItem() {Me.RadRibbonBarGroup5})
         Me.RibbonTab4.Name = "RibbonTab4"
         Me.RibbonTab4.Text = "Graficas"
