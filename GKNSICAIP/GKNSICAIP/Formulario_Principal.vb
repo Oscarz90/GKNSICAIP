@@ -1529,7 +1529,6 @@ Public Class Formulario_Principal
 
     Private Sub Formulario_Principal_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         Me.WindowState = FormWindowState.Maximized
-        Dim vPrueba As Integer = 0
         RadLabel_Usuario_Login.Text = RadLabel_Usuario_Login.Text & oUsuario_Login.Nombre
     End Sub
 
@@ -1537,6 +1536,10 @@ Public Class Formulario_Principal
     Private Sub MapaUbicacion_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MapaUbicacion.Click
 
     End Sub
+
+
+ 
+
     Private Sub btnExportar_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnExportar.Click
         Dim exporter As ExportToExcelML = New ExportToExcelML(Me.dgvRegistros)
         exporter.HiddenColumnOption = Telerik.WinControls.UI.Export.HiddenOption.DoNotExport
