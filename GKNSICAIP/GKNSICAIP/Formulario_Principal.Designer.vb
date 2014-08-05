@@ -155,7 +155,7 @@ Partial Class Formulario_Principal
         Me.Barra_Tool_Registros.Location = New System.Drawing.Point(0, 158)
         Me.Barra_Tool_Registros.Name = "Barra_Tool_Registros"
         Me.Barra_Tool_Registros.Rows.AddRange(New Telerik.WinControls.UI.CommandBarRowElement() {Me.CommandBarRowElement2})
-        Me.Barra_Tool_Registros.Size = New System.Drawing.Size(1016, 55)
+        Me.Barra_Tool_Registros.Size = New System.Drawing.Size(1016, 30)
         Me.Barra_Tool_Registros.TabIndex = 2
         Me.Barra_Tool_Registros.Text = "RadCommandBar2"
         Me.Barra_Tool_Registros.Visible = False
@@ -164,7 +164,6 @@ Partial Class Formulario_Principal
         '
         Me.CommandBarRowElement2.MinSize = New System.Drawing.Size(25, 25)
         Me.CommandBarRowElement2.Strips.AddRange(New Telerik.WinControls.UI.CommandBarStripElement() {Me.CommandBarStripElement2})
-        Me.CommandBarRowElement2.Text = ""
         '
         'CommandBarStripElement2
         '
@@ -201,9 +200,9 @@ Partial Class Formulario_Principal
         Me.RadPanel_Registros.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center
         Me.RadPanel_Registros.Controls.Add(Me.dgvRegistros)
         Me.RadPanel_Registros.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.RadPanel_Registros.Location = New System.Drawing.Point(0, 213)
+        Me.RadPanel_Registros.Location = New System.Drawing.Point(0, 188)
         Me.RadPanel_Registros.Name = "RadPanel_Registros"
-        Me.RadPanel_Registros.Size = New System.Drawing.Size(1016, 510)
+        Me.RadPanel_Registros.Size = New System.Drawing.Size(1016, 535)
         Me.RadPanel_Registros.TabIndex = 1
         '
         'dgvRegistros
@@ -224,7 +223,7 @@ Partial Class Formulario_Principal
         Me.dgvRegistros.MasterTemplate.EnableFiltering = True
         Me.dgvRegistros.Name = "dgvRegistros"
         Me.dgvRegistros.ReadOnly = True
-        Me.dgvRegistros.Size = New System.Drawing.Size(1010, 458)
+        Me.dgvRegistros.Size = New System.Drawing.Size(1010, 483)
         Me.dgvRegistros.TabIndex = 0
         Me.dgvRegistros.Text = "RadGridView1"
         Me.dgvRegistros.UseScrollbarsInHierarchy = True
@@ -288,7 +287,7 @@ Partial Class Formulario_Principal
         '
         Me.RibbonTab1.AccessibleDescription = "Configuración"
         Me.RibbonTab1.AccessibleName = "Configuración"
-        Me.RibbonTab1.IsSelected = True
+        Me.RibbonTab1.IsSelected = False
         Me.RibbonTab1.Items.AddRange(New Telerik.WinControls.RadItem() {Me.RadRibbonBarGroup1})
         Me.RibbonTab1.Name = "RibbonTab1"
         Me.RibbonTab1.Text = "Configuración"
@@ -342,7 +341,7 @@ Partial Class Formulario_Principal
         '
         Me.RibbonTab2.AccessibleDescription = "Catalogos"
         Me.RibbonTab2.AccessibleName = "Catalogos"
-        Me.RibbonTab2.IsSelected = False
+        Me.RibbonTab2.IsSelected = True
         Me.RibbonTab2.Items.AddRange(New Telerik.WinControls.RadItem() {Me.RadRibbonBarGroup2, Me.RadRibbonBarGroup3, Me.RadRibbonBarGroup7})
         Me.RibbonTab2.Name = "RibbonTab2"
         Me.RibbonTab2.Text = "Catalogos SICAIP"
