@@ -19,6 +19,18 @@ Public Class FrmGraficasfaseuno
     Dim minDatetime As New DateTime(1753, 1, 1)
     '12-31-9999 23:59:59:997
     Dim maxDatetime As New DateTime(9999, 12, 31, 23, 59, 59, 997)
+
+    Dim oG_OEE As G_OEE
+    Dim oG_Seguridad As G_Seguridad
+    Dim oG_Costo As G_Costo
+    Dim oG_Cinco_S As G_Cinco_S
+    Dim oG_NRFT As G_NRFT
+    Dim oG_Gente As G_Gente
+    Dim vFormato_Resultado As Integer = 0
+
+    Dim vDatos_Obtenidos As DataTable
+
+
 #End Region
 #Region "Inicializa formulario"
     Public Sub New()
@@ -462,9 +474,11 @@ Public Class FrmGraficasfaseuno
         If rdbtnDias.IsChecked Then
             dtpFechaInicial.CustomFormat = "dd MMMM yyy"
             dtpFechaFinal.CustomFormat = "dd MMMM yyy"
+            vFormato_Resultado = 0
         ElseIf rdbtnMeses.IsChecked Then
             dtpFechaInicial.CustomFormat = "MMMM yyy"
             dtpFechaFinal.CustomFormat = "MMMM yyy"
+            vFormato_Resultado = 1
         End If
         valida_btn_graficar()
     End Sub
@@ -483,8 +497,228 @@ Public Class FrmGraficasfaseuno
         rdbtn.Enabled = False
     End Sub
 #End Region
+
 #Region "Metodos graficar Oee"
-    'Oee planta
+
+    ''Metodo para la obtencion y proceso de Grafico OEE para todos los niveles
+    Private Sub Obtiene_Grafico_OEE()
+        Dim vCve_Equipo As Integer = 0
+        Dim vCve_Linea As Integer = 0
+        Dim vCve_Componente As Integer = 0
+        Dim vCve_CadenaValor As Integer = 0
+        Dim vNivel As Integer = 0
+        Dim vFormato As Integer = 0
+        Dim vF_Inicial As DateTime = Date.Now
+        Dim vF_Final As DateTime = Date.Now
+
+        ''Obtencion de Datos
+        Dim vFI As String = dtpFechaInicial.Value.Month & "/" & dtpFechaInicial.Value.Day & "/" & dtpFechaInicial.Value.Year
+        Dim vFF As String = dtpFechaFinal.Value.Month & "/" & dtpFechaFinal.Value.Day & "/" & dtpFechaFinal.Value.Year
+        vF_Inicial = DateTime.Parse(vFI)
+        vF_Final = DateTime.Parse(vFF)
+        oG_OEE = New G_OEE
+
+        ''Revicion de Nivel Elegido
+        If rdbtnEquipo.IsChecked = True Then
+            If chkTodasLineas.Checked = False Then ''---Nivel Equipo_Linea
+                vCve_Equipo = cbxEquipo.SelectedValue
+                vCve_Linea = cbxLinea.SelectedValue
+                vNivel = 0
+            Else ''---Nivel Equipo
+                vCve_Equipo = cbxEquipo.SelectedValue
+                vNivel = 1
+            End If
+        End If
+        If rdbtnLinea.IsChecked = True Then ''---Nivel Linea
+            vCve_Linea = cbxLinea.SelectedValue
+            vNivel = 2
+        ElseIf rdbtnComponente.IsChecked = True Then ''---Nivel Componente
+            vCve_Componente = cbxComponente.SelectedValue
+            vNivel = 3
+        ElseIf rdbtnCadenaValor.IsChecked = True Then ''---Nivel Cadena Valor
+            vCve_CadenaValor = cbxCadenaValor.SelectedValue
+            vNivel = 4
+        ElseIf rdbtnPlanta.IsChecked = True Then ''---Nivel Planta
+            vNivel = 5
+        End If
+        ''----------------------------------------------------------------------------------------------------------------
+        ''----------------------------------------------------------------------------------------------------------------
+        ''----------------------------------------------------------------------------------------------------------------
+        ''--------------------------Datos Utilizados solo como prueba, borrar para entrega---------------------------------
+        vCve_Equipo = 1 '' cbxEquipo.SelectedValue
+        vCve_Linea = 54 '' cbxLinea.SelectedValue
+        ''----------------------------------------------------------------------------------------------------------------
+        ''----------------------------------------------------------------------------------------------------------------
+        ''----------------------------------------------------------------------------------------------------------------
+        ''Obtencion de Informacion
+        vDatos_Obtenidos = oG_OEE.Obten_OEE(vF_Inicial, vF_Final, vCve_Equipo, vCve_Linea, vCve_Componente, vCve_CadenaValor, vFormato_Resultado, vNivel, True, False)
+
+
+        'Creacion series
+        Dim BarSeries1 As New BarSeries()
+        BarSeries1.LegendTitle = "Oee"
+        Dim BarSeries2 As New BarSeries()
+        BarSeries2.LegendTitle = "Acumulado"
+        Dim LineSeries1 As New LineSeries()
+
+        ''El nivel Planta no lleva esta serie
+        If vNivel <> 5 Then
+            LineSeries1.LegendTitle = "Objetivo Oee"
+        End If
+        
+
+        Me.radChartView1.ShowLegend = True
+        Me.radChartView1.ShowSmartLabels = True
+        BarSeries1.DrawLinesToLabels = True
+        BarSeries1.SyncLinesToLabelsColor = True
+
+        'Obtencion Datos Oee
+        Dim vDT As New DataTable
+        vDT = vDatos_Obtenidos
+
+        'Llenado de las series
+        Dim vTotal As Integer = 1
+        Dim vContador As Integer = 1
+        vTotal = vDT.Rows.Count
+        If vTotal = 0 Then
+            habilita_etiqueta_datos()
+            Me.radChartView1.Title = ""
+        Else
+            Me.radChartView1.Title = "Oee " & cbxComponente.Text
+        End If
+        For Each vDR As DataRow In vDT.Rows
+            If vContador = vTotal Then
+                BarSeries2.DataPoints.Add(New CategoricalDataPoint(vDR("oee"), "Acumulado"))
+            Else
+                BarSeries1.DataPoints.Add(New CategoricalDataPoint(vDR("oee"), vDR("dia_asignado")))
+
+                If vNivel <> 5 Then ''El nivel Planta no lleva esta serie
+                    If Not IsDBNull(vDR("objetivo")) Then
+                        LineSeries1.DataPoints.Add(New CategoricalDataPoint(vDR("objetivo"), vDR("dia_asignado")))
+                    End If
+                End If
+                
+            End If
+            vContador = vContador + 1
+        Next
+        'Cartesian Area, CategoricalAxis, LinearAxis
+        Dim CartesianArea1 As CartesianArea = New CartesianArea()
+        Dim CategoricalAxis1 As CategoricalAxis = New CategoricalAxis()
+        Dim LinearAxis1 As LinearAxis = New LinearAxis()
+        'Personalizacion
+        'CartesianArea1.GridDesign.AlternatingVerticalColor = False
+        'CartesianArea1.ShowGrid = True
+
+        'Logo Indicador
+        picboxIndicador.ImageLocation = Application.StartupPath & "\graficas_fase_uno\logo_indicador_productividad.jpg"
+
+        'Legend & Position
+        Me.radChartView1.ChartElement.LegendElement.StackElement.Orientation = Orientation.Horizontal
+        Me.radChartView1.ChartElement.LegendPosition = LegendPosition.Bottom
+
+        Me.radChartView1.AreaDesign = CartesianArea1
+        CategoricalAxis1.LabelFitMode = AxisLabelFitMode.Rotate
+        If rdbtnDias.IsChecked Then
+            CategoricalAxis1.LabelFormat = "{0:dd - MMM}"
+        ElseIf rdbtnMeses.IsChecked Then
+            CategoricalAxis1.LabelFormat = "{0:MMM - yyyy}"
+        End If
+        CategoricalAxis1.LabelRotationAngle = 270.0R
+        LinearAxis1.AxisType = AxisType.Second
+        'LinearAxis1.LabelFitMode = AxisLabelFitMode.Rotate
+        'LinearAxis1.LabelRotationAngle = 300.0R
+        LinearAxis1.MajorStep = 10.0R
+        LinearAxis1.Maximum = 100
+        LinearAxis1.Title = "% Oee"
+
+        BarSeries1.ShowLabels = True
+        BarSeries2.ShowLabels = True
+        'LineSeries1.ShowLabels = True
+
+        BarSeries1.LabelFormat = "{0:##}" ' & " %"
+        BarSeries2.LabelFormat = "{0:##}" '& " %"
+        If vNivel <> 5 Then ''El nivel Planta no lleva esta serie
+            LineSeries1.LabelFormat = "{0:##.#}" '& " %"
+        End If
+
+
+        BarSeries1.Font = New Font("Segoe UI", 11)
+        BarSeries2.Font = New Font("Segoe UI", 11)
+
+        BarSeries1.HorizontalAxis = CategoricalAxis1
+        If vNivel <> 5 Then ''El nivel Planta no lleva esta serie
+            LineSeries1.HorizontalAxis = CategoricalAxis1
+        End If
+
+
+        BarSeries1.VerticalAxis = LinearAxis1
+        If vNivel <> 5 Then ''El nivel Planta no lleva esta serie
+            LineSeries1.VerticalAxis = LinearAxis1
+        End If
+
+
+        BarSeries1.Palette = New PaletteEntry(Color.FromArgb(255, 205, 47))
+        BarSeries2.Palette = New PaletteEntry(Color.FromArgb(246, 172, 38))
+
+        If vNivel <> 5 Then ''El nivel Planta no lleva esta serie
+            LineSeries1.Palette = New PaletteEntry(Color.FromArgb(202, 0, 0))
+            LineSeries1.BorderColor = Color.FromArgb(202, 0, 0)
+            'LineSeries1.PointSize = New SizeF(10, 10)
+        End If
+      
+
+        Me.radChartView1.ShowToolTip = True
+
+        radChartView1.Series.Add(BarSeries1)
+        radChartView1.Series.Add(BarSeries2)
+        If vNivel <> 5 Then ''El nivel Planta no lleva esta serie
+            radChartView1.Series.Add(LineSeries1)
+        End If
+
+        If vNivel <> 5 Then ''El nivel Planta no lleva esta serie
+            BarSeries1.CombineMode = ChartSeriesCombineMode.None
+            BarSeries2.CombineMode = ChartSeriesCombineMode.None
+            LineSeries1.CombineMode = ChartSeriesCombineMode.None
+        End If
+
+        BarSeries1.LabelMode = BarLabelModes.Top
+        BarSeries2.LabelMode = BarLabelModes.Top
+
+    End Sub
+
+    ''Metodo para Obtener Reportes
+    Private Sub Obtiene_Reporte_OEE(ByVal vEsResumen As Boolean)
+        dgvTabla.DataSource = vDatos_Obtenidos
+
+        If vEsResumen = True Then
+            dgvTabla.Columns(11).IsVisible = False
+            dgvTabla.Columns(12).IsVisible = False
+            dgvTabla.Columns(13).IsVisible = False
+            dgvTabla.Columns(14).IsVisible = False
+            dgvTabla.Columns(15).IsVisible = False
+            dgvTabla.Columns(16).IsVisible = False
+            dgvTabla.Columns(17).IsVisible = False
+            dgvTabla.Columns(18).IsVisible = False
+            dgvTabla.Columns(19).IsVisible = False
+            dgvTabla.Columns(20).IsVisible = False
+            dgvTabla.Columns(21).IsVisible = False
+        Else
+            dgvTabla.Columns(11).IsVisible = True
+            dgvTabla.Columns(12).IsVisible = True
+            dgvTabla.Columns(13).IsVisible = True
+            dgvTabla.Columns(14).IsVisible = True
+            dgvTabla.Columns(15).IsVisible = True
+            dgvTabla.Columns(16).IsVisible = True
+            dgvTabla.Columns(17).IsVisible = True
+            dgvTabla.Columns(18).IsVisible = True
+            dgvTabla.Columns(19).IsVisible = True
+            dgvTabla.Columns(20).IsVisible = True
+            dgvTabla.Columns(21).IsVisible = True
+        End If
+
+    End Sub
+
+#Region "Eliminar estos metodos"
     Private Sub obtiene_oee_planta_dia_mes()
         'Objeto obtiene_oee Clase
         Dim oObtiene_oee As New obtiene_oee
@@ -502,11 +736,15 @@ Public Class FrmGraficasfaseuno
         BarSeries1.SyncLinesToLabelsColor = True
         'Obtencion Datos Oee
         Dim vDT As DataTable = Nothing
-        If rdbtnDias.IsChecked Then
-            vDT = oObtiene_oee.obtiene_oee_planta_dia()
-        ElseIf rdbtnMeses.IsChecked Then
-            vDT = oObtiene_oee.obtiene_oee_planta_mes()
-        End If
+
+        vDT = vDatos_Obtenidos
+
+        'If rdbtnDias.IsChecked Then
+        '    vDT = oObtiene_oee.obtiene_oee_planta_dia()
+        'ElseIf rdbtnMeses.IsChecked Then
+        '    vDT = oObtiene_oee.obtiene_oee_planta_mes()
+        'End If
+
         'Llenado de las series
         Dim vTotal As Integer = 1
         Dim vContador As Integer = 1
@@ -600,11 +838,14 @@ Public Class FrmGraficasfaseuno
         BarSeries1.SyncLinesToLabelsColor = True
         'Obtencion Datos Oee
         Dim vDT As New DataTable
-        If rdbtnDias.IsChecked Then
-            vDT = oObtiene_oee.obtiene_oee_cadena_valor_dia()
-        ElseIf rdbtnMeses.IsChecked Then
-            vDT = oObtiene_oee.obtiene_oee_cadena_valor_mes()
-        End If
+
+        vDT = vDatos_Obtenidos
+        'If rdbtnDias.IsChecked Then
+        '    vDT = oObtiene_oee.obtiene_oee_cadena_valor_dia()
+        'ElseIf rdbtnMeses.IsChecked Then
+        '    vDT = oObtiene_oee.obtiene_oee_cadena_valor_mes()
+        'End If
+
         'Llenado de las series
         Dim vTotal As Integer = 1
         Dim vContador As Integer = 1
@@ -650,7 +891,7 @@ Public Class FrmGraficasfaseuno
         End If
         CategoricalAxis1.LabelRotationAngle = 270.0R
         LinearAxis1.AxisType = AxisType.Second
-        
+
         LinearAxis1.MajorStep = 10.0R
         LinearAxis1.Maximum = 100
         LinearAxis1.Title = "% Oee"
@@ -714,11 +955,16 @@ Public Class FrmGraficasfaseuno
         BarSeries1.SyncLinesToLabelsColor = True
         'Obtencion Datos Oee
         Dim vDT As New DataTable
-        If rdbtnDias.IsChecked Then
-            vDT = oObtiene_oee.obtiene_oee_componente_dia()
-        ElseIf rdbtnMeses.IsChecked Then
-            vDT = oObtiene_oee.obtiene_oee_componente_mes()
-        End If
+
+        vDT = vDatos_Obtenidos
+
+        'If rdbtnDias.IsChecked Then
+        '    vDT = oObtiene_oee.obtiene_oee_componente_dia()
+        'ElseIf rdbtnMeses.IsChecked Then
+        '    vDT = oObtiene_oee.obtiene_oee_componente_mes()
+        'End If
+
+
         'Llenado de las series
         Dim vTotal As Integer = 1
         Dim vContador As Integer = 1
@@ -827,11 +1073,15 @@ Public Class FrmGraficasfaseuno
         BarSeries1.SyncLinesToLabelsColor = True
         'Obtencion Datos Oee
         Dim vDT As New DataTable
-        If rdbtnDias.IsChecked Then
-            vDT = oObtiene_oee.obtiene_oee_linea_dia()
-        ElseIf rdbtnMeses.IsChecked Then
-            vDT = oObtiene_oee.obtiene_oee_linea_mes()
-        End If
+
+        vDT = vDatos_Obtenidos
+
+        'If rdbtnDias.IsChecked Then
+        '    vDT = oObtiene_oee.obtiene_oee_linea_dia()
+        'ElseIf rdbtnMeses.IsChecked Then
+        '    vDT = oObtiene_oee.obtiene_oee_linea_mes()
+        'End If
+
         'Llenado de las series
         Dim vTotal As Integer = 1
         Dim vContador As Integer = 1
@@ -943,11 +1193,15 @@ Public Class FrmGraficasfaseuno
         BarSeries1.SyncLinesToLabelsColor = True
         'Obtencion Datos Oee
         Dim vDT As New DataTable
-        If rdbtnDias.IsChecked Then
-            vDT = oObtiene_oee.obtiene_oee_equipo_dia()
-        ElseIf rdbtnMeses.IsChecked Then
-            vDT = oObtiene_oee.obtiene_oee_equipo_mes()
-        End If
+
+        vDT = vDatos_Obtenidos
+
+        'If rdbtnDias.IsChecked Then
+        '    vDT = oObtiene_oee.obtiene_oee_equipo_dia()
+        'ElseIf rdbtnMeses.IsChecked Then
+        '    vDT = oObtiene_oee.obtiene_oee_equipo_mes()
+        'End If
+
         'Llenado de las series
         Dim vTotal As Integer = 1
         Dim vContador As Integer = 1
@@ -1020,7 +1274,7 @@ Public Class FrmGraficasfaseuno
         LineSeries1.Palette = New PaletteEntry(Color.FromArgb(202, 0, 0))
 
         LineSeries1.BorderColor = Color.FromArgb(202, 0, 0)
-        'LineSeries1.PointSize = New SizeF(10, 10)
+        LineSeries1.PointSize = New SizeF(10, 10)
 
         Me.radChartView1.ShowToolTip = True
 
@@ -1060,11 +1314,15 @@ Public Class FrmGraficasfaseuno
         Dim vContador As Integer = 1
         'Obtencion Datos Oee
         Dim vDT As New DataTable
-        If rdbtnDias.IsChecked Then
-            vDT = oObtiene_oee.obtiene_oee_equipo_linea_dia()
-        ElseIf rdbtnMeses.IsChecked Then
-            vDT = oObtiene_oee.obtiene_oee_equipo_linea_mes()
-        End If
+
+        vDT = vDatos_Obtenidos
+
+        'If rdbtnDias.IsChecked Then
+        '    vDT = oObtiene_oee.obtiene_oee_equipo_linea_dia()
+        'ElseIf rdbtnMeses.IsChecked Then
+        '    vDT = oObtiene_oee.obtiene_oee_equipo_linea_mes()
+        'End If
+
         vTotal = vDT.Rows.Count
         If vTotal = 0 Then
             habilita_etiqueta_datos()
@@ -1162,6 +1420,11 @@ Public Class FrmGraficasfaseuno
         BarSeries2.LabelMode = BarLabelModes.Top
     End Sub
 #End Region
+   
+#End Region
+
+
+
 #Region "Metodos graficar NRFTi"
     'NRNFTi planta
     Private Sub obtiene_nrfti_planta_dia_mes()
@@ -4869,21 +5132,26 @@ Public Class FrmGraficasfaseuno
     End Sub
     Private Sub obtener_grafica()
         If rdbtnOee.IsChecked Then
-            If rdbtnPlanta.IsChecked Then
-                obtiene_oee_planta_dia_mes()
-            ElseIf rdbtnCadenaValor.IsChecked Then
-                obtiene_oee_cadena_valor_dia_mes()
-            ElseIf rdbtnComponente.IsChecked Then
-                obtiene_oee_componente_dia_mes()
-            ElseIf rdbtnLinea.IsChecked Then
-                obtiene_oee_linea_dia_mes()
-            ElseIf rdbtnEquipo.IsChecked Then
-                If chkTodasLineas.Checked Then
-                    obtiene_oee_equipo_dia_mes()
-                Else
-                    obtiene_oee_equipo_linea_dia_mes()
-                End If
-            End If
+            Obtiene_Grafico_OEE()
+
+
+
+            'If rdbtnPlanta.IsChecked Then
+            '    obtiene_oee_planta_dia_mes()
+            'ElseIf rdbtnCadenaValor.IsChecked Then
+            '    obtiene_oee_cadena_valor_dia_mes()
+            'ElseIf rdbtnComponente.IsChecked Then
+            '    obtiene_oee_componente_dia_mes()
+            'ElseIf rdbtnLinea.IsChecked Then
+            '    obtiene_oee_linea_dia_mes()
+            'ElseIf rdbtnEquipo.IsChecked Then
+            '    If chkTodasLineas.Checked Then
+            '        obtiene_oee_equipo_dia_mes()
+            '    Else
+            '        obtiene_oee_equipo_linea_dia_mes()
+            '    End If
+            'End If
+
         ElseIf rdbtnNrfti.IsChecked Then
             If rdbtnPlanta.IsChecked Then
                 obtiene_nrfti_planta_dia_mes()
@@ -4978,4 +5246,47 @@ Public Class FrmGraficasfaseuno
         e.LabelElement.BackColor = Color.Transparent
         e.LabelElement.BorderColor = Color.Transparent
     End Sub
+
+#Region "Metodos para Tablas_Reportes"
+    Private Sub btnResumen_Click(sender As System.Object, e As System.EventArgs) Handles btnResumen.Click
+        If rdbtnOee.IsChecked = True Then
+            Obtiene_Reporte_OEE(True)
+        ElseIf rdbtnNrfti.IsChecked = True Then
+
+        ElseIf rdbtnCosto.IsChecked = True Then
+
+        ElseIf rdbtnSeguridad.IsChecked = True Then
+
+        ElseIf rdbtnCincoS.IsChecked = True Then
+
+        ElseIf rdbtnGente.IsChecked = True Then
+
+        End If
+
+
+    End Sub
+
+    Private Sub btnDetalle_Click(sender As System.Object, e As System.EventArgs) Handles btnDetalle.Click
+        If rdbtnOee.IsChecked = True Then
+            Obtiene_Reporte_OEE(False)
+        ElseIf rdbtnNrfti.IsChecked = True Then
+
+        ElseIf rdbtnCosto.IsChecked = True Then
+
+        ElseIf rdbtnSeguridad.IsChecked = True Then
+
+        ElseIf rdbtnCincoS.IsChecked = True Then
+
+        ElseIf rdbtnGente.IsChecked = True Then
+
+        End If
+
+
+    End Sub
+
+    Private Sub btnExportar_Click(sender As System.Object, e As System.EventArgs) Handles btnExportar.Click
+
+    End Sub
+#End Region
+    
 End Class
