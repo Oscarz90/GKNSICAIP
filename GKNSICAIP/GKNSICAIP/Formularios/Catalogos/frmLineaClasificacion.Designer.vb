@@ -38,30 +38,30 @@ Partial Class frmLineaClasificacion
         'Label1
         '
         Me.Label1.AutoSize = True
-        Me.Label1.Font = New System.Drawing.Font("Calibri", 14.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label1.Font = New System.Drawing.Font("Calibri", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label1.Location = New System.Drawing.Point(12, 57)
         Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(78, 23)
+        Me.Label1.Size = New System.Drawing.Size(64, 19)
         Me.Label1.TabIndex = 109
         Me.Label1.Text = "Nombre:"
         '
         'Label2
         '
         Me.Label2.AutoSize = True
-        Me.Label2.Font = New System.Drawing.Font("Calibri", 14.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label2.Location = New System.Drawing.Point(12, 110)
+        Me.Label2.Font = New System.Drawing.Font("Calibri", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label2.Location = New System.Drawing.Point(12, 100)
         Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(71, 23)
+        Me.Label2.Size = New System.Drawing.Size(61, 19)
         Me.Label2.TabIndex = 110
         Me.Label2.Text = "Estatus:"
         '
         'Label3
         '
         Me.Label3.AutoSize = True
-        Me.Label3.Font = New System.Drawing.Font("Calibri", 14.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label3.Location = New System.Drawing.Point(12, 162)
+        Me.Label3.Font = New System.Drawing.Font("Calibri", 12.0!)
+        Me.Label3.Location = New System.Drawing.Point(12, 135)
         Me.Label3.Name = "Label3"
-        Me.Label3.Size = New System.Drawing.Size(105, 23)
+        Me.Label3.Size = New System.Drawing.Size(89, 19)
         Me.Label3.TabIndex = 111
         Me.Label3.Text = "Descripción:"
         '
@@ -74,7 +74,7 @@ Partial Class frmLineaClasificacion
         '
         'txtDescripcion
         '
-        Me.txtDescripcion.Location = New System.Drawing.Point(16, 188)
+        Me.txtDescripcion.Location = New System.Drawing.Point(16, 157)
         Me.txtDescripcion.Multiline = True
         Me.txtDescripcion.Name = "txtDescripcion"
         Me.txtDescripcion.Size = New System.Drawing.Size(342, 84)
@@ -84,27 +84,29 @@ Partial Class frmLineaClasificacion
         '
         Me.Label4.AutoSize = True
         Me.Label4.BackColor = System.Drawing.Color.Transparent
-        Me.Label4.Font = New System.Drawing.Font("Calibri", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label4.Font = New System.Drawing.Font("Calibri", 14.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label4.Location = New System.Drawing.Point(12, 21)
         Me.Label4.Name = "Label4"
-        Me.Label4.Size = New System.Drawing.Size(186, 23)
+        Me.Label4.Size = New System.Drawing.Size(179, 23)
         Me.Label4.TabIndex = 114
         Me.Label4.Text = "Clasificación de Líneas"
         '
         'btnSalir
         '
-        Me.btnSalir.Location = New System.Drawing.Point(283, 290)
+        Me.btnSalir.Font = New System.Drawing.Font("Calibri", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnSalir.Location = New System.Drawing.Point(281, 247)
         Me.btnSalir.Name = "btnSalir"
-        Me.btnSalir.Size = New System.Drawing.Size(75, 23)
+        Me.btnSalir.Size = New System.Drawing.Size(77, 33)
         Me.btnSalir.TabIndex = 115
         Me.btnSalir.Text = "Salir"
         Me.btnSalir.UseVisualStyleBackColor = True
         '
         'btnRegistrar
         '
-        Me.btnRegistrar.Location = New System.Drawing.Point(184, 290)
+        Me.btnRegistrar.Font = New System.Drawing.Font("Calibri", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnRegistrar.Location = New System.Drawing.Point(189, 247)
         Me.btnRegistrar.Name = "btnRegistrar"
-        Me.btnRegistrar.Size = New System.Drawing.Size(75, 23)
+        Me.btnRegistrar.Size = New System.Drawing.Size(86, 33)
         Me.btnRegistrar.TabIndex = 116
         Me.btnRegistrar.Text = "Registrar"
         Me.btnRegistrar.UseVisualStyleBackColor = True
@@ -112,7 +114,7 @@ Partial Class frmLineaClasificacion
         'txtEstatus
         '
         Me.txtEstatus.FormattingEnabled = True
-        Me.txtEstatus.Location = New System.Drawing.Point(96, 114)
+        Me.txtEstatus.Location = New System.Drawing.Point(96, 101)
         Me.txtEstatus.Name = "txtEstatus"
         Me.txtEstatus.Size = New System.Drawing.Size(262, 21)
         Me.txtEstatus.TabIndex = 117
