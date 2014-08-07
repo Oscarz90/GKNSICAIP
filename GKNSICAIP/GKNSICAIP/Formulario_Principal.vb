@@ -19,6 +19,7 @@ Public Class Formulario_Principal
     Dim vPermisos As Boolean = False '--------------
     Dim vEquipo As Boolean = False '--------------
     Dim vMatch_Equipos As Boolean = False
+    Dim vLineaClasificacion As Boolean = False
 #End Region
 
 #Region "Declaracion de Objetos_Clases_Catalogos"
@@ -59,6 +60,7 @@ Public Class Formulario_Principal
     Dim ofrmAcceso_Sistema_SICAIP As frmLogin
     Dim ofrmEquipo As frmEquipo
     Dim ofrmMatch_Equipos As frmMatch_Equipos_Kronos_SICAIP
+    Dim ofrmLineaClasificacion As frmLineaClasificacion
 #End Region
 
 #Region "Opciones de Menu"
@@ -737,6 +739,21 @@ Public Class Formulario_Principal
             Else
                 MsgBox("El Usuario no tiene los privilegios para ver los Detalles")
             End If
+        ElseIf vLineaClasificacion = True Then
+            If Permiso_Asignado("CLASF_LINEAS.VER") = True Then
+                If Permiso_Asignado("CLASF_LINEAS.REGISTRAR") = True Then
+                    'vPermiso_Add = False
+                    ofrmLineaClasificacion = New frmLineaClasificacion
+                    ofrmLineaClasificacion.operacion = ofrmLineaClasificacion.Insertar
+                    ofrmLineaClasificacion.ShowDialog()
+                Else
+                    MsgBox("El Usuario no tiene los privilegios para ver los Detalles")
+                End If
+                btnClasf_Lineas.PerformClick()
+                vRowSeleccionada = 0
+            Else
+                MsgBox("El Usuario no tiene los privilegios para ver los Detalles")
+            End If
         End If
     End Sub
 
@@ -873,6 +890,25 @@ Public Class Formulario_Principal
                 btnEquipo.PerformClick()
             Else
                 MsgBox("El Usuario no tiene los privilegios para ver los Detalles")
+            End If
+        ElseIf vLineaClasificacion = True Then
+            If vRowSeleccionada <> 0 Then
+                If Permiso_Asignado("MODIF_CATALOGO.VER") = True Then
+                    If Permiso_Asignado("MODIF_CATALOGO.REGISTRAR") = True Then
+                        ofrmLineaClasificacion = New frmLineaClasificacion
+                        ofrmLineaClasificacion.operacion = frmLineaClasificacion.Actualizar
+                        ofrmLineaClasificacion.cve_linea_clasificacion = vRowSeleccionada
+                        ofrmLineaClasificacion.ShowDialog()
+                    Else
+                        MsgBox("El Usuario no tiene los privilegios para registrar")
+                    End If
+                    btnClasf_Lineas.PerformClick()
+                    vRowSeleccionada = 0
+                Else
+                    MsgBox("El Usuario no tiene los privilegios para ver los Detalles")
+                End If
+            Else
+                MsgBox("No has seleccionado ningun registro", vbInformation + vbOKOnly, "Clasificación Linea")
             End If
         End If
     End Sub
@@ -1216,6 +1252,7 @@ Public Class Formulario_Principal
             vUsuario = False
             vTipo_Usuario = False
             vEquipo = False
+            vLineaClasificacion = False
         ElseIf vNombre_De_Formulario = "frmModelo" Then
             vModelo = True
             '--
@@ -1225,6 +1262,7 @@ Public Class Formulario_Principal
             vUsuario = False
             vTipo_Usuario = False
             vEquipo = False
+            vLineaClasificacion = False
         ElseIf vNombre_De_Formulario = "frmMaquina" Then
             vMaquina = True
             '--
@@ -1234,6 +1272,7 @@ Public Class Formulario_Principal
             vUsuario = False
             vTipo_Usuario = False
             vEquipo = False
+            vLineaClasificacion = False
         ElseIf vNombre_De_Formulario = "frmTiempo_Ciclo" Then
             vTiempo_Ciclo = True
             '--
@@ -1243,6 +1282,7 @@ Public Class Formulario_Principal
             vUsuario = False
             vTipo_Usuario = False
             vEquipo = False
+            vLineaClasificacion = False
         ElseIf vNombre_De_Formulario = "frmUsuario" Then
             vUsuario = True
 
@@ -1252,6 +1292,7 @@ Public Class Formulario_Principal
             vMaquina = False
             vTipo_Usuario = False
             vEquipo = False
+            vLineaClasificacion = False
         ElseIf vNombre_De_Formulario = "FrmTipo_Usuario" Then
             vTipo_Usuario = True
 
@@ -1261,6 +1302,7 @@ Public Class Formulario_Principal
             vMaquina = False
             vUsuario = False
             vEquipo = False
+            vLineaClasificacion = False
         ElseIf vNombre_De_Formulario = "frmEquipo" Then
             vEquipo = True
             '--
@@ -1270,6 +1312,17 @@ Public Class Formulario_Principal
             vTiempo_Ciclo = False
             vUsuario = False
             vTipo_Usuario = False
+            vLineaClasificacion = False
+        ElseIf vNombre_De_Formulario = "frmLineaClasificacion" Then
+            vLineaClasificacion = True
+            '--
+            vLinea = False
+            vModelo = False
+            vMaquina = False
+            vTiempo_Ciclo = False
+            vUsuario = False
+            vTipo_Usuario = False
+            vEquipo = False
         End If
     End Sub
 
@@ -1308,24 +1361,14 @@ Public Class Formulario_Principal
             Me.dgvRegistros.Columns.Clear()
             Me.dgvRegistros.Visible = True
             Me.Barra_Tool_Registros.Visible = True
-            'Me.btnEliminar.VisibleInStrip = False
-
+            Me.btnEliminar.Enabled = False
             If Permiso_Asignado("CLASF_LINEAS.REGISTRAR") = True Then
                 Me.btnAdd.Enabled = True
-            Else
-                Me.btnAdd.Enabled = False
-            End If
-            If Permiso_Asignado("CLASF_LINEAS.ACTUALIZAR") = True Then
                 Me.btnModificar.Enabled = True
             Else
+                Me.btnAdd.Enabled = False
                 Me.btnModificar.Enabled = False
             End If
-            If Permiso_Asignado("CLASF_LINEAS.ELIMINAR") = True Then
-                Me.btnEliminar.Enabled = True
-            Else
-                Me.btnEliminar.Enabled = False
-            End If
-
 
             Try
                 Me.dgvRegistros.DataSource = oLineaClasificacion.obtiene_linea_clasificacion_activos()

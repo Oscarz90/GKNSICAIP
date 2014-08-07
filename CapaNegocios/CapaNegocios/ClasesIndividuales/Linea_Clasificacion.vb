@@ -4,7 +4,6 @@
     Dim oBD As New CapaDatos.CapaDatos(cadena_conexion.CadenaSicaip)
     Dim oComponente As Componente
     Dim oEquipo_Linea As EquipoLinea
-
 #Region "IIndividual"
     Public Sub Cargar() Implements IIndividual.Cargar
         Dim vDR As DataRow
@@ -44,19 +43,16 @@
             vId = value
         End Set
     End Property
-
     Public Function Obtener_Id(ByVal vCadena As String) As Long Implements IIndividual.Obtener_Id
         Return 1
     End Function
-
     Public Sub Registrar() Implements IIndividual.Registrar
-        Using scope As New TransactionScope()
-            Try
-                oBD.EjecutarQuery("insert into linea_clasificacion(nombre,descripcion,estatus) values('" & vnombre & "','" & vdescripcion & "','" & vestatus & "')")
-            Catch ex As Exception
-                MsgBox("Surgió un problema al intentar registrar clasificación de linea. CLinea_Clasificacion", vbExclamation + vbOKOnly, "Warning")
-            End Try
-        End Using
+        Try
+            oBD.EjecutarQuery("insert into linea_clasificacion(nombre,descripcion,estatus) values('" & vnombre & "','" & vdescripcion & "','" & vestatus & "')")
+            MsgBox("Se registro correctamente", vbInformation + vbOKOnly, "Clasificación Línea")
+        Catch
+            MsgBox("Surgió un problema al intentar registrar clasificación de linea. CLinea_Clasificacion", vbExclamation + vbOKOnly, "Warning")
+        End Try
     End Sub
 #End Region
 #Region "Atributos"
@@ -100,7 +96,7 @@
         End Set
     End Property
 #End Region
-#Region "Catalogos"
+#Region "Funciones Generales"
     Public Function obtiene_tabla() As DataTable
         Dim oCLT As DataTable
         Using scope As New TransactionScope()
@@ -126,5 +122,14 @@
             Return oCLT
         End Using
     End Function
+    Public Sub Actualizar()
+        Try
+            oBD.EjecutarQuery("update linea_clasificacion set nombre='" & vnombre & "', descripcion='" & vdescripcion & "', estatus='" & vestatus & "' where cve_linea_clasificacion=" & Me.vcve_linea_clasificacion)
+            MsgBox("Se registro correctamente", vbInformation + vbOKOnly, "Clasificación Línea")
+        Catch
+            MsgBox("Surgió un problema al intentar actualizar clasificación de linea. CLinea_Clasificacion", vbExclamation + vbOKOnly, "Warning")
+        End Try
+    End Sub
+
 #End Region
 End Class
