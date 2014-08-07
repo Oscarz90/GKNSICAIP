@@ -23,6 +23,7 @@ Partial Class FrmGraficasfaseuno
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Dim CartesianArea1 As Telerik.WinControls.UI.CartesianArea = New Telerik.WinControls.UI.CartesianArea()
+        Dim CartesianArea2 As Telerik.WinControls.UI.CartesianArea = New Telerik.WinControls.UI.CartesianArea()
         Me.RadGroupBox1 = New Telerik.WinControls.UI.RadGroupBox()
         Me.rdbtnGente = New Telerik.WinControls.UI.RadRadioButton()
         Me.rdbtnCincoS = New Telerik.WinControls.UI.RadRadioButton()
@@ -59,6 +60,7 @@ Partial Class FrmGraficasfaseuno
         Me.btnResumen = New Telerik.WinControls.UI.RadButton()
         Me.dgvTabla = New Telerik.WinControls.UI.RadGridView()
         Me.RadPageViewPage2 = New Telerik.WinControls.UI.RadPageViewPage()
+        Me.RadChartView2 = New Telerik.WinControls.UI.RadChartView()
         CType(Me.RadGroupBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.RadGroupBox1.SuspendLayout()
         CType(Me.rdbtnGente, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -96,6 +98,7 @@ Partial Class FrmGraficasfaseuno
         CType(Me.dgvTabla, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.dgvTabla.MasterTemplate, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.RadPageViewPage2.SuspendLayout()
+        CType(Me.RadChartView2, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
@@ -367,7 +370,7 @@ Partial Class FrmGraficasfaseuno
         Me.radChartView1.Controls.Add(Me.lblError)
         Me.radChartView1.Location = New System.Drawing.Point(3, 3)
         Me.radChartView1.Name = "radChartView1"
-        Me.radChartView1.Size = New System.Drawing.Size(1230, 321)
+        Me.radChartView1.Size = New System.Drawing.Size(1233, 289)
         Me.radChartView1.TabIndex = 9
         CType(Me.radChartView1.GetChildAt(0), Telerik.WinControls.UI.RadChartElement).DrawText = False
         CType(Me.radChartView1.GetChildAt(0), Telerik.WinControls.UI.RadChartElement).DrawFill = True
@@ -394,7 +397,7 @@ Partial Class FrmGraficasfaseuno
         Me.btnGraficar.Name = "btnGraficar"
         Me.btnGraficar.Size = New System.Drawing.Size(99, 66)
         Me.btnGraficar.TabIndex = 8
-        Me.btnGraficar.Text = "Graficar"
+        Me.btnGraficar.Text = "Calcular"
         Me.btnGraficar.TextAlignment = System.Drawing.ContentAlignment.BottomCenter
         Me.btnGraficar.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText
         '
@@ -413,7 +416,7 @@ Partial Class FrmGraficasfaseuno
         Me.RadPageView1.Controls.Add(Me.RadPageViewPage2)
         Me.RadPageView1.Location = New System.Drawing.Point(3, 186)
         Me.RadPageView1.Name = "RadPageView1"
-        Me.RadPageView1.SelectedPage = Me.RadPageViewPage1
+        Me.RadPageView1.SelectedPage = Me.RadPageViewPage2
         Me.RadPageView1.Size = New System.Drawing.Size(1257, 508)
         Me.RadPageView1.TabIndex = 11
         Me.RadPageView1.Text = "Tablas"
@@ -464,12 +467,24 @@ Partial Class FrmGraficasfaseuno
         '
         'RadPageViewPage2
         '
+        Me.RadPageViewPage2.AutoScroll = True
         Me.RadPageViewPage2.BackColor = System.Drawing.Color.White
+        Me.RadPageViewPage2.Controls.Add(Me.RadChartView2)
         Me.RadPageViewPage2.Controls.Add(Me.radChartView1)
         Me.RadPageViewPage2.Location = New System.Drawing.Point(10, 41)
         Me.RadPageViewPage2.Name = "RadPageViewPage2"
         Me.RadPageViewPage2.Size = New System.Drawing.Size(1236, 456)
         Me.RadPageViewPage2.Text = "Graficas"
+        '
+        'RadChartView2
+        '
+        Me.RadChartView2.AreaDesign = CartesianArea2
+        Me.RadChartView2.Location = New System.Drawing.Point(3, 298)
+        Me.RadChartView2.Name = "RadChartView2"
+        Me.RadChartView2.ShowGrid = False
+        Me.RadChartView2.Size = New System.Drawing.Size(1230, 146)
+        Me.RadChartView2.TabIndex = 10
+        Me.RadChartView2.Text = "RadChartView2"
         '
         'FrmGraficasfaseuno
         '
@@ -533,6 +548,7 @@ Partial Class FrmGraficasfaseuno
         CType(Me.dgvTabla.MasterTemplate, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.dgvTabla, System.ComponentModel.ISupportInitialize).EndInit()
         Me.RadPageViewPage2.ResumeLayout(False)
+        CType(Me.RadChartView2, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
@@ -573,5 +589,6 @@ Partial Class FrmGraficasfaseuno
     Friend WithEvents btnResumen As Telerik.WinControls.UI.RadButton
     Friend WithEvents dgvTabla As Telerik.WinControls.UI.RadGridView
     Friend WithEvents RadPageViewPage2 As Telerik.WinControls.UI.RadPageViewPage
+    Friend WithEvents RadChartView2 As Telerik.WinControls.UI.RadChartView
 End Class
 

@@ -1426,6 +1426,251 @@ Public Class FrmGraficasfaseuno
 
 
 #Region "Metodos graficar NRFTi"
+
+    Private Sub Obtiene_Grafica_NRFT()
+        Dim vCve_Equipo As Integer = 0
+        Dim vCve_Linea As Integer = 0
+        Dim vCve_Componente As Integer = 0
+        Dim vCve_CadenaValor As Integer = 0
+        Dim vNivel As Integer = 0
+        Dim vFormato As Integer = 0
+        Dim vF_Inicial As DateTime = Date.Now
+        Dim vF_Final As DateTime = Date.Now
+
+        ''Obtencion de Datos
+        Dim vFI As String = dtpFechaInicial.Value.Month & "/" & dtpFechaInicial.Value.Day & "/" & dtpFechaInicial.Value.Year
+        Dim vFF As String = dtpFechaFinal.Value.Month & "/" & dtpFechaFinal.Value.Day & "/" & dtpFechaFinal.Value.Year
+        vF_Inicial = DateTime.Parse(vFI)
+        vF_Final = DateTime.Parse(vFF)
+        oG_NRFT = New G_NRFT
+
+        ''Revicion de Nivel Elegido
+        If rdbtnEquipo.IsChecked = True Then
+            If chkTodasLineas.Checked = False Then ''---Nivel Equipo_Linea
+                vCve_Equipo = cbxEquipo.SelectedValue
+                vCve_Linea = cbxLinea.SelectedValue
+                vNivel = 0
+            Else ''---Nivel Equipo
+                vCve_Equipo = cbxEquipo.SelectedValue
+                vNivel = 1
+            End If
+        End If
+        If rdbtnLinea.IsChecked = True Then ''---Nivel Linea
+            vCve_Linea = cbxLinea.SelectedValue
+            vNivel = 2
+        ElseIf rdbtnComponente.IsChecked = True Then ''---Nivel Componente
+            vCve_Componente = cbxComponente.SelectedValue
+            vNivel = 3
+        ElseIf rdbtnCadenaValor.IsChecked = True Then ''---Nivel Cadena Valor
+            vCve_CadenaValor = cbxCadenaValor.SelectedValue
+            vNivel = 4
+        ElseIf rdbtnPlanta.IsChecked = True Then ''---Nivel Planta
+            vNivel = 5
+        End If
+        ''----------------------------------------------------------------------------------------------------------------
+        ''----------------------------------------------------------------------------------------------------------------
+        ''----------------------------------------------------------------------------------------------------------------
+        ''--------------------------Datos Utilizados solo como prueba, borrar para entrega---------------------------------
+        vCve_Equipo = 1 '' cbxEquipo.SelectedValue
+        vCve_Linea = 54 '' cbxLinea.SelectedValue
+        ''----------------------------------------------------------------------------------------------------------------
+        ''----------------------------------------------------------------------------------------------------------------
+        ''----------------------------------------------------------------------------------------------------------------
+        ''Obtencion de Informacion
+        vDatos_Obtenidos = oG_NRFT.Obten_NRFT(vF_Inicial, vF_Final, vCve_Equipo, vCve_Linea, vCve_Componente, vCve_CadenaValor, vFormato_Resultado, vNivel, True, False)
+
+        'Creacion series
+        Dim BarSeries1 As New BarSeries()
+        BarSeries1.LegendTitle = "nrfti"
+        Dim BarSeries2 As New BarSeries()
+        BarSeries2.LegendTitle = "Acumulado"
+        Dim LineSeries1 As New LineSeries()
+
+        If vNivel <> 5 Then
+            LineSeries1.LegendTitle = "Objetivo NRFTi"
+        End If
+
+        Me.radChartView1.ShowLegend = True
+        Me.radChartView1.ShowSmartLabels = True
+        BarSeries1.DrawLinesToLabels = True
+        BarSeries1.SyncLinesToLabelsColor = True
+        BarSeries1.Font = New Font("Segoe UI", 11)
+        BarSeries2.Font = New Font("Segoe UI", 11)
+
+        'Obtencion Datos Oee
+        Dim vDT As New DataTable
+        vDT = vDatos_Obtenidos
+
+        'Llenado de las series
+        Dim vTotal As Integer = 1
+        Dim vContador As Integer = 1
+        vTotal = vDT.Rows.Count
+        If vTotal = 0 Then
+            habilita_etiqueta_datos()
+            Me.radChartView1.Title = ""
+        Else
+            Me.radChartView1.Title = "NRFTi ( PPM'S ) " & cbxEquipo.Text & " - " & cbxLinea.Text
+        End If
+        If vNivel = 0 And vNivel = 1 Then
+            For Each vDR As DataRow In vDT.Rows
+                If rdbtnDias.IsChecked Then
+                    If vContador = 1 Then
+                        BarSeries2.DataPoints.Add(New CategoricalDataPoint(vDR("nrfti"), "Acumulado"))
+                    Else
+                        BarSeries1.DataPoints.Add(New CategoricalDataPoint(vDR("nrfti"), vDR("dia_asignado")))
+                        If Not IsDBNull(vDR("objetivo")) Then
+                            LineSeries1.DataPoints.Add(New CategoricalDataPoint(vDR("objetivo"), vDR("dia_asignado")))
+                        End If
+                    End If
+                ElseIf rdbtnMeses.IsChecked Then
+                    If vContador = vTotal Then
+                        BarSeries2.DataPoints.Add(New CategoricalDataPoint(vDR("nrfti"), "Acumulado"))
+                    Else
+                        BarSeries1.DataPoints.Add(New CategoricalDataPoint(vDR("nrfti"), vDR("dia_asignado")))
+                        If Not IsDBNull(vDR("objetivo")) Then
+                            LineSeries1.DataPoints.Add(New CategoricalDataPoint(vDR("objetivo"), vDR("dia_asignado")))
+                        End If
+                    End If
+                End If
+                vContador = vContador + 1
+            Next
+        ElseIf vNivel = 2 And vNivel = 3 And vNivel = 4 Then
+
+            For Each vDR As DataRow In vDT.Rows
+                If vContador = vTotal Then
+                    BarSeries2.DataPoints.Add(New CategoricalDataPoint(vDR("nrfti"), "Acumulado"))
+                Else
+                    BarSeries1.DataPoints.Add(New CategoricalDataPoint(vDR("nrfti"), vDR("dia_asignado")))
+                    If Not IsDBNull(vDR("objetivo")) Then
+                        LineSeries1.DataPoints.Add(New CategoricalDataPoint(vDR("objetivo"), vDR("dia_asignado")))
+                    End If
+                End If
+                vContador = vContador + 1
+            Next
+        ElseIf vNivel = 5 Then
+            For Each vDR As DataRow In vDT.Rows
+                If vContador = vTotal Then
+                    BarSeries2.DataPoints.Add(New CategoricalDataPoint(vDR("nrfti"), "Acumulado"))
+                Else
+                    BarSeries1.DataPoints.Add(New CategoricalDataPoint(vDR("nrfti"), vDR("dia_asignado")))
+                End If
+                vContador = vContador + 1
+            Next
+        End If
+        'Cartesian Area, CategoricalAxis, LinearAxis
+        Dim CartesianArea1 As CartesianArea = New CartesianArea()
+        Dim CategoricalAxis1 As CategoricalAxis = New CategoricalAxis()
+        Dim LinearAxis1 As LinearAxis = New LinearAxis()
+        'Personalizacion
+        'CartesianArea1.GridDesign.AlternatingVerticalColor = False
+        'CartesianArea1.ShowGrid = True
+
+        'Logo Indicador
+        picboxIndicador.ImageLocation = Application.StartupPath & "\graficas_fase_uno\logo_indicador_calidad.jpg"
+
+        'Legend & Position
+        Me.radChartView1.ChartElement.LegendElement.StackElement.Orientation = Orientation.Horizontal
+        Me.radChartView1.ChartElement.LegendPosition = LegendPosition.Bottom
+
+        Me.radChartView1.AreaDesign = CartesianArea1
+        CategoricalAxis1.LabelFitMode = AxisLabelFitMode.Rotate
+        If rdbtnDias.IsChecked Then
+            CategoricalAxis1.LabelFormat = "{0:dd - MMM}"
+        ElseIf rdbtnMeses.IsChecked Then
+            CategoricalAxis1.LabelFormat = "{0:MMM - yyyy}"
+        End If
+        CategoricalAxis1.LabelRotationAngle = 270.0R
+        LinearAxis1.AxisType = AxisType.Second
+        'LinearAxis1.LabelFitMode = AxisLabelFitMode.Rotate
+        'LinearAxis1.LabelRotationAngle = 300.0R
+        'LinearAxis1.MajorStep = 10.0R
+        'LinearAxis1.Maximum = 100
+        LinearAxis1.Title = "NRFTi (PPM'S)"
+        BarSeries1.ShowLabels = True
+        BarSeries2.ShowLabels = True
+        'LineSeries1.ShowLabels = True
+
+        BarSeries1.LabelFormat = "{0:#,###}"
+        BarSeries2.LabelFormat = "{0:#,###}"
+
+        If vNivel <> 5 Then
+            LineSeries1.LabelFormat = "{0:##,###}"
+            LineSeries1.HorizontalAxis = CategoricalAxis1
+            LineSeries1.VerticalAxis = LinearAxis1
+            LineSeries1.Palette = New PaletteEntry(Color.FromArgb(202, 0, 0))
+            LineSeries1.BorderColor = Color.FromArgb(202, 0, 0)
+            radChartView1.Series.Add(LineSeries1)
+            LineSeries1.CombineMode = ChartSeriesCombineMode.None
+        End If
+       
+        BarSeries1.HorizontalAxis = CategoricalAxis1
+
+        BarSeries1.VerticalAxis = LinearAxis1
+
+        BarSeries1.Palette = New PaletteEntry(Color.FromArgb(55, 96, 146))
+        BarSeries2.Palette = New PaletteEntry(Color.FromArgb(37, 64, 97))
+
+        'LineSeries1.PointSize = New SizeF(10, 10)
+
+        Me.radChartView1.ShowToolTip = True
+
+        radChartView1.Series.Add(BarSeries1)
+        radChartView1.Series.Add(BarSeries2)
+
+        If vNivel <> 5 Then
+            BarSeries1.CombineMode = ChartSeriesCombineMode.None
+            BarSeries2.CombineMode = ChartSeriesCombineMode.None
+        End If
+
+        BarSeries1.LabelMode = BarLabelModes.Top
+        BarSeries2.LabelMode = BarLabelModes.Top
+
+        If (LinearAxis1.ActualRange.Maximum = 0) Then
+            LinearAxis1.Maximum = 5
+        End If
+
+        For Each controller As ChartViewController In Me.radChartView1.Controllers
+            Dim control As SmartLabelsController = TryCast(controller, SmartLabelsController)
+            If control IsNot Nothing Then
+                control.Strategy.DistanceToLabel = CInt(Fix(25.0))
+                Me.radChartView1.View.PerformRefresh(Me.radChartView1.View, False)
+            End If
+        Next controller
+
+    End Sub
+
+    Private Sub Obtiene_Reporte_NRFT(ByVal vEsResumen As Boolean)
+        dgvTabla.DataSource = vDatos_Obtenidos
+
+        If vEsResumen = True Then
+            dgvTabla.Columns(11).IsVisible = False
+            dgvTabla.Columns(12).IsVisible = False
+            dgvTabla.Columns(13).IsVisible = False
+            dgvTabla.Columns(14).IsVisible = False
+            dgvTabla.Columns(15).IsVisible = False
+            dgvTabla.Columns(16).IsVisible = False
+            dgvTabla.Columns(17).IsVisible = False
+            dgvTabla.Columns(18).IsVisible = False
+            dgvTabla.Columns(19).IsVisible = False
+            dgvTabla.Columns(20).IsVisible = False
+            dgvTabla.Columns(21).IsVisible = False
+        Else
+            dgvTabla.Columns(11).IsVisible = True
+            dgvTabla.Columns(12).IsVisible = True
+            dgvTabla.Columns(13).IsVisible = True
+            dgvTabla.Columns(14).IsVisible = True
+            dgvTabla.Columns(15).IsVisible = True
+            dgvTabla.Columns(16).IsVisible = True
+            dgvTabla.Columns(17).IsVisible = True
+            dgvTabla.Columns(18).IsVisible = True
+            dgvTabla.Columns(19).IsVisible = True
+            dgvTabla.Columns(20).IsVisible = True
+            dgvTabla.Columns(21).IsVisible = True
+        End If
+
+    End Sub
+
+#Region "MEtodos No Utilizados, Eliminar"
     'NRNFTi planta
     Private Sub obtiene_nrfti_planta_dia_mes()
         'Objeto obtiene_nrfti Clase
@@ -1746,7 +1991,7 @@ Public Class FrmGraficasfaseuno
 
         BarSeries1.VerticalAxis = LinearAxis1
         LineSeries1.VerticalAxis = LinearAxis1
-        
+
         BarSeries1.Palette = New PaletteEntry(Color.FromArgb(55, 96, 146))
         BarSeries2.Palette = New PaletteEntry(Color.FromArgb(37, 64, 97))
         LineSeries1.Palette = New PaletteEntry(Color.FromArgb(202, 0, 0))
@@ -1853,7 +2098,7 @@ Public Class FrmGraficasfaseuno
         End If
         CategoricalAxis1.LabelRotationAngle = 270.0R
         LinearAxis1.AxisType = AxisType.Second
-        
+
         LinearAxis1.Title = "NRFTi (PPM'S)"
         BarSeries1.ShowLabels = True
         BarSeries2.ShowLabels = True
@@ -1868,7 +2113,7 @@ Public Class FrmGraficasfaseuno
 
         BarSeries1.VerticalAxis = LinearAxis1
         LineSeries1.VerticalAxis = LinearAxis1
-        
+
         BarSeries1.Palette = New PaletteEntry(Color.FromArgb(55, 96, 146))
         BarSeries2.Palette = New PaletteEntry(Color.FromArgb(37, 64, 97))
         LineSeries1.Palette = New PaletteEntry(Color.FromArgb(202, 0, 0))
@@ -2144,7 +2389,7 @@ Public Class FrmGraficasfaseuno
 
         BarSeries1.VerticalAxis = LinearAxis1
         LineSeries1.VerticalAxis = LinearAxis1
-        
+
         BarSeries1.Palette = New PaletteEntry(Color.FromArgb(55, 96, 146))
         BarSeries2.Palette = New PaletteEntry(Color.FromArgb(37, 64, 97))
         LineSeries1.Palette = New PaletteEntry(Color.FromArgb(202, 0, 0))
@@ -2179,7 +2424,220 @@ Public Class FrmGraficasfaseuno
 
     End Sub
 #End Region
+#End Region
+
+
+
 #Region "Metodos graficar cincoS"
+
+    Private Sub Obtiene_Grafica_CincoS()
+        Dim vCve_Equipo As Integer = 0
+        Dim vCve_Linea As Integer = 0
+        Dim vCve_Componente As Integer = 0
+        Dim vCve_CadenaValor As Integer = 0
+        Dim vNivel As Integer = 0
+        Dim vFormato As Integer = 0
+        Dim vF_Inicial As DateTime = Date.Now
+        Dim vF_Final As DateTime = Date.Now
+
+        ''Obtencion de Datos
+        Dim vFI As String = dtpFechaInicial.Value.Month & "/" & dtpFechaInicial.Value.Day & "/" & dtpFechaInicial.Value.Year
+        Dim vFF As String = dtpFechaFinal.Value.Month & "/" & dtpFechaFinal.Value.Day & "/" & dtpFechaFinal.Value.Year
+        vF_Inicial = DateTime.Parse(vFI)
+        vF_Final = DateTime.Parse(vFF)
+        oG_Cinco_S = New G_Cinco_S
+
+        ''Revicion de Nivel Elegido
+        If rdbtnEquipo.IsChecked = True Then
+            If chkTodasLineas.Checked = False Then ''---Nivel Equipo_Linea
+                vCve_Equipo = cbxEquipo.SelectedValue
+                vCve_Linea = cbxLinea.SelectedValue
+                vNivel = 0
+            Else ''---Nivel Equipo
+                vCve_Equipo = cbxEquipo.SelectedValue
+                vNivel = 1
+            End If
+        End If
+        If rdbtnLinea.IsChecked = True Then ''---Nivel Linea
+            vCve_Linea = cbxLinea.SelectedValue
+            vNivel = 2
+        ElseIf rdbtnComponente.IsChecked = True Then ''---Nivel Componente
+            vCve_Componente = cbxComponente.SelectedValue
+            vNivel = 3
+        ElseIf rdbtnCadenaValor.IsChecked = True Then ''---Nivel Cadena Valor
+            vCve_CadenaValor = cbxCadenaValor.SelectedValue
+            vNivel = 4
+        ElseIf rdbtnPlanta.IsChecked = True Then ''---Nivel Planta
+            vNivel = 5
+        End If
+        ''----------------------------------------------------------------------------------------------------------------
+        ''----------------------------------------------------------------------------------------------------------------
+        ''----------------------------------------------------------------------------------------------------------------
+        ''--------------------------Datos Utilizados solo como prueba, borrar para entrega---------------------------------
+        vCve_Equipo = 1 '' cbxEquipo.SelectedValue
+        vCve_Linea = 54 '' cbxLinea.SelectedValue
+        ''----------------------------------------------------------------------------------------------------------------
+        ''----------------------------------------------------------------------------------------------------------------
+        ''----------------------------------------------------------------------------------------------------------------
+        ''Obtencion de Informacion
+        vDatos_Obtenidos = oG_Cinco_S.Obten_Cinco_S(vF_Inicial, vF_Final, vCve_Equipo, vCve_Linea, vCve_Componente, vCve_CadenaValor, vFormato_Resultado, vNivel, True, False)
+
+
+        'Creacion series
+        Dim BarSeries1 As New BarSeries()
+        BarSeries1.LegendTitle = "Admon Visual"
+        Dim BarSeries2 As New BarSeries() 'mantto_autto
+        BarSeries2.LegendTitle = "5's"
+        Dim BarSeries3 As New BarSeries() 'admon_visual
+        BarSeries3.LegendTitle = "Mantto Autto"
+        Dim BarSeries4 As New BarSeries() 'cincoS
+        BarSeries4.LegendTitle = "Promedio 5's"
+        Dim LineSeries1 As New LineSeries()
+        If vNivel <> 5 Then
+            LineSeries1.LegendTitle = "Objetivo 5's"
+        End If
+
+        Me.radChartView1.ShowLegend = True
+        'Obtencion Datos
+        Dim vDT As DataTable = Nothing
+        'If rdbtnMeses.IsChecked Then
+        '    vDT = oObtiene_cincoS.obtiene_cincos_equipo_linea_mes()
+        'End If
+
+        vDT = vDatos_Obtenidos
+
+        If vDT.Rows.Count = 0 Then
+            habilita_etiqueta_datos()
+            Me.radChartView1.Title = ""
+        Else
+            Me.radChartView1.Title = "5's " & cbxEquipo.Text & " - " & cbxLinea.Text
+        End If
+
+        BarSeries1.ValueMember = "admon_visual"
+        BarSeries1.CategoryMember = "dia_asignado"
+        BarSeries1.DataSource = vDT
+        BarSeries2.ValueMember = "cincoS"
+        BarSeries2.CategoryMember = "dia_asignado"
+        BarSeries2.DataSource = vDT
+        BarSeries3.ValueMember = "mantto_autto"
+        BarSeries3.CategoryMember = "dia_asignado"
+        BarSeries3.DataSource = vDT
+        BarSeries4.ValueMember = "promedio"
+        BarSeries4.CategoryMember = "dia_asignado"
+        BarSeries4.DataSource = vDT
+        If vNivel <> 5 Then
+            LineSeries1.ValueMember = "objetivo"
+            LineSeries1.CategoryMember = "dia_asignado"
+            LineSeries1.DataSource = vDT
+        End If
+        'Cartesian Area, CategoricalAxis, LinearAxis
+        Dim CartesianArea1 As CartesianArea = New CartesianArea()
+        Dim CategoricalAxis1 As CategoricalAxis = New CategoricalAxis()
+        Dim LinearAxis1 As LinearAxis = New LinearAxis()
+        'Personalizacion
+        'CartesianArea1.GridDesign.AlternatingVerticalColor = False
+        'CartesianArea1.ShowGrid = True
+
+        'Logo Indicador
+        picboxIndicador.ImageLocation = Application.StartupPath & "\graficas_fase_uno\logo_indicador_cincos.jpg"
+
+        'Legend & Position
+        Me.radChartView1.ChartElement.LegendElement.StackElement.Orientation = Orientation.Horizontal
+        Me.radChartView1.ChartElement.LegendPosition = LegendPosition.Bottom
+
+        Me.radChartView1.AreaDesign = CartesianArea1
+        CategoricalAxis1.LabelFitMode = AxisLabelFitMode.Rotate
+        If rdbtnDias.IsChecked Then
+            CategoricalAxis1.LabelFormat = "{0:dd - MMM}"
+        ElseIf rdbtnMeses.IsChecked Then
+            CategoricalAxis1.LabelFormat = "{0:MMM - yyyy}"
+        End If
+        CategoricalAxis1.LabelRotationAngle = 270.0R
+        LinearAxis1.AxisType = AxisType.Second
+        LinearAxis1.MajorStep = 1.0R
+        LinearAxis1.Maximum = 5
+        LinearAxis1.Title = "5's"
+        'serie1
+        BarSeries1.ShowLabels = True
+        BarSeries1.LabelFormat = "{0:##.#}"
+        BarSeries1.HorizontalAxis = CategoricalAxis1
+        BarSeries1.VerticalAxis = LinearAxis1
+        BarSeries1.Palette = New PaletteEntry(Color.FromArgb(217, 217, 217))
+        'serie2
+        BarSeries2.ShowLabels = True
+        BarSeries2.LabelFormat = "{0:##.#}"
+        BarSeries2.Palette = New PaletteEntry(Color.FromArgb(255, 192, 0))
+        'serie3
+        BarSeries3.ShowLabels = True
+        BarSeries3.LabelFormat = "{0:##.#}"
+        BarSeries3.Palette = New PaletteEntry(Color.FromArgb(37, 64, 97))
+        'serie4
+        BarSeries4.ShowLabels = True
+        BarSeries4.LabelFormat = "{0:##.#}"
+        BarSeries4.Palette = New PaletteEntry(Color.FromArgb(127, 127, 127))
+        'lineseries
+        'LineSeries1.ShowLabels = True
+        If vNivel <> 5 Then
+            LineSeries1.LabelFormat = "{0:##.#}"
+            LineSeries1.HorizontalAxis = CategoricalAxis1
+            LineSeries1.VerticalAxis = LinearAxis1
+            LineSeries1.Palette = New PaletteEntry(Color.FromArgb(202, 0, 0))
+            LineSeries1.BorderColor = Color.FromArgb(202, 0, 0)
+            'LineSeries1.PointSize = New SizeF(10, 10)
+        End If
+        Me.radChartView1.ShowToolTip = True
+
+        If vNivel <> 5 Then
+            radChartView1.Series.Add(LineSeries1)
+        End If
+
+        radChartView1.Series.Add(BarSeries1)
+        radChartView1.Series.Add(BarSeries2)
+        radChartView1.Series.Add(BarSeries3)
+        radChartView1.Series.Add(BarSeries4)
+
+        If vNivel <> 5 Then
+            LineSeries1.CombineMode = ChartSeriesCombineMode.None
+            BarSeries1.CombineMode = ChartSeriesCombineMode.Cluster
+            BarSeries2.CombineMode = ChartSeriesCombineMode.Cluster
+            BarSeries3.CombineMode = ChartSeriesCombineMode.Cluster
+            BarSeries4.CombineMode = ChartSeriesCombineMode.Cluster
+        End If
+
+    End Sub
+
+    Private Sub Obtiene_Reporte_CincoS(ByVal vEsResumen As Boolean)
+        dgvTabla.DataSource = vDatos_Obtenidos
+
+        If vEsResumen = True Then
+            dgvTabla.Columns(11).IsVisible = False
+            dgvTabla.Columns(12).IsVisible = False
+            dgvTabla.Columns(13).IsVisible = False
+            dgvTabla.Columns(14).IsVisible = False
+            dgvTabla.Columns(15).IsVisible = False
+            dgvTabla.Columns(16).IsVisible = False
+            dgvTabla.Columns(17).IsVisible = False
+            dgvTabla.Columns(18).IsVisible = False
+            dgvTabla.Columns(19).IsVisible = False
+            dgvTabla.Columns(20).IsVisible = False
+            dgvTabla.Columns(21).IsVisible = False
+        Else
+            dgvTabla.Columns(11).IsVisible = True
+            dgvTabla.Columns(12).IsVisible = True
+            dgvTabla.Columns(13).IsVisible = True
+            dgvTabla.Columns(14).IsVisible = True
+            dgvTabla.Columns(15).IsVisible = True
+            dgvTabla.Columns(16).IsVisible = True
+            dgvTabla.Columns(17).IsVisible = True
+            dgvTabla.Columns(18).IsVisible = True
+            dgvTabla.Columns(19).IsVisible = True
+            dgvTabla.Columns(20).IsVisible = True
+            dgvTabla.Columns(21).IsVisible = True
+        End If
+
+    End Sub
+
+#Region "MEtodos No Utilizados, Eliminar"
     '5s planta
     Private Sub obtiene_cincoS_planta_mes()
         'Objeto obtiene_nrfti Clase
@@ -2860,6 +3318,9 @@ Public Class FrmGraficasfaseuno
         BarSeries3.CombineMode = ChartSeriesCombineMode.Cluster
         BarSeries4.CombineMode = ChartSeriesCombineMode.Cluster
     End Sub
+
+#End Region
+
 #End Region
 #Region "Metodos graficar gente"
     'Gente planta
@@ -5134,8 +5595,6 @@ Public Class FrmGraficasfaseuno
         If rdbtnOee.IsChecked Then
             Obtiene_Grafico_OEE()
 
-
-
             'If rdbtnPlanta.IsChecked Then
             '    obtiene_oee_planta_dia_mes()
             'ElseIf rdbtnCadenaValor.IsChecked Then
@@ -5151,23 +5610,24 @@ Public Class FrmGraficasfaseuno
             '        obtiene_oee_equipo_linea_dia_mes()
             '    End If
             'End If
-
         ElseIf rdbtnNrfti.IsChecked Then
-            If rdbtnPlanta.IsChecked Then
-                obtiene_nrfti_planta_dia_mes()
-            ElseIf rdbtnCadenaValor.IsChecked Then
-                obtiene_nrfti_cadena_valor_dia_mes()
-            ElseIf rdbtnComponente.IsChecked Then
-                obtiene_nrfti_componente_dia_mes()
-            ElseIf rdbtnLinea.IsChecked Then
-                obtiene_nrfti_linea_dia_mes()
-            ElseIf rdbtnEquipo.IsChecked Then
-                If chkTodasLineas.Checked Then
-                    obtiene_nrfti_equipo_dia_mes()
-                Else
-                    obtiene_nrfti_equipo_linea_dia_mes()
-                End If
-            End If
+            Obtiene_Grafica_NRFT()
+
+            'If rdbtnPlanta.IsChecked Then
+            '    obtiene_nrfti_planta_dia_mes()
+            'ElseIf rdbtnCadenaValor.IsChecked Then
+            '    obtiene_nrfti_cadena_valor_dia_mes()
+            'ElseIf rdbtnComponente.IsChecked Then
+            '    obtiene_nrfti_componente_dia_mes()
+            'ElseIf rdbtnLinea.IsChecked Then
+            '    obtiene_nrfti_linea_dia_mes()
+            'ElseIf rdbtnEquipo.IsChecked Then
+            '    If chkTodasLineas.Checked Then
+            '        obtiene_nrfti_equipo_dia_mes()
+            '    Else
+            '        obtiene_nrfti_equipo_linea_dia_mes()
+            '    End If
+            'End If
         ElseIf rdbtnCosto.IsChecked Then
             If rdbtnPlanta.IsChecked Then
                 obtiene_costo_planta_dia_mes()
@@ -5201,21 +5661,27 @@ Public Class FrmGraficasfaseuno
                 End If
             End If
         ElseIf rdbtnCincoS.IsChecked Then
-            If rdbtnPlanta.IsChecked Then
-                obtiene_cincoS_planta_mes()
-            ElseIf rdbtnCadenaValor.IsChecked Then
-                obtiene_cincoS_cadena_valor_mes()
-            ElseIf rdbtnComponente.IsChecked Then
-                obtiene_cincoS_componente_mes()
-            ElseIf rdbtnLinea.IsChecked Then
-                obtiene_cincoS_linea_mes()
-            ElseIf rdbtnEquipo.IsChecked Then
-                If chkTodasLineas.Checked Then
-                    obtiene_cincoS_equipo_mes()
-                Else
-                    obtiene_cincoS_equipo_linea_mes()
-                End If
-            End If
+
+            Obtiene_Grafica_CincoS()
+
+
+            'If rdbtnPlanta.IsChecked Then
+            '    obtiene_cincoS_planta_mes()
+            'ElseIf rdbtnCadenaValor.IsChecked Then
+            '    obtiene_cincoS_cadena_valor_mes()
+            'ElseIf rdbtnComponente.IsChecked Then
+            '    obtiene_cincoS_componente_mes()
+            'ElseIf rdbtnLinea.IsChecked Then
+            '    obtiene_cincoS_linea_mes()
+            'ElseIf rdbtnEquipo.IsChecked Then
+            '    If chkTodasLineas.Checked Then
+            '        obtiene_cincoS_equipo_mes()
+            '    Else
+            '        obtiene_cincoS_equipo_linea_mes()
+            '    End If
+            'End If
+
+
         ElseIf rdbtnGente.IsChecked Then
             If rdbtnPlanta.IsChecked Then
                 obtiene_gente_planta_dia_mes()
