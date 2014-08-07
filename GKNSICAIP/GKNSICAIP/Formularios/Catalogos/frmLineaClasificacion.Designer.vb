@@ -22,6 +22,7 @@ Partial Class frmLineaClasificacion
     'No lo modifique con el editor de código.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Me.components = New System.ComponentModel.Container()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.Label3 = New System.Windows.Forms.Label()
@@ -30,9 +31,11 @@ Partial Class frmLineaClasificacion
         Me.Label4 = New System.Windows.Forms.Label()
         Me.btnSalir = New System.Windows.Forms.Button()
         Me.btnRegistrar = New System.Windows.Forms.Button()
-        Me.txtEstatus = New System.Windows.Forms.ComboBox()
+        Me.cbxEstatus = New System.Windows.Forms.ComboBox()
         Me.banner_formulario = New System.Windows.Forms.PictureBox()
+        Me.errorProvClasfLineas = New System.Windows.Forms.ErrorProvider(Me.components)
         CType(Me.banner_formulario, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.errorProvClasfLineas, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'Label1
@@ -84,19 +87,20 @@ Partial Class frmLineaClasificacion
         '
         Me.Label4.AutoSize = True
         Me.Label4.BackColor = System.Drawing.Color.Transparent
-        Me.Label4.Font = New System.Drawing.Font("Calibri", 14.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label4.Font = New System.Drawing.Font("Calibri", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label4.ForeColor = System.Drawing.Color.SteelBlue
         Me.Label4.Location = New System.Drawing.Point(12, 21)
         Me.Label4.Name = "Label4"
-        Me.Label4.Size = New System.Drawing.Size(179, 23)
+        Me.Label4.Size = New System.Drawing.Size(186, 23)
         Me.Label4.TabIndex = 114
         Me.Label4.Text = "Clasificación de Líneas"
         '
         'btnSalir
         '
         Me.btnSalir.Font = New System.Drawing.Font("Calibri", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnSalir.Location = New System.Drawing.Point(281, 247)
+        Me.btnSalir.Location = New System.Drawing.Point(281, 256)
         Me.btnSalir.Name = "btnSalir"
-        Me.btnSalir.Size = New System.Drawing.Size(77, 33)
+        Me.btnSalir.Size = New System.Drawing.Size(77, 28)
         Me.btnSalir.TabIndex = 115
         Me.btnSalir.Text = "Salir"
         Me.btnSalir.UseVisualStyleBackColor = True
@@ -104,20 +108,20 @@ Partial Class frmLineaClasificacion
         'btnRegistrar
         '
         Me.btnRegistrar.Font = New System.Drawing.Font("Calibri", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnRegistrar.Location = New System.Drawing.Point(189, 247)
+        Me.btnRegistrar.Location = New System.Drawing.Point(196, 256)
         Me.btnRegistrar.Name = "btnRegistrar"
-        Me.btnRegistrar.Size = New System.Drawing.Size(86, 33)
+        Me.btnRegistrar.Size = New System.Drawing.Size(79, 28)
         Me.btnRegistrar.TabIndex = 116
         Me.btnRegistrar.Text = "Registrar"
         Me.btnRegistrar.UseVisualStyleBackColor = True
         '
-        'txtEstatus
+        'cbxEstatus
         '
-        Me.txtEstatus.FormattingEnabled = True
-        Me.txtEstatus.Location = New System.Drawing.Point(96, 101)
-        Me.txtEstatus.Name = "txtEstatus"
-        Me.txtEstatus.Size = New System.Drawing.Size(262, 21)
-        Me.txtEstatus.TabIndex = 117
+        Me.cbxEstatus.FormattingEnabled = True
+        Me.cbxEstatus.Location = New System.Drawing.Point(96, 101)
+        Me.cbxEstatus.Name = "cbxEstatus"
+        Me.cbxEstatus.Size = New System.Drawing.Size(262, 21)
+        Me.cbxEstatus.TabIndex = 117
         '
         'banner_formulario
         '
@@ -130,13 +134,17 @@ Partial Class frmLineaClasificacion
         Me.banner_formulario.TabIndex = 108
         Me.banner_formulario.TabStop = False
         '
+        'errorProvClasfLineas
+        '
+        Me.errorProvClasfLineas.ContainerControl = Me
+        '
         'frmLineaClasificacion
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.SystemColors.ControlLightLight
-        Me.ClientSize = New System.Drawing.Size(385, 337)
-        Me.Controls.Add(Me.txtEstatus)
+        Me.ClientSize = New System.Drawing.Size(377, 296)
+        Me.Controls.Add(Me.cbxEstatus)
         Me.Controls.Add(Me.btnRegistrar)
         Me.Controls.Add(Me.btnSalir)
         Me.Controls.Add(Me.Label4)
@@ -148,10 +156,11 @@ Partial Class frmLineaClasificacion
         Me.Controls.Add(Me.banner_formulario)
         Me.MaximizeBox = False
         Me.MaximumSize = New System.Drawing.Size(401, 376)
-        Me.MinimumSize = New System.Drawing.Size(401, 376)
+        Me.MinimumSize = New System.Drawing.Size(393, 335)
         Me.Name = "frmLineaClasificacion"
         Me.Text = "Clasificación de Líneas"
         CType(Me.banner_formulario, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.errorProvClasfLineas, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -165,5 +174,6 @@ Partial Class frmLineaClasificacion
     Friend WithEvents Label4 As System.Windows.Forms.Label
     Friend WithEvents btnSalir As System.Windows.Forms.Button
     Friend WithEvents btnRegistrar As System.Windows.Forms.Button
-    Friend WithEvents txtEstatus As System.Windows.Forms.ComboBox
+    Friend WithEvents cbxEstatus As System.Windows.Forms.ComboBox
+    Friend WithEvents errorProvClasfLineas As System.Windows.Forms.ErrorProvider
 End Class
