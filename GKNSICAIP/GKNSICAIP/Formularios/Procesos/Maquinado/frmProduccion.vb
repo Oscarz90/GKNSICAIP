@@ -133,18 +133,24 @@ Public Class frmProduccion
         calcula_OEE()
     End Sub
     Private Sub calcula_Disponibilidad()
-        If lblTiempoTurno.Text <> "0" And lblTiempoCarga.Text = lblParosNoPlaneados.Text Then
+        Dim tiempo_operacion As Double = Convert.ToDouble(lblTiempoOperacion.Text)
+        'Validacion si Tiempo de Operacion es 0
+        If tiempo_operacion = 0 Then
             lblDisponibilidad.Text = "0.00"
-        ElseIf lblTiempoCarga.Text <> "0" And lblTiempoOperacion.Text <> "0" Then
-            If ((Convert.ToDouble(lblTiempoOperacion.Text) / Convert.ToDouble(lblTiempoCarga.Text)) * 100) <= 100 Then
-                lblDisponibilidad.Text = Format((Convert.ToDouble(lblTiempoOperacion.Text) / Convert.ToDouble(lblTiempoCarga.Text)) * 100, "##0.00")
-            ElseIf ((Convert.ToDouble(lblTiempoOperacion.Text) / Convert.ToDouble(lblTiempoCarga.Text)) * 100) > 100 Then
-                lblDisponibilidad.Text = "100.00"
+        Else
+            If lblTiempoTurno.Text <> "0" And lblTiempoCarga.Text = lblParosNoPlaneados.Text Then
+                lblDisponibilidad.Text = "0.00"
+            ElseIf lblTiempoCarga.Text <> "0" And lblTiempoOperacion.Text <> "0" Then
+                If ((Convert.ToDouble(lblTiempoOperacion.Text) / Convert.ToDouble(lblTiempoCarga.Text)) * 100) <= 100 Then
+                    lblDisponibilidad.Text = Format((Convert.ToDouble(lblTiempoOperacion.Text) / Convert.ToDouble(lblTiempoCarga.Text)) * 100, "##0.00")
+                ElseIf ((Convert.ToDouble(lblTiempoOperacion.Text) / Convert.ToDouble(lblTiempoCarga.Text)) * 100) > 100 Then
+                    lblDisponibilidad.Text = "100.00"
+                Else
+                    lblDisponibilidad.Text = "0.00"
+                End If
             Else
                 lblDisponibilidad.Text = "0.00"
             End If
-        Else
-            lblDisponibilidad.Text = "0.00"
         End If
     End Sub
     Private Sub calcula_Desempeno()
@@ -155,55 +161,65 @@ Public Class frmProduccion
         Dim oTC As New TC
         Dim oProduccion As New Produccion
         Dim oDesecho As New Desecho
-
-        For Each row As DataGridViewRow In grdDetalleProductividad.Rows
-            oProduccion.cve_produccion = Val(row.Cells(0).Value)
-            oProduccion.Cargar()
-            oTC.cve_TC = oProduccion.cve_TC
-            produccion_d += (oTC.obtener_tiempo_ciclo() * Val(row.Cells(5).Value))
-        Next
-        For Each row As DataGridViewRow In grdDetalleDesecho.Rows
-            oDesecho.cve_desecho = Val(row.Cells(0).Value)
-            oDesecho.Cargar()
-            oTC.cve_TC = oDesecho.cve_TC
-            desechos_d += (oTC.obtener_tiempo_ciclo() * Val(row.Cells(5).Value))
-        Next
-        desempeno = ((produccion_d + desechos_d) / tiempo_operacion) * 100
-        If tiempo_operacion <> 0 Then
-            If desempeno <= 100 And desempeno >= 0 Then
-                lblDesempeno.Text = Format(desempeno, "##0.00")
-            ElseIf desempeno < 0 Then
-                lblDesempeno.Text = "0.00"
-            Else
-                If cbxModeloProductividad.SelectedIndex <> -1 Then
-                    get_body_notificacion(desempeno)
-                    'Dim newThread As New System.Threading.Thread(AddressOf envia_notificacion_sobreproduccion)
-                    Try
-                        envia_notificacion_sobreproduccion(desempeno)
-                    Catch ex As Exception
-                    End Try
-                End If
-                lblDesempeno.Text = "100.00"
-            End If
+        'Validacion si Tiempo de Operacion es 0
+        If tiempo_operacion = 0 Then
+            lblDesempeno.Text = "100.00"
         Else
-            lblDesempeno.Text = "0.00"
+            For Each row As DataGridViewRow In grdDetalleProductividad.Rows
+                oProduccion.cve_produccion = Val(row.Cells(0).Value)
+                oProduccion.Cargar()
+                oTC.cve_TC = oProduccion.cve_TC
+                produccion_d += (oTC.obtener_tiempo_ciclo() * Val(row.Cells(5).Value))
+            Next
+            For Each row As DataGridViewRow In grdDetalleDesecho.Rows
+                oDesecho.cve_desecho = Val(row.Cells(0).Value)
+                oDesecho.Cargar()
+                oTC.cve_TC = oDesecho.cve_TC
+                desechos_d += (oTC.obtener_tiempo_ciclo() * Val(row.Cells(5).Value))
+            Next
+            desempeno = ((produccion_d + desechos_d) / tiempo_operacion) * 100
+            If tiempo_operacion <> 0 Then
+                If desempeno <= 100 And desempeno >= 0 Then
+                    lblDesempeno.Text = Format(desempeno, "##0.00")
+                ElseIf desempeno < 0 Then
+                    lblDesempeno.Text = "0.00"
+                Else
+                    If cbxModeloProductividad.SelectedIndex <> -1 Then
+                        get_body_notificacion(desempeno)
+                        'Dim newThread As New System.Threading.Thread(AddressOf envia_notificacion_sobreproduccion)
+                        Try
+                            envia_notificacion_sobreproduccion(desempeno)
+                        Catch ex As Exception
+                        End Try
+                    End If
+                    lblDesempeno.Text = "100.00"
+                End If
+            Else
+                lblDesempeno.Text = "0.00"
+            End If
         End If
     End Sub
     Private Sub calcula_Calidad()
-        Dim varvalida As Double = (get_suma_desechos() + get_suma_piezas_producidas())
-        If lblTiempoTurno.Text <> "0" And get_suma_piezas_producidas() = 0 Then
-            lblCalidad.Text = "0.00"
-        ElseIf varvalida <> 0 And get_suma_piezas_producidas() <> 0 Then
-            Dim resultado As Double = ((((get_suma_piezas_producidas() + get_suma_desechos()) - get_suma_desechos_aplicables()) / varvalida) * 100)
-            If resultado <= 100 And resultado >= 0 Then
-                lblCalidad.Text = Format(resultado, "##0.00")
-            ElseIf resultado < 0 Then
-                lblCalidad.Text = "0.00"
-            Else
-                lblCalidad.Text = "100.00"
-            End If
+        Dim tiempo_operacion As Double = Convert.ToDouble(lblTiempoOperacion.Text)
+        'Validacion si Tiempo de Operacion es 0
+        If tiempo_operacion = 0 Then
+            lblCalidad.Text = "100.00"
         Else
-            lblCalidad.Text = "0.00"
+            Dim varvalida As Double = (get_suma_desechos() + get_suma_piezas_producidas())
+            If lblTiempoTurno.Text <> "0" And get_suma_piezas_producidas() = 0 Then
+                lblCalidad.Text = "0.00"
+            ElseIf varvalida <> 0 And get_suma_piezas_producidas() <> 0 Then
+                Dim resultado As Double = ((((get_suma_piezas_producidas() + get_suma_desechos()) - get_suma_desechos_aplicables()) / varvalida) * 100)
+                If resultado <= 100 And resultado >= 0 Then
+                    lblCalidad.Text = Format(resultado, "##0.00")
+                ElseIf resultado < 0 Then
+                    lblCalidad.Text = "0.00"
+                Else
+                    lblCalidad.Text = "100.00"
+                End If
+            Else
+                lblCalidad.Text = "0.00"
+            End If
         End If
     End Sub
     Private Sub calcula_OEE()
