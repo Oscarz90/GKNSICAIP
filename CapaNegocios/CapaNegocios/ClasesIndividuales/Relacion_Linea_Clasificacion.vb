@@ -74,7 +74,7 @@
             vcve_linea = value
         End Set
     End Property
-    Public Property cve_line_clasificacion() As Long
+    Public Property cve_linea_clasificacion() As Long
         Get
             Return vcve_linea_clasificacion
         End Get

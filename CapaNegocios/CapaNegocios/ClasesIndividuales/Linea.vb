@@ -311,6 +311,7 @@ Public Class Linea
     Public Function Obtener_Lineas(Optional ByVal vFiltro_Modelo As Long = 0) As DataTable
         Dim vDT As DataTable
         If vFiltro_Modelo = 0 Then
+            'Ojo lo utiliza oscar en frmRelacionLineaClasificacion
             vDT = oBD.ObtenerTabla("select * from Linea where estatus='1'")
         Else
             vDT = oBD.ObtenerTabla("select * from Linea where estatus='1' and cve_componente=" & vFiltro_Modelo)
