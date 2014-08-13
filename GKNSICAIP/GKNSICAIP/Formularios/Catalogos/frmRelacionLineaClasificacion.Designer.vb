@@ -56,7 +56,7 @@ Partial Class frmRelacionLineaClasificacion
         Me.Label4.BackColor = System.Drawing.Color.Transparent
         Me.Label4.Font = New System.Drawing.Font("Calibri", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label4.ForeColor = System.Drawing.Color.SteelBlue
-        Me.Label4.Location = New System.Drawing.Point(0, 21)
+        Me.Label4.Location = New System.Drawing.Point(12, 25)
         Me.Label4.Name = "Label4"
         Me.Label4.Size = New System.Drawing.Size(251, 26)
         Me.Label4.TabIndex = 115
@@ -66,7 +66,7 @@ Partial Class frmRelacionLineaClasificacion
         '
         Me.Label2.AutoSize = True
         Me.Label2.Font = New System.Drawing.Font("Calibri", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label2.Location = New System.Drawing.Point(12, 111)
+        Me.Label2.Location = New System.Drawing.Point(13, 121)
         Me.Label2.Name = "Label2"
         Me.Label2.Size = New System.Drawing.Size(95, 19)
         Me.Label2.TabIndex = 117
@@ -76,7 +76,7 @@ Partial Class frmRelacionLineaClasificacion
         '
         Me.Label1.AutoSize = True
         Me.Label1.Font = New System.Drawing.Font("Calibri", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label1.Location = New System.Drawing.Point(58, 65)
+        Me.Label1.Location = New System.Drawing.Point(59, 75)
         Me.Label1.Name = "Label1"
         Me.Label1.Size = New System.Drawing.Size(48, 19)
         Me.Label1.TabIndex = 116
@@ -87,16 +87,16 @@ Partial Class frmRelacionLineaClasificacion
         Me.cbxClasificacionLinea.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cbxClasificacionLinea.Font = New System.Drawing.Font("Calibri", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cbxClasificacionLinea.FormattingEnabled = True
-        Me.cbxClasificacionLinea.Location = New System.Drawing.Point(112, 108)
+        Me.cbxClasificacionLinea.Location = New System.Drawing.Point(113, 118)
         Me.cbxClasificacionLinea.Name = "cbxClasificacionLinea"
-        Me.cbxClasificacionLinea.Size = New System.Drawing.Size(228, 27)
+        Me.cbxClasificacionLinea.Size = New System.Drawing.Size(248, 27)
         Me.cbxClasificacionLinea.TabIndex = 120
         '
         'Label3
         '
         Me.Label3.AutoSize = True
         Me.Label3.Font = New System.Drawing.Font("Calibri", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label3.Location = New System.Drawing.Point(12, 161)
+        Me.Label3.Location = New System.Drawing.Point(13, 171)
         Me.Label3.Name = "Label3"
         Me.Label3.Size = New System.Drawing.Size(94, 19)
         Me.Label3.TabIndex = 121
@@ -105,7 +105,7 @@ Partial Class frmRelacionLineaClasificacion
         'btnRegistrar
         '
         Me.btnRegistrar.Font = New System.Drawing.Font("Calibri", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnRegistrar.Location = New System.Drawing.Point(115, 207)
+        Me.btnRegistrar.Location = New System.Drawing.Point(140, 217)
         Me.btnRegistrar.Name = "btnRegistrar"
         Me.btnRegistrar.Size = New System.Drawing.Size(101, 28)
         Me.btnRegistrar.TabIndex = 124
@@ -115,7 +115,7 @@ Partial Class frmRelacionLineaClasificacion
         'btnSalir
         '
         Me.btnSalir.Font = New System.Drawing.Font("Calibri", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnSalir.Location = New System.Drawing.Point(239, 207)
+        Me.btnSalir.Location = New System.Drawing.Point(260, 217)
         Me.btnSalir.Name = "btnSalir"
         Me.btnSalir.Size = New System.Drawing.Size(101, 28)
         Me.btnSalir.TabIndex = 123
@@ -125,9 +125,9 @@ Partial Class frmRelacionLineaClasificacion
         'dtpFechaClasificacionLinea
         '
         Me.dtpFechaClasificacionLinea.Font = New System.Drawing.Font("Calibri", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.dtpFechaClasificacionLinea.Location = New System.Drawing.Point(112, 155)
+        Me.dtpFechaClasificacionLinea.Location = New System.Drawing.Point(113, 165)
         Me.dtpFechaClasificacionLinea.Name = "dtpFechaClasificacionLinea"
-        Me.dtpFechaClasificacionLinea.Size = New System.Drawing.Size(228, 25)
+        Me.dtpFechaClasificacionLinea.Size = New System.Drawing.Size(248, 25)
         Me.dtpFechaClasificacionLinea.TabIndex = 125
         Me.dtpFechaClasificacionLinea.TabStop = False
         Me.dtpFechaClasificacionLinea.Value = New Date(CType(0, Long))
@@ -146,7 +146,7 @@ Partial Class frmRelacionLineaClasificacion
         Me.cbxLinea.EditorControl.ImeMode = System.Windows.Forms.ImeMode.NoControl
         Me.cbxLinea.EditorControl.Location = New System.Drawing.Point(0, 0)
         '
-        'cbxLinea.NestedRadGridView
+        '
         '
         Me.cbxLinea.EditorControl.MasterTemplate.AllowAddNewRow = False
         Me.cbxLinea.EditorControl.MasterTemplate.AllowCellContextMenu = False
@@ -162,9 +162,9 @@ Partial Class frmRelacionLineaClasificacion
         Me.cbxLinea.EditorControl.Size = New System.Drawing.Size(240, 150)
         Me.cbxLinea.EditorControl.TabIndex = 0
         Me.cbxLinea.Font = New System.Drawing.Font("Calibri", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.cbxLinea.Location = New System.Drawing.Point(112, 65)
+        Me.cbxLinea.Location = New System.Drawing.Point(113, 75)
         Me.cbxLinea.Name = "cbxLinea"
-        Me.cbxLinea.Size = New System.Drawing.Size(228, 27)
+        Me.cbxLinea.Size = New System.Drawing.Size(248, 27)
         Me.cbxLinea.TabIndex = 126
         Me.cbxLinea.TabStop = False
         '
@@ -173,7 +173,7 @@ Partial Class frmRelacionLineaClasificacion
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.White
-        Me.ClientSize = New System.Drawing.Size(372, 256)
+        Me.ClientSize = New System.Drawing.Size(399, 276)
         Me.Controls.Add(Me.cbxLinea)
         Me.Controls.Add(Me.dtpFechaClasificacionLinea)
         Me.Controls.Add(Me.btnRegistrar)
@@ -185,8 +185,8 @@ Partial Class frmRelacionLineaClasificacion
         Me.Controls.Add(Me.Label4)
         Me.Controls.Add(Me.banner_formulario)
         Me.MaximizeBox = False
-        Me.MaximumSize = New System.Drawing.Size(388, 295)
-        Me.MinimumSize = New System.Drawing.Size(388, 295)
+        Me.MaximumSize = New System.Drawing.Size(415, 315)
+        Me.MinimumSize = New System.Drawing.Size(415, 315)
         Me.Name = "frmRelacionLineaClasificacion"
         Me.Text = "Clasificación de Línea"
         CType(Me.banner_formulario, System.ComponentModel.ISupportInitialize).EndInit()
