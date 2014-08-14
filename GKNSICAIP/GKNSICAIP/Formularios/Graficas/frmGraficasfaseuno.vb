@@ -1,5 +1,6 @@
 ﻿Imports CapaNegocios
 Imports Telerik.WinControls.UI
+Imports Telerik.WinControls.UI.Export
 Imports Telerik.Charting
 Public Class FrmGraficasfaseuno
 #Region "Variables globales"
@@ -20,14 +21,15 @@ Public Class FrmGraficasfaseuno
     '12-31-9999 23:59:59:997
     Dim maxDatetime As New DateTime(9999, 12, 31, 23, 59, 59, 997)
 
-    Dim oG_OEE As G_OEE
-    Dim oG_Seguridad As G_Seguridad
-    Dim oG_Costo As G_Costo
-    Dim oG_Cinco_S As G_Cinco_S
-    Dim oG_NRFT As G_NRFT
-    Dim oG_Gente As G_Gente
-    Dim vFormato_Resultado As Integer = 0
+    'Dim oG_OEE As G_OEE
+    'Dim oG_Seguridad As G_Seguridad
+    'Dim oG_Costo As G_Costo
+    'Dim oG_Cinco_S As G_Cinco_S
+    'Dim oG_NRFT As G_NRFT
+    'Dim oG_Gente As G_Gente
+    Dim oG_Fase2 As G_Fase2
 
+    Dim vFormato_Resultado As Integer = 0
     Dim vDatos_Obtenidos As DataTable
 
 
@@ -512,11 +514,9 @@ Public Class FrmGraficasfaseuno
         Dim vF_Final As DateTime = Date.Now
 
         ''Obtencion de Datos
-        Dim vFI As String = dtpFechaInicial.Value.Month & "/" & dtpFechaInicial.Value.Day & "/" & dtpFechaInicial.Value.Year
-        Dim vFF As String = dtpFechaFinal.Value.Month & "/" & dtpFechaFinal.Value.Day & "/" & dtpFechaFinal.Value.Year
-        vF_Inicial = DateTime.Parse(vFI)
-        vF_Final = DateTime.Parse(vFF)
-        oG_OEE = New G_OEE
+        vF_Inicial = dtpFechaInicial.Value
+        vF_Final = dtpFechaFinal.Value
+        oG_Fase2 = New G_Fase2
 
         ''Revicion de Nivel Elegido
         If rdbtnEquipo.IsChecked = True Then
@@ -541,17 +541,8 @@ Public Class FrmGraficasfaseuno
         ElseIf rdbtnPlanta.IsChecked = True Then ''---Nivel Planta
             vNivel = 5
         End If
-        ''----------------------------------------------------------------------------------------------------------------
-        ''----------------------------------------------------------------------------------------------------------------
-        ''----------------------------------------------------------------------------------------------------------------
-        ''--------------------------Datos Utilizados solo como prueba, borrar para entrega---------------------------------
-        vCve_Equipo = 1 '' cbxEquipo.SelectedValue
-        vCve_Linea = 54 '' cbxLinea.SelectedValue
-        ''----------------------------------------------------------------------------------------------------------------
-        ''----------------------------------------------------------------------------------------------------------------
-        ''----------------------------------------------------------------------------------------------------------------
         ''Obtencion de Informacion
-        vDatos_Obtenidos = oG_OEE.Obten_OEE(vF_Inicial, vF_Final, vCve_Equipo, vCve_Linea, vCve_Componente, vCve_CadenaValor, vFormato_Resultado, vNivel, True, False)
+        vDatos_Obtenidos = oG_Fase2.Obten_OEE(vF_Inicial, vF_Final, vCve_Equipo, vCve_Linea, vCve_Componente, vCve_CadenaValor, vFormato_Resultado, vNivel, True, False)
 
 
         'Creacion series
@@ -586,21 +577,26 @@ Public Class FrmGraficasfaseuno
         Else
             Me.radChartView1.Title = "Oee " & cbxComponente.Text
         End If
+        Dim vOEE_Acumulado As Double = 0
+
+
         For Each vDR As DataRow In vDT.Rows
-            If vContador = vTotal Then
-                BarSeries2.DataPoints.Add(New CategoricalDataPoint(vDR("oee"), "Acumulado"))
+            If vContador = 1 Then
+                vOEE_Acumulado = vDR("oee")
             Else
                 BarSeries1.DataPoints.Add(New CategoricalDataPoint(vDR("oee"), vDR("dia_asignado")))
-
                 If vNivel <> 5 Then ''El nivel Planta no lleva esta serie
                     If Not IsDBNull(vDR("objetivo")) Then
                         LineSeries1.DataPoints.Add(New CategoricalDataPoint(vDR("objetivo"), vDR("dia_asignado")))
                     End If
                 End If
-                
+
             End If
             vContador = vContador + 1
         Next
+        ''Acumulado
+        BarSeries2.DataPoints.Add(New CategoricalDataPoint(vOEE_Acumulado, "Acumulado"))
+
         'Cartesian Area, CategoricalAxis, LinearAxis
         Dim CartesianArea1 As CartesianArea = New CartesianArea()
         Dim CategoricalAxis1 As CategoricalAxis = New CategoricalAxis()
@@ -688,32 +684,146 @@ Public Class FrmGraficasfaseuno
 
     ''Metodo para Obtener Reportes
     Private Sub Obtiene_Reporte_OEE(ByVal vEsResumen As Boolean)
-        dgvTabla.DataSource = vDatos_Obtenidos
+        Me.dgvTabla.DataSource = Nothing
+        Me.dgvTabla.Columns.Clear()
+        Me.dgvTabla.DataSource = vDatos_Obtenidos
+
+        Me.dgvTabla.Columns("planta").HeaderText = "PLANTA"
+        Me.dgvTabla.Columns("planta").Width = 150
+        Me.dgvTabla.Columns("planta").Name = "planta"
+
+        Me.dgvTabla.Columns("cadena_valor").HeaderText = "CADENA VALOR"
+        Me.dgvTabla.Columns("cadena_valor").Width = 150
+        Me.dgvTabla.Columns("cadena_valor").Name = "cadena_valor"
+
+        Me.dgvTabla.Columns("componente").HeaderText = "COMPONENTE"
+        Me.dgvTabla.Columns("componente").Width = 150
+        Me.dgvTabla.Columns("componente").Name = "componente"
+
+        Me.dgvTabla.Columns("equipo").HeaderText = "EQUIPO"
+        Me.dgvTabla.Columns("equipo").Width = 170
+        Me.dgvTabla.Columns("equipo").Name = "equipo"
+
+        Me.dgvTabla.Columns("linea").HeaderText = "LINEA"
+        Me.dgvTabla.Columns("linea").Width = 150
+        Me.dgvTabla.Columns("linea").Name = "linea"
+
+        Me.dgvTabla.Columns("dia_asignado").HeaderText = "FECHA"
+        Me.dgvTabla.Columns("dia_asignado").Width = 170
+        Me.dgvTabla.Columns("dia_asignado").Name = "dia_asignado"
+
+        Me.dgvTabla.Columns("disponibilidad").HeaderText = "DISPONIBILIDAD"
+        Me.dgvTabla.Columns("disponibilidad").Width = 80
+        Me.dgvTabla.Columns("disponibilidad").Name = "disponibilidad"
+
+        Me.dgvTabla.Columns("desempeno").HeaderText = "DESEMPEÑO"
+        Me.dgvTabla.Columns("desempeno").Width = 80
+        Me.dgvTabla.Columns("desempeno").Name = "desempeno"
+
+        Me.dgvTabla.Columns("calidad").HeaderText = "CALIDAD"
+        Me.dgvTabla.Columns("calidad").Width = 80
+        Me.dgvTabla.Columns("calidad").Name = "calidad"
+
+        Me.dgvTabla.Columns("oee").HeaderText = "OEE"
+        Me.dgvTabla.Columns("oee").Width = 80
+        Me.dgvTabla.Columns("oee").Name = "oee"
+
+        Me.dgvTabla.Columns("pzas_ok").HeaderText = "PZAS OK"
+        Me.dgvTabla.Columns("pzas_ok").Width = 80
+        Me.dgvTabla.Columns("pzas_ok").Name = "pzas_ok"
+
+        Me.dgvTabla.Columns("pzas_desecho").HeaderText = "PZAS DESECHO"
+        Me.dgvTabla.Columns("pzas_desecho").Width = 80
+        Me.dgvTabla.Columns("pzas_desecho").Name = "pzas_desecho"
+
+        Me.dgvTabla.Columns("pzas_rechazo").HeaderText = "PZAS RECHAZO"
+        Me.dgvTabla.Columns("pzas_rechazo").Width = 80
+        Me.dgvTabla.Columns("pzas_rechazo").Name = "pzas_rechazo"
+
+        Me.dgvTabla.Columns("desecho_aplicable").HeaderText = "DESECHO APLICABLE"
+        Me.dgvTabla.Columns("desecho_aplicable").Width = 80
+        Me.dgvTabla.Columns("desecho_aplicable").Name = "desecho_aplicable"
+
+        Me.dgvTabla.Columns("adeudo").HeaderText = "ADEUDO"
+        Me.dgvTabla.Columns("adeudo").Width = 80
+        Me.dgvTabla.Columns("adeudo").Name = "adeudo"
+
+        Me.dgvTabla.Columns("p_planeado").HeaderText = "PARO PLANEADO"
+        Me.dgvTabla.Columns("p_planeado").Width = 80
+        Me.dgvTabla.Columns("p_planeado").Name = "p_planeado"
+
+        Me.dgvTabla.Columns("p_no_planeado").HeaderText = "PARO NO PLANEADO"
+        Me.dgvTabla.Columns("p_no_planeado").Width = 80
+        Me.dgvTabla.Columns("p_no_planeado").Name = "p_no_planeado"
+
+        Me.dgvTabla.Columns("t_turno").HeaderText = "TIEMPO TURNO"
+        Me.dgvTabla.Columns("t_turno").Width = 80
+        Me.dgvTabla.Columns("t_turno").Name = "t_turno"
+
+        Me.dgvTabla.Columns("t_comedor").HeaderText = "TIEMPO COMEDOR"
+        Me.dgvTabla.Columns("t_comedor").Width = 80
+        Me.dgvTabla.Columns("t_comedor").Name = "t_comedor"
+
+        Me.dgvTabla.Columns("t_carga").HeaderText = "TIEMPO CARGA"
+        Me.dgvTabla.Columns("t_carga").Width = 80
+        Me.dgvTabla.Columns("t_carga").Name = "t_carga"
+
+        Me.dgvTabla.Columns("t_operacion").HeaderText = "TIEMPO OPERACION"
+        Me.dgvTabla.Columns("t_operacion").Width = 80
+        Me.dgvTabla.Columns("t_operacion").Name = "t_operacion"
+
+        Me.dgvTabla.Columns("objetivo").HeaderText = "OBJETIVO"
+        Me.dgvTabla.Columns("objetivo").Width = 80
+        Me.dgvTabla.Columns("objetivo").Name = "objetivo"
+
+       
 
         If vEsResumen = True Then
-            dgvTabla.Columns(11).IsVisible = False
-            dgvTabla.Columns(12).IsVisible = False
-            dgvTabla.Columns(13).IsVisible = False
-            dgvTabla.Columns(14).IsVisible = False
-            dgvTabla.Columns(15).IsVisible = False
-            dgvTabla.Columns(16).IsVisible = False
-            dgvTabla.Columns(17).IsVisible = False
-            dgvTabla.Columns(18).IsVisible = False
-            dgvTabla.Columns(19).IsVisible = False
-            dgvTabla.Columns(20).IsVisible = False
-            dgvTabla.Columns(21).IsVisible = False
+            Me.dgvTabla.Columns("planta").IsVisible = True
+            Me.dgvTabla.Columns("cadena_valor").IsVisible = True
+            Me.dgvTabla.Columns("componente").IsVisible = True
+            Me.dgvTabla.Columns("equipo").IsVisible = True
+            Me.dgvTabla.Columns("linea").IsVisible = True
+            Me.dgvTabla.Columns("dia_asignado").IsVisible = True
+            Me.dgvTabla.Columns("disponibilidad").IsVisible = True
+            Me.dgvTabla.Columns("desempeno").IsVisible = True
+            Me.dgvTabla.Columns("calidad").IsVisible = True
+            Me.dgvTabla.Columns("oee").IsVisible = True
+            Me.dgvTabla.Columns("pzas_ok").IsVisible = False
+            Me.dgvTabla.Columns("pzas_desecho").IsVisible = False
+            Me.dgvTabla.Columns("pzas_rechazo").IsVisible = False
+            Me.dgvTabla.Columns("desecho_aplicable").IsVisible = False
+            Me.dgvTabla.Columns("adeudo").IsVisible = False
+            Me.dgvTabla.Columns("p_planeado").IsVisible = False
+            Me.dgvTabla.Columns("p_no_planeado").IsVisible = False
+            Me.dgvTabla.Columns("t_turno").IsVisible = False
+            Me.dgvTabla.Columns("t_comedor").IsVisible = False
+            Me.dgvTabla.Columns("t_carga").IsVisible = False
+            Me.dgvTabla.Columns("t_operacion").IsVisible = False
+            Me.dgvTabla.Columns("objetivo").IsVisible = True
         Else
-            dgvTabla.Columns(11).IsVisible = True
-            dgvTabla.Columns(12).IsVisible = True
-            dgvTabla.Columns(13).IsVisible = True
-            dgvTabla.Columns(14).IsVisible = True
-            dgvTabla.Columns(15).IsVisible = True
-            dgvTabla.Columns(16).IsVisible = True
-            dgvTabla.Columns(17).IsVisible = True
-            dgvTabla.Columns(18).IsVisible = True
-            dgvTabla.Columns(19).IsVisible = True
-            dgvTabla.Columns(20).IsVisible = True
-            dgvTabla.Columns(21).IsVisible = True
+            Me.dgvTabla.Columns("planta").IsVisible = True
+            Me.dgvTabla.Columns("cadena_valor").IsVisible = True
+            Me.dgvTabla.Columns("componente").IsVisible = True
+            Me.dgvTabla.Columns("equipo").IsVisible = True
+            Me.dgvTabla.Columns("linea").IsVisible = True
+            Me.dgvTabla.Columns("dia_asignado").IsVisible = True
+            Me.dgvTabla.Columns("disponibilidad").IsVisible = True
+            Me.dgvTabla.Columns("desempeno").IsVisible = True
+            Me.dgvTabla.Columns("calidad").IsVisible = True
+            Me.dgvTabla.Columns("oee").IsVisible = True
+            Me.dgvTabla.Columns("pzas_ok").IsVisible = True
+            Me.dgvTabla.Columns("pzas_desecho").IsVisible = True
+            Me.dgvTabla.Columns("pzas_rechazo").IsVisible = True
+            Me.dgvTabla.Columns("desecho_aplicable").IsVisible = True
+            Me.dgvTabla.Columns("adeudo").IsVisible = True
+            Me.dgvTabla.Columns("p_planeado").IsVisible = True
+            Me.dgvTabla.Columns("p_no_planeado").IsVisible = True
+            Me.dgvTabla.Columns("t_turno").IsVisible = True
+            Me.dgvTabla.Columns("t_comedor").IsVisible = True
+            Me.dgvTabla.Columns("t_carga").IsVisible = True
+            Me.dgvTabla.Columns("t_operacion").IsVisible = True
+            Me.dgvTabla.Columns("objetivo").IsVisible = True
         End If
 
     End Sub
@@ -1423,8 +1533,6 @@ Public Class FrmGraficasfaseuno
    
 #End Region
 
-
-
 #Region "Metodos graficar NRFTi"
 
     Private Sub Obtiene_Grafica_NRFT()
@@ -1438,11 +1546,9 @@ Public Class FrmGraficasfaseuno
         Dim vF_Final As DateTime = Date.Now
 
         ''Obtencion de Datos
-        Dim vFI As String = dtpFechaInicial.Value.Month & "/" & dtpFechaInicial.Value.Day & "/" & dtpFechaInicial.Value.Year
-        Dim vFF As String = dtpFechaFinal.Value.Month & "/" & dtpFechaFinal.Value.Day & "/" & dtpFechaFinal.Value.Year
-        vF_Inicial = DateTime.Parse(vFI)
-        vF_Final = DateTime.Parse(vFF)
-        oG_NRFT = New G_NRFT
+        vF_Inicial = dtpFechaInicial.Value
+        vF_Final = dtpFechaFinal.Value
+        oG_Fase2 = New G_Fase2
 
         ''Revicion de Nivel Elegido
         If rdbtnEquipo.IsChecked = True Then
@@ -1467,17 +1573,9 @@ Public Class FrmGraficasfaseuno
         ElseIf rdbtnPlanta.IsChecked = True Then ''---Nivel Planta
             vNivel = 5
         End If
-        ''----------------------------------------------------------------------------------------------------------------
-        ''----------------------------------------------------------------------------------------------------------------
-        ''----------------------------------------------------------------------------------------------------------------
-        ''--------------------------Datos Utilizados solo como prueba, borrar para entrega---------------------------------
-        vCve_Equipo = 1 '' cbxEquipo.SelectedValue
-        vCve_Linea = 54 '' cbxLinea.SelectedValue
-        ''----------------------------------------------------------------------------------------------------------------
-        ''----------------------------------------------------------------------------------------------------------------
-        ''----------------------------------------------------------------------------------------------------------------
+       
         ''Obtencion de Informacion
-        vDatos_Obtenidos = oG_NRFT.Obten_NRFT(vF_Inicial, vF_Final, vCve_Equipo, vCve_Linea, vCve_Componente, vCve_CadenaValor, vFormato_Resultado, vNivel, True, False)
+        vDatos_Obtenidos = oG_Fase2.Obten_NRFT(vF_Inicial, vF_Final, vCve_Equipo, vCve_Linea, vCve_Componente, vCve_CadenaValor, vFormato_Resultado, vNivel, True, False)
 
         'Creacion series
         Dim BarSeries1 As New BarSeries()
@@ -1511,7 +1609,7 @@ Public Class FrmGraficasfaseuno
         Else
             Me.radChartView1.Title = "NRFTi ( PPM'S ) " & cbxEquipo.Text & " - " & cbxLinea.Text
         End If
-        If vNivel = 0 And vNivel = 1 Then
+        If vNivel = 0 Or vNivel = 1 Then
             For Each vDR As DataRow In vDT.Rows
                 If rdbtnDias.IsChecked Then
                     If vContador = 1 Then
@@ -1523,7 +1621,7 @@ Public Class FrmGraficasfaseuno
                         End If
                     End If
                 ElseIf rdbtnMeses.IsChecked Then
-                    If vContador = vTotal Then
+                    If vContador = 1 Then
                         BarSeries2.DataPoints.Add(New CategoricalDataPoint(vDR("nrfti"), "Acumulado"))
                     Else
                         BarSeries1.DataPoints.Add(New CategoricalDataPoint(vDR("nrfti"), vDR("dia_asignado")))
@@ -1534,10 +1632,10 @@ Public Class FrmGraficasfaseuno
                 End If
                 vContador = vContador + 1
             Next
-        ElseIf vNivel = 2 And vNivel = 3 And vNivel = 4 Then
+        ElseIf vNivel = 2 Or vNivel = 3 Or vNivel = 4 Then
 
             For Each vDR As DataRow In vDT.Rows
-                If vContador = vTotal Then
+                If vContador = 1 Then
                     BarSeries2.DataPoints.Add(New CategoricalDataPoint(vDR("nrfti"), "Acumulado"))
                 Else
                     BarSeries1.DataPoints.Add(New CategoricalDataPoint(vDR("nrfti"), vDR("dia_asignado")))
@@ -1549,7 +1647,7 @@ Public Class FrmGraficasfaseuno
             Next
         ElseIf vNivel = 5 Then
             For Each vDR As DataRow In vDT.Rows
-                If vContador = vTotal Then
+                If vContador = 1 Then
                     BarSeries2.DataPoints.Add(New CategoricalDataPoint(vDR("nrfti"), "Acumulado"))
                 Else
                     BarSeries1.DataPoints.Add(New CategoricalDataPoint(vDR("nrfti"), vDR("dia_asignado")))
@@ -1562,8 +1660,6 @@ Public Class FrmGraficasfaseuno
         Dim CategoricalAxis1 As CategoricalAxis = New CategoricalAxis()
         Dim LinearAxis1 As LinearAxis = New LinearAxis()
         'Personalizacion
-        'CartesianArea1.GridDesign.AlternatingVerticalColor = False
-        'CartesianArea1.ShowGrid = True
 
         'Logo Indicador
         picboxIndicador.ImageLocation = Application.StartupPath & "\graficas_fase_uno\logo_indicador_calidad.jpg"
@@ -1581,17 +1677,21 @@ Public Class FrmGraficasfaseuno
         End If
         CategoricalAxis1.LabelRotationAngle = 270.0R
         LinearAxis1.AxisType = AxisType.Second
-        'LinearAxis1.LabelFitMode = AxisLabelFitMode.Rotate
-        'LinearAxis1.LabelRotationAngle = 300.0R
-        'LinearAxis1.MajorStep = 10.0R
-        'LinearAxis1.Maximum = 100
         LinearAxis1.Title = "NRFTi (PPM'S)"
         BarSeries1.ShowLabels = True
         BarSeries2.ShowLabels = True
-        'LineSeries1.ShowLabels = True
 
         BarSeries1.LabelFormat = "{0:#,###}"
         BarSeries2.LabelFormat = "{0:#,###}"
+
+        BarSeries1.HorizontalAxis = CategoricalAxis1
+        BarSeries1.VerticalAxis = LinearAxis1
+        BarSeries1.Palette = New PaletteEntry(Color.FromArgb(55, 96, 146))
+        BarSeries2.Palette = New PaletteEntry(Color.FromArgb(37, 64, 97))
+
+        Me.radChartView1.ShowToolTip = True
+        Me.radChartView1.Series.Add(BarSeries1)
+        Me.radChartView1.Series.Add(BarSeries2)
 
         If vNivel <> 5 Then
             LineSeries1.LabelFormat = "{0:##,###}"
@@ -1602,20 +1702,6 @@ Public Class FrmGraficasfaseuno
             radChartView1.Series.Add(LineSeries1)
             LineSeries1.CombineMode = ChartSeriesCombineMode.None
         End If
-       
-        BarSeries1.HorizontalAxis = CategoricalAxis1
-
-        BarSeries1.VerticalAxis = LinearAxis1
-
-        BarSeries1.Palette = New PaletteEntry(Color.FromArgb(55, 96, 146))
-        BarSeries2.Palette = New PaletteEntry(Color.FromArgb(37, 64, 97))
-
-        'LineSeries1.PointSize = New SizeF(10, 10)
-
-        Me.radChartView1.ShowToolTip = True
-
-        radChartView1.Series.Add(BarSeries1)
-        radChartView1.Series.Add(BarSeries2)
 
         If vNivel <> 5 Then
             BarSeries1.CombineMode = ChartSeriesCombineMode.None
@@ -1640,32 +1726,90 @@ Public Class FrmGraficasfaseuno
     End Sub
 
     Private Sub Obtiene_Reporte_NRFT(ByVal vEsResumen As Boolean)
-        dgvTabla.DataSource = vDatos_Obtenidos
+        Me.dgvTabla.DataSource = Nothing
+        Me.dgvTabla.Columns.Clear()
+        Me.dgvTabla.DataSource = vDatos_Obtenidos
+
+        Me.dgvTabla.Columns("planta").HeaderText = "PLANTA"
+        Me.dgvTabla.Columns("planta").Width = 150
+        Me.dgvTabla.Columns("planta").Name = "planta"
+
+        Me.dgvTabla.Columns("cadena_valor").HeaderText = "CADENA VALOR"
+        Me.dgvTabla.Columns("cadena_valor").Width = 150
+        Me.dgvTabla.Columns("cadena_valor").Name = "cadena_valor"
+
+        Me.dgvTabla.Columns("componente").HeaderText = "COMPONENTE"
+        Me.dgvTabla.Columns("componente").Width = 150
+        Me.dgvTabla.Columns("componente").Name = "componente"
+
+        Me.dgvTabla.Columns("equipo").HeaderText = "EQUIPO"
+        Me.dgvTabla.Columns("equipo").Width = 170
+        Me.dgvTabla.Columns("equipo").Name = "equipo"
+
+        Me.dgvTabla.Columns("linea").HeaderText = "LINEA"
+        Me.dgvTabla.Columns("linea").Width = 150
+        Me.dgvTabla.Columns("linea").Name = "linea"
+
+        Me.dgvTabla.Columns("dia_asignado").HeaderText = "FECHA"
+        Me.dgvTabla.Columns("dia_asignado").Width = 170
+        Me.dgvTabla.Columns("dia_asignado").Name = "dia_asignado"
+
+        Me.dgvTabla.Columns("nrfti").HeaderText = "NRFTi"
+        Me.dgvTabla.Columns("nrfti").Width = 80
+        Me.dgvTabla.Columns("nrfti").Name = "nrfti"
+
+        Me.dgvTabla.Columns("objetivo").HeaderText = "OBJETIVO"
+        Me.dgvTabla.Columns("objetivo").Width = 80
+        Me.dgvTabla.Columns("objetivo").Name = "objetivo"
+
+        Me.dgvTabla.Columns("pzas_ok").HeaderText = "PZAS_OK"
+        Me.dgvTabla.Columns("pzas_ok").Width = 80
+        Me.dgvTabla.Columns("pzas_ok").Name = "pzas_ok"
+
+        Me.dgvTabla.Columns("pzas_desecho").HeaderText = "PZAS_DESECHO"
+        Me.dgvTabla.Columns("pzas_desecho").Width = 80
+        Me.dgvTabla.Columns("pzas_desecho").Name = "pzas_desecho"
+
+        Me.dgvTabla.Columns("desecho_aplicable").HeaderText = "DESECHO APLICABLE"
+        Me.dgvTabla.Columns("desecho_aplicable").Width = 80
+        Me.dgvTabla.Columns("desecho_aplicable").Name = "desecho_aplicable"
+
+        Me.dgvTabla.Columns("adeudos").HeaderText = "ADEUDO"
+        Me.dgvTabla.Columns("adeudos").Width = 80
+        Me.dgvTabla.Columns("adeudos").Name = "adeudos"
+
+        Me.dgvTabla.Columns("comentarios").HeaderText = "COMENTARIOS"
+        Me.dgvTabla.Columns("comentarios").Width = 300
+        Me.dgvTabla.Columns("comentarios").Name = "comentarios"
 
         If vEsResumen = True Then
-            dgvTabla.Columns(11).IsVisible = False
-            dgvTabla.Columns(12).IsVisible = False
-            dgvTabla.Columns(13).IsVisible = False
-            dgvTabla.Columns(14).IsVisible = False
-            dgvTabla.Columns(15).IsVisible = False
-            dgvTabla.Columns(16).IsVisible = False
-            dgvTabla.Columns(17).IsVisible = False
-            dgvTabla.Columns(18).IsVisible = False
-            dgvTabla.Columns(19).IsVisible = False
-            dgvTabla.Columns(20).IsVisible = False
-            dgvTabla.Columns(21).IsVisible = False
+            Me.dgvTabla.Columns("planta").IsVisible = True
+            Me.dgvTabla.Columns("cadena_valor").IsVisible = True
+            Me.dgvTabla.Columns("componente").IsVisible = True
+            Me.dgvTabla.Columns("equipo").IsVisible = True
+            Me.dgvTabla.Columns("linea").IsVisible = True
+            Me.dgvTabla.Columns("dia_asignado").IsVisible = True
+            Me.dgvTabla.Columns("nrfti").IsVisible = True
+            Me.dgvTabla.Columns("objetivo").IsVisible = True
+            Me.dgvTabla.Columns("desecho_aplicable").IsVisible = False
+            Me.dgvTabla.Columns("pzas_ok").IsVisible = False
+            Me.dgvTabla.Columns("pzas_desecho").IsVisible = False
+            Me.dgvTabla.Columns("adeudos").IsVisible = False
+            Me.dgvTabla.Columns("comentarios").IsVisible = False
         Else
-            dgvTabla.Columns(11).IsVisible = True
-            dgvTabla.Columns(12).IsVisible = True
-            dgvTabla.Columns(13).IsVisible = True
-            dgvTabla.Columns(14).IsVisible = True
-            dgvTabla.Columns(15).IsVisible = True
-            dgvTabla.Columns(16).IsVisible = True
-            dgvTabla.Columns(17).IsVisible = True
-            dgvTabla.Columns(18).IsVisible = True
-            dgvTabla.Columns(19).IsVisible = True
-            dgvTabla.Columns(20).IsVisible = True
-            dgvTabla.Columns(21).IsVisible = True
+            Me.dgvTabla.Columns("planta").IsVisible = True
+            Me.dgvTabla.Columns("cadena_valor").IsVisible = True
+            Me.dgvTabla.Columns("componente").IsVisible = True
+            Me.dgvTabla.Columns("equipo").IsVisible = True
+            Me.dgvTabla.Columns("linea").IsVisible = True
+            Me.dgvTabla.Columns("dia_asignado").IsVisible = True
+            Me.dgvTabla.Columns("nrfti").IsVisible = True
+            Me.dgvTabla.Columns("objetivo").IsVisible = True
+            Me.dgvTabla.Columns("desecho_aplicable").IsVisible = True
+            Me.dgvTabla.Columns("pzas_ok").IsVisible = True
+            Me.dgvTabla.Columns("pzas_desecho").IsVisible = True
+            Me.dgvTabla.Columns("adeudos").IsVisible = True
+            Me.dgvTabla.Columns("comentarios").IsVisible = True
         End If
 
     End Sub
@@ -2426,8 +2570,6 @@ Public Class FrmGraficasfaseuno
 #End Region
 #End Region
 
-
-
 #Region "Metodos graficar cincoS"
 
     Private Sub Obtiene_Grafica_CincoS()
@@ -2441,11 +2583,9 @@ Public Class FrmGraficasfaseuno
         Dim vF_Final As DateTime = Date.Now
 
         ''Obtencion de Datos
-        Dim vFI As String = dtpFechaInicial.Value.Month & "/" & dtpFechaInicial.Value.Day & "/" & dtpFechaInicial.Value.Year
-        Dim vFF As String = dtpFechaFinal.Value.Month & "/" & dtpFechaFinal.Value.Day & "/" & dtpFechaFinal.Value.Year
-        vF_Inicial = DateTime.Parse(vFI)
-        vF_Final = DateTime.Parse(vFF)
-        oG_Cinco_S = New G_Cinco_S
+        vF_Inicial = dtpFechaInicial.Value
+        vF_Final = dtpFechaFinal.Value
+        oG_Fase2 = New G_Fase2
 
         ''Revicion de Nivel Elegido
         If rdbtnEquipo.IsChecked = True Then
@@ -2470,18 +2610,9 @@ Public Class FrmGraficasfaseuno
         ElseIf rdbtnPlanta.IsChecked = True Then ''---Nivel Planta
             vNivel = 5
         End If
-        ''----------------------------------------------------------------------------------------------------------------
-        ''----------------------------------------------------------------------------------------------------------------
-        ''----------------------------------------------------------------------------------------------------------------
-        ''--------------------------Datos Utilizados solo como prueba, borrar para entrega---------------------------------
-        vCve_Equipo = 1 '' cbxEquipo.SelectedValue
-        vCve_Linea = 54 '' cbxLinea.SelectedValue
-        ''----------------------------------------------------------------------------------------------------------------
-        ''----------------------------------------------------------------------------------------------------------------
-        ''----------------------------------------------------------------------------------------------------------------
+       
         ''Obtencion de Informacion
-        vDatos_Obtenidos = oG_Cinco_S.Obten_Cinco_S(vF_Inicial, vF_Final, vCve_Equipo, vCve_Linea, vCve_Componente, vCve_CadenaValor, vFormato_Resultado, vNivel, True, False)
-
+        vDatos_Obtenidos = oG_Fase2.Obten_Cinco_S(vF_Inicial, vF_Final, vCve_Equipo, vCve_Linea, vCve_Componente, vCve_CadenaValor, vFormato_Resultado, vNivel, True, False)
 
         'Creacion series
         Dim BarSeries1 As New BarSeries()
@@ -2500,9 +2631,6 @@ Public Class FrmGraficasfaseuno
         Me.radChartView1.ShowLegend = True
         'Obtencion Datos
         Dim vDT As DataTable = Nothing
-        'If rdbtnMeses.IsChecked Then
-        '    vDT = oObtiene_cincoS.obtiene_cincos_equipo_linea_mes()
-        'End If
 
         vDT = vDatos_Obtenidos
 
@@ -2513,13 +2641,13 @@ Public Class FrmGraficasfaseuno
             Me.radChartView1.Title = "5's " & cbxEquipo.Text & " - " & cbxLinea.Text
         End If
 
-        BarSeries1.ValueMember = "admon_visual"
+        BarSeries1.ValueMember = "administracion_visual"
         BarSeries1.CategoryMember = "dia_asignado"
         BarSeries1.DataSource = vDT
-        BarSeries2.ValueMember = "cincoS"
+        BarSeries2.ValueMember = "cinco_S"
         BarSeries2.CategoryMember = "dia_asignado"
         BarSeries2.DataSource = vDT
-        BarSeries3.ValueMember = "mantto_autto"
+        BarSeries3.ValueMember = "mantenimiento_autonomo"
         BarSeries3.CategoryMember = "dia_asignado"
         BarSeries3.DataSource = vDT
         BarSeries4.ValueMember = "promedio"
@@ -2535,8 +2663,6 @@ Public Class FrmGraficasfaseuno
         Dim CategoricalAxis1 As CategoricalAxis = New CategoricalAxis()
         Dim LinearAxis1 As LinearAxis = New LinearAxis()
         'Personalizacion
-        'CartesianArea1.GridDesign.AlternatingVerticalColor = False
-        'CartesianArea1.ShowGrid = True
 
         'Logo Indicador
         picboxIndicador.ImageLocation = Application.StartupPath & "\graficas_fase_uno\logo_indicador_cincos.jpg"
@@ -2575,26 +2701,25 @@ Public Class FrmGraficasfaseuno
         BarSeries4.ShowLabels = True
         BarSeries4.LabelFormat = "{0:##.#}"
         BarSeries4.Palette = New PaletteEntry(Color.FromArgb(127, 127, 127))
-        'lineseries
-        'LineSeries1.ShowLabels = True
+
+
         If vNivel <> 5 Then
             LineSeries1.LabelFormat = "{0:##.#}"
             LineSeries1.HorizontalAxis = CategoricalAxis1
             LineSeries1.VerticalAxis = LinearAxis1
             LineSeries1.Palette = New PaletteEntry(Color.FromArgb(202, 0, 0))
             LineSeries1.BorderColor = Color.FromArgb(202, 0, 0)
-            'LineSeries1.PointSize = New SizeF(10, 10)
         End If
         Me.radChartView1.ShowToolTip = True
-
-        If vNivel <> 5 Then
-            radChartView1.Series.Add(LineSeries1)
-        End If
 
         radChartView1.Series.Add(BarSeries1)
         radChartView1.Series.Add(BarSeries2)
         radChartView1.Series.Add(BarSeries3)
         radChartView1.Series.Add(BarSeries4)
+
+        If vNivel <> 5 Then
+            radChartView1.Series.Add(LineSeries1)
+        End If
 
         If vNivel <> 5 Then
             LineSeries1.CombineMode = ChartSeriesCombineMode.None
@@ -2607,33 +2732,73 @@ Public Class FrmGraficasfaseuno
     End Sub
 
     Private Sub Obtiene_Reporte_CincoS(ByVal vEsResumen As Boolean)
-        dgvTabla.DataSource = vDatos_Obtenidos
+        Me.dgvTabla.DataSource = Nothing
+        Me.dgvTabla.Columns.Clear()
+        Me.dgvTabla.DataSource = vDatos_Obtenidos
 
-        If vEsResumen = True Then
-            dgvTabla.Columns(11).IsVisible = False
-            dgvTabla.Columns(12).IsVisible = False
-            dgvTabla.Columns(13).IsVisible = False
-            dgvTabla.Columns(14).IsVisible = False
-            dgvTabla.Columns(15).IsVisible = False
-            dgvTabla.Columns(16).IsVisible = False
-            dgvTabla.Columns(17).IsVisible = False
-            dgvTabla.Columns(18).IsVisible = False
-            dgvTabla.Columns(19).IsVisible = False
-            dgvTabla.Columns(20).IsVisible = False
-            dgvTabla.Columns(21).IsVisible = False
-        Else
-            dgvTabla.Columns(11).IsVisible = True
-            dgvTabla.Columns(12).IsVisible = True
-            dgvTabla.Columns(13).IsVisible = True
-            dgvTabla.Columns(14).IsVisible = True
-            dgvTabla.Columns(15).IsVisible = True
-            dgvTabla.Columns(16).IsVisible = True
-            dgvTabla.Columns(17).IsVisible = True
-            dgvTabla.Columns(18).IsVisible = True
-            dgvTabla.Columns(19).IsVisible = True
-            dgvTabla.Columns(20).IsVisible = True
-            dgvTabla.Columns(21).IsVisible = True
-        End If
+        Me.dgvTabla.Columns("planta").HeaderText = "PLANTA"
+        Me.dgvTabla.Columns("planta").Width = 150
+        Me.dgvTabla.Columns("planta").Name = "planta"
+
+        Me.dgvTabla.Columns("cadena_valor").HeaderText = "CADENA VALOR"
+        Me.dgvTabla.Columns("cadena_valor").Width = 150
+        Me.dgvTabla.Columns("cadena_valor").Name = "cadena_valor"
+
+        Me.dgvTabla.Columns("componente").HeaderText = "COMPONENTE"
+        Me.dgvTabla.Columns("componente").Width = 150
+        Me.dgvTabla.Columns("componente").Name = "componente"
+
+        Me.dgvTabla.Columns("equipo").HeaderText = "EQUIPO"
+        Me.dgvTabla.Columns("equipo").Width = 170
+        Me.dgvTabla.Columns("equipo").Name = "equipo"
+
+        Me.dgvTabla.Columns("linea").HeaderText = "LINEA"
+        Me.dgvTabla.Columns("linea").Width = 150
+        Me.dgvTabla.Columns("linea").Name = "linea"
+
+        Me.dgvTabla.Columns("dia_asignado").HeaderText = "FECHA"
+        Me.dgvTabla.Columns("dia_asignado").Width = 170
+        Me.dgvTabla.Columns("dia_asignado").Name = "dia_asignado"
+
+        Me.dgvTabla.Columns("mantenimiento_autonomo").HeaderText = "MANTENIMIENTO AUTONOMO"
+        Me.dgvTabla.Columns("mantenimiento_autonomo").Width = 80
+        Me.dgvTabla.Columns("mantenimiento_autonomo").Name = "mantenimiento_autonomo"
+
+        Me.dgvTabla.Columns("administracion_visual").HeaderText = "ADMINISTRACION VISUAL"
+        Me.dgvTabla.Columns("administracion_visual").Width = 80
+        Me.dgvTabla.Columns("administracion_visual").Name = "administracion_visual"
+
+        Me.dgvTabla.Columns("cinco_S").HeaderText = "CINCO_S"
+        Me.dgvTabla.Columns("cinco_S").Width = 80
+        Me.dgvTabla.Columns("cinco_S").Name = "cinco_S"
+
+        Me.dgvTabla.Columns("promedio").HeaderText = "PROMEDIO"
+        Me.dgvTabla.Columns("promedio").Width = 80
+        Me.dgvTabla.Columns("promedio").Name = "promedio"
+
+        Me.dgvTabla.Columns("objetivo").HeaderText = "OBJETIVO"
+        Me.dgvTabla.Columns("objetivo").Width = 80
+        Me.dgvTabla.Columns("objetivo").Name = "objetivo"
+
+        Me.dgvTabla.Columns("comentarios").HeaderText = "COMENTARIOS"
+        Me.dgvTabla.Columns("comentarios").Width = 300
+        Me.dgvTabla.Columns("comentarios").Name = "comentarios"
+
+
+
+        Me.dgvTabla.Columns("planta").IsVisible = True
+        Me.dgvTabla.Columns("cadena_valor").IsVisible = True
+        Me.dgvTabla.Columns("componente").IsVisible = True
+        Me.dgvTabla.Columns("equipo").IsVisible = True
+        Me.dgvTabla.Columns("linea").IsVisible = True
+        Me.dgvTabla.Columns("dia_asignado").IsVisible = True
+        Me.dgvTabla.Columns("mantenimiento_autonomo").IsVisible = True
+        Me.dgvTabla.Columns("administracion_visual").IsVisible = True
+        Me.dgvTabla.Columns("cinco_S").IsVisible = True
+        Me.dgvTabla.Columns("promedio").IsVisible = True
+        Me.dgvTabla.Columns("objetivo").IsVisible = True
+        Me.dgvTabla.Columns("comentarios").IsVisible = True
+
 
     End Sub
 
@@ -3322,7 +3487,243 @@ Public Class FrmGraficasfaseuno
 #End Region
 
 #End Region
+
 #Region "Metodos graficar gente"
+
+    Private Sub Obtiene_Grafica_Gente()
+        Dim vCve_Equipo As Integer = 0
+        Dim vCve_Linea As Integer = 0
+        Dim vCve_Componente As Integer = 0
+        Dim vCve_CadenaValor As Integer = 0
+        Dim vNivel As Integer = 0
+        Dim vFormato As Integer = 0
+        Dim vF_Inicial As DateTime = Date.Now
+        Dim vF_Final As DateTime = Date.Now
+
+        ''Obtencion de Datos
+        vF_Inicial = dtpFechaInicial.Value
+        vF_Final = dtpFechaFinal.Value
+        oG_Fase2 = New G_Fase2
+
+        ''Revicion de Nivel Elegido
+        If rdbtnEquipo.IsChecked = True Then
+            If chkTodasLineas.Checked = False Then ''---Nivel Equipo_Linea
+                vCve_Equipo = cbxEquipo.SelectedValue
+                vCve_Linea = cbxLinea.SelectedValue
+                vNivel = 0
+            Else ''---Nivel Equipo
+                vCve_Equipo = cbxEquipo.SelectedValue
+                vNivel = 1
+            End If
+        End If
+        If rdbtnLinea.IsChecked = True Then ''---Nivel Linea
+            vCve_Linea = cbxLinea.SelectedValue
+            vNivel = 2
+        ElseIf rdbtnComponente.IsChecked = True Then ''---Nivel Componente
+            vCve_Componente = cbxComponente.SelectedValue
+            vNivel = 3
+        ElseIf rdbtnCadenaValor.IsChecked = True Then ''---Nivel Cadena Valor
+            vCve_CadenaValor = cbxCadenaValor.SelectedValue
+            vNivel = 4
+        ElseIf rdbtnPlanta.IsChecked = True Then ''---Nivel Planta
+            vNivel = 5
+        End If
+
+        ''Obtencion de Informacion
+        vDatos_Obtenidos = oG_Fase2.Obten_Gente(vF_Inicial, vF_Final, vCve_Equipo, vCve_Linea, vCve_Componente, vCve_CadenaValor, vFormato_Resultado, vNivel, True, False)
+
+
+        'Creacion series
+
+        Dim BarSeries2 As New BarSeries()
+        BarSeries2.LegendTitle = "faltas"
+        Dim BarSeries3 As New BarSeries()
+        BarSeries3.LegendTitle = "retardos"
+
+        Dim LineSeries1 As New LineSeries()
+        If vNivel <> 5 Then
+            LineSeries1.LegendTitle = "Objetivo Gente"
+        End If
+        Me.radChartView1.ShowLegend = True
+        'Obtencion Datos
+        Dim vDT As DataTable = Nothing
+        vDT = vDatos_Obtenidos
+
+        If vDT.Rows.Count = 0 Then
+            habilita_etiqueta_datos()
+            Me.radChartView1.Title = ""
+        Else
+            Me.radChartView1.Title = "Gente " & cbxEquipo.Text
+        End If
+
+        Dim vTotal As Integer = 1
+        Dim vContador As Integer = 1
+        Dim vFaltas_Aux As Integer = 0
+        Dim vRetardos_Aux As Integer = 0
+
+        vTotal = vDT.Rows.Count
+
+        For Each vDR As DataRow In vDT.Rows
+            If vContador = 1 Then
+                vFaltas_Aux = vDR("faltas")
+                vRetardos_Aux = vDR("retardos")
+            Else
+                BarSeries2.DataPoints.Add(New CategoricalDataPoint(vDR("faltas"), vDR("dia_asignado")))
+                BarSeries3.DataPoints.Add(New CategoricalDataPoint(vDR("retardos"), vDR("dia_asignado")))
+                If vNivel <> 5 Then
+                    If Not IsDBNull(vDR("objetivo")) Then
+                        LineSeries1.DataPoints.Add(New CategoricalDataPoint(vDR("objetivo"), vDR("dia_asignado")))
+                    End If
+                End If
+            End If
+            vContador = vContador + 1
+        Next
+
+        BarSeries2.DataPoints.Add(New CategoricalDataPoint(vFaltas_Aux, Nothing))
+        BarSeries3.DataPoints.Add(New CategoricalDataPoint(vRetardos_Aux, Nothing))
+
+        'Cartesian Area, CategoricalAxis, LinearAxis
+        Dim CartesianArea1 As CartesianArea = New CartesianArea()
+        Dim CategoricalAxis1 As CategoricalAxis = New CategoricalAxis()
+        Dim LinearAxis1 As LinearAxis = New LinearAxis()
+        'Logo Indicador
+        picboxIndicador.ImageLocation = Application.StartupPath & "\graficas_fase_uno\logo_indicador_gente.jpg"
+
+        'Legend & Position
+        Me.radChartView1.ChartElement.LegendElement.StackElement.Orientation = Orientation.Horizontal
+        Me.radChartView1.ChartElement.LegendPosition = LegendPosition.Bottom
+
+        Me.radChartView1.AreaDesign = CartesianArea1
+        CategoricalAxis1.LabelFitMode = AxisLabelFitMode.Rotate
+        If rdbtnDias.IsChecked Then
+            CategoricalAxis1.LabelFormat = "{0:MMM - dd}"
+        ElseIf rdbtnMeses.IsChecked Then
+            CategoricalAxis1.LabelFormat = "{0:MMM - yyyy}"
+        End If
+
+
+        CategoricalAxis1.LabelRotationAngle = 270.0R
+        LinearAxis1.AxisType = AxisType.Second
+
+        LinearAxis1.Title = "Gente"
+
+        If vNivel <> 3 Or vNivel <> 5 Then
+            BarSeries2.ShowLabels = True
+            BarSeries3.ShowLabels = True
+        End If
+
+
+
+        BarSeries2.LabelFormat = "{0:###}"
+        If vNivel <> 0 Or vNivel <> 5 Then
+            LineSeries1.LabelFormat = "{0:###}"
+        End If
+        If rdbtnDias.IsChecked Then
+            'BarSeries1.HorizontalAxis = CategoricalAxis1
+            'BarSeries1.VerticalAxis = LinearAxis1
+        ElseIf rdbtnMeses.IsChecked Then
+            BarSeries2.HorizontalAxis = CategoricalAxis1
+            BarSeries2.VerticalAxis = LinearAxis1
+        End If
+        If vNivel <> 5 Then
+            LineSeries1.HorizontalAxis = CategoricalAxis1
+            LineSeries1.VerticalAxis = LinearAxis1
+        End If
+
+        BarSeries2.Palette = New PaletteEntry(Color.FromArgb(233, 37, 43))
+        BarSeries3.Palette = New PaletteEntry(Color.FromArgb(255, 191, 0))
+        If vNivel <> 5 Then
+            LineSeries1.Palette = New PaletteEntry(Color.FromArgb(202, 0, 0))
+            LineSeries1.BorderColor = Color.FromArgb(202, 0, 0)
+        End If
+
+        Me.radChartView1.ShowTrackBall = True
+        Me.radChartView1.ShowToolTip = True
+
+
+        radChartView1.Series.Add(BarSeries2)
+        radChartView1.Series.Add(BarSeries3)
+        If vNivel <> 5 Then
+            radChartView1.Series.Add(LineSeries1)
+        End If
+
+        If vNivel <> 5 Then
+            LineSeries1.CombineMode = ChartSeriesCombineMode.None
+            BarSeries2.CombineMode = ChartSeriesCombineMode.Stack
+            BarSeries3.CombineMode = ChartSeriesCombineMode.Stack
+        End If
+        If vNivel = 5 Then
+            For i As Integer = 0 To Me.radChartView1.Series.Count - 1
+                Me.radChartView1.GetSeries(Of BarSeries)(i).CombineMode = ChartSeriesCombineMode.Stack
+            Next i
+        End If
+
+        If (LinearAxis1.ActualRange.Maximum = 0) Then
+            LinearAxis1.Maximum = 5
+        End If
+    End Sub
+
+    Private Sub Obtiene_Reporte_Gente(ByVal vEsResumen As Boolean)
+        Me.dgvTabla.DataSource = Nothing
+        Me.dgvTabla.Columns.Clear()
+
+        Me.dgvTabla.DataSource = vDatos_Obtenidos
+
+
+        Me.dgvTabla.Columns("planta").HeaderText = "PLANTA"
+        Me.dgvTabla.Columns("planta").IsVisible = True
+        Me.dgvTabla.Columns("planta").Width = 150
+        Me.dgvTabla.Columns("planta").Name = "planta"
+
+        Me.dgvTabla.Columns("cadena_valor").HeaderText = "CADENA VALOR"
+        Me.dgvTabla.Columns("cadena_valor").IsVisible = True
+        Me.dgvTabla.Columns("cadena_valor").Width = 150
+        Me.dgvTabla.Columns("cadena_valor").Name = "cadena_valor"
+
+        Me.dgvTabla.Columns("componente").HeaderText = "COMPONENTE"
+        Me.dgvTabla.Columns("componente").IsVisible = True
+        Me.dgvTabla.Columns("componente").Width = 150
+        Me.dgvTabla.Columns("componente").Name = "componente"
+
+        Me.dgvTabla.Columns("equipo").HeaderText = "EQUIPO"
+        Me.dgvTabla.Columns("equipo").IsVisible = True
+        Me.dgvTabla.Columns("equipo").Width = 170
+        Me.dgvTabla.Columns("equipo").Name = "equipo"
+
+        Me.dgvTabla.Columns("linea").HeaderText = "LINEA"
+        Me.dgvTabla.Columns("linea").IsVisible = True
+        Me.dgvTabla.Columns("linea").Width = 150
+        Me.dgvTabla.Columns("linea").Name = "linea"
+
+        Me.dgvTabla.Columns("dia_asignado").HeaderText = "FECHA"
+        Me.dgvTabla.Columns("dia_asignado").IsVisible = True
+        Me.dgvTabla.Columns("dia_asignado").Width = 170
+        Me.dgvTabla.Columns("dia_asignado").Name = "dia_asignado"
+
+        Me.dgvTabla.Columns("faltas").HeaderText = "FALTA"
+        Me.dgvTabla.Columns("faltas").IsVisible = True
+        Me.dgvTabla.Columns("faltas").Width = 80
+        Me.dgvTabla.Columns("faltas").Name = "faltas"
+
+        Me.dgvTabla.Columns("retardos").HeaderText = "RETARDOS"
+        Me.dgvTabla.Columns("retardos").IsVisible = True
+        Me.dgvTabla.Columns("retardos").Width = 80
+        Me.dgvTabla.Columns("retardos").Name = "retardos"
+
+        Me.dgvTabla.Columns("objetivo").HeaderText = "OBJETIVO"
+        Me.dgvTabla.Columns("objetivo").IsVisible = True
+        Me.dgvTabla.Columns("objetivo").Width = 80
+        Me.dgvTabla.Columns("objetivo").Name = "objetivo"
+
+        Me.dgvTabla.Columns("comentarios").HeaderText = "COMENTARIOS"
+        Me.dgvTabla.Columns("comentarios").IsVisible = True
+        Me.dgvTabla.Columns("comentarios").Width = 300
+        Me.dgvTabla.Columns("comentarios").Name = "comentarios"
+
+
+    End Sub
+
+#Region "MEtodos No Utilizados, Eliminar"
     'Gente planta
     Private Sub obtiene_gente_planta_dia_mes()
         'Objeto obtiene_nrfti Clase
@@ -4004,7 +4405,233 @@ Public Class FrmGraficasfaseuno
         End If
     End Sub
 #End Region
+#End Region
+
 #Region "Metodos graficar seguridad"
+
+    Private Sub Obtiene_Grafica_Seguridad()
+        Dim vCve_Equipo As Integer = 0
+        Dim vCve_Linea As Integer = 0
+        Dim vCve_Componente As Integer = 0
+        Dim vCve_CadenaValor As Integer = 0
+        Dim vNivel As Integer = 0
+        Dim vFormato As Integer = 0
+        Dim vF_Inicial As DateTime = Date.Now
+        Dim vF_Final As DateTime = Date.Now
+
+        ''Obtencion de Datos
+      
+        vF_Inicial = dtpFechaInicial.Value
+        vF_Final = dtpFechaFinal.Value
+        oG_Fase2 = New G_Fase2
+       
+        ''Revicion de Nivel Elegido
+        If rdbtnEquipo.IsChecked = True Then
+            If chkTodasLineas.Checked = False Then ''---Nivel Equipo_Linea
+                vCve_Equipo = cbxEquipo.SelectedValue
+                vCve_Linea = cbxLinea.SelectedValue
+                vNivel = 0
+            Else ''---Nivel Equipo
+                vCve_Equipo = cbxEquipo.SelectedValue
+                vNivel = 1
+            End If
+        End If
+        If rdbtnLinea.IsChecked = True Then ''---Nivel Linea
+            vCve_Linea = cbxLinea.SelectedValue
+            vNivel = 2
+        ElseIf rdbtnComponente.IsChecked = True Then ''---Nivel Componente
+            vCve_Componente = cbxComponente.SelectedValue
+            vNivel = 3
+        ElseIf rdbtnCadenaValor.IsChecked = True Then ''---Nivel Cadena Valor
+            vCve_CadenaValor = cbxCadenaValor.SelectedValue
+            vNivel = 4
+        ElseIf rdbtnPlanta.IsChecked = True Then ''---Nivel Planta
+            vNivel = 5
+        End If
+       
+        ''Obtencion de Informacion
+        vDatos_Obtenidos = oG_Fase2.Obten_Seguridad(vF_Inicial, vF_Final, vCve_Equipo, vCve_Linea, vCve_Componente, vCve_CadenaValor, vFormato_Resultado, vNivel, True, False)
+
+
+        'Creacion series
+        Dim BarSeries1 As New BarSeries()
+        BarSeries1.LegendTitle = "acumulado"
+        Dim BarSeries2 As New BarSeries()
+        BarSeries2.LegendTitle = "nuevas"
+        Dim BarSeries3 As New BarSeries()
+        BarSeries3.LegendTitle = "resueltas"
+        Dim LineSeries1 As New LineSeries()
+        If vNivel <> 5 Then
+            LineSeries1.LegendTitle = "Objetivo Seguridad"
+        End If
+        Me.radChartView1.ShowLegend = True
+        'Obtencion Datos
+        Dim vDT As DataTable = Nothing
+        vDT = vDatos_Obtenidos
+
+        If vDT.Rows.Count = 0 Then
+            habilita_etiqueta_datos()
+            Me.radChartView1.Title = ""
+        Else
+            Me.radChartView1.Title = "Seguridad " & cbxEquipo.Text
+        End If
+
+        BarSeries1.ValueMember = "acumulado"
+        BarSeries1.CategoryMember = "dia_asignado"
+        BarSeries1.DataSource = vDT
+        BarSeries2.ValueMember = "nuevas"
+        BarSeries2.CategoryMember = "dia_asignado"
+        BarSeries2.DataSource = vDT
+        BarSeries3.ValueMember = "resueltas"
+        BarSeries3.CategoryMember = "dia_asignado"
+        BarSeries3.DataSource = vDT
+        If vNivel <> 5 Then
+            LineSeries1.ValueMember = "objetivo"
+            LineSeries1.CategoryMember = "dia_asignado"
+            LineSeries1.DataSource = vDT
+        End If
+        'Cartesian Area, CategoricalAxis, LinearAxis
+        Dim CartesianArea1 As CartesianArea = New CartesianArea()
+        Dim CategoricalAxis1 As CategoricalAxis = New CategoricalAxis()
+        Dim LinearAxis1 As LinearAxis = New LinearAxis()
+        'Personalizacion
+
+        'Logo Indicador
+        picboxIndicador.ImageLocation = Application.StartupPath & "\graficas_fase_uno\logo_indicador_seguridad.jpg"
+
+        'Legend & Position
+        Me.radChartView1.ChartElement.LegendElement.StackElement.Orientation = Orientation.Horizontal
+        Me.radChartView1.ChartElement.LegendPosition = LegendPosition.Bottom
+
+        Me.radChartView1.AreaDesign = CartesianArea1
+        CategoricalAxis1.LabelFitMode = AxisLabelFitMode.Rotate
+        If rdbtnDias.IsChecked Then
+            CategoricalAxis1.LabelFormat = "{0:dd - MMM}"
+        ElseIf rdbtnMeses.IsChecked Then
+            CategoricalAxis1.LabelFormat = "{0:MMM - yyyy}"
+        End If
+        CategoricalAxis1.LabelRotationAngle = 270.0R
+        LinearAxis1.AxisType = AxisType.Second
+        LinearAxis1.Title = "CI"
+        BarSeries1.LabelFormat = "{0:###}"
+        BarSeries2.LabelFormat = "{0:###}"
+        BarSeries1.HorizontalAxis = CategoricalAxis1
+        If vNivel <> 5 Then
+            LineSeries1.LabelFormat = "{0:###}"
+            LineSeries1.HorizontalAxis = CategoricalAxis1
+            LineSeries1.VerticalAxis = LinearAxis1
+            LineSeries1.Palette = New PaletteEntry(Color.FromArgb(202, 0, 0))
+            LineSeries1.BorderColor = Color.FromArgb(202, 0, 0)
+        End If
+
+        BarSeries1.VerticalAxis = LinearAxis1
+
+
+        BarSeries1.Palette = New PaletteEntry(Color.FromArgb(255, 191, 0))
+        BarSeries2.Palette = New PaletteEntry(Color.FromArgb(233, 37, 43))
+        BarSeries3.Palette = New PaletteEntry(Color.FromArgb(36, 177, 22))
+
+        Me.radChartView1.ShowTrackBall = True
+        Me.radChartView1.ShowToolTip = True
+        If vNivel <> 5 Then
+            radChartView1.Series.Add(LineSeries1)
+        End If
+
+        radChartView1.Series.Add(BarSeries2)
+        radChartView1.Series.Add(BarSeries3)
+        radChartView1.Series.Add(BarSeries1)
+
+        If vNivel <> 5 Then
+            LineSeries1.CombineMode = ChartSeriesCombineMode.None
+        End If
+
+        If (LinearAxis1.ActualRange.Maximum = 0) Then
+            LinearAxis1.Maximum = 5
+        End If
+    End Sub
+
+    Private Sub Obtiene_Reporte_Seguridad(ByVal vEsResumen As Boolean)
+        Me.dgvTabla.DataSource = Nothing
+        Me.dgvTabla.Columns.Clear()
+        Me.dgvTabla.DataSource = vDatos_Obtenidos
+
+        Me.dgvTabla.Columns("planta").HeaderText = "PLANTA"
+        Me.dgvTabla.Columns("planta").Width = 150
+        Me.dgvTabla.Columns("planta").Name = "planta"
+
+        Me.dgvTabla.Columns("cadena").HeaderText = "CADENA VALOR"
+        Me.dgvTabla.Columns("cadena").Width = 150
+        Me.dgvTabla.Columns("cadena").Name = "cadena"
+
+        Me.dgvTabla.Columns("componente").HeaderText = "COMPONENTE"
+        Me.dgvTabla.Columns("componente").Width = 150
+        Me.dgvTabla.Columns("componente").Name = "componente"
+
+        Me.dgvTabla.Columns("equipo").HeaderText = "EQUIPO"
+        Me.dgvTabla.Columns("equipo").Width = 170
+        Me.dgvTabla.Columns("equipo").Name = "equipo"
+
+        Me.dgvTabla.Columns("linea").HeaderText = "LINEA"
+        Me.dgvTabla.Columns("linea").Width = 150
+        Me.dgvTabla.Columns("linea").Name = "linea"
+
+        Me.dgvTabla.Columns("dia_asignado").HeaderText = "FECHA"
+        Me.dgvTabla.Columns("dia_asignado").Width = 170
+        Me.dgvTabla.Columns("dia_asignado").Name = "dia_asignado"
+
+        Me.dgvTabla.Columns("nuevas").HeaderText = "NUEVAS"
+        Me.dgvTabla.Columns("nuevas").Width = 80
+        Me.dgvTabla.Columns("nuevas").Name = "nuevas"
+
+        Me.dgvTabla.Columns("resueltas").HeaderText = "RESUELTAS"
+        Me.dgvTabla.Columns("resueltas").Width = 80
+        Me.dgvTabla.Columns("resueltas").Name = "resueltas"
+
+        Me.dgvTabla.Columns("acumulado").HeaderText = "ACUMULADO"
+        Me.dgvTabla.Columns("acumulado").Width = 80
+        Me.dgvTabla.Columns("acumulado").Name = "acumulado"
+
+
+        Me.dgvTabla.Columns("objetivo").HeaderText = "OBJETIVO"
+        Me.dgvTabla.Columns("objetivo").Width = 80
+        Me.dgvTabla.Columns("objetivo").Name = "objetivo"
+
+        'Me.dgvTabla.Columns("comentarios").HeaderText = "COMENTARIOS"
+        'Me.dgvTabla.Columns("comentarios").Width = 300
+        'Me.dgvTabla.Columns("comentarios").Name = "comentarios"
+
+
+        If vEsResumen = True Then
+            Me.dgvTabla.Columns("planta").IsVisible = True
+            Me.dgvTabla.Columns("cadena").IsVisible = True
+            Me.dgvTabla.Columns("componente").IsVisible = True
+            Me.dgvTabla.Columns("equipo").IsVisible = True
+            Me.dgvTabla.Columns("linea").IsVisible = True
+            Me.dgvTabla.Columns("dia_asignado").IsVisible = True
+            Me.dgvTabla.Columns("nuevas").IsVisible = True
+            Me.dgvTabla.Columns("resueltas").IsVisible = True
+            Me.dgvTabla.Columns("acumulado").IsVisible = True
+            Me.dgvTabla.Columns("objetivo").IsVisible = True
+            'Me.dgvTabla.Columns("comentarios").IsVisible = False
+        Else
+            Me.dgvTabla.Columns("planta").IsVisible = True
+            Me.dgvTabla.Columns("cadena").IsVisible = True
+            Me.dgvTabla.Columns("componente").IsVisible = True
+            Me.dgvTabla.Columns("equipo").IsVisible = True
+            Me.dgvTabla.Columns("linea").IsVisible = True
+            Me.dgvTabla.Columns("dia_asignado").IsVisible = True
+            Me.dgvTabla.Columns("nuevas").IsVisible = True
+            Me.dgvTabla.Columns("resueltas").IsVisible = True
+            Me.dgvTabla.Columns("acumulado").IsVisible = True
+            Me.dgvTabla.Columns("objetivo").IsVisible = True
+            'Me.dgvTabla.Columns("comentarios").IsVisible = True
+        End If
+
+    End Sub
+
+
+
+#Region "MEtodos No Utilizados, Eliminar"
     'Gente planta
     Private Sub obtiene_seguridad_planta_dia_mes()
         'Objeto obtiene_nrfti Clase
@@ -4191,7 +4818,7 @@ Public Class FrmGraficasfaseuno
 
         Me.radChartView1.ShowTrackBall = True
         Me.radChartView1.ShowToolTip = True
-        
+
         radChartView1.Series.Add(LineSeries1)
         radChartView1.Series.Add(BarSeries1)
         radChartView1.Series.Add(BarSeries2)
@@ -4673,7 +5300,375 @@ Public Class FrmGraficasfaseuno
         End If
     End Sub
 #End Region
+#End Region
+
 #Region "Metodos graficar costo"
+
+    Private Sub Obtiene_Grafica_Costo()
+        Dim vCve_Equipo As Integer = 0
+        Dim vCve_Linea As Integer = 0
+        Dim vCve_Componente As Integer = 0
+        Dim vCve_CadenaValor As Integer = 0
+        Dim vNivel As Integer = 0
+        Dim vFormato As Integer = 0
+        Dim vF_Inicial As DateTime = Date.Now
+        Dim vF_Final As DateTime = Date.Now
+
+        ''Obtencion de Datos
+        vF_Inicial = dtpFechaInicial.Value
+        vF_Final = dtpFechaFinal.Value
+        oG_Fase2 = New G_Fase2
+
+        ''Revicion de Nivel Elegido
+        If rdbtnEquipo.IsChecked = True Then
+            If chkTodasLineas.Checked = False Then ''---Nivel Equipo_Linea
+                vCve_Equipo = cbxEquipo.SelectedValue
+                vCve_Linea = cbxLinea.SelectedValue
+                vNivel = 0
+            Else ''---Nivel Equipo
+                vCve_Equipo = cbxEquipo.SelectedValue
+                vNivel = 1
+            End If
+        End If
+        If rdbtnLinea.IsChecked = True Then ''---Nivel Linea
+            vCve_Linea = cbxLinea.SelectedValue
+            vNivel = 2
+        ElseIf rdbtnComponente.IsChecked = True Then ''---Nivel Componente
+            vCve_Componente = cbxComponente.SelectedValue
+            vNivel = 3
+        ElseIf rdbtnCadenaValor.IsChecked = True Then ''---Nivel Cadena Valor
+            vCve_CadenaValor = cbxCadenaValor.SelectedValue
+            vNivel = 4
+        ElseIf rdbtnPlanta.IsChecked = True Then ''---Nivel Planta
+            vNivel = 5
+        End If
+       
+        ''Obtencion de Informacion
+        vDatos_Obtenidos = oG_Fase2.Obten_Costo(vF_Inicial, vF_Final, vCve_Equipo, vCve_Linea, vCve_Componente, vCve_CadenaValor, vFormato_Resultado, vNivel, True, False)
+
+        Grafica_Minutos(vNivel, vDatos_Obtenidos)
+        Grafica_Costo(vNivel, vDatos_Obtenidos)
+
+    End Sub
+
+    Private Sub Grafica_Minutos(ByVal vNivel As Integer, ByVal vDatos_Obtenidos As DataTable)
+        'Creacion series
+        Dim BarSeries1 As New BarSeries()
+        BarSeries1.LegendTitle = "Min. Reales"
+        Dim LineSeries3 As New LineSeries()
+        If vNivel <> 5 Then
+            LineSeries3.LegendTitle = "Objetivo mins"
+            Me.radChartView1.ShowLegend = True
+        End If
+
+        'Obtencion Datos
+        Dim vDT As DataTable = Nothing
+        vDT = vDatos_Obtenidos
+
+        'Llenado de las series
+        Dim vTotal As Integer = 1
+        Dim vContador As Integer = 1
+        vTotal = vDT.Rows.Count
+
+        If vTotal = 0 Then
+            habilita_etiqueta_datos()
+            Me.radChartView1.Title = ""
+        Else
+            Me.radChartView1.Title = "Costo " & cbxEquipo.Text
+        End If
+        Dim vMin_Program_Aux As Integer = 0
+        Dim vMin_Excedentes_Aux As Integer = 0
+        Dim vCosto_Aux As Integer = 0
+        Dim vObjetivo_tcdm_Aux As Integer = 0
+
+        For Each vDR As DataRow In vDT.Rows
+            If 1 = vContador Then
+                vMin_Program_Aux = vDR("mins_reales")
+                vObjetivo_tcdm_Aux = vDR("objetivo_tcdm")
+            Else
+                BarSeries1.DataPoints.Add(New CategoricalDataPoint(vDR("mins_reales"), vDR("dia_asignado")))
+                If vNivel <> 5 Then
+                    If Not IsDBNull(vDR("objetivo_tcdm")) Then
+                        LineSeries3.DataPoints.Add(New CategoricalDataPoint(vDR("objetivo_tcdm"), vDR("dia_asignado")))
+                    End If
+                End If
+            End If
+            vContador = vContador + 1
+        Next
+
+        BarSeries1.DataPoints.Add(New CategoricalDataPoint(vMin_Program_Aux, "acumulado"))
+
+        'Cartesian Area
+        Dim CartesianArea1 As CartesianArea = New CartesianArea()
+        Me.radChartView1.AreaDesign = CartesianArea1
+        'Categorical axis
+        Dim CategoricalAxis1 As CategoricalAxis = New CategoricalAxis()
+        CategoricalAxis1.LabelFitMode = AxisLabelFitMode.Rotate
+        CategoricalAxis1.LabelRotationAngle = 270.0R
+
+        'LinearAxis
+        Dim LinearAxis1 As LinearAxis = New LinearAxis()
+        LinearAxis1.AxisType = AxisType.Second
+        LinearAxis1.Title = "Minutos"
+        'Personalizacion
+
+        'Logo Indicador
+        picboxIndicador.ImageLocation = Application.StartupPath & "\graficas_fase_uno\logo_indicador_costo.jpg"
+
+        'Legend & Position
+        Me.radChartView1.ChartElement.LegendElement.StackElement.Orientation = Orientation.Horizontal
+        Me.radChartView1.ChartElement.LegendPosition = LegendPosition.Bottom
+
+        If rdbtnDias.IsChecked Then
+            CategoricalAxis1.LabelFormat = "{0:dd - MMM}"
+        ElseIf rdbtnMeses.IsChecked Then
+            CategoricalAxis1.LabelFormat = "{0:MMM - yyyy}"
+        End If
+        'Series
+        BarSeries1.ForeColor = Color.White
+
+        BarSeries1.ShowLabels = True
+        BarSeries1.LabelFormat = "{0:###}"
+
+        If vNivel <> 5 Then
+            LineSeries3.LabelFormat = "{0:###}"
+        End If
+        BarSeries1.HorizontalAxis = CategoricalAxis1
+        If vNivel <> 5 Then
+            LineSeries3.HorizontalAxis = CategoricalAxis1
+        End If
+
+        BarSeries1.VerticalAxis = LinearAxis1
+
+        If vNivel <> 5 Then
+            LineSeries3.VerticalAxis = LinearAxis1
+        End If
+
+        BarSeries1.Palette = New PaletteEntry(Color.FromArgb(62, 105, 157))
+       
+        If vNivel <> 5 Then
+            LineSeries3.Palette = New PaletteEntry(Color.FromArgb(202, 0, 0))
+            LineSeries3.BorderColor = Color.FromArgb(202, 0, 0)
+        End If
+
+        Me.radChartView1.ShowTrackBall = True
+        Me.radChartView1.ShowToolTip = True
+
+        'Chartview
+        
+        radChartView1.Series.Add(BarSeries1)
+
+        If vNivel <> 5 Then
+            radChartView1.Series.Add(LineSeries3)
+        End If
+        BarSeries1.CombineMode = ChartSeriesCombineMode.Stack
+        If vNivel <> 5 Then
+            LineSeries3.CombineMode = ChartSeriesCombineMode.None
+        End If
+
+        If (LinearAxis1.ActualRange.Maximum = 0) Then
+            LinearAxis1.Maximum = 5
+        End If
+    End Sub
+
+    Private Sub Grafica_Costo(ByVal vNivel As Integer, ByVal vDatos_Obtenidos As DataTable)
+        'Creacion series
+        Dim LineSeries1 As New LineSeries()
+        LineSeries1.LegendTitle = "Costo"
+        Dim LineSeries3 As New LineSeries()
+        If vNivel <> 5 Then
+            LineSeries3.LegendTitle = "Objetivo Costo"
+            Me.CharSecundario.ShowLegend = True
+        End If
+
+        'Obtencion Datos
+        Dim vDT As DataTable = Nothing
+        vDT = vDatos_Obtenidos
+
+        'Llenado de las series
+        Dim vTotal As Integer = 1
+        Dim vContador As Integer = 1
+        vTotal = vDT.Rows.Count
+
+        If vTotal = 0 Then
+            habilita_etiqueta_datos()
+            Me.CharSecundario.Title = ""
+        Else
+            Me.CharSecundario.Title = "Costo " & cbxEquipo.Text
+        End If
+        Dim vMin_Program_Aux As Integer = 0
+        Dim vMin_Excedentes_Aux As Integer = 0
+        Dim vCosto_Aux As Integer = 0
+        Dim vObjetivo_tcdm_Aux As Integer = 0
+
+        For Each vDR As DataRow In vDT.Rows
+            If 1 = vContador Then
+                vMin_Program_Aux = vDR("mins_programados")
+                vMin_Excedentes_Aux = vDR("mins_excedentes")
+                vCosto_Aux = vDR("costo")
+                vObjetivo_tcdm_Aux = vDR("objetivo_tcdm")
+            Else
+                LineSeries1.DataPoints.Add(New CategoricalDataPoint(vDR("costo"), vDR("dia_asignado")))
+                If vNivel <> 5 Then
+                    If Not IsDBNull(vDR("objetivo")) Then
+                        LineSeries3.DataPoints.Add(New CategoricalDataPoint(vDR("objetivo"), vDR("dia_asignado")))
+                    End If
+                End If
+            End If
+            vContador = vContador + 1
+        Next
+
+        LineSeries1.DataPoints.Add(New CategoricalDataPoint(vCosto_Aux, "acumulado"))
+
+        'Cartesian Area
+        Dim CartesianArea1 As CartesianArea = New CartesianArea()
+        Me.CharSecundario.AreaDesign = CartesianArea1
+        'Categorical axis
+        Dim CategoricalAxis1 As CategoricalAxis = New CategoricalAxis()
+        CategoricalAxis1.LabelFitMode = AxisLabelFitMode.Rotate
+        CategoricalAxis1.LabelRotationAngle = 270.0R
+
+        'LinearAxis
+        Dim LinearAxis2 As LinearAxis = New LinearAxis()
+        LinearAxis2.AxisType = AxisType.Second
+        LinearAxis2.HorizontalLocation = AxisHorizontalLocation.Left
+        LinearAxis2.Title = "Costo $$"
+        'Personalizacion
+
+        'Logo Indicador
+        picboxIndicador.ImageLocation = Application.StartupPath & "\graficas_fase_uno\logo_indicador_costo.jpg"
+
+        Me.CharSecundario.ChartElement.LegendElement.StackElement.Orientation = Orientation.Horizontal
+        Me.CharSecundario.ChartElement.LegendPosition = LegendPosition.Bottom
+
+        If rdbtnDias.IsChecked Then
+            CategoricalAxis1.LabelFormat = "{0:dd - MMM}"
+        ElseIf rdbtnMeses.IsChecked Then
+            CategoricalAxis1.LabelFormat = "{0:MMM - yyyy}"
+        End If
+        'Series
+        LineSeries1.ShowLabels = True
+
+        If vNivel <> 5 Then
+            LineSeries3.LabelFormat = "{0:###}"
+        End If
+        LineSeries1.LabelFormat = "$ " & "{0:##.##}"
+        LineSeries1.HorizontalAxis = CategoricalAxis1
+
+        If vNivel <> 5 Then
+            LineSeries3.HorizontalAxis = CategoricalAxis1
+        End If
+
+        LineSeries1.VerticalAxis = LinearAxis2
+        If vNivel <> 5 Then
+            'LineSeries3.VerticalAxis = LinearAxis1
+        End If
+
+       
+        LineSeries1.Palette = New PaletteEntry(Color.FromArgb(127, 127, 127))
+
+        If vNivel <> 5 Then
+            LineSeries3.Palette = New PaletteEntry(Color.FromArgb(202, 0, 0))
+            LineSeries3.BorderColor = Color.FromArgb(202, 0, 0)
+        End If
+
+        LineSeries1.BorderColor = Color.FromArgb(127, 127, 127)
+
+        LineSeries1.PointSize = New SizeF(10, 10)
+        Me.CharSecundario.ShowTrackBall = True
+        Me.CharSecundario.ShowToolTip = True
+
+        'Chartview
+        CharSecundario.Series.Add(LineSeries1)
+
+        If vNivel <> 5 Then
+            CharSecundario.Series.Add(LineSeries3)
+        End If
+
+        LineSeries1.CombineMode = ChartSeriesCombineMode.None
+        If vNivel <> 5 Then
+            LineSeries3.CombineMode = ChartSeriesCombineMode.None
+        End If
+    End Sub
+
+    Private Sub Obtiene_Reporte_Costo(ByVal vEsResumen As Boolean)
+        Me.dgvTabla.DataSource = Nothing
+        Me.dgvTabla.Columns.Clear()
+        Me.dgvTabla.DataSource = vDatos_Obtenidos
+
+        Me.dgvTabla.Columns("planta").HeaderText = "PLANTA"
+        Me.dgvTabla.Columns("planta").Width = 150
+        Me.dgvTabla.Columns("planta").Name = "planta"
+
+        Me.dgvTabla.Columns("cadena_valor").HeaderText = "CADENA VALOR"
+        Me.dgvTabla.Columns("cadena_valor").Width = 150
+        Me.dgvTabla.Columns("cadena_valor").Name = "cadena_valor"
+
+        Me.dgvTabla.Columns("componente").HeaderText = "COMPONENTE"
+        Me.dgvTabla.Columns("componente").Width = 150
+        Me.dgvTabla.Columns("componente").Name = "componente"
+
+        Me.dgvTabla.Columns("equipo").HeaderText = "EQUIPO"
+        Me.dgvTabla.Columns("equipo").Width = 170
+        Me.dgvTabla.Columns("equipo").Name = "equipo"
+
+        Me.dgvTabla.Columns("linea").HeaderText = "LINEA"
+        Me.dgvTabla.Columns("linea").Width = 150
+        Me.dgvTabla.Columns("linea").Name = "linea"
+
+        Me.dgvTabla.Columns("dia_asignado").HeaderText = "FECHA"
+        Me.dgvTabla.Columns("dia_asignado").Width = 170
+        Me.dgvTabla.Columns("dia_asignado").Name = "dia_asignado"
+
+        Me.dgvTabla.Columns("objetivo_tcdm").HeaderText = "OBJETIVO TCDM"
+        Me.dgvTabla.Columns("objetivo_tcdm").Width = 80
+        Me.dgvTabla.Columns("objetivo_tcdm").Name = "objetivo_tcdm"
+
+        Me.dgvTabla.Columns("mins_reales").HeaderText = "MINS REALES"
+        Me.dgvTabla.Columns("mins_reales").Width = 80
+        Me.dgvTabla.Columns("mins_reales").Name = "mins_reales"
+
+        Me.dgvTabla.Columns("mins_programados").HeaderText = "MINS PROGRAMADOS"
+        Me.dgvTabla.Columns("mins_programados").Width = 80
+        Me.dgvTabla.Columns("mins_programados").Name = "mins_programados"
+
+        Me.dgvTabla.Columns("mins_excedentes").HeaderText = "MINS EXCEDENTES"
+        Me.dgvTabla.Columns("mins_excedentes").Width = 80
+        Me.dgvTabla.Columns("mins_excedentes").Name = "mins_excedentes"
+
+        Me.dgvTabla.Columns("costo").HeaderText = "COSTO"
+        Me.dgvTabla.Columns("costo").Width = 80
+        Me.dgvTabla.Columns("costo").Name = "costo"
+
+        Me.dgvTabla.Columns("precio").HeaderText = "PRECIO"
+        Me.dgvTabla.Columns("precio").Width = 80
+        Me.dgvTabla.Columns("precio").Name = "precio"
+
+        Me.dgvTabla.Columns("objetivo").HeaderText = "OBJETIVO"
+        Me.dgvTabla.Columns("objetivo").Width = 80
+        Me.dgvTabla.Columns("objetivo").Name = "objetivo"
+
+        Me.dgvTabla.Columns("comentarios").HeaderText = "COMENTARIOS"
+        Me.dgvTabla.Columns("comentarios").Width = 300
+        Me.dgvTabla.Columns("comentarios").Name = "comentarios"
+
+        Me.dgvTabla.Columns("planta").IsVisible = True
+        Me.dgvTabla.Columns("cadena_valor").IsVisible = True
+        Me.dgvTabla.Columns("componente").IsVisible = True
+        Me.dgvTabla.Columns("equipo").IsVisible = True
+        Me.dgvTabla.Columns("linea").IsVisible = True
+        Me.dgvTabla.Columns("dia_asignado").IsVisible = True
+        Me.dgvTabla.Columns("objetivo_tcdm").IsVisible = True
+        Me.dgvTabla.Columns("mins_reales").IsVisible = True
+        Me.dgvTabla.Columns("mins_programados").IsVisible = True
+        Me.dgvTabla.Columns("mins_excedentes").IsVisible = True
+        Me.dgvTabla.Columns("costo").IsVisible = True
+        Me.dgvTabla.Columns("precio").IsVisible = True
+        Me.dgvTabla.Columns("objetivo").IsVisible = True
+        Me.dgvTabla.Columns("comentarios").IsVisible = True
+    End Sub
+
+#Region "MEtodos No Utilizados, Eliminar"
     'Costo Planta
     Private Sub obtiene_costo_planta_dia_mes()
         'Objeto obtiene_nrfti Clase
@@ -5580,6 +6575,8 @@ Public Class FrmGraficasfaseuno
         End If
     End Sub
 #End Region
+#End Region
+
 #Region "Graficar "
     Private Sub habilita_etiqueta_datos()
         lblError.Visible = True
@@ -5593,111 +6590,23 @@ Public Class FrmGraficasfaseuno
     End Sub
     Private Sub obtener_grafica()
         If rdbtnOee.IsChecked Then
+            Me.PageGrafica_Secundaria.Enabled = False
             Obtiene_Grafico_OEE()
-
-            'If rdbtnPlanta.IsChecked Then
-            '    obtiene_oee_planta_dia_mes()
-            'ElseIf rdbtnCadenaValor.IsChecked Then
-            '    obtiene_oee_cadena_valor_dia_mes()
-            'ElseIf rdbtnComponente.IsChecked Then
-            '    obtiene_oee_componente_dia_mes()
-            'ElseIf rdbtnLinea.IsChecked Then
-            '    obtiene_oee_linea_dia_mes()
-            'ElseIf rdbtnEquipo.IsChecked Then
-            '    If chkTodasLineas.Checked Then
-            '        obtiene_oee_equipo_dia_mes()
-            '    Else
-            '        obtiene_oee_equipo_linea_dia_mes()
-            '    End If
-            'End If
         ElseIf rdbtnNrfti.IsChecked Then
+            Me.PageGrafica_Secundaria.Enabled = False
             Obtiene_Grafica_NRFT()
-
-            'If rdbtnPlanta.IsChecked Then
-            '    obtiene_nrfti_planta_dia_mes()
-            'ElseIf rdbtnCadenaValor.IsChecked Then
-            '    obtiene_nrfti_cadena_valor_dia_mes()
-            'ElseIf rdbtnComponente.IsChecked Then
-            '    obtiene_nrfti_componente_dia_mes()
-            'ElseIf rdbtnLinea.IsChecked Then
-            '    obtiene_nrfti_linea_dia_mes()
-            'ElseIf rdbtnEquipo.IsChecked Then
-            '    If chkTodasLineas.Checked Then
-            '        obtiene_nrfti_equipo_dia_mes()
-            '    Else
-            '        obtiene_nrfti_equipo_linea_dia_mes()
-            '    End If
-            'End If
         ElseIf rdbtnCosto.IsChecked Then
-            If rdbtnPlanta.IsChecked Then
-                obtiene_costo_planta_dia_mes()
-            ElseIf rdbtnCadenaValor.IsChecked Then
-                obtiene_costo_cadena_valor_dia_mes()
-            ElseIf rdbtnComponente.IsChecked Then
-                obtiene_costo_componente_dia_mes()
-            ElseIf rdbtnLinea.IsChecked Then
-                obtiene_costo_linea_dia_mes()
-            ElseIf rdbtnEquipo.IsChecked Then
-                If chkTodasLineas.Checked Then
-                    obtiene_costo_equipo_dia_mes()
-                Else
-                    obtiene_costo_equipo_linea_dia_mes()
-                End If
-            End If
+            Me.PageGrafica_Secundaria.Enabled = True
+            Obtiene_Grafica_Costo()
         ElseIf rdbtnSeguridad.IsChecked Then
-            If rdbtnPlanta.IsChecked Then
-                obtiene_seguridad_planta_dia_mes()
-            ElseIf rdbtnCadenaValor.IsChecked Then
-                obtiene_seguridad_cadena_valor_dia_mes()
-            ElseIf rdbtnComponente.IsChecked Then
-                obtiene_seguridad_componente_dia_mes()
-            ElseIf rdbtnLinea.IsChecked Then
-                obtiene_seguridad_linea_dia_mes()
-            ElseIf rdbtnEquipo.IsChecked Then
-                If chkTodasLineas.Checked Then
-                    obtiene_seguridad_equipo_dia_mes()
-                Else
-                    obtiene_seguridad_equipo_linea_dia_mes()
-                End If
-            End If
+            Me.PageGrafica_Secundaria.Enabled = False
+            Obtiene_Grafica_Seguridad()
         ElseIf rdbtnCincoS.IsChecked Then
-
+            Me.PageGrafica_Secundaria.Enabled = False
             Obtiene_Grafica_CincoS()
-
-
-            'If rdbtnPlanta.IsChecked Then
-            '    obtiene_cincoS_planta_mes()
-            'ElseIf rdbtnCadenaValor.IsChecked Then
-            '    obtiene_cincoS_cadena_valor_mes()
-            'ElseIf rdbtnComponente.IsChecked Then
-            '    obtiene_cincoS_componente_mes()
-            'ElseIf rdbtnLinea.IsChecked Then
-            '    obtiene_cincoS_linea_mes()
-            'ElseIf rdbtnEquipo.IsChecked Then
-            '    If chkTodasLineas.Checked Then
-            '        obtiene_cincoS_equipo_mes()
-            '    Else
-            '        obtiene_cincoS_equipo_linea_mes()
-            '    End If
-            'End If
-
-
         ElseIf rdbtnGente.IsChecked Then
-            If rdbtnPlanta.IsChecked Then
-                obtiene_gente_planta_dia_mes()
-            ElseIf rdbtnCadenaValor.IsChecked Then
-                obtiene_gente_cadena_valor_dia_mes()
-            ElseIf rdbtnComponente.IsChecked Then
-                obtiene_gente_componente_dia_mes()
-            ElseIf rdbtnLinea.IsChecked Then
-                obtiene_gente_linea_dia_mes()
-            ElseIf rdbtnEquipo.IsChecked Then
-                If chkTodasLineas.Checked Then
-                    obtiene_gente_equipo_dia_mes()
-                Else
-                    obtiene_gente_equipo_linea_dia_mes()
-                End If
-            End If
+            Me.PageGrafica_Secundaria.Enabled = False
+            Obtiene_Grafica_Gente()
         End If
     End Sub
 #End Region
@@ -5718,15 +6627,15 @@ Public Class FrmGraficasfaseuno
         If rdbtnOee.IsChecked = True Then
             Obtiene_Reporte_OEE(True)
         ElseIf rdbtnNrfti.IsChecked = True Then
-
+            Obtiene_Reporte_NRFT(True)
         ElseIf rdbtnCosto.IsChecked = True Then
-
+            Obtiene_Reporte_Costo(True)
         ElseIf rdbtnSeguridad.IsChecked = True Then
-
+            Obtiene_Reporte_Seguridad(True)
         ElseIf rdbtnCincoS.IsChecked = True Then
-
+            Obtiene_Reporte_CincoS(True)
         ElseIf rdbtnGente.IsChecked = True Then
-
+            Obtiene_Reporte_Gente(True)
         End If
 
 
@@ -5736,23 +6645,37 @@ Public Class FrmGraficasfaseuno
         If rdbtnOee.IsChecked = True Then
             Obtiene_Reporte_OEE(False)
         ElseIf rdbtnNrfti.IsChecked = True Then
-
+            Obtiene_Reporte_NRFT(False)
         ElseIf rdbtnCosto.IsChecked = True Then
-
+            Obtiene_Reporte_Costo(False)
         ElseIf rdbtnSeguridad.IsChecked = True Then
-
+            Obtiene_Reporte_Seguridad(False)
         ElseIf rdbtnCincoS.IsChecked = True Then
-
+            Obtiene_Reporte_CincoS(False)
         ElseIf rdbtnGente.IsChecked = True Then
-
+            Obtiene_Reporte_Gente(False)
         End If
 
 
     End Sub
 
     Private Sub btnExportar_Click(sender As System.Object, e As System.EventArgs) Handles btnExportar.Click
-
+        Dim exporter As ExportToExcelML = New ExportToExcelML(Me.dgvTabla)
+        exporter.HiddenColumnOption = Telerik.WinControls.UI.Export.HiddenOption.DoNotExport
+        sfdExportaExcel.Filter = "Excel |*.xls"
+        sfdExportaExcel.Title = "Guarda documento de Excel."
+        sfdExportaExcel.ShowDialog()
+        If sfdExportaExcel.FileName <> "" Then
+            Try
+                exporter.RunExport(sfdExportaExcel.FileName)
+                MsgBox("Se exportó exitosamente los datos a la ubicación:  " & sfdExportaExcel.FileName, vbInformation + vbOKOnly, "Información")
+            Catch ex As Exception
+                MsgBox(ex.ToString)
+            Finally
+                sfdExportaExcel.FileName = ""
+            End Try
+        End If
     End Sub
 #End Region
-    
+
 End Class
