@@ -82,88 +82,64 @@ Public Class frmRelacionLineaClasificacion
 #Region "Validaciones"
     'Error Provider
     Private Sub error_provider_mensajes()
-        '    If txtNombre.Text <> "" Then
-        '        errorProvClasfLineas.SetError(Me.txtNombre, "")
-        '    Else
-        '        errorProvClasfLineas.SetError(Me.txtNombre, "Escribe un nombre para la clasificación de Línea")
-        '    End If
-        '    If txtDescripcion.Text <> "" Then
-        '        errorProvClasfLineas.SetError(Me.txtDescripcion, "")
-        '    Else
-        '        errorProvClasfLineas.SetError(Me.txtDescripcion, "Escribe una descripción para la clasificación de Línea")
-        '    End If
-        '    If cbxEstatus.SelectedIndex <> -1 Then
-        '        errorProvClasfLineas.SetError(Me.cbxEstatus, "")
-        '    Else
-        '        errorProvClasfLineas.SetError(Me.cbxEstatus, "Selecciona el estatus del registro.")
-        '    End If
+        If cbxLinea.SelectedIndex <> -1 Then
+            Dim auxString As String = String.Format(cbxLinea.EditorControl.Rows(cbxLinea.SelectedIndex).Cells("linea").Value)
+            If auxString <> cbxLinea.Text Then
+                errorProv.SetError(Me.cbxLinea, "Selecciona un línea.")
+            Else
+                errorProv.SetError(Me.cbxLinea, "")
+            End If
+        Else
+            errorProv.SetError(Me.cbxLinea, "Selecciona una línea.")
+        End If
+        Dim aux_date As DateTime = New DateTime(2014, 5, 1)
+        'Valida Fecha Inicial 
+        If dtpFechaClasificacionLinea.Text <> "" Then
+            If Not dtpFechaClasificacionLinea.Value >= aux_date Then
+                errorProv.SetError(Me.dtpFechaClasificacionLinea, "La Fecha debe ser mayor al 01-Mayo-2014, ya que desde este dia se implementó la clasificación de línea.")
+            Else
+                oRelacionLineaClasificacion = New CapaNegocios.Relacion_Linea_Clasificacion
+                oRelacionLineaClasificacion.fecha_auxiliar = dtpFechaClasificacionLinea.Value
+                If voperacion = Insertar Then
+                    oRelacionLineaClasificacion.cve_linea = Long.Parse(String.Format(cbxLinea.EditorControl.Rows(cbxLinea.SelectedIndex).Cells("CVE").Value))
+                    oRelacionLineaClasificacion.operacion = Insertar
+                    If oRelacionLineaClasificacion.valida_registro_relacion_linea_clasificacion() Then
+                        errorProv.SetError(Me.dtpFechaClasificacionLinea, "")
+                    Else
+                        errorProv.SetError(Me.dtpFechaClasificacionLinea, "La Fecha Inicial no se debe traslapar con otro registro existente para esta línea.")
+                    End If
+                ElseIf voperacion = Actualizar Then
+                    oRelacionLineaClasificacion.cve_relacion_linea_clasificacion = vcve_relacion_linea_clasificacion
+                    oRelacionLineaClasificacion.operacion = Actualizar
+                    If oRelacionLineaClasificacion.valida_registro_relacion_linea_clasificacion() Then
+                        If dtpFechaClasificacionLinea.Value >= vfecha_inicial Then
+                            errorProv.SetError(Me.dtpFechaClasificacionLinea, "")
+                        Else
+                            errorProv.SetError(Me.dtpFechaClasificacionLinea, "La Fecha Final debe ser mayor o igual a la Fecha Inicial: " & vfecha_inicial)
+                        End If
+                    Else
+                        errorProv.SetError(Me.dtpFechaClasificacionLinea, "La Fecha Final no se debe traslapar con otro registro existente para esta línea.")
+                    End If
+                End If
+            End If
+        Else
+            If voperacion = Insertar Then
+                errorProv.SetError(Me.dtpFechaClasificacionLinea, "Selecciona la fecha inicial.")
+            ElseIf voperacion = Actualizar Then
+                errorProv.SetError(Me.dtpFechaClasificacionLinea, "Selecciona la fecha final.")
+            End If
 
-        '    '//////////////
+        End If
 
-
-        '    Dim flgFechaInicioFin As Boolean = False
-        '    Dim auxString As String = ""
-        '    'Selecciona un usuario
-        '    If cbxUsuarios.SelectedIndex <> -1 Then
-        '        auxString = String.Format(cbxUsuarios.EditorControl.Rows(cbxUsuarios.SelectedIndex).Cells("Id_Usuario").Value)
-        '        If auxString <> cbxUsuarios.Text Then
-        '            errorProv.SetError(Me.cbxUsuarios, "Selecciona un usuario")
-        '        Else
-        '            errorProv.SetError(Me.cbxUsuarios, "")
-        '        End If
-        '    Else
-        '        errorProv.SetError(Me.cbxUsuarios, "Selecciona un usuario.")
-        '    End If
-        '    'Valida Fecha Inicial y Final
-        '    If dtpFechaInicial.Text <> "" And dtpFechaFinal.Text <> "" Then
-        '        'Fecha Inicial debe ser menor a Fecha Final
-        '        If Not dtpFechaFinal.Value > dtpFechaInicial.Value Then
-        '            errorProv.SetError(Me.dtpFechaInicial, "La fecha Inicial debe ser menor a la Fecha Final!.")
-        '            errorProv.SetError(Me.dtpFechaFinal, "La fecha Final debe ser mayor a la Fecha Inicial!.")
-        '        Else
-        '            'Fecha Inicial mayor a fecha actual
-        '            If Not dtpFechaInicial.Value >= Now.ToString("dd-MM-yyyy HH:mm") Then
-        '                errorProv.SetError(Me.dtpFechaInicial, "La fecha Inicial debe mayor a la Fecha y Hora Actual!.")
-        '            Else
-        '                errorProv.SetError(Me.dtpFechaInicial, "")
-        '                flgFechaInicioFin = True
-        '            End If
-        '            errorProv.SetError(Me.dtpFechaFinal, "")
-        '        End If
-        '    Else
-        '        If dtpFechaInicial.Text <> "" Then
-        '            errorProv.SetError(Me.dtpFechaInicial, "")
-        '        Else
-        '            errorProv.SetError(Me.dtpFechaInicial, "Selecciona la fecha inicial.")
-        '        End If
-        '        If dtpFechaFinal.Text <> "" Then
-        '            errorProv.SetError(Me.dtpFechaFinal, "")
-        '        Else
-        '            errorProv.SetError(Me.dtpFechaFinal, "Selecciona la fecha final.")
-        '        End If
-        '    End If
-        '    'Valida traslape
-        '    If dtpDiaModificacion.Text <> "" Then
-        '        If flgFechaInicioFin = True And cbxUsuarios.SelectedIndex <> -1 Then
-        '            If valida_traslape_fecha_inicio_fin() Then
-        '                errorProv.SetError(Me.dtpDiaModificacion, "")
-        '            Else
-        '                errorProv.SetError(Me.dtpDiaModificacion, "La Fecha Inicial y Final se traslapan con un permiso de modificaciones " & vbCr & "existente para el usuario seleccionado. No puede haber traslapes!.")
-        '            End If
-        '        Else
-        '            errorProv.SetError(Me.dtpDiaModificacion, "Llena los demas campos correctamente.")
-        '        End If
-        '    Else
-        '        errorProv.SetError(Me.dtpDiaModificacion, "Selecciona un dia de modificación.")
-        '    End If
-        '    '/////////////
-
-
-
+        If cbxClasificacionLinea.SelectedIndex <> -1 Then
+            errorProv.SetError(Me.cbxClasificacionLinea, "")
+        Else
+            errorProv.SetError(Me.cbxClasificacionLinea, "Selecciona una clasificacion para la línea.")
+        End If
     End Sub
     'Valida la captura
     Private Function valida_captura() As Boolean
-        'valida_captura_error_provider()
+        error_provider_mensajes()
         If flgcbxlinea And flgcbxlineaclasificacion Then
             Dim flgLinea As Boolean = False
             Dim auxString As String = ""
@@ -209,6 +185,8 @@ Public Class frmRelacionLineaClasificacion
                 Else
                     Return False
                 End If
+            Else
+                Return False
             End If
         Else
         Return False

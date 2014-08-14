@@ -22,6 +22,7 @@ Partial Class frmRelacionLineaClasificacion
     'No lo modifique con el editor de código.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Me.components = New System.ComponentModel.Container()
         Me.Label4 = New System.Windows.Forms.Label()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.Label1 = New System.Windows.Forms.Label()
@@ -32,11 +33,13 @@ Partial Class frmRelacionLineaClasificacion
         Me.dtpFechaClasificacionLinea = New Telerik.WinControls.UI.RadDateTimePicker()
         Me.cbxLinea = New Telerik.WinControls.UI.RadMultiColumnComboBox()
         Me.banner_formulario = New System.Windows.Forms.PictureBox()
+        Me.errorProv = New System.Windows.Forms.ErrorProvider(Me.components)
         CType(Me.dtpFechaClasificacionLinea, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.cbxLinea, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.cbxLinea.EditorControl, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.cbxLinea.EditorControl.MasterTemplate, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.banner_formulario, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.errorProv, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'Label4
@@ -135,7 +138,7 @@ Partial Class frmRelacionLineaClasificacion
         Me.cbxLinea.EditorControl.ImeMode = System.Windows.Forms.ImeMode.NoControl
         Me.cbxLinea.EditorControl.Location = New System.Drawing.Point(0, 0)
         '
-        '
+        'cbxLinea.NestedRadGridView
         '
         Me.cbxLinea.EditorControl.MasterTemplate.AllowAddNewRow = False
         Me.cbxLinea.EditorControl.MasterTemplate.AllowCellContextMenu = False
@@ -168,6 +171,10 @@ Partial Class frmRelacionLineaClasificacion
         Me.banner_formulario.TabIndex = 109
         Me.banner_formulario.TabStop = False
         '
+        'errorProv
+        '
+        Me.errorProv.ContainerControl = Me
+        '
         'frmRelacionLineaClasificacion
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -194,6 +201,7 @@ Partial Class frmRelacionLineaClasificacion
         CType(Me.cbxLinea.EditorControl, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.cbxLinea, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.banner_formulario, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.errorProv, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -208,4 +216,5 @@ Partial Class frmRelacionLineaClasificacion
     Friend WithEvents btnSalir As System.Windows.Forms.Button
     Friend WithEvents dtpFechaClasificacionLinea As Telerik.WinControls.UI.RadDateTimePicker
     Friend WithEvents cbxLinea As Telerik.WinControls.UI.RadMultiColumnComboBox
+    Friend WithEvents errorProv As System.Windows.Forms.ErrorProvider
 End Class

@@ -81,6 +81,4 @@ Public Class msg_RelacionLineaClasificacion
         End If
     End Sub
 #End Region
-
-
 End Class
