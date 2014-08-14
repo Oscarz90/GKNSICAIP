@@ -5,6 +5,9 @@ Public Class frmRelacionLineaClasificacion
     Private oLinea As CapaNegocios.Linea
     Private oLineaClasificacion As CapaNegocios.Linea_Clasificacion
 #End Region
+#Region "Objetos Utilizados - Formularios"
+    Private omsgRelacionLineaClasificacion As msg_RelacionLineaClasificacion
+#End Region
 #Region "Atributos"
     'Operaciones Constantes No modificar su valor!!
     Private Const vInsertar As Long = 1
@@ -16,6 +19,8 @@ Public Class frmRelacionLineaClasificacion
     'Banderas
     Private flgcbxlinea As Boolean = False
     Private flgcbxlineaclasificacion As Boolean = False
+    'Otras
+    Private vfecha_inicial As DateTime
 #End Region
 #Region "Propiedades"
     'Propiedades para las operaciones Insertar y Actualizar
@@ -58,15 +63,19 @@ Public Class frmRelacionLineaClasificacion
         Me.dtpFechaClasificacionLinea.Format = System.Windows.Forms.DateTimePickerFormat.Custom
         Me.dtpFechaClasificacionLinea.DateTimePickerElement.CustomFormat = "dddd, dd/MMMM/yyyy"
         'Operacion
-        If voperacion = 1 Then 'Insertar
-            'cbxEstatus.SelectedIndex = 0
-        ElseIf voperacion = 2 Then 'Actualizar
+        If voperacion = Actualizar Then 'Actualizar
             'Carga datos del registro a actualizar para llenar controles
             oRelacionLineaClasificacion = New CapaNegocios.Relacion_Linea_Clasificacion
             oRelacionLineaClasificacion.cve_relacion_linea_clasificacion = vcve_relacion_linea_clasificacion
             oRelacionLineaClasificacion.Cargar()
-            'Cambio Texto mostrado por el boton
+            cbxLinea.SelectedValue = oRelacionLineaClasificacion.cve_linea
+            cbxClasificacionLinea.SelectedValue = oRelacionLineaClasificacion.cve_linea_clasificacion
+            vfecha_inicial = oRelacionLineaClasificacion.fecha_inicio
+            lblfecha.Text = "Fecha Final:"
+            'Cambio controles
             btnRegistrar.Text = "Actualizar"
+            cbxLinea.Enabled = False
+            cbxClasificacionLinea.Enabled = False
         End If
     End Sub
 #End Region
@@ -164,13 +173,45 @@ Public Class frmRelacionLineaClasificacion
                     flgLinea = True
                 End If
             End If
-            If flgLinea = True And cbxClasificacionLinea.SelectedIndex <> -1 Then 'valida_fecha_inicio_fin() And valida_traslape_fecha_inicio_fin() Then
+            If flgLinea = True And cbxClasificacionLinea.SelectedIndex <> -1 And valida_fecha() Then
                 Return True
             Else
                 Return False
             End If
         Else
             Return False
+        End If
+    End Function
+    'Valida fecha seleccionada
+    Private Function valida_fecha()
+        'Fecha 01 Mayo 2014, ya que en este dia se incluyo la clasificacion de lineas
+        Dim fecha_referencia As DateTime = New DateTime(2014, 5, 1)
+        If dtpFechaClasificacionLinea.Text <> "" And cbxLinea.SelectedIndex <> -1 And cbxClasificacionLinea.SelectedIndex <> -1 Then
+            oRelacionLineaClasificacion = New CapaNegocios.Relacion_Linea_Clasificacion
+            If voperacion = Insertar Then
+                oRelacionLineaClasificacion.cve_linea = Long.Parse(String.Format(cbxLinea.EditorControl.Rows(cbxLinea.SelectedIndex).Cells("CVE").Value))
+                oRelacionLineaClasificacion.operacion = Insertar
+            ElseIf voperacion = Actualizar Then
+                oRelacionLineaClasificacion.cve_relacion_linea_clasificacion = vcve_relacion_linea_clasificacion
+                oRelacionLineaClasificacion.operacion = Actualizar
+            End If
+            oRelacionLineaClasificacion.fecha_auxiliar = dtpFechaClasificacionLinea.Value
+            'Valida segun la operacion
+            If voperacion = Insertar Then
+                If oRelacionLineaClasificacion.valida_registro_relacion_linea_clasificacion And dtpFechaClasificacionLinea.Value >= fecha_referencia Then
+                    Return True
+                Else
+                    Return False
+                End If
+            ElseIf voperacion = Actualizar Then
+                If oRelacionLineaClasificacion.valida_registro_relacion_linea_clasificacion And dtpFechaClasificacionLinea.Value >= vfecha_inicial And dtpFechaClasificacionLinea.Value >= fecha_referencia Then
+                    Return True
+                Else
+                    Return False
+                End If
+            End If
+        Else
+        Return False
         End If
     End Function
     'Valida el boton de Registrar/Actualizar
@@ -185,7 +226,7 @@ Public Class frmRelacionLineaClasificacion
 #Region "Eventos Controles"
     'Evento button Registrar
     Private Sub btnRegistrar_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnRegistrar.Click
-
+        confirmacion_registro()
     End Sub
     'Evento button Salir
     Private Sub btnSalir_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSalir.Click
@@ -209,7 +250,34 @@ Public Class frmRelacionLineaClasificacion
     End Sub
 #End Region
 #Region "Funciones Generales"
-
+    'Confirma el registro
+    Private Sub confirmacion_registro()
+        omsgRelacionLineaClasificacion = New msg_RelacionLineaClasificacion
+        'Establece parametros segun la operacion(Actualizar, Registrar)
+        If voperacion = Insertar Then
+            omsgRelacionLineaClasificacion.inicializa_valores(cbxLinea.Text, dtpFechaClasificacionLinea.Value, cbxClasificacionLinea.Text)
+        ElseIf voperacion = Actualizar Then
+            omsgRelacionLineaClasificacion.inicializa_valores(cbxLinea.Text, dtpFechaClasificacionLinea.Value)
+        End If
+        omsgRelacionLineaClasificacion.operacion = voperacion
+        omsgRelacionLineaClasificacion.ShowDialog()
+        'Verifica confirmacion y segun la operacion(Actualizar, Registrar) realiza la operacion
+        If omsgRelacionLineaClasificacion.vRespuesta Then
+            oRelacionLineaClasificacion = New CapaNegocios.Relacion_Linea_Clasificacion
+            If voperacion = Insertar Then
+                oRelacionLineaClasificacion.cve_linea = Long.Parse(String.Format(cbxLinea.EditorControl.Rows(cbxLinea.SelectedIndex).Cells("CVE").Value))
+                oRelacionLineaClasificacion.cve_linea_clasificacion = cbxClasificacionLinea.SelectedValue
+                oRelacionLineaClasificacion.fecha_inicio = dtpFechaClasificacionLinea.Value
+                oRelacionLineaClasificacion.Registrar()
+                Me.Close()
+            ElseIf voperacion = Actualizar Then
+                oRelacionLineaClasificacion.cve_relacion_linea_clasificacion = vcve_relacion_linea_clasificacion
+                oRelacionLineaClasificacion.fecha_final = dtpFechaClasificacionLinea.Value
+                oRelacionLineaClasificacion.Actualizar_fecha_final()
+                Me.Close()
+            End If
+        End If
+    End Sub
 #End Region
 #Region "Llena Controles"
     'Combo de Lineas

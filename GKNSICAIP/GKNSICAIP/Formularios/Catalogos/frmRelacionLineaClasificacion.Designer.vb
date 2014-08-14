@@ -22,33 +22,22 @@ Partial Class frmRelacionLineaClasificacion
     'No lo modifique con el editor de código.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Me.banner_formulario = New System.Windows.Forms.PictureBox()
         Me.Label4 = New System.Windows.Forms.Label()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.cbxClasificacionLinea = New System.Windows.Forms.ComboBox()
-        Me.Label3 = New System.Windows.Forms.Label()
+        Me.lblfecha = New System.Windows.Forms.Label()
         Me.btnRegistrar = New System.Windows.Forms.Button()
         Me.btnSalir = New System.Windows.Forms.Button()
         Me.dtpFechaClasificacionLinea = New Telerik.WinControls.UI.RadDateTimePicker()
         Me.cbxLinea = New Telerik.WinControls.UI.RadMultiColumnComboBox()
-        CType(Me.banner_formulario, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.banner_formulario = New System.Windows.Forms.PictureBox()
         CType(Me.dtpFechaClasificacionLinea, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.cbxLinea, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.cbxLinea.EditorControl, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.cbxLinea.EditorControl.MasterTemplate, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.banner_formulario, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
-        '
-        'banner_formulario
-        '
-        Me.banner_formulario.BackColor = System.Drawing.Color.Transparent
-        Me.banner_formulario.BackgroundImage = Global.GKNSICAIP.My.Resources.Resources.banner_03
-        Me.banner_formulario.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
-        Me.banner_formulario.Location = New System.Drawing.Point(-8, -6)
-        Me.banner_formulario.Name = "banner_formulario"
-        Me.banner_formulario.Size = New System.Drawing.Size(422, 44)
-        Me.banner_formulario.TabIndex = 109
-        Me.banner_formulario.TabStop = False
         '
         'Label4
         '
@@ -92,15 +81,15 @@ Partial Class frmRelacionLineaClasificacion
         Me.cbxClasificacionLinea.Size = New System.Drawing.Size(248, 27)
         Me.cbxClasificacionLinea.TabIndex = 120
         '
-        'Label3
+        'lblfecha
         '
-        Me.Label3.AutoSize = True
-        Me.Label3.Font = New System.Drawing.Font("Calibri", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label3.Location = New System.Drawing.Point(13, 171)
-        Me.Label3.Name = "Label3"
-        Me.Label3.Size = New System.Drawing.Size(94, 19)
-        Me.Label3.TabIndex = 121
-        Me.Label3.Text = "Fecha Inicial:"
+        Me.lblfecha.AutoSize = True
+        Me.lblfecha.Font = New System.Drawing.Font("Calibri", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblfecha.Location = New System.Drawing.Point(13, 171)
+        Me.lblfecha.Name = "lblfecha"
+        Me.lblfecha.Size = New System.Drawing.Size(94, 19)
+        Me.lblfecha.TabIndex = 121
+        Me.lblfecha.Text = "Fecha Inicial:"
         '
         'btnRegistrar
         '
@@ -168,6 +157,17 @@ Partial Class frmRelacionLineaClasificacion
         Me.cbxLinea.TabIndex = 126
         Me.cbxLinea.TabStop = False
         '
+        'banner_formulario
+        '
+        Me.banner_formulario.BackColor = System.Drawing.Color.Transparent
+        Me.banner_formulario.BackgroundImage = Global.GKNSICAIP.My.Resources.Resources.banner_03
+        Me.banner_formulario.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
+        Me.banner_formulario.Location = New System.Drawing.Point(-8, -6)
+        Me.banner_formulario.Name = "banner_formulario"
+        Me.banner_formulario.Size = New System.Drawing.Size(422, 44)
+        Me.banner_formulario.TabIndex = 109
+        Me.banner_formulario.TabStop = False
+        '
         'frmRelacionLineaClasificacion
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -178,7 +178,7 @@ Partial Class frmRelacionLineaClasificacion
         Me.Controls.Add(Me.dtpFechaClasificacionLinea)
         Me.Controls.Add(Me.btnRegistrar)
         Me.Controls.Add(Me.btnSalir)
-        Me.Controls.Add(Me.Label3)
+        Me.Controls.Add(Me.lblfecha)
         Me.Controls.Add(Me.cbxClasificacionLinea)
         Me.Controls.Add(Me.Label2)
         Me.Controls.Add(Me.Label1)
@@ -189,11 +189,11 @@ Partial Class frmRelacionLineaClasificacion
         Me.MinimumSize = New System.Drawing.Size(415, 315)
         Me.Name = "frmRelacionLineaClasificacion"
         Me.Text = "Clasificación de Línea"
-        CType(Me.banner_formulario, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.dtpFechaClasificacionLinea, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.cbxLinea.EditorControl.MasterTemplate, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.cbxLinea.EditorControl, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.cbxLinea, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.banner_formulario, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -203,7 +203,7 @@ Partial Class frmRelacionLineaClasificacion
     Friend WithEvents Label2 As System.Windows.Forms.Label
     Friend WithEvents Label1 As System.Windows.Forms.Label
     Friend WithEvents cbxClasificacionLinea As System.Windows.Forms.ComboBox
-    Friend WithEvents Label3 As System.Windows.Forms.Label
+    Friend WithEvents lblfecha As System.Windows.Forms.Label
     Friend WithEvents btnRegistrar As System.Windows.Forms.Button
     Friend WithEvents btnSalir As System.Windows.Forms.Button
     Friend WithEvents dtpFechaClasificacionLinea As Telerik.WinControls.UI.RadDateTimePicker

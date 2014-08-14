@@ -20,6 +20,7 @@ Public Class Formulario_Principal
     Dim vEquipo As Boolean = False '--------------
     Dim vMatch_Equipos As Boolean = False
     Dim vLineaClasificacion As Boolean = False
+    Dim vRelacionLineaClasificacion As Boolean = False
 #End Region
 
 #Region "Declaracion de Objetos_Clases_Catalogos"
@@ -61,6 +62,7 @@ Public Class Formulario_Principal
     Dim ofrmEquipo As frmEquipo
     Dim ofrmMatch_Equipos As frmMatch_Equipos_Kronos_SICAIP
     Dim ofrmLineaClasificacion As frmLineaClasificacion
+    Dim ofrmRelacionLineaClasificacion As frmRelacionLineaClasificacion
 #End Region
 
 #Region "Opciones de Menu"
@@ -754,6 +756,21 @@ Public Class Formulario_Principal
             Else
                 MsgBox("El Usuario no tiene los privilegios para ver los Detalles")
             End If
+        ElseIf vRelacionLineaClasificacion = True Then
+            If Permiso_Asignado("REL_CLASF_LINEAS.VER") = True Then
+                If Permiso_Asignado("REL_CLASF_LINEAS.REGISTRAR") = True Then
+                    'vPermiso_Add = False
+                    ofrmRelacionLineaClasificacion = New frmRelacionLineaClasificacion
+                    ofrmRelacionLineaClasificacion.operacion = ofrmRelacionLineaClasificacion.Insertar
+                    ofrmRelacionLineaClasificacion.ShowDialog()
+                Else
+                    MsgBox("El Usuario no tiene los privilegios para ver los Detalles")
+                End If
+                btnRel_Clasf_Lineas.PerformClick()
+                vRowSeleccionada = 0
+            Else
+                MsgBox("El Usuario no tiene los privilegios para ver los Detalles")
+            End If
         End If
     End Sub
 
@@ -893,8 +910,8 @@ Public Class Formulario_Principal
             End If
         ElseIf vLineaClasificacion = True Then
             If vRowSeleccionada <> 0 Then
-                If Permiso_Asignado("MODIF_CATALOGO.VER") = True Then
-                    If Permiso_Asignado("MODIF_CATALOGO.REGISTRAR") = True Then
+                If Permiso_Asignado("CLASF_LINEAS.VER") = True Then
+                    If Permiso_Asignado("CLASF_LINEAS.REGISTRAR") = True Then
                         ofrmLineaClasificacion = New frmLineaClasificacion
                         ofrmLineaClasificacion.operacion = frmLineaClasificacion.Actualizar
                         ofrmLineaClasificacion.cve_linea_clasificacion = vRowSeleccionada
@@ -903,6 +920,32 @@ Public Class Formulario_Principal
                         MsgBox("El Usuario no tiene los privilegios para registrar")
                     End If
                     btnClasf_Lineas.PerformClick()
+                    vRowSeleccionada = 0
+                Else
+                    MsgBox("El Usuario no tiene los privilegios para ver los Detalles")
+                End If
+            Else
+                MsgBox("No has seleccionado ningun registro", vbInformation + vbOKOnly, "Clasificación Linea")
+            End If
+        ElseIf vRelacionLineaClasificacion = True Then
+            If vRowSeleccionada <> 0 Then
+                If Permiso_Asignado("REL_CLASF_LINEAS.VER") = True Then
+                    If Permiso_Asignado("REL_CLASF_LINEAS.REGISTRAR") = True Then
+                        oRelacionLineaClasificacion = New CapaNegocios.Relacion_Linea_Clasificacion
+                        oRelacionLineaClasificacion.cve_relacion_linea_clasificacion = vRowSeleccionada
+                        oRelacionLineaClasificacion.Cargar()
+                        If oRelacionLineaClasificacion.fecha_final <> Nothing Then
+                            MsgBox("Este registro no se puede actualizar ya que tiene establecida su fecha de Inicio y Fin.", vbInformation + vbOKOnly, "Asignación de Clasificación Linea")
+                        Else
+                            ofrmRelacionLineaClasificacion = New frmRelacionLineaClasificacion
+                            ofrmRelacionLineaClasificacion.operacion = ofrmRelacionLineaClasificacion.Actualizar
+                            ofrmRelacionLineaClasificacion.cve_relacion_linea_clasificacion = vRowSeleccionada
+                            ofrmRelacionLineaClasificacion.ShowDialog()
+                        End If
+                    Else
+                        MsgBox("El Usuario no tiene los privilegios para registrar")
+                    End If
+                    btnRel_Clasf_Lineas.PerformClick()
                     vRowSeleccionada = 0
                 Else
                     MsgBox("El Usuario no tiene los privilegios para ver los Detalles")
@@ -1253,6 +1296,7 @@ Public Class Formulario_Principal
             vTipo_Usuario = False
             vEquipo = False
             vLineaClasificacion = False
+            vRelacionLineaClasificacion = False
         ElseIf vNombre_De_Formulario = "frmModelo" Then
             vModelo = True
             '--
@@ -1263,6 +1307,7 @@ Public Class Formulario_Principal
             vTipo_Usuario = False
             vEquipo = False
             vLineaClasificacion = False
+            vRelacionLineaClasificacion = False
         ElseIf vNombre_De_Formulario = "frmMaquina" Then
             vMaquina = True
             '--
@@ -1273,6 +1318,7 @@ Public Class Formulario_Principal
             vTipo_Usuario = False
             vEquipo = False
             vLineaClasificacion = False
+            vRelacionLineaClasificacion = False
         ElseIf vNombre_De_Formulario = "frmTiempo_Ciclo" Then
             vTiempo_Ciclo = True
             '--
@@ -1283,6 +1329,7 @@ Public Class Formulario_Principal
             vTipo_Usuario = False
             vEquipo = False
             vLineaClasificacion = False
+            vRelacionLineaClasificacion = False
         ElseIf vNombre_De_Formulario = "frmUsuario" Then
             vUsuario = True
 
@@ -1293,6 +1340,7 @@ Public Class Formulario_Principal
             vTipo_Usuario = False
             vEquipo = False
             vLineaClasificacion = False
+            vRelacionLineaClasificacion = False
         ElseIf vNombre_De_Formulario = "FrmTipo_Usuario" Then
             vTipo_Usuario = True
 
@@ -1303,6 +1351,7 @@ Public Class Formulario_Principal
             vUsuario = False
             vEquipo = False
             vLineaClasificacion = False
+            vRelacionLineaClasificacion = False
         ElseIf vNombre_De_Formulario = "frmEquipo" Then
             vEquipo = True
             '--
@@ -1313,6 +1362,7 @@ Public Class Formulario_Principal
             vUsuario = False
             vTipo_Usuario = False
             vLineaClasificacion = False
+            vRelacionLineaClasificacion = False
         ElseIf vNombre_De_Formulario = "frmLineaClasificacion" Then
             vLineaClasificacion = True
             '--
@@ -1323,6 +1373,18 @@ Public Class Formulario_Principal
             vUsuario = False
             vTipo_Usuario = False
             vEquipo = False
+            vRelacionLineaClasificacion = False
+        ElseIf vNombre_De_Formulario = "frmRelacionLineaClasificacion" Then
+            vRelacionLineaClasificacion = True
+            '--
+            vLinea = False
+            vModelo = False
+            vMaquina = False
+            vTiempo_Ciclo = False
+            vUsuario = False
+            vTipo_Usuario = False
+            vEquipo = False
+            vLineaClasificacion = False
         End If
     End Sub
 
@@ -1400,37 +1462,32 @@ Public Class Formulario_Principal
         End If
     End Sub
 
-    Private Sub btnAsig_Clasf_Lineas_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnAsig_Clasf_Lineas.Click
+    Private Sub btnAsig_Clasf_Lineas_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnRel_Clasf_Lineas.Click
         If Permiso_Asignado("REL_CLASF_LINEAS") = True Then
             'oCatalogo_Linea = New Catalogo_Linea
             oRelacionLineaClasificacion = New Relacion_Linea_Clasificacion
-
             MapaUbicacion.Text = "Catalogo Relacion Clasificacion Linea"
-
             Me.dgvRegistros.DataSource = Nothing
             Me.dgvRegistros.Columns.Clear()
             Me.dgvRegistros.Visible = True
             Me.Barra_Tool_Registros.Visible = True
-            'Me.btnEliminar.VisibleInStrip = False
-
             If Permiso_Asignado("REL_CLASF_LINEAS.REGISTRAR") = True Then
                 Me.btnAdd.Enabled = True
             Else
                 Me.btnAdd.Enabled = False
             End If
-            If Permiso_Asignado("REL_CLASF_LINEAS.ACTUALIZAR") = True Then
+            If Permiso_Asignado("REL_CLASF_LINEAS.REGISTRAR") = True Then
                 Me.btnModificar.Enabled = True
             Else
                 Me.btnModificar.Enabled = False
             End If
             'No ser permite eliminar por cuestiones de confiabilidad de información
+            Me.btnEliminar.Enabled = False
             'If Permiso_Asignado("CLASF_LINEAS.ELIMINAR") = True Then
             '    Me.btnEliminar.Enabled = True
             'Else
             '    Me.btnEliminar.Enabled = False
             'End If
-
-
             Try
                 Me.dgvRegistros.DataSource = oRelacionLineaClasificacion.obtiene_asignacion_linea_clasificacion()
             Catch ex As Exception
@@ -1442,7 +1499,7 @@ Public Class Formulario_Principal
             Me.dgvRegistros.Columns("cve_relacion_linea_clasificacion").Name = "CVE"
 
             Me.dgvRegistros.Columns("linea").HeaderText = "Linea"
-            Me.dgvRegistros.Columns("nombre").Width = 250
+            Me.dgvRegistros.Columns("linea").Width = 250
 
             Me.dgvRegistros.Columns("nombre").HeaderText = "Clasificacion"
             Me.dgvRegistros.Columns("nombre").Width = 250
@@ -1450,15 +1507,13 @@ Public Class Formulario_Principal
             Me.dgvRegistros.Columns("fecha_inicio").HeaderText = "Fecha Inicio"
             Me.dgvRegistros.Columns("fecha_inicio").Width = 250
 
-            Me.dgvRegistros.Columns("fecha_inicio").HeaderText = "Fecha Final"
-            Me.dgvRegistros.Columns("fecha_inicio").Width = 250
+            Me.dgvRegistros.Columns("fecha_final").HeaderText = "Fecha Final"
+            Me.dgvRegistros.Columns("fecha_final").Width = 250
+            Me.dgvRegistros.Columns("fecha_final").Name = "FECHA"
+
 
             dgvRegistros.Visible = True
             Activar_Formulario("frmRelacionLineaClasificacion")
-
-            Me.dgvRegistros.EnableGrouping = True
-            Me.dgvRegistros.GroupDescriptors.Clear()
-            Me.dgvRegistros.GroupDescriptors.Add(New GridGroupByExpression(Me.dgvRegistros.Columns("linea")))
         Else
             MsgBox("El Usuario no cuenta con los permisos suficientes para entrar al 'Catalogo Asignacion de Clasificación de Línea'")
         End If
