@@ -246,7 +246,7 @@ Public Class frmRelacionLineaClasificacion
                 oRelacionLineaClasificacion.cve_linea = Long.Parse(String.Format(cbxLinea.EditorControl.Rows(cbxLinea.SelectedIndex).Cells("CVE").Value))
                 oRelacionLineaClasificacion.cve_linea_clasificacion = cbxClasificacionLinea.SelectedValue
                 oRelacionLineaClasificacion.fecha_inicio = dtpFechaClasificacionLinea.Value
-                oRelacionLineaClasificacion.Registrar()
+                oRelacionLineaClasificacion.registra_relacion_linea_clasificacion()
                 Me.Close()
             ElseIf voperacion = Actualizar Then
                 oRelacionLineaClasificacion.cve_relacion_linea_clasificacion = vcve_relacion_linea_clasificacion

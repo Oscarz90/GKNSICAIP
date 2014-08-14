@@ -189,5 +189,22 @@
             End Try
         End Using
     End Function
+    Public Sub registra_relacion_linea_clasificacion()
+        Using scope As New TransactionScope
+            Try
+                Dim cmd As New SqlClient.SqlCommand
+                cmd.CommandType = CommandType.StoredProcedure
+                cmd.CommandText = "registra_relacion_linea_clasificacion"
+                cmd.Parameters.Add("@cve_linea", SqlDbType.BigInt).Value = Me.vcve_linea
+                cmd.Parameters.Add("@cve_linea_clasificacion", SqlDbType.BigInt).Value = Me.vcve_linea_clasificacion
+                cmd.Parameters.Add("@fecha_inicio", SqlDbType.DateTime).Value = Me.vfecha_inicio
+                Dim obj As DataTable = oBD.EjecutaCommando(cmd)
+                scope.Complete()
+                MsgBox("Se registro correctamente", vbInformation + vbOKOnly, "Clasificacion de Linea.")
+            Catch
+                MsgBox("Problema al registrar Relacion Linea Clasificacion. CRelacion_Linea_Clasificacion_ERROR", vbExclamation + vbOKOnly, "Problema")
+            End Try
+        End Using
+    End Sub
 #End Region
 End Class
