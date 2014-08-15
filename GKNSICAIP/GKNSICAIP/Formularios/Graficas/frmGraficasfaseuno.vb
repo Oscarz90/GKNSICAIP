@@ -21,16 +21,12 @@ Public Class FrmGraficasfaseuno
     '12-31-9999 23:59:59:997
     Dim maxDatetime As New DateTime(9999, 12, 31, 23, 59, 59, 997)
 
-    'Dim oG_OEE As G_OEE
-    'Dim oG_Seguridad As G_Seguridad
-    'Dim oG_Costo As G_Costo
-    'Dim oG_Cinco_S As G_Cinco_S
-    'Dim oG_NRFT As G_NRFT
-    'Dim oG_Gente As G_Gente
     Dim oG_Fase2 As G_Fase2
-
     Dim vFormato_Resultado As Integer = 0
     Dim vDatos_Obtenidos As DataTable
+    Dim vIndicador_Seleccionado As String = ""
+    Dim vIndicador_A_CALCULAR As String = ""
+   
 
 
 #End Region
@@ -44,6 +40,7 @@ Public Class FrmGraficasfaseuno
         obtiene_nivel_graficos()
         dtpFechaInicial.Format = System.Windows.Forms.DateTimePickerFormat.Custom
         dtpFechaFinal.Format = System.Windows.Forms.DateTimePickerFormat.Custom
+        'Me.RadPageView1.Pages("RadPageViewPage2").Item.ClickMode = Telerik.WinControls.ClickMode.Press
     End Sub
     Public Sub inicializa_formulario(Optional ByVal codempleado As String = "", Optional ByVal cveequipo As Long = 0)
         cve_equipo = cveequipo
@@ -275,16 +272,22 @@ Public Class FrmGraficasfaseuno
     'GroupBox Indicador
     Private Function valida_rdbtn_indicador() As Boolean
         If rdbtnOee.IsChecked Then
+            vIndicador_Seleccionado = "OEE"
             Return True
         ElseIf rdbtnNrfti.IsChecked Then
+            vIndicador_Seleccionado = "NRFTI"
             Return True
         ElseIf rdbtnCosto.IsChecked Then
+            vIndicador_Seleccionado = "COSTO"
             Return True
         ElseIf rdbtnSeguridad.IsChecked Then
+            vIndicador_Seleccionado = "SEGURIDAD"
             Return True
         ElseIf rdbtnCincoS.IsChecked Then
+            vIndicador_Seleccionado = "CINCOS"
             Return True
         ElseIf rdbtnGente.IsChecked Then
+            vIndicador_Seleccionado = "GENTE"
             Return True
         Else
             Return False
@@ -444,6 +447,8 @@ Public Class FrmGraficasfaseuno
     End Sub
     Private Sub rdbtnOee_ToggleStateChanged(ByVal sender As System.Object, ByVal args As Telerik.WinControls.UI.StateChangedEventArgs) Handles rdbtnOee.ToggleStateChanged, rdbtnNrfti.ToggleStateChanged, rdbtnCosto.ToggleStateChanged, rdbtnSeguridad.ToggleStateChanged, rdbtnGente.ToggleStateChanged, rdbtnCincoS.ToggleStateChanged
         valida_btn_graficar()
+
+
     End Sub
     Private Sub cbxNiveles_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cbxCadenaValor.SelectedIndexChanged, cbxComponente.SelectedIndexChanged, cbxLinea.SelectedIndexChanged
         valida_btn_graficar()
@@ -556,7 +561,7 @@ Public Class FrmGraficasfaseuno
         If vNivel <> 5 Then
             LineSeries1.LegendTitle = "Objetivo Oee"
         End If
-        
+
 
         Me.radChartView1.ShowLegend = True
         Me.radChartView1.ShowSmartLabels = True
@@ -575,7 +580,19 @@ Public Class FrmGraficasfaseuno
             habilita_etiqueta_datos()
             Me.radChartView1.Title = ""
         Else
-            Me.radChartView1.Title = "Oee " & cbxComponente.Text
+            If vNivel = 0 Then
+                Me.radChartView1.Title = "Oee " & cbxEquipo.Text & " - " & cbxLinea.Text
+            ElseIf vNivel = 1 Then
+                Me.radChartView1.Title = "Oee " & cbxEquipo.Text
+            ElseIf vNivel = 2 Then
+                Me.radChartView1.Title = "Oee " & cbxLinea.Text
+            ElseIf vNivel = 3 Then
+                Me.radChartView1.Title = "Oee " & cbxComponente.Text
+            ElseIf vNivel = 4 Then
+                Me.radChartView1.Title = "Oee " & cbxCadenaValor.Text
+            ElseIf vNivel = 5 Then
+                Me.radChartView1.Title = "Oee Planta GKN Driveline México"
+            End If
         End If
         Dim vOEE_Acumulado As Double = 0
 
@@ -661,7 +678,7 @@ Public Class FrmGraficasfaseuno
             LineSeries1.BorderColor = Color.FromArgb(202, 0, 0)
             'LineSeries1.PointSize = New SizeF(10, 10)
         End If
-      
+
 
         Me.radChartView1.ShowToolTip = True
 
@@ -776,7 +793,7 @@ Public Class FrmGraficasfaseuno
         Me.dgvTabla.Columns("objetivo").Width = 80
         Me.dgvTabla.Columns("objetivo").Name = "objetivo"
 
-       
+
 
         If vEsResumen = True Then
             Me.dgvTabla.Columns("planta").IsVisible = True
@@ -1530,7 +1547,7 @@ Public Class FrmGraficasfaseuno
         BarSeries2.LabelMode = BarLabelModes.Top
     End Sub
 #End Region
-   
+
 #End Region
 
 #Region "Metodos graficar NRFTi"
@@ -1573,7 +1590,7 @@ Public Class FrmGraficasfaseuno
         ElseIf rdbtnPlanta.IsChecked = True Then ''---Nivel Planta
             vNivel = 5
         End If
-       
+
         ''Obtencion de Informacion
         vDatos_Obtenidos = oG_Fase2.Obten_NRFT(vF_Inicial, vF_Final, vCve_Equipo, vCve_Linea, vCve_Componente, vCve_CadenaValor, vFormato_Resultado, vNivel, True, False)
 
@@ -1607,7 +1624,19 @@ Public Class FrmGraficasfaseuno
             habilita_etiqueta_datos()
             Me.radChartView1.Title = ""
         Else
-            Me.radChartView1.Title = "NRFTi ( PPM'S ) " & cbxEquipo.Text & " - " & cbxLinea.Text
+            If vNivel = 0 Then
+                Me.radChartView1.Title = "NRFTi ( PPM'S ) " & cbxEquipo.Text & " - " & cbxLinea.Text
+            ElseIf vNivel = 1 Then
+                Me.radChartView1.Title = "NRFTi ( PPM'S ) " & cbxEquipo.Text
+            ElseIf vNivel = 2 Then
+                Me.radChartView1.Title = "NRFTi ( PPM'S ) " & cbxLinea.Text
+            ElseIf vNivel = 3 Then
+                Me.radChartView1.Title = "NRFTi ( PPM'S ) " & cbxComponente.Text
+            ElseIf vNivel = 4 Then
+                Me.radChartView1.Title = "NRFTi ( PPM'S ) " & cbxCadenaValor.Text
+            ElseIf vNivel = 5 Then
+                Me.radChartView1.Title = "NRFTi ( PPM'S ) Planta GKN Driveline México"
+            End If
         End If
         If vNivel = 0 Or vNivel = 1 Then
             For Each vDR As DataRow In vDT.Rows
@@ -2610,7 +2639,7 @@ Public Class FrmGraficasfaseuno
         ElseIf rdbtnPlanta.IsChecked = True Then ''---Nivel Planta
             vNivel = 5
         End If
-       
+
         ''Obtencion de Informacion
         vDatos_Obtenidos = oG_Fase2.Obten_Cinco_S(vF_Inicial, vF_Final, vCve_Equipo, vCve_Linea, vCve_Componente, vCve_CadenaValor, vFormato_Resultado, vNivel, True, False)
 
@@ -2638,7 +2667,19 @@ Public Class FrmGraficasfaseuno
             habilita_etiqueta_datos()
             Me.radChartView1.Title = ""
         Else
-            Me.radChartView1.Title = "5's " & cbxEquipo.Text & " - " & cbxLinea.Text
+            If vNivel = 0 Then
+                Me.radChartView1.Title = "5's " & cbxEquipo.Text & " - " & cbxLinea.Text
+            ElseIf vNivel = 1 Then
+                Me.radChartView1.Title = "5's " & cbxEquipo.Text
+            ElseIf vNivel = 2 Then
+                Me.radChartView1.Title = "5's " & cbxLinea.Text
+            ElseIf vNivel = 3 Then
+                Me.radChartView1.Title = "5's " & cbxComponente.Text
+            ElseIf vNivel = 4 Then
+                Me.radChartView1.Title = "5's " & cbxCadenaValor.Text
+            ElseIf vNivel = 5 Then
+                Me.radChartView1.Title = "5's Planta GKN Driveline México"
+            End If
         End If
 
         BarSeries1.ValueMember = "administracion_visual"
@@ -3540,6 +3581,11 @@ Public Class FrmGraficasfaseuno
         Dim BarSeries3 As New BarSeries()
         BarSeries3.LegendTitle = "retardos"
 
+        Dim BarSeries4 As New BarSeries()
+        BarSeries4.LegendTitle = "Faltas_Acumulado"
+        Dim BarSeries5 As New BarSeries()
+        BarSeries5.LegendTitle = "Retardos_Acumulado"
+
         Dim LineSeries1 As New LineSeries()
         If vNivel <> 5 Then
             LineSeries1.LegendTitle = "Objetivo Gente"
@@ -3553,7 +3599,21 @@ Public Class FrmGraficasfaseuno
             habilita_etiqueta_datos()
             Me.radChartView1.Title = ""
         Else
-            Me.radChartView1.Title = "Gente " & cbxEquipo.Text
+
+            If vNivel = 0 Then
+                Me.radChartView1.Title = "Gente " & cbxEquipo.Text & " - " & cbxLinea.Text
+            ElseIf vNivel = 1 Then
+                Me.radChartView1.Title = "Gente " & cbxEquipo.Text
+            ElseIf vNivel = 2 Then
+                Me.radChartView1.Title = "Gente " & cbxLinea.Text
+            ElseIf vNivel = 3 Then
+                Me.radChartView1.Title = "Gente " & cbxComponente.Text
+            ElseIf vNivel = 4 Then
+                Me.radChartView1.Title = "Gente " & cbxCadenaValor.Text
+            ElseIf vNivel = 5 Then
+                Me.radChartView1.Title = "Gente Planta GKN Driveline México"
+            End If
+
         End If
 
         Dim vTotal As Integer = 1
@@ -3579,8 +3639,8 @@ Public Class FrmGraficasfaseuno
             vContador = vContador + 1
         Next
 
-        BarSeries2.DataPoints.Add(New CategoricalDataPoint(vFaltas_Aux, Nothing))
-        BarSeries3.DataPoints.Add(New CategoricalDataPoint(vRetardos_Aux, Nothing))
+        BarSeries4.DataPoints.Add(New CategoricalDataPoint(vFaltas_Aux, "Acumulado"))
+        BarSeries5.DataPoints.Add(New CategoricalDataPoint(vRetardos_Aux, "Acumulado"))
 
         'Cartesian Area, CategoricalAxis, LinearAxis
         Dim CartesianArea1 As CartesianArea = New CartesianArea()
@@ -3611,7 +3671,8 @@ Public Class FrmGraficasfaseuno
             BarSeries2.ShowLabels = True
             BarSeries3.ShowLabels = True
         End If
-
+        BarSeries4.ShowLabels = True
+        BarSeries5.ShowLabels = True
 
 
         BarSeries2.LabelFormat = "{0:###}"
@@ -3632,6 +3693,10 @@ Public Class FrmGraficasfaseuno
 
         BarSeries2.Palette = New PaletteEntry(Color.FromArgb(233, 37, 43))
         BarSeries3.Palette = New PaletteEntry(Color.FromArgb(255, 191, 0))
+
+        BarSeries4.Palette = New PaletteEntry(Color.FromArgb(233, 37, 43))
+        BarSeries5.Palette = New PaletteEntry(Color.FromArgb(255, 191, 0))
+
         If vNivel <> 5 Then
             LineSeries1.Palette = New PaletteEntry(Color.FromArgb(202, 0, 0))
             LineSeries1.BorderColor = Color.FromArgb(202, 0, 0)
@@ -3643,6 +3708,10 @@ Public Class FrmGraficasfaseuno
 
         radChartView1.Series.Add(BarSeries2)
         radChartView1.Series.Add(BarSeries3)
+
+        radChartView1.Series.Add(BarSeries4)
+        radChartView1.Series.Add(BarSeries5)
+
         If vNivel <> 5 Then
             radChartView1.Series.Add(LineSeries1)
         End If
@@ -3651,6 +3720,9 @@ Public Class FrmGraficasfaseuno
             LineSeries1.CombineMode = ChartSeriesCombineMode.None
             BarSeries2.CombineMode = ChartSeriesCombineMode.Stack
             BarSeries3.CombineMode = ChartSeriesCombineMode.Stack
+
+            BarSeries4.CombineMode = ChartSeriesCombineMode.Stack
+            BarSeries5.CombineMode = ChartSeriesCombineMode.Stack
         End If
         If vNivel = 5 Then
             For i As Integer = 0 To Me.radChartView1.Series.Count - 1
@@ -4420,11 +4492,11 @@ Public Class FrmGraficasfaseuno
         Dim vF_Final As DateTime = Date.Now
 
         ''Obtencion de Datos
-      
+
         vF_Inicial = dtpFechaInicial.Value
         vF_Final = dtpFechaFinal.Value
         oG_Fase2 = New G_Fase2
-       
+
         ''Revicion de Nivel Elegido
         If rdbtnEquipo.IsChecked = True Then
             If chkTodasLineas.Checked = False Then ''---Nivel Equipo_Linea
@@ -4448,7 +4520,7 @@ Public Class FrmGraficasfaseuno
         ElseIf rdbtnPlanta.IsChecked = True Then ''---Nivel Planta
             vNivel = 5
         End If
-       
+
         ''Obtencion de Informacion
         vDatos_Obtenidos = oG_Fase2.Obten_Seguridad(vF_Inicial, vF_Final, vCve_Equipo, vCve_Linea, vCve_Componente, vCve_CadenaValor, vFormato_Resultado, vNivel, True, False)
 
@@ -4473,7 +4545,20 @@ Public Class FrmGraficasfaseuno
             habilita_etiqueta_datos()
             Me.radChartView1.Title = ""
         Else
-            Me.radChartView1.Title = "Seguridad " & cbxEquipo.Text
+            If vNivel = 0 Then
+                Me.radChartView1.Title = "Seguridad " & cbxEquipo.Text & " - " & cbxLinea.Text
+            ElseIf vNivel = 1 Then
+                Me.radChartView1.Title = "Seguridad " & cbxEquipo.Text
+            ElseIf vNivel = 2 Then
+                Me.radChartView1.Title = "Seguridad " & cbxLinea.Text
+            ElseIf vNivel = 3 Then
+                Me.radChartView1.Title = "Seguridad " & cbxComponente.Text
+            ElseIf vNivel = 4 Then
+                Me.radChartView1.Title = "Seguridad " & cbxCadenaValor.Text
+            ElseIf vNivel = 5 Then
+                Me.radChartView1.Title = "Seguridad Planta GKN Driveline México"
+            End If
+
         End If
 
         BarSeries1.ValueMember = "acumulado"
@@ -5342,7 +5427,7 @@ Public Class FrmGraficasfaseuno
         ElseIf rdbtnPlanta.IsChecked = True Then ''---Nivel Planta
             vNivel = 5
         End If
-       
+
         ''Obtencion de Informacion
         vDatos_Obtenidos = oG_Fase2.Obten_Costo(vF_Inicial, vF_Final, vCve_Equipo, vCve_Linea, vCve_Componente, vCve_CadenaValor, vFormato_Resultado, vNivel, True, False)
 
@@ -5374,7 +5459,19 @@ Public Class FrmGraficasfaseuno
             habilita_etiqueta_datos()
             Me.radChartView1.Title = ""
         Else
-            Me.radChartView1.Title = "Costo " & cbxEquipo.Text
+            If vNivel = 0 Then
+                Me.radChartView1.Title = "Costo " & cbxEquipo.Text & " - " & cbxLinea.Text
+            ElseIf vNivel = 1 Then
+                Me.radChartView1.Title = "Costo " & cbxEquipo.Text
+            ElseIf vNivel = 2 Then
+                Me.radChartView1.Title = "Costo " & cbxLinea.Text
+            ElseIf vNivel = 3 Then
+                Me.radChartView1.Title = "Costo " & cbxComponente.Text
+            ElseIf vNivel = 4 Then
+                Me.radChartView1.Title = "Costo " & cbxCadenaValor.Text
+            ElseIf vNivel = 5 Then
+                Me.radChartView1.Title = "Costo Planta GKN Driveline México"
+            End If
         End If
         Dim vMin_Program_Aux As Integer = 0
         Dim vMin_Excedentes_Aux As Integer = 0
@@ -5445,7 +5542,7 @@ Public Class FrmGraficasfaseuno
         End If
 
         BarSeries1.Palette = New PaletteEntry(Color.FromArgb(62, 105, 157))
-       
+
         If vNivel <> 5 Then
             LineSeries3.Palette = New PaletteEntry(Color.FromArgb(202, 0, 0))
             LineSeries3.BorderColor = Color.FromArgb(202, 0, 0)
@@ -5455,7 +5552,7 @@ Public Class FrmGraficasfaseuno
         Me.radChartView1.ShowToolTip = True
 
         'Chartview
-        
+
         radChartView1.Series.Add(BarSeries1)
 
         If vNivel <> 5 Then
@@ -5494,7 +5591,20 @@ Public Class FrmGraficasfaseuno
             habilita_etiqueta_datos()
             Me.CharSecundario.Title = ""
         Else
-            Me.CharSecundario.Title = "Costo " & cbxEquipo.Text
+            If vNivel = 0 Then
+                Me.radChartView1.Title = "Costo " & cbxEquipo.Text & " - " & cbxLinea.Text
+            ElseIf vNivel = 1 Then
+                Me.radChartView1.Title = "Costo " & cbxEquipo.Text
+            ElseIf vNivel = 2 Then
+                Me.radChartView1.Title = "Costo " & cbxLinea.Text
+            ElseIf vNivel = 3 Then
+                Me.radChartView1.Title = "Costo " & cbxComponente.Text
+            ElseIf vNivel = 4 Then
+                Me.radChartView1.Title = "Costo " & cbxCadenaValor.Text
+            ElseIf vNivel = 5 Then
+                Me.radChartView1.Title = "Costo Planta GKN Driveline México"
+            End If
+
         End If
         Dim vMin_Program_Aux As Integer = 0
         Dim vMin_Excedentes_Aux As Integer = 0
@@ -5564,7 +5674,7 @@ Public Class FrmGraficasfaseuno
             'LineSeries3.VerticalAxis = LinearAxis1
         End If
 
-       
+
         LineSeries1.Palette = New PaletteEntry(Color.FromArgb(127, 127, 127))
 
         If vNivel <> 5 Then
@@ -6591,21 +6701,27 @@ Public Class FrmGraficasfaseuno
     Private Sub obtener_grafica()
         If rdbtnOee.IsChecked Then
             Me.PageGrafica_Secundaria.Enabled = False
+            vIndicador_A_CALCULAR = "OEE"
             Obtiene_Grafico_OEE()
         ElseIf rdbtnNrfti.IsChecked Then
             Me.PageGrafica_Secundaria.Enabled = False
+            vIndicador_A_CALCULAR = "NRFTI"
             Obtiene_Grafica_NRFT()
         ElseIf rdbtnCosto.IsChecked Then
             Me.PageGrafica_Secundaria.Enabled = True
+            vIndicador_A_CALCULAR = "COSTO"
             Obtiene_Grafica_Costo()
         ElseIf rdbtnSeguridad.IsChecked Then
             Me.PageGrafica_Secundaria.Enabled = False
+            vIndicador_A_CALCULAR = "SEGURIDAD"
             Obtiene_Grafica_Seguridad()
         ElseIf rdbtnCincoS.IsChecked Then
             Me.PageGrafica_Secundaria.Enabled = False
+            vIndicador_A_CALCULAR = "CINCOS"
             Obtiene_Grafica_CincoS()
         ElseIf rdbtnGente.IsChecked Then
             Me.PageGrafica_Secundaria.Enabled = False
+            vIndicador_A_CALCULAR = "GENTE"
             Obtiene_Grafica_Gente()
         End If
     End Sub
@@ -6614,8 +6730,9 @@ Public Class FrmGraficasfaseuno
         Me.radChartView1.ShowTrackBall = False
         picboxIndicador.Image = Nothing
         deshabilita_etiqueta_datos()
+        btnDetalle.Enabled = True
+        btnResumen.Enabled = True
         obtener_grafica()
-
     End Sub
     Private Sub radChartView1_LabelFormatting(ByVal sender As System.Object, ByVal e As Telerik.WinControls.UI.ChartViewLabelFormattingEventArgs) Handles radChartView1.LabelFormatting
         e.LabelElement.BackColor = Color.Transparent
@@ -6624,38 +6741,57 @@ Public Class FrmGraficasfaseuno
 
 #Region "Metodos para Tablas_Reportes"
     Private Sub btnResumen_Click(sender As System.Object, e As System.EventArgs) Handles btnResumen.Click
-        If rdbtnOee.IsChecked = True Then
-            Obtiene_Reporte_OEE(True)
-        ElseIf rdbtnNrfti.IsChecked = True Then
-            Obtiene_Reporte_NRFT(True)
-        ElseIf rdbtnCosto.IsChecked = True Then
-            Obtiene_Reporte_Costo(True)
-        ElseIf rdbtnSeguridad.IsChecked = True Then
-            Obtiene_Reporte_Seguridad(True)
-        ElseIf rdbtnCincoS.IsChecked = True Then
-            Obtiene_Reporte_CincoS(True)
-        ElseIf rdbtnGente.IsChecked = True Then
-            Obtiene_Reporte_Gente(True)
+        If vIndicador_A_CALCULAR = vIndicador_Seleccionado Then
+            btnDetalle.Enabled = True
+            btnResumen.Enabled = True
+
+            If rdbtnOee.IsChecked = True Then
+                Obtiene_Reporte_OEE(True)
+            ElseIf rdbtnNrfti.IsChecked = True Then
+                Obtiene_Reporte_NRFT(True)
+            ElseIf rdbtnCosto.IsChecked = True Then
+                Obtiene_Reporte_Costo(True)
+            ElseIf rdbtnSeguridad.IsChecked = True Then
+                Obtiene_Reporte_Seguridad(True)
+            ElseIf rdbtnCincoS.IsChecked = True Then
+                Obtiene_Reporte_CincoS(True)
+            ElseIf rdbtnGente.IsChecked = True Then
+                Obtiene_Reporte_Gente(True)
+            End If
+        Else
+            MsgBox("El indicador actualmente seleccionado no fue el que calculo. De clic en el boton 'Calcular' para recalcular el indicador seleccionado")
+            btnDetalle.Enabled = False
+            btnResumen.Enabled = False
         End If
+
+
 
 
     End Sub
 
     Private Sub btnDetalle_Click(sender As System.Object, e As System.EventArgs) Handles btnDetalle.Click
-        If rdbtnOee.IsChecked = True Then
-            Obtiene_Reporte_OEE(False)
-        ElseIf rdbtnNrfti.IsChecked = True Then
-            Obtiene_Reporte_NRFT(False)
-        ElseIf rdbtnCosto.IsChecked = True Then
-            Obtiene_Reporte_Costo(False)
-        ElseIf rdbtnSeguridad.IsChecked = True Then
-            Obtiene_Reporte_Seguridad(False)
-        ElseIf rdbtnCincoS.IsChecked = True Then
-            Obtiene_Reporte_CincoS(False)
-        ElseIf rdbtnGente.IsChecked = True Then
-            Obtiene_Reporte_Gente(False)
-        End If
+        If vIndicador_A_CALCULAR = vIndicador_Seleccionado Then
+            btnDetalle.Enabled = True
+            btnResumen.Enabled = True
 
+            If rdbtnOee.IsChecked = True Then
+                Obtiene_Reporte_OEE(False)
+            ElseIf rdbtnNrfti.IsChecked = True Then
+                Obtiene_Reporte_NRFT(False)
+            ElseIf rdbtnCosto.IsChecked = True Then
+                Obtiene_Reporte_Costo(False)
+            ElseIf rdbtnSeguridad.IsChecked = True Then
+                Obtiene_Reporte_Seguridad(False)
+            ElseIf rdbtnCincoS.IsChecked = True Then
+                Obtiene_Reporte_CincoS(False)
+            ElseIf rdbtnGente.IsChecked = True Then
+                Obtiene_Reporte_Gente(False)
+            End If
+        Else
+            MsgBox("El indicador actualmente seleccionado no fue el que calculo. De clic en el boton 'Calcular' para recalcular el indicador seleccionado")
+            btnDetalle.Enabled = False
+            btnResumen.Enabled = False
+        End If
 
     End Sub
 
@@ -6678,4 +6814,5 @@ Public Class FrmGraficasfaseuno
     End Sub
 #End Region
 
+ 
 End Class

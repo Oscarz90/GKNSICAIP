@@ -22,8 +22,8 @@ Partial Class FrmGraficasfaseuno
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Dim CartesianArea3 As Telerik.WinControls.UI.CartesianArea = New Telerik.WinControls.UI.CartesianArea()
         Dim CartesianArea1 As Telerik.WinControls.UI.CartesianArea = New Telerik.WinControls.UI.CartesianArea()
+        Dim CartesianArea2 As Telerik.WinControls.UI.CartesianArea = New Telerik.WinControls.UI.CartesianArea()
         Me.RadGroupBox1 = New Telerik.WinControls.UI.RadGroupBox()
         Me.rdbtnGente = New Telerik.WinControls.UI.RadRadioButton()
         Me.rdbtnCincoS = New Telerik.WinControls.UI.RadRadioButton()
@@ -369,15 +369,15 @@ Partial Class FrmGraficasfaseuno
         Me.radChartView1.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
             Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        CartesianArea3.GridDesign.AlternatingVerticalColor = False
-        CartesianArea3.GridDesign.DrawVerticalFills = False
-        CartesianArea3.ShowGrid = True
-        Me.radChartView1.AreaDesign = CartesianArea3
+        CartesianArea1.GridDesign.AlternatingVerticalColor = False
+        CartesianArea1.GridDesign.DrawVerticalFills = False
+        CartesianArea1.ShowGrid = True
+        Me.radChartView1.AreaDesign = CartesianArea1
         Me.radChartView1.AutoScroll = True
         Me.radChartView1.Controls.Add(Me.lblError)
-        Me.radChartView1.Location = New System.Drawing.Point(3, 3)
+        Me.radChartView1.Location = New System.Drawing.Point(100, 3)
         Me.radChartView1.Name = "radChartView1"
-        Me.radChartView1.Size = New System.Drawing.Size(1331, 609)
+        Me.radChartView1.Size = New System.Drawing.Size(1234, 609)
         Me.radChartView1.TabIndex = 9
         CType(Me.radChartView1.GetChildAt(0), Telerik.WinControls.UI.RadChartElement).DrawText = False
         CType(Me.radChartView1.GetChildAt(0), Telerik.WinControls.UI.RadChartElement).DrawFill = True
@@ -422,13 +422,13 @@ Partial Class FrmGraficasfaseuno
         Me.RadPageView1.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
             Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.RadPageView1.Controls.Add(Me.RadPageViewPage1)
         Me.RadPageView1.Controls.Add(Me.RadPageViewPage2)
         Me.RadPageView1.Controls.Add(Me.PageGrafica_Secundaria)
+        Me.RadPageView1.Controls.Add(Me.RadPageViewPage1)
         Me.RadPageView1.ForeColor = System.Drawing.Color.Black
         Me.RadPageView1.Location = New System.Drawing.Point(3, 3)
         Me.RadPageView1.Name = "RadPageView1"
-        Me.RadPageView1.SelectedPage = Me.RadPageViewPage1
+        Me.RadPageView1.SelectedPage = Me.RadPageViewPage2
         Me.RadPageView1.Size = New System.Drawing.Size(1355, 667)
         Me.RadPageView1.TabIndex = 11
         Me.RadPageView1.Text = "Tablas"
@@ -438,6 +438,7 @@ Partial Class FrmGraficasfaseuno
         '
         Me.RadPageViewPage1.AutoSize = True
         Me.RadPageViewPage1.BackColor = System.Drawing.Color.White
+        Me.RadPageViewPage1.CausesValidation = False
         Me.RadPageViewPage1.Controls.Add(Me.btnExportar)
         Me.RadPageViewPage1.Controls.Add(Me.btnDetalle)
         Me.RadPageViewPage1.Controls.Add(Me.btnResumen)
@@ -503,6 +504,7 @@ Partial Class FrmGraficasfaseuno
         'PageGrafica_Secundaria
         '
         Me.PageGrafica_Secundaria.BackColor = System.Drawing.Color.White
+        Me.PageGrafica_Secundaria.CausesValidation = False
         Me.PageGrafica_Secundaria.Controls.Add(Me.CharSecundario)
         Me.PageGrafica_Secundaria.Location = New System.Drawing.Point(10, 41)
         Me.PageGrafica_Secundaria.Name = "PageGrafica_Secundaria"
@@ -511,7 +513,7 @@ Partial Class FrmGraficasfaseuno
         '
         'CharSecundario
         '
-        Me.CharSecundario.AreaDesign = CartesianArea1
+        Me.CharSecundario.AreaDesign = CartesianArea2
         Me.CharSecundario.Location = New System.Drawing.Point(3, 3)
         Me.CharSecundario.Name = "CharSecundario"
         Me.CharSecundario.ShowGrid = False
