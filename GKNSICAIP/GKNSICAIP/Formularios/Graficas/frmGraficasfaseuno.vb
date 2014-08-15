@@ -599,7 +599,13 @@ Public Class FrmGraficasfaseuno
 
         For Each vDR As DataRow In vDT.Rows
             If vContador = 1 Then
-                vOEE_Acumulado = vDR("oee")
+                If IsDBNull(vDR("dia_asignado")) Then
+                    vOEE_Acumulado = vDR("oee")
+                Else
+                    BarSeries1.DataPoints.Add(New CategoricalDataPoint(vDR("oee"), vDR("dia_asignado")))
+                    vOEE_Acumulado = vDR("oee")
+                End If
+
             Else
                 BarSeries1.DataPoints.Add(New CategoricalDataPoint(vDR("oee"), vDR("dia_asignado")))
                 If vNivel <> 5 Then ''El nivel Planta no lleva esta serie
@@ -3679,13 +3685,19 @@ Public Class FrmGraficasfaseuno
         If vNivel <> 0 Or vNivel <> 5 Then
             LineSeries1.LabelFormat = "{0:###}"
         End If
-        If rdbtnDias.IsChecked Then
-            'BarSeries1.HorizontalAxis = CategoricalAxis1
-            'BarSeries1.VerticalAxis = LinearAxis1
-        ElseIf rdbtnMeses.IsChecked Then
-            BarSeries2.HorizontalAxis = CategoricalAxis1
-            BarSeries2.VerticalAxis = LinearAxis1
-        End If
+
+        BarSeries3.HorizontalAxis = CategoricalAxis1
+        BarSeries3.VerticalAxis = LinearAxis1
+        BarSeries2.HorizontalAxis = CategoricalAxis1
+        BarSeries2.VerticalAxis = LinearAxis1
+
+        'If rdbtnDias.IsChecked Then
+        '    BarSeries3.HorizontalAxis = CategoricalAxis1
+        '    BarSeries3.VerticalAxis = LinearAxis1
+        'ElseIf rdbtnMeses.IsChecked Then
+        '    BarSeries2.HorizontalAxis = CategoricalAxis1
+        '    BarSeries2.VerticalAxis = LinearAxis1
+        'End If
         If vNivel <> 5 Then
             LineSeries1.HorizontalAxis = CategoricalAxis1
             LineSeries1.VerticalAxis = LinearAxis1
