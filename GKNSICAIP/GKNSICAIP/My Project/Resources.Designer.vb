@@ -63,26 +63,6 @@ Namespace My.Resources
         '''<summary>
         '''  Busca un recurso adaptado de tipo System.Drawing.Bitmap.
         '''</summary>
-        Friend ReadOnly Property _04_Save_16x16() As System.Drawing.Bitmap
-            Get
-                Dim obj As Object = ResourceManager.GetObject("04_Save_16x16", resourceCulture)
-                Return CType(obj,System.Drawing.Bitmap)
-            End Get
-        End Property
-        
-        '''<summary>
-        '''  Busca un recurso adaptado de tipo System.Drawing.Bitmap.
-        '''</summary>
-        Friend ReadOnly Property _04_Save_24x24() As System.Drawing.Bitmap
-            Get
-                Dim obj As Object = ResourceManager.GetObject("04_Save_24x24", resourceCulture)
-                Return CType(obj,System.Drawing.Bitmap)
-            End Get
-        End Property
-        
-        '''<summary>
-        '''  Busca un recurso adaptado de tipo System.Drawing.Bitmap.
-        '''</summary>
         Friend ReadOnly Property _next() As System.Drawing.Bitmap
             Get
                 Dim obj As Object = ResourceManager.GetObject("next", resourceCulture)
@@ -105,7 +85,7 @@ Namespace My.Resources
         '''</summary>
         Friend ReadOnly Property banner_gkn_driveline() As System.Drawing.Bitmap
             Get
-                Dim obj As Object = ResourceManager.GetObject("banner-gkn-driveline", resourceCulture)
+                Dim obj As Object = ResourceManager.GetObject("banner_gkn_driveline", resourceCulture)
                 Return CType(obj,System.Drawing.Bitmap)
             End Get
         End Property
@@ -195,7 +175,7 @@ Namespace My.Resources
         '''</summary>
         Friend ReadOnly Property gkn_modificaciones_copia() As System.Drawing.Bitmap
             Get
-                Dim obj As Object = ResourceManager.GetObject("gkn_modificaciones copia", resourceCulture)
+                Dim obj As Object = ResourceManager.GetObject("gkn_modificaciones_copia", resourceCulture)
                 Return CType(obj,System.Drawing.Bitmap)
             End Get
         End Property
@@ -203,9 +183,9 @@ Namespace My.Resources
         '''<summary>
         '''  Busca un recurso adaptado de tipo System.Drawing.Bitmap.
         '''</summary>
-        Friend ReadOnly Property gkn_modificaciones_copia1() As System.Drawing.Bitmap
+        Friend ReadOnly Property linea_clasificacion() As System.Drawing.Bitmap
             Get
-                Dim obj As Object = ResourceManager.GetObject("gkn_modificaciones copia1", resourceCulture)
+                Dim obj As Object = ResourceManager.GetObject("linea_clasificacion", resourceCulture)
                 Return CType(obj,System.Drawing.Bitmap)
             End Get
         End Property
@@ -215,7 +195,17 @@ Namespace My.Resources
         '''</summary>
         Friend ReadOnly Property next_next() As System.Drawing.Bitmap
             Get
-                Dim obj As Object = ResourceManager.GetObject("next-next", resourceCulture)
+                Dim obj As Object = ResourceManager.GetObject("next_next", resourceCulture)
+                Return CType(obj,System.Drawing.Bitmap)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        '''</summary>
+        Friend ReadOnly Property relacion_linea_clasificacion() As System.Drawing.Bitmap
+            Get
+                Dim obj As Object = ResourceManager.GetObject("relacion_linea_clasificacion", resourceCulture)
                 Return CType(obj,System.Drawing.Bitmap)
             End Get
         End Property
@@ -245,7 +235,7 @@ Namespace My.Resources
         '''</summary>
         Friend ReadOnly Property TLATOANI_IMAGOTIPO_REV0a() As System.Drawing.Bitmap
             Get
-                Dim obj As Object = ResourceManager.GetObject("TLATOANI IMAGOTIPO REV0a", resourceCulture)
+                Dim obj As Object = ResourceManager.GetObject("TLATOANI_IMAGOTIPO_REV0a", resourceCulture)
                 Return CType(obj,System.Drawing.Bitmap)
             End Get
         End Property

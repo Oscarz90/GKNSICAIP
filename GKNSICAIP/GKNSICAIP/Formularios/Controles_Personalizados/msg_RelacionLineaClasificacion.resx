@@ -117,59 +117,41 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="save_download_32" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\ICON\save_download_32.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="Estrategias3" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Estrategias3.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="gkn_mod_log" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\gkn_mod_log.ico;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="linea_clasificacion" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\linea_clasificacion.ico;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="frmSoporteEmail1" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\frmSoporteEmail.gif;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="frmSoporteEmail" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\frmSoporteEmail.bmp;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="frmGraficas_graficar1" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\frmGraficas_graficar.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="frmEnviarEmailAddTo" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\frmEnviarEmailAddTo.gif;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="banner_03" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\banner_03.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="gkn_mod" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\gkn_mod.ico;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="frmEnvioEmailCancel" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\frmEnvioEmailCancel.gif;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="save" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\save.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="relacion_linea_clasificacion" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\relacion_linea_clasificacion.ico;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="banner_gkn_driveline" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\banner-gkn-driveline.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="gkn_modificaciones_copia" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\gkn_modificaciones copia.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="next" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\next.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="next_next" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\next-next.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="TLATOANI_IMAGOTIPO_REV0a" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\TLATOANI IMAGOTIPO REV0a.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="PictureBox1.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAAABGdBTUEAALGPC/xhBQAAABl0RVh0U29m
+        dHdhcmUAQWRvYmUgSW1hZ2VSZWFkeXHJZTwAAAcLSURBVGhD7Zh7UNRVFMf7p8meVFajVtLDTIxAWFfY
+        B64rqAgRolaGFhXZ65+mmp4zDYWMltP00KZGCilLgSRXkeWpLmAsLu+n6z7YhV12wVAXEmStP76di+sq
+        /n7ILihuM52Zz3A595x7z/n97u+ee/e6/+V/8VH5xzbF39X878jfXVNkRAOBi1D93XWjzGXiu3LWenP8
+        WetNOGth3IyztvvP/b1AksvU98TZeaufs/MWs9MeDGdfCpyn0y/geB9O2zw4O251ODtu83O5+JY4zbel
+        DNlEGOz9HCealqG74iE37H+mH7LLwexcLr4jQ6bb/YbM0xyDvano0YhgL5/FgekHT2zGGdM0DLXf6Vsf
+        9xnjnSkD1hU4qX8NtrLZo8L6BywrMGicmulyvfYyaLjLb8B4r6OvKxW2SiG6yuaMiq0iGA5rGgaMD2NA
+        f7dv7EoUSEp/exz+bEmG5eDcMelpWIM+01oM6O5RuYa4djJwbLrf6WMzHSeNH8FaFobOA4FjYjkUil7d
+        e+jXheK0dvq13Vb/0s5IOaWNgb0uCZ2lQR7TpY5FrzYZfx2dYXYNNfnS33aff3/bg+hpfQudB0XoKJnn
+        Ffb69TjZKkN/68xrs632tczM7G2OhvVIIswlIcMYlELU5yy8LMyG2XaqFqO78TU4mv0djuYHJre4OZof
+        9D/VFABrzRswlYTBVCwYpr1IgKbcCAgEAl5YH7M5b29Rr8XxhmU41fTQ5G6rbEJ77ZMwl62ggIQjaFFI
+        eYNnsL6LbU0lUliq1+NE/RycrH9kcoobm6i3LhDmypdgLBTDWBA2Au1+MRJi53OCZzrWd6m9SZWALk0c
+        TtTNnpxtlSbKtKpjYDwQR+tZxEFHrFvFTYDpWB/Hp0ACU8XzOF4ThN7aOVe3uNEE/serg2A4lAi9Ugp9
+        vphLQTjeXs9NgOlYH5+PoXg5zBXx+LMmoME11dURmkBhLl8CXVEMdPulvBgKw/HZ+9wEmI718fkw9KWr
+        YVMLcVwz9+oUNxpYZq8KhrZoJY7lyYgIXgwFImRuHhk8g+lYH5/PMPlRlEQsuo885ug+Enjlt1UaWGUo
+        jaQPcSm0+2SjoldKULA9hJMA07G+c8nzc1QZi44yOo6rA69scbOrH5dZygVozVtOQS66LLp8KQ7nBHMS
+        YDrWx+dznqP7FqMtPxpdfwQ7bJVBV25btVU+rtLmy9CqiESbQj4m9LY4CTAdn+2ltCii6KMWsySuTHGj
+        gWTmQwI05i5G6x7P6NHMxUJpqDt41mY6Pls+mn6X01IKhbVi3sS3VevheapmhQRNu2nw3yM9gtYwXnz2
+        wjJibabjs+WjcTe9jTwxOstDJlbcLOUhMkPJfFTvlKEld4nH9BwJwEuJQe4EWLtHE8Bry0dzbtTwnPpi
+        ITpUofGucLyXzrKQhposCep2RaJ591KPsZSFYEvao+4EWJvp+GxHoy4rEjVZUtDyHd+doUMlSNIqF6Di
+        x0Vo+i3aKyx09926cZY7AdZmOj7by3F4+yLa+ei8dHC+99sqy7w8Q4qaX5ehMSfGK3R0vqnMm+5OgLX1
+        pOOzvRxsblV6BEwHhA7C8+JGxkkNueE48J0c9dkxXsMSqFLe406AtZmOz3YsDn4vh2aXGO0lwq9c4Y0t
+        7aVCc+GWCKh/iqa1+ITXNO6OvviH3WGYjs92LKp/jYHy6wh6AHT8Lg4bu7gZSxYk1WSJyEmO2l1xPkHp
+        d1Eoz5BAXximcIU5uhiKwsyKzXQcyKA1uDN+XNRlL6cnLqPiF+FCNqzjs/UEzS9xyN24EC176TRbED56
+        cdMXhr+p3iHCns/l9OpWEPFeU59Dgf4mxtqVQvc3wNpMV58TzevjCUVblkL5DR0GlSL+O4OuQORH2Tmy
+        N0hRti0W1b8kjAtdgRjrVnPvA8+Rjubg9fGUrFQZqumD1uaLuXcGyizlULoE2RsWQ7Nj5bihyskJ/jw1
+        e0LJJmHcFG9djuw0KY7ul3CLW7NCbM74QIqKH+JR9fPKcUNHb97gGfaqQF4fb9j5iRyqHyRo2ycZ+RbY
+        +spOXUJb5+oJ0U1BvpjIvQ8wXXfVY7w+o1H10yoOpd/GYfuHUrTulY6szunvSqDaloDKzKcmRMteOo3W
+        3ofkdYHu4Fmb6VifmmwmSuZHcuz4WDIygS9fF+OP7U+7qZwArfvk6GubgTOmO2DS3DXcZjo+2/GQkxaN
+        L9+4JIHNr1ACGc/8J8hKjQbFOzKBjckiVe6mJ3D4xzUTJ+Pqodr2ND39CGx6WTSyoKW9IArekBRuTn83
+        Cns+e5J2ozU+Rcm3q7Hr0xhsShaDYn3TFfY5uf6GKVOJ6UGzpgW/Ghv0xQfPCGs/WRcOX+LjxAW2d1aF
+        5kUE3b+UYp3N4nUx1Z0A4U+wzosR+AABxKVxuRKYMvVfIfEF9bcc7dsAAAAASUVORK5CYII=
+</value>
   </data>
 </root>
