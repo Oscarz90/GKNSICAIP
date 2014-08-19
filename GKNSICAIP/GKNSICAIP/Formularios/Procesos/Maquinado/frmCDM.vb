@@ -59,20 +59,22 @@ Public Class frmCDM
         txtComents.Enabled = False
         llena_lista_modelos_entrada()
     End Sub
-    Public Sub inicializa_valores(ByVal line As String, ByVal turno As String, ByVal min_disp As Integer, ByVal paro_desc As String)
+    Public Sub inicializa_valores(ByVal line As String, ByVal turno As String, ByVal min_disp As Integer, ByVal paro_desc As String, ByVal fecha_actual As DateTime)
         paro_descr.Text = paro_desc
         minutosdisponibles = min_disp
         linea = line
-        inicializa_Horas_inicio_fin(turno)
+        inicializa_Horas_inicio_fin(turno, fecha_actual)
     End Sub
     '    Public Sub inicializa_Horas_inicio_fin(ByVal inicio As DateTime, ByVal final As DateTime)
-    Public Sub inicializa_Horas_inicio_fin(ByVal turno As Integer)
+    Public Sub inicializa_Horas_inicio_fin(ByVal turno As Integer, ByVal fecha_actual As DateTime)
         Dim oTurno As New Turno
         oTurno.cve_turno = turno
-        oTurno.fecha_registro = Convert.ToDateTime(Now.ToString("dd-MM-yyyy HH:mm"))
+        'oTurno.fecha_registro = Convert.ToDateTime(Now.ToString("dd-MM-yyyy HH:mm"))
+        oTurno.fecha_registro = fecha_actual
         oTurno.valida_inicio_fin()
         If oTurno.bandera_registro = 1 Then
-            oTurno.fecha_registro = Convert.ToDateTime(Now.ToString("dd-MM-yyyy HH:mm"))
+            'oTurno.fecha_registro = Convert.ToDateTime(Now.ToString("dd-MM-yyyy HH:mm"))
+            oTurno.fecha_registro = fecha_actual
             oTurno.fecha_inicio_fin()
             'oTurno.valida_inicio_fin_produccion()
             Dim ini As DateTime = oTurno.inicio

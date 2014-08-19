@@ -1995,7 +1995,7 @@ Public Class frmProduccion
 #End Region
 #Region "Funciones para modulo de CDM"
     Private Sub activa_captura_CDM()
-        obtenedor_CDM.inicializa_valores(cbxLinea.SelectedValue, cbxTurno.SelectedValue, get_minutos_disponibles(), cbxTipoParo.Text)
+        obtenedor_CDM.inicializa_valores(cbxLinea.SelectedValue, cbxTurno.SelectedValue, get_minutos_disponibles(), cbxTipoParo.Text, obtiene_fecha_actual)
         obtenedor_CDM.ShowDialog()
         obtenedor_CDM.Dispose()
         If contenedor_CDM.get_if_it_was_used() Then
