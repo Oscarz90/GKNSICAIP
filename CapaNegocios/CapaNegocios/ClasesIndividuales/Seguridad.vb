@@ -340,13 +340,19 @@ Public Class Seguridad
 
 
     Public Function Obtener_Acumulado_Anterior(ByVal vFecha As DateTime, ByVal vCve_Equipo As Long, ByVal vCve_Linea As Long) As Integer
-        vFecha = DateAdd(DateInterval.Day, -1, vFecha)
+        Dim vDR As DataRow
+        Try
+            vDR = oBD.ObtenerRenglon(String.Format("Select top 1 (fecha) as fecha, acumulado from seguridad_acumulado where cve_equipo = " & vCve_Equipo & " and cve_linea= " & vCve_Linea & " and fecha< '" & vFecha & "' order by fecha desc"), "Seguridad_Acumulado")
 
-        If Existe_Registro_Actual_Acumulado(vFecha, vCve_Equipo, vCve_Linea) = True Then
-            Return vAcumulado_Retorno
-        Else
+            If vDR IsNot Nothing Then             
+                Return vDR("acumulado")
+            Else
+                Return Nothing
+            End If
+        Catch ex As Exception
             Return Nothing
-        End If
+            MsgBox("Lo sentimos, no existe registro acumulado anterior")
+        End Try
     End Function
 
 
