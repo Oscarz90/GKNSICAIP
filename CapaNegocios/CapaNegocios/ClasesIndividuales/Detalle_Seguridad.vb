@@ -1,8 +1,8 @@
 ﻿Imports CapaDatos
 Public Class Detalle_Seguridad
     Implements IIndividual
-    Dim cadena_conexion As New CapaDatos.conexiones
-    Dim oBD As New CapaDatos.CapaDatos(cadena_conexion.CadenaSicaip)
+    Dim cadena_conexion As New conexiones
+    Dim oBD As New Datos(cadena_conexion.CadenaSicaip)
 #Region "Iindividual"
     Public Sub Cargar() Implements IIndividual.Cargar
 

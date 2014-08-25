@@ -1,8 +1,8 @@
 ﻿Imports CapaDatos
 Public Class Seguridad
     Implements IIndividual
-    Dim cadena_conexion As New CapaDatos.conexiones
-    Dim oBD As New CapaDatos.CapaDatos(cadena_conexion.CadenaSicaip)
+    Dim cadena_conexion As New conexiones
+    Dim oBD As New Datos(cadena_conexion.CadenaSicaip)
 #Region "IIndividual"
     Public Sub Cargar() Implements IIndividual.Cargar
 
@@ -10,7 +10,7 @@ Public Class Seguridad
 
     Public Sub Eliminar() Implements IIndividual.Eliminar
         Try
-            oBD.EjecutarQuery("update seguridad set cod_empleado_eliminacion='" & vcod_empleado_eliminacion & "',fecha_eliminacion='" & vfecha_eliminacion.ToString("MM-dd-yyyy HH:mm") & "',estatus='0' where cve_seguridad=" & vcve_seguridad)
+            oBD.EjecutarQuery(String.Format("update seguridad set cod_empleado_eliminacion='{0}',fecha_eliminacion='{1:MM-dd-yyyy HH:mm}',estatus='0' where cve_seguridad={2}", vcod_empleado_eliminacion, vfecha_eliminacion, vcve_seguridad))
         Catch ex As Exception
             MsgBox("Error al eliminar seguridad. CSeguridad_ERROR", vbCritical + vbOKOnly, "Error")
         End Try
@@ -173,7 +173,7 @@ Public Class Seguridad
         Dim vDR As DataRow = Nothing
         Using scope As New TransactionScope
             Try
-                vDR = oBD.ObtenerRenglon("select top 1 (cve_equipo), dia_asignado, acumulado from h_seguridad_equipo_linea_dia where dia_asignado < '" & fecha_puntero.ToString("MM/dd/yyyy") & "' and cve_equipo=" & cve_equipo & " and cve_linea=" & cve_linea & " order by dia_asignado DESC", "seguridad")
+                vDR = oBD.ObtenerRenglon(String.Format("select top 1 (cve_equipo), dia_asignado, acumulado from h_seguridad_equipo_linea_dia where dia_asignado < '{0:MM/dd/yyyy}' and cve_equipo={1} and cve_linea={2} order by dia_asignado DESC", fecha_puntero, cve_equipo, cve_linea), "seguridad")
 
                 If vDR IsNot Nothing Then
                     If vDR("acumulado") IsNot DBNull.Value Then

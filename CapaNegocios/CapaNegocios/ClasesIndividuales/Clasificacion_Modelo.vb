@@ -1,12 +1,11 @@
 ﻿Imports CapaDatos
 Public Class Clasificacion_Modelo
     Implements IIndividual
-    Dim cadena_conexion As New CapaDatos.conexiones
-    Dim oBD As New CapaDatos.CapaDatos(cadena_conexion.CadenaSicaip)
+    Dim cadena_conexion As New conexiones
+    Dim oBD As New Datos(cadena_conexion.CadenaSicaip)
 #Region "IIndividual"
     Public Sub Cargar() Implements IIndividual.Cargar
-        Dim vDR As DataRow
-        vDR = oBD.ObtenerRenglon("select * from clasificacion_modelo where cve_clasificacion_modelo =" & vCve_clasificacion_modelo, "clasificacion_modelo")
+        Dim vDR As DataRow = oBD.ObtenerRenglon("select * from clasificacion_modelo where cve_clasificacion_modelo =" & vCve_clasificacion_modelo, "clasificacion_modelo")
         If vDR IsNot Nothing Then
             vCve_clasificacion_modelo = vDR("cve_clasificacion_modelo")
             vDescripcion = vDR("descripcion")
@@ -22,9 +21,8 @@ Public Class Clasificacion_Modelo
     End Sub
 
     Public Function Obtener_Id(ByVal vCadena As String) As Long Implements IIndividual.Obtener_Id
-        Dim vDR As DataRow
+        Dim vDR As DataRow = oBD.ObtenerRenglon("select cve_clasificacion_modelo from clasificacion_modelo where descripcion= " & vCadena, "clasificacion_modelo")
         Dim vRetorno As Long
-        vDR = oBD.ObtenerRenglon("select cve_clasificacion_modelo from clasificacion_modelo where descripcion= " & vCadena, "clasificacion_modelo")
         If vDR IsNot Nothing Then
             vRetorno = vDR("cve_clasificacion_modelo")
         Else
@@ -37,9 +35,7 @@ Public Class Clasificacion_Modelo
 
         Using scope As New TransactionScope
             Try
-                Dim cmd As New SqlClient.SqlCommand
-                cmd.CommandType = CommandType.StoredProcedure
-                cmd.CommandText = "REGISTRAR_clasificacion_modelo"
+                Dim cmd As New SqlClient.SqlCommand() With {.CommandType = CommandType.StoredProcedure, .CommandText = "REGISTRAR_clasificacion_modelo"}
                 cmd.Parameters.Add("@cve_clasificacion_modelo", SqlDbType.Int).Value = Me.vCve_clasificacion_modelo
                 cmd.Parameters.Add("@descripcion", SqlDbType.VarChar).Value = Me.vCve_clasificacion_modelo
 
@@ -54,8 +50,7 @@ Public Class Clasificacion_Modelo
     End Sub
 
     Public Function Obtener_Modelos() As DataTable
-        Dim vRetorno As DataTable
-        vRetorno = oBD.ObtenerTabla("select * from clasificacion_modelo")        
+        Dim vRetorno As DataTable = oBD.ObtenerTabla("select * from clasificacion_modelo")
         If vRetorno IsNot Nothing Then
 
         Else

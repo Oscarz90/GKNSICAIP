@@ -1,8 +1,8 @@
 ﻿Imports CapaDatos
 Public Class Calidad
     Implements IIndividual
-    Dim cadena_conexion As New CapaDatos.conexiones
-    Dim oBD As New CapaDatos.CapaDatos(cadena_conexion.CadenaSicaip)
+    Dim cadena_conexion As New conexiones
+    Dim oBD As New Datos(cadena_conexion.CadenaSicaip)
 #Region "IIndividual"
     Public Sub Cargar() Implements IIndividual.Cargar
 
@@ -28,9 +28,7 @@ Public Class Calidad
     Public Sub Registrar() Implements IIndividual.Registrar
         Using scope As New TransactionScope
             Try
-                Dim vComando As New SqlClient.SqlCommand
-                vComando.CommandType = CommandType.StoredProcedure
-                vComando.CommandText = "Captura_Calidad_Produccion"
+                Dim vComando As New SqlClient.SqlCommand() With {.CommandType = CommandType.StoredProcedure, .CommandText = "Captura_Calidad_Produccion"}
                 vComando.Parameters.Add("@cve_registro_turno", SqlDbType.BigInt).Value = Me.vcve_registro_turno
                 vComando.Parameters.Add("@cod_empleado", SqlDbType.VarChar).Value = Me.vcod_empleado
                 vComando.Parameters.Add("@fecha", SqlDbType.DateTime).Value = Me.vfecha

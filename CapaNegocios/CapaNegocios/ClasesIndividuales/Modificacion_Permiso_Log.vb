@@ -1,12 +1,11 @@
 ﻿Imports CapaDatos
 Public Class Modificacion_Permiso_Log
     Implements IIndividual
-    Dim cadena_conexion As New CapaDatos.conexiones
-    Dim oBD As New CapaDatos.CapaDatos(cadena_conexion.CadenaSicaip)
+    Dim cadena_conexion As New conexiones
+    Dim oBD As New Datos(cadena_conexion.CadenaSicaip)
 #Region "IIndividual"
     Public Sub Cargar() Implements IIndividual.Cargar
-        Dim vDR As DataRow
-        vDR = oBD.ObtenerRenglon("select * from modificacion_permiso_log mpl where mpl.cve_modificacion_permiso_log=" & vcve_modificacion_permiso_log, "modificacion_permiso")
+        Dim vDR As DataRow = oBD.ObtenerRenglon("select * from modificacion_permiso_log mpl where mpl.cve_modificacion_permiso_log=" & vcve_modificacion_permiso_log, "modificacion_permiso")
         If vDR IsNot Nothing Then
             vcve_modificacion_permiso_log = vDR("cve_modificacion_permiso_log")
             vcve_equipo = vDR("cve_equipo")
@@ -20,8 +19,7 @@ Public Class Modificacion_Permiso_Log
     End Sub
 
     Public Sub Eliminar() Implements IIndividual.Eliminar
-        Dim queryInsert As String = "delete modificacion_permiso_log" &
-            " where cve_modificacion_permiso_log=" & vcve_modificacion_permiso_log
+        Dim queryInsert As String = String.Format("delete modificacion_permiso_log where cve_modificacion_permiso_log={0}", vcve_modificacion_permiso_log)
         Try
             oBD.EjecutarQuery(queryInsert)
             MsgBox("Se eliminó correctamente", vbInformation + vbOKOnly, "Log Permiso Modificación de Captura")
@@ -29,7 +27,7 @@ Public Class Modificacion_Permiso_Log
             MsgBox("Problema al eliminar Log Modificacion Permiso. CModificacion_Permiso_Log_ERROR", vbExclamation + vbOKOnly, "Problema")
         End Try
     End Sub
-    Dim vId As Long
+    'Dim vId As Long
     Public Property Id As Long Implements IIndividual.Id
         Get
             Return vcve_modificacion_permiso_log
@@ -44,8 +42,7 @@ Public Class Modificacion_Permiso_Log
     End Function
 
     Public Sub Registrar() Implements IIndividual.Registrar
-        Dim queryInsert As String = "insert into modificacion_permiso_log" &
-            " values(" & vcve_equipo & ",'" & vmaquina & "','" & vmaquina_usuario & "','" & vcod_empleado & "','" & vdia_modificacion.ToString("MM-dd-yyyy HH:mm") & "','" & vfecha_captura.ToString("MM-dd-yyyy HH:mm") & "','" & vdescripcion & "')"
+        Dim queryInsert As String = String.Format("insert into modificacion_permiso_log values({0},'{1}','{2}','{3}','{4:MM-dd-yyyy HH:mm}','{5:MM-dd-yyyy HH:mm}','{6}')", vcve_equipo, vmaquina, vmaquina_usuario, vcod_empleado, vdia_modificacion, vfecha_captura, vdescripcion)
         Try
             oBD.EjecutarQuery(queryInsert)
             MsgBox("Se registro correctamente", vbInformation + vbOKOnly, "Log Permiso Modificación de Captura")
@@ -159,9 +156,7 @@ Public Class Modificacion_Permiso_Log
     Public Sub registra_modificacion_permiso_log()
         Using scope As New TransactionScope
             Try
-                Dim cmd As New SqlClient.SqlCommand
-                cmd.CommandType = CommandType.StoredProcedure
-                cmd.CommandText = "registra_modificacion_permiso_log"
+                Dim cmd As New SqlClient.SqlCommand() With {.CommandType = CommandType.StoredProcedure, .CommandText = "registra_modificacion_permiso_log"}
                 cmd.Parameters.Add("@cve_registro_turno", SqlDbType.BigInt).Value = Me.vcve_registro_turno
                 cmd.Parameters.Add("@maquina", SqlDbType.VarChar).Value = Me.vmaquina
                 cmd.Parameters.Add("@maquina_usuario", SqlDbType.VarChar).Value = Me.vmaquina_usuario
@@ -169,15 +164,7 @@ Public Class Modificacion_Permiso_Log
                 cmd.Parameters.Add("@fecha_captura", SqlDbType.DateTime).Value = Me.vfecha_captura.ToString("dd-MM-yyyy HH:mm:ss")
                 cmd.Parameters.Add("@descripcion", SqlDbType.VarChar).Value = Me.vdescripcion
                 Dim obj As DataTable = oBD.EjecutaCommando(cmd)
-                'vResponse = obj.Rows(0)(0)
-                'Me.vcve_registro_turno = obj.Rows(0)(1)
-                'Me.vcve_turno = obj.Rows(0)(2)
                 scope.Complete()
-                'If vResponse = "OK" Then
-                '    Return True
-                'Else
-                '    Return False
-                'End If
             Catch
                 MsgBox("Problema al registrar Modificacion Permiso Log. CModificacion_Permiso_Log_ERROR", vbExclamation + vbOKOnly, "Problema")
             End Try

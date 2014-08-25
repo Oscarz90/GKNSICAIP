@@ -1,5 +1,4 @@
 ﻿Imports System.Configuration
-Imports System.Data
 Imports System.Data.SqlClient
 
 
@@ -11,9 +10,6 @@ Public Class conexiones
     Dim cn_Kronos As New SqlConnection(configuracion_Kronos.ConnectionString)
 
     Public Sub New()
-        '"Data Source= Oscar-PC\SQLExpress; initial Catalog=GKNSICAIP; Integrated Security = True"
-        'vCadenaSicaip = "Data Source=JC-PC\SQLEXP2008_R2;Integrated Security=SSPI; Password=sistemas; User ID=sa;Initial Catalog=GKN_SICAIP_V2"
-        'vCadenaKronos = "Data Source=JC-PC\SQLEXP2008_R2;Integrated Security=SSPI; Password=sistemas; User ID=sa;Initial Catalog=wtk52db"
         vCadenaSicaip = cn_SICAIP.ConnectionString
         vCadenaKronos = cn_Kronos.ConnectionString
     End Sub

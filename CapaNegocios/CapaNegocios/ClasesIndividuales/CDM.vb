@@ -1,8 +1,8 @@
 ﻿Imports CapaDatos
 Public Class CDM
     Implements IIndividual
-    Dim cadena_conexion As New CapaDatos.conexiones
-    Dim oBD As New CapaDatos.CapaDatos(cadena_conexion.CadenaSicaip)
+    Dim cadena_conexion As New conexiones
+    Dim oBD As New Datos(cadena_conexion.CadenaSicaip)
 #Region "IIndividual"
     Public Sub Cargar() Implements IIndividual.Cargar
 
@@ -83,14 +83,14 @@ Public Class CDM
     Public Sub obtiene_tiempo_de_cdm()
         Dim rDatos As DataRow = Nothing
         Try
-            rDatos = oBD.ObtenerRenglon("exec get_CDM_tiempo " & vcve_linea & "," & vcve_modelo_inicial & "," & vcve_modelo_final, "CDM")
+            rDatos = oBD.ObtenerRenglon(String.Format("exec get_CDM_tiempo {0},{1},{2}", vcve_linea, vcve_modelo_inicial, vcve_modelo_final), "CDM")
             If rDatos IsNot Nothing Then
                 If rDatos("cve_CDM") IsNot DBNull.Value Then
                     Me.vcve_CDM = rDatos("cve_CDM")
                     Me.tiempo = rDatos("tiempo")
                 End If
             End If
-        Catch 
+        Catch
             MsgBox("Error al Obtener tiempo de cambio de modelo. CCDM_ERROR", vbCritical + vbOKOnly, "Error")
         End Try
     End Sub

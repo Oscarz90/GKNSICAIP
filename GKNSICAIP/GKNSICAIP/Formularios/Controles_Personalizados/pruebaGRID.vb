@@ -3,13 +3,12 @@ Imports Telerik.WinControls.UI
 
 Public Class pruebaGRID
 
-    Dim oEquipos As Clases_Catalogos.Catalogo_Equipo
+
 
     Dim oClasePrueba As clase_prueba_seguridad
     Dim vRowSeleccionada As Integer = 0
 
-    Dim vValorX As Integer = 0
-    Dim vValorY As Integer = 0
+    
     Dim vCellSeleccionada As String = ""
     Dim ofrmImportador_Equipo As FrmImportador_Equipo
     Dim oEquipo As Equipo
@@ -17,55 +16,28 @@ Public Class pruebaGRID
 
 
 
-    Private Sub pruebaGRID_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
+    Private Sub pruebaGRID_Load(ByVal sender As Object, ByVal e As EventArgs) Handles MyBase.Load
         oClasePrueba = New clase_prueba_seguridad
 
-        Dim oCve_Captura As New GridViewDecimalColumn()
-        oCve_Captura.Name = "cve"
-        oCve_Captura.HeaderText = "cve"
-        oCve_Captura.IsVisible = False
+        Dim oCve_Captura As New GridViewDecimalColumn() With {.Name = "cve", .HeaderText = "cve", .IsVisible = False}
 
-        Dim oCve_Equipo As New GridViewDecimalColumn()
-        oCve_Equipo.Name = "cve_Equipo"
-        oCve_Equipo.HeaderText = "cve_Equipo"
-        oCve_Equipo.IsVisible = False
+        Dim oCve_Equipo As New GridViewDecimalColumn() With {.Name = "cve_Equipo", .HeaderText = "cve_Equipo", .IsVisible = False}
 
-        Dim oNombre_Equipo As New GridViewCommandColumn
-        oNombre_Equipo.Name = "Nombre_Equipo"
-        oNombre_Equipo.HeaderText = "Nombre_Equipo"
-        oNombre_Equipo.Width = 250
-        Dim oMes_Afectado As New GridViewDateTimeColumn()
-        oMes_Afectado.Name = "Mes_Afectado"
-        oMes_Afectado.HeaderText = "Mes_Afectado"
-
-        oMes_Afectado.Format = DateTimePickerFormat.Custom
-        oMes_Afectado.CustomFormat = "d"
-        oMes_Afectado.FormatString = "{0: MMMM.yyyy}" ';   / / mes name.year day.long
-        oMes_Afectado.Width = 300
+        Dim oNombre_Equipo As New GridViewCommandColumn() With {.Name = "Nombre_Equipo", .HeaderText = "Nombre_Equipo", .Width = 250}
+        Dim oMes_Afectado As New GridViewDateTimeColumn() With {.Name = "Mes_Afectado", .HeaderText = "Mes_Afectado", .Format = DateTimePickerFormat.Custom, .CustomFormat = "d", .FormatString = "{0: MMMM.yyyy}", .Width = 300}
 
         Me.dgvDatos.Columns.Add(oCve_Captura)
         Me.dgvDatos.Columns.Add(oCve_Equipo)
         Me.dgvDatos.Columns.Add(oNombre_Equipo)
         Me.dgvDatos.Columns.Add(oMes_Afectado)
 
-        Dim oCve_Captura_Windows As New DataGridViewTextBoxColumn
-        oCve_Captura_Windows.Name = "cve"
-        oCve_Captura_Windows.HeaderText = "cve"
-        oCve_Captura_Windows.Visible = False
+        Dim oCve_Captura_Windows As New DataGridViewTextBoxColumn() With {.Name = "cve", .HeaderText = "cve", .Visible = False}
 
-        Dim oCve_Equipo_Windows As New DataGridViewTextBoxColumn()
-        oCve_Equipo_Windows.Name = "cve_Equipo"
-        oCve_Equipo_Windows.HeaderText = "cve_Equipo"
-        oCve_Equipo_Windows.Visible = False
+        Dim oCve_Equipo_Windows As New DataGridViewTextBoxColumn() With {.Name = "cve_Equipo", .HeaderText = "cve_Equipo", .Visible = False}
 
-        Dim oNombre_Equipo_Windows As New DataGridViewButtonColumn
-        oNombre_Equipo_Windows.Name = "Nombre_Equipo"
-        oNombre_Equipo_Windows.HeaderText = "Nombre_Equipo"
-        oNombre_Equipo_Windows.Width = 250
+        Dim oNombre_Equipo_Windows As New DataGridViewButtonColumn() With {.Name = "Nombre_Equipo", .HeaderText = "Nombre_Equipo", .Width = 250}
 
-        Dim oMes_Afectado_Windows As New DataGridViewTextBoxColumn()
-        oMes_Afectado_Windows.Name = "Mes_Afectado"
-        oMes_Afectado_Windows.HeaderText = "Mes_Afectado"
+        Dim oMes_Afectado_Windows As New DataGridViewTextBoxColumn() With {.Name = "Mes_Afectado", .HeaderText = "Mes_Afectado"}
 
 
         Me.dgvDatosWindows.Columns.Add(oCve_Captura_Windows)
@@ -74,28 +46,22 @@ Public Class pruebaGRID
         Me.dgvDatosWindows.Columns.Add(oMes_Afectado_Windows)
 
 
-        Dim vDTTipos_Incidentes As DataTable
-        vDTTipos_Incidentes = oClasePrueba.Obtener_Tipos_Incidentes
+        Dim vDTTipos_Incidentes As DataTable = oClasePrueba.Obtener_Tipos_Incidentes
 
 
         If IsNothing(vDTTipos_Incidentes) = False Then
             For Each oDR As DataRow In vDTTipos_Incidentes.Rows
-                Dim oDescripcion_Incidente As New GridViewDecimalColumn()
-
-                oDescripcion_Incidente.Name = oDR("descripcion")
-                oDescripcion_Incidente.HeaderText = oDR("descripcion")
-                oDescripcion_Incidente.Width = 150
+                Dim oDescripcion_Incidente As New GridViewDecimalColumn() With {.Name = oDR("descripcion"), .HeaderText = oDR("descripcion"), .Width = 150}
                 Me.dgvDatos.Columns.Add(oDescripcion_Incidente)
             Next
 
         End If
-        
+
 
         '---------------------------------- Buscar Datos Detalle Registros Seguridad
-        Dim vDTCapturas As DataTable
+        Dim vDTCapturas As DataTable = oClasePrueba.Obtener_Registros_Seguridad
         Dim vDTDetalleCaptura As DataTable
         Dim vRecorrido As Integer = 0
-        vDTCapturas = oClasePrueba.Obtener_Registros_Seguridad
 
         If IsNothing(vDTCapturas) = False Then
             If IsNothing(vDTTipos_Incidentes) = False Then
@@ -147,14 +113,7 @@ Public Class pruebaGRID
 
     End Sub
 
-
-
-
-    Private Sub btnActualizar_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnActualizar.Click
-
-    End Sub
-
-    Private Sub dgvDatos_CellEndEdit(ByVal sender As Object, ByVal e As Telerik.WinControls.UI.GridViewCellEventArgs) Handles dgvDatos.CellEndEdit
+    Private Sub dgvDatos_CellEndEdit(ByVal sender As Object, ByVal e As GridViewCellEventArgs) Handles dgvDatos.CellEndEdit
         If vRowSeleccionada = 0 Then
             vRowSeleccionada = e.RowIndex
         End If
@@ -163,7 +122,7 @@ Public Class pruebaGRID
 
 
 
-    Private Sub dgvDatos_MouseClick(ByVal sender As System.Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles dgvDatos.MouseClick
+    Private Sub dgvDatos_MouseClick(ByVal sender As Object, ByVal e As MouseEventArgs) Handles dgvDatos.MouseClick
         Try
             If e.Button = Windows.Forms.MouseButtons.Right Then
                 vRowSeleccionada = 0
@@ -177,19 +136,14 @@ Public Class pruebaGRID
         End Try
 
 
-        If vRowSeleccionada <> 0 Then
-
-
-        Else
-
-        End If
+       
 
 
 
 
     End Sub
 
-    Private Sub dgvDatos_MouseUp(ByVal sender As System.Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles dgvDatos.MouseUp
+    Private Sub dgvDatos_MouseUp(ByVal sender As Object, ByVal e As MouseEventArgs) Handles dgvDatos.MouseUp
         Try
             If e.Button = Windows.Forms.MouseButtons.Right Then
                 vRowSeleccionada = dgvDatos.CurrentRow.Cells("CVE").Value 'dgvRegistros.CurrentRow.Index
@@ -203,7 +157,7 @@ Public Class pruebaGRID
         End Try
     End Sub
 
-    Private Sub dgvDatos_CellClick(ByVal sender As System.Object, ByVal e As Telerik.WinControls.UI.GridViewCellEventArgs) Handles dgvDatos.CellClick
+    Private Sub dgvDatos_CellClick(ByVal sender As Object, ByVal e As GridViewCellEventArgs) Handles dgvDatos.CellClick
 
         Try
 
@@ -234,15 +188,11 @@ Public Class pruebaGRID
         End Try
     End Sub
 
-    Private Sub dgvDatos_RowValidated(ByVal sender As System.Object, ByVal e As Telerik.WinControls.UI.RowValidatedEventArgs) Handles dgvDatos.RowValidated
-
-    End Sub
-
-    Private Sub dgvDatos_CreateRow(ByVal sender As Object, ByVal e As Telerik.WinControls.UI.GridViewCreateRowEventArgs) Handles dgvDatos.CreateRow
+    Private Sub dgvDatos_CreateRow(ByVal sender As Object, ByVal e As GridViewCreateRowEventArgs) Handles dgvDatos.CreateRow
         vRowSeleccionada = e.RowInfo.Index
     End Sub
 
-    Private Sub dgvDatos_CreateRowInfo(ByVal sender As Object, ByVal e As Telerik.WinControls.UI.GridViewCreateRowInfoEventArgs) Handles dgvDatos.CreateRowInfo
+    Private Sub dgvDatos_CreateRowInfo(ByVal sender As Object, ByVal e As GridViewCreateRowInfoEventArgs) Handles dgvDatos.CreateRowInfo
         vRowSeleccionada = e.RowInfo.Index
     End Sub
 End Class

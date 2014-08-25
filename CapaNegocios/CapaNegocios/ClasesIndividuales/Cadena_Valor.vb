@@ -1,13 +1,12 @@
 ﻿Imports CapaDatos
 Public Class Cadena_Valor
     Implements IIndividual
-    Dim cadena_conexion As New CapaDatos.conexiones
-    Dim oBD As New CapaDatos.CapaDatos(cadena_conexion.CadenaSicaip)
+    Dim cadena_conexion As New conexiones
+    Dim oBD As New Datos(cadena_conexion.CadenaSicaip)
 
 #Region "IIndividual"
     Public Sub Cargar() Implements IIndividual.Cargar
-        Dim vDR As DataRow
-        vDR = oBD.ObtenerRenglon("select * from cadena_valor where cve_cadena_valor = " & vCve_cadena_valor, "cadena_valor")
+        Dim vDR As DataRow = oBD.ObtenerRenglon("select * from cadena_valor where cve_cadena_valor = " & vCve_cadena_valor, "cadena_valor")
         If vDR IsNot Nothing Then
             vCve_cadena_valor = vDR("cve_cadena_valor")
             vCadena = vDR("cadena")
@@ -23,9 +22,8 @@ Public Class Cadena_Valor
     End Sub
 
     Public Function Obtener_Id(ByVal vCadena As String) As Long Implements IIndividual.Obtener_Id
-        Dim vDR As DataRow
+        Dim vDR As DataRow = oBD.ObtenerRenglon("select cve_cadena_valor from cadena_valor where cadena = " & vCadena, "cadena_valor")
         Dim vRetorno As Long
-        vDR = oBD.ObtenerRenglon("select cve_cadena_valor from cadena_valor where cadena = " & vCadena, "cadena_valor")
         If vDR IsNot Nothing Then
             vRetorno = vDR("cve_cadena_valor")
         Else
@@ -38,9 +36,7 @@ Public Class Cadena_Valor
 
         Using scope As New TransactionScope
             Try
-                Dim cmd As New SqlClient.SqlCommand
-                cmd.CommandType = CommandType.StoredProcedure
-                cmd.CommandText = "REGISTRAR_cadena_valor"
+                Dim cmd As New SqlClient.SqlCommand() With {.CommandType = CommandType.StoredProcedure, .CommandText = "REGISTRAR_cadena_valor"}
                 cmd.Parameters.Add("@cve_cadena_valor", SqlDbType.Int).Value = Me.vCve_cadena_valor
                 cmd.Parameters.Add("@cadena", SqlDbType.VarChar).Value = Me.vCadena
 
@@ -81,16 +77,13 @@ Public Class Cadena_Valor
 #End Region
 
     Public Function Obtener_Cadenas_Valor() As DataTable
-        Dim vDT_Retorno As DataTable
-        vDT_Retorno = oBD.ObtenerTabla("Select * From cadena_valor")
+        Dim vDT_Retorno As DataTable = oBD.ObtenerTabla("Select * From cadena_valor")
 
         Return vDT_Retorno
     End Function
 
     Public Function Obtener_CV_Usuario(ByVal vCve_Usuario As Long) As DataTable
-        Dim vRetorno As DataTable
-
-        vRetorno = oBD.ObtenerTabla("SELECT * FROM USUARIO_CADENA_VALOR WHERE CVE_Usuario=" & vCve_Usuario)
+        Dim vRetorno As DataTable = oBD.ObtenerTabla("SELECT * FROM USUARIO_CADENA_VALOR WHERE CVE_Usuario=" & vCve_Usuario)
 
 
         Return vRetorno

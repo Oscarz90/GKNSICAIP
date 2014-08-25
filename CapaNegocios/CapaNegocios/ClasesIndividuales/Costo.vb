@@ -1,8 +1,8 @@
 ﻿Imports CapaDatos
 Public Class Costo
     Implements IIndividual
-    Dim cadena_conexion As New CapaDatos.conexiones
-    Dim oBD As New CapaDatos.CapaDatos(cadena_conexion.CadenaSicaip)
+    Dim cadena_conexion As New conexiones
+    Dim oBD As New Datos(cadena_conexion.CadenaSicaip)
 #Region "IIndividual"
     Public Sub Cargar() Implements IIndividual.Cargar
 
@@ -28,9 +28,7 @@ Public Class Costo
     Public Sub Registrar() Implements IIndividual.Registrar
         Using scope As New TransactionScope
             Try
-                Dim vComando As New SqlClient.SqlCommand
-                vComando.CommandType = CommandType.StoredProcedure
-                vComando.CommandText = "Captura_costo_Produccion"
+                Dim vComando As New SqlClient.SqlCommand() With {.CommandType = CommandType.StoredProcedure, .CommandText = "Captura_costo_Produccion"}
                 vComando.Parameters.Add("@cve_registro_turno", SqlDbType.BigInt).Value = Me.vcve_registro_turno
                 vComando.Parameters.Add("@cod_empleado", SqlDbType.VarChar).Value = Me.vcod_empleado
                 vComando.Parameters.Add("@fecha", SqlDbType.DateTime).Value = Me.fecha
@@ -130,9 +128,7 @@ Public Class Costo
         Using scope As New TransactionScope
 
             Try
-                Dim cmd As New SqlClient.SqlCommand
-                cmd.CommandType = CommandType.StoredProcedure
-                cmd.CommandText = "verifica_costo_produccion"
+                Dim cmd As New SqlClient.SqlCommand() With {.CommandType = CommandType.StoredProcedure, .CommandText = "verifica_costo_produccion"}
                 cmd.Parameters.Add("@cve_registro_turno", SqlDbType.BigInt).Value = Me.vcve_registro_turno
                 Dim obj As DataTable = oBD.EjecutaCommando(cmd)
                 Me.vmin_programados = obj.Rows(0)(0)

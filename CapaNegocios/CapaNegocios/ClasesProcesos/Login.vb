@@ -1,8 +1,8 @@
 ﻿Imports CapaDatos
-Public Class Login    
-    Dim cadena_conexion As New CapaDatos.conexiones
-    Dim oBD_Kronos As New CapaDatos.CapaDatos(cadena_conexion.CadenaKronos)
-    Dim oBD_SICAIP As New CapaDatos.CapaDatos(cadena_conexion.CadenaSicaip)
+Public Class Login
+    Dim cadena_conexion As New conexiones
+    Dim oBD_Kronos As New Datos(cadena_conexion.CadenaKronos)
+    Dim oBD_SICAIP As New Datos(cadena_conexion.CadenaSicaip)
 
 #Region "Propiedades de Empleado Kronos"
     Private vEquipo_Empleado As String
@@ -54,7 +54,7 @@ Public Class Login
         Dim vDR As DataRow
         Dim vRetorno As Boolean
         Try
-            vDR = oBD_Kronos.ObtenerRenglon("select employmentstatus from vp_employee where personnum ='" & vCve_Empleado & "'", "Empleados")
+            vDR = oBD_Kronos.ObtenerRenglon(String.Format("select employmentstatus from vp_employee where personnum ='{0}'", vCve_Empleado), "Empleados")
             If vDR("employmentstatus") = "Active" Then
                 vRetorno = True
             Else
@@ -73,8 +73,7 @@ Public Class Login
     ''' <param name="vCve_Empleado">Cve del Empleado(Son solo 6 Caracteres</param>
     ''' <remarks></remarks>
     Public Sub Cargar_Empleado(ByVal vCve_Empleado As String)
-        Dim vDR As DataRow
-        vDR = oBD_Kronos.ObtenerRenglon("select personfullname, homelaborleveldsc7 from vp_employee where personnum = '" & vCve_Empleado & "'", "Login")
+        Dim vDR As DataRow = oBD_Kronos.ObtenerRenglon(String.Format("select personfullname, homelaborleveldsc7 from vp_employee where personnum = '{0}'", vCve_Empleado), "Login")
         If vDR IsNot Nothing Then
             vNombre_Empleado = vDR("personfullname")
             vEquipo_Empleado = vDR("homelaborleveldsc7")
@@ -91,7 +90,7 @@ Public Class Login
         Dim vRetorno As Integer = 0
         Dim vDR As DataRow
         Try
-            vDR = oBD_SICAIP.ObtenerRenglon("select cve_equipo from equipo where equipo = '" & Replace(vNombre_Equipo, "'", "''") & "'", "Login")
+            vDR = oBD_SICAIP.ObtenerRenglon(String.Format("select cve_equipo from equipo where equipo = '{0}'", Replace(vNombre_Equipo, "'", "''")), "Login")
             If vDR IsNot Nothing Then
                 vRetorno = vDR("cve_equipo")
             End If
@@ -111,9 +110,7 @@ Public Class Login
         Dim vRetorno As Integer = 0
         Using scope As New TransactionScope
             Try
-                Dim cmd As New SqlClient.SqlCommand
-                cmd.CommandType = CommandType.StoredProcedure
-                cmd.CommandText = "validar_equipo_piloto"
+                Dim cmd As New SqlClient.SqlCommand() With {.CommandType = CommandType.StoredProcedure, .CommandText = "validar_equipo_piloto"}
                 cmd.Parameters.Add("@nombre_equipo", SqlDbType.VarChar).Value = Replace(vNombre_Equipo, "'", "''")
                 Dim obj As DataTable = oBD_SICAIP.EjecutaCommando(cmd)
                 vRetorno = obj.Rows(0)(0)
@@ -135,9 +132,7 @@ Public Class Login
         Dim vRetorno As Integer = 0
         Using scope As New TransactionScope
             Try
-                Dim cmd As New SqlClient.SqlCommand
-                cmd.CommandType = CommandType.StoredProcedure
-                cmd.CommandText = "get_Tipo_Tlatoani"
+                Dim cmd As New SqlClient.SqlCommand() With {.CommandType = CommandType.StoredProcedure, .CommandText = "get_Tipo_Tlatoani"}
                 cmd.Parameters.Add("@nombre_equipo", SqlDbType.VarChar).Value = vNombre_Equipo
                 Dim obj As DataTable = oBD_SICAIP.EjecutaCommando(cmd)
                 vRetorno = obj.Rows(0)(0)

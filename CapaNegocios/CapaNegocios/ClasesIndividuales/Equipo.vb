@@ -5,16 +5,15 @@ Imports System.Drawing.Imaging
 
 Public Class Equipo
     Implements IIndividual
-    Dim cadena_conexion As New CapaDatos.conexiones
+    Dim cadena_conexion As New conexiones
     Dim oDetalle As Detalle
     Dim oLider As Lider
-    Dim oBD As New CapaDatos.CapaDatos(cadena_conexion.CadenaSicaip)
+    Dim oBD As New Datos(cadena_conexion.CadenaSicaip)
     Public vErrorRegistro As Boolean = False
 
 #Region "IIndividual"
     Public Sub Cargar() Implements IIndividual.Cargar
-        Dim vDR As DataRow
-        vDR = oBD.ObtenerRenglon("select * from equipo where cve_equipo = " & vCve_Equipo, "equipo")
+        Dim vDR As DataRow = oBD.ObtenerRenglon("select * from equipo where cve_equipo = " & vCve_Equipo, "equipo")
         If vDR IsNot Nothing Then
             If Not IsDBNull(vDR("cve_equipo")) Then
                 vCve_Equipo = vDR("cve_equipo")
@@ -69,9 +68,8 @@ Public Class Equipo
 
 
     Public Function Obtener_Id(ByVal vCadena As String) As Long Implements IIndividual.Obtener_Id
-        Dim vDR As DataRow
+        Dim vDR As DataRow = oBD.ObtenerRenglon("Select cve_equipo from equipo where cve_equipo_kronos=" & vCadena, "")
         Dim vRetorno As Long
-        vDR = oBD.ObtenerRenglon("Select cve_equipo from equipo where cve_equipo_kronos=" & vCadena, "")
         If vDR IsNot Nothing Then
             vRetorno = vDR("cve_equipo")
         Else
@@ -83,9 +81,7 @@ Public Class Equipo
     Public Sub Registrar() Implements IIndividual.Registrar
         Using scope As New TransactionScope
             Try
-                Dim cmd As New SqlClient.SqlCommand
-                cmd.CommandType = CommandType.StoredProcedure
-                cmd.CommandText = "REGISTRAR_Equipo"
+                Dim cmd As New SqlClient.SqlCommand() With {.CommandType = CommandType.StoredProcedure, .CommandText = "REGISTRAR_Equipo"}
                 cmd.Parameters.Add("@cve_equipo", SqlDbType.BigInt).Value = Me.vCve_Equipo
                 cmd.Parameters.Add("@cve_equipo_kronos", SqlDbType.VarChar).Value = Me.vCve_Equipo_Kronos
                 cmd.Parameters.Add("@cve_lider", SqlDbType.BigInt).Value = Me.vCve_Lider
@@ -123,7 +119,7 @@ Public Class Equipo
         Catch ex As Exception
             Return Nothing
         End Try
-       
+
     End Function
 
 #End Region
@@ -225,8 +221,7 @@ Public Class Equipo
     Public ReadOnly Property Nombre_Detalle() As String
         Get
             If Cve_Detalle <> 0 Then
-                oDetalle = New Detalle
-                oDetalle.Cve_Detalle = Cve_Detalle
+                oDetalle = New Detalle() With {.Cve_Detalle = Cve_Detalle}
                 oDetalle.Cargar()
                 Return oDetalle.Descripcion
             Else
@@ -238,8 +233,7 @@ Public Class Equipo
     Public ReadOnly Property Nombre_Lider() As String
         Get
             If Cve_Lider <> 0 Then
-                oLider = New Lider
-                oLider.cve_lider = Cve_Lider
+                oLider = New Lider() With {.cve_lider = Cve_Lider}
                 oLider.Cargar()
                 Return oLider.LG
             Else
@@ -252,8 +246,7 @@ Public Class Equipo
 
 #Region "Metodos Generales"
     Public Function Obtener_Equipos() As DataTable
-        Dim vDT As DataTable
-        vDT = oBD.ObtenerTabla("select cve_equipo, equipo as Descripcion from Equipo")
+        Dim vDT As DataTable = oBD.ObtenerTabla("select cve_equipo, equipo as Descripcion from Equipo")
         If vDT IsNot Nothing Then
 
         Else
@@ -263,8 +256,7 @@ Public Class Equipo
     End Function
 
     Public Function Obtener_Equipos(ByVal vFiltro As String) As DataTable
-        Dim vDT As DataTable
-        vDT = oBD.ObtenerTabla("select cve_equipo, equipo as Descripcion from Equipo where equipo LIKE '%" & vFiltro & "%'")
+        Dim vDT As DataTable = oBD.ObtenerTabla(String.Format("select cve_equipo, equipo as Descripcion from Equipo where equipo LIKE '%{0}%'", vFiltro))
         If vDT IsNot Nothing Then
 
         Else

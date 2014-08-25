@@ -1,8 +1,8 @@
 ﻿Imports CapaDatos
 Public Class Turno
     Implements IIndividual
-    Dim cadena_conexion As New CapaDatos.conexiones
-    Dim oBD As New CapaDatos.CapaDatos(cadena_conexion.CadenaSicaip)
+    Dim cadena_conexion As New conexiones
+    Dim oBD As New Datos(cadena_conexion.CadenaSicaip)
 #Region "IIndividual"
     Public Sub Cargar() Implements IIndividual.Cargar
         Dim rDatos As DataRow = Nothing
@@ -55,7 +55,7 @@ Public Class Turno
     Private vfecha_registro As DateTime
     Private vbandera_registro As Integer
     Private vcve_registro_turno As Long
-   
+
 
 #End Region
 #Region "Propiedades"
@@ -156,7 +156,7 @@ Public Class Turno
     Public Sub fecha_inicio_fin()
         Dim rDatos As DataRow = Nothing
         Try
-            rDatos = oBD.ObtenerRenglon("select * from fecha_inicio_fin (" & vcve_turno & ",'" & vfecha_registro.ToString("MM-dd-yyyy HH:mm:ss") & "');", "turno")
+            rDatos = oBD.ObtenerRenglon(String.Format("select * from fecha_inicio_fin ({0},'{1:MM-dd-yyyy HH:mm:ss}');", vcve_turno, vfecha_registro), "turno")
             If rDatos IsNot Nothing Then
                 If rDatos("inicio") IsNot DBNull.Value Then
                     Me.vinicio = rDatos("inicio")
@@ -170,9 +170,7 @@ Public Class Turno
     Public Sub valida_inicio_fin()
         Using scope As New TransactionScope
             Try
-                Dim cmd As New SqlClient.SqlCommand
-                cmd.CommandType = CommandType.StoredProcedure
-                cmd.CommandText = "valida_inicio_fin"
+                Dim cmd As New SqlClient.SqlCommand() With {.CommandType = CommandType.StoredProcedure, .CommandText = "valida_inicio_fin"}
                 cmd.Parameters.Add("@turno", SqlDbType.BigInt).Value = Me.vcve_turno
                 cmd.Parameters.Add("@fecha", SqlDbType.DateTime).Value = Me.vfecha_registro.ToString("yyyy-MM-dd HH:mm")
                 Dim obj As DataTable = oBD.EjecutaCommando(cmd)
@@ -189,10 +187,8 @@ Public Class Turno
     Public Sub valida_inicio_fin_produccion()
         Using scope As New TransactionScope
             Try
-                Dim cmd As New SqlClient.SqlCommand
-                cmd.CommandType = CommandType.StoredProcedure
-                cmd.CommandText = "valida_inicio_fin_produccion"
-                cmd.Parameters.Add("@cve_registro_turno", SqlDbType.BigInt).Value = Me.vcve_registro_turno  
+                Dim cmd As New SqlClient.SqlCommand() With {.CommandType = CommandType.StoredProcedure, .CommandText = "valida_inicio_fin_produccion"}
+                cmd.Parameters.Add("@cve_registro_turno", SqlDbType.BigInt).Value = Me.vcve_registro_turno
                 Dim obj As DataTable = oBD.EjecutaCommando(cmd)
                 Me.vinicio = obj.Rows(0)(0)
                 Me.vfin = obj.Rows(0)(1)

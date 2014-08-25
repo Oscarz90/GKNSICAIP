@@ -12,9 +12,8 @@ Namespace Configuracion
         ''' <param name="vRuta_Archivo">Cadena de la ruta del archivo a borrar(Se requiere que en el directorio contenga el archivo a eliminar con su extencion). Ejemplo: C:\Archivo_Eliminar.txt</param>
         ''' <remarks></remarks>
         Public Sub Eliminar_Archivo_Fisico(ByVal vRuta_Archivo)
-            Dim fso
             On Error Resume Next
-            fso = CreateObject("Scripting.FileSystemObject")
+            Dim fso = CreateObject("Scripting.FileSystemObject")
             fso.deletefile(vRuta_Archivo)
         End Sub
 
@@ -28,10 +27,8 @@ Namespace Configuracion
             ' Directory  
             Dim vExiste As Boolean = False
             If Directory.Exists(vRuta_Verificar) Then
-                'MsgBox("La carpeta existe", MsgBoxStyle.Information)
                 vExiste = True
             Else
-                'MsgBox("No existe", MsgBoxStyle.Information)
                 vExiste = False
             End If
             Return vExiste
@@ -47,10 +44,8 @@ Namespace Configuracion
         Public Function Existe_Archivo(ByVal vRuta_Archivo_Verificar As String) As Boolean
             Dim vExiste As Boolean = False
             If File.Exists(vRuta_Archivo_Verificar) Then
-                'MsgBox("Existe", MsgBoxStyle.Information)
                 vExiste = True
             Else
-                'MsgBox("No existe", MsgBoxStyle.Information)
                 vExiste = False
             End If
             Return vExiste
@@ -67,7 +62,7 @@ Namespace Configuracion
                 ' Renombrarlo con la función renameFile  
                 My.Computer.FileSystem.RenameFile(vRuta_Archivo, vNombre_Nuevo_Archivo)
             Catch ex As Exception
-                'MsgBox(ex.Message.ToString, MsgBoxStyle.Critical)
+
             End Try
         End Sub
 
@@ -81,8 +76,6 @@ Namespace Configuracion
             Try
                 ' Mover el fichero.si existe lo sobreescribe  
                 My.Computer.FileSystem.MoveFile(vRuta_Archivo_Origen, vRuta_Destino, True)
-                'MsgBox("Ok.", MsgBoxStyle.Information, "Mover archivo")
-                ' errores  
             Catch ex As Exception
                 MsgBox(ex.Message.ToString, MsgBoxStyle.Critical)
             End Try
@@ -131,12 +124,10 @@ Namespace Configuracion
         Public Function Cantidad_Archivos(ByVal vRuta_Verificar As String) As Object
             Dim vCantidad_Archivos As String = ""
             Try
-                Dim ContadorDeArchivos As System.Collections.ObjectModel.ReadOnlyCollection(Of String)
                 'le indicamos el path que queremos  
-                ContadorDeArchivos = My.Computer.FileSystem.GetFiles(vRuta_Verificar)
+                Dim ContadorDeArchivos As System.Collections.ObjectModel.ReadOnlyCollection(Of String) = My.Computer.FileSystem.GetFiles(vRuta_Verificar)
                 'nos devuelve la cantidad de archivos  
                 vCantidad_Archivos = (ContadorDeArchivos.Count).ToString
-                'MsgBox("La Cantidad de Archivos es: " & CStr(ContadorDeArchivos.Count))
             Catch oExcep As Exception
                 MsgBox("Descripción del error : " & _
                        oExcep.Message, MsgBoxStyle.Critical, "Error")
@@ -152,7 +143,7 @@ Namespace Configuracion
         ''' <remarks></remarks>
         Public Function Obtener_Extension_Archivo(ByVal vRuta_Archivo_Verificar As String) As String
             Dim vExtension As String = ""
-            Dim Caracter As String = "."
+            Const Caracter As String = "."
             If Caracter = "." And InStr(vRuta_Archivo_Verificar, Caracter) <> 0 Then
                 vExtension = "." & Right(vRuta_Archivo_Verificar, Len(vRuta_Archivo_Verificar) - InStrRev(vRuta_Archivo_Verificar, Caracter))
             End If
@@ -167,7 +158,7 @@ Namespace Configuracion
         ''' <remarks></remarks>
         Public Function Obtener_Ruta(ByVal vRuta_Obtener As String) As String
             Dim vRuta_Obtenida As String = ""
-            Dim Caracter As String = "\"
+            Const Caracter As String = "\"
 
             If vRuta_Obtener <> "" And Caracter <> "" Then
                 vRuta_Obtenida = Left(vRuta_Obtener, InStrRev(vRuta_Obtener, Caracter))
@@ -183,19 +174,18 @@ Namespace Configuracion
         ''' <returns>El directorio creado.</returns>
         ''' <remarks></remarks>
         Public Function Crear_Direcctorio(ByVal vDirectorio_A_Crear As String) As String
-            System.IO.Directory.CreateDirectory(vDirectorio_A_Crear)
+            Directory.CreateDirectory(vDirectorio_A_Crear)
             Return vDirectorio_A_Crear
         End Function
 
         ''' <summary>
         ''' Crea una carpeta en el directorio especificado.
         ''' </summary>
-        ''' <param name="vDirectorio_Raiz">Directorio donde se desea crear la nueva carpeta</param>
         ''' <param name="vNombre_Nueva_Carpeta">Nombre de la carpeta a crear</param>
         ''' <remarks></remarks>
-        Public Sub Crear_Carpeta(ByVal vDirectorio_Raiz As String, ByVal vNombre_Nueva_Carpeta As String)
+        Public Sub Crear_Carpeta(ByVal vNombre_Nueva_Carpeta As String)
             Try
-                System.IO.Directory.CreateDirectory(vNombre_Nueva_Carpeta)
+                Directory.CreateDirectory(vNombre_Nueva_Carpeta)
             Catch ex As Exception
                 MsgBox("No se puede crear la carpeta.")
             End Try
@@ -209,9 +199,8 @@ Namespace Configuracion
         ''' <remarks></remarks>
         Public Sub CopiarArchivo(ByVal vRutaOrigen As String, ByVal vRutaDestino As String)
             Try
-                System.IO.File.Copy(vRutaOrigen, vRutaDestino, True)
+                File.Copy(vRutaOrigen, vRutaDestino, True)
             Catch ex As Exception
-                'MsgBox("No se puede copiar el archivo")
                 MsgBox(ex.Message)
             End Try
         End Sub

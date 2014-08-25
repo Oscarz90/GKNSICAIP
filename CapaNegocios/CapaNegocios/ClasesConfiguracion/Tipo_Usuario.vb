@@ -4,8 +4,8 @@ Imports System.Data.SqlClient
 Public Class Tipo_Usuario
     Implements IIndividual
 
-    Dim cadena_conexion As New CapaDatos.conexiones
-    Dim oBD As New CapaDatos.CapaDatos(cadena_conexion.CadenaSicaip)
+    Dim cadena_conexion As New conexiones
+    Dim oBD As New Datos(cadena_conexion.CadenaSicaip)
 
 #Region "IIndividual"
     Public Sub Cargar() Implements IIndividual.Cargar
@@ -30,20 +30,12 @@ Public Class Tipo_Usuario
     End Sub
 
     Public Sub Eliminar() Implements IIndividual.Eliminar
-        'If Usuario.ChecaPermisoTarea("TELEFONO.ELIMINAR") Then
         Try
             oBD.EjecutarQuery("DELETE SEGURIDAD_TIPO_USUARIO WHERE CVE_Tipo_Usuario=" & Me.vCVE_Tipo_Usuario)
             MsgBox("Se elimino correctamente el Tipo de Usuario")
-            'Dim oBitacora As Bitacora = Bitacora.ObtenInstancia
-            'oBitacora.RegistrarEnBitacora("Telefono.ELIMINAR", "Se eliminó el Teléfono: " & Me.m_Telefono_Id)
         Catch ex As Exception
             MsgBox("No se puede eliminar este registro, el Tipo de Usuario se encuentra asignado en un Usuario")
-            'Tiene relacion con otras partes del sistema
-            'Throw New CustomException(Errores.Eliminar)
         End Try
-        'Else
-        'Throw New CustomException(Errores.Permiso)
-        'End If
     End Sub
 
     Public Function Obtener_Id(ByVal vCadena As String) As Long Implements IIndividual.Obtener_Id
@@ -53,20 +45,13 @@ Public Class Tipo_Usuario
     Public Sub Registrar() Implements IIndividual.Registrar
         Using scope As New TransactionScope()
             Try
-                Dim cmd As New SqlClient.SqlCommand
-                cmd.CommandType = CommandType.StoredProcedure
-                cmd.CommandText = "REGISTRAR_SEGURIDAD_TIPO_USUARIO"
-
+                Dim cmd As New SqlCommand() With {.CommandType = CommandType.StoredProcedure, .CommandText = "REGISTRAR_SEGURIDAD_TIPO_USUARIO"}
                 With cmd.Parameters
                     .Add("CVE_Tipo_Usuario", SqlDbType.BigInt).Value = Me.vCVE_Tipo_Usuario
                     .Add("Nombre_Tipo_Usuario", SqlDbType.VarChar).Value = Me.vNombre_Tipo_Usuario
                 End With
-
                 Dim obj As DataTable = oBD.EjecutaCommando(cmd)
                 Me.vCVE_Tipo_Usuario = obj.Rows(0)(0) 'ID
-                'Me.RegistraDatos("DEPARTAMENTO", "Departamento_Id", Me.m_Departamento_Id)
-                'Dim oBitacora As Bitacora = Bitacora.ObtenInstancia
-                'oBitacora.RegistrarEnBitacora("DEPARTAMENTO.REGISTRAR", "Se registró el departamento: " & Me.m_Nombre)
                 scope.Complete()
             Catch ex As Exception
                 Throw New Exception(ex.Message)
@@ -102,8 +87,7 @@ Public Class Tipo_Usuario
 
 #Region "Metodos Generales"
     Public Function Obtener_Tipos_Usuarios() As DataTable
-        Dim vDT As DataTable
-        vDT = oBD.ObtenerTabla("select CVE_Tipo_Usuario, Nombre_Tipo_Usuario as Descripcion from SEGURIDAD_TIPO_USUARIO")
+        Dim vDT As DataTable = oBD.ObtenerTabla("select CVE_Tipo_Usuario, Nombre_Tipo_Usuario as Descripcion from SEGURIDAD_TIPO_USUARIO")
         If vDT IsNot Nothing Then
 
         Else
@@ -113,8 +97,7 @@ Public Class Tipo_Usuario
     End Function
 
     Public Function Obtener_Tipos_Usuarios(ByVal vFiltro As String) As DataTable
-        Dim vDT As DataTable
-        vDT = oBD.ObtenerTabla("select CVE_Tipo_Usuario, Nombre_Tipo_Usuario as Descripcion from SEGURIDAD_TIPO_USUARIO where Nombre_Tipo_Usuario LIKE '%" & vFiltro & "%'")
+        Dim vDT As DataTable = oBD.ObtenerTabla(String.Format("select CVE_Tipo_Usuario, Nombre_Tipo_Usuario as Descripcion from SEGURIDAD_TIPO_USUARIO where Nombre_Tipo_Usuario LIKE '%{0}%'", vFiltro))
         If vDT IsNot Nothing Then
 
         Else

@@ -1,5 +1,4 @@
-﻿Imports CapaNegocios
-Imports Microsoft.Office.Interop 'referencia para leer excel
+﻿Imports Microsoft.Office.Interop 'referencia para leer excel
 Imports System.Security.Principal
 
 Public Class ArchivoGraficas
@@ -13,21 +12,18 @@ Public Class ArchivoGraficas
     Public Sub Abre_Graficas()
         usuario = Mid(WindowsIdentity.GetCurrent.Name, 11).ToUpper
         Exl = New Excel.Application
-        'Exl.Workbooks.Open(Application.StartupPath & "\Graficador\PDFGrafica.xlsm")
         Exl.Workbooks.Open("C:\Users\Patricia\Documents\Graficador\PDFGrafica.xlsm")
         Exl.Visible = False
     End Sub
     Public Sub Cierra_Graficas()
         Try
             Exl.Workbooks("PDFGrafica.xlsm").Close(False)
-            'Exl.Workbooks("C:\Users\Patricia\Documents\Graficador\PDFGrafica.xlsm").Close(False)
         Catch
             MsgBox("no cerro el archivo")
         End Try
     End Sub
     Public Sub Exporta_Graficas_PDF(ByVal ruta As String)
         Try
-            'Exl.Run("convierte_2", Application.StartupPath & "\Graficador", ruta)
             Exl.Run("convierte_2", "C:\Users\Patricia\Documents\Graficador", ruta)
         Catch
         End Try

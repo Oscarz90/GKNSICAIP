@@ -12,19 +12,14 @@ Public Class FrmSeleccion_CV
         ' Agregue cualquier inicialización después de la llamada a InitializeComponent().
     End Sub
 
-    Private Sub btnSalir_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSalir.Click
+    Private Sub btnSalir_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnSalir.Click
         Me.Close()
     End Sub
 
-    Private Sub FrmSeleccion_CV_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
+    Private Sub FrmSeleccion_CV_Load(ByVal sender As Object, ByVal e As EventArgs) Handles MyBase.Load
         oCV = New Cadena_Valor
-        'Lista_Datos.DataSource = oCV.Obtener_Cadenas_Valor
-        'Lista_Datos.ValueMember = "cve_cadena_valor"
-        'Lista_Datos.DisplayMember = "cadena"
         Dim vIndex As Integer
-        'oComponente = New Componente
-        oUsuario = New SEGURIDAD_USUARIO
-        oUsuario.CVE_Usuario = vCve_User
+        oUsuario = New SEGURIDAD_USUARIO() With {.CVE_Usuario = vCve_User}
         Dim vItems As ListViewItem = Nothing
 
         For Each vDR As DataRow In oCV.Obtener_Cadenas_Valor.Rows
@@ -34,12 +29,7 @@ Public Class FrmSeleccion_CV
             Lista_Datos_W.Items.Add(vItems)
         Next
 
-        'Lista_Datos.DataSource = oComponente.Obtener_Componentes
-        'Lista_Datos.ValueMember = "cve_componente"
-        'Lista_Datos.DisplayMember = "componente"        
-
         If oCV.Obtener_CV_Usuario(oUsuario.CVE_Usuario) IsNot Nothing Then
-
             For vIndex = 0 To Lista_Datos_W.Items.Count - 1
                 For Each vdr As DataRow In oCV.Obtener_CV_Usuario(oUsuario.CVE_Usuario).Rows
                     If Lista_Datos_W.Items.Item(vIndex).Tag = vdr("CVE_Cadena_Valor") Then
@@ -51,9 +41,7 @@ Public Class FrmSeleccion_CV
         End If
     End Sub
 
-
-
-    Private Sub btnRegistrar_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnRegistrar.Click
+    Private Sub btnRegistrar_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnRegistrar.Click
         Dim vIndice As Integer
         For vIndice = 0 To Lista_Datos_W.Items.Count - 1
             If Lista_Datos_W.Items.Item(vIndice).Checked = True Then

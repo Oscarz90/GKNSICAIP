@@ -1,13 +1,12 @@
 ﻿Imports CapaDatos
 Public Class Registro_Paro
     Implements IIndividual
-    Dim cadena_conexion As New CapaDatos.conexiones
-    Dim oBD As New CapaDatos.CapaDatos(cadena_conexion.CadenaSicaip)
+    Dim cadena_conexion As New conexiones
+    Dim oBD As New Datos(cadena_conexion.CadenaSicaip)
 
 #Region "IIndividual"
     Public Sub Cargar() Implements IIndividual.Cargar
-        Dim vDR As DataRow
-        vDR = oBD.ObtenerRenglon("select * from registro_paro where cve_registro_paro = " & vCve_registro_paro, "registro_paro")
+        Dim vDR As DataRow = oBD.ObtenerRenglon("select * from registro_paro where cve_registro_paro = " & vCve_registro_paro, "registro_paro")
         If vDR IsNot Nothing Then
             vCve_registro_paro = vDR("cve_registro_paro")
             vCve_registro_turno = vDR("cve_registro_turno")
@@ -25,9 +24,7 @@ Public Class Registro_Paro
     Public Sub Eliminar() Implements IIndividual.Eliminar
         Using scope As New TransactionScope
             Try
-                Dim vComando As New SqlClient.SqlCommand
-                vComando.CommandType = CommandType.StoredProcedure
-                vComando.CommandText = "delete_registro_paro"
+                Dim vComando As New SqlClient.SqlCommand() With {.CommandType = CommandType.StoredProcedure, .CommandText = "delete_registro_paro"}
                 vComando.Parameters.Add("@cve_registro_paro", SqlDbType.BigInt).Value = Me.vCve_registro_paro
                 vComando.Parameters.Add("@cod_empleado_eliminacion", SqlDbType.VarChar).Value = Me.vCod_empleado_eliminacion
                 vComando.Parameters.Add("@fecha_eliminacion", SqlDbType.DateTime).Value = Me.vFecha_eliminacion
@@ -39,9 +36,8 @@ Public Class Registro_Paro
         End Using
     End Sub
     Public Function Obtener_Id(ByVal vCadena As String) As Long Implements IIndividual.Obtener_Id
-        Dim vDR As DataRow
+        Dim vDR As DataRow = oBD.ObtenerRenglon("select cve_registro_paro from registro_paro where cve_registro_turno = " & vCadena, "registro_paro")
         Dim vRetorno As Long
-        vDR = oBD.ObtenerRenglon("select cve_registro_paro from registro_paro where cve_registro_turno = " & vCadena, "registro_paro")
         If vDR IsNot Nothing Then
             vRetorno = vDR("cve_registro_paro")
         Else
@@ -150,7 +146,7 @@ Public Class Registro_Paro
         End Set
     End Property
 
-    
+
     Public Property Cod_empleado_eliminacion() As String
         Get
             Return vCod_empleado_eliminacion
@@ -214,9 +210,7 @@ Public Class Registro_Paro
     Public Sub captura_CDM(ByRef oDDetalle_CDM_total As Detalle_CDM_Total)
         Using scope As New TransactionScope
             Try
-                Dim vComando As New SqlClient.SqlCommand
-                vComando.CommandType = CommandType.StoredProcedure
-                vComando.CommandText = "captura_Paros_CDM"
+                Dim vComando As New SqlClient.SqlCommand() With {.CommandType = CommandType.StoredProcedure, .CommandText = "captura_Paros_CDM"}
                 vComando.Parameters.Add("@cve_registro_turno", SqlDbType.Int).Value = Me.vCve_registro_turno
                 vComando.Parameters.Add("@cod_empleado", SqlDbType.VarChar).Value = Me.vCod_empleado_registro
                 vComando.Parameters.Add("@fecha_registro", SqlDbType.DateTime).Value = Convert.ToDateTime(Me.vFecha_registro)
@@ -232,12 +226,12 @@ Public Class Registro_Paro
                 vComando.Parameters.Add("@costo", SqlDbType.Float).Value = oDDetalle_CDM_total.costo
                 vComando.Parameters.Add("@fecha_inicial", SqlDbType.DateTime).Value = oDDetalle_CDM_total.fecha_inicial
                 vComando.Parameters.Add("@fecha_final", SqlDbType.DateTime).Value = oDDetalle_CDM_total.fecha_final
-                'oBD.EjecutaProcedimientos(vComando)
+
                 Dim obj As DataTable = oBD.EjecutaCommando(vComando)
                 Me.vCve_registro_paro = obj.Rows(0)(0)
                 scope.Complete()
             Catch 'ex As Exception
-                'Throw New Exception(ex.Message)
+
                 MsgBox("Error al insertar CDM. CRegistro_Paro_ERROR", vbCritical + vbOKOnly, "Error")
             End Try
         End Using
@@ -245,9 +239,7 @@ Public Class Registro_Paro
     Public Sub captura_detalle_CDM()
         Using scope As New TransactionScope
             Try
-                Dim vComando As New SqlClient.SqlCommand
-                vComando.CommandType = CommandType.StoredProcedure
-                vComando.CommandText = "captura_Paros_detalles_CDM"
+                Dim vComando As New SqlClient.SqlCommand() With {.CommandType = CommandType.StoredProcedure, .CommandText = "captura_Paros_detalles_CDM"}
                 vComando.Parameters.Add("@cve_registro_paro", SqlDbType.BigInt).Value = Me.vCve_registro_paro
                 vComando.Parameters.Add("@cve_registro_turno", SqlDbType.BigInt).Value = Me.vCve_registro_turno
                 vComando.Parameters.Add("@cod_empleado", SqlDbType.VarChar).Value = Me.vCod_empleado_registro

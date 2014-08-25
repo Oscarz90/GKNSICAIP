@@ -16,36 +16,15 @@ Public Class frmLinea
         ' Agregue cualquier inicialización después de la llamada a InitializeComponent().
     End Sub
 
-    Private Sub frmLinea_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
-
-        ''La Siguiente Linea solo es para hacer pruebas sobre una Linea de Prueba(El cual se agrego y se modifico de forma Exitosa)
-        ''Borrar si requiere hacer registro nuevo
-        'vId_Publico = 80
+    Private Sub frmLinea_Load(ByVal sender As Object, ByVal e As EventArgs) Handles MyBase.Load
 
         If Convert.ToInt64(vId_Publico) <> 0 Then
-            oLinea = New Linea
-            oLinea.cve_linea = vId_Publico
+            oLinea = New Linea() With {.cve_linea = vId_Publico}
             oLinea.Cargar()
             Controles_Registro_Nuevo(False)
-            'vValida_Nombre = oLinea.linea.Count
-            'If vValida_Nombre > 0 Then
-            '    btnRegistrar.Enabled = True
-            '    btnModificar.Enabled = True
-            'Else
-            '    btnRegistrar.Enabled = False
-            '    btnModificar.Enabled = False
-            'End If
         Else
-            oLinea = New Linea
-            oLinea.linea = ""
+            oLinea = New Linea() With {.linea = ""}
             Controles_Registro_Nuevo(True)
-            'If vValida_Nombre > 0 Then
-            '    btnRegistrar.Enabled = True
-            '    btnModificar.Enabled = True
-            'Else
-            '    btnRegistrar.Enabled = False
-            '    btnModificar.Enabled = False
-            'End If
         End If
         vValida_Nombre = oLinea.linea.Count
         If vValida_Nombre > 0 Then
@@ -61,18 +40,18 @@ Public Class frmLinea
         Me.txtNombre_Linea.Focus()
     End Sub
 
-    Private Sub btnSalir_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSalir.Click
+    Private Sub btnSalir_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnSalir.Click
         Me.Close()
     End Sub
 
-    Private Sub btnImportar_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnImportar.Click
+    Private Sub btnImportar_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnImportar.Click
         Dim ofrmImportador_Componente As New frmImportador_Componente
         ofrmImportador_Componente.ShowDialog()
         oLinea.cve_componente = ofrmImportador_Componente.vRetorno_CVE_Componente
         txtComponente.Text = oLinea.Nombre_Componente
     End Sub
 
-    Private Sub btnDarBaja_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnDarBaja.Click
+    Private Sub btnDarBaja_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnDarBaja.Click
         If MsgBox("¿Esta seguro de Dar de Baja la Linea?, se daran de baja los TC relacionados con esta linea", MsgBoxStyle.YesNo, Me.Text) = MsgBoxResult.Yes Then
             Try
                 oLinea.Eliminar()
@@ -83,8 +62,8 @@ Public Class frmLinea
         End If
     End Sub
 
-    Private Sub btnRegistrar_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnRegistrar.Click
-        If vValida_Nombre > 0 Then          
+    Private Sub btnRegistrar_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnRegistrar.Click
+        If vValida_Nombre > 0 Then
             If MsgBox("¿Esta seguro de registrar la nueva Linea?", MsgBoxStyle.YesNo, Me.Text) = MsgBoxResult.Yes Then
                 oLinea.cve_linea = 0
                 oLinea.linea = txtNombre_Linea.Text
@@ -102,7 +81,7 @@ Public Class frmLinea
         End If
     End Sub
 
-    Private Sub btnModificar_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnModificar.Click
+    Private Sub btnModificar_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnModificar.Click
         If vValida_Nombre > 0 Then
             If MsgBox("¿Esta seguro de realizar los cambios a la Linea?", MsgBoxStyle.YesNo, Me.Text) = MsgBoxResult.Yes Then
                 oLinea.linea = txtNombre_Linea.Text
@@ -155,47 +134,33 @@ Public Class frmLinea
             Me.btnRegistrar.Enabled = True
             Me.btnModificar.Enabled = True
             Me.btnDarBaja.Enabled = False
-            'txtNombre_Linea.ReadOnly = False
-            'nudTPCM.ReadOnly = False
         Else
             Me.btnRegistrar.Enabled = False
             Me.btnModificar.Enabled = False
             Me.btnDarBaja.Enabled = True
-            'txtNombre_Linea.ReadOnly = True
-            'nudTPCM.ReadOnly = True
-            'btnImportar.Enabled = False
         End If
         If vDelete = True Then
             Me.btnDarBaja.Enabled = True
             Me.btnRegistrar.Enabled = False
             Me.btnModificar.Enabled = False
-            'txtNombre_Linea.ReadOnly = True
-            'nudTPCM.ReadOnly = True
-            'btnImportar.Enabled = False
         Else
             Me.btnDarBaja.Enabled = False
             Me.btnRegistrar.Enabled = True
             Me.btnModificar.Enabled = True
         End If
         If vAdd = False And vDelete = False Then
-            'txtNombre_Linea.ReadOnly = True
-            'nudTPCM.ReadOnly = True
-            'btnImportar.Enabled = False
             Me.btnDarBaja.Enabled = False
             Me.btnRegistrar.Enabled = False
             Me.btnModificar.Enabled = False
         End If
         If vAdd = True And vDelete = True Then
-            'txtNombre_Linea.ReadOnly = False
-            'nudTPCM.ReadOnly = False
-            'btnImportar.Enabled = False
             Me.btnDarBaja.Enabled = True
             Me.btnRegistrar.Enabled = True
             Me.btnModificar.Enabled = True
         End If
     End Sub
 
-    Private Sub txtNombre_Linea_KeyUp(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtNombre_Linea.KeyUp
+    Private Sub txtNombre_Linea_KeyUp(ByVal sender As Object, ByVal e As KeyEventArgs) Handles txtNombre_Linea.KeyUp
         vValida_Nombre = txtNombre_Linea.Text.Count
 
         If vValida_Nombre > 0 Then
@@ -205,7 +170,7 @@ Public Class frmLinea
             Else
                 btnRegistrar.Enabled = False
                 btnModificar.Enabled = False
-            End If           
+            End If
         Else
             btnRegistrar.Enabled = False
             btnModificar.Enabled = False

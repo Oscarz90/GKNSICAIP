@@ -1,12 +1,11 @@
 ﻿Imports CapaDatos
 Public Class Lider
     Implements IIndividual
-    Dim cadena_conexion As New CapaDatos.conexiones
-    Dim oBD As New CapaDatos.CapaDatos(cadena_conexion.CadenaSicaip)
+    Dim cadena_conexion As New conexiones
+    Dim oBD As New Datos(cadena_conexion.CadenaSicaip)
 #Region "IIndividual"
     Public Sub Cargar() Implements IIndividual.Cargar
-        Dim vDR As DataRow
-        vDR = oBD.ObtenerRenglon("select * from lider where cve_lider = " & vcve_lider, "lider")
+        Dim vDR As DataRow = oBD.ObtenerRenglon("select * from lider where cve_lider = " & vcve_lider, "lider")
         If vDR IsNot Nothing Then
             vcve_lider = vDR("cve_lider")
             vLG = vDR("LG")
@@ -21,11 +20,10 @@ Public Class Lider
 
         End Try
     End Sub
-    
+
     Public Function Obtener_Id(ByVal vCadena As String) As Long Implements IIndividual.Obtener_Id
-        Dim vDR As DataRow
+        Dim vDR As DataRow = oBD.ObtenerRenglon(String.Format("Select cve_lider from lider where codigo_LG='{0}'", vCadena), "")
         Dim vRetorno As Long
-        vDR = oBD.ObtenerRenglon("Select cve_lider from lider where codigo_LG='" & vCadena & "'", "")
         If vDR IsNot Nothing Then
             vRetorno = vDR("cve_lider")
         Else
@@ -37,9 +35,7 @@ Public Class Lider
     Public Sub Registrar() Implements IIndividual.Registrar
         Using scope As New TransactionScope
             Try
-                Dim cmd As New SqlClient.SqlCommand
-                cmd.CommandType = CommandType.StoredProcedure
-                cmd.CommandText = "REGISTRAR_Lider"
+                Dim cmd As New SqlClient.SqlCommand() With {.CommandType = CommandType.StoredProcedure, .CommandText = "REGISTRAR_Lider"}
                 cmd.Parameters.Add("@cve_lider", SqlDbType.BigInt).Value = Me.vcve_lider
                 cmd.Parameters.Add("@LG", SqlDbType.VarChar).Value = Me.vLG
                 cmd.Parameters.Add("@Codigo_LG", SqlDbType.VarChar).Value = Me.vCodigo_LG
@@ -90,8 +86,7 @@ Public Class Lider
 #Region "Metodos generales"
 
     Public Function Obtener_Lineas() As DataTable
-        Dim vDT As DataTable
-        vDT = oBD.ObtenerTabla("select * from lider")
+        Dim vDT As DataTable = oBD.ObtenerTabla("select * from lider")
         If vDT IsNot Nothing Then
 
         Else
@@ -101,8 +96,7 @@ Public Class Lider
     End Function
 
     Public Function Obtener_Lineas(ByVal vFiltro As String) As DataTable
-        Dim vDT As DataTable
-        vDT = oBD.ObtenerTabla("select * from lider where LG LIKE '%" & vFiltro & "%'")
+        Dim vDT As DataTable = oBD.ObtenerTabla(String.Format("select * from lider where LG LIKE '%{0}%'", vFiltro))
         If vDT IsNot Nothing Then
 
         Else

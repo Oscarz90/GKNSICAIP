@@ -1,5 +1,4 @@
-﻿Imports CapaNegocios
-Public Class msg_ModificacionesPermiso
+﻿Public Class msg_ModificacionesPermiso
 #Region "Variables"
     Public vRespuesta As Boolean = False
     Private voperacion As String
@@ -15,10 +14,10 @@ Public Class msg_ModificacionesPermiso
     End Property
 #End Region
 #Region "Objetos"
-    Private oModificacionesPermiso As CapaNegocios.Modificacion_Permiso
+
 #End Region
 #Region "Inicial"
-    Private Sub msg_ModificacionesPermiso_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
+    Private Sub msg_ModificacionesPermiso_Load(ByVal sender As Object, ByVal e As EventArgs) Handles MyBase.Load
         inicializa_etiquetas()
     End Sub
 #End Region
@@ -34,16 +33,16 @@ Public Class msg_ModificacionesPermiso
 #End Region
 #Region "Eventos"
     'Evento Checkbox
-    Private Sub chkbxAcuerdo_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles chkbxAcuerdo.CheckedChanged
+    Private Sub chkbxAcuerdo_CheckedChanged(ByVal sender As Object, ByVal e As EventArgs) Handles chkbxAcuerdo.CheckedChanged
         valida_btn_Aceptar()
     End Sub
     'Boton Aceptar
-    Private Sub btnAceptar_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnAceptar.Click
+    Private Sub btnAceptar_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnAceptar.Click
         vRespuesta = True
         Me.Close()
     End Sub
     'Boton Cancelar
-    Private Sub btnCancelar_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnCancelar.Click
+    Private Sub btnCancelar_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnCancelar.Click
         vRespuesta = False
         Me.Close()
     End Sub

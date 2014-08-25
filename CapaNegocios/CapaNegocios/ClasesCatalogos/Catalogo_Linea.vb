@@ -1,15 +1,15 @@
 ﻿Imports CapaDatos
 Namespace Clases_Catalogos
     Public Class Catalogo_Linea
-        Dim cadena_conexion As New CapaDatos.conexiones
-        Dim oBD As New CapaDatos.CapaDatos(cadena_conexion.CadenaSicaip)
+        Dim cadena_conexion As New conexiones
+        Dim oBD As New Datos(cadena_conexion.CadenaSicaip)
         Private vL_Linea As List(Of Linea)
         Public Property L_Linea() As List(Of Linea)
             Get
                 If vL_Linea Is Nothing Then
                     'Cargo documentos
                     Me.L_Linea = New List(Of Linea)
-                    Dim oBD As New CapaDatos.CapaDatos(cadena_conexion.CadenaSicaip)
+                    Dim oBD As New Datos(cadena_conexion.CadenaSicaip)
                     Dim oEq As DataTable = oBD.ObtenerTabla("SELECT cve_linea FROM Linea")
                     If oEq IsNot Nothing Then
                         Dim oLinea As Linea = Nothing
@@ -28,8 +28,7 @@ Namespace Clases_Catalogos
             End Set
         End Property
         Public Function Obtener_Lineas() As DataTable
-            Dim vDT As DataTable
-            vDT = oBD.ObtenerTabla("SELECT cve_linea, linea, componente, tpcdm " & _
+            Dim vDT As DataTable = oBD.ObtenerTabla("SELECT cve_linea, linea, componente, tpcdm " & _
                                    " FROM Linea l JOIN componente c ON l.cve_componente= c.cve_componente " & _
                                    " WHERE l.Estatus= '1'")
             If vDT IsNot Nothing Then

@@ -1,12 +1,11 @@
 ﻿Imports CapaDatos
 Public Class Nivel_Usuario
     Implements IIndividual
-    Dim cadena_conexion As New CapaDatos.conexiones
-    Dim oBD As New CapaDatos.CapaDatos(cadena_conexion.CadenaSicaip)
+    Dim cadena_conexion As New conexiones
+    Dim oBD As New Datos(cadena_conexion.CadenaSicaip)
 #Region "IIndividual"
     Public Sub Cargar() Implements IIndividual.Cargar
-        Dim vDR As DataRow
-        vDR = oBD.ObtenerRenglon("select * from nivel_usuario where cve_nivel_usuario = " & vCve_nivel_usuario, "nivel_usuario")
+        Dim vDR As DataRow = oBD.ObtenerRenglon("select * from nivel_usuario where cve_nivel_usuario = " & vCve_nivel_usuario, "nivel_usuario")
         If vDR IsNot Nothing Then
             vCve_nivel_usuario = vDR("cve_nivel_usuario")
             vNivel = vDR("nivel")
@@ -20,12 +19,11 @@ Public Class Nivel_Usuario
 
         End Try
     End Sub
-   
+
 
     Public Function Obtener_Id(ByVal vCadena As String) As Long Implements IIndividual.Obtener_Id
-        Dim vDR As DataRow
+        Dim vDR As DataRow = oBD.ObtenerRenglon("select cve_nivel_usuario from nivel_usuario where nivel = " & vCadena, "nivel_usuario")
         Dim vRetorno As Long
-        vDR = oBD.ObtenerRenglon("select cve_nivel_usuario from nivel_usuario where nivel = " & vCadena, "nivel_usuario")
         If vDR IsNot Nothing Then
             vRetorno = vDR("cve_nivel_usuario")
         Else
@@ -38,9 +36,7 @@ Public Class Nivel_Usuario
 
         Using scope As New TransactionScope
             Try
-                Dim cmd As New SqlClient.SqlCommand
-                cmd.CommandType = CommandType.StoredProcedure
-                cmd.CommandText = "REGISTRAR_nivel_usuario"
+                Dim cmd As New SqlClient.SqlCommand() With {.CommandType = CommandType.StoredProcedure, .CommandText = "REGISTRAR_nivel_usuario"}
                 cmd.Parameters.Add("@cve_nivel_usuario", SqlDbType.Int).Value = Me.vCve_nivel_usuario
                 cmd.Parameters.Add("@nivel", SqlDbType.VarChar).Value = Me.vNivel
 

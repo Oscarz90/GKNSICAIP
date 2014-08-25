@@ -1,8 +1,8 @@
 ﻿Imports CapaDatos
 Public Class Cinco_S
     Implements IIndividual
-    Dim cadena_conexion As New CapaDatos.conexiones
-    Dim oBD As New CapaDatos.CapaDatos(cadena_conexion.CadenaSicaip)
+    Dim cadena_conexion As New conexiones
+    Dim oBD As New Datos(cadena_conexion.CadenaSicaip)
 #Region "IIndividual"
     Public Sub Cargar() Implements IIndividual.Cargar
 
@@ -28,9 +28,7 @@ Public Class Cinco_S
     Public Sub Registrar() Implements IIndividual.Registrar
         Using scope As New TransactionScope
             Try
-                Dim vComando As New SqlClient.SqlCommand
-                vComando.CommandType = CommandType.StoredProcedure
-                vComando.CommandText = "Captura_cinco_S_Produccion"
+                Dim vComando As New SqlClient.SqlCommand() With {.CommandType = CommandType.StoredProcedure, .CommandText = "Captura_cinco_S_Produccion"}
                 vComando.Parameters.Add("@cve_registro_turno", SqlDbType.BigInt).Value = Me.vcve_registro_turno
                 vComando.Parameters.Add("@cod_empleado", SqlDbType.VarChar).Value = Me.vcod_empleado
                 vComando.Parameters.Add("@fecha", SqlDbType.DateTime).Value = Me.vfecha
@@ -140,9 +138,7 @@ Public Class Cinco_S
     Public Sub verifica_cinco_S()
         Using scope As New TransactionScope
             Try
-                Dim cmd As New SqlClient.SqlCommand
-                cmd.CommandType = CommandType.StoredProcedure
-                cmd.CommandText = "verifica_cinco_S"
+                Dim cmd As New SqlClient.SqlCommand() With {.CommandType = CommandType.StoredProcedure, .CommandText = "verifica_cinco_S"}
                 cmd.Parameters.Add("@cve_registro_turno", SqlDbType.BigInt).Value = Me.vcve_registro_turno
                 Dim obj As DataTable = oBD.EjecutaCommando(cmd)
                 Me.vmantto_autto = obj.Rows(0)(0)
@@ -156,5 +152,5 @@ Public Class Cinco_S
             End Try
         End Using
     End Sub
-  
+
 End Class

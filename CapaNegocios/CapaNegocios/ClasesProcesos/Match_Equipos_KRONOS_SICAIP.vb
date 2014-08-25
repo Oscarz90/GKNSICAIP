@@ -4,9 +4,9 @@ Imports System.Transactions
 
 Public Class Match_Equipos_KRONOS_SICAIP
 
-    Dim cadena_conexion As New CapaDatos.conexiones    
-    Dim oBD As New CapaDatos.CapaDatos(cadena_conexion.CadenaSicaip)    
-    Dim oBD_Kronos As New CapaDatos.CapaDatos(cadena_conexion.CadenaKronos)
+    Dim cadena_conexion As New conexiones
+    Dim oBD As New Datos(cadena_conexion.CadenaSicaip)
+    Dim oBD_Kronos As New Datos(cadena_conexion.CadenaKronos)
     Dim oEquipo As Equipo
     Dim vDatosSICAIP As DataTable
     Dim vDatosKRONOS As DataTable
@@ -45,7 +45,7 @@ Public Class Match_Equipos_KRONOS_SICAIP
         Dim vRetorno As Boolean = False
         Dim vDR As DataRow
         Try
-            vDR = oBD_Kronos.ObtenerRenglon("SELECT count(name) AS Total FROM VR_LABORLEVEL WHERE LLDEF_SHORTNAME='EQU' AND name != '-' and name != 'Default' and name='" & vCve_Equipo & "'", "")
+            vDR = oBD_Kronos.ObtenerRenglon(String.Format("SELECT count(name) AS Total FROM VR_LABORLEVEL WHERE LLDEF_SHORTNAME='EQU' AND name != '-' and name != 'Default' and name='{0}'", vCve_Equipo), "")
 
             If IsNothing(vDR) = False Then
                 If vDR("Total") > 0 Then
@@ -74,10 +74,10 @@ Public Class Match_Equipos_KRONOS_SICAIP
             vNombre_Anterior = oEquipo.Equipo
             oEquipo.Equipo = vNombre_Nuevo
             oEquipo.Registrar()
-            Mensajes("Se actualizo el Equipo en SICAIP llamado: " & vNombre_Anterior & ", nombre en KRONOS: " & vNombre_Nuevo)
+            Mensajes(String.Format("Se actualizo el Equipo en SICAIP llamado: {0}, nombre en KRONOS: {1}", vNombre_Anterior, vNombre_Nuevo))
         Catch ex As Exception
-            Mensajes("Error al actualizar el Equipo en SICAIP llamado: " & vNombre_Anterior & ", nombre en KRONOS: " & vNombre_Nuevo)
-        End Try      
+            Mensajes(String.Format("Error al actualizar el Equipo en SICAIP llamado: {0}, nombre en KRONOS: {1}", vNombre_Anterior, vNombre_Nuevo))
+        End Try
     End Sub
 
     Private Function Nombres_Equipos_Diferentes(ByVal vName_SICAIP As String, ByVal vName_KRONOS As String) As Boolean
@@ -92,11 +92,9 @@ Public Class Match_Equipos_KRONOS_SICAIP
     End Function
 
     Private Sub Obtener_Equipos_Nuevos()
-        Dim vDT_SICAIP As DataTable
-        Dim vDT_KRONOS As DataTable
+        Dim vDT_SICAIP As DataTable = vDatosSICAIP
+        Dim vDT_KRONOS As DataTable = vDatosKRONOS
         Dim vDT_Equipos_Nuevos As DataTable
-        vDT_KRONOS = vDatosKRONOS
-        vDT_SICAIP = vDatosSICAIP
         Mensajes("Revisando existencia de Equipos Nuevos en KRONOS")
 
         If vDT_KRONOS.Rows.Count > vDT_SICAIP.Rows.Count Then
@@ -106,10 +104,8 @@ Public Class Match_Equipos_KRONOS_SICAIP
                 oLider = New Lider
                 oDetalle = New Detalle
 
-                oLider.cve_lider = oLider.Obtener_Id("Default")                
-
-                oDetalle.Cve_Detalle = oDetalle.Obtener_Id("Default")                
-
+                oLider.cve_lider = oLider.Obtener_Id("Default")
+                oDetalle.Cve_Detalle = oDetalle.Obtener_Id("Default")
 
                 For Each vDR_Nuevo_Equipo As DataRow In vDT_Equipos_Nuevos.Rows
                     oEquipo = New Equipo
@@ -139,15 +135,12 @@ Public Class Match_Equipos_KRONOS_SICAIP
             Mensajes("No existen Equipos Nuevos en KRONOS")
             ''------------------------------------------------------------------------
         End If
-       
+
     End Sub
 
     Private Sub Obtener_Equipos_Faltantes_Kronos()
-        Dim vDT_SICAIP As DataTable
-        Dim vDT_KRONOS As DataTable
-
-        vDT_KRONOS = vDatosKRONOS
-        vDT_SICAIP = Obtener_Equipos_SICAIP()
+        Dim vDT_SICAIP As DataTable = Obtener_Equipos_SICAIP()
+        Dim vDT_KRONOS As DataTable = vDatosKRONOS
         Mensajes("Revisando existencia de Equipos Faltantes en KRONOS")
 
         If vDT_KRONOS.Rows.Count < vDT_SICAIP.Rows.Count Then
@@ -155,7 +148,7 @@ Public Class Match_Equipos_KRONOS_SICAIP
             For Each vdrSICAIP As DataRow In vDT_SICAIP.Rows
 
                 If Existe_Equipo_KRONOS(vdrSICAIP("cve")) = False Then
-                    Mensajes("El Equipos ... " & vdrSICAIP("nombre") & " Falta en KRONOS.............................")
+                    Mensajes(String.Format("El Equipos ... {0} Falta en KRONOS.............................", vdrSICAIP("nombre")))
                 End If
             Next
 
@@ -176,7 +169,7 @@ Public Class Match_Equipos_KRONOS_SICAIP
 
         If vCveS_Equipos_En_SICAIP.Length > 0 Then
             For Each vEmpleado As String In vCveS_Equipos_En_SICAIP
-                vretorno = vretorno & " AND name != '" & vEmpleado & "' "
+                vretorno = String.Format("{0} AND name != '{1}' ", vretorno, vEmpleado)
             Next
         End If
         Try
@@ -189,7 +182,7 @@ Public Class Match_Equipos_KRONOS_SICAIP
 
         Return vDT
     End Function
-    
+
     Public Sub Hacer_Match()
         Dim vDT_SICAIP As DataTable
         Dim vDT_KRONOS As DataTable
@@ -213,15 +206,11 @@ Public Class Match_Equipos_KRONOS_SICAIP
                         Mensajes("Comparando nombres de Equipos")
                         For Each oDR_SICAIP As DataRow In vDT_SICAIP.Rows
                             vDR_S = oDR_SICAIP
-                            'If vDR_S("cve") = 200 Then                                
-                            'End If
                             vCveS_Equipos_En_SICAIP(vIndice) = vDR_S("cve").ToString
                             For Each oDR_KRONOS As DataRow In vDT_KRONOS.Rows
                                 If vDR_S("cve") = oDR_KRONOS("cve") Then
                                     If Nombres_Equipos_Diferentes(vDR_S("nombre"), oDR_KRONOS("nombre")) = True Then
-
                                         Actualizar_Nombre_Equipo(vDR_S("cve"), oDR_KRONOS("nombre"))
-
                                         ''------------------------------------------------------------------------
                                         ''-----Mandar mensaje de que se actualizo un equipo en SICAIP
                                         ''------------------------------------------------------------------------
@@ -237,32 +226,27 @@ Public Class Match_Equipos_KRONOS_SICAIP
                         Mensajes("Error al hacer Match")
                     End Try
                 End Using
-
                 ''------------------------------------------------------------------------
                 ''-----Mandar mensaje de que se buscaran Equipos Nuevos
                 ''------------------------------------------------------------------------
                 Obtener_Equipos_Nuevos()
-
-
                 Obtener_Equipos_Faltantes_Kronos()
-
-
                 Mensajes("Fin")
             End If
         Catch ex As Exception
             MsgBox("Error al hacer Match de Equipos con Kronos")
-        End Try        
+        End Try
     End Sub
 
 
 
-    
+
     Private Sub Mensajes(ByVal vMensaje As String)
         Try
-            oMensajes_Text = oMensajes_Text & vMensaje & "............................." & vbCrLf            
+            oMensajes_Text = String.Format("{0}{1}.............................{2}", oMensajes_Text, vMensaje, vbCrLf)
         Catch ex As Exception
 
-        End Try               
+        End Try
     End Sub
 
 

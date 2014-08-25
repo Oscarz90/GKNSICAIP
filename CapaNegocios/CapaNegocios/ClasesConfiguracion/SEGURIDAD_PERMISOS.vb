@@ -2,8 +2,8 @@
 Public Class SEGURIDAD_PERMISOS
     Implements IIndividual
 
-    Dim cadena_conexion As New CapaDatos.conexiones
-    Dim oBD As New CapaDatos.CapaDatos(cadena_conexion.CadenaSicaip)
+    Dim cadena_conexion As New conexiones
+    Dim oBD As New Datos(cadena_conexion.CadenaSicaip)
 
 
 
@@ -41,20 +41,7 @@ Public Class SEGURIDAD_PERMISOS
     End Sub
 
     Public Sub Eliminar() Implements IIndividual.Eliminar
-        ''If Usuario.ChecaPermisoTarea("TELEFONO.ELIMINAR") Then
-        'Try
-        '    oBD.EjecutarQuery("DELETE SEGURIDAD_PERMISOS WHERE CVE_Permiso=" & Me.vCve_Permiso)
-        '    MsgBox("Se elimino correctamente el Tipo de Usuario")
-        '    'Dim oBitacora As Bitacora = Bitacora.ObtenInstancia
-        '    'oBitacora.RegistrarEnBitacora("Telefono.ELIMINAR", "Se eliminó el Teléfono: " & Me.m_Telefono_Id)
-        'Catch ex As Exception
-        '    MsgBox("No se puede eliminar este registro, el Permiso se encuentra asignado en un Usuario")
-        '    'Tiene relacion con otras partes del sistema
-        '    'Throw New CustomException(Errores.Eliminar)
-        'End Try
-        ''Else
-        ''Throw New CustomException(Errores.Permiso)
-        ''End If
+        
     End Sub
 
     Public Function Obtener_Id(ByVal vCadena As String) As Long Implements IIndividual.Obtener_Id
@@ -62,27 +49,7 @@ Public Class SEGURIDAD_PERMISOS
     End Function
 
     Public Sub Registrar() Implements IIndividual.Registrar
-        'Using scope As New TransactionScope()
-        '    Try
-        '        Dim cmd As New SqlClient.SqlCommand
-        '        cmd.CommandType = CommandType.StoredProcedure
-        '        cmd.CommandText = "REGISTRAR_SEGURIDAD_TIPO_USUARIO"
-
-        '        With cmd.Parameters
-        '            .Add("CVE_Tipo_Usuario", SqlDbType.BigInt).Value = Me.vCVE_Tipo_Usuario
-        '            .Add("Nombre_Tipo_Usuario", SqlDbType.VarChar).Value = Me.vNombre_Tipo_Usuario
-        '        End With
-
-        '        Dim obj As DataTable = oBD.EjecutaCommando(cmd)
-        '        Me.vCVE_Tipo_Usuario = obj.Rows(0)(0) 'ID
-        '        'Me.RegistraDatos("DEPARTAMENTO", "Departamento_Id", Me.m_Departamento_Id)
-        '        'Dim oBitacora As Bitacora = Bitacora.ObtenInstancia
-        '        'oBitacora.RegistrarEnBitacora("DEPARTAMENTO.REGISTRAR", "Se registró el departamento: " & Me.m_Nombre)
-        '        scope.Complete()
-        '    Catch ex As Exception
-        '        Throw New Exception(ex.Message)
-        '    End Try
-        'End Using
+        
     End Sub
 #End Region
 

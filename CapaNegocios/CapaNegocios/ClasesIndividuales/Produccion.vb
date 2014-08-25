@@ -1,13 +1,12 @@
 ﻿Imports CapaDatos
 Public Class Produccion
     Implements IIndividual
-    Dim cadena_conexion As New CapaDatos.conexiones
-    Dim oBD As New CapaDatos.CapaDatos(cadena_conexion.CadenaSicaip)
+    Dim cadena_conexion As New conexiones
+    Dim oBD As New Datos(cadena_conexion.CadenaSicaip)
 #Region "Metodos IIndividual"
 
     Public Sub Cargar() Implements IIndividual.Cargar
-        Dim vDR As DataRow
-        vDR = oBD.ObtenerRenglon("select * from produccion p where p.cve_produccion=" & vcve_produccion, "produccion")
+        Dim vDR As DataRow = oBD.ObtenerRenglon("select * from produccion p where p.cve_produccion=" & vcve_produccion, "produccion")
         If vDR IsNot Nothing Then
             Me.vcve_produccion = vDR("cve_produccion")
             Me.vcve_registro_turno = vDR("cve_registro_turno")
@@ -37,9 +36,7 @@ Public Class Produccion
     Public Sub Eliminar() Implements IIndividual.Eliminar
         Using scope As New TransactionScope
             Try
-                Dim vComando As New SqlClient.SqlCommand
-                vComando.CommandType = CommandType.StoredProcedure
-                vComando.CommandText = "remueve_produccion"
+                Dim vComando As New SqlClient.SqlCommand() With {.CommandType = CommandType.StoredProcedure, .CommandText = "remueve_produccion"}
                 vComando.Parameters.Add("@cve_registro_turno", SqlDbType.BigInt).Value = Me.vcve_registro_turno
                 vComando.Parameters.Add("@cve_produccion", SqlDbType.BigInt).Value = Me.vcve_produccion
                 vComando.Parameters.Add("@cod_empleado", SqlDbType.VarChar).Value = Me.vcod_empleado_eliminacion
@@ -69,9 +66,7 @@ Public Class Produccion
     Public Sub Registrar() Implements IIndividual.Registrar
         Using scope As New TransactionScope
             Try
-                Dim vComando As New SqlClient.SqlCommand
-                vComando.CommandType = CommandType.StoredProcedure
-                vComando.CommandText = "registra_produccion"
+                Dim vComando As New SqlClient.SqlCommand() With {.CommandType = CommandType.StoredProcedure, .CommandText = "registra_produccion"}
                 vComando.Parameters.Add("@cve_registro_turno", SqlDbType.BigInt).Value = Me.vcve_registro_turno
                 vComando.Parameters.Add("@codempleado", SqlDbType.VarChar).Value = Me.vcod_empleado_registro
                 vComando.Parameters.Add("@fecha_registro", SqlDbType.DateTime).Value = Convert.ToDateTime(Me.vfecha_registro)
@@ -79,19 +74,15 @@ Public Class Produccion
                 vComando.Parameters.Add("@cve_TC", SqlDbType.BigInt).Value = Me.vcve_TC
                 vComando.Parameters.Add("@pzas_ok", SqlDbType.Int).Value = Me.vpzas_ok
                 vComando.Parameters.Add("@tiempo_operacion", SqlDbType.Int).Value = Me.vtom
-                'Dim obj As DataTable = oBD.EjecutaCommando(vComando)
                 oBD.EjecutaProcedimientos(vComando)
-                'Me.vId = obj.Rows(0)(0)
                 scope.Complete()
             Catch 'ex As Exception
                 MsgBox("Error al insertar produccion. CProduccion_ERROR", vbCritical + vbOKOnly, "Error")
-                'Throw New Exception(ex.Message)
             End Try
         End Using
     End Sub
 
     Public Function obtener_datos() As DataTable
-        'Dim dt As DataTable = oBD.ObtenerTabla("Select cve_turno,turno from laboratorio")
         Dim dt As DataTable
         Try
             dt = oBD.ObtenerTabla("Select cve_turno,turno from turno")
@@ -210,17 +201,13 @@ Public Class Produccion
         Dim obj As DataTable
         Using scope As New TransactionScope
             Try
-                Dim vComando As New SqlClient.SqlCommand
-                vComando.CommandType = CommandType.StoredProcedure
-                vComando.CommandText = "obtener_registros_produccion"
+                Dim vComando As New SqlClient.SqlCommand() With {.CommandType = CommandType.StoredProcedure, .CommandText = "obtener_registros_produccion"}
                 vComando.Parameters.Add("@cve_registro_turno", SqlDbType.BigInt).Value = Me.vcve_registro_turno
                 obj = oBD.EjecutaCommando(vComando)
-                'Me.vId = obj.Rows(0)(0)
                 scope.Complete()
             Catch 'ex As Exception
                 MsgBox("Error al obtener detalle de Productivdad. CProduccion_ERROR", vbCritical + vbOKOnly, "Error")
                 Return Nothing
-                'Throw New Exception(ex.Message)
             End Try
             Return obj
         End Using

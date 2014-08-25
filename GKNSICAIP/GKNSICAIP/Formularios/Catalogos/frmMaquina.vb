@@ -14,19 +14,13 @@ Public Class frmMaquina
         ' Agregue cualquier inicialización después de la llamada a InitializeComponent().
     End Sub
 
-    Private Sub frmMaquina_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
-        ''La Siguiente Linea solo es para hacer pruebas sobre una Maquina()
-        ''Borrar si requiere hacer registro nuevo
-        'vId_Publico = 936
-
+    Private Sub frmMaquina_Load(ByVal sender As Object, ByVal e As EventArgs) Handles MyBase.Load
         If Convert.ToInt64(vId_Publico) <> 0 Then
-            oMaquina = New Maquina
-            oMaquina.cve_maquina = vId_Publico
+            oMaquina = New Maquina() With {.cve_maquina = vId_Publico}
             oMaquina.Cargar()
             Controles_Registro_Nuevo(False)
         Else
-            oMaquina = New Maquina
-            oMaquina.maquina = ""
+            oMaquina = New Maquina() With {.maquina = ""}
             Controles_Registro_Nuevo(True)
         End If
 
@@ -44,18 +38,18 @@ Public Class frmMaquina
         Me.txtNombre.Focus()
     End Sub
 
-    Private Sub btnSalir_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSalir.Click
+    Private Sub btnSalir_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnSalir.Click
         Me.Close()
     End Sub
 
-    Private Sub btnImportar_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnImportar.Click
-        Dim vfrmImportador_Linea As New frmImportador_Linea        
+    Private Sub btnImportar_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnImportar.Click
+        Dim vfrmImportador_Linea As New frmImportador_Linea
         vfrmImportador_Linea.ShowDialog()
         oMaquina.cve_linea = vfrmImportador_Linea.vRetorno_CVE_Linea
         txtLinea.Text = oMaquina.Nombre_Linea
     End Sub
 
-    Private Sub btnDar_Baja_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnDar_Baja.Click
+    Private Sub btnDar_Baja_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnDar_Baja.Click
         If MsgBox("¿Esta seguro de Dar de Baja la Maquina?", MsgBoxStyle.YesNo, Me.Text) = MsgBoxResult.Yes Then
             Try
                 oMaquina.Eliminar()
@@ -66,7 +60,7 @@ Public Class frmMaquina
         End If
     End Sub
 
-    Private Sub btnRegistrar_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnRegistrar.Click
+    Private Sub btnRegistrar_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnRegistrar.Click
         If vValida_Nombre > 0 Then
             If MsgBox("¿Esta seguro de registrar la nueva Maquina?", MsgBoxStyle.YesNo, Me.Text) = MsgBoxResult.Yes Then
                 oMaquina.clave_maquina = txtCve_Maquina.Text
@@ -86,11 +80,11 @@ Public Class frmMaquina
                     MsgBox("La maquina que quiere registrar ya se encuentra en la Base de Datos, verifique la clave de maquina")
                     Me.Close()
                 End If
-        End If
+            End If
         End If
     End Sub
 
-    Private Sub btnModificar_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnModificar.Click
+    Private Sub btnModificar_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnModificar.Click
         If vValida_Nombre > 0 Then
             If MsgBox("¿Esta seguro de realizar los cambios a la Maquina?", MsgBoxStyle.YesNo, Me.Text) = MsgBoxResult.Yes Then
                 oMaquina.clave_maquina = txtCve_Maquina.Text
@@ -139,22 +133,15 @@ Public Class frmMaquina
             Me.btnRegistrar.Enabled = True
             Me.btnModificar.Enabled = True
             Me.btnDar_Baja.Enabled = False
-            'txtCve_Maquina.ReadOnly = False
         Else
             Me.btnRegistrar.Enabled = False
             Me.btnModificar.Enabled = False
             Me.btnDar_Baja.Enabled = True
-            'txtNombre.ReadOnly = False
-            'txtCve_Maquina.ReadOnly = True
-            'btnImportar.Enabled = True
         End If
         If vDelete = True Then
             Me.btnDar_Baja.Enabled = True
             Me.btnRegistrar.Enabled = False
             Me.btnModificar.Enabled = False
-            'txtNombre.ReadOnly = True
-            'txtCve_Maquina.ReadOnly = True
-            'btnImportar.Enabled = False
         Else
             Me.btnDar_Baja.Enabled = False
             Me.btnRegistrar.Enabled = True
@@ -164,14 +151,8 @@ Public Class frmMaquina
             Me.btnDar_Baja.Enabled = False
             Me.btnRegistrar.Enabled = False
             Me.btnModificar.Enabled = False
-            'txtNombre.ReadOnly = True
-            'txtCve_Maquina.ReadOnly = True
-            'btnImportar.Enabled = False
         End If
         If vAdd = True And vDelete = True Then
-            'txtNombre.ReadOnly = False
-            'txtCve_Maquina.ReadOnly = True
-            'btnImportar.Enabled = True
             Me.btnDar_Baja.Enabled = True
             Me.btnRegistrar.Enabled = True
             Me.btnModificar.Enabled = True
@@ -179,7 +160,7 @@ Public Class frmMaquina
 
     End Sub
 
-    Private Sub txtNombre_KeyUp(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtNombre.KeyUp
+    Private Sub txtNombre_KeyUp(ByVal sender As Object, ByVal e As KeyEventArgs) Handles txtNombre.KeyUp
         vValida_Nombre = txtNombre.Text.Count
 
         If vValida_Nombre > 0 Then
@@ -189,14 +170,14 @@ Public Class frmMaquina
             Else
                 btnRegistrar.Enabled = False
                 btnModificar.Enabled = False
-            End If           
+            End If
         Else
             btnRegistrar.Enabled = False
             btnModificar.Enabled = False
         End If
     End Sub
 
-    Private Sub txtCve_Maquina_KeyPress(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txtCve_Maquina.KeyPress
+    Private Sub txtCve_Maquina_KeyPress(ByVal sender As Object, ByVal e As KeyPressEventArgs) Handles txtCve_Maquina.KeyPress
         If Char.IsLetter(e.KeyChar) Then
             e.Handled = False
         ElseIf Char.IsNumber(e.KeyChar) Then

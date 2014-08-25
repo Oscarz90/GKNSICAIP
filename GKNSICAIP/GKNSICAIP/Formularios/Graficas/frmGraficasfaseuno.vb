@@ -16,11 +16,9 @@ Public Class FrmGraficasfaseuno
     Private bandera_graficos As Integer
     'Variables validar rango datetime sql server 2005
     '01-01-1753
-    'Dim minDatetime = New DateTime(1753, 1, 1)
     Dim minDatetime As New DateTime(1753, 1, 1)
     '12-31-9999 23:59:59:997
     Dim maxDatetime As New DateTime(9999, 12, 31, 23, 59, 59, 997)
-
     Dim oG_Fase2 As G_Fase2
     Dim vFormato_Resultado As Integer = 0
     Dim vDatos_Obtenidos As DataTable
@@ -36,11 +34,10 @@ Public Class FrmGraficasfaseuno
         InitializeComponent()
         ' Agregue cualquier inicialización después de la llamada a InitializeComponent().
     End Sub
-    Private Sub FrmGraficasfaseuno_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
+    Private Sub FrmGraficasfaseuno_Load(ByVal sender As Object, ByVal e As EventArgs) Handles MyBase.Load
         obtiene_nivel_graficos()
-        dtpFechaInicial.Format = System.Windows.Forms.DateTimePickerFormat.Custom
-        dtpFechaFinal.Format = System.Windows.Forms.DateTimePickerFormat.Custom
-        'Me.RadPageView1.Pages("RadPageViewPage2").Item.ClickMode = Telerik.WinControls.ClickMode.Press
+        dtpFechaInicial.Format = DateTimePickerFormat.Custom
+        dtpFechaFinal.Format = DateTimePickerFormat.Custom
     End Sub
     Public Sub inicializa_formulario(Optional ByVal codempleado As String = "", Optional ByVal cveequipo As Long = 0)
         cve_equipo = cveequipo
@@ -49,8 +46,7 @@ Public Class FrmGraficasfaseuno
     'Nivel Grafico
     Private Sub obtiene_nivel_graficos()
         'Obtiene nombre de Usuario-PC
-        Dim oGraficasfaseuno As New Graficasfaseuno
-        oGraficasfaseuno.usuario = Environment.UserName
+        Dim oGraficasfaseuno As New Graficasfaseuno() With {.usuario = Environment.UserName}
         'Valida si el codigo de empleado es nulo
         If cod_empleado Is Nothing Then
             oGraficasfaseuno.cod_empleado = ""
@@ -137,8 +133,7 @@ Public Class FrmGraficasfaseuno
     End Sub
     'Champion
     Private Sub tipo_nivel_champion()
-        Dim oUsuario_indicador As New usuario_indicador
-        oUsuario_indicador.cve_usuario = cve_usuario
+        Dim oUsuario_indicador As New usuario_indicador() With {.cve_usuario = cve_usuario}
         oUsuario_indicador.obtiene_indicador()
         If Not IsNothing(oUsuario_indicador.indicador) Then
             If oUsuario_indicador.indicador <> "oee" Then
@@ -176,36 +171,30 @@ Public Class FrmGraficasfaseuno
         llena_cbx_Linea(oNivel_Planta.nivel_planta_linea)
     End Sub
     Private Sub llena_formulario_Nivel_Cadena_Valor()
-        Dim oNivel_CadenaValor As New gfu_nivel_cadena_valor
-        oNivel_CadenaValor.cve_usuario = cve_usuario
+        Dim oNivel_CadenaValor As New gfu_nivel_cadena_valor() With {.cve_usuario = cve_usuario}
         llena_cbx_CadenaValor(oNivel_CadenaValor.nivel_cadena_valor_CV)
         llena_cbx_Componente(oNivel_CadenaValor.nivel_cadena_valor_componente)
         llena_cbx_Equipo(oNivel_CadenaValor.nivel_cadena_valor_equipos)
     End Sub
     Private Sub llena_cbx_Nivel_Cadena_Valor_Lineas()
-        Dim oNivel_CadenaValor As New gfu_nivel_cadena_valor
-        oNivel_CadenaValor.cve_usuario = cve_usuario
+        Dim oNivel_CadenaValor As New gfu_nivel_cadena_valor() With {.cve_usuario = cve_usuario}
         llena_cbx_Linea(oNivel_CadenaValor.nivel_cadena_valor_linea)
     End Sub
     Private Sub llena_formulario_Nivel_Componente()
-        Dim oNivel_Componente As New gfu_nivel_componente
-        oNivel_Componente.cve_usuario = cve_usuario
+        Dim oNivel_Componente As New gfu_nivel_componente() With {.cve_usuario = cve_usuario}
         llena_cbx_Componente(oNivel_Componente.nivel_componente_componente)
         llena_cbx_Equipo(oNivel_Componente.nivel_componente_equipos)
     End Sub
     Private Sub llena_cbx_Nivel_Componente_Lineas()
-        Dim oNivel_Componente As New gfu_nivel_componente
-        oNivel_Componente.cve_usuario = cve_usuario
+        Dim oNivel_Componente As New gfu_nivel_componente() With {.cve_usuario = cve_usuario}
         llena_cbx_Linea(oNivel_Componente.nivel_componente_linea)
     End Sub
     Private Sub llena_formulario_Nivel_LG()
-        Dim oNivel_lg As New gfu_nivel_lg
-        oNivel_lg.cve_lider = cve_usuario
+        Dim oNivel_lg As New gfu_nivel_lg() With {.cve_lider = cve_usuario}
         llena_cbx_Equipo(oNivel_lg.nivel_lg_equipos)
     End Sub
     Private Sub llena_formulario_Nivel_LET()
-        Dim oGfu_nivel_let As New gfu_nivel_let
-        oGfu_nivel_let.cve_equipo = cve_equipo
+        Dim oGfu_nivel_let As New gfu_nivel_let() With {.cve_equipo = cve_equipo}
         cbxEquipo.ValueMember = "cve_equipo"
         cbxEquipo.DisplayMember = "equipo"
         cbxEquipo.DataSource = oGfu_nivel_let.llena_combo_equipo
@@ -213,8 +202,7 @@ Public Class FrmGraficasfaseuno
         llena_cbx_equipo_linea()
     End Sub
     Private Sub llena_formulario_Nivel_LET_Equipos()
-        Dim oGfu_nivel_let As New gfu_nivel_let
-        oGfu_nivel_let.cve_usuario = cve_usuario
+        Dim oGfu_nivel_let As New gfu_nivel_let() With {.cve_usuario = cve_usuario}
         cbxEquipo.ValueMember = "cve_equipo"
         cbxEquipo.DisplayMember = "equipo"
         cbxEquipo.DataSource = oGfu_nivel_let.llena_combo_equipo_let
@@ -259,8 +247,7 @@ Public Class FrmGraficasfaseuno
     End Sub
     Private Sub llena_cbx_equipo_linea()
         If cbxEquipo.SelectedIndex <> -1 Then
-            Dim oEquipoLinea As New CapaNegocios.EquipoLinea
-            oEquipoLinea.cve_equipo = cbxEquipo.SelectedValue
+            Dim oEquipoLinea As New EquipoLinea() With {.cve_equipo = cbxEquipo.SelectedValue}
             cbxLinea.ValueMember = "cve_linea"
             cbxLinea.DisplayMember = "linea"
             cbxLinea.DataSource = oEquipoLinea.llena_combo_lineas()
@@ -387,7 +374,7 @@ Public Class FrmGraficasfaseuno
     End Sub
 #End Region
 #Region "Eventos RadioButton Combobox Niveles"
-    Private Sub rdbtnNiveles_ToggleStateChanged(ByVal sender As System.Object, ByVal args As Telerik.WinControls.UI.StateChangedEventArgs) Handles rdbtnCadenaValor.ToggleStateChanged, rdbtnComponente.ToggleStateChanged, rdbtnLinea.ToggleStateChanged, rdbtnEquipo.ToggleStateChanged
+    Private Sub rdbtnNiveles_ToggleStateChanged(ByVal sender As Object, ByVal args As StateChangedEventArgs) Handles rdbtnCadenaValor.ToggleStateChanged, rdbtnComponente.ToggleStateChanged, rdbtnLinea.ToggleStateChanged, rdbtnEquipo.ToggleStateChanged
         'Cadena valor
         If rdbtnCadenaValor.IsChecked Then
             habilita_combobox_niveles(cbxCadenaValor)
@@ -442,18 +429,18 @@ Public Class FrmGraficasfaseuno
         End If
         valida_btn_graficar()
     End Sub
-    Private Sub rdbtnPlanta_ToggleStateChanged(ByVal sender As System.Object, ByVal args As Telerik.WinControls.UI.StateChangedEventArgs) Handles rdbtnPlanta.ToggleStateChanged
+    Private Sub rdbtnPlanta_ToggleStateChanged(ByVal sender As Object, ByVal args As StateChangedEventArgs) Handles rdbtnPlanta.ToggleStateChanged
         valida_btn_graficar()
     End Sub
-    Private Sub rdbtnOee_ToggleStateChanged(ByVal sender As System.Object, ByVal args As Telerik.WinControls.UI.StateChangedEventArgs) Handles rdbtnOee.ToggleStateChanged, rdbtnNrfti.ToggleStateChanged, rdbtnCosto.ToggleStateChanged, rdbtnSeguridad.ToggleStateChanged, rdbtnGente.ToggleStateChanged, rdbtnCincoS.ToggleStateChanged
+    Private Sub rdbtnOee_ToggleStateChanged(ByVal sender As Object, ByVal args As StateChangedEventArgs) Handles rdbtnOee.ToggleStateChanged, rdbtnNrfti.ToggleStateChanged, rdbtnCosto.ToggleStateChanged, rdbtnSeguridad.ToggleStateChanged, rdbtnGente.ToggleStateChanged, rdbtnCincoS.ToggleStateChanged
         valida_btn_graficar()
 
 
     End Sub
-    Private Sub cbxNiveles_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cbxCadenaValor.SelectedIndexChanged, cbxComponente.SelectedIndexChanged, cbxLinea.SelectedIndexChanged
+    Private Sub cbxNiveles_SelectedIndexChanged(ByVal sender As Object, ByVal e As EventArgs) Handles cbxCadenaValor.SelectedIndexChanged, cbxComponente.SelectedIndexChanged, cbxLinea.SelectedIndexChanged
         valida_btn_graficar()
     End Sub
-    Private Sub cbxEquipo_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cbxEquipo.SelectedIndexChanged
+    Private Sub cbxEquipo_SelectedIndexChanged(ByVal sender As Object, ByVal e As EventArgs) Handles cbxEquipo.SelectedIndexChanged
         If rdbtnEquipo.IsChecked And cbxEquipo.SelectedIndex <> -1 Then
             llena_cbx_equipo_linea()
         End If
@@ -461,7 +448,7 @@ Public Class FrmGraficasfaseuno
     End Sub
 #End Region
 #Region "Eventos checkbox"
-    Private Sub chkTodasLineas_ToggleStateChanged(ByVal sender As System.Object, ByVal args As Telerik.WinControls.UI.StateChangedEventArgs) Handles chkTodasLineas.ToggleStateChanged
+    Private Sub chkTodasLineas_ToggleStateChanged(ByVal sender As Object, ByVal args As StateChangedEventArgs) Handles chkTodasLineas.ToggleStateChanged
         If chkTodasLineas.Checked Then
             cbxLinea.SelectedIndex = -1
             cbxLinea.Enabled = False
@@ -472,12 +459,12 @@ Public Class FrmGraficasfaseuno
     End Sub
 #End Region
 #Region "Eventos Date time Picker"
-    Private Sub dtpFecha_Inicial_Final_ValueChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles dtpFechaInicial.ValueChanged, dtpFechaFinal.ValueChanged
+    Private Sub dtpFecha_Inicial_Final_ValueChanged(ByVal sender As Object, ByVal e As EventArgs) Handles dtpFechaInicial.ValueChanged, dtpFechaFinal.ValueChanged
         valida_btn_graficar()
     End Sub
 #End Region
 #Region "Eventos DateTimePicker"
-    Private Sub rdbtnDias_Meses_ToggleStateChanged(ByVal sender As System.Object, ByVal args As Telerik.WinControls.UI.StateChangedEventArgs) Handles rdbtnDias.ToggleStateChanged, rdbtnMeses.ToggleStateChanged
+    Private Sub rdbtnDias_Meses_ToggleStateChanged(ByVal sender As Object, ByVal args As StateChangedEventArgs) Handles rdbtnDias.ToggleStateChanged, rdbtnMeses.ToggleStateChanged
         If rdbtnDias.IsChecked Then
             dtpFechaInicial.CustomFormat = "dd MMMM yyy"
             dtpFechaFinal.CustomFormat = "dd MMMM yyy"
@@ -497,9 +484,7 @@ Public Class FrmGraficasfaseuno
     Private Sub deshabilita_combobox_niveles(ByRef combo_box As ComboBox)
         combo_box.Enabled = False
     End Sub
-    Private Sub habilita_radiobutton_niveles(ByRef rdbtn As RadRadioButton)
-        rdbtn.Enabled = True
-    End Sub
+    
     Private Sub deshabilita_radiobutton_niveles(ByRef rdbtn As RadRadioButton)
         rdbtn.Enabled = False
     End Sub
@@ -514,7 +499,6 @@ Public Class FrmGraficasfaseuno
         Dim vCve_Componente As Integer = 0
         Dim vCve_CadenaValor As Integer = 0
         Dim vNivel As Integer = 0
-        Dim vFormato As Integer = 0
         Dim vF_Inicial As DateTime = Date.Now
         Dim vF_Final As DateTime = Date.Now
 
@@ -547,14 +531,12 @@ Public Class FrmGraficasfaseuno
             vNivel = 5
         End If
         ''Obtencion de Informacion
-        vDatos_Obtenidos = oG_Fase2.Obten_OEE(vF_Inicial, vF_Final, vCve_Equipo, vCve_Linea, vCve_Componente, vCve_CadenaValor, vFormato_Resultado, vNivel, True, False)
+        vDatos_Obtenidos = oG_Fase2.Obten_OEE(vF_Inicial, vF_Final, vCve_Equipo, vCve_Linea, vCve_Componente, vCve_CadenaValor, vFormato_Resultado, vNivel)
 
 
         'Creacion series
-        Dim BarSeries1 As New BarSeries()
-        BarSeries1.LegendTitle = "Oee"
-        Dim BarSeries2 As New BarSeries()
-        BarSeries2.LegendTitle = "Acumulado"
+        Dim BarSeries1 As New BarSeries() With {.LegendTitle = "Oee"}
+        Dim BarSeries2 As New BarSeries() With {.LegendTitle = "Acumulado"}
         Dim LineSeries1 As New LineSeries()
 
         ''El nivel Planta no lleva esta serie
@@ -581,7 +563,7 @@ Public Class FrmGraficasfaseuno
             Me.radChartView1.Title = ""
         Else
             If vNivel = 0 Then
-                Me.radChartView1.Title = "Oee " & cbxEquipo.Text & " - " & cbxLinea.Text
+                Me.radChartView1.Title = String.Format("Oee {0} - {1}", cbxEquipo.Text, cbxLinea.Text)
             ElseIf vNivel = 1 Then
                 Me.radChartView1.Title = "Oee " & cbxEquipo.Text
             ElseIf vNivel = 2 Then
@@ -624,9 +606,6 @@ Public Class FrmGraficasfaseuno
         Dim CartesianArea1 As CartesianArea = New CartesianArea()
         Dim CategoricalAxis1 As CategoricalAxis = New CategoricalAxis()
         Dim LinearAxis1 As LinearAxis = New LinearAxis()
-        'Personalizacion
-        'CartesianArea1.GridDesign.AlternatingVerticalColor = False
-        'CartesianArea1.ShowGrid = True
 
         'Logo Indicador
         picboxIndicador.ImageLocation = Application.StartupPath & "\graficas_fase_uno\logo_indicador_productividad.jpg"
@@ -644,15 +623,12 @@ Public Class FrmGraficasfaseuno
         End If
         CategoricalAxis1.LabelRotationAngle = 270.0R
         LinearAxis1.AxisType = AxisType.Second
-        'LinearAxis1.LabelFitMode = AxisLabelFitMode.Rotate
-        'LinearAxis1.LabelRotationAngle = 300.0R
         LinearAxis1.MajorStep = 10.0R
         LinearAxis1.Maximum = 100
         LinearAxis1.Title = "% Oee"
 
         BarSeries1.ShowLabels = True
         BarSeries2.ShowLabels = True
-        'LineSeries1.ShowLabels = True
 
         BarSeries1.LabelFormat = "{0:##}" ' & " %"
         BarSeries2.LabelFormat = "{0:##}" '& " %"
@@ -682,7 +658,6 @@ Public Class FrmGraficasfaseuno
         If vNivel <> 5 Then ''El nivel Planta no lleva esta serie
             LineSeries1.Palette = New PaletteEntry(Color.FromArgb(202, 0, 0))
             LineSeries1.BorderColor = Color.FromArgb(202, 0, 0)
-            'LineSeries1.PointSize = New SizeF(10, 10)
         End If
 
 
@@ -850,710 +825,6 @@ Public Class FrmGraficasfaseuno
         End If
 
     End Sub
-
-#Region "Eliminar estos metodos"
-    Private Sub obtiene_oee_planta_dia_mes()
-        'Objeto obtiene_oee Clase
-        Dim oObtiene_oee As New obtiene_oee
-        oObtiene_oee.fecha_inicial = dtpFechaInicial.Value
-        oObtiene_oee.fecha_final = dtpFechaFinal.Value
-        oObtiene_oee.bandera = bandera_graficos
-        'Creacion series
-        Dim BarSeries1 As New BarSeries()
-        BarSeries1.LegendTitle = "Oee"
-        Dim BarSeries2 As New BarSeries()
-        BarSeries2.LegendTitle = "Acumulado"
-        Me.radChartView1.ShowLegend = True
-        Me.radChartView1.ShowSmartLabels = True
-        BarSeries1.DrawLinesToLabels = True
-        BarSeries1.SyncLinesToLabelsColor = True
-        'Obtencion Datos Oee
-        Dim vDT As DataTable = Nothing
-
-        vDT = vDatos_Obtenidos
-
-        'If rdbtnDias.IsChecked Then
-        '    vDT = oObtiene_oee.obtiene_oee_planta_dia()
-        'ElseIf rdbtnMeses.IsChecked Then
-        '    vDT = oObtiene_oee.obtiene_oee_planta_mes()
-        'End If
-
-        'Llenado de las series
-        Dim vTotal As Integer = 1
-        Dim vContador As Integer = 1
-        vTotal = vDT.Rows.Count
-        If vTotal = 0 Then
-            habilita_etiqueta_datos()
-            Me.radChartView1.Title = ""
-        Else
-            Me.radChartView1.Title = "Oee Planta GKN Driveline México"
-        End If
-        For Each vDR As DataRow In vDT.Rows
-            If vContador = vTotal Then
-                BarSeries2.DataPoints.Add(New CategoricalDataPoint(vDR("oee"), "Acumulado"))
-            Else
-                BarSeries1.DataPoints.Add(New CategoricalDataPoint(vDR("oee"), vDR("dia_asignado")))
-            End If
-            vContador = vContador + 1
-        Next
-        'Cartesian Area, CategoricalAxis, LinearAxis
-        Dim CartesianArea1 As CartesianArea = New CartesianArea()
-        Dim CategoricalAxis1 As CategoricalAxis = New CategoricalAxis()
-        Dim LinearAxis1 As LinearAxis = New LinearAxis()
-        'Personalizacion
-        'CartesianArea1.GridDesign.AlternatingVerticalColor = False
-        'CartesianArea1.ShowGrid = True
-
-        'Logo Indicador
-        picboxIndicador.ImageLocation = Application.StartupPath & "\graficas_fase_uno\logo_indicador_productividad.jpg"
-
-        'Legend & Position
-        Me.radChartView1.ChartElement.LegendElement.StackElement.Orientation = Orientation.Horizontal
-        Me.radChartView1.ChartElement.LegendPosition = LegendPosition.Bottom
-
-        Me.radChartView1.AreaDesign = CartesianArea1
-        CategoricalAxis1.LabelFitMode = AxisLabelFitMode.Rotate
-        If rdbtnDias.IsChecked Then
-            CategoricalAxis1.LabelFormat = "{0:dd - MMM}"
-        ElseIf rdbtnMeses.IsChecked Then
-            CategoricalAxis1.LabelFormat = "{0:MMM - yyyy}"
-        End If
-        CategoricalAxis1.LabelRotationAngle = 270.0R
-        LinearAxis1.AxisType = AxisType.Second
-        'LinearAxis1.LabelFitMode = AxisLabelFitMode.Rotate
-        'LinearAxis1.LabelRotationAngle = 300.0R
-        LinearAxis1.MajorStep = 10.0R
-        LinearAxis1.Maximum = 100
-        LinearAxis1.Title = "% Oee"
-
-        BarSeries1.ShowLabels = True
-        BarSeries2.ShowLabels = True
-
-        BarSeries1.LabelFormat = "{0:##}" ' & " %"
-        BarSeries2.LabelFormat = "{0:##}" ' & " %"
-
-        BarSeries1.Font = New Font("Segoe UI", 11)
-        BarSeries2.Font = New Font("Segoe UI", 11)
-
-        BarSeries1.HorizontalAxis = CategoricalAxis1
-
-        BarSeries1.VerticalAxis = LinearAxis1
-
-        BarSeries1.Palette = New PaletteEntry(Color.FromArgb(255, 205, 47))
-        BarSeries2.Palette = New PaletteEntry(Color.FromArgb(246, 172, 38))
-
-        Me.radChartView1.ShowToolTip = True
-        radChartView1.Series.Add(BarSeries1)
-        radChartView1.Series.Add(BarSeries2)
-
-        BarSeries1.LabelMode = BarLabelModes.Top
-        BarSeries2.LabelMode = BarLabelModes.Top
-
-    End Sub
-    'Oee Cadena Valor
-    Private Sub obtiene_oee_cadena_valor_dia_mes()
-        'Objeto obtiene_oee Clase
-        Dim oObtiene_oee As New obtiene_oee
-        oObtiene_oee.cve_cadena_valor = cbxCadenaValor.SelectedValue
-        oObtiene_oee.fecha_inicial = dtpFechaInicial.Value
-        oObtiene_oee.fecha_final = dtpFechaFinal.Value
-        oObtiene_oee.bandera = bandera_graficos
-        'Creacion series
-        Dim BarSeries1 As New BarSeries()
-        BarSeries1.LegendTitle = "Oee"
-        Dim BarSeries2 As New BarSeries()
-        BarSeries2.LegendTitle = "Acumulado"
-        Dim LineSeries1 As New LineSeries()
-        LineSeries1.LegendTitle = "Objetivo Oee"
-        Me.radChartView1.ShowLegend = True
-        Me.radChartView1.ShowSmartLabels = True
-        BarSeries1.DrawLinesToLabels = True
-        BarSeries1.SyncLinesToLabelsColor = True
-        'Obtencion Datos Oee
-        Dim vDT As New DataTable
-
-        vDT = vDatos_Obtenidos
-        'If rdbtnDias.IsChecked Then
-        '    vDT = oObtiene_oee.obtiene_oee_cadena_valor_dia()
-        'ElseIf rdbtnMeses.IsChecked Then
-        '    vDT = oObtiene_oee.obtiene_oee_cadena_valor_mes()
-        'End If
-
-        'Llenado de las series
-        Dim vTotal As Integer = 1
-        Dim vContador As Integer = 1
-        vTotal = vDT.Rows.Count
-        If vTotal = 0 Then
-            habilita_etiqueta_datos()
-            Me.radChartView1.Title = ""
-        Else
-            Me.radChartView1.Title = "Oee " & cbxCadenaValor.Text
-        End If
-        For Each vDR As DataRow In vDT.Rows
-            If vContador = vTotal Then
-                BarSeries2.DataPoints.Add(New CategoricalDataPoint(vDR("oee"), "Acumulado"))
-            Else
-                BarSeries1.DataPoints.Add(New CategoricalDataPoint(vDR("oee"), vDR("dia_asignado")))
-                If Not IsDBNull(vDR("objetivo")) Then
-                    LineSeries1.DataPoints.Add(New CategoricalDataPoint(vDR("objetivo"), vDR("dia_asignado")))
-                End If
-            End If
-            vContador = vContador + 1
-        Next
-        'Cartesian Area, CategoricalAxis, LinearAxis
-        Dim CartesianArea1 As CartesianArea = New CartesianArea()
-        Dim CategoricalAxis1 As CategoricalAxis = New CategoricalAxis()
-        Dim LinearAxis1 As LinearAxis = New LinearAxis()
-        'Personalizacion
-        'CartesianArea1.GridDesign.AlternatingVerticalColor = False
-        'CartesianArea1.ShowGrid = True
-
-        'Logo Indicador
-        picboxIndicador.ImageLocation = Application.StartupPath & "\graficas_fase_uno\logo_indicador_productividad.jpg"
-
-        'Legend & Position
-        Me.radChartView1.ChartElement.LegendElement.StackElement.Orientation = Orientation.Horizontal
-        Me.radChartView1.ChartElement.LegendPosition = LegendPosition.Bottom
-
-        Me.radChartView1.AreaDesign = CartesianArea1
-        CategoricalAxis1.LabelFitMode = AxisLabelFitMode.Rotate
-        If rdbtnDias.IsChecked Then
-            CategoricalAxis1.LabelFormat = "{0:dd - MMM}"
-        ElseIf rdbtnMeses.IsChecked Then
-            CategoricalAxis1.LabelFormat = "{0:MMM - yyyy}"
-        End If
-        CategoricalAxis1.LabelRotationAngle = 270.0R
-        LinearAxis1.AxisType = AxisType.Second
-
-        LinearAxis1.MajorStep = 10.0R
-        LinearAxis1.Maximum = 100
-        LinearAxis1.Title = "% Oee"
-
-        BarSeries1.ShowLabels = True
-        BarSeries2.ShowLabels = True
-        'LineSeries1.ShowLabels = True
-
-        BarSeries1.LabelFormat = "{0:##}" '& " %"
-        BarSeries2.LabelFormat = "{0:##}" '& " %"
-        LineSeries1.LabelFormat = "{0:##.#}" '& " %"
-        BarSeries1.Font = New Font("Segoe UI", 11)
-        BarSeries2.Font = New Font("Segoe UI", 11)
-
-        BarSeries1.HorizontalAxis = CategoricalAxis1
-        LineSeries1.HorizontalAxis = CategoricalAxis1
-
-        BarSeries1.VerticalAxis = LinearAxis1
-        LineSeries1.VerticalAxis = LinearAxis1
-
-        'BarSeries2.ForeColor = Color.White
-        BarSeries1.Palette = New PaletteEntry(Color.FromArgb(255, 205, 47))
-        BarSeries2.Palette = New PaletteEntry(Color.FromArgb(246, 172, 38))
-        LineSeries1.Palette = New PaletteEntry(Color.FromArgb(202, 0, 0))
-
-        LineSeries1.BorderColor = Color.FromArgb(202, 0, 0)
-        'LineSeries1.PointSize = New SizeF(10, 10)
-
-        Me.radChartView1.ShowToolTip = True
-
-        radChartView1.Series.Add(BarSeries1)
-        radChartView1.Series.Add(BarSeries2)
-        radChartView1.Series.Add(LineSeries1)
-
-        BarSeries1.CombineMode = ChartSeriesCombineMode.None
-        BarSeries2.CombineMode = ChartSeriesCombineMode.None
-        LineSeries1.CombineMode = ChartSeriesCombineMode.None
-
-        BarSeries1.LabelMode = BarLabelModes.Top
-        BarSeries2.LabelMode = BarLabelModes.Top
-
-    End Sub
-    'Oee Componente
-    Private Sub obtiene_oee_componente_dia_mes()
-        'Objeto obtiene_oee Clase
-        Dim oObtiene_oee As New obtiene_oee
-        oObtiene_oee.cve_componente = cbxComponente.SelectedValue
-        oObtiene_oee.fecha_inicial = dtpFechaInicial.Value
-        oObtiene_oee.fecha_final = dtpFechaFinal.Value
-        oObtiene_oee.bandera = bandera_graficos
-        'Creacion series
-        Dim BarSeries1 As New BarSeries()
-        BarSeries1.LegendTitle = "Oee"
-        Dim BarSeries2 As New BarSeries()
-        BarSeries2.LegendTitle = "Acumulado"
-        Dim LineSeries1 As New LineSeries()
-        LineSeries1.LegendTitle = "Objetivo Oee"
-        Me.radChartView1.ShowLegend = True
-        Me.radChartView1.ShowSmartLabels = True
-        BarSeries1.DrawLinesToLabels = True
-        BarSeries1.SyncLinesToLabelsColor = True
-        'Obtencion Datos Oee
-        Dim vDT As New DataTable
-
-        vDT = vDatos_Obtenidos
-
-        'If rdbtnDias.IsChecked Then
-        '    vDT = oObtiene_oee.obtiene_oee_componente_dia()
-        'ElseIf rdbtnMeses.IsChecked Then
-        '    vDT = oObtiene_oee.obtiene_oee_componente_mes()
-        'End If
-
-
-        'Llenado de las series
-        Dim vTotal As Integer = 1
-        Dim vContador As Integer = 1
-        vTotal = vDT.Rows.Count
-        If vTotal = 0 Then
-            habilita_etiqueta_datos()
-            Me.radChartView1.Title = ""
-        Else
-            Me.radChartView1.Title = "Oee " & cbxComponente.Text
-        End If
-        For Each vDR As DataRow In vDT.Rows
-            If vContador = vTotal Then
-                BarSeries2.DataPoints.Add(New CategoricalDataPoint(vDR("oee"), "Acumulado"))
-            Else
-                BarSeries1.DataPoints.Add(New CategoricalDataPoint(vDR("oee"), vDR("dia_asignado")))
-                If Not IsDBNull(vDR("objetivo")) Then
-                    LineSeries1.DataPoints.Add(New CategoricalDataPoint(vDR("objetivo"), vDR("dia_asignado")))
-                End If
-            End If
-            vContador = vContador + 1
-        Next
-        'Cartesian Area, CategoricalAxis, LinearAxis
-        Dim CartesianArea1 As CartesianArea = New CartesianArea()
-        Dim CategoricalAxis1 As CategoricalAxis = New CategoricalAxis()
-        Dim LinearAxis1 As LinearAxis = New LinearAxis()
-        'Personalizacion
-        'CartesianArea1.GridDesign.AlternatingVerticalColor = False
-        'CartesianArea1.ShowGrid = True
-
-        'Logo Indicador
-        picboxIndicador.ImageLocation = Application.StartupPath & "\graficas_fase_uno\logo_indicador_productividad.jpg"
-
-        'Legend & Position
-        Me.radChartView1.ChartElement.LegendElement.StackElement.Orientation = Orientation.Horizontal
-        Me.radChartView1.ChartElement.LegendPosition = LegendPosition.Bottom
-
-        Me.radChartView1.AreaDesign = CartesianArea1
-        CategoricalAxis1.LabelFitMode = AxisLabelFitMode.Rotate
-        If rdbtnDias.IsChecked Then
-            CategoricalAxis1.LabelFormat = "{0:dd - MMM}"
-        ElseIf rdbtnMeses.IsChecked Then
-            CategoricalAxis1.LabelFormat = "{0:MMM - yyyy}"
-        End If
-        CategoricalAxis1.LabelRotationAngle = 270.0R
-        LinearAxis1.AxisType = AxisType.Second
-        'LinearAxis1.LabelFitMode = AxisLabelFitMode.Rotate
-        'LinearAxis1.LabelRotationAngle = 300.0R
-        LinearAxis1.MajorStep = 10.0R
-        LinearAxis1.Maximum = 100
-        LinearAxis1.Title = "% Oee"
-
-        BarSeries1.ShowLabels = True
-        BarSeries2.ShowLabels = True
-        'LineSeries1.ShowLabels = True
-
-        BarSeries1.LabelFormat = "{0:##}" ' & " %"
-        BarSeries2.LabelFormat = "{0:##}" '& " %"
-        LineSeries1.LabelFormat = "{0:##.#}" '& " %"
-        BarSeries1.Font = New Font("Segoe UI", 11)
-        BarSeries2.Font = New Font("Segoe UI", 11)
-
-        BarSeries1.HorizontalAxis = CategoricalAxis1
-        LineSeries1.HorizontalAxis = CategoricalAxis1
-
-        BarSeries1.VerticalAxis = LinearAxis1
-        LineSeries1.VerticalAxis = LinearAxis1
-
-        BarSeries1.Palette = New PaletteEntry(Color.FromArgb(255, 205, 47))
-        BarSeries2.Palette = New PaletteEntry(Color.FromArgb(246, 172, 38))
-        LineSeries1.Palette = New PaletteEntry(Color.FromArgb(202, 0, 0))
-
-        LineSeries1.BorderColor = Color.FromArgb(202, 0, 0)
-        'LineSeries1.PointSize = New SizeF(10, 10)
-
-        Me.radChartView1.ShowToolTip = True
-
-        radChartView1.Series.Add(BarSeries1)
-        radChartView1.Series.Add(BarSeries2)
-        radChartView1.Series.Add(LineSeries1)
-
-        BarSeries1.CombineMode = ChartSeriesCombineMode.None
-        BarSeries2.CombineMode = ChartSeriesCombineMode.None
-        LineSeries1.CombineMode = ChartSeriesCombineMode.None
-
-        BarSeries1.LabelMode = BarLabelModes.Top
-        BarSeries2.LabelMode = BarLabelModes.Top
-    End Sub
-    'Oee Linea
-    Private Sub obtiene_oee_linea_dia_mes()
-        'Objeto obtiene_oee Clase
-        Dim oObtiene_oee As New obtiene_oee
-        oObtiene_oee.cve_linea = cbxLinea.SelectedValue
-        oObtiene_oee.fecha_inicial = dtpFechaInicial.Value
-        oObtiene_oee.fecha_final = dtpFechaFinal.Value
-        oObtiene_oee.bandera = bandera_graficos
-        'Creacion series
-        Dim BarSeries1 As New BarSeries()
-        BarSeries1.LegendTitle = "Oee"
-        Dim BarSeries2 As New BarSeries()
-        BarSeries2.LegendTitle = "Acumulado"
-        Dim LineSeries1 As New LineSeries()
-        LineSeries1.LegendTitle = "Objetivo Oee"
-        Me.radChartView1.ShowLegend = True
-        Me.radChartView1.ShowSmartLabels = True
-        BarSeries1.DrawLinesToLabels = True
-        BarSeries1.SyncLinesToLabelsColor = True
-        'Obtencion Datos Oee
-        Dim vDT As New DataTable
-
-        vDT = vDatos_Obtenidos
-
-        'If rdbtnDias.IsChecked Then
-        '    vDT = oObtiene_oee.obtiene_oee_linea_dia()
-        'ElseIf rdbtnMeses.IsChecked Then
-        '    vDT = oObtiene_oee.obtiene_oee_linea_mes()
-        'End If
-
-        'Llenado de las series
-        Dim vTotal As Integer = 1
-        Dim vContador As Integer = 1
-        vTotal = vDT.Rows.Count
-        If vTotal = 0 Then
-            habilita_etiqueta_datos()
-            Me.radChartView1.Title = ""
-        Else
-            Me.radChartView1.Title = "Oee " & cbxLinea.Text
-        End If
-        For Each vDR As DataRow In vDT.Rows
-            If vContador = vTotal Then
-                BarSeries2.DataPoints.Add(New CategoricalDataPoint(vDR("oee"), "Acumulado"))
-            Else
-                BarSeries1.DataPoints.Add(New CategoricalDataPoint(vDR("oee"), vDR("dia_asignado")))
-                If Not IsDBNull(vDR("objetivo")) Then
-                    LineSeries1.DataPoints.Add(New CategoricalDataPoint(vDR("objetivo"), vDR("dia_asignado")))
-                End If
-            End If
-            vContador = vContador + 1
-        Next
-        'Cartesian Area, CategoricalAxis, LinearAxis
-        Dim CartesianArea1 As CartesianArea = New CartesianArea()
-        Dim CategoricalAxis1 As CategoricalAxis = New CategoricalAxis()
-        Dim LinearAxis1 As LinearAxis = New LinearAxis()
-        'Personalizacion
-        'CartesianArea1.GridDesign.AlternatingVerticalColor = False
-        'CartesianArea1.ShowGrid = True
-
-        'Logo Indicador
-        picboxIndicador.ImageLocation = Application.StartupPath & "\graficas_fase_uno\logo_indicador_productividad.jpg"
-
-        'Legend & Position
-        Me.radChartView1.ChartElement.LegendElement.StackElement.Orientation = Orientation.Horizontal
-        Me.radChartView1.ChartElement.LegendPosition = LegendPosition.Bottom
-
-        Me.radChartView1.AreaDesign = CartesianArea1
-        CategoricalAxis1.LabelFitMode = AxisLabelFitMode.Rotate
-        If rdbtnDias.IsChecked Then
-            CategoricalAxis1.LabelFormat = "{0:dd - MMM}"
-        ElseIf rdbtnMeses.IsChecked Then
-            CategoricalAxis1.LabelFormat = "{0:MMM - yyyy}"
-        End If
-        CategoricalAxis1.LabelRotationAngle = 270.0R
-        LinearAxis1.AxisType = AxisType.Second
-        'LinearAxis1.LabelFitMode = AxisLabelFitMode.Rotate
-        'LinearAxis1.LabelRotationAngle = 300.0R
-        LinearAxis1.MajorStep = 10.0R
-        LinearAxis1.Maximum = 100
-        LinearAxis1.Title = "% Oee"
-
-        BarSeries1.ShowLabels = True
-        BarSeries2.ShowLabels = True
-        'LineSeries1.ShowLabels = True
-
-        BarSeries1.LabelFormat = "{0:##}" '& " %"
-        BarSeries2.LabelFormat = "{0:##}" ' & " %"
-        LineSeries1.LabelFormat = "{0:##.#}" ' & " %"
-        BarSeries1.Font = New Font("Segoe UI", 11)
-        BarSeries2.Font = New Font("Segoe UI", 11)
-
-        BarSeries1.HorizontalAxis = CategoricalAxis1
-        LineSeries1.HorizontalAxis = CategoricalAxis1
-
-        BarSeries1.VerticalAxis = LinearAxis1
-        LineSeries1.VerticalAxis = LinearAxis1
-
-        BarSeries1.Palette = New PaletteEntry(Color.FromArgb(255, 205, 47))
-        BarSeries2.Palette = New PaletteEntry(Color.FromArgb(246, 172, 38))
-        LineSeries1.Palette = New PaletteEntry(Color.FromArgb(202, 0, 0))
-
-        LineSeries1.BorderColor = Color.FromArgb(202, 0, 0)
-        'LineSeries1.PointSize = New SizeF(10, 10)
-
-        'Me.radChartView1.ShowTrackBall = True
-        'Me.radChartView1.ShowToolTip = True
-
-        Me.radChartView1.ShowToolTip = True
-
-        radChartView1.Series.Add(BarSeries1)
-        radChartView1.Series.Add(BarSeries2)
-        radChartView1.Series.Add(LineSeries1)
-
-        BarSeries1.CombineMode = ChartSeriesCombineMode.None
-        BarSeries2.CombineMode = ChartSeriesCombineMode.None
-        LineSeries1.CombineMode = ChartSeriesCombineMode.None
-
-        BarSeries1.LabelMode = BarLabelModes.Top
-        BarSeries2.LabelMode = BarLabelModes.Top
-    End Sub
-    'Oee Equipo
-    Private Sub obtiene_oee_equipo_dia_mes()
-        'Objeto obtiene_oee Clase
-        Dim oObtiene_oee As New obtiene_oee
-        oObtiene_oee.cve_equipo = cbxEquipo.SelectedValue
-        oObtiene_oee.fecha_inicial = dtpFechaInicial.Value
-        oObtiene_oee.fecha_final = dtpFechaFinal.Value
-        oObtiene_oee.bandera = bandera_graficos
-        'Creacion series
-        Dim BarSeries1 As New BarSeries()
-        BarSeries1.LegendTitle = "Oee"
-        Dim BarSeries2 As New BarSeries()
-        BarSeries2.LegendTitle = "Acumulado"
-        Dim LineSeries1 As New LineSeries()
-        LineSeries1.LegendTitle = "Objetivo Oee"
-        Me.radChartView1.ShowLegend = True
-        Me.radChartView1.ShowSmartLabels = True
-        BarSeries1.DrawLinesToLabels = True
-        BarSeries1.SyncLinesToLabelsColor = True
-        'Obtencion Datos Oee
-        Dim vDT As New DataTable
-
-        vDT = vDatos_Obtenidos
-
-        'If rdbtnDias.IsChecked Then
-        '    vDT = oObtiene_oee.obtiene_oee_equipo_dia()
-        'ElseIf rdbtnMeses.IsChecked Then
-        '    vDT = oObtiene_oee.obtiene_oee_equipo_mes()
-        'End If
-
-        'Llenado de las series
-        Dim vTotal As Integer = 1
-        Dim vContador As Integer = 1
-        vTotal = vDT.Rows.Count
-        If vTotal = 0 Then
-            habilita_etiqueta_datos()
-            Me.radChartView1.Title = ""
-        Else
-            Me.radChartView1.Title = "Oee " & cbxEquipo.Text
-        End If
-        For Each vDR As DataRow In vDT.Rows
-            If vContador = vTotal Then
-                BarSeries2.DataPoints.Add(New CategoricalDataPoint(vDR("oee"), "Acumulado"))
-            Else
-                BarSeries1.DataPoints.Add(New CategoricalDataPoint(vDR("oee"), vDR("dia_asignado")))
-                If Not IsDBNull(vDR("objetivo")) Then
-                    LineSeries1.DataPoints.Add(New CategoricalDataPoint(vDR("objetivo"), vDR("dia_asignado")))
-                End If
-            End If
-            vContador = vContador + 1
-        Next
-        'Cartesian Area, CategoricalAxis, LinearAxis
-        Dim CartesianArea1 As CartesianArea = New CartesianArea()
-        Dim CategoricalAxis1 As CategoricalAxis = New CategoricalAxis()
-        Dim LinearAxis1 As LinearAxis = New LinearAxis()
-        'Personalizacion
-        'CartesianArea1.GridDesign.AlternatingVerticalColor = False
-        'CartesianArea1.ShowGrid = True
-
-        'Logo Indicador
-        picboxIndicador.ImageLocation = Application.StartupPath & "\graficas_fase_uno\logo_indicador_productividad.jpg"
-
-        'Legend & Position
-        Me.radChartView1.ChartElement.LegendElement.StackElement.Orientation = Orientation.Horizontal
-        Me.radChartView1.ChartElement.LegendPosition = LegendPosition.Bottom
-
-        Me.radChartView1.AreaDesign = CartesianArea1
-        CategoricalAxis1.LabelFitMode = AxisLabelFitMode.Rotate
-        If rdbtnDias.IsChecked Then
-            CategoricalAxis1.LabelFormat = "{0:dd - MMM}"
-        ElseIf rdbtnMeses.IsChecked Then
-            CategoricalAxis1.LabelFormat = "{0:MMM - yyyy}"
-        End If
-        CategoricalAxis1.LabelRotationAngle = 270.0R
-        LinearAxis1.AxisType = AxisType.Second
-        'LinearAxis1.LabelFitMode = AxisLabelFitMode.Rotate
-        'LinearAxis1.LabelRotationAngle = 300.0R
-        LinearAxis1.MajorStep = 10.0R
-        LinearAxis1.Maximum = 100
-        LinearAxis1.Title = "% Oee"
-        BarSeries1.ShowLabels = True
-        BarSeries2.ShowLabels = True
-        'LineSeries1.ShowLabels = True
-
-        BarSeries1.LabelFormat = "{0:##}" '& " %"
-        BarSeries2.LabelFormat = "{0:##}" '& " %"
-        LineSeries1.LabelFormat = "{0:##.#}" ' & " %"
-        BarSeries1.Font = New Font("Segoe UI", 11)
-        BarSeries2.Font = New Font("Segoe UI", 11)
-
-        BarSeries1.HorizontalAxis = CategoricalAxis1
-        LineSeries1.HorizontalAxis = CategoricalAxis1
-
-        BarSeries1.VerticalAxis = LinearAxis1
-        LineSeries1.VerticalAxis = LinearAxis1
-
-
-        BarSeries1.Palette = New PaletteEntry(Color.FromArgb(255, 205, 47))
-        BarSeries2.Palette = New PaletteEntry(Color.FromArgb(246, 172, 38))
-        LineSeries1.Palette = New PaletteEntry(Color.FromArgb(202, 0, 0))
-
-        LineSeries1.BorderColor = Color.FromArgb(202, 0, 0)
-        LineSeries1.PointSize = New SizeF(10, 10)
-
-        Me.radChartView1.ShowToolTip = True
-
-        radChartView1.Series.Add(BarSeries1)
-        radChartView1.Series.Add(BarSeries2)
-        radChartView1.Series.Add(LineSeries1)
-
-        BarSeries1.CombineMode = ChartSeriesCombineMode.None
-        BarSeries2.CombineMode = ChartSeriesCombineMode.None
-        LineSeries1.CombineMode = ChartSeriesCombineMode.None
-
-        BarSeries1.LabelMode = BarLabelModes.Top
-        BarSeries2.LabelMode = BarLabelModes.Top
-    End Sub
-    'Oee Equipo-Linea
-    Private Sub obtiene_oee_equipo_linea_dia_mes()
-        'Objeto obtiene_oee Clase
-        Dim oObtiene_oee As New obtiene_oee
-        oObtiene_oee.cve_equipo = cbxEquipo.SelectedValue
-        oObtiene_oee.cve_linea = cbxLinea.SelectedValue
-        oObtiene_oee.fecha_inicial = dtpFechaInicial.Value
-        oObtiene_oee.fecha_final = dtpFechaFinal.Value
-        oObtiene_oee.bandera = bandera_graficos
-        'Creacion series
-        Dim BarSeries1 As New BarSeries()
-        BarSeries1.LegendTitle = "Oee"
-        Dim BarSeries2 As New BarSeries()
-        BarSeries2.LegendTitle = "Acumulado"
-        Dim LineSeries1 As New LineSeries()
-        LineSeries1.LegendTitle = "Objetivo Oee"
-        Me.radChartView1.ShowLegend = True
-        Me.radChartView1.ShowSmartLabels = True
-        BarSeries1.DrawLinesToLabels = True
-        BarSeries1.SyncLinesToLabelsColor = True
-        'Llenado de las series
-        Dim vTotal As Integer = 1
-        Dim vContador As Integer = 1
-        'Obtencion Datos Oee
-        Dim vDT As New DataTable
-
-        vDT = vDatos_Obtenidos
-
-        'If rdbtnDias.IsChecked Then
-        '    vDT = oObtiene_oee.obtiene_oee_equipo_linea_dia()
-        'ElseIf rdbtnMeses.IsChecked Then
-        '    vDT = oObtiene_oee.obtiene_oee_equipo_linea_mes()
-        'End If
-
-        vTotal = vDT.Rows.Count
-        If vTotal = 0 Then
-            habilita_etiqueta_datos()
-            Me.radChartView1.Title = ""
-        Else
-            Me.radChartView1.Title = "Oee " & cbxEquipo.Text & " - " & cbxLinea.Text
-        End If
-        For Each vDR As DataRow In vDT.Rows
-            If rdbtnDias.IsChecked Then
-                If vContador = 1 Then
-                    BarSeries2.DataPoints.Add(New CategoricalDataPoint(vDR("oee"), "Acumulado"))
-                Else
-                    BarSeries1.DataPoints.Add(New CategoricalDataPoint(vDR("oee"), vDR("dia_asignado")))
-                    If Not IsDBNull(vDR("objetivo")) Then
-                        LineSeries1.DataPoints.Add(New CategoricalDataPoint(vDR("objetivo"), vDR("dia_asignado")))
-                    End If
-                End If
-            ElseIf rdbtnMeses.IsChecked Then
-                If vContador = vTotal Then
-                    BarSeries2.DataPoints.Add(New CategoricalDataPoint(vDR("oee"), "Acumulado"))
-                Else
-                    BarSeries1.DataPoints.Add(New CategoricalDataPoint(vDR("oee"), vDR("dia_asignado")))
-                    If Not IsDBNull(vDR("objetivo")) Then
-                        LineSeries1.DataPoints.Add(New CategoricalDataPoint(vDR("objetivo"), vDR("dia_asignado")))
-                    End If
-                End If
-            End If
-            vContador = vContador + 1
-        Next
-        'Cartesian Area, CategoricalAxis, LinearAxis
-        Dim CartesianArea1 As CartesianArea = New CartesianArea()
-        Dim CategoricalAxis1 As CategoricalAxis = New CategoricalAxis()
-        Dim LinearAxis1 As LinearAxis = New LinearAxis()
-        'Personalizacion
-        'CartesianArea1.GridDesign.AlternatingVerticalColor = False
-        'CartesianArea1.ShowGrid = True
-
-        'Logo Indicador
-        picboxIndicador.ImageLocation = Application.StartupPath & "\graficas_fase_uno\logo_indicador_productividad.jpg"
-
-        'Legend & Position
-        Me.radChartView1.ChartElement.LegendElement.StackElement.Orientation = Orientation.Horizontal
-        Me.radChartView1.ChartElement.LegendPosition = LegendPosition.Bottom
-
-        Me.radChartView1.AreaDesign = CartesianArea1
-        CategoricalAxis1.LabelFitMode = AxisLabelFitMode.Rotate
-        If rdbtnDias.IsChecked Then
-            CategoricalAxis1.LabelFormat = "{0:dd - MMM}"
-        ElseIf rdbtnMeses.IsChecked Then
-            CategoricalAxis1.LabelFormat = "{0:MMM - yyyy}"
-        End If
-        CategoricalAxis1.LabelRotationAngle = 270.0R
-        LinearAxis1.AxisType = AxisType.Second
-        'LinearAxis1.LabelFitMode = AxisLabelFitMode.Rotate
-        'LinearAxis1.LabelRotationAngle = 300.0R
-        LinearAxis1.MajorStep = 10.0R
-        LinearAxis1.Maximum = 100
-        LinearAxis1.Title = "% Oee"
-
-        BarSeries1.ShowLabels = True
-        BarSeries2.ShowLabels = True
-        'LineSeries1.ShowLabels = True
-
-        BarSeries1.LabelFormat = "{0:##}" ' & " %"
-        BarSeries2.LabelFormat = "{0:##}" '& " %"
-        LineSeries1.LabelFormat = "{0:##.#}" ' & " %"
-        BarSeries1.Font = New Font("Segoe UI", 11)
-        BarSeries2.Font = New Font("Segoe UI", 11)
-
-        BarSeries1.HorizontalAxis = CategoricalAxis1
-        LineSeries1.HorizontalAxis = CategoricalAxis1
-
-        BarSeries1.VerticalAxis = LinearAxis1
-        LineSeries1.VerticalAxis = LinearAxis1
-
-
-        BarSeries1.Palette = New PaletteEntry(Color.FromArgb(255, 205, 47))
-        BarSeries2.Palette = New PaletteEntry(Color.FromArgb(246, 172, 38))
-        LineSeries1.Palette = New PaletteEntry(Color.FromArgb(202, 0, 0))
-
-        LineSeries1.BorderColor = Color.FromArgb(202, 0, 0)
-        'LineSeries1.PointSize = New SizeF(10, 10)
-
-        Me.radChartView1.ShowToolTip = True
-
-        radChartView1.Series.Add(BarSeries1)
-        radChartView1.Series.Add(BarSeries2)
-        radChartView1.Series.Add(LineSeries1)
-
-        BarSeries1.CombineMode = ChartSeriesCombineMode.None
-        BarSeries2.CombineMode = ChartSeriesCombineMode.None
-        LineSeries1.CombineMode = ChartSeriesCombineMode.None
-
-        BarSeries1.LabelMode = BarLabelModes.Top
-        BarSeries2.LabelMode = BarLabelModes.Top
-    End Sub
-#End Region
-
 #End Region
 
 #Region "Metodos graficar NRFTi"
@@ -1564,7 +835,6 @@ Public Class FrmGraficasfaseuno
         Dim vCve_Componente As Integer = 0
         Dim vCve_CadenaValor As Integer = 0
         Dim vNivel As Integer = 0
-        Dim vFormato As Integer = 0
         Dim vF_Inicial As DateTime = Date.Now
         Dim vF_Final As DateTime = Date.Now
 
@@ -1598,13 +868,11 @@ Public Class FrmGraficasfaseuno
         End If
 
         ''Obtencion de Informacion
-        vDatos_Obtenidos = oG_Fase2.Obten_NRFT(vF_Inicial, vF_Final, vCve_Equipo, vCve_Linea, vCve_Componente, vCve_CadenaValor, vFormato_Resultado, vNivel, True, False)
+        vDatos_Obtenidos = oG_Fase2.Obten_NRFT(vF_Inicial, vF_Final, vCve_Equipo, vCve_Linea, vCve_Componente, vCve_CadenaValor, vFormato_Resultado, vNivel)
 
         'Creacion series
-        Dim BarSeries1 As New BarSeries()
-        BarSeries1.LegendTitle = "nrfti"
-        Dim BarSeries2 As New BarSeries()
-        BarSeries2.LegendTitle = "Acumulado"
+        Dim BarSeries1 As New BarSeries() With {.LegendTitle = "nrfti"}
+        Dim BarSeries2 As New BarSeries() With {.LegendTitle = "Acumulado"}
         Dim LineSeries1 As New LineSeries()
 
         If vNivel <> 5 Then
@@ -1631,7 +899,7 @@ Public Class FrmGraficasfaseuno
             Me.radChartView1.Title = ""
         Else
             If vNivel = 0 Then
-                Me.radChartView1.Title = "NRFTi ( PPM'S ) " & cbxEquipo.Text & " - " & cbxLinea.Text
+                Me.radChartView1.Title = String.Format("NRFTi ( PPM'S ) {0} - {1}", cbxEquipo.Text, cbxLinea.Text)
             ElseIf vNivel = 1 Then
                 Me.radChartView1.Title = "NRFTi ( PPM'S ) " & cbxEquipo.Text
             ElseIf vNivel = 2 Then
@@ -1849,760 +1117,6 @@ Public Class FrmGraficasfaseuno
 
     End Sub
 
-#Region "MEtodos No Utilizados, Eliminar"
-    'NRNFTi planta
-    Private Sub obtiene_nrfti_planta_dia_mes()
-        'Objeto obtiene_nrfti Clase
-        Dim oObtiene_nrfti As New obtiene_NRFTi
-        oObtiene_nrfti.fecha_inicial = dtpFechaInicial.Value
-        oObtiene_nrfti.fecha_final = dtpFechaFinal.Value
-        oObtiene_nrfti.bandera = bandera_graficos
-        'Creacion series
-        Dim BarSeries1 As New BarSeries()
-        BarSeries1.LegendTitle = "nrfti"
-        Dim BarSeries2 As New BarSeries()
-        BarSeries2.LegendTitle = "Acumulado"
-        Me.radChartView1.ShowLegend = True
-        Me.radChartView1.ShowSmartLabels = True
-        BarSeries1.DrawLinesToLabels = True
-        BarSeries1.SyncLinesToLabelsColor = True
-        BarSeries1.Font = New Font("Segoe UI", 11)
-        BarSeries2.Font = New Font("Segoe UI", 11)
-        'Obtencion Datos
-        Dim vDT As DataTable = Nothing
-        If rdbtnDias.IsChecked Then
-            vDT = oObtiene_nrfti.obtiene_nrfti_planta_dia()
-        ElseIf rdbtnMeses.IsChecked Then
-            vDT = oObtiene_nrfti.obtiene_nrfti_planta_mes()
-        End If
-        'Llenado de las series
-        Dim vTotal As Integer = 1
-        Dim vContador As Integer = 1
-        vTotal = vDT.Rows.Count
-        If vTotal = 0 Then
-            habilita_etiqueta_datos()
-            Me.radChartView1.Title = ""
-        Else
-            Me.radChartView1.Title = "NRFTi (PPM'S) Planta GKN Driveline México"
-        End If
-        For Each vDR As DataRow In vDT.Rows
-            If vContador = vTotal Then
-                BarSeries2.DataPoints.Add(New CategoricalDataPoint(vDR("nrfti"), "Acumulado"))
-            Else
-                BarSeries1.DataPoints.Add(New CategoricalDataPoint(vDR("nrfti"), vDR("dia_asignado")))
-            End If
-            vContador = vContador + 1
-        Next
-        'Cartesian Area, CategoricalAxis, LinearAxis
-        Dim CartesianArea1 As CartesianArea = New CartesianArea()
-        Dim CategoricalAxis1 As CategoricalAxis = New CategoricalAxis()
-        Dim LinearAxis1 As LinearAxis = New LinearAxis()
-        'Personalizacion
-        'CartesianArea1.GridDesign.AlternatingVerticalColor = False
-        'CartesianArea1.ShowGrid = True
-
-        'Logo Indicador
-        picboxIndicador.ImageLocation = Application.StartupPath & "\graficas_fase_uno\logo_indicador_calidad.jpg"
-
-        'Legend & Position
-        Me.radChartView1.ChartElement.LegendElement.StackElement.Orientation = Orientation.Horizontal
-        Me.radChartView1.ChartElement.LegendPosition = LegendPosition.Bottom
-
-        Me.radChartView1.AreaDesign = CartesianArea1
-        CategoricalAxis1.LabelFitMode = AxisLabelFitMode.Rotate
-        If rdbtnDias.IsChecked Then
-            CategoricalAxis1.LabelFormat = "{0:dd - MMM}"
-        ElseIf rdbtnMeses.IsChecked Then
-            CategoricalAxis1.LabelFormat = "{0:MMM - yyyy}"
-        End If
-        CategoricalAxis1.LabelRotationAngle = 270.0R
-        LinearAxis1.AxisType = AxisType.Second
-        LinearAxis1.Title = "NRFTi ( PPM'S ) "
-
-        BarSeries1.ShowLabels = True
-        BarSeries2.ShowLabels = True
-
-        BarSeries1.LabelFormat = "{0:##,###}"
-        BarSeries2.LabelFormat = "{0:##,##}"
-
-        BarSeries1.HorizontalAxis = CategoricalAxis1
-        BarSeries1.VerticalAxis = LinearAxis1
-        'BarSeries1.ForeColor = Color.White
-        'BarSeries2.ForeColor = Color.White
-        BarSeries1.Palette = New PaletteEntry(Color.FromArgb(55, 96, 146))
-        BarSeries2.Palette = New PaletteEntry(Color.FromArgb(37, 64, 97))
-        Me.radChartView1.ShowToolTip = True
-        radChartView1.Series.Add(BarSeries1)
-        radChartView1.Series.Add(BarSeries2)
-
-        BarSeries1.LabelMode = BarLabelModes.Top
-        BarSeries2.LabelMode = BarLabelModes.Top
-
-        If (LinearAxis1.ActualRange.Maximum = 0) Then
-            LinearAxis1.Maximum = 5
-        End If
-
-        For Each controller As ChartViewController In Me.radChartView1.Controllers
-            Dim control As SmartLabelsController = TryCast(controller, SmartLabelsController)
-            If control IsNot Nothing Then
-                control.Strategy.DistanceToLabel = CInt(Fix(12.0))
-                Me.radChartView1.View.PerformRefresh(Me.radChartView1.View, False)
-            End If
-        Next controller
-
-    End Sub
-    'NRNFTi Cadena Valor
-    Private Sub obtiene_nrfti_cadena_valor_dia_mes()
-        'Objeto obtiene_nrfti Clase
-        Dim oObtiene_nrfti As New obtiene_NRFTi
-        oObtiene_nrfti.cve_cadena_valor = cbxCadenaValor.SelectedValue
-        oObtiene_nrfti.fecha_inicial = dtpFechaInicial.Value
-        oObtiene_nrfti.fecha_final = dtpFechaFinal.Value
-        oObtiene_nrfti.bandera = bandera_graficos
-        'Creacion series
-        Dim BarSeries1 As New BarSeries()
-        BarSeries1.LegendTitle = "nrfti"
-        Dim BarSeries2 As New BarSeries()
-        BarSeries2.LegendTitle = "Acumulado"
-        Dim LineSeries1 As New LineSeries()
-        LineSeries1.LegendTitle = "Objetivo NRFTi"
-        Me.radChartView1.ShowLegend = True
-        Me.radChartView1.ShowSmartLabels = True
-        BarSeries1.DrawLinesToLabels = True
-        BarSeries1.SyncLinesToLabelsColor = True
-        BarSeries1.Font = New Font("Segoe UI", 11)
-        BarSeries2.Font = New Font("Segoe UI", 11)
-        'Obtencion Datos
-        Dim vDT As New DataTable
-        If rdbtnDias.IsChecked Then
-            vDT = oObtiene_nrfti.obtiene_nrfti_cadena_valor_dia()
-        ElseIf rdbtnMeses.IsChecked Then
-            vDT = oObtiene_nrfti.obtiene_nrfti_cadena_valor_mes()
-        End If
-        'Llenado de las series
-        Dim vTotal As Integer = 1
-        Dim vContador As Integer = 1
-        vTotal = vDT.Rows.Count
-        If vTotal = 0 Then
-            habilita_etiqueta_datos()
-            Me.radChartView1.Title = ""
-        Else
-            Me.radChartView1.Title = "NRFTi (PPM'S) " & cbxCadenaValor.Text
-        End If
-        For Each vDR As DataRow In vDT.Rows
-            If vContador = vTotal Then
-                BarSeries2.DataPoints.Add(New CategoricalDataPoint(vDR("nrfti"), "Acumulado"))
-            Else
-                BarSeries1.DataPoints.Add(New CategoricalDataPoint(vDR("nrfti"), vDR("dia_asignado")))
-                If Not IsDBNull(vDR("objetivo")) Then
-                    LineSeries1.DataPoints.Add(New CategoricalDataPoint(vDR("objetivo"), vDR("dia_asignado")))
-                End If
-            End If
-            vContador = vContador + 1
-        Next
-        'Cartesian Area, CategoricalAxis, LinearAxis
-        Dim CartesianArea1 As CartesianArea = New CartesianArea()
-        Dim CategoricalAxis1 As CategoricalAxis = New CategoricalAxis()
-        Dim LinearAxis1 As LinearAxis = New LinearAxis()
-        'Personalizacion
-        'CartesianArea1.GridDesign.AlternatingVerticalColor = False
-        'CartesianArea1.ShowGrid = True
-
-        'Logo Indicador
-        picboxIndicador.ImageLocation = Application.StartupPath & "\graficas_fase_uno\logo_indicador_calidad.jpg"
-
-        'Legend & Position
-        Me.radChartView1.ChartElement.LegendElement.StackElement.Orientation = Orientation.Horizontal
-        Me.radChartView1.ChartElement.LegendPosition = LegendPosition.Bottom
-
-        Me.radChartView1.AreaDesign = CartesianArea1
-        CategoricalAxis1.LabelFitMode = AxisLabelFitMode.Rotate
-        If rdbtnDias.IsChecked Then
-            CategoricalAxis1.LabelFormat = "{0:dd - MMM}"
-        ElseIf rdbtnMeses.IsChecked Then
-            CategoricalAxis1.LabelFormat = "{0:MMM - yyyy}"
-        End If
-        CategoricalAxis1.LabelRotationAngle = 270.0R
-        LinearAxis1.AxisType = AxisType.Second
-        LinearAxis1.Title = "NRFTi ( PPM'S )"
-        'LinearAxis1.LabelFitMode = AxisLabelFitMode.Rotate
-        'LinearAxis1.LabelRotationAngle = 300.0R
-        'LinearAxis1.MajorStep = 10.0R
-        'LinearAxis1.Maximum = 100
-
-
-        BarSeries1.ShowLabels = True
-        BarSeries2.ShowLabels = True
-        'LineSeries1.ShowLabels = True
-
-        BarSeries1.LabelFormat = "{0:##,###}"
-        BarSeries2.LabelFormat = "{0:##,###}"
-        LineSeries1.LabelFormat = "{0:##,###}"
-
-        BarSeries1.HorizontalAxis = CategoricalAxis1
-        LineSeries1.HorizontalAxis = CategoricalAxis1
-
-        BarSeries1.VerticalAxis = LinearAxis1
-        LineSeries1.VerticalAxis = LinearAxis1
-
-        BarSeries1.Palette = New PaletteEntry(Color.FromArgb(55, 96, 146))
-        BarSeries2.Palette = New PaletteEntry(Color.FromArgb(37, 64, 97))
-        LineSeries1.Palette = New PaletteEntry(Color.FromArgb(202, 0, 0))
-
-        LineSeries1.BorderColor = Color.FromArgb(202, 0, 0)
-        'LineSeries1.PointSize = New SizeF(1, 1)
-
-        Me.radChartView1.ShowToolTip = True
-
-        radChartView1.Series.Add(BarSeries1)
-        radChartView1.Series.Add(BarSeries2)
-        radChartView1.Series.Add(LineSeries1)
-
-        BarSeries1.CombineMode = ChartSeriesCombineMode.None
-        BarSeries2.CombineMode = ChartSeriesCombineMode.None
-        LineSeries1.CombineMode = ChartSeriesCombineMode.None
-
-        BarSeries1.LabelMode = BarLabelModes.Top
-        BarSeries2.LabelMode = BarLabelModes.Top
-
-        If (LinearAxis1.ActualRange.Maximum = 0) Then
-            LinearAxis1.Maximum = 5
-        End If
-
-        For Each controller As ChartViewController In Me.radChartView1.Controllers
-            Dim control As SmartLabelsController = TryCast(controller, SmartLabelsController)
-            If control IsNot Nothing Then
-                control.Strategy.DistanceToLabel = CInt(Fix(25.0))
-                Me.radChartView1.View.PerformRefresh(Me.radChartView1.View, False)
-            End If
-        Next controller
-
-    End Sub
-    'NRFTi Componente
-    Private Sub obtiene_nrfti_componente_dia_mes()
-        'Objeto obtiene_oee Clase
-        Dim oObtiene_nrfti As New obtiene_NRFTi
-        oObtiene_nrfti.cve_componente = cbxComponente.SelectedValue
-        oObtiene_nrfti.fecha_inicial = dtpFechaInicial.Value
-        oObtiene_nrfti.fecha_final = dtpFechaFinal.Value
-        oObtiene_nrfti.bandera = bandera_graficos
-        'Creacion series
-        Dim BarSeries1 As New BarSeries()
-        BarSeries1.LegendTitle = "nrfti"
-        Dim BarSeries2 As New BarSeries()
-        BarSeries2.LegendTitle = "Acumulado"
-        Dim LineSeries1 As New LineSeries()
-        LineSeries1.LegendTitle = "Objetivo NRFTi"
-        Me.radChartView1.ShowLegend = True
-        Me.radChartView1.ShowSmartLabels = True
-        BarSeries1.DrawLinesToLabels = True
-        BarSeries1.SyncLinesToLabelsColor = True
-        BarSeries1.Font = New Font("Segoe UI", 11)
-        BarSeries2.Font = New Font("Segoe UI", 11)
-        'Obtencion Datos Oee
-        Dim vDT As New DataTable
-        If rdbtnDias.IsChecked Then
-            vDT = oObtiene_nrfti.obtiene_nrfti_componente_dia()
-        ElseIf rdbtnMeses.IsChecked Then
-            vDT = oObtiene_nrfti.obtiene_nrfti_componente_mes()
-        End If
-        'Llenado de las series
-        Dim vTotal As Integer = 1
-        Dim vContador As Integer = 1
-        vTotal = vDT.Rows.Count
-        If vTotal = 0 Then
-            habilita_etiqueta_datos()
-            Me.radChartView1.Title = ""
-        Else
-            Me.radChartView1.Title = "NRFTi (PPM'S) " & cbxComponente.Text
-        End If
-        For Each vDR As DataRow In vDT.Rows
-            If vContador = vTotal Then
-                BarSeries2.DataPoints.Add(New CategoricalDataPoint(vDR("nrfti"), "Acumulado"))
-            Else
-                BarSeries1.DataPoints.Add(New CategoricalDataPoint(vDR("nrfti"), vDR("dia_asignado")))
-                If Not IsDBNull(vDR("objetivo")) Then
-                    LineSeries1.DataPoints.Add(New CategoricalDataPoint(vDR("objetivo"), vDR("dia_asignado")))
-                End If
-            End If
-            vContador = vContador + 1
-        Next
-        'Cartesian Area, CategoricalAxis, LinearAxis
-        Dim CartesianArea1 As CartesianArea = New CartesianArea()
-        Dim CategoricalAxis1 As CategoricalAxis = New CategoricalAxis()
-        Dim LinearAxis1 As LinearAxis = New LinearAxis()
-        'Personalizacion
-        'CartesianArea1.GridDesign.AlternatingVerticalColor = False
-        'CartesianArea1.ShowGrid = True
-
-        'Logo Indicador
-        picboxIndicador.ImageLocation = Application.StartupPath & "\graficas_fase_uno\logo_indicador_calidad.jpg"
-
-        'Legend & Position
-        Me.radChartView1.ChartElement.LegendElement.StackElement.Orientation = Orientation.Horizontal
-        Me.radChartView1.ChartElement.LegendPosition = LegendPosition.Bottom
-
-        Me.radChartView1.AreaDesign = CartesianArea1
-        CategoricalAxis1.LabelFitMode = AxisLabelFitMode.Rotate
-        If rdbtnDias.IsChecked Then
-            CategoricalAxis1.LabelFormat = "{0:dd - MMM}"
-        ElseIf rdbtnMeses.IsChecked Then
-            CategoricalAxis1.LabelFormat = "{0:MMM - yyyy}"
-        End If
-        CategoricalAxis1.LabelRotationAngle = 270.0R
-        LinearAxis1.AxisType = AxisType.Second
-        'LinearAxis1.LabelFitMode = AxisLabelFitMode.Rotate
-        'LinearAxis1.LabelRotationAngle = 300.0R
-        'LinearAxis1.MajorStep = 10.0R
-        'LinearAxis1.Maximum = 100
-        LinearAxis1.Title = "NRFTi ( PPM'S )"
-
-        BarSeries1.ShowLabels = True
-        BarSeries2.ShowLabels = True
-        'LineSeries1.ShowLabels = True
-
-        BarSeries1.LabelFormat = "{0:#,###}"
-        BarSeries2.LabelFormat = "{0:#,###}"
-        LineSeries1.LabelFormat = "{0:##,###}"
-
-        BarSeries1.HorizontalAxis = CategoricalAxis1
-        LineSeries1.HorizontalAxis = CategoricalAxis1
-
-        BarSeries1.VerticalAxis = LinearAxis1
-        LineSeries1.VerticalAxis = LinearAxis1
-
-        BarSeries1.Palette = New PaletteEntry(Color.FromArgb(55, 96, 146))
-        BarSeries2.Palette = New PaletteEntry(Color.FromArgb(37, 64, 97))
-        LineSeries1.Palette = New PaletteEntry(Color.FromArgb(202, 0, 0))
-
-        LineSeries1.BorderColor = Color.FromArgb(202, 0, 0)
-        'LineSeries1.PointSize = New SizeF(10, 10)
-
-        Me.radChartView1.ShowToolTip = True
-
-        radChartView1.Series.Add(BarSeries1)
-        radChartView1.Series.Add(BarSeries2)
-        radChartView1.Series.Add(LineSeries1)
-
-        BarSeries1.CombineMode = ChartSeriesCombineMode.None
-        BarSeries2.CombineMode = ChartSeriesCombineMode.None
-        LineSeries1.CombineMode = ChartSeriesCombineMode.None
-
-        BarSeries1.LabelMode = BarLabelModes.Top
-        BarSeries2.LabelMode = BarLabelModes.Top
-
-        If (LinearAxis1.ActualRange.Maximum = 0) Then
-            LinearAxis1.Maximum = 5
-        End If
-
-        For Each controller As ChartViewController In Me.radChartView1.Controllers
-            Dim control As SmartLabelsController = TryCast(controller, SmartLabelsController)
-            If control IsNot Nothing Then
-                control.Strategy.DistanceToLabel = CInt(Fix(25.0))
-                Me.radChartView1.View.PerformRefresh(Me.radChartView1.View, False)
-            End If
-        Next controller
-
-    End Sub
-    'NRFTi Linea
-    Private Sub obtiene_nrfti_linea_dia_mes()
-        'Objeto obtiene_oee Clase
-        Dim oObtiene_nrfti As New obtiene_NRFTi
-        oObtiene_nrfti.cve_linea = cbxLinea.SelectedValue
-        oObtiene_nrfti.fecha_inicial = dtpFechaInicial.Value
-        oObtiene_nrfti.fecha_final = dtpFechaFinal.Value
-        oObtiene_nrfti.bandera = bandera_graficos
-        'Creacion series
-        Dim BarSeries1 As New BarSeries()
-        BarSeries1.LegendTitle = "nrfti"
-        Dim BarSeries2 As New BarSeries()
-        BarSeries2.LegendTitle = "Acumulado"
-        Dim LineSeries1 As New LineSeries()
-        LineSeries1.LegendTitle = "Objetivo NRFTi"
-        Me.radChartView1.ShowLegend = True
-        Me.radChartView1.ShowSmartLabels = True
-        BarSeries1.DrawLinesToLabels = True
-        BarSeries1.SyncLinesToLabelsColor = True
-        BarSeries1.Font = New Font("Segoe UI", 11)
-        BarSeries2.Font = New Font("Segoe UI", 11)
-        'Obtencion Datos Oee
-        Dim vDT As New DataTable
-        If rdbtnDias.IsChecked Then
-            vDT = oObtiene_nrfti.obtiene_nrfti_linea_dia()
-        ElseIf rdbtnMeses.IsChecked Then
-            vDT = oObtiene_nrfti.obtiene_nrfti_linea_mes()
-        End If
-        'Llenado de las series
-        Dim vTotal As Integer = 1
-        Dim vContador As Integer = 1
-        vTotal = vDT.Rows.Count
-        If vTotal = 0 Then
-            habilita_etiqueta_datos()
-            Me.radChartView1.Title = ""
-        Else
-            Me.radChartView1.Title = "NRFTi ( PPM'S ) " & cbxLinea.Text
-        End If
-        For Each vDR As DataRow In vDT.Rows
-            If vContador = vTotal Then
-                BarSeries2.DataPoints.Add(New CategoricalDataPoint(vDR("nrfti"), "Acumulado"))
-            Else
-                BarSeries1.DataPoints.Add(New CategoricalDataPoint(vDR("nrfti"), vDR("dia_asignado")))
-                If Not IsDBNull(vDR("objetivo")) Then
-                    LineSeries1.DataPoints.Add(New CategoricalDataPoint(vDR("objetivo"), vDR("dia_asignado")))
-                End If
-            End If
-            vContador = vContador + 1
-        Next
-        'Cartesian Area, CategoricalAxis, LinearAxis
-        Dim CartesianArea1 As CartesianArea = New CartesianArea()
-        Dim CategoricalAxis1 As CategoricalAxis = New CategoricalAxis()
-        Dim LinearAxis1 As LinearAxis = New LinearAxis()
-        'Personalizacion
-        'CartesianArea1.GridDesign.AlternatingVerticalColor = False
-        'CartesianArea1.ShowGrid = True
-
-        'Logo Indicador
-        picboxIndicador.ImageLocation = Application.StartupPath & "\graficas_fase_uno\logo_indicador_calidad.jpg"
-
-        'Legend & Position
-        Me.radChartView1.ChartElement.LegendElement.StackElement.Orientation = Orientation.Horizontal
-        Me.radChartView1.ChartElement.LegendPosition = LegendPosition.Bottom
-
-        Me.radChartView1.AreaDesign = CartesianArea1
-        CategoricalAxis1.LabelFitMode = AxisLabelFitMode.Rotate
-        If rdbtnDias.IsChecked Then
-            CategoricalAxis1.LabelFormat = "{0:dd - MMM}"
-        ElseIf rdbtnMeses.IsChecked Then
-            CategoricalAxis1.LabelFormat = "{0:MMM - yyyy}"
-        End If
-        CategoricalAxis1.LabelRotationAngle = 270.0R
-        LinearAxis1.AxisType = AxisType.Second
-
-        LinearAxis1.Title = "NRFTi (PPM'S)"
-        BarSeries1.ShowLabels = True
-        BarSeries2.ShowLabels = True
-        'LineSeries1.ShowLabels = True
-
-        BarSeries1.LabelFormat = "{0:#,###}"
-        BarSeries2.LabelFormat = "{0:#,###}"
-        LineSeries1.LabelFormat = "{0:##,###}"
-
-        BarSeries1.HorizontalAxis = CategoricalAxis1
-        LineSeries1.HorizontalAxis = CategoricalAxis1
-
-        BarSeries1.VerticalAxis = LinearAxis1
-        LineSeries1.VerticalAxis = LinearAxis1
-
-        BarSeries1.Palette = New PaletteEntry(Color.FromArgb(55, 96, 146))
-        BarSeries2.Palette = New PaletteEntry(Color.FromArgb(37, 64, 97))
-        LineSeries1.Palette = New PaletteEntry(Color.FromArgb(202, 0, 0))
-
-        LineSeries1.BorderColor = Color.FromArgb(202, 0, 0)
-        'LineSeries1.PointSize = New SizeF(10, 10)
-
-        Me.radChartView1.ShowToolTip = True
-
-        radChartView1.Series.Add(BarSeries1)
-        radChartView1.Series.Add(BarSeries2)
-        radChartView1.Series.Add(LineSeries1)
-
-        BarSeries1.CombineMode = ChartSeriesCombineMode.None
-        BarSeries2.CombineMode = ChartSeriesCombineMode.None
-        LineSeries1.CombineMode = ChartSeriesCombineMode.None
-
-        BarSeries1.LabelMode = BarLabelModes.Top
-        BarSeries2.LabelMode = BarLabelModes.Top
-
-        If (LinearAxis1.ActualRange.Maximum = 0) Then
-            LinearAxis1.Maximum = 5
-        End If
-
-        For Each controller As ChartViewController In Me.radChartView1.Controllers
-            Dim control As SmartLabelsController = TryCast(controller, SmartLabelsController)
-            If control IsNot Nothing Then
-                control.Strategy.DistanceToLabel = CInt(Fix(25.0))
-                Me.radChartView1.View.PerformRefresh(Me.radChartView1.View, False)
-            End If
-        Next controller
-
-    End Sub
-    'NRFTi Equipo
-    Private Sub obtiene_nrfti_equipo_dia_mes()
-        'Objeto obtiene_oee Clase
-        Dim oObtiene_nrfti As New obtiene_NRFTi
-        oObtiene_nrfti.cve_equipo = cbxEquipo.SelectedValue
-        oObtiene_nrfti.fecha_inicial = dtpFechaInicial.Value
-        oObtiene_nrfti.fecha_final = dtpFechaFinal.Value
-        oObtiene_nrfti.bandera = bandera_graficos
-        'Creacion series
-        Dim BarSeries1 As New BarSeries()
-        BarSeries1.LegendTitle = "nrfti"
-        Dim BarSeries2 As New BarSeries()
-        BarSeries2.LegendTitle = "Acumulado"
-        Dim LineSeries1 As New LineSeries()
-        LineSeries1.LegendTitle = "Objetivo NRFTi"
-        Me.radChartView1.ShowLegend = True
-        Me.radChartView1.ShowSmartLabels = True
-        BarSeries1.DrawLinesToLabels = True
-        BarSeries1.SyncLinesToLabelsColor = True
-        BarSeries1.Font = New Font("Segoe UI", 11)
-        BarSeries2.Font = New Font("Segoe UI", 11)
-        'Obtencion Datos Oee
-        Dim vDT As New DataTable
-        If rdbtnDias.IsChecked Then
-            vDT = oObtiene_nrfti.obtiene_nrfti_equipo_dia()
-        ElseIf rdbtnMeses.IsChecked Then
-            vDT = oObtiene_nrfti.obtiene_nrfti_equipo_mes()
-        End If
-        'Llenado de las series
-        Dim vTotal As Integer = 1
-        Dim vContador As Integer = 1
-        vTotal = vDT.Rows.Count
-        If vTotal = 0 Then
-            habilita_etiqueta_datos()
-            Me.radChartView1.Title = ""
-        Else
-            Me.radChartView1.Title = "NRFTi ( PPM'S ) " & cbxEquipo.Text
-        End If
-        For Each vDR As DataRow In vDT.Rows
-            If rdbtnDias.IsChecked Then
-                If vContador = 1 Then
-                    BarSeries2.DataPoints.Add(New CategoricalDataPoint(vDR("nrfti"), "Acumulado"))
-                Else
-                    BarSeries1.DataPoints.Add(New CategoricalDataPoint(vDR("nrfti"), vDR("dia_asignado")))
-                    If Not IsDBNull(vDR("objetivo")) Then
-                        LineSeries1.DataPoints.Add(New CategoricalDataPoint(vDR("objetivo"), vDR("dia_asignado")))
-                    End If
-                End If
-            ElseIf rdbtnMeses.IsChecked Then
-                If vContador = vTotal Then
-                    BarSeries2.DataPoints.Add(New CategoricalDataPoint(vDR("nrfti"), "Acumulado"))
-                Else
-                    BarSeries1.DataPoints.Add(New CategoricalDataPoint(vDR("nrfti"), vDR("dia_asignado")))
-                    If Not IsDBNull(vDR("objetivo")) Then
-                        LineSeries1.DataPoints.Add(New CategoricalDataPoint(vDR("objetivo"), vDR("dia_asignado")))
-                    End If
-                End If
-            End If
-            vContador = vContador + 1
-        Next
-
-        'Cartesian Area, CategoricalAxis, LinearAxis
-        Dim CartesianArea1 As CartesianArea = New CartesianArea()
-        Dim CategoricalAxis1 As CategoricalAxis = New CategoricalAxis()
-        Dim LinearAxis1 As LinearAxis = New LinearAxis()
-        'Personalizacion
-        'CartesianArea1.GridDesign.AlternatingVerticalColor = False
-        'CartesianArea1.ShowGrid = True
-
-        'Logo Indicador
-        picboxIndicador.ImageLocation = Application.StartupPath & "\graficas_fase_uno\logo_indicador_calidad.jpg"
-
-        'Legend & Position
-        Me.radChartView1.ChartElement.LegendElement.StackElement.Orientation = Orientation.Horizontal
-        Me.radChartView1.ChartElement.LegendPosition = LegendPosition.Bottom
-
-        Me.radChartView1.AreaDesign = CartesianArea1
-        CategoricalAxis1.LabelFitMode = AxisLabelFitMode.Rotate
-        If rdbtnDias.IsChecked Then
-            CategoricalAxis1.LabelFormat = "{0:dd - MMM}"
-        ElseIf rdbtnMeses.IsChecked Then
-            CategoricalAxis1.LabelFormat = "{0:MMM - yyyy}"
-        End If
-        CategoricalAxis1.LabelRotationAngle = 270.0R
-        LinearAxis1.AxisType = AxisType.Second
-        'LinearAxis1.LabelFitMode = AxisLabelFitMode.Rotate
-        'LinearAxis1.LabelRotationAngle = 300.0R
-        'LinearAxis1.MajorStep = 10.0R
-        'LinearAxis1.Maximum = 100
-        LinearAxis1.Title = "NRFTi (PPM'S)"
-        BarSeries1.ShowLabels = True
-        BarSeries2.ShowLabels = True
-        'LineSeries1.ShowLabels = True
-
-        BarSeries1.LabelFormat = "{0:#,###}"
-        BarSeries2.LabelFormat = "{0:#,###}"
-        LineSeries1.LabelFormat = "{0:##,###}"
-
-        BarSeries1.HorizontalAxis = CategoricalAxis1
-        LineSeries1.HorizontalAxis = CategoricalAxis1
-
-        BarSeries1.VerticalAxis = LinearAxis1
-        LineSeries1.VerticalAxis = LinearAxis1
-
-        'BarSeries1.ForeColor = Color.White
-        'BarSeries2.ForeColor = Color.White
-        BarSeries1.Palette = New PaletteEntry(Color.FromArgb(55, 96, 146))
-        BarSeries2.Palette = New PaletteEntry(Color.FromArgb(37, 64, 97))
-        LineSeries1.Palette = New PaletteEntry(Color.FromArgb(202, 0, 0))
-
-        LineSeries1.BorderColor = Color.FromArgb(202, 0, 0)
-        'LineSeries1.PointSize = New SizeF(10, 10)
-
-        Me.radChartView1.ShowToolTip = True
-
-        radChartView1.Series.Add(BarSeries1)
-        radChartView1.Series.Add(BarSeries2)
-        radChartView1.Series.Add(LineSeries1)
-
-        BarSeries1.CombineMode = ChartSeriesCombineMode.None
-        BarSeries2.CombineMode = ChartSeriesCombineMode.None
-        LineSeries1.CombineMode = ChartSeriesCombineMode.None
-
-        BarSeries1.LabelMode = BarLabelModes.Top
-        BarSeries2.LabelMode = BarLabelModes.Top
-
-        For Each controller As ChartViewController In Me.radChartView1.Controllers
-            Dim control As SmartLabelsController = TryCast(controller, SmartLabelsController)
-            If control IsNot Nothing Then
-                control.Strategy.DistanceToLabel = CInt(Fix(25.0))
-                Me.radChartView1.View.PerformRefresh(Me.radChartView1.View, False)
-            End If
-        Next controller
-
-        If (LinearAxis1.ActualRange.Maximum = 0) Then
-            LinearAxis1.Maximum = 5
-        End If
-    End Sub
-    'NRFTi Equipo-Linea
-    Private Sub obtiene_nrfti_equipo_linea_dia_mes()
-        'Objeto obtiene_oee Clase
-        Dim oObtiene_nrfti As New obtiene_NRFTi
-        oObtiene_nrfti.cve_equipo = cbxEquipo.SelectedValue
-        oObtiene_nrfti.cve_linea = cbxLinea.SelectedValue
-        oObtiene_nrfti.fecha_inicial = dtpFechaInicial.Value
-        oObtiene_nrfti.fecha_final = dtpFechaFinal.Value
-        oObtiene_nrfti.bandera = bandera_graficos
-        'Creacion series
-        Dim BarSeries1 As New BarSeries()
-        BarSeries1.LegendTitle = "nrfti"
-        Dim BarSeries2 As New BarSeries()
-        BarSeries2.LegendTitle = "Acumulado"
-        Dim LineSeries1 As New LineSeries()
-        LineSeries1.LegendTitle = "Objetivo NRFTi"
-        Me.radChartView1.ShowLegend = True
-        Me.radChartView1.ShowSmartLabels = True
-        BarSeries1.DrawLinesToLabels = True
-        BarSeries1.SyncLinesToLabelsColor = True
-        BarSeries1.Font = New Font("Segoe UI", 11)
-        BarSeries2.Font = New Font("Segoe UI", 11)
-        'Obtencion Datos Oee
-        Dim vDT As New DataTable
-        If rdbtnDias.IsChecked Then
-            vDT = oObtiene_nrfti.obtiene_nrfti_equipo_linea_dia()
-        ElseIf rdbtnMeses.IsChecked Then
-            vDT = oObtiene_nrfti.obtiene_nrfti_equipo_linea_mes()
-        End If
-        'Llenado de las series
-        Dim vTotal As Integer = 1
-        Dim vContador As Integer = 1
-        vTotal = vDT.Rows.Count
-        If vTotal = 0 Then
-            habilita_etiqueta_datos()
-            Me.radChartView1.Title = ""
-        Else
-            Me.radChartView1.Title = "NRFTi ( PPM'S ) " & cbxEquipo.Text & " - " & cbxLinea.Text
-        End If
-        For Each vDR As DataRow In vDT.Rows
-            If rdbtnDias.IsChecked Then
-                If vContador = 1 Then
-                    BarSeries2.DataPoints.Add(New CategoricalDataPoint(vDR("nrfti"), "Acumulado"))
-                Else
-                    BarSeries1.DataPoints.Add(New CategoricalDataPoint(vDR("nrfti"), vDR("dia_asignado")))
-                    If Not IsDBNull(vDR("objetivo")) Then
-                        LineSeries1.DataPoints.Add(New CategoricalDataPoint(vDR("objetivo"), vDR("dia_asignado")))
-                    End If
-                End If
-            ElseIf rdbtnMeses.IsChecked Then
-                If vContador = vTotal Then
-                    BarSeries2.DataPoints.Add(New CategoricalDataPoint(vDR("nrfti"), "Acumulado"))
-                Else
-                    BarSeries1.DataPoints.Add(New CategoricalDataPoint(vDR("nrfti"), vDR("dia_asignado")))
-                    If Not IsDBNull(vDR("objetivo")) Then
-                        LineSeries1.DataPoints.Add(New CategoricalDataPoint(vDR("objetivo"), vDR("dia_asignado")))
-                    End If
-                End If
-            End If
-            vContador = vContador + 1
-        Next
-
-        'Cartesian Area, CategoricalAxis, LinearAxis
-        Dim CartesianArea1 As CartesianArea = New CartesianArea()
-        Dim CategoricalAxis1 As CategoricalAxis = New CategoricalAxis()
-        Dim LinearAxis1 As LinearAxis = New LinearAxis()
-        'Personalizacion
-        'CartesianArea1.GridDesign.AlternatingVerticalColor = False
-        'CartesianArea1.ShowGrid = True
-
-        'Logo Indicador
-        picboxIndicador.ImageLocation = Application.StartupPath & "\graficas_fase_uno\logo_indicador_calidad.jpg"
-
-        'Legend & Position
-        Me.radChartView1.ChartElement.LegendElement.StackElement.Orientation = Orientation.Horizontal
-        Me.radChartView1.ChartElement.LegendPosition = LegendPosition.Bottom
-
-        Me.radChartView1.AreaDesign = CartesianArea1
-        CategoricalAxis1.LabelFitMode = AxisLabelFitMode.Rotate
-        If rdbtnDias.IsChecked Then
-            CategoricalAxis1.LabelFormat = "{0:dd - MMM}"
-        ElseIf rdbtnMeses.IsChecked Then
-            CategoricalAxis1.LabelFormat = "{0:MMM - yyyy}"
-        End If
-        CategoricalAxis1.LabelRotationAngle = 270.0R
-        LinearAxis1.AxisType = AxisType.Second
-        'LinearAxis1.LabelFitMode = AxisLabelFitMode.Rotate
-        'LinearAxis1.LabelRotationAngle = 300.0R
-        'LinearAxis1.MajorStep = 10.0R
-        'LinearAxis1.Maximum = 100
-        LinearAxis1.Title = "NRFTi (PPM'S)"
-        BarSeries1.ShowLabels = True
-        BarSeries2.ShowLabels = True
-        'LineSeries1.ShowLabels = True
-
-        BarSeries1.LabelFormat = "{0:#,###}"
-        BarSeries2.LabelFormat = "{0:#,###}"
-        LineSeries1.LabelFormat = "{0:##,###}"
-
-        BarSeries1.HorizontalAxis = CategoricalAxis1
-        LineSeries1.HorizontalAxis = CategoricalAxis1
-
-        BarSeries1.VerticalAxis = LinearAxis1
-        LineSeries1.VerticalAxis = LinearAxis1
-
-        BarSeries1.Palette = New PaletteEntry(Color.FromArgb(55, 96, 146))
-        BarSeries2.Palette = New PaletteEntry(Color.FromArgb(37, 64, 97))
-        LineSeries1.Palette = New PaletteEntry(Color.FromArgb(202, 0, 0))
-
-        LineSeries1.BorderColor = Color.FromArgb(202, 0, 0)
-        'LineSeries1.PointSize = New SizeF(10, 10)
-
-        Me.radChartView1.ShowToolTip = True
-
-        radChartView1.Series.Add(BarSeries1)
-        radChartView1.Series.Add(BarSeries2)
-        radChartView1.Series.Add(LineSeries1)
-
-        BarSeries1.CombineMode = ChartSeriesCombineMode.None
-        BarSeries2.CombineMode = ChartSeriesCombineMode.None
-        LineSeries1.CombineMode = ChartSeriesCombineMode.None
-
-        BarSeries1.LabelMode = BarLabelModes.Top
-        BarSeries2.LabelMode = BarLabelModes.Top
-
-        If (LinearAxis1.ActualRange.Maximum = 0) Then
-            LinearAxis1.Maximum = 5
-        End If
-
-        For Each controller As ChartViewController In Me.radChartView1.Controllers
-            Dim control As SmartLabelsController = TryCast(controller, SmartLabelsController)
-            If control IsNot Nothing Then
-                control.Strategy.DistanceToLabel = CInt(Fix(25.0))
-                Me.radChartView1.View.PerformRefresh(Me.radChartView1.View, False)
-            End If
-        Next controller
-
-    End Sub
-#End Region
 #End Region
 
 #Region "Metodos graficar cincoS"
@@ -2613,7 +1127,6 @@ Public Class FrmGraficasfaseuno
         Dim vCve_Componente As Integer = 0
         Dim vCve_CadenaValor As Integer = 0
         Dim vNivel As Integer = 0
-        Dim vFormato As Integer = 0
         Dim vF_Inicial As DateTime = Date.Now
         Dim vF_Final As DateTime = Date.Now
 
@@ -2647,17 +1160,13 @@ Public Class FrmGraficasfaseuno
         End If
 
         ''Obtencion de Informacion
-        vDatos_Obtenidos = oG_Fase2.Obten_Cinco_S(vF_Inicial, vF_Final, vCve_Equipo, vCve_Linea, vCve_Componente, vCve_CadenaValor, vFormato_Resultado, vNivel, True, False)
+        vDatos_Obtenidos = oG_Fase2.Obten_Cinco_S(vF_Inicial, vF_Final, vCve_Equipo, vCve_Linea, vCve_Componente, vCve_CadenaValor, vNivel)
 
         'Creacion series
-        Dim BarSeries1 As New BarSeries()
-        BarSeries1.LegendTitle = "Admon Visual"
-        Dim BarSeries2 As New BarSeries() 'mantto_autto
-        BarSeries2.LegendTitle = "5's"
-        Dim BarSeries3 As New BarSeries() 'admon_visual
-        BarSeries3.LegendTitle = "Mantto Autto"
-        Dim BarSeries4 As New BarSeries() 'cincoS
-        BarSeries4.LegendTitle = "Promedio 5's"
+        Dim BarSeries1 As New BarSeries() With {.LegendTitle = "Admon Visual"}
+        Dim BarSeries2 As New BarSeries() With {.LegendTitle = "5's"} 'mantto_autto
+        Dim BarSeries3 As New BarSeries() With {.LegendTitle = "Mantto Autto"} 'admon_visual
+        Dim BarSeries4 As New BarSeries() With {.LegendTitle = "Promedio 5's"} 'cincoS
         Dim LineSeries1 As New LineSeries()
         If vNivel <> 5 Then
             LineSeries1.LegendTitle = "Objetivo 5's"
@@ -2665,16 +1174,14 @@ Public Class FrmGraficasfaseuno
 
         Me.radChartView1.ShowLegend = True
         'Obtencion Datos
-        Dim vDT As DataTable = Nothing
-
-        vDT = vDatos_Obtenidos
+        Dim vDT As DataTable = vDatos_Obtenidos
 
         If vDT.Rows.Count = 0 Then
             habilita_etiqueta_datos()
             Me.radChartView1.Title = ""
         Else
             If vNivel = 0 Then
-                Me.radChartView1.Title = "5's " & cbxEquipo.Text & " - " & cbxLinea.Text
+                Me.radChartView1.Title = String.Format("5's {0} - {1}", cbxEquipo.Text, cbxLinea.Text)
             ElseIf vNivel = 1 Then
                 Me.radChartView1.Title = "5's " & cbxEquipo.Text
             ElseIf vNivel = 2 Then
@@ -2778,7 +1285,7 @@ Public Class FrmGraficasfaseuno
 
     End Sub
 
-    Private Sub Obtiene_Reporte_CincoS(ByVal vEsResumen As Boolean)
+    Private Sub Obtiene_Reporte_CincoS()
         Me.dgvTabla.DataSource = Nothing
         Me.dgvTabla.Columns.Clear()
         Me.dgvTabla.DataSource = vDatos_Obtenidos
@@ -2845,694 +1352,7 @@ Public Class FrmGraficasfaseuno
         Me.dgvTabla.Columns("promedio").IsVisible = True
         Me.dgvTabla.Columns("objetivo").IsVisible = True
         Me.dgvTabla.Columns("comentarios").IsVisible = True
-
-
     End Sub
-
-#Region "MEtodos No Utilizados, Eliminar"
-    '5s planta
-    Private Sub obtiene_cincoS_planta_mes()
-        'Objeto obtiene_nrfti Clase
-        Dim oObtiene_cincoS As New obtiene_cincoS
-        oObtiene_cincoS.fecha_inicial = dtpFechaInicial.Value
-        oObtiene_cincoS.fecha_final = dtpFechaFinal.Value
-        oObtiene_cincoS.bandera = bandera_graficos
-        'Creacion series
-        Dim BarSeries1 As New BarSeries()
-        BarSeries1.LegendTitle = "Admon Visual"
-        Dim BarSeries2 As New BarSeries() 'mantto_autto
-        BarSeries2.LegendTitle = "5's"
-        Dim BarSeries3 As New BarSeries() 'admon_visual
-        BarSeries3.LegendTitle = "Mantto Autto"
-        Dim BarSeries4 As New BarSeries() 'cincoS
-        BarSeries4.LegendTitle = "Promedio 5's"
-        Me.radChartView1.ShowLegend = True
-        'Obtencion Datos
-        Dim vDT As DataTable = Nothing
-        If rdbtnMeses.IsChecked Then
-            vDT = oObtiene_cincoS.obtiene_cincos_planta_mes()
-        End If
-
-        If vDT.Rows.Count = 0 Then
-            habilita_etiqueta_datos()
-            Me.radChartView1.Title = ""
-        Else
-            Me.radChartView1.Title = "5's Planta GKN Driveline México"
-        End If
-
-        BarSeries1.ValueMember = "admon_visual"
-        BarSeries1.CategoryMember = "dia_asignado"
-        BarSeries1.DataSource = vDT
-        BarSeries2.ValueMember = "cincoS"
-        BarSeries2.CategoryMember = "dia_asignado"
-        BarSeries2.DataSource = vDT
-        BarSeries3.ValueMember = "mantto_autto"
-        BarSeries3.CategoryMember = "dia_asignado"
-        BarSeries3.DataSource = vDT
-        BarSeries4.ValueMember = "promedio"
-        BarSeries4.CategoryMember = "dia_asignado"
-        BarSeries4.DataSource = vDT
-        'Cartesian Area, CategoricalAxis, LinearAxis
-        Dim CartesianArea1 As CartesianArea = New CartesianArea()
-        Dim CategoricalAxis1 As CategoricalAxis = New CategoricalAxis()
-        Dim LinearAxis1 As LinearAxis = New LinearAxis()
-        'Personalizacion
-        'CartesianArea1.GridDesign.AlternatingVerticalColor = False
-        'CartesianArea1.ShowGrid = True
-
-        'Logo Indicador
-        picboxIndicador.ImageLocation = Application.StartupPath & "\graficas_fase_uno\logo_indicador_cincos.jpg"
-
-        'Legend & Position
-        Me.radChartView1.ChartElement.LegendElement.StackElement.Orientation = Orientation.Horizontal
-        Me.radChartView1.ChartElement.LegendPosition = LegendPosition.Bottom
-
-        Me.radChartView1.AreaDesign = CartesianArea1
-        CategoricalAxis1.LabelFitMode = AxisLabelFitMode.Rotate
-        If rdbtnDias.IsChecked Then
-            CategoricalAxis1.LabelFormat = "{0:dd - MMM}"
-        ElseIf rdbtnMeses.IsChecked Then
-            CategoricalAxis1.LabelFormat = "{0:MMM - yyyy}"
-        End If
-        CategoricalAxis1.LabelRotationAngle = 270.0R
-        LinearAxis1.AxisType = AxisType.Second
-        LinearAxis1.MajorStep = 1.0R
-        LinearAxis1.Maximum = 5
-        LinearAxis1.Title = "5's"
-        'serie1
-        BarSeries1.ShowLabels = True
-        BarSeries1.LabelFormat = "{0:##.#}"
-        BarSeries1.HorizontalAxis = CategoricalAxis1
-        BarSeries1.VerticalAxis = LinearAxis1
-        BarSeries1.Palette = New PaletteEntry(Color.FromArgb(217, 217, 217))
-        'serie2
-        BarSeries2.ShowLabels = True
-        BarSeries2.LabelFormat = "{0:##.#}"
-        BarSeries2.Palette = New PaletteEntry(Color.FromArgb(255, 192, 0))
-        'serie3
-        BarSeries3.ShowLabels = True
-        BarSeries3.LabelFormat = "{0:##.#}"
-        BarSeries3.Palette = New PaletteEntry(Color.FromArgb(37, 64, 97))
-        'serie4
-        BarSeries4.ShowLabels = True
-        BarSeries4.LabelFormat = "{0:##.#}"
-        BarSeries4.Palette = New PaletteEntry(Color.FromArgb(127, 127, 127))
-
-        Me.radChartView1.ShowToolTip = True
-        radChartView1.Series.Add(BarSeries1)
-        radChartView1.Series.Add(BarSeries2)
-        radChartView1.Series.Add(BarSeries3)
-        radChartView1.Series.Add(BarSeries4)
-    End Sub
-    '5s cadena valor
-    Private Sub obtiene_cincoS_cadena_valor_mes()
-        'Objeto obtiene_nrfti Clase
-        Dim oObtiene_cincoS As New obtiene_cincoS
-        oObtiene_cincoS.cve_cadena_valor = cbxCadenaValor.SelectedValue
-        oObtiene_cincoS.fecha_inicial = dtpFechaInicial.Value
-        oObtiene_cincoS.fecha_final = dtpFechaFinal.Value
-        oObtiene_cincoS.bandera = bandera_graficos
-        'Creacion series
-        Dim BarSeries1 As New BarSeries()
-        BarSeries1.LegendTitle = "Admon Visual"
-        Dim BarSeries2 As New BarSeries() 'mantto_autto
-        BarSeries2.LegendTitle = "5's"
-        Dim BarSeries3 As New BarSeries() 'admon_visual
-        BarSeries3.LegendTitle = "Mantto Autto"
-        Dim BarSeries4 As New BarSeries() 'cincoS
-        BarSeries4.LegendTitle = "Promedio 5's"
-        Dim LineSeries1 As New LineSeries()
-        LineSeries1.LegendTitle = "Objetivo 5's"
-        Me.radChartView1.ShowLegend = True
-        'Obtencion Datos
-        Dim vDT As DataTable = Nothing
-        If rdbtnMeses.IsChecked Then
-            vDT = oObtiene_cincoS.obtiene_cincos_cadena_valor_mes()
-        End If
-
-        If vDT.Rows.Count = 0 Then
-            habilita_etiqueta_datos()
-            Me.radChartView1.Title = ""
-        Else
-            Me.radChartView1.Title = "5's " & cbxCadenaValor.Text
-        End If
-
-        BarSeries1.ValueMember = "admon_visual"
-        BarSeries1.CategoryMember = "dia_asignado"
-        BarSeries1.DataSource = vDT
-        BarSeries2.ValueMember = "cincoS"
-        BarSeries2.CategoryMember = "dia_asignado"
-        BarSeries2.DataSource = vDT
-        BarSeries3.ValueMember = "mantto_autto"
-        BarSeries3.CategoryMember = "dia_asignado"
-        BarSeries3.DataSource = vDT
-        BarSeries4.ValueMember = "promedio"
-        BarSeries4.CategoryMember = "dia_asignado"
-        BarSeries4.DataSource = vDT
-
-        LineSeries1.ValueMember = "objetivo"
-        LineSeries1.CategoryMember = "dia_asignado"
-        LineSeries1.DataSource = vDT
-
-        'Cartesian Area, CategoricalAxis, LinearAxis
-        Dim CartesianArea1 As CartesianArea = New CartesianArea()
-        Dim CategoricalAxis1 As CategoricalAxis = New CategoricalAxis()
-        Dim LinearAxis1 As LinearAxis = New LinearAxis()
-        'Personalizacion
-        'CartesianArea1.GridDesign.AlternatingVerticalColor = False
-        'CartesianArea1.ShowGrid = True
-
-        'Logo Indicador
-        picboxIndicador.ImageLocation = Application.StartupPath & "\graficas_fase_uno\logo_indicador_cincos.jpg"
-
-        'Legend & Position
-        Me.radChartView1.ChartElement.LegendElement.StackElement.Orientation = Orientation.Horizontal
-        Me.radChartView1.ChartElement.LegendPosition = LegendPosition.Bottom
-
-        Me.radChartView1.AreaDesign = CartesianArea1
-        CategoricalAxis1.LabelFitMode = AxisLabelFitMode.Rotate
-        If rdbtnDias.IsChecked Then
-            CategoricalAxis1.LabelFormat = "{0:dd - MMM}"
-        ElseIf rdbtnMeses.IsChecked Then
-            CategoricalAxis1.LabelFormat = "{0:MMM - yyyy}"
-        End If
-        CategoricalAxis1.LabelRotationAngle = 270.0R
-        LinearAxis1.AxisType = AxisType.Second
-        LinearAxis1.MajorStep = 1.0R
-        LinearAxis1.Maximum = 5
-        LinearAxis1.Title = "5's"
-        'serie1
-        BarSeries1.ShowLabels = True
-        BarSeries1.LabelFormat = "{0:##.#}"
-        BarSeries1.HorizontalAxis = CategoricalAxis1
-        BarSeries1.VerticalAxis = LinearAxis1
-        BarSeries1.Palette = New PaletteEntry(Color.FromArgb(217, 217, 217))
-        'serie2
-        BarSeries2.ShowLabels = True
-        BarSeries2.LabelFormat = "{0:##.#}"
-        BarSeries2.Palette = New PaletteEntry(Color.FromArgb(255, 192, 0))
-        'serie3
-        BarSeries3.ShowLabels = True
-        BarSeries3.LabelFormat = "{0:##.#}"
-        BarSeries3.Palette = New PaletteEntry(Color.FromArgb(37, 64, 97))
-        'serie4
-        BarSeries4.ShowLabels = True
-        BarSeries4.LabelFormat = "{0:##.#}"
-        BarSeries4.Palette = New PaletteEntry(Color.FromArgb(127, 127, 127))
-        'lineseries
-        'LineSeries1.ShowLabels = True
-        LineSeries1.LabelFormat = "{0:##.#}"
-        LineSeries1.HorizontalAxis = CategoricalAxis1
-        LineSeries1.VerticalAxis = LinearAxis1
-        LineSeries1.Palette = New PaletteEntry(Color.FromArgb(202, 0, 0))
-        LineSeries1.BorderColor = Color.FromArgb(202, 0, 0)
-        'LineSeries1.PointSize = New SizeF(10, 10)
-
-
-        Me.radChartView1.ShowToolTip = True
-        radChartView1.Series.Add(LineSeries1)
-        radChartView1.Series.Add(BarSeries1)
-        radChartView1.Series.Add(BarSeries2)
-        radChartView1.Series.Add(BarSeries3)
-        radChartView1.Series.Add(BarSeries4)
-
-        LineSeries1.CombineMode = ChartSeriesCombineMode.None
-        BarSeries1.CombineMode = ChartSeriesCombineMode.Cluster
-        BarSeries2.CombineMode = ChartSeriesCombineMode.Cluster
-        BarSeries3.CombineMode = ChartSeriesCombineMode.Cluster
-        BarSeries4.CombineMode = ChartSeriesCombineMode.Cluster
-
-
-    End Sub
-    '5s componente
-    Private Sub obtiene_cincoS_componente_mes()
-        'Objeto obtiene_nrfti Clase
-        Dim oObtiene_cincoS As New obtiene_cincoS
-        oObtiene_cincoS.cve_componente = cbxComponente.SelectedValue
-        oObtiene_cincoS.fecha_inicial = dtpFechaInicial.Value
-        oObtiene_cincoS.fecha_final = dtpFechaFinal.Value
-        oObtiene_cincoS.bandera = bandera_graficos
-        'Creacion series
-        Dim BarSeries1 As New BarSeries()
-        BarSeries1.LegendTitle = "Admon Visual"
-        Dim BarSeries2 As New BarSeries() 'mantto_autto
-        BarSeries2.LegendTitle = "5's"
-        Dim BarSeries3 As New BarSeries() 'admon_visual
-        BarSeries3.LegendTitle = "Mantto Autto"
-        Dim BarSeries4 As New BarSeries() 'cincoS
-        BarSeries4.LegendTitle = "Promedio 5's"
-        Dim LineSeries1 As New LineSeries()
-        LineSeries1.LegendTitle = "Objetivo 5's"
-        Me.radChartView1.ShowLegend = True
-        'Obtencion Datos
-        Dim vDT As DataTable = Nothing
-        If rdbtnMeses.IsChecked Then
-            vDT = oObtiene_cincoS.obtiene_cincos_componente_mes()
-        End If
-
-        If vDT.Rows.Count = 0 Then
-            habilita_etiqueta_datos()
-            Me.radChartView1.Title = ""
-        Else
-            Me.radChartView1.Title = "5's " & cbxComponente.Text
-        End If
-
-        BarSeries1.ValueMember = "admon_visual"
-        BarSeries1.CategoryMember = "dia_asignado"
-        BarSeries1.DataSource = vDT
-        BarSeries2.ValueMember = "cincoS"
-        BarSeries2.CategoryMember = "dia_asignado"
-        BarSeries2.DataSource = vDT
-        BarSeries3.ValueMember = "mantto_autto"
-        BarSeries3.CategoryMember = "dia_asignado"
-        BarSeries3.DataSource = vDT
-        BarSeries4.ValueMember = "promedio"
-        BarSeries4.CategoryMember = "dia_asignado"
-        BarSeries4.DataSource = vDT
-
-        LineSeries1.ValueMember = "objetivo"
-        LineSeries1.CategoryMember = "dia_asignado"
-        LineSeries1.DataSource = vDT
-        'Cartesian Area, CategoricalAxis, LinearAxis
-        Dim CartesianArea1 As CartesianArea = New CartesianArea()
-        Dim CategoricalAxis1 As CategoricalAxis = New CategoricalAxis()
-        Dim LinearAxis1 As LinearAxis = New LinearAxis()
-        'Personalizacion
-        'CartesianArea1.GridDesign.AlternatingVerticalColor = False
-        'CartesianArea1.ShowGrid = True
-
-        'Logo Indicador
-        picboxIndicador.ImageLocation = Application.StartupPath & "\graficas_fase_uno\logo_indicador_cincos.jpg"
-
-        'Legend & Position
-        Me.radChartView1.ChartElement.LegendElement.StackElement.Orientation = Orientation.Horizontal
-        Me.radChartView1.ChartElement.LegendPosition = LegendPosition.Bottom
-
-        Me.radChartView1.AreaDesign = CartesianArea1
-        CategoricalAxis1.LabelFitMode = AxisLabelFitMode.Rotate
-        If rdbtnDias.IsChecked Then
-            CategoricalAxis1.LabelFormat = "{0:dd - MMM}"
-        ElseIf rdbtnMeses.IsChecked Then
-            CategoricalAxis1.LabelFormat = "{0:MMM - yyyy}"
-        End If
-        CategoricalAxis1.LabelRotationAngle = 270.0R
-        LinearAxis1.AxisType = AxisType.Second
-        LinearAxis1.MajorStep = 1.0R
-        LinearAxis1.Maximum = 5
-        LinearAxis1.Title = "5's"
-        'serie1
-        BarSeries1.ShowLabels = True
-        BarSeries1.LabelFormat = "{0:##.#}"
-        BarSeries1.HorizontalAxis = CategoricalAxis1
-        BarSeries1.VerticalAxis = LinearAxis1
-        BarSeries1.Palette = New PaletteEntry(Color.FromArgb(217, 217, 217))
-        'serie2
-        BarSeries2.ShowLabels = True
-        BarSeries2.LabelFormat = "{0:##.#}"
-        BarSeries2.Palette = New PaletteEntry(Color.FromArgb(255, 192, 0))
-        'serie3
-        BarSeries3.ShowLabels = True
-        BarSeries3.LabelFormat = "{0:##.#}"
-        BarSeries3.Palette = New PaletteEntry(Color.FromArgb(37, 64, 97))
-        'serie4
-        BarSeries4.ShowLabels = True
-        BarSeries4.LabelFormat = "{0:##.#}"
-        BarSeries4.Palette = New PaletteEntry(Color.FromArgb(127, 127, 127))
-        'lineseries
-        'LineSeries1.ShowLabels = True
-        LineSeries1.LabelFormat = "{0:##.#}"
-        LineSeries1.HorizontalAxis = CategoricalAxis1
-        LineSeries1.VerticalAxis = LinearAxis1
-        LineSeries1.Palette = New PaletteEntry(Color.FromArgb(202, 0, 0))
-        LineSeries1.BorderColor = Color.FromArgb(202, 0, 0)
-        'LineSeries1.PointSize = New SizeF(10, 10)
-
-        Me.radChartView1.ShowToolTip = True
-        radChartView1.Series.Add(LineSeries1)
-        radChartView1.Series.Add(BarSeries1)
-        radChartView1.Series.Add(BarSeries2)
-        radChartView1.Series.Add(BarSeries3)
-        radChartView1.Series.Add(BarSeries4)
-
-        LineSeries1.CombineMode = ChartSeriesCombineMode.None
-        BarSeries1.CombineMode = ChartSeriesCombineMode.Cluster
-        BarSeries2.CombineMode = ChartSeriesCombineMode.Cluster
-        BarSeries3.CombineMode = ChartSeriesCombineMode.Cluster
-        BarSeries4.CombineMode = ChartSeriesCombineMode.Cluster
-    End Sub
-    '5s linea
-    Private Sub obtiene_cincoS_linea_mes()
-        'Objeto obtiene_nrfti Clase
-        Dim oObtiene_cincoS As New obtiene_cincoS
-        oObtiene_cincoS.cve_linea = cbxLinea.SelectedValue
-        oObtiene_cincoS.fecha_inicial = dtpFechaInicial.Value
-        oObtiene_cincoS.fecha_final = dtpFechaFinal.Value
-        oObtiene_cincoS.bandera = bandera_graficos
-        'Creacion series
-        Dim BarSeries1 As New BarSeries()
-        BarSeries1.LegendTitle = "Admon Visual"
-        Dim BarSeries2 As New BarSeries() 'mantto_autto
-        BarSeries2.LegendTitle = "5's"
-        Dim BarSeries3 As New BarSeries() 'admon_visual
-        BarSeries3.LegendTitle = "Mantto Autto"
-        Dim BarSeries4 As New BarSeries() 'cincoS
-        BarSeries4.LegendTitle = "Promedio 5's"
-        Dim LineSeries1 As New LineSeries()
-        LineSeries1.LegendTitle = "Objetivo 5's"
-        Me.radChartView1.ShowLegend = True
-        'Obtencion Datos
-        Dim vDT As DataTable = Nothing
-        If rdbtnMeses.IsChecked Then
-            vDT = oObtiene_cincoS.obtiene_cincos_linea_mes()
-        End If
-
-        If vDT.Rows.Count = 0 Then
-            habilita_etiqueta_datos()
-            Me.radChartView1.Title = ""
-        Else
-            Me.radChartView1.Title = "5's " & cbxLinea.Text
-        End If
-
-        BarSeries1.ValueMember = "admon_visual"
-        BarSeries1.CategoryMember = "dia_asignado"
-        BarSeries1.DataSource = vDT
-        BarSeries2.ValueMember = "cincoS"
-        BarSeries2.CategoryMember = "dia_asignado"
-        BarSeries2.DataSource = vDT
-        BarSeries3.ValueMember = "mantto_autto"
-        BarSeries3.CategoryMember = "dia_asignado"
-        BarSeries3.DataSource = vDT
-        BarSeries4.ValueMember = "promedio"
-        BarSeries4.CategoryMember = "dia_asignado"
-        BarSeries4.DataSource = vDT
-        LineSeries1.ValueMember = "objetivo"
-        LineSeries1.CategoryMember = "dia_asignado"
-        LineSeries1.DataSource = vDT
-
-        'Cartesian Area, CategoricalAxis, LinearAxis
-        Dim CartesianArea1 As CartesianArea = New CartesianArea()
-        Dim CategoricalAxis1 As CategoricalAxis = New CategoricalAxis()
-        Dim LinearAxis1 As LinearAxis = New LinearAxis()
-        'Personalizacion
-        'CartesianArea1.GridDesign.AlternatingVerticalColor = False
-        'CartesianArea1.ShowGrid = True
-
-        'Logo Indicador
-        picboxIndicador.ImageLocation = Application.StartupPath & "\graficas_fase_uno\logo_indicador_cincos.jpg"
-
-        'Legend & Position
-        Me.radChartView1.ChartElement.LegendElement.StackElement.Orientation = Orientation.Horizontal
-        Me.radChartView1.ChartElement.LegendPosition = LegendPosition.Bottom
-
-        Me.radChartView1.AreaDesign = CartesianArea1
-        CategoricalAxis1.LabelFitMode = AxisLabelFitMode.Rotate
-        If rdbtnDias.IsChecked Then
-            CategoricalAxis1.LabelFormat = "{0:dd - MMM}"
-        ElseIf rdbtnMeses.IsChecked Then
-            CategoricalAxis1.LabelFormat = "{0:MMM - yyyy}"
-        End If
-        CategoricalAxis1.LabelRotationAngle = 270.0R
-        LinearAxis1.AxisType = AxisType.Second
-        LinearAxis1.MajorStep = 1.0R
-        LinearAxis1.Maximum = 5
-        LinearAxis1.Title = "5's"
-        'serie1
-        BarSeries1.ShowLabels = True
-        BarSeries1.LabelFormat = "{0:##.#}"
-        BarSeries1.HorizontalAxis = CategoricalAxis1
-        BarSeries1.VerticalAxis = LinearAxis1
-        BarSeries1.Palette = New PaletteEntry(Color.FromArgb(217, 217, 217))
-        'serie2
-        BarSeries2.ShowLabels = True
-        BarSeries2.LabelFormat = "{0:##.#}"
-        BarSeries2.Palette = New PaletteEntry(Color.FromArgb(255, 192, 0))
-        'serie3
-        BarSeries3.ShowLabels = True
-        BarSeries3.LabelFormat = "{0:##.#}"
-        BarSeries3.Palette = New PaletteEntry(Color.FromArgb(37, 64, 97))
-        'serie4
-        BarSeries4.ShowLabels = True
-        BarSeries4.LabelFormat = "{0:##.#}"
-        BarSeries4.Palette = New PaletteEntry(Color.FromArgb(127, 127, 127))
-        'lineseries
-        'LineSeries1.ShowLabels = True
-        LineSeries1.LabelFormat = "{0:##.#}"
-        LineSeries1.HorizontalAxis = CategoricalAxis1
-        LineSeries1.VerticalAxis = LinearAxis1
-        LineSeries1.Palette = New PaletteEntry(Color.FromArgb(202, 0, 0))
-        LineSeries1.BorderColor = Color.FromArgb(202, 0, 0)
-        'LineSeries1.PointSize = New SizeF(10, 10)
-
-        Me.radChartView1.ShowToolTip = True
-        radChartView1.Series.Add(LineSeries1)
-        radChartView1.Series.Add(BarSeries1)
-        radChartView1.Series.Add(BarSeries2)
-        radChartView1.Series.Add(BarSeries3)
-        radChartView1.Series.Add(BarSeries4)
-
-        LineSeries1.CombineMode = ChartSeriesCombineMode.None
-        BarSeries1.CombineMode = ChartSeriesCombineMode.Cluster
-        BarSeries2.CombineMode = ChartSeriesCombineMode.Cluster
-        BarSeries3.CombineMode = ChartSeriesCombineMode.Cluster
-        BarSeries4.CombineMode = ChartSeriesCombineMode.Cluster
-    End Sub
-    '5s equipo
-    Private Sub obtiene_cincoS_equipo_mes()
-        'Objeto obtiene_nrfti Clase
-        Dim oObtiene_cincoS As New obtiene_cincoS
-        oObtiene_cincoS.cve_equipo = cbxEquipo.SelectedValue
-        oObtiene_cincoS.fecha_inicial = dtpFechaInicial.Value
-        oObtiene_cincoS.fecha_final = dtpFechaFinal.Value
-        oObtiene_cincoS.bandera = bandera_graficos
-        'Creacion series
-        Dim BarSeries1 As New BarSeries()
-        BarSeries1.LegendTitle = "Admon Visual"
-        Dim BarSeries2 As New BarSeries() 'mantto_autto
-        BarSeries2.LegendTitle = "5's"
-        Dim BarSeries3 As New BarSeries() 'admon_visual
-        BarSeries3.LegendTitle = "Mantto Autto"
-        Dim BarSeries4 As New BarSeries() 'cincoS
-        BarSeries4.LegendTitle = "Promedio 5's"
-        Dim LineSeries1 As New LineSeries()
-        LineSeries1.LegendTitle = "Objetivo 5's"
-        Me.radChartView1.ShowLegend = True
-        'Obtencion Datos
-        Dim vDT As DataTable = Nothing
-        If rdbtnMeses.IsChecked Then
-            vDT = oObtiene_cincoS.obtiene_cincos_equipo_mes()
-        End If
-
-        If vDT.Rows.Count = 0 Then
-            habilita_etiqueta_datos()
-            Me.radChartView1.Title = ""
-        Else
-            Me.radChartView1.Title = "5's " & cbxEquipo.Text
-        End If
-
-        BarSeries1.ValueMember = "admon_visual"
-        BarSeries1.CategoryMember = "dia_asignado"
-        BarSeries1.DataSource = vDT
-        BarSeries2.ValueMember = "cincoS"
-        BarSeries2.CategoryMember = "dia_asignado"
-        BarSeries2.DataSource = vDT
-        BarSeries3.ValueMember = "mantto_autto"
-        BarSeries3.CategoryMember = "dia_asignado"
-        BarSeries3.DataSource = vDT
-        BarSeries4.ValueMember = "promedio"
-        BarSeries4.CategoryMember = "dia_asignado"
-        BarSeries4.DataSource = vDT
-        LineSeries1.ValueMember = "objetivo"
-        LineSeries1.CategoryMember = "dia_asignado"
-        LineSeries1.DataSource = vDT
-
-        'Cartesian Area, CategoricalAxis, LinearAxis
-        Dim CartesianArea1 As CartesianArea = New CartesianArea()
-        Dim CategoricalAxis1 As CategoricalAxis = New CategoricalAxis()
-        Dim LinearAxis1 As LinearAxis = New LinearAxis()
-        'Personalizacion
-        'CartesianArea1.GridDesign.AlternatingVerticalColor = False
-        'CartesianArea1.ShowGrid = True
-
-        'Logo Indicador
-        picboxIndicador.ImageLocation = Application.StartupPath & "\graficas_fase_uno\logo_indicador_cincos.jpg"
-
-        'Legend & Position
-        Me.radChartView1.ChartElement.LegendElement.StackElement.Orientation = Orientation.Horizontal
-        Me.radChartView1.ChartElement.LegendPosition = LegendPosition.Bottom
-
-        Me.radChartView1.AreaDesign = CartesianArea1
-        CategoricalAxis1.LabelFitMode = AxisLabelFitMode.Rotate
-        If rdbtnDias.IsChecked Then
-            CategoricalAxis1.LabelFormat = "{0:dd - MMM}"
-        ElseIf rdbtnMeses.IsChecked Then
-            CategoricalAxis1.LabelFormat = "{0:MMM - yyyy}"
-        End If
-        CategoricalAxis1.LabelRotationAngle = 270.0R
-        LinearAxis1.AxisType = AxisType.Second
-        LinearAxis1.MajorStep = 1.0R
-        LinearAxis1.Maximum = 5
-        LinearAxis1.Title = "5's"
-        'serie1
-        BarSeries1.ShowLabels = True
-        BarSeries1.LabelFormat = "{0:##.#}"
-        BarSeries1.HorizontalAxis = CategoricalAxis1
-        BarSeries1.VerticalAxis = LinearAxis1
-        BarSeries1.Palette = New PaletteEntry(Color.FromArgb(217, 217, 217))
-        'serie2
-        BarSeries2.ShowLabels = True
-        BarSeries2.LabelFormat = "{0:##.#}"
-        BarSeries2.Palette = New PaletteEntry(Color.FromArgb(255, 192, 0))
-        'serie3
-        BarSeries3.ShowLabels = True
-        BarSeries3.LabelFormat = "{0:##.#}"
-        BarSeries3.Palette = New PaletteEntry(Color.FromArgb(37, 64, 97))
-        'serie4
-        BarSeries4.ShowLabels = True
-        BarSeries4.LabelFormat = "{0:##.#}"
-        BarSeries4.Palette = New PaletteEntry(Color.FromArgb(127, 127, 127))
-        'lineseries
-        'LineSeries1.ShowLabels = True
-        LineSeries1.LabelFormat = "{0:##.#}"
-        LineSeries1.HorizontalAxis = CategoricalAxis1
-        LineSeries1.VerticalAxis = LinearAxis1
-        LineSeries1.Palette = New PaletteEntry(Color.FromArgb(202, 0, 0))
-        LineSeries1.BorderColor = Color.FromArgb(202, 0, 0)
-        'LineSeries1.PointSize = New SizeF(10, 10)
-
-        Me.radChartView1.ShowToolTip = True
-        radChartView1.Series.Add(LineSeries1)
-        radChartView1.Series.Add(BarSeries1)
-        radChartView1.Series.Add(BarSeries2)
-        radChartView1.Series.Add(BarSeries3)
-        radChartView1.Series.Add(BarSeries4)
-
-        LineSeries1.CombineMode = ChartSeriesCombineMode.None
-        BarSeries1.CombineMode = ChartSeriesCombineMode.Cluster
-        BarSeries2.CombineMode = ChartSeriesCombineMode.Cluster
-        BarSeries3.CombineMode = ChartSeriesCombineMode.Cluster
-        BarSeries4.CombineMode = ChartSeriesCombineMode.Cluster
-    End Sub
-    '5s equipo-linea
-    Private Sub obtiene_cincoS_equipo_linea_mes()
-        'Objeto obtiene_nrfti Clase
-        Dim oObtiene_cincoS As New obtiene_cincoS
-        oObtiene_cincoS.cve_equipo = cbxEquipo.SelectedValue
-        oObtiene_cincoS.cve_linea = cbxLinea.SelectedValue
-        oObtiene_cincoS.fecha_inicial = dtpFechaInicial.Value
-        oObtiene_cincoS.fecha_final = dtpFechaFinal.Value
-        oObtiene_cincoS.bandera = bandera_graficos
-        'Creacion series
-        Dim BarSeries1 As New BarSeries()
-        BarSeries1.LegendTitle = "Admon Visual"
-        Dim BarSeries2 As New BarSeries() 'mantto_autto
-        BarSeries2.LegendTitle = "5's"
-        Dim BarSeries3 As New BarSeries() 'admon_visual
-        BarSeries3.LegendTitle = "Mantto Autto"
-        Dim BarSeries4 As New BarSeries() 'cincoS
-        BarSeries4.LegendTitle = "Promedio 5's"
-        Dim LineSeries1 As New LineSeries()
-        LineSeries1.LegendTitle = "Objetivo 5's"
-        Me.radChartView1.ShowLegend = True
-        'Obtencion Datos
-        Dim vDT As DataTable = Nothing
-        If rdbtnMeses.IsChecked Then
-            vDT = oObtiene_cincoS.obtiene_cincos_equipo_linea_mes()
-        End If
-
-        If vDT.Rows.Count = 0 Then
-            habilita_etiqueta_datos()
-            Me.radChartView1.Title = ""
-        Else
-            Me.radChartView1.Title = "5's " & cbxEquipo.Text & " - " & cbxLinea.Text
-        End If
-
-        BarSeries1.ValueMember = "admon_visual"
-        BarSeries1.CategoryMember = "dia_asignado"
-        BarSeries1.DataSource = vDT
-        BarSeries2.ValueMember = "cincoS"
-        BarSeries2.CategoryMember = "dia_asignado"
-        BarSeries2.DataSource = vDT
-        BarSeries3.ValueMember = "mantto_autto"
-        BarSeries3.CategoryMember = "dia_asignado"
-        BarSeries3.DataSource = vDT
-        BarSeries4.ValueMember = "promedio"
-        BarSeries4.CategoryMember = "dia_asignado"
-        BarSeries4.DataSource = vDT
-
-        LineSeries1.ValueMember = "objetivo"
-        LineSeries1.CategoryMember = "dia_asignado"
-        LineSeries1.DataSource = vDT
-
-        'Cartesian Area, CategoricalAxis, LinearAxis
-        Dim CartesianArea1 As CartesianArea = New CartesianArea()
-        Dim CategoricalAxis1 As CategoricalAxis = New CategoricalAxis()
-        Dim LinearAxis1 As LinearAxis = New LinearAxis()
-        'Personalizacion
-        'CartesianArea1.GridDesign.AlternatingVerticalColor = False
-        'CartesianArea1.ShowGrid = True
-
-        'Logo Indicador
-        picboxIndicador.ImageLocation = Application.StartupPath & "\graficas_fase_uno\logo_indicador_cincos.jpg"
-
-        'Legend & Position
-        Me.radChartView1.ChartElement.LegendElement.StackElement.Orientation = Orientation.Horizontal
-        Me.radChartView1.ChartElement.LegendPosition = LegendPosition.Bottom
-
-        Me.radChartView1.AreaDesign = CartesianArea1
-        CategoricalAxis1.LabelFitMode = AxisLabelFitMode.Rotate
-        If rdbtnDias.IsChecked Then
-            CategoricalAxis1.LabelFormat = "{0:dd - MMM}"
-        ElseIf rdbtnMeses.IsChecked Then
-            CategoricalAxis1.LabelFormat = "{0:MMM - yyyy}"
-        End If
-        CategoricalAxis1.LabelRotationAngle = 270.0R
-        LinearAxis1.AxisType = AxisType.Second
-        LinearAxis1.MajorStep = 1.0R
-        LinearAxis1.Maximum = 5
-        LinearAxis1.Title = "5's"
-        'serie1
-        BarSeries1.ShowLabels = True
-        BarSeries1.LabelFormat = "{0:##.#}"
-        BarSeries1.HorizontalAxis = CategoricalAxis1
-        BarSeries1.VerticalAxis = LinearAxis1
-        BarSeries1.Palette = New PaletteEntry(Color.FromArgb(217, 217, 217))
-        'serie2
-        BarSeries2.ShowLabels = True
-        BarSeries2.LabelFormat = "{0:##.#}"
-        BarSeries2.Palette = New PaletteEntry(Color.FromArgb(255, 192, 0))
-        'serie3
-        BarSeries3.ShowLabels = True
-        BarSeries3.LabelFormat = "{0:##.#}"
-        BarSeries3.Palette = New PaletteEntry(Color.FromArgb(37, 64, 97))
-        'serie4
-        BarSeries4.ShowLabels = True
-        BarSeries4.LabelFormat = "{0:##.#}"
-        BarSeries4.Palette = New PaletteEntry(Color.FromArgb(127, 127, 127))
-        'lineseries
-        'LineSeries1.ShowLabels = True
-        LineSeries1.LabelFormat = "{0:##.#}"
-        LineSeries1.HorizontalAxis = CategoricalAxis1
-        LineSeries1.VerticalAxis = LinearAxis1
-        LineSeries1.Palette = New PaletteEntry(Color.FromArgb(202, 0, 0))
-        LineSeries1.BorderColor = Color.FromArgb(202, 0, 0)
-        'LineSeries1.PointSize = New SizeF(10, 10)
-
-        Me.radChartView1.ShowToolTip = True
-        radChartView1.Series.Add(LineSeries1)
-        radChartView1.Series.Add(BarSeries1)
-        radChartView1.Series.Add(BarSeries2)
-        radChartView1.Series.Add(BarSeries3)
-        radChartView1.Series.Add(BarSeries4)
-
-        LineSeries1.CombineMode = ChartSeriesCombineMode.None
-        BarSeries1.CombineMode = ChartSeriesCombineMode.Cluster
-        BarSeries2.CombineMode = ChartSeriesCombineMode.Cluster
-        BarSeries3.CombineMode = ChartSeriesCombineMode.Cluster
-        BarSeries4.CombineMode = ChartSeriesCombineMode.Cluster
-    End Sub
-
-#End Region
-
 #End Region
 
 #Region "Metodos graficar gente"
@@ -3543,7 +1363,6 @@ Public Class FrmGraficasfaseuno
         Dim vCve_Componente As Integer = 0
         Dim vCve_CadenaValor As Integer = 0
         Dim vNivel As Integer = 0
-        Dim vFormato As Integer = 0
         Dim vF_Inicial As DateTime = Date.Now
         Dim vF_Final As DateTime = Date.Now
 
@@ -3577,20 +1396,16 @@ Public Class FrmGraficasfaseuno
         End If
 
         ''Obtencion de Informacion
-        vDatos_Obtenidos = oG_Fase2.Obten_Gente(vF_Inicial, vF_Final, vCve_Equipo, vCve_Linea, vCve_Componente, vCve_CadenaValor, vFormato_Resultado, vNivel, True, False)
+        vDatos_Obtenidos = oG_Fase2.Obten_Gente(vF_Inicial, vF_Final, vCve_Equipo, vCve_Linea, vCve_Componente, vCve_CadenaValor, vFormato_Resultado, vNivel)
 
 
         'Creacion series
 
-        Dim BarSeries2 As New BarSeries()
-        BarSeries2.LegendTitle = "faltas"
-        Dim BarSeries3 As New BarSeries()
-        BarSeries3.LegendTitle = "retardos"
+        Dim BarSeries2 As New BarSeries() With {.LegendTitle = "faltas"}
+        Dim BarSeries3 As New BarSeries() With {.LegendTitle = "retardos"}
 
-        Dim BarSeries4 As New BarSeries()
-        BarSeries4.LegendTitle = "Faltas_Acumulado"
-        Dim BarSeries5 As New BarSeries()
-        BarSeries5.LegendTitle = "Retardos_Acumulado"
+        Dim BarSeries4 As New BarSeries() With {.LegendTitle = "Faltas_Acumulado"}
+        Dim BarSeries5 As New BarSeries() With {.LegendTitle = "Retardos_Acumulado"}
 
         Dim LineSeries1 As New LineSeries()
         If vNivel <> 5 Then
@@ -3598,8 +1413,7 @@ Public Class FrmGraficasfaseuno
         End If
         Me.radChartView1.ShowLegend = True
         'Obtencion Datos
-        Dim vDT As DataTable = Nothing
-        vDT = vDatos_Obtenidos
+        Dim vDT As DataTable = vDatos_Obtenidos
 
         If vDT.Rows.Count = 0 Then
             habilita_etiqueta_datos()
@@ -3607,7 +1421,7 @@ Public Class FrmGraficasfaseuno
         Else
 
             If vNivel = 0 Then
-                Me.radChartView1.Title = "Gente " & cbxEquipo.Text & " - " & cbxLinea.Text
+                Me.radChartView1.Title = String.Format("Gente {0} - {1}", cbxEquipo.Text, cbxLinea.Text)
             ElseIf vNivel = 1 Then
                 Me.radChartView1.Title = "Gente " & cbxEquipo.Text
             ElseIf vNivel = 2 Then
@@ -3619,7 +1433,6 @@ Public Class FrmGraficasfaseuno
             ElseIf vNivel = 5 Then
                 Me.radChartView1.Title = "Gente Planta GKN Driveline México"
             End If
-
         End If
 
         Dim vTotal As Integer = 1
@@ -3691,13 +1504,6 @@ Public Class FrmGraficasfaseuno
         BarSeries2.HorizontalAxis = CategoricalAxis1
         BarSeries2.VerticalAxis = LinearAxis1
 
-        'If rdbtnDias.IsChecked Then
-        '    BarSeries3.HorizontalAxis = CategoricalAxis1
-        '    BarSeries3.VerticalAxis = LinearAxis1
-        'ElseIf rdbtnMeses.IsChecked Then
-        '    BarSeries2.HorizontalAxis = CategoricalAxis1
-        '    BarSeries2.VerticalAxis = LinearAxis1
-        'End If
         If vNivel <> 5 Then
             LineSeries1.HorizontalAxis = CategoricalAxis1
             LineSeries1.VerticalAxis = LinearAxis1
@@ -3747,7 +1553,7 @@ Public Class FrmGraficasfaseuno
         End If
     End Sub
 
-    Private Sub Obtiene_Reporte_Gente(ByVal vEsResumen As Boolean)
+    Private Sub Obtiene_Reporte_Gente()
         Me.dgvTabla.DataSource = Nothing
         Me.dgvTabla.Columns.Clear()
 
@@ -3803,692 +1609,8 @@ Public Class FrmGraficasfaseuno
         Me.dgvTabla.Columns("comentarios").IsVisible = True
         Me.dgvTabla.Columns("comentarios").Width = 300
         Me.dgvTabla.Columns("comentarios").Name = "comentarios"
-
-
     End Sub
 
-#Region "MEtodos No Utilizados, Eliminar"
-    'Gente planta
-    Private Sub obtiene_gente_planta_dia_mes()
-        'Objeto obtiene_nrfti Clase
-        Dim oObtiene_gente As New obtiene_gente
-        oObtiene_gente.fecha_inicial = dtpFechaInicial.Value
-        oObtiene_gente.fecha_final = dtpFechaFinal.Value
-        oObtiene_gente.bandera = bandera_graficos
-        'Creacion series
-        Dim BarSeries1 As New BarSeries()
-        BarSeries1.LegendTitle = "total"
-        Dim BarSeries2 As New BarSeries()
-        BarSeries2.LegendTitle = "faltas"
-        Dim BarSeries3 As New BarSeries()
-        BarSeries3.LegendTitle = "retardos"
-        Me.radChartView1.ShowLegend = True
-        'Obtencion Datos
-        Dim vDT As DataTable = Nothing
-        If rdbtnDias.IsChecked Then
-            vDT = oObtiene_gente.obtiene_gente_planta_dia()
-        ElseIf rdbtnMeses.IsChecked Then
-            vDT = oObtiene_gente.obtiene_gente_planta_mes()
-        End If
-
-        If vDT.Rows.Count = 0 Then
-            habilita_etiqueta_datos()
-            Me.radChartView1.Title = ""
-        Else
-            Me.radChartView1.Title = "Gente Planta GKN Driveline México"
-        End If
-
-        BarSeries1.ValueMember = "total"
-        BarSeries1.CategoryMember = "dia_asignado"
-        BarSeries1.DataSource = vDT
-        BarSeries2.ValueMember = "faltas"
-        BarSeries2.CategoryMember = "dia_asignado"
-        BarSeries2.DataSource = vDT
-        BarSeries3.ValueMember = "retardos"
-        BarSeries3.CategoryMember = "dia_asignado"
-        BarSeries3.DataSource = vDT
-        'Cartesian Area, CategoricalAxis, LinearAxis
-        Dim CartesianArea1 As CartesianArea = New CartesianArea()
-        Dim CategoricalAxis1 As CategoricalAxis = New CategoricalAxis()
-        Dim LinearAxis1 As LinearAxis = New LinearAxis()
-        'Personalizacion
-        'CartesianArea1.GridDesign.AlternatingVerticalColor = False
-        'CartesianArea1.ShowGrid = True
-
-        'Logo Indicador
-        picboxIndicador.ImageLocation = Application.StartupPath & "\graficas_fase_uno\logo_indicador_gente.jpg"
-
-        'Legend & Position
-        Me.radChartView1.ChartElement.LegendElement.StackElement.Orientation = Orientation.Horizontal
-        Me.radChartView1.ChartElement.LegendPosition = LegendPosition.Bottom
-
-        Me.radChartView1.AreaDesign = CartesianArea1
-        CategoricalAxis1.LabelFitMode = AxisLabelFitMode.Rotate
-        If rdbtnDias.IsChecked Then
-            CategoricalAxis1.LabelFormat = "{0:dd - MMM}"
-        ElseIf rdbtnMeses.IsChecked Then
-            CategoricalAxis1.LabelFormat = "{0:MMM - yyyy}"
-        End If
-        CategoricalAxis1.LabelRotationAngle = 270.0R
-        LinearAxis1.AxisType = AxisType.Second
-        'LinearAxis1.MajorStep = 1.0R
-        'LinearAxis1.Maximum = 5
-        LinearAxis1.Title = "Gente"
-        BarSeries1.ShowLabels = True
-        'BarSeries2.ShowLabels = True
-        'BarSeries3.ShowLabels = True
-        BarSeries1.LabelFormat = "{0:###}"
-        BarSeries2.LabelFormat = "{0:###}"
-        If rdbtnDias.IsChecked Then
-            BarSeries1.HorizontalAxis = CategoricalAxis1
-            BarSeries1.VerticalAxis = LinearAxis1
-        ElseIf rdbtnMeses.IsChecked Then
-            BarSeries2.HorizontalAxis = CategoricalAxis1
-            BarSeries2.VerticalAxis = LinearAxis1
-        End If
-        BarSeries1.Palette = New PaletteEntry(Color.FromArgb(108, 96, 190))
-        BarSeries2.Palette = New PaletteEntry(Color.FromArgb(233, 37, 43))
-        BarSeries3.Palette = New PaletteEntry(Color.FromArgb(255, 191, 0))
-        Me.radChartView1.ShowTrackBall = True
-        Me.radChartView1.ShowToolTip = True
-        If rdbtnDias.IsChecked Then
-            radChartView1.Series.Add(BarSeries1)
-        End If
-        radChartView1.Series.Add(BarSeries2)
-        radChartView1.Series.Add(BarSeries3)
-        For i As Integer = 0 To Me.radChartView1.Series.Count - 1
-            Me.radChartView1.GetSeries(Of BarSeries)(i).CombineMode = ChartSeriesCombineMode.Stack
-        Next i
-        If (LinearAxis1.ActualRange.Maximum = 0) Then
-            LinearAxis1.Maximum = 5
-        End If
-    End Sub
-    'Gente cadena valor
-    Private Sub obtiene_gente_cadena_valor_dia_mes()
-        'Objeto obtiene_nrfti Clase
-        Dim oObtiene_gente As New obtiene_gente
-        oObtiene_gente.cve_cadena_valor = cbxCadenaValor.SelectedValue
-        oObtiene_gente.fecha_inicial = dtpFechaInicial.Value
-        oObtiene_gente.fecha_final = dtpFechaFinal.Value
-        oObtiene_gente.bandera = bandera_graficos
-        'Creacion series
-        Dim BarSeries1 As New BarSeries()
-        BarSeries1.LegendTitle = "total"
-        Dim BarSeries2 As New BarSeries()
-        BarSeries2.LegendTitle = "faltas"
-        Dim BarSeries3 As New BarSeries()
-        BarSeries3.LegendTitle = "retardos"
-        Dim LineSeries1 As New LineSeries()
-        LineSeries1.LegendTitle = "Objetivo Gente"
-        Me.radChartView1.ShowLegend = True
-        'Obtencion Datos
-        Dim vDT As DataTable = Nothing
-        If rdbtnDias.IsChecked Then
-            vDT = oObtiene_gente.obtiene_gente_cadena_valor_dia()
-        ElseIf rdbtnMeses.IsChecked Then
-            vDT = oObtiene_gente.obtiene_gente_cadena_valor_mes()
-        End If
-
-        If vDT.Rows.Count = 0 Then
-            habilita_etiqueta_datos()
-            Me.radChartView1.Title = ""
-        Else
-            Me.radChartView1.Title = "Gente " & cbxCadenaValor.Text
-        End If
-
-        BarSeries1.ValueMember = "total"
-        BarSeries1.CategoryMember = "dia_asignado"
-        BarSeries1.DataSource = vDT
-        BarSeries2.ValueMember = "faltas"
-        BarSeries2.CategoryMember = "dia_asignado"
-        BarSeries2.DataSource = vDT
-        BarSeries3.ValueMember = "retardos"
-        BarSeries3.CategoryMember = "dia_asignado"
-        BarSeries3.DataSource = vDT
-        LineSeries1.ValueMember = "objetivo"
-        LineSeries1.CategoryMember = "dia_asignado"
-        LineSeries1.DataSource = vDT
-        'Cartesian Area, CategoricalAxis, LinearAxis
-        Dim CartesianArea1 As CartesianArea = New CartesianArea()
-        Dim CategoricalAxis1 As CategoricalAxis = New CategoricalAxis()
-        Dim LinearAxis1 As LinearAxis = New LinearAxis()
-        'Personalizacion
-        'CartesianArea1.GridDesign.AlternatingVerticalColor = False
-        'CartesianArea1.ShowGrid = True
-
-        'Logo Indicador
-        picboxIndicador.ImageLocation = Application.StartupPath & "\graficas_fase_uno\logo_indicador_gente.jpg"
-
-        'Legend & Position
-        Me.radChartView1.ChartElement.LegendElement.StackElement.Orientation = Orientation.Horizontal
-        Me.radChartView1.ChartElement.LegendPosition = LegendPosition.Bottom
-
-        Me.radChartView1.AreaDesign = CartesianArea1
-        CategoricalAxis1.LabelFitMode = AxisLabelFitMode.Rotate
-        If rdbtnDias.IsChecked Then
-            CategoricalAxis1.LabelFormat = "{0:dd - MMM}"
-        ElseIf rdbtnMeses.IsChecked Then
-            CategoricalAxis1.LabelFormat = "{0:MMM - yyyy}"
-        End If
-        CategoricalAxis1.LabelRotationAngle = 270.0R
-        LinearAxis1.AxisType = AxisType.Second
-        'LinearAxis1.MajorStep = 1.0R
-        'LinearAxis1.Maximum = 5
-        LinearAxis1.Title = "Gente"
-        BarSeries1.ShowLabels = True
-        'LineSeries1.ShowLabels = True
-        'BarSeries2.ShowLabels = True
-        'BarSeries3.ShowLabels = True
-        BarSeries1.LabelFormat = "{0:###}"
-        BarSeries2.LabelFormat = "{0:###}"
-        LineSeries1.LabelFormat = "{0:###}"
-        If rdbtnDias.IsChecked Then
-            BarSeries1.HorizontalAxis = CategoricalAxis1
-            BarSeries1.VerticalAxis = LinearAxis1
-        ElseIf rdbtnMeses.IsChecked Then
-            BarSeries2.HorizontalAxis = CategoricalAxis1
-            BarSeries2.VerticalAxis = LinearAxis1
-        End If
-        LineSeries1.HorizontalAxis = CategoricalAxis1
-        LineSeries1.VerticalAxis = LinearAxis1
-        BarSeries1.Palette = New PaletteEntry(Color.FromArgb(108, 96, 190))
-        BarSeries2.Palette = New PaletteEntry(Color.FromArgb(233, 37, 43))
-        BarSeries3.Palette = New PaletteEntry(Color.FromArgb(255, 191, 0))
-        LineSeries1.Palette = New PaletteEntry(Color.FromArgb(202, 0, 0))
-
-        LineSeries1.BorderColor = Color.FromArgb(202, 0, 0)
-        'LineSeries1.PointSize = New SizeF(10, 10)
-
-        Me.radChartView1.ShowTrackBall = True
-        Me.radChartView1.ShowToolTip = True
-        If rdbtnDias.IsChecked Then
-            radChartView1.Series.Add(BarSeries1)
-        End If
-        radChartView1.Series.Add(LineSeries1)
-        radChartView1.Series.Add(BarSeries2)
-        radChartView1.Series.Add(BarSeries3)
-
-        LineSeries1.CombineMode = ChartSeriesCombineMode.None
-
-        BarSeries1.CombineMode = ChartSeriesCombineMode.Stack
-        BarSeries2.CombineMode = ChartSeriesCombineMode.Stack
-        BarSeries3.CombineMode = ChartSeriesCombineMode.Stack
-
-        'For i As Integer = 0 To Me.radChartView1.Series.Count - 1
-        '    Me.radChartView1.GetSeries(Of BarSeries)(i).CombineMode = ChartSeriesCombineMode.Stack
-        'Next i
-        If (LinearAxis1.ActualRange.Maximum = 0) Then
-            LinearAxis1.Maximum = 5
-        End If
-    End Sub
-    'Gente componente
-    Private Sub obtiene_gente_componente_dia_mes()
-        'Objeto obtiene_nrfti Clase
-        Dim oObtiene_gente As New obtiene_gente
-        oObtiene_gente.cve_componente = cbxComponente.SelectedValue
-        oObtiene_gente.fecha_inicial = dtpFechaInicial.Value
-        oObtiene_gente.fecha_final = dtpFechaFinal.Value
-        oObtiene_gente.bandera = bandera_graficos
-        'Creacion series
-        Dim BarSeries1 As New BarSeries()
-        BarSeries1.LegendTitle = "total"
-        Dim BarSeries2 As New BarSeries()
-        BarSeries2.LegendTitle = "faltas"
-        Dim BarSeries3 As New BarSeries()
-        BarSeries3.LegendTitle = "retardos"
-        Dim LineSeries1 As New LineSeries()
-        LineSeries1.LegendTitle = "Objetivo Gente"
-        Me.radChartView1.ShowLegend = True
-        'Obtencion Datos
-        Dim vDT As DataTable = Nothing
-        If rdbtnDias.IsChecked Then
-            vDT = oObtiene_gente.obtiene_gente_componente_dia()
-        ElseIf rdbtnMeses.IsChecked Then
-            vDT = oObtiene_gente.obtiene_gente_componente_mes()
-        End If
-
-        If vDT.Rows.Count = 0 Then
-            habilita_etiqueta_datos()
-            Me.radChartView1.Title = ""
-        Else
-            Me.radChartView1.Title = "Gente " & cbxComponente.Text
-        End If
-
-        BarSeries1.ValueMember = "total"
-        BarSeries1.CategoryMember = "dia_asignado"
-        BarSeries1.DataSource = vDT
-        BarSeries2.ValueMember = "faltas"
-        BarSeries2.CategoryMember = "dia_asignado"
-        BarSeries2.DataSource = vDT
-        BarSeries3.ValueMember = "retardos"
-        BarSeries3.CategoryMember = "dia_asignado"
-        BarSeries3.DataSource = vDT
-        LineSeries1.ValueMember = "objetivo"
-        LineSeries1.CategoryMember = "dia_asignado"
-        LineSeries1.DataSource = vDT
-        'Cartesian Area, CategoricalAxis, LinearAxis
-        Dim CartesianArea1 As CartesianArea = New CartesianArea()
-        Dim CategoricalAxis1 As CategoricalAxis = New CategoricalAxis()
-        Dim LinearAxis1 As LinearAxis = New LinearAxis()
-        'Personalizacion
-        'CartesianArea1.GridDesign.AlternatingVerticalColor = False
-        'CartesianArea1.ShowGrid = True
-
-        'Logo Indicador
-        picboxIndicador.ImageLocation = Application.StartupPath & "\graficas_fase_uno\logo_indicador_gente.jpg"
-
-        'Legend & Position
-        Me.radChartView1.ChartElement.LegendElement.StackElement.Orientation = Orientation.Horizontal
-        Me.radChartView1.ChartElement.LegendPosition = LegendPosition.Bottom
-
-        Me.radChartView1.AreaDesign = CartesianArea1
-        CategoricalAxis1.LabelFitMode = AxisLabelFitMode.Rotate
-        If rdbtnDias.IsChecked Then
-            CategoricalAxis1.LabelFormat = "{0:dd - MMM}"
-        ElseIf rdbtnMeses.IsChecked Then
-            CategoricalAxis1.LabelFormat = "{0:MMM - yyyy}"
-        End If
-        CategoricalAxis1.LabelRotationAngle = 270.0R
-        LinearAxis1.AxisType = AxisType.Second
-        'LinearAxis1.MajorStep = 1.0R
-        'LinearAxis1.Maximum = 5
-        LinearAxis1.Title = "Gente"
-        BarSeries1.ShowLabels = True
-        'LineSeries1.ShowLabels = True
-
-        'BarSeries2.ShowLabels = True
-        'BarSeries3.ShowLabels = True
-        BarSeries1.LabelFormat = "{0:###}"
-        BarSeries2.LabelFormat = "{0:###}"
-        LineSeries1.LabelFormat = "{0:###}"
-        If rdbtnDias.IsChecked Then
-            BarSeries1.HorizontalAxis = CategoricalAxis1
-            BarSeries1.VerticalAxis = LinearAxis1
-        ElseIf rdbtnMeses.IsChecked Then
-            BarSeries2.HorizontalAxis = CategoricalAxis1
-            BarSeries2.VerticalAxis = LinearAxis1
-        End If
-        LineSeries1.HorizontalAxis = CategoricalAxis1
-        LineSeries1.VerticalAxis = LinearAxis1
-        BarSeries1.Palette = New PaletteEntry(Color.FromArgb(108, 96, 190))
-        BarSeries2.Palette = New PaletteEntry(Color.FromArgb(233, 37, 43))
-        BarSeries3.Palette = New PaletteEntry(Color.FromArgb(255, 191, 0))
-        LineSeries1.Palette = New PaletteEntry(Color.FromArgb(202, 0, 0))
-
-        LineSeries1.BorderColor = Color.FromArgb(202, 0, 0)
-        'LineSeries1.PointSize = New SizeF(10, 10)
-
-        Me.radChartView1.ShowTrackBall = True
-        Me.radChartView1.ShowToolTip = True
-
-        radChartView1.Series.Add(LineSeries1)
-        If rdbtnDias.IsChecked Then
-            radChartView1.Series.Add(BarSeries1)
-        End If
-        radChartView1.Series.Add(BarSeries2)
-        radChartView1.Series.Add(BarSeries3)
-
-        LineSeries1.CombineMode = ChartSeriesCombineMode.None
-        BarSeries1.CombineMode = ChartSeriesCombineMode.Stack
-        BarSeries2.CombineMode = ChartSeriesCombineMode.Stack
-        BarSeries3.CombineMode = ChartSeriesCombineMode.Stack
-        'For i As Integer = 0 To Me.radChartView1.Series.Count - 1
-        '    Me.radChartView1.GetSeries(Of BarSeries)(i).CombineMode = ChartSeriesCombineMode.Stack
-        'Next i
-        If (LinearAxis1.ActualRange.Maximum = 0) Then
-            LinearAxis1.Maximum = 5
-        End If
-    End Sub
-    'Gente linea
-    Private Sub obtiene_gente_linea_dia_mes()
-        'Objeto obtiene_nrfti Clase
-        Dim oObtiene_gente As New obtiene_gente
-        oObtiene_gente.cve_linea = cbxLinea.SelectedValue
-        oObtiene_gente.fecha_inicial = dtpFechaInicial.Value
-        oObtiene_gente.fecha_final = dtpFechaFinal.Value
-        oObtiene_gente.bandera = bandera_graficos
-        'Creacion series
-        Dim BarSeries1 As New BarSeries()
-        BarSeries1.LegendTitle = "total"
-        Dim BarSeries2 As New BarSeries()
-        BarSeries2.LegendTitle = "faltas"
-        Dim BarSeries3 As New BarSeries()
-        BarSeries3.LegendTitle = "retardos"
-        Dim LineSeries1 As New LineSeries()
-        LineSeries1.LegendTitle = "Objetivo Gente"
-        Me.radChartView1.ShowLegend = True
-        'Obtencion Datos
-        Dim vDT As DataTable = Nothing
-        If rdbtnDias.IsChecked Then
-            vDT = oObtiene_gente.obtiene_gente_linea_dia()
-        ElseIf rdbtnMeses.IsChecked Then
-            vDT = oObtiene_gente.obtiene_gente_linea_mes()
-        End If
-
-        If vDT.Rows.Count = 0 Then
-            habilita_etiqueta_datos()
-            Me.radChartView1.Title = ""
-        Else
-            Me.radChartView1.Title = "Gente " & cbxLinea.Text
-        End If
-
-        BarSeries1.ValueMember = "total"
-        BarSeries1.CategoryMember = "dia_asignado"
-        BarSeries1.DataSource = vDT
-        BarSeries2.ValueMember = "faltas"
-        BarSeries2.CategoryMember = "dia_asignado"
-        BarSeries2.DataSource = vDT
-        BarSeries3.ValueMember = "retardos"
-        BarSeries3.CategoryMember = "dia_asignado"
-        BarSeries3.DataSource = vDT
-        LineSeries1.ValueMember = "objetivo"
-        LineSeries1.CategoryMember = "dia_asignado"
-        LineSeries1.DataSource = vDT
-        'Cartesian Area, CategoricalAxis, LinearAxis
-        Dim CartesianArea1 As CartesianArea = New CartesianArea()
-        Dim CategoricalAxis1 As CategoricalAxis = New CategoricalAxis()
-        Dim LinearAxis1 As LinearAxis = New LinearAxis()
-        'Personalizacion
-        'CartesianArea1.GridDesign.AlternatingVerticalColor = False
-        'CartesianArea1.ShowGrid = True
-
-        'Logo Indicador
-        picboxIndicador.ImageLocation = Application.StartupPath & "\graficas_fase_uno\logo_indicador_gente.jpg"
-
-        'Legend & Position
-        Me.radChartView1.ChartElement.LegendElement.StackElement.Orientation = Orientation.Horizontal
-        Me.radChartView1.ChartElement.LegendPosition = LegendPosition.Bottom
-
-        Me.radChartView1.AreaDesign = CartesianArea1
-        CategoricalAxis1.LabelFitMode = AxisLabelFitMode.Rotate
-        If rdbtnDias.IsChecked Then
-            CategoricalAxis1.LabelFormat = "{0:dd - MMM}"
-        ElseIf rdbtnMeses.IsChecked Then
-            CategoricalAxis1.LabelFormat = "{0:MMM - yyyy}"
-        End If
-        CategoricalAxis1.LabelRotationAngle = 270.0R
-        LinearAxis1.AxisType = AxisType.Second
-        'LinearAxis1.MajorStep = 1.0R
-        'LinearAxis1.Maximum = 5
-        LinearAxis1.Title = "Gente"
-        BarSeries1.ShowLabels = True
-        BarSeries2.ShowLabels = True
-        BarSeries3.ShowLabels = True
-        'LineSeries1.ShowLabels = True
-
-        BarSeries1.LabelFormat = "{0:###}"
-        BarSeries2.LabelFormat = "{0:###}"
-        LineSeries1.LabelFormat = "{0:###}"
-        If rdbtnDias.IsChecked Then
-            BarSeries1.HorizontalAxis = CategoricalAxis1
-            BarSeries1.VerticalAxis = LinearAxis1
-        ElseIf rdbtnMeses.IsChecked Then
-            BarSeries2.HorizontalAxis = CategoricalAxis1
-            BarSeries2.VerticalAxis = LinearAxis1
-        End If
-        LineSeries1.HorizontalAxis = CategoricalAxis1
-        LineSeries1.VerticalAxis = LinearAxis1
-        BarSeries1.Palette = New PaletteEntry(Color.FromArgb(108, 96, 190))
-        BarSeries2.Palette = New PaletteEntry(Color.FromArgb(233, 37, 43))
-        BarSeries3.Palette = New PaletteEntry(Color.FromArgb(255, 191, 0))
-        LineSeries1.Palette = New PaletteEntry(Color.FromArgb(202, 0, 0))
-
-        LineSeries1.BorderColor = Color.FromArgb(202, 0, 0)
-        'LineSeries1.PointSize = New SizeF(10, 10)
-
-        Me.radChartView1.ShowTrackBall = True
-        Me.radChartView1.ShowToolTip = True
-        radChartView1.Series.Add(LineSeries1)
-        If rdbtnDias.IsChecked Then
-            radChartView1.Series.Add(BarSeries1)
-        End If
-        radChartView1.Series.Add(BarSeries2)
-        radChartView1.Series.Add(BarSeries3)
-
-        LineSeries1.CombineMode = ChartSeriesCombineMode.None
-        BarSeries1.CombineMode = ChartSeriesCombineMode.Stack
-        BarSeries2.CombineMode = ChartSeriesCombineMode.Stack
-        BarSeries3.CombineMode = ChartSeriesCombineMode.Stack
-        'For i As Integer = 0 To Me.radChartView1.Series.Count - 1
-        '    Me.radChartView1.GetSeries(Of BarSeries)(i).CombineMode = ChartSeriesCombineMode.Stack
-        'Next i
-        If (LinearAxis1.ActualRange.Maximum = 0) Then
-            LinearAxis1.Maximum = 5
-        End If
-    End Sub
-    'Gente equipo
-    Private Sub obtiene_gente_equipo_dia_mes()
-        'Objeto obtiene_nrfti Clase
-        Dim oObtiene_gente As New obtiene_gente
-        oObtiene_gente.cve_equipo = cbxEquipo.SelectedValue
-        oObtiene_gente.fecha_inicial = dtpFechaInicial.Value
-        oObtiene_gente.fecha_final = dtpFechaFinal.Value
-        oObtiene_gente.bandera = bandera_graficos
-        'Creacion series
-        Dim BarSeries1 As New BarSeries()
-        BarSeries1.LegendTitle = "total"
-        Dim BarSeries2 As New BarSeries()
-        BarSeries2.LegendTitle = "faltas"
-        Dim BarSeries3 As New BarSeries()
-        BarSeries3.LegendTitle = "retardos"
-        Dim LineSeries1 As New LineSeries()
-        LineSeries1.LegendTitle = "Objetivo Gente"
-        Me.radChartView1.ShowLegend = True
-        'Obtencion Datos
-        Dim vDT As DataTable = Nothing
-        If rdbtnDias.IsChecked Then
-            vDT = oObtiene_gente.obtiene_gente_equipo_dia()
-        ElseIf rdbtnMeses.IsChecked Then
-            vDT = oObtiene_gente.obtiene_gente_equipo_mes()
-        End If
-
-        If vDT.Rows.Count = 0 Then
-            habilita_etiqueta_datos()
-            Me.radChartView1.Title = ""
-        Else
-            Me.radChartView1.Title = "Gente " & cbxEquipo.Text
-        End If
-
-        BarSeries1.ValueMember = "total"
-        BarSeries1.CategoryMember = "dia_asignado"
-        BarSeries1.DataSource = vDT
-        BarSeries2.ValueMember = "faltas"
-        BarSeries2.CategoryMember = "dia_asignado"
-        BarSeries2.DataSource = vDT
-        BarSeries3.ValueMember = "retardos"
-        BarSeries3.CategoryMember = "dia_asignado"
-        BarSeries3.DataSource = vDT
-        LineSeries1.ValueMember = "objetivo"
-        LineSeries1.CategoryMember = "dia_asignado"
-        LineSeries1.DataSource = vDT
-        'Cartesian Area, CategoricalAxis, LinearAxis
-        Dim CartesianArea1 As CartesianArea = New CartesianArea()
-        Dim CategoricalAxis1 As CategoricalAxis = New CategoricalAxis()
-        Dim LinearAxis1 As LinearAxis = New LinearAxis()
-        'Personalizacion
-        'CartesianArea1.GridDesign.AlternatingVerticalColor = False
-        'CartesianArea1.ShowGrid = True
-
-        'Logo Indicador
-        picboxIndicador.ImageLocation = Application.StartupPath & "\graficas_fase_uno\logo_indicador_gente.jpg"
-
-        'Legend & Position
-        Me.radChartView1.ChartElement.LegendElement.StackElement.Orientation = Orientation.Horizontal
-        Me.radChartView1.ChartElement.LegendPosition = LegendPosition.Bottom
-
-        Me.radChartView1.AreaDesign = CartesianArea1
-        CategoricalAxis1.LabelFitMode = AxisLabelFitMode.Rotate
-        If rdbtnDias.IsChecked Then
-            CategoricalAxis1.LabelFormat = "{0:MMM - dd}"
-        ElseIf rdbtnMeses.IsChecked Then
-            CategoricalAxis1.LabelFormat = "{0:MMM - yyyy}"
-        End If
-        CategoricalAxis1.LabelRotationAngle = 270.0R
-        LinearAxis1.AxisType = AxisType.Second
-        'LinearAxis1.MajorStep = 1.0R
-        'LinearAxis1.Maximum = 5
-        LinearAxis1.Title = "Gente"
-        BarSeries1.ShowLabels = True
-        BarSeries2.ShowLabels = True
-        BarSeries3.ShowLabels = True
-        'LineSeries1.ShowLabels = True
-
-        BarSeries1.LabelFormat = "{0:###}"
-        BarSeries2.LabelFormat = "{0:###}"
-        If rdbtnDias.IsChecked Then
-            BarSeries1.HorizontalAxis = CategoricalAxis1
-            BarSeries1.VerticalAxis = LinearAxis1
-        ElseIf rdbtnMeses.IsChecked Then
-            BarSeries2.HorizontalAxis = CategoricalAxis1
-            BarSeries2.VerticalAxis = LinearAxis1
-        End If
-        LineSeries1.HorizontalAxis = CategoricalAxis1
-        LineSeries1.VerticalAxis = LinearAxis1
-        BarSeries1.Palette = New PaletteEntry(Color.FromArgb(108, 96, 190))
-        BarSeries2.Palette = New PaletteEntry(Color.FromArgb(233, 37, 43))
-        BarSeries3.Palette = New PaletteEntry(Color.FromArgb(255, 191, 0))
-        LineSeries1.Palette = New PaletteEntry(Color.FromArgb(202, 0, 0))
-
-        LineSeries1.BorderColor = Color.FromArgb(202, 0, 0)
-        'LineSeries1.PointSize = New SizeF(10, 10)
-        Me.radChartView1.ShowTrackBall = True
-        Me.radChartView1.ShowToolTip = True
-
-        radChartView1.Series.Add(LineSeries1)
-        If rdbtnDias.IsChecked Then
-            radChartView1.Series.Add(BarSeries1)
-        End If
-        radChartView1.Series.Add(BarSeries2)
-        radChartView1.Series.Add(BarSeries3)
-
-        LineSeries1.CombineMode = ChartSeriesCombineMode.None
-        BarSeries1.CombineMode = ChartSeriesCombineMode.Stack
-        BarSeries2.CombineMode = ChartSeriesCombineMode.Stack
-        BarSeries3.CombineMode = ChartSeriesCombineMode.Stack
-        'For i As Integer = 0 To Me.radChartView1.Series.Count - 1
-        '    Me.radChartView1.GetSeries(Of BarSeries)(i).CombineMode = ChartSeriesCombineMode.Stack
-        'Next i
-        If (LinearAxis1.ActualRange.Maximum = 0) Then
-            LinearAxis1.Maximum = 5
-        End If
-    End Sub
-    'Gente equipo-linea
-    Private Sub obtiene_gente_equipo_linea_dia_mes()
-        'Objeto obtiene_nrfti Clase
-        Dim oObtiene_gente As New obtiene_gente
-        oObtiene_gente.cve_equipo = cbxEquipo.SelectedValue
-        oObtiene_gente.cve_linea = cbxLinea.SelectedValue
-        oObtiene_gente.fecha_inicial = dtpFechaInicial.Value
-        oObtiene_gente.fecha_final = dtpFechaFinal.Value
-        oObtiene_gente.bandera = bandera_graficos
-        'Creacion series
-        Dim BarSeries1 As New BarSeries()
-        BarSeries1.LegendTitle = "total"
-        Dim BarSeries2 As New BarSeries()
-        BarSeries2.LegendTitle = "faltas"
-        Dim BarSeries3 As New BarSeries()
-        BarSeries3.LegendTitle = "retardos"
-        Dim LineSeries1 As New LineSeries()
-        LineSeries1.LegendTitle = "Objetivo Gente"
-        Me.radChartView1.ShowLegend = True
-        'Obtencion Datos
-        Dim vDT As DataTable = Nothing
-        If rdbtnDias.IsChecked Then
-            vDT = oObtiene_gente.obtiene_gente_equipo_linea_dia()
-        ElseIf rdbtnMeses.IsChecked Then
-            vDT = oObtiene_gente.obtiene_gente_equipo_linea_mes()
-        End If
-
-        If vDT.Rows.Count = 0 Then
-            habilita_etiqueta_datos()
-            Me.radChartView1.Title = ""
-        Else
-            Me.radChartView1.Title = "Gente " & cbxEquipo.Text & " - " & cbxLinea.Text
-        End If
-
-        BarSeries1.ValueMember = "total"
-        BarSeries1.CategoryMember = "dia_asignado"
-        BarSeries1.DataSource = vDT
-        BarSeries2.ValueMember = "faltas"
-        BarSeries2.CategoryMember = "dia_asignado"
-        BarSeries2.DataSource = vDT
-        BarSeries3.ValueMember = "retardos"
-        BarSeries3.CategoryMember = "dia_asignado"
-        BarSeries3.DataSource = vDT
-        LineSeries1.ValueMember = "objetivo"
-        LineSeries1.CategoryMember = "dia_asignado"
-        LineSeries1.DataSource = vDT
-        'Cartesian Area, CategoricalAxis, LinearAxis
-        Dim CartesianArea1 As CartesianArea = New CartesianArea()
-        Dim CategoricalAxis1 As CategoricalAxis = New CategoricalAxis()
-        Dim LinearAxis1 As LinearAxis = New LinearAxis()
-        'Personalizacion
-        'CartesianArea1.GridDesign.AlternatingVerticalColor = False
-        'CartesianArea1.ShowGrid = True
-
-        'Logo Indicador
-        picboxIndicador.ImageLocation = Application.StartupPath & "\graficas_fase_uno\logo_indicador_gente.jpg"
-
-        'Legend & Position
-        Me.radChartView1.ChartElement.LegendElement.StackElement.Orientation = Orientation.Horizontal
-        Me.radChartView1.ChartElement.LegendPosition = LegendPosition.Bottom
-
-        Me.radChartView1.AreaDesign = CartesianArea1
-        CategoricalAxis1.LabelFitMode = AxisLabelFitMode.Rotate
-        If rdbtnDias.IsChecked Then
-            CategoricalAxis1.LabelFormat = "{0:dd - MMM}"
-        ElseIf rdbtnMeses.IsChecked Then
-            CategoricalAxis1.LabelFormat = "{0:MMM - yyyy}"
-        End If
-        CategoricalAxis1.LabelRotationAngle = 270.0R
-        LinearAxis1.AxisType = AxisType.Second
-        LinearAxis1.Title = "Gente"
-        BarSeries1.ShowLabels = True
-        BarSeries2.ShowLabels = True
-        BarSeries3.ShowLabels = True
-        'LineSeries1.ShowLabels = True
-
-        BarSeries1.LabelFormat = "{0:###}"
-        BarSeries2.LabelFormat = "{0:###}"
-        LineSeries1.LabelFormat = "{0:###}"
-        If rdbtnDias.IsChecked Then
-            BarSeries1.HorizontalAxis = CategoricalAxis1
-            BarSeries1.VerticalAxis = LinearAxis1
-        ElseIf rdbtnMeses.IsChecked Then
-            BarSeries2.HorizontalAxis = CategoricalAxis1
-            BarSeries2.VerticalAxis = LinearAxis1
-        End If
-        LineSeries1.HorizontalAxis = CategoricalAxis1
-        LineSeries1.VerticalAxis = LinearAxis1
-        BarSeries1.Palette = New PaletteEntry(Color.FromArgb(108, 96, 190))
-        BarSeries2.Palette = New PaletteEntry(Color.FromArgb(233, 37, 43))
-        BarSeries3.Palette = New PaletteEntry(Color.FromArgb(255, 191, 0))
-        LineSeries1.Palette = New PaletteEntry(Color.FromArgb(202, 0, 0))
-
-        LineSeries1.BorderColor = Color.FromArgb(202, 0, 0)
-        'LineSeries1.PointSize = New SizeF(10, 10)
-
-        Me.radChartView1.ShowTrackBall = True
-        Me.radChartView1.ShowToolTip = True
-        radChartView1.Series.Add(LineSeries1)
-        If rdbtnDias.IsChecked Then
-            radChartView1.Series.Add(BarSeries1)
-        End If
-        radChartView1.Series.Add(BarSeries2)
-        radChartView1.Series.Add(BarSeries3)
-
-        LineSeries1.CombineMode = ChartSeriesCombineMode.None
-        BarSeries1.CombineMode = ChartSeriesCombineMode.Stack
-        BarSeries2.CombineMode = ChartSeriesCombineMode.Stack
-        BarSeries3.CombineMode = ChartSeriesCombineMode.Stack
-        'For i As Integer = 0 To Me.radChartView1.Series.Count - 1
-        '    Me.radChartView1.GetSeries(Of BarSeries)(i).CombineMode = ChartSeriesCombineMode.Stack
-        'Next i
-        If (LinearAxis1.ActualRange.Maximum = 0) Then
-            LinearAxis1.Maximum = 5
-        End If
-    End Sub
-#End Region
 #End Region
 
 #Region "Metodos graficar seguridad"
@@ -4499,7 +1621,6 @@ Public Class FrmGraficasfaseuno
         Dim vCve_Componente As Integer = 0
         Dim vCve_CadenaValor As Integer = 0
         Dim vNivel As Integer = 0
-        Dim vFormato As Integer = 0
         Dim vF_Inicial As DateTime = Date.Now
         Dim vF_Final As DateTime = Date.Now
 
@@ -4534,31 +1655,27 @@ Public Class FrmGraficasfaseuno
         End If
 
         ''Obtencion de Informacion
-        vDatos_Obtenidos = oG_Fase2.Obten_Seguridad(vF_Inicial, vF_Final, vCve_Equipo, vCve_Linea, vCve_Componente, vCve_CadenaValor, vFormato_Resultado, vNivel, True, False)
+        vDatos_Obtenidos = oG_Fase2.Obten_Seguridad(vF_Inicial, vF_Final, vCve_Equipo, vCve_Linea, vCve_Componente, vCve_CadenaValor, vFormato_Resultado, vNivel)
 
 
         'Creacion series
-        Dim BarSeries1 As New BarSeries()
-        BarSeries1.LegendTitle = "acumulado"
-        Dim BarSeries2 As New BarSeries()
-        BarSeries2.LegendTitle = "nuevas"
-        Dim BarSeries3 As New BarSeries()
-        BarSeries3.LegendTitle = "resueltas"
+        Dim BarSeries1 As New BarSeries() With {.LegendTitle = "acumulado"}
+        Dim BarSeries2 As New BarSeries() With {.LegendTitle = "nuevas"}
+        Dim BarSeries3 As New BarSeries() With {.LegendTitle = "resueltas"}
         Dim LineSeries1 As New LineSeries()
         If vNivel <> 5 Then
             LineSeries1.LegendTitle = "Objetivo Seguridad"
         End If
         Me.radChartView1.ShowLegend = True
         'Obtencion Datos
-        Dim vDT As DataTable = Nothing
-        vDT = vDatos_Obtenidos
+        Dim vDT As DataTable = vDatos_Obtenidos
 
         If vDT.Rows.Count = 0 Then
             habilita_etiqueta_datos()
             Me.radChartView1.Title = ""
         Else
             If vNivel = 0 Then
-                Me.radChartView1.Title = "Seguridad " & cbxEquipo.Text & " - " & cbxLinea.Text
+                Me.radChartView1.Title = String.Format("Seguridad {0} - {1}", cbxEquipo.Text, cbxLinea.Text)
             ElseIf vNivel = 1 Then
                 Me.radChartView1.Title = "Seguridad " & cbxEquipo.Text
             ElseIf vNivel = 2 Then
@@ -4622,7 +1739,6 @@ Public Class FrmGraficasfaseuno
         End If
 
         BarSeries1.VerticalAxis = LinearAxis1
-
 
         BarSeries1.Palette = New PaletteEntry(Color.FromArgb(255, 191, 0))
         BarSeries2.Palette = New PaletteEntry(Color.FromArgb(233, 37, 43))
@@ -4726,677 +1842,6 @@ Public Class FrmGraficasfaseuno
 
     End Sub
 
-
-
-#Region "MEtodos No Utilizados, Eliminar"
-    'Gente planta
-    Private Sub obtiene_seguridad_planta_dia_mes()
-        'Objeto obtiene_nrfti Clase
-        Dim oObtiene_seguridad As New obtiene_seguridad
-        oObtiene_seguridad.fecha_inicial = dtpFechaInicial.Value
-        oObtiene_seguridad.fecha_final = dtpFechaFinal.Value
-        oObtiene_seguridad.bandera = bandera_graficos
-        'Creacion series
-        Dim BarSeries1 As New BarSeries()
-        BarSeries1.LegendTitle = "acumulado"
-        Dim BarSeries2 As New BarSeries()
-        BarSeries2.LegendTitle = "nuevas"
-        Dim BarSeries3 As New BarSeries()
-        BarSeries3.LegendTitle = "resueltas"
-        Me.radChartView1.ShowLegend = True
-        'Obtencion Datos
-        Dim vDT As DataTable = Nothing
-        If rdbtnDias.IsChecked Then
-            vDT = oObtiene_seguridad.obtiene_seguridad_planta_dia()
-        ElseIf rdbtnMeses.IsChecked Then
-            vDT = oObtiene_seguridad.obtiene_seguridad_planta_mes()
-        End If
-
-        If vDT.Rows.Count = 0 Then
-            habilita_etiqueta_datos()
-            Me.radChartView1.Title = ""
-        Else
-            Me.radChartView1.Title = "Seguridad Planta GKN Driveline México"
-        End If
-
-        BarSeries1.ValueMember = "barra_amarilla"
-        BarSeries1.CategoryMember = "dia_asignado"
-        BarSeries1.DataSource = vDT
-        BarSeries2.ValueMember = "nuevas"
-        BarSeries2.CategoryMember = "dia_asignado"
-        BarSeries2.DataSource = vDT
-        BarSeries3.ValueMember = "resueltas"
-        BarSeries3.CategoryMember = "dia_asignado"
-        BarSeries3.DataSource = vDT
-        'Cartesian Area, CategoricalAxis, LinearAxis
-        Dim CartesianArea1 As CartesianArea = New CartesianArea()
-        Dim CategoricalAxis1 As CategoricalAxis = New CategoricalAxis()
-        Dim LinearAxis1 As LinearAxis = New LinearAxis()
-        'Personalizacion
-        'CartesianArea1.GridDesign.AlternatingVerticalColor = False
-        'CartesianArea1.ShowGrid = True
-
-        'Logo Indicador
-        picboxIndicador.ImageLocation = Application.StartupPath & "\graficas_fase_uno\logo_indicador_seguridad.jpg"
-
-        'Legend & Position
-        Me.radChartView1.ChartElement.LegendElement.StackElement.Orientation = Orientation.Horizontal
-        Me.radChartView1.ChartElement.LegendPosition = LegendPosition.Bottom
-
-        Me.radChartView1.AreaDesign = CartesianArea1
-        CategoricalAxis1.LabelFitMode = AxisLabelFitMode.Rotate
-        If rdbtnDias.IsChecked Then
-            CategoricalAxis1.LabelFormat = "{0:dd - MMM}"
-        ElseIf rdbtnMeses.IsChecked Then
-            CategoricalAxis1.LabelFormat = "{0:MMM - yyyy}"
-        End If
-        CategoricalAxis1.LabelRotationAngle = 270.0R
-        LinearAxis1.AxisType = AxisType.Second
-        'LinearAxis1.MajorStep = 1.0R
-        LinearAxis1.Title = "CI"
-        'BarSeries1.ShowLabels = True
-        'BarSeries2.ShowLabels = True
-        'BarSeries3.ShowLabels = True
-        BarSeries1.LabelFormat = "{0:###}"
-        BarSeries2.LabelFormat = "{0:###}"
-        BarSeries1.HorizontalAxis = CategoricalAxis1
-        BarSeries1.VerticalAxis = LinearAxis1
-        BarSeries1.Palette = New PaletteEntry(Color.FromArgb(255, 191, 0))
-        BarSeries2.Palette = New PaletteEntry(Color.FromArgb(233, 37, 43))
-        BarSeries3.Palette = New PaletteEntry(Color.FromArgb(36, 177, 22))
-
-        Me.radChartView1.ShowTrackBall = True
-        Me.radChartView1.ShowToolTip = True
-
-        radChartView1.Series.Add(BarSeries1)
-        radChartView1.Series.Add(BarSeries2)
-        radChartView1.Series.Add(BarSeries3)
-
-        BarSeries1.CombineMode = ChartSeriesCombineMode.Stack
-        BarSeries2.CombineMode = ChartSeriesCombineMode.Stack
-        BarSeries3.CombineMode = ChartSeriesCombineMode.Stack
-        If (LinearAxis1.ActualRange.Maximum = 0) Then
-            LinearAxis1.Maximum = 5
-        End If
-    End Sub
-    'Gente Cadena Valor
-    Private Sub obtiene_seguridad_cadena_valor_dia_mes()
-        'Objeto obtiene_nrfti Clase
-        Dim oObtiene_seguridad As New obtiene_seguridad
-        oObtiene_seguridad.cve_cadena_valor = cbxCadenaValor.SelectedValue
-        oObtiene_seguridad.fecha_inicial = dtpFechaInicial.Value
-        oObtiene_seguridad.fecha_final = dtpFechaFinal.Value
-        oObtiene_seguridad.bandera = bandera_graficos
-        'Creacion series
-        Dim BarSeries1 As New BarSeries()
-        BarSeries1.LegendTitle = "acumulado"
-        Dim BarSeries2 As New BarSeries()
-        BarSeries2.LegendTitle = "nuevas"
-        Dim BarSeries3 As New BarSeries()
-        BarSeries3.LegendTitle = "resueltas"
-        Dim LineSeries1 As New LineSeries()
-        LineSeries1.LegendTitle = "Objetivo Seguridad"
-        Me.radChartView1.ShowLegend = True
-        'Obtencion Datos
-        Dim vDT As DataTable = Nothing
-        If rdbtnDias.IsChecked Then
-            vDT = oObtiene_seguridad.obtiene_seguridad_cadena_valor_dia()
-        ElseIf rdbtnMeses.IsChecked Then
-            vDT = oObtiene_seguridad.obtiene_seguridad_cadena_valor_mes()
-        End If
-
-        If vDT.Rows.Count = 0 Then
-            habilita_etiqueta_datos()
-            Me.radChartView1.Title = ""
-        Else
-            Me.radChartView1.Title = "Seguridad " & cbxCadenaValor.Text
-        End If
-
-        BarSeries1.ValueMember = "barra_amarilla"
-        BarSeries1.CategoryMember = "dia_asignado"
-        BarSeries1.DataSource = vDT
-        BarSeries2.ValueMember = "nuevas"
-        BarSeries2.CategoryMember = "dia_asignado"
-        BarSeries2.DataSource = vDT
-        BarSeries3.ValueMember = "resueltas"
-        BarSeries3.CategoryMember = "dia_asignado"
-        BarSeries3.DataSource = vDT
-        LineSeries1.ValueMember = "objetivo"
-        LineSeries1.CategoryMember = "dia_asignado"
-        LineSeries1.DataSource = vDT
-        'Cartesian Area, CategoricalAxis, LinearAxis
-        Dim CartesianArea1 As CartesianArea = New CartesianArea()
-        Dim CategoricalAxis1 As CategoricalAxis = New CategoricalAxis()
-        Dim LinearAxis1 As LinearAxis = New LinearAxis()
-        'Personalizacion
-        'CartesianArea1.GridDesign.AlternatingVerticalColor = False
-        'CartesianArea1.ShowGrid = True
-
-        'Logo Indicador
-        picboxIndicador.ImageLocation = Application.StartupPath & "\graficas_fase_uno\logo_indicador_seguridad.jpg"
-
-        'Legend & Position
-        Me.radChartView1.ChartElement.LegendElement.StackElement.Orientation = Orientation.Horizontal
-        Me.radChartView1.ChartElement.LegendPosition = LegendPosition.Bottom
-
-        Me.radChartView1.AreaDesign = CartesianArea1
-        CategoricalAxis1.LabelFitMode = AxisLabelFitMode.Rotate
-        If rdbtnDias.IsChecked Then
-            CategoricalAxis1.LabelFormat = "{0:dd - MMM}"
-        ElseIf rdbtnMeses.IsChecked Then
-            CategoricalAxis1.LabelFormat = "{0:MMM - yyyy}"
-        End If
-        CategoricalAxis1.LabelRotationAngle = 270.0R
-        LinearAxis1.AxisType = AxisType.Second
-        'LinearAxis1.MajorStep = 1.0R
-        'LinearAxis1.Maximum = 5
-        LinearAxis1.Title = "CI"
-        'BarSeries1.ShowLabels = True
-        'LineSeries1.ShowLabels = True
-        'BarSeries2.ShowLabels = True
-        'BarSeries3.ShowLabels = True
-        BarSeries1.LabelFormat = "{0:###}"
-        BarSeries2.LabelFormat = "{0:###}"
-        LineSeries1.LabelFormat = "{0:###}"
-
-        BarSeries1.HorizontalAxis = CategoricalAxis1
-        LineSeries1.HorizontalAxis = CategoricalAxis1
-
-        BarSeries1.VerticalAxis = LinearAxis1
-        LineSeries1.VerticalAxis = LinearAxis1
-
-        BarSeries1.Palette = New PaletteEntry(Color.FromArgb(255, 191, 0))
-        BarSeries2.Palette = New PaletteEntry(Color.FromArgb(233, 37, 43))
-        BarSeries3.Palette = New PaletteEntry(Color.FromArgb(36, 177, 22))
-        LineSeries1.Palette = New PaletteEntry(Color.FromArgb(202, 0, 0))
-
-        LineSeries1.BorderColor = Color.FromArgb(202, 0, 0)
-        'LineSeries1.PointSize = New SizeF(10, 10)
-
-        Me.radChartView1.ShowTrackBall = True
-        Me.radChartView1.ShowToolTip = True
-
-        radChartView1.Series.Add(LineSeries1)
-        radChartView1.Series.Add(BarSeries1)
-        radChartView1.Series.Add(BarSeries2)
-        radChartView1.Series.Add(BarSeries3)
-
-        LineSeries1.CombineMode = ChartSeriesCombineMode.None
-        BarSeries1.CombineMode = ChartSeriesCombineMode.Stack
-        BarSeries2.CombineMode = ChartSeriesCombineMode.Stack
-        BarSeries3.CombineMode = ChartSeriesCombineMode.Stack
-        '        Me.radChartView1.ShowTrackBall = True
-        'For i As Integer = 0 To Me.radChartView1.Series.Count - 1
-        '    Me.radChartView1.GetSeries(Of BarSeries)(i).CombineMode = ChartSeriesCombineMode.Stack
-        'Next i
-        If (LinearAxis1.ActualRange.Maximum = 0) Then
-            LinearAxis1.Maximum = 5
-        End If
-    End Sub
-    'Gente Componente
-    Private Sub obtiene_seguridad_componente_dia_mes()
-        'Objeto obtiene_nrfti Clase
-        Dim oObtiene_seguridad As New obtiene_seguridad
-        oObtiene_seguridad.cve_componente = cbxComponente.SelectedValue
-        oObtiene_seguridad.fecha_inicial = dtpFechaInicial.Value
-        oObtiene_seguridad.fecha_final = dtpFechaFinal.Value
-        oObtiene_seguridad.bandera = bandera_graficos
-        'Creacion series
-        Dim BarSeries1 As New BarSeries()
-        BarSeries1.LegendTitle = "acumulado"
-        Dim BarSeries2 As New BarSeries()
-        BarSeries2.LegendTitle = "nuevas"
-        Dim BarSeries3 As New BarSeries()
-        BarSeries3.LegendTitle = "resueltas"
-        Dim LineSeries1 As New LineSeries()
-        LineSeries1.LegendTitle = "Objetivo Seguridad"
-        Me.radChartView1.ShowLegend = True
-        'Obtencion Datos
-        Dim vDT As DataTable = Nothing
-        If rdbtnDias.IsChecked Then
-            vDT = oObtiene_seguridad.obtiene_seguridad_componente_dia()
-        ElseIf rdbtnMeses.IsChecked Then
-            vDT = oObtiene_seguridad.obtiene_seguridad_componente_mes()
-        End If
-
-        If vDT.Rows.Count = 0 Then
-            habilita_etiqueta_datos()
-            Me.radChartView1.Title = ""
-        Else
-            Me.radChartView1.Title = "Seguridad " & cbxComponente.Text
-        End If
-
-        BarSeries1.ValueMember = "barra_amarilla"
-        BarSeries1.CategoryMember = "dia_asignado"
-        BarSeries1.DataSource = vDT
-        BarSeries2.ValueMember = "nuevas"
-        BarSeries2.CategoryMember = "dia_asignado"
-        BarSeries2.DataSource = vDT
-        BarSeries3.ValueMember = "resueltas"
-        BarSeries3.CategoryMember = "dia_asignado"
-        BarSeries3.DataSource = vDT
-        LineSeries1.ValueMember = "objetivo"
-        LineSeries1.CategoryMember = "dia_asignado"
-        LineSeries1.DataSource = vDT
-        'Cartesian Area, CategoricalAxis, LinearAxis
-        Dim CartesianArea1 As CartesianArea = New CartesianArea()
-        Dim CategoricalAxis1 As CategoricalAxis = New CategoricalAxis()
-        Dim LinearAxis1 As LinearAxis = New LinearAxis()
-        'Personalizacion
-        'CartesianArea1.GridDesign.AlternatingVerticalColor = False
-        'CartesianArea1.ShowGrid = True
-
-        'Logo Indicador
-        picboxIndicador.ImageLocation = Application.StartupPath & "\graficas_fase_uno\logo_indicador_seguridad.jpg"
-
-        'Legend & Position
-        Me.radChartView1.ChartElement.LegendElement.StackElement.Orientation = Orientation.Horizontal
-        Me.radChartView1.ChartElement.LegendPosition = LegendPosition.Bottom
-
-        Me.radChartView1.AreaDesign = CartesianArea1
-        CategoricalAxis1.LabelFitMode = AxisLabelFitMode.Rotate
-        If rdbtnDias.IsChecked Then
-            CategoricalAxis1.LabelFormat = "{0:dd - MMM}"
-        ElseIf rdbtnMeses.IsChecked Then
-            CategoricalAxis1.LabelFormat = "{0:MMM - yyyy}"
-        End If
-        CategoricalAxis1.LabelRotationAngle = 270.0R
-        LinearAxis1.AxisType = AxisType.Second
-        'LinearAxis1.MajorStep = 1.0R
-        'LinearAxis1.Maximum = 5
-        LinearAxis1.Title = "CI"
-        'BarSeries1.ShowLabels = True
-        'LineSeries1.ShowLabels = True
-        'BarSeries2.ShowLabels = True
-        'BarSeries3.ShowLabels = True
-        BarSeries1.LabelFormat = "{0:###}"
-        BarSeries2.LabelFormat = "{0:###}"
-        LineSeries1.LabelFormat = "{0:###}"
-
-        BarSeries1.HorizontalAxis = CategoricalAxis1
-        LineSeries1.HorizontalAxis = CategoricalAxis1
-
-        BarSeries1.VerticalAxis = LinearAxis1
-        LineSeries1.VerticalAxis = LinearAxis1
-
-        BarSeries1.Palette = New PaletteEntry(Color.FromArgb(255, 191, 0))
-        BarSeries2.Palette = New PaletteEntry(Color.FromArgb(233, 37, 43))
-        BarSeries3.Palette = New PaletteEntry(Color.FromArgb(36, 177, 22))
-        LineSeries1.Palette = New PaletteEntry(Color.FromArgb(202, 0, 0))
-
-        LineSeries1.BorderColor = Color.FromArgb(202, 0, 0)
-        'LineSeries1.PointSize = New SizeF(10, 10)
-
-        Me.radChartView1.ShowTrackBall = True
-        Me.radChartView1.ShowToolTip = True
-
-        radChartView1.Series.Add(LineSeries1)
-        radChartView1.Series.Add(BarSeries1)
-        radChartView1.Series.Add(BarSeries2)
-        radChartView1.Series.Add(BarSeries3)
-
-        LineSeries1.CombineMode = ChartSeriesCombineMode.None
-        BarSeries1.CombineMode = ChartSeriesCombineMode.Stack
-        BarSeries2.CombineMode = ChartSeriesCombineMode.Stack
-        BarSeries3.CombineMode = ChartSeriesCombineMode.Stack
-        'radChartView1.Series.Add(BarSeries1)
-        'radChartView1.Series.Add(BarSeries2)
-        'radChartView1.Series.Add(BarSeries3)
-        'For i As Integer = 0 To Me.radChartView1.Series.Count - 1
-        '    Me.radChartView1.GetSeries(Of BarSeries)(i).CombineMode = ChartSeriesCombineMode.Stack
-        'Next i
-        If (LinearAxis1.ActualRange.Maximum = 0) Then
-            LinearAxis1.Maximum = 5
-        End If
-    End Sub
-    'Gente linea
-    Private Sub obtiene_seguridad_linea_dia_mes()
-        'Objeto obtiene_nrfti Clase
-        Dim oObtiene_seguridad As New obtiene_seguridad
-        oObtiene_seguridad.cve_linea = cbxLinea.SelectedValue
-        oObtiene_seguridad.fecha_inicial = dtpFechaInicial.Value
-        oObtiene_seguridad.fecha_final = dtpFechaFinal.Value
-        oObtiene_seguridad.bandera = bandera_graficos
-        'Creacion series
-        Dim BarSeries1 As New BarSeries()
-        BarSeries1.LegendTitle = "acumulado"
-        Dim BarSeries2 As New BarSeries()
-        BarSeries2.LegendTitle = "nuevas"
-        Dim BarSeries3 As New BarSeries()
-        BarSeries3.LegendTitle = "resueltas"
-        Dim LineSeries1 As New LineSeries()
-        LineSeries1.LegendTitle = "Objetivo Seguridad"
-        Me.radChartView1.ShowLegend = True
-        'Obtencion Datos
-        Dim vDT As DataTable = Nothing
-        If rdbtnDias.IsChecked Then
-            vDT = oObtiene_seguridad.obtiene_seguridad_linea_dia()
-        ElseIf rdbtnMeses.IsChecked Then
-            vDT = oObtiene_seguridad.obtiene_seguridad_linea_mes()
-        End If
-
-        If vDT.Rows.Count = 0 Then
-            habilita_etiqueta_datos()
-            Me.radChartView1.Title = ""
-        Else
-            Me.radChartView1.Title = "Seguridad " & cbxLinea.Text
-        End If
-
-        BarSeries1.ValueMember = "barra_amarilla"
-        BarSeries1.CategoryMember = "dia_asignado"
-        BarSeries1.DataSource = vDT
-        BarSeries2.ValueMember = "nuevas"
-        BarSeries2.CategoryMember = "dia_asignado"
-        BarSeries2.DataSource = vDT
-        BarSeries3.ValueMember = "resueltas"
-        BarSeries3.CategoryMember = "dia_asignado"
-        BarSeries3.DataSource = vDT
-        LineSeries1.ValueMember = "objetivo"
-        LineSeries1.CategoryMember = "dia_asignado"
-        LineSeries1.DataSource = vDT
-        'Cartesian Area, CategoricalAxis, LinearAxis
-        Dim CartesianArea1 As CartesianArea = New CartesianArea()
-        Dim CategoricalAxis1 As CategoricalAxis = New CategoricalAxis()
-        Dim LinearAxis1 As LinearAxis = New LinearAxis()
-        'Personalizacion
-        'CartesianArea1.GridDesign.AlternatingVerticalColor = False
-        'CartesianArea1.ShowGrid = True
-
-        'Logo Indicador
-        picboxIndicador.ImageLocation = Application.StartupPath & "\graficas_fase_uno\logo_indicador_seguridad.jpg"
-
-        'Legend & Position
-        Me.radChartView1.ChartElement.LegendElement.StackElement.Orientation = Orientation.Horizontal
-        Me.radChartView1.ChartElement.LegendPosition = LegendPosition.Bottom
-
-        Me.radChartView1.AreaDesign = CartesianArea1
-        CategoricalAxis1.LabelFitMode = AxisLabelFitMode.Rotate
-        If rdbtnDias.IsChecked Then
-            CategoricalAxis1.LabelFormat = "{0:dd - MMM}"
-        ElseIf rdbtnMeses.IsChecked Then
-            CategoricalAxis1.LabelFormat = "{0:MMM - yyyy}"
-        End If
-        CategoricalAxis1.LabelRotationAngle = 270.0R
-        LinearAxis1.AxisType = AxisType.Second
-        'LinearAxis1.MajorStep = 1.0R
-
-        LinearAxis1.Title = "CI"
-        'BarSeries1.ShowLabels = True
-        'LineSeries1.ShowLabels = True
-        'BarSeries2.ShowLabels = True
-        'BarSeries3.ShowLabels = True
-        BarSeries1.LabelFormat = "{0:###}"
-        BarSeries2.LabelFormat = "{0:###}"
-        LineSeries1.LabelFormat = "{0:###}"
-        BarSeries1.HorizontalAxis = CategoricalAxis1
-        LineSeries1.HorizontalAxis = CategoricalAxis1
-
-        BarSeries1.VerticalAxis = LinearAxis1
-        LineSeries1.VerticalAxis = LinearAxis1
-
-        BarSeries1.Palette = New PaletteEntry(Color.FromArgb(255, 191, 0))
-        BarSeries2.Palette = New PaletteEntry(Color.FromArgb(233, 37, 43))
-        BarSeries3.Palette = New PaletteEntry(Color.FromArgb(36, 177, 22))
-        LineSeries1.Palette = New PaletteEntry(Color.FromArgb(202, 0, 0))
-
-        LineSeries1.BorderColor = Color.FromArgb(202, 0, 0)
-        'LineSeries1.PointSize = New SizeF(10, 10)
-
-        Me.radChartView1.ShowTrackBall = True
-        Me.radChartView1.ShowToolTip = True
-
-        radChartView1.Series.Add(LineSeries1)
-        radChartView1.Series.Add(BarSeries1)
-        radChartView1.Series.Add(BarSeries2)
-        radChartView1.Series.Add(BarSeries3)
-
-        LineSeries1.CombineMode = ChartSeriesCombineMode.None
-        BarSeries1.CombineMode = ChartSeriesCombineMode.Stack
-        BarSeries2.CombineMode = ChartSeriesCombineMode.Stack
-        BarSeries3.CombineMode = ChartSeriesCombineMode.Stack
-        'radChartView1.Series.Add(BarSeries1)
-        'radChartView1.Series.Add(BarSeries2)
-        'radChartView1.Series.Add(BarSeries3)
-        'For i As Integer = 0 To Me.radChartView1.Series.Count - 1
-        '    Me.radChartView1.GetSeries(Of BarSeries)(i).CombineMode = ChartSeriesCombineMode.Stack
-        'Next i
-        If (LinearAxis1.ActualRange.Maximum = 0) Then
-            LinearAxis1.Maximum = 5
-        End If
-    End Sub
-    'Gente equipo
-    Private Sub obtiene_seguridad_equipo_dia_mes()
-        'Objeto obtiene_nrfti Clase
-        Dim oObtiene_seguridad As New obtiene_seguridad
-        oObtiene_seguridad.cve_equipo = cbxEquipo.SelectedValue
-        oObtiene_seguridad.fecha_inicial = dtpFechaInicial.Value
-        oObtiene_seguridad.fecha_final = dtpFechaFinal.Value
-        oObtiene_seguridad.bandera = bandera_graficos
-        'Creacion series
-        Dim BarSeries1 As New BarSeries()
-        BarSeries1.LegendTitle = "acumulado"
-        Dim BarSeries2 As New BarSeries()
-        BarSeries2.LegendTitle = "nuevas"
-        Dim BarSeries3 As New BarSeries()
-        BarSeries3.LegendTitle = "resueltas"
-        Dim LineSeries1 As New LineSeries()
-        LineSeries1.LegendTitle = "Objetivo Seguridad"
-        Me.radChartView1.ShowLegend = True
-        'Obtencion Datos
-        Dim vDT As DataTable = Nothing
-        If rdbtnDias.IsChecked Then
-            vDT = oObtiene_seguridad.obtiene_seguridad_equipo_dia()
-        ElseIf rdbtnMeses.IsChecked Then
-            vDT = oObtiene_seguridad.obtiene_seguridad_equipo_mes()
-        End If
-
-        If vDT.Rows.Count = 0 Then
-            habilita_etiqueta_datos()
-            Me.radChartView1.Title = ""
-        Else
-            Me.radChartView1.Title = "Seguridad " & cbxEquipo.Text
-        End If
-
-        BarSeries1.ValueMember = "barra_amarilla"
-        BarSeries1.CategoryMember = "dia_asignado"
-        BarSeries1.DataSource = vDT
-        BarSeries2.ValueMember = "nuevas"
-        BarSeries2.CategoryMember = "dia_asignado"
-        BarSeries2.DataSource = vDT
-        BarSeries3.ValueMember = "resueltas"
-        BarSeries3.CategoryMember = "dia_asignado"
-        BarSeries3.DataSource = vDT
-        LineSeries1.ValueMember = "objetivo"
-        LineSeries1.CategoryMember = "dia_asignado"
-        LineSeries1.DataSource = vDT
-        'Cartesian Area, CategoricalAxis, LinearAxis
-        Dim CartesianArea1 As CartesianArea = New CartesianArea()
-        Dim CategoricalAxis1 As CategoricalAxis = New CategoricalAxis()
-        Dim LinearAxis1 As LinearAxis = New LinearAxis()
-        'Personalizacion
-        'CartesianArea1.GridDesign.AlternatingVerticalColor = False
-        'CartesianArea1.ShowGrid = True
-
-        'Logo Indicador
-        picboxIndicador.ImageLocation = Application.StartupPath & "\graficas_fase_uno\logo_indicador_seguridad.jpg"
-
-        'Legend & Position
-        Me.radChartView1.ChartElement.LegendElement.StackElement.Orientation = Orientation.Horizontal
-        Me.radChartView1.ChartElement.LegendPosition = LegendPosition.Bottom
-
-        Me.radChartView1.AreaDesign = CartesianArea1
-        CategoricalAxis1.LabelFitMode = AxisLabelFitMode.Rotate
-        If rdbtnDias.IsChecked Then
-            CategoricalAxis1.LabelFormat = "{0:dd - MMM}"
-        ElseIf rdbtnMeses.IsChecked Then
-            CategoricalAxis1.LabelFormat = "{0:MMM - yyyy}"
-        End If
-        CategoricalAxis1.LabelRotationAngle = 270.0R
-        LinearAxis1.AxisType = AxisType.Second
-        'LinearAxis1.MajorStep = 1.0R
-        'LinearAxis1.Maximum = 5
-        LinearAxis1.Title = "CI"
-        'BarSeries1.ShowLabels = True
-        'LineSeries1.ShowLabels = True
-        'BarSeries2.ShowLabels = True
-        'BarSeries3.ShowLabels = True
-        BarSeries1.LabelFormat = "{0:###}"
-        BarSeries2.LabelFormat = "{0:###}"
-        LineSeries1.LabelFormat = "{0:###}"
-        BarSeries1.HorizontalAxis = CategoricalAxis1
-        LineSeries1.HorizontalAxis = CategoricalAxis1
-
-        BarSeries1.VerticalAxis = LinearAxis1
-        LineSeries1.VerticalAxis = LinearAxis1
-
-        BarSeries1.Palette = New PaletteEntry(Color.FromArgb(255, 191, 0))
-        BarSeries2.Palette = New PaletteEntry(Color.FromArgb(233, 37, 43))
-        BarSeries3.Palette = New PaletteEntry(Color.FromArgb(36, 177, 22))
-        LineSeries1.Palette = New PaletteEntry(Color.FromArgb(202, 0, 0))
-
-        LineSeries1.BorderColor = Color.FromArgb(202, 0, 0)
-        'LineSeries1.PointSize = New SizeF(10, 10)
-
-        Me.radChartView1.ShowTrackBall = True
-        Me.radChartView1.ShowToolTip = True
-
-        radChartView1.Series.Add(LineSeries1)
-        radChartView1.Series.Add(BarSeries1)
-        radChartView1.Series.Add(BarSeries2)
-        radChartView1.Series.Add(BarSeries3)
-
-        LineSeries1.CombineMode = ChartSeriesCombineMode.None
-        BarSeries1.CombineMode = ChartSeriesCombineMode.Stack
-        BarSeries2.CombineMode = ChartSeriesCombineMode.Stack
-        BarSeries3.CombineMode = ChartSeriesCombineMode.Stack
-
-
-        'radChartView1.Series.Add(BarSeries1)
-        'radChartView1.Series.Add(BarSeries2)
-        'radChartView1.Series.Add(BarSeries3)
-        'For i As Integer = 0 To Me.radChartView1.Series.Count - 1
-        '    Me.radChartView1.GetSeries(Of BarSeries)(i).CombineMode = ChartSeriesCombineMode.Stack
-        'Next i
-        If (LinearAxis1.ActualRange.Maximum = 0) Then
-            LinearAxis1.Maximum = 5
-        End If
-    End Sub
-    'Gente equipo-linea
-    Private Sub obtiene_seguridad_equipo_linea_dia_mes()
-        'Objeto obtiene_nrfti Clase
-        Dim oObtiene_seguridad As New obtiene_seguridad
-        oObtiene_seguridad.cve_equipo = cbxEquipo.SelectedValue
-        oObtiene_seguridad.cve_linea = cbxLinea.SelectedValue
-        oObtiene_seguridad.fecha_inicial = dtpFechaInicial.Value
-        oObtiene_seguridad.fecha_final = dtpFechaFinal.Value
-        oObtiene_seguridad.bandera = bandera_graficos
-        'Creacion series
-        Dim BarSeries1 As New BarSeries()
-        BarSeries1.LegendTitle = "acumulado"
-        Dim BarSeries2 As New BarSeries()
-        BarSeries2.LegendTitle = "nuevas"
-        Dim BarSeries3 As New BarSeries()
-        BarSeries3.LegendTitle = "resueltas"
-        Dim LineSeries1 As New LineSeries()
-        LineSeries1.LegendTitle = "Objetivo Seguridad"
-        Me.radChartView1.ShowLegend = True
-        'Obtencion Datos
-        Dim vDT As DataTable = Nothing
-        If rdbtnDias.IsChecked Then
-            vDT = oObtiene_seguridad.obtiene_seguridad_equipo_linea_dia()
-        ElseIf rdbtnMeses.IsChecked Then
-            vDT = oObtiene_seguridad.obtiene_seguridad_equipo_linea_mes()
-        End If
-
-        If vDT.Rows.Count = 0 Then
-            habilita_etiqueta_datos()
-            Me.radChartView1.Title = ""
-        Else
-            Me.radChartView1.Title = "Seguridad " & cbxEquipo.Text & " - " & cbxLinea.Text
-        End If
-
-        BarSeries1.ValueMember = "barra_amarilla"
-        BarSeries1.CategoryMember = "dia_asignado"
-        BarSeries1.DataSource = vDT
-        BarSeries2.ValueMember = "nuevas"
-        BarSeries2.CategoryMember = "dia_asignado"
-        BarSeries2.DataSource = vDT
-        BarSeries3.ValueMember = "resueltas"
-        BarSeries3.CategoryMember = "dia_asignado"
-        BarSeries3.DataSource = vDT
-        LineSeries1.ValueMember = "objetivo"
-        LineSeries1.CategoryMember = "dia_asignado"
-        LineSeries1.DataSource = vDT
-        'Cartesian Area, CategoricalAxis, LinearAxis
-        Dim CartesianArea1 As CartesianArea = New CartesianArea()
-        Dim CategoricalAxis1 As CategoricalAxis = New CategoricalAxis()
-        Dim LinearAxis1 As LinearAxis = New LinearAxis()
-        'Personalizacion
-        'CartesianArea1.GridDesign.AlternatingVerticalColor = False
-        'CartesianArea1.ShowGrid = True
-
-        'Logo Indicador
-        picboxIndicador.ImageLocation = Application.StartupPath & "\graficas_fase_uno\logo_indicador_seguridad.jpg"
-
-        'Legend & Position
-        Me.radChartView1.ChartElement.LegendElement.StackElement.Orientation = Orientation.Horizontal
-        Me.radChartView1.ChartElement.LegendPosition = LegendPosition.Bottom
-
-        Me.radChartView1.AreaDesign = CartesianArea1
-        CategoricalAxis1.LabelFitMode = AxisLabelFitMode.Rotate
-        If rdbtnDias.IsChecked Then
-            CategoricalAxis1.LabelFormat = "{0:dd - MMM}"
-        ElseIf rdbtnMeses.IsChecked Then
-            CategoricalAxis1.LabelFormat = "{0:MMM - yyyy}"
-        End If
-        CategoricalAxis1.LabelRotationAngle = 270.0R
-        LinearAxis1.AxisType = AxisType.Second
-        'LinearAxis1.MajorStep = 1.0R
-        'LinearAxis1.Maximum = 5
-        LinearAxis1.Title = "CI"
-        'BarSeries1.ShowLabels = True
-        'LineSeries1.ShowLabels = True
-        'BarSeries2.ShowLabels = True
-        'BarSeries3.ShowLabels = True
-        BarSeries1.LabelFormat = "{0:###}"
-        BarSeries2.LabelFormat = "{0:###}"
-        LineSeries1.LabelFormat = "{0:###}"
-
-        BarSeries1.HorizontalAxis = CategoricalAxis1
-        LineSeries1.HorizontalAxis = CategoricalAxis1
-
-        BarSeries1.VerticalAxis = LinearAxis1
-        LineSeries1.VerticalAxis = LinearAxis1
-
-
-        BarSeries1.Palette = New PaletteEntry(Color.FromArgb(255, 191, 0))
-        BarSeries2.Palette = New PaletteEntry(Color.FromArgb(233, 37, 43))
-        BarSeries3.Palette = New PaletteEntry(Color.FromArgb(36, 177, 22))
-        LineSeries1.Palette = New PaletteEntry(Color.FromArgb(202, 0, 0))
-
-        LineSeries1.BorderColor = Color.FromArgb(202, 0, 0)
-        'LineSeries1.PointSize = New SizeF(10, 10)
-
-        Me.radChartView1.ShowTrackBall = True
-        Me.radChartView1.ShowToolTip = True
-
-        radChartView1.Series.Add(LineSeries1)
-        radChartView1.Series.Add(BarSeries1)
-        radChartView1.Series.Add(BarSeries2)
-        radChartView1.Series.Add(BarSeries3)
-
-        LineSeries1.CombineMode = ChartSeriesCombineMode.None
-        BarSeries1.CombineMode = ChartSeriesCombineMode.Stack
-        BarSeries2.CombineMode = ChartSeriesCombineMode.Stack
-        BarSeries3.CombineMode = ChartSeriesCombineMode.Stack
-        'For i As Integer = 0 To Me.radChartView1.Series.Count - 1
-        '    Me.radChartView1.GetSeries(Of BarSeries)(i).CombineMode = ChartSeriesCombineMode.Stack
-        'Next i
-        If (LinearAxis1.ActualRange.Maximum = 0) Then
-            LinearAxis1.Maximum = 5
-        End If
-    End Sub
-#End Region
 #End Region
 
 #Region "Metodos graficar costo"
@@ -5407,7 +1852,6 @@ Public Class FrmGraficasfaseuno
         Dim vCve_Componente As Integer = 0
         Dim vCve_CadenaValor As Integer = 0
         Dim vNivel As Integer = 0
-        Dim vFormato As Integer = 0
         Dim vF_Inicial As DateTime = Date.Now
         Dim vF_Final As DateTime = Date.Now
 
@@ -5441,7 +1885,7 @@ Public Class FrmGraficasfaseuno
         End If
 
         ''Obtencion de Informacion
-        vDatos_Obtenidos = oG_Fase2.Obten_Costo(vF_Inicial, vF_Final, vCve_Equipo, vCve_Linea, vCve_Componente, vCve_CadenaValor, vFormato_Resultado, vNivel, True, False)
+        vDatos_Obtenidos = oG_Fase2.Obten_Costo(vF_Inicial, vF_Final, vCve_Equipo, vCve_Linea, vCve_Componente, vCve_CadenaValor, vFormato_Resultado, vNivel)
 
         Grafica_Minutos(vNivel, vDatos_Obtenidos)
         Grafica_Costo(vNivel, vDatos_Obtenidos)
@@ -5450,8 +1894,7 @@ Public Class FrmGraficasfaseuno
 
     Private Sub Grafica_Minutos(ByVal vNivel As Integer, ByVal vDatos_Obtenidos As DataTable)
         'Creacion series
-        Dim BarSeries1 As New BarSeries()
-        BarSeries1.LegendTitle = "Min. Reales"
+        Dim BarSeries1 As New BarSeries() With {.LegendTitle = "Min. Reales"}
         Dim LineSeries3 As New LineSeries()
         If vNivel <> 5 Then
             LineSeries3.LegendTitle = "Objetivo mins"
@@ -5459,8 +1902,7 @@ Public Class FrmGraficasfaseuno
         End If
 
         'Obtencion Datos
-        Dim vDT As DataTable = Nothing
-        vDT = vDatos_Obtenidos
+        Dim vDT As DataTable = vDatos_Obtenidos
 
         'Llenado de las series
         Dim vTotal As Integer = 1
@@ -5472,7 +1914,7 @@ Public Class FrmGraficasfaseuno
             Me.radChartView1.Title = ""
         Else
             If vNivel = 0 Then
-                Me.radChartView1.Title = "Costo " & cbxEquipo.Text & " - " & cbxLinea.Text
+                Me.radChartView1.Title = String.Format("Costo {0} - {1}", cbxEquipo.Text, cbxLinea.Text)
             ElseIf vNivel = 1 Then
                 Me.radChartView1.Title = "Costo " & cbxEquipo.Text
             ElseIf vNivel = 2 Then
@@ -5486,8 +1928,6 @@ Public Class FrmGraficasfaseuno
             End If
         End If
         Dim vMin_Program_Aux As Integer = 0
-        Dim vMin_Excedentes_Aux As Integer = 0
-        Dim vCosto_Aux As Integer = 0
         Dim vObjetivo_tcdm_Aux As Integer = 0
 
         For Each vDR As DataRow In vDT.Rows
@@ -5511,14 +1951,10 @@ Public Class FrmGraficasfaseuno
         Dim CartesianArea1 As CartesianArea = New CartesianArea()
         Me.radChartView1.AreaDesign = CartesianArea1
         'Categorical axis
-        Dim CategoricalAxis1 As CategoricalAxis = New CategoricalAxis()
-        CategoricalAxis1.LabelFitMode = AxisLabelFitMode.Rotate
-        CategoricalAxis1.LabelRotationAngle = 270.0R
+        Dim CategoricalAxis1 As CategoricalAxis = New CategoricalAxis() With {.LabelFitMode = AxisLabelFitMode.Rotate, .LabelRotationAngle = 270.0R}
 
         'LinearAxis
-        Dim LinearAxis1 As LinearAxis = New LinearAxis()
-        LinearAxis1.AxisType = AxisType.Second
-        LinearAxis1.Title = "Minutos"
+        Dim LinearAxis1 As LinearAxis = New LinearAxis() With {.AxisType = AxisType.Second, .Title = "Minutos"}
         'Personalizacion
 
         'Logo Indicador
@@ -5582,8 +2018,7 @@ Public Class FrmGraficasfaseuno
 
     Private Sub Grafica_Costo(ByVal vNivel As Integer, ByVal vDatos_Obtenidos As DataTable)
         'Creacion series
-        Dim LineSeries1 As New LineSeries()
-        LineSeries1.LegendTitle = "Costo"
+        Dim LineSeries1 As New LineSeries() With {.LegendTitle = "Costo"}
         Dim LineSeries3 As New LineSeries()
         If vNivel <> 5 Then
             LineSeries3.LegendTitle = "Objetivo Costo"
@@ -5591,8 +2026,7 @@ Public Class FrmGraficasfaseuno
         End If
 
         'Obtencion Datos
-        Dim vDT As DataTable = Nothing
-        vDT = vDatos_Obtenidos
+        Dim vDT As DataTable = vDatos_Obtenidos
 
         'Llenado de las series
         Dim vTotal As Integer = 1
@@ -5604,7 +2038,7 @@ Public Class FrmGraficasfaseuno
             Me.CharSecundario.Title = ""
         Else
             If vNivel = 0 Then
-                Me.radChartView1.Title = "Costo " & cbxEquipo.Text & " - " & cbxLinea.Text
+                Me.radChartView1.Title = String.Format("Costo {0} - {1}", cbxEquipo.Text, cbxLinea.Text)
             ElseIf vNivel = 1 Then
                 Me.radChartView1.Title = "Costo " & cbxEquipo.Text
             ElseIf vNivel = 2 Then
@@ -5646,15 +2080,10 @@ Public Class FrmGraficasfaseuno
         Dim CartesianArea1 As CartesianArea = New CartesianArea()
         Me.CharSecundario.AreaDesign = CartesianArea1
         'Categorical axis
-        Dim CategoricalAxis1 As CategoricalAxis = New CategoricalAxis()
-        CategoricalAxis1.LabelFitMode = AxisLabelFitMode.Rotate
-        CategoricalAxis1.LabelRotationAngle = 270.0R
+        Dim CategoricalAxis1 As CategoricalAxis = New CategoricalAxis() With {.LabelFitMode = AxisLabelFitMode.Rotate, .LabelRotationAngle = 270.0R}
 
         'LinearAxis
-        Dim LinearAxis2 As LinearAxis = New LinearAxis()
-        LinearAxis2.AxisType = AxisType.Second
-        LinearAxis2.HorizontalLocation = AxisHorizontalLocation.Left
-        LinearAxis2.Title = "Costo $$"
+        Dim LinearAxis2 As LinearAxis = New LinearAxis() With {.AxisType = AxisType.Second, .HorizontalLocation = AxisHorizontalLocation.Left, .Title = "Costo $$"}
         'Personalizacion
 
         'Logo Indicador
@@ -5682,10 +2111,6 @@ Public Class FrmGraficasfaseuno
         End If
 
         LineSeries1.VerticalAxis = LinearAxis2
-        If vNivel <> 5 Then
-            'LineSeries3.VerticalAxis = LinearAxis1
-        End If
-
 
         LineSeries1.Palette = New PaletteEntry(Color.FromArgb(127, 127, 127))
 
@@ -5713,7 +2138,7 @@ Public Class FrmGraficasfaseuno
         End If
     End Sub
 
-    Private Sub Obtiene_Reporte_Costo(ByVal vEsResumen As Boolean)
+    Private Sub Obtiene_Reporte_Costo()
         Me.dgvTabla.DataSource = Nothing
         Me.dgvTabla.Columns.Clear()
         Me.dgvTabla.DataSource = vDatos_Obtenidos
@@ -5790,913 +2215,7 @@ Public Class FrmGraficasfaseuno
         Me.dgvTabla.Columns("comentarios").IsVisible = True
     End Sub
 
-#Region "MEtodos No Utilizados, Eliminar"
-    'Costo Planta
-    Private Sub obtiene_costo_planta_dia_mes()
-        'Objeto obtiene_nrfti Clase
-        Dim oObtiene_costo As New obtiene_costo
-        oObtiene_costo.fecha_inicial = dtpFechaInicial.Value
-        oObtiene_costo.fecha_final = dtpFechaFinal.Value
-        oObtiene_costo.bandera = bandera_graficos
-        'Creacion series
-        Dim BarSeries1 As New BarSeries()
-        BarSeries1.LegendTitle = "Min. Programados"
-        Dim BarSeries2 As New BarSeries()
-        BarSeries2.LegendTitle = "Min. Excedentes"
-        Dim LineSeries1 As New LineSeries()
-        LineSeries1.LegendTitle = "Costo"
-        Me.radChartView1.ShowLegend = True
-        Dim LineSeries2 As New LineSeries()
-        LineSeries2.LegendTitle = "Objetivo mins"
-        'Obtencion Datos
-        Dim vDT As DataTable = Nothing
-        If rdbtnDias.IsChecked Then
-            vDT = oObtiene_costo.obtiene_costo_planta_dia()
-        ElseIf rdbtnMeses.IsChecked Then
-            vDT = oObtiene_costo.obtiene_costo_planta_mes()
-        End If
-
-        'Llenado de las series
-        Dim vTotal As Integer = 1
-        Dim vContador As Integer = 1
-        vTotal = vDT.Rows.Count
-
-        If vTotal = 0 Then
-            habilita_etiqueta_datos()
-            Me.radChartView1.Title = ""
-        Else
-            Me.radChartView1.Title = "Costo Planta GKN Driveline México"
-        End If
-
-        For Each vDR As DataRow In vDT.Rows
-            If vTotal = vContador Then
-                BarSeries1.DataPoints.Add(New CategoricalDataPoint(vDR("min_programados"), "acumulado"))
-                BarSeries2.DataPoints.Add(New CategoricalDataPoint(vDR("min_excedentes"), "acumulado"))
-                LineSeries1.DataPoints.Add(New CategoricalDataPoint(vDR("costo"), "acumulado"))
-                LineSeries2.DataPoints.Add(New CategoricalDataPoint(vDR("objetivo_tcdm"), "acumulado"))
-            Else
-                BarSeries1.DataPoints.Add(New CategoricalDataPoint(vDR("min_programados"), vDR("dia_asignado")))
-                BarSeries2.DataPoints.Add(New CategoricalDataPoint(vDR("min_excedentes"), vDR("dia_asignado")))
-                LineSeries1.DataPoints.Add(New CategoricalDataPoint(vDR("costo"), vDR("dia_asignado")))
-                LineSeries2.DataPoints.Add(New CategoricalDataPoint(vDR("objetivo_tcdm"), vDR("dia_asignado")))
-            End If
-            vContador = vContador + 1
-        Next
-        'Cartesian Area
-        Dim CartesianArea1 As CartesianArea = New CartesianArea()
-        'CartesianArea1.ShowGrid = True
-        Me.radChartView1.AreaDesign = CartesianArea1
-        'Categorical axis
-        Dim CategoricalAxis1 As CategoricalAxis = New CategoricalAxis()
-        CategoricalAxis1.LabelFitMode = AxisLabelFitMode.Rotate
-        CategoricalAxis1.LabelRotationAngle = 270.0R
-
-        'LinearAxis
-        Dim LinearAxis1 As LinearAxis = New LinearAxis()
-        Dim LinearAxis2 As LinearAxis = New LinearAxis()
-        LinearAxis1.AxisType = AxisType.Second
-        LinearAxis2.AxisType = AxisType.Second
-        LinearAxis2.HorizontalLocation = AxisHorizontalLocation.Right
-        LinearAxis1.Title = "Minutos"
-        LinearAxis2.Title = "Costo $"
-        'Personalizacion
-
-        'Logo Indicador
-        picboxIndicador.ImageLocation = Application.StartupPath & "\graficas_fase_uno\logo_indicador_costo.jpg"
-
-        'Legend & Position
-        Me.radChartView1.ChartElement.LegendElement.StackElement.Orientation = Orientation.Horizontal
-        Me.radChartView1.ChartElement.LegendPosition = LegendPosition.Bottom
-
-        If rdbtnDias.IsChecked Then
-            CategoricalAxis1.LabelFormat = "{0:dd - MMM}"
-        ElseIf rdbtnMeses.IsChecked Then
-            CategoricalAxis1.LabelFormat = "{0:MMM - yyyy}"
-        End If
-        'LinearAxis1.MajorStep = 10.0R
-        'Series
-        BarSeries1.ForeColor = Color.White
-
-        BarSeries1.ShowLabels = True
-        BarSeries2.ShowLabels = True
-        LineSeries1.ShowLabels = True
-        'LineSeries2.ShowLabels = True
-
-        BarSeries1.LabelFormat = "{0:###}"
-        BarSeries2.LabelFormat = "{0:###}"
-        'LineSeries2.LabelFormat = "{0:###}"
-        LineSeries1.LabelFormat = "$ " & "{0:##.##}"
-
-
-        BarSeries1.HorizontalAxis = CategoricalAxis1
-        BarSeries2.HorizontalAxis = CategoricalAxis1
-        LineSeries1.HorizontalAxis = CategoricalAxis1
-        LineSeries2.HorizontalAxis = CategoricalAxis1
-
-        BarSeries1.VerticalAxis = LinearAxis1
-        BarSeries2.VerticalAxis = LinearAxis1
-        LineSeries2.VerticalAxis = LinearAxis1
-        LineSeries1.VerticalAxis = LinearAxis2
-
-        BarSeries1.Palette = New PaletteEntry(Color.FromArgb(62, 105, 157))
-        BarSeries2.Palette = New PaletteEntry(Color.FromArgb(255, 192, 0))
-        LineSeries1.Palette = New PaletteEntry(Color.FromArgb(127, 127, 127))
-        LineSeries2.Palette = New PaletteEntry(Color.FromArgb(217, 217, 217))
-
-        LineSeries1.BorderColor = Color.FromArgb(127, 127, 127)
-        LineSeries2.BorderColor = Color.FromArgb(217, 217, 217)
-        LineSeries1.PointSize = New SizeF(10, 10)
-
-        Me.radChartView1.ShowTrackBall = True
-        Me.radChartView1.ShowToolTip = True
-        'Chartview
-        'Me.radChartView1.ShowGrid = True
-        'Me.radChartView1.ShowSmartLabels = True
-        radChartView1.Series.Add(LineSeries1)
-
-        radChartView1.Series.Add(BarSeries1)
-        radChartView1.Series.Add(BarSeries2)
-        radChartView1.Series.Add(LineSeries2)
-
-        BarSeries1.CombineMode = ChartSeriesCombineMode.Stack
-        BarSeries2.CombineMode = ChartSeriesCombineMode.Stack
-        LineSeries1.CombineMode = ChartSeriesCombineMode.None
-        LineSeries2.CombineMode = ChartSeriesCombineMode.None
-
-        If (LinearAxis1.ActualRange.Maximum = 0) Then
-            LinearAxis1.Maximum = 5
-        End If
-    End Sub
-    'Costo Cadena Valor
-    Private Sub obtiene_costo_cadena_valor_dia_mes()
-        'Objeto obtiene_nrfti Clase
-        Dim oObtiene_costo As New obtiene_costo
-        oObtiene_costo.cve_cadena_valor = cbxCadenaValor.SelectedValue
-        oObtiene_costo.fecha_inicial = dtpFechaInicial.Value
-        oObtiene_costo.fecha_final = dtpFechaFinal.Value
-        oObtiene_costo.bandera = bandera_graficos
-        'Creacion series
-        Dim BarSeries1 As New BarSeries()
-        BarSeries1.LegendTitle = "Min. Programados"
-        Dim BarSeries2 As New BarSeries()
-        BarSeries2.LegendTitle = "Min. Excedentes"
-        Dim LineSeries1 As New LineSeries()
-        LineSeries1.LegendTitle = "Costo"
-        Me.radChartView1.ShowLegend = True
-        Dim LineSeries2 As New LineSeries()
-        LineSeries2.LegendTitle = "Objetivo mins"
-        Dim LineSeries3 As New LineSeries()
-        LineSeries3.LegendTitle = "Objetivo Costo"
-        'Obtencion Datos
-        Dim vDT As DataTable = Nothing
-        If rdbtnDias.IsChecked Then
-            vDT = oObtiene_costo.obtiene_costo_cadena_valor_dia()
-        ElseIf rdbtnMeses.IsChecked Then
-            vDT = oObtiene_costo.obtiene_costo_cadena_valor_mes()
-        End If
-        'Llenado de las series
-        Dim vTotal As Integer = 1
-        Dim vContador As Integer = 1
-        vTotal = vDT.Rows.Count
-
-        If vTotal = 0 Then
-            habilita_etiqueta_datos()
-            Me.radChartView1.Title = ""
-        Else
-            Me.radChartView1.Title = "Costo " & cbxCadenaValor.Text
-        End If
-
-        For Each vDR As DataRow In vDT.Rows
-            If vTotal = vContador Then
-                BarSeries1.DataPoints.Add(New CategoricalDataPoint(vDR("min_programados"), "acumulado"))
-                BarSeries2.DataPoints.Add(New CategoricalDataPoint(vDR("min_excedentes"), "acumulado"))
-                LineSeries1.DataPoints.Add(New CategoricalDataPoint(vDR("costo"), "acumulado"))
-                LineSeries2.DataPoints.Add(New CategoricalDataPoint(vDR("objetivo_tcdm"), "acumulado"))
-            Else
-                BarSeries1.DataPoints.Add(New CategoricalDataPoint(vDR("min_programados"), vDR("dia_asignado")))
-                BarSeries2.DataPoints.Add(New CategoricalDataPoint(vDR("min_excedentes"), vDR("dia_asignado")))
-                LineSeries1.DataPoints.Add(New CategoricalDataPoint(vDR("costo"), vDR("dia_asignado")))
-                LineSeries2.DataPoints.Add(New CategoricalDataPoint(vDR("objetivo_tcdm"), vDR("dia_asignado")))
-                If Not IsDBNull(vDR("objetivo")) Then
-                    LineSeries3.DataPoints.Add(New CategoricalDataPoint(vDR("objetivo"), vDR("dia_asignado")))
-                End If
-            End If
-            vContador = vContador + 1
-        Next
-        'Cartesian Area
-        Dim CartesianArea1 As CartesianArea = New CartesianArea()
-        'CartesianArea1.ShowGrid = True
-        Me.radChartView1.AreaDesign = CartesianArea1
-        'Categorical axis
-        Dim CategoricalAxis1 As CategoricalAxis = New CategoricalAxis()
-        CategoricalAxis1.LabelFitMode = AxisLabelFitMode.Rotate
-        CategoricalAxis1.LabelRotationAngle = 270.0R
-
-        'LinearAxis
-        Dim LinearAxis1 As LinearAxis = New LinearAxis()
-        Dim LinearAxis2 As LinearAxis = New LinearAxis()
-        LinearAxis1.AxisType = AxisType.Second
-        LinearAxis2.AxisType = AxisType.Second
-        LinearAxis2.HorizontalLocation = AxisHorizontalLocation.Right
-        LinearAxis1.Title = "Minutos"
-        LinearAxis2.Title = "Costo $$"
-        'Personalizacion
-
-        'Logo Indicador
-        picboxIndicador.ImageLocation = Application.StartupPath & "\graficas_fase_uno\logo_indicador_costo.jpg"
-
-        'Legend & Position
-        Me.radChartView1.ChartElement.LegendElement.StackElement.Orientation = Orientation.Horizontal
-        Me.radChartView1.ChartElement.LegendPosition = LegendPosition.Bottom
-
-        If rdbtnDias.IsChecked Then
-            CategoricalAxis1.LabelFormat = "{0:dd - MMM}"
-        ElseIf rdbtnMeses.IsChecked Then
-            CategoricalAxis1.LabelFormat = "{0:MMM - yyyy}"
-        End If
-
-        'LinearAxis1.MajorStep = 10.0R
-        'Series
-        BarSeries1.ForeColor = Color.White
-
-        BarSeries1.ShowLabels = True
-        BarSeries2.ShowLabels = True
-        LineSeries1.ShowLabels = True
-        'LineSeries3.ShowLabels = True
-        'LineSeries2.ShowLabels = True
-
-        BarSeries1.LabelFormat = "{0:###}"
-        BarSeries2.LabelFormat = "{0:###}"
-        LineSeries3.LabelFormat = "{0:###}"
-        'LineSeries2.LabelFormat = "{0:###}"
-        LineSeries1.LabelFormat = "$ " & "{0:##.##}"
-
-        BarSeries1.HorizontalAxis = CategoricalAxis1
-        BarSeries2.HorizontalAxis = CategoricalAxis1
-        LineSeries1.HorizontalAxis = CategoricalAxis1
-        LineSeries2.HorizontalAxis = CategoricalAxis1
-        LineSeries3.HorizontalAxis = CategoricalAxis1
-
-
-        BarSeries1.VerticalAxis = LinearAxis1
-        BarSeries2.VerticalAxis = LinearAxis1
-        LineSeries2.VerticalAxis = LinearAxis1
-        LineSeries1.VerticalAxis = LinearAxis2
-        LineSeries3.VerticalAxis = LinearAxis1
-
-        BarSeries1.Palette = New PaletteEntry(Color.FromArgb(62, 105, 157))
-        BarSeries2.Palette = New PaletteEntry(Color.FromArgb(255, 192, 0))
-        LineSeries1.Palette = New PaletteEntry(Color.FromArgb(127, 127, 127))
-        LineSeries2.Palette = New PaletteEntry(Color.FromArgb(217, 217, 217))
-        LineSeries3.Palette = New PaletteEntry(Color.FromArgb(202, 0, 0))
-
-        LineSeries3.BorderColor = Color.FromArgb(202, 0, 0)
-        'LineSeries3.PointSize = New SizeF(10, 10)
-
-        LineSeries1.BorderColor = Color.FromArgb(127, 127, 127)
-        LineSeries2.BorderColor = Color.FromArgb(217, 217, 217)
-
-        LineSeries1.PointSize = New SizeF(10, 10)
-        'LineSeries2.PointSize = New SizeF(10, 10)
-
-        Me.radChartView1.ShowTrackBall = True
-        Me.radChartView1.ShowToolTip = True
-
-        'Chartview
-
-        radChartView1.Series.Add(LineSeries1)
-
-        radChartView1.Series.Add(BarSeries1)
-        radChartView1.Series.Add(BarSeries2)
-        radChartView1.Series.Add(LineSeries3)
-        radChartView1.Series.Add(LineSeries2)
-
-        BarSeries1.CombineMode = ChartSeriesCombineMode.Stack
-        BarSeries2.CombineMode = ChartSeriesCombineMode.Stack
-        LineSeries1.CombineMode = ChartSeriesCombineMode.None
-        LineSeries2.CombineMode = ChartSeriesCombineMode.None
-        LineSeries3.CombineMode = ChartSeriesCombineMode.None
-
-        If (LinearAxis1.ActualRange.Maximum = 0) Then
-            LinearAxis1.Maximum = 5
-        End If
-    End Sub
-    'Costo Componente
-    Private Sub obtiene_costo_componente_dia_mes()
-        'Objeto obtiene_nrfti Clase
-        Dim oObtiene_costo As New obtiene_costo
-        oObtiene_costo.cve_componente = cbxComponente.SelectedValue
-        oObtiene_costo.fecha_inicial = dtpFechaInicial.Value
-        oObtiene_costo.fecha_final = dtpFechaFinal.Value
-        oObtiene_costo.bandera = bandera_graficos
-        'Creacion series
-        Dim BarSeries1 As New BarSeries()
-        BarSeries1.LegendTitle = "Min. Programados"
-        Dim BarSeries2 As New BarSeries()
-        BarSeries2.LegendTitle = "Min. Excedentes"
-        Dim LineSeries1 As New LineSeries()
-        LineSeries1.LegendTitle = "Costo"
-        Dim LineSeries2 As New LineSeries()
-        LineSeries2.LegendTitle = "Objetivo mins"
-        Dim LineSeries3 As New LineSeries()
-        LineSeries3.LegendTitle = "Objetivo Costo"
-        Me.radChartView1.ShowLegend = True
-        'Obtencion Datos
-        Dim vDT As DataTable = Nothing
-        If rdbtnDias.IsChecked Then
-            vDT = oObtiene_costo.obtiene_costo_componente_dia()
-        ElseIf rdbtnMeses.IsChecked Then
-            vDT = oObtiene_costo.obtiene_costo_componente_mes()
-        End If
-        'Llenado de las series
-        Dim vTotal As Integer = 1
-        Dim vContador As Integer = 1
-        vTotal = vDT.Rows.Count
-
-        If vTotal = 0 Then
-            habilita_etiqueta_datos()
-            Me.radChartView1.Title = ""
-        Else
-            Me.radChartView1.Title = "Costo " & cbxComponente.Text
-        End If
-
-        For Each vDR As DataRow In vDT.Rows
-            If vTotal = vContador Then
-                BarSeries1.DataPoints.Add(New CategoricalDataPoint(vDR("min_programados"), "acumulado"))
-                BarSeries2.DataPoints.Add(New CategoricalDataPoint(vDR("min_excedentes"), "acumulado"))
-                LineSeries1.DataPoints.Add(New CategoricalDataPoint(vDR("costo"), "acumulado"))
-                LineSeries2.DataPoints.Add(New CategoricalDataPoint(vDR("objetivo_tcdm"), "acumulado"))
-            Else
-                BarSeries1.DataPoints.Add(New CategoricalDataPoint(vDR("min_programados"), vDR("dia_asignado")))
-                BarSeries2.DataPoints.Add(New CategoricalDataPoint(vDR("min_excedentes"), vDR("dia_asignado")))
-                LineSeries1.DataPoints.Add(New CategoricalDataPoint(vDR("costo"), vDR("dia_asignado")))
-                LineSeries2.DataPoints.Add(New CategoricalDataPoint(vDR("objetivo_tcdm"), vDR("dia_asignado")))
-                If Not IsDBNull(vDR("objetivo")) Then
-                    LineSeries3.DataPoints.Add(New CategoricalDataPoint(vDR("objetivo"), vDR("dia_asignado")))
-                End If
-            End If
-            vContador = vContador + 1
-        Next
-        'Cartesian Area
-        Dim CartesianArea1 As CartesianArea = New CartesianArea()
-        'CartesianArea1.ShowGrid = True
-        Me.radChartView1.AreaDesign = CartesianArea1
-        'Categorical axis
-        Dim CategoricalAxis1 As CategoricalAxis = New CategoricalAxis()
-        CategoricalAxis1.LabelFitMode = AxisLabelFitMode.Rotate
-        CategoricalAxis1.LabelRotationAngle = 270.0R
-
-        'LinearAxis
-        Dim LinearAxis1 As LinearAxis = New LinearAxis()
-        Dim LinearAxis2 As LinearAxis = New LinearAxis()
-        LinearAxis1.AxisType = AxisType.Second
-        LinearAxis2.AxisType = AxisType.Second
-        LinearAxis2.HorizontalLocation = AxisHorizontalLocation.Right
-        LinearAxis1.Title = "Minutos"
-        LinearAxis2.Title = "Costo $$"
-        'Personalizacion
-
-        'Logo Indicador
-        picboxIndicador.ImageLocation = Application.StartupPath & "\graficas_fase_uno\logo_indicador_costo.jpg"
-
-        'Legend & Position
-        Me.radChartView1.ChartElement.LegendElement.StackElement.Orientation = Orientation.Horizontal
-        Me.radChartView1.ChartElement.LegendPosition = LegendPosition.Bottom
-
-        If rdbtnDias.IsChecked Then
-            CategoricalAxis1.LabelFormat = "{0:dd - MMM}"
-        ElseIf rdbtnMeses.IsChecked Then
-            CategoricalAxis1.LabelFormat = "{0:MMM - yyyy}"
-        End If
-        'LinearAxis1.MajorStep = 10.0R
-        'Series
-        BarSeries1.ForeColor = Color.White
-
-        BarSeries1.ShowLabels = True
-        BarSeries2.ShowLabels = True
-        LineSeries1.ShowLabels = True
-        'LineSeries3.ShowLabels = True
-        'LineSeries2.ShowLabels = True
-
-        BarSeries1.LabelFormat = "{0:###}"
-        BarSeries2.LabelFormat = "{0:###}"
-        LineSeries3.LabelFormat = "{0:###}"
-        'LineSeries2.LabelFormat = "{0:###}"
-        LineSeries1.LabelFormat = "$ " & "{0:##.##}"
-
-
-        BarSeries1.HorizontalAxis = CategoricalAxis1
-        BarSeries2.HorizontalAxis = CategoricalAxis1
-        LineSeries1.HorizontalAxis = CategoricalAxis1
-        LineSeries2.HorizontalAxis = CategoricalAxis1
-        LineSeries3.HorizontalAxis = CategoricalAxis1
-
-        BarSeries1.VerticalAxis = LinearAxis1
-        BarSeries2.VerticalAxis = LinearAxis1
-        LineSeries2.VerticalAxis = LinearAxis1
-        LineSeries1.VerticalAxis = LinearAxis2
-        LineSeries3.VerticalAxis = LinearAxis1
-
-        BarSeries1.Palette = New PaletteEntry(Color.FromArgb(62, 105, 157))
-        BarSeries2.Palette = New PaletteEntry(Color.FromArgb(255, 192, 0))
-        LineSeries1.Palette = New PaletteEntry(Color.FromArgb(127, 127, 127))
-        LineSeries2.Palette = New PaletteEntry(Color.FromArgb(217, 217, 217))
-        LineSeries3.Palette = New PaletteEntry(Color.FromArgb(202, 0, 0))
-
-        LineSeries3.BorderColor = Color.FromArgb(202, 0, 0)
-        'LineSeries3.PointSize = New SizeF(10, 10)
-
-        LineSeries1.BorderColor = Color.FromArgb(127, 127, 127)
-        LineSeries2.BorderColor = Color.FromArgb(217, 217, 217)
-
-        LineSeries1.PointSize = New SizeF(10, 10)
-        'LineSeries2.PointSize = New SizeF(10, 10)
-        Me.radChartView1.ShowTrackBall = True
-        Me.radChartView1.ShowToolTip = True
-        'Chartview
-        'Me.radChartView1.ShowGrid = True
-        'Me.radChartView1.ShowSmartLabels = True
-
-        radChartView1.Series.Add(LineSeries1)
-
-        radChartView1.Series.Add(BarSeries1)
-        radChartView1.Series.Add(BarSeries2)
-
-        radChartView1.Series.Add(LineSeries3)
-        radChartView1.Series.Add(LineSeries2)
-
-        BarSeries1.CombineMode = ChartSeriesCombineMode.Stack
-        BarSeries2.CombineMode = ChartSeriesCombineMode.Stack
-        LineSeries1.CombineMode = ChartSeriesCombineMode.None
-        LineSeries2.CombineMode = ChartSeriesCombineMode.None
-        LineSeries3.CombineMode = ChartSeriesCombineMode.None
-
-        If (LinearAxis1.ActualRange.Maximum = 0) Then
-            LinearAxis1.Maximum = 5
-        End If
-    End Sub
-    'Costo Linea
-    Private Sub obtiene_costo_linea_dia_mes()
-        'Objeto obtiene_nrfti Clase
-        Dim oObtiene_costo As New obtiene_costo
-        oObtiene_costo.cve_linea = cbxLinea.SelectedValue
-        oObtiene_costo.fecha_inicial = dtpFechaInicial.Value
-        oObtiene_costo.fecha_final = dtpFechaFinal.Value
-        oObtiene_costo.bandera = bandera_graficos
-        'Creacion series
-        Dim BarSeries1 As New BarSeries()
-        BarSeries1.LegendTitle = "Min. Programados"
-        Dim BarSeries2 As New BarSeries()
-        BarSeries2.LegendTitle = "Min. Excedentes"
-        Dim LineSeries1 As New LineSeries()
-        LineSeries1.LegendTitle = "Costo"
-        Dim LineSeries2 As New LineSeries()
-        LineSeries2.LegendTitle = "Objetivo mins"
-        Dim LineSeries3 As New LineSeries()
-        LineSeries3.LegendTitle = "Objetivo Costo"
-        Me.radChartView1.ShowLegend = True
-        'Obtencion Datos
-        Dim vDT As DataTable = Nothing
-        If rdbtnDias.IsChecked Then
-            vDT = oObtiene_costo.obtiene_costo_linea_dia()
-        ElseIf rdbtnMeses.IsChecked Then
-            vDT = oObtiene_costo.obtiene_costo_linea_mes()
-        End If
-        'Llenado de las series
-        Dim vTotal As Integer = 1
-        Dim vContador As Integer = 1
-        vTotal = vDT.Rows.Count
-
-        If vTotal = 0 Then
-            habilita_etiqueta_datos()
-            Me.radChartView1.Title = ""
-        Else
-            Me.radChartView1.Title = "Costo " & cbxLinea.Text
-        End If
-
-        For Each vDR As DataRow In vDT.Rows
-            If vTotal = vContador Then
-                BarSeries1.DataPoints.Add(New CategoricalDataPoint(vDR("min_programados"), "acumulado"))
-                BarSeries2.DataPoints.Add(New CategoricalDataPoint(vDR("min_excedentes"), "acumulado"))
-                LineSeries1.DataPoints.Add(New CategoricalDataPoint(vDR("costo"), "acumulado"))
-                LineSeries2.DataPoints.Add(New CategoricalDataPoint(vDR("objetivo_tcdm"), "acumulado"))
-            Else
-                BarSeries1.DataPoints.Add(New CategoricalDataPoint(vDR("min_programados"), vDR("dia_asignado")))
-                BarSeries2.DataPoints.Add(New CategoricalDataPoint(vDR("min_excedentes"), vDR("dia_asignado")))
-                LineSeries1.DataPoints.Add(New CategoricalDataPoint(vDR("costo"), vDR("dia_asignado")))
-                LineSeries2.DataPoints.Add(New CategoricalDataPoint(vDR("objetivo_tcdm"), vDR("dia_asignado")))
-                If Not IsDBNull(vDR("objetivo")) Then
-                    LineSeries3.DataPoints.Add(New CategoricalDataPoint(vDR("objetivo"), vDR("dia_asignado")))
-                End If
-            End If
-            vContador = vContador + 1
-        Next
-        'Cartesian Area
-        Dim CartesianArea1 As CartesianArea = New CartesianArea()
-        'CartesianArea1.ShowGrid = True
-        Me.radChartView1.AreaDesign = CartesianArea1
-        'Categorical axis
-        Dim CategoricalAxis1 As CategoricalAxis = New CategoricalAxis()
-        CategoricalAxis1.LabelFitMode = AxisLabelFitMode.Rotate
-        CategoricalAxis1.LabelRotationAngle = 270.0R
-
-        'LinearAxis
-        Dim LinearAxis1 As LinearAxis = New LinearAxis()
-        Dim LinearAxis2 As LinearAxis = New LinearAxis()
-        LinearAxis1.AxisType = AxisType.Second
-        LinearAxis2.AxisType = AxisType.Second
-        LinearAxis2.HorizontalLocation = AxisHorizontalLocation.Right
-        LinearAxis1.Title = "Minutos"
-        LinearAxis2.Title = "Costo $$"
-        'Personalizacion
-
-        'Logo Indicador
-        picboxIndicador.ImageLocation = Application.StartupPath & "\graficas_fase_uno\logo_indicador_costo.jpg"
-
-        'Legend & Position
-        Me.radChartView1.ChartElement.LegendElement.StackElement.Orientation = Orientation.Horizontal
-        Me.radChartView1.ChartElement.LegendPosition = LegendPosition.Bottom
-
-        If rdbtnDias.IsChecked Then
-            CategoricalAxis1.LabelFormat = "{0:dd - MMM}"
-        ElseIf rdbtnMeses.IsChecked Then
-            CategoricalAxis1.LabelFormat = "{0:MMM - yyyy}"
-        End If
-        'LinearAxis1.MajorStep = 10.0R
-        'Series
-        BarSeries1.ShowLabels = True
-        BarSeries2.ShowLabels = True
-        LineSeries1.ShowLabels = True
-        'LineSeries3.ShowLabels = True
-        'LineSeries2.ShowLabels = True
-
-        BarSeries1.LabelFormat = "{0:###}"
-        BarSeries2.LabelFormat = "{0:###}"
-        LineSeries3.LabelFormat = "{0:###}"
-        'LineSeries2.LabelFormat = "{0:###}"
-        LineSeries1.LabelFormat = "$ " & "{0:##.##}"
-
-
-        BarSeries1.HorizontalAxis = CategoricalAxis1
-        BarSeries2.HorizontalAxis = CategoricalAxis1
-        LineSeries1.HorizontalAxis = CategoricalAxis1
-        LineSeries2.HorizontalAxis = CategoricalAxis1
-        LineSeries3.HorizontalAxis = CategoricalAxis1
-
-        BarSeries1.VerticalAxis = LinearAxis1
-        BarSeries2.VerticalAxis = LinearAxis1
-        LineSeries2.VerticalAxis = LinearAxis1
-        LineSeries1.VerticalAxis = LinearAxis2
-        LineSeries3.VerticalAxis = LinearAxis1
-
-        BarSeries1.Palette = New PaletteEntry(Color.FromArgb(62, 105, 157))
-        BarSeries2.Palette = New PaletteEntry(Color.FromArgb(255, 192, 0))
-        LineSeries1.Palette = New PaletteEntry(Color.FromArgb(127, 127, 127))
-        LineSeries2.Palette = New PaletteEntry(Color.FromArgb(217, 217, 217))
-        LineSeries3.Palette = New PaletteEntry(Color.FromArgb(202, 0, 0))
-
-        LineSeries3.BorderColor = Color.FromArgb(202, 0, 0)
-        'LineSeries3.PointSize = New SizeF(10, 10)
-
-        LineSeries1.BorderColor = Color.FromArgb(127, 127, 127)
-        LineSeries2.BorderColor = Color.FromArgb(217, 217, 217)
-
-        LineSeries1.PointSize = New SizeF(10, 10)
-        'LineSeries2.PointSize = New SizeF(10, 10)
-        Me.radChartView1.ShowTrackBall = True
-        Me.radChartView1.ShowToolTip = True
-        'Chartview
-        'Me.radChartView1.ShowGrid = True
-        'Me.radChartView1.ShowSmartLabels = True
-
-        radChartView1.Series.Add(LineSeries1)
-
-        radChartView1.Series.Add(BarSeries1)
-        radChartView1.Series.Add(BarSeries2)
-
-        radChartView1.Series.Add(LineSeries3)
-        radChartView1.Series.Add(LineSeries2)
-
-        BarSeries1.CombineMode = ChartSeriesCombineMode.Stack
-        BarSeries2.CombineMode = ChartSeriesCombineMode.Stack
-        LineSeries1.CombineMode = ChartSeriesCombineMode.None
-        LineSeries2.CombineMode = ChartSeriesCombineMode.None
-        LineSeries3.CombineMode = ChartSeriesCombineMode.None
-
-        If (LinearAxis1.ActualRange.Maximum = 0) Then
-            LinearAxis1.Maximum = 5
-        End If
-    End Sub
-    'Costo Equipo
-    Private Sub obtiene_costo_equipo_dia_mes()
-        'Objeto obtiene_nrfti Clase
-        Dim oObtiene_costo As New obtiene_costo
-        oObtiene_costo.cve_equipo = cbxEquipo.SelectedValue
-        oObtiene_costo.fecha_inicial = dtpFechaInicial.Value
-        oObtiene_costo.fecha_final = dtpFechaFinal.Value
-        oObtiene_costo.bandera = bandera_graficos
-        'Creacion series
-        Dim BarSeries1 As New BarSeries()
-        BarSeries1.LegendTitle = "Min. Programados"
-        Dim BarSeries2 As New BarSeries()
-        BarSeries2.LegendTitle = "Min. Excedentes"
-        Dim LineSeries1 As New LineSeries()
-        LineSeries1.LegendTitle = "Costo"
-        Dim LineSeries2 As New LineSeries()
-        LineSeries2.LegendTitle = "Objetivo mins"
-        Dim LineSeries3 As New LineSeries()
-        LineSeries3.LegendTitle = "Objetivo Costo"
-        Me.radChartView1.ShowLegend = True
-        'Obtencion Datos
-        Dim vDT As DataTable = Nothing
-        If rdbtnDias.IsChecked Then
-            vDT = oObtiene_costo.obtiene_costo_equipo_dia()
-        ElseIf rdbtnMeses.IsChecked Then
-            vDT = oObtiene_costo.obtiene_costo_equipo_mes()
-        End If
-        'Llenado de las series
-        Dim vTotal As Integer = 1
-        Dim vContador As Integer = 1
-        vTotal = vDT.Rows.Count
-
-        If vTotal = 0 Then
-            habilita_etiqueta_datos()
-            Me.radChartView1.Title = ""
-        Else
-            Me.radChartView1.Title = "Costo " & cbxEquipo.Text
-        End If
-
-        For Each vDR As DataRow In vDT.Rows
-            If vTotal = vContador Then
-                BarSeries1.DataPoints.Add(New CategoricalDataPoint(vDR("min_programados"), "acumulado"))
-                BarSeries2.DataPoints.Add(New CategoricalDataPoint(vDR("min_excedentes"), "acumulado"))
-                LineSeries1.DataPoints.Add(New CategoricalDataPoint(vDR("costo"), "acumulado"))
-                LineSeries2.DataPoints.Add(New CategoricalDataPoint(vDR("objetivo_tcdm"), "acumulado"))
-            Else
-                BarSeries1.DataPoints.Add(New CategoricalDataPoint(vDR("min_programados"), vDR("dia_asignado")))
-                BarSeries2.DataPoints.Add(New CategoricalDataPoint(vDR("min_excedentes"), vDR("dia_asignado")))
-                LineSeries1.DataPoints.Add(New CategoricalDataPoint(vDR("costo"), vDR("dia_asignado")))
-                LineSeries2.DataPoints.Add(New CategoricalDataPoint(vDR("objetivo_tcdm"), vDR("dia_asignado")))
-                If Not IsDBNull(vDR("objetivo")) Then
-                    LineSeries3.DataPoints.Add(New CategoricalDataPoint(vDR("objetivo"), vDR("dia_asignado")))
-                End If
-            End If
-            vContador = vContador + 1
-        Next
-        'Cartesian Area
-        Dim CartesianArea1 As CartesianArea = New CartesianArea()
-        'CartesianArea1.ShowGrid = True
-        Me.radChartView1.AreaDesign = CartesianArea1
-        'Categorical axis
-        Dim CategoricalAxis1 As CategoricalAxis = New CategoricalAxis()
-        CategoricalAxis1.LabelFitMode = AxisLabelFitMode.Rotate
-        CategoricalAxis1.LabelRotationAngle = 270.0R
-
-        'LinearAxis
-        Dim LinearAxis1 As LinearAxis = New LinearAxis()
-        Dim LinearAxis2 As LinearAxis = New LinearAxis()
-        LinearAxis1.AxisType = AxisType.Second
-        LinearAxis2.AxisType = AxisType.Second
-        LinearAxis2.HorizontalLocation = AxisHorizontalLocation.Right
-        LinearAxis1.Title = "Minutos"
-        LinearAxis2.Title = "Costo $$"
-        'Personalizacion
-
-        'Logo Indicador
-        picboxIndicador.ImageLocation = Application.StartupPath & "\graficas_fase_uno\logo_indicador_costo.jpg"
-
-        'Legend & Position
-        Me.radChartView1.ChartElement.LegendElement.StackElement.Orientation = Orientation.Horizontal
-        Me.radChartView1.ChartElement.LegendPosition = LegendPosition.Bottom
-
-        If rdbtnDias.IsChecked Then
-            CategoricalAxis1.LabelFormat = "{0:dd - MMM}"
-        ElseIf rdbtnMeses.IsChecked Then
-            CategoricalAxis1.LabelFormat = "{0:MMM - yyyy}"
-        End If
-        'LinearAxis1.MajorStep = 10.0R
-        'Series
-        BarSeries1.ForeColor = Color.White
-
-        BarSeries1.ShowLabels = True
-        BarSeries2.ShowLabels = True
-        LineSeries1.ShowLabels = True
-        'LineSeries3.ShowLabels = True
-        'LineSeries2.ShowLabels = True
-
-        BarSeries1.LabelFormat = "{0:###}"
-        BarSeries2.LabelFormat = "{0:###}"
-        LineSeries3.LabelFormat = "{0:###}"
-        'LineSeries2.LabelFormat = "{0:###}"
-        LineSeries1.LabelFormat = "$ " & "{0:##.##}"
-
-
-        BarSeries1.HorizontalAxis = CategoricalAxis1
-        BarSeries2.HorizontalAxis = CategoricalAxis1
-        LineSeries1.HorizontalAxis = CategoricalAxis1
-        LineSeries2.HorizontalAxis = CategoricalAxis1
-        LineSeries3.HorizontalAxis = CategoricalAxis1
-
-        BarSeries1.VerticalAxis = LinearAxis1
-        BarSeries2.VerticalAxis = LinearAxis1
-        LineSeries2.VerticalAxis = LinearAxis1
-        LineSeries1.VerticalAxis = LinearAxis2
-        LineSeries3.VerticalAxis = LinearAxis1
-
-        BarSeries1.Palette = New PaletteEntry(Color.FromArgb(62, 105, 157))
-        BarSeries2.Palette = New PaletteEntry(Color.FromArgb(255, 192, 0))
-        LineSeries1.Palette = New PaletteEntry(Color.FromArgb(127, 127, 127))
-        LineSeries2.Palette = New PaletteEntry(Color.FromArgb(217, 217, 217))
-        LineSeries3.Palette = New PaletteEntry(Color.FromArgb(202, 0, 0))
-
-        LineSeries3.BorderColor = Color.FromArgb(202, 0, 0)
-        'LineSeries3.PointSize = New SizeF(10, 10)
-
-        LineSeries1.BorderColor = Color.FromArgb(127, 127, 127)
-        LineSeries2.BorderColor = Color.FromArgb(217, 217, 217)
-
-        LineSeries1.PointSize = New SizeF(10, 10)
-        'LineSeries2.PointSize = New SizeF(10, 10)
-        Me.radChartView1.ShowTrackBall = True
-        Me.radChartView1.ShowToolTip = True
-        'Chartview
-        'Me.radChartView1.ShowGrid = True
-        'Me.radChartView1.ShowSmartLabels = True
-
-        radChartView1.Series.Add(LineSeries1)
-
-        radChartView1.Series.Add(BarSeries1)
-        radChartView1.Series.Add(BarSeries2)
-
-        radChartView1.Series.Add(LineSeries3)
-        radChartView1.Series.Add(LineSeries2)
-
-        BarSeries1.CombineMode = ChartSeriesCombineMode.Stack
-        BarSeries2.CombineMode = ChartSeriesCombineMode.Stack
-        LineSeries1.CombineMode = ChartSeriesCombineMode.None
-        LineSeries2.CombineMode = ChartSeriesCombineMode.None
-        LineSeries3.CombineMode = ChartSeriesCombineMode.None
-
-        If (LinearAxis1.ActualRange.Maximum = 0) Then
-            LinearAxis1.Maximum = 5
-        End If
-    End Sub
-    'Costo equipo-linea
-    Private Sub obtiene_costo_equipo_linea_dia_mes()
-        'Objeto obtiene_nrfti Clase
-        Dim oObtiene_costo As New obtiene_costo
-        oObtiene_costo.cve_equipo = cbxEquipo.SelectedValue
-        oObtiene_costo.cve_linea = cbxLinea.SelectedValue
-        oObtiene_costo.fecha_inicial = dtpFechaInicial.Value
-        oObtiene_costo.fecha_final = dtpFechaFinal.Value
-        oObtiene_costo.bandera = bandera_graficos
-        'Creacion series
-        Dim BarSeries1 As New BarSeries()
-        BarSeries1.LegendTitle = "Min. Programados"
-        Dim BarSeries2 As New BarSeries()
-        BarSeries2.LegendTitle = "Min. Excedentes"
-        Dim LineSeries1 As New LineSeries()
-        LineSeries1.LegendTitle = "Costo"
-        Dim LineSeries2 As New LineSeries()
-        LineSeries2.LegendTitle = "Objetivo mins"
-        Dim LineSeries3 As New LineSeries()
-        LineSeries3.LegendTitle = "Objetivo Costo"
-        Me.radChartView1.ShowLegend = True
-        'Obtencion Datos
-        Dim vDT As DataTable = Nothing
-        If rdbtnDias.IsChecked Then
-            vDT = oObtiene_costo.obtiene_costo_equipo_linea_dia()
-        ElseIf rdbtnMeses.IsChecked Then
-            vDT = oObtiene_costo.obtiene_costo_equipo_linea_mes()
-        End If
-        'Llenado de las series
-        Dim vTotal As Integer = 1
-        Dim vContador As Integer = 1
-        vTotal = vDT.Rows.Count
-
-        If vTotal = 0 Then
-            habilita_etiqueta_datos()
-            Me.radChartView1.Title = ""
-        Else
-            Me.radChartView1.Title = "Costo " & cbxEquipo.Text & " - " & cbxLinea.Text
-        End If
-
-        For Each vDR As DataRow In vDT.Rows
-            If vTotal = vContador Then
-                BarSeries1.DataPoints.Add(New CategoricalDataPoint(vDR("min_programados"), "acumulado"))
-                BarSeries2.DataPoints.Add(New CategoricalDataPoint(vDR("min_excedentes"), "acumulado"))
-                LineSeries1.DataPoints.Add(New CategoricalDataPoint(vDR("costo"), "acumulado"))
-                LineSeries2.DataPoints.Add(New CategoricalDataPoint(vDR("objetivo_tcdm"), "acumulado"))
-            Else
-                BarSeries1.DataPoints.Add(New CategoricalDataPoint(vDR("min_programados"), vDR("dia_asignado")))
-                BarSeries2.DataPoints.Add(New CategoricalDataPoint(vDR("min_excedentes"), vDR("dia_asignado")))
-                LineSeries1.DataPoints.Add(New CategoricalDataPoint(vDR("costo"), vDR("dia_asignado")))
-                LineSeries2.DataPoints.Add(New CategoricalDataPoint(vDR("objetivo_tcdm"), vDR("dia_asignado")))
-                If Not IsDBNull(vDR("objetivo")) Then
-                    LineSeries3.DataPoints.Add(New CategoricalDataPoint(vDR("objetivo"), vDR("dia_asignado")))
-                End If
-            End If
-            vContador = vContador + 1
-        Next
-        'Cartesian Area
-        Dim CartesianArea1 As CartesianArea = New CartesianArea()
-        'CartesianArea1.ShowGrid = True
-        Me.radChartView1.AreaDesign = CartesianArea1
-        'Categorical axis
-        Dim CategoricalAxis1 As CategoricalAxis = New CategoricalAxis()
-        CategoricalAxis1.LabelFitMode = AxisLabelFitMode.Rotate
-        CategoricalAxis1.LabelRotationAngle = 270.0R
-
-        'LinearAxis
-        Dim LinearAxis1 As LinearAxis = New LinearAxis()
-        Dim LinearAxis2 As LinearAxis = New LinearAxis()
-        LinearAxis1.AxisType = AxisType.Second
-        LinearAxis2.AxisType = AxisType.Second
-        LinearAxis2.HorizontalLocation = AxisHorizontalLocation.Right
-        LinearAxis1.Title = "Minutos"
-        LinearAxis2.Title = "Costo $$"
-        'Personalizacion
-
-        'Logo Indicador
-        picboxIndicador.ImageLocation = Application.StartupPath & "\graficas_fase_uno\logo_indicador_costo.jpg"
-
-        'Legend & Position
-        Me.radChartView1.ChartElement.LegendElement.StackElement.Orientation = Orientation.Horizontal
-        Me.radChartView1.ChartElement.LegendPosition = LegendPosition.Bottom
-
-        If rdbtnDias.IsChecked Then
-            CategoricalAxis1.LabelFormat = "{0:dd - MMM}"
-        ElseIf rdbtnMeses.IsChecked Then
-            CategoricalAxis1.LabelFormat = "{0:MMM - yyyy}"
-        End If
-        'LinearAxis1.MajorStep = 10.0R
-        'Series
-        BarSeries1.ForeColor = Color.White
-
-        BarSeries1.ShowLabels = True
-        BarSeries2.ShowLabels = True
-        LineSeries1.ShowLabels = True
-        'LineSeries3.ShowLabels = True
-        'LineSeries2.ShowLabels = True
-
-        BarSeries1.LabelFormat = "{0:###}"
-        BarSeries2.LabelFormat = "{0:###}"
-        LineSeries3.LabelFormat = "{0:###}"
-        'LineSeries2.LabelFormat = "{0:###}"
-        LineSeries1.LabelFormat = "$ " & "{0:##.##}"
-
-
-        BarSeries1.HorizontalAxis = CategoricalAxis1
-        BarSeries2.HorizontalAxis = CategoricalAxis1
-        LineSeries1.HorizontalAxis = CategoricalAxis1
-        LineSeries2.HorizontalAxis = CategoricalAxis1
-        LineSeries3.HorizontalAxis = CategoricalAxis1
-
-        BarSeries1.VerticalAxis = LinearAxis1
-        BarSeries2.VerticalAxis = LinearAxis1
-        LineSeries2.VerticalAxis = LinearAxis1
-        LineSeries1.VerticalAxis = LinearAxis2
-        LineSeries3.VerticalAxis = LinearAxis1
-
-        BarSeries1.Palette = New PaletteEntry(Color.FromArgb(62, 105, 157))
-        BarSeries2.Palette = New PaletteEntry(Color.FromArgb(255, 192, 0))
-        LineSeries1.Palette = New PaletteEntry(Color.FromArgb(127, 127, 127))
-        LineSeries2.Palette = New PaletteEntry(Color.FromArgb(217, 217, 217))
-        LineSeries3.Palette = New PaletteEntry(Color.FromArgb(202, 0, 0))
-
-        LineSeries3.BorderColor = Color.FromArgb(202, 0, 0)
-        'LineSeries3.PointSize = New SizeF(10, 10)
-
-        LineSeries1.BorderColor = Color.FromArgb(127, 127, 127)
-        LineSeries2.BorderColor = Color.FromArgb(217, 217, 217)
-
-        LineSeries1.PointSize = New SizeF(10, 10)
-        'LineSeries2.PointSize = New SizeF(10, 10)
-        Me.radChartView1.ShowTrackBall = True
-        Me.radChartView1.ShowToolTip = True
-        'Chartview
-        'Me.radChartView1.ShowGrid = True
-        'Me.radChartView1.ShowSmartLabels = True
-
-        radChartView1.Series.Add(LineSeries1)
-
-        radChartView1.Series.Add(BarSeries1)
-        radChartView1.Series.Add(BarSeries2)
-
-        radChartView1.Series.Add(LineSeries3)
-        radChartView1.Series.Add(LineSeries2)
-
-        BarSeries1.CombineMode = ChartSeriesCombineMode.Stack
-        BarSeries2.CombineMode = ChartSeriesCombineMode.Stack
-        LineSeries1.CombineMode = ChartSeriesCombineMode.None
-        LineSeries2.CombineMode = ChartSeriesCombineMode.None
-        LineSeries3.CombineMode = ChartSeriesCombineMode.None
-
-        If (LinearAxis1.ActualRange.Maximum = 0) Then
-            LinearAxis1.Maximum = 5
-        End If
-    End Sub
-#End Region
+    
 #End Region
 
 #Region "Graficar "
@@ -6738,7 +2257,7 @@ Public Class FrmGraficasfaseuno
         End If
     End Sub
 #End Region
-    Private Sub btnGraficar_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnGraficar.Click
+    Private Sub btnGraficar_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnGraficar.Click
         Me.radChartView1.ShowTrackBall = False
         picboxIndicador.Image = Nothing
         deshabilita_etiqueta_datos()
@@ -6746,13 +2265,13 @@ Public Class FrmGraficasfaseuno
         btnResumen.Enabled = True
         obtener_grafica()
     End Sub
-    Private Sub radChartView1_LabelFormatting(ByVal sender As System.Object, ByVal e As Telerik.WinControls.UI.ChartViewLabelFormattingEventArgs) Handles radChartView1.LabelFormatting
+    Private Sub radChartView1_LabelFormatting(ByVal sender As Object, ByVal e As ChartViewLabelFormattingEventArgs) Handles radChartView1.LabelFormatting
         e.LabelElement.BackColor = Color.Transparent
         e.LabelElement.BorderColor = Color.Transparent
     End Sub
 
 #Region "Metodos para Tablas_Reportes"
-    Private Sub btnResumen_Click(sender As System.Object, e As System.EventArgs) Handles btnResumen.Click
+    Private Sub btnResumen_Click(sender As Object, e As EventArgs) Handles btnResumen.Click
         If vIndicador_A_CALCULAR = vIndicador_Seleccionado Then
             btnDetalle.Enabled = True
             btnResumen.Enabled = True
@@ -6762,26 +2281,22 @@ Public Class FrmGraficasfaseuno
             ElseIf rdbtnNrfti.IsChecked = True Then
                 Obtiene_Reporte_NRFT(True)
             ElseIf rdbtnCosto.IsChecked = True Then
-                Obtiene_Reporte_Costo(True)
+                Obtiene_Reporte_Costo()
             ElseIf rdbtnSeguridad.IsChecked = True Then
                 Obtiene_Reporte_Seguridad(True)
             ElseIf rdbtnCincoS.IsChecked = True Then
-                Obtiene_Reporte_CincoS(True)
+                Obtiene_Reporte_CincoS()
             ElseIf rdbtnGente.IsChecked = True Then
-                Obtiene_Reporte_Gente(True)
+                Obtiene_Reporte_Gente()
             End If
         Else
             MsgBox("El indicador actualmente seleccionado no fue el que calculo. De clic en el boton 'Calcular' para recalcular el indicador seleccionado")
             btnDetalle.Enabled = False
             btnResumen.Enabled = False
         End If
-
-
-
-
     End Sub
 
-    Private Sub btnDetalle_Click(sender As System.Object, e As System.EventArgs) Handles btnDetalle.Click
+    Private Sub btnDetalle_Click(sender As Object, e As EventArgs) Handles btnDetalle.Click
         If vIndicador_A_CALCULAR = vIndicador_Seleccionado Then
             btnDetalle.Enabled = True
             btnResumen.Enabled = True
@@ -6791,13 +2306,13 @@ Public Class FrmGraficasfaseuno
             ElseIf rdbtnNrfti.IsChecked = True Then
                 Obtiene_Reporte_NRFT(False)
             ElseIf rdbtnCosto.IsChecked = True Then
-                Obtiene_Reporte_Costo(False)
+                Obtiene_Reporte_Costo()
             ElseIf rdbtnSeguridad.IsChecked = True Then
                 Obtiene_Reporte_Seguridad(False)
             ElseIf rdbtnCincoS.IsChecked = True Then
-                Obtiene_Reporte_CincoS(False)
+                Obtiene_Reporte_CincoS()
             ElseIf rdbtnGente.IsChecked = True Then
-                Obtiene_Reporte_Gente(False)
+                Obtiene_Reporte_Gente()
             End If
         Else
             MsgBox("El indicador actualmente seleccionado no fue el que calculo. De clic en el boton 'Calcular' para recalcular el indicador seleccionado")
@@ -6807,7 +2322,7 @@ Public Class FrmGraficasfaseuno
 
     End Sub
 
-    Private Sub btnExportar_Click(sender As System.Object, e As System.EventArgs) Handles btnExportar.Click
+    Private Sub btnExportar_Click(sender As Object, e As EventArgs) Handles btnExportar.Click
         Dim exporter As ExportToExcelML = New ExportToExcelML(Me.dgvTabla)
         exporter.HiddenColumnOption = Telerik.WinControls.UI.Export.HiddenOption.DoNotExport
         sfdExportaExcel.Filter = "Excel |*.xls"

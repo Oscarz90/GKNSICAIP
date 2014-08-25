@@ -1,12 +1,11 @@
 ﻿Imports CapaDatos
 Public Class Registro_Turno
     Implements IIndividual
-    Dim cadena_conexion As New CapaDatos.conexiones
-    Dim oBD As New CapaDatos.CapaDatos(cadena_conexion.CadenaSicaip)
+    Dim cadena_conexion As New conexiones
+    Dim oBD As New Datos(cadena_conexion.CadenaSicaip)
 #Region "IIndividual"
     Public Sub Cargar() Implements IIndividual.Cargar
-        Dim vDR As DataRow
-        vDR = oBD.ObtenerRenglon("select * from registro_turno where cve_registro_turno = " & vcve_registro_turno, "registro_turno")
+        Dim vDR As DataRow = oBD.ObtenerRenglon("select * from registro_turno where cve_registro_turno = " & vcve_registro_turno, "registro_turno")
         If vDR IsNot Nothing Then
             vcve_registro_turno = vDR("cve_registro_turno")
             vcve_equipo = vDR("cve_equipo")
@@ -126,9 +125,7 @@ Public Class Registro_Turno
     Public Sub calcula_adeudo_desecho_aplicable()
         Using scope As New TransactionScope
             Try
-                Dim cmd As New SqlClient.SqlCommand
-                cmd.CommandType = CommandType.StoredProcedure
-                cmd.CommandText = "calcula_adeudo"
+                Dim cmd As New SqlClient.SqlCommand() With {.CommandType = CommandType.StoredProcedure, .CommandText = "calcula_adeudo"}
                 cmd.Parameters.Add("@cve_registro_turno", SqlDbType.BigInt).Value = Me.vcve_registro_turno
                 Dim obj As DataTable = oBD.EjecutaCommando(cmd)
                 scope.Complete()
@@ -140,9 +137,7 @@ Public Class Registro_Turno
     Public Sub verifica_registro_turno()
         Using scope As New TransactionScope
             Try
-                Dim cmd As New SqlClient.SqlCommand
-                cmd.CommandType = CommandType.StoredProcedure
-                cmd.CommandText = "verifica_registro_turno"
+                Dim cmd As New SqlClient.SqlCommand() With {.CommandType = CommandType.StoredProcedure, .CommandText = "verifica_registro_turno"}
                 cmd.Parameters.Add("@cve_equipo", SqlDbType.BigInt).Value = Me.vcve_equipo
                 cmd.Parameters.Add("@cve_linea", SqlDbType.BigInt).Value = Me.vcve_linea
                 cmd.Parameters.Add("@fecha", SqlDbType.DateTime).Value = Me.vdia_asignado.ToString("dd-MM-yyyy")
@@ -159,9 +154,7 @@ Public Class Registro_Turno
     Public Sub verifica_registro_turno_produccion()
         Using scope As New TransactionScope
             Try
-                Dim cmd As New SqlClient.SqlCommand
-                cmd.CommandType = CommandType.StoredProcedure
-                cmd.CommandText = "verifica_registro_turno_produccion"
+                Dim cmd As New SqlClient.SqlCommand() With {.CommandType = CommandType.StoredProcedure, .CommandText = "verifica_registro_turno_produccion"}
                 cmd.Parameters.Add("@cve_equipo", SqlDbType.BigInt).Value = Me.vcve_equipo
                 cmd.Parameters.Add("@cve_linea", SqlDbType.BigInt).Value = Me.vcve_linea
                 cmd.Parameters.Add("@fecha", SqlDbType.DateTime).Value = Me.vdia_asignado.ToString("dd-MM-yyyy HH:mm")
@@ -179,9 +172,7 @@ Public Class Registro_Turno
         Dim obj As DataTable
         Using scope As New TransactionScope
             Try
-                Dim vComando As New SqlClient.SqlCommand
-                vComando.CommandType = CommandType.StoredProcedure
-                vComando.CommandText = "lineas_registradas"
+                Dim vComando As New SqlClient.SqlCommand() With {.CommandType = CommandType.StoredProcedure, .CommandText = "lineas_registradas"}
                 vComando.Parameters.Add("@cve_equipo", SqlDbType.BigInt).Value = Me.vcve_equipo
                 vComando.Parameters.Add("@fecha", SqlDbType.DateTime).Value = Me.vdia_asignado
                 obj = oBD.EjecutaCommando(vComando)
@@ -195,8 +186,7 @@ Public Class Registro_Turno
     End Function
     'Descansos
     Public Sub registra_dia_descanso()
-        Dim queryInsert As String = "insert into registro_turno " &
-            "select el.cve_equipo,l.cve_linea,(Select t.cve_turno from turno t where turno='Descanso'),'" & vdia_asignado.ToString("MM-dd-yyyy") & "',0,0 from linea l join equipo_linea el on l.cve_linea=el.cve_linea where l.Estatus='1' and el.cve_equipo=" & cve_equipo
+        Dim queryInsert As String = String.Format("insert into registro_turno select el.cve_equipo,l.cve_linea,(Select t.cve_turno from turno t where turno='Descanso'),'{0:MM-dd-yyyy}',0,0 from linea l join equipo_linea el on l.cve_linea=el.cve_linea where l.Estatus='1' and el.cve_equipo={1}", vdia_asignado, cve_equipo)
         Try
             oBD.EjecutarQuery(queryInsert)
         Catch

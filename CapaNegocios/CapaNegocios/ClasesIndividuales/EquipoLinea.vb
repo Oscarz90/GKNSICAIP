@@ -1,8 +1,8 @@
 ﻿Imports CapaDatos
 Public Class EquipoLinea
     Implements IIndividual
-    Dim cadena_conexion As New CapaDatos.conexiones
-    Dim oBD As New CapaDatos.CapaDatos(cadena_conexion.CadenaSicaip)
+    Dim cadena_conexion As New conexiones
+    Dim oBD As New Datos(cadena_conexion.CadenaSicaip)
     Dim oLinea As Linea
 #Region "IIndividual"
     Public Sub Cargar() Implements IIndividual.Cargar
@@ -34,9 +34,7 @@ Public Class EquipoLinea
     Public Sub Registrar() Implements IIndividual.Registrar
         Using scope As New TransactionScope()
             Try
-                Dim cmd As New SqlClient.SqlCommand
-                cmd.CommandType = CommandType.StoredProcedure
-                cmd.CommandText = "REGISTRAR_EQUIPO_LINEA"
+                Dim cmd As New SqlClient.SqlCommand() With {.CommandType = CommandType.StoredProcedure, .CommandText = "REGISTRAR_EQUIPO_LINEA"}
                 With cmd.Parameters
                     .Add("cve_equipo_linea", SqlDbType.BigInt).Value = Me.vcve_equipo_linea
                     .Add("cve_equipo", SqlDbType.BigInt).Value = Me.vcve_equipo
@@ -85,8 +83,7 @@ Public Class EquipoLinea
     Public ReadOnly Property Nombre_Linea() As String
         Get
             If cve_linea <> 0 Then
-                oLinea = New Linea
-                oLinea.cve_linea = cve_linea
+                oLinea = New Linea() With {.cve_linea = cve_linea}
                 oLinea.Cargar()
                 Return oLinea.linea
             Else
@@ -97,8 +94,7 @@ Public Class EquipoLinea
 #End Region
 #Region "Metodos Generales"
     Public Function ObtenerElementosNoAsignados(ByVal vIdLinea As Long) As DataTable
-        Dim vDT As DataTable
-        vDT = oBD.ObtenerTabla("SELECT DISTINCT E.Equipo as Equipo, E.cve_equipo  from Equipo_Linea EL join Equipo E on EL.cve_Equipo=E.cve_Equipo Where EL.cve_linea <>" & vIdLinea)
+        Dim vDT As DataTable = oBD.ObtenerTabla("SELECT DISTINCT E.Equipo as Equipo, E.cve_equipo  from Equipo_Linea EL join Equipo E on EL.cve_Equipo=E.cve_Equipo Where EL.cve_linea <>" & vIdLinea)
         If vDT IsNot Nothing Then
 
         Else
@@ -108,8 +104,7 @@ Public Class EquipoLinea
     End Function
 
     Public Function ObtenerElementosAsignados(ByVal vIdLinea As Long) As DataTable
-        Dim vDT As DataTable
-        vDT = oBD.ObtenerTabla("select EL.cve_equipo_linea AS cve_equipo_linea  From Equipo_Linea EL join Equipo E on EL.cve_Equipo=E.cve_Equipo Where EL.cve_linea =" & vIdLinea)
+        Dim vDT As DataTable = oBD.ObtenerTabla("select EL.cve_equipo_linea AS cve_equipo_linea  From Equipo_Linea EL join Equipo E on EL.cve_Equipo=E.cve_Equipo Where EL.cve_linea =" & vIdLinea)
         If vDT IsNot Nothing Then
 
         Else

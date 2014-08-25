@@ -2,8 +2,8 @@
 
 Public Class SEGURIDAD_USUARIO_PERMISOS
     Implements IIndividual
-    Dim cadena_conexion As New CapaDatos.conexiones
-    Dim oBD As New CapaDatos.CapaDatos(cadena_conexion.CadenaSicaip)
+    Dim cadena_conexion As New conexiones
+    Dim oBD As New Datos(cadena_conexion.CadenaSicaip)
     Dim oPermisos As SEGURIDAD_PERMISOS
     Public vRetorno_nombreCorto As String
 
@@ -44,8 +44,7 @@ Public Class SEGURIDAD_USUARIO_PERMISOS
     Public ReadOnly Property Nombre_Corto_Permiso() As String
         Get
             If vCVE_PERMISO <> 0 Then
-                oPermisos = New SEGURIDAD_PERMISOS
-                oPermisos.Cve_Permiso = vCVE_PERMISO
+                oPermisos = New SEGURIDAD_PERMISOS() With {.Cve_Permiso = vCVE_PERMISO}
                 oPermisos.Cargar()
                 Return oPermisos.Nombre_Corto
             Else
@@ -59,8 +58,7 @@ Public Class SEGURIDAD_USUARIO_PERMISOS
     Public Property Nombre_Short() As String
         Get
             If vCVE_PERMISO <> 0 Then
-                oPermisos = New SEGURIDAD_PERMISOS
-                oPermisos.Cve_Permiso = vCVE_PERMISO
+                oPermisos = New SEGURIDAD_PERMISOS() With {.Cve_Permiso = vCVE_PERMISO}
                 oPermisos.Cargar()
                 Return oPermisos.Nombre_Corto
             Else
@@ -88,7 +86,7 @@ Public Class SEGURIDAD_USUARIO_PERMISOS
                     Me.vCVE_Usuario_Permisos = rDatos("CVE_Usuario_Permisos")
                 Else
                     Me.vCVE_Usuario_Permisos = 0
-                End If               
+                End If
                 If Not IsDBNull(rDatos("CVE_USUARIO")) Then
                     Me.vCVE_USUARIO = rDatos("CVE_USUARIO")
                 Else
@@ -120,21 +118,14 @@ Public Class SEGURIDAD_USUARIO_PERMISOS
     Public Sub Registrar() Implements IIndividual.Registrar
         Using scope As New TransactionScope()
             Try
-                Dim cmd As New SqlClient.SqlCommand
-                cmd.CommandType = CommandType.StoredProcedure
-                cmd.CommandText = "REGISTRAR_USUARIO_PERMISOS"
-
+                Dim cmd As New SqlClient.SqlCommand() With {.CommandType = CommandType.StoredProcedure, .CommandText = "REGISTRAR_USUARIO_PERMISOS"}
                 With cmd.Parameters
                     .Add("CVE_Usuario_Permisos", SqlDbType.BigInt).Value = Me.vCVE_Usuario_Permisos
                     .Add("CVE_USUARIO", SqlDbType.BigInt).Value = Me.vCVE_USUARIO
                     .Add("CVE_PERMISO", SqlDbType.BigInt).Value = Me.vCVE_PERMISO
                 End With
-
                 Dim obj As DataTable = oBD.EjecutaCommando(cmd)
                 Me.vCVE_USUARIO = obj.Rows(0)(0) 'ID
-                'Me.RegistraDatos("DEPARTAMENTO", "Departamento_Id", Me.m_Departamento_Id)
-                'Dim oBitacora As Bitacora = Bitacora.ObtenInstancia
-                'oBitacora.RegistrarEnBitacora("DEPARTAMENTO.REGISTRAR", "Se registró el departamento: " & Me.m_Nombre)
                 scope.Complete()
             Catch ex As Exception
                 Throw New Exception(ex.Message)

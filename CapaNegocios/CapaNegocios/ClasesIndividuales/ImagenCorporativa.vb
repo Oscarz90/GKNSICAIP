@@ -1,11 +1,10 @@
-﻿Imports CapaDatos
+﻿
 Public Class ImagenCorporativa
     Implements IIndividual
-    Dim cadena_conexion As New CapaDatos.conexiones
-    Dim oBD As New CapaDatos.CapaDatos(cadena_conexion.CadenaSicaip)
+    
 #Region "IIndividual"
     Public Sub Cargar() Implements IIndividual.Cargar
-       
+
     End Sub
 
     Public Sub Eliminar() Implements IIndividual.Eliminar

@@ -1,8 +1,7 @@
-﻿Imports CapaDatos
+﻿
 Public Class Detalle_CDM_Total
     Implements IIndividual
-    Dim cadena_conexion As New CapaDatos.conexiones
-    Dim oBD As New CapaDatos.CapaDatos(cadena_conexion.CadenaSicaip)
+    
 #Region "IIndividual"
     Public Sub Cargar() Implements IIndividual.Cargar
 

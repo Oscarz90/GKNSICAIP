@@ -1,8 +1,8 @@
 ﻿Imports CapaDatos
 Public Class obtiene_gente
     Implements IIndividual
-    Dim cadena_conexion As New CapaDatos.conexiones
-    Dim oBD As New CapaDatos.CapaDatos(cadena_conexion.CadenaSicaip)
+    Dim cadena_conexion As New conexiones
+    Dim oBD As New Datos(cadena_conexion.CadenaSicaip)
 #Region "IIndividual"
     Public Sub Cargar() Implements IIndividual.Cargar
 
@@ -103,19 +103,15 @@ Public Class obtiene_gente
         Dim obj As DataTable
         Using scope As New TransactionScope
             Try
-                Dim vComando As New SqlClient.SqlCommand
-                vComando.CommandType = CommandType.StoredProcedure
-                vComando.CommandText = "obtiene_gente_planta_dia"
+                Dim vComando As New SqlClient.SqlCommand() With {.CommandType = CommandType.StoredProcedure, .CommandText = "obtiene_gente_planta_dia"}
                 vComando.Parameters.Add("@fecha_inicial", SqlDbType.DateTime).Value = Me.vfecha_inicial
                 vComando.Parameters.Add("@fecha_final", SqlDbType.DateTime).Value = Me.vfecha_final
                 vComando.Parameters.Add("@bandera", SqlDbType.Int).Value = Me.vbandera
                 obj = oBD.EjecutaCommando(vComando)
-                'Me.vId = obj.Rows(0)(0)
                 scope.Complete()
             Catch 'ex As Exception
                 MsgBox("Error al obtener gente. CObtiene_gente_ERROR", vbCritical + vbOKOnly, "Error")
                 Return Nothing
-                'Throw New Exception(ex.Message)
             End Try
             Return obj
         End Using
@@ -124,19 +120,15 @@ Public Class obtiene_gente
         Dim obj As DataTable
         Using scope As New TransactionScope
             Try
-                Dim vComando As New SqlClient.SqlCommand
-                vComando.CommandType = CommandType.StoredProcedure
-                vComando.CommandText = "obtiene_gente_planta_mes"
+                Dim vComando As New SqlClient.SqlCommand() With {.CommandType = CommandType.StoredProcedure, .CommandText = "obtiene_gente_planta_mes"}
                 vComando.Parameters.Add("@fecha_inicial", SqlDbType.DateTime).Value = Me.vfecha_inicial
                 vComando.Parameters.Add("@fecha_final", SqlDbType.DateTime).Value = Me.vfecha_final
                 vComando.Parameters.Add("@bandera", SqlDbType.Int).Value = Me.vbandera
                 obj = oBD.EjecutaCommando(vComando)
-                'Me.vId = obj.Rows(0)(0)
                 scope.Complete()
             Catch 'ex As Exception
                 MsgBox("Error al obtener gente. CObtiene_gente_ERROR", vbCritical + vbOKOnly, "Error")
                 Return Nothing
-                'Throw New Exception(ex.Message)
             End Try
             Return obj
         End Using
@@ -146,20 +138,16 @@ Public Class obtiene_gente
         Dim obj As DataTable
         Using scope As New TransactionScope
             Try
-                Dim vComando As New SqlClient.SqlCommand
-                vComando.CommandType = CommandType.StoredProcedure
-                vComando.CommandText = "obtiene_gente_cadena_valor_dia"
+                Dim vComando As New SqlClient.SqlCommand() With {.CommandType = CommandType.StoredProcedure, .CommandText = "obtiene_gente_cadena_valor_dia"}
                 vComando.Parameters.Add("@cve_cadena_valor", SqlDbType.BigInt).Value = Me.vcve_cadena_valor
                 vComando.Parameters.Add("@fecha_inicial", SqlDbType.DateTime).Value = Me.vfecha_inicial
                 vComando.Parameters.Add("@fecha_final", SqlDbType.DateTime).Value = Me.vfecha_final
                 vComando.Parameters.Add("@bandera", SqlDbType.Int).Value = Me.vbandera
                 obj = oBD.EjecutaCommando(vComando)
-                'Me.vId = obj.Rows(0)(0)
                 scope.Complete()
             Catch 'ex As Exception
                 MsgBox("Error al obtener gente. CObtiene_gente_ERROR", vbCritical + vbOKOnly, "Error")
                 Return Nothing
-                'Throw New Exception(ex.Message)
             End Try
             Return obj
         End Using
@@ -168,20 +156,16 @@ Public Class obtiene_gente
         Dim obj As DataTable
         Using scope As New TransactionScope
             Try
-                Dim vComando As New SqlClient.SqlCommand
-                vComando.CommandType = CommandType.StoredProcedure
-                vComando.CommandText = "obtiene_gente_cadena_valor_mes"
+                Dim vComando As New SqlClient.SqlCommand() With {.CommandType = CommandType.StoredProcedure, .CommandText = "obtiene_gente_cadena_valor_mes"}
                 vComando.Parameters.Add("@cve_cadena_valor", SqlDbType.BigInt).Value = Me.vcve_cadena_valor
                 vComando.Parameters.Add("@fecha_inicial", SqlDbType.DateTime).Value = Me.vfecha_inicial
                 vComando.Parameters.Add("@fecha_final", SqlDbType.DateTime).Value = Me.vfecha_final
                 vComando.Parameters.Add("@bandera", SqlDbType.Int).Value = Me.vbandera
                 obj = oBD.EjecutaCommando(vComando)
-                'Me.vId = obj.Rows(0)(0)
                 scope.Complete()
             Catch 'ex As Exception
                 MsgBox("Error al obtener gente. CObtiene_gente_ERROR", vbCritical + vbOKOnly, "Error")
                 Return Nothing
-                'Throw New Exception(ex.Message)
             End Try
             Return obj
         End Using
@@ -191,20 +175,16 @@ Public Class obtiene_gente
         Dim obj As DataTable
         Using scope As New TransactionScope
             Try
-                Dim vComando As New SqlClient.SqlCommand
-                vComando.CommandType = CommandType.StoredProcedure
-                vComando.CommandText = "obtiene_gente_componente_dia"
+                Dim vComando As New SqlClient.SqlCommand() With {.CommandType = CommandType.StoredProcedure, .CommandText = "obtiene_gente_componente_dia"}
                 vComando.Parameters.Add("@cve_componente", SqlDbType.BigInt).Value = Me.vcve_componente
                 vComando.Parameters.Add("@fecha_inicial", SqlDbType.DateTime).Value = Me.vfecha_inicial
                 vComando.Parameters.Add("@fecha_final", SqlDbType.DateTime).Value = Me.vfecha_final
                 vComando.Parameters.Add("@bandera", SqlDbType.Int).Value = Me.vbandera
                 obj = oBD.EjecutaCommando(vComando)
-                'Me.vId = obj.Rows(0)(0)
                 scope.Complete()
             Catch 'ex As Exception
                 MsgBox("Error al obtener gente. CObtiene_gente_ERROR", vbCritical + vbOKOnly, "Error")
                 Return Nothing
-                'Throw New Exception(ex.Message)
             End Try
             Return obj
         End Using
@@ -213,20 +193,16 @@ Public Class obtiene_gente
         Dim obj As DataTable
         Using scope As New TransactionScope
             Try
-                Dim vComando As New SqlClient.SqlCommand
-                vComando.CommandType = CommandType.StoredProcedure
-                vComando.CommandText = "obtiene_gente_componente_mes"
+                Dim vComando As New SqlClient.SqlCommand() With {.CommandType = CommandType.StoredProcedure, .CommandText = "obtiene_gente_componente_mes"}
                 vComando.Parameters.Add("@cve_componente", SqlDbType.BigInt).Value = Me.vcve_componente
                 vComando.Parameters.Add("@fecha_inicial", SqlDbType.DateTime).Value = Me.vfecha_inicial
                 vComando.Parameters.Add("@fecha_final", SqlDbType.DateTime).Value = Me.vfecha_final
                 vComando.Parameters.Add("@bandera", SqlDbType.Int).Value = Me.vbandera
                 obj = oBD.EjecutaCommando(vComando)
-                'Me.vId = obj.Rows(0)(0)
                 scope.Complete()
             Catch 'ex As Exception
                 MsgBox("Error al obtener gente. CObtiene_gente_ERROR", vbCritical + vbOKOnly, "Error")
                 Return Nothing
-                'Throw New Exception(ex.Message)
             End Try
             Return obj
         End Using
@@ -236,20 +212,16 @@ Public Class obtiene_gente
         Dim obj As DataTable
         Using scope As New TransactionScope
             Try
-                Dim vComando As New SqlClient.SqlCommand
-                vComando.CommandType = CommandType.StoredProcedure
-                vComando.CommandText = "obtiene_gente_linea_dia"
+                Dim vComando As New SqlClient.SqlCommand() With {.CommandType = CommandType.StoredProcedure, .CommandText = "obtiene_gente_linea_dia"}
                 vComando.Parameters.Add("@cve_linea", SqlDbType.BigInt).Value = Me.vcve_linea
                 vComando.Parameters.Add("@fecha_inicial", SqlDbType.DateTime).Value = Me.vfecha_inicial
                 vComando.Parameters.Add("@fecha_final", SqlDbType.DateTime).Value = Me.vfecha_final
                 vComando.Parameters.Add("@bandera", SqlDbType.Int).Value = Me.vbandera
                 obj = oBD.EjecutaCommando(vComando)
-                'Me.vId = obj.Rows(0)(0)
                 scope.Complete()
             Catch 'ex As Exception
                 MsgBox("Error al obtener gente. CObtiene_gente_ERROR", vbCritical + vbOKOnly, "Error")
                 Return Nothing
-                'Throw New Exception(ex.Message)
             End Try
             Return obj
         End Using
@@ -258,20 +230,16 @@ Public Class obtiene_gente
         Dim obj As DataTable
         Using scope As New TransactionScope
             Try
-                Dim vComando As New SqlClient.SqlCommand
-                vComando.CommandType = CommandType.StoredProcedure
-                vComando.CommandText = "obtiene_gente_linea_mes"
+                Dim vComando As New SqlClient.SqlCommand() With {.CommandType = CommandType.StoredProcedure, .CommandText = "obtiene_gente_linea_mes"}
                 vComando.Parameters.Add("@cve_linea", SqlDbType.BigInt).Value = Me.vcve_linea
                 vComando.Parameters.Add("@fecha_inicial", SqlDbType.DateTime).Value = Me.vfecha_inicial
                 vComando.Parameters.Add("@fecha_final", SqlDbType.DateTime).Value = Me.vfecha_final
                 vComando.Parameters.Add("@bandera", SqlDbType.Int).Value = Me.vbandera
                 obj = oBD.EjecutaCommando(vComando)
-                'Me.vId = obj.Rows(0)(0)
                 scope.Complete()
             Catch 'ex As Exception
                 MsgBox("Error al obtener gente. CObtiene_gente_ERROR", vbCritical + vbOKOnly, "Error")
                 Return Nothing
-                'Throw New Exception(ex.Message)
             End Try
             Return obj
         End Using
@@ -281,20 +249,16 @@ Public Class obtiene_gente
         Dim obj As DataTable
         Using scope As New TransactionScope
             Try
-                Dim vComando As New SqlClient.SqlCommand
-                vComando.CommandType = CommandType.StoredProcedure
-                vComando.CommandText = "obtiene_gente_equipo_dia"
+                Dim vComando As New SqlClient.SqlCommand() With {.CommandType = CommandType.StoredProcedure, .CommandText = "obtiene_gente_equipo_dia"}
                 vComando.Parameters.Add("@cve_equipo", SqlDbType.BigInt).Value = Me.vcve_equipo
                 vComando.Parameters.Add("@fecha_inicial", SqlDbType.DateTime).Value = Me.vfecha_inicial
                 vComando.Parameters.Add("@fecha_final", SqlDbType.DateTime).Value = Me.vfecha_final
                 vComando.Parameters.Add("@bandera", SqlDbType.Int).Value = Me.vbandera
                 obj = oBD.EjecutaCommando(vComando)
-                'Me.vId = obj.Rows(0)(0)
                 scope.Complete()
             Catch 'ex As Exception
                 MsgBox("Error al obtener gente. CObtiene_gente_ERROR", vbCritical + vbOKOnly, "Error")
                 Return Nothing
-                'Throw New Exception(ex.Message)
             End Try
             Return obj
         End Using
@@ -303,20 +267,16 @@ Public Class obtiene_gente
         Dim obj As DataTable
         Using scope As New TransactionScope
             Try
-                Dim vComando As New SqlClient.SqlCommand
-                vComando.CommandType = CommandType.StoredProcedure
-                vComando.CommandText = "obtiene_gente_equipo_mes"
+                Dim vComando As New SqlClient.SqlCommand() With {.CommandType = CommandType.StoredProcedure, .CommandText = "obtiene_gente_equipo_mes"}
                 vComando.Parameters.Add("@cve_equipo", SqlDbType.BigInt).Value = Me.vcve_equipo
                 vComando.Parameters.Add("@fecha_inicial", SqlDbType.DateTime).Value = Me.vfecha_inicial
                 vComando.Parameters.Add("@fecha_final", SqlDbType.DateTime).Value = Me.vfecha_final
                 vComando.Parameters.Add("@bandera", SqlDbType.Int).Value = Me.vbandera
                 obj = oBD.EjecutaCommando(vComando)
-                'Me.vId = obj.Rows(0)(0)
                 scope.Complete()
             Catch 'ex As Exception
                 MsgBox("Error al obtener gente. CObtiene_gente_ERROR", vbCritical + vbOKOnly, "Error")
                 Return Nothing
-                'Throw New Exception(ex.Message)
             End Try
             Return obj
         End Using
@@ -325,21 +285,17 @@ Public Class obtiene_gente
         Dim obj As DataTable
         Using scope As New TransactionScope
             Try
-                Dim vComando As New SqlClient.SqlCommand
-                vComando.CommandType = CommandType.StoredProcedure
-                vComando.CommandText = "obtiene_gente_equipo_linea_dia"
+                Dim vComando As New SqlClient.SqlCommand() With {.CommandType = CommandType.StoredProcedure, .CommandText = "obtiene_gente_equipo_linea_dia"}
                 vComando.Parameters.Add("@cve_equipo", SqlDbType.BigInt).Value = Me.vcve_equipo
                 vComando.Parameters.Add("@cve_linea", SqlDbType.BigInt).Value = Me.vcve_linea
                 vComando.Parameters.Add("@fecha_inicial", SqlDbType.DateTime).Value = Me.vfecha_inicial
                 vComando.Parameters.Add("@fecha_final", SqlDbType.DateTime).Value = Me.vfecha_final
                 vComando.Parameters.Add("@bandera", SqlDbType.Int).Value = Me.vbandera
                 obj = oBD.EjecutaCommando(vComando)
-                'Me.vId = obj.Rows(0)(0)
                 scope.Complete()
             Catch 'ex As Exception
                 MsgBox("Error al obtener gente. CObtiene_gente_ERROR", vbCritical + vbOKOnly, "Error")
                 Return Nothing
-                'Throw New Exception(ex.Message)
             End Try
             Return obj
         End Using
@@ -348,21 +304,17 @@ Public Class obtiene_gente
         Dim obj As DataTable
         Using scope As New TransactionScope
             Try
-                Dim vComando As New SqlClient.SqlCommand
-                vComando.CommandType = CommandType.StoredProcedure
-                vComando.CommandText = "obtiene_gente_equipo_linea_mes"
+                Dim vComando As New SqlClient.SqlCommand() With {.CommandType = CommandType.StoredProcedure, .CommandText = "obtiene_gente_equipo_linea_mes"}
                 vComando.Parameters.Add("@cve_equipo", SqlDbType.BigInt).Value = Me.vcve_equipo
                 vComando.Parameters.Add("@cve_linea", SqlDbType.BigInt).Value = Me.vcve_linea
                 vComando.Parameters.Add("@fecha_inicial", SqlDbType.DateTime).Value = Me.vfecha_inicial
                 vComando.Parameters.Add("@fecha_final", SqlDbType.DateTime).Value = Me.vfecha_final
                 vComando.Parameters.Add("@bandera", SqlDbType.Int).Value = Me.vbandera
                 obj = oBD.EjecutaCommando(vComando)
-                'Me.vId = obj.Rows(0)(0)
                 scope.Complete()
             Catch 'ex As Exception
                 MsgBox("Error al obtener gente. CObtiene_gente_ERROR", vbCritical + vbOKOnly, "Error")
                 Return Nothing
-                'Throw New Exception(ex.Message)
             End Try
             Return obj
         End Using

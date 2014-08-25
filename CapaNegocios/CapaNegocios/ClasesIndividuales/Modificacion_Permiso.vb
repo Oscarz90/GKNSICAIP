@@ -1,12 +1,11 @@
 ﻿Imports CapaDatos
 Public Class Modificacion_Permiso
     Implements IIndividual
-    Dim cadena_conexion As New CapaDatos.conexiones
-    Dim oBD As New CapaDatos.CapaDatos(cadena_conexion.CadenaSicaip)
+    Dim cadena_conexion As New conexiones
+    Dim oBD As New Datos(cadena_conexion.CadenaSicaip)
 #Region "IIndividual"
     Public Sub Cargar() Implements IIndividual.Cargar
-        Dim vDR As DataRow
-        vDR = oBD.ObtenerRenglon("select * from modificacion_permiso mp where mp.cve_modificacion_permiso=" & vcve_modificacion_permiso, "modificacion_permiso")
+        Dim vDR As DataRow = oBD.ObtenerRenglon("select * from modificacion_permiso mp where mp.cve_modificacion_permiso=" & vcve_modificacion_permiso, "modificacion_permiso")
         If vDR IsNot Nothing Then
             vcve_modificacion_permiso = vDR("cve_modificacion_permiso")
             vcve_usuario = vDR("cve_usuario")
@@ -17,8 +16,7 @@ Public Class Modificacion_Permiso
     End Sub
 
     Public Sub Eliminar() Implements IIndividual.Eliminar
-        Dim queryInsert As String = "delete modificacion_permiso" &
-            " where cve_modificacion_permiso=" & vcve_modificacion_permiso
+        Dim queryInsert As String = String.Format("delete modificacion_permiso where cve_modificacion_permiso={0}", vcve_modificacion_permiso)
         Try
             oBD.EjecutarQuery(queryInsert)
             MsgBox("Se eliminó correctamente", vbInformation + vbOKOnly, "Permiso Modificación de Captura")
@@ -26,7 +24,7 @@ Public Class Modificacion_Permiso
             MsgBox("Problema al eliminar Modificacion Permiso. CModificacion_Permiso_ERROR", vbExclamation + vbOKOnly, "Problema")
         End Try
     End Sub
-    Dim vId As Long
+    'Dim vId As Long
     Public Property Id As Long Implements IIndividual.Id
         Get
             Return vcve_modificacion_permiso
@@ -41,8 +39,7 @@ Public Class Modificacion_Permiso
     End Function
 
     Public Sub Registrar() Implements IIndividual.Registrar
-        Dim queryInsert As String = "insert into modificacion_permiso " &
-            "values (" & vcve_usuario & ",'" & vdia_modificacion.ToString("MM-dd-yyyy") & "','" & vfecha_inicio.ToString("MM-dd-yyyy HH:mm") & "','" & vfecha_final.ToString("MM-dd-yyyy HH:mm") & "')"
+        Dim queryInsert As String = String.Format("insert into modificacion_permiso values ({0},'{1:MM-dd-yyyy}','{2:MM-dd-yyyy HH:mm}','{3:MM-dd-yyyy HH:mm}')", vcve_usuario, vdia_modificacion, vfecha_inicio, vfecha_final)
         Try
             oBD.EjecutarQuery(queryInsert)
             MsgBox("Se registro correctamente", vbInformation + vbOKOnly, "Permiso Modificación de Captura")
@@ -150,9 +147,7 @@ Public Class Modificacion_Permiso
         Dim vResponse As String
         Using scope As New TransactionScope
             Try
-                Dim cmd As New SqlClient.SqlCommand
-                cmd.CommandType = CommandType.StoredProcedure
-                cmd.CommandText = "valida_registro_modificacion_permiso"
+                Dim cmd As New SqlClient.SqlCommand() With {.CommandType = CommandType.StoredProcedure, .CommandText = "valida_registro_modificacion_permiso"}
                 cmd.Parameters.Add("@cve_modificacion_permiso", SqlDbType.BigInt).Value = Me.vcve_modificacion_permiso
                 cmd.Parameters.Add("@cve_usuario", SqlDbType.BigInt).Value = Me.vcve_usuario
                 cmd.Parameters.Add("@fecha_modificacion", SqlDbType.DateTime).Value = Me.vdia_modificacion
@@ -161,8 +156,6 @@ Public Class Modificacion_Permiso
                 cmd.Parameters.Add("@operacion", SqlDbType.VarChar).Value = Me.voperacion
                 Dim obj As DataTable = oBD.EjecutaCommando(cmd)
                 vResponse = obj.Rows(0)(0)
-                'Me.vcve_registro_turno = obj.Rows(0)(1)
-                'Me.vcve_turno = obj.Rows(0)(2)
                 scope.Complete()
                 If vResponse = "OK" Then
                     Return True
@@ -179,9 +172,7 @@ Public Class Modificacion_Permiso
         Dim vResponse As String
         Using scope As New TransactionScope
             Try
-                Dim cmd As New SqlClient.SqlCommand
-                cmd.CommandType = CommandType.StoredProcedure
-                cmd.CommandText = "valida_dia_modificacion_permiso"
+                Dim cmd As New SqlClient.SqlCommand() With {.CommandType = CommandType.StoredProcedure, .CommandText = "valida_dia_modificacion_permiso"}
                 cmd.Parameters.Add("@usuario", SqlDbType.VarChar).Value = Me.vusuario
                 cmd.Parameters.Add("@fecha_actual", SqlDbType.DateTime).Value = Now
                 If vbandera = 2 Then

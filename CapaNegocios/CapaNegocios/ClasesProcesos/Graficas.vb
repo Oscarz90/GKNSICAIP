@@ -1,8 +1,8 @@
 ﻿Imports CapaDatos
 Public Class Graficas
-    Dim cadena_conexion As New CapaDatos.conexiones
-    Dim oBD As New CapaDatos.CapaDatos(cadena_conexion.CadenaSicaip)
-    Dim oBD_Kronos As New CapaDatos.CapaDatos(cadena_conexion.CadenaKronos)
+    Dim cadena_conexion As New conexiones
+    Dim oBD As New Datos(cadena_conexion.CadenaSicaip)
+    Dim oBD_Kronos As New Datos(cadena_conexion.CadenaKronos)
 
 #Region "Atributos"
     Private vIdEquipo As Long
@@ -45,7 +45,7 @@ Public Class Graficas
     ''' <param name="IdEquipo">idEquipo</param>
     ''' <remarks></remarks>
     Public Sub Obtener_IdEquipo(ByVal IdEquipo As Integer)
-        'vIdEquipo = IdEquipo
+
     End Sub
 
     ''' <summary>
@@ -167,7 +167,7 @@ Public Class Graficas
         Dim vRetorno As DataTable = Nothing
         Dim vDT As DataTable = Nothing
         Try
-            vDT = oBD.ObtenerTabla("" & cadena & " " & cadenaWHERE)
+            vDT = oBD.ObtenerTabla(String.Format("{0} {1}", cadena, cadenaWHERE))
             If vDT IsNot Nothing Then
                 vRetorno = vDT
             Else
@@ -187,10 +187,7 @@ Public Class Graficas
         Dim obj As DataTable
         Using scope As New TransactionScope
             Try
-                Dim cmd As New SqlClient.SqlCommand
-                cmd.CommandType = CommandType.StoredProcedure
-                'cmd.CommandText = "obtiene_oee" --procedimiento anterior
-                cmd.CommandText = "obtiene_oee_dia"
+                Dim cmd As New SqlClient.SqlCommand() With {.CommandType = CommandType.StoredProcedure, .CommandText = "obtiene_oee_dia"}
                 cmd.Parameters.Add("@cve_equipo", SqlDbType.BigInt).Value = videquipo
                 cmd.Parameters.Add("@fecha_inicial", SqlDbType.DateTime).Value = vfechainicio
                 cmd.Parameters.Add("@fecha_final", SqlDbType.DateTime).Value = vfechafinal
@@ -209,10 +206,7 @@ Public Class Graficas
         Dim obj As DataTable
         Using scope As New TransactionScope
             Try
-                Dim cmd As New SqlClient.SqlCommand
-                cmd.CommandType = CommandType.StoredProcedure
-                'cmd.CommandText = "obtiene_oee" 
-                cmd.CommandText = "obtiene_oee_dia_linea"
+                Dim cmd As New SqlClient.SqlCommand() With {.CommandType = CommandType.StoredProcedure, .CommandText = "obtiene_oee_dia_linea"}
                 cmd.Parameters.Add("@cve_equipo", SqlDbType.BigInt).Value = videquipo
                 cmd.Parameters.Add("@cve_linea", SqlDbType.BigInt).Value = vidlinea
                 cmd.Parameters.Add("@fecha_inicial", SqlDbType.DateTime).Value = vfechainicio
@@ -232,10 +226,7 @@ Public Class Graficas
         Dim obj As DataTable
         Using scope As New TransactionScope
             Try
-                Dim cmd As New SqlClient.SqlCommand
-                cmd.CommandType = CommandType.StoredProcedure
-                'cmd.CommandText = "obtiene_oee_por_linea" procedimiento anterior
-                cmd.CommandText = "obtiene_oee_mes"
+                Dim cmd As New SqlClient.SqlCommand() With {.CommandType = CommandType.StoredProcedure, .CommandText = "obtiene_oee_mes"}
                 cmd.Parameters.Add("@cve_equipo", SqlDbType.BigInt).Value = videquipo
                 cmd.Parameters.Add("@fecha_inicial", SqlDbType.DateTime).Value = vfechainicio
                 cmd.Parameters.Add("@fecha_final", SqlDbType.DateTime).Value = vfechafinal
@@ -254,10 +245,7 @@ Public Class Graficas
         Dim obj As DataTable
         Using scope As New TransactionScope
             Try
-                Dim cmd As New SqlClient.SqlCommand
-                cmd.CommandType = CommandType.StoredProcedure
-                'cmd.CommandText = "obtiene_oee_por_linea" 'obtiene_oee_mes_linea
-                cmd.CommandText = "obtiene_oee_mes_linea"
+                Dim cmd As New SqlClient.SqlCommand() With {.CommandType = CommandType.StoredProcedure, .CommandText = "obtiene_oee_mes_linea"}
                 cmd.Parameters.Add("@cve_equipo", SqlDbType.BigInt).Value = videquipo
                 cmd.Parameters.Add("@cve_linea", SqlDbType.BigInt).Value = vidlinea
                 cmd.Parameters.Add("@fecha_inicial", SqlDbType.DateTime).Value = vfechainicio
@@ -271,7 +259,7 @@ Public Class Graficas
             Return obj
         End Using
     End Function
-    
+
 #End Region
 
 #Region "OBTENER NRFTI"
@@ -279,9 +267,7 @@ Public Class Graficas
         Dim obj As DataTable
         Using scope As New TransactionScope
             Try
-                Dim cmd As New SqlClient.SqlCommand
-                cmd.CommandType = CommandType.StoredProcedure
-                cmd.CommandText = "obtiene_nrft_interno"
+                Dim cmd As New SqlClient.SqlCommand() With {.CommandType = CommandType.StoredProcedure, .CommandText = "obtiene_nrft_interno"}
                 cmd.Parameters.Add("@cve_equipo", SqlDbType.BigInt).Value = videquipo
                 cmd.Parameters.Add("@fecha_inicial", SqlDbType.DateTime).Value = vfechainicio
                 cmd.Parameters.Add("@fecha_final", SqlDbType.DateTime).Value = vfechafinal
@@ -298,9 +284,7 @@ Public Class Graficas
         Dim obj As DataTable
         Using scope As New TransactionScope
             Try
-                Dim cmd As New SqlClient.SqlCommand
-                cmd.CommandType = CommandType.StoredProcedure
-                cmd.CommandText = "obtiene_nrft_interno_por_linea"
+                Dim cmd As New SqlClient.SqlCommand() With {.CommandType = CommandType.StoredProcedure, .CommandText = "obtiene_nrft_interno_por_linea"}
                 cmd.Parameters.Add("@cve_equipo", SqlDbType.BigInt).Value = videquipo
                 cmd.Parameters.Add("@cve_linea", SqlDbType.BigInt).Value = vidlinea
                 cmd.Parameters.Add("@fecha_inicial", SqlDbType.DateTime).Value = vfechainicio
@@ -409,9 +393,7 @@ Public Class Graficas
         Dim obj As DataTable
         Using scope As New TransactionScope
             Try
-                Dim cmd As New SqlClient.SqlCommand
-                cmd.CommandType = CommandType.StoredProcedure
-                cmd.CommandText = "obtiene_seguridad"  ''-----------------
+                Dim cmd As New SqlClient.SqlCommand() With {.CommandType = CommandType.StoredProcedure, .CommandText = "obtiene_seguridad"} ''-----------------}
                 cmd.Parameters.Add("@cve_equipo", SqlDbType.BigInt).Value = videquipo
                 cmd.Parameters.Add("@fecha_inicial", SqlDbType.DateTime).Value = vfechainicio
                 cmd.Parameters.Add("@fecha_final", SqlDbType.DateTime).Value = vfechafinal
@@ -428,9 +410,7 @@ Public Class Graficas
         Dim obj As DataTable
         Using scope As New TransactionScope
             Try
-                Dim cmd As New SqlClient.SqlCommand
-                cmd.CommandType = CommandType.StoredProcedure
-                cmd.CommandText = "obtiene_seguridad_por_linea"
+                Dim cmd As New SqlClient.SqlCommand() With {.CommandType = CommandType.StoredProcedure, .CommandText = "obtiene_seguridad_por_linea"}
                 cmd.Parameters.Add("@cve_equipo", SqlDbType.BigInt).Value = videquipo
                 cmd.Parameters.Add("@cve_linea", SqlDbType.BigInt).Value = vidlinea
                 cmd.Parameters.Add("@fecha_inicial", SqlDbType.DateTime).Value = vfechainicio
@@ -448,9 +428,7 @@ Public Class Graficas
         Dim obj As DataTable
         Using scope As New TransactionScope
             Try
-                Dim cmd As New SqlClient.SqlCommand
-                cmd.CommandType = CommandType.StoredProcedure
-                cmd.CommandText = "obtiene_seguridad_por_mes"
+                Dim cmd As New SqlClient.SqlCommand() With {.CommandType = CommandType.StoredProcedure, .CommandText = "obtiene_seguridad_por_mes"}
                 cmd.Parameters.Add("@cve_equipo", SqlDbType.BigInt).Value = videquipo
                 cmd.Parameters.Add("@fecha_inicial", SqlDbType.DateTime).Value = vfechainicio
                 cmd.Parameters.Add("@fecha_final", SqlDbType.DateTime).Value = vfechafinal
@@ -467,9 +445,7 @@ Public Class Graficas
         Dim obj As DataTable
         Using scope As New TransactionScope
             Try
-                Dim cmd As New SqlClient.SqlCommand
-                cmd.CommandType = CommandType.StoredProcedure
-                cmd.CommandText = "obtiene_seguridad_por_mes_por_linea"
+                Dim cmd As New SqlClient.SqlCommand() With {.CommandType = CommandType.StoredProcedure, .CommandText = "obtiene_seguridad_por_mes_por_linea"}
                 cmd.Parameters.Add("@cve_equipo", SqlDbType.BigInt).Value = videquipo
                 cmd.Parameters.Add("@cve_linea", SqlDbType.BigInt).Value = Vidlinea
                 cmd.Parameters.Add("@fecha_inicial", SqlDbType.DateTime).Value = vfechainicio
@@ -489,9 +465,7 @@ Public Class Graficas
         Dim obj As DataTable
         Using scope As New TransactionScope
             Try
-                Dim cmd As New SqlClient.SqlCommand
-                cmd.CommandType = CommandType.StoredProcedure
-                cmd.CommandText = "obtiene_gente"
+                Dim cmd As New SqlClient.SqlCommand() With {.CommandType = CommandType.StoredProcedure, .CommandText = "obtiene_gente"}
                 cmd.Parameters.Add("@cve_equipo", SqlDbType.BigInt).Value = videquipo
                 cmd.Parameters.Add("@fecha_inicial", SqlDbType.DateTime).Value = vfechainicio
                 cmd.Parameters.Add("@fecha_final", SqlDbType.DateTime).Value = vfechafinal
@@ -508,9 +482,7 @@ Public Class Graficas
         Dim obj As DataTable
         Using scope As New TransactionScope
             Try
-                Dim cmd As New SqlClient.SqlCommand
-                cmd.CommandType = CommandType.StoredProcedure
-                cmd.CommandText = "obtiene_gente_por_linea"
+                Dim cmd As New SqlClient.SqlCommand() With {.CommandType = CommandType.StoredProcedure, .CommandText = "obtiene_gente_por_linea"}
                 cmd.Parameters.Add("@cve_equipo", SqlDbType.BigInt).Value = videquipo
                 cmd.Parameters.Add("@cve_linea", SqlDbType.BigInt).Value = vidlinea
                 cmd.Parameters.Add("@fecha_inicial", SqlDbType.DateTime).Value = vfechainicio
@@ -528,9 +500,7 @@ Public Class Graficas
         Dim obj As DataTable
         Using scope As New TransactionScope
             Try
-                Dim cmd As New SqlClient.SqlCommand
-                cmd.CommandType = CommandType.StoredProcedure
-                cmd.CommandText = "obtiene_gente_por_mes"
+                Dim cmd As New SqlClient.SqlCommand() With {.CommandType = CommandType.StoredProcedure, .CommandText = "obtiene_gente_por_mes"}
                 cmd.Parameters.Add("@cve_equipo", SqlDbType.BigInt).Value = videquipo
                 cmd.Parameters.Add("@fecha_inicial", SqlDbType.DateTime).Value = vfechainicio
                 cmd.Parameters.Add("@fecha_final", SqlDbType.DateTime).Value = vfechafinal
@@ -547,9 +517,7 @@ Public Class Graficas
         Dim obj As DataTable
         Using scope As New TransactionScope
             Try
-                Dim cmd As New SqlClient.SqlCommand
-                cmd.CommandType = CommandType.StoredProcedure
-                cmd.CommandText = "obtiene_gente_por_mes_por_linea"
+                Dim cmd As New SqlClient.SqlCommand() With {.CommandType = CommandType.StoredProcedure, .CommandText = "obtiene_gente_por_mes_por_linea"}
                 cmd.Parameters.Add("@cve_equipo", SqlDbType.BigInt).Value = videquipo
                 cmd.Parameters.Add("@cve_linea", SqlDbType.BigInt).Value = vidlinea
                 cmd.Parameters.Add("@fecha_inicial", SqlDbType.DateTime).Value = vfechainicio
