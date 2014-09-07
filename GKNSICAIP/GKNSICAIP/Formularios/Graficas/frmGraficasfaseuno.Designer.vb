@@ -54,14 +54,14 @@ Partial Class FrmGraficasfaseuno
         Me.btnGraficar = New Telerik.WinControls.UI.RadButton()
         Me.picboxIndicador = New System.Windows.Forms.PictureBox()
         Me.RadPageView1 = New Telerik.WinControls.UI.RadPageView()
+        Me.RadPageViewPage2 = New Telerik.WinControls.UI.RadPageViewPage()
+        Me.PageGrafica_Secundaria = New Telerik.WinControls.UI.RadPageViewPage()
+        Me.CharSecundario = New Telerik.WinControls.UI.RadChartView()
         Me.RadPageViewPage1 = New Telerik.WinControls.UI.RadPageViewPage()
         Me.btnExportar = New Telerik.WinControls.UI.RadButton()
         Me.btnDetalle = New Telerik.WinControls.UI.RadButton()
         Me.btnResumen = New Telerik.WinControls.UI.RadButton()
         Me.dgvTabla = New Telerik.WinControls.UI.RadGridView()
-        Me.RadPageViewPage2 = New Telerik.WinControls.UI.RadPageViewPage()
-        Me.PageGrafica_Secundaria = New Telerik.WinControls.UI.RadPageViewPage()
-        Me.CharSecundario = New Telerik.WinControls.UI.RadChartView()
         Me.RadPanel1 = New Telerik.WinControls.UI.RadPanel()
         Me.sfdExportaExcel = New System.Windows.Forms.SaveFileDialog()
         CType(Me.RadGroupBox1, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -94,15 +94,15 @@ Partial Class FrmGraficasfaseuno
         CType(Me.picboxIndicador, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.RadPageView1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.RadPageView1.SuspendLayout()
+        Me.RadPageViewPage2.SuspendLayout()
+        Me.PageGrafica_Secundaria.SuspendLayout()
+        CType(Me.CharSecundario, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.RadPageViewPage1.SuspendLayout()
         CType(Me.btnExportar, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.btnDetalle, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.btnResumen, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.dgvTabla, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.dgvTabla.MasterTemplate, System.ComponentModel.ISupportInitialize).BeginInit()
-        Me.RadPageViewPage2.SuspendLayout()
-        Me.PageGrafica_Secundaria.SuspendLayout()
-        CType(Me.CharSecundario, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.RadPanel1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.RadPanel1.SuspendLayout()
         CType(Me, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -428,11 +428,44 @@ Partial Class FrmGraficasfaseuno
         Me.RadPageView1.ForeColor = System.Drawing.Color.Black
         Me.RadPageView1.Location = New System.Drawing.Point(3, 3)
         Me.RadPageView1.Name = "RadPageView1"
-        Me.RadPageView1.SelectedPage = Me.RadPageViewPage2
+        Me.RadPageView1.SelectedPage = Me.PageGrafica_Secundaria
         Me.RadPageView1.Size = New System.Drawing.Size(1355, 667)
         Me.RadPageView1.TabIndex = 11
         Me.RadPageView1.Text = "Tablas"
         CType(Me.RadPageView1.GetChildAt(0), Telerik.WinControls.UI.RadPageViewStripElement).StripButtons = Telerik.WinControls.UI.StripViewButtons.None
+        '
+        'RadPageViewPage2
+        '
+        Me.RadPageViewPage2.AutoScroll = True
+        Me.RadPageViewPage2.BackColor = System.Drawing.Color.White
+        Me.RadPageViewPage2.Controls.Add(Me.radChartView1)
+        Me.RadPageViewPage2.Location = New System.Drawing.Point(10, 41)
+        Me.RadPageViewPage2.Name = "RadPageViewPage2"
+        Me.RadPageViewPage2.Size = New System.Drawing.Size(1334, 615)
+        Me.RadPageViewPage2.Text = "Graficas"
+        '
+        'PageGrafica_Secundaria
+        '
+        Me.PageGrafica_Secundaria.BackColor = System.Drawing.Color.White
+        Me.PageGrafica_Secundaria.CausesValidation = False
+        Me.PageGrafica_Secundaria.Controls.Add(Me.CharSecundario)
+        Me.PageGrafica_Secundaria.Location = New System.Drawing.Point(10, 41)
+        Me.PageGrafica_Secundaria.Name = "PageGrafica_Secundaria"
+        Me.PageGrafica_Secundaria.Size = New System.Drawing.Size(1334, 615)
+        Me.PageGrafica_Secundaria.Text = " Grafica Secundaria"
+        '
+        'CharSecundario
+        '
+        Me.CharSecundario.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.CharSecundario.AreaDesign = CartesianArea2
+        Me.CharSecundario.Location = New System.Drawing.Point(3, 3)
+        Me.CharSecundario.Name = "CharSecundario"
+        Me.CharSecundario.ShowGrid = False
+        Me.CharSecundario.Size = New System.Drawing.Size(1331, 609)
+        Me.CharSecundario.TabIndex = 0
+        Me.CharSecundario.Text = "RadChartView2"
         '
         'RadPageViewPage1
         '
@@ -482,7 +515,7 @@ Partial Class FrmGraficasfaseuno
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.dgvTabla.Location = New System.Drawing.Point(3, 33)
         '
-        'dgvTabla
+        '
         '
         Me.dgvTabla.MasterTemplate.AllowAddNewRow = False
         Me.dgvTabla.Name = "dgvTabla"
@@ -490,36 +523,6 @@ Partial Class FrmGraficasfaseuno
         Me.dgvTabla.Size = New System.Drawing.Size(1328, 579)
         Me.dgvTabla.TabIndex = 0
         Me.dgvTabla.Text = "RadGridView1"
-        '
-        'RadPageViewPage2
-        '
-        Me.RadPageViewPage2.AutoScroll = True
-        Me.RadPageViewPage2.BackColor = System.Drawing.Color.White
-        Me.RadPageViewPage2.Controls.Add(Me.radChartView1)
-        Me.RadPageViewPage2.Location = New System.Drawing.Point(10, 41)
-        Me.RadPageViewPage2.Name = "RadPageViewPage2"
-        Me.RadPageViewPage2.Size = New System.Drawing.Size(1334, 615)
-        Me.RadPageViewPage2.Text = "Graficas"
-        '
-        'PageGrafica_Secundaria
-        '
-        Me.PageGrafica_Secundaria.BackColor = System.Drawing.Color.White
-        Me.PageGrafica_Secundaria.CausesValidation = False
-        Me.PageGrafica_Secundaria.Controls.Add(Me.CharSecundario)
-        Me.PageGrafica_Secundaria.Location = New System.Drawing.Point(10, 41)
-        Me.PageGrafica_Secundaria.Name = "PageGrafica_Secundaria"
-        Me.PageGrafica_Secundaria.Size = New System.Drawing.Size(1334, 615)
-        Me.PageGrafica_Secundaria.Text = " Grafica Secundaria"
-        '
-        'CharSecundario
-        '
-        Me.CharSecundario.AreaDesign = CartesianArea2
-        Me.CharSecundario.Location = New System.Drawing.Point(3, 3)
-        Me.CharSecundario.Name = "CharSecundario"
-        Me.CharSecundario.ShowGrid = False
-        Me.CharSecundario.Size = New System.Drawing.Size(1331, 609)
-        Me.CharSecundario.TabIndex = 0
-        Me.CharSecundario.Text = "RadChartView2"
         '
         'RadPanel1
         '
@@ -588,15 +591,15 @@ Partial Class FrmGraficasfaseuno
         CType(Me.RadPageView1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.RadPageView1.ResumeLayout(False)
         Me.RadPageView1.PerformLayout()
+        Me.RadPageViewPage2.ResumeLayout(False)
+        Me.PageGrafica_Secundaria.ResumeLayout(False)
+        CType(Me.CharSecundario, System.ComponentModel.ISupportInitialize).EndInit()
         Me.RadPageViewPage1.ResumeLayout(False)
         CType(Me.btnExportar, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.btnDetalle, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.btnResumen, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.dgvTabla.MasterTemplate, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.dgvTabla, System.ComponentModel.ISupportInitialize).EndInit()
-        Me.RadPageViewPage2.ResumeLayout(False)
-        Me.PageGrafica_Secundaria.ResumeLayout(False)
-        CType(Me.CharSecundario, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.RadPanel1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.RadPanel1.ResumeLayout(False)
         CType(Me, System.ComponentModel.ISupportInitialize).EndInit()

@@ -1605,10 +1605,16 @@ Public Class FrmGraficasfaseuno
         Me.dgvTabla.Columns("objetivo").Width = 80
         Me.dgvTabla.Columns("objetivo").Name = "objetivo"
 
-        Me.dgvTabla.Columns("comentarios").HeaderText = "COMENTARIOS"
-        Me.dgvTabla.Columns("comentarios").IsVisible = True
-        Me.dgvTabla.Columns("comentarios").Width = 300
-        Me.dgvTabla.Columns("comentarios").Name = "comentarios"
+        Me.dgvTabla.Columns("comentarios_faltas").HeaderText = "COMENTARIOS FALTAS"
+        Me.dgvTabla.Columns("comentarios_faltas").IsVisible = True
+        Me.dgvTabla.Columns("comentarios_faltas").Width = 300
+        Me.dgvTabla.Columns("comentarios_faltas").Name = "comentarios_faltas"
+
+        Me.dgvTabla.Columns("comentarios_retardos").HeaderText = "COMENTARIOS RETARDOS"
+        Me.dgvTabla.Columns("comentarios_retardos").IsVisible = True
+        Me.dgvTabla.Columns("comentarios_retardos").Width = 300
+        Me.dgvTabla.Columns("comentarios_retardos").Name = "comentarios_retardos"
+
     End Sub
 
 #End Region
@@ -2011,7 +2017,7 @@ Public Class FrmGraficasfaseuno
         If vNivel <> 5 Then
             radChartView1.Series.Add(LineSeries3)
         End If
-        BarSeries1.CombineMode = ChartSeriesCombineMode.Stack
+        'BarSeries1.CombineMode = ChartSeriesCombineMode.Stack
         If vNivel <> 5 Then
             LineSeries3.CombineMode = ChartSeriesCombineMode.None
         End If
