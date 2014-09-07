@@ -1334,9 +1334,9 @@ Public Class FrmGraficasfaseuno
         Me.dgvTabla.Columns("objetivo").Width = 80
         Me.dgvTabla.Columns("objetivo").Name = "objetivo"
 
-        Me.dgvTabla.Columns("comentarios").HeaderText = "COMENTARIOS"
-        Me.dgvTabla.Columns("comentarios").Width = 300
-        Me.dgvTabla.Columns("comentarios").Name = "comentarios"
+        'Me.dgvTabla.Columns("comentarios").HeaderText = "COMENTARIOS"
+        'Me.dgvTabla.Columns("comentarios").Width = 300
+        'Me.dgvTabla.Columns("comentarios").Name = "comentarios"
 
 
 
@@ -1351,7 +1351,7 @@ Public Class FrmGraficasfaseuno
         Me.dgvTabla.Columns("cinco_S").IsVisible = True
         Me.dgvTabla.Columns("promedio").IsVisible = True
         Me.dgvTabla.Columns("objetivo").IsVisible = True
-        Me.dgvTabla.Columns("comentarios").IsVisible = True
+        'Me.dgvTabla.Columns("comentarios").IsVisible = True
     End Sub
 #End Region
 
@@ -1772,9 +1772,9 @@ Public Class FrmGraficasfaseuno
         Me.dgvTabla.Columns("planta").Width = 150
         Me.dgvTabla.Columns("planta").Name = "planta"
 
-        Me.dgvTabla.Columns("cadena").HeaderText = "CADENA VALOR"
-        Me.dgvTabla.Columns("cadena").Width = 150
-        Me.dgvTabla.Columns("cadena").Name = "cadena"
+        Me.dgvTabla.Columns("cadena_valor").HeaderText = "CADENA VALOR"
+        Me.dgvTabla.Columns("cadena_valor").Width = 150
+        Me.dgvTabla.Columns("cadena_valor").Name = "cadena_valor"
 
         Me.dgvTabla.Columns("componente").HeaderText = "COMPONENTE"
         Me.dgvTabla.Columns("componente").Width = 150
@@ -1809,14 +1809,17 @@ Public Class FrmGraficasfaseuno
         Me.dgvTabla.Columns("objetivo").Width = 80
         Me.dgvTabla.Columns("objetivo").Name = "objetivo"
 
-        'Me.dgvTabla.Columns("comentarios").HeaderText = "COMENTARIOS"
-        'Me.dgvTabla.Columns("comentarios").Width = 300
-        'Me.dgvTabla.Columns("comentarios").Name = "comentarios"
+        Me.dgvTabla.Columns("comentarios_nuevas").HeaderText = "COMENTARIOS NUEVAS"
+        Me.dgvTabla.Columns("comentarios_nuevas").Width = 300
+        Me.dgvTabla.Columns("comentarios_nuevas").Name = "comentarios_nuevas"
 
+        Me.dgvTabla.Columns("comentarios_resueltas").HeaderText = "COMENTARIOS RESUELTAS"
+        Me.dgvTabla.Columns("comentarios_resueltas").Width = 300
+        Me.dgvTabla.Columns("comentarios_resueltas").Name = "comentarios_resueltas"
 
         If vEsResumen = True Then
             Me.dgvTabla.Columns("planta").IsVisible = True
-            Me.dgvTabla.Columns("cadena").IsVisible = True
+            Me.dgvTabla.Columns("cadena_valor").IsVisible = True
             Me.dgvTabla.Columns("componente").IsVisible = True
             Me.dgvTabla.Columns("equipo").IsVisible = True
             Me.dgvTabla.Columns("linea").IsVisible = True
@@ -1825,10 +1828,11 @@ Public Class FrmGraficasfaseuno
             Me.dgvTabla.Columns("resueltas").IsVisible = True
             Me.dgvTabla.Columns("acumulado").IsVisible = True
             Me.dgvTabla.Columns("objetivo").IsVisible = True
-            'Me.dgvTabla.Columns("comentarios").IsVisible = False
+            Me.dgvTabla.Columns("comentarios_nuevas").IsVisible = False
+            Me.dgvTabla.Columns("comentarios_resueltas").IsVisible = False
         Else
             Me.dgvTabla.Columns("planta").IsVisible = True
-            Me.dgvTabla.Columns("cadena").IsVisible = True
+            Me.dgvTabla.Columns("cadena_valor").IsVisible = True
             Me.dgvTabla.Columns("componente").IsVisible = True
             Me.dgvTabla.Columns("equipo").IsVisible = True
             Me.dgvTabla.Columns("linea").IsVisible = True
@@ -1837,7 +1841,8 @@ Public Class FrmGraficasfaseuno
             Me.dgvTabla.Columns("resueltas").IsVisible = True
             Me.dgvTabla.Columns("acumulado").IsVisible = True
             Me.dgvTabla.Columns("objetivo").IsVisible = True
-            'Me.dgvTabla.Columns("comentarios").IsVisible = True
+            Me.dgvTabla.Columns("comentarios_nuevas").IsVisible = True
+            Me.dgvTabla.Columns("comentarios_resueltas").IsVisible = True
         End If
 
     End Sub
