@@ -422,13 +422,14 @@ Partial Class FrmGraficasfaseuno
         Me.RadPageView1.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
             Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.RadPageView1.AutoScroll = True
         Me.RadPageView1.Controls.Add(Me.RadPageViewPage2)
         Me.RadPageView1.Controls.Add(Me.PageGrafica_Secundaria)
         Me.RadPageView1.Controls.Add(Me.RadPageViewPage1)
         Me.RadPageView1.ForeColor = System.Drawing.Color.Black
         Me.RadPageView1.Location = New System.Drawing.Point(3, 3)
         Me.RadPageView1.Name = "RadPageView1"
-        Me.RadPageView1.SelectedPage = Me.RadPageViewPage1
+        Me.RadPageView1.SelectedPage = Me.RadPageViewPage2
         Me.RadPageView1.Size = New System.Drawing.Size(1355, 667)
         Me.RadPageView1.TabIndex = 11
         Me.RadPageView1.Text = "Tablas"
@@ -469,6 +470,7 @@ Partial Class FrmGraficasfaseuno
         '
         'RadPageViewPage1
         '
+        Me.RadPageViewPage1.AutoScroll = True
         Me.RadPageViewPage1.AutoSize = True
         Me.RadPageViewPage1.BackColor = System.Drawing.Color.White
         Me.RadPageViewPage1.CausesValidation = False
@@ -531,6 +533,7 @@ Partial Class FrmGraficasfaseuno
         Me.RadPanel1.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
             Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.RadPanel1.AutoScroll = True
         Me.RadPanel1.Controls.Add(Me.RadPageView1)
         Me.RadPanel1.Location = New System.Drawing.Point(3, 186)
         Me.RadPanel1.Name = "RadPanel1"

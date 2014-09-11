@@ -1669,9 +1669,10 @@ Public Class FrmGraficasfaseuno
 
 
         'Creacion series
-        Dim BarSeries1 As New BarSeries() With {.LegendTitle = "acumulado"}
+
         Dim BarSeries2 As New BarSeries() With {.LegendTitle = "nuevas"}
         Dim BarSeries3 As New BarSeries() With {.LegendTitle = "resueltas"}
+        Dim BarSeries1 As New BarSeries() With {.LegendTitle = "acumulado"}
         Dim LineSeries1 As New LineSeries()
         If vNivel <> 5 Then
             LineSeries1.LegendTitle = "Objetivo Seguridad"
@@ -1700,15 +1701,16 @@ Public Class FrmGraficasfaseuno
 
         End If
 
-        BarSeries1.ValueMember = "acumulado"
-        BarSeries1.CategoryMember = "dia_asignado"
-        BarSeries1.DataSource = vDT
+       
         BarSeries2.ValueMember = "nuevas"
         BarSeries2.CategoryMember = "dia_asignado"
         BarSeries2.DataSource = vDT
         BarSeries3.ValueMember = "resueltas"
         BarSeries3.CategoryMember = "dia_asignado"
         BarSeries3.DataSource = vDT
+        BarSeries1.ValueMember = "acumulado"
+        BarSeries1.CategoryMember = "dia_asignado"
+        BarSeries1.DataSource = vDT
         If vNivel <> 5 Then
             LineSeries1.ValueMember = "objetivo"
             LineSeries1.CategoryMember = "dia_asignado"
@@ -1737,8 +1739,9 @@ Public Class FrmGraficasfaseuno
         CategoricalAxis1.LabelRotationAngle = 270.0R
         LinearAxis1.AxisType = AxisType.Second
         LinearAxis1.Title = "CI"
-        BarSeries1.LabelFormat = "{0:###}"
+
         BarSeries2.LabelFormat = "{0:###}"
+        BarSeries1.LabelFormat = "{0:###}"
         BarSeries1.HorizontalAxis = CategoricalAxis1
         If vNivel <> 5 Then
             LineSeries1.LabelFormat = "{0:###}"
@@ -1748,11 +1751,11 @@ Public Class FrmGraficasfaseuno
             LineSeries1.BorderColor = Color.FromArgb(202, 0, 0)
         End If
 
-        BarSeries1.VerticalAxis = LinearAxis1
-
-        BarSeries1.Palette = New PaletteEntry(Color.FromArgb(255, 191, 0))
+        
         BarSeries2.Palette = New PaletteEntry(Color.FromArgb(233, 37, 43))
         BarSeries3.Palette = New PaletteEntry(Color.FromArgb(36, 177, 22))
+        BarSeries1.VerticalAxis = LinearAxis1
+        BarSeries1.Palette = New PaletteEntry(Color.FromArgb(255, 191, 0))
 
         Me.radChartView1.ShowTrackBall = True
         Me.radChartView1.ShowToolTip = True
@@ -1760,9 +1763,10 @@ Public Class FrmGraficasfaseuno
             radChartView1.Series.Add(LineSeries1)
         End If
 
+        radChartView1.Series.Add(BarSeries1)
         radChartView1.Series.Add(BarSeries2)
         radChartView1.Series.Add(BarSeries3)
-        radChartView1.Series.Add(BarSeries1)
+
 
         If vNivel <> 5 Then
             LineSeries1.CombineMode = ChartSeriesCombineMode.None
