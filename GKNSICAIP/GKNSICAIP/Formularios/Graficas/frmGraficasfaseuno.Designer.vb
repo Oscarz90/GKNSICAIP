@@ -428,7 +428,7 @@ Partial Class FrmGraficasfaseuno
         Me.RadPageView1.ForeColor = System.Drawing.Color.Black
         Me.RadPageView1.Location = New System.Drawing.Point(3, 3)
         Me.RadPageView1.Name = "RadPageView1"
-        Me.RadPageView1.SelectedPage = Me.PageGrafica_Secundaria
+        Me.RadPageView1.SelectedPage = Me.RadPageViewPage1
         Me.RadPageView1.Size = New System.Drawing.Size(1355, 667)
         Me.RadPageView1.TabIndex = 11
         Me.RadPageView1.Text = "Tablas"
@@ -515,9 +515,11 @@ Partial Class FrmGraficasfaseuno
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.dgvTabla.Location = New System.Drawing.Point(3, 33)
         '
-        '
+        'dgvTabla
         '
         Me.dgvTabla.MasterTemplate.AllowAddNewRow = False
+        Me.dgvTabla.MasterTemplate.HorizontalScrollState = Telerik.WinControls.UI.ScrollState.AlwaysShow
+        Me.dgvTabla.MasterTemplate.VerticalScrollState = Telerik.WinControls.UI.ScrollState.AlwaysShow
         Me.dgvTabla.Name = "dgvTabla"
         Me.dgvTabla.ReadOnly = True
         Me.dgvTabla.Size = New System.Drawing.Size(1328, 579)
