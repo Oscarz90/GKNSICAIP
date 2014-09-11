@@ -17,7 +17,7 @@ Public Class G_Fase2
     End Function
 
     Public Function Obten_Costo(ByVal vFecha_Inicial As DateTime, ByVal vFecha_Final As DateTime, ByVal vCve_Equipo As Integer, ByVal vCve_Linea As Integer, ByVal vCve_Componente As Integer, ByVal vCve_Cadena_Valor As Integer, ByVal vFormato As Integer, ByVal vNivel As Integer) As DataTable
-        Dim vDT_Retorno As DataTable = oBD.ObtenerTabla(String.Format("EXEC Obtiene_Costo_verifid '{0}', '{1}', {2} , {3} , {4} , {5} , {6} , {7}", Dar_Formato_FECHA(vFecha_Inicial), Dar_Formato_FECHA(vFecha_Final), vCve_Equipo, vCve_Linea, vCve_Componente, vCve_Cadena_Valor, vFormato, vNivel))
+        Dim vDT_Retorno As DataTable = oBD.ObtenerTabla(String.Format("EXEC obtiene_costo_verifid '{0}', '{1}', {2} , {3} , {4} , {5} , {6} , {7}", Dar_Formato_FECHA(vFecha_Inicial), Dar_Formato_FECHA(vFecha_Final), vCve_Equipo, vCve_Linea, vCve_Componente, vCve_Cadena_Valor, vFormato, vNivel))
         Return vDT_Retorno
     End Function
 
@@ -32,7 +32,7 @@ Public Class G_Fase2
     End Function
 
     Public Function Obten_OEE(ByVal vFecha_Inicial As DateTime, ByVal vFecha_Final As DateTime, ByVal vCve_Equipo As Integer, ByVal vCve_Linea As Integer, ByVal vCve_Componente As Integer, ByVal vCve_Cadena_Valor As Integer, ByVal vFormato As Integer, ByVal vNivel As Integer) As DataTable
-        Dim vDT_Retorno As DataTable = oBD.ObtenerTabla(String.Format("EXEC Obtiene_OEE_prueba '{0}', '{1}', {2} , {3} , {4} , {5} , {6} , {7}", Dar_Formato_FECHA(vFecha_Inicial), Dar_Formato_FECHA(vFecha_Final), vCve_Equipo, vCve_Linea, vCve_Componente, vCve_Cadena_Valor, vFormato, vNivel))
+        Dim vDT_Retorno As DataTable = oBD.ObtenerTabla(String.Format("EXEC obtiene_oee_verifid '{0}', '{1}', {2} , {3} , {4} , {5} , {6} , {7}", Dar_Formato_FECHA(vFecha_Inicial), Dar_Formato_FECHA(vFecha_Final), vCve_Equipo, vCve_Linea, vCve_Componente, vCve_Cadena_Valor, vFormato, vNivel))
         Return vDT_Retorno
     End Function
 

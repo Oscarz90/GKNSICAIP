@@ -726,17 +726,17 @@ Public Class FrmGraficasfaseuno
         Me.dgvTabla.Columns("oee").Width = 80
         Me.dgvTabla.Columns("oee").Name = "oee"
 
-        Me.dgvTabla.Columns("pzas_ok").HeaderText = "PZAS OK"
-        Me.dgvTabla.Columns("pzas_ok").Width = 80
-        Me.dgvTabla.Columns("pzas_ok").Name = "pzas_ok"
+        Me.dgvTabla.Columns("piezas_ok").HeaderText = "PZAS OK"
+        Me.dgvTabla.Columns("piezas_ok").Width = 80
+        Me.dgvTabla.Columns("piezas_ok").Name = "piezas_ok"
 
-        Me.dgvTabla.Columns("pzas_desecho").HeaderText = "PZAS DESECHO"
-        Me.dgvTabla.Columns("pzas_desecho").Width = 80
-        Me.dgvTabla.Columns("pzas_desecho").Name = "pzas_desecho"
+        Me.dgvTabla.Columns("piezas_desecho").HeaderText = "PZAS DESECHO"
+        Me.dgvTabla.Columns("piezas_desecho").Width = 80
+        Me.dgvTabla.Columns("piezas_desecho").Name = "piezas_desecho"
 
-        Me.dgvTabla.Columns("pzas_rechazo").HeaderText = "PZAS RECHAZO"
-        Me.dgvTabla.Columns("pzas_rechazo").Width = 80
-        Me.dgvTabla.Columns("pzas_rechazo").Name = "pzas_rechazo"
+        Me.dgvTabla.Columns("piezas_rechazo").HeaderText = "PZAS RECHAZO"
+        Me.dgvTabla.Columns("piezas_rechazo").Width = 80
+        Me.dgvTabla.Columns("piezas_rechazo").Name = "piezas_rechazo"
 
         Me.dgvTabla.Columns("desecho_aplicable").HeaderText = "DESECHO APLICABLE"
         Me.dgvTabla.Columns("desecho_aplicable").Width = 80
@@ -746,33 +746,37 @@ Public Class FrmGraficasfaseuno
         Me.dgvTabla.Columns("adeudo").Width = 80
         Me.dgvTabla.Columns("adeudo").Name = "adeudo"
 
-        Me.dgvTabla.Columns("p_planeado").HeaderText = "PARO PLANEADO"
-        Me.dgvTabla.Columns("p_planeado").Width = 80
-        Me.dgvTabla.Columns("p_planeado").Name = "p_planeado"
+        Me.dgvTabla.Columns("paro_planeado").HeaderText = "PARO PLANEADO"
+        Me.dgvTabla.Columns("paro_planeado").Width = 80
+        Me.dgvTabla.Columns("paro_planeado").Name = "paro_planeado"
 
-        Me.dgvTabla.Columns("p_no_planeado").HeaderText = "PARO NO PLANEADO"
-        Me.dgvTabla.Columns("p_no_planeado").Width = 80
-        Me.dgvTabla.Columns("p_no_planeado").Name = "p_no_planeado"
+        Me.dgvTabla.Columns("paro_no_planeado").HeaderText = "PARO NO PLANEADO"
+        Me.dgvTabla.Columns("paro_no_planeado").Width = 80
+        Me.dgvTabla.Columns("paro_no_planeado").Name = "paro_no_planeado"
 
-        Me.dgvTabla.Columns("t_turno").HeaderText = "TIEMPO TURNO"
-        Me.dgvTabla.Columns("t_turno").Width = 80
-        Me.dgvTabla.Columns("t_turno").Name = "t_turno"
+        Me.dgvTabla.Columns("tiempo_turno").HeaderText = "TIEMPO TURNO"
+        Me.dgvTabla.Columns("tiempo_turno").Width = 80
+        Me.dgvTabla.Columns("tiempo_turno").Name = "tiempo_turno"
 
-        Me.dgvTabla.Columns("t_comedor").HeaderText = "TIEMPO COMEDOR"
-        Me.dgvTabla.Columns("t_comedor").Width = 80
-        Me.dgvTabla.Columns("t_comedor").Name = "t_comedor"
+        Me.dgvTabla.Columns("tiempo_comedor").HeaderText = "TIEMPO COMEDOR"
+        Me.dgvTabla.Columns("tiempo_comedor").Width = 80
+        Me.dgvTabla.Columns("tiempo_comedor").Name = "tiempo_comedor"
 
-        Me.dgvTabla.Columns("t_carga").HeaderText = "TIEMPO CARGA"
-        Me.dgvTabla.Columns("t_carga").Width = 80
-        Me.dgvTabla.Columns("t_carga").Name = "t_carga"
+        Me.dgvTabla.Columns("tiempo_carga").HeaderText = "TIEMPO CARGA"
+        Me.dgvTabla.Columns("tiempo_carga").Width = 80
+        Me.dgvTabla.Columns("tiempo_carga").Name = "tiempo_carga"
 
-        Me.dgvTabla.Columns("t_operacion").HeaderText = "TIEMPO OPERACION"
-        Me.dgvTabla.Columns("t_operacion").Width = 80
-        Me.dgvTabla.Columns("t_operacion").Name = "t_operacion"
+        Me.dgvTabla.Columns("tiempo_operacion").HeaderText = "TIEMPO OPERACION"
+        Me.dgvTabla.Columns("tiempo_operacion").Width = 80
+        Me.dgvTabla.Columns("tiempo_operacion").Name = "tiempo_operacion"
 
         Me.dgvTabla.Columns("objetivo").HeaderText = "OBJETIVO"
         Me.dgvTabla.Columns("objetivo").Width = 80
         Me.dgvTabla.Columns("objetivo").Name = "objetivo"
+
+        Me.dgvTabla.Columns("comentarios").HeaderText = "COMENTARIOS"
+        Me.dgvTabla.Columns("comentarios").Width = 80
+        Me.dgvTabla.Columns("comentarios").Name = "comentarios"
 
 
 
@@ -787,17 +791,17 @@ Public Class FrmGraficasfaseuno
             Me.dgvTabla.Columns("desempeno").IsVisible = True
             Me.dgvTabla.Columns("calidad").IsVisible = True
             Me.dgvTabla.Columns("oee").IsVisible = True
-            Me.dgvTabla.Columns("pzas_ok").IsVisible = False
-            Me.dgvTabla.Columns("pzas_desecho").IsVisible = False
-            Me.dgvTabla.Columns("pzas_rechazo").IsVisible = False
+            Me.dgvTabla.Columns("piezas_ok").IsVisible = False
+            Me.dgvTabla.Columns("piezas_desecho").IsVisible = False
+            Me.dgvTabla.Columns("piezas_rechazo").IsVisible = False
             Me.dgvTabla.Columns("desecho_aplicable").IsVisible = False
             Me.dgvTabla.Columns("adeudo").IsVisible = False
-            Me.dgvTabla.Columns("p_planeado").IsVisible = False
-            Me.dgvTabla.Columns("p_no_planeado").IsVisible = False
-            Me.dgvTabla.Columns("t_turno").IsVisible = False
-            Me.dgvTabla.Columns("t_comedor").IsVisible = False
-            Me.dgvTabla.Columns("t_carga").IsVisible = False
-            Me.dgvTabla.Columns("t_operacion").IsVisible = False
+            Me.dgvTabla.Columns("paro_planeado").IsVisible = False
+            Me.dgvTabla.Columns("paro_no_planeado").IsVisible = False
+            Me.dgvTabla.Columns("tiempo_turno").IsVisible = False
+            Me.dgvTabla.Columns("tiempo_comedor").IsVisible = False
+            Me.dgvTabla.Columns("tiempo_carga").IsVisible = False
+            Me.dgvTabla.Columns("tiempo_operacion").IsVisible = False
             Me.dgvTabla.Columns("objetivo").IsVisible = True
         Else
             Me.dgvTabla.Columns("planta").IsVisible = True
@@ -810,17 +814,17 @@ Public Class FrmGraficasfaseuno
             Me.dgvTabla.Columns("desempeno").IsVisible = True
             Me.dgvTabla.Columns("calidad").IsVisible = True
             Me.dgvTabla.Columns("oee").IsVisible = True
-            Me.dgvTabla.Columns("pzas_ok").IsVisible = True
-            Me.dgvTabla.Columns("pzas_desecho").IsVisible = True
-            Me.dgvTabla.Columns("pzas_rechazo").IsVisible = True
+            Me.dgvTabla.Columns("piezas_ok").IsVisible = True
+            Me.dgvTabla.Columns("piezas_desecho").IsVisible = True
+            Me.dgvTabla.Columns("piezas_rechazo").IsVisible = True
             Me.dgvTabla.Columns("desecho_aplicable").IsVisible = True
             Me.dgvTabla.Columns("adeudo").IsVisible = True
-            Me.dgvTabla.Columns("p_planeado").IsVisible = True
-            Me.dgvTabla.Columns("p_no_planeado").IsVisible = True
-            Me.dgvTabla.Columns("t_turno").IsVisible = True
-            Me.dgvTabla.Columns("t_comedor").IsVisible = True
-            Me.dgvTabla.Columns("t_carga").IsVisible = True
-            Me.dgvTabla.Columns("t_operacion").IsVisible = True
+            Me.dgvTabla.Columns("paro_planeado").IsVisible = True
+            Me.dgvTabla.Columns("paro_no_planeado").IsVisible = True
+            Me.dgvTabla.Columns("tiempo_turno").IsVisible = True
+            Me.dgvTabla.Columns("tiempo_comedor").IsVisible = True
+            Me.dgvTabla.Columns("tiempo_carga").IsVisible = True
+            Me.dgvTabla.Columns("tiempo_operacion").IsVisible = True
             Me.dgvTabla.Columns("objetivo").IsVisible = True
         End If
 
