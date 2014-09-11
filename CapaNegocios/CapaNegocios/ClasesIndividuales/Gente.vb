@@ -1,8 +1,8 @@
 ﻿Imports CapaDatos
 Public Class Gente
     Implements IIndividual
-    Dim cadena_conexion As New CapaDatos.conexiones
-    Dim oBD As New CapaDatos.CapaDatos(cadena_conexion.CadenaSicaip)
+    Dim cadena_conexion As New conexiones
+    Dim oBD As New Datos(cadena_conexion.CadenaSicaip)
 #Region "IIndividual"
     Public Sub Cargar() Implements IIndividual.Cargar
 
@@ -10,7 +10,7 @@ Public Class Gente
 
     Public Sub Eliminar() Implements IIndividual.Eliminar
         Try
-            oBD.EjecutarQuery("update gente set cod_empleado_eliminacion='" & vcod_empleado_eliminacion & "',fecha_eliminacion='" & vfecha_eliminacion.ToString("MM-dd-yyyy HH:mm") & "',estatus='0' where cve_gente=" & vcve_gente)
+            oBD.EjecutarQuery(String.Format("update gente set cod_empleado_eliminacion='{0}',fecha_eliminacion='{1:MM-dd-yyyy HH:mm}',estatus='0' where cve_gente={2}", vcod_empleado_eliminacion, vfecha_eliminacion, vcve_gente))
         Catch ex As Exception
             MsgBox("Error al eliminar desecho. CGente_ERROR", vbCritical + vbOKOnly, "Error")
         End Try

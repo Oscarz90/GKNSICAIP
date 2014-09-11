@@ -1,12 +1,11 @@
 ﻿Imports CapaDatos
 Public Class usuario_indicador
     Implements IIndividual
-    Dim cadena_conexion As New CapaDatos.conexiones
-    Dim oBD As New CapaDatos.CapaDatos(cadena_conexion.CadenaSicaip)
+    Dim cadena_conexion As New conexiones
+    Dim oBD As New Datos(cadena_conexion.CadenaSicaip)
 #Region "IIndividual"
     Public Sub Cargar() Implements IIndividual.Cargar
-        Dim vDR As DataRow
-        vDR = oBD.ObtenerRenglon("select * from USUARIO_INDICADOR where cve_usuario_indicador =" & vcve_usuario_indicador, "usuario_indicador")
+        Dim vDR As DataRow = oBD.ObtenerRenglon("select * from USUARIO_INDICADOR where cve_usuario_indicador =" & vcve_usuario_indicador, "usuario_indicador")
         If vDR IsNot Nothing Then
             vcve_usuario_indicador = vDR("cve_usuario_indicador")
             vcve_usuario = vDR("cve_usuario")
@@ -29,9 +28,8 @@ Public Class usuario_indicador
         End Set
     End Property
     Public Function Obtener_Id(ByVal vCadena As String) As Long Implements IIndividual.Obtener_Id
-        Dim vDR As DataRow
+        Dim vDR As DataRow = oBD.ObtenerRenglon("select cve_usuario_indicador from USUARIO_INDICADOR where cve_usuario_indicador= " & vcve_usuario_indicador, "usuario_indicador")
         Dim vRetorno As Long
-        vDR = oBD.ObtenerRenglon("select cve_usuario_indicador from USUARIO_INDICADOR where cve_usuario_indicador= " & vcve_usuario_indicador, "usuario_indicador")
         If vDR IsNot Nothing Then
             vcve_usuario_indicador = vDR("cve_usuario_indicador")
         Else
@@ -87,9 +85,7 @@ Public Class usuario_indicador
 #Region "Metodos"
     Public Sub obtiene_indicador()
         Dim vDR As DataRow
-        Dim query As String = "select i.indicador from USUARIO_INDICADOR ui " &
-            "join indicador i on ui.cve_indicador=i.cve_indicador " &
-            "where ui.cve_usuario =" & vcve_usuario
+        Dim query As String = String.Format("select i.indicador from USUARIO_INDICADOR ui join indicador i on ui.cve_indicador=i.cve_indicador where ui.cve_usuario ={0}", vcve_usuario)
         vDR = oBD.ObtenerRenglon(query, "usuario_indicador")
         If vDR IsNot Nothing Then
             vindicador = vDR("indicador")

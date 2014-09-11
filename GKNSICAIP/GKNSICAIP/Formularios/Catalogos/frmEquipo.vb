@@ -7,7 +7,6 @@ Public Class frmEquipo
     Dim vAdd_Registrar As Boolean = True
     Dim vDelete_Eliminar As Boolean = True
     Dim vValida_Tlatoani As Integer = 0
-    Dim vCveDetalle As Long = 0
     Dim vT_Tlatoani As Boolean = True
     Dim vLG As Boolean = True
     Dim vLET As Boolean = True
@@ -22,13 +21,10 @@ Public Class frmEquipo
     End Sub
 
 #Region "Eventos de controles"
-    Private Sub frmEquipo_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
+    Private Sub frmEquipo_Load(ByVal sender As Object, ByVal e As EventArgs) Handles MyBase.Load
         If Convert.ToInt64(vId_Publico) <> 0 Then
-            oEquipo = New Equipo
-            oEquipo.Cve_Equipo = vId_Publico
+            oEquipo = New Equipo() With {.Cve_Equipo = vId_Publico}
             oEquipo.Cargar()
-        Else
-
         End If
         Controles_Permisos(vAdd_Registrar, vDelete_Eliminar)
         SetBindings()
@@ -36,11 +32,11 @@ Public Class frmEquipo
         Me.btnImportar.Focus()
     End Sub
 
-    Private Sub btnSalir_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSalir.Click
+    Private Sub btnSalir_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnSalir.Click
         Me.Close()
     End Sub
 
-    Private Sub btnImportar_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnImportar.Click
+    Private Sub btnImportar_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnImportar.Click
         'Importar Tipo Tlatoani
         Dim ofrmImportador_TipoTlatoani As New frmImportador_TipoTlatoani
         ofrmImportador_TipoTlatoani.ShowDialog()
@@ -54,7 +50,7 @@ Public Class frmEquipo
         Validar_Datos_Completos(vT_Tlatoani, vLG, vLET, vImagen)
     End Sub
 
-    Private Sub btnImportar_LG_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnImportar_LG.Click
+    Private Sub btnImportar_LG_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnImportar_LG.Click
         'Importar Lider
         Dim ofrmImportador_LG As New frmImportador_LG
         ofrmImportador_LG.ShowDialog()
@@ -68,9 +64,9 @@ Public Class frmEquipo
         Validar_Datos_Completos(vT_Tlatoani, vLG, vLET, vImagen)
     End Sub
 
-    Private Sub btnImportar_Imagen_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnImportar_Imagen.Click
+    Private Sub btnImportar_Imagen_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnImportar_Imagen.Click
         'Cargar una imagen
-        If ofdImagen.ShowDialog() = System.Windows.Forms.DialogResult.OK Then
+        If ofdImagen.ShowDialog() = DialogResult.OK Then
             Try
                 If Validar_Imagen_Correcta() = True Then
                     vImagen = True
@@ -85,7 +81,7 @@ Public Class frmEquipo
         End If
     End Sub
 
-    Private Sub btnModificar_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnModificar.Click
+    Private Sub btnModificar_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnModificar.Click
         If Validar_Datos_Completos(vT_Tlatoani, vLG, vLET, vImagen) = True And Existe_Imagen() = True And txtLet.Text <> "" Then
             If MsgBox("¿Esta seguro de realizar los cambios al equipo?", MsgBoxStyle.YesNo, Me.Text) = MsgBoxResult.Yes Then
                 oEquipo.LETT = txtLet.Text
@@ -103,7 +99,7 @@ Public Class frmEquipo
         End If
     End Sub
 
-    Private Sub txtLet_KeyUp(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtLet.KeyUp
+    Private Sub txtLet_KeyUp(ByVal sender As Object, ByVal e As KeyEventArgs) Handles txtLet.KeyUp
         vValida_Tlatoani = txtTipo_Tlatoani.Text.Count
         If vValida_Tlatoani > 0 And txtLet.Text <> "" Then
             btnModificar.Enabled = True
@@ -171,12 +167,12 @@ Public Class frmEquipo
         Dim vRetorno As Boolean = False
         'validar formato y tamaño de imagen
         Dim opb As New PictureBox() 'Creamos un objeto pb
-       
+
 
         Dim vExtencion As String = Obtener_Extencion_Imagen(ofdImagen.FileName)
 
         If vExtencion = "jpg" Or vExtencion = "JPG" Or vExtencion = "png" Or vExtencion = "PNG" Then
-            opb.Image = System.Drawing.Image.FromFile(ofdImagen.FileName) 'Asignamos la imagen
+            opb.Image = Image.FromFile(ofdImagen.FileName) 'Asignamos la imagen
             opb.SizeMode = PictureBoxSizeMode.AutoSize 'Dejamos su propiedad en autosize para tener el tamaño original de la misma
 
             If opb.Size.Width <> 250 Or opb.Size.Height <> 170 Then
@@ -208,10 +204,8 @@ Public Class frmEquipo
 
     Private Function Obtener_Extencion_Imagen(ByVal vNombre_Imagen_Con_Extencion As String) As String
         Dim vRetorno As String = ""
-        Dim aText() As String
-        'vNombre_Imagen_Con_Extencion = "Hola/mundo.arto/hola.png"
+        Dim aText As String() = Split(vNombre_Imagen_Con_Extencion, ".")
 
-        aText = Split(vNombre_Imagen_Con_Extencion, ".")
         vRetorno = aText(UBound(aText))
         Return vRetorno
     End Function

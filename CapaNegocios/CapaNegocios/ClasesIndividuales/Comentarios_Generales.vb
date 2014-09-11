@@ -1,8 +1,8 @@
 ﻿Imports CapaDatos
 Public Class Comentarios_Generales
     Implements IIndividual
-    Dim cadena_conexion As New CapaDatos.conexiones
-    Dim oBD As New CapaDatos.CapaDatos(cadena_conexion.CadenaSicaip)
+    Dim cadena_conexion As New conexiones
+    Dim oBD As New Datos(cadena_conexion.CadenaSicaip)
 #Region "IIndividual"
 
 
@@ -12,7 +12,7 @@ Public Class Comentarios_Generales
 
     Public Sub Eliminar() Implements IIndividual.Eliminar
         Try
-            oBD.EjecutarQuery("update comentarios_generales set cod_empleado_eliminacion='" & vcod_empleado_eliminacion & "',fecha_eliminacion='" & vfecha_eliminacion.ToString("MM-dd-yyyy HH:mm") & "',estatus='0' where cve_comentarios_generales=" & vcve_comentarios_generales)
+            oBD.EjecutarQuery(String.Format("update comentarios_generales set cod_empleado_eliminacion='{0}',fecha_eliminacion='{1:MM-dd-yyyy HH:mm}',estatus='0' where cve_comentarios_generales={2}", vcod_empleado_eliminacion, vfecha_eliminacion, vcve_comentarios_generales))
         Catch ex As Exception
             MsgBox("Error al eliminar comentario. CComentarios_Generales_ERROR", vbCritical + vbOKOnly, "Error")
         End Try

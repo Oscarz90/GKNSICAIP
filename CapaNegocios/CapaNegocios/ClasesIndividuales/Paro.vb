@@ -1,18 +1,16 @@
 ﻿Imports CapaDatos
 Public Class Paro
     Implements IIndividual
-    Dim cadena_conexion As New CapaDatos.conexiones
-    Dim oBD As New CapaDatos.CapaDatos(cadena_conexion.CadenaSicaip)
+    Dim cadena_conexion As New conexiones
+    Dim oBD As New Datos(cadena_conexion.CadenaSicaip)
 #Region "IIndividual"
     Public Sub Cargar() Implements IIndividual.Cargar
-        Dim vDR As DataRow
-        vDR = oBD.ObtenerRenglon("select * from paro where cve_paro =" & vCve_Paro, "paro")
+        Dim vDR As DataRow = oBD.ObtenerRenglon("select * from paro where cve_paro =" & vCve_Paro, "paro")
         If vDR IsNot Nothing Then
             vCve_Paro = vDR("cve_paro")
             vCod_Paro = vDR("cod_paro")
             vParo = vDR("paro")
             vAfecta_CDM = vDR("afecta_CDM")
-            'vCve_Detalle = vDR("cve_detalle")
         End If
     End Sub
     Public Sub Eliminar() Implements IIndividual.Eliminar
@@ -23,9 +21,8 @@ Public Class Paro
         End Try
     End Sub
     Public Function Obtener_Id(ByVal vCadena As String) As Long Implements IIndividual.Obtener_Id
-        Dim vDR As DataRow
+        Dim vDR As DataRow = oBD.ObtenerRenglon("Select cve_paro from paro where cod_paro=" & vCadena, "")
         Dim vRetorno As Long
-        vDR = oBD.ObtenerRenglon("Select cve_paro from paro where cod_paro=" & vCadena, "")
         If vDR IsNot Nothing Then
             vRetorno = vDR("cve_paro")
         Else
@@ -36,9 +33,7 @@ Public Class Paro
     Public Sub Registrar() Implements IIndividual.Registrar
         Using scope As New TransactionScope
             Try
-                Dim cmd As New SqlClient.SqlCommand
-                cmd.CommandType = CommandType.StoredProcedure
-                cmd.CommandText = "REGISTRAR_Paro"
+                Dim cmd As New SqlClient.SqlCommand() With {.CommandType = CommandType.StoredProcedure, .CommandText = "REGISTRAR_Paro"}
                 cmd.Parameters.Add("@cve_paro", SqlDbType.BigInt).Value = Me.vCve_Paro
                 cmd.Parameters.Add("@cod_paro", SqlDbType.VarChar).Value = Me.vCod_Paro
                 cmd.Parameters.Add("@paro", SqlDbType.VarChar).Value = Me.vParo
@@ -114,8 +109,7 @@ Public Class Paro
         Return dtParo
     End Function
     Public Sub obten_descripcion_paro()
-        Dim vDR As DataRow
-        vDR = oBD.ObtenerRenglon("select * from paro where cve_paro =" & vCve_Paro, "paro")
+        Dim vDR As DataRow = oBD.ObtenerRenglon("select * from paro where cve_paro =" & vCve_Paro, "paro")
         If vDR IsNot Nothing Then
             vCve_Paro = vDR("cve_paro")
             vCod_Paro = vDR("cod_paro")

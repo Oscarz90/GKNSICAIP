@@ -1,8 +1,8 @@
 ﻿Imports CapaDatos
 Public Class Graficasfaseuno
     Implements IIndividual
-    Dim cadena_conexion As New CapaDatos.conexiones
-    Dim oBD As New CapaDatos.CapaDatos(cadena_conexion.CadenaSicaip)
+    Dim cadena_conexion As New conexiones
+    Dim oBD As New Datos(cadena_conexion.CadenaSicaip)
 #Region "Propiedades"
     Private vusuario As String
     Public Property usuario() As String
@@ -64,9 +64,7 @@ Public Class Graficasfaseuno
     Public Sub obtiene_nivel_graficos()
         Using scope As New TransactionScope
             Try
-                Dim cmd As New SqlClient.SqlCommand
-                cmd.CommandType = CommandType.StoredProcedure
-                cmd.CommandText = "obtiene_nivel_graficos_usuario"
+                Dim cmd As New SqlClient.SqlCommand() With {.CommandType = CommandType.StoredProcedure, .CommandText = "obtiene_nivel_graficos_usuario"}
                 cmd.Parameters.Add("@usuario", SqlDbType.VarChar).Value = Me.vusuario
                 cmd.Parameters.Add("@cod_empleado", SqlDbType.VarChar).Value = Me.vcod_empleado
                 Dim obj As DataTable = oBD.EjecutaCommando(cmd)

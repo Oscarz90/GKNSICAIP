@@ -1,8 +1,8 @@
 ﻿Imports CapaDatos
 Public Class Productividad
     Implements IIndividual
-    Dim cadena_conexion As New CapaDatos.conexiones
-    Dim oBD As New CapaDatos.CapaDatos(cadena_conexion.CadenaSicaip)
+    Dim cadena_conexion As New conexiones
+    Dim oBD As New Datos(cadena_conexion.CadenaSicaip)
 #Region "IIndividual"
     Public Sub Cargar() Implements IIndividual.Cargar
 
@@ -28,9 +28,7 @@ Public Class Productividad
     Public Sub Registrar() Implements IIndividual.Registrar
         Using scope As New TransactionScope
             Try
-                Dim vComando As New SqlClient.SqlCommand
-                vComando.CommandType = CommandType.StoredProcedure
-                vComando.CommandText = "Captura_productividad_Produccion"
+                Dim vComando As New SqlClient.SqlCommand() With {.CommandType = CommandType.StoredProcedure, .CommandText = "Captura_productividad_Produccion"}
                 vComando.Parameters.Add("@cve_registro_turno", SqlDbType.BigInt).Value = Me.vcve_registro_turno
                 vComando.Parameters.Add("@cod_empleado", SqlDbType.VarChar).Value = Me.vcod_empleado
                 vComando.Parameters.Add("@fecha", SqlDbType.DateTime).Value = Me.vfecha
@@ -43,7 +41,6 @@ Public Class Productividad
                 scope.Complete()
             Catch 'ex As Exception
                 MsgBox("Error al insertar productividad. CProductividad_ERROR", vbCritical + vbOKOnly, "Error")
-                'Throw New Exception(ex.Message)
             End Try
         End Using
     End Sub

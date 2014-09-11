@@ -1,12 +1,11 @@
 ﻿Imports CapaDatos
 Public Class Registro_Paro_CDM
     Implements IIndividual
-    Dim cadena_conexion As New CapaDatos.conexiones
-    Dim oBD As New CapaDatos.CapaDatos(cadena_conexion.CadenaSicaip)
+    Dim cadena_conexion As New conexiones
+    Dim oBD As New Datos(cadena_conexion.CadenaSicaip)
 #Region "IIndividual"
     Public Sub Cargar() Implements IIndividual.Cargar
-        Dim vDR As DataRow
-        vDR = oBD.ObtenerRenglon("select * from Registro_paro_CDM where cve_reg_paros_CDM = " & vCve_Reg_Paros_CDM, "Registro_paro_CDM")
+        Dim vDR As DataRow = oBD.ObtenerRenglon("select * from Registro_paro_CDM where cve_reg_paros_CDM = " & vCve_Reg_Paros_CDM, "Registro_paro_CDM")
         If vDR IsNot Nothing Then
             vCve_Reg_Paros_CDM = vDR("cve_reg_paros_CDM")
             vRegistro_Paro_Principal = vDR("Registro_Paro_Principal")
@@ -21,12 +20,11 @@ Public Class Registro_Paro_CDM
 
         End Try
     End Sub
-  
+
 
     Public Function Obtener_Id(ByVal vCadena As String) As Long Implements IIndividual.Obtener_Id
-        Dim vDR As DataRow
+        Dim vDR As DataRow = oBD.ObtenerRenglon("Select cve_reg_paros_CDM from Registro_paro_CDM where registro_paro_principal=" & vCadena, "")
         Dim vRetorno As Long
-        vDR = oBD.ObtenerRenglon("Select cve_reg_paros_CDM from Registro_paro_CDM where registro_paro_principal=" & vCadena, "")
         If vDR IsNot Nothing Then
             vRetorno = vDR("cve_reg_paros_CDM")
         Else
@@ -38,9 +36,7 @@ Public Class Registro_Paro_CDM
     Public Sub Registrar() Implements IIndividual.Registrar
         Using scope As New TransactionScope
             Try
-                Dim cmd As New SqlClient.SqlCommand
-                cmd.CommandType = CommandType.StoredProcedure
-                cmd.CommandText = "REGISTRAR_Registro_Paro_CDM"
+                Dim cmd As New SqlClient.SqlCommand() With {.CommandType = CommandType.StoredProcedure, .CommandText = "REGISTRAR_Registro_Paro_CDM"}
                 cmd.Parameters.Add("@Cve_Reg_Paros_CDM", SqlDbType.BigInt).Value = Me.vCve_Reg_Paros_CDM
                 cmd.Parameters.Add("@Registro_Paro_Principal", SqlDbType.BigInt).Value = Me.vRegistro_Paro_Principal
                 cmd.Parameters.Add("@Registro_Paro_Secundario", SqlDbType.BigInt).Value = Me.vRegistro_Paro_Secundario

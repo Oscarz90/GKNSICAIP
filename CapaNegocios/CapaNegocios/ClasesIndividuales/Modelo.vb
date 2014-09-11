@@ -1,8 +1,8 @@
 ﻿Imports CapaDatos
 Public Class Modelo
     Implements IIndividual
-    Dim cadena_conexion As New CapaDatos.conexiones
-    Dim oBD As New CapaDatos.CapaDatos(cadena_conexion.CadenaSicaip)
+    Dim cadena_conexion As New conexiones
+    Dim oBD As New Datos(cadena_conexion.CadenaSicaip)
     Dim oComponente As Componente
     Dim oClasificacion_Modelo As Clasificacion_Modelo
 #Region "IIndividual"
@@ -30,45 +30,25 @@ Public Class Modelo
     End Sub
 
     Public Sub Eliminar() Implements IIndividual.Eliminar
-        ''If Usuario.ChecaPermisoTarea("TELEFONO.ELIMINAR") Then
-        'Try
-        '    oBD.EjecutarQuery("UPDATE MODELO SET Estatus='0' WHERE cve_modelo=" & Me.vcve_modelo)
-        '    MsgBox("La Baja de Modelo se realizo correctamente")
-        '    'Dim oBitacora As Bitacora = Bitacora.ObtenInstancia
-        '    'oBitacora.RegistrarEnBitacora("Telefono.ELIMINAR", "Se eliminó el Teléfono: " & Me.m_Telefono_Id)
-        'Catch ex As Exception
-        '    'Tiene relacion con otras partes del sistema
-        '    'Throw New CustomException(Errores.Eliminar)
-        'End Try
-        ''Else
-        ''Throw New CustomException(Errores.Permiso)
-        ''End If
-
         Dim oTC As New TC
         Dim vDT_TC_CON_Modelo_Para_Baja As DataTable
 
         Using scope As New TransactionScope()
             Try
                 oBD.EjecutarQuery("UPDATE MODELO SET Estatus='0' WHERE cve_modelo=" & Me.vcve_modelo)
-
                 vDT_TC_CON_Modelo_Para_Baja = oTC.Obtener_TC_con_Modelo(vcve_modelo) ''---Obtiene los TC relacionados con la linea, para darlos de baja
-
                 If IsNothing(vDT_TC_CON_Modelo_Para_Baja) = False Then
                     For Each vDR As DataRow In vDT_TC_CON_Modelo_Para_Baja.Rows
                         oTC.cve_TC = vDR("cve_TC")
                         oTC.Eliminar()
                     Next
                 End If
-
                 MsgBox("La Baja de Modelo se realizo correctamente")
-
                 scope.Complete()
             Catch ex As Exception
 
             End Try
         End Using
-
-
     End Sub
     Dim vId As Long
     Public Property Id As Long Implements IIndividual.Id
@@ -85,26 +65,9 @@ Public Class Modelo
     End Function
 
     Public Sub Registrar() Implements IIndividual.Registrar
-        'Validacion
-        'If ValidacionesName.ValidacionesGenerales.ValidaNombre("DEPARTAMENTO", "Nombre", Me.m_Nombre, "Departamento_Id", Me.m_Departamento_Id) Then
-        '    Throw New CustomException(Errores.Mismo_Nombre)
-        '    Exit Sub
-        'End If
-
-        'If Me.m_Departamento_Id = 0 Then
-        '    'Nuevo Registro
-        '    Me.CargaDatosNvoRegistro()
-        'End If
-        'Me.CargaDatosNvoModificacion()
-        'vEmpleado_Registro = "07044800"
-        'vEmpleado_Modifico = "07044800"
-        'vFecha_Registro = "30/05/2013"
-        'vFecha_Modifico = "30/05/2013"
         Using scope As New TransactionScope()
             Try
-                Dim cmd As New SqlClient.SqlCommand
-                cmd.CommandType = CommandType.StoredProcedure
-                cmd.CommandText = "REGISTRAR_MODELO"
+                Dim cmd As New SqlClient.SqlCommand() With {.CommandType = CommandType.StoredProcedure, .CommandText = "REGISTRAR_MODELO"}
 
                 With cmd.Parameters
                     .Add("cve_modelo", SqlDbType.BigInt).Value = Me.vcve_modelo
@@ -117,9 +80,6 @@ Public Class Modelo
 
                 Dim obj As DataTable = oBD.EjecutaCommando(cmd)
                 Me.vcve_modelo = obj.Rows(0)(0) 'ID
-                'Me.RegistraDatos("DEPARTAMENTO", "Departamento_Id", Me.m_Departamento_Id)
-                'Dim oBitacora As Bitacora = Bitacora.ObtenInstancia
-                'oBitacora.RegistrarEnBitacora("DEPARTAMENTO.REGISTRAR", "Se registró el departamento: " & Me.m_Nombre)
                 scope.Complete()
             Catch ex As Exception
                 Throw New Exception(ex.Message)
@@ -174,7 +134,7 @@ Public Class Modelo
             vcve_clasificacion_modelo = value
         End Set
     End Property
-    
+
     Public Property descripcion() As String
         Get
             Return vdescripcion
@@ -218,8 +178,7 @@ Public Class Modelo
     Public ReadOnly Property Nombre_Componente() As String
         Get
             If cve_componente <> 0 Then
-                oComponente = New Componente
-                oComponente.cve_componente = cve_componente
+                oComponente = New Componente() With {.cve_componente = cve_componente}
                 oComponente.Cargar()
                 Return oComponente.componente
             Else
@@ -230,8 +189,7 @@ Public Class Modelo
     Public ReadOnly Property Nombre_Clasificacion_Modelo() As String
         Get
             If vcve_clasificacion_modelo <> 0 Then
-                oClasificacion_Modelo = New Clasificacion_Modelo
-                oClasificacion_Modelo.Cve_clasificacion_modelo = vcve_clasificacion_modelo
+                oClasificacion_Modelo = New Clasificacion_Modelo() With {.Cve_clasificacion_modelo = vcve_clasificacion_modelo}
                 oClasificacion_Modelo.Cargar()
                 Return oClasificacion_Modelo.Descripcion
             Else
@@ -243,8 +201,7 @@ Public Class Modelo
 
 #Region "Metodos Generales"
     Public Function Obtener_Modelos() As DataTable
-        Dim vDT As DataTable
-        vDT = oBD.ObtenerTabla("select * from Modelo")
+        Dim vDT As DataTable = oBD.ObtenerTabla("select * from Modelo")
         If vDT IsNot Nothing Then
 
         Else
@@ -254,8 +211,7 @@ Public Class Modelo
     End Function
 
     Public Function Obtener_Modelos(ByVal vFiltro As String) As DataTable
-        Dim vDT As DataTable
-        vDT = oBD.ObtenerTabla("select * from Modelo where np_gkn LIKE '%" & vFiltro & "%'")
+        Dim vDT As DataTable = oBD.ObtenerTabla(String.Format("select * from Modelo where np_gkn LIKE '%{0}%'", vFiltro))
         If vDT IsNot Nothing Then
 
         Else
@@ -266,8 +222,7 @@ Public Class Modelo
 
     Public Function Validar_Exixtencia_De_Modelo_En_Linea(ByVal vId_Modelo As Long, ByVal vId_Linea As Long) As Boolean
         Dim vRetorno As Boolean = False
-        Dim vDT As DataTable
-        vDT = oBD.ObtenerTabla("select * from modelo M JOIN componente C ON M.cve_componente=C.cve_componente JOIN linea L ON L.cve_componente=C.cve_componente WHERE cve_linea=" & vId_Linea & " and cve_modelo=" & vId_Modelo)
+        Dim vDT As DataTable = oBD.ObtenerTabla(String.Format("select * from modelo M JOIN componente C ON M.cve_componente=C.cve_componente JOIN linea L ON L.cve_componente=C.cve_componente WHERE cve_linea={0} and cve_modelo={1}", vId_Linea, vId_Modelo))
         If vDT.Rows.Count > 0 Then
             vRetorno = True
         Else
@@ -278,9 +233,7 @@ Public Class Modelo
 
     Public Function Validar_Existencia_De_Modelo_En_BD(ByVal vNP_GKN As String) As Boolean
         Dim vRetorno As Boolean = False
-        Dim vDR As DataRow
-
-        vDR = oBD.ObtenerRenglon("Select count(np_gkn) as Total from modelo where np_gkn='" & vNP_GKN & "'", "Modelo")
+        Dim vDR As DataRow = oBD.ObtenerRenglon(String.Format("Select count(np_gkn) as Total from modelo where np_gkn='{0}'", vNP_GKN), "Modelo")
 
         If vDR IsNot Nothing Then
             If vDR("Total") > 0 Then
@@ -291,61 +244,6 @@ Public Class Modelo
         End If
         Return vRetorno
     End Function
-
-    'Public Function Modelo_Asignado_En_Linea(ByVal vId_Modelo As Long) As Boolean
-    '    Dim vRetorno As Boolean = False
-    '    Dim vDT As DataTable
-    '    vDT = oBD.ObtenerTabla("SELECT Li.linea " & _
-    '                             "FROM linea Li JOIN componente Co ON Li.cve_componente= Co.cve_componente " & _
-    '                             "JOIN modelo Mo on Mo.cve_componente= Co.cve_componente " & _
-    '                             "WHERE cve_modelo=" & vId_Modelo)
-    '    If vDT IsNot Nothing Then
-    '        If vDT.Rows.Count > 0 Then
-    '            vRetorno = True
-    '        Else
-    '            vRetorno = False
-    '        End If
-    '    Else
-    '        vRetorno = False
-    '    End If
-    '    Return vRetorno
-    'End Function
-
-    'Public Function Modelo_Asignado_En_TiempoCiclo(ByVal vId_Modelo As Long) As Boolean
-    '    Dim vRetorno As Boolean = False
-    '    Dim vDT As DataTable
-    '    vDT = oBD.ObtenerTabla("SELECT TiemCiclo.cve_TC " & _
-    '                             "FROM modelo Mo join TC TiemCiclo ON Mo.cve_modelo=TiemCiclo.cve_modelo " & _
-    '                             "WHERE TiemCiclo.cve_modelo=" & vId_Modelo)
-    '    If vDT IsNot Nothing Then
-    '        If vDT.Rows.Count > 0 Then
-    '            vRetorno = True
-    '        Else
-    '            vRetorno = False
-    '        End If
-    '    Else
-    '        vRetorno = False
-    '    End If
-    '    Return vRetorno
-    'End Function
-
-    'Public Function Modelo_Y_Linea_Asignado_En_TiempoCiclo(ByVal vId_Modelo As Long, ByVal vId_Linea As Long) As Boolean
-    '    Dim vRetorno As Boolean = False
-    '    Dim vDT As DataTable
-    '    vDT = oBD.ObtenerTabla("SELECT TiemCiclo.cve_TC " & _
-    '                             "FROM modelo Mo join TC TiemCiclo ON Mo.cve_modelo=TiemCiclo.cve_modelo " & _
-    '                             "WHERE TiemCiclo.cve_modelo=" & vId_Modelo & " AND TiemCiclo.cve_linea=" & vId_Linea)
-    '    If vDT IsNot Nothing Then
-    '        If vDT.Rows.Count > 0 Then
-    '            vRetorno = True
-    '        Else
-    '            vRetorno = False
-    '        End If
-    '    Else
-    '        vRetorno = False
-    '    End If
-    '    Return vRetorno
-    'End Function
 
 #End Region
 
@@ -384,9 +282,7 @@ Public Class Modelo
     Public Function llena_combo_Modelos_Linea_Salida() As DataTable
         Using scope As New TransactionScope
             Try
-                Dim vComando As New SqlClient.SqlCommand
-                vComando.CommandType = CommandType.StoredProcedure
-                vComando.CommandText = "get_lista_modelos_salida"
+                Dim vComando As New SqlClient.SqlCommand() With {.CommandType = CommandType.StoredProcedure, .CommandText = "get_lista_modelos_salida"}
                 vComando.Parameters.Add("@cve_linea", SqlDbType.BigInt).Value = Me.vcve_linea
                 vComando.Parameters.Add("@cve_modelo", SqlDbType.VarChar).Value = Me.vcve_modelo
                 Dim obj As DataTable = oBD.EjecutaCommando(vComando)

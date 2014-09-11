@@ -1,8 +1,8 @@
 ﻿Imports CapaDatos
 Namespace Clases_Catalogos
     Public Class Catalogo_Tipo_Usuario
-        Dim cadena_conexion As New CapaDatos.conexiones
-        Dim oBD As New CapaDatos.CapaDatos(cadena_conexion.CadenaSicaip)
+        Dim cadena_conexion As New conexiones
+
 
         Private vL_Tipo_Usuario As List(Of Tipo_Usuario)
         Public Property L_Tipo_Usuario() As List(Of Tipo_Usuario)
@@ -10,7 +10,7 @@ Namespace Clases_Catalogos
                 If vL_Tipo_Usuario Is Nothing Then
                     'Cargo TIPO_USUARIO
                     Me.L_Tipo_Usuario = New List(Of Tipo_Usuario)
-                    Dim oBD As New CapaDatos.CapaDatos(cadena_conexion.CadenaSicaip)
+                    Dim oBD As New Datos(cadena_conexion.CadenaSicaip)
                     Dim oEq As DataTable = oBD.ObtenerTabla("SELECT CVE_Tipo_Usuario FROM SEGURIDAD_TIPO_USUARIO")
                     If oEq IsNot Nothing Then
                         Dim oTipo_Usuario As Tipo_Usuario = Nothing

@@ -2,7 +2,7 @@
 Namespace Clases_Catalogos
     Public Class Catalogo_Linea_Clasificacion
         Dim cadena_conexion As New CapaDatos.conexiones
-        Dim oBD As New CapaDatos.CapaDatos(cadena_conexion.CadenaSicaip)
+        Dim oBD As New Datos(cadena_conexion.CadenaSicaip)
         Dim oClasificacion_Linea As New Linea_Clasificacion
 
         Private vL_Linea As List(Of Linea_Clasificacion)

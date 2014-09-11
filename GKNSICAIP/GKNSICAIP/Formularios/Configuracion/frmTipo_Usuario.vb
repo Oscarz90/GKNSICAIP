@@ -16,11 +16,11 @@ Public Class FrmTipo_Usuario
         ' Agregue cualquier inicialización después de la llamada a InitializeComponent().
     End Sub
 
-    Private Sub btnSalir_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSalir.Click
+    Private Sub btnSalir_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnSalir.Click
         Me.Close()
     End Sub
 
-    Private Sub btnBaja_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnBaja.Click
+    Private Sub btnBaja_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnBaja.Click
         If MsgBox("¿Esta seguro de Eliminar al Tipo de Usuario?", MsgBoxStyle.YesNo, Me.Text) = MsgBoxResult.Yes Then
             Try
                 oTipo_Usuario.Eliminar()
@@ -31,7 +31,7 @@ Public Class FrmTipo_Usuario
         End If
     End Sub
 
-    Private Sub btnModificar_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnModificar.Click
+    Private Sub btnModificar_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnModificar.Click
         If MsgBox("¿Esta seguro de realizar los cambios al Tipo de Usuario?", MsgBoxStyle.YesNo, Me.Text) = MsgBoxResult.Yes Then
             oTipo_Usuario.Nombre_Tipo_Usuario = txtDescripcion.Text
             Try
@@ -44,8 +44,8 @@ Public Class FrmTipo_Usuario
         End If
     End Sub
 
-    Private Sub btnRegistrar_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnRegistrar.Click
-        If vValida_Descripcion > 0 Then            
+    Private Sub btnRegistrar_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnRegistrar.Click
+        If vValida_Descripcion > 0 Then
             If MsgBox("¿Esta seguro de registrar el nuevo Tipo de Usuario?", MsgBoxStyle.YesNo, Me.Text) = MsgBoxResult.Yes Then
                 oTipo_Usuario.CVE_Tipo_Usuario = 0
                 oTipo_Usuario.Nombre_Tipo_Usuario = txtDescripcion.Text
@@ -63,29 +63,23 @@ Public Class FrmTipo_Usuario
         End If
     End Sub
 
-    Private Sub FrmTipo_Usuario_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
-
-        ''La Siguiente Linea solo es para hacer pruebas sobre un TIPO_USUARIO de Prueba(El cual se agrego y se modifico de forma Exitosa)
-        ''Borrar si requiere hacer registro nuevo
-        'vId_Publico = 936
+    Private Sub FrmTipo_Usuario_Load(ByVal sender As Object, ByVal e As EventArgs) Handles MyBase.Load
         If Convert.ToInt64(vId_Publico) <> 0 Then
-            oTipo_Usuario = New Tipo_Usuario
-            oTipo_Usuario.CVE_Tipo_Usuario = vId_Publico
-            oTipo_Usuario.Cargar()            
+            oTipo_Usuario = New Tipo_Usuario() With {.CVE_Tipo_Usuario = vId_Publico}
+            oTipo_Usuario.Cargar()
             Controles_Registro_Nuevo(False)
         Else
-            oTipo_Usuario = New Tipo_Usuario            
+            oTipo_Usuario = New Tipo_Usuario
             Controles_Registro_Nuevo(True)
         End If
         Controles_Permisos(vAdd_Registrar, vDelete_Eliminar)
-        SetBindings()      
+        SetBindings()
         Me.Show()
         Me.txtDescripcion.Focus()
     End Sub
 
     Private Sub SetBindings()
         Me.txtDescripcion.DataBindings.Clear()
-
         Me.txtDescripcion.DataBindings.Add("Text", oTipo_Usuario, "Nombre_Tipo_Usuario")
     End Sub
 
@@ -124,7 +118,7 @@ Public Class FrmTipo_Usuario
         End If
     End Sub
 
-    Private Sub txtDescripcion_Validated(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles txtDescripcion.Validated
+    Private Sub txtDescripcion_Validated(ByVal sender As Object, ByVal e As EventArgs) Handles txtDescripcion.Validated
         vValida_Descripcion = txtDescripcion.Text.Count
         If vValida_Descripcion > 0 Then
             btnRegistrar.Enabled = True
@@ -134,7 +128,7 @@ Public Class FrmTipo_Usuario
 
     End Sub
 
-    Private Sub txtDescripcion_KeyUp(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtDescripcion.KeyUp
+    Private Sub txtDescripcion_KeyUp(ByVal sender As Object, ByVal e As KeyEventArgs) Handles txtDescripcion.KeyUp
         vValida_Descripcion = txtDescripcion.Text.Count
         If vValida_Descripcion > 0 Then
             btnRegistrar.Enabled = True

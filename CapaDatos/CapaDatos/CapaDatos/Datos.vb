@@ -1,11 +1,9 @@
 ﻿Imports Microsoft.Practices.EnterpriseLibrary.Common
 Imports Microsoft.Practices.EnterpriseLibrary.Data
 
-Public Class CapaDatos
+Public Class Datos
     Dim oBD As Microsoft.Practices.EnterpriseLibrary.Data.Sql.SqlDatabase
-    'Private vCadenaConexion As String
     Public Sub New(ByVal vCadena_Conexion As String)
-        'LeerCadenaConexion()
         oBD = New Microsoft.Practices.EnterpriseLibrary.Data.Sql.SqlDatabase(vCadena_Conexion)
     End Sub
 #Region "Metodos"
@@ -14,7 +12,7 @@ Public Class CapaDatos
             Dim oSqlComando As New SqlClient.SqlCommand(vConsulta)
             oBD.ExecuteNonQuery(oSqlComando)
         Catch
-            Throw New Exception("Error al ejecutar la siguiente consulta: " & vConsulta & " " & Err.Description)
+            Throw New Exception(String.Format("Error al ejecutar la siguiente consulta: {0} {1}", vConsulta, Err.Description))
         End Try
 
     End Sub
@@ -40,7 +38,7 @@ Public Class CapaDatos
                 Return Nothing
             End If
         Catch
-            Throw New Exception("Error al crear una tabla con la siguente sentencia: " & vConsulta_SQL & " " & Err.Description)
+            Throw New Exception(String.Format("Error al crear una tabla con la siguente sentencia: {0} {1}", vConsulta_SQL, Err.Description))
         End Try
     End Function
     ''' <summary>
@@ -66,7 +64,7 @@ Public Class CapaDatos
                 ObtenerRenglon = Nothing
             End If
         Catch
-            Throw New Exception("Error al crear un renglon con la siguente sentencia: " & vConsulta_SQL & " " & Err.Description)
+            Throw New Exception(String.Format("Error al crear un renglon con la siguente sentencia: {0} {1}", vConsulta_SQL, Err.Description))
         End Try
     End Function
     Public Sub EjecutaProcedimientos(ByVal oSQL_Comando As System.Data.Common.DbCommand)

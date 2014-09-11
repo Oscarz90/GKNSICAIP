@@ -1,14 +1,12 @@
 ﻿Imports CapaDatos
-Imports System.Data
 
 Public Class Tipo_Rechazo
     Implements IIndividual
-    Dim cadena_conexion As New CapaDatos.conexiones
-    Dim oBD As New CapaDatos.CapaDatos(cadena_conexion.CadenaSicaip)
+    Dim cadena_conexion As New conexiones
+    Dim oBD As New Datos(cadena_conexion.CadenaSicaip)
 #Region "IIndividual"
     Public Sub Cargar() Implements IIndividual.Cargar
-        Dim vDR As DataRow
-        vDR = oBD.ObtenerRenglon("select * from tipo_rechazo where cve_tipo_rechazo = " & vcve_tipo_rechazo, "tipo_rechazo")
+        Dim vDR As DataRow = oBD.ObtenerRenglon("select * from tipo_rechazo where cve_tipo_rechazo = " & vcve_tipo_rechazo, "tipo_rechazo")
         If vDR IsNot Nothing Then
             vcve_tipo_rechazo = vDR("cve_tipo_rechazo")
             vTipo = vDR("tipo")
@@ -24,9 +22,8 @@ Public Class Tipo_Rechazo
     End Sub
 
     Public Function Obtener_Id(ByVal vCadena As String) As Long Implements IIndividual.Obtener_Id
-        Dim vDR As DataRow
+        Dim vDR As DataRow = oBD.ObtenerRenglon("select cve_tipo_rechazo from tipo_rechazo where tipo = " & vCadena, "tipo_rechazo")
         Dim vRetorno As Long
-        vDR = oBD.ObtenerRenglon("select cve_tipo_rechazo from tipo_rechazo where tipo = " & vCadena, "tipo_rechazo")
         If vDR IsNot Nothing Then
             vRetorno = vDR("cve_tipo_rechazo")
         Else
@@ -39,9 +36,7 @@ Public Class Tipo_Rechazo
 
         Using scope As New TransactionScope
             Try
-                Dim cmd As New SqlClient.SqlCommand
-                cmd.CommandType = CommandType.StoredProcedure
-                cmd.CommandText = "REGISTRAR_Tipo_Rechazo"
+                Dim cmd As New SqlClient.SqlCommand() With {.CommandType = CommandType.StoredProcedure, .CommandText = "REGISTRAR_Tipo_Rechazo"}
                 cmd.Parameters.Add("@cve_tipo_rechazo", SqlDbType.Int).Value = Me.vcve_tipo_rechazo
                 cmd.Parameters.Add("@tipo", SqlDbType.VarChar).Value = Me.vTipo
 

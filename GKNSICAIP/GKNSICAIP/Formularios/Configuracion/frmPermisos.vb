@@ -19,27 +19,21 @@ Public Class FrmPermisos
         ' Agregue cualquier inicialización después de la llamada a InitializeComponent().
     End Sub
 
-    Private Sub FrmPermisos_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
+    Private Sub FrmPermisos_Load(ByVal sender As Object, ByVal e As EventArgs) Handles MyBase.Load
         oUsuario = New SEGURIDAD_USUARIO
         Cargar_Usuarios(oUsuario, 0, Nothing)
-        Carga_Permisos_Usuario(oUsuario, 0, Nothing)        
+        Carga_Permisos_Usuario(oUsuario, 0, Nothing)
         btnGuardar.Enabled = False
         RadLabel1.Visible = False
     End Sub
 
     Private Sub Cargar_Usuarios(ByRef User As SEGURIDAD_USUARIO, ByVal vIndicePadre As Integer, ByVal vNodePadre As TreeNode)
-        Dim vDV_Hijos As DataView
         'Crear un DataView con los Nodos que dependen del Nodo padre pasado como parámetro
-        vDV_Hijos = New DataView(User.Obtener_Arbol_Usuarios)
-
-        vDV_Hijos.RowFilter = User.Obtener_Arbol_Usuarios.Columns("IdentificadorPadre").ColumnName + "=" + vIndicePadre.ToString
+        Dim vDV_Hijos As New DataView(User.Obtener_Arbol_Usuarios) With {.RowFilter = String.Format("{0}={1}", User.Obtener_Arbol_Usuarios.Columns("IdentificadorPadre").ColumnName, vIndicePadre)}
         ' Agregar al TreeView los nodos Hijos que se han obtenido en el DataView.      
 
         For Each dataRowCurrent As DataRowView In vDV_Hijos
-            Dim nuevoNodo As New TreeNode
-            nuevoNodo.Text = dataRowCurrent("NombreNodo").ToString().Trim() ' + " " + "-->" + dataRowCurrent("estatus").ToString().Trim()            
-            nuevoNodo.Tag = dataRowCurrent("CVE_TABLA").ToString().Trim()
-            nuevoNodo.Checked = True
+            Dim nuevoNodo As New TreeNode() With {.Text = dataRowCurrent("NombreNodo").ToString().Trim(), .Tag = dataRowCurrent("CVE_TABLA").ToString().Trim(), .Checked = True}
             ' si el parámetro nodoPadre es nulo es porque es la primera llamada, son los Nodos
             ' del primer nivel que no dependen de otro nodo.
             If vNodePadre Is Nothing Then
@@ -55,17 +49,13 @@ Public Class FrmPermisos
     End Sub
 
     Private Sub Carga_Permisos_Usuario(ByRef User As SEGURIDAD_USUARIO, ByVal vIndicePadre_Permisos_Usuarios As Integer, ByVal vNodePadre_Permisos_Usuarios As TreeNode, Optional ByVal vAsignacion_Permisos As Boolean = False, Optional ByVal vId_Usuario As Long = 0)
-        Dim vDV_Hijos As DataView
         'Crear un DataView con los Nodos que dependen del Nodo padre pasado como parámetro
-        vDV_Hijos = New DataView(User.Obtener_Arbol_Permisos)
-
-        vDV_Hijos.RowFilter = User.Obtener_Arbol_Permisos.Columns("IdentificadorPadre").ColumnName + "=" + vIndicePadre_Permisos_Usuarios.ToString
+        Dim vDV_Hijos As New DataView(User.Obtener_Arbol_Permisos)
+        vDV_Hijos.RowFilter = String.Format("{0}={1}", User.Obtener_Arbol_Permisos.Columns("IdentificadorPadre").ColumnName, vIndicePadre_Permisos_Usuarios)
         ' Agregar al TreeView los nodos Hijos que se han obtenido en el DataView.   
 
         For Each dataRowCurrent As DataRowView In vDV_Hijos
-            Dim nuevoNodo_Permisos_Usuarios As New TreeNode
-            nuevoNodo_Permisos_Usuarios.Text = dataRowCurrent("NombreNodo").ToString().Trim() ' + " " + "-->" + dataRowCurrent("estatus").ToString().Trim()            
-            nuevoNodo_Permisos_Usuarios.Tag = dataRowCurrent("CVE_TABLA").ToString().Trim()
+            Dim nuevoNodo_Permisos_Usuarios As New TreeNode() With {.Text = dataRowCurrent("NombreNodo").ToString().Trim(), .Tag = dataRowCurrent("CVE_TABLA").ToString().Trim()}
             ''-------------------------------------------------------------------------------------------------------------------------------
             If vAsignacion_Permisos = True Then
                 Dim vDV_Permisos As DataView
@@ -76,7 +66,7 @@ Public Class FrmPermisos
                     vId_Per_Libre = Obtener_Id_Libre(nuevoNodo_Permisos_Usuarios.Tag)
                     vDV_Permisos = New DataView(User.Obtener_Permisos_Usuario(vId_Usuario))
                     If vDV_Permisos.Count > 0 Then
-                        vDV_Permisos.RowFilter = User.Obtener_Permisos_Usuario(vId_Usuario).Columns("CVE_PERMISO").ColumnName + "=" + vId_Per_Libre.ToString
+                        vDV_Permisos.RowFilter = String.Format("{0}={1}", User.Obtener_Permisos_Usuario(vId_Usuario).Columns("CVE_PERMISO").ColumnName, vId_Per_Libre)
                         If vDV_Permisos.Count > 0 Then
                             nuevoNodo_Permisos_Usuarios.Checked = True
                         Else
@@ -103,11 +93,11 @@ Public Class FrmPermisos
         Next dataRowCurrent
     End Sub
 
-    Private Sub btnSalir_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSalir.Click
+    Private Sub btnSalir_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnSalir.Click
         Me.Close()
     End Sub
 
-    Private Sub TreeView_Usuarios_NodeMouseClick(ByVal sender As System.Object, ByVal e As System.Windows.Forms.TreeNodeMouseClickEventArgs) Handles TreeView_Usuarios.NodeMouseClick
+    Private Sub TreeView_Usuarios_NodeMouseClick(ByVal sender As Object, ByVal e As TreeNodeMouseClickEventArgs) Handles TreeView_Usuarios.NodeMouseClick
         Cargar_Permisos_Usuario_Seleccionado(e.Node.Tag)
         If Obtener_Tipo_ID(e.Node.Tag) = "U" Then
             lbUsuario_Seleccionado.Text = e.Node.Text
@@ -137,11 +127,9 @@ Public Class FrmPermisos
         Next node
     End Sub
 
-    Private Sub TreeView_Permisos_AfterCheck(ByVal sender As System.Object, ByVal e As System.Windows.Forms.TreeViewEventArgs) Handles TreeView_Permisos.AfterCheck
+    Private Sub TreeView_Permisos_AfterCheck(ByVal sender As Object, ByVal e As TreeViewEventArgs) Handles TreeView_Permisos.AfterCheck
         If e.Action <> TreeViewAction.Unknown Then
             If e.Node.Nodes.Count > 0 Then
-                ' Calls the CheckAllChildNodes method, passing in the current 
-                ' Checked value of the TreeNode whose checked state changed. 
                 Me.CheckAllChildNodes(e.Node, e.Node.Checked)
             End If
         End If
@@ -153,7 +141,6 @@ Public Class FrmPermisos
     Private Function Obtener_Id_Libre(ByVal vTag_Nodo As String) As Integer
         Dim vRetorno As Integer
         Dim cadena As String = vTag_Nodo 'para capturar una cadena
-        Dim resultado As String = "" 'para y recogiendo los caracteres de la cadena
         Dim x As Integer 'para pasar la posicion de la cadena
         Dim vPosicionPunto As Integer = 0
 
@@ -171,7 +158,6 @@ Public Class FrmPermisos
     Private Function Obtener_Tipo_ID(ByVal vTag_Nodo As String) As String
         Dim vRetorno As String = ""
         Dim cadena As String = vTag_Nodo 'para capturar una cadena
-        Dim resultado As String = "" 'para y recogiendo los caracteres de la cadena
         Dim x As Integer 'para pasar la posicion de la cadena
         Dim vPosicionPunto As Integer = 0
 
@@ -194,11 +180,9 @@ Public Class FrmPermisos
             ''Se busca el Id, siempre y cuando sea un Usuario, esto para optimizar recurso(no sirve de nada cargar un TU("Tipo Usuario") ya que no requerimos esto.
             vId_Nodo = Obtener_Id_Libre(vTag)
             vUsuario_Seleccionado_Global = vId_Nodo
-            'If oUsuario.Obtener_Permisos_Usuario(vId_Nodo) IsNot Nothing Then             
             oUsuario = New SEGURIDAD_USUARIO
             TreeView_Permisos.Nodes.Clear()
             Carga_Permisos_Usuario(oUsuario, 0, Nothing, True, vId_Nodo)
-            'End If
         End If
     End Sub
 
@@ -228,18 +212,14 @@ Public Class FrmPermisos
             'Si el nodo que recibimos tiene hijos se recorrerá para luego verificar si esta o no checado
             For Each tn As TreeNode In treeNode.Nodes
                 'Se Verifica si esta marcado...
-                'If tn.Checked = True Then
                 If Obtener_Tipo_ID(tn.Tag) = "P" Then
                     If tn.Checked = True Then
                         vId_Nodo = Obtener_Id_Libre(tn.Tag)
-                        oUsuario_Permisos = New SEGURIDAD_USUARIO_PERMISOS
-                        oUsuario_Permisos.CVE_PERMISO = vId_Nodo
-                        oUsuario_Permisos.CVE_USUARIO = vUsuario_Seleccionado_Global
+                        oUsuario_Permisos = New SEGURIDAD_USUARIO_PERMISOS() With {.CVE_PERMISO = vId_Nodo, .CVE_USUARIO = vUsuario_Seleccionado_Global}
                         oUsuario.CVE_Usuario = vUsuario_Seleccionado_Global
                         oUsuario.L_USUARIO_PERMISOS.Add(oUsuario_Permisos)
                     End If
                 End If
-                'End If
                 'Ahora hago verificacion a los hijos del nodo actual. Esta iteración no acabara hasta llegar al ultimo nodo principal
                 RecorrerNodos_PARA_GUARDAR(tn)
             Next
@@ -248,7 +228,7 @@ Public Class FrmPermisos
         End Try
     End Sub
 
-    Private Sub btnGuardar_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnGuardar.Click
+    Private Sub btnGuardar_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnGuardar.Click
         'Se Declara una colección de nodos apartir de tu Treeview del que se va a recorrer
         Dim nodes As TreeNodeCollection = TreeView_Permisos.Nodes
         'Se recorren los nodos principales

@@ -1,12 +1,11 @@
 ﻿Imports CapaDatos
 Public Class Componente
     Implements IIndividual
-    Dim cadena_conexion As New CapaDatos.conexiones
-    Dim oBD As New CapaDatos.CapaDatos(cadena_conexion.CadenaSicaip)
+    Dim cadena_conexion As New conexiones
+    Dim oBD As New Datos(cadena_conexion.CadenaSicaip)
 #Region "IIndividual"
     Public Sub Cargar() Implements IIndividual.Cargar
-        Dim vDR As DataRow
-        vDR = oBD.ObtenerRenglon("select * from Componente where cve_componente=" & vcve_componente, "Componente")
+        Dim vDR As DataRow = oBD.ObtenerRenglon("select * from Componente where cve_componente=" & vcve_componente, "Componente")
         If vDR IsNot Nothing Then
             If Not IsDBNull(vDR("cve_componente")) Then
                 Me.vcve_componente = vDR("cve_componente")
@@ -98,8 +97,7 @@ Public Class Componente
 
 #Region "Metodos Generales"
     Public Function Obtener_Componentes() As DataTable
-        Dim vDT As DataTable
-        vDT = oBD.ObtenerTabla("select * from componente")
+        Dim vDT As DataTable = oBD.ObtenerTabla("select * from componente")
         If vDT IsNot Nothing Then
 
         Else
@@ -109,8 +107,7 @@ Public Class Componente
     End Function
 
     Public Function Obtener_Componentes(ByVal vFiltro As String) As DataTable
-        Dim vDT As DataTable
-        vDT = oBD.ObtenerTabla("select * from componente where componente LIKE '%" & vFiltro & "%'")
+        Dim vDT As DataTable = oBD.ObtenerTabla(String.Format("select * from componente where componente LIKE '%{0}%'", vFiltro))
         If vDT IsNot Nothing Then
 
         Else
@@ -120,9 +117,7 @@ Public Class Componente
     End Function
 
     Public Function Obtener_Componente_Usuario(ByVal vCve_Usuario As Long) As DataTable
-        Dim vRetorno As DataTable
-
-        vRetorno = oBD.ObtenerTabla("SELECT * FROM USUARIO_COMPONENTE WHERE CVE_Usuario=" & vCve_Usuario)
+        Dim vRetorno As DataTable = oBD.ObtenerTabla("SELECT * FROM USUARIO_COMPONENTE WHERE CVE_Usuario=" & vCve_Usuario)
 
 
         Return vRetorno
@@ -131,8 +126,7 @@ Public Class Componente
 
 #Region "Metodos Formulario de CDM Cambio de Modelo"
     Public Sub obtiene_precio_componente_linea()
-        Dim vDR As DataRow
-        vDR = oBD.ObtenerRenglon("select c.precio from linea l join componente c on l.cve_componente=c.cve_componente where l.cve_linea=" & vcve_linea, "paro")
+        Dim vDR As DataRow = oBD.ObtenerRenglon("select c.precio from linea l join componente c on l.cve_componente=c.cve_componente where l.cve_linea=" & vcve_linea, "paro")
         If vDR IsNot Nothing Then
             vprecio = vDR("precio")
         End If

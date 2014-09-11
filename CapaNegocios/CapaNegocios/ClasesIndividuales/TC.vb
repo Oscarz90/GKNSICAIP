@@ -1,8 +1,8 @@
 ﻿Imports CapaDatos
 Public Class TC
     Implements IIndividual
-    Dim cadena_conexion As New CapaDatos.conexiones
-    Dim oBD As New CapaDatos.CapaDatos(cadena_conexion.CadenaSicaip)
+    Dim cadena_conexion As New conexiones
+    Dim oBD As New Datos(cadena_conexion.CadenaSicaip)
     Dim oLinea As Linea
     Dim oModelo As Modelo
     Public vCve_TC_Existe As Long = 0
@@ -47,15 +47,7 @@ Public Class TC
 
         End Try
     End Sub
-    'Dim vId As Long
-    'Public Property Id As Long Implements IIndividual.Id
-    '    Get
-    '        Return vId
-    '    End Get
-    '    Set(ByVal value As Long)
-    '        vId = value
-    '    End Set
-    'End Property
+    
 
     Public Function Obtener_Id(ByVal vCadena As String) As Long Implements IIndividual.Obtener_Id
         Return 1
@@ -64,9 +56,7 @@ Public Class TC
     Public Sub Registrar() Implements IIndividual.Registrar
         Using scope As New TransactionScope()
             Try
-                Dim cmd As New SqlClient.SqlCommand
-                cmd.CommandType = CommandType.StoredProcedure
-                cmd.CommandText = "REGISTRAR_TC"
+                Dim cmd As New SqlClient.SqlCommand() With {.CommandType = CommandType.StoredProcedure, .CommandText = "REGISTRAR_TC"}
                 With cmd.Parameters
                     .Add("cve_TC", SqlDbType.BigInt).Value = Me.vcve_TC
                     .Add("piezas_por_hora", SqlDbType.Int).Value = Me.vpiezas_por_hora
@@ -128,7 +118,7 @@ Public Class TC
         End Set
     End Property
 
-    
+
     Public Property Fecha() As DateTime
         Get
             Return vFecha
@@ -148,8 +138,7 @@ Public Class TC
     Public ReadOnly Property Nombre_Linea() As String
         Get
             If cve_linea <> 0 Then
-                oLinea = New Linea
-                oLinea.cve_linea = cve_linea
+                oLinea = New Linea() With {.cve_linea = cve_linea}
                 oLinea.Cargar()
                 Return oLinea.linea
             Else
@@ -160,8 +149,7 @@ Public Class TC
     Public ReadOnly Property Nombre_Modelo() As String
         Get
             If cve_modelo <> 0 Then
-                oModelo = New Modelo
-                oModelo.cve_modelo = cve_modelo
+                oModelo = New Modelo() With {.cve_modelo = cve_modelo}
                 oModelo.Cargar()
                 Return oModelo.descripcion
             Else
@@ -195,8 +183,7 @@ Public Class TC
 
     Public Function Validar_Exixtencia_LINEA_MODELO_EN_TC(ByVal vID_Linea As Long, ByVal vID_Modelo As Long) As Boolean
         Dim vRetorno As Boolean = False
-        Dim vDT As DataTable
-        vDT = oBD.ObtenerTabla("SELECT cve_TC FROM TC WHERE estatus !='0' and cve_linea=" & vID_Linea & " AND cve_modelo=" & vID_Modelo)
+        Dim vDT As DataTable = oBD.ObtenerTabla(String.Format("SELECT cve_TC FROM TC WHERE estatus !='0' and cve_linea={0} AND cve_modelo={1}", vID_Linea, vID_Modelo))
         If vDT.Rows.Count > 0 Then
             vCve_TC_Existe = vDT.Rows(0).Item("cve_TC")
             vRetorno = True
@@ -239,13 +226,10 @@ Public Class TC
     End Function
 
     Public Sub Cargar_TC(ByVal vID_Linea As Long, ByVal vID_Modelo As Long)
-        Dim rDatos As DataRow
-        rDatos = oBD.ObtenerRenglon("SELECT cve_TC FROM TC WHERE estatus !='0' and cve_linea=" & vID_Linea & " AND cve_modelo=" & vID_Modelo, "TC")
+        Dim rDatos As DataRow = oBD.ObtenerRenglon(String.Format("SELECT cve_TC FROM TC WHERE estatus !='0' and cve_linea={0} AND cve_modelo={1}", vID_Linea, vID_Modelo), "TC")
         If rDatos IsNot Nothing Then
             vcve_TC = rDatos("cve_TC")
             Cargar()
-        Else
-
         End If
     End Sub
 
@@ -299,7 +283,7 @@ Public Class TC
     Public Sub obtener_piezas_por_hora()
         Dim vDR As DataRow
         Try
-            vDR = oBD.ObtenerRenglon("select top(1)t.cve_TC,t.piezas_por_hora from TC t where t.cve_linea=" & vcve_linea & " and t.cve_modelo=" & vcve_modelo & " and estatus='1' order by fecha desc", "paro")
+            vDR = oBD.ObtenerRenglon(String.Format("select top(1)t.cve_TC,t.piezas_por_hora from TC t where t.cve_linea={0} and t.cve_modelo={1} and estatus='1' order by fecha desc", vcve_linea, vcve_modelo), "paro")
             If vDR IsNot Nothing Then
                 vcve_TC = vDR("cve_TC")
                 vpiezas_por_hora = vDR("piezas_por_hora")

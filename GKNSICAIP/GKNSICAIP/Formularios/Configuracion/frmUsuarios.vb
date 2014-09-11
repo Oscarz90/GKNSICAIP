@@ -7,8 +7,7 @@ Public Class FrmUsuarios
     Public vId_Retorno As Long = 0
     Dim vAdd_Registrar As Boolean = True
     Dim vDelete_Eliminar As Boolean = True
-    Dim oCadena_Valor As New Cadena_Valor
-    Dim oComponente As New Componente
+    
     Dim oLista_Componentes As New List(Of String)
     Dim oLista_CV As New List(Of String)
     Dim vValida_Usuario_Red As Integer = 0
@@ -26,11 +25,11 @@ Public Class FrmUsuarios
     End Sub
 
 
-    Private Sub btnSalir_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSalir.Click
+    Private Sub btnSalir_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnSalir.Click
         Me.Close()
     End Sub
 
-    Private Sub btnBaja_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnBaja.Click
+    Private Sub btnBaja_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnBaja.Click
         If MsgBox("¿Esta seguro de Desactivar al Usuario?", MsgBoxStyle.YesNo, Me.Text) = MsgBoxResult.Yes Then
             Try
                 oUsuario.Eliminar()
@@ -41,7 +40,7 @@ Public Class FrmUsuarios
         End If
     End Sub
 
-    Private Sub btnAlta_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnAlta.Click
+    Private Sub btnAlta_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnAlta.Click
         If MsgBox("¿Esta seguro de Activar al Usuario?", MsgBoxStyle.YesNo, Me.Text) = MsgBoxResult.Yes Then
             Try
                 oUsuario.Estatus = "1"
@@ -53,9 +52,7 @@ Public Class FrmUsuarios
         End If
     End Sub
 
-    Private Sub btnImportar_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnImportar.Click
-
-
+    Private Sub btnImportar_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnImportar.Click
         Dim ofrmImportar_Tipo_Usuario As New FrmImportador_TipoUsuario
         ofrmImportar_Tipo_Usuario.ShowDialog()
         oUsuario.CVE_TIPO_USUARIO = ofrmImportar_Tipo_Usuario.vRetorno_CVE_TIPO_USUARIO
@@ -65,22 +62,21 @@ Public Class FrmUsuarios
             btnRegistrar.Enabled = True
         Else
             btnRegistrar.Enabled = False
-        End If        
+        End If
         Call opActivar_Nivel_ToggleStateChanged(Nothing, Nothing)
 
     End Sub
 
-    Private Sub btnModificar_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnModificar.Click
+    Private Sub btnModificar_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnModificar.Click
         If MsgBox("¿Esta seguro de realizar los cambios al Usuario?", MsgBoxStyle.YesNo, Me.Text) = MsgBoxResult.Yes Then
             oUsuario.Id_Usuario = txtId_Usuario.Text
             oUsuario.Pass = txtPass.Text
             oUsuario.Nombre = txtNombre.Text
-            'oUsuario.Email = txtEmail.Text
             oUsuario.Email = vEmail_Respaldo
             Try
                 oUsuario.Registrar()
                 If opActivar_Nivel.Checked = True Then
-                    oUsuario.Eliminar_Nivel_Usuario(oUsuario.CVE_Usuario)                    
+                    oUsuario.Eliminar_Nivel_Usuario(oUsuario.CVE_Usuario)
                     If radUsuario_Componente.IsChecked = True Then
                         For Each vElemento As String In oLista_Componentes
                             oUsuario.Registrar_Nivel_Usuario(True, Long.Parse(vElemento), oUsuario.CVE_Usuario)
@@ -102,7 +98,7 @@ Public Class FrmUsuarios
         End If
     End Sub
 
-    Private Sub btnRegistrar_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnRegistrar.Click
+    Private Sub btnRegistrar_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnRegistrar.Click
         If vValida_Usuario_Red > 0 And vValida_Nombre > 0 And vValida_Tipo_Usuario > 0 Then
             btnRegistrar.Enabled = True
             If MsgBox("¿Esta seguro de registrar el nuevo Usuario?", MsgBoxStyle.YesNo, Me.Text) = MsgBoxResult.Yes Then
@@ -110,7 +106,6 @@ Public Class FrmUsuarios
                 oUsuario.Id_Usuario = txtId_Usuario.Text
                 oUsuario.Pass = txtPass.Text
                 oUsuario.Nombre = txtNombre.Text
-                'oUsuario.Email = txtEmail.Text
                 oUsuario.Email = vEmail_Respaldo
                 Using scope As New TransactionScope()
                     Try
@@ -142,14 +137,9 @@ Public Class FrmUsuarios
         End If
     End Sub
 
-    Private Sub FrmUsuarios_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
-        ''La Siguiente Linea solo es para hacer pruebas sobre un SEGURIDAD_USUARIO de Prueba(El cual se agrego y se modifico de forma Exitosa)
-        ''Borrar si requiere hacer registro nuevo
-        'vId_Publico = 936
-
+    Private Sub FrmUsuarios_Load(ByVal sender As Object, ByVal e As EventArgs) Handles MyBase.Load
         If Convert.ToInt64(vId_Publico) <> 0 Then
-            oUsuario = New SEGURIDAD_USUARIO
-            oUsuario.CVE_Usuario = vId_Publico
+            oUsuario = New SEGURIDAD_USUARIO() With {.CVE_Usuario = vId_Publico}
             oUsuario.Cargar()
             Controles_Registro_Nuevo(False)
             Controles_Permisos(vAdd_Registrar, vDelete_Eliminar)
@@ -158,18 +148,14 @@ Public Class FrmUsuarios
 
             If oUsuario.Cve_Componente <> 0 Then
                 radUsuario_Componente.IsChecked = True
-                'ddlComponente_W.Enabled = True
                 btnComponente.Enabled = True
             Else
-                'ddlComponente_W.Enabled = False
                 btnComponente.Enabled = False
             End If
             If oUsuario.Cve_CV <> 0 Then
                 radUsuario_CV.IsChecked = True
-                'ddlCadena_Valor_W.Enabled = True
-                btnCadena_Valor.Enabled = True                
+                btnCadena_Valor.Enabled = True
             Else
-                'ddlCadena_Valor_W.Enabled = False
                 btnCadena_Valor.Enabled = False
             End If
 
@@ -186,14 +172,12 @@ Public Class FrmUsuarios
                 Controles_Registro_Inactivo(False)
             End If
         Else
-            oUsuario = New SEGURIDAD_USUARIO
-            oUsuario.Estatus = "1"
+            oUsuario = New SEGURIDAD_USUARIO() With {.Estatus = "1"}
             Controles_Registro_Nuevo(True)
             Controles_Permisos(vAdd_Registrar, vDelete_Eliminar)
             opActivar_Nivel.Checked = False
         End If
-        'LlenaCombos()
-        SetBindings()        
+        SetBindings()
         Me.Show()
         Me.txtId_Usuario.Focus()
     End Sub
@@ -204,15 +188,7 @@ Public Class FrmUsuarios
         Me.txtNombre.DataBindings.Clear()
         Me.txtEmail.DataBindings.Clear()
         Me.txtTipo_Usuario.DataBindings.Clear()
-        'Me.ddlCadena_Valor_W.DataBindings.Clear()
-        'Me.ddlComponente_W.DataBindings.Clear()
-
-        'If oUsuario.Cve_Componente <> 0 Then            
-        '    Me.ddlComponente_W.DataBindings.Add("SelectedValue", oUsuario, "Cve_Componente")
-        'End If
-        'If oUsuario.Cve_CV <> 0 Then
-        '    Me.ddlCadena_Valor_W.DataBindings.Add("SelectedValue", oUsuario, "Cve_CV")
-        'End If
+       
         Me.txtId_Usuario.DataBindings.Add("Text", oUsuario, "Id_Usuario")
         Me.txtPass.DataBindings.Add("Text", oUsuario, "Pass")
         Me.txtNombre.DataBindings.Add("Text", oUsuario, "Nombre")
@@ -220,17 +196,6 @@ Public Class FrmUsuarios
         Me.txtTipo_Usuario.DataBindings.Add("Text", oUsuario, "Descripcion_Tipo_Usuario")
         Me.txtEstatus.DataBindings.Add("Text", oUsuario, "Estatus")
     End Sub
-
-    'Private Sub LlenaCombos()
-    '    Me.ddlCadena_Valor_W.DisplayMember = "cadena"
-    '    Me.ddlCadena_Valor_W.ValueMember = "cve_cadena_valor"
-    '    Me.ddlCadena_Valor_W.DataSource = oCadena_Valor.Obtener_Cadenas_Valor
-
-    '    Me.ddlComponente_W.DisplayMember = "componente"
-    '    Me.ddlComponente_W.ValueMember = "cve_componente"
-    '    Me.ddlComponente_W.DataSource = oComponente.Obtener_Componentes
-
-    'End Sub
 
     Private Sub Controles_Registro_Nuevo(ByVal vEs_Registro_Nuevo As Boolean)
         If vEs_Registro_Nuevo = True Then
@@ -263,9 +228,7 @@ Public Class FrmUsuarios
             txtNombre.ReadOnly = True
         Else
             btnAlta.Visible = False
-            'btnAlta.Enabled = False
             btnBaja.Visible = True
-            'btnBaja.Enabled = True
             rgbGrupo_Nivel.Enabled = True
             opActivar_Nivel.Enabled = True
         End If
@@ -303,7 +266,7 @@ Public Class FrmUsuarios
         End If
     End Sub
 
-    Private Sub txtId_Usuario_Validated(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles txtId_Usuario.Validated
+    Private Sub txtId_Usuario_Validated(ByVal sender As Object, ByVal e As EventArgs) Handles txtId_Usuario.Validated
         vValida_Usuario_Red = txtId_Usuario.Text.Count
         Me.txtEmail.Text = txtId_Usuario.Text & "@gkndriveline.com"
         vEmail_Respaldo = Me.txtEmail.Text
@@ -313,10 +276,9 @@ Public Class FrmUsuarios
         Else
             btnRegistrar.Enabled = False
         End If
-
     End Sub
 
-    Private Sub txtNombre_Validated(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles txtNombre.Validated
+    Private Sub txtNombre_Validated(ByVal sender As Object, ByVal e As EventArgs) Handles txtNombre.Validated
         vValida_Nombre = txtNombre.Text.Count
 
         If vValida_Usuario_Red > 0 And vValida_Nombre > 0 And vValida_Tipo_Usuario > 0 Then
@@ -327,18 +289,16 @@ Public Class FrmUsuarios
     End Sub
 
 
-    Private Sub txtEmail_Validated(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles txtEmail.Validated
+    Private Sub txtEmail_Validated(ByVal sender As Object, ByVal e As EventArgs) Handles txtEmail.Validated
         If txtEmail.Text <> "" Then
             Me.txtEmail.Text = txtId_Usuario.Text & "@gkndriveline.com"
             vEmail_Respaldo = Me.txtEmail.Text
         Else
             Me.txtEmail.Text = vEmail_Respaldo
         End If
-        'Me.txtEmail.Text = txtId_Usuario.Text & "@gkndriveline.com"
-        'vEmail_Respaldo = Me.txtEmail.Text
     End Sub
 
-    Private Sub radUsuario_Componente_ToggleStateChanged(ByVal sender As System.Object, ByVal args As Telerik.WinControls.UI.StateChangedEventArgs) Handles radUsuario_Componente.ToggleStateChanged
+    Private Sub radUsuario_Componente_ToggleStateChanged(ByVal sender As Object, ByVal args As Telerik.WinControls.UI.StateChangedEventArgs) Handles radUsuario_Componente.ToggleStateChanged
         If radUsuario_Componente.IsChecked = True Then
             ddlComponente_W.Enabled = True
             ddlCadena_Valor_W.Enabled = False
@@ -354,7 +314,7 @@ Public Class FrmUsuarios
         End If
     End Sub
 
-    Private Sub opActivar_Nivel_ToggleStateChanged(ByVal sender As System.Object, ByVal args As Telerik.WinControls.UI.StateChangedEventArgs) Handles opActivar_Nivel.ToggleStateChanged
+    Private Sub opActivar_Nivel_ToggleStateChanged(ByVal sender As Object, ByVal args As Telerik.WinControls.UI.StateChangedEventArgs) Handles opActivar_Nivel.ToggleStateChanged
         If opActivar_Nivel.Checked = True Then
             radUsuario_CV.IsChecked = True
             rgbGrupo_Nivel.Enabled = True
@@ -362,7 +322,6 @@ Public Class FrmUsuarios
             rgbGrupo_Nivel.Enabled = False
         End If
         If oUsuario IsNot Nothing Then
-            'opActivar_Nivel.Enabled = True
             If oUsuario.Descripcion_Tipo_Usuario = "LET" Then
                 radUsuario_Componente.Enabled = True
                 radUsuario_CV.Enabled = False
@@ -400,26 +359,20 @@ Public Class FrmUsuarios
                 radUsuario_Componente.IsChecked = True
                 radUsuario_CV.IsChecked = True
             End If
-            'Else
-            '    opActivar_Nivel.Enabled = False
         End If
-        
+
     End Sub
 
-    Private Sub btnComponente_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnComponente.Click
+    Private Sub btnComponente_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnComponente.Click
         Dim ofrmSeleccion_Componente As New FrmSeleccion_Componentes(oUsuario.CVE_Usuario.ToString)
         ofrmSeleccion_Componente.ShowDialog()
         oLista_Componentes = ofrmSeleccion_Componente.oRetorno
     End Sub
 
-    Private Sub btnCadena_Valor_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnCadena_Valor.Click
+    Private Sub btnCadena_Valor_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnCadena_Valor.Click
         Dim ofrmSeleccion_CV As New FrmSeleccion_CV(oUsuario.CVE_Usuario.ToString)
         ofrmSeleccion_CV.ShowDialog()
         oLista_CV = ofrmSeleccion_CV.oRetorno
     End Sub
 
- 
-    'Private Sub btnImportar_MouseClick(ByVal sender As System.Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles btnImportar.MouseClick
-    '    vEmail_Respaldo = Me.txtEmail.Text
-    'End Sub
 End Class

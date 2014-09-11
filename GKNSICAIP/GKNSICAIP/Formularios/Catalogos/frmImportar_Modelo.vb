@@ -10,16 +10,16 @@ Public Class FrmImportar_Modelo
     Dim vSiguienteRegistro As Long
     Dim oModelo As Modelo
 
-    Private Sub FrmImportar_Modelo_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
+    Private Sub FrmImportar_Modelo_Load(ByVal sender As Object, ByVal e As EventArgs) Handles MyBase.Load
         btnCargar.Enabled = False
         btnValidar_Archivo.Enabled = False
     End Sub
 
-    Private Sub btnSalir_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSalir.Click
+    Private Sub btnSalir_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnSalir.Click
         Me.Close()
     End Sub
 
-    Private Sub btnSeleccion_Archivo_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSeleccion_Archivo.Click
+    Private Sub btnSeleccion_Archivo_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnSeleccion_Archivo.Click
         OpenFileDialog1.Filter =
          "Archivos de Excel 97-2003 (*.xls)|*.xls|" & _
          "Archivos de Excel 2007-2010 (*.xlsx)|*.xlsx"
@@ -36,31 +36,28 @@ Public Class FrmImportar_Modelo
 
     End Sub
 
-    Private Sub btnCargar_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnCargar.Click
+    Private Sub btnCargar_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnCargar.Click
         Exl.Workbooks.Open(vRuta_Fichero)
-        Dim vEncontrado As Boolean = False
         Dim vRecorrido As Long = 2
         oModelo = New Modelo
 
         Dim vCve_componente As Long = 0
-        Dim vCve_clasificacion_modelo As Integer = 2
+        Const vCve_clasificacion_modelo As Integer = 2
         Dim vNP_gkn As String = ""
         Dim vDescripcion As String = ""
-        Dim vEstatus As String = "1"
-
+        Const vEstatus As String = "1"
 
         vSiguienteRegistro = Obten_Ultimo_Registro(Exl, 2)
         Using scope As New TransactionScope()
             Try
                 While vRecorrido <= vSiguienteRegistro
                     Try
-
                         vCve_componente = Exl.Range("A" & vRecorrido).Value
                         vNP_gkn = Exl.Range("B" & vRecorrido).Value
                         vDescripcion = Exl.Range("C" & vRecorrido).Value
 
-                        If oModelo.Validar_Existencia_De_Modelo_En_BD(vNP_gkn) = True Then                           
-                            Me.Set_Indicentes("El modelo con NP= " & vNP_gkn & " ya existe")
+                        If oModelo.Validar_Existencia_De_Modelo_En_BD(vNP_gkn) = True Then
+                            Me.Set_Indicentes(String.Format("El modelo con NP= {0} ya existe", vNP_gkn))
                         Else
                             oModelo.cve_modelo = 0
                             oModelo.cve_componente = vCve_componente
@@ -68,7 +65,6 @@ Public Class FrmImportar_Modelo
                             oModelo.np_gkn = vNP_gkn
                             oModelo.descripcion = vDescripcion
                             oModelo.Estatus = vEstatus
-
                             oModelo.Registrar()
                         End If
                     Catch ex As Exception
@@ -89,7 +85,7 @@ Public Class FrmImportar_Modelo
         Me.Set_Indicentes("Carga de Modelo Exitosa")
     End Sub
 
-    Private Sub btnValidar_Archivo_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnValidar_Archivo.Click
+    Private Sub btnValidar_Archivo_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnValidar_Archivo.Click
         If Valida_Archivo_TC() = True Then
             btnCargar.Enabled = True
         Else
@@ -98,7 +94,7 @@ Public Class FrmImportar_Modelo
     End Sub
 
     Public Sub Set_Indicentes(ByVal Incidente As String) 'agrega un incidente al cuadro de incidentes
-        txtIncidentes.Text = txtIncidentes.Text & Incidente & " " & vbCrLf
+        txtIncidentes.Text = String.Format("{0}{1} {2}", txtIncidentes.Text, Incidente, vbCrLf)
         Me.Refresh()
     End Sub
 
@@ -106,8 +102,7 @@ Public Class FrmImportar_Modelo
         Dim hoja_correcta As Boolean
         Try
             Exl.Workbooks.Open(vRuta_Fichero)
-            Dim vNombreHoja As String
-            vNombreHoja = Exl.Sheets(1).Name()
+            Dim vNombreHoja As String = Exl.Sheets(1).Name()
             hoja_correcta = True
         Catch
             Me.Set_Indicentes("El nombre de la hoja no es el correcto, debe ser 'Hoja1'")

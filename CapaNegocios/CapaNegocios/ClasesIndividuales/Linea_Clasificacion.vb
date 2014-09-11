@@ -1,7 +1,9 @@
-﻿Public Class Linea_Clasificacion
+﻿Imports CapaDatos
+Public Class Linea_Clasificacion
     Implements IIndividual
     Dim cadena_conexion As New CapaDatos.conexiones
-    Dim oBD As New CapaDatos.CapaDatos(cadena_conexion.CadenaSicaip)
+    Dim oBD As New Datos(cadena_conexion.CadenaSicaip)
+
     Dim oComponente As Componente
     Dim oEquipo_Linea As EquipoLinea
 #Region "IIndividual"
@@ -60,7 +62,7 @@
     Private vnombre As String
     Private vdescripcion As String
     Private vestatus As String
-   
+
 #End Region
 #Region "Propiedades"
     Public Property cve_line_clasificacion() As Long

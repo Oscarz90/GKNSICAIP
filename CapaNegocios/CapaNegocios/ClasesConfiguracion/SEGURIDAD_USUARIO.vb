@@ -2,8 +2,8 @@
 
 Public Class SEGURIDAD_USUARIO
     Implements IIndividual
-    Dim cadena_conexion As New CapaDatos.conexiones
-    Dim oBD As New CapaDatos.CapaDatos(cadena_conexion.CadenaSicaip)    
+    Dim cadena_conexion As New conexiones
+    Dim oBD As New Datos(cadena_conexion.CadenaSicaip)
     Dim oTipo_Usuario As Tipo_Usuario
 
 #Region "IIndividual"
@@ -64,25 +64,18 @@ Public Class SEGURIDAD_USUARIO
     End Sub
 
     Public Sub Eliminar() Implements IIndividual.Eliminar
-        'If Usuario.ChecaPermisoTarea("TELEFONO.ELIMINAR") Then
         Try
             oBD.EjecutarQuery("UPDATE SEGURIDAD_USUARIO SET Estatus='0' WHERE CVE_Usuario=" & Me.vCVE_Usuario)
             MsgBox("La Baja de Usuario se realizo correctamente")
-            'Dim oBitacora As Bitacora = Bitacora.ObtenInstancia
-            'oBitacora.RegistrarEnBitacora("Telefono.ELIMINAR", "Se eliminó el Teléfono: " & Me.m_Telefono_Id)
         Catch ex As Exception
-            'Tiene relacion con otras partes del sistema
-            'Throw New CustomException(Errores.Eliminar)
+
         End Try
-        'Else
-        'Throw New CustomException(Errores.Permiso)
-        'End If
     End Sub
 
     Public Function Obtener_Id(ByVal vCadena As String) As Long Implements IIndividual.Obtener_Id
         Dim vRetorno As Long = 0
 
-        Dim vDR As DataRow = oBD.ObtenerRenglon("SELECT * FROM SEGURIDAD_USUARIO WHERE Id_Usuario='" & vCadena & "'", "")
+        Dim vDR As DataRow = oBD.ObtenerRenglon(String.Format("SELECT * FROM SEGURIDAD_USUARIO WHERE Id_Usuario='{0}'", vCadena), "")
         If vDR IsNot Nothing Then
             vRetorno = vDR("CVE_Usuario")
         Else
@@ -95,17 +88,13 @@ Public Class SEGURIDAD_USUARIO
     Public Sub Registrar() Implements IIndividual.Registrar
         Using scope As New TransactionScope()
             Try
-                Dim cmd As New SqlClient.SqlCommand
-                cmd.CommandType = CommandType.StoredProcedure
-                cmd.CommandText = "REGISTRAR_SEGURIDAD_USUARIO"
+                Dim cmd As New SqlClient.SqlCommand() With {.CommandType = CommandType.StoredProcedure, .CommandText = "REGISTRAR_SEGURIDAD_USUARIO"}
                 Dim vEsNuevo As Boolean = False
-
                 If vCVE_Usuario = 0 Then
                     vEsNuevo = True
                 Else
                     vEsNuevo = False
                 End If
-
                 With cmd.Parameters
                     .Add("CVE_Usuario", SqlDbType.BigInt).Value = Me.vCVE_Usuario
                     .Add("Id_Usuario", SqlDbType.VarChar).Value = Me.vId_Usuario
@@ -115,14 +104,8 @@ Public Class SEGURIDAD_USUARIO
                     .Add("CVE_TIPO_USUARIO", SqlDbType.BigInt).Value = Me.vCVE_TIPO_USUARIO
                     .Add("Estatus", SqlDbType.VarChar).Value = Me.vEstatus
                 End With
-
                 Dim obj As DataTable = oBD.EjecutaCommando(cmd)
                 Me.vCVE_Usuario = obj.Rows(0)(0) 'ID
-
-                'MsgBox("El Usuario se registro Correctamente")
-                'Me.RegistraDatos("DEPARTAMENTO", "Departamento_Id", Me.m_Departamento_Id)
-                'Dim oBitacora As Bitacora = Bitacora.ObtenInstancia
-                'oBitacora.RegistrarEnBitacora("DEPARTAMENTO.REGISTRAR", "Se registró el departamento: " & Me.m_Nombre)
                 scope.Complete()
             Catch ex As Exception
                 Throw New Exception(ex.Message)
@@ -193,8 +176,7 @@ Public Class SEGURIDAD_USUARIO
     Public ReadOnly Property Descripcion_Tipo_Usuario() As String
         Get
             If vCVE_TIPO_USUARIO <> 0 Then
-                oTipo_Usuario = New Tipo_Usuario
-                oTipo_Usuario.CVE_Tipo_Usuario = vCVE_TIPO_USUARIO
+                oTipo_Usuario = New Tipo_Usuario() With {.CVE_Tipo_Usuario = vCVE_TIPO_USUARIO}
                 oTipo_Usuario.Cargar()
                 Return oTipo_Usuario.Nombre_Tipo_Usuario
             Else
@@ -222,7 +204,7 @@ Public Class SEGURIDAD_USUARIO
             If vL_USUARIO_PERMISOS Is Nothing Then
                 'Cargo documentos
                 Me.L_USUARIO_PERMISOS = New List(Of SEGURIDAD_USUARIO_PERMISOS)
-                Dim oBD As New CapaDatos.CapaDatos(cadena_conexion.CadenaSicaip)
+                Dim oBD As New Datos(cadena_conexion.CadenaSicaip)
                 Dim oEq As DataTable = oBD.ObtenerTabla("SELECT CVE_Usuario_Permisos FROM SEGURIDAD_USUARIO_PERMISOS WHERE CVE_USUARIO= " & vCVE_Usuario)
                 If oEq IsNot Nothing Then
                     Dim oUSUARIO_PERMISOS As SEGURIDAD_USUARIO_PERMISOS = Nothing
@@ -341,8 +323,7 @@ Public Class SEGURIDAD_USUARIO
         Dim vIdetificador_Padre As Integer = 1
         If Obtener_TIPOS_USUARIOS() IsNot Nothing Then
             For Each vDR_Tipos As DataRow In Obtener_TIPOS_USUARIOS.Rows
-                Dim vDR_Nuevo As DataRow
-                vDR_Nuevo = vDT.NewRow
+                Dim vDR_Nuevo As DataRow = vDT.NewRow
                 vDR_Nuevo("NombreNodo") = vDR_Tipos("Nombre_Tipo_Usuario")
                 vDR_Nuevo("IdentificadorNodo") = vIdetificador_Nodo
                 vDR_Nuevo("IdentificadorPadre") = 0
@@ -357,8 +338,7 @@ Public Class SEGURIDAD_USUARIO
                         ''Incrementa el Identificador del Nodo
                         vIdetificador_Nodo = vIdetificador_Nodo + 1
 
-                        Dim vDR_Nuevo_USUARIO As DataRow
-                        vDR_Nuevo_USUARIO = vDT.NewRow
+                        Dim vDR_Nuevo_USUARIO As DataRow = vDT.NewRow
 
                         vDR_Nuevo_USUARIO("NombreNodo") = vDR_USUARIOS("Id_Usuario")
                         vDR_Nuevo_USUARIO("IdentificadorNodo") = vIdetificador_Nodo
@@ -374,7 +354,7 @@ Public Class SEGURIDAD_USUARIO
                     vIdetificador_Nodo = vIdetificador_Nodo + 1
                 End If
             Next
-        End If        
+        End If
         Return vDT
     End Function
 
@@ -388,8 +368,7 @@ Public Class SEGURIDAD_USUARIO
         If Obtener_Categoria_Permisos() IsNot Nothing Then
             For Each vDR_Categoria_Permiso As DataRow In Obtener_Categoria_Permisos.Rows
                 ''En este primer ciclo se Obtienen las Categorias de Permisos con IDSuperior = Null (Nivel 1)
-                Dim vDR_Nuevo As DataRow
-                vDR_Nuevo = vDT.NewRow
+                Dim vDR_Nuevo As DataRow = vDT.NewRow
                 vDR_Nuevo("NombreNodo") = vDR_Categoria_Permiso("Nombre_Categoria")
                 vDR_Nuevo("IdentificadorNodo") = vIdetificador_Nodo
                 vDR_Nuevo("CVE_TABLA") = vDR_Categoria_Permiso("CVE_Categoria_Permiso") & ".CP"
@@ -405,8 +384,7 @@ Public Class SEGURIDAD_USUARIO
                         ''Incrementa el Identificador del Nodo
                         vIdetificador_Nodo = vIdetificador_Nodo + 1
 
-                        Dim vDR_Nuevo_HIJO_TIPO As DataRow
-                        vDR_Nuevo_HIJO_TIPO = vDT.NewRow
+                        Dim vDR_Nuevo_HIJO_TIPO As DataRow = vDT.NewRow
 
                         vDR_Nuevo_HIJO_TIPO("NombreNodo") = vDR_HIJOS_Categoria_Permiso("Nombre_Categoria")
                         vDR_Nuevo_HIJO_TIPO("IdentificadorNodo") = vIdetificador_Nodo
@@ -421,8 +399,7 @@ Public Class SEGURIDAD_USUARIO
                             ''Incrementa el Identificador del Nodo
                             vIdetificador_Nodo = vIdetificador_Nodo + 1
 
-                            Dim vDR_Nuevo_USUARIO As DataRow
-                            vDR_Nuevo_USUARIO = vDT.NewRow
+                            Dim vDR_Nuevo_USUARIO As DataRow = vDT.NewRow
 
                             vDR_Nuevo_USUARIO("NombreNodo") = vDR_USUARIOS("Descripcion")
                             vDR_Nuevo_USUARIO("IdentificadorNodo") = vIdetificador_Nodo
@@ -440,39 +417,19 @@ Public Class SEGURIDAD_USUARIO
                     vIdetificador_Nodo = vIdetificador_Nodo + 1
                 End If
             Next
-        End If       
+        End If
         Return vDT
     End Function
 
     Private Sub Crear_Tabla_Arbol(ByRef vDT As DataTable)
         ' Create a DataColumn and set various properties. 
-        Dim column As DataColumn = New DataColumn
-        column.DataType = System.Type.GetType("System.String")
-        column.AllowDBNull = False
-        column.Caption = "NombreNodo"
-        column.ColumnName = "NombreNodo"
-        column.DefaultValue = ""
+        Dim column As DataColumn = New DataColumn() With {.DataType = Type.GetType("System.String"), .AllowDBNull = False, .Caption = "NombreNodo", .ColumnName = "NombreNodo", .DefaultValue = ""}
 
-        Dim vColumn2 As DataColumn = New DataColumn
-        vColumn2.DataType = System.Type.GetType("System.Int64")
-        vColumn2.AllowDBNull = False
-        vColumn2.Caption = "IdentificadorNodo"
-        vColumn2.ColumnName = "IdentificadorNodo"
-        vColumn2.DefaultValue = 0
+        Dim vColumn2 As DataColumn = New DataColumn() With {.DataType = Type.GetType("System.Int64"), .AllowDBNull = False, .Caption = "IdentificadorNodo", .ColumnName = "IdentificadorNodo", .DefaultValue = 0}
 
-        Dim vColumn3 As DataColumn = New DataColumn
-        vColumn3.DataType = System.Type.GetType("System.Int64")
-        vColumn3.AllowDBNull = False
-        vColumn3.Caption = "IdentificadorPadre"
-        vColumn3.ColumnName = "IdentificadorPadre"
-        vColumn3.DefaultValue = 0
+        Dim vColumn3 As DataColumn = New DataColumn() With {.DataType = Type.GetType("System.Int64"), .AllowDBNull = False, .Caption = "IdentificadorPadre", .ColumnName = "IdentificadorPadre", .DefaultValue = 0}
 
-        Dim vColumn4 As DataColumn = New DataColumn
-        vColumn4.DataType = System.Type.GetType("System.String")
-        vColumn4.AllowDBNull = False
-        vColumn4.Caption = "CVE_TABLA"
-        vColumn4.ColumnName = "CVE_TABLA"
-        vColumn4.DefaultValue = ""
+        Dim vColumn4 As DataColumn = New DataColumn() With {.DataType = Type.GetType("System.String"), .AllowDBNull = False, .Caption = "CVE_TABLA", .ColumnName = "CVE_TABLA", .DefaultValue = ""}
 
         ' Add the column to the table. 
         vDT.Columns.Add(column)
@@ -504,7 +461,7 @@ Public Class SEGURIDAD_USUARIO
                 If vL_USUARIO_PERMISOS IsNot Nothing Then
                     For i As Integer = 0 To vL_USUARIO_PERMISOS.Count - 1
                         If vL_USUARIO_PERMISOS.Item(i).CVE_Usuario_Permisos = 0 Then
-                            oBD.EjecutarQuery("INSERT INTO SEGURIDAD_USUARIO_PERMISOS(CVE_USUARIO,CVE_PERMISO) VALUES(" & vCVE_Usuario & ", " & vL_USUARIO_PERMISOS.Item(i).CVE_PERMISO & ")")
+                            oBD.EjecutarQuery(String.Format("INSERT INTO SEGURIDAD_USUARIO_PERMISOS(CVE_USUARIO,CVE_PERMISO) VALUES({0}, {1})", vCVE_Usuario, vL_USUARIO_PERMISOS.Item(i).CVE_PERMISO))
                         End If
                     Next
                 End If
@@ -519,7 +476,7 @@ Public Class SEGURIDAD_USUARIO
         Dim vRetorno As Boolean = False
         Dim vDR As DataRow
         Try
-            vDR = oBD.ObtenerRenglon("select CVE_Usuario from SEGURIDAD_USUARIO where estatus=1 and Id_Usuario ='" & vNombreUsuario_Login & "'", "SEGU_USUARIO")
+            vDR = oBD.ObtenerRenglon(String.Format("select CVE_Usuario from SEGURIDAD_USUARIO where estatus=1 and Id_Usuario ='{0}'", vNombreUsuario_Login), "SEGU_USUARIO")
             If vDR IsNot Nothing Then
                 vRetorno = True
                 CVE_Usuario = vDR("CVE_Usuario")
@@ -527,15 +484,14 @@ Public Class SEGURIDAD_USUARIO
                 vRetorno = False
             End If
         Catch ex As Exception
-            'MsgBox("El empleado no está activo en KRONOS. Clave del Error: LIN_001", vbCritical + vbOKOnly, "Error")
+
         End Try
         Return vRetorno
     End Function
 
     Public Function Nivel_Usuario_CV(ByVal vID_USUARIO As Long) As Boolean
         Dim vRetorno As Boolean = False
-        Dim vDR As DataRow
-        vDR = oBD.ObtenerRenglon("SELECT * FROM USUARIO_CADENA_VALOR where CVE_Usuario=" & vID_USUARIO, "USUARIO_CADENA_VALOR")
+        Dim vDR As DataRow = oBD.ObtenerRenglon("SELECT * FROM USUARIO_CADENA_VALOR where CVE_Usuario=" & vID_USUARIO, "USUARIO_CADENA_VALOR")
         If vDR IsNot Nothing Then
             vRetorno = True
         Else
@@ -546,8 +502,7 @@ Public Class SEGURIDAD_USUARIO
 
     Public Function Nivel_Usuario_Componente(ByVal vID_USUARIO As Long) As Boolean
         Dim vRetorno As Boolean = False
-        Dim vDR As DataRow
-        vDR = oBD.ObtenerRenglon("SELECT * FROM USUARIO_COMPONENTE where CVE_Usuario=" & vID_USUARIO, "USUARIO_COMPONENTE")
+        Dim vDR As DataRow = oBD.ObtenerRenglon("SELECT * FROM USUARIO_COMPONENTE where CVE_Usuario=" & vID_USUARIO, "USUARIO_COMPONENTE")
         If vDR IsNot Nothing Then
             vRetorno = True
         Else
@@ -577,9 +532,9 @@ Public Class SEGURIDAD_USUARIO
         Using scope As New TransactionScope()
             Try
                 If vEsNivel_Componente = True Then
-                    oBD.EjecutarQuery("INSERT INTO USUARIO_COMPONENTE(CVE_Componente,CVE_Usuario) values(" & vCVE_NIVEL & "," & vCVE_Usuario & ")")
+                    oBD.EjecutarQuery(String.Format("INSERT INTO USUARIO_COMPONENTE(CVE_Componente,CVE_Usuario) values({0},{1})", vCVE_NIVEL, vCVE_Usuario))
                 Else
-                    oBD.EjecutarQuery("INSERT INTO USUARIO_CADENA_VALOR(CVE_Cadena_Valor,CVE_Usuario) values(" & vCVE_NIVEL & "," & vCVE_Usuario & ")")
+                    oBD.EjecutarQuery(String.Format("INSERT INTO USUARIO_CADENA_VALOR(CVE_Cadena_Valor,CVE_Usuario) values({0},{1})", vCVE_NIVEL, vCVE_Usuario))
                 End If
                 scope.Complete()
             Catch ex As Exception

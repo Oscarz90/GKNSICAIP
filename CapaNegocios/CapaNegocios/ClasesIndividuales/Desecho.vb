@@ -1,12 +1,11 @@
 ﻿Imports CapaDatos
 Public Class Desecho
     Implements IIndividual
-    Dim cadena_conexion As New CapaDatos.conexiones
-    Dim oBD As New CapaDatos.CapaDatos(cadena_conexion.CadenaSicaip)
+    Dim cadena_conexion As New conexiones
+    Dim oBD As New Datos(cadena_conexion.CadenaSicaip)
 #Region "Metodos IIndividual"
     Public Sub Cargar() Implements IIndividual.Cargar
-        Dim vDR As DataRow
-        vDR = oBD.ObtenerRenglon("select * from desecho d where d.cve_desecho=" & vcve_desecho, "desecho")
+        Dim vDR As DataRow = oBD.ObtenerRenglon("select * from desecho d where d.cve_desecho=" & vcve_desecho, "desecho")
         If vDR IsNot Nothing Then
             Me.vcve_desecho = vDR("cve_desecho")
             Me.vcve_registro_turno = vDR("cve_registro_turno")
@@ -39,7 +38,7 @@ Public Class Desecho
     End Sub
     Public Sub Eliminar() Implements IIndividual.Eliminar
         Try
-            oBD.EjecutarQuery("update desecho set cod_empleado_eliminacion='" & vcod_empleado_eliminacion & "',fecha_eliminacion='" & vfecha_eliminacion & "',estatus='0' where cve_desecho=" & vcve_desecho)
+            oBD.EjecutarQuery(String.Format("update desecho set cod_empleado_eliminacion='{0}',fecha_eliminacion='{1}',estatus='0' where cve_desecho={2}", vcod_empleado_eliminacion, vfecha_eliminacion, vcve_desecho))
         Catch ex As Exception
             MsgBox("Error al eliminar desecho. CDesecho_ERROR", vbCritical + vbOKOnly, "Error")
         End Try

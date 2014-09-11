@@ -1,12 +1,11 @@
 ﻿Imports CapaDatos
 Public Class usuario_equipo
     Implements IIndividual
-    Dim cadena_conexion As New CapaDatos.conexiones
-    Dim oBD As New CapaDatos.CapaDatos(cadena_conexion.CadenaSicaip)
+    Dim cadena_conexion As New conexiones
+    Dim oBD As New Datos(cadena_conexion.CadenaSicaip)
 #Region "IIndividual"
     Public Sub Cargar() Implements IIndividual.Cargar
-        Dim vDR As DataRow
-        vDR = oBD.ObtenerRenglon("select * from USUARIO_EQUIPO where CVE_USUARIO_EQUIPO =" & vcve_usuario_equipo, "usuario_indicador")
+        Dim vDR As DataRow = oBD.ObtenerRenglon("select * from USUARIO_EQUIPO where CVE_USUARIO_EQUIPO =" & vcve_usuario_equipo, "usuario_indicador")
         If vDR IsNot Nothing Then
             vcve_usuario_equipo = vDR("CVE_USUARIO_EQUIPO")
             vcve_usuario = vDR("CVE_Usuario")
@@ -29,9 +28,8 @@ Public Class usuario_equipo
         End Set
     End Property
     Public Function Obtener_Id(ByVal vCadena As String) As Long Implements IIndividual.Obtener_Id
-        Dim vDR As DataRow
+        Dim vDR As DataRow = oBD.ObtenerRenglon("select CVE_USUARIO_EQUIPO from USUARIO_EQUIPO where CVE_USUARIO_EQUIPO= " & vcve_usuario_equipo, "usuario_equipo")
         Dim vRetorno As Long
-        vDR = oBD.ObtenerRenglon("select CVE_USUARIO_EQUIPO from USUARIO_EQUIPO where CVE_USUARIO_EQUIPO= " & vcve_usuario_equipo, "usuario_equipo")
         If vDR IsNot Nothing Then
             vcve_usuario_equipo = vDR("CVE_USUARIO_EQUIPO")
         Else
@@ -75,7 +73,7 @@ Public Class usuario_equipo
     End Property
 #End Region
 #Region "Metodos"
-   
+
 #End Region
 End Class
 

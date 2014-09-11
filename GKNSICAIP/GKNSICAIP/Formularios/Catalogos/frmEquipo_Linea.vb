@@ -13,15 +13,15 @@ Public Class frmEquipo_Linea
         ' Agregue cualquier inicialización después de la llamada a InitializeComponent().
     End Sub
 
-    Private Sub frmEquipo_Linea_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
+    Private Sub frmEquipo_Linea_Load(ByVal sender As Object, ByVal e As EventArgs) Handles MyBase.Load
         Me.btnAsignar_ITEM.Enabled = False
         Me.btnLiberar_ITEM.Enabled = False
         Me.btnGuardar.Enabled = False
     End Sub
 
-    Private Sub btnImportar_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnImportar.Click
+    Private Sub btnImportar_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnImportar.Click
         Dim vfrmImportador_Linea As New frmImportador_Linea
-        vfrmImportador_Linea.ShowDialog()        
+        vfrmImportador_Linea.ShowDialog()
         vId_Linea_Importada = vfrmImportador_Linea.vRetorno_CVE_Linea ''--------------Se guarda el Id de la Linea Importada
         oEquipo_Linea.cve_linea = vId_Linea_Importada
         txtLinea.Text = oEquipo_Linea.Nombre_Linea
@@ -36,21 +36,21 @@ Public Class frmEquipo_Linea
         End If
     End Sub
 
-    Private Sub btnSalir_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSalir.Click
+    Private Sub btnSalir_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnSalir.Click
         Me.Close()
     End Sub
 
-    Private Sub btnAsignar_ITEM_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnAsignar_ITEM.Click
+    Private Sub btnAsignar_ITEM_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnAsignar_ITEM.Click
         lbAsignados.Items.Add(lbLibres.SelectedItem)
         lbLibres.Items.Remove(lbLibres.SelectedItem)
     End Sub
 
-    Private Sub btnLiberar_ITEM_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnLiberar_ITEM.Click
+    Private Sub btnLiberar_ITEM_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnLiberar_ITEM.Click
         lbLibres.Items.Add(lbAsignados.SelectedItem)
         lbAsignados.Items.Remove(lbAsignados.SelectedItem)
     End Sub
 
-    Private Sub btnGuardar_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnGuardar.Click
+    Private Sub btnGuardar_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnGuardar.Click
         ''--------Se debe eliminar los equipos asignados a la linea Importada
         ''--------para despues Guardar los equipos actuales en la lista de Asignacion.
         If MsgBox("¿Esta seguro de registrar los Equipos en la Linea Seleccionada?", MsgBoxStyle.YesNo, Me.Text) = MsgBoxResult.Yes Then
@@ -89,16 +89,12 @@ Public Class frmEquipo_Linea
 
         For Each vEquipo As Equipo In oLinea.LEquipos_Linea_Asignados
             lbAsignados.Items.Add(vEquipo)
-            'lbAsignados.ValueMember = "cve_equipo"
-            'lbAsignados.DisplayMember = "Equipo"
         Next
 
         lbLibres.ValueMember = "cve_equipo"
         lbLibres.DisplayMember = "Equipo"
         For Each vEquipo As Equipo In oLinea.LEquipos_Linea_NO_Asignados
             lbLibres.Items.Add(vEquipo)
-            'lbLibres.ValueMember = "cve_equipo"
-            'lbLibres.DisplayMember = "Equipo"
         Next
 
 

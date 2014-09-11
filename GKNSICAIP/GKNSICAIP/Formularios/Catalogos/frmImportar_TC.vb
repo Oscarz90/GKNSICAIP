@@ -10,18 +10,17 @@ Public Class FrmImportar_TC
     Dim oTC As TC
     'Dim oBD As New BD
 
-    Private Sub FrmImportar_TC_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
+    Private Sub FrmImportar_TC_Load(ByVal sender As Object, ByVal e As EventArgs) Handles MyBase.Load
         btnCargar.Enabled = False
         btnValidar_Archivo.Enabled = False
     End Sub
 
-    Private Sub btnSalir_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSalir.Click
+    Private Sub btnSalir_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnSalir.Click
         Me.Close()
     End Sub
 
-    Private Sub btnCargar_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnCargar.Click
+    Private Sub btnCargar_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnCargar.Click
         Exl.Workbooks.Open(vRuta_Fichero)
-        Dim vEncontrado As Boolean = False
         Dim vRecorrido As Long = 2
         oTC = New TC
         Dim vPzas_por_Hora As Integer = 0
@@ -43,19 +42,15 @@ Public Class FrmImportar_TC
                         vCve_Modelo = Exl.Range("C" & vRecorrido).Value
                         vCod_Empleado = Exl.Range("D" & vRecorrido).Value
                         vFecha = Exl.Range("E" & vRecorrido).Value
-                        'vFecha = DateTime.Parse(vFecha.ToString("MM-dd-yyyy")) ''------------------Checar esta linea
                         vEstatus = Exl.Range("F" & vRecorrido).Value
 
-                        Me.Set_Indicentes("Select * from TC Where cve_linea=" & vCve_linea & " and cve_modelo=" & vCve_Modelo)
+                        Me.Set_Indicentes(String.Format("Select * from TC Where cve_linea={0} and cve_modelo={1}", vCve_linea, vCve_Modelo))
                         If oTC.Validar_Exixtencia_LINEA_MODELO_EN_TC(vCve_linea, vCve_Modelo) = True Then
                             ''Cargo el TC existente para registrarlo como Inactivo
                             oTC.cve_TC = oTC.vCve_TC_Existe
                             oTC.Cargar()
                             oTC.Estatus = "0"
-                            'oTC.piezas_por_hora = vPzas_por_Hora
                             oTC.Registrar()
-                            'Me.Set_Indicentes("Registro TC EXISTENTE cve_linea=" & vCve_linea & " and cve_modelo=" & vCve_Modelo)
-
 
                             ''Cargo el Objeto oTC con los Datos Obtenidos de Excel para registrar el TC Nuevo
                             oTC.cve_TC = 0
@@ -67,7 +62,6 @@ Public Class FrmImportar_TC
                             oTC.Estatus = "1"
                             oTC.Registrar()
                         Else
-                            'Me.Set_Indicentes("Registro TC NUEVO cve_linea=" & vCve_linea & " and cve_modelo=" & vCve_Modelo)
                             oTC.cve_TC = 0
                             oTC.piezas_por_hora = vPzas_por_Hora
                             oTC.cve_linea = vCve_linea
@@ -95,7 +89,7 @@ Public Class FrmImportar_TC
         Me.Set_Indicentes("Carga de TC Exitosa")
     End Sub
 
-    Private Sub btnValidar_Archivo_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnValidar_Archivo.Click
+    Private Sub btnValidar_Archivo_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnValidar_Archivo.Click
         If Valida_Archivo_TC() = True Then
             btnCargar.Enabled = True
         Else
@@ -103,7 +97,7 @@ Public Class FrmImportar_TC
         End If
     End Sub
 
-    Private Sub btnSeleccion_Archivo_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSeleccion_Archivo.Click
+    Private Sub btnSeleccion_Archivo_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnSeleccion_Archivo.Click
         OpenFileDialog1.Filter =
           "Archivos de Excel 97-2003 (*.xls)|*.xls|" & _
           "Archivos de Excel 2007-2010 (*.xlsx)|*.xlsx"
@@ -120,7 +114,7 @@ Public Class FrmImportar_TC
     End Sub
 
     Public Sub Set_Indicentes(ByVal Incidente As String) 'agrega un incidente al cuadro de incidentes
-        txtIncidentes.Text = txtIncidentes.Text & Incidente & " " & vbCrLf
+        txtIncidentes.Text = String.Format("{0}{1} {2}", txtIncidentes.Text, Incidente, vbCrLf)
         Me.Refresh()
     End Sub
 
@@ -129,8 +123,7 @@ Public Class FrmImportar_TC
         Try
 
             Exl.Workbooks.Open(vRuta_Fichero)
-            Dim vNombreHoja As String
-            vNombreHoja = Exl.Sheets(1).Name()
+            Dim vNombreHoja As String = Exl.Sheets(1).Name()
             hoja_correcta = True
         Catch
             Me.Set_Indicentes("El nombre de la hoja no es el correcto, debe ser 'Hoja1'")

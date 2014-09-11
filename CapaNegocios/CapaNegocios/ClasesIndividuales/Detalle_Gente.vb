@@ -1,8 +1,8 @@
 ﻿Imports CapaDatos
 Public Class Detalle_Gente
     Implements IIndividual
-    Dim cadena_conexion As New CapaDatos.conexiones
-    Dim oBD As New CapaDatos.CapaDatos(cadena_conexion.CadenaSicaip)
+    Dim cadena_conexion As New conexiones
+    Dim oBD As New Datos(cadena_conexion.CadenaSicaip)
 #Region "Iindividual"
     Public Sub Cargar() Implements IIndividual.Cargar
 
@@ -61,5 +61,5 @@ Public Class Detalle_Gente
         End Try
         Return dtDetalle
     End Function
-#End Region   
+#End Region
 End Class

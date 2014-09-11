@@ -3,7 +3,7 @@
     Public vRespuesta As Boolean = False
     Public vEntrada As String = ""
 
-    Private Sub msg_Dialogo_Descanso_All_Lineas_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
+    Private Sub msg_Dialogo_Descanso_All_Lineas_Load(ByVal sender As Object, ByVal e As EventArgs) Handles MyBase.Load
         Me.ckbAcuerdo.Checked = True
         Me.ckbAcuerdo.Checked = False
         Me.btnNo.Enabled = False
@@ -16,17 +16,17 @@
         Me.lb_Entrada.Text = vEntrada
     End Sub
 
-    Private Sub btnSi_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSi.Click
+    Private Sub btnSi_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnSi.Click
         vRespuesta = True
         Me.Close()
     End Sub
 
-    Private Sub btnNo_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnNo.Click
+    Private Sub btnNo_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnNo.Click
         vRespuesta = False
         Me.Close()
     End Sub
 
-    Private Sub ckbAcuerdo_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ckbAcuerdo.CheckedChanged
+    Private Sub ckbAcuerdo_CheckedChanged(ByVal sender As Object, ByVal e As EventArgs) Handles ckbAcuerdo.CheckedChanged
         If ckbAcuerdo.Checked = True Then
             Me.btnNo.Enabled = True
             Me.btnSi.Enabled = True

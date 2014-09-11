@@ -1,5 +1,4 @@
-﻿Imports Telerik.WinControls.UI
-Imports Telerik.WinControls.Data
+﻿Imports Telerik.WinControls.Data
 
 Public Class frmModificacionPermiso
 #Region "Objetos Clases"
@@ -32,7 +31,7 @@ Public Class frmModificacionPermiso
 #End Region
 #Region "Metodos Iniciales"
     'Load
-    Private Sub frmModificacionPermiso_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
+    Private Sub frmModificacionPermiso_Load(ByVal sender As Object, ByVal e As EventArgs) Handles MyBase.Load
         establece_controles()
         llena_combo_usuarios()
         establece_operacion()
@@ -40,13 +39,13 @@ Public Class frmModificacionPermiso
     'Establece controles
     Private Sub establece_controles()
         'Establece calendario solo por dias
-        Me.dtpDiaModificacion.Format = System.Windows.Forms.DateTimePickerFormat.Custom
+        Me.dtpDiaModificacion.Format = DateTimePickerFormat.Custom
         Me.dtpDiaModificacion.DateTimePickerElement.CustomFormat = "dddd, dd/MMMM/yyyy"
         'Calendario Inicial
-        Me.dtpFechaInicial.Format = System.Windows.Forms.DateTimePickerFormat.Custom
+        Me.dtpFechaInicial.Format = DateTimePickerFormat.Custom
         Me.dtpFechaInicial.DateTimePickerElement.CustomFormat = "dddd, dd/MMMM/yyyy HH:mm tt" 'tt am o pm para eso es
         'Calendario Final
-        Me.dtpFechaFinal.Format = System.Windows.Forms.DateTimePickerFormat.Custom
+        Me.dtpFechaFinal.Format = DateTimePickerFormat.Custom
         Me.dtpFechaFinal.DateTimePickerElement.CustomFormat = "dddd, dd/MMMM/yyyy HH:mm tt"
         If voperacion = "INSERT" Then
             btnRegistrar.Text = "Registrar"
@@ -58,10 +57,8 @@ Public Class frmModificacionPermiso
     'EStablece la operacion
     Private Sub establece_operacion()
         If voperacion = "UPDATE" And vcve_modificacion_permiso <> 0 Then
-            oModificacionPermiso = New CapaNegocios.Modificacion_Permiso
-            oModificacionPermiso.cve_modificacion_permiso = vcve_modificacion_permiso
+            oModificacionPermiso = New CapaNegocios.Modificacion_Permiso() With {.cve_modificacion_permiso = vcve_modificacion_permiso}
             oModificacionPermiso.Cargar()
-            'cbxUsuarios.SelectedItem = oModificacionPermiso.cve_usuario
             cbxUsuarios.SelectedValue = oModificacionPermiso.cve_usuario
             dtpDiaModificacion.Value = oModificacionPermiso.dia_modificacion
             dtpFechaInicial.Value = oModificacionPermiso.fecha_inicio
@@ -86,9 +83,7 @@ Public Class frmModificacionPermiso
         Me.cbxUsuarios.AutoFilter = True
         Me.cbxUsuarios.ValueMember = "CVE_Usuario"
         Me.cbxUsuarios.DisplayMember = "Id_Usuario"
-        Dim filter As New FilterDescriptor()
-        filter.PropertyName = Me.cbxUsuarios.DisplayMember
-        filter.Operator = FilterOperator.Contains
+        Dim filter As New FilterDescriptor() With {.PropertyName = Me.cbxUsuarios.DisplayMember, .Operator = FilterOperator.Contains}
         Me.cbxUsuarios.EditorControl.MasterTemplate.FilterDescriptors.Add(filter)
 
         cbxUsuarios.SelectedIndex = -1
@@ -194,7 +189,7 @@ Public Class frmModificacionPermiso
         End If
     End Function
     'Valida cambio de texto
-    Private Sub cbxUsuarios_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cbxUsuarios.TextChanged
+    Private Sub cbxUsuarios_TextChanged(ByVal sender As Object, ByVal e As EventArgs) Handles cbxUsuarios.TextChanged
         If flgcbxUsuarios Then
             valida_btn_Registrar()
         End If
@@ -202,24 +197,24 @@ Public Class frmModificacionPermiso
 #End Region
 #Region "Eventos"
     'Evento DatetimePicker Dia_Modificacion,Fecha_Inicial,Fecha_Final
-    Private Sub dtpFecha_ValueChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles dtpDiaModificacion.ValueChanged, dtpFechaInicial.ValueChanged, dtpFechaFinal.ValueChanged
+    Private Sub dtpFecha_ValueChanged(ByVal sender As Object, ByVal e As EventArgs) Handles dtpDiaModificacion.ValueChanged, dtpFechaInicial.ValueChanged, dtpFechaFinal.ValueChanged
         'Valida boton Registrar
         If flgcbxUsuarios Then
             valida_btn_Registrar()
         End If
     End Sub
     'Evento CBX Usuarios
-    Private Sub cbxUsuarios_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cbxUsuarios.SelectedIndexChanged
+    Private Sub cbxUsuarios_SelectedIndexChanged(ByVal sender As Object, ByVal e As EventArgs) Handles cbxUsuarios.SelectedIndexChanged
         If flgcbxUsuarios Then
             valida_btn_Registrar()
         End If
     End Sub
     'Boton Salir
-    Private Sub btnSalir_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSalir.Click
+    Private Sub btnSalir_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnSalir.Click
         Me.Close()
     End Sub
     'Boton Registrar
-    Private Sub btnRegistrar_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnRegistrar.Click
+    Private Sub btnRegistrar_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnRegistrar.Click
         confirmacion_registro()
     End Sub
 #End Region

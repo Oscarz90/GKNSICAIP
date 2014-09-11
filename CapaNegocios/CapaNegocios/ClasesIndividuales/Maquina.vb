@@ -1,8 +1,8 @@
 ﻿Imports CapaDatos
 Public Class Maquina
     Implements IIndividual
-    Dim cadena_conexion As New CapaDatos.conexiones
-    Dim oBD As New CapaDatos.CapaDatos(cadena_conexion.CadenaSicaip)
+    Dim cadena_conexion As New conexiones
+    Dim oBD As New Datos(cadena_conexion.CadenaSicaip)
     Dim oLinea As Linea
 
 #Region "IIndividual"
@@ -29,19 +29,12 @@ Public Class Maquina
     End Sub
 
     Public Sub Eliminar() Implements IIndividual.Eliminar
-        'If Usuario.ChecaPermisoTarea("TELEFONO.ELIMINAR") Then
         Try
             oBD.EjecutarQuery("UPDATE Maquina SET Estatus='0' WHERE cve_maquina=" & Me.cve_maquina)
             MsgBox("La Baja de Maquina se realizo correctamente")
-            'Dim oBitacora As Bitacora = Bitacora.ObtenInstancia
-            'oBitacora.RegistrarEnBitacora("Telefono.ELIMINAR", "Se eliminó el Teléfono: " & Me.m_Telefono_Id)
         Catch ex As Exception
-            'Tiene relacion con otras partes del sistema
-            'Throw New CustomException(Errores.Eliminar)
+
         End Try
-        'Else
-        'Throw New CustomException(Errores.Permiso)
-        'End If
     End Sub
     Dim vId As Long
     Public Property Id As Long Implements IIndividual.Id
@@ -60,9 +53,7 @@ Public Class Maquina
     Public Sub Registrar() Implements IIndividual.Registrar
         Using scope As New TransactionScope()
             Try
-                Dim cmd As New SqlClient.SqlCommand
-                cmd.CommandType = CommandType.StoredProcedure
-                cmd.CommandText = "REGISTRAR_MAQUINA"
+                Dim cmd As New SqlClient.SqlCommand() With {.CommandType = CommandType.StoredProcedure, .CommandText = "REGISTRAR_MAQUINA"}
 
                 With cmd.Parameters
                     .Add("cve_maquina", SqlDbType.BigInt).Value = Me.vcve_maquina
@@ -74,9 +65,6 @@ Public Class Maquina
 
                 Dim obj As DataTable = oBD.EjecutaCommando(cmd)
                 Me.vcve_maquina = obj.Rows(0)(0) 'ID
-                'Me.RegistraDatos("DEPARTAMENTO", "Departamento_Id", Me.m_Departamento_Id)
-                'Dim oBitacora As Bitacora = Bitacora.ObtenInstancia
-                'oBitacora.RegistrarEnBitacora("DEPARTAMENTO.REGISTRAR", "Se registró el departamento: " & Me.m_Nombre)
                 scope.Complete()
             Catch ex As Exception
                 Throw New Exception(ex.Message)
@@ -144,8 +132,7 @@ Public Class Maquina
     Public ReadOnly Property Nombre_Linea() As String
         Get
             If vcve_linea <> 0 Then
-                oLinea = New Linea
-                oLinea.cve_linea = vcve_linea
+                oLinea = New Linea() With {.cve_linea = vcve_linea}
                 oLinea.Cargar()
                 Return oLinea.linea
             Else
@@ -161,7 +148,7 @@ Public Class Maquina
         Dim vTotal As Integer = 0
         Dim rDatos As DataRow = Nothing
         Try
-            rDatos = oBD.ObtenerRenglon("SELECT sum(cve_maquina) as Total FROM maquina WHERE clave_maquina='" & vCve_Maquina_Validar & "' and estatus='1'", "turno")
+            rDatos = oBD.ObtenerRenglon(String.Format("SELECT sum(cve_maquina) as Total FROM maquina WHERE clave_maquina='{0}' and estatus='1'", vCve_Maquina_Validar), "turno")
             If rDatos IsNot Nothing Then
                 If rDatos("Total") IsNot DBNull.Value Then
                     vTotal = rDatos("Total")

@@ -47,36 +47,35 @@ Public Class FrmSoporteEmail
     End Sub
 #End Region
 #Region "Eventos textboxs"
-    Private Sub txtPara_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles txtPara.TextChanged
+    Private Sub txtPara_TextChanged(ByVal sender As Object, ByVal e As EventArgs) Handles txtPara.TextChanged
         valida_btnEnviarEmail()
     End Sub
-    Private Sub txtAsunto_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles txtAsunto.TextChanged
+    Private Sub txtAsunto_TextChanged(ByVal sender As Object, ByVal e As EventArgs) Handles txtAsunto.TextChanged
         valida_btnEnviarEmail()
     End Sub
-    Private Sub txtMensaje_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles txtMensaje.TextChanged
+    Private Sub txtMensaje_TextChanged(ByVal sender As Object, ByVal e As EventArgs) Handles txtMensaje.TextChanged
         valida_btnEnviarEmail()
     End Sub
 #End Region
 #Region "Eventos botones"
-    Private Sub txtAddEmail_KeyUp(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtAddEmail.KeyUp
+    Private Sub txtAddEmail_KeyUp(ByVal sender As Object, ByVal e As KeyEventArgs) Handles txtAddEmail.KeyUp
         If txtAddEmail.Text <> "" Then
             Try
-                Dim testAddress = New MailAddress(txtAddEmail.Text)
                 habilita_btnAddEmail()
             Catch ex As FormatException
                 deshabilita_btnAddEmail()
             End Try
         End If
     End Sub
-    Private Sub txtPara_KeyPress(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txtPara.KeyPress
+    Private Sub txtPara_KeyPress(ByVal sender As Object, ByVal e As KeyPressEventArgs) Handles txtPara.KeyPress
         e.Handled = True
     End Sub
-    Private Sub btnAddEmail_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnAddEmail.Click
+    Private Sub btnAddEmail_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnAddEmail.Click
         add_Email()
         txtAddEmail.Text = ""
         deshabilita_btnAddEmail()
     End Sub
-    Private Sub btnEnviaEmail_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnEnviaEmail.Click
+    Private Sub btnEnviaEmail_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnEnviaEmail.Click
         deshabilita_frmSoporteEmail()
         habilita_waitingbar()
         deshabilita_btnEnviarEmail()
@@ -86,53 +85,44 @@ Public Class FrmSoporteEmail
             bw.RunWorkerAsync()
         End If
     End Sub
-    Private Sub btnCancelaEmail_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnCancelaEmail.Click
+    Private Sub btnCancelaEmail_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnCancelaEmail.Click
         Me.Close()
     End Sub
 #End Region
 #Region "funciones y metodos"
     Private Sub add_Email()
-        txtPara.Text = txtPara.Text & txtAddEmail.Text & ";"
+        txtPara.Text = String.Format("{0}{1};", txtPara.Text, txtAddEmail.Text)
     End Sub
     Private Sub envia_email()
-        Dim Message As New System.Net.Mail.MailMessage()
-        Dim SMTP As New System.Net.Mail.SmtpClient
+        Dim Message As New MailMessage()
         'CONFIGURACIÓN DEL STMP
-        SMTP.Credentials = New System.Net.NetworkCredential("iomsz90@gmail.com", "90111915")
-        SMTP.Host = "smtp.gmail.com"
-        SMTP.Port = 587
-        SMTP.EnableSsl = True
+        Dim SMTP As New SmtpClient() With {.Credentials = New System.Net.NetworkCredential("iomsz90@gmail.com", "90111915"), .Host = "smtp.gmail.com", .Port = 587, .EnableSsl = True}
         ' CONFIGURACION DEL MENSAJE
         'Ingresa los destinatarios
         If txtPara.Text <> "" Then
-            Dim LineOfText As String
+            Dim LineOfText As String = txtPara.Text
             Dim i As Integer
-            Dim aryTextFile() As String
-            LineOfText = txtPara.Text
-            aryTextFile = LineOfText.Split(";")
+            Dim aryTextFile As String() = LineOfText.Split(";")
             For i = 0 To UBound(aryTextFile) - 1
                 Message.[To].Add(aryTextFile(i))
             Next i
         End If
-        'Message.[To].Add("omsz90@live.com.mx") 'Cuenta de Correo al que se le quiere enviar el e-mail
-        Message.From = New System.Net.Mail.MailAddress("omsz90@live.com.mx", "Oscar Martinez Sanchez", System.Text.Encoding.UTF8) 'Quien lo envía
+        Message.From = New MailAddress("omsz90@live.com.mx", "Oscar Martinez Sanchez", System.Text.Encoding.UTF8) 'Quien lo envía
         Message.Subject = txtAsunto.Text 'Sujeto del e-mail
         Message.SubjectEncoding = System.Text.Encoding.UTF8 'Codificacion
         Message.Body = txtMensaje.Text 'contenido del mail
         Message.BodyEncoding = System.Text.Encoding.UTF8
-        Message.Priority = System.Net.Mail.MailPriority.Normal
+        Message.Priority = MailPriority.Normal
         Message.IsBodyHtml = False
         'ENVIO
         Try
             SMTP.Send(Message)
-            'MessageBox.Show("Mensaje enviado correctamene", "Exito!", MessageBoxButtons.OK)
             wbarEnviarEmail.Text = "e-amil enviado correctamente"
             deshabilia_waitingbar()
             If bw.WorkerSupportsCancellation = True Then
                 bw.CancelAsync()
             End If
-        Catch ex As System.Net.Mail.SmtpException
-            'MessageBox.Show(ex.ToString, "Error al enviar email!", MessageBoxButtons.OK)
+        Catch ex As SmtpException
             wbarEnviarEmail.Text = "error al enviar e-amil"
             If bw.WorkerSupportsCancellation = True Then
                 bw.CancelAsync()
@@ -146,10 +136,7 @@ Public Class FrmSoporteEmail
         wbarEnviarEmail.Visible = True
         wbarEnviarEmail.StartWaiting()
     End Sub
-    Private Sub deshabilita_waitingbar()
-        wbarEnviarEmail.StopWaiting()
-        wbarEnviarEmail.Text = "Enviado Correctamente"
-    End Sub
+    
     Private Sub deshabilia_waitingbar()
         wbarEnviarEmail.WaitingStyle = Telerik.WinControls.Enumerations.WaitingBarStyles.Dash
         wbarEnviarEmail.StopWaiting()
@@ -164,10 +151,6 @@ Public Class FrmSoporteEmail
         habilita_btnCancelarEmail()
         If e.Cancelled = True Then
             deshabilia_waitingbar()
-        ElseIf e.Error IsNot Nothing Then
-            'Me.tbProgress.Text = "Error: " & e.Error.Message
-        Else
-            'Me.tbProgress.Text = "Done!"
         End If
     End Sub
     Private Sub bw_ProgressChanged(ByVal sender As Object, ByVal e As ProgressChangedEventArgs)

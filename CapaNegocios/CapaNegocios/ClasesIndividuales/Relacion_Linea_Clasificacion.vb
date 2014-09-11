@@ -1,7 +1,8 @@
-﻿Public Class Relacion_Linea_Clasificacion
+﻿Imports CapaDatos
+Public Class Relacion_Linea_Clasificacion
     Implements IIndividual
     Dim cadena_conexion As New CapaDatos.conexiones
-    Dim oBD As New CapaDatos.CapaDatos(cadena_conexion.CadenaSicaip)
+    Dim oBD As New Datos(cadena_conexion.CadenaSicaip)
     Dim oComponente As Componente
     Dim oEquipo_Linea As EquipoLinea
 

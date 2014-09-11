@@ -1,12 +1,11 @@
 ﻿Imports CapaDatos
 Public Class Objetivo
     Implements IIndividual
-    Dim cadena_conexion As New CapaDatos.conexiones
-    Dim oBD As New CapaDatos.CapaDatos(cadena_conexion.CadenaSicaip)
+    Dim cadena_conexion As New conexiones
+    Dim oBD As New Datos(cadena_conexion.CadenaSicaip)
 #Region "IIndividual"
     Public Sub Cargar() Implements IIndividual.Cargar
-        Dim vDR As DataRow
-        vDR = oBD.ObtenerRenglon("select * from objetivo where cve_objetivo = " & vCve_Objetivo, "objetivo")
+        Dim vDR As DataRow = oBD.ObtenerRenglon("select * from objetivo where cve_objetivo = " & vCve_Objetivo, "objetivo")
         If vDR IsNot Nothing Then
             vCve_Objetivo = vDR("cve_objetivo")
             vCve_Equipo = vDR("cve_equipo")
@@ -27,11 +26,10 @@ Public Class Objetivo
 
         End Try
     End Sub
-   
+
     Public Function Obtener_Id(ByVal vCadena As String) As Long Implements IIndividual.Obtener_Id
-        Dim vDR As DataRow
+        Dim vDR As DataRow = oBD.ObtenerRenglon("Select cve_objetivo from objetivo where cve_equipo=" & vCadena, "")
         Dim vRetorno As Long
-        vDR = oBD.ObtenerRenglon("Select cve_objetivo from objetivo where cve_equipo=" & vCadena, "")
         If vDR IsNot Nothing Then
             vRetorno = vDR("cve_objetivo")
         Else
@@ -43,9 +41,7 @@ Public Class Objetivo
     Public Sub Registrar() Implements IIndividual.Registrar
         Using scope As New TransactionScope
             Try
-                Dim cmd As New SqlClient.SqlCommand
-                cmd.CommandType = CommandType.StoredProcedure
-                cmd.CommandText = "REGISTRAR_Objetivo"
+                Dim cmd As New SqlClient.SqlCommand() With {.CommandType = CommandType.StoredProcedure, .CommandText = "REGISTRAR_Objetivo"}
                 cmd.Parameters.Add("@Cve_Objetivo", SqlDbType.BigInt).Value = Me.vCve_Objetivo
                 cmd.Parameters.Add("@Cve_Equipo", SqlDbType.BigInt).Value = Me.vCve_Equipo
                 cmd.Parameters.Add("@Fecha_Objetivo", SqlDbType.VarChar).Value = Me.vFecha_Objetivo

@@ -1,14 +1,13 @@
 ﻿Imports CapaDatos
 Public Class Usuario
     Implements IIndividual
-    Dim cadena_conexion As New CapaDatos.conexiones
-    Dim oBD As New CapaDatos.CapaDatos(cadena_conexion.CadenaSicaip)
+    Dim cadena_conexion As New conexiones
+    Dim oBD As New Datos(cadena_conexion.CadenaSicaip)
 
 #Region "IIndividual"
 
     Public Sub Cargar() Implements IIndividual.Cargar
-        Dim vDR As DataRow
-        vDR = oBD.ObtenerRenglon("select * from usuario where cve_usuario = " & vCve_usuario, "usuario")
+        Dim vDR As DataRow = oBD.ObtenerRenglon("select * from usuario where cve_usuario = " & vCve_usuario, "usuario")
         If vDR IsNot Nothing Then
             vCve_usuario = vDR("cve_usuario")
             vNombre = vDR("nombre")
@@ -28,9 +27,8 @@ Public Class Usuario
 
 
     Public Function Obtener_Id(ByVal vCadena As String) As Long Implements IIndividual.Obtener_Id
-        Dim vDR As DataRow
+        Dim vDR As DataRow = oBD.ObtenerRenglon("select cve_usuario from usuario where nombre = " & vCadena, "usuario")
         Dim vRetorno As Long
-        vDR = oBD.ObtenerRenglon("select cve_usuario from usuario where nombre = " & vCadena, "usuario")
         If vDR IsNot Nothing Then
             vRetorno = vDR("cve_usuario")
         Else
@@ -43,9 +41,7 @@ Public Class Usuario
 
         Using scope As New TransactionScope
             Try
-                Dim cmd As New SqlClient.SqlCommand
-                cmd.CommandType = CommandType.StoredProcedure
-                cmd.CommandText = "REGISTRAR_Usuario"
+                Dim cmd As New SqlClient.SqlCommand() With {.CommandType = CommandType.StoredProcedure, .CommandText = "REGISTRAR_Usuario"}
                 cmd.Parameters.Add("@cve_usuario", SqlDbType.BigInt).Value = Me.vCve_usuario
                 cmd.Parameters.Add("@nombre", SqlDbType.VarChar).Value = Me.vNombre
                 cmd.Parameters.Add("@pass", SqlDbType.VarChar).Value = Me.vPass

@@ -7,7 +7,7 @@ Public Class FrmImportador_Equipo
 
 
 
-    Private Sub FrmImportador_Equipo_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
+    Private Sub FrmImportador_Equipo_Load(ByVal sender As Object, ByVal e As EventArgs) Handles MyBase.Load
         Cargar_Tabla(False)
         btnImportar.Enabled = False
     End Sub
@@ -36,28 +36,19 @@ Public Class FrmImportador_Equipo
         Me.dgvDatos.EnableAlternatingRowColor = True
        
     End Sub
-    Private Sub CargarElementoSeleccionado(ByVal vIndice_Fila_Seleccioada As Integer)
-        oEquipo = New Equipo
-        oEquipo.Cve_Equipo = vIndice_Fila_Seleccioada
-        oEquipo.Cargar()
-       
-    End Sub
+  
 #End Region
 
-    Private Sub btnImportar_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnImportar.Click
+    Private Sub btnImportar_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnImportar.Click
         vRetorno_CVE_TIPO_USUARIO = oEquipo.Cve_Equipo
         Me.Close()
     End Sub
 
-    Private Sub btnCancelar_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnCancelar.Click
+    Private Sub btnCancelar_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnCancelar.Click
         Me.Close()
     End Sub
 
-    Private Sub btnNuevo_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnNuevo.Click
-
-    End Sub
-
-    Private Sub btnFiltrar_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnFiltrar.Click
+    Private Sub btnFiltrar_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnFiltrar.Click
         If rbtFiltro_Nombre.IsChecked = True Then
 
         ElseIf rbtTodos.IsChecked = True Then
@@ -65,20 +56,19 @@ Public Class FrmImportador_Equipo
         End If
     End Sub
 
-    Private Sub txtParametro_KeyUp(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtParametro.KeyUp
+    Private Sub txtParametro_KeyUp(ByVal sender As Object, ByVal e As KeyEventArgs) Handles txtParametro.KeyUp
         If rbtFiltro_Nombre.IsChecked = True Then
             Cargar_Tabla(True, txtParametro.Text)
             btnImportar.Enabled = False
         End If
     End Sub
 
-    Private Sub dgvDatos_MouseUp(ByVal sender As System.Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles dgvDatos.MouseUp
+    Private Sub dgvDatos_MouseUp(ByVal sender As Object, ByVal e As MouseEventArgs) Handles dgvDatos.MouseUp
         Try
             If e.Button = Windows.Forms.MouseButtons.Right Then
-              
+
             ElseIf e.Button = Windows.Forms.MouseButtons.Left Then
-                oEquipo = New Equipo
-                oEquipo.Cve_Equipo = dgvDatos.CurrentRow.Cells("Cve_Equipo").Value
+                oEquipo = New Equipo() With {.Cve_Equipo = dgvDatos.CurrentRow.Cells("Cve_Equipo").Value}
                 oEquipo.Cargar()
                 btnImportar.Enabled = True
             End If

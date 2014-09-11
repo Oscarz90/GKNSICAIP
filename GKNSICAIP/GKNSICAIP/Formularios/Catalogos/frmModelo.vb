@@ -17,25 +17,20 @@ Public Class frmModelo
         ' Agregue cualquier inicialización después de la llamada a InitializeComponent().
     End Sub
 
-    Private Sub btnSalir_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSalir.Click
+    Private Sub btnSalir_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnSalir.Click
         Me.Close()
     End Sub
 
-    Private Sub frmModelo_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
-        ''La Siguiente Linea solo es para hacer pruebas sobre un modelo de Prueba(El cual se agrego y se modifico de forma Exitosa)
-        ''Borrar si requiere hacer registro nuevo
-        'vId_Publico = 936
+    Private Sub frmModelo_Load(ByVal sender As Object, ByVal e As EventArgs) Handles MyBase.Load
         If Convert.ToInt64(vId_Publico) <> 0 Then
-            oModelo = New Modelo
-            oModelo.cve_modelo = vId_Publico
+            oModelo = New Modelo() With {.cve_modelo = vId_Publico}
             oModelo.Cargar()
             LlenaCombos()
 
             Controles_Registro_Nuevo(False)
             Controles_Permisos(vAdd_Registrar, vDelete_Eliminar)
         Else
-            oModelo = New Modelo
-            oModelo.descripcion = ""
+            oModelo = New Modelo() With {.descripcion = ""}
             LlenaCombos()
 
             Controles_Registro_Nuevo(True)
@@ -43,8 +38,7 @@ Public Class frmModelo
         End If
         vValida_Nombre = oModelo.descripcion.Count
         If vValida_Nombre > 0 Then
-            'btnRegistrar.Enabled = True
-            'btnModificar.Enabled = True
+            
         Else
             btnRegistrar.Enabled = False
             btnModificar.Enabled = False
@@ -57,7 +51,7 @@ Public Class frmModelo
         Me.txtDescripcion.Focus()
     End Sub
 
-    Private Sub btnDarBaja_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnDarBaja.Click
+    Private Sub btnDarBaja_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnDarBaja.Click
         If MsgBox("¿Esta seguro de Dar de Baja el Modelo?, se daran de baja los TC relacionados con este modelo", MsgBoxStyle.YesNo, Me.Text) = MsgBoxResult.Yes Then
             Try
                 oModelo.Eliminar()
@@ -68,7 +62,7 @@ Public Class frmModelo
         End If
     End Sub
 
-    Private Sub btnModificar_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnModificar.Click
+    Private Sub btnModificar_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnModificar.Click
         If vValida_Nombre > 0 Then
             If MsgBox("¿Esta seguro de realizar los cambios al Modelo?", MsgBoxStyle.YesNo, Me.Text) = MsgBoxResult.Yes Then
                 oModelo.descripcion = txtDescripcion.Text
@@ -85,7 +79,7 @@ Public Class frmModelo
         End If
     End Sub
 
-    Private Sub btnRegistrar_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnRegistrar.Click
+    Private Sub btnRegistrar_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnRegistrar.Click
         If vValida_Nombre > 0 Then
             If MsgBox("¿Esta seguro de registrar el nuevo Modelo?", MsgBoxStyle.YesNo, Me.Text) = MsgBoxResult.Yes Then
                 oModelo.cve_modelo = 0
@@ -105,7 +99,7 @@ Public Class frmModelo
         End If
     End Sub
 
-    Private Sub btnImportar_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnImportar.Click
+    Private Sub btnImportar_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnImportar.Click
         Dim ofrmImportador_Componente As New frmImportador_Componente
         ofrmImportador_Componente.ShowDialog()
         oModelo.cve_componente = ofrmImportador_Componente.vRetorno_CVE_Componente
@@ -156,23 +150,14 @@ Public Class frmModelo
             Me.btnModificar.Enabled = True
             Me.btnDarBaja.Enabled = False
         Else
-            'Me.btnDarBaja.Enabled = True
             Me.btnRegistrar.Enabled = False
             Me.btnModificar.Enabled = False
             Me.btnDarBaja.Enabled = True
-            'txtDescripcion.ReadOnly = True
-            'txtNumero_Parte.ReadOnly = True
-            'cbxClasificacion.Enabled = False
-            'btnImportar.Enabled = False
         End If
         If vDelete = True Then
             Me.btnDarBaja.Enabled = True
             Me.btnRegistrar.Enabled = False
             Me.btnModificar.Enabled = False
-            'txtDescripcion.ReadOnly = True
-            'txtNumero_Parte.ReadOnly = True
-            'cbxClasificacion.Enabled = False
-            'btnImportar.Enabled = False
         Else
             Me.btnDarBaja.Enabled = False
             Me.btnRegistrar.Enabled = True
@@ -182,23 +167,15 @@ Public Class frmModelo
             Me.btnDarBaja.Enabled = False
             Me.btnRegistrar.Enabled = False
             Me.btnModificar.Enabled = False
-            'txtDescripcion.ReadOnly = True
-            'txtNumero_Parte.ReadOnly = True
-            'cbxClasificacion.Enabled = False
-            'btnImportar.Enabled = False
         End If
         If vAdd = True And vDelete = True Then
             Me.btnDarBaja.Enabled = True
             Me.btnRegistrar.Enabled = True
             Me.btnModificar.Enabled = True
-            'txtDescripcion.ReadOnly = False
-            'txtNumero_Parte.ReadOnly = True
-            'cbxClasificacion.Enabled = False
-            'btnImportar.Enabled = True
         End If
     End Sub
 
-    Private Sub txtDescripcion_KeyUp(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtDescripcion.KeyUp
+    Private Sub txtDescripcion_KeyUp(ByVal sender As Object, ByVal e As KeyEventArgs) Handles txtDescripcion.KeyUp
         vValida_Nombre = txtDescripcion.Text.Count
 
         If vValida_Nombre > 0 Then
@@ -208,14 +185,12 @@ Public Class frmModelo
             Else
                 btnRegistrar.Enabled = False
                 btnModificar.Enabled = False
-            End If          
+            End If
         Else
             btnRegistrar.Enabled = False
             btnModificar.Enabled = False
         End If
     End Sub
 
-    Private Sub txtNumero_Parte_KeyUp(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtNumero_Parte.KeyUp
-
-    End Sub
+    
 End Class

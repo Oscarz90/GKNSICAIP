@@ -5,13 +5,13 @@ Public Class FrmMenu
     Public oUsuario_Login As SEGURIDAD_USUARIO
 
 #Region "Opciones De Menu"
-    Private Sub btnOpSICAIP_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnOpSICAIP.Click
+    Private Sub btnOpSICAIP_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnOpSICAIP.Click
         Dim ofrmLogin As New frmLogin
         ofrmLogin.ShowDialog()
     End Sub
 
-    Private Sub btnOpCalculadora_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnOpCalculadora.Click
-        Try            
+    Private Sub btnOpCalculadora_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnOpCalculadora.Click
+        Try
             Process.Start("\\celsr014\gknsicaip$\CALCULADORA\calculadorPrestaciones.exe")
         Catch ex As Exception
             MsgBox("No se encontro la ruta de la aplicacion. Error 0001")
@@ -19,9 +19,9 @@ Public Class FrmMenu
     End Sub
 #End Region
     
-    Private Sub FrmMenu_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
+    Private Sub FrmMenu_Load(ByVal sender As Object, ByVal e As EventArgs) Handles MyBase.Load
         oUsuario_Login = New SEGURIDAD_USUARIO
-        user_maq = Environment.UserName       
+        user_maq = Environment.UserName
         Dim ofrmFormulario_Principal As New Formulario_Principal
 
         If oUsuario_Login.Usuario_NO_Sindicalizado(user_maq) = True Then
