@@ -22,8 +22,8 @@ Partial Class FrmGraficasfaseuno
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Dim CartesianArea3 As Telerik.WinControls.UI.CartesianArea = New Telerik.WinControls.UI.CartesianArea()
         Dim CartesianArea1 As Telerik.WinControls.UI.CartesianArea = New Telerik.WinControls.UI.CartesianArea()
-        Dim CartesianArea2 As Telerik.WinControls.UI.CartesianArea = New Telerik.WinControls.UI.CartesianArea()
         Me.RadGroupBox1 = New Telerik.WinControls.UI.RadGroupBox()
         Me.rdbtnGente = New Telerik.WinControls.UI.RadRadioButton()
         Me.rdbtnCincoS = New Telerik.WinControls.UI.RadRadioButton()
@@ -64,6 +64,7 @@ Partial Class FrmGraficasfaseuno
         Me.dgvTabla = New Telerik.WinControls.UI.RadGridView()
         Me.RadPanel1 = New Telerik.WinControls.UI.RadPanel()
         Me.sfdExportaExcel = New System.Windows.Forms.SaveFileDialog()
+        Me.RadPanel2 = New Telerik.WinControls.UI.RadPanel()
         CType(Me.RadGroupBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.RadGroupBox1.SuspendLayout()
         CType(Me.rdbtnGente, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -105,6 +106,8 @@ Partial Class FrmGraficasfaseuno
         CType(Me.dgvTabla.MasterTemplate, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.RadPanel1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.RadPanel1.SuspendLayout()
+        CType(Me.RadPanel2, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.RadPanel2.SuspendLayout()
         CType(Me, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
@@ -118,13 +121,13 @@ Partial Class FrmGraficasfaseuno
         Me.RadGroupBox1.Controls.Add(Me.rdbtnNrfti)
         Me.RadGroupBox1.Controls.Add(Me.rdbtnOee)
         Me.RadGroupBox1.HeaderText = "Indicador:"
-        Me.RadGroupBox1.Location = New System.Drawing.Point(3, 2)
+        Me.RadGroupBox1.Location = New System.Drawing.Point(3, 3)
         Me.RadGroupBox1.Name = "RadGroupBox1"
         '
         '
         '
         Me.RadGroupBox1.RootElement.Padding = New System.Windows.Forms.Padding(2, 18, 2, 2)
-        Me.RadGroupBox1.Size = New System.Drawing.Size(95, 178)
+        Me.RadGroupBox1.Size = New System.Drawing.Size(104, 178)
         Me.RadGroupBox1.TabIndex = 0
         Me.RadGroupBox1.Text = "Indicador:"
         Me.RadGroupBox1.ThemeName = "RadThemeManager"
@@ -191,13 +194,13 @@ Partial Class FrmGraficasfaseuno
         Me.RadGroupBox2.Controls.Add(Me.rdbtnCadenaValor)
         Me.RadGroupBox2.Controls.Add(Me.rdbtnPlanta)
         Me.RadGroupBox2.HeaderText = "Selecciona:"
-        Me.RadGroupBox2.Location = New System.Drawing.Point(104, 2)
+        Me.RadGroupBox2.Location = New System.Drawing.Point(113, 3)
         Me.RadGroupBox2.Name = "RadGroupBox2"
         '
         '
         '
         Me.RadGroupBox2.RootElement.Padding = New System.Windows.Forms.Padding(2, 18, 2, 2)
-        Me.RadGroupBox2.Size = New System.Drawing.Size(426, 178)
+        Me.RadGroupBox2.Size = New System.Drawing.Size(454, 178)
         Me.RadGroupBox2.TabIndex = 4
         Me.RadGroupBox2.Text = "Selecciona:"
         Me.RadGroupBox2.ThemeName = "RadThemeManager"
@@ -301,7 +304,7 @@ Partial Class FrmGraficasfaseuno
         Me.RadGroupBox3.Controls.Add(Me.rdbtnMeses)
         Me.RadGroupBox3.Controls.Add(Me.rdbtnDias)
         Me.RadGroupBox3.HeaderText = "Seleccion Fecha:"
-        Me.RadGroupBox3.Location = New System.Drawing.Point(536, 2)
+        Me.RadGroupBox3.Location = New System.Drawing.Point(573, 3)
         Me.RadGroupBox3.Name = "RadGroupBox3"
         '
         '
@@ -369,15 +372,15 @@ Partial Class FrmGraficasfaseuno
         Me.radChartView1.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
             Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        CartesianArea1.GridDesign.AlternatingVerticalColor = False
-        CartesianArea1.GridDesign.DrawVerticalFills = False
-        CartesianArea1.ShowGrid = True
-        Me.radChartView1.AreaDesign = CartesianArea1
+        CartesianArea3.GridDesign.AlternatingVerticalColor = False
+        CartesianArea3.GridDesign.DrawVerticalFills = False
+        CartesianArea3.ShowGrid = True
+        Me.radChartView1.AreaDesign = CartesianArea3
         Me.radChartView1.AutoScroll = True
         Me.radChartView1.Controls.Add(Me.lblError)
         Me.radChartView1.Location = New System.Drawing.Point(100, 3)
         Me.radChartView1.Name = "radChartView1"
-        Me.radChartView1.Size = New System.Drawing.Size(1130, 428)
+        Me.radChartView1.Size = New System.Drawing.Size(1167, 415)
         Me.radChartView1.TabIndex = 9
         CType(Me.radChartView1.GetChildAt(0), Telerik.WinControls.UI.RadChartElement).DrawText = False
         CType(Me.radChartView1.GetChildAt(0), Telerik.WinControls.UI.RadChartElement).DrawFill = True
@@ -400,7 +403,7 @@ Partial Class FrmGraficasfaseuno
         Me.btnGraficar.Enabled = False
         Me.btnGraficar.Image = Global.GKNSICAIP.My.Resources.Resources.frmGraficas_graficar1
         Me.btnGraficar.ImageAlignment = System.Drawing.ContentAlignment.TopCenter
-        Me.btnGraficar.Location = New System.Drawing.Point(826, 63)
+        Me.btnGraficar.Location = New System.Drawing.Point(863, 64)
         Me.btnGraficar.Name = "btnGraficar"
         Me.btnGraficar.Size = New System.Drawing.Size(121, 78)
         Me.btnGraficar.TabIndex = 8
@@ -410,7 +413,7 @@ Partial Class FrmGraficasfaseuno
         '
         'picboxIndicador
         '
-        Me.picboxIndicador.Location = New System.Drawing.Point(953, 4)
+        Me.picboxIndicador.Location = New System.Drawing.Point(990, 2)
         Me.picboxIndicador.Name = "picboxIndicador"
         Me.picboxIndicador.Size = New System.Drawing.Size(305, 179)
         Me.picboxIndicador.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom
@@ -429,8 +432,8 @@ Partial Class FrmGraficasfaseuno
         Me.RadPageView1.ForeColor = System.Drawing.Color.Black
         Me.RadPageView1.Location = New System.Drawing.Point(3, 3)
         Me.RadPageView1.Name = "RadPageView1"
-        Me.RadPageView1.SelectedPage = Me.RadPageViewPage2
-        Me.RadPageView1.Size = New System.Drawing.Size(1251, 486)
+        Me.RadPageView1.SelectedPage = Me.RadPageViewPage1
+        Me.RadPageView1.Size = New System.Drawing.Size(1288, 473)
         Me.RadPageView1.TabIndex = 11
         Me.RadPageView1.Text = "Tablas"
         CType(Me.RadPageView1.GetChildAt(0), Telerik.WinControls.UI.RadPageViewStripElement).StripButtons = Telerik.WinControls.UI.StripViewButtons.None
@@ -442,7 +445,7 @@ Partial Class FrmGraficasfaseuno
         Me.RadPageViewPage2.Controls.Add(Me.radChartView1)
         Me.RadPageViewPage2.Location = New System.Drawing.Point(10, 41)
         Me.RadPageViewPage2.Name = "RadPageViewPage2"
-        Me.RadPageViewPage2.Size = New System.Drawing.Size(1230, 434)
+        Me.RadPageViewPage2.Size = New System.Drawing.Size(1267, 421)
         Me.RadPageViewPage2.Text = "Graficas"
         '
         'PageGrafica_Secundaria
@@ -452,7 +455,7 @@ Partial Class FrmGraficasfaseuno
         Me.PageGrafica_Secundaria.Controls.Add(Me.CharSecundario)
         Me.PageGrafica_Secundaria.Location = New System.Drawing.Point(10, 41)
         Me.PageGrafica_Secundaria.Name = "PageGrafica_Secundaria"
-        Me.PageGrafica_Secundaria.Size = New System.Drawing.Size(1230, 434)
+        Me.PageGrafica_Secundaria.Size = New System.Drawing.Size(1267, 421)
         Me.PageGrafica_Secundaria.Text = " Grafica Secundaria"
         '
         'CharSecundario
@@ -460,11 +463,11 @@ Partial Class FrmGraficasfaseuno
         Me.CharSecundario.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
             Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.CharSecundario.AreaDesign = CartesianArea2
+        Me.CharSecundario.AreaDesign = CartesianArea1
         Me.CharSecundario.Location = New System.Drawing.Point(3, 3)
         Me.CharSecundario.Name = "CharSecundario"
         Me.CharSecundario.ShowGrid = False
-        Me.CharSecundario.Size = New System.Drawing.Size(1227, 428)
+        Me.CharSecundario.Size = New System.Drawing.Size(1264, 415)
         Me.CharSecundario.TabIndex = 0
         Me.CharSecundario.Text = "RadChartView2"
         '
@@ -480,13 +483,13 @@ Partial Class FrmGraficasfaseuno
         Me.RadPageViewPage1.Controls.Add(Me.dgvTabla)
         Me.RadPageViewPage1.Location = New System.Drawing.Point(10, 41)
         Me.RadPageViewPage1.Name = "RadPageViewPage1"
-        Me.RadPageViewPage1.Size = New System.Drawing.Size(1230, 434)
+        Me.RadPageViewPage1.Size = New System.Drawing.Size(1267, 421)
         Me.RadPageViewPage1.Text = "Tablas"
         '
         'btnExportar
         '
         Me.btnExportar.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.btnExportar.Location = New System.Drawing.Point(1117, 3)
+        Me.btnExportar.Location = New System.Drawing.Point(1154, 3)
         Me.btnExportar.Name = "btnExportar"
         Me.btnExportar.Size = New System.Drawing.Size(110, 24)
         Me.btnExportar.TabIndex = 3
@@ -495,7 +498,7 @@ Partial Class FrmGraficasfaseuno
         'btnDetalle
         '
         Me.btnDetalle.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.btnDetalle.Location = New System.Drawing.Point(1001, 3)
+        Me.btnDetalle.Location = New System.Drawing.Point(1038, 3)
         Me.btnDetalle.Name = "btnDetalle"
         Me.btnDetalle.Size = New System.Drawing.Size(110, 24)
         Me.btnDetalle.TabIndex = 2
@@ -504,7 +507,7 @@ Partial Class FrmGraficasfaseuno
         'btnResumen
         '
         Me.btnResumen.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.btnResumen.Location = New System.Drawing.Point(885, 3)
+        Me.btnResumen.Location = New System.Drawing.Point(922, 3)
         Me.btnResumen.Name = "btnResumen"
         Me.btnResumen.Size = New System.Drawing.Size(110, 24)
         Me.btnResumen.TabIndex = 1
@@ -517,14 +520,14 @@ Partial Class FrmGraficasfaseuno
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.dgvTabla.Location = New System.Drawing.Point(3, 33)
         '
-        'dgvTabla
+        '
         '
         Me.dgvTabla.MasterTemplate.AllowAddNewRow = False
         Me.dgvTabla.MasterTemplate.HorizontalScrollState = Telerik.WinControls.UI.ScrollState.AlwaysShow
         Me.dgvTabla.MasterTemplate.VerticalScrollState = Telerik.WinControls.UI.ScrollState.AlwaysShow
         Me.dgvTabla.Name = "dgvTabla"
         Me.dgvTabla.ReadOnly = True
-        Me.dgvTabla.Size = New System.Drawing.Size(1224, 398)
+        Me.dgvTabla.Size = New System.Drawing.Size(1261, 385)
         Me.dgvTabla.TabIndex = 0
         Me.dgvTabla.Text = "RadGridView1"
         '
@@ -535,10 +538,27 @@ Partial Class FrmGraficasfaseuno
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.RadPanel1.AutoScroll = True
         Me.RadPanel1.Controls.Add(Me.RadPageView1)
-        Me.RadPanel1.Location = New System.Drawing.Point(3, 186)
+        Me.RadPanel1.Location = New System.Drawing.Point(0, 187)
         Me.RadPanel1.Name = "RadPanel1"
-        Me.RadPanel1.Size = New System.Drawing.Size(1257, 492)
+        Me.RadPanel1.Size = New System.Drawing.Size(1294, 479)
         Me.RadPanel1.TabIndex = 12
+        '
+        'RadPanel2
+        '
+        Me.RadPanel2.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.RadPanel2.AutoScroll = True
+        Me.RadPanel2.Controls.Add(Me.RadGroupBox1)
+        Me.RadPanel2.Controls.Add(Me.RadPanel1)
+        Me.RadPanel2.Controls.Add(Me.RadGroupBox2)
+        Me.RadPanel2.Controls.Add(Me.picboxIndicador)
+        Me.RadPanel2.Controls.Add(Me.RadGroupBox3)
+        Me.RadPanel2.Controls.Add(Me.btnGraficar)
+        Me.RadPanel2.Location = New System.Drawing.Point(3, 12)
+        Me.RadPanel2.Name = "RadPanel2"
+        Me.RadPanel2.Size = New System.Drawing.Size(1306, 677)
+        Me.RadPanel2.TabIndex = 13
         '
         'FrmGraficasfaseuno
         '
@@ -546,14 +566,9 @@ Partial Class FrmGraficasfaseuno
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.AutoScroll = True
         Me.BackColor = System.Drawing.Color.White
-        Me.ClientSize = New System.Drawing.Size(1272, 690)
-        Me.Controls.Add(Me.RadPanel1)
-        Me.Controls.Add(Me.picboxIndicador)
-        Me.Controls.Add(Me.btnGraficar)
-        Me.Controls.Add(Me.RadGroupBox3)
-        Me.Controls.Add(Me.RadGroupBox2)
-        Me.Controls.Add(Me.RadGroupBox1)
-        Me.MinimumSize = New System.Drawing.Size(1024, 720)
+        Me.ClientSize = New System.Drawing.Size(1310, 690)
+        Me.Controls.Add(Me.RadPanel2)
+        Me.MinimumSize = New System.Drawing.Size(1318, 720)
         Me.Name = "FrmGraficasfaseuno"
         '
         '
@@ -608,6 +623,8 @@ Partial Class FrmGraficasfaseuno
         CType(Me.dgvTabla, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.RadPanel1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.RadPanel1.ResumeLayout(False)
+        CType(Me.RadPanel2, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.RadPanel2.ResumeLayout(False)
         CType(Me, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
@@ -652,5 +669,6 @@ Partial Class FrmGraficasfaseuno
     Friend WithEvents PageGrafica_Secundaria As Telerik.WinControls.UI.RadPageViewPage
     Friend WithEvents CharSecundario As Telerik.WinControls.UI.RadChartView
     Friend WithEvents sfdExportaExcel As System.Windows.Forms.SaveFileDialog
+    Friend WithEvents RadPanel2 As Telerik.WinControls.UI.RadPanel
 End Class
 
