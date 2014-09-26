@@ -507,7 +507,7 @@ Public Class FrmGraficasfaseuno
         vF_Final = dtpFechaFinal.Value
         oG_Fase2 = New G_Fase2
 
-        ''Revicion de Nivel Elegido
+        ''Revisión de Nivel Elegido
         If rdbtnEquipo.IsChecked = True Then
             If chkTodasLineas.Checked = False Then ''---Nivel Equipo_Linea
                 vCve_Equipo = cbxEquipo.SelectedValue
@@ -578,6 +578,10 @@ Public Class FrmGraficasfaseuno
         End If
         Dim vOEE_Acumulado As Double = 0
 
+        'Dim vUltimo_Registro As Integer = 0
+        'Dim vUltimo_acumulado As Integer = 0
+        'vUltimo_Registro = vDT.Rows.Count - 1
+        'vUltimo_acumulado = vDT.Rows(vUltimo_Registro).Item("acumulado")
 
         For Each vDR As DataRow In vDT.Rows
             If vContador = 1 Then
@@ -1669,7 +1673,6 @@ Public Class FrmGraficasfaseuno
 
 
         'Creacion series
-
         Dim BarSeries2 As New BarSeries() With {.LegendTitle = "nuevas"}
         Dim BarSeries3 As New BarSeries() With {.LegendTitle = "resueltas"}
         Dim BarSeries1 As New BarSeries() With {.LegendTitle = "acumulado"}
@@ -1701,6 +1704,26 @@ Public Class FrmGraficasfaseuno
 
         End If
 
+        ''Obtención de total nuevas, total resueltas, último acumulado
+        Dim vTotal As Integer = 1
+        vTotal = vDT.Rows.Count
+        Dim vTotalNuevas As Integer = 0
+        Dim vTotalResueltas As Integer = 0
+        Dim vUltimo_Registro As Integer = 0
+        Dim vUltimo_acumulado As Integer = 0
+        vUltimo_Registro = vDT.Rows.Count - 1
+        vUltimo_acumulado = vDT.Rows(vUltimo_Registro).Item("acumulado")
+
+        For Each vDR As DataRow In vDT.Rows
+            vTotalNuevas = vTotalNuevas + vDR("nuevas")
+            vTotalResueltas = vTotalResueltas + vDR("resueltas")
+
+            vTotal = vTotal + 1
+        Next
+        ''Mostrar nuevas, resueltas y acumulado en labels
+        LblMuestraNuevas.Text = vTotalNuevas.ToString
+        LblMuestraResueltas.Text = vTotalResueltas.ToString
+        LblMuestaAcumulado.Text = vUltimo_acumulado.ToString
        
         BarSeries2.ValueMember = "nuevas"
         BarSeries2.CategoryMember = "dia_asignado"
@@ -2131,14 +2154,14 @@ Public Class FrmGraficasfaseuno
 
         LineSeries1.VerticalAxis = LinearAxis2
 
-        LineSeries1.Palette = New PaletteEntry(Color.FromArgb(127, 127, 127))
+        ''LineSeries1.Palette = New PaletteEntry(Color.FromArgb(127, 127, 127))
 
         If vNivel <> 5 Then
             LineSeries3.Palette = New PaletteEntry(Color.FromArgb(202, 0, 0))
             LineSeries3.BorderColor = Color.FromArgb(202, 0, 0)
         End If
 
-        LineSeries1.BorderColor = Color.FromArgb(127, 127, 127)
+        ''LineSeries1.BorderColor = Color.FromArgb(127, 127, 127)
 
         LineSeries1.PointSize = New SizeF(10, 10)
         Me.CharSecundario.ShowTrackBall = True
@@ -2250,26 +2273,32 @@ Public Class FrmGraficasfaseuno
     End Sub
     Private Sub obtener_grafica()
         If rdbtnOee.IsChecked Then
+            RpSeguridad.Visible = False
             Me.PageGrafica_Secundaria.Enabled = False
             vIndicador_A_CALCULAR = "OEE"
             Obtiene_Grafico_OEE()
         ElseIf rdbtnNrfti.IsChecked Then
+            RpSeguridad.Visible = False
             Me.PageGrafica_Secundaria.Enabled = False
             vIndicador_A_CALCULAR = "NRFTI"
             Obtiene_Grafica_NRFT()
         ElseIf rdbtnCosto.IsChecked Then
+            RpSeguridad.Visible = False
             Me.PageGrafica_Secundaria.Enabled = True
             vIndicador_A_CALCULAR = "COSTO"
             Obtiene_Grafica_Costo()
         ElseIf rdbtnSeguridad.IsChecked Then
+            RpSeguridad.Visible = True
             Me.PageGrafica_Secundaria.Enabled = False
             vIndicador_A_CALCULAR = "SEGURIDAD"
             Obtiene_Grafica_Seguridad()
         ElseIf rdbtnCincoS.IsChecked Then
+            RpSeguridad.Visible = False
             Me.PageGrafica_Secundaria.Enabled = False
             vIndicador_A_CALCULAR = "CINCOS"
             Obtiene_Grafica_CincoS()
         ElseIf rdbtnGente.IsChecked Then
+            RpSeguridad.Visible = False
             Me.PageGrafica_Secundaria.Enabled = False
             vIndicador_A_CALCULAR = "GENTE"
             Obtiene_Grafica_Gente()
@@ -2360,5 +2389,5 @@ Public Class FrmGraficasfaseuno
     End Sub
 #End Region
 
- 
+
 End Class

@@ -22,8 +22,8 @@ Partial Class FrmGraficasfaseuno
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Dim CartesianArea3 As Telerik.WinControls.UI.CartesianArea = New Telerik.WinControls.UI.CartesianArea()
         Dim CartesianArea1 As Telerik.WinControls.UI.CartesianArea = New Telerik.WinControls.UI.CartesianArea()
-        Dim CartesianArea2 As Telerik.WinControls.UI.CartesianArea = New Telerik.WinControls.UI.CartesianArea()
         Me.RadGroupBox1 = New Telerik.WinControls.UI.RadGroupBox()
         Me.rdbtnGente = New Telerik.WinControls.UI.RadRadioButton()
         Me.rdbtnCincoS = New Telerik.WinControls.UI.RadRadioButton()
@@ -64,6 +64,13 @@ Partial Class FrmGraficasfaseuno
         Me.dgvTabla = New Telerik.WinControls.UI.RadGridView()
         Me.RadPanel1 = New Telerik.WinControls.UI.RadPanel()
         Me.sfdExportaExcel = New System.Windows.Forms.SaveFileDialog()
+        Me.LblResueltas = New Telerik.WinControls.UI.RadLabel()
+        Me.LblMuestraNuevas = New Telerik.WinControls.UI.RadLabel()
+        Me.LblNuevas = New Telerik.WinControls.UI.RadLabel()
+        Me.LblMuestraResueltas = New Telerik.WinControls.UI.RadLabel()
+        Me.LblAcumulado = New Telerik.WinControls.UI.RadLabel()
+        Me.LblMuestaAcumulado = New Telerik.WinControls.UI.RadLabel()
+        Me.RpSeguridad = New Telerik.WinControls.UI.RadPanel()
         CType(Me.RadGroupBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.RadGroupBox1.SuspendLayout()
         CType(Me.rdbtnGente, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -105,6 +112,14 @@ Partial Class FrmGraficasfaseuno
         CType(Me.dgvTabla.MasterTemplate, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.RadPanel1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.RadPanel1.SuspendLayout()
+        CType(Me.LblResueltas, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.LblMuestraNuevas, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.LblNuevas, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.LblMuestraResueltas, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.LblAcumulado, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.LblMuestaAcumulado, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.RpSeguridad, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.RpSeguridad.SuspendLayout()
         CType(Me, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
@@ -133,7 +148,7 @@ Partial Class FrmGraficasfaseuno
         '
         Me.rdbtnGente.Location = New System.Drawing.Point(5, 141)
         Me.rdbtnGente.Name = "rdbtnGente"
-        Me.rdbtnGente.Size = New System.Drawing.Size(58, 22)
+        Me.rdbtnGente.Size = New System.Drawing.Size(50, 18)
         Me.rdbtnGente.TabIndex = 3
         Me.rdbtnGente.Text = "Gente"
         '
@@ -141,7 +156,7 @@ Partial Class FrmGraficasfaseuno
         '
         Me.rdbtnCincoS.Location = New System.Drawing.Point(5, 117)
         Me.rdbtnCincoS.Name = "rdbtnCincoS"
-        Me.rdbtnCincoS.Size = New System.Drawing.Size(38, 22)
+        Me.rdbtnCincoS.Size = New System.Drawing.Size(34, 18)
         Me.rdbtnCincoS.TabIndex = 3
         Me.rdbtnCincoS.Text = "5's"
         '
@@ -149,7 +164,7 @@ Partial Class FrmGraficasfaseuno
         '
         Me.rdbtnSeguridad.Location = New System.Drawing.Point(5, 93)
         Me.rdbtnSeguridad.Name = "rdbtnSeguridad"
-        Me.rdbtnSeguridad.Size = New System.Drawing.Size(85, 22)
+        Me.rdbtnSeguridad.Size = New System.Drawing.Size(71, 18)
         Me.rdbtnSeguridad.TabIndex = 2
         Me.rdbtnSeguridad.Text = "Seguridad"
         '
@@ -157,7 +172,7 @@ Partial Class FrmGraficasfaseuno
         '
         Me.rdbtnCosto.Location = New System.Drawing.Point(5, 69)
         Me.rdbtnCosto.Name = "rdbtnCosto"
-        Me.rdbtnCosto.Size = New System.Drawing.Size(57, 22)
+        Me.rdbtnCosto.Size = New System.Drawing.Size(49, 18)
         Me.rdbtnCosto.TabIndex = 2
         Me.rdbtnCosto.Text = "Costo"
         '
@@ -165,7 +180,7 @@ Partial Class FrmGraficasfaseuno
         '
         Me.rdbtnNrfti.Location = New System.Drawing.Point(5, 45)
         Me.rdbtnNrfti.Name = "rdbtnNrfti"
-        Me.rdbtnNrfti.Size = New System.Drawing.Size(58, 22)
+        Me.rdbtnNrfti.Size = New System.Drawing.Size(50, 18)
         Me.rdbtnNrfti.TabIndex = 2
         Me.rdbtnNrfti.Text = "NRFTi"
         '
@@ -173,7 +188,7 @@ Partial Class FrmGraficasfaseuno
         '
         Me.rdbtnOee.Location = New System.Drawing.Point(5, 21)
         Me.rdbtnOee.Name = "rdbtnOee"
-        Me.rdbtnOee.Size = New System.Drawing.Size(46, 22)
+        Me.rdbtnOee.Size = New System.Drawing.Size(40, 18)
         Me.rdbtnOee.TabIndex = 1
         Me.rdbtnOee.Text = "OEE"
         '
@@ -209,7 +224,7 @@ Partial Class FrmGraficasfaseuno
         Me.cbxLinea.FormattingEnabled = True
         Me.cbxLinea.Location = New System.Drawing.Point(119, 131)
         Me.cbxLinea.Name = "cbxLinea"
-        Me.cbxLinea.Size = New System.Drawing.Size(241, 24)
+        Me.cbxLinea.Size = New System.Drawing.Size(241, 21)
         Me.cbxLinea.TabIndex = 13
         '
         'cbxEquipo
@@ -219,7 +234,7 @@ Partial Class FrmGraficasfaseuno
         Me.cbxEquipo.FormattingEnabled = True
         Me.cbxEquipo.Location = New System.Drawing.Point(119, 107)
         Me.cbxEquipo.Name = "cbxEquipo"
-        Me.cbxEquipo.Size = New System.Drawing.Size(241, 24)
+        Me.cbxEquipo.Size = New System.Drawing.Size(241, 21)
         Me.cbxEquipo.TabIndex = 12
         '
         'cbxComponente
@@ -229,7 +244,7 @@ Partial Class FrmGraficasfaseuno
         Me.cbxComponente.FormattingEnabled = True
         Me.cbxComponente.Location = New System.Drawing.Point(119, 83)
         Me.cbxComponente.Name = "cbxComponente"
-        Me.cbxComponente.Size = New System.Drawing.Size(241, 24)
+        Me.cbxComponente.Size = New System.Drawing.Size(241, 21)
         Me.cbxComponente.TabIndex = 11
         '
         'cbxCadenaValor
@@ -239,14 +254,14 @@ Partial Class FrmGraficasfaseuno
         Me.cbxCadenaValor.FormattingEnabled = True
         Me.cbxCadenaValor.Location = New System.Drawing.Point(119, 59)
         Me.cbxCadenaValor.Name = "cbxCadenaValor"
-        Me.cbxCadenaValor.Size = New System.Drawing.Size(241, 24)
+        Me.cbxCadenaValor.Size = New System.Drawing.Size(241, 21)
         Me.cbxCadenaValor.TabIndex = 10
         '
         'chkTodasLineas
         '
         Me.chkTodasLineas.Location = New System.Drawing.Point(366, 133)
         Me.chkTodasLineas.Name = "chkTodasLineas"
-        Me.chkTodasLineas.Size = New System.Drawing.Size(58, 22)
+        Me.chkTodasLineas.Size = New System.Drawing.Size(50, 18)
         Me.chkTodasLineas.TabIndex = 7
         Me.chkTodasLineas.Text = "Todas"
         Me.chkTodasLineas.Visible = False
@@ -255,7 +270,7 @@ Partial Class FrmGraficasfaseuno
         '
         Me.rdbtnLinea.Location = New System.Drawing.Point(5, 133)
         Me.rdbtnLinea.Name = "rdbtnLinea"
-        Me.rdbtnLinea.Size = New System.Drawing.Size(57, 22)
+        Me.rdbtnLinea.Size = New System.Drawing.Size(49, 18)
         Me.rdbtnLinea.TabIndex = 3
         Me.rdbtnLinea.Text = "Linea:"
         '
@@ -263,7 +278,7 @@ Partial Class FrmGraficasfaseuno
         '
         Me.rdbtnComponente.Location = New System.Drawing.Point(5, 85)
         Me.rdbtnComponente.Name = "rdbtnComponente"
-        Me.rdbtnComponente.Size = New System.Drawing.Size(106, 22)
+        Me.rdbtnComponente.Size = New System.Drawing.Size(88, 18)
         Me.rdbtnComponente.TabIndex = 2
         Me.rdbtnComponente.Text = "Componente:"
         '
@@ -271,7 +286,7 @@ Partial Class FrmGraficasfaseuno
         '
         Me.rdbtnEquipo.Location = New System.Drawing.Point(5, 109)
         Me.rdbtnEquipo.Name = "rdbtnEquipo"
-        Me.rdbtnEquipo.Size = New System.Drawing.Size(68, 22)
+        Me.rdbtnEquipo.Size = New System.Drawing.Size(57, 18)
         Me.rdbtnEquipo.TabIndex = 2
         Me.rdbtnEquipo.Text = "Equipo:"
         '
@@ -279,7 +294,7 @@ Partial Class FrmGraficasfaseuno
         '
         Me.rdbtnCadenaValor.Location = New System.Drawing.Point(5, 61)
         Me.rdbtnCadenaValor.Name = "rdbtnCadenaValor"
-        Me.rdbtnCadenaValor.Size = New System.Drawing.Size(108, 22)
+        Me.rdbtnCadenaValor.Size = New System.Drawing.Size(89, 18)
         Me.rdbtnCadenaValor.TabIndex = 2
         Me.rdbtnCadenaValor.Text = "Cadena Valor:"
         '
@@ -287,7 +302,7 @@ Partial Class FrmGraficasfaseuno
         '
         Me.rdbtnPlanta.Location = New System.Drawing.Point(5, 37)
         Me.rdbtnPlanta.Name = "rdbtnPlanta"
-        Me.rdbtnPlanta.Size = New System.Drawing.Size(60, 22)
+        Me.rdbtnPlanta.Size = New System.Drawing.Size(51, 18)
         Me.rdbtnPlanta.TabIndex = 1
         Me.rdbtnPlanta.Text = "Planta"
         '
@@ -316,7 +331,7 @@ Partial Class FrmGraficasfaseuno
         '
         Me.RadLabel2.Location = New System.Drawing.Point(22, 103)
         Me.RadLabel2.Name = "RadLabel2"
-        Me.RadLabel2.Size = New System.Drawing.Size(79, 22)
+        Me.RadLabel2.Size = New System.Drawing.Size(64, 18)
         Me.RadLabel2.TabIndex = 11
         Me.RadLabel2.Text = "Fecha Final:"
         '
@@ -324,7 +339,7 @@ Partial Class FrmGraficasfaseuno
         '
         Me.RadLabel1.Location = New System.Drawing.Point(17, 69)
         Me.RadLabel1.Name = "RadLabel1"
-        Me.RadLabel1.Size = New System.Drawing.Size(86, 22)
+        Me.RadLabel1.Size = New System.Drawing.Size(69, 18)
         Me.RadLabel1.TabIndex = 10
         Me.RadLabel1.Text = "Fecha Inicial:"
         '
@@ -332,7 +347,7 @@ Partial Class FrmGraficasfaseuno
         '
         Me.dtpFechaFinal.Location = New System.Drawing.Point(118, 101)
         Me.dtpFechaFinal.Name = "dtpFechaFinal"
-        Me.dtpFechaFinal.Size = New System.Drawing.Size(164, 24)
+        Me.dtpFechaFinal.Size = New System.Drawing.Size(164, 20)
         Me.dtpFechaFinal.TabIndex = 9
         Me.dtpFechaFinal.TabStop = False
         Me.dtpFechaFinal.Value = New Date(CType(0, Long))
@@ -341,7 +356,7 @@ Partial Class FrmGraficasfaseuno
         '
         Me.dtpFechaInicial.Location = New System.Drawing.Point(118, 67)
         Me.dtpFechaInicial.Name = "dtpFechaInicial"
-        Me.dtpFechaInicial.Size = New System.Drawing.Size(164, 24)
+        Me.dtpFechaInicial.Size = New System.Drawing.Size(164, 20)
         Me.dtpFechaInicial.TabIndex = 8
         Me.dtpFechaInicial.TabStop = False
         Me.dtpFechaInicial.Value = New Date(CType(0, Long))
@@ -350,7 +365,7 @@ Partial Class FrmGraficasfaseuno
         '
         Me.rdbtnMeses.Location = New System.Drawing.Point(182, 33)
         Me.rdbtnMeses.Name = "rdbtnMeses"
-        Me.rdbtnMeses.Size = New System.Drawing.Size(86, 22)
+        Me.rdbtnMeses.Size = New System.Drawing.Size(72, 18)
         Me.rdbtnMeses.TabIndex = 2
         Me.rdbtnMeses.Text = "Por Meses"
         '
@@ -358,7 +373,7 @@ Partial Class FrmGraficasfaseuno
         '
         Me.rdbtnDias.Location = New System.Drawing.Point(43, 33)
         Me.rdbtnDias.Name = "rdbtnDias"
-        Me.rdbtnDias.Size = New System.Drawing.Size(73, 22)
+        Me.rdbtnDias.Size = New System.Drawing.Size(61, 18)
         Me.rdbtnDias.TabIndex = 1
         Me.rdbtnDias.TabStop = True
         Me.rdbtnDias.Text = "Por Días"
@@ -367,17 +382,17 @@ Partial Class FrmGraficasfaseuno
         'radChartView1
         '
         Me.radChartView1.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-            Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        CartesianArea1.GridDesign.AlternatingVerticalColor = False
-        CartesianArea1.GridDesign.DrawVerticalFills = False
-        CartesianArea1.ShowGrid = True
-        Me.radChartView1.AreaDesign = CartesianArea1
+                    Or System.Windows.Forms.AnchorStyles.Left) _
+                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        CartesianArea3.GridDesign.AlternatingVerticalColor = False
+        CartesianArea3.GridDesign.DrawVerticalFills = False
+        CartesianArea3.ShowGrid = True
+        Me.radChartView1.AreaDesign = CartesianArea3
         Me.radChartView1.AutoScroll = True
         Me.radChartView1.Controls.Add(Me.lblError)
-        Me.radChartView1.Location = New System.Drawing.Point(100, 3)
+        Me.radChartView1.Location = New System.Drawing.Point(3, 66)
         Me.radChartView1.Name = "radChartView1"
-        Me.radChartView1.Size = New System.Drawing.Size(1234, 609)
+        Me.radChartView1.Size = New System.Drawing.Size(1235, 529)
         Me.radChartView1.TabIndex = 9
         CType(Me.radChartView1.GetChildAt(0), Telerik.WinControls.UI.RadChartElement).DrawText = False
         CType(Me.radChartView1.GetChildAt(0), Telerik.WinControls.UI.RadChartElement).DrawFill = True
@@ -389,7 +404,7 @@ Partial Class FrmGraficasfaseuno
         Me.lblError.ForeColor = System.Drawing.Color.Red
         Me.lblError.Location = New System.Drawing.Point(427, 0)
         Me.lblError.Name = "lblError"
-        Me.lblError.Size = New System.Drawing.Size(418, 31)
+        Me.lblError.Size = New System.Drawing.Size(344, 26)
         Me.lblError.TabIndex = 109
         Me.lblError.Text = "NO HAY DATOS A MOSTRAR."
         Me.lblError.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
@@ -420,8 +435,8 @@ Partial Class FrmGraficasfaseuno
         'RadPageView1
         '
         Me.RadPageView1.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-            Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+                    Or System.Windows.Forms.AnchorStyles.Left) _
+                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.RadPageView1.AutoScroll = True
         Me.RadPageView1.Controls.Add(Me.RadPageViewPage2)
         Me.RadPageView1.Controls.Add(Me.PageGrafica_Secundaria)
@@ -439,10 +454,11 @@ Partial Class FrmGraficasfaseuno
         '
         Me.RadPageViewPage2.AutoScroll = True
         Me.RadPageViewPage2.BackColor = System.Drawing.Color.White
+        Me.RadPageViewPage2.Controls.Add(Me.RpSeguridad)
         Me.RadPageViewPage2.Controls.Add(Me.radChartView1)
-        Me.RadPageViewPage2.Location = New System.Drawing.Point(10, 41)
+        Me.RadPageViewPage2.Location = New System.Drawing.Point(10, 37)
         Me.RadPageViewPage2.Name = "RadPageViewPage2"
-        Me.RadPageViewPage2.Size = New System.Drawing.Size(1334, 615)
+        Me.RadPageViewPage2.Size = New System.Drawing.Size(1334, 619)
         Me.RadPageViewPage2.Text = "Graficas"
         '
         'PageGrafica_Secundaria
@@ -450,21 +466,21 @@ Partial Class FrmGraficasfaseuno
         Me.PageGrafica_Secundaria.BackColor = System.Drawing.Color.White
         Me.PageGrafica_Secundaria.CausesValidation = False
         Me.PageGrafica_Secundaria.Controls.Add(Me.CharSecundario)
-        Me.PageGrafica_Secundaria.Location = New System.Drawing.Point(10, 41)
+        Me.PageGrafica_Secundaria.Location = New System.Drawing.Point(10, 37)
         Me.PageGrafica_Secundaria.Name = "PageGrafica_Secundaria"
-        Me.PageGrafica_Secundaria.Size = New System.Drawing.Size(1334, 615)
+        Me.PageGrafica_Secundaria.Size = New System.Drawing.Size(1334, 619)
         Me.PageGrafica_Secundaria.Text = " Grafica Secundaria"
         '
         'CharSecundario
         '
         Me.CharSecundario.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-            Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.CharSecundario.AreaDesign = CartesianArea2
+                    Or System.Windows.Forms.AnchorStyles.Left) _
+                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.CharSecundario.AreaDesign = CartesianArea1
         Me.CharSecundario.Location = New System.Drawing.Point(3, 3)
         Me.CharSecundario.Name = "CharSecundario"
         Me.CharSecundario.ShowGrid = False
-        Me.CharSecundario.Size = New System.Drawing.Size(1331, 609)
+        Me.CharSecundario.Size = New System.Drawing.Size(1331, 613)
         Me.CharSecundario.TabIndex = 0
         Me.CharSecundario.Text = "RadChartView2"
         '
@@ -513,11 +529,11 @@ Partial Class FrmGraficasfaseuno
         'dgvTabla
         '
         Me.dgvTabla.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-            Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+                    Or System.Windows.Forms.AnchorStyles.Left) _
+                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.dgvTabla.Location = New System.Drawing.Point(3, 33)
         '
-        'dgvTabla
+        '
         '
         Me.dgvTabla.MasterTemplate.AllowAddNewRow = False
         Me.dgvTabla.MasterTemplate.HorizontalScrollState = Telerik.WinControls.UI.ScrollState.AlwaysShow
@@ -531,8 +547,8 @@ Partial Class FrmGraficasfaseuno
         'RadPanel1
         '
         Me.RadPanel1.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-            Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+                    Or System.Windows.Forms.AnchorStyles.Left) _
+                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.RadPanel1.AutoScroll = True
         Me.RadPanel1.Controls.Add(Me.RadPageView1)
         Me.RadPanel1.Location = New System.Drawing.Point(3, 186)
@@ -540,19 +556,91 @@ Partial Class FrmGraficasfaseuno
         Me.RadPanel1.Size = New System.Drawing.Size(1361, 673)
         Me.RadPanel1.TabIndex = 12
         '
+        'LblResueltas
+        '
+        Me.LblResueltas.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LblResueltas.Location = New System.Drawing.Point(87, 4)
+        Me.LblResueltas.Name = "LblResueltas"
+        Me.LblResueltas.Size = New System.Drawing.Size(82, 21)
+        Me.LblResueltas.TabIndex = 2
+        Me.LblResueltas.Text = "RESUELTAS:"
+        '
+        'LblMuestraNuevas
+        '
+        Me.LblMuestraNuevas.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LblMuestraNuevas.Location = New System.Drawing.Point(33, 29)
+        Me.LblMuestraNuevas.Name = "LblMuestraNuevas"
+        Me.LblMuestraNuevas.Size = New System.Drawing.Size(2, 2)
+        Me.LblMuestraNuevas.TabIndex = 1
+        Me.LblMuestraNuevas.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'LblNuevas
+        '
+        Me.LblNuevas.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LblNuevas.Location = New System.Drawing.Point(7, 3)
+        Me.LblNuevas.Name = "LblNuevas"
+        Me.LblNuevas.Size = New System.Drawing.Size(64, 21)
+        Me.LblNuevas.TabIndex = 0
+        Me.LblNuevas.Text = "NUEVAS:"
+        '
+        'LblMuestraResueltas
+        '
+        Me.LblMuestraResueltas.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LblMuestraResueltas.Location = New System.Drawing.Point(120, 27)
+        Me.LblMuestraResueltas.Name = "LblMuestraResueltas"
+        Me.LblMuestraResueltas.Size = New System.Drawing.Size(2, 2)
+        Me.LblMuestraResueltas.TabIndex = 3
+        Me.LblMuestraResueltas.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'LblAcumulado
+        '
+        Me.LblAcumulado.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LblAcumulado.Location = New System.Drawing.Point(189, 4)
+        Me.LblAcumulado.Name = "LblAcumulado"
+        Me.LblAcumulado.Size = New System.Drawing.Size(97, 21)
+        Me.LblAcumulado.TabIndex = 4
+        Me.LblAcumulado.Text = "ACUMULADO:"
+        '
+        'LblMuestaAcumulado
+        '
+        Me.LblMuestaAcumulado.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LblMuestaAcumulado.Location = New System.Drawing.Point(217, 28)
+        Me.LblMuestaAcumulado.Name = "LblMuestaAcumulado"
+        Me.LblMuestaAcumulado.Size = New System.Drawing.Size(2, 2)
+        Me.LblMuestaAcumulado.TabIndex = 5
+        Me.LblMuestaAcumulado.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'RpSeguridad
+        '
+        Me.RpSeguridad.BackColor = System.Drawing.Color.Transparent
+        Me.RpSeguridad.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None
+        Me.RpSeguridad.Controls.Add(Me.LblAcumulado)
+        Me.RpSeguridad.Controls.Add(Me.LblMuestraResueltas)
+        Me.RpSeguridad.Controls.Add(Me.LblNuevas)
+        Me.RpSeguridad.Controls.Add(Me.LblMuestraNuevas)
+        Me.RpSeguridad.Controls.Add(Me.LblMuestaAcumulado)
+        Me.RpSeguridad.Controls.Add(Me.LblResueltas)
+        Me.RpSeguridad.Cursor = System.Windows.Forms.Cursors.Default
+        Me.RpSeguridad.ForeColor = System.Drawing.Color.Black
+        Me.RpSeguridad.Location = New System.Drawing.Point(1022, -1)
+        Me.RpSeguridad.Name = "RpSeguridad"
+        Me.RpSeguridad.Size = New System.Drawing.Size(313, 61)
+        Me.RpSeguridad.TabIndex = 10
+        Me.RpSeguridad.Visible = False
+        '
         'FrmGraficasfaseuno
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.White
-        Me.ClientSize = New System.Drawing.Size(1376, 871)
+        Me.ClientSize = New System.Drawing.Size(1358, 698)
         Me.Controls.Add(Me.RadPanel1)
         Me.Controls.Add(Me.picboxIndicador)
         Me.Controls.Add(Me.btnGraficar)
         Me.Controls.Add(Me.RadGroupBox3)
         Me.Controls.Add(Me.RadGroupBox2)
         Me.Controls.Add(Me.RadGroupBox1)
-        Me.MinimumSize = New System.Drawing.Size(1280, 736)
+        Me.MinimumSize = New System.Drawing.Size(1280, 726)
         Me.Name = "FrmGraficasfaseuno"
         '
         '
@@ -607,6 +695,15 @@ Partial Class FrmGraficasfaseuno
         CType(Me.dgvTabla, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.RadPanel1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.RadPanel1.ResumeLayout(False)
+        CType(Me.LblResueltas, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.LblMuestraNuevas, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.LblNuevas, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.LblMuestraResueltas, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.LblAcumulado, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.LblMuestaAcumulado, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.RpSeguridad, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.RpSeguridad.ResumeLayout(False)
+        Me.RpSeguridad.PerformLayout()
         CType(Me, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
@@ -651,5 +748,12 @@ Partial Class FrmGraficasfaseuno
     Friend WithEvents PageGrafica_Secundaria As Telerik.WinControls.UI.RadPageViewPage
     Friend WithEvents CharSecundario As Telerik.WinControls.UI.RadChartView
     Friend WithEvents sfdExportaExcel As System.Windows.Forms.SaveFileDialog
+    Friend WithEvents RpSeguridad As Telerik.WinControls.UI.RadPanel
+    Friend WithEvents LblAcumulado As Telerik.WinControls.UI.RadLabel
+    Friend WithEvents LblMuestraResueltas As Telerik.WinControls.UI.RadLabel
+    Friend WithEvents LblNuevas As Telerik.WinControls.UI.RadLabel
+    Friend WithEvents LblMuestraNuevas As Telerik.WinControls.UI.RadLabel
+    Friend WithEvents LblMuestaAcumulado As Telerik.WinControls.UI.RadLabel
+    Friend WithEvents LblResueltas As Telerik.WinControls.UI.RadLabel
 End Class
 
