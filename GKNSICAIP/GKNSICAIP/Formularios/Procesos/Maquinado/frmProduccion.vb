@@ -1,5 +1,7 @@
 ﻿Imports CapaNegocios
 Imports System.Configuration
+Imports System.Transactions
+
 Public Class frmProduccion
 #Region "Objetos"
     Dim ofrmMensaje_Turno As msg_Dialogo
@@ -852,6 +854,8 @@ Public Class frmProduccion
         Dim ci_resueltas As Integer = 0
         Dim vMaximo_Resueltas As Integer = 0
         Dim oObtieneSeguridad As obtiene_seguridad
+        Dim oSeguridad As Seguridad
+
         If valida_hora_de_captura(Now.ToString("dd-MM-yyyy HH:mm:ss")) Then
             If flgBanderaModificacionPermiso Then
                 vLogModifPermDes = "Registro Cond. Insegura - Equipo: " & vnombre_equipo & " Linea: " & cbxLinea.Text &
@@ -859,13 +863,16 @@ Public Class frmProduccion
                 " Cantidad: " & txtCondInsegCantidad.Text &
                 " #cve: " & get_registro_del_turno()
             End If
+
             If cbxTipoCondInseg.SelectedValue = 1 Then ''SI SON NUEVAS
-                add_cond_inseg()
+                add_cond_inseg(True)
                 log_modificaciones_permiso(vLogModifPermDes)
                 limpia_cond_inseg()
                 llena_cond_inseg_gridview()
             ElseIf cbxTipoCondInseg.SelectedValue = 2 Then ''SI SON RESUELTAS
+
                 '------------------------------------------
+                'Exec proc para actualixar historico
                 oObtieneSeguridad = New obtiene_seguridad
                 oObtieneSeguridad.cve_equipo = vcve_equipo
                 oObtieneSeguridad.cve_linea = vCve_Linea_CBX
@@ -873,13 +880,16 @@ Public Class frmProduccion
                 oObtieneSeguridad.fecha_final = Date.Now
                 oObtieneSeguridad.bandera = 2
                 oObtieneSeguridad.obtiene_seguridad_equipo_linea_dia()
-
                 'Exec proc para actualixar historico
-
                 '------------------------------------------
-                acumulado = acumulado_dia_anterior()
+
+
+                'acumulado = acumulado_dia_anterior()
+                oSeguridad = New Seguridad
+                acumulado = oSeguridad.Obtener_Acumulado_Anterior(Convert.ToDateTime(Now.ToString("dd-MM-yyyy HH:mm")), vcve_equipo, vCve_Linea_CBX)
                 ci_nuevas = obtener_nuevas_hoy()
                 ci_resueltas = obtener_resueltas_hoy()
+
                 'OBTENER MAXIMO VALOR PARA RESUELTAS
                 vMaximo_Resueltas = (acumulado + ci_nuevas) - ci_resueltas
                 If txtCondInsegCantidad.Text <= vMaximo_Resueltas Then
@@ -1341,7 +1351,7 @@ Public Class frmProduccion
         btnLineasTodas.Enabled = False
         btnLineaUnica.Enabled = False
     End Sub
-    
+
     Private Function valida_insercion_cinco_s() As Boolean
         If cbxTurno.SelectedValue <> -1 And txtAdmonVisual.Text <> "" And txtManttoAutonomo.Text <> "" And txt5s.Text <> "" Then
             If Convert.ToDouble(txtAdmonVisual.Text) <> 0 And Convert.ToDouble(txtManttoAutonomo.Text) <> 0 And Convert.ToDouble(txt5s.Text) <> 0 Then
@@ -1514,7 +1524,7 @@ Public Class frmProduccion
 #End Region
 #Region "Funciones Generales"
     Private Sub define_calendario_descanso()
-       
+
         Dim diainicial As DateTime = DateSerial(obtiene_fecha_actual.Year, obtiene_fecha_actual.Month, 1)
         Dim diafinal As DateTime = DateSerial(obtiene_fecha_actual.Year, obtiene_fecha_actual.Month + 1, 0)
         diafinal = diafinal.AddDays(5)
@@ -1584,7 +1594,7 @@ Public Class frmProduccion
         lblFechaRegistro.Visible = True
         lblFechaRegistrodescripcion.Visible = True
     End Sub
-    
+
 #End Region
 #Region "Funciones para modulo Productividad"
     'Metodo Enviar notificaciones de sobreproduccion
@@ -1705,7 +1715,7 @@ Public Class frmProduccion
         Next
         Return Total
     End Function
-    
+
     Private Function get_suma_desechos_aplicables() As Double
         Dim oRegistro_turno As New Registro_Turno() With {.cve_registro_turno = get_registro_del_turno()}
         oRegistro_turno.Cargar()
@@ -1890,7 +1900,7 @@ Public Class frmProduccion
         End If
 
     End Sub
-    
+
 #End Region
 #Region "Funciones para modulo de CDM"
     Private Sub activa_captura_CDM()
@@ -1980,16 +1990,58 @@ Public Class frmProduccion
     End Sub
 #End Region
 #Region "Funciones para modulo Seguridad"
-    Private Sub add_cond_inseg()
+    Private Sub add_cond_inseg(Optional ByVal vEsNueva As Boolean = True)
         Dim oSeguridad As New Seguridad
-        oSeguridad.cve_registro_turno = get_registro_del_turno()
-        oSeguridad.cod_empleado_registro = vcodigo_empleado
-        oSeguridad.fecha_registro = Convert.ToDateTime(Now.ToString("dd-MM-yyyy HH:mm"))
-        oSeguridad.cve_detalle_seguridad = cbxTipoCondInseg.SelectedValue
-        oSeguridad.cantidad = Long.Parse(txtCondInsegCantidad.Text)
-        oSeguridad.comentarios = txtDetallesCondInseg.Text
-        oSeguridad.estatus = "1"
-        oSeguridad.Registrar()
+
+        Dim vAcumulado_Anterior As Integer = 0
+        Dim vNuevas_Actuales As Integer = 0
+        Dim vResueltas_Actuales As Integer = 0
+
+        Dim vValidacion_Exitosa As Boolean = True
+
+
+        vAcumulado_Anterior = oSeguridad.Obtener_Acumulado_Anterior(Convert.ToDateTime(Now.ToString("dd-MM-yyyy HH:mm")), vcve_equipo, vCve_Linea_CBX)
+        vNuevas_Actuales = oSeguridad.obtener_nuevas_seguridad(vcve_equipo, vCve_Linea_CBX, Convert.ToDateTime(Now.ToString("dd-MM-yyyy HH:mm")))
+        vResueltas_Actuales = oSeguridad.obtener_resueltas_seguridad(vcve_equipo, vCve_Linea_CBX, Convert.ToDateTime(Now.ToString("dd-MM-yyyy HH:mm")))
+
+        If oSeguridad.Validacion_Exitosa_Condicion_Agregar(vAcumulado_Anterior, vNuevas_Actuales, vResueltas_Actuales, Long.Parse(txtCondInsegCantidad.Text), vEsNueva) = True Then
+            vValidacion_Exitosa = True
+        Else
+            vValidacion_Exitosa = False
+        End If
+
+        If vValidacion_Exitosa = True Then
+            Using scope As New TransactionScope()
+                Try
+                    oSeguridad.cve_registro_turno = get_registro_del_turno()
+                    oSeguridad.cod_empleado_registro = vcodigo_empleado
+                    oSeguridad.fecha_registro = Convert.ToDateTime(Now.ToString("dd-MM-yyyy HH:mm"))
+                    oSeguridad.cve_detalle_seguridad = cbxTipoCondInseg.SelectedValue
+                    oSeguridad.cantidad = Long.Parse(txtCondInsegCantidad.Text)
+                    oSeguridad.comentarios = txtDetallesCondInseg.Text
+                    oSeguridad.estatus = "1"
+                    oSeguridad.Registrar()
+
+                    If oSeguridad.Existe_Registro_Actual_Acumulado(Convert.ToDateTime(Now.ToString("dd-MM-yyyy HH:mm")), vcve_equipo, vCve_Linea_CBX) = True Then
+                        ''Actualizar
+                        oSeguridad.Agregar_Seguridad_Acumulado(oSeguridad.Cve_Seguridad_Acumulado, Convert.ToDateTime(Now.ToString("dd-MM-yyyy HH:mm")), vcve_equipo, vCve_Linea_CBX, oSeguridad.Acumulado_Final)
+                    Else
+                        ''Insertar
+                        oSeguridad.Agregar_Seguridad_Acumulado(0, Convert.ToDateTime(Now.ToString("dd-MM-yyyy HH:mm")), vcve_equipo, vCve_Linea_CBX, oSeguridad.Acumulado_Final)
+                    End If
+
+                    scope.Complete()
+                Catch ex As Exception
+
+                End Try
+            End Using
+        Else
+            If vEsNueva = True Then
+                MsgBox("No se puede Registrar la cantidad de Nuevas=")
+            Else
+                MsgBox("No se puede Registrar la cantidad de Resueltas=")
+            End If
+        End If
     End Sub
     Private Sub remove_cond_inseg()
         If grdDetalleCondInseg.Rows.Count <> 0 Then
@@ -2082,7 +2134,7 @@ Public Class frmProduccion
                     llena_lineas_Si_gridview()
                 End If
             End If
-           
+
         Else
             MsgBox("Para Registrar todas lineas con descanso dirijase a la pestaña 'Descansos' ", vbCritical + vbOKOnly, "Error")
             limpia_turno_linea()

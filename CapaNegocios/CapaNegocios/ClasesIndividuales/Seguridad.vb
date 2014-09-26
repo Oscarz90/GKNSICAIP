@@ -133,6 +133,45 @@ Public Class Seguridad
             vestatus = value
         End Set
     End Property
+
+
+    Private vAcumulado_Retorno As Integer
+    Public Property Acumulado_Retorno() As Integer
+        Get
+            Return vAcumulado_Retorno
+        End Get
+        Set(ByVal value As Integer)
+            vAcumulado_Retorno = value
+        End Set
+    End Property
+
+    Private vCve_Seguridad_Acumulado As Long
+    Public Property Cve_Seguridad_Acumulado() As Long
+        Get
+            Return vCve_Seguridad_Acumulado
+        End Get
+        Set(ByVal value As Long)
+            vCve_Seguridad_Acumulado = value
+        End Set
+    End Property
+
+
+    Private vAcumulado_Final As Integer
+    Public Property Acumulado_Final() As Integer
+        Get
+            Return vAcumulado_Final
+        End Get
+        Set(ByVal value As Integer)
+            vAcumulado_Final = value
+        End Set
+    End Property
+
+
+
+
+
+
+
 #End Region
 #Region "Metodos formulario de produccion"
     Public Function llena_cond_inseg_gridview() As DataTable
@@ -229,5 +268,92 @@ Public Class Seguridad
         End Try
         Return resueltas
     End Function
+
+
+
+#Region "Validacion Captura de Nuevas y Resueltas"
+
+    Public Function Validacion_Exitosa_Condicion_Agregar(ByVal vAcum_Anterior As Integer, ByVal vNuevas_Actuales As Integer, ByVal vResueltas_Actuales As Integer, ByVal vCant_Condicion_Agregar As Integer, ByVal vEsNueva As Boolean) As Boolean
+        'Dim vAcumulado_Final As Integer = 0
+
+        If vEsNueva = True Then
+            vNuevas_Actuales = vNuevas_Actuales + vCant_Condicion_Agregar
+        Else
+            vResueltas_Actuales = vResueltas_Actuales + vCant_Condicion_Agregar
+        End If
+
+        vAcumulado_Final = vAcum_Anterior + vNuevas_Actuales - vResueltas_Actuales
+
+        If vAcumulado_Final < 0 Then
+            Return False
+        Else
+            Return True
+        End If
+    End Function
+
+    ''' <summary>
+    ''' Valida que exista un registro en la tabla Seguridad_Acumulado, NOTA: Si Existe_Registro then Retorna TRUE and GUARDA Acumulado_Retorno=Acumulado, Cve_Seguridad_Acumulado= identity
+    ''' </summary>
+    ''' <param name="vFecha"></param>
+    ''' <param name="vCve_Equipo"></param>
+    ''' <param name="vCve_Linea"></param>
+    ''' <returns></returns>
+    ''' <remarks></remarks>
+    Public Function Existe_Registro_Actual_Acumulado(ByVal vFecha As DateTime, ByVal vCve_Equipo As Long, ByVal vCve_Linea As Long) As Boolean
+        Dim vDR As DataRow
+        Try
+            vDR = oBD.ObtenerRenglon(String.Format("Select acumulado, cve_seguridad_acumulado from seguridad_acumulado where cve_equipo = {0} and cve_linea= {1} and fecha= '{2}'", vCve_Equipo, vCve_Linea, vFecha), "Seguridad_Acumulado")
+
+            If vDR IsNot Nothing Then
+                vAcumulado_Retorno = vDR("acumulado")
+                vCve_Seguridad_Acumulado = vDR("cve_seguridad_acumulado")
+                Return True
+            Else
+                Return False
+            End If
+
+        Catch ex As Exception
+            Return False
+            MsgBox("Lo sentimos, no existe registro")
+        End Try
+    End Function
+
+    Public Sub Agregar_Seguridad_Acumulado(ByVal vIdentity As Long, ByVal vFecha As DateTime, ByVal vCve_Equipo As Long, ByVal vCve_Linea As Long, ByVal vValor_Acumulado As Integer)
+        Using scope As New TransactionScope()
+            Try
+                Dim cmd As New SqlClient.SqlCommand() With {.CommandType = CommandType.StoredProcedure, .CommandText = "REGISTRAR_SEGURIDAD_ACUMULADO"}
+                With cmd.Parameters
+                    .Add("cve_seguridad_acumulado", SqlDbType.BigInt).Value = vIdentity
+                    .Add("cve_equipo", SqlDbType.BigInt).Value = vCve_Equipo
+                    .Add("cve_linea", SqlDbType.BigInt).Value = vCve_Linea
+                    .Add("fecha", SqlDbType.DateTime).Value = vFecha
+                    .Add("acumulado", SqlDbType.Int).Value = vValor_Acumulado
+                End With
+                Dim obj As DataTable = oBD.EjecutaCommando(cmd)
+                'Me.vcve_linea = obj.Rows(0)(0) 'ID               
+                scope.Complete()
+            Catch ex As Exception
+                Throw New Exception(ex.Message)
+            End Try
+        End Using
+    End Sub
+
+
+    Public Function Obtener_Acumulado_Anterior(ByVal vFecha As DateTime, ByVal vCve_Equipo As Long, ByVal vCve_Linea As Long) As Integer
+        vFecha = DateAdd(DateInterval.Day, -1, vFecha)
+
+        If Existe_Registro_Actual_Acumulado(vFecha, vCve_Equipo, vCve_Linea) = True Then
+            Return vAcumulado_Retorno
+        Else
+            Return Nothing
+        End If
+    End Function
+
+
+#End Region
+
+
+
+
 #End Region
 End Class
