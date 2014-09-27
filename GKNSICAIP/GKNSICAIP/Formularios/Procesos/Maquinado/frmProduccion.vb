@@ -1993,16 +1993,11 @@ Public Class frmProduccion
     Private Sub add_cond_inseg(Optional ByVal vEsNueva As Boolean = True)
         Dim oSeguridad As New Seguridad
 
-        Dim vAcumulado_Anterior As Integer = 0
-        Dim vNuevas_Actuales As Integer = 0
-        Dim vResueltas_Actuales As Integer = 0
+        Dim vAcumulado_Anterior As Integer = oSeguridad.Obtener_Acumulado_Anterior(Convert.ToDateTime(Now.ToString("yyyy-MM-dd")), vcve_equipo, vCve_Linea_CBX)
+        Dim vNuevas_Actuales As Integer = oSeguridad.obtener_nuevas_seguridad(vcve_equipo, vCve_Linea_CBX, Convert.ToDateTime(Now.ToString("yyyy-MM-dd")))
+        Dim vResueltas_Actuales As Integer = oSeguridad.obtener_resueltas_seguridad(vcve_equipo, vCve_Linea_CBX, Convert.ToDateTime(Now.ToString("yyyy-MM-dd")))
 
         Dim vValidacion_Exitosa As Boolean = True
-
-
-        vAcumulado_Anterior = oSeguridad.Obtener_Acumulado_Anterior(Convert.ToDateTime(Now.ToString("yyyy-MM-dd")), vcve_equipo, vCve_Linea_CBX)
-        vNuevas_Actuales = oSeguridad.obtener_nuevas_seguridad(vcve_equipo, vCve_Linea_CBX, Convert.ToDateTime(Now.ToString("yyyy-MM-dd")))
-        vResueltas_Actuales = oSeguridad.obtener_resueltas_seguridad(vcve_equipo, vCve_Linea_CBX, Convert.ToDateTime(Now.ToString("yyyy-MM-dd")))
 
         If oSeguridad.Validacion_Exitosa_Condicion_Agregar(vAcumulado_Anterior, vNuevas_Actuales, vResueltas_Actuales, Long.Parse(txtCondInsegCantidad.Text), vEsNueva) = True Then
             vValidacion_Exitosa = True

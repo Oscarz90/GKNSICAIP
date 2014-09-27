@@ -302,7 +302,7 @@ Public Class Seguridad
     Public Function Existe_Registro_Actual_Acumulado(ByVal vFecha As DateTime, ByVal vCve_Equipo As Long, ByVal vCve_Linea As Long) As Boolean
         Dim vDR As DataRow
         Try
-            vDR = oBD.ObtenerRenglon(String.Format("Select acumulado, cve_seguridad_acumulado from seguridad_acumulado where cve_equipo = {0} and cve_linea= {1} and fecha= '{2}'", vCve_Equipo, vCve_Linea, vFecha), "Seguridad_Acumulado")
+            vDR = oBD.ObtenerRenglon(String.Format("Select acumulado, cve_seguridad_acumulado from seguridad_acumulado where cve_equipo = {0} and cve_linea= {1} and fecha= '{2}'", vCve_Equipo, vCve_Linea, Dar_Formato_FECHA(vFecha)), "Seguridad_Acumulado")
 
             If vDR IsNot Nothing Then
                 vAcumulado_Retorno = vDR("acumulado")
@@ -319,30 +319,30 @@ Public Class Seguridad
     End Function
 
     Public Sub Agregar_Seguridad_Acumulado(ByVal vIdentity As Long, ByVal vFecha As DateTime, ByVal vCve_Equipo As Long, ByVal vCve_Linea As Long, ByVal vValor_Acumulado As Integer)
-        Using scope As New TransactionScope()
-            Try
-                Dim cmd As New SqlClient.SqlCommand() With {.CommandType = CommandType.StoredProcedure, .CommandText = "REGISTRAR_SEGURIDAD_ACUMULADO"}
-                With cmd.Parameters
-                    .Add("cve_seguridad_acumulado", SqlDbType.BigInt).Value = vIdentity
-                    .Add("cve_equipo", SqlDbType.BigInt).Value = vCve_Equipo
-                    .Add("cve_linea", SqlDbType.BigInt).Value = vCve_Linea
-                    .Add("fecha", SqlDbType.DateTime).Value = vFecha
-                    .Add("acumulado", SqlDbType.Int).Value = vValor_Acumulado
-                End With
-                Dim obj As DataTable = oBD.EjecutaCommando(cmd)
-                'Me.vcve_linea = obj.Rows(0)(0) 'ID               
-                scope.Complete()
-            Catch ex As Exception
-                Throw New Exception(ex.Message)
-            End Try
-        End Using
+        'Using scope As New TransactionScope()
+        Try
+            Dim cmd As New SqlClient.SqlCommand() With {.CommandType = CommandType.StoredProcedure, .CommandText = "REGISTRAR_SEGURIDAD_ACUMULADO"} ''REGISTRAR_SEGURIDAD_ACUMULADO
+            With cmd.Parameters
+                .Add("cve_seguridad_acumulado", SqlDbType.BigInt).Value = vIdentity
+                .Add("cve_equipo", SqlDbType.BigInt).Value = vCve_Equipo
+                .Add("cve_linea", SqlDbType.BigInt).Value = vCve_Linea
+                .Add("fecha", SqlDbType.DateTime).Value = Dar_Formato_FECHA(vFecha)
+                .Add("acumulado", SqlDbType.Int).Value = vValor_Acumulado
+            End With
+            Dim obj As DataTable = oBD.EjecutaCommando(cmd)
+            'Me.vcve_linea = obj.Rows(0)(0) 'ID               
+            'scope.Complete()
+        Catch ex As Exception
+            '    Throw New Exception(ex.Message)
+        End Try
+        'End Using
     End Sub
 
 
     Public Function Obtener_Acumulado_Anterior(ByVal vFecha As DateTime, ByVal vCve_Equipo As Long, ByVal vCve_Linea As Long) As Integer
         Dim vDR As DataRow
         Try
-            vDR = oBD.ObtenerRenglon(String.Format("Select top 1 (fecha) as fecha, acumulado from seguridad_acumulado where cve_equipo = " & vCve_Equipo & " and cve_linea= " & vCve_Linea & " and fecha< '" & vFecha & "' order by fecha desc"), "Seguridad_Acumulado")
+            vDR = oBD.ObtenerRenglon(String.Format("Select top 1 (fecha) as fecha, acumulado from seguridad_acumulado where cve_equipo = {0} and cve_linea={1} and fecha < '{2}' order by fecha desc", vCve_Equipo, vCve_Linea, Dar_Formato_FECHA(vFecha)), "Seguridad_Acumulado")
 
             If vDR IsNot Nothing Then             
                 Return vDR("acumulado")
@@ -355,7 +355,10 @@ Public Class Seguridad
         End Try
     End Function
 
-
+    Private Function Dar_Formato_FECHA(ByVal vEntrada As DateTime) As String
+        Dim vRetorno As String = String.Format("{0}/{1}/{2}", vEntrada.Year, vEntrada.Month, vEntrada.Day)
+        Return vRetorno
+    End Function
 #End Region
 
 
