@@ -344,7 +344,7 @@ Public Class Seguridad
         Try
             vDR = oBD.ObtenerRenglon(String.Format("Select top 1 (fecha) as fecha, acumulado from seguridad_acumulado where cve_equipo = {0} and cve_linea={1} and fecha < '{2}' order by fecha desc", vCve_Equipo, vCve_Linea, Dar_Formato_FECHA(vFecha)), "Seguridad_Acumulado")
 
-            If vDR IsNot Nothing Then             
+            If vDR IsNot Nothing Then
                 Return vDR("acumulado")
             Else
                 Return Nothing
