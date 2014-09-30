@@ -917,7 +917,9 @@ Public Class frmProduccion
             End If
             Dim vEsNueva As Boolean
 
-            If cbxTipoCondInseg.SelectedValue = 1 Then ''SI SON NUEVAS
+
+
+            If (grdDetalleCondInseg.Item(1, grdDetalleCondInseg.CurrentRow.Index).Value) = "C.I. Nuevas" Then
                 vEsNueva = True
             Else
                 vEsNueva = False
@@ -2071,13 +2073,14 @@ Public Class frmProduccion
             Dim vAcumulado_Anterior As Integer = oSeguridad_Acumulado.Obtener_Acumulado_Anterior(Convert.ToDateTime(Now.ToString("yyyy-MM-dd")), vcve_equipo, vCve_Linea_CBX)
             Dim vNuevas_Actuales As Integer = oSeguridad.obtener_nuevas_seguridad(vcve_equipo, vCve_Linea_CBX, Convert.ToDateTime(Now.ToString("yyyy-MM-dd")))
             Dim vResueltas_Actuales As Integer = oSeguridad.obtener_resueltas_seguridad(vcve_equipo, vCve_Linea_CBX, Convert.ToDateTime(Now.ToString("yyyy-MM-dd")))
-
+            Dim vCondInseguraCant As Integer = 0
+            vCondInseguraCant = grdDetalleCondInseg.Item(2, grdDetalleCondInseg.CurrentRow.Index).Value
 
             Using scope As New TransactionScope()
                 Try
 
                     If vEsNueva = True Then
-                        If oSeguridad_Acumulado.Validacion_Exitosa_Condicion_Quitar(vAcumulado_Anterior, vNuevas_Actuales, vResueltas_Actuales, Long.Parse(txtCondInsegCantidad.Text), vEsNueva) = True Then
+                        If oSeguridad_Acumulado.Validacion_Exitosa_Condicion_Quitar(vAcumulado_Anterior, vNuevas_Actuales, vResueltas_Actuales, Long.Parse(vCondInseguraCant), vEsNueva) = True Then
                             ''Actualiza el Estatus del Registro a Eliminar
                             oSeguridad.cod_empleado_eliminacion = vcodigo_empleado
                             oSeguridad.fecha_eliminacion = Convert.ToDateTime(Now.ToString("dd-MM-yyyy HH:mm"))
@@ -2093,7 +2096,7 @@ Public Class frmProduccion
                             MsgBox("No se pueden eliminar estas Nuevas")
                         End If
                     Else
-                        If oSeguridad_Acumulado.Validacion_Exitosa_Condicion_Quitar(vAcumulado_Anterior, vNuevas_Actuales, vResueltas_Actuales, Long.Parse(txtCondInsegCantidad.Text), vEsNueva) = True Then
+                        If oSeguridad_Acumulado.Validacion_Exitosa_Condicion_Quitar(vAcumulado_Anterior, vNuevas_Actuales, vResueltas_Actuales, Long.Parse(vCondInseguraCant), vEsNueva) = True Then
                             ''Actualiza el Estatus del Registro a Eliminar
                             oSeguridad.cod_empleado_eliminacion = vcodigo_empleado
                             oSeguridad.fecha_eliminacion = Convert.ToDateTime(Now.ToString("dd-MM-yyyy HH:mm"))
@@ -2106,7 +2109,7 @@ Public Class frmProduccion
                             oSeguridad_Acumulado.Registrar()
                         Else
                             MsgBox("No se pueden eliminar estas Resueltas")
-                        End If                        
+                        End If
                     End If
                     scope.Complete()
                 Catch ex As Exception
