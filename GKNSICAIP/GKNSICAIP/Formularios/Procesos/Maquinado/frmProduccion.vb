@@ -855,6 +855,7 @@ Public Class frmProduccion
         Dim vMaximo_Resueltas As Integer = 0
         Dim oObtieneSeguridad As obtiene_seguridad
         Dim oSeguridad As Seguridad
+        Dim oSeguridad_Acumulado As seguridad_acumulado
 
         If valida_hora_de_captura(Now.ToString("dd-MM-yyyy HH:mm:ss")) Then
             If flgBanderaModificacionPermiso Then
@@ -885,8 +886,10 @@ Public Class frmProduccion
 
 
                 'acumulado = acumulado_dia_anterior()
-                oSeguridad = New Seguridad
-                acumulado = oSeguridad.Obtener_Acumulado_Anterior(Convert.ToDateTime(Now.ToString("dd-MM-yyyy HH:mm")), vcve_equipo, vCve_Linea_CBX)
+                'oSeguridad = New Seguridad
+                oSeguridad_Acumulado = New seguridad_acumulado
+
+                acumulado = oSeguridad_Acumulado.Obtener_Acumulado_Anterior(Convert.ToDateTime(Now.ToString("dd-MM-yyyy HH:mm")), vcve_equipo, vCve_Linea_CBX)
                 ci_nuevas = obtener_nuevas_hoy()
                 ci_resueltas = obtener_resueltas_hoy()
 
@@ -1992,14 +1995,15 @@ Public Class frmProduccion
 #Region "Funciones para modulo Seguridad"
     Private Sub add_cond_inseg(Optional ByVal vEsNueva As Boolean = True)
         Dim oSeguridad As New Seguridad
+        Dim oSeguridad_Acumulado As New seguridad_acumulado
 
-        Dim vAcumulado_Anterior As Integer = oSeguridad.Obtener_Acumulado_Anterior(Convert.ToDateTime(Now.ToString("yyyy-MM-dd")), vcve_equipo, vCve_Linea_CBX)
+        Dim vAcumulado_Anterior As Integer = oSeguridad_Acumulado.Obtener_Acumulado_Anterior(Convert.ToDateTime(Now.ToString("yyyy-MM-dd")), vcve_equipo, vCve_Linea_CBX)
         Dim vNuevas_Actuales As Integer = oSeguridad.obtener_nuevas_seguridad(vcve_equipo, vCve_Linea_CBX, Convert.ToDateTime(Now.ToString("yyyy-MM-dd")))
         Dim vResueltas_Actuales As Integer = oSeguridad.obtener_resueltas_seguridad(vcve_equipo, vCve_Linea_CBX, Convert.ToDateTime(Now.ToString("yyyy-MM-dd")))
 
         Dim vValidacion_Exitosa As Boolean = True
 
-        If oSeguridad.Validacion_Exitosa_Condicion_Agregar(vAcumulado_Anterior, vNuevas_Actuales, vResueltas_Actuales, Long.Parse(txtCondInsegCantidad.Text), vEsNueva) = True Then
+        If oSeguridad_Acumulado.Validacion_Exitosa_Condicion_Agregar(vAcumulado_Anterior, vNuevas_Actuales, vResueltas_Actuales, Long.Parse(txtCondInsegCantidad.Text), vEsNueva) = True Then
             vValidacion_Exitosa = True
         Else
             vValidacion_Exitosa = False
@@ -2017,12 +2021,24 @@ Public Class frmProduccion
                     oSeguridad.estatus = "1"
                     oSeguridad.Registrar()
 
-                    If oSeguridad.Existe_Registro_Actual_Acumulado(Convert.ToDateTime(Now.ToString("dd-MM-yyyy HH:mm")), vcve_equipo, vCve_Linea_CBX) = True Then
+                    If oSeguridad_Acumulado.Existe_Registro_Actual_Acumulado(Convert.ToDateTime(Now.ToString("dd-MM-yyyy HH:mm")), vcve_equipo, vCve_Linea_CBX) = True Then
                         ''Actualizar
-                        oSeguridad.Agregar_Seguridad_Acumulado(oSeguridad.Cve_Seguridad_Acumulado, Convert.ToDateTime(Now.ToString("dd-MM-yyyy HH:mm")), vcve_equipo, vCve_Linea_CBX, oSeguridad.Acumulado_Final)
+                        oSeguridad_Acumulado.Cve_seguridad_acumulado = oSeguridad_Acumulado.Obtener_Id(vcve_equipo, vCve_Linea_CBX, Convert.ToDateTime(Now.ToString("dd-MM-yyyy HH:mm")))
+                        oSeguridad_Acumulado.cve_equipo = vcve_equipo
+                        oSeguridad_Acumulado.cve_linea = vCve_Linea_CBX
+                        oSeguridad_Acumulado.fecha = Convert.ToDateTime(Now.ToString("dd-MM-yyyy HH:mm"))
+                        oSeguridad_Acumulado.acumulado = oSeguridad_Acumulado.Acumulado_Final
+
+                        oSeguridad_Acumulado.Registrar()
                     Else
                         ''Insertar
-                        oSeguridad.Agregar_Seguridad_Acumulado(0, Convert.ToDateTime(Now.ToString("dd-MM-yyyy HH:mm")), vcve_equipo, vCve_Linea_CBX, oSeguridad.Acumulado_Final)
+                        oSeguridad_Acumulado.Cve_seguridad_acumulado = 0
+                        oSeguridad_Acumulado.cve_equipo = vcve_equipo
+                        oSeguridad_Acumulado.cve_linea = vCve_Linea_CBX
+                        oSeguridad_Acumulado.fecha = Convert.ToDateTime(Now.ToString("dd-MM-yyyy HH:mm"))
+                        oSeguridad_Acumulado.acumulado = oSeguridad_Acumulado.Acumulado_Final
+
+                        oSeguridad_Acumulado.Registrar()
                     End If
 
                     scope.Complete()
