@@ -893,7 +893,7 @@ Public Class frmProduccion
                 'OBTENER MAXIMO VALOR PARA RESUELTAS
                 vMaximo_Resueltas = (acumulado + ci_nuevas) - ci_resueltas
                 If txtCondInsegCantidad.Text <= vMaximo_Resueltas Then
-                    add_cond_inseg()
+                    add_cond_inseg(False)
                     log_modificaciones_permiso(vLogModifPermDes)
                     limpia_cond_inseg()
                     llena_cond_inseg_gridview()
