@@ -854,7 +854,7 @@ Public Class frmProduccion
         Dim ci_resueltas As Integer = 0
         Dim vMaximo_Resueltas As Integer = 0
         Dim oObtieneSeguridad As obtiene_seguridad
-        Dim oSeguridad As Seguridad
+        'Dim oSeguridad As Seguridad
         Dim oSeguridad_Acumulado As seguridad_acumulado
 
         If valida_hora_de_captura(Now.ToString("dd-MM-yyyy HH:mm:ss")) Then
@@ -915,7 +915,15 @@ Public Class frmProduccion
                " Cantidad: " & grdDetalleCondInseg.Item(2, grdDetalleCondInseg.CurrentRow.Index).Value &
                " #cve: " & get_registro_del_turno()
             End If
-            remove_cond_inseg()
+            Dim vEsNueva As Boolean
+
+            If cbxTipoCondInseg.SelectedValue = 1 Then ''SI SON NUEVAS
+                vEsNueva = True
+            Else
+                vEsNueva = False
+            End If
+
+            remove_cond_inseg(vEsNueva)
             log_modificaciones_permiso(vLogModifPermDes)
             limpia_cond_inseg()
             deshabilitar_btn_quitar_cond_inseg()
@@ -2054,13 +2062,57 @@ Public Class frmProduccion
             End If
         End If
     End Sub
-    Private Sub remove_cond_inseg()
+    Private Sub remove_cond_inseg(ByVal vEsNueva As Boolean)
         If grdDetalleCondInseg.Rows.Count <> 0 Then
+
             Dim oSeguridad As New Seguridad
-            oSeguridad.cod_empleado_eliminacion = vcodigo_empleado
-            oSeguridad.fecha_eliminacion = Convert.ToDateTime(Now.ToString("dd-MM-yyyy HH:mm"))
-            oSeguridad.cve_seguridad = grdDetalleCondInseg.Item("cve_seguridad", grdDetalleCondInseg.CurrentRow.Index).Value
-            oSeguridad.Eliminar()
+            Dim oSeguridad_Acumulado As New seguridad_acumulado
+
+            Dim vAcumulado_Anterior As Integer = oSeguridad_Acumulado.Obtener_Acumulado_Anterior(Convert.ToDateTime(Now.ToString("yyyy-MM-dd")), vcve_equipo, vCve_Linea_CBX)
+            Dim vNuevas_Actuales As Integer = oSeguridad.obtener_nuevas_seguridad(vcve_equipo, vCve_Linea_CBX, Convert.ToDateTime(Now.ToString("yyyy-MM-dd")))
+            Dim vResueltas_Actuales As Integer = oSeguridad.obtener_resueltas_seguridad(vcve_equipo, vCve_Linea_CBX, Convert.ToDateTime(Now.ToString("yyyy-MM-dd")))
+
+
+            Using scope As New TransactionScope()
+                Try
+
+                    If vEsNueva = True Then
+                        If oSeguridad_Acumulado.Validacion_Exitosa_Condicion_Quitar(vAcumulado_Anterior, vNuevas_Actuales, vResueltas_Actuales, Long.Parse(txtCondInsegCantidad.Text), vEsNueva) = True Then
+                            ''Actualiza el Estatus del Registro a Eliminar
+                            oSeguridad.cod_empleado_eliminacion = vcodigo_empleado
+                            oSeguridad.fecha_eliminacion = Convert.ToDateTime(Now.ToString("dd-MM-yyyy HH:mm"))
+                            oSeguridad.cve_seguridad = grdDetalleCondInseg.Item("cve_seguridad", grdDetalleCondInseg.CurrentRow.Index).Value
+                            oSeguridad.Eliminar()
+                            ''Actualiza el Acumulado
+                            oSeguridad_Acumulado.Cve_seguridad_acumulado = oSeguridad_Acumulado.Obtener_Id(vcve_equipo, vCve_Linea_CBX, Convert.ToDateTime(Now.ToString("yyyy-MM-dd")))
+                            oSeguridad_Acumulado.Cargar()
+                            oSeguridad_Acumulado.acumulado = oSeguridad_Acumulado.Acumulado_Final
+                            oSeguridad_Acumulado.Registrar()
+
+                        Else
+                            MsgBox("No se pueden eliminar estas Nuevas")
+                        End If
+                    Else
+                        If oSeguridad_Acumulado.Validacion_Exitosa_Condicion_Quitar(vAcumulado_Anterior, vNuevas_Actuales, vResueltas_Actuales, Long.Parse(txtCondInsegCantidad.Text), vEsNueva) = True Then
+                            ''Actualiza el Estatus del Registro a Eliminar
+                            oSeguridad.cod_empleado_eliminacion = vcodigo_empleado
+                            oSeguridad.fecha_eliminacion = Convert.ToDateTime(Now.ToString("dd-MM-yyyy HH:mm"))
+                            oSeguridad.cve_seguridad = grdDetalleCondInseg.Item("cve_seguridad", grdDetalleCondInseg.CurrentRow.Index).Value
+                            oSeguridad.Eliminar()
+                            ''Actualiza el Acumulado
+                            oSeguridad_Acumulado.Cve_seguridad_acumulado = oSeguridad_Acumulado.Obtener_Id(vcve_equipo, vCve_Linea_CBX, Convert.ToDateTime(Now.ToString("yyyy-MM-dd")))
+                            oSeguridad_Acumulado.Cargar()
+                            oSeguridad_Acumulado.acumulado = oSeguridad_Acumulado.Acumulado_Final
+                            oSeguridad_Acumulado.Registrar()
+                        Else
+                            MsgBox("No se pueden eliminar estas Resueltas")
+                        End If                        
+                    End If
+                    scope.Complete()
+                Catch ex As Exception
+
+                End Try
+            End Using
         Else
             btnQuitarCondInseg.Enabled = False
         End If

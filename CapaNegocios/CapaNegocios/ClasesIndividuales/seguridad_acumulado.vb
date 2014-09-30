@@ -81,7 +81,7 @@ Public Class seguridad_acumulado
                 cmd.Parameters.Add("cve_seguridad_acumulado", SqlDbType.BigInt).Value = Me.vcve_seguridad_acumulado
                 cmd.Parameters.Add("cve_equipo", SqlDbType.BigInt).Value = Me.vCve_equipo
                 cmd.Parameters.Add("cve_linea", SqlDbType.BigInt).Value = Me.vCve_linea
-                cmd.Parameters.Add("fecha", SqlDbType.DateTime).Value = Me.vFecha
+                cmd.Parameters.Add("fecha", SqlDbType.DateTime).Value = Dar_Formato_FECHA(Me.vFecha)
                 cmd.Parameters.Add("acumulado", SqlDbType.BigInt).Value = Me.vAcumulado
 
                 Dim obj As DataTable = oBD.EjecutaCommando(cmd)
@@ -189,6 +189,26 @@ Public Class seguridad_acumulado
             Return True
         End If
     End Function
+
+    Public Function Validacion_Exitosa_Condicion_Quitar(ByVal vAcum_Anterior As Integer, ByVal vNuevas_Actuales As Integer, ByVal vResueltas_Actuales As Integer, ByVal vCant_Condicion_Quitar As Integer, ByVal vEsNueva As Boolean) As Boolean
+        'Dim vAcumulado_Final As Integer = 0
+
+        If vEsNueva = True Then
+            vAcumulado_Final = (vAcum_Anterior + vNuevas_Actuales - vResueltas_Actuales) - vCant_Condicion_Quitar
+        Else
+            vAcumulado_Final = (vAcum_Anterior + vNuevas_Actuales) - (vResueltas_Actuales - vCant_Condicion_Quitar)
+        End If
+
+
+        If vAcumulado_Final < 0 Then
+            Return False
+        Else
+            Return True
+        End If
+    End Function
+
+
+
 
     ''' <summary>
     ''' Valida que exista un registro en la tabla Seguridad_Acumulado, NOTA: Si Existe_Registro then Retorna TRUE
