@@ -713,6 +713,8 @@ Public Class FrmGraficasfaseuno
         Me.dgvTabla.Columns("dia_asignado").HeaderText = "FECHA"
         Me.dgvTabla.Columns("dia_asignado").Width = 170
         Me.dgvTabla.Columns("dia_asignado").Name = "dia_asignado"
+        Me.dgvTabla.Columns("dia_asignado").ExcelExportType = DisplayFormatType.Custom
+        Me.dgvTabla.Columns("dia_asignado").ExcelExportFormatString = " yyyy.MMMM.dd hh:mm:ss AM/PM "
 
         Me.dgvTabla.Columns("disponibilidad").HeaderText = "DISPONIBILIDAD"
         Me.dgvTabla.Columns("disponibilidad").Width = 80
@@ -2373,7 +2375,7 @@ Public Class FrmGraficasfaseuno
     Private Sub btnExportar_Click(sender As Object, e As EventArgs) Handles btnExportar.Click
         Dim exporter As ExportToExcelML = New ExportToExcelML(Me.dgvTabla)
         exporter.HiddenColumnOption = Telerik.WinControls.UI.Export.HiddenOption.DoNotExport
-        sfdExportaExcel.Filter = "Excel |*.xls"
+        sfdExportaExcel.Filter = "Excel |*.xlsx"
         sfdExportaExcel.Title = "Guarda documento de Excel."
         sfdExportaExcel.ShowDialog()
         If sfdExportaExcel.FileName <> "" Then
