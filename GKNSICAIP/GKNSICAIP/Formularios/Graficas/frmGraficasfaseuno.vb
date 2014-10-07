@@ -1414,6 +1414,8 @@ Public Class FrmGraficasfaseuno
         Dim BarSeries2 As New BarSeries() With {.LegendTitle = "faltas"}
         Dim BarSeries3 As New BarSeries() With {.LegendTitle = "retardos"}
 
+
+
         Dim BarSeries4 As New BarSeries() With {.LegendTitle = "Faltas_Acumulado"}
         Dim BarSeries5 As New BarSeries() With {.LegendTitle = "Retardos_Acumulado"}
 
@@ -1518,6 +1520,7 @@ Public Class FrmGraficasfaseuno
             LineSeries1.HorizontalAxis = CategoricalAxis1
             LineSeries1.VerticalAxis = LinearAxis1
         End If
+
 
         BarSeries2.Palette = New PaletteEntry(Color.FromArgb(233, 37, 43))
         BarSeries3.Palette = New PaletteEntry(Color.FromArgb(255, 191, 0))
