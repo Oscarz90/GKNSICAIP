@@ -1960,19 +1960,20 @@ Public Class FrmGraficasfaseuno
             habilita_etiqueta_datos()
             Me.radChartView1.Title = ""
         Else
-            If vNivel = 0 Then
-                Me.radChartView1.Title = String.Format("Costo {0} - {1}", cbxEquipo.Text, cbxLinea.Text)
-            ElseIf vNivel = 1 Then
-                Me.radChartView1.Title = "Costo " & cbxEquipo.Text
-            ElseIf vNivel = 2 Then
-                Me.radChartView1.Title = "Costo " & cbxLinea.Text
-            ElseIf vNivel = 3 Then
-                Me.radChartView1.Title = "Costo " & cbxComponente.Text
-            ElseIf vNivel = 4 Then
-                Me.radChartView1.Title = "Costo " & cbxCadenaValor.Text
-            ElseIf vNivel = 5 Then
-                Me.radChartView1.Title = "Costo Planta GKN Driveline México"
-            End If
+            'If vNivel = 0 Then
+            '    Me.radChartView1.Title = String.Format("Costo {0} - {1}", cbxEquipo.Text, cbxLinea.Text)
+            'ElseIf vNivel = 1 Then
+            '    Me.radChartView1.Title = "Costo " & cbxEquipo.Text
+            'ElseIf vNivel = 2 Then
+            '    Me.radChartView1.Title = "Costo " & cbxLinea.Text
+            'ElseIf vNivel = 3 Then
+            '    Me.radChartView1.Title = "Costo " & cbxComponente.Text
+            'ElseIf vNivel = 4 Then
+            '    Me.radChartView1.Title = "Costo " & cbxCadenaValor.Text
+            'ElseIf vNivel = 5 Then
+            '    Me.radChartView1.Title = "Costo Planta GKN Driveline México"
+            'End If
+            Me.radChartView1.Title = "Tiempo CDM"
         End If
         Dim vMin_Program_Aux As Integer = 0
         Dim vObjetivo_tcdm_Aux As Integer = 0
@@ -2018,8 +2019,8 @@ Public Class FrmGraficasfaseuno
         End If
         'Series
         BarSeries1.ForeColor = Color.White
-
         BarSeries1.ShowLabels = True
+        BarSeries1.LabelMode = BarLabelModes.Center
         BarSeries1.LabelFormat = "{0:###}"
 
         If vNivel <> 5 Then
@@ -2046,14 +2047,15 @@ Public Class FrmGraficasfaseuno
         Me.radChartView1.ShowTrackBall = True
         Me.radChartView1.ShowToolTip = True
 
-        'Chartview
+       
 
         radChartView1.Series.Add(BarSeries1)
-
+        'Chartview
         If vNivel <> 5 Then
             radChartView1.Series.Add(LineSeries3)
         End If
-        'BarSeries1.CombineMode = ChartSeriesCombineMode.Stack
+        
+        BarSeries1.CombineMode = ChartSeriesCombineMode.None
         If vNivel <> 5 Then
             LineSeries3.CombineMode = ChartSeriesCombineMode.None
         End If
@@ -2084,19 +2086,20 @@ Public Class FrmGraficasfaseuno
             habilita_etiqueta_datos()
             Me.CharSecundario.Title = ""
         Else
-            If vNivel = 0 Then
-                Me.radChartView1.Title = String.Format("Costo {0} - {1}", cbxEquipo.Text, cbxLinea.Text)
-            ElseIf vNivel = 1 Then
-                Me.radChartView1.Title = "Costo " & cbxEquipo.Text
-            ElseIf vNivel = 2 Then
-                Me.radChartView1.Title = "Costo " & cbxLinea.Text
-            ElseIf vNivel = 3 Then
-                Me.radChartView1.Title = "Costo " & cbxComponente.Text
-            ElseIf vNivel = 4 Then
-                Me.radChartView1.Title = "Costo " & cbxCadenaValor.Text
-            ElseIf vNivel = 5 Then
-                Me.radChartView1.Title = "Costo Planta GKN Driveline México"
-            End If
+            'If vNivel = 0 Then
+            '    Me.radChartView1.Title = String.Format("Costo {0} - {1}", cbxEquipo.Text, cbxLinea.Text)
+            'ElseIf vNivel = 1 Then
+            '    Me.radChartView1.Title = "Costo " & cbxEquipo.Text
+            'ElseIf vNivel = 2 Then
+            '    Me.radChartView1.Title = "Costo " & cbxLinea.Text
+            'ElseIf vNivel = 3 Then
+            '    Me.radChartView1.Title = "Costo " & cbxComponente.Text
+            'ElseIf vNivel = 4 Then
+            '    Me.radChartView1.Title = "Costo " & cbxCadenaValor.Text
+            'ElseIf vNivel = 5 Then
+            '    Me.radChartView1.Title = "Costo Planta GKN Driveline México"
+            'End If
+            Me.radChartView1.Title = "Tiempo CDM"
 
         End If
         Dim vMin_Program_Aux As Integer = 0
