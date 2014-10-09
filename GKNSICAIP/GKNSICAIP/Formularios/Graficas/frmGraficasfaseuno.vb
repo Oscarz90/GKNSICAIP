@@ -1501,6 +1501,9 @@ Public Class FrmGraficasfaseuno
         If vNivel <> 3 Or vNivel <> 5 Then
             BarSeries2.ShowLabels = True
             BarSeries3.ShowLabels = True
+
+            BarSeries2.LabelMode = BarLabelModes.Top
+            BarSeries3.LabelMode = BarLabelModes.Top
         End If
         BarSeries4.ShowLabels = True
         BarSeries5.ShowLabels = True
