@@ -714,7 +714,7 @@ Public Class FrmGraficasfaseuno
         Me.dgvTabla.Columns("dia_asignado").Width = 170
         Me.dgvTabla.Columns("dia_asignado").Name = "dia_asignado"
         Me.dgvTabla.Columns("dia_asignado").ExcelExportType = DisplayFormatType.Custom
-        Me.dgvTabla.Columns("dia_asignado").ExcelExportFormatString = " yyyy.MMMM.dd hh:mm:ss AM/PM "
+        Me.dgvTabla.Columns("dia_asignado").ExcelExportFormatString = " dd/MM/yyyy "
 
         Me.dgvTabla.Columns("disponibilidad").HeaderText = "DISPONIBILIDAD"
         Me.dgvTabla.Columns("disponibilidad").Width = 80
@@ -900,6 +900,10 @@ Public Class FrmGraficasfaseuno
         Dim vDT As New DataTable
         vDT = vDatos_Obtenidos
 
+        ''Variable acumulado
+        Dim vAcumulado As Double = 0
+        Dim vNrftiAcum As Double = 0
+
         'Llenado de las series
         Dim vTotal As Integer = 1
         Dim vContador As Integer = 1
@@ -926,7 +930,8 @@ Public Class FrmGraficasfaseuno
             For Each vDR As DataRow In vDT.Rows
                 If rdbtnDias.IsChecked Then
                     If vContador = 1 Then
-                        BarSeries2.DataPoints.Add(New CategoricalDataPoint(vDR("nrfti"), "Acumulado"))
+                        vAcumulado = vDR("objetivo")
+                        vNrftiAcum = vDR("nrfti")
                     Else
                         BarSeries1.DataPoints.Add(New CategoricalDataPoint(vDR("nrfti"), vDR("dia_asignado")))
                         If Not IsDBNull(vDR("objetivo")) Then
@@ -935,7 +940,8 @@ Public Class FrmGraficasfaseuno
                     End If
                 ElseIf rdbtnMeses.IsChecked Then
                     If vContador = 1 Then
-                        BarSeries2.DataPoints.Add(New CategoricalDataPoint(vDR("nrfti"), "Acumulado"))
+                        vAcumulado = vDR("objetivo")
+                        ''BarSeries2.DataPoints.Add(New CategoricalDataPoint(vDR("nrfti"), "Acumulado"))
                     Else
                         BarSeries1.DataPoints.Add(New CategoricalDataPoint(vDR("nrfti"), vDR("dia_asignado")))
                         If Not IsDBNull(vDR("objetivo")) Then
@@ -945,11 +951,15 @@ Public Class FrmGraficasfaseuno
                 End If
                 vContador = vContador + 1
             Next
+            ''LineSeries1.DataPoints.Add(New CategoricalDataPoint(vAcumulado, ""))
+            BarSeries1.DataPoints.Add(New CategoricalDataPoint(vNrftiAcum, "Acumulado"))
+            LineSeries1.DataPoints.Add(New CategoricalDataPoint(vAcumulado, ""))
+
         ElseIf vNivel = 2 Or vNivel = 3 Or vNivel = 4 Then
 
             For Each vDR As DataRow In vDT.Rows
                 If vContador = 1 Then
-                    BarSeries2.DataPoints.Add(New CategoricalDataPoint(vDR("nrfti"), "Acumulado"))
+                    ''BarSeries2.DataPoints.Add(New CategoricalDataPoint(vDR("nrfti"), "Acumulado"))
                 Else
                     BarSeries1.DataPoints.Add(New CategoricalDataPoint(vDR("nrfti"), vDR("dia_asignado")))
                     If Not IsDBNull(vDR("objetivo")) Then
@@ -961,7 +971,7 @@ Public Class FrmGraficasfaseuno
         ElseIf vNivel = 5 Then
             For Each vDR As DataRow In vDT.Rows
                 If vContador = 1 Then
-                    BarSeries2.DataPoints.Add(New CategoricalDataPoint(vDR("nrfti"), "Acumulado"))
+                    ''BarSeries2.DataPoints.Add(New CategoricalDataPoint(vDR("nrfti"), "Acumulado"))
                 Else
                     BarSeries1.DataPoints.Add(New CategoricalDataPoint(vDR("nrfti"), vDR("dia_asignado")))
                 End If
