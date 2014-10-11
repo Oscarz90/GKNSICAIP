@@ -92,7 +92,7 @@ Public Class gfu_nivel_cadena_valor
                                              "join linea l on c.cve_componente=l.cve_componente " &
                                              "join equipo_linea el on l.cve_linea=el.cve_linea " &
                                              "join equipo e on el.cve_equipo=e.cve_equipo " &
-                                             "where l.Estatus='1' and ucv.CVE_Usuario=" & vcve_usuario & " order by e.equipo asc")
+                                             "where (e.cve_detalle = 7 or e.cve_detalle = 13 or e.cve_detalle = 23) and l.Estatus='1' and ucv.CVE_Usuario=" & vcve_usuario & " order by e.equipo asc")
         Catch ex As Exception
             MsgBox("Error al obtener equipo. Cgfu_nivel_cadena_valor_ERROR", vbCritical + vbOKOnly, "Error")
             dt_componente = Nothing

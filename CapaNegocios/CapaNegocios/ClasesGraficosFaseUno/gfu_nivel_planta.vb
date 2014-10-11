@@ -55,7 +55,7 @@ Public Class gfu_nivel_planta
     Public Function nivel_planta_equipos() As DataTable
         Dim dt_componente As New DataTable
         Try
-            dt_componente = oBD.ObtenerTabla("select e.cve_equipo,e.equipo from equipo e order by e.equipo asc")
+            dt_componente = oBD.ObtenerTabla("select e.cve_equipo,e.equipo from equipo e where e.cve_detalle = 7 or e.cve_detalle = 13 or e.cve_detalle = 23 order by e.equipo asc")
         Catch ex As Exception
             MsgBox("Error al obtener equipo. Cgfu_nivel_planta_ERROR", vbCritical + vbOKOnly, "Error")
             dt_componente = Nothing

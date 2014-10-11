@@ -49,7 +49,7 @@ Public Class gfu_nivel_let
     Public Function llena_combo_equipo() As DataTable
         Dim dtEquipoLinea As New DataTable
         Try
-            dtEquipoLinea = oBD.ObtenerTabla("select e.cve_equipo,e.equipo from equipo e where e.cve_equipo=" & vcve_equipo)
+            dtEquipoLinea = oBD.ObtenerTabla("select e.cve_equipo,e.equipo from equipo e where (e.cve_detalle = 7 or e.cve_detalle = 13 or e.cve_detalle = 23) and e.cve_equipo=" & vcve_equipo)
         Catch ex As Exception
             MsgBox("Error al obtener equipo. Cgfu_nivel_let_ERROR", vbCritical + vbOKOnly, "Error")
             dtEquipoLinea = Nothing
@@ -62,7 +62,7 @@ Public Class gfu_nivel_let
         Try
             dtEquipoLinea = oBD.ObtenerTabla("select e.cve_equipo,e.equipo from USUARIO_EQUIPO ue " &
                                              "join equipo e on ue.CVE_Equipo=e.cve_equipo " &
-                                             "where ue.CVE_Usuario = " & vcve_usuario)
+                                             "where (e.cve_detalle = 7 or e.cve_detalle = 13 or e.cve_detalle = 23) and ue.CVE_Usuario = " & vcve_usuario)
         Catch ex As Exception
             MsgBox("Error al obtener equipo. Cgfu_nivel_let_ERROR", vbCritical + vbOKOnly, "Error")
             dtEquipoLinea = Nothing

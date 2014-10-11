@@ -25,7 +25,7 @@ Public Class FrmGraficasfaseuno
     Dim vIndicador_Seleccionado As String = ""
     Dim vIndicador_A_CALCULAR As String = ""
    
-
+    Dim vBandera_EsResumen As Boolean = True
 
 #End Region
 #Region "Inicializa formulario"
@@ -536,7 +536,7 @@ Public Class FrmGraficasfaseuno
 
         'Creacion series
         Dim BarSeries1 As New BarSeries() With {.LegendTitle = "Oee"}
-        Dim BarSeries2 As New BarSeries() With {.LegendTitle = "Acumulado"}
+        ' Dim BarSeries2 As New BarSeries() With {.LegendTitle = "Acumulado"}
         Dim LineSeries1 As New LineSeries()
 
         ''El nivel Planta no lleva esta serie
@@ -577,6 +577,7 @@ Public Class FrmGraficasfaseuno
             End If
         End If
         Dim vOEE_Acumulado As Double = 0
+        Dim vObjetivo_Acumulado As Double = 0
 
         'Dim vUltimo_Registro As Integer = 0
         'Dim vUltimo_acumulado As Integer = 0
@@ -587,6 +588,7 @@ Public Class FrmGraficasfaseuno
             If vContador = 1 Then
                 If IsDBNull(vDR("dia_asignado")) Then
                     vOEE_Acumulado = vDR("oee")
+                    vObjetivo_Acumulado = vDR("objetivo")
                 Else
                     BarSeries1.DataPoints.Add(New CategoricalDataPoint(vDR("oee"), vDR("dia_asignado")))
                     vOEE_Acumulado = vDR("oee")
@@ -599,12 +601,13 @@ Public Class FrmGraficasfaseuno
                         LineSeries1.DataPoints.Add(New CategoricalDataPoint(vDR("objetivo"), vDR("dia_asignado")))
                     End If
                 End If
-
             End If
             vContador = vContador + 1
         Next
         ''Acumulado
-        BarSeries2.DataPoints.Add(New CategoricalDataPoint(vOEE_Acumulado, "Acumulado"))
+        'BarSeries2.DataPoints.Add(New CategoricalDataPoint(vOEE_Acumulado, "Acumulado"))
+        BarSeries1.DataPoints.Add(New CategoricalDataPoint(vOEE_Acumulado, "Acumulado"))
+        LineSeries1.DataPoints.Add(New CategoricalDataPoint(vObjetivo_Acumulado, ""))
 
         'Cartesian Area, CategoricalAxis, LinearAxis
         Dim CartesianArea1 As CartesianArea = New CartesianArea()
@@ -632,17 +635,17 @@ Public Class FrmGraficasfaseuno
         LinearAxis1.Title = "% Oee"
 
         BarSeries1.ShowLabels = True
-        BarSeries2.ShowLabels = True
+        'BarSeries2.ShowLabels = True
 
         BarSeries1.LabelFormat = "{0:##}" ' & " %"
-        BarSeries2.LabelFormat = "{0:##}" '& " %"
+        'BarSeries2.LabelFormat = "{0:##}" '& " %"
         If vNivel <> 5 Then ''El nivel Planta no lleva esta serie
             LineSeries1.LabelFormat = "{0:##.#}" '& " %"
         End If
 
 
         BarSeries1.Font = New Font("Segoe UI", 11)
-        BarSeries2.Font = New Font("Segoe UI", 11)
+        'BarSeries2.Font = New Font("Segoe UI", 11)
 
         BarSeries1.HorizontalAxis = CategoricalAxis1
         If vNivel <> 5 Then ''El nivel Planta no lleva esta serie
@@ -657,7 +660,7 @@ Public Class FrmGraficasfaseuno
 
 
         BarSeries1.Palette = New PaletteEntry(Color.FromArgb(255, 205, 47))
-        BarSeries2.Palette = New PaletteEntry(Color.FromArgb(246, 172, 38))
+        'BarSeries2.Palette = New PaletteEntry(Color.FromArgb(246, 172, 38))
 
         If vNivel <> 5 Then ''El nivel Planta no lleva esta serie
             LineSeries1.Palette = New PaletteEntry(Color.FromArgb(202, 0, 0))
@@ -668,19 +671,19 @@ Public Class FrmGraficasfaseuno
         Me.radChartView1.ShowToolTip = True
 
         radChartView1.Series.Add(BarSeries1)
-        radChartView1.Series.Add(BarSeries2)
+        'radChartView1.Series.Add(BarSeries2)
         If vNivel <> 5 Then ''El nivel Planta no lleva esta serie
             radChartView1.Series.Add(LineSeries1)
         End If
 
         If vNivel <> 5 Then ''El nivel Planta no lleva esta serie
             BarSeries1.CombineMode = ChartSeriesCombineMode.None
-            BarSeries2.CombineMode = ChartSeriesCombineMode.None
+            'BarSeries2.CombineMode = ChartSeriesCombineMode.None
             LineSeries1.CombineMode = ChartSeriesCombineMode.None
         End If
 
         BarSeries1.LabelMode = BarLabelModes.Top
-        BarSeries2.LabelMode = BarLabelModes.Top
+        'BarSeries2.LabelMode = BarLabelModes.Top
 
     End Sub
 
@@ -941,6 +944,7 @@ Public Class FrmGraficasfaseuno
                 ElseIf rdbtnMeses.IsChecked Then
                     If vContador = 1 Then
                         vAcumulado = vDR("objetivo")
+                        vNrftiAcum = vDR("nrfti")
                         ''BarSeries2.DataPoints.Add(New CategoricalDataPoint(vDR("nrfti"), "Acumulado"))
                     Else
                         BarSeries1.DataPoints.Add(New CategoricalDataPoint(vDR("nrfti"), vDR("dia_asignado")))
@@ -959,6 +963,8 @@ Public Class FrmGraficasfaseuno
 
             For Each vDR As DataRow In vDT.Rows
                 If vContador = 1 Then
+                    vNrftiAcum = vDR("nrfti")
+                    vAcumulado = vDR("objetivo")
                     ''BarSeries2.DataPoints.Add(New CategoricalDataPoint(vDR("nrfti"), "Acumulado"))
                 Else
                     BarSeries1.DataPoints.Add(New CategoricalDataPoint(vDR("nrfti"), vDR("dia_asignado")))
@@ -968,15 +974,20 @@ Public Class FrmGraficasfaseuno
                 End If
                 vContador = vContador + 1
             Next
+            BarSeries1.DataPoints.Add(New CategoricalDataPoint(vNrftiAcum, "Acumulado"))
+            LineSeries1.DataPoints.Add(New CategoricalDataPoint(vAcumulado, ""))
+
         ElseIf vNivel = 5 Then
             For Each vDR As DataRow In vDT.Rows
                 If vContador = 1 Then
+                    vNrftiAcum = vDR("nrfti")
                     ''BarSeries2.DataPoints.Add(New CategoricalDataPoint(vDR("nrfti"), "Acumulado"))
                 Else
                     BarSeries1.DataPoints.Add(New CategoricalDataPoint(vDR("nrfti"), vDR("dia_asignado")))
                 End If
                 vContador = vContador + 1
             Next
+            BarSeries1.DataPoints.Add(New CategoricalDataPoint(vNrftiAcum, "Acumulado"))
         End If
         'Cartesian Area, CategoricalAxis, LinearAxis
         Dim CartesianArea1 As CartesianArea = New CartesianArea()
@@ -1076,6 +1087,8 @@ Public Class FrmGraficasfaseuno
         Me.dgvTabla.Columns("dia_asignado").HeaderText = "FECHA"
         Me.dgvTabla.Columns("dia_asignado").Width = 170
         Me.dgvTabla.Columns("dia_asignado").Name = "dia_asignado"
+        Me.dgvTabla.Columns("dia_asignado").ExcelExportType = DisplayFormatType.Custom
+        Me.dgvTabla.Columns("dia_asignado").ExcelExportFormatString = " dd/MM/yyyy "
 
         Me.dgvTabla.Columns("nrfti").HeaderText = "NRFTi"
         Me.dgvTabla.Columns("nrfti").Width = 80
@@ -1333,6 +1346,8 @@ Public Class FrmGraficasfaseuno
         Me.dgvTabla.Columns("dia_asignado").HeaderText = "FECHA"
         Me.dgvTabla.Columns("dia_asignado").Width = 170
         Me.dgvTabla.Columns("dia_asignado").Name = "dia_asignado"
+        Me.dgvTabla.Columns("dia_asignado").ExcelExportType = DisplayFormatType.Custom
+        Me.dgvTabla.Columns("dia_asignado").ExcelExportFormatString = " dd/MM/yyyy "
 
         Me.dgvTabla.Columns("mantenimiento_autonomo").HeaderText = "MANTENIMIENTO AUTONOMO"
         Me.dgvTabla.Columns("mantenimiento_autonomo").Width = 80
@@ -1461,6 +1476,7 @@ Public Class FrmGraficasfaseuno
         Dim vContador As Integer = 1
         Dim vFaltas_Aux As Integer = 0
         Dim vRetardos_Aux As Integer = 0
+        Dim vObjetivo As Double = 0
 
         vTotal = vDT.Rows.Count
 
@@ -1468,6 +1484,7 @@ Public Class FrmGraficasfaseuno
             If vContador = 1 Then
                 vFaltas_Aux = vDR("faltas")
                 vRetardos_Aux = vDR("retardos")
+                vObjetivo = vDR("objetivo")
             Else
                 BarSeries2.DataPoints.Add(New CategoricalDataPoint(vDR("faltas"), vDR("dia_asignado")))
                 BarSeries3.DataPoints.Add(New CategoricalDataPoint(vDR("retardos"), vDR("dia_asignado")))
@@ -1480,8 +1497,10 @@ Public Class FrmGraficasfaseuno
             vContador = vContador + 1
         Next
 
-        BarSeries4.DataPoints.Add(New CategoricalDataPoint(vFaltas_Aux, "Acumulado"))
-        BarSeries5.DataPoints.Add(New CategoricalDataPoint(vRetardos_Aux, "Acumulado"))
+        BarSeries2.DataPoints.Add(New CategoricalDataPoint(vFaltas_Aux, "Acumulado"))
+        BarSeries3.DataPoints.Add(New CategoricalDataPoint(vRetardos_Aux, "Acumulado"))
+
+        LineSeries1.DataPoints.Add(New CategoricalDataPoint(vObjetivo, ""))
 
         'Cartesian Area, CategoricalAxis, LinearAxis
         Dim CartesianArea1 As CartesianArea = New CartesianArea()
@@ -1553,8 +1572,8 @@ Public Class FrmGraficasfaseuno
         radChartView1.Series.Add(BarSeries2)
         radChartView1.Series.Add(BarSeries3)
 
-        radChartView1.Series.Add(BarSeries4)
-        radChartView1.Series.Add(BarSeries5)
+        'radChartView1.Series.Add(BarSeries4)
+        'radChartView1.Series.Add(BarSeries5)
 
         If vNivel <> 5 Then
             radChartView1.Series.Add(LineSeries1)
@@ -1565,8 +1584,8 @@ Public Class FrmGraficasfaseuno
             BarSeries2.CombineMode = ChartSeriesCombineMode.Stack
             BarSeries3.CombineMode = ChartSeriesCombineMode.Stack
 
-            BarSeries4.CombineMode = ChartSeriesCombineMode.Stack
-            BarSeries5.CombineMode = ChartSeriesCombineMode.Stack
+            'BarSeries4.CombineMode = ChartSeriesCombineMode.Stack
+            'BarSeries5.CombineMode = ChartSeriesCombineMode.Stack
         End If
         If vNivel = 5 Then
             For i As Integer = 0 To Me.radChartView1.Series.Count - 1
@@ -1615,6 +1634,8 @@ Public Class FrmGraficasfaseuno
         Me.dgvTabla.Columns("dia_asignado").IsVisible = True
         Me.dgvTabla.Columns("dia_asignado").Width = 170
         Me.dgvTabla.Columns("dia_asignado").Name = "dia_asignado"
+        Me.dgvTabla.Columns("dia_asignado").ExcelExportType = DisplayFormatType.Custom
+        Me.dgvTabla.Columns("dia_asignado").ExcelExportFormatString = " dd/MM/yyyy "
 
         Me.dgvTabla.Columns("faltas").HeaderText = "FALTA"
         Me.dgvTabla.Columns("faltas").IsVisible = True
@@ -1846,6 +1867,8 @@ Public Class FrmGraficasfaseuno
         Me.dgvTabla.Columns("dia_asignado").HeaderText = "FECHA"
         Me.dgvTabla.Columns("dia_asignado").Width = 170
         Me.dgvTabla.Columns("dia_asignado").Name = "dia_asignado"
+        Me.dgvTabla.Columns("dia_asignado").ExcelExportType = DisplayFormatType.Custom
+        Me.dgvTabla.Columns("dia_asignado").ExcelExportFormatString = " dd/MM/yyyy "
 
         Me.dgvTabla.Columns("nuevas").HeaderText = "NUEVAS"
         Me.dgvTabla.Columns("nuevas").Width = 80
@@ -1990,11 +2013,13 @@ Public Class FrmGraficasfaseuno
         End If
         Dim vMin_Program_Aux As Integer = 0
         Dim vObjetivo_tcdm_Aux As Integer = 0
+        '  Dim vObjetivo_Aux As Double = 0
 
         For Each vDR As DataRow In vDT.Rows
             If 1 = vContador Then
                 vMin_Program_Aux = vDR("mins_reales")
                 vObjetivo_tcdm_Aux = vDR("objetivo_tcdm")
+                ' vObjetivo_Aux = vDR("objetivo_tcdm")
             Else
                 BarSeries1.DataPoints.Add(New CategoricalDataPoint(vDR("mins_reales"), vDR("dia_asignado")))
                 If vNivel <> 5 Then
@@ -2007,6 +2032,7 @@ Public Class FrmGraficasfaseuno
         Next
 
         BarSeries1.DataPoints.Add(New CategoricalDataPoint(vMin_Program_Aux, "acumulado"))
+        LineSeries3.DataPoints.Add(New CategoricalDataPoint(vObjetivo_tcdm_Aux, ""))
 
         'Cartesian Area
         Dim CartesianArea1 As CartesianArea = New CartesianArea()
@@ -2060,7 +2086,6 @@ Public Class FrmGraficasfaseuno
         Me.radChartView1.ShowTrackBall = True
         Me.radChartView1.ShowToolTip = True
 
-       
 
         radChartView1.Series.Add(BarSeries1)
         'Chartview
@@ -2068,7 +2093,7 @@ Public Class FrmGraficasfaseuno
             radChartView1.Series.Add(LineSeries3)
         End If
         
-        BarSeries1.CombineMode = ChartSeriesCombineMode.None
+        BarSeries1.CombineMode = ChartSeriesCombineMode.Cluster
         If vNivel <> 5 Then
             LineSeries3.CombineMode = ChartSeriesCombineMode.None
         End If
@@ -2119,6 +2144,7 @@ Public Class FrmGraficasfaseuno
         Dim vMin_Excedentes_Aux As Integer = 0
         Dim vCosto_Aux As Integer = 0
         Dim vObjetivo_tcdm_Aux As Integer = 0
+        Dim vObjetivo_Aux As Double = 0
 
         For Each vDR As DataRow In vDT.Rows
             If 1 = vContador Then
@@ -2126,6 +2152,7 @@ Public Class FrmGraficasfaseuno
                 vMin_Excedentes_Aux = vDR("mins_excedentes")
                 vCosto_Aux = vDR("costo")
                 vObjetivo_tcdm_Aux = vDR("objetivo_tcdm")
+                vObjetivo_Aux = vDR("objetivo")
             Else
                 LineSeries1.DataPoints.Add(New CategoricalDataPoint(vDR("costo"), vDR("dia_asignado")))
                 If vNivel <> 5 Then
@@ -2138,6 +2165,7 @@ Public Class FrmGraficasfaseuno
         Next
 
         LineSeries1.DataPoints.Add(New CategoricalDataPoint(vCosto_Aux, "acumulado"))
+        LineSeries3.DataPoints.Add(New CategoricalDataPoint(vObjetivo_Aux, ""))
 
         'Cartesian Area
         Dim CartesianArea1 As CartesianArea = New CartesianArea()
@@ -2229,6 +2257,8 @@ Public Class FrmGraficasfaseuno
         Me.dgvTabla.Columns("dia_asignado").HeaderText = "FECHA"
         Me.dgvTabla.Columns("dia_asignado").Width = 170
         Me.dgvTabla.Columns("dia_asignado").Name = "dia_asignado"
+        Me.dgvTabla.Columns("dia_asignado").ExcelExportType = DisplayFormatType.Custom
+        Me.dgvTabla.Columns("dia_asignado").ExcelExportFormatString = " dd/MM/yyyy "
 
         Me.dgvTabla.Columns("objetivo_tcdm").HeaderText = "OBJETIVO TCDM"
         Me.dgvTabla.Columns("objetivo_tcdm").Width = 80
@@ -2270,8 +2300,8 @@ Public Class FrmGraficasfaseuno
         Me.dgvTabla.Columns("dia_asignado").IsVisible = True
         Me.dgvTabla.Columns("objetivo_tcdm").IsVisible = True
         Me.dgvTabla.Columns("mins_reales").IsVisible = True
-        Me.dgvTabla.Columns("mins_programados").IsVisible = True
-        Me.dgvTabla.Columns("mins_excedentes").IsVisible = True
+        Me.dgvTabla.Columns("mins_programados").IsVisible = False
+        Me.dgvTabla.Columns("mins_excedentes").IsVisible = False
         Me.dgvTabla.Columns("costo").IsVisible = True
         Me.dgvTabla.Columns("precio").IsVisible = True
         Me.dgvTabla.Columns("objetivo").IsVisible = True
@@ -2298,31 +2328,53 @@ Public Class FrmGraficasfaseuno
             Me.PageGrafica_Secundaria.Enabled = False
             vIndicador_A_CALCULAR = "OEE"
             Obtiene_Grafico_OEE()
+            If vBandera_EsResumen = True Then
+                Obtiene_Reporte_OEE(True)
+            Else
+                Obtiene_Reporte_OEE(False)
+            End If
+
         ElseIf rdbtnNrfti.IsChecked Then
             RpSeguridad.Visible = False
             Me.PageGrafica_Secundaria.Enabled = False
             vIndicador_A_CALCULAR = "NRFTI"
             Obtiene_Grafica_NRFT()
+
+            If vBandera_EsResumen = True Then
+                Obtiene_Reporte_NRFT(True)
+            Else
+                Obtiene_Reporte_NRFT(False)
+            End If
+
         ElseIf rdbtnCosto.IsChecked Then
             RpSeguridad.Visible = False
             Me.PageGrafica_Secundaria.Enabled = True
             vIndicador_A_CALCULAR = "COSTO"
             Obtiene_Grafica_Costo()
+            Obtiene_Reporte_Costo()
         ElseIf rdbtnSeguridad.IsChecked Then
             RpSeguridad.Visible = True
             Me.PageGrafica_Secundaria.Enabled = False
             vIndicador_A_CALCULAR = "SEGURIDAD"
             Obtiene_Grafica_Seguridad()
+            If vBandera_EsResumen = True Then
+                Obtiene_Reporte_Seguridad(True)
+            Else
+                Obtiene_Reporte_Seguridad(False)
+            End If
+
         ElseIf rdbtnCincoS.IsChecked Then
             RpSeguridad.Visible = False
             Me.PageGrafica_Secundaria.Enabled = False
             vIndicador_A_CALCULAR = "CINCOS"
             Obtiene_Grafica_CincoS()
+            Obtiene_Reporte_CincoS()
         ElseIf rdbtnGente.IsChecked Then
             RpSeguridad.Visible = False
             Me.PageGrafica_Secundaria.Enabled = False
             vIndicador_A_CALCULAR = "GENTE"
             Obtiene_Grafica_Gente()
+            Obtiene_Reporte_Gente()
         End If
     End Sub
 #End Region
@@ -2340,7 +2392,7 @@ Public Class FrmGraficasfaseuno
     End Sub
 
 #Region "Metodos para Tablas_Reportes"
-    Private Sub btnResumen_Click(sender As Object, e As EventArgs) Handles btnResumen.Click
+    Private Sub btnResumen_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnResumen.Click
         If vIndicador_A_CALCULAR = vIndicador_Seleccionado Then
             btnDetalle.Enabled = True
             btnResumen.Enabled = True
@@ -2358,10 +2410,12 @@ Public Class FrmGraficasfaseuno
             ElseIf rdbtnGente.IsChecked = True Then
                 Obtiene_Reporte_Gente()
             End If
+            vBandera_EsResumen = True
         Else
             MsgBox("El indicador actualmente seleccionado no fue el que calculo. De clic en el boton 'Calcular' para recalcular el indicador seleccionado")
             btnDetalle.Enabled = False
             btnResumen.Enabled = False
+            vBandera_EsResumen = True
         End If
     End Sub
 
@@ -2383,10 +2437,14 @@ Public Class FrmGraficasfaseuno
             ElseIf rdbtnGente.IsChecked = True Then
                 Obtiene_Reporte_Gente()
             End If
+
+            vBandera_EsResumen = False
         Else
             MsgBox("El indicador actualmente seleccionado no fue el que calculo. De clic en el boton 'Calcular' para recalcular el indicador seleccionado")
             btnDetalle.Enabled = False
             btnResumen.Enabled = False
+
+            vBandera_EsResumen = False
         End If
 
     End Sub
