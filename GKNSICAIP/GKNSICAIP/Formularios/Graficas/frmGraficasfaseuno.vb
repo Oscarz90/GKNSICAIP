@@ -1969,9 +1969,13 @@ Public Class FrmGraficasfaseuno
 
         ''Obtencion de Informacion
         vDatos_Obtenidos = oG_Fase2.Obten_Costo(vF_Inicial, vF_Final, vCve_Equipo, vCve_Linea, vCve_Componente, vCve_CadenaValor, vFormato_Resultado, vNivel)
+        Try
+            Grafica_Minutos(vNivel, vDatos_Obtenidos)
+            Grafica_Costo(vNivel, vDatos_Obtenidos)
+        Catch ex As Exception
 
-        Grafica_Minutos(vNivel, vDatos_Obtenidos)
-        Grafica_Costo(vNivel, vDatos_Obtenidos)
+        End Try
+       
 
     End Sub
 
@@ -2019,7 +2023,7 @@ Public Class FrmGraficasfaseuno
             If 1 = vContador Then
                 vMin_Program_Aux = vDR("mins_reales")
                 vObjetivo_tcdm_Aux = vDR("objetivo_tcdm")
-                ' vObjetivo_Aux = vDR("objetivo_tcdm")
+                'vObjetivo_Aux = vDR("objetivo_tcdm")
             Else
                 BarSeries1.DataPoints.Add(New CategoricalDataPoint(vDR("mins_reales"), vDR("dia_asignado")))
                 If vNivel <> 5 Then
@@ -2032,7 +2036,9 @@ Public Class FrmGraficasfaseuno
         Next
 
         BarSeries1.DataPoints.Add(New CategoricalDataPoint(vMin_Program_Aux, "acumulado"))
+        ''If vNivel <> 5 Then
         LineSeries3.DataPoints.Add(New CategoricalDataPoint(vObjetivo_tcdm_Aux, ""))
+        ''End If
 
         'Cartesian Area
         Dim CartesianArea1 As CartesianArea = New CartesianArea()
@@ -2062,26 +2068,26 @@ Public Class FrmGraficasfaseuno
         BarSeries1.LabelMode = BarLabelModes.Center
         BarSeries1.LabelFormat = "{0:###}"
 
-        If vNivel <> 5 Then
-            LineSeries3.LabelFormat = "{0:###}"
-        End If
+        ''If vNivel <> 5 Then
+        LineSeries3.LabelFormat = "{0:###}"
+        ''End If
         BarSeries1.HorizontalAxis = CategoricalAxis1
-        If vNivel <> 5 Then
-            LineSeries3.HorizontalAxis = CategoricalAxis1
-        End If
+        ''If vNivel <> 5 Then
+        LineSeries3.HorizontalAxis = CategoricalAxis1
+        ''End If
 
         BarSeries1.VerticalAxis = LinearAxis1
 
-        If vNivel <> 5 Then
-            LineSeries3.VerticalAxis = LinearAxis1
-        End If
+        ''If vNivel <> 5 Then
+        LineSeries3.VerticalAxis = LinearAxis1
+        ''End If
 
         BarSeries1.Palette = New PaletteEntry(Color.FromArgb(62, 105, 157))
 
-        If vNivel <> 5 Then
-            LineSeries3.Palette = New PaletteEntry(Color.FromArgb(202, 0, 0))
-            LineSeries3.BorderColor = Color.FromArgb(202, 0, 0)
-        End If
+        ''If vNivel <> 5 Then
+        LineSeries3.Palette = New PaletteEntry(Color.FromArgb(202, 0, 0))
+        LineSeries3.BorderColor = Color.FromArgb(202, 0, 0)
+        ''End If
 
         Me.radChartView1.ShowTrackBall = True
         Me.radChartView1.ShowToolTip = True
@@ -2089,14 +2095,14 @@ Public Class FrmGraficasfaseuno
 
         radChartView1.Series.Add(BarSeries1)
         'Chartview
-        If vNivel <> 5 Then
-            radChartView1.Series.Add(LineSeries3)
-        End If
-        
+        ''If vNivel <> 5 Then
+        radChartView1.Series.Add(LineSeries3)
+        ''End If
+
         BarSeries1.CombineMode = ChartSeriesCombineMode.Cluster
-        If vNivel <> 5 Then
-            LineSeries3.CombineMode = ChartSeriesCombineMode.None
-        End If
+        ''If vNivel <> 5 Then
+        LineSeries3.CombineMode = ChartSeriesCombineMode.None
+        ''End If
 
         If (LinearAxis1.ActualRange.Maximum = 0) Then
             LinearAxis1.Maximum = 5
