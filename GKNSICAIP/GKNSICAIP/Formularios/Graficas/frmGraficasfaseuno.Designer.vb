@@ -49,8 +49,6 @@ Partial Class FrmGraficasfaseuno
         Me.dtpFechaInicial = New Telerik.WinControls.UI.RadDateTimePicker()
         Me.rdbtnMeses = New Telerik.WinControls.UI.RadRadioButton()
         Me.rdbtnDias = New Telerik.WinControls.UI.RadRadioButton()
-        Me.radChartView1 = New Telerik.WinControls.UI.RadChartView()
-        Me.lblError = New System.Windows.Forms.Label()
         Me.btnGraficar = New Telerik.WinControls.UI.RadButton()
         Me.picboxIndicador = New System.Windows.Forms.PictureBox()
         Me.RadPageView1 = New Telerik.WinControls.UI.RadPageView()
@@ -62,6 +60,8 @@ Partial Class FrmGraficasfaseuno
         Me.LblMuestraNuevas = New Telerik.WinControls.UI.RadLabel()
         Me.LblMuestaAcumulado = New Telerik.WinControls.UI.RadLabel()
         Me.LblResueltas = New Telerik.WinControls.UI.RadLabel()
+        Me.radChartView1 = New Telerik.WinControls.UI.RadChartView()
+        Me.lblError = New System.Windows.Forms.Label()
         Me.PageGrafica_Secundaria = New Telerik.WinControls.UI.RadPageViewPage()
         Me.CharSecundario = New Telerik.WinControls.UI.RadChartView()
         Me.RadPageViewPage1 = New Telerik.WinControls.UI.RadPageViewPage()
@@ -95,8 +95,6 @@ Partial Class FrmGraficasfaseuno
         CType(Me.dtpFechaInicial, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.rdbtnMeses, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.rdbtnDias, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.radChartView1, System.ComponentModel.ISupportInitialize).BeginInit()
-        Me.radChartView1.SuspendLayout()
         CType(Me.btnGraficar, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.picboxIndicador, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.RadPageView1, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -110,6 +108,8 @@ Partial Class FrmGraficasfaseuno
         CType(Me.LblMuestraNuevas, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.LblMuestaAcumulado, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.LblResueltas, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.radChartView1, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.radChartView1.SuspendLayout()
         Me.PageGrafica_Secundaria.SuspendLayout()
         CType(Me.CharSecundario, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.RadPageViewPage1.SuspendLayout()
@@ -133,20 +133,20 @@ Partial Class FrmGraficasfaseuno
         Me.RadGroupBox1.Controls.Add(Me.rdbtnNrfti)
         Me.RadGroupBox1.Controls.Add(Me.rdbtnOee)
         Me.RadGroupBox1.HeaderText = "Indicador:"
-        Me.RadGroupBox1.Location = New System.Drawing.Point(3, 3)
+        Me.RadGroupBox1.Location = New System.Drawing.Point(3, 1)
         Me.RadGroupBox1.Name = "RadGroupBox1"
         '
         '
         '
         Me.RadGroupBox1.RootElement.Padding = New System.Windows.Forms.Padding(2, 18, 2, 2)
-        Me.RadGroupBox1.Size = New System.Drawing.Size(104, 178)
+        Me.RadGroupBox1.Size = New System.Drawing.Size(104, 127)
         Me.RadGroupBox1.TabIndex = 0
         Me.RadGroupBox1.Text = "Indicador:"
         Me.RadGroupBox1.ThemeName = "RadThemeManager"
         '
         'rdbtnGente
         '
-        Me.rdbtnGente.Location = New System.Drawing.Point(5, 141)
+        Me.rdbtnGente.Location = New System.Drawing.Point(5, 107)
         Me.rdbtnGente.Name = "rdbtnGente"
         Me.rdbtnGente.Size = New System.Drawing.Size(50, 18)
         Me.rdbtnGente.TabIndex = 3
@@ -154,7 +154,7 @@ Partial Class FrmGraficasfaseuno
         '
         'rdbtnCincoS
         '
-        Me.rdbtnCincoS.Location = New System.Drawing.Point(5, 117)
+        Me.rdbtnCincoS.Location = New System.Drawing.Point(5, 88)
         Me.rdbtnCincoS.Name = "rdbtnCincoS"
         Me.rdbtnCincoS.Size = New System.Drawing.Size(34, 18)
         Me.rdbtnCincoS.TabIndex = 3
@@ -162,7 +162,7 @@ Partial Class FrmGraficasfaseuno
         '
         'rdbtnSeguridad
         '
-        Me.rdbtnSeguridad.Location = New System.Drawing.Point(5, 93)
+        Me.rdbtnSeguridad.Location = New System.Drawing.Point(5, 70)
         Me.rdbtnSeguridad.Name = "rdbtnSeguridad"
         Me.rdbtnSeguridad.Size = New System.Drawing.Size(71, 18)
         Me.rdbtnSeguridad.TabIndex = 2
@@ -170,7 +170,7 @@ Partial Class FrmGraficasfaseuno
         '
         'rdbtnCosto
         '
-        Me.rdbtnCosto.Location = New System.Drawing.Point(5, 69)
+        Me.rdbtnCosto.Location = New System.Drawing.Point(5, 52)
         Me.rdbtnCosto.Name = "rdbtnCosto"
         Me.rdbtnCosto.Size = New System.Drawing.Size(49, 18)
         Me.rdbtnCosto.TabIndex = 2
@@ -178,7 +178,7 @@ Partial Class FrmGraficasfaseuno
         '
         'rdbtnNrfti
         '
-        Me.rdbtnNrfti.Location = New System.Drawing.Point(5, 45)
+        Me.rdbtnNrfti.Location = New System.Drawing.Point(5, 35)
         Me.rdbtnNrfti.Name = "rdbtnNrfti"
         Me.rdbtnNrfti.Size = New System.Drawing.Size(50, 18)
         Me.rdbtnNrfti.TabIndex = 2
@@ -186,7 +186,7 @@ Partial Class FrmGraficasfaseuno
         '
         'rdbtnOee
         '
-        Me.rdbtnOee.Location = New System.Drawing.Point(5, 21)
+        Me.rdbtnOee.Location = New System.Drawing.Point(5, 17)
         Me.rdbtnOee.Name = "rdbtnOee"
         Me.rdbtnOee.Size = New System.Drawing.Size(40, 18)
         Me.rdbtnOee.TabIndex = 1
@@ -206,13 +206,13 @@ Partial Class FrmGraficasfaseuno
         Me.RadGroupBox2.Controls.Add(Me.rdbtnCadenaValor)
         Me.RadGroupBox2.Controls.Add(Me.rdbtnPlanta)
         Me.RadGroupBox2.HeaderText = "Selecciona:"
-        Me.RadGroupBox2.Location = New System.Drawing.Point(113, 3)
+        Me.RadGroupBox2.Location = New System.Drawing.Point(113, 1)
         Me.RadGroupBox2.Name = "RadGroupBox2"
         '
         '
         '
         Me.RadGroupBox2.RootElement.Padding = New System.Windows.Forms.Padding(2, 18, 2, 2)
-        Me.RadGroupBox2.Size = New System.Drawing.Size(454, 178)
+        Me.RadGroupBox2.Size = New System.Drawing.Size(454, 127)
         Me.RadGroupBox2.TabIndex = 4
         Me.RadGroupBox2.Text = "Selecciona:"
         Me.RadGroupBox2.ThemeName = "RadThemeManager"
@@ -222,7 +222,7 @@ Partial Class FrmGraficasfaseuno
         Me.cbxLinea.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cbxLinea.Enabled = False
         Me.cbxLinea.FormattingEnabled = True
-        Me.cbxLinea.Location = New System.Drawing.Point(119, 131)
+        Me.cbxLinea.Location = New System.Drawing.Point(119, 101)
         Me.cbxLinea.Name = "cbxLinea"
         Me.cbxLinea.Size = New System.Drawing.Size(241, 21)
         Me.cbxLinea.TabIndex = 13
@@ -232,7 +232,7 @@ Partial Class FrmGraficasfaseuno
         Me.cbxEquipo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cbxEquipo.Enabled = False
         Me.cbxEquipo.FormattingEnabled = True
-        Me.cbxEquipo.Location = New System.Drawing.Point(119, 107)
+        Me.cbxEquipo.Location = New System.Drawing.Point(119, 78)
         Me.cbxEquipo.Name = "cbxEquipo"
         Me.cbxEquipo.Size = New System.Drawing.Size(241, 21)
         Me.cbxEquipo.TabIndex = 12
@@ -242,7 +242,7 @@ Partial Class FrmGraficasfaseuno
         Me.cbxComponente.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cbxComponente.Enabled = False
         Me.cbxComponente.FormattingEnabled = True
-        Me.cbxComponente.Location = New System.Drawing.Point(119, 83)
+        Me.cbxComponente.Location = New System.Drawing.Point(119, 55)
         Me.cbxComponente.Name = "cbxComponente"
         Me.cbxComponente.Size = New System.Drawing.Size(241, 21)
         Me.cbxComponente.TabIndex = 11
@@ -252,14 +252,14 @@ Partial Class FrmGraficasfaseuno
         Me.cbxCadenaValor.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cbxCadenaValor.Enabled = False
         Me.cbxCadenaValor.FormattingEnabled = True
-        Me.cbxCadenaValor.Location = New System.Drawing.Point(119, 59)
+        Me.cbxCadenaValor.Location = New System.Drawing.Point(119, 32)
         Me.cbxCadenaValor.Name = "cbxCadenaValor"
         Me.cbxCadenaValor.Size = New System.Drawing.Size(241, 21)
         Me.cbxCadenaValor.TabIndex = 10
         '
         'chkTodasLineas
         '
-        Me.chkTodasLineas.Location = New System.Drawing.Point(366, 133)
+        Me.chkTodasLineas.Location = New System.Drawing.Point(366, 103)
         Me.chkTodasLineas.Name = "chkTodasLineas"
         Me.chkTodasLineas.Size = New System.Drawing.Size(50, 18)
         Me.chkTodasLineas.TabIndex = 7
@@ -268,7 +268,7 @@ Partial Class FrmGraficasfaseuno
         '
         'rdbtnLinea
         '
-        Me.rdbtnLinea.Location = New System.Drawing.Point(5, 133)
+        Me.rdbtnLinea.Location = New System.Drawing.Point(5, 103)
         Me.rdbtnLinea.Name = "rdbtnLinea"
         Me.rdbtnLinea.Size = New System.Drawing.Size(49, 18)
         Me.rdbtnLinea.TabIndex = 3
@@ -276,7 +276,7 @@ Partial Class FrmGraficasfaseuno
         '
         'rdbtnComponente
         '
-        Me.rdbtnComponente.Location = New System.Drawing.Point(5, 85)
+        Me.rdbtnComponente.Location = New System.Drawing.Point(5, 57)
         Me.rdbtnComponente.Name = "rdbtnComponente"
         Me.rdbtnComponente.Size = New System.Drawing.Size(88, 18)
         Me.rdbtnComponente.TabIndex = 2
@@ -284,7 +284,7 @@ Partial Class FrmGraficasfaseuno
         '
         'rdbtnEquipo
         '
-        Me.rdbtnEquipo.Location = New System.Drawing.Point(5, 109)
+        Me.rdbtnEquipo.Location = New System.Drawing.Point(5, 80)
         Me.rdbtnEquipo.Name = "rdbtnEquipo"
         Me.rdbtnEquipo.Size = New System.Drawing.Size(57, 18)
         Me.rdbtnEquipo.TabIndex = 2
@@ -292,7 +292,7 @@ Partial Class FrmGraficasfaseuno
         '
         'rdbtnCadenaValor
         '
-        Me.rdbtnCadenaValor.Location = New System.Drawing.Point(5, 61)
+        Me.rdbtnCadenaValor.Location = New System.Drawing.Point(5, 34)
         Me.rdbtnCadenaValor.Name = "rdbtnCadenaValor"
         Me.rdbtnCadenaValor.Size = New System.Drawing.Size(89, 18)
         Me.rdbtnCadenaValor.TabIndex = 2
@@ -300,7 +300,7 @@ Partial Class FrmGraficasfaseuno
         '
         'rdbtnPlanta
         '
-        Me.rdbtnPlanta.Location = New System.Drawing.Point(5, 37)
+        Me.rdbtnPlanta.Location = New System.Drawing.Point(5, 16)
         Me.rdbtnPlanta.Name = "rdbtnPlanta"
         Me.rdbtnPlanta.Size = New System.Drawing.Size(51, 18)
         Me.rdbtnPlanta.TabIndex = 1
@@ -316,20 +316,20 @@ Partial Class FrmGraficasfaseuno
         Me.RadGroupBox3.Controls.Add(Me.rdbtnMeses)
         Me.RadGroupBox3.Controls.Add(Me.rdbtnDias)
         Me.RadGroupBox3.HeaderText = "Seleccion Fecha:"
-        Me.RadGroupBox3.Location = New System.Drawing.Point(573, 3)
+        Me.RadGroupBox3.Location = New System.Drawing.Point(573, 1)
         Me.RadGroupBox3.Name = "RadGroupBox3"
         '
         '
         '
         Me.RadGroupBox3.RootElement.Padding = New System.Windows.Forms.Padding(2, 18, 2, 2)
-        Me.RadGroupBox3.Size = New System.Drawing.Size(284, 178)
+        Me.RadGroupBox3.Size = New System.Drawing.Size(284, 127)
         Me.RadGroupBox3.TabIndex = 7
         Me.RadGroupBox3.Text = "Seleccion Fecha:"
         Me.RadGroupBox3.ThemeName = "RadThemeManager"
         '
         'RadLabel2
         '
-        Me.RadLabel2.Location = New System.Drawing.Point(5, 107)
+        Me.RadLabel2.Location = New System.Drawing.Point(5, 81)
         Me.RadLabel2.Name = "RadLabel2"
         Me.RadLabel2.Size = New System.Drawing.Size(64, 18)
         Me.RadLabel2.TabIndex = 11
@@ -337,7 +337,7 @@ Partial Class FrmGraficasfaseuno
         '
         'RadLabel1
         '
-        Me.RadLabel1.Location = New System.Drawing.Point(5, 73)
+        Me.RadLabel1.Location = New System.Drawing.Point(5, 49)
         Me.RadLabel1.Name = "RadLabel1"
         Me.RadLabel1.Size = New System.Drawing.Size(69, 18)
         Me.RadLabel1.TabIndex = 10
@@ -345,7 +345,7 @@ Partial Class FrmGraficasfaseuno
         '
         'dtpFechaFinal
         '
-        Me.dtpFechaFinal.Location = New System.Drawing.Point(106, 105)
+        Me.dtpFechaFinal.Location = New System.Drawing.Point(106, 79)
         Me.dtpFechaFinal.Name = "dtpFechaFinal"
         Me.dtpFechaFinal.Size = New System.Drawing.Size(164, 20)
         Me.dtpFechaFinal.TabIndex = 9
@@ -354,7 +354,7 @@ Partial Class FrmGraficasfaseuno
         '
         'dtpFechaInicial
         '
-        Me.dtpFechaInicial.Location = New System.Drawing.Point(106, 71)
+        Me.dtpFechaInicial.Location = New System.Drawing.Point(106, 47)
         Me.dtpFechaInicial.Name = "dtpFechaInicial"
         Me.dtpFechaInicial.Size = New System.Drawing.Size(164, 20)
         Me.dtpFechaInicial.TabIndex = 8
@@ -363,7 +363,7 @@ Partial Class FrmGraficasfaseuno
         '
         'rdbtnMeses
         '
-        Me.rdbtnMeses.Location = New System.Drawing.Point(170, 37)
+        Me.rdbtnMeses.Location = New System.Drawing.Point(170, 23)
         Me.rdbtnMeses.Name = "rdbtnMeses"
         Me.rdbtnMeses.Size = New System.Drawing.Size(72, 18)
         Me.rdbtnMeses.TabIndex = 2
@@ -371,13 +371,139 @@ Partial Class FrmGraficasfaseuno
         '
         'rdbtnDias
         '
-        Me.rdbtnDias.Location = New System.Drawing.Point(31, 37)
+        Me.rdbtnDias.Location = New System.Drawing.Point(31, 23)
         Me.rdbtnDias.Name = "rdbtnDias"
         Me.rdbtnDias.Size = New System.Drawing.Size(61, 18)
         Me.rdbtnDias.TabIndex = 1
         Me.rdbtnDias.TabStop = True
         Me.rdbtnDias.Text = "Por Días"
         Me.rdbtnDias.ToggleState = Telerik.WinControls.Enumerations.ToggleState.[On]
+        '
+        'btnGraficar
+        '
+        Me.btnGraficar.Enabled = False
+        Me.btnGraficar.Image = Global.GKNSICAIP.My.Resources.Resources.frmGraficas_graficar1
+        Me.btnGraficar.ImageAlignment = System.Drawing.ContentAlignment.TopCenter
+        Me.btnGraficar.Location = New System.Drawing.Point(863, 26)
+        Me.btnGraficar.Name = "btnGraficar"
+        Me.btnGraficar.Size = New System.Drawing.Size(121, 78)
+        Me.btnGraficar.TabIndex = 8
+        Me.btnGraficar.Text = "Calcular"
+        Me.btnGraficar.TextAlignment = System.Drawing.ContentAlignment.BottomCenter
+        Me.btnGraficar.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText
+        '
+        'picboxIndicador
+        '
+        Me.picboxIndicador.Location = New System.Drawing.Point(1045, 0)
+        Me.picboxIndicador.Name = "picboxIndicador"
+        Me.picboxIndicador.Size = New System.Drawing.Size(311, 128)
+        Me.picboxIndicador.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom
+        Me.picboxIndicador.TabIndex = 10
+        Me.picboxIndicador.TabStop = False
+        '
+        'RadPageView1
+        '
+        Me.RadPageView1.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+                    Or System.Windows.Forms.AnchorStyles.Left) _
+                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.RadPageView1.AutoScroll = True
+        Me.RadPageView1.Controls.Add(Me.RadPageViewPage2)
+        Me.RadPageView1.Controls.Add(Me.PageGrafica_Secundaria)
+        Me.RadPageView1.Controls.Add(Me.RadPageViewPage1)
+        Me.RadPageView1.ForeColor = System.Drawing.Color.Black
+        Me.RadPageView1.Location = New System.Drawing.Point(0, 3)
+        Me.RadPageView1.Name = "RadPageView1"
+        Me.RadPageView1.SelectedPage = Me.RadPageViewPage2
+        Me.RadPageView1.Size = New System.Drawing.Size(1352, 559)
+        Me.RadPageView1.TabIndex = 11
+        Me.RadPageView1.Text = "Tablas"
+        CType(Me.RadPageView1.GetChildAt(0), Telerik.WinControls.UI.RadPageViewStripElement).StripButtons = Telerik.WinControls.UI.StripViewButtons.None
+        '
+        'RadPageViewPage2
+        '
+        Me.RadPageViewPage2.AutoScroll = True
+        Me.RadPageViewPage2.BackColor = System.Drawing.Color.White
+        Me.RadPageViewPage2.Controls.Add(Me.RpSeguridad)
+        Me.RadPageViewPage2.Controls.Add(Me.radChartView1)
+        Me.RadPageViewPage2.Location = New System.Drawing.Point(10, 37)
+        Me.RadPageViewPage2.Name = "RadPageViewPage2"
+        Me.RadPageViewPage2.Size = New System.Drawing.Size(1331, 511)
+        Me.RadPageViewPage2.Text = "Graficas"
+        '
+        'RpSeguridad
+        '
+        Me.RpSeguridad.BackColor = System.Drawing.Color.Transparent
+        Me.RpSeguridad.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None
+        Me.RpSeguridad.Controls.Add(Me.LblAcumulado)
+        Me.RpSeguridad.Controls.Add(Me.LblMuestraResueltas)
+        Me.RpSeguridad.Controls.Add(Me.LblNuevas)
+        Me.RpSeguridad.Controls.Add(Me.LblMuestraNuevas)
+        Me.RpSeguridad.Controls.Add(Me.LblMuestaAcumulado)
+        Me.RpSeguridad.Controls.Add(Me.LblResueltas)
+        Me.RpSeguridad.Cursor = System.Windows.Forms.Cursors.Default
+        Me.RpSeguridad.ForeColor = System.Drawing.Color.Black
+        Me.RpSeguridad.Location = New System.Drawing.Point(874, -1)
+        Me.RpSeguridad.Name = "RpSeguridad"
+        Me.RpSeguridad.Size = New System.Drawing.Size(464, 21)
+        Me.RpSeguridad.TabIndex = 10
+        Me.RpSeguridad.Visible = False
+        '
+        'LblAcumulado
+        '
+        Me.LblAcumulado.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LblAcumulado.Location = New System.Drawing.Point(300, 1)
+        Me.LblAcumulado.Name = "LblAcumulado"
+        Me.LblAcumulado.Size = New System.Drawing.Size(97, 21)
+        Me.LblAcumulado.TabIndex = 4
+        Me.LblAcumulado.Text = "ACUMULADO:"
+        '
+        'LblMuestraResueltas
+        '
+        Me.LblMuestraResueltas.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LblMuestraResueltas.Location = New System.Drawing.Point(231, 1)
+        Me.LblMuestraResueltas.Name = "LblMuestraResueltas"
+        Me.LblMuestraResueltas.Size = New System.Drawing.Size(50, 21)
+        Me.LblMuestraResueltas.TabIndex = 3
+        Me.LblMuestraResueltas.Text = "resuelt"
+        Me.LblMuestraResueltas.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'LblNuevas
+        '
+        Me.LblNuevas.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LblNuevas.Location = New System.Drawing.Point(7, 0)
+        Me.LblNuevas.Name = "LblNuevas"
+        Me.LblNuevas.Size = New System.Drawing.Size(64, 21)
+        Me.LblNuevas.TabIndex = 0
+        Me.LblNuevas.Text = "NUEVAS:"
+        '
+        'LblMuestraNuevas
+        '
+        Me.LblMuestraNuevas.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LblMuestraNuevas.Location = New System.Drawing.Point(77, 0)
+        Me.LblMuestraNuevas.Name = "LblMuestraNuevas"
+        Me.LblMuestraNuevas.Size = New System.Drawing.Size(51, 21)
+        Me.LblMuestraNuevas.TabIndex = 1
+        Me.LblMuestraNuevas.Text = "nuevas"
+        Me.LblMuestraNuevas.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'LblMuestaAcumulado
+        '
+        Me.LblMuestaAcumulado.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LblMuestaAcumulado.Location = New System.Drawing.Point(405, 1)
+        Me.LblMuestaAcumulado.Name = "LblMuestaAcumulado"
+        Me.LblMuestaAcumulado.Size = New System.Drawing.Size(41, 21)
+        Me.LblMuestaAcumulado.TabIndex = 5
+        Me.LblMuestaAcumulado.Text = "acum"
+        Me.LblMuestaAcumulado.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'LblResueltas
+        '
+        Me.LblResueltas.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LblResueltas.Location = New System.Drawing.Point(143, 1)
+        Me.LblResueltas.Name = "LblResueltas"
+        Me.LblResueltas.Size = New System.Drawing.Size(82, 21)
+        Me.LblResueltas.TabIndex = 2
+        Me.LblResueltas.Text = "RESUELTAS:"
         '
         'radChartView1
         '
@@ -390,9 +516,9 @@ Partial Class FrmGraficasfaseuno
         Me.radChartView1.AreaDesign = CartesianArea1
         Me.radChartView1.AutoScroll = True
         Me.radChartView1.Controls.Add(Me.lblError)
-        Me.radChartView1.Location = New System.Drawing.Point(3, 66)
+        Me.radChartView1.Location = New System.Drawing.Point(3, 21)
         Me.radChartView1.Name = "radChartView1"
-        Me.radChartView1.Size = New System.Drawing.Size(1332, 331)
+        Me.radChartView1.Size = New System.Drawing.Size(1362, 457)
         Me.radChartView1.TabIndex = 9
         CType(Me.radChartView1.GetChildAt(0), Telerik.WinControls.UI.RadChartElement).DrawText = False
         CType(Me.radChartView1.GetChildAt(0), Telerik.WinControls.UI.RadChartElement).DrawFill = True
@@ -409,129 +535,6 @@ Partial Class FrmGraficasfaseuno
         Me.lblError.Text = "NO HAY DATOS A MOSTRAR."
         Me.lblError.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.lblError.Visible = False
-        '
-        'btnGraficar
-        '
-        Me.btnGraficar.Enabled = False
-        Me.btnGraficar.Image = Global.GKNSICAIP.My.Resources.Resources.frmGraficas_graficar1
-        Me.btnGraficar.ImageAlignment = System.Drawing.ContentAlignment.TopCenter
-        Me.btnGraficar.Location = New System.Drawing.Point(863, 64)
-        Me.btnGraficar.Name = "btnGraficar"
-        Me.btnGraficar.Size = New System.Drawing.Size(121, 78)
-        Me.btnGraficar.TabIndex = 8
-        Me.btnGraficar.Text = "Calcular"
-        Me.btnGraficar.TextAlignment = System.Drawing.ContentAlignment.BottomCenter
-        Me.btnGraficar.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText
-        '
-        'picboxIndicador
-        '
-        Me.picboxIndicador.Location = New System.Drawing.Point(990, 2)
-        Me.picboxIndicador.Name = "picboxIndicador"
-        Me.picboxIndicador.Size = New System.Drawing.Size(305, 179)
-        Me.picboxIndicador.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom
-        Me.picboxIndicador.TabIndex = 10
-        Me.picboxIndicador.TabStop = False
-        '
-        'RadPageView1
-        '
-        Me.RadPageView1.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-                    Or System.Windows.Forms.AnchorStyles.Left) _
-                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.RadPageView1.AutoScroll = True
-        Me.RadPageView1.Controls.Add(Me.RadPageViewPage2)
-        Me.RadPageView1.Controls.Add(Me.PageGrafica_Secundaria)
-        Me.RadPageView1.Controls.Add(Me.RadPageViewPage1)
-        Me.RadPageView1.ForeColor = System.Drawing.Color.Black
-        Me.RadPageView1.Location = New System.Drawing.Point(3, 3)
-        Me.RadPageView1.Name = "RadPageView1"
-        Me.RadPageView1.SelectedPage = Me.RadPageViewPage2
-        Me.RadPageView1.Size = New System.Drawing.Size(1340, 473)
-        Me.RadPageView1.TabIndex = 11
-        Me.RadPageView1.Text = "Tablas"
-        CType(Me.RadPageView1.GetChildAt(0), Telerik.WinControls.UI.RadPageViewStripElement).StripButtons = Telerik.WinControls.UI.StripViewButtons.None
-        '
-        'RadPageViewPage2
-        '
-        Me.RadPageViewPage2.AutoScroll = True
-        Me.RadPageViewPage2.BackColor = System.Drawing.Color.White
-        Me.RadPageViewPage2.Controls.Add(Me.RpSeguridad)
-        Me.RadPageViewPage2.Controls.Add(Me.radChartView1)
-        Me.RadPageViewPage2.Location = New System.Drawing.Point(10, 37)
-        Me.RadPageViewPage2.Name = "RadPageViewPage2"
-        Me.RadPageViewPage2.Size = New System.Drawing.Size(1319, 425)
-        Me.RadPageViewPage2.Text = "Graficas"
-        '
-        'RpSeguridad
-        '
-        Me.RpSeguridad.BackColor = System.Drawing.Color.Transparent
-        Me.RpSeguridad.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None
-        Me.RpSeguridad.Controls.Add(Me.LblAcumulado)
-        Me.RpSeguridad.Controls.Add(Me.LblMuestraResueltas)
-        Me.RpSeguridad.Controls.Add(Me.LblNuevas)
-        Me.RpSeguridad.Controls.Add(Me.LblMuestraNuevas)
-        Me.RpSeguridad.Controls.Add(Me.LblMuestaAcumulado)
-        Me.RpSeguridad.Controls.Add(Me.LblResueltas)
-        Me.RpSeguridad.Cursor = System.Windows.Forms.Cursors.Default
-        Me.RpSeguridad.ForeColor = System.Drawing.Color.Black
-        Me.RpSeguridad.Location = New System.Drawing.Point(1022, -1)
-        Me.RpSeguridad.Name = "RpSeguridad"
-        Me.RpSeguridad.Size = New System.Drawing.Size(313, 61)
-        Me.RpSeguridad.TabIndex = 10
-        Me.RpSeguridad.Visible = False
-        '
-        'LblAcumulado
-        '
-        Me.LblAcumulado.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.LblAcumulado.Location = New System.Drawing.Point(189, 4)
-        Me.LblAcumulado.Name = "LblAcumulado"
-        Me.LblAcumulado.Size = New System.Drawing.Size(97, 21)
-        Me.LblAcumulado.TabIndex = 4
-        Me.LblAcumulado.Text = "ACUMULADO:"
-        '
-        'LblMuestraResueltas
-        '
-        Me.LblMuestraResueltas.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.LblMuestraResueltas.Location = New System.Drawing.Point(120, 27)
-        Me.LblMuestraResueltas.Name = "LblMuestraResueltas"
-        Me.LblMuestraResueltas.Size = New System.Drawing.Size(2, 2)
-        Me.LblMuestraResueltas.TabIndex = 3
-        Me.LblMuestraResueltas.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter
-        '
-        'LblNuevas
-        '
-        Me.LblNuevas.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.LblNuevas.Location = New System.Drawing.Point(7, 3)
-        Me.LblNuevas.Name = "LblNuevas"
-        Me.LblNuevas.Size = New System.Drawing.Size(64, 21)
-        Me.LblNuevas.TabIndex = 0
-        Me.LblNuevas.Text = "NUEVAS:"
-        '
-        'LblMuestraNuevas
-        '
-        Me.LblMuestraNuevas.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.LblMuestraNuevas.Location = New System.Drawing.Point(33, 29)
-        Me.LblMuestraNuevas.Name = "LblMuestraNuevas"
-        Me.LblMuestraNuevas.Size = New System.Drawing.Size(2, 2)
-        Me.LblMuestraNuevas.TabIndex = 1
-        Me.LblMuestraNuevas.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter
-        '
-        'LblMuestaAcumulado
-        '
-        Me.LblMuestaAcumulado.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.LblMuestaAcumulado.Location = New System.Drawing.Point(217, 28)
-        Me.LblMuestaAcumulado.Name = "LblMuestaAcumulado"
-        Me.LblMuestaAcumulado.Size = New System.Drawing.Size(2, 2)
-        Me.LblMuestaAcumulado.TabIndex = 5
-        Me.LblMuestaAcumulado.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter
-        '
-        'LblResueltas
-        '
-        Me.LblResueltas.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.LblResueltas.Location = New System.Drawing.Point(87, 4)
-        Me.LblResueltas.Name = "LblResueltas"
-        Me.LblResueltas.Size = New System.Drawing.Size(82, 21)
-        Me.LblResueltas.TabIndex = 2
-        Me.LblResueltas.Text = "RESUELTAS:"
         '
         'PageGrafica_Secundaria
         '
@@ -605,7 +608,7 @@ Partial Class FrmGraficasfaseuno
                     Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.dgvTabla.Location = New System.Drawing.Point(3, 33)
         '
-        'dgvTabla
+        '
         '
         Me.dgvTabla.MasterTemplate.AllowAddNewRow = False
         Me.dgvTabla.MasterTemplate.HorizontalScrollState = Telerik.WinControls.UI.ScrollState.AlwaysShow
@@ -623,9 +626,9 @@ Partial Class FrmGraficasfaseuno
                     Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.RadPanel1.AutoScroll = True
         Me.RadPanel1.Controls.Add(Me.RadPageView1)
-        Me.RadPanel1.Location = New System.Drawing.Point(0, 187)
+        Me.RadPanel1.Location = New System.Drawing.Point(3, 134)
         Me.RadPanel1.Name = "RadPanel1"
-        Me.RadPanel1.Size = New System.Drawing.Size(1346, 479)
+        Me.RadPanel1.Size = New System.Drawing.Size(1355, 565)
         Me.RadPanel1.TabIndex = 12
         '
         'FrmGraficasfaseuno
@@ -677,9 +680,6 @@ Partial Class FrmGraficasfaseuno
         CType(Me.dtpFechaInicial, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.rdbtnMeses, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.rdbtnDias, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.radChartView1, System.ComponentModel.ISupportInitialize).EndInit()
-        Me.radChartView1.ResumeLayout(False)
-        Me.radChartView1.PerformLayout()
         CType(Me.btnGraficar, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.picboxIndicador, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.RadPageView1, System.ComponentModel.ISupportInitialize).EndInit()
@@ -695,6 +695,9 @@ Partial Class FrmGraficasfaseuno
         CType(Me.LblMuestraNuevas, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.LblMuestaAcumulado, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.LblResueltas, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.radChartView1, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.radChartView1.ResumeLayout(False)
+        Me.radChartView1.PerformLayout()
         Me.PageGrafica_Secundaria.ResumeLayout(False)
         CType(Me.CharSecundario, System.ComponentModel.ISupportInitialize).EndInit()
         Me.RadPageViewPage1.ResumeLayout(False)
@@ -731,12 +734,10 @@ Partial Class FrmGraficasfaseuno
     Friend WithEvents dtpFechaFinal As Telerik.WinControls.UI.RadDateTimePicker
     Friend WithEvents btnGraficar As Telerik.WinControls.UI.RadButton
     Friend WithEvents chkTodasLineas As Telerik.WinControls.UI.RadCheckBox
-    Friend WithEvents radChartView1 As Telerik.WinControls.UI.RadChartView
     Friend WithEvents cbxCadenaValor As System.Windows.Forms.ComboBox
     Friend WithEvents cbxLinea As System.Windows.Forms.ComboBox
     Friend WithEvents cbxEquipo As System.Windows.Forms.ComboBox
     Friend WithEvents cbxComponente As System.Windows.Forms.ComboBox
-    Friend WithEvents lblError As System.Windows.Forms.Label
     Friend WithEvents picboxIndicador As System.Windows.Forms.PictureBox
     Friend WithEvents RadPageView1 As Telerik.WinControls.UI.RadPageView
     Friend WithEvents RadPageViewPage1 As Telerik.WinControls.UI.RadPageViewPage
@@ -749,7 +750,6 @@ Partial Class FrmGraficasfaseuno
     Friend WithEvents PageGrafica_Secundaria As Telerik.WinControls.UI.RadPageViewPage
     Friend WithEvents CharSecundario As Telerik.WinControls.UI.RadChartView
     Friend WithEvents sfdExportaExcel As System.Windows.Forms.SaveFileDialog
-
     Friend WithEvents RpSeguridad As Telerik.WinControls.UI.RadPanel
     Friend WithEvents LblAcumulado As Telerik.WinControls.UI.RadLabel
     Friend WithEvents LblMuestraResueltas As Telerik.WinControls.UI.RadLabel
@@ -757,6 +757,9 @@ Partial Class FrmGraficasfaseuno
     Friend WithEvents LblMuestraNuevas As Telerik.WinControls.UI.RadLabel
     Friend WithEvents LblMuestaAcumulado As Telerik.WinControls.UI.RadLabel
     Friend WithEvents LblResueltas As Telerik.WinControls.UI.RadLabel
+    Friend WithEvents radChartView1 As Telerik.WinControls.UI.RadChartView
+    Friend WithEvents lblError As System.Windows.Forms.Label
+
 
 End Class
 
