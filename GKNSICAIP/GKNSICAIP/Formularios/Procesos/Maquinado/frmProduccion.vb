@@ -488,6 +488,7 @@ Public Class frmProduccion
                             llena_cbx_Maquinas()
                             llena_informacion_tabs_formulario()
                             establece_label_fecha_captura()
+                            Me.grpCondInseg.Enabled = False
                         End If
                     Else
                         establece_dia_laboral()
@@ -1057,6 +1058,7 @@ Public Class frmProduccion
         flgBanderaModificacionPermiso = True
         If flgBanderaModificacionPermiso Then
             establece_hora_inicio_fin_captura()
+
         End If
         inicializa_formulario()
         'End If
@@ -2494,6 +2496,8 @@ Public Class frmProduccion
         btnModModificar.Enabled = True
         cldrModificaciones.Enabled = True
         cldrModificaciones.SelectedDate = Now
+        Me.grpCondInseg.Enabled = True
+
         inicializa_formulario()
     End Sub
 #End Region

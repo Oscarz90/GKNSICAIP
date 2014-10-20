@@ -674,6 +674,7 @@ Public Class FrmGraficasfaseuno
 
 
         Me.radChartView1.ShowToolTip = True
+      
 
         radChartView1.Series.Add(BarSeries1)
         'radChartView1.Series.Add(BarSeries2)
@@ -689,6 +690,15 @@ Public Class FrmGraficasfaseuno
 
         BarSeries1.LabelMode = BarLabelModes.Top
         'BarSeries2.LabelMode = BarLabelModes.Top
+
+        For Each controller As ChartViewController In Me.radChartView1.Controllers
+            Dim control As SmartLabelsController = TryCast(controller, SmartLabelsController)
+            If control IsNot Nothing Then
+                control.Strategy.DistanceToLabel = CInt(Fix(10.0))
+                Me.radChartView1.View.PerformRefresh(Me.radChartView1.View, False)
+            End If
+        Next controller
+
 
     End Sub
 
@@ -1034,6 +1044,9 @@ Public Class FrmGraficasfaseuno
         BarSeries2.Palette = New PaletteEntry(Color.FromArgb(37, 64, 97))
 
         Me.radChartView1.ShowToolTip = True
+
+       
+
         Me.radChartView1.Series.Add(BarSeries1)
         Me.radChartView1.Series.Add(BarSeries2)
 
@@ -1309,14 +1322,16 @@ Public Class FrmGraficasfaseuno
         End If
         Me.radChartView1.ShowToolTip = True
 
+        If vNivel <> 5 Then
+            radChartView1.Series.Add(LineSeries1)
+        End If
+
         radChartView1.Series.Add(BarSeries1)
         radChartView1.Series.Add(BarSeries2)
         radChartView1.Series.Add(BarSeries3)
         radChartView1.Series.Add(BarSeries4)
 
-        If vNivel <> 5 Then
-            radChartView1.Series.Add(LineSeries1)
-        End If
+       
 
         If vNivel <> 5 Then
             LineSeries1.CombineMode = ChartSeriesCombineMode.None
@@ -1325,6 +1340,15 @@ Public Class FrmGraficasfaseuno
             BarSeries3.CombineMode = ChartSeriesCombineMode.Cluster
             BarSeries4.CombineMode = ChartSeriesCombineMode.Cluster
         End If
+
+
+        For Each controller As ChartViewController In Me.radChartView1.Controllers
+            Dim control As SmartLabelsController = TryCast(controller, SmartLabelsController)
+            If control IsNot Nothing Then
+                control.Strategy.DistanceToLabel = CInt(Fix(2.0))
+                Me.radChartView1.View.PerformRefresh(Me.radChartView1.View, False)
+            End If
+        Next controller
 
     End Sub
 
@@ -1409,7 +1433,7 @@ Public Class FrmGraficasfaseuno
         Dim vCve_CadenaValor As Integer = 0
         Dim vNivel As Integer = 0
         Dim vF_Inicial As DateTime = Date.Now
-        Dim vF_Final As DateTime = Date.Now
+        Dim vF_Final As DateTime = Date.Now        
 
         ''Obtencion de Datos
         vF_Inicial = dtpFechaInicial.Value
@@ -1443,8 +1467,10 @@ Public Class FrmGraficasfaseuno
         'vDatos_Obtenidos.Clear()
         'vDatos_Obtenidos.Dispose()
 
+
         ''Obtencion de Informacion
         vDatos_Obtenidos = oG_Fase2.Obten_Gente(vF_Inicial, vF_Final, vCve_Equipo, vCve_Linea, vCve_Componente, vCve_CadenaValor, vFormato_Resultado, vNivel)
+
 
         'Creacion series
         Dim BarSeries2_Faltas As New BarSeries() With {.LegendTitle = "faltas"}
@@ -1455,6 +1481,8 @@ Public Class FrmGraficasfaseuno
         If vNivel <> 5 Then
             LineSeries1.LegendTitle = "Objetivo Gente"
         End If
+
+
 
         Me.radChartView1.ShowLegend = True
 
@@ -1545,21 +1573,20 @@ Public Class FrmGraficasfaseuno
             BarSeries2_Faltas.ShowLabels = True
             Barserie_Respaldo.ShowLabels = True
 
-            BarSeries2_Faltas.LabelMode = BarLabelModes.Top
-            Barserie_Respaldo.LabelMode = BarLabelModes.Top
+            BarSeries2_Faltas.LabelMode = BarLabelModes.Center
+            Barserie_Respaldo.LabelMode = BarLabelModes.Center
         End If
 
         BarSeries2_Faltas.LabelFormat = "{0:###}"
-        'BarSeries3.LabelFormat = "{0:###}"
+        Barserie_Respaldo.LabelFormat = "{0:###}"
         If vNivel <> 0 Or vNivel <> 5 Then
             LineSeries1.LabelFormat = "{0:###}"
         End If
-        'MsgBox("exito")
 
         Barserie_Respaldo.HorizontalAxis = CategoricalAxis1
         Barserie_Respaldo.VerticalAxis = LinearAxis1
         BarSeries2_Faltas.HorizontalAxis = CategoricalAxis1
-        BarSeries2_Faltas.VerticalAxis = LinearAxis1
+        'BarSeries2_Faltas.VerticalAxis = LinearAxis1
 
         If vNivel <> 5 Then
             LineSeries1.HorizontalAxis = CategoricalAxis1
@@ -1578,14 +1605,13 @@ Public Class FrmGraficasfaseuno
         Me.radChartView1.ShowTrackBall = True
         Me.radChartView1.ShowToolTip = True
 
+        Me.radChartView1.Series.Clear()
 
-        radChartView1.Series.Add(BarSeries2_Faltas)
-        radChartView1.Series.Add(Barserie_Respaldo)
-        'MsgBox("exito")
-
+        Me.radChartView1.Series.Add(Barserie_Respaldo)
+        Me.radChartView1.Series.Add(BarSeries2_Faltas)            
 
         If vNivel <> 5 Then
-            radChartView1.Series.Add(LineSeries1)
+            Me.radChartView1.Series.Add(LineSeries1)
         End If
       
 
@@ -1593,17 +1619,27 @@ Public Class FrmGraficasfaseuno
             LineSeries1.CombineMode = ChartSeriesCombineMode.None
             BarSeries2_Faltas.CombineMode = ChartSeriesCombineMode.Stack
             Barserie_Respaldo.CombineMode = ChartSeriesCombineMode.Stack
+        Else
+            BarSeries2_Faltas.CombineMode = ChartSeriesCombineMode.Stack
+            Barserie_Respaldo.CombineMode = ChartSeriesCombineMode.Stack
         End If
-        If vNivel = 5 Then
-            For i As Integer = 0 To Me.radChartView1.Series.Count - 1
-                Me.radChartView1.GetSeries(Of BarSeries)(i).CombineMode = ChartSeriesCombineMode.Stack
-            Next i
-        End If
+        'If vNivel = 5 Then
+        '    For i As Integer = 0 To Me.radChartView1.Series.Count - 1
+        '        Me.radChartView1.GetSeries(Of BarSeries)(i).CombineMode = ChartSeriesCombineMode.Stack
+        '    Next i
+        'End If
 
         If (LinearAxis1.ActualRange.Maximum = 0) Then
             LinearAxis1.Maximum = 5
         End If
 
+        For Each controller As ChartViewController In Me.radChartView1.Controllers
+            Dim control As SmartLabelsController = TryCast(controller, SmartLabelsController)
+            If control IsNot Nothing Then
+                control.Strategy.DistanceToLabel = CInt(Fix(2.0))
+                Me.radChartView1.View.PerformRefresh(Me.radChartView1.View, False)
+            End If
+        Next controller
 
     End Sub
 
@@ -1846,6 +1882,15 @@ Public Class FrmGraficasfaseuno
         If (LinearAxis1.ActualRange.Maximum = 0) Then
             LinearAxis1.Maximum = 5
         End If
+
+        For Each controller As ChartViewController In Me.radChartView1.Controllers
+            Dim control As SmartLabelsController = TryCast(controller, SmartLabelsController)
+            If control IsNot Nothing Then
+                control.Strategy.DistanceToLabel = CInt(Fix(2.0))
+                Me.radChartView1.View.PerformRefresh(Me.radChartView1.View, False)
+            End If
+        Next controller
+
     End Sub
 
     Private Sub Obtiene_Reporte_Seguridad(ByVal vEsResumen As Boolean)
@@ -2103,12 +2148,13 @@ Public Class FrmGraficasfaseuno
         Me.radChartView1.ShowTrackBall = True
         Me.radChartView1.ShowToolTip = True
 
-
-        radChartView1.Series.Add(BarSeries1)
         'Chartview
+        
+        radChartView1.Series.Add(BarSeries1)
         ''If vNivel <> 5 Then
         radChartView1.Series.Add(LineSeries3)
         ''End If
+       
 
         BarSeries1.CombineMode = ChartSeriesCombineMode.Cluster
         ''If vNivel <> 5 Then
@@ -2118,6 +2164,15 @@ Public Class FrmGraficasfaseuno
         If (LinearAxis1.ActualRange.Maximum = 0) Then
             LinearAxis1.Maximum = 5
         End If
+
+        For Each controller As ChartViewController In Me.radChartView1.Controllers
+            Dim control As SmartLabelsController = TryCast(controller, SmartLabelsController)
+            If control IsNot Nothing Then
+                control.Strategy.DistanceToLabel = CInt(Fix(2.0))
+                Me.radChartView1.View.PerformRefresh(Me.radChartView1.View, False)
+            End If
+        Next controller
+
     End Sub
 
     Private Sub Grafica_Costo(ByVal vNivel As Integer, ByVal vDatos_Obtenidos As DataTable)
