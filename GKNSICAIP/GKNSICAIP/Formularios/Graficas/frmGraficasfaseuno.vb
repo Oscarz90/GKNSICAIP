@@ -532,20 +532,18 @@ Public Class FrmGraficasfaseuno
         ElseIf rdbtnPlanta.IsChecked = True Then ''---Nivel Planta
             vNivel = 5
         End If
-        ''Obtencion de Informacion
-        vDatos_Obtenidos = oG_Fase2.Obten_OEE(vF_Inicial, vF_Final, vCve_Equipo, vCve_Linea, vCve_Componente, vCve_CadenaValor, vFormato_Resultado, vNivel)
 
+        'Obtencion de Informacion
+        vDatos_Obtenidos = oG_Fase2.Obten_OEE(vF_Inicial, vF_Final, vCve_Equipo, vCve_Linea, vCve_Componente, vCve_CadenaValor, vFormato_Resultado, vNivel)
 
         'Creacion series
         Dim BarSeries1 As New BarSeries() With {.LegendTitle = "Oee"}
-        ' Dim BarSeries2 As New BarSeries() With {.LegendTitle = "Acumulado"}
         Dim LineSeries1 As New LineSeries()
 
         ''El nivel Planta no lleva esta serie
         If vNivel <> 5 Then
             LineSeries1.LegendTitle = "Objetivo Oee"
         End If
-
 
         Me.radChartView1.ShowLegend = True
         Me.radChartView1.ShowSmartLabels = True
@@ -581,27 +579,16 @@ Public Class FrmGraficasfaseuno
         Dim vOEE_Acumulado As Double = 0
         Dim vObjetivo_Acumulado As Double = 0
 
-        'Dim vUltimo_Registro As Integer = 0
-        'Dim vUltimo_acumulado As Integer = 0
-        'vUltimo_Registro = vDT.Rows.Count - 1
-        'vUltimo_acumulado = vDT.Rows(vUltimo_Registro).Item("acumulado")
         Dim vDiaAsignado As DateTime
 
         For Each vDR As DataRow In vDT.Rows
             If vContador = 1 Then
-                If vDR("dia_asignado") = "ACUMULADO" Then
-                    vOEE_Acumulado = vDR("oee")
-                    vObjetivo_Acumulado = vDR("objetivo")
-                Else
-                    vDiaAsignado = DateTime.Parse(vDR("dia_asignado"))
-                    BarSeries1.DataPoints.Add(New CategoricalDataPoint(vDR("oee"), vDiaAsignado))
-                    vOEE_Acumulado = vDR("oee")
-                End If
-
+                vOEE_Acumulado = vDR("oee")
+                vObjetivo_Acumulado = vDR("objetivo")
             Else
                 vDiaAsignado = DateTime.Parse(vDR("dia_asignado"))
                 BarSeries1.DataPoints.Add(New CategoricalDataPoint(vDR("oee"), vDiaAsignado))
-                If vNivel <> 5 Then ''El nivel Planta no lleva esta serie
+                If vNivel <> 5 Then
                     If Not IsDBNull(vDR("objetivo")) Then
                         LineSeries1.DataPoints.Add(New CategoricalDataPoint(vDR("objetivo"), vDiaAsignado))
                     End If
@@ -609,10 +596,9 @@ Public Class FrmGraficasfaseuno
             End If
             vContador = vContador + 1
         Next
-        ''Acumulado
-        'BarSeries2.DataPoints.Add(New CategoricalDataPoint(vOEE_Acumulado, "Acumulado"))
+        'Acumulado
         BarSeries1.DataPoints.Add(New CategoricalDataPoint(vOEE_Acumulado, "Acumulado"))
-        LineSeries1.DataPoints.Add(New CategoricalDataPoint(vObjetivo_Acumulado, ""))
+        LineSeries1.DataPoints.Add(New CategoricalDataPoint(vObjetivo_Acumulado, "Acumulado"))
 
         'Cartesian Area, CategoricalAxis, LinearAxis
         Dim CartesianArea1 As CartesianArea = New CartesianArea()
@@ -640,56 +626,44 @@ Public Class FrmGraficasfaseuno
         LinearAxis1.Title = "% Oee"
 
         BarSeries1.ShowLabels = True
-        'BarSeries2.ShowLabels = True
-
         BarSeries1.LabelFormat = "{0:##}" ' & " %"
-        'BarSeries2.LabelFormat = "{0:##}" '& " %"
+
         If vNivel <> 5 Then ''El nivel Planta no lleva esta serie
             LineSeries1.LabelFormat = "{0:##.#}" '& " %"
         End If
 
-
         BarSeries1.Font = New Font("Segoe UI", 11)
-        'BarSeries2.Font = New Font("Segoe UI", 11)
 
         BarSeries1.HorizontalAxis = CategoricalAxis1
         If vNivel <> 5 Then ''El nivel Planta no lleva esta serie
             LineSeries1.HorizontalAxis = CategoricalAxis1
         End If
 
-
         BarSeries1.VerticalAxis = LinearAxis1
         If vNivel <> 5 Then ''El nivel Planta no lleva esta serie
             LineSeries1.VerticalAxis = LinearAxis1
         End If
 
-
         BarSeries1.Palette = New PaletteEntry(Color.FromArgb(255, 205, 47))
-        'BarSeries2.Palette = New PaletteEntry(Color.FromArgb(246, 172, 38))
 
         If vNivel <> 5 Then ''El nivel Planta no lleva esta serie
             LineSeries1.Palette = New PaletteEntry(Color.FromArgb(202, 0, 0))
             LineSeries1.BorderColor = Color.FromArgb(202, 0, 0)
         End If
 
-
         Me.radChartView1.ShowToolTip = True
-      
 
-        radChartView1.Series.Add(BarSeries1)
-        'radChartView1.Series.Add(BarSeries2)
         If vNivel <> 5 Then ''El nivel Planta no lleva esta serie
             radChartView1.Series.Add(LineSeries1)
         End If
+        radChartView1.Series.Add(BarSeries1)
 
-        If vNivel <> 5 Then ''El nivel Planta no lleva esta serie
+        If vNivel <> 5 Then
             BarSeries1.CombineMode = ChartSeriesCombineMode.None
-            'BarSeries2.CombineMode = ChartSeriesCombineMode.None
             LineSeries1.CombineMode = ChartSeriesCombineMode.None
         End If
 
         BarSeries1.LabelMode = BarLabelModes.Top
-        'BarSeries2.LabelMode = BarLabelModes.Top
 
         For Each controller As ChartViewController In Me.radChartView1.Controllers
             Dim control As SmartLabelsController = TryCast(controller, SmartLabelsController)
@@ -900,7 +874,6 @@ Public Class FrmGraficasfaseuno
 
         'Creacion series
         Dim BarSeries1 As New BarSeries() With {.LegendTitle = "nrfti"}
-        Dim BarSeries2 As New BarSeries() With {.LegendTitle = "Acumulado"}
         Dim LineSeries1 As New LineSeries()
 
         If vNivel <> 5 Then
@@ -912,7 +885,6 @@ Public Class FrmGraficasfaseuno
         BarSeries1.DrawLinesToLabels = True
         BarSeries1.SyncLinesToLabelsColor = True
         BarSeries1.Font = New Font("Segoe UI", 11)
-        BarSeries2.Font = New Font("Segoe UI", 11)
 
         'Obtencion Datos Oee
         Dim vDT As New DataTable
@@ -962,7 +934,6 @@ Public Class FrmGraficasfaseuno
                     If vContador = 1 Then
                         vAcumulado = vDR("objetivo")
                         vNrftiAcum = vDR("nrfti")
-                        ''BarSeries2.DataPoints.Add(New CategoricalDataPoint(vDR("nrfti"), "Acumulado"))
                     Else
                         vDiaAsignado = DateTime.Parse(vDR("dia_asignado"))
                         BarSeries1.DataPoints.Add(New CategoricalDataPoint(vDR("nrfti"), vDiaAsignado))
@@ -973,9 +944,8 @@ Public Class FrmGraficasfaseuno
                 End If
                 vContador = vContador + 1
             Next
-            ''LineSeries1.DataPoints.Add(New CategoricalDataPoint(vAcumulado, ""))
             BarSeries1.DataPoints.Add(New CategoricalDataPoint(vNrftiAcum, "Acumulado"))
-            LineSeries1.DataPoints.Add(New CategoricalDataPoint(vAcumulado, ""))
+            LineSeries1.DataPoints.Add(New CategoricalDataPoint(vAcumulado, "Acumulado"))
 
         ElseIf vNivel = 2 Or vNivel = 3 Or vNivel = 4 Then
 
@@ -983,7 +953,6 @@ Public Class FrmGraficasfaseuno
                 If vContador = 1 Then
                     vNrftiAcum = vDR("nrfti")
                     vAcumulado = vDR("objetivo")
-                    ''BarSeries2.DataPoints.Add(New CategoricalDataPoint(vDR("nrfti"), "Acumulado"))
                 Else
                     vDiaAsignado = DateTime.Parse(vDR("dia_asignado"))
                     BarSeries1.DataPoints.Add(New CategoricalDataPoint(vDR("nrfti"), vDiaAsignado))
@@ -994,13 +963,12 @@ Public Class FrmGraficasfaseuno
                 vContador = vContador + 1
             Next
             BarSeries1.DataPoints.Add(New CategoricalDataPoint(vNrftiAcum, "Acumulado"))
-            LineSeries1.DataPoints.Add(New CategoricalDataPoint(vAcumulado, ""))
+            LineSeries1.DataPoints.Add(New CategoricalDataPoint(vAcumulado, "Acumulado"))
 
         ElseIf vNivel = 5 Then
             For Each vDR As DataRow In vDT.Rows
                 If vContador = 1 Then
                     vNrftiAcum = vDR("nrfti")
-                    ''BarSeries2.DataPoints.Add(New CategoricalDataPoint(vDR("nrfti"), "Acumulado"))
                 Else
                     vDiaAsignado = DateTime.Parse(vDR("dia_asignado"))
                     BarSeries1.DataPoints.Add(New CategoricalDataPoint(vDR("nrfti"), vDiaAsignado))
@@ -1033,22 +1001,14 @@ Public Class FrmGraficasfaseuno
         LinearAxis1.AxisType = AxisType.Second
         LinearAxis1.Title = "NRFTi (PPM'S)"
         BarSeries1.ShowLabels = True
-        BarSeries2.ShowLabels = True
 
         BarSeries1.LabelFormat = "{0:#,###}"
-        BarSeries2.LabelFormat = "{0:#,###}"
 
         BarSeries1.HorizontalAxis = CategoricalAxis1
         BarSeries1.VerticalAxis = LinearAxis1
         BarSeries1.Palette = New PaletteEntry(Color.FromArgb(55, 96, 146))
-        BarSeries2.Palette = New PaletteEntry(Color.FromArgb(37, 64, 97))
 
         Me.radChartView1.ShowToolTip = True
-
-       
-
-        Me.radChartView1.Series.Add(BarSeries1)
-        Me.radChartView1.Series.Add(BarSeries2)
 
         If vNivel <> 5 Then
             LineSeries1.LabelFormat = "{0:##,###}"
@@ -1059,14 +1019,13 @@ Public Class FrmGraficasfaseuno
             radChartView1.Series.Add(LineSeries1)
             LineSeries1.CombineMode = ChartSeriesCombineMode.None
         End If
+        Me.radChartView1.Series.Add(BarSeries1)
 
         If vNivel <> 5 Then
             BarSeries1.CombineMode = ChartSeriesCombineMode.None
-            BarSeries2.CombineMode = ChartSeriesCombineMode.None
         End If
 
         BarSeries1.LabelMode = BarLabelModes.Top
-        BarSeries2.LabelMode = BarLabelModes.Top
 
         If (LinearAxis1.ActualRange.Maximum = 0) Then
             LinearAxis1.Maximum = 5
@@ -1331,8 +1290,6 @@ Public Class FrmGraficasfaseuno
         radChartView1.Series.Add(BarSeries3)
         radChartView1.Series.Add(BarSeries4)
 
-       
-
         If vNivel <> 5 Then
             LineSeries1.CombineMode = ChartSeriesCombineMode.None
             BarSeries1.CombineMode = ChartSeriesCombineMode.Cluster
@@ -1340,7 +1297,6 @@ Public Class FrmGraficasfaseuno
             BarSeries3.CombineMode = ChartSeriesCombineMode.Cluster
             BarSeries4.CombineMode = ChartSeriesCombineMode.Cluster
         End If
-
 
         For Each controller As ChartViewController In Me.radChartView1.Controllers
             Dim control As SmartLabelsController = TryCast(controller, SmartLabelsController)
@@ -1403,11 +1359,6 @@ Public Class FrmGraficasfaseuno
         Me.dgvTabla.Columns("objetivo").Width = 80
         Me.dgvTabla.Columns("objetivo").Name = "objetivo"
 
-        'Me.dgvTabla.Columns("comentarios").HeaderText = "COMENTARIOS"
-        'Me.dgvTabla.Columns("comentarios").Width = 300
-        'Me.dgvTabla.Columns("comentarios").Name = "comentarios"
-
-
 
         Me.dgvTabla.Columns("planta").IsVisible = True
         Me.dgvTabla.Columns("cadena_valor").IsVisible = True
@@ -1464,13 +1415,8 @@ Public Class FrmGraficasfaseuno
             vNivel = 5
         End If
 
-        'vDatos_Obtenidos.Clear()
-        'vDatos_Obtenidos.Dispose()
-
-
         ''Obtencion de Informacion
         vDatos_Obtenidos = oG_Fase2.Obten_Gente(vF_Inicial, vF_Final, vCve_Equipo, vCve_Linea, vCve_Componente, vCve_CadenaValor, vFormato_Resultado, vNivel)
-
 
         'Creacion series
         Dim BarSeries2_Faltas As New BarSeries() With {.LegendTitle = "faltas"}
@@ -1481,8 +1427,6 @@ Public Class FrmGraficasfaseuno
         If vNivel <> 5 Then
             LineSeries1.LegendTitle = "Objetivo Gente"
         End If
-
-
 
         Me.radChartView1.ShowLegend = True
 
@@ -1525,8 +1469,7 @@ Public Class FrmGraficasfaseuno
                 vRetardos_Aux = vDR("retardos")
                 vObjetivo = vDR("objetivo")
             Else
-                vDiaAsignado = DateTime.Parse(vDR("dia_asignado")) ''falta dar formato dd/mm/yyyy
-
+                vDiaAsignado = DateTime.Parse(vDR("dia_asignado"))
                 BarSeries2_Faltas.DataPoints.Add(New CategoricalDataPoint(vDR("faltas"), vDiaAsignado))
                 Barserie_Respaldo.DataPoints.Add(New CategoricalDataPoint(vDR("retardos"), vDiaAsignado))
                 If vNivel <> 5 Then
@@ -1537,11 +1480,11 @@ Public Class FrmGraficasfaseuno
             End If
             vContador = vContador + 1
         Next
-
         BarSeries2_Faltas.DataPoints.Add(New CategoricalDataPoint(vFaltas_Aux, "Acumulado"))
         Barserie_Respaldo.DataPoints.Add(New CategoricalDataPoint(vRetardos_Aux, "Acumulado"))
+
         If vNivel <> 5 Then
-            LineSeries1.DataPoints.Add(New CategoricalDataPoint(vObjetivo, ""))
+            LineSeries1.DataPoints.Add(New CategoricalDataPoint(vObjetivo, "Acumulado"))
         End If
 
         'Cartesian Area, CategoricalAxis, LinearAxis
@@ -1607,12 +1550,12 @@ Public Class FrmGraficasfaseuno
 
         Me.radChartView1.Series.Clear()
 
-        Me.radChartView1.Series.Add(Barserie_Respaldo)
-        Me.radChartView1.Series.Add(BarSeries2_Faltas)            
 
         If vNivel <> 5 Then
             Me.radChartView1.Series.Add(LineSeries1)
         End If
+        Me.radChartView1.Series.Add(Barserie_Respaldo)
+        Me.radChartView1.Series.Add(BarSeries2_Faltas)
       
 
         If vNivel <> 5 Then
@@ -2037,10 +1980,10 @@ Public Class FrmGraficasfaseuno
         'Creacion series
         Dim BarSeries1 As New BarSeries() With {.LegendTitle = "Min. Reales"}
         Dim LineSeries3 As New LineSeries()
-        If vNivel <> 5 Then
-            LineSeries3.LegendTitle = "Objetivo mins"
-            Me.radChartView1.ShowLegend = True
-        End If
+        ''If vNivel <> 5 Then
+        LineSeries3.LegendTitle = "Objetivo mins"
+        Me.radChartView1.ShowLegend = True
+        ''End If
 
         'Obtencion Datos
         Dim vDT As DataTable = vDatos_Obtenidos
@@ -2054,31 +1997,16 @@ Public Class FrmGraficasfaseuno
             habilita_etiqueta_datos()
             Me.radChartView1.Title = ""
         Else
-            'If vNivel = 0 Then
-            '    Me.radChartView1.Title = String.Format("Costo {0} - {1}", cbxEquipo.Text, cbxLinea.Text)
-            'ElseIf vNivel = 1 Then
-            '    Me.radChartView1.Title = "Costo " & cbxEquipo.Text
-            'ElseIf vNivel = 2 Then
-            '    Me.radChartView1.Title = "Costo " & cbxLinea.Text
-            'ElseIf vNivel = 3 Then
-            '    Me.radChartView1.Title = "Costo " & cbxComponente.Text
-            'ElseIf vNivel = 4 Then
-            '    Me.radChartView1.Title = "Costo " & cbxCadenaValor.Text
-            'ElseIf vNivel = 5 Then
-            '    Me.radChartView1.Title = "Costo Planta GKN Driveline México"
-            'End If
             Me.radChartView1.Title = "Tiempo CDM"
         End If
         Dim vMin_Program_Aux As Integer = 0
         Dim vObjetivo_tcdm_Aux As Integer = 0
         Dim vDiaAsignado As DateTime
-        '  Dim vObjetivo_Aux As Double = 0
 
         For Each vDR As DataRow In vDT.Rows
             If 1 = vContador Then
                 vMin_Program_Aux = vDR("mins_reales")
                 vObjetivo_tcdm_Aux = vDR("objetivo_tcdm")
-                'vObjetivo_Aux = vDR("objetivo_tcdm")
             Else
                 vDiaAsignado = DateTime.Parse(vDR("dia_asignado"))
                 BarSeries1.DataPoints.Add(New CategoricalDataPoint(vDR("mins_reales"), vDiaAsignado))
@@ -2090,11 +2018,9 @@ Public Class FrmGraficasfaseuno
             End If
             vContador = vContador + 1
         Next
-
+        'Acumulado
         BarSeries1.DataPoints.Add(New CategoricalDataPoint(vMin_Program_Aux, "acumulado"))
-        ''If vNivel <> 5 Then
-        LineSeries3.DataPoints.Add(New CategoricalDataPoint(vObjetivo_tcdm_Aux, ""))
-        ''End If
+        LineSeries3.DataPoints.Add(New CategoricalDataPoint(vObjetivo_tcdm_Aux, "acumulado"))
 
         'Cartesian Area
         Dim CartesianArea1 As CartesianArea = New CartesianArea()
@@ -2118,7 +2044,7 @@ Public Class FrmGraficasfaseuno
         ElseIf rdbtnMeses.IsChecked Then
             CategoricalAxis1.LabelFormat = "{0:MMM - yyyy}"
         End If
-        'Series
+        'Series Etiqueta color blanco
         BarSeries1.ForeColor = Color.White
         BarSeries1.ShowLabels = True
         BarSeries1.LabelMode = BarLabelModes.Center
@@ -2149,17 +2075,16 @@ Public Class FrmGraficasfaseuno
         Me.radChartView1.ShowToolTip = True
 
         'Chartview
-        
+        If vNivel <> 5 Then
+            radChartView1.Series.Add(LineSeries3)
+        End If
         radChartView1.Series.Add(BarSeries1)
-        ''If vNivel <> 5 Then
-        radChartView1.Series.Add(LineSeries3)
-        ''End If
-       
 
-        BarSeries1.CombineMode = ChartSeriesCombineMode.Cluster
-        ''If vNivel <> 5 Then
-        LineSeries3.CombineMode = ChartSeriesCombineMode.None
-        ''End If
+        If vNivel <> 5 Then
+            LineSeries3.CombineMode = ChartSeriesCombineMode.None
+        Else
+            BarSeries1.CombineMode = ChartSeriesCombineMode.None
+        End If
 
         If (LinearAxis1.ActualRange.Maximum = 0) Then
             LinearAxis1.Maximum = 5
@@ -2179,10 +2104,10 @@ Public Class FrmGraficasfaseuno
         'Creacion series
         Dim LineSeries1 As New LineSeries() With {.LegendTitle = "Costo"}
         Dim LineSeries3 As New LineSeries()
-        If vNivel <> 5 Then
-            LineSeries3.LegendTitle = "Objetivo Costo"
-            Me.CharSecundario.ShowLegend = True
-        End If
+        ''If vNivel <> 5 Then
+        LineSeries3.LegendTitle = "Objetivo Costo"
+        Me.CharSecundario.ShowLegend = True
+        ''End If
 
         'Obtencion Datos
         Dim vDT As DataTable = vDatos_Obtenidos
@@ -2196,35 +2121,16 @@ Public Class FrmGraficasfaseuno
             habilita_etiqueta_datos()
             Me.CharSecundario.Title = ""
         Else
-            'If vNivel = 0 Then
-            '    Me.radChartView1.Title = String.Format("Costo {0} - {1}", cbxEquipo.Text, cbxLinea.Text)
-            'ElseIf vNivel = 1 Then
-            '    Me.radChartView1.Title = "Costo " & cbxEquipo.Text
-            'ElseIf vNivel = 2 Then
-            '    Me.radChartView1.Title = "Costo " & cbxLinea.Text
-            'ElseIf vNivel = 3 Then
-            '    Me.radChartView1.Title = "Costo " & cbxComponente.Text
-            'ElseIf vNivel = 4 Then
-            '    Me.radChartView1.Title = "Costo " & cbxCadenaValor.Text
-            'ElseIf vNivel = 5 Then
-            '    Me.radChartView1.Title = "Costo Planta GKN Driveline México"
-            'End If
             Me.radChartView1.Title = "Tiempo CDM"
-
         End If
-        Dim vMin_Program_Aux As Integer = 0
-        Dim vMin_Excedentes_Aux As Integer = 0
+
         Dim vCosto_Aux As Integer = 0
-        Dim vObjetivo_tcdm_Aux As Integer = 0
         Dim vObjetivo_Aux As Double = 0
         Dim vDiaAsignado As DateTime
 
         For Each vDR As DataRow In vDT.Rows
             If 1 = vContador Then
-                vMin_Program_Aux = vDR("mins_programados")
-                vMin_Excedentes_Aux = vDR("mins_excedentes")
                 vCosto_Aux = vDR("costo")
-                vObjetivo_tcdm_Aux = vDR("objetivo_tcdm")
                 vObjetivo_Aux = vDR("objetivo")
             Else
                 vDiaAsignado = DateTime.Parse(vDR("dia_asignado"))
@@ -2237,9 +2143,9 @@ Public Class FrmGraficasfaseuno
             End If
             vContador = vContador + 1
         Next
-
+        'Acumulado
         LineSeries1.DataPoints.Add(New CategoricalDataPoint(vCosto_Aux, "acumulado"))
-        LineSeries3.DataPoints.Add(New CategoricalDataPoint(vObjetivo_Aux, ""))
+        LineSeries3.DataPoints.Add(New CategoricalDataPoint(vObjetivo_Aux, "acumulado"))
 
         'Cartesian Area
         Dim CartesianArea1 As CartesianArea = New CartesianArea()
@@ -2297,10 +2203,20 @@ Public Class FrmGraficasfaseuno
             CharSecundario.Series.Add(LineSeries3)
         End If
 
-        LineSeries1.CombineMode = ChartSeriesCombineMode.None
         If vNivel <> 5 Then
             LineSeries3.CombineMode = ChartSeriesCombineMode.None
+        Else
+            LineSeries1.CombineMode = ChartSeriesCombineMode.None
         End If
+
+        For Each controller As ChartViewController In Me.radChartView1.Controllers
+            Dim control As SmartLabelsController = TryCast(controller, SmartLabelsController)
+            If control IsNot Nothing Then
+                control.Strategy.DistanceToLabel = CInt(Fix(2.0))
+                Me.radChartView1.View.PerformRefresh(Me.radChartView1.View, False)
+            End If
+        Next controller
+
     End Sub
 
     Private Sub Obtiene_Reporte_Costo()

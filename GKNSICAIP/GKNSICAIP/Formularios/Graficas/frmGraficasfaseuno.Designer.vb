@@ -22,8 +22,8 @@ Partial Class FrmGraficasfaseuno
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Dim CartesianArea3 As Telerik.WinControls.UI.CartesianArea = New Telerik.WinControls.UI.CartesianArea()
         Dim CartesianArea1 As Telerik.WinControls.UI.CartesianArea = New Telerik.WinControls.UI.CartesianArea()
-        Dim CartesianArea2 As Telerik.WinControls.UI.CartesianArea = New Telerik.WinControls.UI.CartesianArea()
         Me.RadGroupBox1 = New Telerik.WinControls.UI.RadGroupBox()
         Me.rdbtnGente = New Telerik.WinControls.UI.RadRadioButton()
         Me.rdbtnCincoS = New Telerik.WinControls.UI.RadRadioButton()
@@ -510,15 +510,15 @@ Partial Class FrmGraficasfaseuno
         Me.radChartView1.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
                     Or System.Windows.Forms.AnchorStyles.Left) _
                     Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        CartesianArea1.GridDesign.AlternatingVerticalColor = False
-        CartesianArea1.GridDesign.DrawVerticalFills = False
-        CartesianArea1.ShowGrid = True
-        Me.radChartView1.AreaDesign = CartesianArea1
+        CartesianArea3.GridDesign.AlternatingVerticalColor = False
+        CartesianArea3.GridDesign.DrawVerticalFills = False
+        CartesianArea3.ShowGrid = True
+        Me.radChartView1.AreaDesign = CartesianArea3
         Me.radChartView1.AutoScroll = True
         Me.radChartView1.Controls.Add(Me.lblError)
         Me.radChartView1.Location = New System.Drawing.Point(3, 21)
         Me.radChartView1.Name = "radChartView1"
-        Me.radChartView1.Size = New System.Drawing.Size(1362, 457)
+        Me.radChartView1.Size = New System.Drawing.Size(1369, 457)
         Me.radChartView1.TabIndex = 9
         CType(Me.radChartView1.GetChildAt(0), Telerik.WinControls.UI.RadChartElement).DrawText = False
         CType(Me.radChartView1.GetChildAt(0), Telerik.WinControls.UI.RadChartElement).DrawFill = True
@@ -543,7 +543,7 @@ Partial Class FrmGraficasfaseuno
         Me.PageGrafica_Secundaria.Controls.Add(Me.CharSecundario)
         Me.PageGrafica_Secundaria.Location = New System.Drawing.Point(10, 37)
         Me.PageGrafica_Secundaria.Name = "PageGrafica_Secundaria"
-        Me.PageGrafica_Secundaria.Size = New System.Drawing.Size(1267, 425)
+        Me.PageGrafica_Secundaria.Size = New System.Drawing.Size(1331, 511)
         Me.PageGrafica_Secundaria.Text = " Grafica Secundaria"
         '
         'CharSecundario
@@ -551,11 +551,11 @@ Partial Class FrmGraficasfaseuno
         Me.CharSecundario.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
                     Or System.Windows.Forms.AnchorStyles.Left) _
                     Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.CharSecundario.AreaDesign = CartesianArea2
+        Me.CharSecundario.AreaDesign = CartesianArea1
         Me.CharSecundario.Location = New System.Drawing.Point(3, 3)
         Me.CharSecundario.Name = "CharSecundario"
         Me.CharSecundario.ShowGrid = False
-        Me.CharSecundario.Size = New System.Drawing.Size(1264, 419)
+        Me.CharSecundario.Size = New System.Drawing.Size(1328, 505)
         Me.CharSecundario.TabIndex = 0
         Me.CharSecundario.Text = "RadChartView2"
         '
