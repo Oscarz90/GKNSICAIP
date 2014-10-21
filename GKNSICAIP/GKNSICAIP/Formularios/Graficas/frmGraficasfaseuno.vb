@@ -2209,11 +2209,15 @@ Public Class FrmGraficasfaseuno
             LineSeries1.CombineMode = ChartSeriesCombineMode.None
         End If
 
-        For Each controller As ChartViewController In Me.radChartView1.Controllers
+        'If (LinearAxis2.ActualRange.Maximum = 0) Then
+        '    LinearAxis2.Maximum = 5
+        'End If
+
+        For Each controller As ChartViewController In Me.CharSecundario.Controllers
             Dim control As SmartLabelsController = TryCast(controller, SmartLabelsController)
             If control IsNot Nothing Then
                 control.Strategy.DistanceToLabel = CInt(Fix(2.0))
-                Me.radChartView1.View.PerformRefresh(Me.radChartView1.View, False)
+                Me.CharSecundario.View.PerformRefresh(Me.CharSecundario.View, False)
             End If
         Next controller
 
