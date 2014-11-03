@@ -535,7 +535,10 @@ Public Class FrmGraficasfaseuno
 
         'Obtencion de Informacion
         vDatos_Obtenidos = oG_Fase2.Obten_OEE(vF_Inicial, vF_Final, vCve_Equipo, vCve_Linea, vCve_Componente, vCve_CadenaValor, vFormato_Resultado, vNivel)
+        'If vDatos_Obtenidos.Rows.Count = 0 Then
+        '    MsgBox("no hay ")
 
+        'End If
         'Creacion series
         Dim BarSeries1 As New BarSeries() With {.LegendTitle = "Oee"}
         Dim LineSeries1 As New LineSeries()

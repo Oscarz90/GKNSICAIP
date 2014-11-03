@@ -152,6 +152,7 @@ Public Class Relacion_Linea_Clasificacion
                                         " from relacion_linea_clasificacion rlc" &
                                         " join linea l on rlc.cve_linea=l.cve_linea" &
                                         " join linea_clasificacion lc on rlc.cve_linea_clasificacion=lc.cve_linea_clasificacion" &
+                                        " where l.Estatus='1' " &
                                         " order by rlc.cve_linea,rlc.fecha_inicio")
             Catch ex As Exception
                 MsgBox("Surgió un problema al intentar obtener asignación clasificación de linea. CRelacion_Linea_Clasificacion", vbExclamation + vbOKOnly, "Warning")
